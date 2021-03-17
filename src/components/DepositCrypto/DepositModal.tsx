@@ -3,7 +3,6 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal } from '../../mobile/components/Modal';
 import {
     depositsCreate,
     selectDepositsCreateLoading,
@@ -154,10 +153,7 @@ const DepositModalComponent: React.FC<Props> = (props: Props) => {
     }, [amount, isDisabled, isSubmitted]);
 
     const renderContent = React.useCallback(() => {
-        const addModalClass = classnames('beneficiaries-add-address-modal', {
-            'beneficiaries-add-address-modal--coin': true,
-            'cr-modal': !isMobileDevice,
-        });
+        const addModalClass = classnames({'cr-modal': !isMobileDevice});
 
         return (
             <div className={addModalClass}>
@@ -170,15 +166,7 @@ const DepositModalComponent: React.FC<Props> = (props: Props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMobileDevice, getState, isDisabled, isSubmitted]);
 
-    return (
-        isMobileDevice ?
-            <Modal
-                title={formatMessage({ id: 'page.body.wallets.deposits.addDepositModal.header' })}
-                onClose={props.handleCloseModal}
-                isOpen>
-                {renderContent()}
-            </Modal> : renderContent()
-    );
+    return renderContent();
 };
 
 const DepositModal = React.memo(DepositModalComponent);
