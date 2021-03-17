@@ -136,33 +136,6 @@ class DepositCryptoComponent extends React.Component<Props, State> {
                 </div>
             </div>
         );
-
-        //return (
-            //<div className={className}>
-                    //<form className="cr-deposit-crypto__intention">
-                            //<InputGroup>
-                                //<CustomInput
-                                    //autoFocus={true}
-                                    //classNameInput="cr-withdraw__input"
-                                    //classNameLabel="cr-sign-up-form__label"
-                                    //type="text"
-                                    //label="Deposit Amount"
-                                    //placeholder={'0.1'}
-                                    //defaultLabel="Deposit Amoount"
-                                    //inputValue={depositAmount}
-                                    //handleChangeInput={handleChangeInputAmount}
-                                ///>
-                                //<InputGroup.Append>
-                                    //<Button
-                                        //onClick={submitForm}
-                                        //size="lg"
-                                        //variant="primary"
-                                    //>Deposit</Button>
-                                //</InputGroup.Append>
-                            //</InputGroup>
-                    //</form>
-            //</div>
-        //);
       } else {
         return (
             <div className={className}>
@@ -183,7 +156,6 @@ class DepositCryptoComponent extends React.Component<Props, State> {
         );
       }
     }
-
     const walletAddress = wallet.deposit_address && wallet.deposit_address.address ?
         formatCCYAddress(wallet.currency, wallet.deposit_address.address) : '';
 
