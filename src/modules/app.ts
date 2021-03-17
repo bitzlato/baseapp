@@ -37,6 +37,7 @@ import { profileReducer  } from './user/profile';
 import { userActivityReducer  } from './user/userActivity';
 import { walletsReducer  } from './user/wallets';
 import { withdrawLimitReducer  } from './user/withdrawLimit';
+import { depositIntentionReducer  } from './user/deposits';
 
 export const publicReducer = combineReducers({
     alerts: alertReducer,
@@ -80,4 +81,5 @@ export const userReducer = combineReducers({
     userActivity: userActivityReducer,
     wallets: walletsReducer,
     withdrawLimit: withdrawLimitReducer,
+    depositIntentionState: depositIntentionReducer,
 });

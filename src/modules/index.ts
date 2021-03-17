@@ -20,6 +20,7 @@ import { ApiKeysState } from './user/apiKeys';
 import { rootApiKeysSaga } from './user/apiKeys/sagas';
 import { AuthState, rootAuthSaga } from './user/auth';
 import { BeneficiariesState, rootBeneficiariesSaga } from './user/beneficiaries';
+import { DepositIntentionState, rootDepositIntentionSaga } from './user/deposits';
 import { GeetestCaptchaState, rootGeetestCaptchaSaga } from './user/captcha';
 import { CustomizationUpdateState, rootCustomizationUpdateSaga } from './user/customization';
 import { DocumentationState, rootDocumentationSaga } from './user/documentation';
@@ -69,6 +70,7 @@ export * from './user/profile';
 export * from './user/userActivity';
 export * from './user/wallets';
 export * from './user/withdrawLimit';
+export * from './user/deposits';
 
 export interface RootState {
     public: {
@@ -112,6 +114,7 @@ export interface RootState {
         userActivity: UserActivityState;
         wallets: WalletsState;
         withdrawLimit: WithdrawLimitState;
+        depositIntentionState: DepositIntentionState;
     };
 }
 
@@ -125,6 +128,7 @@ export function* rootSaga() {
         call(rootApiKeysSaga),
         call(rootAuthSaga),
         call(rootBeneficiariesSaga),
+        call(rootDepositIntentionSaga),
         call(rootBlocklistAccessSaga),
         call(rootConfigsSaga),
         call(rootCurrenciesSaga),

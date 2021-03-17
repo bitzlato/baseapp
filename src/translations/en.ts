@@ -198,6 +198,8 @@ export const en = {
     'success.beneficiaries.resent_pin': 'Beneficiaries: pin resent',
     'error.beneficiaries.max10.addresses': 'You can register up to 10 withdrawal addresses',
 
+    'success.deposits.created': 'Deposit intention: successfully created',
+
     'page.body.wallets.beneficiaries.title': 'Withdraw address',
     'page.body.wallets.beneficiaries.fiat.title': 'Withdrawal details',
     'page.body.wallets.beneficiaries.dropdown.address': 'Address',
@@ -245,6 +247,11 @@ export const en = {
     'page.body.wallets.beneficiaries.failAddModal.header': 'Warning',
     'page.body.wallets.beneficiaries.failAddModal.content': 'You need to confirm your account to add a beneficiary',
     'page.body.wallets.beneficiaries.failAddModal.button': 'Confirm an account',
+
+    'page.body.wallets.deposits.addDepositModal.header': 'Select amount to deposit',
+    'page.body.wallets.deposits.addDepositModal.body.button': 'Submit',
+    'page.body.wallets.deposits.addDepositModal.body.invalidAmount': 'Invalid amount',
+    'page.body.wallets.deposits.addDepositModal.amount': 'Amount',
 
     'page.body.openOrders.tab.all': 'All',
     'page.body.openOrders.tab.open': 'Open',

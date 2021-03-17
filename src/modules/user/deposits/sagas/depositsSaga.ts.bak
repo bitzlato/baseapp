@@ -1,0 +1,29 @@
+import { call, put } from 'redux-saga/effects';
+import { sendError } from '../../../';
+import { API, RequestOptions } from '../../../../api';
+import { buildQueryString } from '../../../../helpers';
+import { depositsData, depositsError, DepositsFetch } from '../actions';
+
+const config: RequestOptions = {
+    apiVersion: 'peatio',
+};
+
+export function* depositsSaga(action: DepositsFetch) {
+    try {
+        let params = '';
+        if (action.payload) {
+            params = `?${buildQueryString(action.payload)}`;
+        }
+        const deposits = yield call(API.get(config), `/account/deposits{params}`);
+
+        yield put(depositsData(deposits));
+    } catch (error) {
+        yield put(sendError({
+            error,
+            processingType: 'alert',
+            extraOptions: {
+                actionError: depositsError,
+            },
+        }));
+    }
+}

@@ -1,12 +1,15 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { injectIntl } from 'react-intl';
+import { connect, MapDispatchToProps } from 'react-redux';
+import { compose } from 'redux';
 import { formatCCYAddress } from '../../helpers';
-import { selectMobileDeviceState, Wallet } from '../../modules';
+import { selectMobileDeviceState, Wallet, RootState, depositsCreateClear } from '../../modules';
 import { CopyableTextField } from '../CopyableTextField';
 import { MetaMaskButton } from '../MetaMaskButton';
 import { QRCode } from '../QRCode';
+import { DepositModal } from './DepositModal';
 
 export interface DepositCryptoProps {
     /**
@@ -48,13 +51,44 @@ export interface DepositCryptoProps {
      * Generate address button label
      */
     buttonLabel?: string;
+
+    isMobileDevice: boolean;
 }
 
+interface DispatchProps {
+    clearDepositIntention: typeof depositsCreateClear;
+}
+
+interface ReduxProps {
+    isMobileDevice: boolean;
+}
+
+interface State {
+    isOpenDepositModal: boolean;
+}
+
+type Props = DepositCryptoProps & DispatchProps;
 
 /**
  *  Component that displays wallet details that can be used to deposit cryptocurrency.
  */
-const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: DepositCryptoProps) => {
+class DepositCryptoComponent extends React.Component<Props, State> {
+// const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: DepositCryptoProps, state: State) => {
+  constructor(props: Props) {
+      super(props);
+      this.state = {
+          isOpenDepositModal: false,
+      };
+  }
+  private handleOpenDepositModal = () => {
+      this.props.clearDepositIntention();
+      this.setState(prevState => ({
+          isOpenDepositModal: !prevState.isOpenDepositModal,
+      }));
+  };
+
+
+  public render() {
     const QR_SIZE = 118;
     const {
         buttonLabel,
@@ -66,14 +100,70 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
         handleOnCopy,
         text,
         wallet,
-    } = props;
-    const isMobileDevice = useSelector(selectMobileDeviceState);
+        isMobileDevice
+    } = this.props;
     const size = dimensions || QR_SIZE;
     const disabled = !wallet.deposit_address?.address;
     const onCopy = !disabled ? handleOnCopy : undefined;
     const className = classnames('cr-deposit-crypto', {'cr-copyable-text-field__disabled': disabled});
+    const {
+      isOpenDepositModal
+    } = this.state;
 
     if (!wallet.deposit_address) {
+      if (wallet.enable_intention) {
+        return (
+            <div className="pg-beneficiaries">
+              {isOpenDepositModal && (
+                  <DepositModal
+                      currency={wallet.currency}
+                      handleSubmit={() => {}}
+                      handleCloseModal={this.handleOpenDepositModal}
+                  />
+              )}
+                <div className="cr-deposit-crypto__create">
+                    <div className="cr-deposit-crypto__create-btn">
+                        <Button
+                            block={true}
+                            type="button"
+                            onClick={this.handleOpenDepositModal}
+                            size="lg"
+                            variant="primary"
+                        >
+                            {'Create Deposit'}
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        );
+
+        //return (
+            //<div className={className}>
+                    //<form className="cr-deposit-crypto__intention">
+                            //<InputGroup>
+                                //<CustomInput
+                                    //autoFocus={true}
+                                    //classNameInput="cr-withdraw__input"
+                                    //classNameLabel="cr-sign-up-form__label"
+                                    //type="text"
+                                    //label="Deposit Amount"
+                                    //placeholder={'0.1'}
+                                    //defaultLabel="Deposit Amoount"
+                                    //inputValue={depositAmount}
+                                    //handleChangeInput={handleChangeInputAmount}
+                                ///>
+                                //<InputGroup.Append>
+                                    //<Button
+                                        //onClick={submitForm}
+                                        //size="lg"
+                                        //variant="primary"
+                                    //>Deposit</Button>
+                                //</InputGroup.Append>
+                            //</InputGroup>
+                    //</form>
+            //</div>
+        //);
+      } else {
         return (
             <div className={className}>
                 <div className="cr-deposit-crypto__create">
@@ -91,6 +181,7 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
                 </div>
             </div>
         );
+      }
     }
 
     const walletAddress = wallet.deposit_address && wallet.deposit_address.address ?
@@ -125,8 +216,19 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
             </div>
         </div>
     );
+  }
 };
 
-export {
-    DepositCrypto,
-};
+const mapStateToProps = (state: RootState): ReduxProps => ({
+    isMobileDevice: selectMobileDeviceState(state),
+});
+
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
+    clearDepositIntention: () => dispatch(depositsCreateClear()),
+});
+
+// tslint:disable-next-line:no-any
+export const DepositCrypto = compose(
+    injectIntl,
+    connect(mapStateToProps, mapDispatchToProps),
+)(DepositCryptoComponent) as any; // tslint:disable-line
