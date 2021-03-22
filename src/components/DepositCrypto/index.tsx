@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps } from 'react-redux';
 import { compose } from 'redux';
 import { formatCCYAddress } from '../../helpers';
-import { selectMobileDeviceState, Wallet, RootState, depositsCreateClear } from '../../modules';
+import { depositsCreateClear, RootState, selectMobileDeviceState, Wallet } from '../../modules';
 import { CopyableTextField } from '../CopyableTextField';
 import { MetaMaskButton } from '../MetaMaskButton';
 import { QRCode } from '../QRCode';
@@ -80,12 +80,6 @@ class DepositCryptoComponent extends React.Component<Props, State> {
           isOpenDepositModal: false,
       };
   }
-  private handleOpenDepositModal = () => {
-      this.props.clearDepositIntention();
-      this.setState(prevState => ({
-          isOpenDepositModal: !prevState.isOpenDepositModal,
-      }));
-  };
 
 
   public render() {
@@ -189,7 +183,13 @@ class DepositCryptoComponent extends React.Component<Props, State> {
         </div>
     );
   }
-};
+  private handleOpenDepositModal = () => {
+      this.props.clearDepositIntention();
+      this.setState(prevState => ({
+          isOpenDepositModal: !prevState.isOpenDepositModal,
+      }));
+  };
+}
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     isMobileDevice: selectMobileDeviceState(state),

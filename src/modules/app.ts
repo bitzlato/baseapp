@@ -19,6 +19,7 @@ import { authReducer  } from './user/auth';
 import { beneficiariesReducer } from './user/beneficiaries';
 import { getGeetestCaptchaReducer } from './user/captcha';
 import { customizationUpdateReducer } from './user/customization';
+import { depositIntentionReducer  } from './user/deposits';
 import { documentationReducer } from './user/documentation';
 import { sendEmailVerificationReducer } from './user/emailVerification';
 import { historyReducer  } from './user/history';
@@ -37,7 +38,6 @@ import { profileReducer  } from './user/profile';
 import { userActivityReducer  } from './user/userActivity';
 import { walletsReducer  } from './user/wallets';
 import { withdrawLimitReducer  } from './user/withdrawLimit';
-import { depositIntentionReducer  } from './user/deposits';
 
 export const publicReducer = combineReducers({
     alerts: alertReducer,

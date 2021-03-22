@@ -1,11 +1,11 @@
 import { CommonError } from '../../../modules/types';
+import { Deposit } from '../history/types';
 import {
     DEPOSITS_CREATE,
+    DEPOSITS_CREATE_CLEAR,
     DEPOSITS_CREATE_DATA,
     DEPOSITS_CREATE_ERROR,
-    DEPOSITS_CREATE_CLEAR,
 } from './constants';
-import { Deposit } from '../history/types';
 
 export interface DepositsCreate {
     type: typeof DEPOSITS_CREATE;

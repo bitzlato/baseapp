@@ -11,9 +11,9 @@ import { selectFirstElemIndex, selectHistory } from '../../../modules/user/histo
 import { selectWallets } from '../../../modules/user/wallets';
 import { RowItem } from './Rowitem';
 
-const presentTransferLinks = (links: TransferLinks): Array<JSX.Element> =>
-  Object.entries(links).map(([key, value]) => 
-    <a href={value} target='_blank' rel='noopener noreferrer' style={{ marginLeft: "5px" }}>{key}</a>
+const presentTransferLinks = (links: TransferLinks): JSX.Element[] =>
+  Object.entries(links).map(([key, value]) =>
+    <a href={value} target="_blank" rel="noopener noreferrer" style={{ marginLeft: '5px' }}>{key}</a>
   );
 
 const DEFAULT_LIMIT = 6;
@@ -50,16 +50,17 @@ const HistoryTable = (props: any) => {
             processing: <span className="cr-mobile-history-table--pending">{intl.formatMessage({ id: 'page.body.history.deposit.content.status.processing' })}</span>,
             prepared: <span className="cr-mobile-history-table--pending">{intl.formatMessage({ id: 'page.body.wallets.table.pending' })}</span>,
             submitted: <span className="cr-mobile-history-table--pending">{(confirmations !== undefined && minConfirmations !== undefined) ? (
-              (transferLinks !== undefined) 
+              (transferLinks !== undefined)
                 ? (presentTransferLinks(transferLinks))
                 : `${confirmations}/${minConfirmations}`
             ) : (
                 intl.formatMessage({ id: 'page.body.wallets.table.pending' })
                 )}</span>,
+            confirming: (transferLinks === undefined) ? <span className="cr-mobile-history-table--success">{intl.formatMessage({ id: 'page.body.history.deposit.content.status.confirming' })}</span> : presentTransferLinks(transferLinks),
             skipped: <span className="cr-mobile-history-table--success">{intl.formatMessage({ id: 'page.body.history.deposit.content.status.skipped' })}</span>,
         };
 
-        return statusMapping[tx];
+        return statusMapping[tx] || tx;
     };
     const retrieveData = () => {
         const {
@@ -78,8 +79,8 @@ const HistoryTable = (props: any) => {
             const confirmations = type === 'deposits' && item.confirmations;
             const itemCurrency = currencies && currencies.find(cur => cur.id === currency);
             const minConfirmations = itemCurrency && itemCurrency.min_confirmations;
-            const transfer_links = 'transfer_links' in item ? item.transfer_links : undefined;
-            const state = 'state' in item ? formatTxState(item.state, confirmations, minConfirmations, transfer_links) : '';
+            const transferLinks = 'transfer_links' in item ? item.transfer_links : undefined;
+            const state = 'state' in item ? formatTxState(item.state, confirmations, minConfirmations, transferLinks) : '';
 
             return [
                 <RowItem

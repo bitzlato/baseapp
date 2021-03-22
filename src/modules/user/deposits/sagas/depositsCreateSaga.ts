@@ -1,4 +1,5 @@
 import { call, put } from 'redux-saga/effects';
+import { fetchHistory } from '../../..';
 import { alertPush, sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import { getCsrfToken } from '../../../../helpers';
@@ -7,7 +8,6 @@ import {
     depositsCreateData,
     depositsCreateError,
 } from '../actions';
-import { fetchHistory } from '../../..';
 
 const config = (csrfToken?: string): RequestOptions => {
     return {
