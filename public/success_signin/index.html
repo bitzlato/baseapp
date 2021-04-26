@@ -36,9 +36,12 @@
         .then(redirectResult => {
           console.log('handleRedirectCallback', redirectResult)
           auth0.getIdTokenClaims().then(result => {
-            console.debug('getIdTokenClaims from handleRedirectCallback', result);
             if (result) {
-               useIdToken(result.__raw);
+              if (result['email_verified']) {
+                useIdToken(result.__raw);
+              } else {
+                alert("Email is not verified! Authorization imposible.");
+              };
             } else {
               alert("Some error! Login again")
             }
