@@ -752,6 +752,7 @@ export const ru: LangType = {
     'identity.session.not_active': 'Ваш аккаунт не активен',
     'identity.session.banned': 'Ваш аккаунт заблокирован',
     'identity.session.invalid_params': 'Неправильный адрес электронной почты или пароль',
+    'identity.session.email_not_verified': 'Неподтверждён емайл',
     'identity.session.missing_otp': 'Отсутствует код 2FA',
     'identity.session.invalid_otp': 'Код 2FA недействителен',
     'username.taken': 'Никнейм уже используется',

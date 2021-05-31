@@ -747,6 +747,7 @@ export const en = {
     'identity.session.not_active': 'Your account is not active',
     'identity.session.banned': 'Your account is banned',
     'identity.session.invalid_params': 'Invalid Email or Password',
+    'identity.session.email_not_verified': 'Email Is Not Verified',
     'identity.session.missing_otp': 'The account has enabled 2FA but OTP code is missing',
     'identity.session.invalid_otp': 'OTP code is invalid',
 
