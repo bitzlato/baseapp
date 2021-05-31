@@ -37,7 +37,7 @@
           console.log('handleRedirectCallback', redirectResult)
           auth0.getIdTokenClaims().then(result => {
             if (result) {
-              if (result['email_verified']) {
+              if (result['email_verified'] || !window.env.auth0.require_verified_email) {
                 useIdToken(result.__raw);
               } else {
                 alert("Email is not verified! Authorization imposible.");
