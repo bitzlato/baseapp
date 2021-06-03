@@ -173,6 +173,7 @@ export class WalletTable extends React.Component<Props> {
             rejected: <FailIcon />,
             processing: this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
             prepared: this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
+            invoiced: this.presentTransferLinks(transferLinks),
             submitted: (confirmations !== undefined && minConfirmations !== undefined) ? (
                 transferLinks !== undefined ? this.presentTransferLinks(transferLinks) : `${confirmations}/${minConfirmations}`
               )
