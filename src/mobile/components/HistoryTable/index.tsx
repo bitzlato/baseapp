@@ -49,7 +49,7 @@ const HistoryTable = (props: any) => {
             rejected: <span className="cr-mobile-history-table--failed">{intl.formatMessage({ id: 'page.body.history.deposit.content.status.rejected' })}</span>,
             processing: <span className="cr-mobile-history-table--pending">{intl.formatMessage({ id: 'page.body.history.deposit.content.status.processing' })}</span>,
             prepared: <span className="cr-mobile-history-table--pending">{intl.formatMessage({ id: 'page.body.wallets.table.pending' })}</span>,
-            invoiced: <span className="cr-mobile-history-table--pending">{(presentTransferLinks(transferLinks))}</span>,
+            invoiced: <span className="cr-mobile-history-table--pending">{ transferLinks === undefined ?  intl.formatMessage({ id: 'page.body.history.deposit.content.status.processing' }) : (presentTransferLinks(transferLinks))}</span>,
             submitted: <span className="cr-mobile-history-table--pending">{(confirmations !== undefined && minConfirmations !== undefined) ? (
               (transferLinks !== undefined)
                 ? (presentTransferLinks(transferLinks))
