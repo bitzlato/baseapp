@@ -88,6 +88,13 @@ describe('Describe incremental update of order book asks', () => {
         expect(result).toEqual(updatedAsks);
     });
 
+    it('should not update existing value in order book if there are removing not existing price', () => {
+        const asks: string[][] = [["39000.0", "0.025"], ["40000.0", "0.001"], ["42283.162", "0.0018"]];
+        const newAskOrder: string[] = ["51592.2", ""];
+        const result = handleIncrementalUpdate(asks, newAskOrder, 'asks');
+        expect(result).toEqual(asks);
+    });
+
     it('should update existing value in order book', () => {
         const asks: string[][] = [
             ['0.60', '0.1'],

@@ -7,13 +7,17 @@ export const handleIncrementalUpdate = (depthOld: string[][], newLevel: string[]
 
     const index = depthOld.findIndex(([price]) => +price === +newLevel[0]);
 
-    if (index === -1 && +newLevel[1]) {
+    if (index === -1) {
+      if (+newLevel[1]) {
         const data = [...depthOld, newLevel];
         if (type === 'asks') {
             return sortAsks(data);
         }
 
         return sortBids(data);
+      } else {
+        return depthOld;
+      }
     }
 
     const result = [...depthOld];
@@ -41,6 +45,5 @@ export const handleIncrementalUpdateArray = (depthOld: string[][], newLevels: st
     if (type === 'asks') {
         return sortAsks(result);
     }
-
     return sortBids(result);
 };
