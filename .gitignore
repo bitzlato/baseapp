@@ -31,3 +31,5 @@ index.css
 
 # environment config
 public/config/
+
+log/
