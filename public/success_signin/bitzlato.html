@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
   </head>
   <body>
-    <h1>Success authorization to P2P</h1>
+    <h1>Success authorization with P2P! Wait a moment..</h1>
     <script src="/config/env.js"></script>
      <script type="text/javascript">
         const authorizeOnPeatioWithAuth0ID = (id_token) => 
@@ -17,7 +17,6 @@
                 }
           )
           .then(response => {
-            console.log('response', response);
             // TODO Remove cookie
             response.json().then(user => {
               localStorage.setItem('csrfToken', user.csrf_token);
