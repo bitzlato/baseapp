@@ -4,6 +4,7 @@
   </head>
   <body>
     <h1>Success authorization to P2P</h1>
+    <script src="/config/env.js"></script>
      <script type="text/javascript">
         const authorizeOnPeatioWithAuth0ID = (id_token) => 
           fetch(window.env.auth0.auth_url + "?id_token=" + id_token,
