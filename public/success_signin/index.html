@@ -21,7 +21,6 @@
           console.log('response', response);
           response.json().then(user => {
             localStorage.setItem('csrfToken', user.csrf_token);
-            debugger
             window.location = window.env.auth0.signedin_url;
           });
         });
