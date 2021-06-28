@@ -1,9 +1,10 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { IntlProps } from '../../';
+import { openOrdersFetchInterval } from '../../api';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { Decimal, OpenOrders } from '../../components';
 import { localeDate, setTradeColor } from '../../helpers';
@@ -37,44 +38,89 @@ interface DispatchProps {
 
 type Props = ReduxProps & DispatchProps & IntlProps;
 
-export class OpenOrdersContainer extends React.Component<Props> {
-    public componentDidMount() {
-        const { currentMarket, userLoggedIn } = this.props;
-        if (userLoggedIn && currentMarket) {
-            this.props.userOpenOrdersFetch({ market: currentMarket });
+interface State {
+    showLoading: boolean;
+}
+
+export class OpenOrdersContainer extends React.Component<Props, State> {
+    private openOrdersFetchTimeout;
+
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            showLoading: true,
+        };
+    }
+
+    private fetchOpenOrders = (
+        userLoggedIn = this.props.userLoggedIn,
+        market: Market | undefined = this.props.currentMarket
+    ) => {
+        clearTimeout(this.openOrdersFetchTimeout);
+
+        if (userLoggedIn && market) {
+            this.props.userOpenOrdersFetch({ market });
+
+            this.openOrdersFetchTimeout = setTimeout(this.fetchOpenOrders, openOrdersFetchInterval());
         }
+    }
+
+    public componentDidMount() {
+        this.fetchOpenOrders();
+    }
+
+    public componentWillUnmount() {
+        clearTimeout(this.openOrdersFetchTimeout);
     }
 
     public componentWillReceiveProps(next: Props) {
         const { userLoggedIn, currentMarket } = next;
-        const { userLoggedIn: prevUserLoggedIn, currentMarket: prevCurrentMarket } = this.props;
 
-        if (!prevUserLoggedIn && userLoggedIn && currentMarket) {
-            this.props.userOpenOrdersFetch({ market: currentMarket });
-        } else if (userLoggedIn && currentMarket && prevCurrentMarket !== currentMarket) {
-            this.props.userOpenOrdersFetch({ market: currentMarket });
+        if (!this.props.userLoggedIn || this.props.currentMarket !== currentMarket) {
+            this.fetchOpenOrders(userLoggedIn, currentMarket);
+        }
+
+        if (this.props.fetching && !next.fetching) {
+            this.setState({ showLoading: false });
         }
     }
 
     public render() {
-        const { list, fetching } = this.props;
+        const { list, fetching, userLoggedIn } = this.props;
+        const loading = fetching && this.state.showLoading;
         const classNames = classnames('pg-open-orders', {
             'pg-open-orders--empty': !list.length,
-            'pg-open-orders--loading': fetching,
+            'pg-open-orders--loading': loading,
         });
 
         return (
             <div className={classNames}>
                 <div className="cr-table-header__content">
-                    <div className="cr-title-component">
+                    <div className="cr-grow">
                         <FormattedMessage id="page.body.trade.header.openOrders" />
-                        <span className="cr-table-header__cancel" onClick={this.handleCancelAll}>
-                            <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
-                            <CloseIcon className="cr-table-header__close" />
-                        </span>
+                    </div>
+                    <div className={classnames('cr-row', 'cr-row-spacing')}>
+                        <Button disabled={!userLoggedIn} variant="light" onClick={this.handleRefresh}>
+                            <FormattedMessage id="page.body.openOrders.header.button.refresh" />
+                        </Button>
+                        <Button
+                            variant="light"
+                            className={classnames('cr-row', 'cr-row-spacing')}
+                            onClick={this.handleCancelAll}>
+                            <CloseIcon />
+                            <span>
+                                <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
+                            </span>
+                        </Button>
                     </div>
                 </div>
-                {fetching ? <div className="open-order-loading"><Spinner animation="border" variant="primary" /></div> : this.openOrders()}
+                {loading ? (
+                    <div className="open-order-loading">
+                        <Spinner animation="border" variant="primary" />
+                    </div>
+                ) : (
+                    this.openOrders()
+                )}
             </div>
         );
     }
@@ -153,6 +199,10 @@ export class OpenOrdersContainer extends React.Component<Props> {
     private handleCancelAll = () => {
         const { currentMarket } = this.props;
         currentMarket && this.props.ordersCancelAll({ market: currentMarket.id });
+    };
+   
+    private handleRefresh = () => {
+        this.fetchOpenOrders();
     };
 }
 

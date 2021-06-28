@@ -40,9 +40,22 @@ export const insertOrUpdate = (list: OrderCommon[], order: OrderCommon): OrderCo
     }
 };
 
-export const insertIfNotExisted = (list: OrderCommon[], order: OrderCommon): OrderCommon[] => {
-    const index = list.findIndex((value: OrderCommon) =>
-        order.confirmed ? value.id === order.id : value.uuid === order.uuid);
+const findOrder = (list: OrderCommon[], order: OrderCommon): number => {
+    return list.findIndex(order.confirmed ? (v) => v.id === order.id : (v) => v.uuid === order.uuid);
+};
 
-    return (index === -1) ? [{...order}, ...list] : [...list];
+export const insertIfNotExisted = (list: OrderCommon[], order: OrderCommon): OrderCommon[] => {
+    const index = findOrder(list, order);
+
+    return index === -1 ? [{ ...order }, ...list] : [...list];
+};
+
+export const removeOrder = (list: OrderCommon[], order: OrderCommon): OrderCommon[] => {
+    const index = findOrder(list, order);
+
+    if (index !== -1) {
+        list.splice(index, 1);
+    }
+
+    return [...list];
 };

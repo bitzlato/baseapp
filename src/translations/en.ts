@@ -271,6 +271,7 @@ export const en = {
     'page.body.openOrders.content.status.wait': 'Open',
     'page.body.openOrders.content.status.cancel': 'Stopped',
     'page.body.openOrders.header.button.cancelAll': 'Cancel all',
+    'page.body.openOrders.header.button.refresh': 'Refresh',
 
     'page.body.history.deposit': 'Deposit History',
     'page.body.history.deposit.header.txid': 'txID',

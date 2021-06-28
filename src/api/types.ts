@@ -21,6 +21,7 @@ declare global {
         msAlertDisplayTime: string;
         sessionCheckInterval: string;
         balancesFetchInterval: string;
+        openOrdersFetchInterval: string;
         passwordEntropyStep: string | number;
         storage: {
             defaultStorageLimit: string | number;

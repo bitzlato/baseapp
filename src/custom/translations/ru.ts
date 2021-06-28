@@ -278,6 +278,7 @@ export const ru: LangType = {
     'page.body.openOrders.content.status.wait': 'Открыт',
     'page.body.openOrders.content.status.cancel': 'Отменен',
     'page.body.openOrders.header.button.cancelAll': 'Отменить все',
+    'page.body.openOrders.header.button.refresh': 'Обновить',
 
     'page.body.history.deposit': 'История депозитов',
     'page.body.history.deposit.header.txid': 'txID',

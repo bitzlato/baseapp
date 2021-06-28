@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { openOrdersFetchInterval } from '../../../api';
 import { CloseIcon } from '../../../assets/images/CloseIcon';
-import { useUserOrdersHistoryFetch } from '../../../hooks';
 import {
     ordersCancelAllFetch,
     ordersHistoryCancelFetch,
     selectOrdersHistory,
     selectShouldFetchCancelAll,
     selectShouldFetchCancelSingle,
+    userOrdersHistoryFetch,
 } from '../../../modules';
 import { OrdersItem } from '../Orders/OrdersItem';
 
@@ -18,8 +19,16 @@ const OpenOrdersComponent: React.FC = () => {
     const orders = useSelector(selectOrdersHistory);
     const shouldFetchCancelAll = useSelector(selectShouldFetchCancelAll);
     const shouldFetchCancelSingle = useSelector(selectShouldFetchCancelSingle);
-    useUserOrdersHistoryFetch(0, 'open', 25);
     const waitOrders = orders.filter(o => ['wait', 'pending'].includes(o.state));
+
+    React.useEffect(() => {
+        const fetchOrdersCb = () => {
+            dispatch(userOrdersHistoryFetch({ pageIndex: 0, type: 'open', limit: 25 }));
+        };
+        fetchOrdersCb();
+        const intervalId = setInterval(fetchOrdersCb, openOrdersFetchInterval());
+        return () => clearInterval(intervalId);
+    }, [dispatch]);
 
     const handleCancelAllOrders = () => {
         if (shouldFetchCancelAll) {
