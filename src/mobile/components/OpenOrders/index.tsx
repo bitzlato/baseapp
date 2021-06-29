@@ -26,7 +26,8 @@ const OpenOrdersComponent: React.FC = () => {
             dispatch(userOrdersHistoryFetch({ pageIndex: 0, type: 'open', limit: 25 }));
         };
         fetchOrdersCb();
-        const intervalId = setInterval(fetchOrdersCb, openOrdersFetchInterval());
+        const interval = openOrdersFetchInterval();
+        const intervalId = interval > 0 ? window.setInterval(fetchOrdersCb, openOrdersFetchInterval()) : undefined;
         return () => clearInterval(intervalId);
     }, [dispatch]);
 

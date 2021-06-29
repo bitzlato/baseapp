@@ -43,7 +43,7 @@ interface State {
 }
 
 export class OpenOrdersContainer extends React.Component<Props, State> {
-    private openOrdersFetchTimeout;
+    private openOrdersFetchTimeout?: number;
 
     constructor(props: Props) {
         super(props);
@@ -61,7 +61,10 @@ export class OpenOrdersContainer extends React.Component<Props, State> {
         if (userLoggedIn && market) {
             this.props.userOpenOrdersFetch({ market });
 
-            this.openOrdersFetchTimeout = setTimeout(this.fetchOpenOrders, openOrdersFetchInterval());
+            const interval = openOrdersFetchInterval();
+            if (interval > 0) {
+                this.openOrdersFetchTimeout = window.setTimeout(this.fetchOpenOrders, interval);
+            }
         }
     }
 
@@ -200,7 +203,7 @@ export class OpenOrdersContainer extends React.Component<Props, State> {
         const { currentMarket } = this.props;
         currentMarket && this.props.ordersCancelAll({ market: currentMarket.id });
     };
-   
+
     private handleRefresh = () => {
         this.fetchOpenOrders();
     };
