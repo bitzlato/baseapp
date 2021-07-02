@@ -1,10 +1,26 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="/config/env.js"></script>
+    <style>
+      html, body {
+          height: 100%;
+      }
+
+      html {
+          display: table;
+          margin: auto;
+      }
+
+      body {
+          display: table-cell;
+          vertical-align: middle;
+      }
+    </style>
   </head>
   <body>
-    <h1>Success authorization with P2P! Wait a moment..</h1>
-    <script src="/config/env.js"></script>
+    <img src="https://market.bitzlato.bz/assets/bitzlato_logo_blue.png" style='margin-bottom: 2rem'>
+    <center>Congratulations, you are successfully logged in! Redirecting to the market..</center>
      <script type="text/javascript">
         const authorizeOnPeatioWithAuth0ID = (id_token) => 
           fetch(window.env.auth0.auth_url + "?id_token=" + id_token,
