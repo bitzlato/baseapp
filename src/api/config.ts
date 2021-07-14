@@ -20,6 +20,7 @@ export const defaultConfig: Config = {
     msAlertDisplayTime: '5000',
     sessionCheckInterval: '15000',
     balancesFetchInterval: '3000',
+    openOrdersFetchInterval: '10000',
     passwordEntropyStep: '14',
     storage: {
         defaultStorageLimit: '50',
@@ -58,6 +59,7 @@ export const captchaLogin = (): boolean => Cryptobase.config.captchaLogin;
 export const minutesUntilAutoLogout = (): string => Cryptobase.config.minutesUntilAutoLogout;
 export const sessionCheckInterval = (): string => Cryptobase.config.sessionCheckInterval;
 export const balancesFetchInterval = (): string => Cryptobase.config.balancesFetchInterval;
+export const openOrdersFetchInterval = (): number => Number(Cryptobase.config.openOrdersFetchInterval);
 export const gaTrackerKey = (): string => Cryptobase.config.gaTrackerKey;
 export const msAlertDisplayTime = (): string => Cryptobase.config.msAlertDisplayTime;
 export const defaultStorageLimit = (): number => Number(Cryptobase.config.storage.defaultStorageLimit);
