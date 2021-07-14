@@ -20,26 +20,6 @@
       padding: 9px 9px 9px 12px;
     }
 
-    &__cancel {
-      color: var(--secondary-contrast-cta-color);
-      cursor: pointer;
-      float: right;
-      transition: 0.2s;
-
-      &:hover {
-        color: var(--primary-text-color);
-        transition: 0.2s;
-
-        .cr-table-header__close {
-          &::before,
-          &::after {
-            background: var(--primary-text-color);
-            transition: 0.2s;
-          }
-        }
-      }
-    }
-
     &__close {
       cursor: pointer;
       display: inline-block;
@@ -69,6 +49,21 @@
       }
     }
   }
+}
+
+.cr-row-spacing {
+  & > *:not(:first-child) {
+    margin-left: var(--gap);
+  }
+}
+
+.cr-row {
+  align-items: center;
+  display: flex;
+}
+
+.cr-grow {
+  flex-grow: 1;
 }
 
 .cr-open-orders .cr-table th,

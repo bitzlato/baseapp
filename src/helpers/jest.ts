@@ -29,6 +29,7 @@ const mockConfig: Config = {
     msAlertDisplayTime: '5000',
     sessionCheckInterval: '15000',
     balancesFetchInterval: '3000',
+    openOrdersFetchInterval: '10000',
     passwordEntropyStep: '14',
     storage: {
         defaultStorageLimit: '50',
