@@ -2,9 +2,9 @@ import { CommonError } from '../../../modules/types';
 import { DepositsActions } from './actions';
 import {
     DEPOSITS_CREATE,
+    DEPOSITS_CREATE_CLEAR,
     DEPOSITS_CREATE_DATA,
     DEPOSITS_CREATE_ERROR,
-    DEPOSITS_CREATE_CLEAR,
 } from './constants';
 import { DepositIntention } from './types';
 
