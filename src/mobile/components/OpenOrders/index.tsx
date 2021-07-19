@@ -28,6 +28,7 @@ const OpenOrdersComponent: React.FC = () => {
         fetchOrdersCb();
         const interval = openOrdersFetchInterval();
         const intervalId = interval > 0 ? window.setInterval(fetchOrdersCb, openOrdersFetchInterval()) : undefined;
+
         return () => clearInterval(intervalId);
     }, [dispatch]);
 

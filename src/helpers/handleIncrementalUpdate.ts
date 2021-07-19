@@ -45,5 +45,6 @@ export const handleIncrementalUpdateArray = (depthOld: string[][], newLevels: st
     if (type === 'asks') {
         return sortAsks(result);
     }
+
     return sortBids(result);
 };

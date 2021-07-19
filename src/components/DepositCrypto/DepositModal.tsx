@@ -14,7 +14,6 @@ import { CustomInput } from '../CustomInput';
 interface Props {
     currency: string;
     handleCloseModal: () => void;
-    handleSubmit: () => void;
 }
 
 const DepositModalComponent: React.FC<Props> = (props: Props) => {
@@ -87,8 +86,8 @@ const DepositModalComponent: React.FC<Props> = (props: Props) => {
     ]);
 
     const validateAmount = React.useCallback((value: string) => {
-      const number = parseFloat(value);
-       setAmountValid(number > 0);
+      const num = parseFloat(value);
+       setAmountValid(num > 0);
     }, []);
 
     const handleChangeFieldValue = React.useCallback((key: string, value: string) => {

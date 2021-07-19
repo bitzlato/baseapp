@@ -111,7 +111,6 @@ class DepositCryptoComponent extends React.Component<Props, State> {
               {isOpenDepositModal && (
                   <DepositModal
                       currency={wallet.currency}
-                      handleSubmit={() => {}}
                       handleCloseModal={this.handleOpenDepositModal}
                   />
               )}
