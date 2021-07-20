@@ -6,7 +6,7 @@ import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { IntlProps } from '../../';
-import { captchaLogin } from '../../api';
+import { captchaLogin, signInUrl } from '../../api';
 import { Captcha, SignInComponent, TwoFactorAuth } from '../../components';
 import { EMAIL_REGEX, ERROR_EMPTY_PASSWORD, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
 import {
@@ -320,8 +320,19 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
     signUpRequireVerification: data => dispatch(signUpRequireVerification(data)),
 });
 
-export const SignInScreen = compose(
+const SignInWindow = compose(
     injectIntl,
     withRouter,
     connect(mapStateToProps, mapDispatchToProps),
 )(SignIn) as React.ComponentClass;
+
+export const SignInScreen: React.FC = () => {
+    const url = signInUrl();
+    if (url) {
+        window.location.href = url;
+    }
+
+    return (
+        <SignInWindow />
+    );
+};
