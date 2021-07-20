@@ -13,7 +13,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { IntlProps } from '../../';
-import { isUsernameEnabled } from '../../api';
+import { isUsernameEnabled, signUpUrl } from '../../api';
 import { Captcha, Modal, SignUpForm } from '../../components';
 import {
     EMAIL_REGEX,
@@ -511,8 +511,19 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
         resetCaptchaState: () => dispatch(resetCaptchaState()),
     });
 
-export const SignUpScreen = compose(
+export const SignUpWindow = compose(
     injectIntl,
     withRouter,
     connect(mapStateToProps, mapDispatchToProps),
 )(SignUp) as React.ComponentClass;
+
+export const SignUpScreen: React.FC = () => {
+    const url = signUpUrl();
+    if (url) {
+        window.location.href = url;
+    }
+
+    return (
+        <SignUpWindow />
+    );
+};
