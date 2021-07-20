@@ -3,12 +3,13 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { signInUrl } from '../../../api';
 import { selectSignInRequire2FA } from '../../../modules/user/auth';
 import { SignInScreen } from '../../../screens/SignInScreen';
 import { Modal } from '../../components';
 
 
-const SignInMobileScreen: React.FC = () => {
+const SignInMobileWindow: React.FC = () => {
     const require2FA = useSelector(selectSignInRequire2FA);
     const history = useHistory();
     const intl = useIntl();
@@ -28,6 +29,17 @@ const SignInMobileScreen: React.FC = () => {
             <SignInScreen/>
         </Modal>
     </div>;
+};
+
+const SignInMobileScreen: React.FC = () => {
+    const url = signInUrl();
+    if (url) {
+        window.location.href = url;
+    }
+
+    return (
+        <SignInMobileWindow />
+    );
 };
 
 export {

@@ -29,6 +29,8 @@ declare global {
         };
         languages: string[];
         kycSteps: string[];
+        signInUrl: string;
+        signUpUrl: string;
     }
 
     interface Window {

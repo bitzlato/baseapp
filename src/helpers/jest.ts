@@ -42,7 +42,9 @@ const mockConfig: Config = {
         'profile',
         'document',
         'address'
-    ]
+    ],
+    signInUrl: '',
+    signUpUrl: ''
 };
 
 // tslint:disable no-any no-console

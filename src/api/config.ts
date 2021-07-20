@@ -33,7 +33,9 @@ export const defaultConfig: Config = {
         'profile',
         'document',
         'address'
-    ]
+    ],
+    signInUrl: '',
+    signUpUrl: ''
 };
 
 export const Cryptobase = {
@@ -68,3 +70,5 @@ export const passwordEntropyStep = (): number => Number(Cryptobase.config.passwo
 export const languages: string[] = (Cryptobase.config.languages && Cryptobase.config.languages.length > 0) ? Cryptobase.config.languages : ['en'];
 export const kycSteps = (): string[] => Cryptobase.config.kycSteps;
 export const isUsernameEnabled = (): boolean => Cryptobase.config.usernameEnabled;
+export const signInUrl = (): string => Cryptobase.config.signInUrl;
+export const signUpUrl = (): string => Cryptobase.config.signUpUrl;

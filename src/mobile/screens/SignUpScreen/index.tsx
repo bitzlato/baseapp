@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';
+import { signUpUrl } from '../../../api';
 import { SignUpScreen } from '../../../screens/SignUpScreen';
 import { Modal } from '../../components';
 
 
-const SignUpMobileScreen: React.FC = () => {
+const SignUpMobileWindow: React.FC = () => {
     const history = useHistory();
     const intl = useIntl();
 
@@ -19,6 +20,16 @@ const SignUpMobileScreen: React.FC = () => {
             <SignUpScreen/>
         </Modal>
     </div>;
+};
+
+
+const SignUpMobileScreen: React.FC = () => {
+    const url = signUpUrl();
+    if (url) {
+        window.location.href = url;
+    }
+
+    return <SignUpMobileWindow />;
 };
 
 export {
