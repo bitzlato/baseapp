@@ -35,7 +35,9 @@ export const defaultConfig: Config = {
         'address'
     ],
     signInUrl: '',
-    signUpUrl: ''
+    signUpUrl: '',
+    logoUrl: '',
+    logoDarkUrl: ''
 };
 
 export const Cryptobase = {
@@ -72,3 +74,5 @@ export const kycSteps = (): string[] => Cryptobase.config.kycSteps;
 export const isUsernameEnabled = (): boolean => Cryptobase.config.usernameEnabled;
 export const signInUrl = (): string => Cryptobase.config.signInUrl;
 export const signUpUrl = (): string => Cryptobase.config.signUpUrl;
+export const logoUrl = (): string => Cryptobase.config.logoUrl;
+export const logoDarkUrl = (): string => Cryptobase.config.logoDarkUrl;

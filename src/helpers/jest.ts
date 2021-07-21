@@ -44,7 +44,9 @@ const mockConfig: Config = {
         'address'
     ],
     signInUrl: '',
-    signUpUrl: ''
+    signUpUrl: '',
+    logoUrl: '',
+    logoDarkUrl: ''
 };
 
 // tslint:disable no-any no-console

@@ -31,6 +31,8 @@ declare global {
         kycSteps: string[];
         signInUrl: string;
         signUpUrl: string;
+        logoUrl: string;
+        logoDarkUrl: string;
     }
 
     interface Window {
