@@ -14,7 +14,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { IntlProps } from '../../';
 import { isUsernameEnabled, signUpUrl } from '../../api';
-import { Captcha, Modal, SignUpForm } from '../../components';
+import { Captcha, Modal, ReplaceUrl, SignUpForm } from '../../components';
 import {
     EMAIL_REGEX,
     ERROR_INVALID_EMAIL,
@@ -519,11 +519,6 @@ export const SignUpWindow = compose(
 
 export const SignUpScreen: React.FC = () => {
     const url = signUpUrl();
-    if (url) {
-        window.location.href = url;
-    }
 
-    return (
-        <SignUpWindow />
-    );
+    return url ? <ReplaceUrl url={url} /> : <SignUpWindow />;
 };

@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { signInUrl } from '../../../api';
+import { ReplaceUrl } from '../../../components';
 import { selectSignInRequire2FA } from '../../../modules/user/auth';
 import { SignInScreen } from '../../../screens/SignInScreen';
 import { Modal } from '../../components';
@@ -33,13 +34,8 @@ const SignInMobileWindow: React.FC = () => {
 
 const SignInMobileScreen: React.FC = () => {
     const url = signInUrl();
-    if (url) {
-        window.location.href = url;
-    }
 
-    return (
-        <SignInMobileWindow />
-    );
+    return url ? <ReplaceUrl url={url} /> : <SignInMobileWindow />;
 };
 
 export {

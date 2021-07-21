@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import { signUpUrl } from '../../../api';
+import { ReplaceUrl } from '../../../components';
 import { SignUpScreen } from '../../../screens/SignUpScreen';
 import { Modal } from '../../components';
 
@@ -25,11 +26,8 @@ const SignUpMobileWindow: React.FC = () => {
 
 const SignUpMobileScreen: React.FC = () => {
     const url = signUpUrl();
-    if (url) {
-        window.location.href = url;
-    }
 
-    return <SignUpMobileWindow />;
+    return url ? <ReplaceUrl url={url} /> : <SignUpMobileWindow />;
 };
 
 export {

@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { IntlProps } from '../../';
 import { captchaLogin, signInUrl } from '../../api';
-import { Captcha, SignInComponent, TwoFactorAuth } from '../../components';
+import { Captcha, ReplaceUrl, SignInComponent, TwoFactorAuth } from '../../components';
 import { EMAIL_REGEX, ERROR_EMPTY_PASSWORD, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
 import {
     Configs,
@@ -328,11 +328,6 @@ const SignInWindow = compose(
 
 export const SignInScreen: React.FC = () => {
     const url = signInUrl();
-    if (url) {
-        window.location.href = url;
-    }
 
-    return (
-        <SignInWindow />
-    );
+    return url ? <ReplaceUrl url={url} /> : <SignInWindow />;
 };
