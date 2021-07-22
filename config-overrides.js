@@ -26,10 +26,11 @@ module.exports = function override(config, env) {
             }
         }
 
-        if (`${process.env.BUILD_DOMAIN}` != "") {
-            const domains = process.env.BUILD_DOMAIN.split(',');
+        const domain = process.env.BUILD_DOMAIN;
+        if (domain) {
+            const domainLock = domain.split(',');
             config.plugins.push(
-                new JavaScriptObfuscator({ rotateUnicodeArray: true, domainLock: domains }, [commonJSFilename])
+                new JavaScriptObfuscator({ rotateUnicodeArray: true, domainLock }, [commonJSFilename])
             );
         }
 
