@@ -10,10 +10,6 @@ set :roles, %w[app].freeze
 set :repo_url, ENV.fetch('DEPLOY_REPO', `git remote -v | grep origin | head -1 | awk  '{ print $2 }'`) if ENV['USE_LOCAL_REPO'].nil?
 set :keep_releases, 10
 
-set :linked_files, %w[.env]
-set :linked_dirs, %w[log public/config]
-set :config_files, fetch(:linked_files)
-
 set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}" }
 
 set :disallow_pushing, true
@@ -65,6 +61,14 @@ before 'deploy:starting', 'sentry:validate_config'
 after 'deploy:published', 'sentry:notice_deployment'
 after 'deploy:updated', 'yarn_build'
 
+task :link_env do
+  on roles('app') do
+    within release_path do
+      execute :ln, "-s env.#{fetch(:stage)}.js public/config/env.js"
+    end
+  end
+end
+
 task :yarn_build do
   on roles('app') do
     within release_path do
@@ -72,6 +76,7 @@ task :yarn_build do
     end
   end
 end
+before 'yarn_build', 'link_env'
 
 if defined? Slackistrano
   Rake::Task['deploy:starting'].prerequisites.delete('slack:deploy:starting')
