@@ -4,8 +4,9 @@ const host = process.env.REACT_APP_STAGING;
 
 module.exports = app => {
     app.use(
-        '/api/v2/ranger',
-        createProxyMiddleware({
+        // place path inside createProxyMiddleware !!!
+        // https://github.com/chimurai/http-proxy-middleware/issues/204
+        createProxyMiddleware('/api/v2/ranger', {
             target: `wss://${host}`,
             changeOrigin: true,
             ws: true,
@@ -13,8 +14,7 @@ module.exports = app => {
     );
 
     app.use(
-        '/api',
-        createProxyMiddleware({
+        createProxyMiddleware('/api', {
             target: `https://${host}`,
             changeOrigin: true,
         })
