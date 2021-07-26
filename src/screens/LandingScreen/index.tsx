@@ -7,11 +7,7 @@ import { IntlProps } from '../../';
 import { LogoIcon } from '../../assets/images/LogoIcon';
 import { MarketsTable } from '../../containers';
 import { toggleColorTheme } from '../../helpers';
-import {
-    RootState,
-    selectCurrentColorTheme,
-    selectUserLoggedIn,
-} from '../../modules';
+import { RootState, selectCurrentColorTheme, selectUserLoggedIn } from '../../modules';
 
 const FeaturesExchangeIcon = require('../../assets/images/landing/features/Exchange.svg');
 const FeaturesTypesIcon = require('../../assets/images/landing/features/Types.svg');
@@ -28,7 +24,6 @@ const RedditIcon = require('../../assets/images/landing/social/Reddit.svg');
 const FacebookIcon = require('../../assets/images/landing/social/Facebook.svg');
 const MediumIcon = require('../../assets/images/landing/social/Medium.svg');
 const CoinMarketIcon = require('../../assets/images/landing/social/CoinMarket.svg');
-
 
 interface ReduxProps {
     isLoggedIn: boolean;
@@ -57,36 +52,27 @@ class Landing extends React.Component<Props> {
     }
 
     public renderHeader() {
-        if (this.props.isLoggedIn) {
-            return (
-                <div className="pg-landing-screen__header">
-                    <div className="pg-landing-screen__header__wrap">
-                        <div className="pg-landing-screen__header__wrap__left" onClick={e => this.handleScrollTop()}>
-                            <LogoIcon />
-                        </div>
-                        <div className="pg-landing-screen__header__wrap__right">
-                            <Link to="/profile" className="landing-button">
-                                {this.translate('page.body.landing.header.button1')}
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
         return (
             <div className="pg-landing-screen__header">
                 <div className="pg-landing-screen__header__wrap">
                     <div className="pg-landing-screen__header__wrap__left" onClick={e => this.handleScrollTop()}>
-                        <LogoIcon />
+                        <LogoIcon colorTheme="dark" />
                     </div>
                     <div className="pg-landing-screen__header__wrap__right">
-                        <Link to="/signin" className="landing-button landing-button--simple">
-                            {this.translate('page.body.landing.header.button2')}
-                        </Link>
-                        <Link to="/signup" className="landing-button">
-                            {this.translate('page.body.landing.header.button3')}
-                        </Link>
+                        {this.props.isLoggedIn ? (
+                            <Link to="/profile" className="landing-button">
+                                {this.translate('page.body.landing.header.button1')}
+                            </Link>
+                        ) : (
+                            <>
+                                <Link to="/signin" className="landing-button landing-button--simple">
+                                    {this.translate('page.body.landing.header.button2')}
+                                </Link>
+                                <Link to="/signup" className="landing-button">
+                                    {this.translate('page.body.landing.header.button3')}
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
@@ -217,7 +203,7 @@ class Landing extends React.Component<Props> {
         return (
             <div className="pg-landing-screen__trade-on-the-go">
                 <div className="pg-landing-screen__trade-on-the-go__wrap">
-                    <div className="pg-landing-screen__trade-on-the-go__wrap__image"/>
+                    <div className="pg-landing-screen__trade-on-the-go__wrap__image" />
                     <div className="pg-landing-screen__trade-on-the-go__wrap__content">
                         <h1>{this.translate('page.body.landing.tradeOnTheGo.item.title')}</h1>
                         <h2>{this.translate('page.body.landing.tradeOnTheGo.item.text1')}</h2>
@@ -289,7 +275,9 @@ class Landing extends React.Component<Props> {
                         </div>
                     </div>
                 </div>
-                <span className="pg-landing-screen__footer__rights">{this.translate('page.body.landing.footer.rights')}</span>
+                <span className="pg-landing-screen__footer__rights">
+                    {this.translate('page.body.landing.footer.rights')}
+                </span>
             </div>
         );
     }
@@ -313,7 +301,7 @@ class Landing extends React.Component<Props> {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    private translate = (key: string) => this.props.intl.formatMessage({id: key});
+    private translate = (key: string) => this.props.intl.formatMessage({ id: key });
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
@@ -324,5 +312,5 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
 export const LandingScreen = compose(
     injectIntl,
     withRouter,
-    connect(mapStateToProps, null),
+    connect(mapStateToProps, null)
 )(Landing) as React.ComponentClass;
