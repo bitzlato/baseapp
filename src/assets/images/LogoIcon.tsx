@@ -4,6 +4,7 @@ import { logoDarkUrl, logoUrl } from '../../api';
 import { selectCurrentColorTheme } from '../../modules';
 
 interface LogoIconProps {
+    colorTheme?: 'dark' | 'light';
     className?: string;
 }
 
@@ -24,12 +25,13 @@ export const LogoIcon: React.FC<LogoIconProps> = props => {
         return <LogoIconBaseapp {...props} />;
     }
 
-    const src = currentTheme === 'dark' ? logoDarkUrl() : logo;
+    const colorTheme = props.colorTheme || currentTheme;
+    const src = colorTheme === 'dark' ? logoDarkUrl() : logo;
 
     return (
         <img
             className={props.className}
-            alt="logo icon"
+            alt="Logo"
             src={src}
             style={{ height: '100%', width: 'auto', objectFit: 'contain', maxHeight: 60 }}
         />
