@@ -36,6 +36,16 @@ $ yarn start-mock
 This command will also start a fake api backend for helping development.
 Once you happy with the result, save, build an image and run it with OpenDAX docker compose system.
 
+## Local development with staging server
+
+```bash
+$ cp public/config/env.localdev.js public/config/env.js
+$ PORT=8080 REACT_APP_STAGING=ex-stage.bitzlato.bz yarn start
+```
+This command will run development server with proxying of API requests to the staging server `ex-stage.bitzlato.bz`.
+Uses `public/config/env.localdev.js` as a configuration file.
+It is recommended to place the env variables in the `.envrc ' file.
+
 ## Execute tests
 
 In `<rootDir>`
