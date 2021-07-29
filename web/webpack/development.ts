@@ -8,6 +8,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import commonConfig from './common';
 const rootDir = path.resolve(__dirname, '..');
+const host = process.env.REACT_APP_STAGING;
 
 const config = merge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',
@@ -64,12 +65,24 @@ const config = merge(commonConfig, {
     devServer: {
         contentBase: path.join(__dirname, '../public'),
         compress: false,
-        port: 3000,
+        host: '0.0.0.0',
+        port: Number(process.env.PORT) || 3000,
         historyApiFallback: true,
         stats: {
             children: false,
         },
         hot: true,
+        proxy: {
+            '/api/v2/ranger': {
+                target: `wss://${host}`,
+                changeOrigin: true,
+                ws: true,
+            },
+            '/api': {
+                target: `https://${host}`,
+                changeOrigin: true,
+            }
+        },
     },
 });
 
