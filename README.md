@@ -1,22 +1,14 @@
-![Cryptocurrency Exchange Platform - Baseapp](https://github.com/openware/meta/raw/main/images/github_baseapp.png)
+# Go-Gin web application
 
-<h3 align="center">
-<a href="https://www.openware.com/sdk/docs.html#baseapp">Guide</a> <span>&vert;</span> 
-<a href="https://www.openware.com/sdk/api.html">API Docs</a> <span>&vert;</span> 
-<a href="https://www.openware.com/">Consulting</a> <span>&vert;</span> 
-<a href="https://t.me/peatio">Community</a>
-</h3>
-<h6 align="center">Component part of <a href="https://github.com/openware/opendax">OpenDAX Trading Platform</a></h6>
+This application was generated with [sonic](https://github.com/openware/sonic)
 
----
+## Prerequisites
 
-# OpenDAX BaseApp UI
-## User Interface for Trading and Wallets Management
+To bring up all the dependencies, run `docker-compose up -Vd`
 
-React application to build a trading platform interface for use with OpenDAX: https://github.com/openware/opendax
+Afterwards, enable the Transit engine for Vault with `vault secrets enable transit`
 
-You can see an example of a live application running at: https://www.openfinex.io/
-If you need customization from the experts contact us: https://www.openware.com/
+Also, you may want to run `source .env` to load Peatio, Barong and Sonic public keys for development use
 
 ## License
 
@@ -140,104 +132,48 @@ Put the name of BE server:
   }
 ```
 
-**5. Open the project in Xcode.**
-
-Launch Xcode with a prepared app:
-```bash
-ionic capacitor run ios
+##### Peatio Management Scopes
+```
+  read_engines:
+    mandatory_signers:
+      - sonic
+    permitted_signers:
+      - sonic
+  write_engines:
+    mandatory_signers:
+      - sonic
+    permitted_signers:
+      - sonic
+  read_markets:
+    mandatory_signers:
+      - sonic
+    permitted_signers:
+      - sonic
+  write_markets:
+    mandatory_signers:
+      - sonic
+    permitted_signers:
+      - sonic
 ```
 
-**6. Check Xcode configuration**
-In Project navigator, select the project root to open the project editor. Under the **Identity section**, verify that the **Package ID** that was set matches the Bundle Identifier.
+3. Use the resulting Vault token when running the application
 
-In the same project editor, under the **Signing section**, ensure Automatically manage signing is enabled. Then, select a Development Team. Given a Development Team, Xcode will attempt to automatically prepare provisioning and signing.
+## How to run Sonic with a frontend
 
-**7. Update native app with the changes**
+1. Copy your frontend application source files to the `client/` folder
 
-With each meaningful change, Ionic apps must be built into web assets before the change can appear on iOS simulators and devices. The web assets then must be copied into the native project:
-```bash
-ionic capacitor copy ios
+2. Use the Makefile:
+```
+make asset
+```
+This will run the build command in `client/` and move the build output to `public/assets/`.
+
+**Warning**: Make sure to build your client (frontend) into the `build/` folder, if it's a different folder, you **must** update your client (frontend) or Makefile
+
+3. Start the go server
+```
+go run app.go serve
 ```
 
-**8. Build IOS app**
-
-To receive an executable app file run 'build' command on Xcode. You need to have an Apple Developer account to be able to extract an executable file from Xcode.
-
-## Build Android app
-**1. Install Android studio**
-
-Android Studio is IDE, that provides the fastest tools for building apps on every type of Android device.
-
-**2. Open the `capacitor.config.json` file and modify the `linuxAndroidStudioPath` property.**
-
-Run next command
-```bash
-whereis android-studio
-```
-
-**3. Build your android application**
-
-```bash
-ionic capacitor add android
-```
-
-**4. Launch android application with Android Studio**
-```bash
-ionic capacitor run android
-```
-
-**5. Android Studio configuration**
-
-Select connected android device or configure device simulator, which required
-
-**6. Update app with the changes**
-```bash
-ionic capacitor copy android [options]
-```
-
-**7. Set ANDROID_SDK_ROOT variale**
-
-Set android ask path to ANDROID_SDK_ROOT or write sdk.dir variable in android/local.properties file (it doesn't exist as a default)
-
-**8. Build android app**
-
-Build android app using Android Studio Build tab
-
-or you can build apk file with command line
-
-Debug build:
-
-```bash
-  ionic capacitor copy android && cd android && ./gradlew assembleDebug && cd ..
-```
-
-Release build:
-
-For release build you have to create keystore path and keystore alias and run next command:
-
-```bash
-  cd android &&
-  ./gradlew assembleRelease &&
-  cd app/build/outputs/apk/release &&
-  jarsigner -keystore YOUR_KEYSTORE_PATH -storepass YOUR_KEYSTORE_PASS app-release-unsigned.apk YOUR_KEYSTORE_ALIAS &&
-  zipalign 4 app-release-unsigned.apk app-release.apk
-```
-
-## Happy trading with OpenDAX BaseApp UI
-
-If you have designed something beautiful with it, we would love to see it!
-
-And if you have any comments, feedback and suggestions - we are happy to hear from you here at GitHub or at https://openware.com
-
-## Licensing
-
-This code is open for helping private modification and performing customer demonstration, you can use it for raising capital.
-You cannot use it for a live platform without getting a commercial license from us.
-
-Contact us if you'd like to purchase a commercial license.
-
-## Partners
-
-If you would like to fork, and modify this UI to create a BaseApp theme, we would be happy to setup a partnership program and sell your work provided a revenue sharing.
-
-Made with love from Paris and Kiev.
+## Troubleshooting
+**If it doesn't work and you see the white screen, check the order of import files in index.html**

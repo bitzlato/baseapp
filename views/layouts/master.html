@@ -1,0 +1,30 @@
+<!-- /views/admin/master.html -->
+<!doctype html>
+
+<html>
+    <head>
+        <title>{{.title}}</title>
+        <link rel="shortcut icon" href="/public/assets/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{template "head" .}}
+        {{ if .cssFiles}}
+            {{range .cssFiles}}
+                <link href={{ . }} rel="stylesheet">
+            {{end}}
+        {{end}}
+    </head>
+
+    <body>
+        <div id={{ .rootID }}></div>
+        {{template "content" .}}
+        <hr>
+        {{ if .renderFooter }}
+            {{include "layouts/footer"}}
+        {{end}}
+        {{ if .jsFiles}}
+            {{range .jsFiles}}
+                <script src="{{ . }}"></script>
+            {{end}}
+        {{end}}
+    </body>
+</html>

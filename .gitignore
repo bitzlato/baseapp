@@ -9,7 +9,6 @@
 /coverage
 
 # production
-/build
 /.idea
 /android
 /ios
@@ -21,12 +20,24 @@
 /.env
 env.js
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-index.css
+# sonic
+bin/
+.vscode
 
 # environment config
-public/config/env.js
+web/public/config/env.js
 
 log/
+
+# baseapp
+web/.DS_Store
+web/node_modules
+web/build
+web/npm-debug.log*
+web/yarn-debug.log*
+web/yarn-error.log*
+web/.env.local
+web/.env.development.local
+web/.env.test.local
+web/.env.production.local
+web/.env

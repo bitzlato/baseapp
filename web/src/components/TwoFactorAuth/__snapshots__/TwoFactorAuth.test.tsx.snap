@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TwoFactorAuth component should render 1`] = `
+<div
+  className="pg-2fa___form"
+>
+  <form>
+    <div
+      className="cr-email-form"
+    >
+      <div
+        className="cr-email-form__options-group"
+      >
+        <div
+          className="cr-email-form__option"
+        >
+          <div
+            className="cr-email-form__option-inner"
+          >
+            2FA verification
+            <div
+              className="cr-email-form__cros-icon"
+              onClick={[MockFunction]}
+            >
+              <Component
+                className="close-icon"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="cr-email-form__form-content"
+      >
+        <div
+          className="cr-email-form__header"
+        />
+        <div
+          className="cr-email-form__group"
+        >
+          <CodeVerification
+            code=""
+            codeLength={6}
+            inputMode="decimal"
+            onChange={[MockFunction]}
+            onSubmit={[Function]}
+            placeholder="X"
+            showPaste2FA={true}
+            type="text"
+          />
+        </div>
+        <div
+          className="cr-email-form__button-wrapper"
+        >
+          <Button
+            active={false}
+            disabled={true}
+            onClick={[MockFunction]}
+            size="lg"
+            variant="primary"
+          >
+            Sign in
+          </Button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+`;
