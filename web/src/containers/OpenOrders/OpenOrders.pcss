@@ -182,3 +182,18 @@
     }
   }
 }
+
+.cr-row-spacing {
+  & > *:not(:first-child) {
+    margin-left: var(--gap);
+  }
+}
+
+.cr-row {
+  align-items: center;
+  display: flex;
+}
+
+.cr-grow {
+  flex-grow: 1;
+}

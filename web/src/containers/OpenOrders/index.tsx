@@ -1,8 +1,9 @@
 import classnames from 'classnames';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Form, Spinner } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { openOrdersFetchInterval } from 'src/api';
 import { useOpenOrdersFetch } from 'src/hooks';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { Decimal, OpenOrders } from '../../components';
@@ -14,18 +15,22 @@ import {
     selectMarkets,
     selectOpenOrdersFetching,
     selectOpenOrdersList,
+    selectUserLoggedIn,
+    userOrdersHistoryFetch,
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
 import { getTriggerSign } from './helpers';
 
 export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
     const [hideOtherPairs, setHideOtherPairs] = useState<boolean>(true);
+    const [showLoading, setShowLoading] = useState(false);
     const { formatMessage } = useIntl();
     const dispatch = useDispatch();
     const currentMarket = useSelector(selectCurrentMarket);
     const list = useSelector(selectOpenOrdersList);
     const fetching = useSelector(selectOpenOrdersFetching);
     const markets = useSelector(selectMarkets);
+    const userLoggedIn = useSelector(selectUserLoggedIn);
 
     const translate = React.useCallback((id: string) => formatMessage({ id: id }), [formatMessage]);
 
@@ -98,13 +103,25 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
         currentMarket && dispatch(ordersCancelAllFetch({ market: currentMarket.id }));
     }, [currentMarket]);
 
-    const classNames = useMemo(() => 
-        classnames('pg-open-orders', {
-                'pg-open-orders--empty': !list.length,
-                'pg-open-orders--loading': fetching,
-            },
-        ),
-    [list, fetching]);
+    const fetchOrders = () => {
+        if (showLoading) {
+            setShowLoading(false);
+        }
+        // TODO: check parameters
+        dispatch(userOrdersHistoryFetch({ pageIndex: 0, limit: 25, type: 'open' }));
+    };
+
+    React.useEffect(() => {
+        const interval = openOrdersFetchInterval();
+        const intervalId = (userLoggedIn && currentMarket && interval > 0) ? window.setInterval(fetchOrders, interval) : undefined;
+        return () => clearInterval(intervalId);
+    }, [dispatch, userLoggedIn, currentMarket]);
+
+    const loading = fetching && showLoading;
+    const classNames = classnames('pg-open-orders', {
+        'pg-open-orders--empty': !list.length,
+        'pg-open-orders--loading': loading,
+    });
 
     const handleToggleCheckbox = React.useCallback(event => {
         event.preventDefault();
@@ -112,7 +129,7 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
     }, [hideOtherPairs]);
 
     const renderContent = useMemo(() => {
-        if (fetching) {
+        if (loading) {
             return (
                 <div className="open-order-loading">
                     <Spinner animation="border" variant="primary" />
@@ -128,13 +145,13 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
                 onCancel={handleCancel}
             />
         );
-    }, [fetching, list, markets]);
+    }, [loading, list, markets]);
 
     return (
         <div className={classNames}>
             <div className="cr-table-header__content">
-                <div className="cr-title-component">
-                    <span>{translate('page.body.trade.header.openOrders')}</span>
+                <div className="cr-grow">
+                    <FormattedMessage id="page.body.trade.header.openOrders" />
                     <Form className="cr-title-component__checkbox" onClick={handleToggleCheckbox}>
                         <Form.Check
                             type="checkbox"
@@ -145,10 +162,20 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
                             label={translate('page.body.trade.header.openOrders.hideOtherPairs')}
                         />
                     </Form>
-                    <span className="cr-table-header__cancel" onClick={handleCancelAll}>
-                        <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
-                        <CloseIcon className="cr-table-header__close" />
-                    </span>
+                </div>
+                <div className={classnames('cr-row', 'cr-row-spacing')}>
+                    <Button disabled={!userLoggedIn} variant="light" onClick={fetchOrders}>
+                        <FormattedMessage id="page.body.openOrders.header.button.refresh" />
+                    </Button>
+                    <Button
+                        variant="light"
+                        className={classnames('cr-row', 'cr-row-spacing')}
+                        onClick={handleCancelAll}>
+                        <CloseIcon />
+                        <span>
+                            <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
+                        </span>
+                    </Button>
                 </div>
             </div>
             {renderContent}

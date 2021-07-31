@@ -285,8 +285,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             return (
                 <div className={mobileCls}>
                     <Switch>
-                        <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/setup" component={SetupScreen} />
-                        <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signin" component={SignInMobileScreen} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signin" component={() => { window.location.href = '/signin'; return null; }} />
+                       <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signup" component={() => { window.location.href = '/signup'; return null; }} />
                         <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signup" component={SignUpMobileScreen} />
                         <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/forgot_password" component={ForgotPasswordMobileScreen} />
                         <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/accounts/password_reset" component={ChangeForgottenPasswordMobileScreen} />
@@ -321,9 +321,9 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                 <Switch>
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/setup" component={SetupScreen} />
                     <Route exact={true} path="/magic-link" component={MagicLink} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signin" component={SignInScreen} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signin" component={() => { window.location.href = '/signin'; return null; }} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signup" component={() => { window.location.href = '/signup'; return null; }} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/accounts/confirmation" component={VerificationScreen} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signup" component={SignUpScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/forgot_password" component={ForgotPasswordScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/accounts/password_reset" component={ChangeForgottenPasswordScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/email-verification" component={EmailVerificationScreen} />

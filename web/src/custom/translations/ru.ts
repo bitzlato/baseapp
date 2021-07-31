@@ -233,6 +233,8 @@ export const ru: LangType = {
     'success.beneficiaries.resent_pin': 'Beneficiaries: pin resent',
     'error.beneficiaries.max10.addresses': 'You can register up to 10 withdrawal addresses',
 
+    'success.deposits.created': 'Создано намерение депонировать',
+
     'page.body.wallets.beneficiaries.title': 'Withdraw address',
     'page.body.wallets.beneficiaries.fiat.title': 'Withdrawal details',
     'page.body.wallets.beneficiaries.dropdown.address': 'Address',
@@ -281,6 +283,11 @@ export const ru: LangType = {
     'page.body.wallets.beneficiaries.failAddModal.content': 'You need to confirm your account to add a beneficiary',
     'page.body.wallets.beneficiaries.failAddModal.button': 'Confirm phone',
 
+    'page.body.wallets.deposits.addDepositModal.header': 'Укажите сумму пополнения',
+    'page.body.wallets.deposits.addDepositModal.body.button': 'Отправить',
+    'page.body.wallets.deposits.addDepositModal.body.invalidAmount': 'Недопустимое значение',
+    'page.body.wallets.deposits.addDepositModal.amount': 'Сумма',
+
     'page.body.openOrders.tab.all': 'Все',
     'page.body.openOrders.tab.open': 'Открытые',
     'page.body.openOrders.header.date': 'Дата',
@@ -303,6 +310,7 @@ export const ru: LangType = {
     'page.body.openOrders.content.status.trigger_cancel': 'Триггер Отменен',
     'page.body.openOrders.content.status.execution_reject': 'Триггер Отклонен',
     'page.body.openOrders.header.button.cancelAll': 'Отменить все',
+    'page.body.openOrders.header.button.refresh': 'Обновить',
 
     'page.body.history.deposit': 'История депозитов',
     'page.body.history.deposit.header.txid': 'txID',

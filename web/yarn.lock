@@ -4050,10 +4050,9 @@ cryptocoins-icons@^2.8.0:
   resolved "https://registry.yarnpkg.com/cryptocoins-icons/-/cryptocoins-icons-2.9.0.tgz#2abd9db764ca5c5f87620acc4d75abfa6d8142f7"
   integrity sha512-bfhtws/Hs4YOv7GXrCQfZ9yzgVLqkJsFzgsTFVFBY/D1qPIICQI0UjcoFxea8dlBlwerxNu3Shp0T0ucBLHwng==
 
-cryptocurrency-icons@^0.16.1:
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/cryptocurrency-icons/-/cryptocurrency-icons-0.16.1.tgz#33ec0b828c666f773b53866b4b803b2a06c28efc"
-  integrity sha512-C6y+r56g0ZJzZ9kCbeKa/WXb/oz1elilsaSGjv86T93P0oZWr4v5pxnbtZrEnvHn63qbTxo/Pz3NvzLbKrnQVQ==
+"cryptocurrency-icons@https://github.com/bitzlato/cryptocurrency-icons.git":
+  version "0.17.2"
+  resolved "https://github.com/bitzlato/cryptocurrency-icons.git#010b3bfcfe10168ca3afdcaa45e6e0143ce09d2b"
 
 css-color-names@0.0.4, css-color-names@^0.0.4:
   version "0.0.4"

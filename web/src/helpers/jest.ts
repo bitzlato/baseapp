@@ -44,6 +44,11 @@ const mockConfig: Config = {
         'address'
     ],
     themeSwitcher: 'visible',
+    openOrdersFetchInterval: '10000',
+    signInUrl: '',
+    signUpUrl: '',
+    logoUrl: '',
+    logoDarkUrl: '',
 };
 
 // tslint:disable no-any no-console

@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { IntlProps } from '../../';
 import { History, Pagination } from '../../components';
 import { Decimal } from '../../components/Decimal';
-import { localeDate } from '../../helpers';
+import { localeDate, TransferLink } from '../../helpers';
 import {
     currenciesFetch,
     Currency,
@@ -152,7 +152,8 @@ export class WalletTable extends React.Component<Props> {
             const confirmations = type === 'deposits' && item.confirmations;
             const itemCurrency = currencies && currencies.find(cur => cur.id === currency);
             const minConfirmations = itemCurrency && itemCurrency.min_confirmations;
-            const state = 'state' in item ? this.formatTxState(item.state, confirmations, minConfirmations) : '';
+            const transferLinks = 'transfer_links' in item ? item.transfer_links : undefined;
+            const state = 'state' in item ? this.formatTxState(item.state, confirmations, minConfirmations, transferLinks) : '';
 
             return [
                 localeDate(item.created_at, 'fullDate'),
@@ -162,7 +163,13 @@ export class WalletTable extends React.Component<Props> {
         });
     };
 
-    private formatTxState = (tx: string, confirmations?: number | string, minConfirmations?: number) => {
+    private presentTransferLinks = (links: TransferLink[]): JSX.Element[] =>
+        links.map((link: TransferLink) =>
+            <a href={link.url} target="_blank" rel="noopener noreferrer" style={{ marginLeft: '5px' }}>{link.title}</a>
+        );
+
+
+    private formatTxState = (tx: string, confirmations?: number | string, minConfirmations?: number, transferLinks?: TransferLink[]) => {
         const statusMapping = {
             succeed: <SucceedIcon />,
             failed: <FailIcon />,
@@ -173,16 +180,17 @@ export class WalletTable extends React.Component<Props> {
             processing: this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
             fee_processing: this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
             prepared: this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
-            submitted: (confirmations !== 'N/A' && confirmations !== undefined && minConfirmations !== undefined) ? (
-                `${confirmations}/${minConfirmations}`
-            ) : (
-                this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' })
-            ),
+            invoiced: (transferLinks !== undefined ? this.presentTransferLinks(transferLinks) : this.props.intl.formatMessage({ id: 'page.body.wallets.table.invoiced' })),
+            submitted: (confirmations !== undefined && minConfirmations !== undefined) ? (
+                transferLinks !== undefined ? this.presentTransferLinks(transferLinks) : `${confirmations}/${minConfirmations}`
+              )
+              : this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
+            confirming: (transferLinks === undefined) ? <SucceedIcon /> : this.presentTransferLinks(transferLinks),
             skipped: <SucceedIcon />,
             errored: <span className="cr-mobile-history-table--failed">{this.props.intl.formatMessage({ id: 'page.body.history.deposit.content.status.errored' })}</span>,
         };
 
-        return statusMapping[tx];
+        return statusMapping[tx] || tx;
     };
 }
 

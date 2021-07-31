@@ -1,12 +1,13 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { formatCCYAddress } from '../../helpers';
-import { selectMobileDeviceState, Wallet } from '../../modules';
+import { depositsCreateClear, selectMobileDeviceState, Wallet } from '../../modules';
 import { CopyableTextField } from '../CopyableTextField';
 import { MetaMaskButton } from '../MetaMaskButton';
 import { QRCode } from '../QRCode';
+import { DepositModal } from './DepositModal';
 
 export interface DepositCryptoProps {
     /**
@@ -74,24 +75,58 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
     const onCopy = !disabled ? handleOnCopy : undefined;
     const className = classnames('cr-deposit-crypto', {'cr-copyable-text-field__disabled': disabled});
 
+    const dispatch = useDispatch();
+    const [isOpenDepositModal, setOpenDepositModal] = React.useState(false);
+
+    const handleOpenDepositModal = () => {
+        dispatch(depositsCreateClear());
+        setOpenDepositModal(!isOpenDepositModal);
+    };
+
     if (!wallet.deposit_address) {
-        return (
-            <div className={className}>
-                <div className="cr-deposit-crypto__create">
-                    <div className="cr-deposit-crypto__create-btn">
-                        <Button
-                            block={true}
-                            type="button"
-                            onClick={handleGenerateAddress}
-                            size="lg"
-                            variant="primary"
-                        >
-                            {buttonLabel ? buttonLabel : 'Generate deposit address'}
-                        </Button>
+        if (wallet.enable_intention) {
+            return (
+                <div className="pg-beneficiaries">
+                  {isOpenDepositModal && (
+                      <DepositModal
+                          currency={wallet.currency}
+                          handleCloseModal={handleOpenDepositModal}
+                      />
+                  )}
+                    <div className="cr-deposit-crypto__create">
+                        <div className="cr-deposit-crypto__create-btn">
+                            <Button
+                                block={true}
+                                type="button"
+                                onClick={handleOpenDepositModal}
+                                size="lg"
+                                variant="primary"
+                            >
+                                {'Create Deposit'}
+                            </Button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return (
+                <div className={className}>
+                    <div className="cr-deposit-crypto__create">
+                        <div className="cr-deposit-crypto__create-btn">
+                            <Button
+                                block={true}
+                                type="button"
+                                onClick={handleGenerateAddress}
+                                size="lg"
+                                variant="primary"
+                            >
+                                {buttonLabel ? buttonLabel : 'Generate deposit address'}
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
     }
 
     const walletAddress = wallet.deposit_address && wallet.deposit_address.address ?

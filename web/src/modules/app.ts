@@ -18,6 +18,7 @@ import { abilitiesReducer } from './user/abilities';
 import { authReducer  } from './user/auth';
 import { beneficiariesReducer } from './user/beneficiaries';
 import { getGeetestCaptchaReducer } from './user/captcha';
+import { depositIntentionReducer  } from './user/deposits';
 import { documentationReducer } from './user/documentation';
 import { sendEmailVerificationReducer } from './user/emailVerification';
 import { historyReducer  } from './user/history';
@@ -83,6 +84,7 @@ export const userReducer = combineReducers({
     internalTransfers: internalTransfersReducer,
     quickExchange: quickExchangeReducer,
     abilities: abilitiesReducer,
+    depositIntentionState: depositIntentionReducer,
 });
 
 export const adminReducer = combineReducers({
