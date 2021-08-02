@@ -6,27 +6,33 @@ on:
     branches:
       - master
 
-jobs:
+jobs:  
   test:
     name: Test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
     steps:
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.3.0
+      - uses: actions/setup-node@v2
         with:
-          cmd: install
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: test
+          node-version: '14'
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn test
   
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
     steps:
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.3.0
+      - uses: actions/setup-node@v2
         with:
-          cmd: install
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: lint
+          node-version: '14'
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn lint
