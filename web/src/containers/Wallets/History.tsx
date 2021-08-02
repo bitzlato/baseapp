@@ -145,9 +145,7 @@ export class WalletTable extends React.Component<Props> {
             return [[]];
         }
 
-        return list.sort((a, b) => {
-            return localeDate(a.created_at, 'fullDate') > localeDate(b.created_at, 'fullDate') ? -1 : 1;
-        }).map((item, index) => {
+        return list.sort(sortDescByCreated).map((item, index) => {
             const amount = 'amount' in item ? Number(item.amount) : Number(item.price) * Number(item.volume);
             const confirmations = type === 'deposits' && item.confirmations;
             const itemCurrency = currencies && currencies.find(cur => cur.id === currency);
@@ -194,6 +192,13 @@ export class WalletTable extends React.Component<Props> {
     };
 }
 
+function sortDescByCreated(a, b) {
+    try {
+        return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1;
+    } catch (e) {
+        return localeDate(a.created_at, 'fullDate') > localeDate(b.created_at, 'fullDate') ? -1 : 1;
+    }
+}
 
 export const mapStateToProps = (state: RootState): ReduxProps => ({
     currencies: selectCurrencies(state),
