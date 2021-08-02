@@ -195,9 +195,10 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.accountName': 'Account name',
     'page.body.wallets.tabs.deposit.fiat.phoneNumber': 'Phone Number',
     'page.body.wallets.tabs.deposit.fiat.referenceCode': 'Your reference code',
+    'page.body.wallets.tabs.deposit.fiat.admin': ' To initiate a fiat withdrawal, please contact administrator!',
     'page.body.wallets.table.pending': 'Pending',
     'page.body.wallets.table.rejected': 'Rejected',
-    'page.body.wallets.tabs.deposit.fiat.admin': ' To initiate a fiat withdrawal, please contact administrator!',
+    'page.body.wallets.table.invoiced': 'Invoiced',
 
     'page.body.wallets.tabs.withdraw': 'Withdraw',
     'page.body.wallets.tabs.withdraw.content.amount': 'Withdrawal Amount',
