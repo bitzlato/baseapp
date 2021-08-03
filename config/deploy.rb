@@ -61,17 +61,19 @@ before 'deploy:starting', 'sentry:validate_config'
 after 'deploy:published', 'sentry:notice_deployment'
 after 'deploy:updated', 'yarn_build'
 
+set :web_release_path, -> { release_path + '/web' }
+
 task :link_env do
   on roles('app') do
     within release_path do
-      execute :ln, "-s env.#{fetch(:stage)}.js public/config/env.js"
+      # execute :ln, "-s env.#{fetch(:stage)}.js public/config/env.js"
     end
   end
 end
 
 task :yarn_build do
   on roles('app') do
-    within release_path do
+    within web_release_path do
       execute :yarn, :build
     end
   end
