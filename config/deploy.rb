@@ -61,24 +61,32 @@ before 'deploy:starting', 'sentry:validate_config'
 after 'deploy:published', 'sentry:notice_deployment'
 after 'deploy:updated', 'yarn_build'
 
-set :web_release_path, -> { release_path + '/web' }
+# set :web_release_path, -> { release_path + '/web' }
 
 task :link_env do
   on roles('app') do
     within release_path do
-      # execute :ln, "-s env.#{fetch(:stage)}.js public/config/env.js"
+      execute :ln, "-s env.#{fetch(:stage)}.js public/config/env.js"
     end
   end
 end
 
 task :yarn_build do
   on roles('app') do
-    within web_release_path do
+    within release_path do
       execute :yarn, :build
     end
   end
 end
 before 'yarn_build', 'link_env'
+
+task :change_release_path do
+  on roles('app') do
+    set(:release_path, fetch(:release_path).join('web'))
+  end
+end
+
+after 'git:create_release', 'change_release_path'
 
 if defined? Slackistrano
   Rake::Task['deploy:starting'].prerequisites.delete('slack:deploy:starting')
@@ -96,7 +104,3 @@ end
 # Added rails.
 # rake has its own dotenv requirement in Rakefile
 set :dotenv_hook_commands, %w{yarn rails ruby}
-
-# Capistrano::DSL.stages.each do |stage|
-#   after stage, 'dotenv:hook'
-# end
