@@ -14,7 +14,7 @@ export function* ordersHistorySaga(action: UserOrdersHistoryFetch) {
         let params: any = {
             page: pageIndex,
             limit,
-            ...(type === 'open' && { state: ['wait', 'trigger_wait'] }),
+            ...(type === 'open' && { state: ['wait'/*, 'trigger_wait'*/] }),
         };
 
         const data = yield call(API.get(ordersOptions), `/market/orders?${buildQueryString(params)}`);
