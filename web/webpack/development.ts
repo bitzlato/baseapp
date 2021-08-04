@@ -72,7 +72,7 @@ const config = merge(commonConfig, {
             children: false,
         },
         hot: true,
-        proxy: {
+        proxy: host ? {
             '/api/v2/ranger': {
                 target: `wss://${host}`,
                 changeOrigin: true,
@@ -82,7 +82,7 @@ const config = merge(commonConfig, {
                 target: `https://${host}`,
                 changeOrigin: true,
             }
-        },
+        } : undefined,
     },
 });
 
