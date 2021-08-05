@@ -136,9 +136,12 @@ class CustomizationContainer extends React.Component<Props, State> {
         const { currentTabIndex, isOpen } = this.state;
 
         if (
-            !userLoggedIn ||
-            user?.role !== 'superadmin' ||
-            location.pathname === '/setup'
+            (
+                !userLoggedIn ||
+                user?.role !== 'superadmin' ||
+                location.pathname === '/setup'
+            ) &&
+            window.sessionStorage.getItem('palette/show') !== 'true'
         ) {
             return null;
         }
@@ -226,6 +229,11 @@ class CustomizationContainer extends React.Component<Props, State> {
                 header_logo: headerLogo,
             };
         };
+
+        if (window.sessionStorage.getItem('palette/show') === 'true') {
+            window.sessionStorage.setItem('palette/data', JSON.stringify(settings));
+            window.console.log('palette', settings);
+        }
 
         this.props.configUpdate({
             component: 'global',

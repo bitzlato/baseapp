@@ -44,11 +44,16 @@ const mockConfig: Config = {
         'address'
     ],
     themeSwitcher: 'visible',
+    captcha_id: undefined,
+    captcha_type: 'none',
+    password_min_entropy: 0,
+
     openOrdersFetchInterval: '10000',
     signInUrl: '',
     signUpUrl: '',
     logoUrl: '',
     logoDarkUrl: '',
+    sonic: false,
 };
 
 // tslint:disable no-any no-console

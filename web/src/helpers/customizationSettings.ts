@@ -10,7 +10,7 @@ export const clearCustomizationSettings = () => {
     const rootElement = document.documentElement;
     const bodyElement = document.querySelector<HTMLElement>('body')!;
 
-    if (rootElement) {    
+    if (rootElement) {
         AVAILABLE_COLOR_TITLES.reduce((result, item) => {
             rootElement.style.removeProperty(item.key);
 
@@ -31,8 +31,13 @@ export const applyCustomizationSettingsColors = (
     customization?: CustomizationSettingsInterface,
     toggleChartRebuild?: () => void,
 ) => {
-    const settingsFromConfig: CustomizationSettingsInterface | undefined =
+    let settingsFromConfig: CustomizationSettingsInterface | undefined =
         window.env?.palette ? JSON.parse(window.env.palette) : undefined;
+
+    if (!settingsFromConfig && window.sessionStorage.getItem('palette/show') === 'true') {
+        settingsFromConfig = JSON.parse(window.sessionStorage.getItem('palette/data'));
+    }
+
     const rootElement = document.documentElement;
     const bodyElement = document.querySelector<HTMLElement>('body')!;
     let shouldChartRebuild = false;
@@ -41,7 +46,7 @@ export const applyCustomizationSettingsColors = (
         AVAILABLE_COLOR_TITLES.reduce((result, item) => {
             let darkModeColor = undefined;
             let lightModeColor = undefined;
-    
+
             if (customization?.theme_colors?.dark) {
                 darkModeColor = customization.theme_colors.dark.find((color => color.key === item.key));
             }

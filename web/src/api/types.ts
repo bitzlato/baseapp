@@ -43,6 +43,7 @@ declare global {
         signUpUrl: string;
         logoUrl: string;
         logoDarkUrl: string;
+        sonic?: string | boolean;
     }
 
     interface Window {
