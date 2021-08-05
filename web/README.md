@@ -1,9 +1,9 @@
 ![Cryptocurrency Exchange Platform - Baseapp](https://github.com/openware/meta/raw/main/images/github_baseapp.png)
 
 <h3 align="center">
-<a href="https://www.openware.com/sdk/docs.html#baseapp">Guide</a> <span>&vert;</span> 
-<a href="https://www.openware.com/sdk/api.html">API Docs</a> <span>&vert;</span> 
-<a href="https://www.openware.com/">Consulting</a> <span>&vert;</span> 
+<a href="https://www.openware.com/sdk/docs.html#baseapp">Guide</a> <span>&vert;</span>
+<a href="https://www.openware.com/sdk/api.html">API Docs</a> <span>&vert;</span>
+<a href="https://www.openware.com/">Consulting</a> <span>&vert;</span>
 <a href="https://t.me/peatio">Community</a>
 </h3>
 <h6 align="center">Component part of <a href="https://github.com/openware/opendax">OpenDAX Trading Platform</a></h6>
@@ -40,9 +40,9 @@ Once you happy with the result, save, build an image and run it with OpenDAX doc
 
 ```bash
 $ cp public/config/env.localdev.js public/config/env.js
-$ PORT=8080 REACT_APP_STAGING=ex-stage.bitzlato.bz yarn start
+$ PORT=8080 REACT_APP_STAGING=ex-stage.bitzlato.com yarn start
 ```
-This command will run development server with proxying of API requests to the staging server `ex-stage.bitzlato.bz`.
+This command will run development server with proxying of API requests to the staging server `ex-stage.bitzlato.com`.
 Uses `public/config/env.localdev.js` as a configuration file.
 It is recommended to place the env variables in the `.envrc ' file.
 
@@ -78,7 +78,7 @@ Configuration file is fetched from sonic in  `public/config.js`
 
 ## Available Docker build args
 
-While building a Docker image you can pass build-dependant arguments using `--build-arg`: 
+While building a Docker image you can pass build-dependant arguments using `--build-arg`:
 `docker build -t baseapp:latest
   --build-arg BUILD_DOMAIN="example.com" .`
 
