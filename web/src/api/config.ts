@@ -50,6 +50,7 @@ export const defaultConfig: Config = {
     signUpUrl: '',
     logoUrl: '',
     logoDarkUrl: '',
+    sonic: false,
 };
 
 export const Cryptobase = {
@@ -100,3 +101,4 @@ export const signInUrl = (): string => Cryptobase.config.signInUrl;
 export const signUpUrl = (): string => Cryptobase.config.signUpUrl;
 export const logoUrl = (): string => Cryptobase.config.logoUrl;
 export const logoDarkUrl = (): string => Cryptobase.config.logoDarkUrl;
+export const isSonicEnabled = () => convertToBoolean(Cryptobase.config.sonic);
