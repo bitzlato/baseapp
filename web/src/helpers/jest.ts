@@ -7,7 +7,7 @@ import { Cryptobase } from '../api';
 // tslint:disable-next-line
 import * as WebSocket from 'ws';
 
-const mockConfig: Config = {
+export const mockConfig: Config = {
     api: {
         authUrl: '/api/v2/barong',
         tradeUrl: '/api/v2/peatio',

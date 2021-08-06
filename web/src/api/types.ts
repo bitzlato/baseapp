@@ -7,6 +7,13 @@ declare global {
             rangerUrl: string;
             finexUrl: string;
         };
+        auth0?: {
+            domain: string;
+            client_id: string;
+            redirect_uri: string;
+            auth_url: string;
+            signedin_url: string;
+        };
         finex: string | boolean;
         withCredentials: string | boolean;
         incrementalOrderBook: string | boolean;
