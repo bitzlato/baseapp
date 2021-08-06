@@ -8,7 +8,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import commonConfig from './common';
 const rootDir = path.resolve(__dirname, '..');
-const host = process.env.REACT_APP_STAGING;
+const host = process.env.PROXY_HOST;
 
 const config = merge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',
