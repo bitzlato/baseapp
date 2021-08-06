@@ -51,10 +51,12 @@ const ProfileMobileScreenComponent: React.FC = () => {
                 </div>
             ),
         },
-        { titleKey: 'page.mobile.profileLinks.main.changePassword', route: '/profile/change-password' },
+        !window.env.auth0
+            ? { titleKey: 'page.mobile.profileLinks.main.changePassword', route: '/profile/change-password' }
+            : null,
         { titleKey: 'page.mobile.profileLinks.main.activity', route: '/profile/account-activity' },
         { titleKey: 'page.mobile.profileLinks.main.apiKeys', route: '/profile/api-keys' },
-    ];
+    ].filter(Boolean);
 
     const settingsLinks = [
         {

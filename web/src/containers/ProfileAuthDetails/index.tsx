@@ -124,25 +124,29 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                         ) : null}
                     </div>
                 </div>
-                <div className="pg-profile-page__row">
-                    <div>
-                        <div className="pg-profile-page__label">
-                            {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password'})}
-                        </div>
+                {!window.env.auth0 && (
+                    <div className="pg-profile-page__row">
                         <div>
-                            ************
+                            <div className="pg-profile-page__label">
+                                {this.props.intl.formatMessage({
+                                    id: 'page.body.profile.header.account.content.password',
+                                })}
+                            </div>
+                            <div>************</div>
                         </div>
+                        <Button
+                            className="btn-block mt-3 mb-3 btn-lg btn btn-primary w-25"
+                            onClick={this.toggleChangeModal}
+                            size="lg"
+                            variant="primary"
+                        >
+                            {this.props.intl.formatMessage({
+                                id: 'page.body.profile.header.account.content.password.button.change',
+                            })}
+                        </Button>
+                        {modal}
                     </div>
-                    <Button
-                        className="btn-block mt-3 mb-3 btn-lg btn btn-primary w-25"
-                        onClick={this.toggleChangeModal}
-                        size="lg"
-                        variant="primary"
-                    >
-                        {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password.button.change'})}
-                    </Button>
-                    {modal}
-                </div>
+                )}
                 {this.renderProfileTwoFactor()}
                 <Modal
                     className="pg-profile-page__disable-2fa-modal"
