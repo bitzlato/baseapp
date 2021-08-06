@@ -9,6 +9,7 @@
   padding: var(--gap);
   text-align: center;
   width: 100%;
+  white-space: nowrap;
 
   &:active {
     background: var(--button-active);
@@ -24,5 +25,10 @@
 
   &:focus {
     outline: none !important;
+  }
+
+  &:disabled {
+    opacity: 0.48;
+    cursor: not-allowed;
   }
 }
