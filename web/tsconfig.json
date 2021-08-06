@@ -8,7 +8,7 @@
         "experimentalDecorators": true,
         "moduleResolution": "node",
         "sourceMap": true,
-        "allowJs": true,
+        "allowJs": false,
         "baseUrl": "./",
         "strict": false,
         "paths": {
