@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Button, Form, Spinner } from 'react-bootstrap';
+import { Form, Spinner } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { openOrdersFetchInterval } from 'src/api';
@@ -164,18 +164,27 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
                     </Form>
                 </div>
                 <div className={classnames('cr-row', 'cr-row-spacing')}>
-                    <Button disabled={!userLoggedIn} variant="light" onClick={fetchOrders}>
-                        <FormattedMessage id="page.body.openOrders.header.button.refresh" />
-                    </Button>
-                    <Button
-                        variant="light"
-                        className={classnames('cr-row', 'cr-row-spacing')}
-                        onClick={handleCancelAll}>
-                        <CloseIcon />
-                        <span>
-                            <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
-                        </span>
-                    </Button>
+                    {userLoggedIn &&
+                        <>
+                            <button
+                                className="cr-percentage-button"
+                                disabled={!userLoggedIn}
+                                onClick={fetchOrders}
+                            >
+                                <FormattedMessage id="page.body.openOrders.header.button.refresh" />
+                            </button>
+                            <button
+                                className={classnames('cr-row', 'cr-row-spacing', 'cr-percentage-button')}
+                                disabled={!userLoggedIn}
+                                onClick={handleCancelAll}
+                            >
+                                <CloseIcon />
+                                <span>
+                                    <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
+                                </span>
+                            </button>
+                        </>
+                    }
                 </div>
             </div>
             {renderContent}
