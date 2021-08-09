@@ -45,17 +45,13 @@ exports[`SignInScreen should render 1`] = `
               <label
                 class="cr-sign-in-form__label"
               />
-              <div
-                class="input-group input-group-lg"
-              >
-                <input
-                  autofocus=""
-                  class="form-control form-control-lg"
-                  placeholder="Email"
-                  type="email"
-                  value=""
-                />
-              </div>
+              <input
+                autofocus=""
+                class="form-control form-control-lg"
+                placeholder="Email"
+                type="email"
+                value=""
+              />
             </div>
           </div>
           <div
@@ -67,16 +63,12 @@ exports[`SignInScreen should render 1`] = `
               <label
                 class="cr-sign-in-form__label"
               />
-              <div
-                class="input-group input-group-lg"
-              >
-                <input
-                  class="form-control form-control-lg"
-                  placeholder="Password"
-                  type="password"
-                  value=""
-                />
-              </div>
+              <input
+                class="form-control form-control-lg"
+                placeholder="Password"
+                type="password"
+                value=""
+              />
             </div>
           </div>
           <div
