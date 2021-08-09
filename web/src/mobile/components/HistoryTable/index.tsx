@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { Pagination, Table } from '../../../components';
 import { DEFAULT_CCY_PRECISION } from '../../../constants';
-import { localeDate, TransferLinks } from '../../../helpers';
+import { sortByDateDesc, TransferLinks } from '../../../helpers';
 import { useCurrenciesFetch, useHistoryFetch, useWalletsFetch } from '../../../hooks';
 import { RootState, selectCurrentPage, selectLastElemIndex, selectNextPageExists } from '../../../modules';
 import { selectCurrencies } from '../../../modules/public/currencies';
@@ -74,15 +74,12 @@ const HistoryTable = (props: any) => {
             return [[]];
         }
 
-        return list.sort((a, b) => {
-            return localeDate(a.created_at, 'fullDate') > localeDate(b.created_at, 'fullDate') ? -1 : 1;
-        }).map((item: any, index) => {
+        return list.sort((a, b) => sortByDateDesc(a.created_at, b.created_at)).map((item: any) => {
             const amount = 'amount' in item ? Number(item.amount) : Number(item.price) * Number(item.volume);
             const confirmations = type === 'deposits' && item.confirmations;
             const itemCurrency = currencies && currencies.find(cur => cur.id === currency);
             const minConfirmations = itemCurrency && itemCurrency.min_confirmations;
-            const transferLinks = 'transfer_links' in item ? item.transfer_links : undefined;
-            const state = 'state' in item ? formatTxState(item.state, confirmations, minConfirmations, transferLinks) : '';
+            const state = 'state' in item ? formatTxState(item.state, confirmations, minConfirmations, item.transfer_links) : '';
 
             return [
                 <RowItem

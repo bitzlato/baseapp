@@ -34,6 +34,7 @@ export * from './setTradeColor';
 export * from './sliceArray';
 export * from './sliceString';
 export * from './sortByDate';
+export * from './sortByDateDesc';
 export * from './sortByPrice';
 export * from './timeConvert';
 export * from './timezone';

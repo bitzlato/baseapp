@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { IntlProps } from '../../';
 import { History, Pagination } from '../../components';
 import { Decimal } from '../../components/Decimal';
-import { localeDate, TransferLink } from '../../helpers';
+import { localeDate, sortByDateDesc, TransferLink } from '../../helpers';
 import {
     currenciesFetch,
     Currency,
@@ -145,13 +145,12 @@ export class WalletTable extends React.Component<Props> {
             return [[]];
         }
 
-        return list.sort(sortDescByCreated).map((item, index) => {
+        return list.sort((a, b) => sortByDateDesc(a.created_at, b.created_at)).map((item, index) => {
             const amount = 'amount' in item ? Number(item.amount) : Number(item.price) * Number(item.volume);
             const confirmations = type === 'deposits' && item.confirmations;
             const itemCurrency = currencies && currencies.find(cur => cur.id === currency);
             const minConfirmations = itemCurrency && itemCurrency.min_confirmations;
-            const transferLinks = 'transfer_links' in item ? item.transfer_links : undefined;
-            const state = 'state' in item ? this.formatTxState(item.state, confirmations, minConfirmations, transferLinks) : '';
+            const state = 'state' in item ? this.formatTxState(item.state, confirmations, minConfirmations, item.transfer_links) : '';
 
             return [
                 localeDate(item.created_at, 'fullDate'),
@@ -190,14 +189,6 @@ export class WalletTable extends React.Component<Props> {
 
         return statusMapping[tx] || tx;
     };
-}
-
-function sortDescByCreated(a, b) {
-    try {
-        return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1;
-    } catch (e) {
-        return localeDate(a.created_at, 'fullDate') > localeDate(b.created_at, 'fullDate') ? -1 : 1;
-    }
 }
 
 export const mapStateToProps = (state: RootState): ReduxProps => ({
