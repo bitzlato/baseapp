@@ -147,16 +147,12 @@ exports[`ProfileTwoFactorAuthScreen test should render 1`] = `
                 class="custom-input"
               >
                 <label />
-                <div
-                  class="input-group input-group-lg"
-                >
-                  <input
-                    class="form-control form-control-lg"
-                    placeholder="2FA code"
-                    type="tel"
-                    value=""
-                  />
-                </div>
+                <input
+                  class="form-control form-control-lg"
+                  placeholder="2FA code"
+                  type="tel"
+                  value=""
+                />
               </div>
             </fieldset>
           </div>

@@ -124,18 +124,14 @@ exports[`ProfileScreen test should render 1`] = `
                     class="custom-input"
                   >
                     <label />
-                    <div
-                      class="input-group input-group-lg"
-                    >
-                      <input
-                        class="form-control form-control-lg"
-                        id="referral-id"
-                        placeholder=""
-                        readonly=""
-                        type="text"
-                        value="http://localhost/signup?refid="
-                      />
-                    </div>
+                    <input
+                      class="form-control form-control-lg"
+                      id="referral-id"
+                      placeholder=""
+                      readonly=""
+                      type="text"
+                      value="http://localhost/signup?refid="
+                    />
                   </div>
                   <div
                     class="input-group-append"

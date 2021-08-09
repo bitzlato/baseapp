@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormControl, InputGroup } from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap';
 
 export interface CustomInputProps {
     type: string;
@@ -55,25 +55,23 @@ class CustomInput extends React.Component<Props> {
                     <label className={classNameLabel}>
                         {(labelVisible || inputValue) && (label || defaultLabel)}
                     </label>
-                    <InputGroup size="lg">
-                        <FormControl
-                            size="lg"
-                            type={type}
-                            value={inputValue.toString()}
-                            placeholder={placeholder}
-                            autoFocus={autoFocus}
-                            onFocus={this.props.handleFocusInput}
-                            onBlur={this.props.handleFocusInput}
-                            onChange={e => this.handleChangeValue(e)}
-                            readOnly={readOnly}
-                            id={id}
-                            onClick={handleClick}
-                            disabled={isDisabled}
-                            onKeyPress={onKeyPress}
-                            autoComplete={autoComplete}
-                            name={name}
-                        />
-                    </InputGroup>
+                    <FormControl
+                        size="lg"
+                        type={type}
+                        value={inputValue.toString()}
+                        placeholder={placeholder}
+                        autoFocus={autoFocus}
+                        onFocus={this.props.handleFocusInput}
+                        onBlur={this.props.handleFocusInput}
+                        onChange={e => this.handleChangeValue(e)}
+                        readOnly={readOnly}
+                        id={id}
+                        onClick={handleClick}
+                        disabled={isDisabled}
+                        onKeyPress={onKeyPress}
+                        autoComplete={autoComplete}
+                        name={name}
+                    />
                 </div>
             </React.Fragment>
         );
