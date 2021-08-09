@@ -58,6 +58,7 @@ module.exports = {
             // enable the rule specifically for TypeScript files
             files: ['*.ts', '*.tsx'],
             rules: {
+                'import/no-unresolved': 'off',
                 //   "@typescript-eslint/explicit-function-return-type": ["error", { "allowExpressions": true, "allowTypedFunctionExpressions": true, "allowHigherOrderFunctions": true }],
             },
         },
@@ -67,7 +68,6 @@ module.exports = {
             version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
         },
         'import/resolver': {
-            typescript: {},
             node: {
                 extensions: ['.js', '.jsx', '.ts', '.tsx'],
             },
