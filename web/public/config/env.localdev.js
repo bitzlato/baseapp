@@ -44,4 +44,5 @@ window.env = {
     captchaLogin: false,
     usernameEnabled: false,
     showLanding: false,
+    wsApi: true,
 };

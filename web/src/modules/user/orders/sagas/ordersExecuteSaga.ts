@@ -1,6 +1,7 @@
 import { call, put } from 'redux-saga/effects';
+import { RANGER_DIRECT_WRITE } from 'src/modules/public/ranger/constants';
 import { alertPush, sendError } from '../../../';
-import { API, isFinexEnabled, RequestOptions } from '../../../../api';
+import { API, isFinexEnabled, isWsApiEnabled, RequestOptions } from '../../../../api';
 import { getCsrfToken, getOrderAPI } from '../../../../helpers';
 import { userOpenOrdersAppend } from '../../openOrders';
 import { orderExecuteData, orderExecuteError, OrderExecuteFetch } from '../actions';
@@ -23,20 +24,26 @@ export function* ordersExecuteSaga(action: OrderExecuteFetch) {
             ...(typeof trigger_price !== 'undefined' && { trigger_price }),
             type: ord_type,
         } : action.payload;
-        const order = yield call(API.post(executeOptions(getCsrfToken())), '/market/orders', params);
-        yield put(orderExecuteData());
 
-        if (getOrderAPI() === 'finex') {
-            if (order.type !== 'market') {
-                yield put(userOpenOrdersAppend(order));
-            }
+        if (isWsApiEnabled()) {
+            yield put({ type: RANGER_DIRECT_WRITE, payload: { event: 'order', data: params } });
+            yield put(orderExecuteData());
         } else {
-            if (order.ord_type !== 'market') {
-                yield put(userOpenOrdersAppend(order));
-            }
-        }
+            const order = yield call(API.post(executeOptions(getCsrfToken())), '/market/orders', params);
+            yield put(orderExecuteData());
 
-        yield put(alertPush({ message: ['success.order.created'], type: 'success'}));
+            if (getOrderAPI() === 'finex') {
+                if (order.type !== 'market') {
+                    yield put(userOpenOrdersAppend(order));
+                }
+            } else {
+                if (order.ord_type !== 'market') {
+                    yield put(userOpenOrdersAppend(order));
+                }
+            }
+
+            yield put(alertPush({ message: ['success.order.created'], type: 'success'}));
+        }
     } catch (error) {
         yield put(sendError({
             error,

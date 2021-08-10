@@ -51,6 +51,7 @@ declare global {
         logoUrl: string;
         logoDarkUrl: string;
         sonic?: string | boolean;
+        wsApi?: string | boolean;
     }
 
     interface Window {
