@@ -13,10 +13,10 @@
         <title>Cryptobase</title>
     </head>
     <body>
-        <% if (htmlWebpackPlugin.options.PROXY_HOST) { %>
-            <script src="/config/env.js"></script>
-        <% } else { %>
+        <% if (htmlWebpackPlugin.options.mock) { %>
             <script src="/config.js"></script>
+        <% } else { %>
+            <script src="/config/env.js"></script>
         <% } %>
         <noscript>
             You need to enable JavaScript to run this app.
