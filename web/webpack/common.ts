@@ -23,6 +23,7 @@ const config: webpack.Configuration = {
     plugins: [
         new webpack.EnvironmentPlugin({
             envType: 'dev',
+            REACT_APP_BUGSNAG_KEY: ''
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(rootDir, 'src/app/template.html'),

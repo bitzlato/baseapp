@@ -3,6 +3,8 @@
     "version": "3.0.0",
     "private": true,
     "dependencies": {
+        "@bugsnag/js": "^7.11.0",
+        "@bugsnag/plugin-react": "^7.11.0",
         "@capacitor/android": "2.4.1",
         "@capacitor/cli": "^2.4.2",
         "@capacitor/core": "^2.4.1",
