@@ -9,7 +9,6 @@ export const pgRoutes = (isLoggedIn: boolean, CanCan: boolean, isLight?: boolean
         ['page.header.navbar.openOrders', '/orders', `orders${isLight ? 'Light' : ''}`],
         ['page.header.navbar.history', '/history', `history${isLight ? 'Light' : ''}`],
         ['page.header.navbar.api', '/docs', `api${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.internal.transfer', '/internal-transfer', `internal_transfer${isLight ? 'Light' : ''}`],
     ];
 
     const routesFinexAbilities = [
@@ -18,7 +17,6 @@ export const pgRoutes = (isLoggedIn: boolean, CanCan: boolean, isLight?: boolean
         ['page.header.navbar.wallets', '/wallets', `wallets${isLight ? 'Light' : ''}`],
         ['page.header.navbar.openOrders', '/orders', `orders${isLight ? 'Light' : ''}`],
         ['page.header.navbar.history', '/history', `history${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.internal.transfer', '/internal-transfer', `internal_transfer${isLight ? 'Light' : ''}`],
         ['page.header.navbar.api', '/docs', `api${isLight ? 'Light' : ''}`],
     ];
 
