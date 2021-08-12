@@ -84,7 +84,7 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
     };
 
     if (!wallet.deposit_address) {
-        if (wallet.enable_intention) {
+        if (wallet.enable_invoice) {
             return (
                 <div className="pg-beneficiaries">
                   {isOpenDepositModal && (

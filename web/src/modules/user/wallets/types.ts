@@ -11,7 +11,7 @@ export interface Wallet {
     explorerAddress?: string;
     deposit_address?: WalletAddress;
     active?: boolean;
-    enable_intention?: boolean;
+    enable_invoice?: boolean;
 }
 export interface WalletAddress {
     address: string;
