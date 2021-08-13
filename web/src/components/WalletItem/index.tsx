@@ -3,7 +3,6 @@ import { Wallet } from '../../modules';
 import { CryptoIcon } from '../CryptoIcon';
 import { Decimal } from '../Decimal';
 
-
 const style: React.CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between',
