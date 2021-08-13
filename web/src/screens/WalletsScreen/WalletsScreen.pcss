@@ -67,6 +67,12 @@
       &__info {
         align-items: center;
 
+        .cr-wallet-item__icon {
+          img {
+            margin-right: 0;
+          }
+        }
+
         .cr-wallet-item__image-icon {
           margin-left: calc(var(--gap) * 2);
           margin-right: calc(var(--gap) * 1.5);
@@ -88,7 +94,7 @@
             color: var(--wallets-locked-amount);
             font-size: calc(var(--gap) * 1.9);
             font-weight: normal;
-            margin-top: calc(var(--gap) * 0.6);
+            margin-top: calc(var(--gap) * 0.3);
             opacity: 0.3;
           }
         }
