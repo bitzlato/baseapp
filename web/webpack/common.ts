@@ -23,7 +23,7 @@ const config: webpack.Configuration = {
     plugins: [
         new webpack.EnvironmentPlugin({
             envType: 'dev',
-            REACT_APP_BUGSNAG_KEY: ''
+            REACT_APP_BUGSNAG_KEY: '',
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(rootDir, 'src/app/template.html'),
@@ -65,7 +65,14 @@ const config: webpack.Configuration = {
         rules: [
             {
                 test: /\.(png|jpg|gif|ttf|eot|woff|svg)$/,
-                use: 'url-loader',
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192,
+                        },
+                    },
+                ],
             },
         ],
     },
