@@ -1,5 +1,7 @@
+import Bugsnag from '@bugsnag/js';
 import * as Sentry from '@sentry/browser';
 import { call, put } from 'redux-saga/effects';
+import { sentryEnabled } from 'src/api/config';
 import { alertPush } from '../../alert';
 import { ErrorHandlerFetch, getErrorData } from '../actions';
 import { getMetaMaskErrorMessage } from '../helpers/getMetaMaskErrorMessage';
@@ -51,7 +53,11 @@ export function* handleErrorSaga(action: ErrorHandlerFetch) {
 
 function* handleSentryError(error) {
     for (const item of error.message) {
-        yield call(Sentry.captureException, item);
+        if (sentryEnabled()) {
+            yield call(Sentry.captureException, item);
+        } else {
+            yield call(Bugsnag.notify, item);
+        }
     }
 }
 
