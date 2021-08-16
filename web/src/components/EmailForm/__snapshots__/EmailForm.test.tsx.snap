@@ -51,17 +51,13 @@ exports[`EmailForm component should render 1`] = `
           <label
             class="cr-email-form__label"
           />
-          <div
-            class="input-group input-group-lg"
-          >
-            <input
-              autofocus=""
-              class="form-control form-control-lg"
-              placeholder="Email"
-              type="email"
-              value=""
-            />
-          </div>
+          <input
+            autofocus=""
+            class="form-control form-control-lg"
+            placeholder="Email"
+            type="email"
+            value=""
+          />
         </div>
       </div>
       <div

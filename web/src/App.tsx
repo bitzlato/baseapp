@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import { Router } from 'react-router';
 import { gaTrackerKey } from './api';
 import { ErrorWrapper } from './containers';
+import Bugsnag from '@bugsnag/js';
+import BugsnagPluginReact from '@bugsnag/plugin-react';
 import { useSetMobileDevice } from './hooks';
 import * as mobileTranslations from './mobile/translations';
 import { selectCurrentLanguage, selectMobileDeviceState } from './modules';
@@ -21,6 +23,19 @@ if (gaKey) {
         ReactGA.pageview(location.pathname);
     });
 }
+
+const bugsnagKey = process.env.REACT_APP_BUGSNAG_KEY;
+
+if (bugsnagKey) {
+    Bugsnag.start({
+        apiKey: bugsnagKey || 'DO_NOT_SEND',
+        plugins: [new BugsnagPluginReact()],
+    });
+}
+
+const ErrorBoundary = bugsnagKey
+    ? Bugsnag.getPlugin('react').createErrorBoundary(React)
+    : ErrorWrapper;
 
 /* Mobile components */
 const MobileHeader = React.lazy(() => import('./mobile/components/Header').then(({ Header }) => ({ default: Header })));
@@ -79,11 +94,11 @@ export const App = () => {
     return (
         <IntlProvider locale={lang} messages={getTranslations(lang, isMobileDevice)} key={lang}>
             <Router history={browserHistory}>
-                <ErrorWrapper>
+                <ErrorBoundary>
                     <React.Suspense fallback={null}>
                         <RenderDeviceContainers />
                     </React.Suspense>
-                </ErrorWrapper>
+                </ErrorBoundary>
             </Router>
         </IntlProvider>
     );

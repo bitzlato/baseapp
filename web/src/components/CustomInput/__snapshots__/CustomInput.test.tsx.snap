@@ -8,20 +8,16 @@ exports[`CustomInput component should render 1`] = `
     <label
       className=""
     />
-    <InputGroup
+    <FormControl
+      autoFocus={false}
+      onBlur={[MockFunction]}
+      onChange={[Function]}
+      onFocus={[MockFunction]}
+      placeholder=""
       size="lg"
-    >
-      <FormControl
-        autoFocus={false}
-        onBlur={[MockFunction]}
-        onChange={[Function]}
-        onFocus={[MockFunction]}
-        placeholder=""
-        size="lg"
-        type=""
-        value=""
-      />
-    </InputGroup>
+      type=""
+      value=""
+    />
   </div>
 </Fragment>
 `;

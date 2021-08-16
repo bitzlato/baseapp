@@ -40,9 +40,9 @@ Once you happy with the result, save, build an image and run it with OpenDAX doc
 
 ```bash
 $ cp public/config/env.localdev.js public/config/env.js
-$ PORT=8080 PROXY_HOST=ex-stage.bitzlato.bz yarn start
+$ PORT=8080 PROXY_HOST=market-s1.bitzlato.com yarn start
 ```
-This command will run development server with proxying of API requests to the staging server `ex-stage.bitzlato.com`.
+This command will run development server with proxying of API requests to the staging server `market-s1.bitzlato.com`.
 Uses `public/config/env.localdev.js` as a configuration file.
 It is recommended to place the env variables in the `.envrc ' file.
 

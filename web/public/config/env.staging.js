@@ -1,17 +1,17 @@
 window.env = {
     api: {
-      authUrl: 'https://ex-stage.bitzlato.com/api/v2/barong',
-      tradeUrl: 'https://ex-stage.bitzlato.com/api/v2/peatio',
-      finexUrl: 'https://ex-stage.bitzlato.com/api/v2/finex',
-      applogicUrl: 'https://ex-stage.bitzlato.com/api/v2/applogic',
-      rangerUrl: 'wss://ex-stage.bitzlato.com/api/v2/ranger',
+      authUrl: 'https://market-s1.bitzlato.com/api/v2/barong',
+      tradeUrl: 'https://market-s1.bitzlato.com/api/v2/peatio',
+      finexUrl: 'https://market-s1.bitzlato.com/api/v2/finex',
+      applogicUrl: 'https://market-s1.bitzlato.com/api/v2/applogic',
+      rangerUrl: 'wss://market-s1.bitzlato.com/api/v2/ranger',
     },
     auth0: {
       domain: 'bitzlato-dev.auth0.com',
       client_id: 'OL926gD0Zha6h80uJx4TVhJLMKrJemjb',
-      redirect_uri: 'https://ex-stage.bitzlato.com/success_signin',
-      auth_url: 'https://ex-stage.bitzlato.com/api/v2/barong/identity/sessions/auth0',
-      signedin_url: 'https://ex-stage.bitzlato.com/wallets'
+      redirect_uri: 'https://market-s1.bitzlato.com/success_signin',
+      auth_url: 'https://market-s1.bitzlato.com/api/v2/barong/identity/sessions/auth0',
+      signedin_url: 'https://market-s1.bitzlato.com/wallets'
     },
     signInUrl: '/signin/bitzlato.html',
     signUpUrl: '/signin/bitzlato.html',

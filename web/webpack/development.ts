@@ -19,6 +19,7 @@ const config = merge(commonConfig, {
             template: path.resolve(rootDir, 'src/app/template_dev.html'),
             hash: true,
             chunks: ['common', 'bundle', 'styles'],
+            mock: process.env.MOCK,
         }),
     ],
     module: {

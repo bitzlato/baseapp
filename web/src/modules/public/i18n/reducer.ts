@@ -10,7 +10,21 @@ const defaultLanguage = {
     code: languages[0],
 };
 
-const currentLang: string = localStorage.getItem('lang_code') || defaultLanguage.code;
+const detectLanguage = () => {
+    const fromLocalStorage = localStorage.getItem('lang_code');
+    if (fromLocalStorage) {
+        return fromLocalStorage;
+    }
+
+    const fromNavigator = navigator.language.split('-')[0];
+    if (languages.includes(fromNavigator)) {
+        return fromNavigator;
+    }
+
+    return defaultLanguage.code;
+};
+
+const currentLang = detectLanguage();
 
 export const initialChangeLanguageState: LanguageState = {
     lang: currentLang,
@@ -23,7 +37,7 @@ export const changeLanguageReducer = (state = initialChangeLanguageState, action
 
             return {
                 lang: action.payload,
-             };
+            };
         default:
             return state;
     }

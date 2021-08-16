@@ -39,17 +39,13 @@ exports[`SignUp component should render 1`] = `
           <label
             class="cr-sign-up-form__label"
           />
-          <div
-            class="input-group input-group-lg"
-          >
-            <input
-              autofocus=""
-              class="form-control form-control-lg"
-              placeholder="Email"
-              type="email"
-              value=""
-            />
-          </div>
+          <input
+            autofocus=""
+            class="form-control form-control-lg"
+            placeholder="Email"
+            type="email"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -61,16 +57,12 @@ exports[`SignUp component should render 1`] = `
           <label
             class="cr-sign-up-form__label"
           />
-          <div
-            class="input-group input-group-lg"
-          >
-            <input
-              class="form-control form-control-lg"
-              placeholder="Password"
-              type="password"
-              value=""
-            />
-          </div>
+          <input
+            class="form-control form-control-lg"
+            placeholder="Password"
+            type="password"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -82,16 +74,12 @@ exports[`SignUp component should render 1`] = `
           <label
             class="cr-sign-up-form__label"
           />
-          <div
-            class="input-group input-group-lg"
-          >
-            <input
-              class="form-control form-control-lg"
-              placeholder="Confirm Password"
-              type="password"
-              value=""
-            />
-          </div>
+          <input
+            class="form-control form-control-lg"
+            placeholder="Confirm Password"
+            type="password"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -103,16 +91,12 @@ exports[`SignUp component should render 1`] = `
           <label
             class="cr-sign-up-form__label"
           />
-          <div
-            class="input-group input-group-lg"
-          >
-            <input
-              class="form-control form-control-lg"
-              placeholder="Referral code"
-              type="text"
-              value=""
-            />
-          </div>
+          <input
+            class="form-control form-control-lg"
+            placeholder="Referral code"
+            type="text"
+            value=""
+          />
         </div>
       </div>
       <div

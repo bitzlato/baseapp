@@ -561,7 +561,6 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 const mapStateToProps = (state: RootState): ReduxProps => ({
     user: selectUserInfo(state),
     wallets: selectWallets(state),
-    walletsLoading: selectWalletsLoading(state),
     withdrawSuccess: selectWithdrawSuccess(state),
     historyList: selectHistory(state),
     mobileWalletChosen: selectMobileWalletUi(state),
