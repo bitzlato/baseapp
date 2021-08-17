@@ -64,7 +64,7 @@ const config: webpack.Configuration = {
     module: {
         rules: [
             {
-                test: /\.(png|jpg|gif|ttf|eot|woff|svg)$/,
+                test: /\.(png|jpg|gif|ttf|eot|woff|woff2|svg)$/,
                 use: [
                     {
                         loader: 'url-loader',
