@@ -1,6 +1,6 @@
 import { Channel, eventChannel, EventChannel } from 'redux-saga';
 import { all, call, cancel, delay, fork, put, race, select, take, takeEvery } from 'redux-saga/effects';
-import { isFinexEnabled, rangerUrl } from '../../../../api';
+import { rangerUrl } from '../../../../api';
 import { store } from '../../../../store';
 import { pushHistoryEmit } from '../../../user/history';
 import { selectOpenOrdersList, userOpenOrdersUpdate } from '../../../user/openOrders';
@@ -168,7 +168,7 @@ const initRanger = (
 
                         // private
                         case 'order':
-                            if (isFinexEnabled() && event) {
+                            if (event) {
                                 switch (event.state) {
                                     case 'wait':
                                     case 'pending':
@@ -210,6 +210,11 @@ const initRanger = (
                         case 'deposit_address':
                             emitter(walletsAddressDataWS(event));
 
+                            return;
+                        
+                        // private
+                        case 'error':
+                            emitter(alertPush({ message: event, type: 'error'}));
                             return;
 
                         default:
