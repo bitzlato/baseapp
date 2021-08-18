@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAuth0 } from 'src/api';
 import { ChevronIcon } from '../../../assets/images/ChevronIcon';
 import { copy, getLanguageName } from '../../../helpers';
 import {
@@ -51,7 +52,7 @@ const ProfileMobileScreenComponent: React.FC = () => {
                 </div>
             ),
         },
-        !window.env.auth0
+        !useAuth0()
             ? { titleKey: 'page.mobile.profileLinks.main.changePassword', route: '/profile/change-password' }
             : null,
         { titleKey: 'page.mobile.profileLinks.main.activity', route: '/profile/account-activity' },
