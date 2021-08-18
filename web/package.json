@@ -146,6 +146,7 @@
         "optimize-css-assets-webpack-plugin": "^5.0.3",
         "postcss": "^8.3.6",
         "postcss-loader": "^4.0.4",
+        "postcss-preset-env": "^6.7.0",
         "react-hot-loader": "^4.3.4",
         "redux-mock-store": "^1.5.3",
         "rimraf": "^2.6.2",

@@ -51,6 +51,29 @@ const config = merge(commonConfig, {
     module: {
         rules: [
             {
+                test: /\.postcss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                mode: 'local',
+                                localIdentName: '[hash:base64]',
+                            },
+                        },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [['postcss-preset-env']],
+                            },
+                        },
+                    },
+                ],
+            },
+            {
                 test: /\.(css|sass|scss|pcss)$/,
                 use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader'],
             },
