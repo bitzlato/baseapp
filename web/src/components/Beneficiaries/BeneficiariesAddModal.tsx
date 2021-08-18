@@ -131,7 +131,7 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
         dispatch(beneficiariesCreate(payload));
         handleClearModalsInputs();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [coinAddress, coinBeneficiaryName, coinDescription, currency]);
+    }, [coinAddress, coinBeneficiaryName, coinDescription, currency, coinDestinationTag, isRipple]);
 
     const getState = React.useCallback(key => {
         switch (key) {
@@ -298,8 +298,9 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
     }, []);
 
     const renderAddAddressModalBodyItem = React.useCallback((field: string, optional?: boolean) => {
+        const focused = Boolean(getState(`${field}Focused`));
         const focusedClass = classnames('cr-email-form__group', {
-            'cr-email-form__group--focused': getState(`${field}Focused`),
+            'cr-email-form__group--focused': focused,
             'cr-email-form__group--optional': optional,
         });
 
@@ -308,7 +309,7 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
                 <CustomInput
                     type="text"
                     label={formatMessage({ id: `page.body.wallets.beneficiaries.addAddressModal.body.${field}` })}
-                    placeholder={formatMessage({ id: `page.body.wallets.beneficiaries.addAddressModal.body.${field}` })}
+                    placeholder={focused ? '' : formatMessage({ id: `page.body.wallets.beneficiaries.addAddressModal.body.${field}` })}
                     defaultLabel={field}
                     handleChangeInput={value => handleChangeFieldValue(field, value)}
                     // @ts-ignore
@@ -317,6 +318,7 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
                     classNameLabel="cr-email-form__label"
                     classNameInput="cr-email-form__input"
                     autoFocus={field === 'coinAddress' || field === 'fiatName'}
+                    labelVisible={focused}
                 />
             </div>
         );
