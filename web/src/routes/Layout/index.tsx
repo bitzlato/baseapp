@@ -7,7 +7,7 @@ import { Route, RouterProps, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { IntlProps } from '../../';
-import { minutesUntilAutoLogout, sessionCheckInterval, showLanding, wizardStep } from '../../api';
+import { useAuth0, minutesUntilAutoLogout, sessionCheckInterval, showLanding, wizardStep } from '../../api';
 import { ExpiredSessionModal } from '../../components';
 import { WalletsFetch, CanCan } from '../../containers';
 import { applyCustomizationSettings, toggleColorTheme } from '../../helpers';
@@ -302,7 +302,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                         <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile/api-keys" component={ProfileApiKeysMobileScreen} />
                         <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile/language" component={ProfileLanguageMobileScreen} />
                         <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile/2fa" component={ProfileAuthMobileScreen} />
-                        {!window.env.auth0 && <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile/change-password" component={ProfileChangePasswordMobileScreen} />}
+                        {!useAuth0() && <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile/change-password" component={ProfileChangePasswordMobileScreen} />}
                         <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile/verification" component={ProfileVerificationMobileScreen} />
                         <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile/theme" component={ProfileThemeMobileScreen} />
                         <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile" component={ProfileMobileScreen} />
