@@ -135,6 +135,7 @@
         "header-case-normalizer": "1.0.3",
         "html-webpack-plugin": "^4.3.0",
         "husky": "^1.0.0-rc.13",
+        "identity-obj-proxy": "^3.0.0",
         "jest": "^26.4.1",
         "jest-config": "^26.4.1",
         "jest-environment-enzyme": "^7.1.2",
