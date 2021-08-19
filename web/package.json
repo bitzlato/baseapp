@@ -89,7 +89,7 @@
         "test:coverage": "jest --config jest.config.js --collectCoverage=true",
         "test:ci": "jest --config jest.config.js --silent --ci",
         "spec:integration": "cypress open",
-        "clean": "rimraf build"
+        "clean": "rimraf build src/**/*.postcss.d.ts"
     },
     "devDependencies": {
         "@openware/coding-standards": "2.3.0",
@@ -123,6 +123,7 @@
         "cryptocurrency-icons": "https://github.com/bitzlato/cryptocurrency-icons.git",
         "cssnano": "^4.0.5",
         "cypress": "^3.1.5",
+        "dts-css-modules-loader": "^1.2.4",
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.10.0",
         "enzyme-to-json": "^3.3.4",

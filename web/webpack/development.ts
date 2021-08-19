@@ -29,11 +29,18 @@ const config = merge(commonConfig, {
                 use: [
                     'style-loader',
                     {
+                        loader: 'dts-css-modules-loader',
+                        options: {
+                          namedExport: true
+                        }
+                    },
+                    {
                         loader: 'css-loader',
                         options: {
                             modules: {
                                 mode: 'local',
                                 localIdentName: '[name]__[local]--[hash:base64:5]',
+                                exportLocalsConvention: 'camelCaseOnly',
                             },
                         },
                     },

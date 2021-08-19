@@ -55,11 +55,18 @@ const config = merge(commonConfig, {
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
+                        loader: 'dts-css-modules-loader',
+                        options: {
+                          namedExport: true
+                        }
+                    },
+                    {
                         loader: 'css-loader',
                         options: {
                             modules: {
                                 mode: 'local',
                                 localIdentName: '[hash:base64]',
+                                exportLocalsConvention: 'camelCaseOnly',
                             },
                         },
                     },
