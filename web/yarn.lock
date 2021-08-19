@@ -4849,6 +4849,13 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
+dts-css-modules-loader@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/dts-css-modules-loader/-/dts-css-modules-loader-1.2.4.tgz#ae0f3001f000f3b78394c4925670593eef39fe80"
+  integrity sha512-/uB7sPhjWsovzN2TKll+/KrK1F2fv3iM4QT+kDZA97ljCoy7csIOoGTgjjwSqMPIAiXVeeaNZHOgXfLnYzmj8g==
+  dependencies:
+    loader-utils "^2.0.0"
+
 duplexer2@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.0.2.tgz#c614dcf67e2fb14995a91711e5a617e8a60a31db"
