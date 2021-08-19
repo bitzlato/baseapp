@@ -1,5 +1,6 @@
 /* tslint:disable */
 import * as React from 'react';
+import { v4 } from 'uuid';
 import { Spinner } from 'react-bootstrap';
 import {
     FormattedMessage,
@@ -42,8 +43,10 @@ import {
 } from '../../modules/public/markets';
 import {
     orderExecuteFetch,
+    OrderExecution,
     selectOrderExecuteLoading,
 } from '../../modules/user/orders';
+import { isWsApiEnabled } from 'src/api/config';
 
 interface ReduxProps {
     currentMarket?: Market;
@@ -246,7 +249,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
         const actualOrderPrice = withPrice ? price : trigger;
         const priceMult = TRIGGER_BUY_PRICE_ADJUSTED_TYPES.includes((orderType as string).toLowerCase()) ? TRIGGER_BUY_PRICE_MULT : 1;
 
-        const resultData = {
+        const resultData: OrderExecution = {
             market: currentMarket.id,
             side: type,
             volume: amount.toString(),
@@ -351,6 +354,10 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
             });
 
             orderAllowed = false;
+        }
+
+        if (isWsApiEnabled()) {
+            resultData.uuid = v4();
         }
 
         if (orderAllowed) {
