@@ -15,6 +15,7 @@ export interface OrderExecution {
     price?: string;
     ord_type?: string;
     trigger_price?: string;
+    uuid?: string;
 }
 
 export interface OrderExecuteFetch {
