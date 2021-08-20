@@ -38,6 +38,8 @@ set :db_remote_clean, true
 set :app_version, SemVer.find.to_s
 set :current_version, `git rev-parse HEAD`.strip
 
+set :bugsnag_api_key, ENV.fetch('BUGSNAG_API_KEY')
+
 set :sentry_organization, ENV['SENTRY_ORGANIZATION']
 set :sentry_release_version, -> { [fetch(:app_version), fetch(:current_version)].join('-') }
 

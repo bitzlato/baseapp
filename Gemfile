@@ -14,4 +14,5 @@ gem 'capistrano-rbenv', require: false
 gem 'capistrano-yarn', require: false
 gem 'capistrano-shell', require: false
 gem 'capistrano-sentry', require: false
+gem 'bugsnag-capistrano', require: false
 gem 'slackistrano', require: false
