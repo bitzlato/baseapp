@@ -30,7 +30,7 @@ import { OrderCommon } from '../../modules/types';
 interface ReduxProps {
     asks: string[][];
     bids: string[][];
-    colorTheme: string;
+    colorTheme: 'light' | 'dark';
     currentMarket?: Market;
     currentPrice?: number;
     lastRecentTrade?: PublicTrade;

@@ -22,6 +22,7 @@ import {
 import { HeaderToolbar } from '../HeaderToolbar';
 import { NavBar } from '../NavBar';
 
+// TODO: use one icon with transform
 import arrowBottom from './arrows/arrowBottom.svg';
 import arrowBottomLight from './arrows/arrowBottomLight.svg';
 import arrowRight from './arrows/arrowRight.svg';
