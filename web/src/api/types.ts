@@ -52,6 +52,10 @@ declare global {
         logoDarkUrl: string;
         sonic?: string | boolean;
         wsApi?: string | boolean;
+        valuationPrimaryCurrency: string;
+        valuationPrimaryCurrencyName: string;
+        valuationSecondaryCurrency: string;
+        valuationSecondaryCurrencyName: string;
     }
 
     interface Window {

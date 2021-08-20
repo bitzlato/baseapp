@@ -51,6 +51,10 @@ export const defaultConfig: Config = {
     logoUrl: '',
     logoDarkUrl: '',
     sonic: false,
+    valuationPrimaryCurrency: 'USD',
+    valuationPrimaryCurrencyName: 'USD',
+    valuationSecondaryCurrency: 'ETH',
+    valuationSecondaryCurrencyName: 'ETH',
 };
 
 export const Cryptobase = {
@@ -104,3 +108,7 @@ export const logoDarkUrl = (): string => Cryptobase.config.logoDarkUrl;
 export const isSonicEnabled = () => convertToBoolean(Cryptobase.config.sonic);
 export const isWsApiEnabled = () => convertToBoolean(Cryptobase.config.wsApi);
 export const useAuth0 = () => Cryptobase.config.auth0 !== undefined;
+export const valuationPrimaryCurrency = (): string => Cryptobase.config.valuationPrimaryCurrency;
+export const valuationPrimaryCurrencyName = (): string => Cryptobase.config.valuationPrimaryCurrencyName;
+export const valuationSecondaryCurrency = (): string => Cryptobase.config.valuationSecondaryCurrency;
+export const valuationSecondaryCurrencyName = (): string => Cryptobase.config.valuationSecondaryCurrencyName;
