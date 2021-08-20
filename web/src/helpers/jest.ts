@@ -54,6 +54,10 @@ export const mockConfig: Config = {
     logoUrl: '',
     logoDarkUrl: '',
     sonic: false,
+    valuationPrimaryCurrency: 'USD',
+    valuationPrimaryCurrencyName: 'USD',
+    valuationSecondaryCurrency: 'ETH',
+    valuationSecondaryCurrencyName: 'ETH',
 };
 
 // tslint:disable no-any no-console

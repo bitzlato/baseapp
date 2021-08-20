@@ -36,8 +36,6 @@ export const pgRoutes = (isLoggedIn: boolean, CanCan: boolean, isLight?: boolean
 
 export const DEFAULT_CCY_PRECISION = 4;
 export const DEFAULT_TRADING_VIEW_INTERVAL = '15';
-export const VALUATION_PRIMARY_CURRENCY = 'USD';
-export const VALUATION_SECONDARY_CURRENCY = 'ETH';
 
 export const PASSWORD_ENTROPY_STEP = 6;
 
