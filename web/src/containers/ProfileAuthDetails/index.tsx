@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { ProfileTwoFactorAuth } from '../';
 import { IntlProps } from '../../';
-import { isUsernameEnabled } from '../../api';
+import { useAuth0, isUsernameEnabled } from '../../api';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { ChangePassword, CustomInput, Modal } from '../../components';
 import {
@@ -124,7 +124,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                         ) : null}
                     </div>
                 </div>
-                {!window.env.auth0 && (
+                {!useAuth0() && (
                     <div className="pg-profile-page__row">
                         <div>
                             <div className="pg-profile-page__label">

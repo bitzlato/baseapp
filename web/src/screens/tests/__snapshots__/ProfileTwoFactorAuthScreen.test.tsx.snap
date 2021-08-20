@@ -133,28 +133,21 @@ exports[`ProfileTwoFactorAuthScreen test should render 1`] = `
             </span>
           </div>
           <div
-            class="col-12 col-sm-7"
+            class="cr-email-form__group"
           >
-            <fieldset
-              class="pg-profile-two-factor-auth__body--input"
+            <div
+              class="custom-input"
             >
-              <div
-                class="hidden-label"
-              >
-                2FA code
-              </div>
-              <div
-                class="custom-input"
-              >
-                <label />
-                <input
-                  class="form-control form-control-lg"
-                  placeholder="2FA code"
-                  type="tel"
-                  value=""
-                />
-              </div>
-            </fieldset>
+              <label
+                class="cr-email-form__label"
+              />
+              <input
+                class="form-control form-control-lg"
+                placeholder="2FA code"
+                type="tel"
+                value=""
+              />
+            </div>
           </div>
         </div>
       </div>

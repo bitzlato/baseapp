@@ -19,7 +19,9 @@
 /src/mobile
 /src/modules
 /src/routes
-/src/screens
+!/src/screens
+/src/screens/*
+!/src/screens/NewLandingScreen
 /src/styles
 /src/themes
 /src/translations

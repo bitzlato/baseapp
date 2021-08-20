@@ -99,7 +99,12 @@ class ProfileVerificationComponent extends React.Component<Props> {
     public renderProgressBar(labels: Label[]) {
         return (
             <div className="pg-profile-page-verification__progress-bar">
-                {kycSteps().map((step, index) => this.renderProgressBarStep(step, index, labels))}
+                {kycSteps().map((step, index) =>
+                    React.cloneElement(
+                        this.renderProgressBarStep(step, index, labels),
+                        { key: index }
+                    )
+                )}
             </div>
         );
     }

@@ -103,3 +103,4 @@ export const logoUrl = (): string => Cryptobase.config.logoUrl;
 export const logoDarkUrl = (): string => Cryptobase.config.logoDarkUrl;
 export const isSonicEnabled = () => convertToBoolean(Cryptobase.config.sonic);
 export const isWsApiEnabled = () => convertToBoolean(Cryptobase.config.wsApi);
+export const useAuth0 = () => Cryptobase.config.auth0 !== undefined;

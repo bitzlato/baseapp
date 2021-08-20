@@ -25,6 +25,36 @@ const config = merge(commonConfig, {
     module: {
         rules: [
             {
+                test: /\.postcss$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'dts-css-modules-loader',
+                        options: {
+                          namedExport: true
+                        }
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                mode: 'local',
+                                localIdentName: '[name]__[local]--[hash:base64:5]',
+                                exportLocalsConvention: 'camelCaseOnly',
+                            },
+                        },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [['postcss-preset-env']],
+                            },
+                        },
+                    },
+                ],
+            },
+            {
                 test: /\.(css|sass|scss|pcss)$/,
                 use: [
                     'style-loader',
@@ -73,17 +103,19 @@ const config = merge(commonConfig, {
             children: false,
         },
         hot: true,
-        proxy: host ? {
-            '/api/v2/ranger': {
-                target: `wss://${host}`,
-                changeOrigin: true,
-                ws: true,
-            },
-            '/api': {
-                target: `https://${host}`,
-                changeOrigin: true,
-            }
-        } : undefined,
+        proxy: host
+            ? {
+                  '/api/v2/ranger': {
+                      target: `wss://${host}`,
+                      changeOrigin: true,
+                      ws: true,
+                  },
+                  '/api': {
+                      target: `https://${host}`,
+                      changeOrigin: true,
+                  },
+              }
+            : undefined,
     },
 });
 
