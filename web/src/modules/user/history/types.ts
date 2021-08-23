@@ -61,6 +61,13 @@ export interface Deposit {
     completed_at: string;
     state: string;
     price?: number;
+    public_message?: string;
+    transfer_links?: TransferLink[];
+}
+
+export interface TransferLink {
+    title: string;
+    url: string;
 }
 
 export type WalletHistoryElement = Withdraw | Deposit | PrivateTrade;
