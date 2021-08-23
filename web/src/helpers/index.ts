@@ -49,4 +49,3 @@ export * from './ssToMMSS';
 export * from './mergeObjects';
 export * from './validateBeneficiaryTestnetAddress';
 export * from './validateBeneficiaryAddress';
-export * from './transferLinks';

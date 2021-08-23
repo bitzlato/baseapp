@@ -328,6 +328,7 @@ export const ru: LangType = {
     'page.body.history.deposit.content.status.processing': 'Обрабатывается',
     'page.body.history.deposit.content.status.fee_processing': 'Обрабатывается',
     'page.body.history.deposit.content.status.errored': 'Ошибка',
+    'page.body.history.deposit.content.status.refunding': 'Refunding',
 
     'page.body.history.withdraw': 'История выводов',
     'page.body.history.withdraw.header.id': 'ID',

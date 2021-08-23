@@ -322,6 +322,7 @@ export const en = {
     'page.body.history.deposit.content.status.processing': 'Processing',
     'page.body.history.deposit.content.status.fee_processing': 'Processing',
     'page.body.history.deposit.content.status.errored': 'Errored',
+    'page.body.history.deposit.content.status.refunding': 'Refunding',
 
     'page.body.history.withdraw': 'Withdrawal History',
     'page.body.history.withdraw.header.id': 'ID',
