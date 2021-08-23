@@ -40,8 +40,12 @@ set :current_version, `git rev-parse HEAD`.strip
 
 set :bugsnag_api_key, ENV.fetch('BUGSNAG_API_KEY')
 
-set :sentry_organization, ENV['SENTRY_ORGANIZATION']
-set :sentry_release_version, -> { [fetch(:app_version), fetch(:current_version)].join('-') }
+if Gem.loaded_specs.key?('capistrano-sentry')
+  set :sentry_organization, ENV['SENTRY_ORGANIZATION']
+  set :sentry_release_version, -> { [fetch(:app_version), fetch(:current_version)].join('-') }
+  before 'deploy:starting', 'sentry:validate_config'
+  after 'deploy:published', 'sentry:notice_deployment'
+end
 
 set :nvm_node, File.read('.nvmrc').strip
 set :nvm_map_bins, %w{node npm yarn rake}
@@ -60,8 +64,6 @@ set :default_env, {
   PUBLIC_URL: fetch(:public_url),
 }
 
-before 'deploy:starting', 'sentry:validate_config'
-after 'deploy:published', 'sentry:notice_deployment'
 after 'deploy:updated', 'yarn_build'
 
 # set :web_release_path, -> { release_path + '/web' }
