@@ -34,6 +34,21 @@ export interface PrivateTradesState extends CommonState {
 
 export type MakerType = 'buy' | 'sell';
 
+export type WithdrawState =
+    | 'prepared'
+    | 'accepted'
+    | 'canceled'
+    | 'skipped'
+    | 'to_reject'
+    | 'rejected'
+    | 'processing'
+    | 'transfering'
+    | 'under_review'
+    | 'succeed'
+    | 'failed'
+    | 'errored'
+    | 'confirming';
+
 export interface Withdraw {
     currency: string;
     id: number;
@@ -42,13 +57,26 @@ export interface Withdraw {
     fee: string;
     blockchain_txid: string;
     rid: string;
-    state: string;
+    state: WithdrawState;
     created_at: string;
     updated_at: string;
     completed_at: string;
     done_at: string;
     price?: number;
+    confirmations: number;
+    public_message?: string;
 }
+
+export type DepositState =
+    | 'submitted'
+    | 'invoiced'
+    | 'canceled'
+    | 'rejected'
+    | 'accepted'
+    | 'skipped'
+    | 'dispatched'
+    | 'errored'
+    | 'refunding';
 
 export interface Deposit {
     currency: string;
@@ -57,12 +85,14 @@ export interface Deposit {
     fee: string;
     txid: string;
     created_at: string;
-    confirmations: number | string;
+    confirmations: number;
     completed_at: string;
-    state: string;
+    state: DepositState;
     price?: number;
     public_message?: string;
     transfer_links?: TransferLink[];
+    transfer_type?: string;
+    tid?: string;
 }
 
 export interface TransferLink {

@@ -350,6 +350,7 @@ export const ru: LangType = {
     'page.body.history.withdraw.content.status.failed': 'Неудачный',
     'page.body.history.withdraw.content.status.confirming': 'Подтверждается',
     'page.body.history.withdraw.content.status.errored': 'Ошибка',
+    'page.body.history.withdraw.content.status.under_review': 'На рассмотрении',
 
     'page.body.history.transfer': 'История трансферов',
     'page.body.history.transfer.header.date': 'Дата',

@@ -388,6 +388,7 @@ exports[`Markets should render empty data 1`] = `
         "page.body.history.withdraw.content.status.submitted": "Submitted",
         "page.body.history.withdraw.content.status.succeed": "Succeed",
         "page.body.history.withdraw.content.status.suspected": "Suspected",
+        "page.body.history.withdraw.content.status.under_review": "Under review",
         "page.body.history.withdraw.header.address": "Address",
         "page.body.history.withdraw.header.amount": "Amount",
         "page.body.history.withdraw.header.currency": "Currency",
