@@ -169,7 +169,7 @@ export class WalletTable extends React.Component<Props> {
     };
 
     private getDepositRow = (item: Deposit, fixed: number): CellData[] => [
-        localeDate(item.created_at, 'fullDate'),
+        <div title={`${item.id}`}>{localeDate(item.created_at, 'fullDate')}</div>,
         <DepositStatus item={item} currency={this.props.currency} />,
         <Decimal key={item.id} fixed={fixed} thousSep=",">
             {Number(item.amount)}

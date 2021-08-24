@@ -26,7 +26,7 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
             return item.public_message ? (
                 <Status type="failed">{item.public_message}</Status>
             ) : (
-                <Status type="failed">{t('page.body.history.deposit.content.status.skipped')}</Status>
+                <Status type="failed">{t('page.body.history.deposit.content.status.errored')}</Status>
             );
         case 'skipped':
             return <Status type="failed">{t('page.body.history.deposit.content.status.skipped')}</Status>;
@@ -53,7 +53,11 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
         case 'refunding':
             return <Status type="pending">{t('page.body.history.deposit.content.status.refunding')}</Status>;
         default:
-            return <Status type="failed">{item.state}</Status>;
+            return (
+                <Status type="failed" style={{ textTransform: 'capitalize' }}>
+                    {item.state}
+                </Status>
+            );
     }
 };
 
@@ -64,7 +68,9 @@ const DepositStatusAccepted: React.FC<Props> = ({ item, currency }) => {
     const blockchainLink = getBlockchainLink(wallets, currency, item.txid);
     const itemCurrency = currencies.find(cur => cur.id === currency);
     const min: number | undefined = itemCurrency?.min_confirmations;
-    const content = t('page.body.wallets.table.pending') + (min !== undefined ? ` ${item.confirmations}/${min}` : '');
+    const content =
+        t('page.body.history.withdraw.content.status.confirming') +
+        (min !== undefined ? ` ${item.confirmations}/${min}` : '');
     return (
         <ExternalLink href={blockchainLink}>
             <Status type="pending">{content}</Status>
