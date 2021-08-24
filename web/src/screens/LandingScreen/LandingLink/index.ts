@@ -1,0 +1,1 @@
+export { LandingLink } from './LandingLink';

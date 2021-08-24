@@ -1,0 +1,1 @@
+export { WelcomeBlock } from './WelcomeBlock';

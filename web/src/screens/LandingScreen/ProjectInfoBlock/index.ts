@@ -1,0 +1,1 @@
+export { ProjectInfoBlock } from './ProjectInfoBlock';

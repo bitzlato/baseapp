@@ -57,8 +57,8 @@ const config = merge(commonConfig, {
                     {
                         loader: 'dts-css-modules-loader',
                         options: {
-                          namedExport: true
-                        }
+                            namedExport: true,
+                        },
                     },
                     {
                         loader: 'css-loader',
@@ -74,7 +74,7 @@ const config = merge(commonConfig, {
                         loader: 'postcss-loader',
                         options: {
                             postcssOptions: {
-                                plugins: [['postcss-preset-env']],
+                                plugins: [['postcss-preset-env', { stage: 1 }]],
                             },
                         },
                     },

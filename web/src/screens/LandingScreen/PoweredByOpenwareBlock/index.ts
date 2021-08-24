@@ -1,0 +1,1 @@
+export { PoweredByOpenwareBlock } from './PoweredByOpenwareBlock';

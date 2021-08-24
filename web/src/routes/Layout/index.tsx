@@ -73,7 +73,7 @@ import {
     WalletsScreen,
     SetupScreen,
     QuickExchange,
-    NewLandingScreen,
+    LandingScreen,
 } from '../../screens';
 
 interface ReduxProps {
@@ -331,7 +331,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                     <Route path="/restriction" component={RestrictedScreen} />
                     <Route path="/maintenance" component={MaintenanceScreen} />
                     <Route exact={true} path="/trading/:market?" component={TradingScreen} />
-                    {showLanding() && <Route exact={true} path="/" component={NewLandingScreen} />}
+                    {showLanding() && <Route exact={true} path="/" component={LandingScreen} />}
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/orders" component={OrdersTabScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/history" component={HistoryScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/confirm" component={ConfirmScreen} />

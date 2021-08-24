@@ -1,1 +1,0 @@
-export { NewLandingScreen } from './NewLandingScreen';
