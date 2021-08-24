@@ -1,0 +1,48 @@
+.landingLink {
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 32px;
+}
+
+.landingLink:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.landingLink.primary {
+  background-color: #e9bb1a;
+}
+
+.landingLink.primary:hover,
+.landingLink.primary:focus {
+  background-color: #f4cd3f;
+  box-shadow: 0 7px 15px rgba(222, 226, 237, 0.15);
+}
+
+.landingLink.primary:active {
+  background-color: #d7ae1e;
+}
+
+:global(.light-mode) {
+  & .landingLink.primary,
+  & .landingLink.primary:hover {
+    color: #333;
+  }
+}
+
+.landingLink.secondary {
+  background-color: #789ef3;
+}
+
+.landingLink.secondary:hover,
+.landingLink.secondary:focus {
+  background-color: #99b9ff;
+  box-shadow: 0 7px 15px rgba(222, 226, 237, 0.15);
+}
+
+.landingLink.secondary:active {
+  background-color: #5984e6;
+}

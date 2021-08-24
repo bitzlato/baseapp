@@ -1,0 +1,107 @@
+.featuresBlock {
+  background-color: #1f242b;
+  padding-bottom: 110px;
+}
+
+:global(.light-mode) .featuresBlock {
+  background-color: #fff;
+}
+
+.title {
+  color: #ccc;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 38px;
+  text-align: center;
+}
+
+:global(.light-mode) .title {
+  color: #202472;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.feature {
+  background-color: #40454c;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  padding: 44px;
+  width: calc(33.33% - 8px); /* calc(100% / 3 - (12 * 2) / 3) */
+
+  @media (width < 1200px) {
+    width: calc(50% - 6px); /* calc(100% / 2 - (12 * 1) / 2) */
+  }
+}
+
+:global(.light-mode) .feature {
+  background-color: #f0f3f9;
+}
+
+.featureHeader {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.featureIcon {
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 116px;
+  margin-bottom: 18px;
+  width: 116px;
+}
+
+.featureIconApi {
+  background-image: url('./icons/api.svg');
+}
+
+.featureIconCommunity {
+  background-image: url('./icons/community.svg');
+}
+
+.featureIconExchange {
+  background-image: url('./icons/exchange.svg');
+}
+
+.featureIconInterface {
+  background-image: url('./icons/interface.svg');
+}
+
+.featureIconOrder {
+  background-image: url('./icons/order.svg');
+}
+
+.featureIconSecurity {
+  background-image: url('./icons/security.svg');
+}
+
+.featureTitle {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+:global(.light-mode) .featureTitle {
+  color: #202472;
+}
+
+.featureBody {
+  color: #ccc;
+  font-size: 20px;
+  height: 100%;
+  text-align: justify;
+}
+
+:global(.light-mode) .featureBody {
+  color: #666;
+}
+
+.joinButton {
+  padding-top: 20px;
+}
