@@ -6,5 +6,5 @@ export type TranslateFn = (id: string, values?: Record<string, any>) => string |
 export const useT = (): TranslateFn => {
     const { formatMessage } = useIntl();
 
-    return (id: string, values?: Record<string, any>) => formatMessage({ id }, values);
+    return (id, values) => formatMessage({ id }, values);
 };
