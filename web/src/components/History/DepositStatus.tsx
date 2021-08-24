@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
-import { getBlockchainLink } from 'src/helpers/getBlockchainLink';
-import { selectCurrencies, selectWallets } from 'src/modules';
 import { Deposit } from 'src/modules/user/history/types';
 import { Status } from './Status';
 import { SucceedIcon } from '../../containers/Wallets/SucceedIcon';
 import { useT } from 'src/hooks/useT';
 import { ExternalLink } from './ExternalLink';
+import { ConfirmingStatus } from './ConfirmingStatus';
+import { PendingStatus } from './PendingStatus';
 
 interface Props {
     currency: string;
@@ -33,7 +32,7 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
         case 'rejected':
             return <Status type="failed">{t('page.body.history.deposit.content.status.canceled')}</Status>;
         case 'submitted':
-            return <Status type="pending">{t('page.body.history.deposit.content.status.processing')}</Status>;
+            return <PendingStatus />;
         case 'invoiced':
             return item.transfer_links ? (
                 <div className="cr-row-spacing">
@@ -49,7 +48,7 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
         case 'canceled':
             return <Status type="failed">{t('page.body.history.deposit.content.status.canceled')}</Status>;
         case 'accepted':
-            return <DepositStatusAccepted item={item} currency={currency} />;
+            return <ConfirmingStatus txid={item.txid} confirmations={item.confirmations} currency={currency} />;
         case 'refunding':
             return <Status type="pending">{t('page.body.history.deposit.content.status.refunding')}</Status>;
         default:
@@ -59,21 +58,4 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
                 </Status>
             );
     }
-};
-
-const DepositStatusAccepted: React.FC<Props> = ({ item, currency }) => {
-    const t = useT();
-    const wallets = useSelector(selectWallets);
-    const currencies = useSelector(selectCurrencies);
-    const blockchainLink = getBlockchainLink(wallets, currency, item.txid);
-    const itemCurrency = currencies.find(cur => cur.id === currency);
-    const min: number | undefined = itemCurrency?.min_confirmations;
-    const content =
-        t('page.body.history.withdraw.content.status.confirming') +
-        (min !== undefined ? ` ${item.confirmations}/${min}` : '');
-    return (
-        <ExternalLink href={blockchainLink}>
-            <Status type="pending">{content}</Status>
-        </ExternalLink>
-    );
 };

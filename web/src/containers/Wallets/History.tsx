@@ -9,7 +9,6 @@ import { localeDate, sortByDateDesc } from '../../helpers';
 import {
     currenciesFetch,
     Currency,
-    Deposit,
     fetchHistory,
     resetHistory,
     RootState,
@@ -21,18 +20,15 @@ import {
     selectLastElemIndex,
     selectNextPageExists,
     selectWallets,
-    TransferLink,
     Wallet,
     WalletHistoryList,
 } from '../../modules';
-import { FailIcon } from './FailIcon';
-import { SucceedIcon } from './SucceedIcon';
 import { DepositStatus } from 'src/components/History/DepositStatus';
-import { TransferLinks } from 'src/components/History/TransferLinks';
+import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
 
 export interface HistoryProps {
     label: string;
-    type: string;
+    type: 'deposits' | 'withdraws';
     currency: string;
 }
 
@@ -139,7 +135,6 @@ export class WalletTable extends React.Component<Props> {
     private retrieveData = list => {
         const {
             currency,
-            currencies,
             type,
             wallets,
         } = this.props;
@@ -150,54 +145,20 @@ export class WalletTable extends React.Component<Props> {
         }
 
         return list.sort((a, b) => sortByDateDesc(a.created_at, b.created_at)).map((item, index) => {
-            if (type === 'deposits') {
-                return this.getDepositRow(item, fixed);
-            }
-
             const amount = 'amount' in item ? Number(item.amount) : Number(item.price) * Number(item.volume);
-            const confirmations = type === 'deposits' && item.confirmations;
-            const itemCurrency = currencies && currencies.find(cur => cur.id === currency);
-            const minConfirmations = itemCurrency && itemCurrency.min_confirmations;
-            const state = 'state' in item ? this.formatTxState(item.state, confirmations, minConfirmations, item.transfer_links) : '';
 
             return [
-                localeDate(item.created_at, 'fullDate'),
-                state,
+                <div title={`${item.id} - ${item.state}`}>
+                    {localeDate(item.created_at, 'fullDate')}
+                </div>,
+                type === 'deposits' ? (
+                    <DepositStatus item={item} currency={currency} />
+                ) : (
+                    <WithdrawStatus item={item} currency={currency} />
+                ),
                 <Decimal key={index} fixed={fixed} thousSep=",">{amount}</Decimal>,
             ];
         });
-    };
-
-    private getDepositRow = (item: Deposit, fixed: number): CellData[] => [
-        <div title={`${item.id}`}>{localeDate(item.created_at, 'fullDate')}</div>,
-        <DepositStatus item={item} currency={this.props.currency} />,
-        <Decimal key={item.id} fixed={fixed} thousSep=",">
-            {Number(item.amount)}
-        </Decimal>,
-    ];
-
-    private formatTxState = (tx: string, confirmations?: number | string, minConfirmations?: number, transferLinks?: TransferLink[]) => {
-        const statusMapping = {
-            succeed: <SucceedIcon />,
-            failed: <FailIcon />,
-            accepted: <SucceedIcon />,
-            collected: <SucceedIcon />,
-            canceled: <FailIcon />,
-            rejected: <FailIcon />,
-            processing: this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
-            fee_processing: this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
-            prepared: this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
-            invoiced: (transferLinks !== undefined ? <TransferLinks links={transferLinks}></TransferLinks> : this.props.intl.formatMessage({ id: 'page.body.wallets.table.invoiced' })),
-            submitted: (confirmations !== undefined && minConfirmations !== undefined) ? (
-                transferLinks !== undefined ? <TransferLinks links={transferLinks}></TransferLinks> : `${confirmations}/${minConfirmations}`
-              )
-              : this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
-            confirming: (transferLinks === undefined) ? <SucceedIcon /> : <TransferLinks links={transferLinks}></TransferLinks>,
-            skipped: <SucceedIcon />,
-            errored: <span className="cr-mobile-history-table--failed">{this.props.intl.formatMessage({ id: 'page.body.history.deposit.content.status.errored' })}</span>,
-        };
-
-        return statusMapping[tx] || tx;
     };
 }
 
