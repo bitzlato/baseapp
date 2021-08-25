@@ -31,7 +31,6 @@ window.env = {
     sessionCheckInterval: '15000',
     balancesFetchInterval: '3000',
     passwordEntropyStep: 14,
-    showLanding: true,
     directSigninUrl: 'https://bitzlato.com/auth/login?ex=true&returnTo=https%3A%2F%2Fmarket.bitzlato.com%2Fsuccess_signin%2Fbitzlato.html',
     sentryEnabled: false,
     kycSteps: [
@@ -43,7 +42,6 @@ window.env = {
     ],
     captchaLogin: false,
     usernameEnabled: false,
-    showLanding: false,
     valuationPrimaryCurrency: 'USDT-ERC20',
     valuationPrimaryCurrencyName: 'USD',
     valuationSecondaryCurrency: 'BTC',
