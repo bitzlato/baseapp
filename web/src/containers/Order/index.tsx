@@ -105,7 +105,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     private orderRef;
 
     public componentDidMount() {
-        if (!this.props.wallets.length) {
+        if (this.props.userLoggedIn && !this.props.wallets.length) {
             this.props.walletsFetch();
         }
 
