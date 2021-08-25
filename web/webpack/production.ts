@@ -1,22 +1,31 @@
-import { ExtendedAPIPlugin, DefinePlugin } from 'webpack';
+import { ExtendedAPIPlugin, EnvironmentPlugin } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import merge from 'webpack-merge';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import path from 'path';
+import { readFileSync } from 'fs';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import JavaScriptObfuscator from 'webpack-obfuscator';
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+import { BugsnagBuildReporterPlugin } from 'webpack-bugsnag-plugins';
 
 const rootDir = path.resolve(__dirname, '..');
 const BUILD_DIR = path.resolve(rootDir, 'build');
 
 import commonConfig from './common';
+import { extractSemver } from './semver';
 
 const domain = process.env.BUILD_DOMAIN ? process.env.BUILD_DOMAIN.split(',') : [];
+const appVersion = extractSemver(readFileSync('../.semver').toString());
 
 const plugins = [
     new ExtendedAPIPlugin(),
-    new DefinePlugin({ 'process.env.BUILD_EXPIRE': JSON.stringify(process.env.BUILD_EXPIRE) }),
+    new EnvironmentPlugin({
+        BUILD_EXPIRE: null,
+        REACT_APP_BUGSNAG_KEY: null,
+        REACT_APP_BUGSNAG_VERSION: appVersion,
+        REACT_APP_BUGSNAG_RELEASE_STAGE: 'development'
+    }),
     new OptimizeCssAssetsPlugin({
         assetNameRegExp: /\.css$/g,
         cssProcessor: require('cssnano'),
@@ -35,7 +44,17 @@ if (process.env.ANALYZE === '1') {
     plugins.push(new BundleAnalyzerPlugin());
 }
 
+if (process.env.REACT_APP_BUGSNAG_KEY) {
+    plugins.push(
+        new BugsnagBuildReporterPlugin({
+            apiKey: process.env.REACT_APP_BUGSNAG_KEY,
+            appVersion,
+        })
+    );
+}
+
 const config = merge(commonConfig, {
+    devtool: 'source-map',
     mode: 'production',
     output: {
         path: BUILD_DIR,
