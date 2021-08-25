@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-set :public_url, 'https://market-s3.bitzlato.com/'
-set :build_domain, 'market-s3.bitzlato.com'
+set :public_url, "https://#{ENV.fetch( 'STAGING_SERVER_3' )}/"
+set :build_domain, ENV.fetch( 'STAGING_SERVER_3' )
 set :stage, 's3'
 set :application, -> { 'baseapp-' + fetch(:stage).to_s }
 
-server 'market-s3.bitzlato.com', user: fetch(:user), roles: fetch(:roles)
+server ENV.fetch( 'STAGING_SERVER_3' ), user: fetch(:user), roles: fetch(:roles)
