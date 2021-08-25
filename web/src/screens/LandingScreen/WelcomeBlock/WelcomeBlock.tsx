@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { MarketsTable } from 'src/containers';
 import { useT } from 'src/hooks/useT';
 
+import { MarketsTable, HeaderToolbar, Charts } from 'src/containers';
 import { LandingContainer } from '../LandingContainer';
 import { LandingLink } from '../LandingLink';
+
 import s from './WelcomeBlock.postcss';
 
 export const WelcomeBlock: FC = () => {
@@ -20,8 +21,12 @@ export const WelcomeBlock: FC = () => {
                     <MarketsTable />
                 </div>
                 <div className={s.tradingStatistics}>
-                    {/* TODO: stats */}
-                    add charts
+                    <div className={s.tradingStatisticsHeader}>
+                        <HeaderToolbar />
+                    </div>
+                    <div className={s.tradingStatisticsChart}>
+                        <Charts />
+                    </div>
                 </div>
             </LandingContainer>
         </div>

@@ -74,7 +74,18 @@ const config = merge(commonConfig, {
                         loader: 'postcss-loader',
                         options: {
                             postcssOptions: {
-                                plugins: [['postcss-preset-env', { stage: 1 }]],
+                                plugins: [
+                                    [
+                                        'postcss-preset-env',
+                                        {
+                                            stage: 1,
+                                            features: {
+                                                'nesting-rules': false,
+                                            },
+                                        },
+                                    ],
+                                    'postcss-nested',
+                                ],
                             },
                         },
                     },
