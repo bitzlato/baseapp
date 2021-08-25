@@ -1,0 +1,19 @@
+/* md */
+@custom-media --breakpoint-up-md (width >= 768px);
+@custom-media --breakpoint-down-md (width <= 767.98px);
+
+/* lg */
+@custom-media --breakpoint-up-lg (width >= 992px);
+@custom-media --breakpoint-down-lg (width <= 991.98px);
+
+/* xl */
+@custom-media --breakpoint-up-xl (width >= 1200px);
+@custom-media --breakpoint-down-xl (width <= 1199.98px);
+
+/* xxl */
+@custom-media --breakpoint-up-xxl (width >= 1400px);
+@custom-media --breakpoint-down-xxl (width <= 1399.98px);
+
+/* xxxl */
+@custom-media --breakpoint-up-xxxl (width >= 1600px);
+@custom-media --breakpoint-down-xxxl (width <= 1599.98px);

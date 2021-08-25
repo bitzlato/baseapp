@@ -27,7 +27,7 @@
   width: 440px;
   z-index: 2;
 
-  @media (width < 992px) {
+  @media (--breakpoint-down-lg) {
     margin: 0 auto;
     text-align: center;
   }
@@ -63,7 +63,7 @@
   width: 100%;
   z-index: 1;
 
-  @media (width >= 992px) {
+  @media (--breakpoint-up-lg) {
     --height: calc(var(--landing-join-image-height) * 0.5);
     --width: calc(var(--landing-join-image-width) * 0.5);
 
@@ -72,7 +72,7 @@
     width: var(--width);
   }
 
-  @media (width >= 1200px) {
+  @media (--breakpoint-up-xl) {
     --height: calc(var(--landing-join-image-height) * 0.7);
     --width: calc(var(--landing-join-image-width) * 0.7);
 
@@ -81,7 +81,7 @@
     width: var(--width);
   }
 
-  @media (width >= 1400px) {
+  @media (--breakpoint-up-xxl) {
     --height: calc(var(--landing-join-image-height) * 0.8);
     --width: calc(var(--landing-join-image-width) * 0.8);
 
@@ -90,7 +90,7 @@
     width: var(--width);
   }
 
-  @media (width >= 1600px) {
+  @media (--breakpoint-up-xxxl) {
     --height: var(--landing-join-image-height);
     --width: var(--landing-join-image-width);
 

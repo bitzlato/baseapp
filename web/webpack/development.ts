@@ -42,6 +42,7 @@ const config = merge(commonConfig, {
                                 localIdentName: '[name]__[local]--[hash:base64:5]',
                                 exportLocalsConvention: 'camelCaseOnly',
                             },
+                            importLoaders: 1,
                         },
                     },
                     {
@@ -56,6 +57,7 @@ const config = merge(commonConfig, {
                                             features: {
                                                 'nesting-rules': false,
                                             },
+                                            importFrom: ['src/styles/mediaQueries.css'],
                                         },
                                     ],
                                     'postcss-nested',
