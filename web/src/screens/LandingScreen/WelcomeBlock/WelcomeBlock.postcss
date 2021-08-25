@@ -45,6 +45,11 @@
   @media (width < 1200px) {
     text-align: center;
     width: 100%;
+    margin-bottom: 12px;
+  }
+
+  :global(.light-mode) & > :global(.pg-ticker-table) {
+    box-shadow: 1px 1px 5px var(--shadow-color-level-2);
   }
 }
 
@@ -63,5 +68,37 @@
 }
 
 .tradingStatistics {
-  /* TODO: add properties */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--header-background-color);
+    border-radius: 3px;
+    height: calc(var(--gap) * 10.67);
+    margin-bottom: 12px;
+
+    :global(.light-mode) & {
+      box-shadow: 1px 1px 5px var(--shadow-color-level-2);
+    }
+  }
+
+  &__chart {
+    flex-grow: 1;
+    border-radius: 3px;
+    overflow: hidden;
+    min-height: 400px;
+    position: relative;
+
+    & > :global(.pg-charts) {
+      position: absolute;
+    }
+
+    :global(.light-mode) & {
+      box-shadow: 1px 1px 5px var(--shadow-color-level-2);
+    }
+  }
 }
