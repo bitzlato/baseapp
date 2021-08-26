@@ -1,0 +1,19 @@
+.link {
+  & svg {
+    fill: #999;
+  }
+
+  &:hover svg {
+    fill: #808080;
+  }
+
+  :global(.light-mode) & {
+    & svg {
+      fill: #202472;
+    }
+
+    &:hover svg {
+      fill: #272c8c;
+    }
+  }
+}

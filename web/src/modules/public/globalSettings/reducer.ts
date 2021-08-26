@@ -7,8 +7,10 @@ import {
     TRIGGER_APPLY_WINDOW_ENVS,
 } from './constants';
 
+export type Theme = 'light' | 'dark';
+
 export interface ColorThemeState {
-    color: string;
+    color: Theme;
     chartRebuild: boolean;
     marketSelectorActive: boolean;
     isMobileDevice: boolean;
@@ -16,7 +18,7 @@ export interface ColorThemeState {
     applyWindowEnvsTrigger: boolean;
 }
 
-const currentColorTheme: string = localStorage.getItem('colorTheme') || 'dark';
+const currentColorTheme = (localStorage.getItem('colorTheme') as Theme) || 'dark';
 
 export const initialChangeColorThemeState: ColorThemeState = {
     color: currentColorTheme,

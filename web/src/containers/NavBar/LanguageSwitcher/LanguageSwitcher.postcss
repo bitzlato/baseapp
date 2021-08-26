@@ -1,0 +1,62 @@
+.language {
+  color: #999;
+  cursor: pointer;
+  text-decoration: underline;
+  user-select: none;
+
+  &:hover {
+    color: #808080;
+  }
+
+  :global(.light-mode) & {
+    color: #202472;
+    text-decoration: none;
+  }
+}
+
+.menu {
+  background-color: #262d37;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0;
+
+  :global(.light-mode) & {
+    background-color: #fff;
+  }
+}
+
+.item {
+  border-left: 3px solid transparent;
+  color: #999;
+  font-size: 16px;
+  padding-bottom: 14px;
+  padding-top: 14px;
+
+  &:hover {
+    color: #999;
+  }
+
+  &:global(.active) {
+    background-color: #40454c;
+    border-left-color: #485bc1;
+    color: #b2beed;
+  }
+
+  :global(.light-mode) & {
+    color: #a0a0a0;
+
+    &:hover {
+      color: #000;
+    }
+
+    &:global(.active) {
+      background-color: #dbe4fc;
+      border-left-color: #5b8ee5;
+      color: #000;
+    }
+  }
+}
+
+.flag {
+  margin-right: 12px;
+}

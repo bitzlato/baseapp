@@ -1,12 +1,10 @@
 import classnames from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
-import { Dropdown } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { Link, RouteProps, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { languages } from '../../api/config';
 import { LogoutIcon } from '../../assets/images/sidebar/LogoutIcon';
 import { ProfileIcon } from '../../assets/images/sidebar/ProfileIcon';
 import { SidebarIcons } from '../../assets/images/sidebar/SidebarIcons';
@@ -30,12 +28,7 @@ import {
 } from '../../modules';
 import { CanCan } from '../';
 
-import enIcon from 'src/assets/images/sidebar/en.svg';
-import ruIcon from 'src/assets/images/sidebar/ru.svg';
-
-interface State {
-    isOpenLanguage: boolean;
-}
+import s from './Sidebar.postcss'
 
 interface DispatchProps {
     changeLanguage: typeof changeLanguage;
@@ -64,11 +57,7 @@ interface OwnProps {
 
 type Props = OwnProps & ReduxProps & RouteProps & DispatchProps;
 
-class SidebarContainer extends React.Component<Props, State> {
-    public state = {
-        isOpenLanguage: false,
-    };
-
+class SidebarContainer extends React.Component<Props> {
     public componentWillReceiveProps(nextProps: Props) {
         if (this.props.location.pathname !== nextProps.location.pathname && nextProps.isActive) {
             this.props.toggleSidebar(false);
@@ -76,36 +65,19 @@ class SidebarContainer extends React.Component<Props, State> {
     }
 
     public render() {
-        const { isLoggedIn, isActive, lang } = this.props;
-        const { isOpenLanguage } = this.state;
-
+        const { isLoggedIn, isActive } = this.props;
         const address = this.props.history.location ? this.props.history.location.pathname : '';
-        const languageName = lang.toUpperCase();
-
-        const languageClassName = classnames('dropdown-menu-language-field', {
-            'dropdown-menu-language-field-active': isOpenLanguage,
-        });
-
         const sidebarClassName = classnames('pg-sidebar-wrapper', {
-            'pg-sidebar-wrapper--active': isActive,
-            'pg-sidebar-wrapper--hidden': !isActive,
+            [s.sidebar]: true,
+            [s.sidebarActive]: isActive,
         });
 
         return (
             <div className={sidebarClassName}>
                 {this.renderProfileLink()}
-                <div className="pg-sidebar-wrapper-nav">{pgRoutes(isLoggedIn, CanCan.checkAbilityByAction('read', 'QuickExchange', this.props.abilities)).map(this.renderNavItems(address))}</div>
-                <div className="pg-sidebar-wrapper-lng">
-                    <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-menu-language-container">
-                        <Dropdown>
-                            <Dropdown.Toggle variant='outline-secondary' id={languageClassName} className="cr-row">
-                                <img src={this.getLanguageIcon(lang)} alt={lang} />
-                                <span className="dropdown-menu-language-selected">{languageName}</span>
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>{this.getLanguageDropdownItems()}</Dropdown.Menu>
-                        </Dropdown>
-                    </div>
-                </div>
+                {pgRoutes(isLoggedIn, CanCan.checkAbilityByAction('read', 'QuickExchange', this.props.abilities)).map(
+                    this.renderNavItems(address)
+                )}
                 {this.renderLogout()}
             </div>
         );
@@ -119,20 +91,17 @@ class SidebarContainer extends React.Component<Props, State> {
         const path = url.includes('/trading') && currentMarket ? `/trading/${currentMarket.id}` : url;
         const isActive = (url === '/trading/' && address.includes('/trading')) || address === url;
 
-        const iconClassName = classnames('pg-sidebar-wrapper-nav-item-img', {
-            'pg-sidebar-wrapper-nav-item-img--active': isActive,
-        });
-
         return (
-            <Link to={path} key={index} onClick={handleLinkChange} className={`${isActive && 'route-selected'}`}>
-                <div className="pg-sidebar-wrapper-nav-item">
-                    <div className="pg-sidebar-wrapper-nav-item-img-wrapper">
-                        <SidebarIcons className={iconClassName} name={img} />
-                    </div>
-                    <p className="pg-sidebar-wrapper-nav-item-text">
-                        <FormattedMessage id={name} />
-                    </p>
-                </div>
+            <Link
+                className={classnames(s.item, isActive && s.itemActive)}
+                key={index}
+                to={path}
+                onClick={handleLinkChange}
+            >
+                <span className={s.itemIcon}>
+                    <SidebarIcons name={img} />
+                </span>
+                <FormattedMessage id={name} />
             </Link>
         );
     };
@@ -143,83 +112,30 @@ class SidebarContainer extends React.Component<Props, State> {
         const address = location ? location.pathname : '';
         const isActive = address === '/profile';
 
-        const iconClassName = classnames('pg-sidebar-wrapper-nav-item-img', {
-            'pg-sidebar-wrapper-nav-item-img--active': isActive,
-        });
-
         return (
             isLoggedIn && (
-                <div className="pg-sidebar-wrapper-profile">
-                    <Link to="/profile" onClick={handleLinkChange} className={`${isActive && 'route-selected'}`}>
-                        <div className="pg-sidebar-wrapper-profile-link">
-                            <ProfileIcon className={iconClassName} />
-                            <p className="pg-sidebar-wrapper-profile-link-text">
-                                <FormattedMessage id={'page.header.navbar.profile'} />
-                            </p>
-                        </div>
-                    </Link>
-                </div>
+                <Link className={classnames(s.item, isActive && s.itemActive)} to="/profile" onClick={handleLinkChange}>
+                    <span className={s.itemIcon}>
+                        <ProfileIcon />
+                    </span>
+                    <FormattedMessage id={'page.header.navbar.profile'} />
+                </Link>
             )
         );
     };
 
     public renderLogout = () => {
         const { isLoggedIn } = this.props;
-        if (!isLoggedIn) {
-            return null;
-        }
-
         return (
-            <div className="pg-sidebar-wrapper-logout">
-                <div className="pg-sidebar-wrapper-logout-link" onClick={this.props.logoutFetch}>
-                    <LogoutIcon className="pg-sidebar-wrapper-logout-link-img" />
-                    <p className="pg-sidebar-wrapper-logout-link-text">
-                        <FormattedMessage id={'page.body.profile.content.action.logout'} />
-                    </p>
-                </div>
-            </div>
+            isLoggedIn && (
+                <button className={s.item} type="button" tabIndex={-1} onClick={this.props.logoutFetch}>
+                    <span className={s.itemIcon}>
+                        <LogoutIcon />
+                    </span>
+                    <FormattedMessage id={'page.body.profile.content.action.logout'} />
+                </button>
+            )
         );
-    };
-
-    public getLanguageDropdownItems = () => {
-        return languages.map((l: string, index: number) => (
-            <Dropdown.Item key={index} onClick={(e) => this.handleChangeLanguage(l)}>
-                <div className="dropdown-row">
-                    <img src={this.getLanguageIcon(l)} alt={l} />
-                    <span>{l.toUpperCase()}</span>
-                </div>
-            </Dropdown.Item>
-        ));
-    };
-
-    private getLanguageIcon = (name: string): string => {
-        if (name === 'ru') {
-            return ruIcon;
-        } else {
-            return enIcon;
-        }
-    };
-
-    private handleChangeLanguage = (language: string) => {
-        const { user, isLoggedIn } = this.props;
-
-        if (isLoggedIn) {
-            const data = user.data && JSON.parse(user.data);
-
-            if (data && data.language && data.language !== language) {
-                const payload = {
-                    ...user,
-                    data: JSON.stringify({
-                        ...data,
-                        language,
-                    }),
-                };
-
-                this.props.changeUserDataFetch({ user: payload });
-            }
-        }
-
-        this.props.changeLanguage(language);
     };
 }
 

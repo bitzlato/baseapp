@@ -11,7 +11,9 @@
 /src/charting_library
 /src/components
 # /src/constants
-/src/containers
+!/src/containers
+/src/containers/*
+!/src/containers/NavBar
 /src/custom
 /src/filters
 /src/helpers
