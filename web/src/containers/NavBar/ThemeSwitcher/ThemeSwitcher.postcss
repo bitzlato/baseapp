@@ -1,0 +1,43 @@
+.switchTheme {
+  align-items: center;
+  background: transparent;
+  border: 1px solid #535559;
+  border-radius: 4px;
+  display: flex;
+  height: 37px;
+  justify-content: space-around;
+  width: 78px;
+
+  &:hover {
+    border-color: #999;
+  }
+
+  :global(.light-mode) & {
+    border-color: #edf1fd;
+
+    &:hover {
+      border-color: #212473;
+    }
+  }
+}
+
+.sun svg {
+  fill: #ccc;
+
+  .switchTheme:hover & {
+    fill: #e5e5e5;
+  }
+
+  :global(.light-mode) &,
+  :global(.light-mode) .switchTheme:hover & {
+    fill: #fff;
+  }
+}
+
+.moon svg {
+  fill: #535559;
+
+  :global(.light-mode) & {
+    fill: #212473;
+  }
+}

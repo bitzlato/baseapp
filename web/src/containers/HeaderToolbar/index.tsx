@@ -2,6 +2,7 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import cn from 'classnames'
 import { IntlProps } from '../../';
 import { Decimal } from '../../components/Decimal';
 import {
@@ -12,6 +13,7 @@ import {
     selectMarketTickers, Ticker,
 } from '../../modules';
 
+import s from './HeaderToolbar.postcss'
 
 interface ReduxProps {
     currentMarket?: Market;
@@ -37,42 +39,42 @@ class HeaderToolbarContainer extends React.Component<Props> {
         return (
             <div className="pg-header__toolbar">
                 <div className="pg-header__toolbar-item">
-                    <p className="pg-header__toolbar-item-value pg-header__toolbar-item-value-positive">
+                    <p className={cn('pg-header__toolbar-item-value pg-header__toolbar-item-value-positive', s.itemValue)}>
                         {currentMarket && Decimal.format(Number(this.getTickerValue('low')), currentMarket.price_precision, ',')} {bidUnit}
                     </p>
-                    <p className="pg-header__toolbar-item-text">
+                    <p className={cn('pg-header__toolbar-item-text', s.itemText)}>
                         {this.translate('page.body.trade.toolBar.lowest')}
                     </p>
                 </div>
                 <div className="pg-header__toolbar-item">
-                    <p className="pg-header__toolbar-item-value pg-header__toolbar-item-value-negative">
+                    <p className={cn('pg-header__toolbar-item-value pg-header__toolbar-item-value-negative', s.itemValue)}>
                         {currentMarket && Decimal.format(Number(this.getTickerValue('last')), currentMarket.price_precision, ',')} {bidUnit}
                     </p>
-                    <p className="pg-header__toolbar-item-text">
+                    <p className={cn('pg-header__toolbar-item-text', s.itemText)}>
                         {this.translate('page.body.trade.toolBar.lastPrice')}
                     </p>
                 </div>
                 <div className="pg-header__toolbar-item">
-                    <p className="pg-header__toolbar-item-value pg-header__toolbar-item-value-negative">
+                    <p className={cn('pg-header__toolbar-item-value pg-header__toolbar-item-value-negative', s.itemValue)}>
                         {currentMarket && Decimal.format(Number(this.getTickerValue('high')), currentMarket.price_precision, ',')} {bidUnit}
                     </p>
-                    <p className="pg-header__toolbar-item-text">
+                    <p className={cn('pg-header__toolbar-item-text', s.itemText)}>
                         {this.translate('page.body.trade.toolBar.highest')}
                     </p>
                 </div>
                 <div className="pg-header__toolbar-item">
-                    <p className="pg-header__toolbar-item-value pg-header__toolbar-item-value-positive">
+                    <p className={cn('pg-header__toolbar-item-value pg-header__toolbar-item-value-positive', s.itemValue)}>
                         {currentMarket && Decimal.format(Number(this.getTickerValue('volume')), currentMarket.price_precision, ',')} {bidUnit}
                     </p>
-                    <p className="pg-header__toolbar-item-text">
+                    <p className={cn('pg-header__toolbar-item-text', s.itemText)}>
                         {this.translate('page.body.trade.toolBar.volume')}
                     </p>
                 </div>
                 <div className="pg-header__toolbar-item">
-                    <p className={`pg-header__toolbar-item-value pg-header__toolbar-item-value-${cls}`}>
+                    <p className={`pg-header__toolbar-item-value pg-header__toolbar-item-value-${cls} ${s.itemValue}`}>
                         {currentMarket && (marketTickers[currentMarket.id] || defaultTicker).price_change_percent}
                     </p>
-                    <p className="pg-header__toolbar-item-text">
+                    <p className={cn('pg-header__toolbar-item-text', s.itemText)}>
                         {this.translate('page.body.trade.toolBar.change')}
                     </p>
                 </div>

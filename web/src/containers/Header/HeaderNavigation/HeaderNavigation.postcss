@@ -1,0 +1,28 @@
+.navigation {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.item {
+  color: #999;
+  margin: 0 10px;
+
+  :global(.light-mode) & {
+    color: #333;
+  }
+
+  @media (--breakpoint-down-lg) {
+    display: none;
+  }
+
+  @media (--breakpoint-up-xl) {
+    margin: 0 30px;
+  }
+
+  &:hover {
+    color: #eebe13;
+    text-decoration: underline;
+  }
+}

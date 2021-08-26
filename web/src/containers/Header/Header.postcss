@@ -1,0 +1,25 @@
+.header {
+  font-size: 16px;
+
+  .headerContent {
+    height: 75px;
+    padding: 0 1%;
+
+    @media (--breakpoint-up-xl) {
+      padding: 0 2%;
+    }
+
+    @media (--breakpoint-up-xxl) {
+      padding: 0 4%;
+    }
+  }
+}
+
+.marketToogleValue {
+  color: #40454c;
+  font-size: 14px;
+
+  :global(.light-mode) & {
+    color: #333;
+  }
+}

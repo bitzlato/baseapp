@@ -4,6 +4,7 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import cn from 'classnames';
 import { IntlProps } from '../../';
 import { showLanding } from '../../api';
 import { Logo } from '../../components';
@@ -30,6 +31,8 @@ import arrowRightLight from './arrows/arrowRightLight.svg';
 
 import backIcon from './back.svg';
 import backLightIcon from './backLight.svg';
+import s from './Header.postcss'
+import { HeaderNavigation } from './HeaderNavigation/HeaderNavigation';
 
 interface ReduxProps {
     currentMarket: Market | undefined;
@@ -60,15 +63,15 @@ class Head extends React.Component<Props> {
         const { mobileWallet, location } = this.props;
         const tradingCls = location.pathname.includes('/trading') ? 'pg-container-trading' : '';
         const shouldRenderHeader =
-            !noHeaderRoutes.some((r) => location.pathname.includes(r)) && location.pathname !== '/';
+            !noHeaderRoutes.some((r) => location.pathname.includes(r));
 
         if (!shouldRenderHeader) {
             return <React.Fragment />;
         }
 
         return (
-            <header className={`pg-header`}>
-                <div className={`pg-container pg-header__content ${tradingCls}`}>
+            <header className={`pg-header ${s.header}`}>
+                <div className={`pg-container pg-header__content ${tradingCls} ${s.headerContent}`}>
                     <div
                         className={`pg-sidebar__toggler ${mobileWallet && 'pg-sidebar__toggler-mobile'}`}
                         onClick={this.openSidebar}>
@@ -86,7 +89,7 @@ class Head extends React.Component<Props> {
                     {this.renderMobileWalletNav()}
                     <div className="pg-header__navbar">
                         {this.renderMarketToolbar()}
-                        <NavBar onLinkChange={this.closeMenu} />
+                        <NavBar />
                     </div>
                 </div>
             </header>
@@ -120,12 +123,12 @@ class Head extends React.Component<Props> {
         const { currentMarket, marketSelectorOpened, colorTheme } = this.props;
         const isLight = colorTheme === 'light';
         if (!this.props.location.pathname.includes('/trading/')) {
-            return null;
+            return <HeaderNavigation />;
         }
 
         return (
             <div className="pg-header__market-selector-toggle" onClick={this.props.toggleMarketSelector}>
-                <p className="pg-header__market-selector-toggle-value">{currentMarket && currentMarket.name}</p>
+                <p className={cn("pg-header__market-selector-toggle-value", s.marketToogleValue)}>{currentMarket && currentMarket.name}</p>
                 {marketSelectorOpened ? (
                     <img src={isLight ? arrowBottomLight : arrowBottom} alt="arrow" />
                 ) : (
