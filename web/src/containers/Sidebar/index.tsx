@@ -28,7 +28,7 @@ import {
     AbilitiesInterface,
     User,
 } from '../../modules';
-import { CanCan } from '../'; 
+import { CanCan } from '../';
 
 import enIcon from 'src/assets/images/sidebar/en.svg';
 import ruIcon from 'src/assets/images/sidebar/ru.svg';
@@ -98,7 +98,7 @@ class SidebarContainer extends React.Component<Props, State> {
                 <div className="pg-sidebar-wrapper-lng">
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-menu-language-container">
                         <Dropdown>
-                            <Dropdown.Toggle variant="primary" id={languageClassName}>
+                            <Dropdown.Toggle variant='outline-secondary' id={languageClassName} className="cr-row">
                                 <img src={this.getLanguageIcon(lang)} alt={lang} />
                                 <span className="dropdown-menu-language-selected">{languageName}</span>
                             </Dropdown.Toggle>
