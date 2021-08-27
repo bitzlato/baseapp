@@ -122,6 +122,9 @@ const config = merge(commonConfig, {
                       target: `wss://${host}`,
                       changeOrigin: true,
                       ws: true,
+                      onProxyReqWs: (proxyReq, req, socket) => {
+                          socket.on('error', error => {});
+                      },
                   },
                   '/api': {
                       target: `https://${host}`,
