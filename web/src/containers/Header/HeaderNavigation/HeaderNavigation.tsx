@@ -18,7 +18,7 @@ export const HeaderNavigation: FC = () => {
     return (
         <div className={s.navigation}>
             {links.map(([id, link]) => (
-                <Link className={s.item} to={link}>
+                <Link key={id} className={s.item} to={link}>
                     {t(id)}
                 </Link>
             ))}
