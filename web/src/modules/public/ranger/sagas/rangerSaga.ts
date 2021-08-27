@@ -211,10 +211,10 @@ const initRanger = (
                             emitter(walletsAddressDataWS(event));
 
                             return;
-                        
+
                         // private
                         case 'error':
-                            emitter(alertPush({ message: event, type: 'error'}));
+                            emitter(alertPush({ message: [event], type: 'error'}));
                             return;
 
                         default:
