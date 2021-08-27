@@ -19,6 +19,7 @@
 /.env.local
 /.env
 env.js
+/.envrc
 
 # sonic
 bin/
