@@ -16,7 +16,7 @@ const config = merge(commonConfig, {
         new HotModuleReplacementPlugin(),
         new ForkTsCheckerWebpackPlugin({}),
         new HtmlWebpackPlugin({
-            template: path.resolve(rootDir, 'src/app/template_dev.html'),
+            template: path.resolve(rootDir, 'src/app/template.html'),
             hash: true,
             chunks: ['common', 'bundle', 'styles'],
             mock: process.env.MOCK,

@@ -4,14 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#000000">
-        <meta name="description" content="Baseapp crypto-currency trading platform" />
+        <meta name="description" content="Bitzlato crypto-currency trading platform" />
         <meta name="ui-version" content="%REACT_APP_GIT_SHA%"/>
-        <link rel="manifest" href="/manifest.json" async>
-        <link rel="shortcut icon" href="/favicon.ico" async>
-        <title>Cryptobase</title>
+        <link rel="icon" href="/favicon.ico" sizes="any">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="manifest" href="/manifest.json">
+        <title>Bitzlato</title>
     </head>
     <body>
-        <script src="/config/env.js"></script>
+        <% if (htmlWebpackPlugin.options.mock) { %>
+            <script src="/config.js"></script>
+        <% } else { %>
+            <script src="/config/env.js"></script>
+        <% } %>
         <noscript>
             You need to enable JavaScript to run this app.
         </noscript>
