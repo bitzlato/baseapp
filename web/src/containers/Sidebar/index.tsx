@@ -28,7 +28,7 @@ import {
 } from '../../modules';
 import { CanCan } from '../';
 
-import s from './Sidebar.postcss'
+import s from './Sidebar.postcss';
 
 interface DispatchProps {
     changeLanguage: typeof changeLanguage;
@@ -58,10 +58,24 @@ interface OwnProps {
 type Props = OwnProps & ReduxProps & RouteProps & DispatchProps;
 
 class SidebarContainer extends React.Component<Props> {
+    private elementRef = React.createRef<HTMLDivElement>();
+
     public componentWillReceiveProps(nextProps: Props) {
         if (this.props.location.pathname !== nextProps.location.pathname && nextProps.isActive) {
             this.props.toggleSidebar(false);
         }
+    }
+
+    public componentDidMount() {
+        document.addEventListener('mousedown', this.handleOutsideClick);
+        document.addEventListener('touchstart', this.handleOutsideClick);
+        window.addEventListener('keydown', this.handleEscapeKeyDown);
+    }
+
+    public componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleOutsideClick);
+        document.removeEventListener('touchstart', this.handleOutsideClick);
+        window.removeEventListener('keydown', this.handleEscapeKeyDown);
     }
 
     public render() {
@@ -73,7 +87,7 @@ class SidebarContainer extends React.Component<Props> {
         });
 
         return (
-            <div className={sidebarClassName}>
+            <div className={sidebarClassName} ref={this.elementRef}>
                 {this.renderProfileLink()}
                 {pgRoutes(isLoggedIn, CanCan.checkAbilityByAction('read', 'QuickExchange', this.props.abilities)).map(
                     this.renderNavItems(address)
@@ -136,6 +150,31 @@ class SidebarContainer extends React.Component<Props> {
                 </button>
             )
         );
+    };
+
+    private handleOutsideClick = (event: MouseEvent | TouchEvent) => {
+        const { isActive, toggleSidebar } = this.props;
+
+        if (isActive) {
+            const target = event.target as HTMLElement;
+            if (
+                !this.elementRef.current ||
+                this.elementRef.current.contains(target) ||
+                target.className.includes('pg-sidebar__toggler')
+            ) {
+                return;
+            }
+
+            toggleSidebar(false);
+        }
+    };
+
+    private handleEscapeKeyDown = (event: KeyboardEvent) => {
+        const { isActive, toggleSidebar } = this.props;
+
+        if (event.key === 'Escape' && isActive) {
+            toggleSidebar(false);
+        }
     };
 }
 
