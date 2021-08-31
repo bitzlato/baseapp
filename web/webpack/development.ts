@@ -111,7 +111,9 @@ const config = merge(commonConfig, {
                       target: `wss://${host}`,
                       changeOrigin: true,
                       ws: true,
-                      onProxyReqWs: (proxyReq, req, socket) => {
+                      onProxyReqWs: (proxyReq, _, socket) => {
+                          proxyReq.removeHeader('origin');
+                          proxyReq.setHeader('origin', `https://${host}`);
                           socket.on('error', error => {});
                       },
                   },
