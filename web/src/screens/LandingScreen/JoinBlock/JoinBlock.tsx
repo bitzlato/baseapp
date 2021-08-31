@@ -12,16 +12,8 @@ export const JoinBlock: FC = () => {
         <div className={s.join}>
             <LandingContainer className={s.container}>
                 <div className={s.body}>
-                    <h2 className={s.title}>
-                        {/* TODO: add translate t('page.body.landing.register.item.title') */}
-                        Независимо от вашего уровня опыта
-                    </h2>
-                    <p className={s.text}>
-                        {/* TODO: add translate t('page.body.landing.register.item.text') */}
-                        Предлагаем интуитивно понятный интерфейс с книгами заказов в реальном времени, инструментами
-                        построения графиков, историей торговли и простым процессом заказа, поэтому вы можете торговать с
-                        первого дня
-                    </p>
+                    <h2 className={s.title}>{t('page.body.landing.register.item.title')}</h2>
+                    <p className={s.text}>{t('page.body.landing.register.item.text')}</p>
                     <LandingLink to="/trading">{t('page.body.landing.marketInfo.title.button')}</LandingLink>
                 </div>
                 <div className={s.image} />
