@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 set :stage, :production
+set :user, 'baseapp'
 set :public_url, 'https://market.bitzlato.bz/'
 set :build_domain, 'market.bitzlato.bz'
 

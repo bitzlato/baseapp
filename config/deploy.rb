@@ -12,6 +12,8 @@ set :keep_releases, 10
 
 set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}" }
 
+set :tmp_dir, -> { '/tmp/baseapp_tmp' }
+
 set :disallow_pushing, true
 
 set :db_dump_extra_opts, '--force'
@@ -27,8 +29,8 @@ else
   ask(:branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp })
 end
 
-set :rbenv_type, :user
-set :rbenv_ruby, File.read('.ruby-version').strip
+# set :rbenv_type, :user
+# set :rbenv_ruby, File.read('.ruby-version').strip
 
 set :conditionally_migrate, true # Only attempt migration if db/migrate changed - not related to Webpacker, but a nice thing
 
