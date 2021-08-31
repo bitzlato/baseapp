@@ -15,6 +15,7 @@ const BUILD_DIR = path.resolve(rootDir, 'build');
 import commonConfig from './common';
 import { extractSemver } from './semver';
 
+const HASH = Math.round(Date.now() / 1000).toString();
 const domain = process.env.BUILD_DOMAIN ? process.env.BUILD_DOMAIN.split(',') : [];
 const appVersion = extractSemver(readFileSync('../.semver').toString());
 
@@ -24,7 +25,8 @@ const plugins = [
         BUILD_EXPIRE: null,
         REACT_APP_BUGSNAG_KEY: null,
         REACT_APP_BUGSNAG_VERSION: appVersion,
-        REACT_APP_BUGSNAG_RELEASE_STAGE: 'development'
+        REACT_APP_BUGSNAG_RELEASE_STAGE: 'development',
+        HASH
     }),
     new OptimizeCssAssetsPlugin({
         assetNameRegExp: /\.css$/g,

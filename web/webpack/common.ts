@@ -22,7 +22,7 @@ const config: webpack.Configuration = {
     },
     plugins: [
         new webpack.EnvironmentPlugin({
-            envType: 'dev',
+            MOCK: false,
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(rootDir, 'src/app/template.html'),

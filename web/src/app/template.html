@@ -13,10 +13,10 @@
         <title>Bitzlato</title>
     </head>
     <body>
-        <% if (htmlWebpackPlugin.options.mock) { %>
+        <% if (process.env.MOCK) { %>
             <script src="/config.js"></script>
         <% } else { %>
-            <script src="/config/env.js"></script>
+            <script src="/config/env.js?<%= process.env.HASH %>"></script>
         <% } %>
         <noscript>
             You need to enable JavaScript to run this app.
