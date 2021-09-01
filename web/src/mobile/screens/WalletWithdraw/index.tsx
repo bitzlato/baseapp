@@ -8,7 +8,7 @@ import { selectWallets } from '../../../modules/user/wallets';
 import { Subheader, WalletBanner, WalletHeader, WalletWithdrawBody } from '../../components';
 
 
-const defaultWallet = { name: '', currency: '', balance: '', type: '', address: '', fee: '' };
+const defaultWallet = { name: '', currency: '', balance: '', type: '', address: '', fee: '', icon_id: '' };
 
 const WalletWithdraw: React.FC = () => {
     const { currency = '' } = useParams();
@@ -27,7 +27,7 @@ const WalletWithdraw: React.FC = () => {
                 backTitle={intl.formatMessage({ id: 'page.body.wallets.balance' })}
                 onGoBack={() => history.push(`/wallets/${currency}/history`)}
             />
-            <WalletHeader currency={wallet.currency} name={wallet.name}/>
+            <WalletHeader currency={wallet.currency} iconId={wallet.icon_id} name={wallet.name}/>
             <WalletBanner wallet={wallet} />
             <WalletWithdrawBody wallet={wallet}/>
         </div>

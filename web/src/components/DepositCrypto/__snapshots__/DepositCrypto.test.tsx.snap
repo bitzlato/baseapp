@@ -42,6 +42,7 @@ exports[`DepositCrypto should match snapshot 1`] = `
         "currency": "eth",
         "fee": 0,
         "fixed": 0,
+        "icon_id": "eth",
         "name": "",
         "type": "coin",
       }

@@ -14,6 +14,7 @@ describe('DepositCrypto', () => {
     const handleGenerateAddress = jest.fn();
     const wallet: Wallet = {
         currency: 'eth',
+        icon_id: 'eth',
         name: '',
         fixed: 0,
         type: 'coin',

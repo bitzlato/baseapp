@@ -35,6 +35,7 @@ const WalletDeposit: React.FC = () => {
         type: 'coin',
         fixed: 0,
         fee: 0,
+        icon_id: '',
     };
 
     const wallet: Wallet = wallets.find(item => item.currency === currency) || defaultWallet;
@@ -53,7 +54,7 @@ const WalletDeposit: React.FC = () => {
                 backTitle={intl.formatMessage({ id: 'page.body.wallets.balance' })}
                 onGoBack={() => history.push(`/wallets/${currency}/history`)}
             />
-            <WalletHeader currency={wallet.currency} name={wallet.name}/>
+            <WalletHeader currency={wallet.currency} iconId={wallet.icon_id} name={wallet.name}/>
             <WalletDepositBody
                 wallet={wallet}
                 handleGenerateAddress={handleGenerateAddress}

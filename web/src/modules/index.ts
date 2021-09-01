@@ -57,6 +57,7 @@ export * from './public/markets';
 export * from './public/memberLevels';
 export * from './public/orderBook';
 export * from './public/recentTrades';
+export * from './public/accounts/types';
 export * from './user/apiKeys';
 export * from './user/auth';
 export * from './user/beneficiaries';

@@ -31,7 +31,7 @@ const CurrencyInfo: React.FunctionComponent<CurrencyInfoProps> = (props: Currenc
 
     return (
         <div className="cr-wallet-item__single">
-            <CurrencyIcon icon={iconUrl} currency={currency}/>
+            <CurrencyIcon icon={iconUrl} currency={props.wallet.icon_id}/>
             <div className="cr-wallet-item__single-balance">
                 <div>
                     <div className="cr-wallet-item__amount-locked">

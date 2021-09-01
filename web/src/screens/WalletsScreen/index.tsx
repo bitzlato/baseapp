@@ -96,6 +96,7 @@ const defaultWallet: Wallet = {
     type: 'coin',
     fixed: 0,
     fee: 0,
+    icon_id: '',
 };
 
 interface WalletsState {
