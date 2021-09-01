@@ -27,7 +27,7 @@ export interface ToggleMobileDeviceAction {
 
 export interface ToggleSidebarAction {
     type: string;
-    payload: boolean;
+    payload?: boolean;
 }
 
 export interface TriggerApplyWindowEnvs {
@@ -60,7 +60,7 @@ export const setMobileDevice = (payload: boolean): ToggleMobileDeviceAction => (
     payload,
 });
 
-export const toggleSidebar = (payload: boolean): ToggleSidebarAction => ({
+export const toggleSidebar = (payload?: boolean): ToggleSidebarAction => ({
     type: TOGGLE_SIDEBAR,
     payload,
 });

@@ -57,7 +57,7 @@ export const changeColorThemeReducer = (state = initialChangeColorThemeState, ac
         case TOGGLE_SIDEBAR:
             return {
                 ...state,
-                sideBarActive: action.payload,
+                sideBarActive: action.payload ?? !state.sideBarActive,
                 marketSelectorActive: false,
             };
         case TRIGGER_APPLY_WINDOW_ENVS:

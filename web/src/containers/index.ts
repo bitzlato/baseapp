@@ -25,7 +25,6 @@ export * from './ProfileTwoFactorAuth';
 export * from './ProfileVerification';
 export * from './RecentTrades';
 export * from './ReferralProgram';
-export * from './Sidebar';
 export * from './ToolBar';
 export * from './TradingChart';
 export * from './WalletsFetch';
