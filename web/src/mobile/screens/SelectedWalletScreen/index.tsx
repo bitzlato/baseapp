@@ -13,7 +13,7 @@ const SelectedWalletMobileScreen = ()  =>  {
     const history = useHistory();
     const wallets = useSelector(selectWallets) || [];
 
-    const wallet = wallets.find(item => item.currency === currency) || { name: '', currency: '' };
+    const wallet = wallets.find(item => item.currency === currency) || { name: '', currency: '', icon_id: '' };
 
     useWalletsFetch();
 
@@ -24,7 +24,7 @@ const SelectedWalletMobileScreen = ()  =>  {
                 backTitle={intl.formatMessage({ id: 'page.mobile.wallets.title' })}
                 onGoBack={() => history.push('/wallets')}
             />
-            <WalletHeader currency={wallet.currency} name={wallet.name}/>
+            <WalletHeader currency={wallet.currency} iconId={wallet.icon_id} name={wallet.name}/>
             <WalletBanner wallet={wallet}/>
             <WalletsHistory />
             <WalletsButtons currency={wallet.currency} />

@@ -4,7 +4,7 @@ export interface Currency {
     symbol: string;
     explorer_transaction: string;
     explorer_address: string;
-    type: string;
+    type: 'fiat' | 'coin';
     deposit_fee: string;
     min_confirmations: number;
     min_deposit_amount: string;
@@ -17,4 +17,5 @@ export interface Currency {
     base_factor: number;
     precision: number;
     icon_url: string;
+    icon_id: string;
 }

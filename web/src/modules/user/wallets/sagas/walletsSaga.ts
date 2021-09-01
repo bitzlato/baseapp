@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { Account, Currency, sendError, Wallet } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import { walletsData, walletsError, WalletsFetch } from '../actions';
 
@@ -13,10 +13,10 @@ const currenciesOptions: RequestOptions = {
 
 export function* walletsSaga(action: WalletsFetch) {
     try {
-        const accounts = yield call(API.get(walletsOptions), '/account/balances');
-        const currencies = yield call(API.get(currenciesOptions), '/public/currencies');
+        const accounts: Account[] = yield call(API.get(walletsOptions), '/account/balances');
+        const currencies: Currency[] = yield call(API.get(currenciesOptions), '/public/currencies');
 
-        const accountsByCurrencies = currencies.map(currency => {
+        const accountsByCurrencies = currencies.map<Wallet>(currency => {
             let walletInfo = accounts.find(wallet => wallet.currency === currency.id);
 
             if (!walletInfo) {
@@ -30,10 +30,11 @@ export function* walletsSaga(action: WalletsFetch) {
                 name: currency?.name,
                 explorerTransaction: currency?.explorer_transaction,
                 explorerAddress: currency?.explorer_address,
-                fee: currency?.withdraw_fee,
+                fee: Number(currency?.withdraw_fee),
                 type: currency?.type,
                 fixed: currency?.precision,
                 iconUrl: currency?.icon_url,
+                icon_id: currency.icon_id
             });
         });
 

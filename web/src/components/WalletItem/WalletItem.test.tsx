@@ -15,6 +15,7 @@ describe('WalletItem #render', () => {
         const wrapper = setup({
             address: 'aevrv',
             currency: 'BTC',
+            icon_id: 'BTC',
             name: 'Bitcoin',
             balance: '45',
             locked: '3',
@@ -30,6 +31,7 @@ describe('WalletItem #render', () => {
         const wrapper = setup({
             address: 'aevrv',
             currency: 'BTC',
+            icon_id: 'BTC',
             name: 'Bitcoin',
             balance: '45',
             locked: '3',
@@ -45,6 +47,7 @@ describe('WalletItem #render', () => {
         const wrapper = setup({
             address: 'aevrv',
             currency: 'BTC',
+            icon_id: 'BTC',
             name: 'Bitcoin',
             balance: '45',
             locked: '3',
@@ -61,6 +64,7 @@ describe('WalletItem #render', () => {
         const wrapper = setup({
             address: 'aevrv',
             currency: 'BTC',
+            icon_id: 'BTC',
             name: 'Bitcoin',
             balance: '45',
             locked: '3',
@@ -78,6 +82,7 @@ describe('WalletItem #render', () => {
         const wrapper = setup({
             address: 'aevrv',
             currency: 'BTC',
+            icon_id: 'BTC',
             name: 'Bitcoin',
             balance: '45',
             locked: '',
@@ -93,6 +98,7 @@ describe('WalletItem #render', () => {
         const wrapper = setup({
             address: 'aevrv',
             currency: 'BTC',
+            icon_id: 'BTC',
             name: 'Bitcoin',
             balance: '45',
             locked: '3',

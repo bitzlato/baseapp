@@ -12,6 +12,7 @@ export interface Wallet {
     deposit_address?: WalletAddress;
     active?: boolean;
     enable_invoice?: boolean;
+    icon_id: string;
 }
 export interface WalletAddress {
     address: string;
