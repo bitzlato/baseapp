@@ -156,7 +156,7 @@ export const en = {
     'page.body.landing.tradeOnTheGo.item.text1': 'Our platform is optimized for trading on any device.',
     'page.body.landing.tradeOnTheGo.item.text2': 'And you don’t need to download any additional applications.',
     'page.body.landing.tradeOnTheGo.item.text3':
-        'All the power of Baseapp cryptocurrency exchange, in the palm of your hand.',
+        'All the power of Bitzlato cryptocurrency exchange, in the palm of your hand.',
     'page.body.landing.tradeOnTheGo.item.button': 'let’s try',
 
     'page.body.landing.startTrading.title': 'Start trading now',
@@ -172,7 +172,7 @@ export const en = {
     'page.body.landing.footer.about': 'About us',
     'page.body.landing.footer.community': 'Community',
     'page.body.landing.footer.info': 'Info',
-    'page.body.landing.footer.rights': 'Baseapp © All rights reserved.',
+    'page.body.landing.footer.rights': 'Bitzlato © All rights reserved.',
 
     'pagy.body.footer.powered_by': 'Powered by',
 
