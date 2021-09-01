@@ -49,7 +49,6 @@ const CustomizationContainer = React.lazy(() =>
     import('./containers/Customization').then(({ Customization }) => ({ default: Customization }))
 );
 const HeaderContainer = React.lazy(() => import('./containers/Header').then(({ Header }) => ({ default: Header })));
-const SidebarContainer = React.lazy(() => import('./containers/Sidebar').then(({ Sidebar }) => ({ default: Sidebar })));
 const LayoutContainer = React.lazy(() => import('./routes').then(({ Layout }) => ({ default: Layout })));
 const FooterContainer = React.lazy(() => import('./containers/Footer/Footer').then(({ Footer }) => ({ default: Footer })));
 
@@ -71,7 +70,6 @@ const RenderDeviceContainers = () => {
         return (
             <React.Fragment>
                 <HeaderContainer />
-                <SidebarContainer />
                 <CustomizationContainer />
                 <AlertsContainer />
                 <LayoutContainer />

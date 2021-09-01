@@ -7,7 +7,9 @@
 
 /src/api
 /src/app
-/src/assets
+!/src/assets
+/src/assets/*
+!/src/assets/icons
 /src/charting_library
 /src/components
 # /src/constants
@@ -17,6 +19,7 @@
 !/src/containers/Header
 /src/containers/Header/*
 !/src/containers/Header/HeaderNavigation
+!/src/containers/Sidebar
 /src/custom
 /src/filters
 /src/helpers

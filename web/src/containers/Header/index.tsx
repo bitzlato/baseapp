@@ -5,6 +5,7 @@ import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import cn from 'classnames';
+import { Sidebar } from 'src/containers/Sidebar/Sidebar';
 import { IntlProps } from '../../';
 import { showLanding } from '../../api';
 import { Logo } from '../../components';
@@ -72,13 +73,7 @@ class Head extends React.Component<Props> {
         return (
             <header className={`pg-header ${s.header}`}>
                 <div className={`pg-container pg-header__content ${tradingCls} ${s.headerContent}`}>
-                    <div
-                        className={`pg-sidebar__toggler ${mobileWallet && 'pg-sidebar__toggler-mobile'}`}
-                        onClick={this.openSidebar}>
-                        <span className="pg-sidebar__toggler-item" />
-                        <span className="pg-sidebar__toggler-item" />
-                        <span className="pg-sidebar__toggler-item" />
-                    </div>
+                    <Sidebar />
                     <div onClick={(e) => this.redirectToLanding()} className="pg-header__logo">
                         <Logo />
                     </div>
