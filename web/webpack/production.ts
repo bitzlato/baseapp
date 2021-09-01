@@ -7,7 +7,7 @@ import { readFileSync } from 'fs';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import JavaScriptObfuscator from 'webpack-obfuscator';
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-import { BugsnagBuildReporterPlugin } from 'webpack-bugsnag-plugins';
+import { BugsnagSourceMapUploaderPlugin } from 'webpack-bugsnag-plugins';
 
 const rootDir = path.resolve(__dirname, '..');
 const BUILD_DIR = path.resolve(rootDir, 'build');
@@ -48,10 +48,10 @@ if (process.env.ANALYZE === '1') {
 
 if (process.env.REACT_APP_BUGSNAG_KEY) {
     plugins.push(
-        new BugsnagBuildReporterPlugin({
+        new BugsnagSourceMapUploaderPlugin({
             apiKey: process.env.REACT_APP_BUGSNAG_KEY,
-            releaseStage: process.env.REACT_APP_BUGSNAG_RELEASE_STAGE,
             appVersion,
+            overwrite: true,
         })
     );
 }
