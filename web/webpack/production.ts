@@ -26,7 +26,7 @@ const plugins = [
         REACT_APP_BUGSNAG_KEY: null,
         REACT_APP_BUGSNAG_VERSION: appVersion,
         REACT_APP_BUGSNAG_RELEASE_STAGE: 'development',
-        HASH
+        HASH,
     }),
     new OptimizeCssAssetsPlugin({
         assetNameRegExp: /\.css$/g,
@@ -50,6 +50,7 @@ if (process.env.REACT_APP_BUGSNAG_KEY) {
     plugins.push(
         new BugsnagBuildReporterPlugin({
             apiKey: process.env.REACT_APP_BUGSNAG_KEY,
+            releaseStage: process.env.REACT_APP_BUGSNAG_RELEASE_STAGE,
             appVersion,
         })
     );
