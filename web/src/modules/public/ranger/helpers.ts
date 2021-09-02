@@ -1,9 +1,15 @@
-import { isFinexEnabled } from '../../../api';
+import { isFinexEnabled, isWsApiEnabled } from '../../../api';
 import { DEFAULT_TRADING_VIEW_INTERVAL } from '../../../constants';
 import { Market, Ticker, TickerEvent } from '../markets';
 import { marketStreams } from './actions';
 
-export const generateSocketURI = (baseUrl: string, s: string[]) => `${baseUrl}/?stream=${s.sort().join('&stream=')}`;
+export const generateSocketURI = (baseUrl: string, s: string[]) => {
+    let uri = `${baseUrl}/?stream=${s.sort().join('&stream=')}`;
+    if (isWsApiEnabled()) {
+        uri += '&cancel_on_close=1';
+    }
+    return uri;
+};
 
 export const formatTicker = (events: { [pair: string]: TickerEvent }): { [pair: string]: Ticker } => {
     const tickers = {};
