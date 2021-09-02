@@ -4151,8 +4151,8 @@ cryptocoins-icons@^2.8.0:
   integrity sha512-bfhtws/Hs4YOv7GXrCQfZ9yzgVLqkJsFzgsTFVFBY/D1qPIICQI0UjcoFxea8dlBlwerxNu3Shp0T0ucBLHwng==
 
 "cryptocurrency-icons@https://github.com/bitzlato/cryptocurrency-icons.git":
-  version "0.17.2"
-  resolved "https://github.com/bitzlato/cryptocurrency-icons.git#010b3bfcfe10168ca3afdcaa45e6e0143ce09d2b"
+  version "0.18.0"
+  resolved "https://github.com/bitzlato/cryptocurrency-icons.git#2844c0e213547fcbcaaac9dd51474cec3a102304"
 
 css-blank-pseudo@^0.1.4:
   version "0.1.4"
