@@ -952,6 +952,7 @@ exports[`Markets should render empty data 1`] = `
         "page.body.trade.toolBar.volume": "24h Volume",
         "page.body.wallets.balance": "Balance",
         "page.body.wallets.beneficiaries.addAddress": "Add Address",
+        "page.body.wallets.beneficiaries.addAddressModal.body.bitzlatoAddress": "Bitzlato Public Name",
         "page.body.wallets.beneficiaries.addAddressModal.body.button": "Submit for confirmation",
         "page.body.wallets.beneficiaries.addAddressModal.body.coinAddress": "Blockchain Address",
         "page.body.wallets.beneficiaries.addAddressModal.body.coinBeneficiaryName": "Beneficiary Name",

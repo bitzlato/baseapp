@@ -254,6 +254,7 @@ export const en = {
     'page.body.wallets.beneficiaries.addAddressModal.header': 'Add new withdrawal address',
 
     'page.body.wallets.beneficiaries.addAddressModal.body.coinAddress': 'Blockchain Address',
+    'page.body.wallets.beneficiaries.addAddressModal.body.bitzlatoAddress': 'Bitzlato Public Name',
     'page.body.wallets.beneficiaries.addAddressModal.body.invalidAddress': 'Invalid Address',
     'page.body.wallets.beneficiaries.addAddressModal.body.testnetAddress': 'WARNING! This is testnet address',
     'page.body.wallets.beneficiaries.addAddressModal.body.coinBeneficiaryName': 'Beneficiary Name',

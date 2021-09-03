@@ -31,6 +31,7 @@ import { BeneficiariesFailAddModal } from './BeneficiariesFailAddModal';
 interface OwnProps {
     currency: string;
     type: 'fiat' | 'coin';
+    enableInvoice?: boolean;
     onChangeValue: (beneficiary: Beneficiary) => void;
 }
 
@@ -54,7 +55,7 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
     const [isOpenTip, setTipState] = React.useState(false);
     const [isOpenDropdown, setDropdownState] = React.useState(false);
 
-    const { currency, type, onChangeValue } = props;
+    const { currency, type, onChangeValue, enableInvoice } = props;
 
     const { formatMessage } = useIntl();
     const dispatch = useDispatch();
@@ -397,10 +398,11 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
             <BeneficiariesAddModal
                 currency={currency}
                 type={type}
+                enableInvoice={enableInvoice}
                 handleToggleAddAddressModal={() => setAddressModalState(false)}
             />
         );
-    }, [currency, type]);
+    }, [currency, type, enableInvoice]);
 
     const renderActivateModal = React.useMemo(() => {
         return (
