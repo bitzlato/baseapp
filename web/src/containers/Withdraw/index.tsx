@@ -17,6 +17,7 @@ export interface WithdrawProps {
     fixed: number;
     className?: string;
     type: 'fiat' | 'coin';
+    enableInvoice?: boolean;
     twoFactorAuthRequired?: boolean;
     withdrawAmountLabel?: string;
     withdraw2faLabel?: string;
@@ -80,6 +81,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
             className,
             currency,
             type,
+            enableInvoice,
             twoFactorAuthRequired,
             withdrawAmountLabel,
             withdrawFeeLabel,
@@ -105,6 +107,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
                         <Beneficiaries
                             currency={currency}
                             type={type}
+                            enableInvoice={enableInvoice}
                             onChangeValue={this.handleChangeBeneficiary}
                         />
                     </div>

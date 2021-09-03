@@ -17,6 +17,7 @@ import { CustomInput } from '../CustomInput';
 interface Props {
     currency: string;
     type: 'fiat' | 'coin';
+    enableInvoice?: boolean;
     handleToggleAddAddressModal: () => void;
 }
 
@@ -47,7 +48,7 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
     const [fiatIntermediaryBankNameFocused, setFiatIntermediaryBankNameFocused] = React.useState(false);
     const [fiatIntermediaryBankSwiftCodeFocused, setFiatIntermediaryBankSwiftCodeFocused] = React.useState(false);
 
-    const { type, handleToggleAddAddressModal, currency } = props;
+    const { type, handleToggleAddAddressModal, currency, enableInvoice } = props;
     const { formatMessage } = useIntl();
     const dispatch = useDispatch();
 
@@ -348,7 +349,10 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
 
         return (
             <div className="cr-email-form__form-content">
-                {renderAddAddressModalBodyItem('coinAddress')}
+                {enableInvoice
+                    ? renderAddAddressModalBodyItem('bitzlatoAddress')
+                    : renderAddAddressModalBodyItem('coinAddress')
+                }
                 {!coinAddressValid && !coinTestnetAddressValid && coinAddress && renderInvalidAddressMessage}
                 {!coinAddressValid && coinTestnetAddressValid && coinAddress && renderTestnetAddressMessage}
                 {renderAddAddressModalBodyItem('coinBeneficiaryName')}

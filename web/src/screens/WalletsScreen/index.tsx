@@ -496,7 +496,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         }
         const { user: { level, otp }, wallets } = this.props;
         const wallet = wallets[selectedWalletIndex];
-        const { currency, fee, type } = wallet;
+        const { currency, fee, type, enable_invoice } = wallet;
         const fixed = (wallet || { fixed: 0 }).fixed;
 
         const withdrawProps: WithdrawProps = {
@@ -507,6 +507,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             twoFactorAuthRequired: this.isTwoFactorAuthRequired(level, otp),
             fixed,
             type,
+            enableInvoice: enable_invoice,
             withdrawAmountLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.amount' }),
             withdraw2faLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' }),
             withdrawFeeLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.fee' }),
