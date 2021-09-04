@@ -5,7 +5,6 @@ import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import path from 'path';
 import { readFileSync } from 'fs';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import JavaScriptObfuscator from 'webpack-obfuscator';
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 import { BugsnagSourceMapUploaderPlugin } from 'webpack-bugsnag-plugins';
 
@@ -39,7 +38,6 @@ const plugins = [
     new CopyWebpackPlugin({
         patterns: [{ from: 'public' }],
     }),
-    new JavaScriptObfuscator({ rotateUnicodeArray: true, domainLock: domain }),
 ];
 
 if (process.env.ANALYZE === '1') {
