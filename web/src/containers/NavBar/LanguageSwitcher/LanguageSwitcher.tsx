@@ -55,7 +55,7 @@ export const LanguageSwitcher: FC = () => {
     return (
         <Dropdown>
             <Dropdown.Toggle as="span" className={s.language}>
-                {currentLanguage}
+                {currentCode}
             </Dropdown.Toggle>
             <Dropdown.Menu className={s.menu} align="right">
                 {languages.map((code: string) => {

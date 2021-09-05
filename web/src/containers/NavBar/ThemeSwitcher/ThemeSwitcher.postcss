@@ -1,7 +1,23 @@
+:root {
+  --theme-switcher-border: rgb(83, 85, 89);
+  --theme-switcher-border-hover: rgb(153, 153, 153);
+  --theme-switcher-sun-fill: rgb(204, 204, 204);
+  --theme-switcher-sun-fill-hover: rgb(229, 229, 229);
+  --theme-switcher-moon-fill: rgb(83, 85, 89);
+}
+
+:global(.light-mode) {
+  --theme-switcher-border: rgb(237, 241, 253);
+  --theme-switcher-border-hover: rgb(var(--rgb-brand-dark-blue));
+  --theme-switcher-sun-fill: rgb(255, 255, 255);
+  --theme-switcher-sun-fill-hover: rgb(255, 255, 255);
+  --theme-switcher-moon-fill: rgb(var(--rgb-brand-dark-blue));
+}
+
 .switchTheme {
   align-items: center;
   background: transparent;
-  border: 1px solid #535559;
+  border: 1px solid var(--theme-switcher-border);
   border-radius: 4px;
   display: flex;
   height: 37px;
@@ -9,35 +25,18 @@
   width: 78px;
 
   &:hover {
-    border-color: #999;
-  }
-
-  :global(.light-mode) & {
-    border-color: #edf1fd;
-
-    &:hover {
-      border-color: #212473;
-    }
+    border-color: var(--theme-switcher-border-hover);
   }
 }
 
 .sun svg {
-  fill: #ccc;
+  fill: var(--theme-switcher-sun-fill);
 
-  .switchTheme:hover & {
-    fill: #e5e5e5;
-  }
-
-  :global(.light-mode) &,
-  :global(.light-mode) .switchTheme:hover & {
-    fill: #fff;
+  & .switchTheme:hover & {
+    fill: var(--theme-switcher-sun-fill-hover);
   }
 }
 
 .moon svg {
-  fill: #535559;
-
-  :global(.light-mode) & {
-    fill: #212473;
-  }
+  fill: var(--theme-switcher-moon-fill);
 }
