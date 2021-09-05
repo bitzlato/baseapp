@@ -39,7 +39,11 @@ export const Sidebar: FC = () => {
     const handleTogglerClick = () => {
         dispatch(toggleSidebar());
     };
+    const handleItemClick = () => {
+        dispatch(toggleSidebar(false));
+    };
     const handleLogoutClick = () => {
+        handleItemClick();
         dispatch(logoutFetch());
     };
 
@@ -48,36 +52,36 @@ export const Sidebar: FC = () => {
             <SidebarToggler onClick={handleTogglerClick} />
             <div className={cn(s.sidebar, isOpen && s.sidebarOpen)}>
                 {isLoggedIn ? (
-                    <SidebarItem to="/profile" icon={<ProfileIcon />}>
+                    <SidebarItem to="/profile" icon={<ProfileIcon />} onClick={handleItemClick}>
                         {t('page.header.navbar.profile')}
                     </SidebarItem>
                 ) : (
                     <>
-                        <SidebarItem to="/signin" icon={<ProfileIcon />}>
+                        <SidebarItem to="/signin" icon={<ProfileIcon />} onClick={handleItemClick}>
                             {t('page.header.navbar.signIn')}
                         </SidebarItem>
-                        <SidebarItem to="/signup" icon={<SignupIcon />}>
+                        <SidebarItem to="/signup" icon={<SignupIcon />} onClick={handleItemClick}>
                             {t('page.header.signUp')}
                         </SidebarItem>
                     </>
                 )}
-                <SidebarItem to="/trading" icon={<TrandingIcon />}>
+                <SidebarItem to="/trading" icon={<TrandingIcon />} onClick={handleItemClick}>
                     {t('page.header.navbar.trade')}
                 </SidebarItem>
                 {isLoggedIn && (
                     <>
-                        <SidebarItem to="/wallets" icon={<WalletsIcon />}>
+                        <SidebarItem to="/wallets" icon={<WalletsIcon />} onClick={handleItemClick}>
                             {t('page.header.navbar.wallets')}
                         </SidebarItem>
-                        <SidebarItem to="/openOrders" icon={<OrdersIcon />}>
+                        <SidebarItem to="/openOrders" icon={<OrdersIcon />} onClick={handleItemClick}>
                             {t('page.header.navbar.openOrders')}
                         </SidebarItem>
-                        <SidebarItem to="/history" icon={<HistoryIcon />}>
+                        <SidebarItem to="/history" icon={<HistoryIcon />} onClick={handleItemClick}>
                             {t('page.header.navbar.history')}
                         </SidebarItem>
                     </>
                 )}
-                <SidebarItem to="/docs" icon={<ApiIcon />}>
+                <SidebarItem to="/docs" icon={<ApiIcon />} onClick={handleItemClick}>
                     {t('page.header.navbar.api')}
                 </SidebarItem>
                 {isLoggedIn && (
