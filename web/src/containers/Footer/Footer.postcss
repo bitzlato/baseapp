@@ -1,7 +1,27 @@
+:root {
+  --footer-bg: rgb(38, 45, 55);
+  --footer-border: rgb(51, 57, 65);
+  --footer-color: rgb(102, 102, 102);
+  --footer-link-color: rgb(102, 102, 102);
+  --footer-link-color-hover: rgb(238, 190, 19);
+  --footer-social-icon-fill: rgb(102, 102, 102);
+  --footer-social-icon-fill-hover: rgb(153, 153, 153);
+}
+
+:global(.light-mode) {
+  --footer-bg: rgb(33, 36, 115);
+  --footer-border: rgb(52, 63, 154);
+  --footer-color: rgb(178, 190, 237);
+  --footer-link-color: rgb(91, 142, 229);
+  --footer-link-color-hover: rgb(238, 190, 19);
+  --footer-social-icon-fill: rgb(72, 91, 193);
+  --footer-social-icon-fill-hover: rgb(178, 190, 237);
+}
+
 .footer {
   align-items: center;
-  background-color: #262d37;
-  border-bottom: 2px solid #333941;
+  background-color: var(--footer-bg);
+  border-bottom: 2px solid var(--footer-border);
   display: flex;
   justify-content: center;
   padding: 26px 0;
@@ -16,11 +36,11 @@
 }
 
 .link {
-  color: #666;
+  color: var(--footer-link-color);
   font-size: 14px;
 
   &:hover {
-    color: #eebe13;
+    color: var(--footer-link-color-hover);
     text-decoration: underline;
   }
 }
@@ -40,17 +60,17 @@
   }
 
   svg {
-    fill: #40454c;
+    fill: var(--footer-social-icon-fill);
   }
 
   &:hover svg {
-    fill: #999;
+    fill: var(--footer-social-icon-fill-hover);
   }
 }
 
 .copyright {
-  background-color: #262d37;
-  color: #40454c;
+  background-color: var(--footer-bg);
+  color: var(--footer-color);
   font-size: 14px;
   padding: 30px 0 32px;
   text-align: center;
