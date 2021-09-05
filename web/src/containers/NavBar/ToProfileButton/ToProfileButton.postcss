@@ -1,19 +1,19 @@
+:root {
+  --to-profile-button-icon-fill: rgb(153, 153, 153);
+  --to-profile-button-icon-fill-hover: rgb(128, 128, 128);
+}
+
+:global(.light-mode) {
+  --to-profile-button-icon-fill: rgb(32, 36, 114);
+  --to-profile-button-icon-fill-hover: rgb(39, 44, 140);
+}
+
 .link {
   & svg {
-    fill: #999;
+    fill: var(--to-profile-button-icon-fill);
   }
 
   &:hover svg {
-    fill: #808080;
-  }
-
-  :global(.light-mode) & {
-    & svg {
-      fill: #202472;
-    }
-
-    &:hover svg {
-      fill: #272c8c;
-    }
+    fill: var(--to-profile-button-icon-fill-hover);
   }
 }

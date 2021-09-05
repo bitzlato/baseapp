@@ -1,59 +1,59 @@
+:root {
+  --language-switcher-color: rgb(153, 153, 153);
+  --language-switcher-color-hover: rgb(128, 128, 128);
+  --language-switcher-menu-bg: rgb(38, 45, 55);
+  --language-switcher-item-color: rgb(153, 153, 153);
+  --language-switcher-item-color-hover: rgb(153, 153, 153);
+  --language-switcher-item-color-active: rgb(178, 190, 237);
+  --language-switcher-item-bg-active: rgb(64, 69, 76);
+  --language-switcher-item-border-active: rgb(var(--rgb-brand-blue));
+}
+
+:global(.light-mode) {
+  --language-switcher-color: rgb(32, 36, 114);
+  --language-switcher-color-hover: rgb(32, 36, 114);
+  --language-switcher-menu-bg: rgb(255, 255, 255);
+  --language-switcher-item-color: rgb(160, 160, 160);
+  --language-switcher-item-color-hover: rgb(0, 0, 0);
+  --language-switcher-item-color-active: rgb(0, 0, 0);
+  --language-switcher-item-bg-active: rgb(219, 228, 252);
+  --language-switcher-item-border-active: rgb(91, 142, 229);
+}
+
 .language {
-  color: #999;
+  color: var(--language-switcher-color);
   cursor: pointer;
-  text-decoration: underline;
+  font-weight: bold;
+  text-transform: capitalize;
   user-select: none;
 
   &:hover {
-    color: #808080;
-  }
-
-  :global(.light-mode) & {
-    color: #202472;
-    text-decoration: none;
+    color: var(--language-switcher-color-hover);
   }
 }
 
 .menu {
-  background-color: #262d37;
+  background-color: var(--language-switcher-menu-bg);
   border-radius: 8px;
   overflow: hidden;
   padding: 0;
-
-  :global(.light-mode) & {
-    background-color: #fff;
-  }
 }
 
 .item {
   border-left: 3px solid transparent;
-  color: #999;
+  color: var(--language-switcher-item-color);
   font-size: 16px;
   padding-bottom: 14px;
   padding-top: 14px;
 
   &:hover {
-    color: #999;
+    color: var(--language-switcher-item-color-hover);
   }
 
   &:global(.active) {
-    background-color: #40454c;
-    border-left-color: #485bc1;
-    color: #b2beed;
-  }
-
-  :global(.light-mode) & {
-    color: #a0a0a0;
-
-    &:hover {
-      color: #000;
-    }
-
-    &:global(.active) {
-      background-color: #dbe4fc;
-      border-left-color: #5b8ee5;
-      color: #000;
-    }
+    background-color: var(--language-switcher-item-bg-active);
+    border-left-color: var(--language-switcher-item-border-active);
+    color: var(--language-switcher-item-color-active);
   }
 }
 
