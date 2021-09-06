@@ -56,8 +56,8 @@
       width: 100%;
 
       .cr-copyable-text-field {
-        padding: calc(var(--gap) * 0.83) calc(var(--gap) * 0.83) calc(var(--gap) * 0.83) var(--gap);
         height: 48px;
+        padding: calc(var(--gap) * 0.83) calc(var(--gap) * 0.83) calc(var(--gap) * 0.83) var(--gap);
 
         .input-group {
           display: flex;
@@ -91,6 +91,7 @@
       .cr-deposit-crypto__copyable-title {
         margin-top: calc(var(--gap) * -1.5);
         position: absolute;
+        white-space: nowrap;
         width: max-content;
       }
 
@@ -130,8 +131,8 @@
       &--group {
         align-items: center;
         display: flex;
-        margin: calc(var(--gap) * 2) 0;
         justify-content: space-between;
+        margin: calc(var(--gap) * 2) 0;
 
         a {
           color: var(--primary-cta-color);
@@ -146,13 +147,13 @@
         }
 
         .cr-email-form__group {
-          padding: 0;
-          max-width: 45%;
           margin-bottom: 0 !important;
+          max-width: 45%;
+          padding: 0;
 
           .custom-input {
-            padding: 0;
             margin-bottom: 0 !important;
+            padding: 0;
 
             label {
               left: 36px !important;
