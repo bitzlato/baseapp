@@ -216,7 +216,7 @@ export const ru: LangType = {
 
     'page.body.wallets.tabs.withdraw': 'Вывод',
     'page.body.wallets.tabs.withdraw.content.amount': 'Сумма вывода',
-    'page.body.wallets.tabs.withdraw.content.code2fa': '6-ти значный GAuthenticator код',
+    'page.body.wallets.tabs.withdraw.content.code2fa': '2FA код',
     'page.body.wallets.tabs.withdraw.content.fee': 'Комиссия',
     'page.body.wallets.tabs.withdraw.content.total': 'Сумма вывода',
     'page.body.wallets.tabs.withdraw.content.button': 'ВЫВЕСТИ',
@@ -415,7 +415,7 @@ export const ru: LangType = {
         '* Сохраните этот код в надежном месте. Он может быть использован для доступа 2FA кода с разных устройств.',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.mfa': 'MFA код',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.4': 'Введите 2FA код с приложения',
-    'page.body.profile.header.account.content.twoFactorAuthentication.subHeader': '6-ти значный код GAuthenticator',
+    'page.body.profile.header.account.content.twoFactorAuthentication.subHeader': '2FA код',
     'page.body.profile.header.account.content.twoFactorAuthentication.enable': 'ВКЛЮЧИТЬ',
     'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'ОТКЛЮЧИТЬ 2FA',
     'page.body.profile.header.account.content.twoFactorAuthentication.modalBody':
