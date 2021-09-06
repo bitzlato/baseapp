@@ -1,0 +1,35 @@
+:root {
+  --market-selector-tabs-toogler-color: rgb(153, 153, 153);
+  --market-selector-tabs-toogler-color-active: rgb(var(--rgb-brand-yellow));
+}
+
+:global(.light-mode) {
+  --market-selector-tabs-toogler-color-active: rgb(var(--rgb-brand-blue));
+}
+
+.toggler {
+  background-color: transparent;
+  border: 0;
+  padding: 0 8px;
+  transform: rotate(90deg);
+
+  & svg {
+    fill: rgb(153, 153, 153);
+  }
+
+  &:hover svg {
+    fill: rgb(238, 190, 19);
+  }
+
+  &.togglerActive {
+    transform: rotate(-90deg);
+  }
+}
+
+.dropdown {
+  display: none;
+
+  &.dropdownOpened {
+    display: block;
+  }
+}

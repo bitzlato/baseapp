@@ -14,7 +14,6 @@ import {
     OrderBook,
     OrderComponent,
     RecentTrades,
-    ToolBar,
 } from '../../containers';
 import { getUrlPart, setDocumentTitle } from '../../helpers';
 import {
@@ -223,7 +222,6 @@ class Trading extends React.Component<Props, StateProps> {
         return (
             <div className={'pg-trading-screen'}>
                 <div className={'pg-trading-wrap'}>
-                    <ToolBar/>
                     <div data-react-toolbox="grid" className={'cr-grid'}>
                         <div className="cr-grid__grid-wrapper">
                             <TradingWrapper
