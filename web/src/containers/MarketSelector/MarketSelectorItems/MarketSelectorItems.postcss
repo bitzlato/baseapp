@@ -1,0 +1,108 @@
+:root {
+  --market-selector-table-th-bg: rgb(64, 69, 76);
+  --market-selector-table-th-color: var(--secondary-contrast-cta-color);
+  --market-selector-table-td-color: rgb(153, 153, 153);
+  --market-selector-table-td-color-hover: rgb(219, 228, 252);
+  --market-selector-table-td-bg-hover: rgb(102, 102, 102);
+  --market-selector-table-sort-icon-color: var(--primary-text-color);
+  --market-selector-table-positive: var(--bids);
+  --market-selector-table-negative: var(--asks);
+}
+
+:global(.light-mode) {
+  --market-selector-table-th-bg: rgb(250, 250, 250);
+  --market-selector-table-th-color: rgb(153, 153, 153);
+  --market-selector-table-td-color: rgb(102, 102, 102);
+  --market-selector-table-td-color-hover: rgb(102, 102, 102);
+  --market-selector-table-td-bg-hover: rgb(219, 228, 252);
+  --market-selector-table-sort-icon-color: rgb(153, 153, 153);
+}
+
+.items {
+  flex: 1;
+  height: 100%;
+  overflow: scroll;
+
+  & table,
+  & thead,
+  & thead tr,
+  & thead tr th,
+  & tbody,
+  & tbody tr,
+  & tbody tr:nth-child(2n),
+  & tbody tr td {
+    background-color: transparent;
+  }
+
+  & thead tr th {
+    background-color: var(--market-selector-table-th-bg);
+    top: 0;
+    white-space: nowrap;
+  }
+
+  & tr td {
+    font-size: 12px !important;
+  }
+
+  & td,
+  & th {
+    text-align: right;
+
+    &:first-child {
+      text-align: left;
+    }
+  }
+
+  & tbody tr {
+    cursor: pointer;
+
+    & td {
+      color: var(--market-selector-table-td-color);
+    }
+
+    &:hover {
+      background: transparent;
+
+      & td {
+        background-color: var(--market-selector-table-td-bg-hover);
+        color: var(--market-selector-table-td-color-hover);
+      }
+    }
+  }
+
+  & tbody :global(.cr-table__row--selected) td {
+    background-color: var(--market-selector-table-td-bg-hover);
+    color: var(--market-selector-table-td-color-hover);
+  }
+}
+
+.headerButton {
+  background-color: transparent;
+  border: 0;
+  color: var(--market-selector-table-th-color);
+  font-size: 0.8em;
+  padding: 0;
+}
+
+.sortIcon {
+  & svg {
+    height: 8.016px;
+    line-height: 14.4px;
+    padding-left: 2.4px;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 9.6px;
+
+    & path {
+      fill: var(--market-selector-table-sort-icon-color);
+    }
+  }
+}
+
+.cellPositive {
+  color: var(--market-selector-table-positive);
+}
+
+.cellNegative {
+  color: var(--market-selector-table-negative);
+}

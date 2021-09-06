@@ -1,0 +1,40 @@
+:root {
+  --market-selector-bg: rgb(64, 69, 76);
+  --market-selector-border: rgb(51, 57, 65);
+}
+
+:global(.light-mode) {
+  --market-selector-bg: rgb(var(--rgb-body-background-color));
+  --market-selector-border: rgb(170, 196, 239);
+}
+
+.wrapper {
+  position: relative;
+}
+
+.marketSelector {
+  background-color: var(--market-selector-bg);
+  border: 1px solid var(--market-selector-border);
+  border-radius: 8px;
+  bottom: auto;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  height: 400px;
+  left: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 10px;
+  pointer-events: none;
+  position: absolute;
+  top: 44px;
+  transition: opacity 0.3s ease-out;
+  width: 440px;
+  z-index: 99990;
+
+  &.marketSelectorOpen {
+    opacity: 1;
+    pointer-events: initial;
+  }
+}

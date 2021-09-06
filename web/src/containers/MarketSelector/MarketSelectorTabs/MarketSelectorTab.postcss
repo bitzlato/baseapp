@@ -1,0 +1,29 @@
+:root {
+  --market-selector-tab-color: rgb(153, 153, 153);
+  --market-selector-tab-color-active: rgb(var(--rgb-brand-yellow));
+  --market-selector-tab-border-active: rgb(var(--rgb-brand-yellow));
+}
+
+:global(.light-mode) {
+  --market-selector-tab-color-active: rgb(var(--rgb-brand-blue));
+  --market-selector-tab-border-active: rgb(var(--rgb-brand-blue));
+}
+
+.tab {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--market-selector-tab-color);
+  font-size: 16px;
+  margin-right: 6px;
+  padding: 0 4px;
+
+  &:hover {
+    color: var(--market-selector-tab-color-active);
+  }
+
+  &.tabActive {
+    border-color: var(--market-selector-tab-border-active);
+    color: var(--market-selector-tab-color-active);
+  }
+}

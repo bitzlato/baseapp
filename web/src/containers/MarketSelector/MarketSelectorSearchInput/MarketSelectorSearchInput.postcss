@@ -1,0 +1,68 @@
+:root {
+  --market-selector-search-input-bg: rgb(38, 45, 55);
+  --market-selector-search-input-border: rgb(86, 87, 90);
+  --market-selector-search-input-icon: rgb(100, 100, 101);
+  --market-selector-search-input-color: rgb(153, 153, 153);
+  --market-selector-search-input-clear-button: rgb(100, 100, 101);
+  --market-selector-search-input-clear-button-hover: rgb(153, 153, 153);
+}
+
+:global(.light-mode) {
+  --market-selector-search-input-bg: rgb(255, 255, 255);
+  --market-selector-search-input-border: rgb(214, 220, 244);
+  --market-selector-search-input-icon: rgb(204, 204, 204);
+  --market-selector-search-input-color: rgb(102, 102, 102);
+  --market-selector-search-input-clear-button: rgb(204, 204, 204);
+  --market-selector-search-input-clear-button-hover: rgb(102, 102, 102);
+}
+
+.wrapper {
+  background-color: var(--market-selector-search-input-bg);
+  border: solid 1px var(--market-selector-search-input-border);
+  border-radius: 4px;
+  display: flex;
+  flex-shrink: 0;
+  height: 40px;
+  margin: 10px;
+  overflow: hidden;
+}
+
+.icon {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  height: 100%;
+  justify-content: center;
+  width: 36px;
+
+  & svg {
+    fill: var(--market-selector-search-input-icon);
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.input {
+  background: none;
+  border: none;
+  color: var(--market-selector-search-input-color);
+  font-size: 14px;
+  line-height: 19px;
+  outline: none;
+  padding: 0 6px;
+  width: 100%;
+}
+
+.clearButton {
+  background-color: transparent;
+  border: 0;
+  padding: 0 12px;
+
+  & svg {
+    fill: var(--market-selector-search-input-clear-button);
+  }
+
+  &:hover svg {
+    fill: var(--market-selector-search-input-clear-button-hover);
+  }
+}
