@@ -185,7 +185,7 @@ export const ru: LangType = {
     /* Wallets */
     'page.body.wallets.estimated_value': 'Оценочная стоимость',
 
-    'page.body.wallets.locked': 'В ордерах',
+    'page.body.wallets.locked': 'Заблокировано',
     'page.body.wallets.balance': 'Баланс',
     'page.body.wallets.tabs.deposit': 'Пополнить',
     'page.body.wallets.tabs.deposit.disabled.message': 'Депозит был отключен администрацией',
