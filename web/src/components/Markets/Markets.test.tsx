@@ -50,9 +50,7 @@ describe('Markets', () => {
             onSelect,
         }).render();
 
-        const resultSelectedRow = '<td>ETH/LTC</td><td>0.223100</td><td><span class="__positive">+25.00%</span></td>';
-        const expectedSelectedRow = component.find('.cr-table__row--selected').first().html();
-        console.log(expectedSelectedRow);
-        expect(resultSelectedRow).toBe(expectedSelectedRow);
+        const selectedRow = component.find('.cr-table__row--selected').first().get(0)?.tagName;
+        expect(selectedRow).toBe('tr');
     });
 });

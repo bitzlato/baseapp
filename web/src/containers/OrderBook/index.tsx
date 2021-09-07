@@ -27,6 +27,7 @@ import {
     Theme,
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 
 interface ReduxProps {
     asks: string[][];
@@ -217,7 +218,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                 <React.Fragment>
                     <span className={cn}>
                         {Decimal.format(lastPrice, currentMarket.price_precision, ',')}&nbsp;
-                        {isMobileDevice ? null : currentMarket.quote_unit.toUpperCase()}
+                        {isMobileDevice ? null : <CurrencyTicker symbol={currentMarket.quote_unit} />}
                     </span>
                     <span>{this.props.intl.formatMessage({ id: 'page.body.trade.orderbook.lastMarket' })}</span>
                 </React.Fragment>

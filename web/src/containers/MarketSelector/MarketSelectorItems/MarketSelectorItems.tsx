@@ -2,10 +2,11 @@ import React, { FC, useMemo, useState } from 'react';
 import cn from 'classnames';
 import { Market, Ticker } from 'src/modules';
 import { Decimal, Table } from 'src/components';
-
-import s from './MarketSelectorItems.postcss';
 import { useT } from 'src/hooks/useT';
 import { SortIcon } from 'src/components/SortIcon/SortIcon';
+import { MarketName } from 'src/components/MarketName/MarketName';
+
+import s from './MarketSelectorItems.postcss';
 
 interface Props {
     currentMarket?: Market | undefined;
@@ -129,7 +130,7 @@ export const MarketSelectorItems: FC<Props> = ({
                   });
 
                   return [
-                      item.name,
+                      <MarketName name={item.name} />,
                       <span className={cellClassName}>
                           {Decimal.format(Number(item.last), item.price_precision, ',')}
                       </span>,
@@ -156,13 +157,7 @@ export const MarketSelectorItems: FC<Props> = ({
 
     return (
         <div className={s.items}>
-            <Table
-                data={data}
-                header={header}
-                onSelect={handleSelect}
-                selectedKey={currentMarket?.name}
-                rowKeyIndex={0}
-            />
+            <Table data={data} header={header} onSelect={handleSelect} selectedKey={currentMarket?.name} />
         </div>
     );
 };

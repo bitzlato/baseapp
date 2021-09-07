@@ -4,6 +4,7 @@ import { DEFAULT_MARKET_HEADERS } from '../../constants';
 import { hasDuplicates } from '../../helpers';
 import { FilterInput } from '../FilterInput';
 import { CellData, Table } from '../Table';
+import { MarketName } from '../MarketName/MarketName';
 
 export interface MarketsProps {
     /**
@@ -69,7 +70,7 @@ export const Markets = (props: MarketsProps) => {
     }, []);
 
     const mapRows = React.useCallback(
-        (cell: CellData) => {
+        (cell: CellData, idx: number) => {
             const isChangeValue = typeof cell === 'string' && (cell.charAt(0) === '-' || cell.charAt(0) === '+');
 
             return isChangeValue ? renderChange(cell as string) : cell;
@@ -88,7 +89,7 @@ export const Markets = (props: MarketsProps) => {
 
     const createUniqueCurrencies = React.useCallback((currencies: string[], market: string) => {
         const marketCurrencies = market.split('/').map((c: string) => c.trim());
-        const uniqueCurrencies = marketCurrencies.filter((c) => !hasDuplicates(currencies, c));
+        const uniqueCurrencies = marketCurrencies.filter(c => !hasDuplicates(currencies, c));
 
         return currencies.concat(uniqueCurrencies);
     }, []);
@@ -124,8 +125,15 @@ export const Markets = (props: MarketsProps) => {
     const getTableData = React.useMemo(() => {
         const fd = data.filter(w => (w[0] as string).toLowerCase().includes(searchKey.toLowerCase()));
 
-        return fd.map((row) => row.map(mapRows));
+        return fd.map(row => row.map(mapRows));
     }, [data, mapRows, searchKey]);
+    const renderCells = [
+        (data: CellData) => {
+            if (typeof data === 'string') {
+                return <MarketName name={data} />;
+            }
+        }
+    ]
 
     return (
         <div className="cr-markets">
@@ -137,6 +145,7 @@ export const Markets = (props: MarketsProps) => {
                 header={headers || DEFAULT_MARKET_HEADERS}
                 onSelect={props.onSelect}
                 titleComponent={title || 'Markets'}
+                renderCells={renderCells}
             />
             <FilterInput data={props.data} filter={searchFilter} placeholder={filterPlaceholder} />
         </div>

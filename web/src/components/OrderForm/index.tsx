@@ -20,6 +20,7 @@ import { OrderProps } from '../Order';
 import { OrderInput } from '../OrderInput';
 import { PercentageButton } from '../PercentageButton';
 import { getTriggerSign } from 'src/containers/OpenOrders/helpers';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 
 type OnSubmitCallback = (order: OrderProps) => void;
 type DropdownElem = number | string | React.ReactNode;
@@ -419,7 +420,7 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
                                 {Decimal.format(total, currentMarketAskPrecision + currentMarketBidPrecision, ',')}
                             </span>
                             <span className="cr-order-item__total__content__currency">
-                                {from.toUpperCase()}
+                                <CurrencyTicker symbol={from} />
                             </span>
                         </div>
                     </div>
@@ -434,7 +435,7 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
                                 {available ? Decimal.format(available, availablePrecision, ',') : ''}
                             </span>
                             <span className="cr-order-item__available__content__currency">
-                                {available ? availableCurrency.toUpperCase() : ''}
+                                {available ? <CurrencyTicker symbol={availableCurrency} /> : ''}
                             </span>
                         </div>
                     </div>
