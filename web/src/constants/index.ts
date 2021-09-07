@@ -1,3 +1,5 @@
+import { showInternalTransfer } from 'src/api';
+
 import { DropdownElem } from '../components/Order';
 
 export const PG_TITLE_PREFIX = 'Bitzlato';
@@ -10,6 +12,14 @@ export const pgRoutes = (isLoggedIn: boolean, CanCan: boolean, isLight?: boolean
         ['page.header.navbar.history', '/history', `history${isLight ? 'Light' : ''}`],
         ['page.header.navbar.api', '/docs', `api${isLight ? 'Light' : ''}`],
     ];
+
+    if (showInternalTransfer()) {
+        routes.push([
+            'page.header.navbar.internal.transfer',
+            '/internal-transfer',
+            `internal_transfer${isLight ? 'Light' : ''}`,
+        ]);
+    }
 
     const routesFinexAbilities = [
         ['page.header.navbar.trade', '/trading/', `trade${isLight ? 'Light' : ''}`],

@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useCallback, useRef } from 'react';
+import React, { FC, useCallback, useRef } from 'react';
 import cn from 'classnames';
 import { logoutFetch, RootState, selectSidebarState, selectUserLoggedIn, toggleSidebar } from 'src/modules';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,10 +13,13 @@ import { WalletsIcon } from 'src/assets/icons/WalletsIcon';
 import { OrdersIcon } from 'src/assets/icons/OrdersIcon';
 import { HistoryIcon } from 'src/assets/icons/HistoryIcon';
 import { ApiIcon } from 'src/assets/icons/ApiIcon';
+import { InternalTransferIcon } from 'src/assets/icons/InternalTransferIcon';
+import { showInternalTransfer } from 'src/api/config';
 
-import s from './Sidebar.postcss';
 import { SidebarItem } from './SidebarItem/SidebarItem';
 import { SidebarToggler } from './SidebarToggler/SidebarToggler';
+
+import s from './Sidebar.postcss';
 
 export const Sidebar: FC = () => {
     const elementRef = useRef<HTMLDivElement>();
@@ -85,9 +88,20 @@ export const Sidebar: FC = () => {
                     {t('page.header.navbar.api')}
                 </SidebarItem>
                 {isLoggedIn && (
-                    <SidebarItem icon={<LogoutIcon />} onClick={handleLogoutClick}>
-                        {t('page.body.profile.content.action.logout')}
-                    </SidebarItem>
+                    <>
+                        {showInternalTransfer() && (
+                            <SidebarItem
+                                to="/internal-transfer"
+                                icon={<InternalTransferIcon />}
+                                onClick={handleItemClick}
+                            >
+                                {t('page.header.navbar.internal.transfer')}
+                            </SidebarItem>
+                        )}
+                        <SidebarItem icon={<LogoutIcon />} onClick={handleLogoutClick}>
+                            {t('page.body.profile.content.action.logout')}
+                        </SidebarItem>
+                    </>
                 )}
             </div>
         </div>
