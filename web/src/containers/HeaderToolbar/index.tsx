@@ -2,7 +2,8 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import cn from 'classnames'
+import cn from 'classnames';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { IntlProps } from '../../';
 import { Decimal } from '../../components/Decimal';
 import {
@@ -34,7 +35,7 @@ class HeaderToolbarContainer extends React.Component<Props> {
         const isPositive = currentMarket && /\+/.test(this.getTickerValue('price_change_percent'));
         const cls = isPositive ? 'positive' : 'negative';
 
-        const bidUnit = currentMarket && currentMarket.quote_unit.toUpperCase();
+        const bidUnit = currentMarket ? <CurrencyTicker symbol={currentMarket.quote_unit} /> : '';
 
         return (
             <div className="pg-header__toolbar">

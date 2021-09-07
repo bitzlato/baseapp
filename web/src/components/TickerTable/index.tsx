@@ -3,6 +3,8 @@ import { useIntl } from 'react-intl';
 import { Market } from '../../modules';
 import { Decimal } from '../Decimal';
 import { FIXED_VOL_PRECISION } from "src/constants";
+import { MarketName } from 'src/components/MarketName/MarketName';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 
 interface Props {
     currentBidUnit: string;
@@ -28,7 +30,7 @@ export const TickerTable: React.FC<Props> = ({
             return (
                 <tr key={index} onClick={() => redirectToTrading(market.id)}>
                     <td>
-                        <div>{market && market.name}</div>
+                        <div>{market && <MarketName name={market.name} />}</div>
                     </td>
                     <td>
                         <span>
@@ -77,7 +79,7 @@ export const TickerTable: React.FC<Props> = ({
                             className={`navigation__item ${item === currentBidUnit && 'navigation__item--active'}`}
                             onClick={() => setCurrentBidUnit(item)}>
                             <span className="navigation__item__link">
-                                {item ? item.toUpperCase() : formatMessage({ id: 'page.body.marketsTable.filter.all' })}
+                                {item ? <CurrencyTicker symbol={item} /> : formatMessage({ id: 'page.body.marketsTable.filter.all' })}
                             </span>
                         </li>
                     ))}

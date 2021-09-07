@@ -74,6 +74,10 @@ export interface TableProps {
      * Sets colspan count for empty table
      */
     colSpan?: number;
+    /**
+     * Additional custom render functions
+     */
+    renderCells?: readonly ((data: CellData) => React.ReactNode)[];
 }
 
 /**
@@ -104,7 +108,10 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
     const renderRowCells = React.useCallback((row: CellData[]) => {
         return row && row.length ?
             row.map((c, index: number) =>
-                <td key={index} colSpan={row.length === 1 ? props.colSpan : undefined}>{c}</td>)
+                {
+                    const cellContent = typeof props.renderCells?.[index] !== 'undefined' ? props.renderCells[index](c) : c
+                    return <td key={index} colSpan={row.length === 1 ? props.colSpan : undefined}>{cellContent}</td>;
+                })
             : <td className="cr-table--no-data" colSpan={header && header.length}>{formatMessage({ id: 'page.noDataToShow' })}</td>;
     }, [header, props.colSpan, formatMessage]);
 
