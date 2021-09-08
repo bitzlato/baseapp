@@ -11,6 +11,7 @@ export const en = {
     'page.header.navbar.history': 'History',
     'page.header.navbar.api': 'API Documentation',
     'page.header.navbar.internal.transfer': 'Internal transfer',
+    'page.header.navbar.toP2P': 'P2P trading',
 
     'page.header.navbar.profile': 'Profile',
     'page.header.navbar.logout': 'Logout',

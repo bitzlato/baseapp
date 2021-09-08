@@ -1,6 +1,13 @@
 import React, { FC, useCallback, useRef } from 'react';
 import cn from 'classnames';
-import { logoutFetch, RootState, selectSidebarState, selectUserLoggedIn, toggleSidebar } from 'src/modules';
+import {
+    logoutFetch,
+    RootState,
+    selectSidebarState,
+    selectUserLoggedIn,
+    toggleSidebar,
+    selectCurrentLanguage,
+} from 'src/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { LogoutIcon } from 'src/assets/icons/LogoutIcon';
@@ -15,18 +22,23 @@ import { HistoryIcon } from 'src/assets/icons/HistoryIcon';
 import { ApiIcon } from 'src/assets/icons/ApiIcon';
 import { InternalTransferIcon } from 'src/assets/icons/InternalTransferIcon';
 import { showInternalTransfer } from 'src/api/config';
+import { P2PIcon } from 'src/assets/icons/P2PIcon';
+import { getLinkToP2P } from 'src/containers/Header/HeaderNavigation/getLinkToP2P';
 
 import { SidebarItem } from './SidebarItem/SidebarItem';
 import { SidebarToggler } from './SidebarToggler/SidebarToggler';
 
 import s from './Sidebar.postcss';
 
+const selector = (state: RootState) => ({
+    isLoggedIn: selectUserLoggedIn(state),
+    isOpen: selectSidebarState(state),
+    languageCode: selectCurrentLanguage(state),
+});
+
 export const Sidebar: FC = () => {
     const elementRef = useRef<HTMLDivElement>();
-    const { isOpen, isLoggedIn } = useSelector((state: RootState) => ({
-        isOpen: selectSidebarState(state),
-        isLoggedIn: selectUserLoggedIn(state),
-    }));
+    const { isLoggedIn, isOpen, languageCode } = useSelector(selector);
     const dispatch = useDispatch();
     const t = useT();
 
@@ -84,6 +96,9 @@ export const Sidebar: FC = () => {
                         </SidebarItem>
                     </>
                 )}
+                <SidebarItem to={getLinkToP2P(languageCode)} icon={<P2PIcon />} external>
+                    {t('page.header.navbar.toP2P')}
+                </SidebarItem>
                 <SidebarItem to="/docs" icon={<ApiIcon />} onClick={handleItemClick}>
                     {t('page.header.navbar.api')}
                 </SidebarItem>
