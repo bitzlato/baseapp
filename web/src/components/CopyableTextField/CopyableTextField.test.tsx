@@ -1,8 +1,7 @@
 import { shallow } from 'enzyme';
+import { TestComponentWrapper } from 'lib/test';
 import * as React from 'react';
-import { CustomInput } from '../CustomInput';
 import { CopyableTextField, CopyableTextFieldProps } from './';
-
 
 const defaultProps: CopyableTextFieldProps = {
     value: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4dfE',
@@ -10,23 +9,21 @@ const defaultProps: CopyableTextFieldProps = {
 };
 
 const setup = (props: Partial<CopyableTextFieldProps> = {}) =>
-    shallow(<CopyableTextField {...{ ...defaultProps, ...props }} />);
+    shallow(
+        <TestComponentWrapper>
+            <CopyableTextField {...{ ...defaultProps, ...props }} />
+        </TestComponentWrapper>
+    );
 
 describe('CopyableTextField', () => {
     it('should render', () => {
-        const wrapper = setup();
+        const wrapper = setup().render();
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('should contain cr-copyable-text-field className', () => {
-        const wrapper = setup();
-        expect(wrapper.find('.cr-copyable-text-field')).toHaveLength(1);
-    });
-
     it('should render 1 input tag', () => {
-        const wrapper = setup();
-        const input = wrapper.find(CustomInput);
+        const wrapper = setup().render();
+        const input = wrapper.find('.custom-input');
         expect(input.length).toBe(1);
     });
-
 });

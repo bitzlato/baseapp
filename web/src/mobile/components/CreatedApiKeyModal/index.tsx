@@ -25,7 +25,6 @@ export const CreatedApiKeyModalComponent = props => {
                             className="pg-copyable-text-field__input"
                             fieldId={'access-key-id'}
                             value={apiKey.kid || ''}
-                            copyButtonText={intl.formatMessage({ id: 'page.body.profile.content.copyLink' })}
                             label={intl.formatMessage({ id: 'page.body.profile.apiKeys.modal.access_key' })}
                         />
                     </fieldset>
@@ -36,7 +35,6 @@ export const CreatedApiKeyModalComponent = props => {
                             className="pg-copyable-text-field__input"
                             fieldId={'secret_key-id'}
                             value={apiKey.secret || ''}
-                            copyButtonText={intl.formatMessage({ id: 'page.body.profile.content.copyLink' })}
                             label={intl.formatMessage({ id: 'page.body.profile.apiKeys.modal.secret_key' })}
                         />
                     </fieldset>

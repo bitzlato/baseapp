@@ -1,10 +1,12 @@
 import '@openware/cryptofont';
-import classnames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
-import { Button, InputGroup } from 'react-bootstrap';
+import { InputGroup } from 'react-bootstrap';
+import { CopyIcon } from 'src/assets/icons/CopyIcon';
+import { useT } from 'src/hooks/useT';
 import { CustomInput } from '../';
 import { copy } from '../../helpers';
-
+import { IconButton } from '../IconButton/IconButton';
 
 export interface CopyableTextFieldProps {
     /**
@@ -21,11 +23,6 @@ export interface CopyableTextFieldProps {
      */
     fieldId: string;
     /**
-     * @default 'Copy'
-     *  Renders text of the label of copy button component
-     */
-    copyButtonText?: string;
-    /**
      * @default 'false'
      * If true, Button will be disabled.
      */
@@ -36,56 +33,30 @@ export interface CopyableTextFieldProps {
 /**
  * Text field component with ability to copy inner text.
  */
-class CopyableTextField extends React.Component<CopyableTextFieldProps> {
-    public componentDidMount() {
-        if (!this.props.fieldId) {
-            throw new Error('CopyableTextField must contain `fieldId` prop');
-        }
-    }
+export const CopyableTextField: React.FC<CopyableTextFieldProps> = ({ value, className, disabled, fieldId, label }) => {
+    const t = useT();
+    const handleCopy = () => copy(fieldId);
 
-    public render() {
-        const {
-            value,
-            className,
-            disabled,
-            fieldId,
-            copyButtonText,
-            label,
-        } = this.props;
-        const doCopy = () => copy(fieldId);
-        const cx = classnames('cr-copyable-text-field', className);
-
-        return (
-            <div className={cx}>
-                <InputGroup>
-                    <CustomInput
-                        id={String(fieldId)}
-                        readOnly={true}
-                        inputValue={value}
-                        handleClick={doCopy}
-                        type="text"
-                        isDisabled={disabled}
-                        label={label || ''}
-                        defaultLabel={label || ''}
-                        placeholder={label || ''}
-                    />
-                    <InputGroup.Append>
-                        <Button
-                            onClick={doCopy}
-                            disabled={disabled}
-                            size="lg"
-                            variant="primary"
-                        >
-                            {copyButtonText ? copyButtonText : 'Copy'}
-                        </Button>
-                    </InputGroup.Append>
-                </InputGroup>
-            </div>
-        );
-    }
-}
-
-export {
-    CopyableTextField,
-    copy,
+    return (
+        <div className={cn('cr-copyable-text-field', className)}>
+            <InputGroup>
+                <CustomInput
+                    id={fieldId}
+                    readOnly
+                    inputValue={value}
+                    handleClick={handleCopy}
+                    type="text"
+                    isDisabled={disabled}
+                    label={label || ''}
+                    defaultLabel={label || ''}
+                    placeholder={label || ''}
+                />
+                <InputGroup.Append>
+                    <IconButton onClick={handleCopy} disabled={disabled} title={t('page.body.profile.content.copyLink')}>
+                        <CopyIcon />
+                    </IconButton>
+                </InputGroup.Append>
+            </InputGroup>
+        </div>
+    );
 };

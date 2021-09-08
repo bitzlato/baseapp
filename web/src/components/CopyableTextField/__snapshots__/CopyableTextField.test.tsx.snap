@@ -2,30 +2,47 @@
 
 exports[`CopyableTextField should render 1`] = `
 <div
-  className="cr-copyable-text-field"
+  class="cr-copyable-text-field"
 >
-  <InputGroup>
-    <CustomInput
-      defaultLabel=""
-      handleClick={[Function]}
-      id="copy_id"
-      inputValue="1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4dfE"
-      label=""
-      placeholder=""
-      readOnly={true}
-      type="text"
-    />
-    <InputGroupAppend>
-      <Button
-        active={false}
-        disabled={false}
-        onClick={[Function]}
-        size="lg"
-        variant="primary"
+  <div
+    class="input-group"
+  >
+    <div
+      class="custom-input"
+    >
+      <label />
+      <input
+        class="form-control"
+        id="copy_id"
+        placeholder=""
+        readonly=""
+        type="text"
+        value="1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4dfE"
+      />
+    </div>
+    <div
+      class="input-group-append"
+    >
+      <button
+        class="cr-percentage-button iconButton"
+        title="Copy"
+        type="button"
       >
-        Copy
-      </Button>
-    </InputGroupAppend>
-  </InputGroup>
+        <svg
+          height="24"
+          viewBox="0 0 20 20"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"
+          />
+          <path
+            d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
 </div>
 `;

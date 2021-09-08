@@ -53,7 +53,7 @@ exports[`EmailForm component should render 1`] = `
           />
           <input
             autofocus=""
-            class="form-control form-control-lg"
+            class="form-control"
             placeholder="Email"
             type="email"
             value=""

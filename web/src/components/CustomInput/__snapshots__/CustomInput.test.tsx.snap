@@ -14,7 +14,6 @@ exports[`CustomInput component should render 1`] = `
       onChange={[Function]}
       onFocus={[MockFunction]}
       placeholder=""
-      size="lg"
       type=""
       value=""
     />

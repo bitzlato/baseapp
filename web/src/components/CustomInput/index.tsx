@@ -56,7 +56,6 @@ class CustomInput extends React.Component<Props> {
                         {(labelVisible || inputValue) && (label || defaultLabel)}
                     </label>
                     <FormControl
-                        size="lg"
                         type={type}
                         value={inputValue.toString()}
                         placeholder={placeholder}

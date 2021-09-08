@@ -79,7 +79,6 @@ const WalletDepositBodyComponent = props => {
                     <DepositCrypto
                         buttonLabel={buttonLabel}
                         copiableTextFieldText={`${wallet.currency.toUpperCase()} ${label}`}
-                        copyButtonText={intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.button'} )}
                         error={error}
                         handleGenerateAddress={props.handleGenerateAddress}
                         handleOnCopy={handleOnCopy}

@@ -142,7 +142,7 @@ exports[`ProfileTwoFactorAuthScreen test should render 1`] = `
                 class="cr-email-form__label"
               />
               <input
-                class="form-control form-control-lg"
+                class="form-control"
                 placeholder="2FA code"
                 type="tel"
                 value=""
