@@ -47,7 +47,7 @@ exports[`SignUpScreen should render 1`] = `
               />
               <input
                 autofocus=""
-                class="form-control form-control-lg"
+                class="form-control"
                 placeholder="Email"
                 type="email"
                 value=""
@@ -64,7 +64,7 @@ exports[`SignUpScreen should render 1`] = `
                 class="cr-sign-up-form__label"
               />
               <input
-                class="form-control form-control-lg"
+                class="form-control"
                 placeholder="Password"
                 type="password"
                 value=""
@@ -81,7 +81,7 @@ exports[`SignUpScreen should render 1`] = `
                 class="cr-sign-up-form__label"
               />
               <input
-                class="form-control form-control-lg"
+                class="form-control"
                 placeholder="Confirm Password"
                 type="password"
                 value=""
@@ -98,7 +98,7 @@ exports[`SignUpScreen should render 1`] = `
                 class="cr-sign-up-form__label"
               />
               <input
-                class="form-control form-control-lg"
+                class="form-control"
                 placeholder="Referral Code"
                 type="text"
                 value=""

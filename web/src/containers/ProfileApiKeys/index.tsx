@@ -279,7 +279,6 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
                                   className="pg-copyable-text-field__input"
                                   fieldId={'access-key-id'}
                                   value={(modal.apiKey && modal.apiKey.kid) || ''}
-                                  copyButtonText={this.t('page.body.profile.content.copyLink')}
                                   label={this.t('page.body.profile.apiKeys.modal.access_key')}
                                 />
                             </fieldset>
@@ -299,7 +298,6 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
                                   className="pg-copyable-text-field__input"
                                   fieldId={'secret_key-id'}
                                   value={secret || ''}
-                                  copyButtonText={this.t('page.body.profile.content.copyLink')}
                                   label={this.t('page.body.profile.apiKeys.modal.secret_key')}
                                 />
                             </fieldset>

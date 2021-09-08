@@ -49,7 +49,6 @@ class ReferralProgramClass extends React.Component<Props> {
                         className="pg-copyable-text-field__input"
                         value={referralLink}
                         fieldId="referral-id"
-                        copyButtonText={this.translate('page.body.profile.content.copyLink')}
                     />
                 </fieldset>
             </div>

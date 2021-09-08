@@ -33,11 +33,6 @@ export interface DepositCryptoProps {
      */
     copiableTextFieldText?: string;
     /**
-     * @default 'Copy'
-     *  Renders text of the label of copy button component
-     */
-    copyButtonText?: string;
-    /**
      * Renders text alert about success copy address
      */
     handleOnCopy: () => void;
@@ -61,7 +56,6 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
     const {
         buttonLabel,
         copiableTextFieldText,
-        copyButtonText,
         dimensions,
         error,
         handleGenerateAddress,
@@ -152,7 +146,6 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
                             className="cr-deposit-crypto__copyable-area"
                             value={walletAddress || error}
                             fieldId={walletAddress ? 'copy_deposit_1' : 'copy_deposit_2'}
-                            copyButtonText={copyButtonText}
                             disabled={disabled}
                             label={copiableTextFieldText ? copiableTextFieldText : 'Deposit by Wallet Address'}
                         />
