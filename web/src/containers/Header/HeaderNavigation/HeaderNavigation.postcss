@@ -1,3 +1,12 @@
+:root {
+  --header-nav-item-color: rgb(153, 153, 153);
+  --header-nav-item-color-hover: rgb(238, 190, 19);
+}
+
+:global(.light-mode) {
+  --header-nav-item-color: rgb(51, 51, 51);
+}
+
 .navigation {
   align-items: center;
   display: flex;
@@ -6,12 +15,8 @@
 }
 
 .item {
-  color: #999;
+  color: var(--header-nav-item-color);
   margin: 0 10px;
-
-  :global(.light-mode) & {
-    color: #333;
-  }
 
   @media (--breakpoint-down-lg) {
     display: none;
@@ -22,7 +27,7 @@
   }
 
   &:hover {
-    color: #eebe13;
+    color: var(--header-nav-item-color-hover);
     text-decoration: underline;
   }
 }

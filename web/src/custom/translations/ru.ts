@@ -11,6 +11,7 @@ export const ru: LangType = {
     'page.header.navbar.history': 'История',
     'page.header.navbar.api': 'API Документация',
     'page.header.navbar.internal.transfer': 'Internal transfer',
+    'page.header.navbar.toP2P': 'Перейти в P2P',
 
     'page.header.navbar.profile': 'Профиль',
     'page.header.navbar.logout': 'Выйти',

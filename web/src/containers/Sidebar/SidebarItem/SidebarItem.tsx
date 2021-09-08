@@ -7,10 +7,11 @@ type Props = {
     to?: string;
     icon: ReactNode;
     children: ReactNode;
+    external?: boolean;
     onClick?: () => void;
 };
 
-export const SidebarItem: FC<Props> = ({ children, icon, onClick, to }: Props) => {
+export const SidebarItem: FC<Props> = ({ children, icon, to, external = false, onClick }: Props) => {
     const body = (
         <>
             <span className={s.itemIcon}>{icon}</span>
@@ -23,6 +24,14 @@ export const SidebarItem: FC<Props> = ({ children, icon, onClick, to }: Props) =
             <button className={s.item} type="button" tabIndex={-1} onClick={onClick}>
                 {body}
             </button>
+        );
+    }
+
+    if (external) {
+        return (
+            <a className={s.item} href={to} onClick={onClick}>
+                {body}
+            </a>
         );
     }
 
