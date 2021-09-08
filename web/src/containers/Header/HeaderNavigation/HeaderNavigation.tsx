@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { showInternalTransfer } from 'src/api';
@@ -7,6 +6,7 @@ import { selectCurrentLanguage, selectUserLoggedIn, RootState } from 'src/module
 
 import s from './HeaderNavigation.postcss';
 import { getLinkToP2P } from './getLinkToP2P';
+import { HeaderNavigationItem } from './HeaderNavigationItem';
 
 const selector = (state: RootState) => ({
     isLoggedIn: selectUserLoggedIn(state),
@@ -21,41 +21,29 @@ export const HeaderNavigation: FC = () => {
         <div className={s.navigation}>
             {!isLoggedIn && (
                 <>
-                    <Link className={s.item} to="/signin">
-                        {t('page.header.navbar.signIn')}
-                    </Link>
-                    <Link className={s.item} to="/signup">
-                        {t('page.header.signUp')}
-                    </Link>
+                    <HeaderNavigationItem to="/signin">{t('page.header.navbar.signIn')}</HeaderNavigationItem>
+                    <HeaderNavigationItem to="/signup">{t('page.header.signUp')}</HeaderNavigationItem>
                 </>
             )}
 
-            <Link className={s.item} to="/trading">
-                {t('page.header.navbar.trade')}
-            </Link>
+            <HeaderNavigationItem to="/trading">{t('page.header.navbar.trade')}</HeaderNavigationItem>
 
             {isLoggedIn && (
                 <>
-                    <Link className={s.item} to="/wallets">
-                        {t('page.header.navbar.wallets')}
-                    </Link>
-                    <Link className={s.item} to="/orders">
-                        {t('page.header.navbar.openOrders')}
-                    </Link>
-                    <Link className={s.item} to="/history">
-                        {t('page.header.navbar.history')}
-                    </Link>
+                    <HeaderNavigationItem to="/wallets">{t('page.header.navbar.wallets')}</HeaderNavigationItem>
+                    <HeaderNavigationItem to="/orders">{t('page.header.navbar.openOrders')}</HeaderNavigationItem>
+                    <HeaderNavigationItem to="/history">{t('page.header.navbar.history')}</HeaderNavigationItem>
                     {showInternalTransfer() && (
-                        <Link className={s.item} to="/internal-transfer">
+                        <HeaderNavigationItem to="/internal-transfer">
                             {t('page.header.navbar.internal.transfer')}
-                        </Link>
+                        </HeaderNavigationItem>
                     )}
                 </>
             )}
 
-            <a className={s.item} href={getLinkToP2P(languageCode)} target="_blank" rel="noopener noreferrer">
+            <HeaderNavigationItem to={getLinkToP2P(languageCode)} external>
                 {t('page.header.navbar.toP2P')}
-            </a>
+            </HeaderNavigationItem>
         </div>
     );
 };
