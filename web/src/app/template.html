@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#000000">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
         <meta name="description" content="Bitzlato crypto-currency trading platform" />
-        <meta name="ui-version" content="%REACT_APP_GIT_SHA%"/>
-        <link rel="icon" href="/favicon.ico" sizes="any">
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-        <link rel="manifest" href="/manifest.json">
+        <meta name="ui-version" content="%REACT_APP_GIT_SHA%" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
         <title>Bitzlato</title>
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != "dataLayer" ? "&l=" + l : "";
+                j.async = true;
+                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, "script", "dataLayer", "GTM-MQCP3N7");
+        </script>
     </head>
     <body>
-        <% if (process.env.MOCK) { %>
-            <script src="/config.js"></script>
-        <% } else { %>
-            <script src="/config/env.js?<%= process.env.HASH %>"></script>
-        <% } %>
         <noscript>
-            You need to enable JavaScript to run this app.
+            <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-MQCP3N7"
+                height="0"
+                width="0"
+                style="display: none; visibility: hidden"
+            ></iframe>
         </noscript>
+        <% if (process.env.MOCK) { %>
+        <script src="/config.js"></script>
+        <% } else { %>
+        <script src="/config/env.js?<%= process.env.HASH %>"></script>
+        <% } %>
+        <noscript> You need to enable JavaScript to run this app. </noscript>
         <div id="root"></div>
     </body>
 </html>
