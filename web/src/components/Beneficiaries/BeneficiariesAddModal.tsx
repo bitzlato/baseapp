@@ -209,12 +209,16 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
     ]);
 
     const validateCoinAddressFormat = React.useCallback((value: string) => {
-        const coinAddressValidator = validateBeneficiaryAddress.cryptocurrency(currency, true);
-        const coinAddressTestnetValidator = validateBeneficiaryTestnetAddress.cryptocurrency(currency, true);
+        const cur = enableInvoice ? 'bitzlatoAddress' : currency;
 
+        const coinAddressValidator = validateBeneficiaryAddress.cryptocurrency(cur, true);
         setCoinAddressValid(coinAddressValidator.test(value.trim()));
-        setCoinTestnetAddressValid(coinAddressTestnetValidator.test(value.trim()));
-    }, [currency]);
+
+        if (!enableInvoice) {
+            const coinAddressTestnetValidator = validateBeneficiaryTestnetAddress.cryptocurrency(currency, true);
+            setCoinTestnetAddressValid(coinAddressTestnetValidator.test(value.trim()));
+        }
+    }, [currency, enableInvoice]);
 
     const handleChangeFieldValue = React.useCallback((key: string, value: string) => {
         switch (key) {
@@ -305,11 +309,13 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
             'cr-email-form__group--optional': optional,
         });
 
+        const label = formatMessage({ id: `page.body.wallets.beneficiaries.addAddressModal.body.${enableInvoice ? 'bitzlatoAddress' : field}`})
+
         return (
             <div key={field} className={focusedClass}>
                 <CustomInput
                     type="text"
-                    label={formatMessage({ id: `page.body.wallets.beneficiaries.addAddressModal.body.${field}` })}
+                    label={label}
                     placeholder={focused ? '' : formatMessage({ id: `page.body.wallets.beneficiaries.addAddressModal.body.${field}` })}
                     defaultLabel={field}
                     handleChangeInput={value => handleChangeFieldValue(field, value)}
@@ -349,10 +355,7 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
 
         return (
             <div className="cr-email-form__form-content">
-                {enableInvoice
-                    ? renderAddAddressModalBodyItem('bitzlatoAddress')
-                    : renderAddAddressModalBodyItem('coinAddress')
-                }
+                {renderAddAddressModalBodyItem('coinAddress')}
                 {!coinAddressValid && !coinTestnetAddressValid && coinAddress && renderInvalidAddressMessage}
                 {!coinAddressValid && coinTestnetAddressValid && coinAddress && renderTestnetAddressMessage}
                 {renderAddAddressModalBodyItem('coinBeneficiaryName')}
