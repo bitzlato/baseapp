@@ -30,7 +30,7 @@ if (bugsnagKey) {
     Bugsnag.start({
         apiKey: bugsnagKey || 'DO_NOT_SEND',
         appVersion: process.env.REACT_APP_BUGSNAG_VERSION,
-        releaseStage: process.env.REACT_APP_BUGSNAG_RELEASE_STAGE,
+        releaseStage: process.env.REACT_APP_RELEASE_STAGE,
         plugins: [new BugsnagPluginReact()],
     });
 }

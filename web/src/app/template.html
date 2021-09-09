@@ -11,6 +11,7 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <title>Bitzlato</title>
+        <% if (process.env.REACT_APP_RELEASE_STAGE === 'production') { %>
         <script>
             (function (w, d, s, l, i) {
                 w[l] = w[l] || [];
@@ -23,8 +24,10 @@
                 f.parentNode.insertBefore(j, f);
             })(window, document, "script", "dataLayer", "GTM-MQCP3N7");
         </script>
+        <% } %>
     </head>
     <body>
+        <% if (process.env.REACT_APP_RELEASE_STAGE === 'production') { %>
         <noscript>
             <iframe
                 src="https://www.googletagmanager.com/ns.html?id=GTM-MQCP3N7"
@@ -33,6 +36,7 @@
                 style="display: none; visibility: hidden"
             ></iframe>
         </noscript>
+        <% } %>
         <% if (process.env.MOCK) { %>
         <script src="/config.js"></script>
         <% } else { %>

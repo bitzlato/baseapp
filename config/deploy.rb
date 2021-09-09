@@ -57,7 +57,7 @@ set :nvm_map_bins, %w{node npm yarn rake}
 set :yarn_flags, '--silent --no-progress'
 
 set :default_env, {
-  REACT_APP_BUGSNAG_RELEASE_STAGE: fetch(:stage),
+  REACT_APP_RELEASE_STAGE: fetch(:stage),
   REACT_APP_SENTRY_KEY:  ENV['SENTRY_KEY'],
   REACT_APP_SENTRY_ORGANIZATION:  ENV['SENTRY_ORGANIZATION'],
   REACT_APP_SENTRY_PROJECT: ENV['SENTRY_PROJECT'],
