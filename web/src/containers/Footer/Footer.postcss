@@ -1,5 +1,6 @@
 :root {
   --footer-bg: rgb(38, 45, 55);
+  --footer-title: rgb(153, 153, 153);
   --footer-border: rgb(51, 57, 65);
   --footer-color: rgb(102, 102, 102);
   --footer-link-color: rgb(102, 102, 102);
@@ -10,6 +11,7 @@
 
 :global(.light-mode) {
   --footer-bg: rgb(33, 36, 115);
+  --footer-title: rgb(178, 190, 237);
   --footer-border: rgb(52, 63, 154);
   --footer-color: rgb(178, 190, 237);
   --footer-link-color: rgb(91, 142, 229);
@@ -19,12 +21,27 @@
 }
 
 .footer {
-  align-items: center;
   background-color: var(--footer-bg);
   border-bottom: 2px solid var(--footer-border);
+  padding: 26px 0;
+}
+
+.row {
   display: flex;
   justify-content: center;
-  padding: 26px 0;
+  margin-bottom: 40px;
+}
+
+.col {
+  margin-right: 34px;
+}
+
+.title {
+  color: var(--footer-title);
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 18px;
+  text-transform: uppercase;
 }
 
 .links {
@@ -47,12 +64,12 @@
 
 .socialNetworks {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .socialNetwork {
   height: 26px;
-  margin-right: 14px;
+  margin-right: 16px;
   width: 26px;
 
   &:last-child {
