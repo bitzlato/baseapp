@@ -165,14 +165,15 @@ export const en = {
     'page.body.landing.startTrading.button2': 'Start trading',
 
     'page.body.landing.footer.exchange': 'Exchange',
-    'page.body.landing.footer.wallets': 'Wallets',
     'page.body.landing.footer.fees': 'Fees',
     'page.body.landing.footer.faq': 'FAQ',
     'page.body.landing.footer.support': 'Support',
-    'page.body.landing.footer.privacy': 'Privacy',
     'page.body.landing.footer.about': 'About us',
-    'page.body.landing.footer.community': 'Community',
-    'page.body.landing.footer.info': 'Info',
+    'page.body.landing.footer.blog': 'Blog',
+    'page.body.landing.footer.reviews': 'Reviews',
+    'page.body.landing.footer.p2p': 'P2P platform',
+    'page.body.landing.footer.paymentGateway': 'Payment Gateway',
+    'page.body.landing.footer.cryptoloan': 'Crypto Loan',
     'page.body.landing.footer.rights': 'Bitzlato © All rights reserved.',
 
     'pagy.body.footer.powered_by': 'Powered by',
@@ -617,6 +618,9 @@ export const en = {
 
     'page.footer.legalDocuments': 'Legal documents',
     'page.footer.faq': 'FAQ',
+    'page.footer.information': 'Information',
+    'page.footer.products': 'Products',
+    'page.footer.company': 'Company',
 
     'page.header.signIn': 'Sign In',
     'page.header.signIn.email': 'Email',
