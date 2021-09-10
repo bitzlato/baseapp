@@ -14,7 +14,6 @@ import { LogoutIcon } from 'src/assets/icons/LogoutIcon';
 import { useOnClickOutside } from 'src/hooks/useOnClickOutside';
 import { useEscapeKeyDown } from 'src/hooks/useEscapeKeyDown';
 import { ProfileIcon } from 'src/assets/icons/ProfileIcon';
-import { SignupIcon } from 'src/assets/icons/SignupIcon';
 import { TrandingIcon } from 'src/assets/icons/TrandingIcon';
 import { WalletsIcon } from 'src/assets/icons/WalletsIcon';
 import { OrdersIcon } from 'src/assets/icons/OrdersIcon';
@@ -66,19 +65,10 @@ export const Sidebar: FC = () => {
         <div className={s.block} ref={elementRef}>
             <SidebarToggler onClick={handleTogglerClick} />
             <div className={cn(s.sidebar, isOpen && s.sidebarOpen)}>
-                {isLoggedIn ? (
+                {isLoggedIn && (
                     <SidebarItem to="/profile" icon={<ProfileIcon />} onClick={handleItemClick}>
                         {t('page.header.navbar.profile')}
                     </SidebarItem>
-                ) : (
-                    <>
-                        <SidebarItem to="/signin" icon={<ProfileIcon />} onClick={handleItemClick}>
-                            {t('page.header.navbar.signIn')}
-                        </SidebarItem>
-                        <SidebarItem to="/signup" icon={<SignupIcon />} onClick={handleItemClick}>
-                            {t('page.header.signUp')}
-                        </SidebarItem>
-                    </>
                 )}
                 <SidebarItem to="/trading" icon={<TrandingIcon />} onClick={handleItemClick}>
                     {t('page.header.navbar.trade')}

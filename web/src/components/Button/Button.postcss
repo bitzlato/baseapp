@@ -1,0 +1,115 @@
+:root {
+  --btnbase-primary-bg: rgb(233, 187, 26);
+  --btnbase-primary-bg-hover: rgb(244, 205, 63);
+  --btnbase-primary-bg-active: rgb(215, 174, 30);
+  --btnbase-primary-bg-disabled: rgb(222, 226, 237);
+  --btnbase-primary-color: rgb(249, 250, 252);
+  --btnbase-primary-color-disabled: rgb(149, 150, 158);
+  --btnbase-primary-box-shadow-focus: 0 7px 15px rgba(222, 226, 237, 0.15);
+  --btnbase-secondary-bg: rgb(120, 158, 243);
+  --btnbase-secondary-bg-hover: rgb(153, 185, 255);
+  --btnbase-secondary-bg-active: rgb(89, 132, 230);
+  --btnbase-secondary-bg-disabled: rgb(222, 226, 237);
+  --btnbase-secondary-color: rgb(249, 250, 252);
+  --btnbase-secondary-color-disabled: rgb(149, 150, 158);
+  --btnbase-secondary-box-shadow-focus: 0 7px 15px rgba(222, 226, 237, 0.15);
+}
+
+:global(.light-mode) {
+  --btnbase-primary-bg: rgb(var(--rgb-brand-yellow));
+  --btnbase-primary-bg-hover: rgb(255, 206, 32);
+  --btnbase-primary-bg-active: rgb(233, 184, 13);
+  --btnbase-primary-bg-disabled: rgb(222, 226, 237);
+  --btnbase-primary-color: rgb(249, 250, 252);
+  --btnbase-primary-color-disabled: rgb(149, 150, 158);
+  --btnbase-primary-box-shadow-focus: 0 7px 11px rgba(222, 226, 237, 0.9);
+  --btnbase-secondary-bg: rgb(var(--rgb-brand-blue));
+  --btnbase-secondary-bg-hover: rgb(88, 107, 209);
+  --btnbase-secondary-bg-active: rgb(49, 69, 176);
+  --btnbase-secondary-bg-disabled: rgb(222, 226, 237);
+  --btnbase-secondary-color: rgb(249, 250, 252);
+  --btnbase-secondary-color-disabled: rgb(149, 150, 158);
+  --btnbase-secondary-box-shadow-focus: 0 7px 11px rgba(42, 42, 44, 0.19);
+}
+
+.btn {
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  /* sizes */
+  &.btnSmall {
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 4px 10px;
+  }
+
+  &.btnMedium {
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 6px 16px;
+  }
+
+  &.btnLarge {
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 12px 32px;
+  }
+
+  /* colors */
+  &.btnPrimary:not(.btnDisabled) {
+    background-color: var(--btnbase-primary-bg);
+    color: var(--btnbase-primary-color);
+
+    &:hover,
+    &:focus {
+      background-color: var(--btnbase-primary-bg-hover);
+    }
+
+    &:focus-visible {
+      box-shadow: var(--btnbase-primary-box-shadow-focus);
+    }
+
+    &:active {
+      background-color: var(--btnbase-primary-bg-active);
+    }
+  }
+
+  &.btnPrimary.btnDisabled {
+    background-color: var(--btnbase-primary-bg-disabled);
+    color: var(--btnbase-primary-color-disabled);
+  }
+
+  &.btnSecondary:not(.btnDisabled) {
+    background-color: var(--btnbase-secondary-bg);
+    color: var(--btnbase-secondary-color);
+
+    &:hover,
+    &:focus {
+      background-color: var(--btnbase-secondary-bg-hover);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 7px 15px var(--btnbase-secondary-box-shadow-focus-visible);
+    }
+
+    &:active {
+      background-color: var(--btnbase-secondary-bg-active);
+    }
+  }
+
+  &.btnSecondary.btnDisabled {
+    background-color: var(--btnbase-secondary-bg-disabled);
+    color: var(--btnbase-secondary-color-disabled);
+  }
+
+  /* states */
+  &.btnDisabled {
+    cursor: initial;
+  }
+}

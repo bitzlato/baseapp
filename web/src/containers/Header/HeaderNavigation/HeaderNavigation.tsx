@@ -19,13 +19,6 @@ export const HeaderNavigation: FC = () => {
 
     return (
         <div className={s.navigation}>
-            {!isLoggedIn && (
-                <>
-                    <HeaderNavigationItem to="/signin">{t('page.header.navbar.signIn')}</HeaderNavigationItem>
-                    <HeaderNavigationItem to="/signup">{t('page.header.signUp')}</HeaderNavigationItem>
-                </>
-            )}
-
             <HeaderNavigationItem to="/trading">{t('page.header.navbar.trade')}</HeaderNavigationItem>
 
             {isLoggedIn && (
