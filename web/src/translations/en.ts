@@ -192,8 +192,10 @@ export const en = {
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Deposit Address',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Address copied',
     'page.body.wallets.tabs.deposit.ccy.message.pending': 'Generating deposit address',
-    'page.body.wallets.tabs.deposit.ccy.button.generate': 'Generate',
-    'page.body.wallets.tabs.deposit.ccy.button.address': 'address',
+    'page.body.wallets.tabs.deposit.ccy.message.minimum': 'Minimum amount of deposit: {amount} {currency}',
+    'page.body.wallets.tabs.deposit.ccy.message.warning': 'The asset you have deposited may be lost if the deposit amount is less than the minimum',
+    'page.body.wallets.tabs.deposit.ccy.button.generate': 'Generate {currency} address',
+    'page.body.wallets.tabs.deposit.ccy.button.create': 'Create Deposit',
 
     'page.body.wallets.tabs.deposit.fiat.message1': 'Deposit using bank transfer',
     'page.body.wallets.tabs.deposit.fiat.message2':

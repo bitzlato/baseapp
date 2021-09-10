@@ -57,9 +57,7 @@ const WalletDepositBodyComponent = props => {
 
     const renderDeposit = () => {
         const { wallet } = props;
-        const currencyItem = (currencies && currencies.find(item => item.id === wallet.currency)) || { min_confirmations: 6, deposit_enabled: false };
-        const text = intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' },
-            { confirmations: currencyItem.min_confirmations });
+        const currencyItem = currencies.find(item => item.id === wallet.currency);
         const error = intl.formatMessage({id: 'page.body.wallets.tabs.deposit.ccy.message.pending'});
 
         const selectedWalletAddress = '';
@@ -69,22 +67,19 @@ const WalletDepositBodyComponent = props => {
         const title = intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.fiat.message1' });
         const description = intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.fiat.message2' });
 
-        const buttonLabel = `${intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.button.generate' })} ${wallet.currency.toUpperCase()} ${intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.button.address' })}`;
-
         if (wallet.type === 'coin') {
             return (
                 <React.Fragment>
                     <CurrencyInfo wallet={wallet}/>
                     {renderDepositBlur}
                     <DepositCrypto
-                        buttonLabel={buttonLabel}
                         copiableTextFieldText={`${wallet.currency.toUpperCase()} ${label}`}
                         error={error}
                         handleGenerateAddress={props.handleGenerateAddress}
                         handleOnCopy={handleOnCopy}
-                        text={text}
                         wallet={wallet}
-                        disabled={walletAddress === ''}
+                        currency={currencyItem}
+                        disabled={!walletAddress}
                     />
                 </React.Fragment>
             );

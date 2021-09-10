@@ -29,7 +29,6 @@ describe('DepositCrypto', () => {
                     error={'error123'}
                     handleGenerateAddress={handleGenerateAddress}
                     handleOnCopy={handleOnCopy}
-                    text={'text123'}
                     wallet={wallet}
                     disabled={false}
                 />,
