@@ -30,13 +30,12 @@ exports[`DepositCrypto should match snapshot 1`] = `
     }
   }
 >
-  <DepositCrypto
+  <Component
     dimensions={118}
     disabled={false}
     error="error123"
     handleGenerateAddress={[MockFunction]}
     handleOnCopy={[MockFunction]}
-    text="text123"
     wallet={
       Object {
         "currency": "eth",

@@ -10,10 +10,12 @@ import {
     selectMobileDeviceState,
 } from '../../modules';
 import { CustomInput } from '../CustomInput';
+import { MinAmountWarning } from './MinAmountWarning';
 
 interface Props {
     currency: string;
     handleCloseModal: () => void;
+    minDepositAmount: string;
 }
 
 const DepositModalComponent: React.FC<Props> = (props: Props) => {
@@ -87,7 +89,7 @@ const DepositModalComponent: React.FC<Props> = (props: Props) => {
 
     const validateAmount = React.useCallback((value: string) => {
       const num = parseFloat(value);
-       setAmountValid(num > 0);
+       setAmountValid(num > parseFloat(props.minDepositAmount));
     }, []);
 
     const handleChangeFieldValue = React.useCallback((key: string, value: string) => {
@@ -122,20 +124,11 @@ const DepositModalComponent: React.FC<Props> = (props: Props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formatMessage, getState, isSubmitted]);
 
-    const renderInvalidAmount = React.useMemo(() => {
-        return (
-          <div className="cr-email-form__group">
-              <span className="pg-beneficiaries__error-text">{formatMessage({ id: 'page.body.wallets.deposits.addDepositModal.body.invalidAmount' })}</span>
-          </div>
-        );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [amount]);
-
     const renderBody = React.useMemo(() => {
         return (
             <div className="cr-email-form__form-content">
                 {renderField('amount')}
-                {!amountValid && amount && renderInvalidAmount}
+                <MinAmountWarning currency={currency} minDepositAmount={props.minDepositAmount} />
                 <div className="cr-email-form__button-wrapper">
                     <Button
                         disabled={isDisabled}

@@ -196,8 +196,10 @@ export const ru: LangType = {
         'Пожалуйста, внесите депозитный платеж. Ваш депозит будет доступен после 6 подтверждений',
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Пополнить кошелек',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Адрес скопирован',
-    'page.body.wallets.tabs.deposit.ccy.button.generate': 'Сгенерировать',
-    'page.body.wallets.tabs.deposit.ccy.button.address': 'адресс',
+    'page.body.wallets.tabs.deposit.ccy.button.generate': 'Сгенерировать {currency} адресс',
+    'page.body.wallets.tabs.deposit.ccy.message.minimum': 'Минимальная сумма депозита: {amount} {currency}',
+    'page.body.wallets.tabs.deposit.ccy.message.warning': 'Внесённый вами актив будет потерян, если сумма депозита меньше минимальной',
+    'page.body.wallets.tabs.deposit.ccy.button.create': 'Создать депозит',
 
     'page.body.wallets.tabs.deposit.ccy.message.pending': 'Генерация адреса',
 

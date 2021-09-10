@@ -183,9 +183,17 @@
   }
 }
 
+/* TODO: move classes to other common place */
+
 .cr-row-spacing {
   & > *:not(:first-child) {
     margin-left: var(--gap);
+  }
+}
+
+.cr-col-spacing {
+  & > *:not(:first-child) {
+    margin-top: var(--gap);
   }
 }
 
@@ -200,4 +208,16 @@
 
 .cr-justify-end {
   justify-content: flex-end;
+}
+
+.cr-align-start {
+  align-items: flex-start;
+}
+
+.cr-warning-text {
+  color: var(--system-yellow);
+}
+
+.cr-margin-bottom-3x {
+  margin-bottom: calc(var(--gap) * 3);
 }

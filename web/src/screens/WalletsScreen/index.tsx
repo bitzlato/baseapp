@@ -397,12 +397,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         } = this.props;
         const { selectedWalletIndex } = this.state;
         const wallet: Wallet = (wallets[selectedWalletIndex] || defaultWallet);
-        const currencyItem = (currencies && currencies.find(item => item.id === wallet.currency)) || { min_confirmations: 6, deposit_enabled: false };
-        const text = this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' },
-                                                   { confirmations: currencyItem.min_confirmations });
+        const currencyItem = currencies.find(item => item.id === wallet.currency);
         const error = this.props.intl.formatMessage({id: 'page.body.wallets.tabs.deposit.ccy.message.pending'});
-
-        const buttonLabel = `${this.translate('page.body.wallets.tabs.deposit.ccy.button.generate')} ${wallet.currency.toUpperCase()} ${this.translate('page.body.wallets.tabs.deposit.ccy.button.address')}`;
 
         if (wallets[selectedWalletIndex].type === 'coin') {
             return (
@@ -410,13 +406,12 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                     <CurrencyInfo wallet={wallets[selectedWalletIndex]}/>
                     {this.getBlurDeposit(isAccountActivated)}
                     <DepositCrypto
-                        buttonLabel={buttonLabel}
                         copiableTextFieldText={this.translate('page.body.wallets.tabs.deposit.ccy.message.address')}
                         error={error}
                         handleGenerateAddress={this.handleGenerateAddress}
                         handleOnCopy={this.handleOnCopy}
-                        text={text}
                         wallet={wallet}
+                        currency={currencyItem}
                     />
                     {wallet.currency && <WalletHistory label="deposit" type="deposits" currency={wallet.currency} />}
                 </React.Fragment>
