@@ -8,7 +8,7 @@ const cryptoRegExps = {
     xmr: '4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}',
     neo: 'A[0-9a-zA-Z]{33}',
     xrp: 'r[0-9a-zA-Z]{24,34}?.{1,}',
-    bitzlatoAddress: '[a-z0-9_]+',
+    bitzlatoAddress: '[a-zA-Z0-9_]+',
 };
 
 const chainTokens = {

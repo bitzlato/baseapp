@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
-import { validateBeneficiaryAddress, validateBeneficiaryTestnetAddress } from '../../helpers';
+import { validateBeneficiaryAddress as validator, validateBeneficiaryTestnetAddress as testnetValidator } from '../../helpers';
 import { Modal } from '../../mobile/components/Modal';
 import {
     alertPush,
@@ -208,17 +208,19 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
         fiatNameFocused,
     ]);
 
-    const validateCoinAddressFormat = React.useCallback((value: string) => {
-        const cur = enableInvoice ? 'bitzlatoAddress' : currency;
+    const validateCoinAddressFormat = (value: string) => {
+        const v = value.trim();
 
-        const coinAddressValidator = validateBeneficiaryAddress.cryptocurrency(cur, true);
-        setCoinAddressValid(coinAddressValidator.test(value.trim()));
-
-        if (!enableInvoice) {
-            const coinAddressTestnetValidator = validateBeneficiaryTestnetAddress.cryptocurrency(currency, true);
-            setCoinTestnetAddressValid(coinAddressTestnetValidator.test(value.trim()));
+        if (enableInvoice) {
+            const isBitzlatoAndNotBtc =
+                validator.cryptocurrency('bitzlatoAddress', true).test(v) &&
+                !validator.cryptocurrency('btc', true).test(v);
+            setCoinAddressValid(isBitzlatoAndNotBtc);
+        } else {
+            setCoinAddressValid(validator.cryptocurrency(currency, true).test(v));
+            setCoinTestnetAddressValid(testnetValidator.cryptocurrency(currency, true).test(v));
         }
-    }, [currency, enableInvoice]);
+    };
 
     const handleChangeFieldValue = React.useCallback((key: string, value: string) => {
         switch (key) {
