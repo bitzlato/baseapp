@@ -22,6 +22,6 @@ export const getBitzlatoLink = (locale: string, section: string) => {
             return faqLinks[locale] ?? faqLinks.en;
 
         default:
-            return `https://bitzlato.com/${locale !== 'en' ? '' : `${locale}/`}${section}`;
+            return `https://bitzlato.com/${locale === 'en' ? '' : `${locale}/`}${section}`;
     }
 };
