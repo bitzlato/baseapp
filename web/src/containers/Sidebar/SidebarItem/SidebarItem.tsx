@@ -29,7 +29,7 @@ export const SidebarItem: FC<Props> = ({ children, icon, to, external = false, o
 
     if (external) {
         return (
-            <a className={s.item} href={to} target="_blank" rel="noopener noreferrer" onClick={onClick}>
+            <a className={s.item} href={to} onClick={onClick}>
                 {body}
             </a>
         );

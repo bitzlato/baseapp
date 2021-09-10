@@ -13,7 +13,7 @@ type Props = {
 export const HeaderNavigationItem: FC<Props> = ({ children, to, external = false }: Props) => {
     if (external) {
         return (
-            <a className={s.item} href={to} target="_blank" rel="noopener noreferrer">
+            <a className={s.item} href={to}>
                 {children}
             </a>
         );
