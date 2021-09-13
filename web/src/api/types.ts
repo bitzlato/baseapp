@@ -20,7 +20,6 @@ declare global {
         isResizable: string | boolean;
         isDraggable: string | boolean;
         showLanding: string | boolean;
-        sentryEnabled: string | boolean;
         captchaLogin: string | boolean;
         usernameEnabled: string | boolean;
         gaTrackerKey: string;

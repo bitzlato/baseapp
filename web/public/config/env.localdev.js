@@ -32,7 +32,6 @@ window.env = {
     balancesFetchInterval: '3000',
     passwordEntropyStep: 14,
     directSigninUrl: 'https://bitzlato.com/auth/login?ex=true&returnTo=http://localhost:8080/success_signin/bitzlato.html',
-    sentryEnabled: false,
     kycSteps: [
       'email',
       // 'phone',
