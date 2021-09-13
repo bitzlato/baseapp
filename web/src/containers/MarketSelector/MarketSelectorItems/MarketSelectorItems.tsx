@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useState } from 'react';
 import cn from 'classnames';
 import { Market, Ticker } from 'src/modules';
-import { Decimal, Table } from 'src/components';
+import { Decimal, Table, CellData } from 'src/components';
 import { useT } from 'src/hooks/useT';
 import { SortIcon } from 'src/components/SortIcon/SortIcon';
 import { MarketName } from 'src/components/MarketName/MarketName';
@@ -130,7 +130,7 @@ export const MarketSelectorItems: FC<Props> = ({
                   });
 
                   return [
-                      <MarketName name={item.name} />,
+                      item.name,
                       <span className={cellClassName}>
                           {Decimal.format(Number(item.last), item.price_precision, ',')}
                       </span>,
@@ -154,10 +154,24 @@ export const MarketSelectorItems: FC<Props> = ({
             </button>
         );
     });
+    const renderCells = [
+        (data: CellData) => {
+            if (typeof data === 'string') {
+                return <MarketName name={data} />;
+            }
+        },
+    ];
 
     return (
         <div className={s.items}>
-            <Table data={data} header={header} onSelect={handleSelect} selectedKey={currentMarket?.name} />
+            <Table
+                data={data}
+                header={header}
+                onSelect={handleSelect}
+                selectedKey={currentMarket?.name}
+                rowKeyIndex={0}
+                renderCells={renderCells}
+            />
         </div>
     );
 };
