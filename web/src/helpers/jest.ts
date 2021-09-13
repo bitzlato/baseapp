@@ -21,7 +21,6 @@ export const mockConfig: Config = {
     isResizable: false,
     isDraggable: false,
     showLanding: true,
-    sentryEnabled: false,
     captchaLogin: false,
     usernameEnabled: false,
     gaTrackerKey: '',

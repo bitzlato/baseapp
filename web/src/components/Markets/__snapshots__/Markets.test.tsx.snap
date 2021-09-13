@@ -1352,7 +1352,6 @@ exports[`Markets should render empty data 1`] = `
         "resource.user.missing_old_password": "Old password is missing",
         "resource.user.missing_topic": "Topic is missing",
         "resource.user.no_activity": "No activity recorded or wrong topic",
-        "sentry.report_feedback": "Report feedback",
         "server.internal_error": "Internal Server Error",
         "success.addresses.accepted": "Addresses upload was successful",
         "success.api_keys.copied.access": "Access key was copied",

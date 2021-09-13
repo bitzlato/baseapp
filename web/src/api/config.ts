@@ -16,7 +16,6 @@ export const defaultConfig: Config = {
     isResizable: false,
     isDraggable: false,
     showLanding: true,
-    sentryEnabled: false,
     captchaLogin: false,
     usernameEnabled: false,
     gaTrackerKey: '',
@@ -80,7 +79,6 @@ export const isResizableGrid = () => convertToBoolean(Cryptobase.config.isResiza
 export const isDraggableGrid = () => convertToBoolean(Cryptobase.config.isDraggable);
 export const isFinexEnabled = () => convertToBoolean(Cryptobase.config.finex);
 export const showLanding = () => convertToBoolean(Cryptobase.config.showLanding);
-export const sentryEnabled = () => convertToBoolean(Cryptobase.config.sentryEnabled);
 export const captchaLogin = () => convertToBoolean(Cryptobase.config.captchaLogin);
 export const minutesUntilAutoLogout = () => Cryptobase.config.minutesUntilAutoLogout;
 export const sessionCheckInterval = () => Cryptobase.config.sessionCheckInterval;

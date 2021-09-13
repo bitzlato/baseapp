@@ -1,52 +1,24 @@
-import * as Sentry from '@sentry/browser';
 import * as React from 'react';
-import { injectIntl } from 'react-intl';
-import { IntlProps } from '../../';
 
-interface ErrorWrapperState {
-    eventId: any; // tslint:disable-line
-    hasError: boolean;
-}
-
-interface ErrorWrapperProps {
-    children: React.ReactNode;
-}
-
-type ErrorProps = ErrorWrapperProps & IntlProps;
-
-class HandleErrorWrapper extends React.Component<ErrorProps, ErrorWrapperState> {
-    constructor(props) {
+export class ErrorWrapper extends React.Component<{}, { error: string }> {
+    constructor(props: {}) {
         super(props);
-
-        this.state = {
-            eventId: null,
-            hasError: false,
-        };
+        this.state = { error: '' };
     }
 
-    public static getDerivedStateFromError() {
-        return { hasError: true };
+    static getDerivedStateFromError(error: string | Error) {
+        return { error: error.toString() };
     }
 
-    public componentDidCatch(error, info) {
-        Sentry.withScope(scope => {
-            scope.setExtras(info);
-            const eventId = Sentry.captureException(error);
-            this.setState({eventId});
-        });
+    componentDidCatch(error: Error | string, info: React.ErrorInfo) {
+        this.setState({ error: error.toString() });
     }
 
-    public render() {
-        if (this.state.hasError) {
-            return (
-                <button onClick={() => Sentry.showReportDialog({ eventId: this.state.eventId })}>
-                    {this.props.intl.formatMessage({ id: 'sentry.report_feedback' })}
-                </button>
-            );
+    render() {
+        const { error } = this.state;
+        if (error) {
+            return <div>{error}</div>;
         }
-
         return this.props.children;
     }
 }
-
-export const ErrorWrapper = injectIntl(HandleErrorWrapper);
