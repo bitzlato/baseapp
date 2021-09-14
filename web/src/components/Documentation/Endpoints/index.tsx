@@ -8,7 +8,7 @@ export const DocumentationEndpoints: React.FC = () => {
 
     if (documentation?.paths && Object.keys(documentation?.paths).length) {
         return (
-            <div className="pg-documentation-item pg-documentation-endpoints" id="endpoints">
+            <div className="pg-documentation-item" id="endpoints">
                 {Object.keys(documentation?.paths).map((key, index) => (
                     <DocumentationEndpointsItem
                         key={key}

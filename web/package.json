@@ -66,6 +66,7 @@
         "stylelint-prettier": "^1.1.2",
         "stylelint-scss": "^3.18.0",
         "stylelint-selector-bem-pattern": "^2.1.0",
+        "swagger-ui-react": "^3.52.2",
         "ts-loader": "^8.0.2",
         "ua-parser-js": "^0.7.19",
         "url-loader": "^4.1.1",

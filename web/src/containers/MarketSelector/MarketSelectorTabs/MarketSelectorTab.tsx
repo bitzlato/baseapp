@@ -1,22 +1,23 @@
 import React, { FC } from 'react';
 import cn from 'classnames';
-import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 
 import s from './MarketSelectorTab.postcss';
 
 interface Props {
-    children: string;
-    currency: string;
+    id: string;
     active?: boolean;
+    activeId?: string;
     onClick: (carrency: string) => void;
 }
 
-export const MarketSelectorTab: FC<Props> = ({ children, currency, active, onClick }: Props) => {
-    const handleClick = () => onClick(currency);
+export const MarketSelectorTab: FC<Props> = props => {
+    const handleClick = () => props.onClick(props.id);
+
+    const className = cn(s.tab, (props.active || props.activeId === props.id) && s.tabActive);
 
     return (
-        <button className={cn(s.tab, active && s.tabActive)} type="button" onClick={handleClick}>
-            <CurrencyTicker symbol={children} />
+        <button className={className} type="button" onClick={handleClick}>
+            {props.children}
         </button>
     );
 };
