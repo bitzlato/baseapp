@@ -1,20 +1,23 @@
 import React, { FC, useMemo, useState } from 'react';
+import cn from 'classnames';
 
 import s from './MarketSelectorTabs.postcss';
 import { Market } from 'src/modules';
 import { useT } from 'src/hooks/useT';
 import { MarketSelectorTab } from './MarketSelectorTab';
 import { MarketSelectorTabsDropdown } from './MarketSelectorTabsDropdown';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 
 interface Props {
     markets: readonly Market[];
     searchValue: string;
     onSelect: (value: string) => void;
+    className?: string;
 }
 
 const ITEM_ALL = 'ALL' as const;
 
-export const MarketSelectorTabs: FC<Props> = ({ markets, searchValue, onSelect }: Props) => {
+export const MarketSelectorTabs: FC<Props> = ({ markets, searchValue, onSelect, className }: Props) => {
     const t = useT();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const currencies = useMemo((): readonly string[] => {
@@ -38,18 +41,18 @@ export const MarketSelectorTabs: FC<Props> = ({ markets, searchValue, onSelect }
     const handleTogglerClick = () => setIsDropdownOpen(!isDropdownOpen);
 
     return (
-        <div className={s.tabs}>
-            <MarketSelectorTab currency={ITEM_ALL} active={searchValue === ''} onClick={handleTabClick}>
+        <div className={cn(s.tabs, className)}>
+            <MarketSelectorTab id={ITEM_ALL} active={searchValue === ''} onClick={handleTabClick}>
                 {t('page.body.openOrders.tab.all')}
             </MarketSelectorTab>
             {primary.map(currency => (
                 <MarketSelectorTab
                     key={currency}
-                    currency={currency}
+                    id={currency}
                     active={currency === searchValueUpperCase}
                     onClick={handleTabClick}
                 >
-                    {currency.toUpperCase()}
+                    <CurrencyTicker symbol={currency.toUpperCase()} />
                 </MarketSelectorTab>
             ))}
             {secondary.length > 0 && (
@@ -57,11 +60,11 @@ export const MarketSelectorTabs: FC<Props> = ({ markets, searchValue, onSelect }
                     {secondary.map(currency => (
                         <MarketSelectorTab
                             key={currency}
-                            currency={currency}
+                            id={currency}
                             active={currency === searchValueUpperCase}
                             onClick={handleTabClick}
                         >
-                            {currency.toUpperCase()}
+                            <CurrencyTicker symbol={currency.toUpperCase()} />
                         </MarketSelectorTab>
                     ))}
                 </MarketSelectorTabsDropdown>

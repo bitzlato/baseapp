@@ -10,7 +10,7 @@ export const DocumentationModels: React.FC = () => {
 
     if (documentation?.definitions && Object.keys(documentation?.definitions).length) {
         return (
-            <div className="pg-documentation-item pg-documentation-models" id="models">
+            <div className="pg-documentation-item" id="models">
                 <h4>{intl.formatMessage({ id: 'page.documentation.models.title' })}</h4>
                 {Object.keys(documentation?.definitions).map(key => (
                     <DocumentationModelsItem
