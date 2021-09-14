@@ -1,6 +1,12 @@
 {
+    "ts-node": {
+        "transpileOnly": true,
+        "compilerOptions": {
+            "module": "commonjs",
+        }
+    },
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "amd",
         "target": "es6",
         "lib": ["dom", "dom.iterable", "es6", "scripthost", "webworker", "es5", "es7", "es2017"],
         "types": ["node", "jest", "webpack-env"],

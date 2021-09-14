@@ -1,3 +1,4 @@
 # dependencies
 /node_modules
 *.postcss.d.ts
+stats.json
