@@ -17,6 +17,7 @@ const config: webpack.Configuration = {
     output: {
         path: BUILD_DIR,
         filename: '[name].js',
+        chunkFilename: `[id].js?[contenthash]`,
         globalObject: 'this',
         publicPath: '/',
     },
