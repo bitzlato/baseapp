@@ -10,7 +10,7 @@ export const DocumentationEndpointsItem: React.FC<ItemInterface> = (props: ItemI
 
     return (
         <div className="pg-documentation-item">
-            <h4 className="text-transform--initial">{title}</h4>
+            <h2 className="text-transform--initial">{title}</h2>
             {item && Object.keys(item).length ? Object.keys(item).map((key, index) => (
                 <RequestTypeItem
                     item={item[key]}
