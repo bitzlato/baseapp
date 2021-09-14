@@ -74,6 +74,10 @@ const config: webpack.Configuration = {
                     },
                 ],
             },
+            {
+                test: /\.md$/,
+                use: 'raw-loader',
+            },
         ],
     },
     resolve: {

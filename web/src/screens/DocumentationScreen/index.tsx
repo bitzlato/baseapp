@@ -14,16 +14,24 @@ export const DocumentationScreen: React.FC = () => {
             <div className="pg-documentation__content">
                 <div className={cn(s.tabs, 'cr-self-start')}>
                     <MarketSelectorTab id="0" onClick={setActiveTab} activeId={activeTab}>
-                        {'Documentation'}
+                        {'API'}
                     </MarketSelectorTab>
                     <MarketSelectorTab id="1" onClick={setActiveTab} activeId={activeTab}>
-                        {'Swagger'}
+                        {'Swagger UI'}
+                    </MarketSelectorTab>
+                    <MarketSelectorTab id="2" onClick={setActiveTab} activeId={activeTab}>
+                        {'WebSocket API'}
                     </MarketSelectorTab>
                 </div>
                 {activeTab === '0' && <Doc />}
                 {activeTab === '1' && (
                     <React.Suspense fallback>
                         <Swagger />
+                    </React.Suspense>
+                )}
+                {activeTab === '2' && (
+                    <React.Suspense fallback>
+                        <WebSocket />
                     </React.Suspense>
                 )}
             </div>
@@ -44,4 +52,8 @@ const Doc: React.FC = () => {
 
 const Swagger = React.lazy(() =>
     import(/* webpackChunkName: "swagger" */ './Swagger').then(m => ({ default: m.Swagger }))
+);
+
+const WebSocket = React.lazy(() =>
+    import(/* webpackChunkName: "websocket" */ './WebSocket').then(m => ({ default: m.WebSocket }))
 );

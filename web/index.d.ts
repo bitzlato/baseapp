@@ -5,6 +5,7 @@ declare module '*.svg' {
 
 declare module '*.png';
 declare module '*.jpg';
+declare module '*.md';
 
 declare module '*.postcss' {
     interface IClassNames {
