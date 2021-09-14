@@ -9,12 +9,12 @@ export const DocumentationHeader: React.FC = () => {
 
     return (
         <div className="pg-documentation-item pg-documentation-header">
-            <h3>{documentation?.info?.title}</h3>
+            <h1>{documentation?.info?.title}</h1>
             <div className="pg-documentation-header__description">
                 <span>{documentation?.info?.description}</span>
             </div>
             <div className="pg-documentation-header__version">
-                <h4>{intl.formatMessage({ id: 'page.documentation.header.version.title' })}&nbsp;{documentation?.info?.version}</h4>
+                <h2>{intl.formatMessage({ id: 'page.documentation.header.version.title' })}&nbsp;{documentation?.info?.version}</h2>
             </div>
             <div className="pg-documentation-header__contact-info">
                 <span>{intl.formatMessage({ id: 'page.documentation.header.contactInfo.title' })}</span>

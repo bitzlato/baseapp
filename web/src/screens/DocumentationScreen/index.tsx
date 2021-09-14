@@ -16,11 +16,19 @@ export const DocumentationScreen: React.FC = () => {
                     <MarketSelectorTab id="1" onClick={setActiveTab} activeId={activeTab}>
                         {'Swagger UI'}
                     </MarketSelectorTab>
+                    <MarketSelectorTab id="2" onClick={setActiveTab} activeId={activeTab}>
+                        {'WebSocket API'}
+                    </MarketSelectorTab>
                 </div>
-                {activeTab === '0' && <Doc />}
+                {activeTab === '0' && <ApiDoc />}
                 {activeTab === '1' && (
                     <React.Suspense fallback>
                         <Swagger />
+                    </React.Suspense>
+                )}
+                {activeTab === '2' && (
+                    <React.Suspense fallback>
+                        <WebSocketApi />
                     </React.Suspense>
                 )}
             </div>
@@ -28,7 +36,7 @@ export const DocumentationScreen: React.FC = () => {
     );
 };
 
-const Doc: React.FC = () => {
+const ApiDoc: React.FC = () => {
     useDocumentationFetch();
     return (
         <>
@@ -41,4 +49,8 @@ const Doc: React.FC = () => {
 
 const Swagger = React.lazy(() =>
     import(/* webpackChunkName: "swagger" */ './Swagger').then(m => ({ default: m.Swagger }))
+);
+
+const WebSocketApi = React.lazy(() =>
+    import(/* webpackChunkName: "websocket" */ './WebSocketApi').then(m => ({ default: m.WebSocketApi }))
 );

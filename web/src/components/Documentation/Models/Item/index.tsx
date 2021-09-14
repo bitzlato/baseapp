@@ -78,7 +78,7 @@ export const DocumentationModelsItem: React.FC<ItemInterface> = (props: ItemInte
 
     return (
         <div className="pg-documentation-item pg-documentation-models-item" id={`models/${title}`}>
-            <h5>{title}</h5>
+            <h3>{title}</h3>
             <span>{item.description}</span>
             {item.properties && Object.keys(item.properties).length ? (
                 <Table

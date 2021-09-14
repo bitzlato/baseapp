@@ -65,7 +65,7 @@ export const ResponsesItem: React.FC<ItemInterface> = (props: ItemInterface) => 
     if (item.responses && Object.keys(item.responses).length) {
         return (
             <React.Fragment>
-                <h5>{intl.formatMessage({ id: 'page.documentation.endpoints.requestTypeItem.responses.title' })}</h5>
+                <h3>{intl.formatMessage({ id: 'page.documentation.endpoints.requestTypeItem.responses.title' })}</h3>
                 <Table
                     header={getTableHeaders()}
                     data={getTableData()}

@@ -48,7 +48,7 @@ export const ParametersItem: React.FC<ItemInterface> = (props: ItemInterface) =>
     if (item.parameters && Object.keys(item.parameters).length) {
         return (
             <React.Fragment>
-                <h5>{intl.formatMessage({ id: 'page.documentation.endpoints.requestTypeItem.parameters.title' })}</h5>
+                <h3>{intl.formatMessage({ id: 'page.documentation.endpoints.requestTypeItem.parameters.title' })}</h3>
                 <Table
                     header={getTableHeaders()}
                     data={getTableData()}
