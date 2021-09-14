@@ -121,12 +121,6 @@ const config = merge(commonConfig, {
                 test: /\.(tsx|ts)?$/,
                 use: [
                     {
-                        loader: 'thread-loader',
-                        options: {
-                            poolTimeout: 2000,
-                        },
-                    },
-                    {
                         loader: 'ts-loader',
                         options: {
                             transpileOnly: true,

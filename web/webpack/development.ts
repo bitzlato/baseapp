@@ -67,7 +67,6 @@ const config = merge(commonConfig, {
                             reloadAll: true,
                         },
                     },
-                    'cache-loader',
                     'css-loader',
                     'sass-loader',
                     'postcss-loader',
@@ -76,13 +75,6 @@ const config = merge(commonConfig, {
             {
                 test: /\.(tsx|ts)?$/,
                 use: [
-                    'cache-loader',
-                    {
-                        loader: 'thread-loader',
-                        options: {
-                            poolTimeout: Infinity,
-                        },
-                    },
                     {
                         loader: 'ts-loader',
                         options: {
