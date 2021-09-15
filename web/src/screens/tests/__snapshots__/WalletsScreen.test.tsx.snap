@@ -12,7 +12,7 @@ Array [
       <div
         class="col-md-5 col-sm-12 col-12 "
       >
-        <ul
+        <div
           class="cr-wallet-list"
         />
       </div>

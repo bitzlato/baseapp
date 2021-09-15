@@ -8,8 +8,11 @@
 
   &-balance {
     display: flex;
+    flex-direction: row;
     flex-grow: 2;
+    flex-wrap: wrap-reverse;
     justify-content: space-between;
+    margin-left: 18px;
   }
 
   &__image-icon {
@@ -25,7 +28,7 @@
     }
 
     &__amount-locked {
-      margin-right: calc(var(--gap) * 8);
+      margin-right: var(--gap);
     }
 
     &__balance,
