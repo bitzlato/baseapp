@@ -31,6 +31,29 @@ exports[`DepositCrypto should match snapshot 1`] = `
   }
 >
   <Component
+    currency={
+      Object {
+        "base_factor": 100000000,
+        "deposit_enabled": true,
+        "deposit_fee": "0.0",
+        "explorer_address": "",
+        "explorer_transaction": "",
+        "icon_id": "",
+        "icon_url": "",
+        "id": "",
+        "min_confirmations": 6,
+        "min_deposit_amount": "0.0",
+        "min_withdraw_amount": "0.0",
+        "name": "",
+        "precision": 8,
+        "symbol": "",
+        "type": "coin",
+        "withdraw_fee": "0.0",
+        "withdraw_limit_24h": "0.0",
+        "withdraw_limit_72h": "0.0",
+        "withdrawal_enabled": true,
+      }
+    }
     dimensions={118}
     disabled={false}
     error="error123"

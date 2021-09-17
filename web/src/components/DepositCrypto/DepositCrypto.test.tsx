@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { defaultCurrency } from 'src/modules/public/currencies/defaults';
 import { rootReducer, Wallet } from '../../modules';
 import { CopyableTextField } from '../CopyableTextField';
 import { DepositCrypto } from './';
@@ -31,8 +32,10 @@ describe('DepositCrypto', () => {
                     handleOnCopy={handleOnCopy}
                     wallet={wallet}
                     disabled={false}
-                />,
-            </Provider>,
+                    currency={defaultCurrency}
+                />
+                ,
+            </Provider>
         );
     });
 

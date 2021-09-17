@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 
 import { defaultFormatterOptions, format, FormatterOptions } from './formatter';
-import { Money } from './Money';
+import { Currency, Money } from './Money';
 import s from './MoneyFormat.postcss';
 
 type Renderer = (amountFormatted: string) => ReactElement;
@@ -31,3 +31,6 @@ export const MoneyFormat: FC<Props> = ({ money, children, ...options }: Props) =
         </>
     );
 };
+
+export const money = (amount: Money['amount'], currency: Money['currency']) => ({ amount, currency });
+export const ccy = (code: Currency['code'], minorUnit: Currency['minorUnit']) => ({ code, minorUnit });

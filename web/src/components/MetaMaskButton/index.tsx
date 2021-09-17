@@ -60,12 +60,10 @@ export const MetaMaskButtonComponent: React.FunctionComponent<Props> = (props: P
     }, [!!error, dispatch]);
 
     return (
-        <div className="pg-metamask">
-            <MetaMaskLogo
-                className="pg-metamask__logo-icon"
-                onClick={handleConnectWallet}
-            />
-        </div>
+        <MetaMaskLogo
+            className="pg-metamask"
+            onClick={handleConnectWallet}
+        />
     );
 };
 

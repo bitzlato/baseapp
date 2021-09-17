@@ -11,24 +11,18 @@ export interface SummaryFieldProps {
      * The string to use as the label for the SummaryField.
      */
     message: string;
-    /**
-     * Content will be displayed instead of amount and currency, if it is necessary
-     */
-    content: JSX.Element;
 }
 
 /**
  * Component to display currency amount with specific label.
  */
-export const SummaryFieldComponent: React.FC<SummaryFieldProps> = ({ message, className, content }) => {
-    const cx = classnames('cr-summary-field', className);
+export const SummaryField: React.FC<SummaryFieldProps> = ({ message, className, children }) => {
+    const cx = classnames('cr-summary-field', 'cr-row-spacing', className);
 
     return (
         <div className={cx}>
             <span className="cr-summary-field-message">{message}</span>
-            <span className="cr-summary-field-content">{content}</span>
+            <span className="cr-summary-field-content">{children}</span>
         </div>
     );
 };
-
-export const SummaryField = React.memo(SummaryFieldComponent);

@@ -4,11 +4,10 @@ import { SummaryField, SummaryFieldProps } from './';
 
 const defaultProps: SummaryFieldProps = {
     message: 'Message',
-    content: <div>Content</div>,
 };
 
 const setup = (props: Partial<SummaryFieldProps> = {}) =>
-    shallow(<SummaryField {...{ ...defaultProps, ...props }} />);
+    shallow(<SummaryField {...{ ...defaultProps, ...props }}><div>Content</div></SummaryField>);
 
 describe('SummaryField', () => {
     it('should render', () => {
