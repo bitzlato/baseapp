@@ -4,18 +4,18 @@ import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+    Currency,
     depositsCreate,
     selectDepositsCreateLoading,
     selectDepositsCreateSuccess,
     selectMobileDeviceState,
 } from '../../modules';
 import { CustomInput } from '../CustomInput';
-import { MinAmountWarning } from './MinAmountWarning';
+import { DepositSummary } from './DepositSummary';
 
 interface Props {
-    currency: string;
+    currency: Currency;
     handleCloseModal: () => void;
-    minDepositAmount: string;
 }
 
 const DepositModalComponent: React.FC<Props> = (props: Props) => {
@@ -68,13 +68,13 @@ const DepositModalComponent: React.FC<Props> = (props: Props) => {
     const handleSubmit = React.useCallback(() => {
       setSubmitted(true);
         const payload = {
-            currency: currency,
+            currency: currency.id,
             amount: amount,
         };
 
          dispatch(depositsCreate(payload));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [amount, currency, handleCloseModal, handleClearModalsInputs]);
+    }, [amount, currency.id, handleCloseModal, handleClearModalsInputs]);
 
     const getState = React.useCallback(key => {
         switch (key) {
@@ -89,7 +89,7 @@ const DepositModalComponent: React.FC<Props> = (props: Props) => {
 
     const validateAmount = React.useCallback((value: string) => {
       const num = parseFloat(value);
-       setAmountValid(num > parseFloat(props.minDepositAmount));
+       setAmountValid(num > parseFloat(props.currency.min_deposit_amount));
     }, []);
 
     const handleChangeFieldValue = React.useCallback((key: string, value: string) => {
@@ -128,7 +128,7 @@ const DepositModalComponent: React.FC<Props> = (props: Props) => {
         return (
             <div className="cr-email-form__form-content">
                 {renderField('amount')}
-                <MinAmountWarning currency={currency} minDepositAmount={props.minDepositAmount} />
+                <DepositSummary currency={currency} />
                 <div className="cr-email-form__button-wrapper">
                     <Button
                         disabled={isDisabled}

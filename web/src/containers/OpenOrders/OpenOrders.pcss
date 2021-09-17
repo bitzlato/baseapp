@@ -27,14 +27,15 @@
           .custom-control-label {
             color: var(--secondary-contrast-cta-color);
 
-            &:after, &:before {
+            &::after,
+            &::before {
               height: 18px;
-              width: 18px;
               left: -26px;
               top: 0;
+              width: 18px;
             }
 
-            &:before {
+            &::before {
               background-color: var(--subheader-background-color);
             }
           }
@@ -51,13 +52,13 @@
     &__cancel {
       color: var(--system-red);
       cursor: pointer;
-      text-align: right;
-      letter-spacing: 0.06em;
-      font-weight: bold;
       font-size: 10px;
-      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 0.06em;
       line-height: 17px;
       margin-right: 2px;
+      text-align: right;
+      text-transform: uppercase;
       transition: 0.2s;
 
       &:hover {
@@ -111,8 +112,8 @@
 
 .cr-open-orders .cr-table th,
 .cr-open-orders .cr-table td {
-  width: auto !important;
   text-align: right;
+  width: auto !important;
 
   &:first-child,
   &:nth-child(2),
@@ -191,15 +192,38 @@
   }
 }
 
+.cr-row-spacing-2x {
+  & > *:not(:first-child) {
+    margin-left: calc(var(--gap) * 2);
+  }
+}
+
 .cr-col-spacing {
   & > *:not(:first-child) {
     margin-top: var(--gap);
   }
 }
 
+.cr-col-spacing-2x {
+  & > *:not(:first-child) {
+    margin-top: calc(var(--gap) * 2);
+  }
+}
+
+.cr-col-spacing-3x {
+  & > *:not(:first-child) {
+    margin-top: calc(var(--gap) * 3);
+  }
+}
+
 .cr-row {
   align-items: center;
   display: flex;
+}
+
+.cr-col {
+  display: flex;
+  flex-direction: column;
 }
 
 .cr-grow {

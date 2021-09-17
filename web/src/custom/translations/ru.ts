@@ -198,7 +198,8 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Пополнить кошелек',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Адрес скопирован',
     'page.body.wallets.tabs.deposit.ccy.button.generate': 'Сгенерировать {currency} адресс',
-    'page.body.wallets.tabs.deposit.ccy.message.minimum': 'Минимальная сумма депозита: {amount} {currency}',
+    'page.body.wallets.tabs.deposit.ccy.message.minimum': 'Минимальная сумма депозита',
+    'page.body.wallets.tabs.deposit.ccy.message.fee': 'Комиссия',
     'page.body.wallets.tabs.deposit.ccy.message.warning': 'Внесённый вами актив будет потерян, если сумма депозита меньше минимальной',
     'page.body.wallets.tabs.deposit.ccy.button.create': 'Создать депозит',
 
@@ -222,6 +223,9 @@ export const ru: LangType = {
     'page.body.wallets.tabs.withdraw.content.code2fa': '2FA код',
     'page.body.wallets.tabs.withdraw.content.fee': 'Комиссия',
     'page.body.wallets.tabs.withdraw.content.total': 'Сумма вывода',
+    'page.body.wallets.tabs.withdraw.content.min': 'Минимальная сумму вывода',
+    'page.body.wallets.tabs.withdraw.content.limit24h': 'Лимит на вывод за 24ч',
+    'page.body.wallets.tabs.withdraw.content.limit72h': 'Лимит на вывод за 72ч',
     'page.body.wallets.tabs.withdraw.content.button': 'ВЫВЕСТИ',
 
     'page.body.wallets.tabs.withdraw.disabled.message': 'Вывод средств был отключен администрацией',

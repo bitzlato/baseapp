@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { selectMemberLevels } from 'src/modules';
+import { defaultCurrency } from 'src/modules/public/currencies/defaults';
 import { Blur } from '../../../components/Blur';
 import { ModalWithdrawSubmit, Withdraw } from '../../../containers';
 import { useBeneficiariesFetch, useCurrenciesFetch } from '../../../hooks';
@@ -47,8 +48,6 @@ const WalletWithdrawBodyComponent = props => {
     const fixed = (props.wallet || { fixed: 0 }).fixed;
     const withdrawAmountLabel = React.useMemo(() => intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.amount' }), [intl]);
     const withdraw2faLabel = React.useMemo(() => intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' }), [intl]);
-    const withdrawFeeLabel = React.useMemo(() => intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.fee' }), [intl]);
-    const withdrawTotalLabel = React.useMemo(() => intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.total' }), [intl]);
     const withdrawButtonLabel = React.useMemo(() => intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.button' }), [intl]);
     const currencyItem = (currencies && currencies.find(item => item.id === currency));
 
@@ -119,7 +118,7 @@ const WalletWithdrawBodyComponent = props => {
             </div>
         );
     };
-    
+
     useBeneficiariesFetch();
     useCurrenciesFetch();
 
@@ -168,11 +167,10 @@ const WalletWithdrawBodyComponent = props => {
                 onClick={toggleConfirmModal}
                 withdrawAmountLabel={withdrawAmountLabel}
                 withdraw2faLabel={withdraw2faLabel}
-                withdrawFeeLabel={withdrawFeeLabel}
-                withdrawTotalLabel={withdrawTotalLabel}
                 withdrawDone={withdrawData.withdrawDone}
                 withdrawButtonLabel={withdrawButtonLabel}
                 twoFactorAuthRequired={isTwoFactorAuthRequired(user.level, user.otp)}
+                ccyInfo={currencyItem ?? defaultCurrency}
             />
         );
     }, [
@@ -186,8 +184,6 @@ const WalletWithdrawBodyComponent = props => {
         currency,
         withdrawAmountLabel,
         withdraw2faLabel,
-        withdrawFeeLabel,
-        withdrawTotalLabel,
         withdrawData.withdrawDone,
         withdrawButtonLabel,
     ]);

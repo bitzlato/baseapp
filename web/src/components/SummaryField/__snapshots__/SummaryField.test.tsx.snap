@@ -2,7 +2,7 @@
 
 exports[`SummaryField should render 1`] = `
 <div
-  className="cr-summary-field"
+  className="cr-summary-field cr-row-spacing"
 >
   <span
     className="cr-summary-field-message"

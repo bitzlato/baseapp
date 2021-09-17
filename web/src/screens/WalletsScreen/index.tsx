@@ -6,6 +6,7 @@ import { connect, MapDispatchToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { defaultCurrency } from 'src/modules/public/currencies/defaults';
 import { IntlProps } from '../../';
 import { Blur, CurrencyInfo, DepositCrypto, DepositFiat, TabPanel, WalletList } from '../../components';
 import { DEFAULT_CCY_PRECISION } from '../../constants';
@@ -506,10 +507,12 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         const {
             user: { level, otp },
             wallets,
+            currencies
         } = this.props;
         const wallet = wallets[selectedWalletIndex];
         const { currency, fee, type, enable_invoice } = wallet;
         const fixed = (wallet || { fixed: 0 }).fixed;
+        const currencyItem = currencies && currencies.find(item => item.id === wallet.currency);
 
         const withdrawProps: WithdrawProps = {
             withdrawDone,
@@ -524,11 +527,10 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 id: 'page.body.wallets.tabs.withdraw.content.amount',
             }),
             withdraw2faLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' }),
-            withdrawFeeLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.fee' }),
-            withdrawTotalLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.total' }),
             withdrawButtonLabel: this.props.intl.formatMessage({
                 id: 'page.body.wallets.tabs.withdraw.content.button',
             }),
+            ccyInfo: currencyItem || defaultCurrency
         };
 
         return otp ? <Withdraw {...withdrawProps} /> : this.isOtpDisabled();
