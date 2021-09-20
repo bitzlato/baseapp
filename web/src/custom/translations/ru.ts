@@ -266,14 +266,14 @@ export const ru: LangType = {
     'page.body.wallets.beneficiaries.dropdown.fiat.name': 'Name',
     'page.body.wallets.beneficiaries.dropdown.fiat.fullName': 'Full Name',
 
-    'page.body.wallets.beneficiaries.addAddress': 'Add Address',
-    'page.body.wallets.beneficiaries.addAddressModal.header': 'Add new withdrawal address',
+    'page.body.wallets.beneficiaries.addAddress': 'Добавить адрес',
+    'page.body.wallets.beneficiaries.addAddressModal.header': 'Добавить новый кошелек для вывода',
 
-    'page.body.wallets.beneficiaries.addAddressModal.body.coinAddress': 'Blockchain Address',
+    'page.body.wallets.beneficiaries.addAddressModal.body.coinAddress': 'Адрес кошелька',
     'page.body.wallets.beneficiaries.addAddressModal.body.bitzlatoAddress': 'Bitzlato Public Name',
     'page.body.wallets.beneficiaries.addAddressModal.body.invalidAddress': 'Invalid Address',
     'page.body.wallets.beneficiaries.addAddressModal.body.testnetAddress': 'WARNING! This is testnet address',
-    'page.body.wallets.beneficiaries.addAddressModal.body.coinBeneficiaryName': 'Beneficiary Name',
+    'page.body.wallets.beneficiaries.addAddressModal.body.coinBeneficiaryName': 'Название адреса (пример Bitzlato Telegram)',
     'page.body.wallets.beneficiaries.addAddressModal.body.coinDescription': 'Description (optional)',
     'page.body.wallets.beneficiaries.addAddressModal.body.coinDestinationTag': 'Destination Tag (optional)',
 
@@ -287,7 +287,7 @@ export const ru: LangType = {
     'page.body.wallets.beneficiaries.addAddressModal.body.fiatIntermediaryBankSwiftCode':
         'Intermediary Bank Swift Code (optional)',
 
-    'page.body.wallets.beneficiaries.addAddressModal.body.button': 'Submit for confirmation',
+    'page.body.wallets.beneficiaries.addAddressModal.body.button': 'Подтвердить',
 
     'page.body.wallets.beneficiaries.confirmationModal.header': 'Confirm new address',
     'page.body.wallets.beneficiaries.confirmationModal.body.text':

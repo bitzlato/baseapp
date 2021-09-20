@@ -311,15 +311,20 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
             'cr-email-form__group--optional': optional,
         });
 
-        const label = formatMessage({ id: `page.body.wallets.beneficiaries.addAddressModal.body.${enableInvoice ? 'bitzlatoAddress' : field}`})
+        let label = '';
+        if (enableInvoice && field === 'coinAddress') {
+            label = formatMessage({ id: 'page.body.wallets.beneficiaries.addAddressModal.body.bitzlatoAddress' });
+        } else {
+            label = formatMessage({ id: `page.body.wallets.beneficiaries.addAddressModal.body.${field}` });
+        }
 
         return (
             <div key={field} className={focusedClass}>
                 <CustomInput
                     type="text"
                     label={label}
-                    placeholder={focused ? '' : formatMessage({ id: `page.body.wallets.beneficiaries.addAddressModal.body.${field}` })}
-                    defaultLabel={field}
+                    placeholder={focused ? '' : formatMessage({ id: label })}
+                    defaultLabel={label}
                     handleChangeInput={value => handleChangeFieldValue(field, value)}
                     // @ts-ignore
                     inputValue={getState(field)}
@@ -361,7 +366,6 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
                 {!coinAddressValid && !coinTestnetAddressValid && coinAddress && renderInvalidAddressMessage}
                 {!coinAddressValid && coinTestnetAddressValid && coinAddress && renderTestnetAddressMessage}
                 {renderAddAddressModalBodyItem('coinBeneficiaryName')}
-                {renderAddAddressModalBodyItem('coinDescription', true)}
                 {isRipple && renderAddAddressModalBodyItem('coinDestinationTag', true)}
                 <div className="cr-email-form__button-wrapper">
                     <Button

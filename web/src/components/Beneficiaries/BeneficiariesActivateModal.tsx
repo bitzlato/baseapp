@@ -116,7 +116,7 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
                     <Button
                         onClick={handleResendConfirmationCode}
                         size="lg"
-                        variant="primary"
+                        variant="secondary"
                     >
                         {formatMessage({ id: 'page.body.wallets.beneficiaries.confirmationModal.body.resendButton' })}
                     </Button>

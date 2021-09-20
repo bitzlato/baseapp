@@ -986,7 +986,7 @@ exports[`Markets should render empty data 1`] = `
         "page.body.wallets.beneficiaries.addAddressModal.body.bitzlatoAddress": "Bitzlato Public Name",
         "page.body.wallets.beneficiaries.addAddressModal.body.button": "Submit for confirmation",
         "page.body.wallets.beneficiaries.addAddressModal.body.coinAddress": "Blockchain Address",
-        "page.body.wallets.beneficiaries.addAddressModal.body.coinBeneficiaryName": "Beneficiary Name",
+        "page.body.wallets.beneficiaries.addAddressModal.body.coinBeneficiaryName": "Address title (example Bitzlato Telegram)",
         "page.body.wallets.beneficiaries.addAddressModal.body.coinDescription": "Description (optional)",
         "page.body.wallets.beneficiaries.addAddressModal.body.coinDestinationTag": "Destination Tag (optional)",
         "page.body.wallets.beneficiaries.addAddressModal.body.fiatAccountNumber": "Account Number",
