@@ -88,17 +88,13 @@ const RenderDeviceContainers = () => {
     );
 };
 
-const defaultRichTextElements = {
-    'br': () => <br />,
-}
-
 export const App = () => {
     useSetMobileDevice();
     const lang = useSelector(selectCurrentLanguage);
     const isMobileDevice = useSelector(selectMobileDeviceState);
 
     return (
-        <IntlProvider locale={lang} messages={getTranslations(lang, isMobileDevice)} key={lang} defaultRichTextElements={defaultRichTextElements}>
+        <IntlProvider locale={lang} messages={getTranslations(lang, isMobileDevice)} key={lang}>
             <Router history={browserHistory}>
                 <ErrorBoundary>
                     <React.Suspense fallback={null}>
