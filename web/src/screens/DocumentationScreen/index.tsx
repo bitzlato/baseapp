@@ -1,43 +1,45 @@
-import * as React from 'react';
-import { MarketSelectorTab } from 'src/containers/MarketSelector/MarketSelectorTabs/MarketSelectorTab';
+import React, { FC, Suspense, lazy } from 'react';
+import { Tabs, TabList, Tab, TabPanel } from 'src/components/Tabs';
+
 import { DocumentationEndpoints, DocumentationHeader, DocumentationModels } from '../../components';
 import { useDocumentationFetch } from '../../hooks';
 
-export const DocumentationScreen: React.FC = () => {
-    const [activeTab, setActiveTab] = React.useState('0');
-
-    return (
-        <div className="pg-documentation">
-            <div className="pg-documentation__content">
-                <div className='cr-row'>
-                    <MarketSelectorTab id="0" onClick={setActiveTab} activeId={activeTab}>
-                        {'API'}
-                    </MarketSelectorTab>
-                    <MarketSelectorTab id="1" onClick={setActiveTab} activeId={activeTab}>
-                        {'Swagger UI'}
-                    </MarketSelectorTab>
-                    <MarketSelectorTab id="2" onClick={setActiveTab} activeId={activeTab}>
-                        {'WebSocket API'}
-                    </MarketSelectorTab>
-                </div>
-                {activeTab === '0' && <ApiDoc />}
-                {activeTab === '1' && (
-                    <React.Suspense fallback>
+export const DocumentationScreen: FC = () => (
+    <div className="pg-documentation">
+        <div className="pg-documentation__content">
+            <Tabs defaultValue="0">
+                <TabList>
+                    <Tab size="large" value="0">
+                        API
+                    </Tab>
+                    <Tab size="large" value="1">
+                        Swagger UI
+                    </Tab>
+                    <Tab size="large" value="2">
+                        WebSocket API
+                    </Tab>
+                </TabList>
+                <TabPanel value="0">
+                    <ApiDoc />
+                </TabPanel>
+                <TabPanel value="1">
+                    <Suspense fallback>
                         <Swagger />
-                    </React.Suspense>
-                )}
-                {activeTab === '2' && (
-                    <React.Suspense fallback>
+                    </Suspense>
+                </TabPanel>
+                <TabPanel value="2">
+                    <Suspense fallback>
                         <WebSocketApi />
-                    </React.Suspense>
-                )}
-            </div>
+                    </Suspense>
+                </TabPanel>
+            </Tabs>
         </div>
-    );
-};
+    </div>
+);
 
-const ApiDoc: React.FC = () => {
+const ApiDoc: FC = () => {
     useDocumentationFetch();
+
     return (
         <>
             <DocumentationHeader />
@@ -47,10 +49,8 @@ const ApiDoc: React.FC = () => {
     );
 };
 
-const Swagger = React.lazy(() =>
-    import(/* webpackChunkName: "swagger" */ './Swagger').then(m => ({ default: m.Swagger }))
-);
+const Swagger = lazy(() => import(/* webpackChunkName: "swagger" */ './Swagger').then(m => ({ default: m.Swagger })));
 
-const WebSocketApi = React.lazy(() =>
+const WebSocketApi = lazy(() =>
     import(/* webpackChunkName: "websocket" */ './WebSocketApi').then(m => ({ default: m.WebSocketApi }))
 );

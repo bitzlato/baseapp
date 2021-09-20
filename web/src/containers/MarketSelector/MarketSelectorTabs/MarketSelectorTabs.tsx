@@ -4,9 +4,9 @@ import cn from 'classnames';
 import s from './MarketSelectorTabs.postcss';
 import { Market } from 'src/modules';
 import { useT } from 'src/hooks/useT';
-import { MarketSelectorTab } from './MarketSelectorTab';
 import { MarketSelectorTabsDropdown } from './MarketSelectorTabsDropdown';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { Tabs, TabList, Tab } from 'src/components/Tabs';
 
 interface Props {
     markets: readonly Market[];
@@ -27,7 +27,7 @@ export const MarketSelectorTabs: FC<Props> = ({ markets, searchValue, onSelect, 
     const secondary = currencies.slice(3);
     const searchValueUpperCase = searchValue.toUpperCase();
 
-    const handleTabClick = (currency: string) => {
+    const handleSelectionChange = (currency: string) => {
         setIsDropdownOpen(false);
 
         if (currency === ITEM_ALL) {
@@ -41,34 +41,29 @@ export const MarketSelectorTabs: FC<Props> = ({ markets, searchValue, onSelect, 
     const handleTogglerClick = () => setIsDropdownOpen(!isDropdownOpen);
 
     return (
-        <div className={cn(s.tabs, className)}>
-            <MarketSelectorTab id={ITEM_ALL} active={searchValue === ''} onClick={handleTabClick}>
-                {t('page.body.openOrders.tab.all')}
-            </MarketSelectorTab>
-            {primary.map(currency => (
-                <MarketSelectorTab
-                    key={currency}
-                    id={currency}
-                    active={currency === searchValueUpperCase}
-                    onClick={handleTabClick}
-                >
-                    <CurrencyTicker symbol={currency.toUpperCase()} />
-                </MarketSelectorTab>
-            ))}
-            {secondary.length > 0 && (
-                <MarketSelectorTabsDropdown opened={isDropdownOpen} onTogglerClick={handleTogglerClick}>
-                    {secondary.map(currency => (
-                        <MarketSelectorTab
-                            key={currency}
-                            id={currency}
-                            active={currency === searchValueUpperCase}
-                            onClick={handleTabClick}
-                        >
-                            <CurrencyTicker symbol={currency.toUpperCase()} />
-                        </MarketSelectorTab>
-                    ))}
-                </MarketSelectorTabsDropdown>
-            )}
-        </div>
+        <Tabs
+            value={searchValueUpperCase === '' ? ITEM_ALL : searchValueUpperCase}
+            onSelectionChange={handleSelectionChange}
+        >
+            <TabList className={cn(s.tabs, className)}>
+                <Tab className={s.tab} size="small" value={ITEM_ALL}>
+                    {t('page.body.openOrders.tab.all')}
+                </Tab>
+                {primary.map(currency => (
+                    <Tab key={currency} className={s.tab} size="small" value={currency}>
+                        <CurrencyTicker symbol={currency.toUpperCase()} />
+                    </Tab>
+                ))}
+                {secondary.length > 0 && (
+                    <MarketSelectorTabsDropdown opened={isDropdownOpen} onTogglerClick={handleTogglerClick}>
+                        {secondary.map(currency => (
+                            <Tab key={currency} className={s.tab} size="small" value={currency}>
+                                <CurrencyTicker symbol={currency.toUpperCase()} />
+                            </Tab>
+                        ))}
+                    </MarketSelectorTabsDropdown>
+                )}
+            </TabList>
+        </Tabs>
     );
 };
