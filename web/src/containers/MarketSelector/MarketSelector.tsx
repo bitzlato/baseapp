@@ -83,7 +83,6 @@ export const MarketSelector: FC = () => {
                     markets={availableMarkets}
                     searchValue={searchValue}
                     onSelect={handleSearchValueChange}
-                    className={s.tabs}
                 />
                 <MarketSelectorItems
                     currentMarket={currentMarket}
