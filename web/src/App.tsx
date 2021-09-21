@@ -5,13 +5,11 @@ import { IntlProvider } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { Router } from 'react-router';
 import { gaTrackerKey } from './api';
-import { ErrorWrapper } from './containers';
-import Bugsnag from '@bugsnag/js';
-import BugsnagPluginReact from '@bugsnag/plugin-react';
 import { useSetMobileDevice } from './hooks';
 import * as mobileTranslations from './mobile/translations';
 import { selectCurrentLanguage, selectMobileDeviceState } from './modules';
 import { languageMap } from './translations';
+import { ErrorBoundary } from './containers/ErrorBoundary/ErrorBoundary';
 
 const gaKey = gaTrackerKey();
 const browserHistory = createBrowserHistory();
@@ -23,21 +21,6 @@ if (gaKey) {
         ReactGA.pageview(location.pathname);
     });
 }
-
-const bugsnagKey = process.env.REACT_APP_BUGSNAG_KEY;
-
-if (bugsnagKey) {
-    Bugsnag.start({
-        apiKey: bugsnagKey || 'DO_NOT_SEND',
-        appVersion: process.env.REACT_APP_BUGSNAG_VERSION,
-        releaseStage: process.env.REACT_APP_RELEASE_STAGE,
-        plugins: [new BugsnagPluginReact()],
-    });
-}
-
-const ErrorBoundary = bugsnagKey
-    ? Bugsnag.getPlugin('react').createErrorBoundary(React)
-    : ErrorWrapper;
 
 /* Mobile components */
 const MobileHeader = React.lazy(() => import('./mobile/components/Header').then(({ Header }) => ({ default: Header })));
