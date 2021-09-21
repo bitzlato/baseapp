@@ -122,7 +122,7 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
     const handleSubmitAddAddressCoinModal = React.useCallback(() => {
         const payload = {
             currency: currency || '',
-            name: coinBeneficiaryName,
+            name: enableInvoice ? coinAddress : coinBeneficiaryName,
             data: JSON.stringify({
                 address: (isRipple && coinDestinationTag ? `${coinAddress}?dt=${coinDestinationTag}` : coinAddress),
             }),
@@ -358,14 +358,14 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
     }, [coinAddress]);
 
     const renderAddAddressModalCryptoBody = React.useMemo(() => {
-        const isDisabled = !coinAddress || !coinBeneficiaryName || (!coinAddressValid && !coinTestnetAddressValid);
+        const isDisabled = !coinAddress || (!enableInvoice && !coinBeneficiaryName) || (!coinAddressValid && !coinTestnetAddressValid);
 
         return (
             <div className="cr-email-form__form-content">
                 {renderAddAddressModalBodyItem('coinAddress')}
                 {!coinAddressValid && !coinTestnetAddressValid && coinAddress && renderInvalidAddressMessage}
                 {!coinAddressValid && coinTestnetAddressValid && coinAddress && renderTestnetAddressMessage}
-                {renderAddAddressModalBodyItem('coinBeneficiaryName')}
+                {!enableInvoice && renderAddAddressModalBodyItem('coinBeneficiaryName')}
                 {isRipple && renderAddAddressModalBodyItem('coinDestinationTag', true)}
                 <div className="cr-email-form__button-wrapper">
                     <Button
