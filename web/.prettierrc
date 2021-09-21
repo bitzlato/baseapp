@@ -1,29 +1,20 @@
 {
-    "jsxBracketSameLine": false,
-    "singleQuote": true,
-    "overrides": [
-        {
-            "files": ["**/*.css", "**/*.scss", "**/*.pcss", "**/*.html"],
-            "options": {
-                "singleQuote": false,
-                "tabWidth": 4
-            }
-        },
-        {
-            "files": ["**/*.postcss"],
-            "options": {
-                "tabWidth": 2,
-                "printWidth": 80
-            }
-        }
-    ],
-    "jsxSingleQuote": false,
-    "printWidth": 120,
-    "tabWidth": 4,
-    "endOfLine": "auto",
-    "semi": true,
-    "tslintIntegration": true,
-    "stylelintIntegration": true,
-    "ignorePath": ".gitignore",
-    "arrowParens": "avoid"
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "requirePragma": false,
+  "insertPragma": false,
+  "proseWrap": "preserve",
+  "htmlWhitespaceSensitivity": "css",
+  "vueIndentScriptAndStyle": false,
+  "endOfLine": "lf",
+  "embeddedLanguageFormatting": "auto"
 }
