@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { BlockchainIcon } from 'src/components/BlockchainIcon/BlockchainIcon';
 
 import s from './CurrencyTicker.postcss';
 
@@ -7,15 +9,19 @@ type Props = {
 };
 
 export const CurrencyTicker: FC<Props> = ({ symbol }: Props) => {
-    const hasNetwork = symbol.includes('-');
-    if (!hasNetwork) {
-        return <span className={s.currency}>{symbol.toUpperCase()}</span>;
-    }
-    const [currency, network] = symbol.split('-');
-    return (
-        <span className={s.currencyWithNetwork}>
+    const [currency, protocol] = symbol.split('-');
+    const content = (
+        <span className={s.currency}>
             <span>{currency.toUpperCase()}</span>
-            <span className={s.network}>{network.toUpperCase()}</span>
+            {protocol && <BlockchainIcon className={s.blockchainIcon} protocol={protocol} />}
         </span>
+    );
+
+    return protocol ? (
+        <OverlayTrigger placement="bottom" overlay={<Tooltip id={symbol}>{symbol.toUpperCase()}</Tooltip>}>
+            {content}
+        </OverlayTrigger>
+    ) : (
+        content
     );
 };
