@@ -7,7 +7,7 @@ type JSXElement = keyof JSX.IntrinsicElements | JSXElementConstructor<any>;
 type Props<C extends JSXElement, P = ComponentProps<C>> = P & {
     children: ReactNode;
     color?: 'primary' | 'secondary';
-    component: C;
+    component?: C;
     size?: 'small' | 'medium' | 'large';
     fullWidth?: boolean;
 };
@@ -15,7 +15,7 @@ type Props<C extends JSXElement, P = ComponentProps<C>> = P & {
 export const Button = <T extends JSXElement = 'button'>({
     children,
     color = 'primary',
-    component,
+    component = 'button',
     size = 'medium',
     fullWidth = false,
     ...props

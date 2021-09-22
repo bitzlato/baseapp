@@ -7,16 +7,31 @@
   }
 
   & .blockchainIcon {
-    bottom: -10%;
+    align-items: center;
+    bottom: -6%;
+    display: inline-flex;
     height: 50%;
+    justify-content: center;
     position: absolute;
-    right: -10%;
+    right: -6%;
     width: 50%;
 
-    & img {
+    &::before {
+      background-color: #fff;
+      border-radius: 50%;
+      content: '';
       height: 100%;
+      position: absolute;
+      width: 100%;
+    }
+
+    & > img,
+    & > svg {
+      height: 90%;
       margin-right: 0 !important;
-      width: 100% !important;
+      position: relative;
+      width: 90% !important;
+      z-index: 2;
     }
   }
 }

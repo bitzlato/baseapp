@@ -9,7 +9,9 @@
   }
 
   .arrow {
-    display: none;
+    &::before {
+      border-bottom-color: var(--main-background-color);
+    }
   }
 
   &__content {

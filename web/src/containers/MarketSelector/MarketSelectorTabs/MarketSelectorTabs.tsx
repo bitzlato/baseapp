@@ -16,6 +16,7 @@ interface Props {
 }
 
 const ITEM_ALL = 'ALL' as const;
+const TABS_LIMIT = 5 as const;
 
 export const MarketSelectorTabs: FC<Props> = ({ markets, searchValue, onSelect, className }: Props) => {
     const t = useT();
@@ -23,8 +24,8 @@ export const MarketSelectorTabs: FC<Props> = ({ markets, searchValue, onSelect, 
     const currencies = useMemo((): readonly string[] => {
         return Array.from(new Set(markets.reduce((acc, market) => [...acc, ...market.name.split('/')], [])));
     }, [markets]);
-    const primary = currencies.slice(0, 3);
-    const secondary = currencies.slice(3);
+    const primary = currencies.slice(0, TABS_LIMIT);
+    const secondary = currencies.slice(TABS_LIMIT);
     const searchValueUpperCase = searchValue.toUpperCase();
 
     const handleSelectionChange = (currency: string) => {
