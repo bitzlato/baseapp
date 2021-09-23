@@ -1,17 +1,16 @@
 .tooltip {
+  z-index: 99991;
+
+  &.show {
+    opacity: 0.8;
+  }
+
   .tooltip-inner {
-    background: var(--main-background-color);
     border-radius: 4px;
     height: max-content;
     max-width: 259px;
     width: max-content;
     z-index: 10;
-  }
-
-  .arrow {
-    &::before {
-      border-bottom-color: var(--main-background-color);
-    }
   }
 
   &__content {
