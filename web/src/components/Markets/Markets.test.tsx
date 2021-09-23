@@ -36,7 +36,7 @@ describe('Markets', () => {
 
     it('should render empty data', () => {
         wrapper = setup({ data: [] });
-        expect(wrapper).toMatchSnapshot();
+        expect(wrapper.render()).toMatchSnapshot();
     });
 
     it('should set selected market in props', () => {
