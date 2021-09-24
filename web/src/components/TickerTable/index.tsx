@@ -30,7 +30,7 @@ export const TickerTable: React.FC<Props> = ({
             return (
                 <tr key={index} onClick={() => redirectToTrading(market.id)}>
                     <td>
-                        <div>{market && <MarketName name={market.name} />}</div>
+                        {market && <MarketName name={market.name} />}
                     </td>
                     <td>
                         <span>

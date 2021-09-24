@@ -29,16 +29,18 @@ const HeaderComponent: React.FC = () => {
                         <ProfileIcon className="pg-mobile-header__account__profile__icon" />
                     </Link>
                 ) : (
-                    <Link to="/signin" className="pg-mobile-header__account__log-in">
-                        <Button
-                            block={true}
-                            type="button"
-                            size="lg"
-                            variant="primary"
-                        >
-                            {intl.formatMessage({id: 'page.mobile.header.signIn'})}
-                        </Button>
-                    </Link>
+                    <>
+                        <Link to="/signin" className="pg-mobile-header__account__log-in">
+                            <Button type="button" size="lg" variant="primary">
+                                {intl.formatMessage({ id: 'page.header.navbar.signIn' })}
+                            </Button>
+                        </Link>
+                        <Link id="signup" to="/signup" className="pg-mobile-header__account__log-in">
+                            <Button type="button" size="lg" variant="primary">
+                                {intl.formatMessage({ id: 'page.header.signUp' })}
+                            </Button>
+                        </Link>
+                    </>
                 )}
             </div>
         </div>
