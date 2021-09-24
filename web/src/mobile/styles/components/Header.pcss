@@ -37,7 +37,7 @@
       button {
         align-items: center;
         border-radius: 3px;
-        display: flex;
+        display: inline-flex;
         font-size: 14px;
         height: 28px;
         justify-content: center;
@@ -45,6 +45,10 @@
         line-height: 22px;
         min-width: 89px;
         padding: 0 15px;
+      }
+
+      & + & {
+        margin-left: 12px;
       }
 
       &:hover {

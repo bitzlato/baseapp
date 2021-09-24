@@ -9,6 +9,7 @@ import { MarketsTable } from '../../../containers';
 import { Market, selectCurrentMarket, selectMarkets, selectMarketTickers } from '../../../modules';
 import { ChevronIcon } from '../../assets/images/ChevronIcon';
 import { Modal } from '../../components';
+import { MarketName } from 'src/components/MarketName/MarketName';
 
 const defaultTicker = {
     amount: '0.0',
@@ -74,7 +75,7 @@ const CurrentMarketInfoComponent: React.FC = () => {
         <div className="pg-mobile-current-market-info">
             <div className="pg-mobile-current-market-info__left">
                 <div className="pg-mobile-current-market-info__left__selector" onClick={() => setOpenMarketSelector(!isOpenMarketSelector)}>
-                    <span>{currentMarket ? currentMarket.name : ''}</span>
+                    <span>{currentMarket ? <MarketName name={currentMarket.name} /> : ''}</span>
                     <div className={isOpenMarketSelectorClass}>
                         <ChevronIcon />
                     </div>

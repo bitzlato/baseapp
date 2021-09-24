@@ -2,6 +2,7 @@ import { mount, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { SinonSpy, spy } from 'sinon';
 import { Order, OrderComponentProps } from './';
+import { TestComponentWrapper } from 'lib/test/wrapper';
 
 // tslint:disable:no-magic-numbers
 
@@ -15,14 +16,18 @@ const defaultProps: OrderComponentProps = {
     availableQuote: 12,
     from: 'btc',
     to: 'eth',
-    asks: [['10','1']],
-    bids: [['10','1']],
+    asks: [['10', '1']],
+    bids: [['10', '1']],
     currentMarketFilters: [],
     translate: jest.fn(),
 };
 
 const setup = (props: Partial<OrderComponentProps> = {}) =>
-    shallow(<Order {...{ ...defaultProps, ...props }} />);
+    shallow(
+        <TestComponentWrapper>
+            <Order {...{ ...defaultProps, ...props }} />
+        </TestComponentWrapper>
+    );
 
 describe('Order', () => {
     let wrapper: ShallowWrapper;
@@ -32,12 +37,16 @@ describe('Order', () => {
     });
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
+        expect(wrapper.render()).toMatchSnapshot();
     });
 
     it('button should be disabled', () => {
         // tslint:disable: no-shadowed-variable
-        const wrapper = mount(<Order {...{ ...defaultProps}} />);
+        const wrapper = mount(
+            <TestComponentWrapper>
+                <Order {...{ ...defaultProps }} />
+            </TestComponentWrapper>
+        );
         wrapper.find('input').at(2).simulate('click');
         expect((defaultProps.onSubmit as SinonSpy).calledOnceWith()).toBeFalsy();
         wrapper.unmount();
