@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Decimal } from '../../../components';
 import { Modal } from '../../components';
 
@@ -46,7 +47,7 @@ const ModalWithdraw = (props: ModalWithdrawConfirmationProps) => {
                         {formatMessage({ id: 'page.mobile.wallet.withdraw.modal.confirmation.message1' })}
                     </span>
                     <span className="mobile-modal-body__withdraw-confirm--light">
-                        {Decimal.format(amount, precision, ',')}  {currency.toUpperCase()}
+                        {Decimal.format(amount, precision, ',')} <CurrencyTicker symbol={currency} />
                     </span>
                 </div>
                 <div className="mobile-modal-body__withdraw-confirm--block">

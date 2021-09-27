@@ -1,6 +1,7 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
+import { MarketName } from 'src/components/MarketName/MarketName';
 
 import { TabPanel } from '../../components/TabPanel';
 import { selectCurrentMarket } from '../../modules';
@@ -9,7 +10,7 @@ import { MarketDepthsComponent, TradingChart } from '../index';
 export const Charts: FC = (): ReactElement => {
     const intl = useIntl();
     const currentMarket = useSelector(selectCurrentMarket);
-    const [ currentTabIndex, setCurrentTabIndex ] = useState(0);
+    const [currentTabIndex, setCurrentTabIndex] = useState(0);
 
     const renderTabs = () => [
         {
@@ -18,14 +19,14 @@ export const Charts: FC = (): ReactElement => {
         },
         {
             content: currentTabIndex === 1 ? <MarketDepthsComponent /> : null,
-            label: intl.formatMessage( { id: 'page.body.charts.tabs.depth' }),
+            label: intl.formatMessage({ id: 'page.body.charts.tabs.depth' }),
         },
     ];
 
     return (
         <div className="pg-charts">
             <TabPanel
-                optionalHead={currentMarket?.name}
+                optionalHead={currentMarket?.name !== undefined ? <MarketName name={currentMarket.name} /> : null}
                 panels={renderTabs()}
                 currentTabIndex={currentTabIndex}
                 onCurrentTabChange={setCurrentTabIndex}

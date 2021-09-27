@@ -87,7 +87,7 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = props => {
             );
         } else {
             const buttonLabel = t('page.body.wallets.tabs.deposit.ccy.button.generate', {
-                currency: wallet.currency.toUpperCase(),
+                currency: wallet.name,
             });
             return (
                 <div className={className}>

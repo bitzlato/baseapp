@@ -95,7 +95,13 @@ exports[`Order should match snapshot 1`] = `
               <div
                 class="cr-order-input__crypto-icon"
               >
-                BTC
+                <span
+                  class="currency"
+                >
+                  <span>
+                    BTC
+                  </span>
+                </span>
               </div>
             </div>
             <div
@@ -144,7 +150,13 @@ exports[`Order should match snapshot 1`] = `
               <div
                 class="cr-order-input__crypto-icon"
               >
-                ETH
+                <span
+                  class="currency"
+                >
+                  <span>
+                    ETH
+                  </span>
+                </span>
               </div>
             </div>
           </div>
@@ -344,7 +356,13 @@ exports[`Order should match snapshot 1`] = `
               <div
                 class="cr-order-input__crypto-icon"
               >
-                BTC
+                <span
+                  class="currency"
+                >
+                  <span>
+                    BTC
+                  </span>
+                </span>
               </div>
             </div>
             <div
@@ -393,7 +411,13 @@ exports[`Order should match snapshot 1`] = `
               <div
                 class="cr-order-input__crypto-icon"
               >
-                ETH
+                <span
+                  class="currency"
+                >
+                  <span>
+                    ETH
+                  </span>
+                </span>
               </div>
             </div>
           </div>

@@ -78,7 +78,7 @@ export const Sidebar: FC = () => {
                         <SidebarItem to="/wallets" icon={<WalletsIcon />} onClick={handleItemClick}>
                             {t('page.header.navbar.wallets')}
                         </SidebarItem>
-                        <SidebarItem to="/openOrders" icon={<OrdersIcon />} onClick={handleItemClick}>
+                        <SidebarItem to="/orders" icon={<OrdersIcon />} onClick={handleItemClick}>
                             {t('page.header.navbar.openOrders')}
                         </SidebarItem>
                         <SidebarItem to="/history" icon={<HistoryIcon />} onClick={handleItemClick}>

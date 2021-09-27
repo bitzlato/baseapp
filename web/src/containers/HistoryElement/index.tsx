@@ -7,6 +7,8 @@ import {connect, MapDispatchToPropsFunction} from 'react-redux';
 import { compose } from 'redux';
 import { DepositStatus } from 'src/components/History/DepositStatus';
 import { getBlockchainLink } from 'src/helpers/getBlockchainLink';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { MarketName } from 'src/components/MarketName/MarketName';
 import { IntlProps } from '../../';
 import { Decimal, History, Pagination } from '../../components';
 import {
@@ -187,7 +189,7 @@ class HistoryComponent extends React.Component<Props> {
                         </a>
                     </div>,
                     localeDate(created_at, 'fullDate'),
-                    currency && currency.toUpperCase(),
+                    <CurrencyTicker symbol={currency} />,
                     wallet && Decimal.format(amount, wallet.fixed, ','),
                     <DepositStatus item={item} currency={currency} />,
                 ];
@@ -205,7 +207,7 @@ class HistoryComponent extends React.Component<Props> {
                         </a>
                     </div>,
                     localeDate(created_at, 'fullDate'),
-                    currency && currency.toUpperCase(),
+                    <CurrencyTicker symbol={currency} />,
                     wallet && Decimal.format(amount, wallet.fixed, ','),
                     wallet && Decimal.format(fee, wallet.fixed, ','),
                     <span style={{ color: setWithdrawStatusColor(item.state) }} key={txid || rid}>{state}</span>,
@@ -220,8 +222,8 @@ class HistoryComponent extends React.Component<Props> {
 
                 return [
                     localeDate(created_at, 'fullDate'),
-                    <span style={{ color: setTradesType(side).color }} key={id}>{sideText}</span>,
-                    marketName,
+                    <span style={{ color: setTradesType(side) .color }} key={id}>{sideText}</span>,
+                    <MarketName name={marketName} />,
                     <Decimal key={id} fixed={marketToDisplay.price_precision} thousSep=",">{price}</Decimal>,
                     <Decimal key={id} fixed={marketToDisplay.amount_precision} thousSep=",">{amount}</Decimal>,
                     <Decimal key={id} fixed={marketToDisplay.amount_precision} thousSep=",">{total}</Decimal>,
@@ -237,7 +239,7 @@ class HistoryComponent extends React.Component<Props> {
                 return [
                     localeDate(created_at, 'fullDate'),
                     wallet && Decimal.format(amount, wallet.fixed, ','),
-                    currency && currency.toUpperCase(),
+                    <CurrencyTicker symbol={currency} />,
                     direction && direction.replace(/^./, direction[0].toUpperCase()),
                     toAccount,
                     <span style={{ color: setTransferStatusColor(item.status) }} key={id}>{status}</span>,
