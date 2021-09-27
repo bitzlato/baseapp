@@ -79,6 +79,14 @@ task :link_env do
   end
 end
 
+task :link_auth0 do
+  on roles('app') do
+    within release_path do
+      execute :ln, "-sf auth0.html public/signin/index.html"
+    end
+  end
+end
+
 task :yarn_build do
   on roles('app') do
     within release_path do

@@ -6,3 +6,5 @@ set :stage, 's5'
 set :application, -> { 'baseapp-' + fetch(:stage).to_s }
 
 server ENV.fetch( 'STAGING_SERVER_5' ), user: fetch(:user), roles: fetch(:roles)
+
+before 'link_env', 'link_auth0'
