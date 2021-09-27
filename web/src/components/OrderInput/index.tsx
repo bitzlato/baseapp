@@ -1,5 +1,6 @@
 import cr from 'classnames';
 import * as React from 'react';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { CustomInput } from '../../components';
 
 export interface OrderInputProps {
@@ -78,7 +79,7 @@ export const OrderInput: React.FunctionComponent<OrderInputProps> = React.memo((
                 />
             </fieldset>
             <div className={cryptoIconClass}>
-                {currency.toUpperCase()}
+                <CurrencyTicker symbol={currency} />
             </div>
         </div>
     );

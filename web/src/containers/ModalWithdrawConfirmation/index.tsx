@@ -6,6 +6,7 @@ import {
 import { IntlProps } from '../../';
 import { Decimal, Modal } from '../../components';
 import { Modal as MobileModal } from '../../mobile/components/Modal';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 
 interface ModalWithdrawConfirmationProps {
     amount: string;
@@ -55,13 +56,12 @@ class ModalWithdraw extends React.Component<Props> {
 
     private renderBody = () => {
         const { amount, currency, precision, rid } = this.props;
-        const formattedCurrency = currency.toUpperCase();
 
         return (
             <div className="pg-exchange-modal-submit-body modal-body__withdraw-confirm">
                 <p>
                     {this.translate('page.body.wallets.tabs.withdraw.modal.message1')}
-                    {Decimal.format(amount, precision, ',')}  {formattedCurrency}
+                    {Decimal.format(amount, precision, ',')}  <CurrencyTicker symbol={currency} />
                     {this.translate('page.body.wallets.tabs.withdraw.modal.message2')} {rid}
                 </p>
             </div>

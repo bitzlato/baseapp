@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
-import { Wallet } from '../../modules';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { Wallet } from 'src/modules';
 
 export interface CurrencyInfoProps {
     wallet: Wallet;
@@ -56,7 +57,8 @@ export const CurrencyInfo: FC<CurrencyInfoProps> = props => {
                 </div>
                 <div>
                     <span className="cr-wallet-item__balance">
-                        {currency}&nbsp;
+                        <CurrencyTicker symbol={currency} />
+                        &nbsp;
                         <FormattedMessage id="page.body.wallets.balance" />
                     </span>
                     &nbsp;
