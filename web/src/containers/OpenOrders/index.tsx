@@ -20,6 +20,8 @@ import {
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
 import { getTriggerSign } from './helpers';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { MarketName } from 'src/components/MarketName/MarketName';
 
 export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
     const [hideOtherPairs, setHideOtherPairs] = useState<boolean>(true);
@@ -75,11 +77,11 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
 
             return [
                 <span key={id} className="split-lines"><span className="secondary">{localeDate(created_at, 'date')}</span>&nbsp;<span>{localeDate(created_at, 'time')}</span></span>,
-                <span key={id} className="bold">{curMarket?.name.toUpperCase()}</span>,
+                <span key={id} className="bold">{curMarket?.name && <MarketName name={curMarket?.name} />}</span>,
                 <span key={id}>{ord_type ? translate(`page.body.trade.header.openOrders.content.type.${ord_type}`) : '-'}</span>,
                 <span style={{ color: setTradeColor(side).color }} key={id}><Decimal fixed={priceFixed} thousSep=",">{price}</Decimal></span>,
                 <span key={id}><Decimal fixed={amountFixed} thousSep=",">{+remaining_volume}</Decimal></span>,
-                <span key={id}><Decimal fixed={amountFixed} thousSep=",">{+remaining_volume * +price}</Decimal> <span className="cr-text__opacity">{curMarket?.quote_unit?.toUpperCase()}</span></span>,
+                <span key={id}><Decimal fixed={amountFixed} thousSep=",">{+remaining_volume * +price}</Decimal> <span className="cr-text__opacity">{curMarket?.quote_unit && <CurrencyTicker symbol={curMarket?.quote_unit} />}</span></span>,
                 <span key={id} className="split-lines">
                     {trigger_price ? (
                         <React.Fragment>
