@@ -52,14 +52,14 @@ export const MarketSelectorTabs: FC<Props> = ({ markets, searchValue, onSelect, 
                 </Tab>
                 {primary.map(currency => (
                     <Tab key={currency} className={s.tab} size="small" value={currency}>
-                        <CurrencyTicker symbol={currency.toUpperCase()} />
+                        <CurrencyTicker symbol={currency} />
                     </Tab>
                 ))}
                 {secondary.length > 0 && (
                     <MarketSelectorTabsDropdown opened={isDropdownOpen} onTogglerClick={handleTogglerClick}>
                         {secondary.map(currency => (
                             <Tab key={currency} className={s.tab} size="small" value={currency}>
-                                <CurrencyTicker symbol={currency.toUpperCase()} />
+                                <CurrencyTicker symbol={currency} />
                             </Tab>
                         ))}
                     </MarketSelectorTabsDropdown>

@@ -21,7 +21,7 @@ export interface OrderBookProps {
     /**
      * Renders table header
      */
-    headers?: string[];
+    headers?: React.ReactNode[];
     /**
      * Renders table title
      */

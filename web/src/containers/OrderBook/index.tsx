@@ -236,21 +236,43 @@ class OrderBookContainer extends React.Component<Props, State> {
     private renderHeaders = () => {
         const { currentMarket, intl, isMobileDevice } = this.props;
         const formattedBaseUnit =
-            currentMarket && currentMarket.base_unit ? `(${currentMarket.base_unit.toUpperCase()})` : '';
+            currentMarket && currentMarket.base_unit ? (
+                <span className="pg-combined-order-book-currency">
+                    (<CurrencyTicker symbol={currentMarket.base_unit} />)
+                </span>
+            ) : (
+                ''
+            );
         const formattedQuoteUnit =
-            currentMarket && currentMarket.quote_unit ? `(${currentMarket.quote_unit.toUpperCase()})` : '';
+            currentMarket && currentMarket.quote_unit ? (
+                <span className="pg-combined-order-book-currency">
+                    (<CurrencyTicker symbol={currentMarket.quote_unit} />)
+                </span>
+            ) : (
+                ''
+            );
 
         if (isMobileDevice) {
             return [
-                `${intl.formatMessage({ id: 'page.body.trade.orderbook.header.price' })}\n${formattedQuoteUnit}`,
-                `${intl.formatMessage({ id: 'page.body.trade.orderbook.header.amount' })}\n${formattedBaseUnit}`,
+                <>
+                    {intl.formatMessage({ id: 'page.body.trade.orderbook.header.price' })} {formattedQuoteUnit}
+                </>,
+                <>
+                    {intl.formatMessage({ id: 'page.body.trade.orderbook.header.amount' })} {formattedBaseUnit}
+                </>,
             ];
         }
 
         return [
-            `${intl.formatMessage({ id: 'page.body.trade.orderbook.header.price' })}\n${formattedQuoteUnit}`,
-            `${intl.formatMessage({ id: 'page.body.trade.orderbook.header.amount' })}\n${formattedBaseUnit}`,
-            `${intl.formatMessage({ id: 'page.body.trade.orderbook.header.volume' })}\n${formattedBaseUnit}`,
+            <>
+                {intl.formatMessage({ id: 'page.body.trade.orderbook.header.price' })} {formattedQuoteUnit}
+            </>,
+            <>
+                {intl.formatMessage({ id: 'page.body.trade.orderbook.header.amount' })} {formattedBaseUnit}
+            </>,
+            <>
+                {intl.formatMessage({ id: 'page.body.trade.orderbook.header.volume' })} {formattedBaseUnit}
+            </>,
         ];
     };
 

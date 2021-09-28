@@ -26,7 +26,7 @@ export interface CombinedOrderBookProps {
   /**
    * Renders table header
    */
-  headers: string[];
+  headers: React.ReactNode[];
   /**
    * Sets Asks row background color
    */
