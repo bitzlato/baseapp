@@ -1,5 +1,7 @@
 # Go-Gin web application
 
+[![CI](https://github.com/bitzlato/baseapp/actions/workflows/yarn.yml/badge.svg)](https://github.com/bitzlato/baseapp/actions/workflows/yarn.yml)
+
 This application was generated with [sonic](https://github.com/openware/sonic)
 
 ## Prerequisites
