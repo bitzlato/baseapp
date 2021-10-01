@@ -1,59 +1,29 @@
-const cryptoRegExps = {
-    btc: '([13][a-km-zA-HJ-NP-Z1-9]{25,34})|((?=bc1[a-km-zA-HJ-NP-Z1-9]*)(?:.{42}|.{62}))',
-    bch: '((bitcoincash|bchreg|bchtest):)?(q|p)[a-z0-9]{41}',
-    eth: '0x[a-fA-F0-9]{40}',
-    ltc: '[LM3][a-km-zA-HJ-NP-Z1-9]{26,33}',
-    doge: 'D{1}[5-9A-HJ-NP-U]{1}[1-9A-HJ-NP-Za-km-z]{32}',
-    dash: 'X[1-9A-HJ-NP-Za-km-z]{33}',
-    xmr: '4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}',
-    neo: 'A[0-9a-zA-Z]{33}',
-    xrp: 'r[0-9a-zA-Z]{24,34}?.{1,}',
-    bitzlatoAddress: '[a-zA-Z0-9_]+',
+import * as WAValidator from 'multicoin-address-validator';
+
+export const BZ_PUBLIC_NAME = 'bitzlatoPublicName';
+
+const CUSTOM_REGEX: Record<string, string> = {
+    [BZ_PUBLIC_NAME]: '[a-zA-Z0-9_]+',
 };
 
-const chainTokens = {
-    eth: [
-        'usdt',
-        'bnb',
-        'mesg',
-        'und',
-        'bdp',
-        'taas',
-    ],
+const TOKEN_CHAIN = {
+    erc20: 'eth',
+    bep20: 'eth',
+    hrc20: 'eth',
 };
 
-const buildRegExp = (bodyExp: string, exact?: boolean) =>
-    exact ? new RegExp(`^(${bodyExp})$`) : new RegExp(`\\b(?:${bodyExp})\\b`, 'g');
+export function isValidAddress(address: string, currency: string, networkType = 'prod'): boolean {
+    currency = TOKEN_CHAIN[currency.split('-')[1]] ?? currency;
 
-const cryptoAddress = (cryptoCurrency, exact?: boolean) => {
-    return buildRegExp(cryptoRegExps[cryptoCurrency], exact);
-};
+    const regex = CUSTOM_REGEX[currency];
 
-const chainTokenMap = (tokenName: string) => {
-    for (const [chain, tokens] of Object.entries(chainTokens)) {
-        if (tokens.includes(tokenName)) {
-            return chain;
-        }
+    if (currency === BZ_PUBLIC_NAME) {
+        return new RegExp(`^(${regex!})$`).test(address) && !WAValidator.validate(address, 'btc');
     }
 
-    return '';
-};
-
-cryptoAddress.cryptocurrency = (cryptoCurrency, exact) => {
-    if (cryptoRegExps.hasOwnProperty(cryptoCurrency)) {
-        const bodyExp = cryptoRegExps[cryptoCurrency];
-
-        return buildRegExp(bodyExp, exact);
-    } else if (chainTokenMap(cryptoCurrency)) {
-        const bodyExp = cryptoRegExps[chainTokenMap(cryptoCurrency)];
-
-        return buildRegExp(bodyExp, exact);
-    } else {
-        // throw new Error('Unsupported cryptocurrency');
-
-        //TODO: will need to add more supported crypto coin later
-        return buildRegExp('', false);
+    try {
+        return WAValidator.validate(address, currency, networkType);
+    } catch (e) {
+        return true;
     }
-};
-
-export const validateBeneficiaryAddress = cryptoAddress;
+}

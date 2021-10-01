@@ -3,16 +3,16 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
-import { validateBeneficiaryAddress as validator, validateBeneficiaryTestnetAddress as testnetValidator } from '../../helpers';
-import { Modal } from '../../mobile/components/Modal';
+import { CustomInput } from 'src/components/CustomInput';
+import { BZ_PUBLIC_NAME, isValidAddress } from 'src/helpers/validateBeneficiaryAddress';
+import { Modal } from 'src/mobile/components/Modal';
 import {
     alertPush,
     beneficiariesCreate,
     BeneficiaryBank,
     selectBeneficiariesCreateError,
     selectMobileDeviceState,
-} from '../../modules';
-import { CustomInput } from '../CustomInput';
+} from 'src/modules';
 
 interface Props {
     currency: string;
@@ -209,16 +209,12 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
     ]);
 
     const validateCoinAddressFormat = (value: string) => {
-        const v = value.trim();
-
+        const address = value.trim();
         if (enableInvoice) {
-            const isBitzlatoAndNotBtc =
-                validator.cryptocurrency('bitzlatoAddress', true).test(v) &&
-                !validator.cryptocurrency('btc', true).test(v);
-            setCoinAddressValid(isBitzlatoAndNotBtc);
+            setCoinAddressValid(isValidAddress(address, BZ_PUBLIC_NAME));
         } else {
-            setCoinAddressValid(validator.cryptocurrency(currency, true).test(v));
-            setCoinTestnetAddressValid(testnetValidator.cryptocurrency(currency, true).test(v));
+            setCoinAddressValid(isValidAddress(address, currency));
+            setCoinTestnetAddressValid(isValidAddress(address, currency, 'testnet'));
         }
     };
 
