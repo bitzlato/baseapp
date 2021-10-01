@@ -1,48 +1,6 @@
-import { showInternalTransfer } from 'src/api';
-
 import { DropdownElem } from '../components/Order';
 
 export const PG_TITLE_PREFIX = 'Bitzlato';
-
-export const pgRoutes = (isLoggedIn: boolean, CanCan: boolean, isLight?: boolean): string[][] => {
-    const routes = [
-        ['page.header.navbar.trade', '/trading/', `trade${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.wallets', '/wallets', `wallets${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.openOrders', '/orders', `orders${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.history', '/history', `history${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.api', '/docs', `api${isLight ? 'Light' : ''}`],
-    ];
-
-    if (showInternalTransfer()) {
-        routes.push([
-            'page.header.navbar.internal.transfer',
-            '/internal-transfer',
-            `internal_transfer${isLight ? 'Light' : ''}`,
-        ]);
-    }
-
-    const routesFinexAbilities = [
-        ['page.header.navbar.trade', '/trading/', `trade${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.quick.exchange', '/quick-exchange', `quick_exchange${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.wallets', '/wallets', `wallets${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.openOrders', '/orders', `orders${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.history', '/history', `history${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.api', '/docs', `api${isLight ? 'Light' : ''}`],
-    ];
-
-    const routesUnloggedIn = [
-        ['page.header.navbar.signIn', '/signin', `signin${isLight ? 'Light' : ''}`],
-        ['page.header.signUp', '/signup', `signup${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.trade', '/trading/', `trade${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.api', '/docs', `api${isLight ? 'Light' : ''}`],
-    ];
-
-    if (CanCan) {
-        return isLoggedIn ? routesFinexAbilities : routesUnloggedIn;
-    }
-
-    return isLoggedIn ? routes : routesUnloggedIn;
-};
 
 export const DEFAULT_CCY_PRECISION = 4;
 export const DEFAULT_TRADING_VIEW_INTERVAL = '15';

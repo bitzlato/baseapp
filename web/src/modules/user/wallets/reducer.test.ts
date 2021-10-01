@@ -14,6 +14,7 @@ describe('walletsList reducer', () => {
             fee: 0,
             type: 'coin',
             fixed: 8,
+            icon_id: '',
         },
         {
             balance: '0',
@@ -24,6 +25,7 @@ describe('walletsList reducer', () => {
             fee: 0,
             type: 'coin',
             fixed: 8,
+            icon_id: '',
         },
         {
             balance: '0',
@@ -34,6 +36,7 @@ describe('walletsList reducer', () => {
             fee: 0,
             type: 'coin',
             fixed: 8,
+            icon_id: '',
         },
     ];
 
@@ -135,6 +138,7 @@ describe('walletsList reducer', () => {
                     address: 'address',
                     state: 'active',
                 },
+                icon_id: '',
             },
             {
                 balance: '0',
@@ -145,6 +149,7 @@ describe('walletsList reducer', () => {
                 fee: 0,
                 type: 'coin',
                 fixed: 8,
+                icon_id: '',
             },
             {
                 balance: '0',
@@ -155,6 +160,7 @@ describe('walletsList reducer', () => {
                 fee: 0,
                 type: 'coin',
                 fixed: 8,
+                icon_id: '',
             },
         ];
 

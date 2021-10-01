@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { rootSaga, sendError } from '../../../';
+import { rootSaga, sendError, WalletHistoryList } from '../../../';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
 import { CommonError } from '../../../types';
 import { failHistory, fetchHistory, successHistory } from '../actions';
@@ -22,7 +22,7 @@ describe('CurrencyHistory', () => {
         mockAxios.reset();
     });
 
-    const fakeHistory = [
+    const fakeHistory: WalletHistoryList = [
         {
             id:566,
             currency:'btc',
@@ -77,7 +77,7 @@ describe('CurrencyHistory', () => {
 
     it('should fetch currency deposit history for 1 page in success flow', async () => {
         mockHistory();
-        const promise = new Promise(resolve => {
+        const promise = new Promise<void>(resolve => {
             store.subscribe(() => {
                 const actions = store.getActions();
                 if (actions.length === expectedActionsFetchWithFirstPage.length) {
@@ -93,7 +93,7 @@ describe('CurrencyHistory', () => {
 
     it('should trigger an error', async () => {
         mockNetworkError(mockAxios);
-        const promise = new Promise(resolve => {
+        const promise = new Promise<void>(resolve => {
             store.subscribe(() => {
                 const actions = store.getActions();
                 if (actions.length === expectedActionsError.length) {
