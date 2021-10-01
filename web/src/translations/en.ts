@@ -1016,6 +1016,7 @@ export const en = {
   'account.beneficiary.invalid_pin': 'Invalid beneficiary activation pin',
   'account.beneficiary.cant_resend_within_1_minute': "Can't resend activation pin within 1 minute",
   'account.beneficiary.duplicate_address': 'Beneficiary address already exists',
+  'account.beneficiary.failed_to_create': "Can't add the beneficiary: invalid address",
 
   'market.market.doesnt_exist': "Market doesn't exist",
   'market.order.invalid_state': 'Invalid deposit state',
