@@ -43,6 +43,7 @@ describe('Saga: currenciesFetchSaga', () => {
             base_factor: 100000000,
             precision: 8,
             icon_url: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg',
+            icon_id: '',
         },
 
         {
@@ -64,6 +65,7 @@ describe('Saga: currenciesFetchSaga', () => {
             base_factor: 100000000,
             precision: 8,
             icon_url: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg',
+            icon_id: '',
         },
     ];
 

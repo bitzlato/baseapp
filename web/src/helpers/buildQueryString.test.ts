@@ -19,6 +19,6 @@ describe('Describe build query string helper', () => {
             page: 1,
             limit: 25,
         };
-        expect(buildQueryString(payload)).toEqual('currency=btc&sort_by=desc&page=1&limit=25');
+        expect(buildQueryString(payload)).toEqual('currency=btc&sort_by=desc&page=2&limit=25');
     });
 });

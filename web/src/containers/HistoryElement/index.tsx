@@ -13,7 +13,6 @@ import { IntlProps } from '../../';
 import { Decimal, History, Pagination } from '../../components';
 import {
     localeDate,
-    setDepositStatusColor,
     setTradesType,
     setTransferStatusColor,
     setWithdrawStatusColor,
