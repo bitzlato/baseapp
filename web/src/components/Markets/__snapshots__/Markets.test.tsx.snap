@@ -44,18 +44,22 @@ exports[`Markets should render 1`] = `
         >
           <td>
             <span
-              class="currency"
+              style="white-space:nowrap"
             >
-              <span>
-                ETH
+              <span
+                class="currency"
+              >
+                <span>
+                  ETH
+                </span>
               </span>
-            </span>
-            /
-            <span
-              class="currency"
-            >
-              <span>
-                BTC
+              /
+              <span
+                class="currency"
+              >
+                <span>
+                  BTC
+                </span>
               </span>
             </span>
           </td>
@@ -75,18 +79,22 @@ exports[`Markets should render 1`] = `
         >
           <td>
             <span
-              class="currency"
+              style="white-space:nowrap"
             >
-              <span>
-                ETH
+              <span
+                class="currency"
+              >
+                <span>
+                  ETH
+                </span>
               </span>
-            </span>
-            /
-            <span
-              class="currency"
-            >
-              <span>
-                LTC
+              /
+              <span
+                class="currency"
+              >
+                <span>
+                  LTC
+                </span>
               </span>
             </span>
           </td>
@@ -106,18 +114,22 @@ exports[`Markets should render 1`] = `
         >
           <td>
             <span
-              class="currency"
+              style="white-space:nowrap"
             >
-              <span>
-                LTC
+              <span
+                class="currency"
+              >
+                <span>
+                  LTC
+                </span>
               </span>
-            </span>
-            /
-            <span
-              class="currency"
-            >
-              <span>
-                BTC
+              /
+              <span
+                class="currency"
+              >
+                <span>
+                  BTC
+                </span>
               </span>
             </span>
           </td>
