@@ -16,7 +16,7 @@ interface Props {
 }
 
 const ITEM_ALL = 'ALL' as const;
-const TABS_LIMIT = 5 as const;
+const TABS_LIMIT = 6 as const;
 
 export const MarketSelectorTabs: FC<Props> = ({ markets, searchValue, onSelect, className }: Props) => {
     const t = useT();

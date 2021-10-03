@@ -295,7 +295,7 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
                             </div>
                         </fieldset>
                         <div className="cr-order-input__crypto-icon">
-                            {from.toUpperCase()}
+                            <CurrencyTicker symbol={from} />
                         </div>
                     </div>
                 );

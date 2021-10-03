@@ -130,10 +130,14 @@ export const Markets = (props: MarketsProps) => {
     const renderCells = [
         (data: CellData) => {
             if (typeof data === 'string') {
-                return <MarketName name={data} />;
+                return (
+                    <span style={{ whiteSpace: 'nowrap' }}>
+                        <MarketName name={data} />
+                    </span>
+                );
             }
-        }
-    ]
+        },
+    ];
 
     return (
         <div className="cr-markets">

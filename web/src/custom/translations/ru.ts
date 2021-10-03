@@ -22,7 +22,7 @@ export const ru: LangType = {
     'page.body.trade.header.markets': 'Рынки',
     'page.body.trade.header.markets.content.pair': 'Пара',
     'page.body.trade.header.markets.content.price': 'Цена',
-    'page.body.trade.header.markets.content.change': 'Изменение 24ч',
+    'page.body.trade.header.markets.content.change': 'Изменение',
     'page.body.trade.header.markets.content.market': 'Пара',
     'page.body.trade.header.markets.content.last_price': 'Последняя цена',
     'page.body.trade.header.markets.content.search': 'Поиск',

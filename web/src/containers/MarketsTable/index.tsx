@@ -2,18 +2,8 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Decimal, TickerTable } from '../../components';
-import {
-    useMarketsFetch,
-    useMarketsTickersFetch,
-    useRangerConnectFetch,
-} from '../../hooks';
-import {
-    Market,
-    selectMarkets,
-    selectMarketTickers,
-    setCurrentMarket,
-    selectUserInfo,
-} from '../../modules';
+import { useMarketsFetch, useMarketsTickersFetch, useRangerConnectFetch } from '../../hooks';
+import { Market, selectMarkets, selectMarketTickers, setCurrentMarket, selectUserInfo } from '../../modules';
 
 const defaultTicker = {
     amount: '0.0',
@@ -51,6 +41,10 @@ const MarketsTableComponent = props => {
             return list;
         }
 
+        if (!list.includes(market.base_unit)) {
+            list.push(market.base_unit);
+        }
+
         if (!list.includes(market.quote_unit)) {
             list.push(market.quote_unit);
         }
@@ -67,34 +61,47 @@ const MarketsTableComponent = props => {
     let currentBidUnitMarkets = props.markets || markets;
 
     if (currentBidUnit) {
-        currentBidUnitMarkets = currentBidUnitMarkets.length ? currentBidUnitMarkets.filter(market => market.quote_unit === currentBidUnit) : [];
+        currentBidUnitMarkets = currentBidUnitMarkets.length
+            ? currentBidUnitMarkets.filter(market => market.quote_unit === currentBidUnit)
+            : [];
     }
 
-    const formattedMarkets = currentBidUnitMarkets.length ? currentBidUnitMarkets.map(market =>
-        ({
-            ...market,
-            last: Decimal.format(Number((marketTickers[market.id] || defaultTicker).last), market.amount_precision),
-            open: Decimal.format(Number((marketTickers[market.id] || defaultTicker).open), market.price_precision),
-            price_change_percent: String((marketTickers[market.id] || defaultTicker).price_change_percent),
-            high: Decimal.format(Number((marketTickers[market.id] || defaultTicker).high), market.amount_precision),
-            low: Decimal.format(Number((marketTickers[market.id] || defaultTicker).low), market.amount_precision),
-            volume: Decimal.format(Number((marketTickers[market.id] || defaultTicker).volume), market.amount_precision),
-        }),
-    ).map(market =>
-        ({
-            ...market,
-            change: Decimal.format((+market.last - +market.open)
-                .toFixed(market.price_precision), market.price_precision),
-        }),
-    ) : [];
+    const formattedMarkets = currentBidUnitMarkets.length
+        ? currentBidUnitMarkets
+              .map(market => ({
+                  ...market,
+                  last: Decimal.format(
+                      Number((marketTickers[market.id] || defaultTicker).last),
+                      market.amount_precision
+                  ),
+                  open: Decimal.format(
+                      Number((marketTickers[market.id] || defaultTicker).open),
+                      market.price_precision
+                  ),
+                  price_change_percent: String((marketTickers[market.id] || defaultTicker).price_change_percent),
+                  high: Decimal.format(
+                      Number((marketTickers[market.id] || defaultTicker).high),
+                      market.amount_precision
+                  ),
+                  low: Decimal.format(Number((marketTickers[market.id] || defaultTicker).low), market.amount_precision),
+                  volume: Decimal.format(
+                      Number((marketTickers[market.id] || defaultTicker).volume),
+                      market.amount_precision
+                  ),
+              }))
+              .map(market => ({
+                  ...market,
+                  change: Decimal.format(
+                      (+market.last - +market.open).toFixed(market.price_precision),
+                      market.price_precision
+                  ),
+              }))
+        : [];
 
-    const filteredMarkets = formattedMarkets.map(market => {
-        if (market.state && market.state === 'hidden' && userData.role !== 'admin' && userData.role !== 'superadmin') {
-            return [null, null, null, null];
-        }
-
-        return market;
-    }).filter(item => item[0] !== null);
+    const filteredMarkets = formattedMarkets.filter(
+        market =>
+            !(market.state && market.state === 'hidden' && userData.role !== 'admin' && userData.role !== 'superadmin')
+    );
 
     return (
         <TickerTable
