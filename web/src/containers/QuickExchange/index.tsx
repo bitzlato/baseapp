@@ -21,7 +21,6 @@ import {
 import { SwipeIcon } from '../../assets/images/swipe';
 import {
   Decimal,
-  CurrencyIcon,
   QuickExchangeForm,
   DropdownComponent,
   Timer,
@@ -37,6 +36,7 @@ import {
 } from './helpers';
 import { precisionRegExp, ssToMMSS } from '../../helpers';
 import { ArrowRight, WarningIcon } from './icons';
+import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 
 interface QuickExchangeTimer {
   initialSeconds: number;
@@ -385,9 +385,9 @@ export const QuickExchangeContainer = () => {
           </div>
         </div>
         <div className="cr-quick-exchange__body-summary-icons">
-          <CurrencyIcon icon={walletBase.iconUrl} currency={walletBase.currency} />
+          <CryptoCurrencyIcon icon={walletBase.iconUrl} currency={walletBase.currency} />
           <ArrowRight />
-          <CurrencyIcon icon={walletQuote.iconUrl} currency={walletQuote.currency} />
+          <CryptoCurrencyIcon icon={walletQuote.iconUrl} currency={walletQuote.currency} />
         </div>
         <div className="cr-quick-exchange__body-summary-currency">
           <div className="cr-quick-exchange__body-summary-currency-label">

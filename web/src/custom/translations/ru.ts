@@ -207,6 +207,7 @@ export const ru: LangType = {
   'page.body.wallets.tabs.deposit.ccy.button.generate': 'Сгенерировать {currency} адресс',
   'page.body.wallets.tabs.deposit.ccy.message.minimum': 'Минимальная сумма депозита',
   'page.body.wallets.tabs.deposit.ccy.message.fee': 'Комиссия',
+  'page.body.wallets.tabs.deposit.ccy.message.fee.free': 'Бесплатно',
   'page.body.wallets.tabs.deposit.ccy.message.warning':
     'Внесённый вами актив будет потерян, если сумма депозита меньше минимальной',
   'page.body.wallets.tabs.deposit.ccy.button.create': 'Создать депозит',
@@ -1167,4 +1168,10 @@ export const ru: LangType = {
   'order.action.not_permitted': 'Action is not permitted',
   'order.action_role.not_permitted': 'Action is not permitted for your user role',
   'order.action_level.not_permitted': 'Action is not permitted for your user verification level',
+
+  'page.fees.table.coin': 'Монета',
+  'page.fees.table.name': 'Имя',
+  'page.fees.table.network': 'Сеть',
+  'page.fees.table.min_deposit': 'Мин. ввод',
+  'page.fees.table.min_withdraw': 'Мин. вывод',
 };

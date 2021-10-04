@@ -18,7 +18,11 @@ export const DepositSummary: React.FC<Props> = ({ currency }) => {
   return (
     <div className="cr-col cr-col-spacing">
       <SummaryField message={t('page.body.wallets.tabs.deposit.ccy.message.fee')}>
-        <MoneyFormat money={money(currency.deposit_fee, moneyCcy)} />
+        {Number(currency.deposit_fee) == 0 ? (
+          t('page.body.wallets.tabs.deposit.ccy.message.fee.free')
+        ) : (
+          <MoneyFormat money={money(currency.deposit_fee, moneyCcy)} />
+        )}
       </SummaryField>
       <SummaryField message={t('page.body.wallets.tabs.deposit.ccy.message.minimum')}>
         <MoneyFormat money={money(currency.min_deposit_amount, moneyCcy)} />

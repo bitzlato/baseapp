@@ -36,11 +36,7 @@ export const WalletItem: FC<Props> = ({
   return (
     <button className={cn(s.item, active && s.itemActive)} type="button" onClick={onClick}>
       <span className={s.icon}>
-        {iconUrl ? (
-          <img alt={currency.toUpperCase()} src={iconUrl} />
-        ) : (
-          <CryptoCurrencyIcon currency={currency.toLowerCase()} iconId={iconId} />
-        )}
+        <CryptoCurrencyIcon currency={currency.toLowerCase()} iconId={iconId} icon={iconUrl} />
       </span>
       <span className={s.info}>
         <span className={cn(s.row, s.title)}>

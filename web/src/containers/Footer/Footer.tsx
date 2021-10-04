@@ -63,9 +63,9 @@ export const Footer: FC = () => {
               <a className={s.link} href={getBitzlatoLink(languageCode, 'reviews')}>
                 {t('page.body.landing.footer.reviews')}
               </a>
-              <a className={s.link} href={getBitzlatoLink(languageCode, 'price')}>
+              <Link to="/fees" className={s.link}>
                 {t('page.body.landing.footer.fees')}
-              </a>
+              </Link>
             </div>
           </div>
 

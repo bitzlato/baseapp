@@ -9,20 +9,6 @@ export interface CurrencyInfoProps {
   wallet: Wallet;
 }
 
-interface CurrencyIconProps {
-  icon?: string | null;
-  currency: string;
-  iconId?: string;
-}
-
-export const CurrencyIcon: FC<CurrencyIconProps> = ({ currency, icon, iconId }) => {
-  return icon ? (
-    <img alt={currency} className="cr-wallet-item__single__image-icon" src={icon} />
-  ) : (
-    <CryptoCurrencyIcon currency={currency} iconId={iconId} />
-  );
-};
-
 export const CurrencyInfo: FC<CurrencyInfoProps> = (props) => {
   const balance = props.wallet && props.wallet.balance ? props.wallet.balance.toString() : '0';
   const lockedAmount = props.wallet && props.wallet.locked ? props.wallet.locked.toString() : '0';
@@ -45,7 +31,7 @@ export const CurrencyInfo: FC<CurrencyInfoProps> = (props) => {
 
   return (
     <div className="cr-wallet-item__single">
-      <CurrencyIcon icon={iconUrl} currency={props.wallet.currency} iconId={props.wallet.icon_id} />
+      <CryptoCurrencyIcon icon={iconUrl} currency={props.wallet.currency} iconId={props.wallet.icon_id} />
       <div className="cr-wallet-item__single-balance">
         <div>
           <div className="cr-wallet-item__amount-locked">

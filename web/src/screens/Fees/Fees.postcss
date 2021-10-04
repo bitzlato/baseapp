@@ -1,0 +1,38 @@
+.card {
+  background-color: var(--body-background-color);
+  border-radius: var(--border-radius);
+  box-shadow: 3px 3px 10px 3px var(--shadow-color-level-1);
+  overflow: hidden;
+  width: 100%;
+}
+
+.feesHeader {
+  padding-left: calc(var(--rgap) * 3);
+  padding-right: calc(var(--rgap) * 3);
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.feesTable {
+  :global(.cr-table) {
+    text-align: left;
+
+    th,
+    td {
+      &:first-child {
+        padding-left: calc(var(--rgap) * 3);
+      }
+
+      &:last-child {
+        padding-right: calc(var(--rgap) * 3);
+        width: initial;
+      }
+
+      &:nth-child(n+4) {
+        text-align: right !important;
+      }
+    }
+  }
+}
