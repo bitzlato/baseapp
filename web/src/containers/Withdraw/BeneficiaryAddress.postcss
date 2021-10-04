@@ -1,0 +1,15 @@
+.field {
+  border: 1px solid var(--input-border-color);
+  margin-top: calc(var(--gap) * -1.1);
+
+  :global(.input-group) {
+    :global(.custom-input) {
+      width: 100%;
+    }
+
+    label {
+      color: var(--secondary-contrast-cta-color);
+      margin-top: -12px !important;
+    }
+  }
+}

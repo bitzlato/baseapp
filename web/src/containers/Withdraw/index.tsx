@@ -1,11 +1,12 @@
 import classnames from 'classnames';
-import * as React from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Box } from 'src/components/Box';
 import { Beneficiaries, CustomInput } from '../../components';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
 import { Beneficiary, Currency } from '../../modules';
 import { WithdrawSummary } from './WithdrawSummary';
+import { BeneficiaryAddress } from './BeneficiaryAddress';
 
 export interface WithdrawProps {
   currency: string;
@@ -53,7 +54,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
     total: '',
   };
 
-  public componentWillReceiveProps(nextProps) {
+  public componentWillReceiveProps(nextProps: WithdrawProps) {
     const { currency, withdrawDone } = this.props;
 
     if (
@@ -64,6 +65,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
         amount: '',
         otpCode: '',
         total: '',
+        beneficiary: defaultBeneficiary,
       });
     }
   }
@@ -105,6 +107,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
             />
           </div>
           <div className="cr-withdraw__divider cr-withdraw__divider-one" />
+          <BeneficiaryAddress beneficiary={beneficiary} />
           <div className={withdrawAmountClass}>
             <CustomInput
               type="number"
