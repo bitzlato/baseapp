@@ -1156,4 +1156,5 @@ export const en = {
   'page.fees.table.network': 'Network',
   'page.fees.table.min_deposit': 'Min deposit',
   'page.fees.table.min_withdraw': 'Min withdrawal',
+  your_address: 'Your address',
 };

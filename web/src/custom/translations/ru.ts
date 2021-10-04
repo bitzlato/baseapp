@@ -204,7 +204,7 @@ export const ru: LangType = {
     'Пожалуйста, внесите депозитный платеж. Ваш депозит будет доступен после 6 подтверждений',
   'page.body.wallets.tabs.deposit.ccy.message.address': 'Пополнить кошелек',
   'page.body.wallets.tabs.deposit.ccy.message.success': 'Адрес скопирован',
-  'page.body.wallets.tabs.deposit.ccy.button.generate': 'Сгенерировать {currency} адресс',
+  'page.body.wallets.tabs.deposit.ccy.button.generate': 'Сгенерировать {currency} адрес',
   'page.body.wallets.tabs.deposit.ccy.message.minimum': 'Минимальная сумма депозита',
   'page.body.wallets.tabs.deposit.ccy.message.fee': 'Комиссия',
   'page.body.wallets.tabs.deposit.ccy.message.fee.free': 'Бесплатно',
@@ -1028,7 +1028,7 @@ export const ru: LangType = {
   'account.beneficiary.invalid_pin': 'Invalid beneficiary activation pin',
   'account.beneficiary.cant_resend_within_1_minute': "Can't resend activation pin within 1 minute",
   'account.beneficiary.duplicate_address': 'Beneficiary address already exists',
-  'account.beneficiary.failed_to_create': "Невозможно добавить получателя: неверный адрес",
+  'account.beneficiary.failed_to_create': 'Невозможно добавить получателя: неверный адрес',
 
   'market.market.doesnt_exist': 'Рынок не существует',
   'market.order.invalid_state': 'Неверное состояние депозита',
@@ -1175,4 +1175,5 @@ export const ru: LangType = {
   'page.fees.table.network': 'Сеть',
   'page.fees.table.min_deposit': 'Мин. ввод',
   'page.fees.table.min_withdraw': 'Мин. вывод',
+  your_address: 'Ваш адрес',
 };

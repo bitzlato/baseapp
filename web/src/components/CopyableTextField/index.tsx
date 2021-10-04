@@ -28,6 +28,7 @@ export interface CopyableTextFieldProps {
    */
   disabled?: boolean;
   label?: string;
+  onCopy?: () => void;
 }
 
 /**
@@ -39,9 +40,13 @@ export const CopyableTextField: React.FC<CopyableTextFieldProps> = ({
   disabled,
   fieldId,
   label,
+  onCopy,
 }) => {
   const t = useT();
-  const handleCopy = () => copy(fieldId);
+  const handleCopy = () => {
+    copy(fieldId);
+    onCopy?.();
+  };
 
   return (
     <div className={cn('cr-copyable-text-field', className)}>
