@@ -6,6 +6,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, RouterProps, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { Fees } from 'src/screens/Fees';
 import { IntlProps } from '../../';
 import {
   useAuth0,
@@ -15,7 +16,7 @@ import {
   wizardStep,
 } from '../../api';
 import { ExpiredSessionModal } from '../../components';
-import { WalletsFetch, CanCan } from '../../containers';
+import { WalletsFetch } from '../../containers';
 import { applyCustomizationSettings, toggleColorTheme } from '../../helpers';
 import {
   ChangeForgottenPasswordMobileScreen,
@@ -33,8 +34,6 @@ import {
   ProfileThemeMobileScreen,
   ProfileVerificationMobileScreen,
   SelectedWalletMobileScreen,
-  SignInMobileScreen,
-  SignUpMobileScreen,
   TradingScreenMobile,
   WalletDeposit,
   WalletsMobileScreen,
@@ -72,8 +71,6 @@ import {
   ProfileScreen,
   ProfileTwoFactorAuthScreen,
   RestrictedScreen,
-  SignInScreen,
-  SignUpScreen,
   TradingScreen,
   VerificationScreen,
   WalletsScreen,
@@ -330,12 +327,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             <PublicRoute
               loading={userLoading}
               isLogged={isLoggedIn}
-              path="/signup"
-              component={SignUpMobileScreen}
-            />
-            <PublicRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
               path="/forgot_password"
               component={ForgotPasswordMobileScreen}
             />
@@ -508,6 +499,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             component={EmailVerificationScreen}
           />
           <Route path="/docs" component={DocumentationScreen} />
+          <Route path="/fees" component={Fees} />
           <Route path="/restriction" component={RestrictedScreen} />
           <Route path="/maintenance" component={MaintenanceScreen} />
           <Route exact={true} path="/trading/:market?" component={TradingScreen} />

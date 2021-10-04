@@ -202,6 +202,7 @@ export const en = {
   'page.body.wallets.tabs.deposit.ccy.message.pending': 'Generating deposit address',
   'page.body.wallets.tabs.deposit.ccy.message.minimum': 'Minimum amount of deposit',
   'page.body.wallets.tabs.deposit.ccy.message.fee': 'Deposit Fee',
+  'page.body.wallets.tabs.deposit.ccy.message.fee.free': 'Free',
   'page.body.wallets.tabs.deposit.ccy.message.warning':
     'The asset you have deposited may be lost if the deposit amount is less than the minimum',
   'page.body.wallets.tabs.deposit.ccy.button.generate': 'Generate {currency} address',
@@ -224,7 +225,7 @@ export const en = {
   'page.body.wallets.tabs.withdraw': 'Withdraw',
   'page.body.wallets.tabs.withdraw.content.amount': 'Withdrawal Amount',
   'page.body.wallets.tabs.withdraw.content.code2fa': '2FA code',
-  'page.body.wallets.tabs.withdraw.content.fee': 'Fee',
+  'page.body.wallets.tabs.withdraw.content.fee': 'Withdrawal Fee',
   'page.body.wallets.tabs.withdraw.content.total': 'Total Withdrawal Amount',
   'page.body.wallets.tabs.withdraw.content.min': 'Min Withdrawal Amount',
   'page.body.wallets.tabs.withdraw.content.limit24h': 'Withdrawal Limit 24h',
@@ -1149,4 +1150,10 @@ export const en = {
   'order.action.not_permitted': 'Action is not permitted',
   'order.action_role.not_permitted': 'Action is not permitted for your user role',
   'order.action_level.not_permitted': 'Action is not permitted for your user verification level',
+
+  'page.fees.table.coin': 'Coin',
+  'page.fees.table.name': 'Name',
+  'page.fees.table.network': 'Network',
+  'page.fees.table.min_deposit': 'Min deposit',
+  'page.fees.table.min_withdraw': 'Min withdrawal',
 };
