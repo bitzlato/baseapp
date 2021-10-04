@@ -4,7 +4,7 @@ import { Spinner } from 'react-bootstrap';
 import { Status } from './Status';
 
 export const PendingStatus: React.FC = () => (
-    <Status type="pending" className={classNames('cr-row', 'cr-justify-end')}>
-        <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-    </Status>
+  <Status type="pending" className={classNames('cr-row', 'cr-justify-end')}>
+    <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+  </Status>
 );

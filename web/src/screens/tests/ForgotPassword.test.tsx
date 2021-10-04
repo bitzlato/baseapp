@@ -5,15 +5,15 @@ import { IntlProps } from '../../';
 import { ForgotPasswordScreen } from '../ForgotPassword';
 
 const setup = (props: Partial<IntlProps> = {}) =>
-    shallow(
-        <TestComponentWrapper>
-            <ForgotPasswordScreen />
-        </TestComponentWrapper>
-    );
+  shallow(
+    <TestComponentWrapper>
+      <ForgotPasswordScreen />
+    </TestComponentWrapper>,
+  );
 
 describe('ForgotPasswordScreen', () => {
-    it('should render', () => {
-        const wrapper = setup().render();
-        expect(wrapper).toMatchSnapshot();
-    });
+  it('should render', () => {
+    const wrapper = setup().render();
+    expect(wrapper).toMatchSnapshot();
+  });
 });

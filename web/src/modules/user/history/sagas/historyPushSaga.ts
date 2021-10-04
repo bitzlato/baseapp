@@ -5,9 +5,9 @@ import { HistoryPush, pushHistoryFinish } from '../actions';
 import { selectHistory } from '../selectors';
 
 export function* historyPushSaga(action: HistoryPush) {
-    const actualList = yield select(selectHistory);
-    const updatedTrades = [...[action.payload], ...actualList];
-    const slicedTrades = sliceArray(updatedTrades, defaultStorageLimit());
+  const actualList = yield select(selectHistory);
+  const updatedTrades = [...[action.payload], ...actualList];
+  const slicedTrades = sliceArray(updatedTrades, defaultStorageLimit());
 
-    yield put(pushHistoryFinish(slicedTrades));
+  yield put(pushHistoryFinish(slicedTrades));
 }

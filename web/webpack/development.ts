@@ -9,113 +9,113 @@ import commonConfig from './common';
 const host = process.env.PROXY_HOST;
 
 const config = merge(commonConfig, {
-    devtool: 'cheap-module-eval-source-map',
-    plugins: [new HotModuleReplacementPlugin(), new ForkTsCheckerWebpackPlugin({})],
-    module: {
-        rules: [
-            {
-                test: /\.postcss$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'dts-css-modules-loader',
-                        options: {
-                            namedExport: true,
-                        },
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                mode: 'local',
-                                localIdentName: '[name]__[local]--[hash:base64:5]',
-                                exportLocalsConvention: 'camelCaseOnly',
-                            },
-                            importLoaders: 1,
-                        },
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    [
-                                        'postcss-preset-env',
-                                        {
-                                            stage: 1,
-                                            features: {
-                                                'nesting-rules': false,
-                                            },
-                                            importFrom: ['src/styles/mediaQueries.css'],
-                                        },
-                                    ],
-                                    'postcss-nested',
-                                ],
-                            },
-                        },
-                    },
-                ],
+  devtool: 'cheap-module-eval-source-map',
+  plugins: [new HotModuleReplacementPlugin(), new ForkTsCheckerWebpackPlugin({})],
+  module: {
+    rules: [
+      {
+        test: /\.postcss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'dts-css-modules-loader',
+            options: {
+              namedExport: true,
             },
-            {
-                test: /\.(css|sass|scss|pcss)$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            hmr: true,
-                            reloadAll: true,
-                        },
-                    },
-                    'css-loader',
-                    'sass-loader',
-                    'postcss-loader',
-                ],
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+                exportLocalsConvention: 'camelCaseOnly',
+              },
+              importLoaders: 1,
             },
-            {
-                test: /\.(tsx|ts)?$/,
-                use: [
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
                     {
-                        loader: 'ts-loader',
-                        options: {
-                            transpileOnly: true,
-                            happyPackMode: true,
-                        },
-                    },
-                ],
-                exclude: /node_modules/,
-            },
-        ],
-    },
-    devServer: {
-        contentBase: path.join(__dirname, '../public'),
-        compress: false,
-        host: '0.0.0.0',
-        port: Number(process.env.PORT) || 3000,
-        historyApiFallback: true,
-        stats: {
-            children: false,
-        },
-        hot: true,
-        proxy: host
-            ? {
-                  '/api/v2/ranger': {
-                      target: `wss://${host}`,
-                      changeOrigin: true,
-                      ws: true,
-                      onProxyReqWs: (proxyReq, _, socket) => {
-                          proxyReq.removeHeader('origin');
-                          proxyReq.setHeader('origin', `https://${host}`);
-                          socket.on('error', error => {});
+                      stage: 1,
+                      features: {
+                        'nesting-rules': false,
                       },
-                  },
-                  '/api': {
-                      target: `https://${host}`,
-                      changeOrigin: true,
-                  },
-              }
-            : undefined,
+                      importFrom: ['src/styles/mediaQueries.css'],
+                    },
+                  ],
+                  'postcss-nested',
+                ],
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(css|sass|scss|pcss)$/,
+        use: [
+          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: true,
+              reloadAll: true,
+            },
+          },
+          'css-loader',
+          'sass-loader',
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.(tsx|ts)?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              happyPackMode: true,
+            },
+          },
+        ],
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  devServer: {
+    contentBase: path.join(__dirname, '../public'),
+    compress: false,
+    host: '0.0.0.0',
+    port: Number(process.env.PORT) || 3000,
+    historyApiFallback: true,
+    stats: {
+      children: false,
     },
+    hot: true,
+    proxy: host
+      ? {
+          '/api/v2/ranger': {
+            target: `wss://${host}`,
+            changeOrigin: true,
+            ws: true,
+            onProxyReqWs: (proxyReq, _, socket) => {
+              proxyReq.removeHeader('origin');
+              proxyReq.setHeader('origin', `https://${host}`);
+              socket.on('error', (error) => {});
+            },
+          },
+          '/api': {
+            target: `https://${host}`,
+            changeOrigin: true,
+          },
+        }
+      : undefined,
+  },
 });
 
 // eslint-disable-next-line import/no-default-export

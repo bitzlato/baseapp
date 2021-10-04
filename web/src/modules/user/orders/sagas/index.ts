@@ -3,5 +3,5 @@ import { ORDER_EXECUTE_FETCH } from '../constants';
 import { ordersExecuteSaga } from './ordersExecuteSaga';
 
 export function* rootOrdersSaga() {
-    yield takeLatest(ORDER_EXECUTE_FETCH, ordersExecuteSaga);
+  yield takeLatest(ORDER_EXECUTE_FETCH, ordersExecuteSaga);
 }

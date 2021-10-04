@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import { memberLevelsFetch } from '../modules';
 
 export const useMemberLevelFetch = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    React.useEffect(() => {
-        dispatch(memberLevelsFetch());
-    }, [dispatch]);
+  React.useEffect(() => {
+    dispatch(memberLevelsFetch());
+  }, [dispatch]);
 };

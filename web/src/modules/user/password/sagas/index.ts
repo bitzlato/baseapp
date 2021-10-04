@@ -4,6 +4,6 @@ import { changeForgotPasswordSaga } from './changeForgotPasswordSaga';
 import { forgotPasswordSaga } from './forgotPasswordSaga';
 
 export function* rootPasswordSaga() {
-    yield takeEvery(PASSWORD_FORGOT_FETCH, forgotPasswordSaga);
-    yield takeEvery(PASSWORD_CHANGE_FORGOT_PASSWORD_FETCH, changeForgotPasswordSaga);
+  yield takeEvery(PASSWORD_FORGOT_FETCH, forgotPasswordSaga);
+  yield takeEvery(PASSWORD_CHANGE_FORGOT_PASSWORD_FETCH, changeForgotPasswordSaga);
 }

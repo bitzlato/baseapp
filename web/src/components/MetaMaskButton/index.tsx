@@ -8,7 +8,7 @@ import { Web3ProviderWrapper } from '../../helpers';
 import { alertPush, sendError } from '../../modules';
 
 interface OwnProps {
-    depositAddress: string;
+  depositAddress: string;
 }
 
 type Props = OwnProps;
@@ -16,59 +16,48 @@ type Props = OwnProps;
 export const injected = new InjectedConnector({ supportedChainIds: [1] });
 
 export const MetaMaskButtonComponent: React.FunctionComponent<Props> = (props: Props) => {
-    const {
-        account,
-        activate,
-        connector,
-        error,
-    } = useWeb3ReactCore<Web3Provider>();
-    const [activatingConnector, setActivatingConnector] = React.useState<any>();
-    const dispatch = useDispatch();
+  const { account, activate, connector, error } = useWeb3ReactCore<Web3Provider>();
+  const [activatingConnector, setActivatingConnector] = React.useState<any>();
+  const dispatch = useDispatch();
 
-    const handleConnectWallet = React.useCallback(() => {
-        if (account) {
-            dispatch(alertPush({ message: ['metamask.success.connected'], type: 'success'}));
-        } else {
-            setActivatingConnector(injected);
-            // tslint:disable-next-line: no-floating-promises
-            activate(injected);
-        }
-    }, [account, activate, dispatch]);
+  const handleConnectWallet = React.useCallback(() => {
+    if (account) {
+      dispatch(alertPush({ message: ['metamask.success.connected'], type: 'success' }));
+    } else {
+      setActivatingConnector(injected);
+      // tslint:disable-next-line: no-floating-promises
+      activate(injected);
+    }
+  }, [account, activate, dispatch]);
 
-    React.useEffect(() => {
-        if (activatingConnector &&
-            activatingConnector === connector &&
-            account
-        ) {
-            dispatch(alertPush({ message: ['metamask.success.connected'], type: 'success'}));
-            setActivatingConnector(undefined);
-        }
-    }, [activatingConnector, connector, account, dispatch]);
+  React.useEffect(() => {
+    if (activatingConnector && activatingConnector === connector && account) {
+      dispatch(alertPush({ message: ['metamask.success.connected'], type: 'success' }));
+      setActivatingConnector(undefined);
+    }
+  }, [activatingConnector, connector, account, dispatch]);
 
-    React.useEffect(() => {
-        if (!!error) {
-            dispatch(sendError({
-                error,
-                processingType: 'alert',
-                extraOptions: {
-                    type: 'METAMASK_HANDLE_ERROR',
-                },
-            }));
-        }
+  React.useEffect(() => {
+    if (!!error) {
+      dispatch(
+        sendError({
+          error,
+          processingType: 'alert',
+          extraOptions: {
+            type: 'METAMASK_HANDLE_ERROR',
+          },
+        }),
+      );
+    }
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [!!error, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [!!error, dispatch]);
 
-    return (
-        <MetaMaskLogo
-            className="pg-metamask"
-            onClick={handleConnectWallet}
-        />
-    );
+  return <MetaMaskLogo className="pg-metamask" onClick={handleConnectWallet} />;
 };
 
 export const MetaMaskButton: React.FunctionComponent<Props> = (props: Props) => (
-    <Web3ProviderWrapper>
-        <MetaMaskButtonComponent {...props} />
-    </Web3ProviderWrapper>
+  <Web3ProviderWrapper>
+    <MetaMaskButtonComponent {...props} />
+  </Web3ProviderWrapper>
 );

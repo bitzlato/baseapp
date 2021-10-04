@@ -8,95 +8,89 @@ import { Cryptobase } from '../api';
 import * as WebSocket from 'ws';
 
 export const mockConfig: Config = {
-    api: {
-        authUrl: '/api/v2/barong',
-        tradeUrl: '/api/v2/peatio',
-        applogicUrl: '/api/v2/applogic',
-        rangerUrl: '/api/v2/ranger',
-        finexUrl: '/api/v2/finex',
-    },
-    finex: false,
-    withCredentials: false,
-    incrementalOrderBook: false,
-    isResizable: false,
-    isDraggable: false,
-    showLanding: true,
-    captchaLogin: false,
-    usernameEnabled: false,
-    gaTrackerKey: '',
-    minutesUntilAutoLogout: '5',
-    msAlertDisplayTime: '5000',
-    msPricesUpdates: '1000',
-    sessionCheckInterval: '15000',
-    balancesFetchInterval: '3000',
-    passwordEntropyStep: '14',
-    storage: {
-        defaultStorageLimit: '50',
-        orderBookSideLimit: '25'
-    },
-    languages: ['en', 'ru'],
-    kycSteps: [
-        'email',
-        'phone',
-        'profile',
-        'document',
-        'address'
-    ],
-    themeSwitcher: 'visible',
-    captcha_id: undefined,
-    captcha_type: 'none',
-    password_min_entropy: 0,
+  api: {
+    authUrl: '/api/v2/barong',
+    tradeUrl: '/api/v2/peatio',
+    applogicUrl: '/api/v2/applogic',
+    rangerUrl: '/api/v2/ranger',
+    finexUrl: '/api/v2/finex',
+  },
+  finex: false,
+  withCredentials: false,
+  incrementalOrderBook: false,
+  isResizable: false,
+  isDraggable: false,
+  showLanding: true,
+  captchaLogin: false,
+  usernameEnabled: false,
+  gaTrackerKey: '',
+  minutesUntilAutoLogout: '5',
+  msAlertDisplayTime: '5000',
+  msPricesUpdates: '1000',
+  sessionCheckInterval: '15000',
+  balancesFetchInterval: '3000',
+  passwordEntropyStep: '14',
+  storage: {
+    defaultStorageLimit: '50',
+    orderBookSideLimit: '25',
+  },
+  languages: ['en', 'ru'],
+  kycSteps: ['email', 'phone', 'profile', 'document', 'address'],
+  themeSwitcher: 'visible',
+  captcha_id: undefined,
+  captcha_type: 'none',
+  password_min_entropy: 0,
 
-    openOrdersFetchInterval: '10000',
-    signInUrl: '',
-    signUpUrl: '',
-    logoUrl: '',
-    logoDarkUrl: '',
-    sonic: false,
-    valuationPrimaryCurrency: 'USD',
-    valuationPrimaryCurrencyName: 'USD',
-    valuationSecondaryCurrency: 'ETH',
-    valuationSecondaryCurrencyName: 'ETH',
+  openOrdersFetchInterval: '10000',
+  signInUrl: '',
+  signUpUrl: '',
+  logoUrl: '',
+  logoDarkUrl: '',
+  sonic: false,
+  valuationPrimaryCurrency: 'USD',
+  valuationPrimaryCurrencyName: 'USD',
+  valuationSecondaryCurrency: 'ETH',
+  valuationSecondaryCurrencyName: 'ETH',
 };
 
 // tslint:disable no-any no-console
 export const loggerMiddleware: Middleware = (store: {}) => (next: any) => (action: Action) => {
-    console.log(`dispatching: ${JSON.stringify(action)}`);
+  console.log(`dispatching: ${JSON.stringify(action)}`);
 
-    return next(action);
+  return next(action);
 };
 
 export const setupMockStore = (appMiddleware: Middleware, log = false) => {
-    const middlewares = log ? [loggerMiddleware, appMiddleware] : [appMiddleware];
+  const middlewares = log ? [loggerMiddleware, appMiddleware] : [appMiddleware];
 
-    return configureMockStore(middlewares);
+  return configureMockStore(middlewares);
 };
 
 export const setupMockAxios = () => {
-    Cryptobase.config = mockConfig;
+  Cryptobase.config = mockConfig;
 
-    return new MockAdapter(Axios);
+  return new MockAdapter(Axios);
 };
 
 export const mockNetworkError = (mockAxios: any) => {
-    mockAxios.onAny().networkError();
+  mockAxios.onAny().networkError();
 };
 
 export const createEchoServer = (port: number, debug: boolean) => {
-    const server = new WebSocket.Server({ port: port });
-    server.on('connection', (ws, request) => {
-        if (debug) {
-            ws.addEventListener('open', () => {
-                console.log(`Ping Server: listening on port ${port}`);
-            });
-        }
-        ws.on('message', (message: string) => {
-            if (debug) {
-                console.log(`Ping Server: sending back ${message}`);
-            }
-            ws.send(message);
-        });
+  const server = new WebSocket.Server({ port: port });
+  server.on('connection', (ws, request) => {
+    if (debug) {
+      ws.addEventListener('open', () => {
+        console.log(`Ping Server: listening on port ${port}`);
+      });
+    }
+    ws.on('message', (message: string) => {
+      if (debug) {
+        console.log(`Ping Server: sending back ${message}`);
+      }
+      ws.send(message);
     });
+  });
 
-    return server;
+  return server;
 };

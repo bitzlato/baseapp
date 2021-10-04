@@ -5,15 +5,15 @@ import { OrdersTabScreen } from '../';
 import { IntlProps } from '../../';
 
 const setup = (props: Partial<IntlProps> = {}) =>
-    shallow(
-        <TestComponentWrapper>
-            <OrdersTabScreen />
-        </TestComponentWrapper>
-    );
+  shallow(
+    <TestComponentWrapper>
+      <OrdersTabScreen />
+    </TestComponentWrapper>,
+  );
 
 describe('OrdersTabScreen test', () => {
-    it('should render', () => {
-        const wrapper = setup().render();
-        expect(wrapper).toMatchSnapshot();
-    });
+  it('should render', () => {
+    const wrapper = setup().render();
+    expect(wrapper).toMatchSnapshot();
+  });
 });

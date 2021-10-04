@@ -4,13 +4,13 @@ import { incrementalOrderBook } from '../api';
 import { depthFetch, selectCurrentMarket } from '../modules';
 
 export const useDepthFetch = () => {
-    const isIncrementalOrderBook = incrementalOrderBook();
-    const currentMarket = useSelector(selectCurrentMarket);
-    const dispatch = useDispatch();
+  const isIncrementalOrderBook = incrementalOrderBook();
+  const currentMarket = useSelector(selectCurrentMarket);
+  const dispatch = useDispatch();
 
-    React.useEffect(() => {
-        if (currentMarket && !isIncrementalOrderBook) {
-            dispatch(depthFetch(currentMarket));
-        }
-    }, [dispatch, currentMarket, isIncrementalOrderBook]);
+  React.useEffect(() => {
+    if (currentMarket && !isIncrementalOrderBook) {
+      dispatch(depthFetch(currentMarket));
+    }
+  }, [dispatch, currentMarket, isIncrementalOrderBook]);
 };

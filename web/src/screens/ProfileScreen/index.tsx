@@ -11,50 +11,49 @@ import { ReferralProgram } from '../../containers/ReferralProgram';
 import { setDocumentTitle } from '../../helpers';
 
 class ProfileComponent extends React.Component<RouterProps, IntlProps> {
+  public componentDidMount() {
+    setDocumentTitle('Profile');
+  }
 
-    public componentDidMount() {
-        setDocumentTitle('Profile');
-    }
+  public goBack = () => {
+    this.props.history.goBack();
+  };
 
-    public goBack = () => {
-        this.props.history.goBack();
-    };
-
-    public render() {
-        return (
-            <div className="container pg-profile-page">
-                <div className="pg-profile-page__details">
-                    <div className="row pg-profile-page-header pg-profile-page-header-first">
-                        <h3 className="col-12">
-                            <FormattedMessage id="page.body.profile.header.account"/>
-                        </h3>
-                    </div>
-                    <div className="row">
-                        <div className="col-12 col-md-6 mx-0">
-                            <div className="row col-12 mx-0">
-                                <ProfileAuthDetails/>
-                                <ReferralProgram/>
-                            </div>
-                        </div>
-                        <div className="col-12 col-md-6">
-                            <ProfileVerification/>
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-12">
-                        <ProfileApiKeys/>
-                    </div>
-                    <div className="col-12">
-                        <ProfileAccountActivity/>
-                    </div>
-                </div>
+  public render() {
+    return (
+      <div className="container pg-profile-page">
+        <div className="pg-profile-page__details">
+          <div className="row pg-profile-page-header pg-profile-page-header-first">
+            <h3 className="col-12">
+              <FormattedMessage id="page.body.profile.header.account" />
+            </h3>
+          </div>
+          <div className="row">
+            <div className="col-12 col-md-6 mx-0">
+              <div className="row col-12 mx-0">
+                <ProfileAuthDetails />
+                <ReferralProgram />
+              </div>
             </div>
-        );
-    }
+            <div className="col-12 col-md-6">
+              <ProfileVerification />
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <ProfileApiKeys />
+          </div>
+          <div className="col-12">
+            <ProfileAccountActivity />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export const ProfileScreen = compose(
-    injectIntl,
-    withRouter,
+  injectIntl,
+  withRouter,
 )(ProfileComponent as any) as React.ComponentClass;

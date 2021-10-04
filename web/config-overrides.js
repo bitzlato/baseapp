@@ -3,47 +3,51 @@ const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = function override(config, env) {
-    if (!config.plugins) {
-        config.plugins = [];
-    }
-    config.plugins.push(new webpack.DefinePlugin({ 'process.env.BUILD_EXPIRE': JSON.stringify(process.env.BUILD_EXPIRE) }));
+  if (!config.plugins) {
+    config.plugins = [];
+  }
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env.BUILD_EXPIRE': JSON.stringify(process.env.BUILD_EXPIRE),
+    }),
+  );
 
-    const version = process.env.REACT_APP_GIT_SHA || 'snapshot';
-    const commonJSFilename = `commons.${version}.js`;
+  const version = process.env.REACT_APP_GIT_SHA || 'snapshot';
+  const commonJSFilename = `commons.${version}.js`;
 
-    if (process.env.NODE_ENV === 'production') {
-        config.optimization = {
-            splitChunks: {
-                cacheGroups: {
-                    commons: {
-                        chunks: "initial",
-                        minChunks: 1,
-                        name: "commons",
-                        filename: commonJSFilename,
-                        enforce: true
-                    }
-                }
-            }
-        }
+  if (process.env.NODE_ENV === 'production') {
+    config.optimization = {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            chunks: 'initial',
+            minChunks: 1,
+            name: 'commons',
+            filename: commonJSFilename,
+            enforce: true,
+          },
+        },
+      },
+    };
 
-        const domain = process.env.BUILD_DOMAIN;
-        if (domain) {
-            const domainLock = domain.split(',');
-            config.plugins.push(
-                new JavaScriptObfuscator({ rotateUnicodeArray: true, domainLock }, [commonJSFilename])
-            );
-        }
-
-        config.plugins.push(
-            new CompressionPlugin({
-                filename: "[path].gz[query]",
-                algorithm: "gzip",
-                test: /\.js$|\.css$|\.html$/,
-                threshold: 10240,
-                minRatio: 0.8
-            })
-        );
+    const domain = process.env.BUILD_DOMAIN;
+    if (domain) {
+      const domainLock = domain.split(',');
+      config.plugins.push(
+        new JavaScriptObfuscator({ rotateUnicodeArray: true, domainLock }, [commonJSFilename]),
+      );
     }
 
-    return config;
+    config.plugins.push(
+      new CompressionPlugin({
+        filename: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: /\.js$|\.css$|\.html$/,
+        threshold: 10240,
+        minRatio: 0.8,
+      }),
+    );
+  }
+
+  return config;
 };

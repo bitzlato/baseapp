@@ -1,3 +1,3 @@
 module.exports = {
-    hideNothingWarning: true,
+  hideNothingWarning: true,
 };

@@ -11,6 +11,7 @@
 ---
 
 # OpenDAX BaseApp UI
+
 ## User Interface for Trading and Wallets Management
 
 React application to build a trading platform interface for use with OpenDAX: https://github.com/openware/opendax
@@ -33,6 +34,7 @@ $ yarn install
 ```bash
 $ yarn start-mock
 ```
+
 This command will also start a fake api backend for helping development.
 Once you happy with the result, save, build an image and run it with OpenDAX docker compose system.
 
@@ -42,6 +44,7 @@ Once you happy with the result, save, build an image and run it with OpenDAX doc
 $ cp public/config/env.localdev.js public/config/env.js
 $ PORT=8080 PROXY_HOST=market-s1.bitzlato.com yarn start
 ```
+
 This command will run development server with proxying of API requests to the staging server `market-s1.bitzlato.com`.
 Uses `public/config/env.localdev.js` as a configuration file.
 It is recommended to place the env variables in the `.envrc ' file.
@@ -55,6 +58,7 @@ $ yarn test
 ```
 
 Check test coverage:
+
 ```bash
 $ yarn test -- --coverage --watchAll
 ```
@@ -63,24 +67,22 @@ For more options for `jest` run `yarn test --help`.
 
 ## Configuration documentation
 
-Configuration file is fetched from sonic in  `public/config.js`
+Configuration file is fetched from sonic in `public/config.js`
 
-
-| Argument                 | Description                                                  |
-| --------------------- | ------------------------------------------------------------ |
-| `api`    | URLs of `barong`, `peatio`, `applogic` and `ranger` API endpoints. You can use mockserver (<https://github.com/openware/mockserver>) with default values |
-| `minutesUntilAutoLogout`                |  Autologout time in minutes  |
-| `withCredentials`               |  `false` or `true` if you want to include cookies as part of the request(https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)   |
-| `gaTrackerKey` |  Google Analytics tracker key  |
-| `rangerReconnectPeriod` |  Reconnection time for the Ranger WS service in minutes    |
-| `msAlertDisplayTime` |  Alert message display duration in milliseconds    |
-| `kycSteps` |  List of label names for KYC process    |
+| Argument                               | Description                                                                                                                                                         |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `api`                                  | URLs of `barong`, `peatio`, `applogic` and `ranger` API endpoints. You can use mockserver (<https://github.com/openware/mockserver>) with default values            |
+| `minutesUntilAutoLogout`               | Autologout time in minutes                                                                                                                                          |
+| `withCredentials`                      | `false` or `true` if you want to include cookies as part of the request(https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) |
+| `gaTrackerKey`                         | Google Analytics tracker key                                                                                                                                        |
+| `rangerReconnectPeriod`                | Reconnection time for the Ranger WS service in minutes                                                                                                              |
+| `msAlertDisplayTime`                   |  Alert message display duration in milliseconds                                                                                                                     |
+| `kycSteps`                             |  List of label names for KYC process                                                                                                                                |
 
 ## Available Docker build args
 
 While building a Docker image you can pass build-dependant arguments using `--build-arg`:
-`docker build -t baseapp:latest
-  --build-arg BUILD_DOMAIN="example.com" .`
+`docker build -t baseapp:latest --build-arg BUILD_DOMAIN="example.com" .`
 
 | Argument       | Description                                            |
 | -------------- | ------------------------------------------------------ |
@@ -88,28 +90,38 @@ While building a Docker image you can pass build-dependant arguments using `--bu
 | `BUILD_DOMAIN` | Domain which you'd like to use during the deployment   |
 
 ## Build mobile app
+
 Install dependencies using npm. Important for mobile app development.
+
 ```bash
 npm install
 ```
+
 Build frontend
+
 ```bash
 yarn build
 ```
+
 Generate a native project (ios, android)
+
 ```bash
 ionic capacitor add <platform>
 ```
+
 To build a native app you should have Xcode or Android studio on your local machine.
 
 ## Build IOS app
+
 **1. Install Xcode**
 
 Xcode is the IDE for creating native iOS apps. It includes the iOS SDK and Xcode command-line tools. Xcode can be downloaded for free with an Apple account or it can be installed through the App Store.
 Once Xcode is installed, make sure the command-line tools are selected for use:
+
 ```bash
 xcode-select --install
 ```
+
 **2. Set up a development team**
 
 All iOS apps must be code signed, even for development. Luckily, Xcode makes this easy with automatic code signing. The only prerequisite is an Apple ID.
@@ -126,6 +138,7 @@ Open Xcode and navigate to **Window » Devices and Simulators**. Create an **iPh
 Open the `capacitor.config.json` file and modify the `appId` property.
 
 Put the name of BE server:
+
 ```json
   "server": {
     "hostname": "example.openware.work"
@@ -135,6 +148,7 @@ Put the name of BE server:
 **5. Open the project in Xcode.**
 
 Launch Xcode with a prepared app:
+
 ```bash
 ionic capacitor run ios
 ```
@@ -147,6 +161,7 @@ In the same project editor, under the **Signing section**, ensure Automatically 
 **7. Update native app with the changes**
 
 With each meaningful change, Ionic apps must be built into web assets before the change can appear on iOS simulators and devices. The web assets then must be copied into the native project:
+
 ```bash
 ionic capacitor copy ios
 ```
@@ -156,6 +171,7 @@ ionic capacitor copy ios
 To receive an executable app file run 'build' command on Xcode. You need to have an Apple Developer account to be able to extract an executable file from Xcode.
 
 ## Build Android app
+
 **1. Install Android studio**
 
 Android Studio is IDE, that provides the fastest tools for building apps on every type of Android device.
@@ -163,6 +179,7 @@ Android Studio is IDE, that provides the fastest tools for building apps on ever
 **2. Open the `capacitor.config.json` file and modify the `linuxAndroidStudioPath` property.**
 
 Run next command
+
 ```bash
 whereis android-studio
 ```
@@ -174,6 +191,7 @@ ionic capacitor add android
 ```
 
 **4. Launch android application with Android Studio**
+
 ```bash
 ionic capacitor run android
 ```
@@ -183,6 +201,7 @@ ionic capacitor run android
 Select connected android device or configure device simulator, which required
 
 **6. Update app with the changes**
+
 ```bash
 ionic capacitor copy android [options]
 ```

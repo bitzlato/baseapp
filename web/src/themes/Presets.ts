@@ -17,52 +17,52 @@ import { YellowTheme as YellowThemeLight } from './templates/light/Yellow';
 import { ThemePresetInterface } from './types';
 
 export const AVAILABLE_THEME_PRESETS: ThemePresetInterface[] = [
-    {
-        theme_id: 0,
-        title: 'page.body.customization.themes.theme.basic.title',
-        theme_colors: {
-            light: BasicThemeLight,
-            dark: BasicThemeDark,
-        },
+  {
+    theme_id: 0,
+    title: 'page.body.customization.themes.theme.basic.title',
+    theme_colors: {
+      light: BasicThemeLight,
+      dark: BasicThemeDark,
     },
-    {
-        theme_id: 1,
-        title: 'page.body.customization.themes.theme.basicNew.title',
-        theme_colors: {
-            light: BasicNewThemeLight,
-            dark: BasicNewThemeDark,
-        },
+  },
+  {
+    theme_id: 1,
+    title: 'page.body.customization.themes.theme.basicNew.title',
+    theme_colors: {
+      light: BasicNewThemeLight,
+      dark: BasicNewThemeDark,
     },
-    {
-        theme_id: 2,
-        title: 'page.body.customization.themes.theme.yellow.title',
-        theme_colors: {
-            light: YellowThemeLight,
-            dark: YellowThemeDark,
-        },
+  },
+  {
+    theme_id: 2,
+    title: 'page.body.customization.themes.theme.yellow.title',
+    theme_colors: {
+      light: YellowThemeLight,
+      dark: YellowThemeDark,
     },
-    {
-        theme_id: 3,
-        title: 'page.body.customization.themes.theme.red.title',
-        theme_colors: {
-            light: RedThemeLight,
-            dark: RedThemeDark,
-        },
+  },
+  {
+    theme_id: 3,
+    title: 'page.body.customization.themes.theme.red.title',
+    theme_colors: {
+      light: RedThemeLight,
+      dark: RedThemeDark,
     },
-    {
-        theme_id: 4,
-        title: 'page.body.customization.themes.theme.green.title',
-        theme_colors: {
-            light: GreenThemeLight,
-            dark: GreenThemeDark,
-        },
+  },
+  {
+    theme_id: 4,
+    title: 'page.body.customization.themes.theme.green.title',
+    theme_colors: {
+      light: GreenThemeLight,
+      dark: GreenThemeDark,
     },
-    {
-        theme_id: 5,
-        title: 'page.body.customization.themes.theme.violet.title',
-        theme_colors: {
-            light: VioletThemeLight,
-            dark: VioletThemeDark,
-        },
+  },
+  {
+    theme_id: 5,
+    title: 'page.body.customization.themes.theme.violet.title',
+    theme_colors: {
+      light: VioletThemeLight,
+      dark: VioletThemeDark,
     },
+  },
 ];

@@ -6,38 +6,38 @@ import { balancesFetchInterval, isFinexEnabled } from '../../api';
 import { walletsFetch } from '../../modules/user/wallets';
 
 interface DispatchProps {
-    walletsFetch: typeof walletsFetch;
+  walletsFetch: typeof walletsFetch;
 }
 
 export type WalletsFetchProps = DispatchProps;
 
 export class WalletsFetchComponent extends React.Component<WalletsFetchProps> {
-    private walletsFetchInterval;
+  private walletsFetchInterval;
 
-    public componentDidMount(): void {
-        if (!isFinexEnabled()) {
-            this.walletsFetchInterval = setInterval(() => {
-                this.props.walletsFetch();
-            }, parseFloat(balancesFetchInterval()));
-        }
+  public componentDidMount(): void {
+    if (!isFinexEnabled()) {
+      this.walletsFetchInterval = setInterval(() => {
+        this.props.walletsFetch();
+      }, parseFloat(balancesFetchInterval()));
     }
+  }
 
-    public componentWillUnmount(): void {
-        if (!isFinexEnabled()) {
-            clearInterval(this.walletsFetchInterval);
-        }
+  public componentWillUnmount(): void {
+    if (!isFinexEnabled()) {
+      clearInterval(this.walletsFetchInterval);
     }
+  }
 
-    public render() {
-        return null;
-    }
+  public render() {
+    return null;
+  }
 }
 
-const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
-    walletsFetch: () => dispatch(walletsFetch()),
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch) => ({
+  walletsFetch: () => dispatch(walletsFetch()),
 });
 
 export const WalletsFetch = compose(
-    withRouter,
-    connect(null, mapDispatchToProps),
+  withRouter,
+  connect(null, mapDispatchToProps),
 )(WalletsFetchComponent) as React.ComponentClass;

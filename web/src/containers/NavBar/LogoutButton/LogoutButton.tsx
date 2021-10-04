@@ -7,19 +7,19 @@ import { LogoutIcon } from 'src/assets/icons/LogoutIcon';
 import s from './LogoutButton.postcss';
 
 export const LogoutButton: FC = () => {
-    const dispatch = useDispatch();
-    const t = useT();
+  const dispatch = useDispatch();
+  const t = useT();
 
-    const handleClick = () => dispatch(logoutFetch());
+  const handleClick = () => dispatch(logoutFetch());
 
-    return (
-        <button
-            className={s.button}
-            type="button"
-            onClick={handleClick}
-            title={t('page.body.profile.content.action.logout')}
-        >
-            <LogoutIcon />
-        </button>
-    );
+  return (
+    <button
+      className={s.button}
+      type="button"
+      onClick={handleClick}
+      title={t('page.body.profile.content.action.logout')}
+    >
+      <LogoutIcon />
+    </button>
+  );
 };

@@ -4,39 +4,45 @@ import { initialMemberLevelsState, memberLevelsReducer, MemberLevelsState } from
 import { MemberLevels } from './types';
 
 describe('MemberLevels reducer', () => {
-    const fakeMemberLevels: MemberLevels = {
-        deposit: { minimum_level: 1 },
-        withdraw: { minimum_level: 1 },
-        trading: { minimum_level: 1 },
+  const fakeMemberLevels: MemberLevels = {
+    deposit: { minimum_level: 1 },
+    withdraw: { minimum_level: 1 },
+    trading: { minimum_level: 1 },
+  };
+
+  const error: CommonError = {
+    code: 500,
+    message: ['Server error'],
+  };
+
+  it('should handle MEMBER_LEVELS_FETCH', () => {
+    const expectedState: MemberLevelsState = {
+      ...initialMemberLevelsState,
+      loading: true,
     };
+    expect(memberLevelsReducer(initialMemberLevelsState, actions.memberLevelsFetch())).toEqual(
+      expectedState,
+    );
+  });
 
-    const error: CommonError = {
-        code: 500,
-        message: ['Server error'],
+  it('should handle MEMBER_LEVELS_DATA', () => {
+    const expectedState: MemberLevelsState = {
+      ...initialMemberLevelsState,
+      loading: false,
+      levels: fakeMemberLevels,
     };
+    expect(
+      memberLevelsReducer(initialMemberLevelsState, actions.memberLevelsData(fakeMemberLevels)),
+    ).toEqual(expectedState);
+  });
 
-    it('should handle MEMBER_LEVELS_FETCH', () => {
-        const expectedState: MemberLevelsState = {
-            ...initialMemberLevelsState,
-            loading: true,
-        };
-        expect(memberLevelsReducer(initialMemberLevelsState, actions.memberLevelsFetch())).toEqual(expectedState);
-    });
-
-    it('should handle MEMBER_LEVELS_DATA', () => {
-        const expectedState: MemberLevelsState = {
-            ...initialMemberLevelsState,
-            loading: false,
-            levels: fakeMemberLevels,
-        };
-        expect(memberLevelsReducer(initialMemberLevelsState, actions.memberLevelsData(fakeMemberLevels))).toEqual(expectedState);
-    });
-
-    it('should handle MEMBER_LEVELS_ERROR', () => {
-        const expectedState: MemberLevelsState = {
-            ...initialMemberLevelsState,
-            loading: false,
-        };
-        expect(memberLevelsReducer(initialMemberLevelsState, actions.memberLevelsError(error))).toEqual(expectedState);
-    });
+  it('should handle MEMBER_LEVELS_ERROR', () => {
+    const expectedState: MemberLevelsState = {
+      ...initialMemberLevelsState,
+      loading: false,
+    };
+    expect(memberLevelsReducer(initialMemberLevelsState, actions.memberLevelsError(error))).toEqual(
+      expectedState,
+    );
+  });
 });

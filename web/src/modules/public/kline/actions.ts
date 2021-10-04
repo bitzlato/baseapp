@@ -1,91 +1,93 @@
 import { CommonError } from '../../types';
 import {
-    KLINE_DATA,
-    KLINE_ERROR,
-    KLINE_FETCH,
-    KLINE_PUSH,
-    KLINE_UPDATE_PERIOD,
-    KLINE_UPDATE_TIME_RANGE,
+  KLINE_DATA,
+  KLINE_ERROR,
+  KLINE_FETCH,
+  KLINE_PUSH,
+  KLINE_UPDATE_PERIOD,
+  KLINE_UPDATE_TIME_RANGE,
 } from './constants';
 
 export type KlineRawElement = string | number;
 
 export interface KlinePush {
-    type: typeof KLINE_PUSH;
-    payload: {
-        marketId: string;
-        kline: KlineRawElement[];
-        period: string;
-    };
+  type: typeof KLINE_PUSH;
+  payload: {
+    marketId: string;
+    kline: KlineRawElement[];
+    period: string;
+  };
 }
 
 export interface KlineFetch {
-    type: typeof KLINE_FETCH;
-    payload: {
-        market: string;
-        resolution: number;
-        from: string;
-        to: string;
-    };
+  type: typeof KLINE_FETCH;
+  payload: {
+    market: string;
+    resolution: number;
+    from: string;
+    to: string;
+  };
 }
 
 export interface KlineData {
-    type: typeof KLINE_DATA;
-    payload: any;
+  type: typeof KLINE_DATA;
+  payload: any;
 }
 
 export interface KlineUpdateTimeRange {
-    type: typeof KLINE_UPDATE_TIME_RANGE;
-    payload: {
-        from: number;
-        to: number;
-    };
+  type: typeof KLINE_UPDATE_TIME_RANGE;
+  payload: {
+    from: number;
+    to: number;
+  };
 }
 
 export interface KlineUpdatePeriod {
-    type: typeof KLINE_UPDATE_PERIOD;
-    payload: string;
+  type: typeof KLINE_UPDATE_PERIOD;
+  payload: string;
 }
 
 export interface KlineError {
-    type: typeof KLINE_ERROR;
-    error: CommonError;
+  type: typeof KLINE_ERROR;
+  error: CommonError;
 }
 
-export type KlineActions = KlinePush
-    | KlineFetch
-    | KlineData
-    | KlineUpdateTimeRange
-    | KlineUpdatePeriod
-    | KlineError;
-
+export type KlineActions =
+  | KlinePush
+  | KlineFetch
+  | KlineData
+  | KlineUpdateTimeRange
+  | KlineUpdatePeriod
+  | KlineError;
 
 export const klinePush = (payload: KlinePush['payload']): KlinePush => ({
-    type: KLINE_PUSH,
-    payload,
+  type: KLINE_PUSH,
+  payload,
 });
 
 export const klineFetch = (payload: KlineFetch['payload']): KlineFetch => ({
-    type: KLINE_FETCH,
-    payload,
+  type: KLINE_FETCH,
+  payload,
 });
 
 export const klineData = (payload: KlineData['payload']): KlineData => ({
-    type: KLINE_DATA,
-    payload,
+  type: KLINE_DATA,
+  payload,
 });
 
-export const klineUpdateTimeRange = (payload: KlineUpdateTimeRange['payload']): KlineUpdateTimeRange => ({
-    type: KLINE_UPDATE_TIME_RANGE,
-    payload,
+export const klineUpdateTimeRange = (
+  payload: KlineUpdateTimeRange['payload'],
+): KlineUpdateTimeRange => ({
+  type: KLINE_UPDATE_TIME_RANGE,
+  payload,
 });
 
 export const klineUpdatePeriod = (payload: KlineUpdatePeriod['payload']): KlineUpdatePeriod => ({
-    type: KLINE_UPDATE_PERIOD,
-    payload,
+  type: KLINE_UPDATE_PERIOD,
+  payload,
 });
 
 export const klineError = (error: CommonError): KlineError => ({
-    type: KLINE_ERROR,
-    error,
+  type: KLINE_ERROR,
+  error,
 });

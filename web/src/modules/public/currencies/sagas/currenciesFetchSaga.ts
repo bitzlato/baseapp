@@ -5,24 +5,26 @@ import { currenciesData, currenciesError, CurrenciesFetch } from '../actions';
 import { CURRENCIES_FETCH } from '../constants';
 
 const currenciesOptions: RequestOptions = {
-    apiVersion: 'peatio',
+  apiVersion: 'peatio',
 };
 
 export function* rootCurrenciesSaga() {
-    yield takeLeading(CURRENCIES_FETCH, currenciesFetchSaga);
+  yield takeLeading(CURRENCIES_FETCH, currenciesFetchSaga);
 }
 
 export function* currenciesFetchSaga(action: CurrenciesFetch) {
-    try {
-        const currencies = yield call(API.get(currenciesOptions), '/public/currencies');
-        yield put(currenciesData(currencies));
-    } catch (error) {
-        yield put(sendError({
-            error,
-            processingType: 'alert',
-            extraOptions: {
-                actionError: currenciesError,
-            },
-        }));
-    }
+  try {
+    const currencies = yield call(API.get(currenciesOptions), '/public/currencies');
+    yield put(currenciesData(currencies));
+  } catch (error) {
+    yield put(
+      sendError({
+        error,
+        processingType: 'alert',
+        extraOptions: {
+          actionError: currenciesError,
+        },
+      }),
+    );
+  }
 }

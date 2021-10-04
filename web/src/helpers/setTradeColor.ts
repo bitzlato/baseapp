@@ -1,10 +1,10 @@
 const tradesColorMapping = {
-    buy: {
-        color: 'var(--bids)',
-    },
-    sell: {
-        color: 'var(--asks)',
-    },
+  buy: {
+    color: 'var(--bids)',
+  },
+  sell: {
+    color: 'var(--asks)',
+  },
 };
 
-export const setTradeColor = (side: string) => tradesColorMapping[side] || { color: ''};
+export const setTradeColor = (side: string) => tradesColorMapping[side] || { color: '' };

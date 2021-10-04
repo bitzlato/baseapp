@@ -5,64 +5,65 @@ import { ErrorHandlerFetch, getErrorData } from '../actions';
 import { getMetaMaskErrorMessage } from '../helpers/getMetaMaskErrorMessage';
 
 export function* handleErrorSaga(action: ErrorHandlerFetch) {
-    const { processingType, extraOptions, error } = action.payload;
+  const { processingType, extraOptions, error } = action.payload;
 
-    if (extraOptions) {
-        const { params, type, actionError } = extraOptions;
+  if (extraOptions) {
+    const { params, type, actionError } = extraOptions;
 
-        if (type) {
-            switch (type) {
-                case 'METAMASK_HANDLE_ERROR':
-                    error.message = [getMetaMaskErrorMessage(error)];
+    if (type) {
+      switch (type) {
+        case 'METAMASK_HANDLE_ERROR':
+          error.message = [getMetaMaskErrorMessage(error)];
 
-                    if (error.message[0] === 'metamask.error.unknown') {
-                        yield call(handleConsoleError, error);
-                    }
-
-                    break;
-                default:
-                    window.console.log(`Unexpected action with type: ${type}`);
-                    break;
-            }
-        }
-
-        if (actionError) {
-            params ? yield put(actionError(params)) : yield put(actionError(error));
-        }
-    }
-
-    switch (processingType) {
-        case 'sentry':
-            yield call(handleCustomError, error);
-            break;
-        case 'alert':
-            yield call(handleAlertError,  error);
-            break;
-        case 'console':
+          if (error.message[0] === 'metamask.error.unknown') {
             yield call(handleConsoleError, error);
-            break;
+          }
+
+          break;
         default:
-            break;
+          window.console.log(`Unexpected action with type: ${type}`);
+          break;
+      }
     }
 
+    if (actionError) {
+      params ? yield put(actionError(params)) : yield put(actionError(error));
+    }
+  }
 
-    yield put(getErrorData());
+  switch (processingType) {
+    case 'sentry':
+      yield call(handleCustomError, error);
+      break;
+    case 'alert':
+      yield call(handleAlertError, error);
+      break;
+    case 'console':
+      yield call(handleConsoleError, error);
+      break;
+    default:
+      break;
+  }
+
+  yield put(getErrorData());
 }
 
 function* handleCustomError(error) {
-    for (const item of error.message) {
-        yield call(Bugsnag.notify, item);
-    }
+  for (const item of error.message) {
+    yield call(Bugsnag.notify, item);
+  }
 }
 
 function* handleAlertError(error) {
-    yield put(alertPush({
-        message: error.message,
-        code: error.code,
-        type: 'error',
-    }));
+  yield put(
+    alertPush({
+      message: error.message,
+      code: error.code,
+      type: 'error',
+    }),
+  );
 }
 
 function* handleConsoleError(error) {
-    yield call(window.console.error, error.message[0]);
+  yield call(window.console.error, error.message[0]);
 }

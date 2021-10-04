@@ -6,25 +6,25 @@ import { IntlProps } from '../../';
 import { extractToken } from '../VerificationScreen';
 
 const setup = (props: Partial<IntlProps> = {}) =>
-    shallow(
-        <TestComponentWrapper>
-            <VerificationScreen />
-        </TestComponentWrapper>
-    );
+  shallow(
+    <TestComponentWrapper>
+      <VerificationScreen />
+    </TestComponentWrapper>,
+  );
 
 describe('VerificationScreen test', () => {
-    it('should render', () => {
-        const wrapper = setup().render();
-        expect(wrapper).toMatchSnapshot();
-    });
+  it('should render', () => {
+    const wrapper = setup().render();
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    const tokenProps = {
-        location: {
-            search: 'confirmation_token=123123',
-        },
-    };
+  const tokenProps = {
+    location: {
+      search: 'confirmation_token=123123',
+    },
+  };
 
-    it('extract the token from search url', () => {
-        expect(extractToken(tokenProps)).toEqual('123123');
-    });
+  it('extract the token from search url', () => {
+    expect(extractToken(tokenProps)).toEqual('123123');
+  });
 });

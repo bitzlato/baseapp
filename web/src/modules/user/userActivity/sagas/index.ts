@@ -3,5 +3,5 @@ import { USER_ACTIVITY_FETCH } from '../constants';
 import { userActivitySaga } from './userActivitySaga';
 
 export function* rootUserActivitySaga() {
-    yield takeLatest(USER_ACTIVITY_FETCH, userActivitySaga);
+  yield takeLatest(USER_ACTIVITY_FETCH, userActivitySaga);
 }

@@ -4,10 +4,10 @@ import cn from 'classnames';
 import s from './LandingContainer.postcss';
 
 type Props = {
-    className?: string;
-    children: ReactNode;
+  className?: string;
+  children: ReactNode;
 };
 
 export const LandingContainer: FC<Props> = ({ className, children }: Props) => {
-    return <div className={cn(s.container, className)}>{children}</div>;
+  return <div className={cn(s.container, className)}>{children}</div>;
 };

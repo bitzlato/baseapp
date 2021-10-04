@@ -15,11 +15,11 @@ const store = createStore(rootReducer);
 const locale = 'en';
 
 export const TestComponentWrapper: React.FC = ({ children }) => {
-    return (
-        <Router history={browserHistory}>
-            <IntlProvider {...{ locale }} defaultLocale={locale} messages={languageMap[locale]}>
-                <Provider store={store}>{children}</Provider>
-            </IntlProvider>
-        </Router>
-    );
+  return (
+    <Router history={browserHistory}>
+      <IntlProvider {...{ locale }} defaultLocale={locale} messages={languageMap[locale]}>
+        <Provider store={store}>{children}</Provider>
+      </IntlProvider>
+    </Router>
+  );
 };

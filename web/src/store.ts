@@ -7,8 +7,12 @@ const sagaMiddleware = createSagaMiddleware();
 const rangerMiddleware = createSagaMiddleware();
 
 // tslint:disable-next-line:no-any
-const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer: typeof compose =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeEnhancer(applyMiddleware(sagaMiddleware, rangerMiddleware)));
+const store = createStore(
+  rootReducer,
+  composeEnhancer(applyMiddleware(sagaMiddleware, rangerMiddleware)),
+);
 
 export { store, sagaMiddleware, rangerMiddleware };
