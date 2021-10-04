@@ -5,24 +5,30 @@ import { getCsrfToken } from '../../../../helpers';
 import { changePasswordData, changePasswordError, ChangePasswordFetch } from '../actions';
 
 const changePasswordOptions = (csrfToken?: string): RequestOptions => {
-    return {
-        apiVersion: 'barong',
-        headers: { 'X-CSRF-Token': csrfToken },
-    };
+  return {
+    apiVersion: 'barong',
+    headers: { 'X-CSRF-Token': csrfToken },
+  };
 };
 
 export function* changePasswordSaga(action: ChangePasswordFetch) {
-    try {
-        yield call(API.put(changePasswordOptions(getCsrfToken())), '/resource/users/password', action.payload);
-        yield put(changePasswordData());
-        yield put(alertPush({message: ['success.password.changed'], type: 'success'}));
-    } catch (error) {
-        yield put(sendError({
-            error,
-            processingType: 'alert',
-            extraOptions: {
-                actionError: changePasswordError,
-            },
-        }));
-    }
+  try {
+    yield call(
+      API.put(changePasswordOptions(getCsrfToken())),
+      '/resource/users/password',
+      action.payload,
+    );
+    yield put(changePasswordData());
+    yield put(alertPush({ message: ['success.password.changed'], type: 'success' }));
+  } catch (error) {
+    yield put(
+      sendError({
+        error,
+        processingType: 'alert',
+        extraOptions: {
+          actionError: changePasswordError,
+        },
+      }),
+    );
+  }
 }

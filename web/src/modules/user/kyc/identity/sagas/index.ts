@@ -4,6 +4,6 @@ import { editIdentitySaga } from './editIdentitySaga';
 import { sendIdentitySaga } from './sendIdentitySaga';
 
 export function* rootSendIdentitySaga() {
-    yield takeEvery(EDIT_IDENTITY_FETCH, editIdentitySaga);
-    yield takeEvery(SEND_IDENTITY_FETCH, sendIdentitySaga);
+  yield takeEvery(EDIT_IDENTITY_FETCH, editIdentitySaga);
+  yield takeEvery(SEND_IDENTITY_FETCH, sendIdentitySaga);
 }

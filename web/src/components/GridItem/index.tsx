@@ -3,8 +3,8 @@ import * as React from 'react';
 
 export interface GridItemProps {
   /*
-  * Children node for GridItem component
-  */
+   * Children node for GridItem component
+   */
   children: React.ReactNode | GridChildInterface;
   /**
    * Additional class name. By default element receives `cr-grid-item` class
@@ -12,8 +12,8 @@ export interface GridItemProps {
    */
   className?: string;
   /*
-  * Children node for GridItem component
-  */
+   * Children node for GridItem component
+   */
   title?: string;
 }
 
@@ -29,17 +29,14 @@ const GridItem: React.FunctionComponent<GridItemProps> = (props: GridItemProps) 
 
   return (
     <div className={cx}>
-      {title ? <div className="cr-grid-item__header">
-        <div className="cr-grid-item__title">
-          {title}
+      {title ? (
+        <div className="cr-grid-item__header">
+          <div className="cr-grid-item__title">{title}</div>
         </div>
-      </div>
-      : null}
+      ) : null}
       <div className="cr-grid-item__body">{children}</div>
     </div>
   );
 };
 
-export {
-  GridItem,
-};
+export { GridItem };

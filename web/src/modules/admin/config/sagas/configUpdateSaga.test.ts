@@ -8,81 +8,81 @@ import { configUpdate, configUpdateData, configUpdateError } from '../actions';
 import { ConfigUpdateDataInterface } from '../types';
 
 describe('Saga: configUpdateSaga', () => {
-    let store: MockStoreEnhanced;
-    let sagaMiddleware: SagaMiddleware;
-    let mockAxios: MockAdapter;
+  let store: MockStoreEnhanced;
+  let sagaMiddleware: SagaMiddleware;
+  let mockAxios: MockAdapter;
 
-    beforeEach(() => {
-        mockAxios = setupMockAxios();
-        sagaMiddleware = createSagaMiddleware();
-        store = setupMockStore(sagaMiddleware, false)();
-        sagaMiddleware.run(rootSaga);
+  beforeEach(() => {
+    mockAxios = setupMockAxios();
+    sagaMiddleware = createSagaMiddleware();
+    store = setupMockStore(sagaMiddleware, false)();
+    sagaMiddleware.run(rootSaga);
+  });
+
+  afterEach(() => {
+    mockAxios.reset();
+  });
+
+  const fakeConfig: ConfigUpdateDataInterface = {
+    scope: 'public',
+    key: 'minutesUntilAutoLogout',
+    value: '10',
+    component: 'global',
+  };
+
+  const mockConfigUpdate = () => {
+    mockAxios.onPost('/config').reply(200);
+  };
+
+  const error: CommonError = {
+    message: ['Server error'],
+    code: 500,
+  };
+
+  it('should update config', async () => {
+    const expectedActions = [configUpdate(fakeConfig)];
+
+    mockConfigUpdate();
+
+    const promise = new Promise<void>((resolve) => {
+      store.subscribe(() => {
+        const actions = store.getActions();
+        if (actions.length === expectedActions.length) {
+          expect(actions).toEqual(expectedActions);
+          resolve();
+        }
+      });
     });
 
-    afterEach(() => {
-        mockAxios.reset();
+    store.dispatch(configUpdate(fakeConfig));
+
+    return promise;
+  });
+
+  xit('should trigger an error on config update', async () => {
+    const expectedActions = [
+      configUpdate(fakeConfig),
+      sendError({
+        error,
+        processingType: 'alert',
+        extraOptions: {
+          actionError: configUpdateError,
+        },
+      }),
+    ];
+
+    mockNetworkError(mockAxios);
+    const promise = new Promise<void>((resolve) => {
+      store.subscribe(() => {
+        const actions = store.getActions();
+        if (actions.length === expectedActions.length) {
+          expect(actions).toEqual(expectedActions);
+          resolve();
+        }
+      });
     });
+    store.dispatch(configUpdate(fakeConfig));
 
-    const fakeConfig: ConfigUpdateDataInterface = {
-        scope: 'public',
-        key: 'minutesUntilAutoLogout',
-        value: '10',
-        component: 'global',
-    };
-
-    const mockConfigUpdate = () => {
-        mockAxios.onPost('/config').reply(200);
-    };
-
-    const error: CommonError = {
-        message: ['Server error'],
-        code: 500,
-    };
-
-    it('should update config', async () => {
-        const expectedActions = [configUpdate(fakeConfig)];
-
-        mockConfigUpdate();
-
-        const promise = new Promise<void>(resolve => {
-            store.subscribe(() => {
-                const actions = store.getActions();
-                if (actions.length === expectedActions.length) {
-                    expect(actions).toEqual(expectedActions);
-                    resolve();
-                }
-            });
-        });
-
-        store.dispatch(configUpdate(fakeConfig));
-
-        return promise;
-    });
-
-    xit('should trigger an error on config update', async () => {
-        const expectedActions = [
-            configUpdate(fakeConfig),
-            sendError({
-                error,
-                processingType: 'alert',
-                extraOptions: {
-                    actionError: configUpdateError,
-                },
-            }),
-        ];
-
-        mockNetworkError(mockAxios);
-        const promise = new Promise<void>(resolve => {
-            store.subscribe(() => {
-                const actions = store.getActions();
-                if (actions.length === expectedActions.length) {
-                    expect(actions).toEqual(expectedActions);
-                    resolve();
-                }
-            });
-        });
-        store.dispatch(configUpdate(fakeConfig));
-
-        return promise;
-    });
+    return promise;
+  });
 });

@@ -1,7 +1,6 @@
 MarketDepths example:
 
 ```js
-
 const testData = [
   { bid: 4500, name: 'Total : 4500' },
   { bid: 3500, name: 'Total : 7000' },
@@ -55,11 +54,10 @@ const stylesTest = {
 };
 
 <MarketDepths
-    data={testData}
-    colors={stylesTest}
-    hideCartesianGrid={true}
-    chartType="linear"
-    gradientHide={true}
-/>
-
+  data={testData}
+  colors={stylesTest}
+  hideCartesianGrid={true}
+  chartType="linear"
+  gradientHide={true}
+/>;
 ```

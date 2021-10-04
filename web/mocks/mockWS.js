@@ -7,16 +7,19 @@ const argv = require('yargs').argv;
 const fs = require('fs');
 const portWS = argv.portWS || 9003;
 
-process.on('SIGINT', () => { console.log("Bye bye!"); process.exit(); });
+process.on('SIGINT', () => {
+  console.log('Bye bye!');
+  process.exit();
+});
 
 var server = new RangerMock(portWS, markets);
 
 fs.watch('./mocks', (curr, prev) => {
   console.log(`reloading mock websocket`);
   server.close();
-  delete require.cache[require.resolve('./ranger.js')]
-  delete require.cache[require.resolve('./markets.js')]
-  RangerMock = require('./ranger.js')
+  delete require.cache[require.resolve('./ranger.js')];
+  delete require.cache[require.resolve('./markets.js')];
+  RangerMock = require('./ranger.js');
   markets = require('./markets.js');
   server = new RangerMock(portWS, markets);
 });

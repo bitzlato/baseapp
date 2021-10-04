@@ -13,5 +13,5 @@ const index = 0;
 
 const onSelect = (index) => console.log(index);
 
-<Markets data={data} onSelect={onSelect} headers={headers} rowKeyIndex={index}/>
+<Markets data={data} onSelect={onSelect} headers={headers} rowKeyIndex={index} />;
 ```

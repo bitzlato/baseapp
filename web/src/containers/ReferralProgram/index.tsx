@@ -1,68 +1,64 @@
 import * as React from 'react';
-import {
-    FormattedMessage,
-    injectIntl,
-} from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps } from 'react-redux';
 import { IntlProps } from '../../';
 import { CopyableTextField } from '../../components';
 import { copy } from '../../helpers';
-import {
-    alertPush,
-    RootState,
-    selectUserInfo,
-    User,
-} from '../../modules';
+import { alertPush, RootState, selectUserInfo, User } from '../../modules';
 
 interface ReduxProps {
-    user: User;
+  user: User;
 }
 
 interface DispatchProps {
-    fetchSuccess: typeof alertPush;
+  fetchSuccess: typeof alertPush;
 }
-
 
 type Props = ReduxProps & DispatchProps & IntlProps;
 
 class ReferralProgramClass extends React.Component<Props> {
-    public translate = (e: string) => {
-        return this.props.intl.formatMessage({id: e});
-    };
+  public translate = (e: string) => {
+    return this.props.intl.formatMessage({ id: e });
+  };
 
-    public doCopy = () => {
-        copy('referral-id');
-        this.props.fetchSuccess({message: ['page.body.wallets.tabs.deposit.ccy.message.success'], type: 'success'});
-    };
+  public doCopy = () => {
+    copy('referral-id');
+    this.props.fetchSuccess({
+      message: ['page.body.wallets.tabs.deposit.ccy.message.success'],
+      type: 'success',
+    });
+  };
 
-    public render() {
-        const { user } = this.props;
-        const referralLink = `${window.document.location.origin}/signup?refid=${user.uid}`;
+  public render() {
+    const { user } = this.props;
+    const referralLink = `${window.document.location.origin}/signup?refid=${user.uid}`;
 
-        return (
-            <div className="pg-profile-page__referral mb-3">
-                <fieldset className="pg-copyable-text__section" onClick={this.doCopy}>
-                    <legend className="cr-deposit-crypto__copyable-title">
-                        <FormattedMessage id="page.body.profile.header.referralProgram"/>
-                    </legend>
-                    <CopyableTextField
-                        className="pg-copyable-text-field__input"
-                        value={referralLink}
-                        fieldId="referral-id"
-                    />
-                </fieldset>
-            </div>
-        );
-    }
+    return (
+      <div className="pg-profile-page__referral mb-3">
+        <fieldset className="pg-copyable-text__section" onClick={this.doCopy}>
+          <legend className="cr-deposit-crypto__copyable-title">
+            <FormattedMessage id="page.body.profile.header.referralProgram" />
+          </legend>
+          <CopyableTextField
+            className="pg-copyable-text-field__input"
+            value={referralLink}
+            fieldId="referral-id"
+          />
+        </fieldset>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
-    user: selectUserInfo(state),
+  user: selectUserInfo(state),
 });
 
-const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
-    fetchSuccess: payload => dispatch(alertPush(payload)),
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch) => ({
+  fetchSuccess: (payload) => dispatch(alertPush(payload)),
 });
 
 // tslint:disable-next-line
-export const ReferralProgram = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ReferralProgramClass) as any) as any;
+export const ReferralProgram = injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(ReferralProgramClass) as any,
+) as any;

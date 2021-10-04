@@ -10,41 +10,41 @@ import { selectUserLoggedIn } from '../../../modules';
 const noHeaderRoutes = ['/setup'];
 
 const HeaderComponent: React.FC = () => {
-    const userLoggedIn = useSelector(selectUserLoggedIn);
-    const intl = useIntl();
-    const shouldRenderHeader = !noHeaderRoutes.some((r) => location.pathname.includes(r));
+  const userLoggedIn = useSelector(selectUserLoggedIn);
+  const intl = useIntl();
+  const shouldRenderHeader = !noHeaderRoutes.some((r) => location.pathname.includes(r));
 
-    if (!shouldRenderHeader) {
-        return <React.Fragment />;
-    }
+  if (!shouldRenderHeader) {
+    return <React.Fragment />;
+  }
 
-    return (
-        <div className="pg-mobile-header">
-            <Link to="/" className="pg-mobile-header__logo">
-                <Logo />
+  return (
+    <div className="pg-mobile-header">
+      <Link to="/" className="pg-mobile-header__logo">
+        <Logo />
+      </Link>
+      <div className="pg-mobile-header__account">
+        {userLoggedIn ? (
+          <Link to="/profile" className="pg-mobile-header__account__profile">
+            <ProfileIcon className="pg-mobile-header__account__profile__icon" />
+          </Link>
+        ) : (
+          <>
+            <Link to="/signin" className="pg-mobile-header__account__log-in">
+              <Button type="button" size="lg" variant="primary">
+                {intl.formatMessage({ id: 'page.header.navbar.signIn' })}
+              </Button>
             </Link>
-            <div className="pg-mobile-header__account">
-                {userLoggedIn ? (
-                    <Link to="/profile" className="pg-mobile-header__account__profile">
-                        <ProfileIcon className="pg-mobile-header__account__profile__icon" />
-                    </Link>
-                ) : (
-                    <>
-                        <Link to="/signin" className="pg-mobile-header__account__log-in">
-                            <Button type="button" size="lg" variant="primary">
-                                {intl.formatMessage({ id: 'page.header.navbar.signIn' })}
-                            </Button>
-                        </Link>
-                        <Link id="signup" to="/signup" className="pg-mobile-header__account__log-in">
-                            <Button type="button" size="lg" variant="primary">
-                                {intl.formatMessage({ id: 'page.header.signUp' })}
-                            </Button>
-                        </Link>
-                    </>
-                )}
-            </div>
-        </div>
-    );
+            <Link id="signup" to="/signup" className="pg-mobile-header__account__log-in">
+              <Button type="button" size="lg" variant="primary">
+                {intl.formatMessage({ id: 'page.header.signUp' })}
+              </Button>
+            </Link>
+          </>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export const Header = React.memo(HeaderComponent);

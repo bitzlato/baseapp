@@ -4,19 +4,20 @@ From this tutorial you will learn how to customize [frontend application](https:
 
 **Reminder:**
 
-* Here is [previous customization tutorial](https://medium.com/openware/change-baseapp-logo-and-deploy-in-opendax-8506c865ee99) where you can find how to update logo for Baseapp version 2.4.
+- Here is [previous customization tutorial](https://medium.com/openware/change-baseapp-logo-and-deploy-in-opendax-8506c865ee99) where you can find how to update logo for Baseapp version 2.4.
 
 In newer 2.5 and 2.6 versions exchange logo is represented as SVG element inside React Function Component instead of simple png image from 2.4 version.
 
 The roadmap is pretty short:
 
-* clone [Baseapp](https://github.com/openware/baseapp)
-* change the logo and favicon
-* edit page title
+- clone [Baseapp](https://github.com/openware/baseapp)
+- change the logo and favicon
+- edit page title
 
 Should be easy as always. Let’s start.
 
 ### 1. Clone Baseapp
+
 ```bash
 cd /home/app
 git clone https://github.com/openware/baseapp.git
@@ -24,7 +25,7 @@ git clone https://github.com/openware/baseapp.git
 
 ### 2. Change the logo and favicon
 
-So to start with, you can download some [random SVG image](https://www.flaticon.com/svg/static/icons/svg/2933/2933116.svg) and [favicon in ICO format](https://icon-icons.com/downloadimage.php\?id\=51091\&root\=516/ICO/512/\&file\=coin_money_icon-icons.com_51091.ico).
+So to start with, you can download some [random SVG image](https://www.flaticon.com/svg/static/icons/svg/2933/2933116.svg) and [favicon in ICO format](https://icon-icons.com/downloadimage.php?id=51091&root=516/ICO/512/&file=coin_money_icon-icons.com_51091.ico).
 
 To change the logo follow next steps:
 
@@ -60,7 +61,7 @@ To change the logo follow next steps:
 Last step - add className={props.className} to the opening <svg> tag. It should look like this
 
 ```html
-  <svg className={props.className} ...other_attributes>
+<svg className="{props.className}" ...other_attributes></svg>
 ```
 
 **Pay attention** that most of the `<svg>` images have `width` and `height` attributes which are already preseted so, probably, you will have to change them.
@@ -69,7 +70,7 @@ Keep the ratio between width and height for downloaded image, but don’t use he
 So in the end my opening SVG tag inside the **LogoIcon.tsx** looks like that:
 
 ```html
-  <svg className={props.className} width=”60" height=”60" viewBox=”0 0 512 512">
+<svg className={props.className} width=”60" height=”60" viewBox=”0 0 512 512">
 ```
 
 Now let’s replace favicon.ico:
@@ -84,6 +85,7 @@ Now let’s replace favicon.ico:
   # download the new one
   curl https://icon-icons.com/downloadimage.php\?id\=51091\&root\=516/ICO/512/\&file\=coin_money_icon-icons.com_51091.ico -o favicon.ico
 ```
+
 ### 3. Edit the page title
 
 To edit title of the webpage we have to change it in two files:

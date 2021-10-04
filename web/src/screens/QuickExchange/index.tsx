@@ -4,15 +4,15 @@ import { QuickExchangeContainer } from '../../containers';
 import { setDocumentTitle } from '../../helpers';
 
 export const QuickExchange: React.FC = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        setDocumentTitle('Quick Exchange');
-    }, [dispatch]);
+  useEffect(() => {
+    setDocumentTitle('Quick Exchange');
+  }, [dispatch]);
 
-    return (
-        <div className="pg-quick-exchange">
-            <QuickExchangeContainer />
-        </div>
-    );
+  return (
+    <div className="pg-quick-exchange">
+      <QuickExchangeContainer />
+    </div>
+  );
 };

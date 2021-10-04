@@ -1,50 +1,53 @@
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="/config/env.js"></script>
     <style>
-      html, body {
-          height: 100%;
+      html,
+      body {
+        height: 100%;
       }
 
       html {
-          display: table;
-          margin: auto;
+        display: table;
+        margin: auto;
       }
 
       body {
-          display: table-cell;
-          vertical-align: middle;
+        display: table-cell;
+        vertical-align: middle;
       }
     </style>
   </head>
   <body>
-    <img src="https://market.bitzlato.com/assets/bitzlato_logo_blue.png" style='margin-bottom: 2rem'>
+    <img
+      src="https://market.bitzlato.com/assets/bitzlato_logo_blue.png"
+      style="margin-bottom: 2rem"
+    />
     <center>Congratulations, you are successfully logged in! Redirecting to the market..</center>
-     <script type="text/javascript">
-        const authorizeOnPeatioWithAuth0ID = (id_token) =>
-          fetch(window.env.auth0.auth_url + "?id_token=" + id_token,
-                {
-                  credentials: 'same-origin', // credentials: 'include',
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                }
-          )
-          .then(response => {
-            // TODO Remove cookie
-            response.json().then(user => {
-              localStorage.setItem('csrfToken', user.csrf_token);
-              window.location = window.env.auth0.signedin_url;
-            });
+    <script type="text/javascript">
+      const authorizeOnPeatioWithAuth0ID = (id_token) =>
+        fetch(window.env.auth0.auth_url + '?id_token=' + id_token, {
+          credentials: 'same-origin', // credentials: 'include',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then((response) => {
+          // TODO Remove cookie
+          response.json().then((user) => {
+            localStorage.setItem('csrfToken', user.csrf_token);
+            window.location = window.env.auth0.signedin_url;
           });
+        });
 
-        const cookies = Object.fromEntries(document.cookie.split(/; */).map(c => {
-            const [ key, ...v ] = c.split('=');
-            return [ key, decodeURIComponent(v.join('=')) ];
-        }));;
-        authorizeOnPeatioWithAuth0ID(cookies['ex_auth0_id_token']);
-     </script>
+      const cookies = Object.fromEntries(
+        document.cookie.split(/; */).map((c) => {
+          const [key, ...v] = c.split('=');
+          return [key, decodeURIComponent(v.join('='))];
+        }),
+      );
+      authorizeOnPeatioWithAuth0ID(cookies['ex_auth0_id_token']);
+    </script>
   </body>
 </html>

@@ -19,122 +19,128 @@ const domain = process.env.BUILD_DOMAIN ? process.env.BUILD_DOMAIN.split(',') : 
 const appVersion = extractSemver(readFileSync('../.semver').toString());
 
 const plugins = [
-    new ExtendedAPIPlugin(),
-    new EnvironmentPlugin({
-        BUILD_EXPIRE: null,
-        REACT_APP_BUGSNAG_KEY: null,
-        REACT_APP_BUGSNAG_VERSION: appVersion,
-        REACT_APP_RELEASE_STAGE: 'development',
-        HASH,
-    }),
-    new OptimizeCssAssetsPlugin({
-        assetNameRegExp: /\.css$/g,
-        cssProcessor: require('cssnano'),
-        cssProcessorPluginOptions: {
-            preset: ['default', { discardComments: { removeAll: true } }],
-        },
-        canPrint: false,
-    }),
-    new CopyWebpackPlugin({
-        patterns: [{ from: 'public' }],
-    }),
+  new ExtendedAPIPlugin(),
+  new EnvironmentPlugin({
+    BUILD_EXPIRE: null,
+    REACT_APP_BUGSNAG_KEY: null,
+    REACT_APP_BUGSNAG_VERSION: appVersion,
+    REACT_APP_RELEASE_STAGE: 'development',
+    HASH,
+  }),
+  new OptimizeCssAssetsPlugin({
+    assetNameRegExp: /\.css$/g,
+    cssProcessor: require('cssnano'),
+    cssProcessorPluginOptions: {
+      preset: ['default', { discardComments: { removeAll: true } }],
+    },
+    canPrint: false,
+  }),
+  new CopyWebpackPlugin({
+    patterns: [{ from: 'public' }],
+  }),
 ];
 
 if (process.env.ANALYZE === '1') {
-    plugins.push(new BundleAnalyzerPlugin());
+  plugins.push(new BundleAnalyzerPlugin());
 }
 
 if (process.env.REACT_APP_BUGSNAG_KEY) {
-    plugins.push(
-        new BugsnagSourceMapUploaderPlugin({
-            apiKey: process.env.REACT_APP_BUGSNAG_KEY,
-            appVersion,
-            overwrite: true,
-        })
-    );
+  plugins.push(
+    new BugsnagSourceMapUploaderPlugin({
+      apiKey: process.env.REACT_APP_BUGSNAG_KEY,
+      appVersion,
+      overwrite: true,
+    }),
+  );
 }
 
 const config = merge(commonConfig, {
-    devtool: 'source-map',
-    mode: 'production',
-    output: {
-        path: BUILD_DIR,
-        filename: '[name].[hash].js',
-        globalObject: 'this',
-        publicPath: '/',
-    },
-    optimization: {
-        usedExports: false,
-        minimize: true,
-    },
-    plugins,
-    module: {
-        rules: [
-            {
-                test: /\.postcss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
+  devtool: 'source-map',
+  mode: 'production',
+  output: {
+    path: BUILD_DIR,
+    filename: '[name].[hash].js',
+    globalObject: 'this',
+    publicPath: '/',
+  },
+  optimization: {
+    usedExports: false,
+    minimize: true,
+  },
+  plugins,
+  module: {
+    rules: [
+      {
+        test: /\.postcss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'dts-css-modules-loader',
+            options: {
+              namedExport: true,
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[hash:base64]',
+                exportLocalsConvention: 'camelCaseOnly',
+              },
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
                     {
-                        loader: 'dts-css-modules-loader',
-                        options: {
-                            namedExport: true,
-                        },
+                      stage: 1,
+                      features: {
+                        'nesting-rules': false,
+                      },
+                      importFrom: ['src/styles/mediaQueries.css'],
                     },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                mode: 'local',
-                                localIdentName: '[hash:base64]',
-                                exportLocalsConvention: 'camelCaseOnly',
-                            },
-                            importLoaders: 1,
-                        },
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    [
-                                        'postcss-preset-env',
-                                        {
-                                            stage: 1,
-                                            features: {
-                                                'nesting-rules': false,
-                                            },
-                                            importFrom: ['src/styles/mediaQueries.css'],
-                                        },
-                                    ],
-                                    'postcss-nested',
-                                ],
-                            },
-                        },
-                    },
+                  ],
+                  'postcss-nested',
                 ],
+              },
             },
-            {
-                test: /\.(css|sass|scss|pcss)$/,
-                use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader'],
-            },
-            {
-                test: /\.(tsx|ts)?$/,
-                use: [
-                    {
-                        loader: 'ts-loader',
-                        options: {
-                            transpileOnly: true,
-                            happyPackMode: true,
-                        },
-                    },
-                ],
-                exclude: /node_modules/,
-            },
+          },
         ],
-    },
-    stats: {
-        children: false,
-    },
+      },
+      {
+        test: /\.(css|sass|scss|pcss)$/,
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.(tsx|ts)?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              happyPackMode: true,
+            },
+          },
+        ],
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  stats: {
+    children: false,
+  },
 });
 
 // eslint-disable-next-line import/no-default-export

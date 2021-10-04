@@ -65,138 +65,143 @@ export interface CombinedOrderBookProps {
   noDataMessage: string;
 }
 
-
 export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProps> {
-    public componentDidMount() {
-        const scroll = document.getElementsByClassName('cr-order-book')[0];
+  public componentDidMount() {
+    const scroll = document.getElementsByClassName('cr-order-book')[0];
 
-        if (!this.props.isLarge && scroll) {
-          scroll.scrollTop = scroll.scrollHeight;
-        }
+    if (!this.props.isLarge && scroll) {
+      scroll.scrollTop = scroll.scrollHeight;
     }
+  }
 
-    public componentWillReceiveProps(next: CombinedOrderBookProps) {
-        const scroll = document.getElementsByClassName('cr-order-book')[0];
+  public componentWillReceiveProps(next: CombinedOrderBookProps) {
+    const scroll = document.getElementsByClassName('cr-order-book')[0];
 
-        if (next.isLarge !== this.props.isLarge && !next.isLarge && scroll) {
-            scroll.scrollTop = scroll.scrollHeight;
-        }
+    if (next.isLarge !== this.props.isLarge && !next.isLarge && scroll) {
+      scroll.scrollTop = scroll.scrollHeight;
     }
+  }
 
-    public render() {
-        return (
-            <div className="cr-combined-order-book">
-              {this.props.isLarge ? this.orderBookLarge() : this.orderBookSmall()}
-            </div>
-        );
-    }
-
-    public renderNoData = (message: string) => (
-        <div className="cr-order-book cr-order-book--empty">
-            <span className="cr-order-book--empty-item">{message}</span>
-        </div>
+  public render() {
+    return (
+      <div className="cr-combined-order-book">
+        {this.props.isLarge ? this.orderBookLarge() : this.orderBookSmall()}
+      </div>
     );
+  }
 
-    private orderBookLarge = () => {
-      const {
-          dataAsks,
-          dataBids,
-          maxVolume,
-          orderBookEntryAsks,
-          orderBookEntryBids,
-          headers,
-          rowBackgroundColorAsks,
-          rowBackgroundColorBids,
-          onSelectAsks,
-          onSelectBids,
-          lastPrice,
-          noDataAsks,
-          noDataBids,
-          noDataMessage,
-      } = this.props;
+  public renderNoData = (message: string) => (
+    <div className="cr-order-book cr-order-book--empty">
+      <span className="cr-order-book--empty-item">{message}</span>
+    </div>
+  );
 
-      const reverseHead = headers.slice(0).reverse();
+  private orderBookLarge = () => {
+    const {
+      dataAsks,
+      dataBids,
+      maxVolume,
+      orderBookEntryAsks,
+      orderBookEntryBids,
+      headers,
+      rowBackgroundColorAsks,
+      rowBackgroundColorBids,
+      onSelectAsks,
+      onSelectBids,
+      lastPrice,
+      noDataAsks,
+      noDataBids,
+      noDataMessage,
+    } = this.props;
 
-      return (
-          <React.Fragment>
-              <div className="cr-combined-order-book__large">
-                  {noDataBids ? this.renderNoData(noDataMessage) :
-                      <OrderBook
-                          side={'right'}
-                          headers={reverseHead}
-                          data={dataBids}
-                          rowBackgroundColor={rowBackgroundColorBids}
-                          maxVolume={maxVolume}
-                          orderBookEntry={orderBookEntryBids}
-                          onSelect={onSelectBids}
-                      />
-                  }
-                  {noDataAsks ? this.renderNoData(noDataMessage) :
-                      <OrderBook
-                          side={'left'}
-                          headers={headers}
-                          data={dataAsks}
-                          rowBackgroundColor={rowBackgroundColorAsks}
-                          maxVolume={maxVolume}
-                          orderBookEntry={orderBookEntryAsks}
-                          onSelect={onSelectAsks}
-                      />
-                  }
-              </div>
-              <div className="cr-combined-order-book__market cr-combined-order-book__large-market">
-                  {lastPrice}
-              </div>
-          </React.Fragment>
-      );
-    };
+    const reverseHead = headers.slice(0).reverse();
 
-    private orderBookSmall = () => {
-      const {
-          dataAsks,
-          dataBids,
-          maxVolume,
-          orderBookEntryAsks,
-          orderBookEntryBids,
-          headers,
-          rowBackgroundColorAsks,
-          rowBackgroundColorBids,
-          onSelectAsks,
-          onSelectBids,
-          lastPrice,
-          noDataAsks,
-          noDataBids,
-          noDataMessage,
-      } = this.props;
+    return (
+      <React.Fragment>
+        <div className="cr-combined-order-book__large">
+          {noDataBids ? (
+            this.renderNoData(noDataMessage)
+          ) : (
+            <OrderBook
+              side={'right'}
+              headers={reverseHead}
+              data={dataBids}
+              rowBackgroundColor={rowBackgroundColorBids}
+              maxVolume={maxVolume}
+              orderBookEntry={orderBookEntryBids}
+              onSelect={onSelectBids}
+            />
+          )}
+          {noDataAsks ? (
+            this.renderNoData(noDataMessage)
+          ) : (
+            <OrderBook
+              side={'left'}
+              headers={headers}
+              data={dataAsks}
+              rowBackgroundColor={rowBackgroundColorAsks}
+              maxVolume={maxVolume}
+              orderBookEntry={orderBookEntryAsks}
+              onSelect={onSelectAsks}
+            />
+          )}
+        </div>
+        <div className="cr-combined-order-book__market cr-combined-order-book__large-market">
+          {lastPrice}
+        </div>
+      </React.Fragment>
+    );
+  };
 
-      return (
-          <React.Fragment>
-              <div className="cr-combined-order-book__small">
-                    {noDataAsks ? this.renderNoData(noDataMessage) :
-                        <OrderBook
-                            side={'left'}
-                            headers={headers}
-                            data={dataAsks}
-                            rowBackgroundColor={rowBackgroundColorAsks}
-                            maxVolume={maxVolume}
-                            orderBookEntry={orderBookEntryAsks.reverse()}
-                            onSelect={onSelectAsks}
-                        />
-                    }
-                    <div className="cr-combined-order-book__market">
-                        {lastPrice}
-                    </div>
-                    {noDataBids ? this.renderNoData(noDataMessage) :
-                        <OrderBook
-                            side={'left'}
-                            data={dataBids}
-                            rowBackgroundColor={rowBackgroundColorBids}
-                            maxVolume={maxVolume}
-                            orderBookEntry={orderBookEntryBids}
-                            onSelect={onSelectBids}
-                        />
-                    }
-                </div>
-            </React.Fragment>
-      );
-    };
+  private orderBookSmall = () => {
+    const {
+      dataAsks,
+      dataBids,
+      maxVolume,
+      orderBookEntryAsks,
+      orderBookEntryBids,
+      headers,
+      rowBackgroundColorAsks,
+      rowBackgroundColorBids,
+      onSelectAsks,
+      onSelectBids,
+      lastPrice,
+      noDataAsks,
+      noDataBids,
+      noDataMessage,
+    } = this.props;
+
+    return (
+      <React.Fragment>
+        <div className="cr-combined-order-book__small">
+          {noDataAsks ? (
+            this.renderNoData(noDataMessage)
+          ) : (
+            <OrderBook
+              side={'left'}
+              headers={headers}
+              data={dataAsks}
+              rowBackgroundColor={rowBackgroundColorAsks}
+              maxVolume={maxVolume}
+              orderBookEntry={orderBookEntryAsks.reverse()}
+              onSelect={onSelectAsks}
+            />
+          )}
+          <div className="cr-combined-order-book__market">{lastPrice}</div>
+          {noDataBids ? (
+            this.renderNoData(noDataMessage)
+          ) : (
+            <OrderBook
+              side={'left'}
+              data={dataBids}
+              rowBackgroundColor={rowBackgroundColorBids}
+              maxVolume={maxVolume}
+              orderBookEntry={orderBookEntryBids}
+              onSelect={onSelectBids}
+            />
+          )}
+        </div>
+      </React.Fragment>
+    );
+  };
 }

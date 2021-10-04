@@ -5,7 +5,7 @@ import { en } from './en';
 export type LangType = typeof en;
 
 export const languageMap = {
-    default: en,
-    en: { ...en, ...enCustom },
-    ...customLanguageMap,
+  default: en,
+  en: { ...en, ...enCustom },
+  ...customLanguageMap,
 };

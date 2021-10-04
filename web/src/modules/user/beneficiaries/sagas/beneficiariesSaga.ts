@@ -5,25 +5,27 @@ import { buildQueryString } from '../../../../helpers';
 import { beneficiariesData, beneficiariesError, BeneficiariesFetch } from '../actions';
 
 const config: RequestOptions = {
-    apiVersion: 'peatio',
+  apiVersion: 'peatio',
 };
 
 export function* beneficiariesSaga(action: BeneficiariesFetch) {
-    try {
-        let params = '';
-        if (action.payload) {
-            params = `?${buildQueryString(action.payload)}`;
-        }
-        const beneficiaries = yield call(API.get(config), `/account/beneficiaries${params}`);
-
-        yield put(beneficiariesData(beneficiaries));
-    } catch (error) {
-        yield put(sendError({
-            error,
-            processingType: 'alert',
-            extraOptions: {
-                actionError: beneficiariesError,
-            },
-        }));
+  try {
+    let params = '';
+    if (action.payload) {
+      params = `?${buildQueryString(action.payload)}`;
     }
+    const beneficiaries = yield call(API.get(config), `/account/beneficiaries${params}`);
+
+    yield put(beneficiariesData(beneficiaries));
+  } catch (error) {
+    yield put(
+      sendError({
+        error,
+        processingType: 'alert',
+        extraOptions: {
+          actionError: beneficiariesError,
+        },
+      }),
+    );
+  }
 }

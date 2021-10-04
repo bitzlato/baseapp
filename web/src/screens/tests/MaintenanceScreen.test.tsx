@@ -5,15 +5,15 @@ import { IntlProps } from '../../';
 import { MaintenanceScreen } from '../MaintenanceScreen';
 
 const setup = (props: Partial<IntlProps> = {}) =>
-    shallow(
-        <TestComponentWrapper>
-            <MaintenanceScreen />
-        </TestComponentWrapper>
-    );
+  shallow(
+    <TestComponentWrapper>
+      <MaintenanceScreen />
+    </TestComponentWrapper>,
+  );
 
 describe('MaintenanceScreen', () => {
-    it('should render', () => {
-        const wrapper = setup().render();
-        expect(wrapper).toMatchSnapshot();
-    });
+  it('should render', () => {
+    const wrapper = setup().render();
+    expect(wrapper).toMatchSnapshot();
+  });
 });

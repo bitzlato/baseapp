@@ -1,5 +1,5 @@
-@import "./colors.pcss";
-@import "./fonts.pcss";
+@import './colors.pcss';
+@import './fonts.pcss';
 
 .setup-screen {
   display: flex;
@@ -88,7 +88,7 @@
       }
 
       .checkmark::after {
-        content: "";
+        content: '';
         display: none;
         position: absolute;
       }
@@ -138,7 +138,10 @@
       letter-spacing: 0.04em;
       width: 75px;
 
-      &:active, &:hover, &:focus, &:disabled {
+      &:active,
+      &:hover,
+      &:focus,
+      &:disabled {
         background-color: var(--setup-markets-button-bg-color) !important;
         color: var(--setup-markets-button-color) !important;
         opacity: 0.72;

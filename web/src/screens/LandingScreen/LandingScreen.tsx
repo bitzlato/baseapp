@@ -6,11 +6,11 @@ import { JoinBlock } from './JoinBlock';
 import { FeaturesBlock } from './FeaturesBlock';
 
 export const LandingScreen: FC = () => {
-    return (
-        <div className={s.landing}>
-            <WelcomeBlock />
-            <JoinBlock />
-            <FeaturesBlock />
-        </div>
-    );
+  return (
+    <div className={s.landing}>
+      <WelcomeBlock />
+      <JoinBlock />
+      <FeaturesBlock />
+    </div>
+  );
 };

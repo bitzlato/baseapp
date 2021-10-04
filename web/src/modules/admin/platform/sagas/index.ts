@@ -3,5 +3,5 @@ import { PLATFORM_CREATE } from '../constants';
 import { platformCreateSaga } from './platformDataCreateSaga';
 
 export function* rootPlatformCreateSaga() {
-    yield takeLatest(PLATFORM_CREATE, platformCreateSaga);
+  yield takeLatest(PLATFORM_CREATE, platformCreateSaga);
 }

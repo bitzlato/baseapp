@@ -6,24 +6,25 @@ import { selectWallets } from '../../../modules/user/wallets';
 import { EstimatedValueMobile, WalletItem } from '../../components';
 
 const WalletsMobileScreen: React.FC = () => {
-    const wallets = useSelector(selectWallets) || [];
-    const history = useHistory();
+  const wallets = useSelector(selectWallets) || [];
+  const history = useHistory();
 
-    useWalletsFetch();
-    useCurrenciesFetch();
-    useDocumentTitle('Wallets');
+  useWalletsFetch();
+  useCurrenciesFetch();
+  useDocumentTitle('Wallets');
 
-    return <div>
-        <EstimatedValueMobile/>
-        {wallets.map((wallet, index) =>
-            <WalletItem
-                onClick={c => history.push(`/wallets/${c}/history`)}
-                wallet={wallet}
-                key={index}
-            />)}
-    </div>;
+  return (
+    <div>
+      <EstimatedValueMobile />
+      {wallets.map((wallet, index) => (
+        <WalletItem
+          onClick={(c) => history.push(`/wallets/${c}/history`)}
+          wallet={wallet}
+          key={index}
+        />
+      ))}
+    </div>
+  );
 };
 
-export {
-    WalletsMobileScreen,
-};
+export { WalletsMobileScreen };

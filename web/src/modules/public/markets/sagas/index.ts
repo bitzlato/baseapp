@@ -5,7 +5,7 @@ import { tickersSaga } from './tickersSaga';
 import { marketPriceSaga } from './marketPriceSaga';
 
 export function* rootMarketsSaga() {
-    yield takeLeading(MARKETS_FETCH, marketsFetchSaga);
-    yield takeLeading(MARKETS_TICKERS_FETCH, tickersSaga);
-    yield takeLeading(MARKET_PRICE_FETCH, marketPriceSaga);
+  yield takeLeading(MARKETS_FETCH, marketsFetchSaga);
+  yield takeLeading(MARKETS_TICKERS_FETCH, tickersSaga);
+  yield takeLeading(MARKET_PRICE_FETCH, marketPriceSaga);
 }

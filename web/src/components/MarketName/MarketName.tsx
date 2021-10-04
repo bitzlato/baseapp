@@ -2,15 +2,15 @@ import React, { FC } from 'react';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 
 type Props = {
-    name: string;
+  name: string;
 };
 
 export const MarketName: FC<Props> = ({ name }: Props) => {
-    const [from, to] = name.split('/');
+  const [from, to] = name.split('/');
 
-    return (
-        <>
-            <CurrencyTicker symbol={from} />/<CurrencyTicker symbol={to} />
-        </>
-    );
+  return (
+    <>
+      <CurrencyTicker symbol={from} />/<CurrencyTicker symbol={to} />
+    </>
+  );
 };

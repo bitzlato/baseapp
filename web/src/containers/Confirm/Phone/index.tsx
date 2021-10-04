@@ -9,265 +9,264 @@ import { compose } from 'redux';
 import { IntlProps } from '../../../';
 import { CustomInput } from '../../../components';
 import {
-    changeUserLevel,
-    resendCode,
-    RootState,
-    selectVerifyPhoneLoading,
-    selectVerifyPhoneSuccess,
-    sendCode,
-    verifyPhone,
+  changeUserLevel,
+  resendCode,
+  RootState,
+  selectVerifyPhoneLoading,
+  selectVerifyPhoneSuccess,
+  sendCode,
+  verifyPhone,
 } from '../../../modules';
 
 interface ReduxProps {
-    verifyPhoneSuccess?: string;
-    loading: boolean;
+  verifyPhoneSuccess?: string;
+  loading: boolean;
 }
 
 interface PhoneState {
-    phoneNumber: string;
-    phoneNumberFocused: boolean;
-    confirmationCode: string;
-    confirmationCodeFocused: boolean;
-    resendCode: boolean;
+  phoneNumber: string;
+  phoneNumberFocused: boolean;
+  confirmationCode: string;
+  confirmationCodeFocused: boolean;
+  resendCode: boolean;
 }
 
 interface DispatchProps {
-    resendCode: typeof resendCode;
-    sendCode: typeof sendCode;
-    verifyPhone: typeof verifyPhone;
-    changeUserLevel: typeof changeUserLevel;
+  resendCode: typeof resendCode;
+  sendCode: typeof sendCode;
+  verifyPhone: typeof verifyPhone;
+  changeUserLevel: typeof changeUserLevel;
 }
 
 type Props = ReduxProps & DispatchProps & RouterProps & IntlProps;
 
 class PhoneComponent extends React.Component<Props, PhoneState> {
-    constructor(props: Props) {
-        super(props);
+  constructor(props: Props) {
+    super(props);
 
-        this.state = {
-            phoneNumber: '',
-            phoneNumberFocused: false,
-            confirmationCode: '',
-            confirmationCodeFocused: false,
-            resendCode: false,
-        };
+    this.state = {
+      phoneNumber: '',
+      phoneNumberFocused: false,
+      confirmationCode: '',
+      confirmationCodeFocused: false,
+      resendCode: false,
+    };
+  }
+
+  public componentDidUpdate(prevProps: Props) {
+    const { history, verifyPhoneSuccess } = this.props;
+
+    if (verifyPhoneSuccess !== prevProps.verifyPhoneSuccess) {
+      history.push('/profile');
     }
+  }
 
-    public componentDidUpdate(prevProps: Props) {
-        const { history, verifyPhoneSuccess } = this.props;
+  public render() {
+    const { phoneNumber, phoneNumberFocused, confirmationCode, confirmationCodeFocused } =
+      this.state;
+    const { loading } = this.props;
 
-        if (verifyPhoneSuccess !== prevProps.verifyPhoneSuccess) {
-            history.push('/profile');
-        }
+    const phoneNumberFocusedClass = cr('pg-confirm__content-phone__row__content', {
+      'pg-confirm__content-phone__row__content--focused': phoneNumberFocused,
+    });
+
+    const confirmationCodeFocusedClass = cr('pg-confirm__content-phone__row__content', {
+      'pg-confirm__content-phone__row__content--focused': confirmationCodeFocused,
+    });
+
+    return (
+      <div className="pg-confirm__content-phone">
+        <div className="pg-confirm__content-phone__row">
+          <form>
+            <fieldset className={phoneNumberFocusedClass}>
+              <InputGroup>
+                <CustomInput
+                  label={phoneNumber ? this.translate('page.body.kyc.phone.phoneNumber') : ''}
+                  defaultLabel={
+                    phoneNumber ? this.translate('page.body.kyc.phone.phoneNumber') : ''
+                  }
+                  placeholder={
+                    phoneNumberFocused ? '' : this.translate('page.body.kyc.phone.phoneNumber')
+                  }
+                  type="tel"
+                  name="phone"
+                  autoComplete="tel"
+                  inputValue={phoneNumber}
+                  handleClick={this.addPlusSignToPhoneNumber}
+                  handleChangeInput={this.handleChangePhoneNumber}
+                  onKeyPress={this.handleSendEnterPress}
+                  autoFocus={true}
+                  handleFocusInput={this.handleFieldFocus('phoneNumber')}
+                  labelVisible={phoneNumberFocused}
+                />
+                <InputGroup.Append>
+                  <Button
+                    block={true}
+                    onClick={this.handleSendCode}
+                    size="lg"
+                    variant="primary"
+                    type="submit"
+                    disabled={!phoneNumber}
+                  >
+                    {this.state.resendCode
+                      ? this.translate('page.body.kyc.phone.resend')
+                      : this.translate('page.body.kyc.phone.send')}
+                  </Button>
+                </InputGroup.Append>
+              </InputGroup>
+            </fieldset>
+          </form>
+        </div>
+        <div className="pg-confirm__content-phone__row">
+          <fieldset className={confirmationCodeFocusedClass}>
+            <CustomInput
+              type="string"
+              label={confirmationCode ? this.translate('page.body.kyc.phone.code') : ''}
+              defaultLabel={confirmationCode ? this.translate('page.body.kyc.phone.code') : ''}
+              handleChangeInput={this.handleChangeConfirmationCode}
+              onKeyPress={this.handleConfirmEnterPress}
+              inputValue={confirmationCode}
+              placeholder={
+                confirmationCodeFocused ? '' : this.translate('page.body.kyc.phone.code')
+              }
+              handleFocusInput={this.handleFieldFocus('confirmationCode')}
+              labelVisible={confirmationCodeFocused}
+            />
+          </fieldset>
+        </div>
+        <div className="pg-confirm__content-deep">
+          <Button
+            block={true}
+            onClick={this.confirmPhone}
+            size="lg"
+            variant="primary"
+            disabled={!confirmationCode || loading}
+          >
+            {loading ? (
+              <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+            ) : (
+              this.translate('page.body.kyc.next')
+            )}
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  private handleFieldFocus = (field: string) => {
+    return () => {
+      switch (field) {
+        case 'phoneNumber':
+          this.addPlusSignToPhoneNumber();
+          this.setState((prev) => ({
+            phoneNumberFocused: !prev.phoneNumberFocused,
+          }));
+          break;
+        case 'confirmationCode':
+          this.setState({
+            confirmationCodeFocused: !this.state.confirmationCodeFocused,
+          });
+          break;
+        default:
+          break;
+      }
+    };
+  };
+
+  private handleConfirmEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.confirmPhone();
     }
+  };
 
-    public render() {
-        const {
-            phoneNumber,
-            phoneNumberFocused,
-            confirmationCode,
-            confirmationCodeFocused,
-        } = this.state;
-        const { loading } = this.props;
-
-        const phoneNumberFocusedClass = cr('pg-confirm__content-phone__row__content', {
-            'pg-confirm__content-phone__row__content--focused': phoneNumberFocused,
-        });
-
-        const confirmationCodeFocusedClass = cr('pg-confirm__content-phone__row__content', {
-            'pg-confirm__content-phone__row__content--focused': confirmationCodeFocused,
-        });
-
-        return (
-            <div className="pg-confirm__content-phone">
-                <div className="pg-confirm__content-phone__row">
-                    <form>
-                        <fieldset className={phoneNumberFocusedClass}>
-                            <InputGroup>
-                                <CustomInput
-                                    label={phoneNumber ? this.translate('page.body.kyc.phone.phoneNumber') : ''}
-                                    defaultLabel={phoneNumber ? this.translate('page.body.kyc.phone.phoneNumber') : ''}
-                                    placeholder={phoneNumberFocused ? '' : this.translate('page.body.kyc.phone.phoneNumber')}
-                                    type="tel"
-                                    name="phone"
-                                    autoComplete="tel"
-                                    inputValue={phoneNumber}
-                                    handleClick={this.addPlusSignToPhoneNumber}
-                                    handleChangeInput={this.handleChangePhoneNumber}
-                                    onKeyPress={this.handleSendEnterPress}
-                                    autoFocus={true}
-                                    handleFocusInput={this.handleFieldFocus('phoneNumber')}
-                                    labelVisible={phoneNumberFocused}
-                                />
-                                <InputGroup.Append>
-                                    <Button
-                                        block={true}
-                                        onClick={this.handleSendCode}
-                                        size="lg"
-                                        variant="primary"
-                                        type="submit"
-                                        disabled={!phoneNumber}
-                                    >
-                                        {this.state.resendCode ? this.translate('page.body.kyc.phone.resend') : this.translate('page.body.kyc.phone.send')}
-                                    </Button>
-                                </InputGroup.Append>
-                            </InputGroup>
-                        </fieldset>
-                    </form>
-                </div>
-                <div className="pg-confirm__content-phone__row">
-                    <fieldset className={confirmationCodeFocusedClass}>
-                        <CustomInput
-                            type="string"
-                            label={confirmationCode ? this.translate('page.body.kyc.phone.code') : ''}
-                            defaultLabel={confirmationCode ? this.translate('page.body.kyc.phone.code') : ''}
-                            handleChangeInput={this.handleChangeConfirmationCode}
-                            onKeyPress={this.handleConfirmEnterPress}
-                            inputValue={confirmationCode}
-                            placeholder={confirmationCodeFocused ? '' : this.translate('page.body.kyc.phone.code')}
-                            handleFocusInput={this.handleFieldFocus('confirmationCode')}
-                            labelVisible={confirmationCodeFocused}
-                        />
-                    </fieldset>
-                </div>
-                <div className="pg-confirm__content-deep">
-                    <Button
-                        block={true}
-                        onClick={this.confirmPhone}
-                        size="lg"
-                        variant="primary"
-                        disabled={!confirmationCode || loading}
-                    >
-                        {loading ? (
-                            <Spinner
-                                as="span"
-                                animation="border"
-                                size="sm"
-                                role="status"
-                                aria-hidden="true"
-                            />
-                        ) : this.translate('page.body.kyc.next')}
-                    </Button>
-                </div>
-            </div>
-        );
+  private handleSendEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.handleSendCode(event);
     }
+  };
 
-    private handleFieldFocus = (field: string) => {
-        return() => {
-            switch (field) {
-                case 'phoneNumber':
-                    this.addPlusSignToPhoneNumber();
-                    this.setState(prev => ({
-                        phoneNumberFocused: !prev.phoneNumberFocused,
-                    }));
-                    break;
-                case 'confirmationCode':
-                    this.setState({
-                        confirmationCodeFocused: !this.state.confirmationCodeFocused,
-                    });
-                    break;
-                default:
-                    break;
-            }
-        };
+  private confirmPhone = () => {
+    const requestProps = {
+      phone_number: String(this.state.phoneNumber),
+      verification_code: String(this.state.confirmationCode),
+    };
+    this.props.verifyPhone(requestProps);
+  };
+
+  private addPlusSignToPhoneNumber = () => {
+    if (this.state.phoneNumber.length === 0) {
+      this.setState({
+        phoneNumber: '+',
+      });
+    }
+  };
+
+  private handleChangePhoneNumber = (value: string) => {
+    if (this.inputPhoneNumber(value)) {
+      this.setState({
+        phoneNumber: value,
+        resendCode: false,
+      });
+    }
+  };
+
+  private handleChangeConfirmationCode = (value: string) => {
+    if (this.inputConfirmationCode(value)) {
+      this.setState({
+        confirmationCode: value,
+      });
+    }
+  };
+
+  private inputPhoneNumber = (value: string) => {
+    const convertedText = value.trim();
+    const condition = new RegExp('^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*$');
+
+    return condition.test(convertedText);
+  };
+
+  private inputConfirmationCode = (value: string) => {
+    const convertedText = value.trim();
+    const condition = new RegExp('^\\d*?$');
+
+    return condition.test(convertedText);
+  };
+
+  private handleSendCode = (event) => {
+    event.preventDefault();
+    const requestProps = {
+      phone_number: String(this.state.phoneNumber),
     };
 
-    private handleConfirmEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            this.confirmPhone();
-        }
-    };
+    if (!this.state.resendCode) {
+      this.props.sendCode(requestProps);
+      this.setState({
+        resendCode: true,
+      });
+    } else {
+      this.props.resendCode(requestProps);
+    }
+  };
 
-    private handleSendEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            this.handleSendCode(event);
-        }
-    };
-
-    private confirmPhone = () => {
-        const requestProps = {
-            phone_number: String(this.state.phoneNumber),
-            verification_code: String(this.state.confirmationCode),
-        };
-        this.props.verifyPhone(requestProps);
-    };
-
-    private addPlusSignToPhoneNumber = () => {
-        if (this.state.phoneNumber.length === 0) {
-            this.setState({
-                phoneNumber: '+',
-            });
-        }
-    };
-
-    private handleChangePhoneNumber = (value: string) => {
-        if (this.inputPhoneNumber(value)) {
-            this.setState({
-                phoneNumber: value,
-                resendCode: false,
-            });
-        }
-    };
-
-    private handleChangeConfirmationCode = (value: string) => {
-        if (this.inputConfirmationCode(value)) {
-            this.setState({
-                confirmationCode: value,
-            });
-        }
-    };
-
-    private inputPhoneNumber = (value: string) => {
-        const convertedText = value.trim();
-        const condition = new RegExp('^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*$');
-
-        return condition.test(convertedText);
-    };
-
-    private inputConfirmationCode = (value: string) => {
-        const convertedText = value.trim();
-        const condition = new RegExp('^\\d*?$');
-
-        return condition.test(convertedText);
-    };
-
-    private handleSendCode = event => {
-        event.preventDefault();
-        const requestProps = {
-            phone_number: String(this.state.phoneNumber),
-        };
-
-        if (!this.state.resendCode) {
-            this.props.sendCode(requestProps);
-            this.setState({
-                resendCode: true,
-            });
-        } else {
-            this.props.resendCode(requestProps);
-        }
-    };
-
-    private translate = (id: string) => this.props.intl.formatMessage({ id });
+  private translate = (id: string) => this.props.intl.formatMessage({ id });
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
-    verifyPhoneSuccess: selectVerifyPhoneSuccess(state),
-    loading: selectVerifyPhoneLoading(state),
+  verifyPhoneSuccess: selectVerifyPhoneSuccess(state),
+  loading: selectVerifyPhoneLoading(state),
 });
 
-const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
-    dispatch => ({
-        resendCode: phone => dispatch(resendCode(phone)),
-        sendCode: phone => dispatch(sendCode(phone)),
-        verifyPhone: payload => dispatch(verifyPhone(payload)),
-        changeUserLevel: payload => dispatch(changeUserLevel(payload)),
-    });
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = (dispatch) => ({
+  resendCode: (phone) => dispatch(resendCode(phone)),
+  sendCode: (phone) => dispatch(sendCode(phone)),
+  verifyPhone: (payload) => dispatch(verifyPhone(payload)),
+  changeUserLevel: (payload) => dispatch(changeUserLevel(payload)),
+});
 
 export const Phone = compose(
-    injectIntl,
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps),
+  injectIntl,
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
 )(PhoneComponent) as any; // tslint:disable-line

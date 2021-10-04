@@ -1,27 +1,27 @@
-import { LayoutGrid} from '../../../helpers/layout';
+import { LayoutGrid } from '../../../helpers/layout';
 import * as actions from './actions';
 
 describe('Grid Layout actions', () => {
-    it('should check saveLayouts action creator', () => {
-        const expectedAction = {
-            type: 'layouts/SAVE_LAYOUTS',
-            payload: {
-                key: 'layouts',
-                layouts: {foo: 42} as unknown as LayoutGrid,
-            },
-        };
+  it('should check saveLayouts action creator', () => {
+    const expectedAction = {
+      type: 'layouts/SAVE_LAYOUTS',
+      payload: {
+        key: 'layouts',
+        layouts: { foo: 42 } as unknown as LayoutGrid,
+      },
+    };
 
-        expect(actions.saveLayouts(expectedAction.payload)).toEqual(expectedAction);
-    });
+    expect(actions.saveLayouts(expectedAction.payload)).toEqual(expectedAction);
+  });
 
-    it('should check resetLayouts action creator', () => {
-        const expectedAction = {
-            type: 'layouts/RESET_LAYOUTS',
-            payload: {
-                key: 'layouts',
-            },
-        };
+  it('should check resetLayouts action creator', () => {
+    const expectedAction = {
+      type: 'layouts/RESET_LAYOUTS',
+      payload: {
+        key: 'layouts',
+      },
+    };
 
-        expect(actions.resetLayouts(expectedAction.payload)).toEqual(expectedAction);
-    });
+    expect(actions.resetLayouts(expectedAction.payload)).toEqual(expectedAction);
+  });
 });

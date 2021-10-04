@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import { resetCaptchaState } from '../modules';
 
 export const useResetCaptchaState = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    React.useEffect(() => {
-        dispatch(resetCaptchaState());
-    }, [dispatch]);
+  React.useEffect(() => {
+    dispatch(resetCaptchaState());
+  }, [dispatch]);
 };

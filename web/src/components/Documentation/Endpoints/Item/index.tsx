@@ -2,22 +2,20 @@ import * as React from 'react';
 import { RequestTypeItem } from './RequestTypeItem';
 
 interface ItemInterface {
-    item: any;
-    title: string;
+  item: any;
+  title: string;
 }
 export const DocumentationEndpointsItem: React.FC<ItemInterface> = (props: ItemInterface) => {
-    const { title, item } = props;
+  const { title, item } = props;
 
-    return (
-        <div className="pg-documentation-item">
-            <h2 className="text-transform--initial">{title}</h2>
-            {item && Object.keys(item).length ? Object.keys(item).map((key, index) => (
-                <RequestTypeItem
-                    item={item[key]}
-                    key={key}
-                    title={key}
-                />
-            )) : null}
-        </div>
-    );
+  return (
+    <div className="pg-documentation-item">
+      <h2 className="text-transform--initial">{title}</h2>
+      {item && Object.keys(item).length
+        ? Object.keys(item).map((key, index) => (
+            <RequestTypeItem item={item[key]} key={key} title={key} />
+          ))
+        : null}
+    </div>
+  );
 };

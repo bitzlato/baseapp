@@ -1,50 +1,58 @@
 import { sortAsks, sortBids } from './sortByPrice';
 
-export const handleIncrementalUpdate = (depthOld: string[][], newLevel: string[], type: string): string[][] => {
-    if (newLevel.length !== 2) {
-        return depthOld;
-    }
+export const handleIncrementalUpdate = (
+  depthOld: string[][],
+  newLevel: string[],
+  type: string,
+): string[][] => {
+  if (newLevel.length !== 2) {
+    return depthOld;
+  }
 
-    const index = depthOld.findIndex(([price]) => +price === +newLevel[0]);
+  const index = depthOld.findIndex(([price]) => +price === +newLevel[0]);
 
-    if (index === -1) {
-      if (+newLevel[1]) {
-        const data = [...depthOld, newLevel];
-        if (type === 'asks') {
-            return sortAsks(data);
-        }
-
-        return sortBids(data);
-      } else {
-        return depthOld;
+  if (index === -1) {
+    if (+newLevel[1]) {
+      const data = [...depthOld, newLevel];
+      if (type === 'asks') {
+        return sortAsks(data);
       }
-    }
 
-    const result = [...depthOld];
-    if (Number(newLevel[1]) !== 0) {
-        result[index] = newLevel;
+      return sortBids(data);
     } else {
-        result.splice(index, 1);
+      return depthOld;
     }
+  }
 
-    return result;
+  const result = [...depthOld];
+  if (Number(newLevel[1]) !== 0) {
+    result[index] = newLevel;
+  } else {
+    result.splice(index, 1);
+  }
+
+  return result;
 };
 
-export const handleIncrementalUpdateArray = (depthOld: string[][], newLevels: string[][], type: string): string[][] => {
-    const prices = {};
+export const handleIncrementalUpdateArray = (
+  depthOld: string[][],
+  newLevels: string[][],
+  type: string,
+): string[][] => {
+  const prices = {};
 
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < newLevels.length; i += 1) {
-        prices[newLevels[i][0]] = newLevels[i][1];
-    }
+  // tslint:disable-next-line:prefer-for-of
+  for (let i = 0; i < newLevels.length; i += 1) {
+    prices[newLevels[i][0]] = newLevels[i][1];
+  }
 
-    const rest = depthOld.filter(([price]) => !prices[price]);
-    const newData = newLevels.filter(([_, amount]) => Number(amount) !== 0);
-    const result = [...rest, ...newData];
+  const rest = depthOld.filter(([price]) => !prices[price]);
+  const newData = newLevels.filter(([_, amount]) => Number(amount) !== 0);
+  const result = [...rest, ...newData];
 
-    if (type === 'asks') {
-        return sortAsks(result);
-    }
+  if (type === 'asks') {
+    return sortAsks(result);
+  }
 
-    return sortBids(result);
+  return sortBids(result);
 };

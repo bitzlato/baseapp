@@ -5,15 +5,15 @@ import { IntlProps } from '../../';
 import { HistoryScreen } from '../History';
 
 const setup = (props: Partial<IntlProps> = {}) =>
-    shallow(
-        <TestComponentWrapper>
-            <HistoryScreen />
-        </TestComponentWrapper>
-    );
+  shallow(
+    <TestComponentWrapper>
+      <HistoryScreen />
+    </TestComponentWrapper>,
+  );
 
 describe('HistoryScreen', () => {
-    it('should render', () => {
-        const wrapper = setup().render();
-        expect(wrapper).toMatchSnapshot();
-    });
+  it('should render', () => {
+    const wrapper = setup().render();
+    expect(wrapper).toMatchSnapshot();
+  });
 });

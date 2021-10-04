@@ -1,21 +1,21 @@
 export interface ThemeColorInterface {
-    key: string;
-    value: string;
+  key: string;
+  value: string;
 }
 
 export interface ThemePresetInterface extends CustomizationSettingsInterface {
-    title: string;
+  title: string;
 }
 
 export interface LogoInterface {
-    url: string;
-    width?: string;
+  url: string;
+  width?: string;
 }
 
 export interface CustomizationSettingsInterface {
-    theme_id: number;
-    theme_colors: {
-        [key: string]: ThemeColorInterface[];
-    };
-    header_logo?: LogoInterface;
+  theme_id: number;
+  theme_colors: {
+    [key: string]: ThemeColorInterface[];
+  };
+  header_logo?: LogoInterface;
 }

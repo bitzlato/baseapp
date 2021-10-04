@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {  WrappedComponentProps } from 'react-intl';
+import { WrappedComponentProps } from 'react-intl';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { Provider } from 'react-redux';
 import { App } from './App';
@@ -13,17 +13,16 @@ import { rangerMiddleware, sagaMiddleware, store } from './store';
 
 import '@openware/react-components/build/index.css';
 
-
 if (!Intl.PluralRules) {
-    require('@formatjs/intl-pluralrules/polyfill');
-    require('@formatjs/intl-pluralrules/locale-data/en');
-    require('@formatjs/intl-pluralrules/locale-data/ru');
+  require('@formatjs/intl-pluralrules/polyfill');
+  require('@formatjs/intl-pluralrules/locale-data/en');
+  require('@formatjs/intl-pluralrules/locale-data/ru');
 }
 // @ts-ignore
 if (!Intl.RelativeTimeFormat) {
-    require('@formatjs/intl-relativetimeformat/polyfill');
-    require('@formatjs/intl-relativetimeformat/locale-data/en');
-    require('@formatjs/intl-relativetimeformat/locale-data/ru');
+  require('@formatjs/intl-relativetimeformat/polyfill');
+  require('@formatjs/intl-relativetimeformat/locale-data/en');
+  require('@formatjs/intl-relativetimeformat/locale-data/ru');
 }
 
 sagaMiddleware.run(rootSaga);
@@ -31,11 +30,12 @@ rangerMiddleware.run(rangerSagas);
 
 export type IntlProps = WrappedComponentProps;
 
-const render = () => ReactDOM.render(
+const render = () =>
+  ReactDOM.render(
     <Provider store={store}>
-        <App />
+      <App />
     </Provider>,
     document.getElementById('root') as HTMLElement,
-);
+  );
 
 render();

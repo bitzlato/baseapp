@@ -5,52 +5,56 @@ import { DocumentationEndpoints, DocumentationHeader, DocumentationModels } from
 import { useDocumentationFetch } from '../../hooks';
 
 export const DocumentationScreen: FC = () => (
-    <div className="pg-documentation">
-        <div className="pg-documentation__content">
-            <Tabs defaultValue="0">
-                <TabList>
-                    <Tab size="large" value="0">
-                        API
-                    </Tab>
-                    <Tab size="large" value="1">
-                        Swagger UI
-                    </Tab>
-                    <Tab size="large" value="2">
-                        WebSocket API
-                    </Tab>
-                </TabList>
-                <TabPanel value="0">
-                    <ApiDoc />
-                </TabPanel>
-                <TabPanel value="1">
-                    <Suspense fallback>
-                        <Swagger />
-                    </Suspense>
-                </TabPanel>
-                <TabPanel value="2">
-                    <Suspense fallback>
-                        <WebSocketApi />
-                    </Suspense>
-                </TabPanel>
-            </Tabs>
-        </div>
+  <div className="pg-documentation">
+    <div className="pg-documentation__content">
+      <Tabs defaultValue="0">
+        <TabList>
+          <Tab size="large" value="0">
+            API
+          </Tab>
+          <Tab size="large" value="1">
+            Swagger UI
+          </Tab>
+          <Tab size="large" value="2">
+            WebSocket API
+          </Tab>
+        </TabList>
+        <TabPanel value="0">
+          <ApiDoc />
+        </TabPanel>
+        <TabPanel value="1">
+          <Suspense fallback>
+            <Swagger />
+          </Suspense>
+        </TabPanel>
+        <TabPanel value="2">
+          <Suspense fallback>
+            <WebSocketApi />
+          </Suspense>
+        </TabPanel>
+      </Tabs>
     </div>
+  </div>
 );
 
 const ApiDoc: FC = () => {
-    useDocumentationFetch();
+  useDocumentationFetch();
 
-    return (
-        <>
-            <DocumentationHeader />
-            <DocumentationEndpoints />
-            <DocumentationModels />
-        </>
-    );
+  return (
+    <>
+      <DocumentationHeader />
+      <DocumentationEndpoints />
+      <DocumentationModels />
+    </>
+  );
 };
 
-const Swagger = lazy(() => import(/* webpackChunkName: "swagger" */ './Swagger').then(m => ({ default: m.Swagger })));
+const Swagger = lazy(() =>
+  import(/* webpackChunkName: "swagger" */ './Swagger').then((m) => ({ default: m.Swagger })),
+);
 
 const WebSocketApi = lazy(() =>
-    import(/* webpackChunkName: "websocket" */ './WebSocketApi').then(m => ({ default: m.WebSocketApi }))
+  import(/* webpackChunkName: "websocket" */ './WebSocketApi').then((m) => ({
+    default: m.WebSocketApi,
+  })),
 );

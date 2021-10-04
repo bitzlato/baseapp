@@ -4,20 +4,22 @@ import { API, RequestOptions } from '../../../../api';
 import { geetestCaptchaData, geetestCaptchaError, GeetestCaptchaFetch } from '../actions';
 
 const sessionsConfig: RequestOptions = {
-    apiVersion: 'barong',
+  apiVersion: 'barong',
 };
 
 export function* geetestCaptchaSaga(action: GeetestCaptchaFetch) {
-    try {
-        const keys = yield call(API.get(sessionsConfig), '/identity/users/register_geetest');
-        yield put(geetestCaptchaData(keys));
-    } catch (error) {
-        yield put(sendError({
-            error,
-            processingType: 'alert',
-            extraOptions: {
-                actionError: geetestCaptchaError,
-            },
-        }));
-    }
+  try {
+    const keys = yield call(API.get(sessionsConfig), '/identity/users/register_geetest');
+    yield put(geetestCaptchaData(keys));
+  } catch (error) {
+    yield put(
+      sendError({
+        error,
+        processingType: 'alert',
+        extraOptions: {
+          actionError: geetestCaptchaError,
+        },
+      }),
+    );
+  }
 }

@@ -1,15 +1,15 @@
 declare module '*.svg' {
-    const content: string;
-    export = content;
+  const content: string;
+  export = content;
 }
 
 declare module '*.png';
 declare module '*.jpg';
 
 declare module '*.postcss' {
-    interface IClassNames {
-        [className: string]: string;
-    }
-    const classNames: IClassNames;
-    export = classNames;
+  interface IClassNames {
+    [className: string]: string;
+  }
+  const classNames: IClassNames;
+  export = classNames;
 }

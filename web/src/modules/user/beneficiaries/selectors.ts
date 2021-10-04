@@ -4,59 +4,59 @@ import { Beneficiary } from './types';
 
 /* Beneficiaries fetch */
 export const selectBeneficiaries = (state: RootState): Beneficiary[] =>
-    state.user.beneficiaries.fetch.data;
+  state.user.beneficiaries.fetch.data;
 
 export const selectBeneficiariesFetchLoading = (state: RootState): boolean =>
-    state.user.beneficiaries.fetch.fetching;
+  state.user.beneficiaries.fetch.fetching;
 
 export const selectBeneficiariesFetchSuccess = (state: RootState): boolean =>
-    state.user.beneficiaries.fetch.success;
+  state.user.beneficiaries.fetch.success;
 
 export const selectBeneficiariesFetchError = (state: RootState): CommonError | undefined =>
-    state.user.beneficiaries.fetch.error;
+  state.user.beneficiaries.fetch.error;
 
 /* Beneficiaries activate */
 export const selectBeneficiariesActivateData = (state: RootState): Beneficiary =>
-    state.user.beneficiaries.activate.data;
+  state.user.beneficiaries.activate.data;
 
 export const selectBeneficiariesActivateLoading = (state: RootState): boolean =>
-    state.user.beneficiaries.activate.fetching;
+  state.user.beneficiaries.activate.fetching;
 
 export const selectBeneficiariesActivateSuccess = (state: RootState): boolean =>
-    state.user.beneficiaries.activate.success;
+  state.user.beneficiaries.activate.success;
 
 export const selectBeneficiariesActivateError = (state: RootState): CommonError | undefined =>
-    state.user.beneficiaries.activate.error;
+  state.user.beneficiaries.activate.error;
 
 /* Beneficiaries create */
 export const selectBeneficiariesCreate = (state: RootState): Beneficiary =>
-    state.user.beneficiaries.create.data;
+  state.user.beneficiaries.create.data;
 
 export const selectBeneficiariesCreateLoading = (state: RootState): boolean =>
-    state.user.beneficiaries.create.fetching;
+  state.user.beneficiaries.create.fetching;
 
 export const selectBeneficiariesCreateSuccess = (state: RootState): boolean =>
-    state.user.beneficiaries.create.success;
+  state.user.beneficiaries.create.success;
 
 export const selectBeneficiariesCreateError = (state: RootState): CommonError | undefined =>
-    state.user.beneficiaries.create.error;
+  state.user.beneficiaries.create.error;
 
 /* Beneficiaries delete */
 export const selectBeneficiariesDeleteLoading = (state: RootState): boolean =>
-    state.user.beneficiaries.delete.fetching;
+  state.user.beneficiaries.delete.fetching;
 
 export const selectBeneficiariesDeleteSuccess = (state: RootState): boolean =>
-    state.user.beneficiaries.delete.success;
+  state.user.beneficiaries.delete.success;
 
 export const selectBeneficiariesDeleteError = (state: RootState): CommonError | undefined =>
-    state.user.beneficiaries.delete.error;
+  state.user.beneficiaries.delete.error;
 
 /* Beneficiaries resend pin */
 export const selectBeneficiariesResendPinLoading = (state: RootState): boolean =>
-    state.user.beneficiaries.resendPin.fetching;
+  state.user.beneficiaries.resendPin.fetching;
 
 export const selectBeneficiariesResendPinSuccess = (state: RootState): boolean =>
-    state.user.beneficiaries.resendPin.success;
+  state.user.beneficiaries.resendPin.success;
 
 export const selectBeneficiariesResendPinError = (state: RootState): CommonError | undefined =>
-    state.user.beneficiaries.resendPin.error;
+  state.user.beneficiaries.resendPin.error;

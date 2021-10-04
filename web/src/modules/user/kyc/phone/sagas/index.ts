@@ -5,7 +5,7 @@ import { resendCodeSaga } from './resendCodeSaga';
 import { sendCodeSaga } from './sendCodeSaga';
 
 export function* rootSendCodeSaga() {
-    yield takeEvery(PHONE_SEND_CODE_FETCH, sendCodeSaga);
-    yield takeEvery(PHONE_VERIFY_FETCH, confirmPhoneSaga);
-    yield takeEvery(PHONE_RESEND_CODE_FETCH, resendCodeSaga);
+  yield takeEvery(PHONE_SEND_CODE_FETCH, sendCodeSaga);
+  yield takeEvery(PHONE_VERIFY_FETCH, confirmPhoneSaga);
+  yield takeEvery(PHONE_RESEND_CODE_FETCH, resendCodeSaga);
 }

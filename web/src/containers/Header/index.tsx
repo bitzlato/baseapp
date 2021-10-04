@@ -10,16 +10,16 @@ import { IntlProps } from '../../';
 import { showLanding } from '../../api';
 import { Logo } from '../../components';
 import {
-    Market,
-    RootState,
-    selectCurrentColorTheme,
-    selectCurrentMarket,
-    selectMarketSelectorState,
-    selectMobileWalletUi,
-    selectSidebarState,
-    setMobileWalletUi,
-    toggleMarketSelector,
-    toggleSidebar,
+  Market,
+  RootState,
+  selectCurrentColorTheme,
+  selectCurrentMarket,
+  selectMarketSelectorState,
+  selectMobileWalletUi,
+  selectSidebarState,
+  setMobileWalletUi,
+  toggleMarketSelector,
+  toggleSidebar,
 } from '../../modules';
 import { HeaderToolbar } from '../HeaderToolbar';
 import { NavBar } from '../NavBar';
@@ -30,19 +30,19 @@ import s from './Header.postcss';
 import { HeaderNavigation } from './HeaderNavigation/HeaderNavigation';
 
 interface ReduxProps {
-    colorTheme: string;
-    mobileWallet: string;
+  colorTheme: string;
+  mobileWallet: string;
 }
 
 interface DispatchProps {
-    setMobileWalletUi: typeof setMobileWalletUi;
-    toggleSidebar: typeof toggleSidebar;
+  setMobileWalletUi: typeof setMobileWalletUi;
+  toggleSidebar: typeof toggleSidebar;
 }
 
 interface LocationProps extends RouterProps {
-    location: {
-        pathname: string;
-    };
+  location: {
+    pathname: string;
+  };
 }
 
 const noHeaderRoutes = ['/confirm', '/restriction', '/maintenance', '/setup'];
@@ -50,89 +50,93 @@ const noHeaderRoutes = ['/confirm', '/restriction', '/maintenance', '/setup'];
 type Props = ReduxProps & DispatchProps & IntlProps & LocationProps;
 
 class Head extends React.Component<Props> {
-    public render() {
-        const { mobileWallet, location } = this.props;
-        const tradingCls = location.pathname.includes('/trading') ? 'pg-container-trading' : '';
-        const shouldRenderHeader = !noHeaderRoutes.some(r => location.pathname.includes(r));
+  public render() {
+    const { mobileWallet, location } = this.props;
+    const tradingCls = location.pathname.includes('/trading') ? 'pg-container-trading' : '';
+    const shouldRenderHeader = !noHeaderRoutes.some((r) => location.pathname.includes(r));
 
-        if (!shouldRenderHeader) {
-            return <React.Fragment />;
-        }
-
-        return (
-            <header className={`pg-header ${s.header}`}>
-                <div className={`pg-container pg-header__content ${tradingCls} ${s.headerContent}`}>
-                    <Sidebar />
-                    <div onClick={e => this.redirectToLanding()} className="pg-header__logo">
-                        <Logo />
-                    </div>
-                    {this.renderMarketToggler()}
-                    <div className="pg-header__location">
-                        {mobileWallet ? <span>{mobileWallet}</span> : <span>{location.pathname.split('/')[1]}</span>}
-                    </div>
-                    {this.renderMobileWalletNav()}
-                    <div className="pg-header__navbar">
-                        {this.renderMarketToolbar()}
-                        <NavBar />
-                    </div>
-                </div>
-            </header>
-        );
+    if (!shouldRenderHeader) {
+      return <React.Fragment />;
     }
 
-    public renderMobileWalletNav = () => {
-        const { colorTheme, mobileWallet } = this.props;
-        return (
-            mobileWallet && (
-                <div onClick={this.backWallets} className="pg-header__toggler">
-                    <img alt="" src={colorTheme === 'light' ? backLightIcon : backIcon} />
-                </div>
-            )
-        );
-    };
+    return (
+      <header className={`pg-header ${s.header}`}>
+        <div className={`pg-container pg-header__content ${tradingCls} ${s.headerContent}`}>
+          <Sidebar />
+          <div onClick={(e) => this.redirectToLanding()} className="pg-header__logo">
+            <Logo />
+          </div>
+          {this.renderMarketToggler()}
+          <div className="pg-header__location">
+            {mobileWallet ? (
+              <span>{mobileWallet}</span>
+            ) : (
+              <span>{location.pathname.split('/')[1]}</span>
+            )}
+          </div>
+          {this.renderMobileWalletNav()}
+          <div className="pg-header__navbar">
+            {this.renderMarketToolbar()}
+            <NavBar />
+          </div>
+        </div>
+      </header>
+    );
+  }
 
-    public translate = (id: string) => {
-        return id ? this.props.intl.formatMessage({ id }) : '';
-    };
+  public renderMobileWalletNav = () => {
+    const { colorTheme, mobileWallet } = this.props;
+    return (
+      mobileWallet && (
+        <div onClick={this.backWallets} className="pg-header__toggler">
+          <img alt="" src={colorTheme === 'light' ? backLightIcon : backIcon} />
+        </div>
+      )
+    );
+  };
 
-    private renderMarketToolbar = () => {
-        if (!this.props.location.pathname.includes('/trading/')) {
-            return null;
-        }
+  public translate = (id: string) => {
+    return id ? this.props.intl.formatMessage({ id }) : '';
+  };
 
-        return <HeaderToolbar />;
-    };
+  private renderMarketToolbar = () => {
+    if (!this.props.location.pathname.includes('/trading/')) {
+      return null;
+    }
 
-    private renderMarketToggler = () => {
-        if (!this.props.location.pathname.includes('/trading/')) {
-            return <HeaderNavigation />;
-        }
+    return <HeaderToolbar />;
+  };
 
-        return <MarketSelector />;
-    };
+  private renderMarketToggler = () => {
+    if (!this.props.location.pathname.includes('/trading/')) {
+      return <HeaderNavigation />;
+    }
 
-    private redirectToLanding = () => {
-        this.props.toggleSidebar(false);
-        this.props.history.push(`${showLanding() ? '/' : '/trading'}`);
-    };
+    return <MarketSelector />;
+  };
 
-    private backWallets = () => this.props.setMobileWalletUi('');
+  private redirectToLanding = () => {
+    this.props.toggleSidebar(false);
+    this.props.history.push(`${showLanding() ? '/' : '/trading'}`);
+  };
 
-    private closeMenu = (e: any) => this.props.setMobileWalletUi('');
+  private backWallets = () => this.props.setMobileWalletUi('');
+
+  private closeMenu = (e: any) => this.props.setMobileWalletUi('');
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
-    colorTheme: selectCurrentColorTheme(state),
-    mobileWallet: selectMobileWalletUi(state),
+  colorTheme: selectCurrentColorTheme(state),
+  mobileWallet: selectMobileWalletUi(state),
 });
 
-const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
-    setMobileWalletUi: payload => dispatch(setMobileWalletUi(payload)),
-    toggleSidebar: payload => dispatch(toggleSidebar(payload)),
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = (dispatch) => ({
+  setMobileWalletUi: (payload) => dispatch(setMobileWalletUi(payload)),
+  toggleSidebar: (payload) => dispatch(toggleSidebar(payload)),
 });
 
 export const Header = compose(
-    injectIntl,
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
+  injectIntl,
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
 )(Head) as React.ComponentClass;

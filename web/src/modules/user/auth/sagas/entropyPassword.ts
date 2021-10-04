@@ -4,21 +4,23 @@ import { API, RequestOptions } from '../../../../api';
 import { entropyPasswordData, entropyPasswordError, EntropyPasswordFetch } from '../actions';
 
 const config: RequestOptions = {
-    apiVersion: 'barong',
+  apiVersion: 'barong',
 };
 
 export function* entropyPassword(action: EntropyPasswordFetch) {
-    try {
-        const data = yield call(API.post(config), '/identity/password/validate', action.payload);
-        yield put(entropyPasswordData(data));
-    } catch (error) {
-        yield put(entropyPasswordError(error));
-        yield put(sendError({
-            error,
-            processingType: 'alert',
-            extraOptions: {
-                actionError: entropyPasswordError,
-            },
-        }));
-    }
+  try {
+    const data = yield call(API.post(config), '/identity/password/validate', action.payload);
+    yield put(entropyPasswordData(data));
+  } catch (error) {
+    yield put(entropyPasswordError(error));
+    yield put(
+      sendError({
+        error,
+        processingType: 'alert',
+        extraOptions: {
+          actionError: entropyPasswordError,
+        },
+      }),
+    );
+  }
 }

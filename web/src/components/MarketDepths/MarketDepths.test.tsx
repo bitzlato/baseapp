@@ -46,28 +46,27 @@ const defaultProps: MarketDepthsProps = {
 };
 
 const setup = (props: Partial<MarketDepthsProps> = {}) =>
-    shallow(<MarketDepths {...{ ...defaultProps, ...props }} />);
+  shallow(<MarketDepths {...{ ...defaultProps, ...props }} />);
 
 describe('CryptoIcon', () => {
-    it('should render', () => {
-        const wrapper = setup();
-        expect(wrapper).toMatchSnapshot();
-    });
+  it('should render', () => {
+    const wrapper = setup();
+    expect(wrapper).toMatchSnapshot();
+  });
 
-    it('should have correct className', () => {
-        const wrapper = setup();
-        expect(wrapper.hasClass('cr-market-depths')).toBeTruthy();
-    });
+  it('should have correct className', () => {
+    const wrapper = setup();
+    expect(wrapper.hasClass('cr-market-depths')).toBeTruthy();
+  });
 
-    it('always renders a market depth', () => {
-        const wrapper = setup();
-        expect(wrapper.length).toBe(1);
-    });
+  it('always renders a market depth', () => {
+    const wrapper = setup();
+    expect(wrapper.length).toBe(1);
+  });
 
-    it('check data from default props', () => {
-        const wrapper = setup();
-        const { data } = wrapper.find('AreaChart').first().props();
-        expect(data).toEqual(defaultProps.data);
-    });
-
+  it('check data from default props', () => {
+    const wrapper = setup();
+    const { data } = wrapper.find('AreaChart').first().props();
+    expect(data).toEqual(defaultProps.data);
+  });
 });
