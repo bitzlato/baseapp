@@ -123,18 +123,16 @@ const config = merge(commonConfig, {
           'postcss-loader',
         ],
       },
+
       {
-        test: /\.(tsx|ts)?$/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: true,
-              happyPackMode: true,
-            },
-          },
-        ],
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
+        },
       },
     ],
   },
