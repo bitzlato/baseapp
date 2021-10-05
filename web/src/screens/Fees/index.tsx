@@ -9,6 +9,7 @@ import { currenciesFetch } from 'src/modules/public/currencies/actions';
 import { selectCurrencies } from 'src/modules/public/currencies/selectors';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { ccy, money, MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { Box } from 'src/components/Box';
 
 export const Fees: React.FC = () => {
   const t = useT();
@@ -35,10 +36,10 @@ export const Fees: React.FC = () => {
     const [token, network] = d.id.toUpperCase().split('-');
     const mccy = ccy(d.id, d.precision);
     return [
-      <div className="cr-row cr-row-spacing">
+      <Box row spacing>
         <CryptoCurrencyIcon currency={d.id} icon={d.icon_url} iconId={d.icon_id} size="small" />
         <span>{token.toUpperCase()}</span>
-      </div>,
+      </Box>,
       d.name,
       network || token,
       Number(d.deposit_fee) == 0 ? (
@@ -53,7 +54,7 @@ export const Fees: React.FC = () => {
   });
 
   return (
-    <div className={cn('container', 'cr-padding-2x')}>
+    <Box padding='2x' className='container'>
       <div className={s.card}>
         <div className={cn('cr-table-header__content', s.feesHeader)}>
           <h3>{t('page.body.landing.footer.fees')}</h3>
@@ -62,6 +63,6 @@ export const Fees: React.FC = () => {
           <Table header={header} data={data} />
         </div>
       </div>
-    </div>
+    </Box>
   );
 };

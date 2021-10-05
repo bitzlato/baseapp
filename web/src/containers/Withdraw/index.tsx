@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
+import { Box } from 'src/components/Box';
 import { ccy } from 'src/components/MoneyFormat/MoneyFormat';
 import { Beneficiaries, CustomInput } from '../../components';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
@@ -121,19 +122,20 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
           <div className={lastDividerClassName} />
           {!isMobileDevice && twoFactorAuthRequired && this.renderOtpCodeInput()}
         </div>
-        <div className="cr-withdraw-column cr-row-spacing-2x">
+        <Box className="cr-withdraw-column" row spacing="2x">
           <WithdrawSummary total={total} currency={ccyInfo} />
           {isMobileDevice && twoFactorAuthRequired && this.renderOtpCodeInput()}
-          <Button
-            className="cr-self-start"
-            variant="primary"
-            size="lg"
-            onClick={this.handleClick}
-            disabled={this.handleCheckButtonDisabled(total, beneficiary, otpCode)}
-          >
-            {withdrawButtonLabel ? withdrawButtonLabel : 'Withdraw'}
-          </Button>
-        </div>
+          <Box selfStart>
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={this.handleClick}
+              disabled={this.handleCheckButtonDisabled(total, beneficiary, otpCode)}
+            >
+              {withdrawButtonLabel ? withdrawButtonLabel : 'Withdraw'}
+            </Button>
+          </Box>
+        </Box>
       </div>
     );
   }

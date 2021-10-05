@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import cn from 'classnames';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Form, Spinner } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -22,6 +22,7 @@ import { OrderCommon } from '../../modules/types';
 import { getTriggerSign } from './helpers';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { MarketName } from 'src/components/MarketName/MarketName';
+import { Box } from 'src/components/Box';
 
 export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
   const [hideOtherPairs, setHideOtherPairs] = useState<boolean>(true);
@@ -169,7 +170,7 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
   }, [dispatch, userLoggedIn, currentMarket]);
 
   const loading = fetching && showLoading;
-  const classNames = classnames('pg-open-orders', {
+  const classNames = cn('pg-open-orders', {
     'pg-open-orders--empty': !list.length,
     'pg-open-orders--loading': loading,
   });
@@ -204,7 +205,7 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
   return (
     <div className={classNames}>
       <div className="cr-table-header__content">
-        <div className="cr-grow">
+        <Box grow>
           <FormattedMessage id="page.body.trade.header.openOrders" />
           <Form className="cr-title-component__checkbox" onClick={handleToggleCheckbox}>
             <Form.Check
@@ -216,8 +217,8 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
               label={translate('page.body.trade.header.openOrders.hideOtherPairs')}
             />
           </Form>
-        </div>
-        <div className={classnames('cr-row', 'cr-row-spacing')}>
+        </Box>
+        <Box row spacing>
           {userLoggedIn && (
             <>
               <button
@@ -227,8 +228,11 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
               >
                 <FormattedMessage id="page.body.openOrders.header.button.refresh" />
               </button>
-              <button
-                className={classnames('cr-row', 'cr-row-spacing', 'cr-percentage-button')}
+              <Box
+                row
+                spacing
+                as="button"
+                className="cr-percentage-button"
                 disabled={!userLoggedIn}
                 onClick={handleCancelAll}
               >
@@ -236,10 +240,10 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
                 <span>
                   <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
                 </span>
-              </button>
+              </Box>
             </>
           )}
-        </div>
+        </Box>
       </div>
       {renderContent}
     </div>
