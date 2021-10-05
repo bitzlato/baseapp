@@ -3,14 +3,13 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 import merge from 'webpack-merge';
 import 'webpack-dev-server';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import commonConfig from './common';
 
 const host = process.env.PROXY_HOST;
 
 const config = merge(commonConfig, {
   devtool: 'cheap-module-eval-source-map',
-  plugins: [new HotModuleReplacementPlugin(), new ForkTsCheckerWebpackPlugin({})],
+  plugins: [new HotModuleReplacementPlugin()],
   module: {
     rules: [
       {
@@ -56,6 +55,7 @@ const config = merge(commonConfig, {
           },
         ],
       },
+
       {
         test: /\.(css|sass|scss|pcss)$/,
         use: [
@@ -72,18 +72,16 @@ const config = merge(commonConfig, {
           'postcss-loader',
         ],
       },
+
       {
-        test: /\.(tsx|ts)?$/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: true,
-              happyPackMode: true,
-            },
-          },
-        ],
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
+        },
       },
     ],
   },
