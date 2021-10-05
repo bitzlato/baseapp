@@ -30,7 +30,7 @@ exports[`DepositCrypto should match snapshot 1`] = `
     }
   }
 >
-  <Component
+  <DepositCrypto
     currency={
       Object {
         "base_factor": 100000000,
