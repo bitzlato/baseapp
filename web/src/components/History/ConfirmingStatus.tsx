@@ -4,7 +4,7 @@ import { selectCurrencies } from 'src/modules';
 import { Status } from './Status';
 import { BlockchainLink } from './ExternalLink';
 import { PendingStatus } from './PendingStatus';
-import classNames from 'classnames';
+import { Box } from '../Box';
 
 interface Props {
   currency: string;
@@ -18,11 +18,11 @@ export const ConfirmingStatus: React.FC<Props> = ({ txid, currency, confirmation
   const min: number | undefined = itemCurrency?.min_confirmations;
   const content = min !== undefined ? ` ${confirmations}/${min}` : '';
   return (
-    <div className={classNames('cr-row', 'cr-row-spacing', 'cr-justify-end')}>
+    <Box row spacing justifyEnd>
       <BlockchainLink txid={txid} currency={currency}>
         <Status type="pending">{content}</Status>
       </BlockchainLink>
       <PendingStatus />
-    </div>
+    </Box>
   );
 };

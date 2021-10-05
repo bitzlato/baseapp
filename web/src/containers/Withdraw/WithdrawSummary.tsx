@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Box } from 'src/components/Box';
 import { ccy, money, MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { useT } from 'src/hooks/useT';
 import { SummaryField } from '../../components';
@@ -15,7 +16,7 @@ export const WithdrawSummary: React.FC<Props> = ({ currency, total }) => {
   const mccy = ccy(currency.id, currency.precision);
 
   return (
-    <div className="cr-col cr-col-spacing">
+    <Box col spacing>
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.fee')}>
         <MoneyFormat money={money(currency.withdraw_fee, mccy)} />
       </SummaryField>
@@ -31,6 +32,6 @@ export const WithdrawSummary: React.FC<Props> = ({ currency, total }) => {
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.limit72h')}>
         <MoneyFormat money={money(currency.withdraw_limit_72h, mccy)} />
       </SummaryField>
-    </div>
+    </Box>
   );
 };

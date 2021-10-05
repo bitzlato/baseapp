@@ -6,6 +6,7 @@ import { useT } from 'src/hooks/useT';
 import { ExternalLink } from './ExternalLink';
 import { ConfirmingStatus } from './ConfirmingStatus';
 import { PendingStatus } from './PendingStatus';
+import { Box } from '../Box';
 
 interface Props {
   currency: string;
@@ -37,13 +38,13 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
       return <PendingStatus />;
     case 'invoiced':
       return item.transfer_links ? (
-        <div className="cr-row-spacing">
+        <Box row spacing>
           {item.transfer_links.map((d) => (
             <ExternalLink key={d.title} href={d.url}>
               <Status type="pending">{d.title}</Status>
             </ExternalLink>
           ))}
-        </div>
+        </Box>
       ) : (
         <Status type="pending">{t('page.body.wallets.table.invoiced')}</Status>
       );
