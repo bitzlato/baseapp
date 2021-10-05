@@ -21,7 +21,7 @@ exports[`InputBlock should render 1`] = `
   <div
     className="cr-order-input__crypto-icon"
   >
-    <Component
+    <CurrencyTicker
       symbol="eth"
     />
   </div>

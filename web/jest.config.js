@@ -19,7 +19,7 @@ module.exports = {
   // ---------------------------------------------------------------------------
   roots: ['<rootDir>'],
   transform: {
-    '^.+\\.(tsx|ts)$': 'ts-jest',
+    '^.+\\.(tsx|ts)$': 'babel-jest', // TODO: use ts-jest
     '^.+\\.(jsx|js)$': 'babel-jest',
     '^.+\\.svg$': '<rootDir>/jest/svg-transform.js',
   },

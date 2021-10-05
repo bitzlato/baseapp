@@ -22,7 +22,7 @@ exports[`FilterInput should render 1`] = `
   <span
     className="cr-search__cancel"
   >
-    <Component
+    <SearchFieldCloseIcon
       onClick={[Function]}
     />
   </span>

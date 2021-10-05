@@ -4,7 +4,7 @@ exports[`WalletList should render 1`] = `
 <div
   className="cr-wallet-list"
 >
-  <Component
+  <WalletItem
     active={true}
     key="0"
     onClick={[Function]}
@@ -24,7 +24,7 @@ exports[`WalletList should render 1`] = `
       }
     }
   />
-  <Component
+  <WalletItem
     active={false}
     key="1"
     onClick={[Function]}
@@ -42,7 +42,7 @@ exports[`WalletList should render 1`] = `
       }
     }
   />
-  <Component
+  <WalletItem
     active={false}
     key="2"
     onClick={[Function]}
