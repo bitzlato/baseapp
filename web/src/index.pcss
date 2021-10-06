@@ -27,6 +27,7 @@
   --rgap: 0.5rem;
   --big-gap: 60px;
   --border-radius: 5px;
+  --mobile-footer-height: 52px;
 }
 
 #root {
@@ -357,11 +358,11 @@ input:-webkit-autofill {
   height: 48px;
 
   .input-group {
+    align-items: center;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: center;
 
     .custom-input {
       margin-bottom: 0;
@@ -369,8 +370,8 @@ input:-webkit-autofill {
 
     .input-group-append {
       .btn {
-        height: 40px;
         border-radius: 4px;
+        height: 40px;
       }
     }
   }
@@ -396,38 +397,47 @@ input:-webkit-autofill {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
-  src: url('assets/fonts/montserrat-regular.woff2') format('woff2'),
+  src:
+    url('assets/fonts/montserrat-regular.woff2') format('woff2'),
     url('assets/fonts/montserrat-regular.woff') format('woff');
 }
+
 /* montserrat-500 - latin */
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
-  src: url('assets/fonts/montserrat-500.woff2') format('woff2'),
+  src:
+    url('assets/fonts/montserrat-500.woff2') format('woff2'),
     url('assets/fonts/montserrat-500.woff') format('woff');
 }
+
 /* montserrat-600 - latin */
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
-  src: url('assets/fonts/montserrat-600.woff2') format('woff2'),
+  src:
+    url('assets/fonts/montserrat-600.woff2') format('woff2'),
     url('assets/fonts/montserrat-600.woff') format('woff');
 }
+
 /* montserrat-700 - latin */
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
-  src: url('assets/fonts/montserrat-700.woff2') format('woff2'),
+  src:
+    url('assets/fonts/montserrat-700.woff2') format('woff2'),
     url('assets/fonts/montserrat-700.woff') format('woff');
 }
+
 /* montserrat-800 - latin */
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 800;
-  src: url('assets/fonts/montserrat-800.woff2') format('woff2'),
+  src:
+    url('assets/fonts/montserrat-800.woff2') format('woff2'),
     url('assets/fonts/montserrat-800.woff') format('woff');
 }
