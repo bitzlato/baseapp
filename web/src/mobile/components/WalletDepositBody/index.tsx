@@ -4,7 +4,8 @@ import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { formatCCYAddress } from 'src/helpers';
-import { selectMemberLevels } from 'src/modules';
+import { selectMemberLevels, Wallet } from 'src/modules';
+import { defaultCurrency } from 'src/modules/public/currencies/defaults';
 import { Blur } from '../../../components/Blur';
 import { CurrencyInfo } from '../../../components/CurrencyInfo';
 import { DepositCrypto } from '../../../components/DepositCrypto';
@@ -12,7 +13,12 @@ import { DepositFiat } from '../../../components/DepositFiat';
 import { selectCurrencies } from '../../../modules/public/currencies';
 import { selectUserInfo } from '../../../modules/user/profile';
 
-const WalletDepositBodyComponent = (props) => {
+interface Props {
+  wallet: Wallet;
+  handleGenerateAddress: () => void;
+}
+
+const WalletDepositBodyComponent: React.FC<Props> = (props) => {
   const intl = useIntl();
   const history = useHistory();
   const currencies = useSelector(selectCurrencies);
@@ -86,7 +92,7 @@ const WalletDepositBodyComponent = (props) => {
             handleGenerateAddress={props.handleGenerateAddress}
             handleOnCopy={handleOnCopy}
             wallet={wallet}
-            currency={currencyItem}
+            currency={currencyItem || defaultCurrency}
             disabled={!walletAddress}
           />
         </React.Fragment>

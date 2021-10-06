@@ -2,7 +2,6 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { Box } from 'src/components/Box';
-import { ccy } from 'src/components/MoneyFormat/MoneyFormat';
 import { Beneficiaries, CustomInput } from '../../components';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
 import { Beneficiary, Currency } from '../../modules';
@@ -93,8 +92,6 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
     const withdrawAmountClass = classnames('cr-withdraw__group__amount', {
       'cr-withdraw__group__amount--focused': withdrawAmountFocused,
     });
-
-    const mccy = ccy(currency, fixed);
 
     return (
       <div className={cx}>
