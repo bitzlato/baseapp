@@ -20,7 +20,9 @@ export const WelcomeBlock: FC = () => {
               {t('page.body.landing.marketInfo.title.button')}
             </LandingLink>
           </p>
-          <MarketsTable />
+          <div className={s.marketTable}>
+            <MarketsTable />
+          </div>
         </div>
         <div className={s.tradingStatistics}>
           <div className={s.tradingStatisticsHeader}>
