@@ -444,7 +444,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             handleGenerateAddress={this.handleGenerateAddress}
             handleOnCopy={this.handleOnCopy}
             wallet={wallet}
-            currency={currencyItem}
+            currency={currencyItem ?? defaultCurrency}
           />
           {wallet.currency && (
             <WalletHistory label="deposit" type="deposits" currency={wallet.currency} />

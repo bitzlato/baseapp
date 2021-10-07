@@ -33,6 +33,25 @@ export const DepositSummary: React.FC<Props> = ({ currency }) => {
         </Box>
         <Box warningColor>{t('page.body.wallets.tabs.deposit.ccy.message.warning')}</Box>
       </Box>
+      {process.env.REACT_APP_RELEASE_STAGE === 'sandbox' && (
+        <span>
+          <span>You can top up your balance by address </span>
+          {currency.id === 'eth' && (
+            <a href="https://faucet.ropsten.be/" target="_blank" rel="noopener noreferrer">
+              faucet.ropsten.be/
+            </a>
+          )}
+          {currency.id === 'bnb' && (
+            <a
+              href="https://testnet.binance.org/faucet-smart"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              testnet.binance.org/faucet-smart
+            </a>
+          )}
+        </span>
+      )}
     </Box>
   );
 };
