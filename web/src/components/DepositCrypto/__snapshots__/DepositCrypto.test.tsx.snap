@@ -51,6 +51,7 @@ exports[`DepositCrypto should match snapshot 1`] = `
         "withdraw_fee": "0.0",
         "withdraw_limit_24h": "0.0",
         "withdraw_limit_72h": "0.0",
+        "withdrawal_disabled_reason": "",
         "withdrawal_enabled": true,
       }
     }
