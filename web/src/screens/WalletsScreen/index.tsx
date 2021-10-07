@@ -41,7 +41,6 @@ import {
   selectMobileWalletUi,
   selectUserInfo,
   selectWallets,
-  selectWalletsLoading,
   selectWithdrawSuccess,
   setMobileWalletUi,
   User,
@@ -268,7 +267,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             >
               <TabPanel
                 panels={this.renderTabs()}
-                onTabChange={(_, label) => this.onTabChange(label)}
+                onTabChange={this.onTabChange}
                 currentTabIndex={currentTabIndex}
                 onCurrentTabChange={this.onCurrentTabChange}
               />
@@ -293,9 +292,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     );
   }
 
-  private onTabChange = (label) => this.setState({ tab: label });
-  private onActiveIndexChange = (index) => this.setState({ activeIndex: index });
-  private onCurrentTabChange = (index) => this.setState({ currentTabIndex: index });
+  private onTabChange = (_: number, label?: string) => this.setState({ tab: label! });
+  private onActiveIndexChange = (index: number) => this.setState({ activeIndex: index });
+  private onCurrentTabChange = (index: number) => this.setState({ currentTabIndex: index });
 
   private toggleSubmitModal = () => {
     this.setState((state: WalletsState) => ({
@@ -408,7 +407,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
       );
     }
 
-    if (user.level < memberLevels?.deposit.minimum_level) {
+    if (memberLevels && user.level < memberLevels?.deposit.minimum_level) {
       return (
         <Blur
           className={blurClassName}
@@ -479,12 +478,15 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
       return (
         <Blur
           className="pg-blur-withdraw"
-          text={this.translate('page.body.wallets.tabs.withdraw.disabled.message')}
+          text={
+            currencyItem?.withdrawal_disabled_reason ||
+            this.translate('page.body.wallets.tabs.withdraw.disabled.message')
+          }
         />
       );
     }
 
-    if (user.level < memberLevels?.withdraw.minimum_level) {
+    if (memberLevels && user.level < memberLevels?.withdraw.minimum_level) {
       return (
         <Blur
           className={`pg-blur-withdraw pg-blur-withdraw-${currencyItem?.type}`}

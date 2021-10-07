@@ -16,6 +16,7 @@ export const defaultCurrency: Currency = {
   withdraw_limit_72h: '0.0',
   deposit_enabled: true,
   withdrawal_enabled: true,
+  withdrawal_disabled_reason: '',
   base_factor: 100000000,
   precision: 8,
   icon_url: '',

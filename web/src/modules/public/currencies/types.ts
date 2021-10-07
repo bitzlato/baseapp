@@ -14,6 +14,7 @@ export interface Currency {
   withdraw_limit_72h: string;
   deposit_enabled: boolean;
   withdrawal_enabled: boolean;
+  withdrawal_disabled_reason: string;
   base_factor: number;
   precision: number;
   icon_url: string;
