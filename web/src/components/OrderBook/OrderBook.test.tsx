@@ -1,7 +1,6 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import { TestComponentWrapper } from 'lib/test';
 import * as React from 'react';
-import { spy } from 'sinon';
 import { CellData } from '../../components/Table';
 import { mapValues, OrderBook, OrderBookProps } from './';
 
@@ -17,7 +16,7 @@ const defaultProps: OrderBookProps = {
   data: data,
   headers: ['Total', 'Amount', 'Price'],
   title: 'Bids',
-  onSelect: spy(),
+  onSelect: jest.fn(),
 };
 
 const setup = (props: Partial<OrderBook> = {}) =>

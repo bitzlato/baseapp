@@ -1,6 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
-import { SinonSpy, spy } from 'sinon';
 import { FilterInput, FilterInputProps } from './';
 
 const data = [
@@ -28,7 +27,7 @@ const defaults: FilterInputProps = {
   data,
   filter: (item: typeof data[0], term) =>
     String(item.cryptoCode).toLowerCase().indexOf(term.toLowerCase()) !== -1,
-  onFilter: spy(),
+  onFilter: jest.fn(),
 };
 
 const setup = (props: Partial<FilterInputProps> = {}) =>
@@ -66,6 +65,6 @@ describe('FilterInput', () => {
       },
     });
 
-    expect((defaults.onFilter as SinonSpy).calledOnceWith([defaults.data[0]])).toBeTruthy();
+    expect(defaults.onFilter).toHaveBeenCalledWith([defaults.data[0]]);
   });
 });
