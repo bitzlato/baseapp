@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import cn from 'classnames';
-import { DotsFlashing } from 'src/components/Box/DotsFlashing/DotsFlashing';
+import { DotsFlashing } from 'src/components/DotsFlashing/DotsFlashing';
 
 import s from './HeaderToolbarItem.postcss';
 
