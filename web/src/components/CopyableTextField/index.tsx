@@ -1,4 +1,3 @@
-import '@openware/cryptofont';
 import cn from 'classnames';
 import * as React from 'react';
 import { InputGroup } from 'react-bootstrap';
