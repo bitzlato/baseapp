@@ -1,0 +1,51 @@
+.item {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  margin-left: 40px;
+  text-align: right;
+
+  @media (--breakpoint-down-xl) {
+    margin-left: 10px;
+  }
+
+  &:last-child {
+    margin-right: 20px;
+  }
+}
+
+.label {
+  color: var(--header-toolbar-item-text-color);
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-top: 5px;
+
+  @media (--breakpoint-down-xl) {
+    font-weight: normal;
+  }
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+
+  @media (--breakpoint-down-xl) {
+    font-size: 12px;
+  }
+
+  &.valuePositive {
+    color: var(--header-positive-text-color);
+  }
+
+  &.valueNegative {
+    color: var(--header-negative-text-color);
+  }
+}
+
+.currencyTicker {
+  @media (--breakpoint-down-xxxl) {
+    display: none;
+  }
+}

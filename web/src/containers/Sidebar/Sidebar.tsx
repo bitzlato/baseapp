@@ -24,6 +24,8 @@ import { showInternalTransfer } from 'src/api/config';
 import { P2PIcon } from 'src/assets/icons/P2PIcon';
 import { getLinkToP2P } from 'src/containers/Header/HeaderNavigation/getLinkToP2P';
 
+import { SignupIcon } from 'src/assets/icons/SignupIcon';
+
 import { SidebarItem } from './SidebarItem/SidebarItem';
 import { SidebarToggler } from './SidebarToggler/SidebarToggler';
 
@@ -36,7 +38,7 @@ const selector = (state: RootState) => ({
 });
 
 export const Sidebar: FC = () => {
-  const elementRef = useRef<HTMLDivElement>();
+  const elementRef = useRef<HTMLDivElement>(null);
   const { isLoggedIn, isOpen, languageCode } = useSelector(selector);
   const dispatch = useDispatch();
   const t = useT();
@@ -65,10 +67,19 @@ export const Sidebar: FC = () => {
     <div className={s.block} ref={elementRef}>
       <SidebarToggler onClick={handleTogglerClick} />
       <div className={cn(s.sidebar, isOpen && s.sidebarOpen)}>
-        {isLoggedIn && (
+        {isLoggedIn ? (
           <SidebarItem to="/profile" icon={<ProfileIcon />} onClick={handleItemClick}>
             {t('page.header.navbar.profile')}
           </SidebarItem>
+        ) : (
+          <>
+            <SidebarItem to="/signin" icon={<ProfileIcon />} onClick={handleItemClick}>
+              {t('page.header.navbar.signIn')}
+            </SidebarItem>
+            <SidebarItem to="/signup" icon={<SignupIcon />} onClick={handleItemClick}>
+              {t('page.header.signUp')}
+            </SidebarItem>
+          </>
         )}
         <SidebarItem to="/trading" icon={<TrandingIcon />} onClick={handleItemClick}>
           {t('page.header.navbar.trade')}

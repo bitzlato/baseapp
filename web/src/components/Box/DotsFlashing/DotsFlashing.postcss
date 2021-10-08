@@ -1,0 +1,58 @@
+:root {
+  --dots-flashing-color-start: rgb(249, 250, 252);
+  --dots-flashing-color-end: rgb(149, 150, 158);
+}
+
+.wrapper {
+  padding: 0 0.75em;
+  width: 0.5em;
+}
+
+.dots {
+  animation-delay: 0.5s;
+  animation-timing-function: linear;
+  display: inline-block;
+  position: relative;
+
+  &,
+  &::before,
+  &::after {
+    animation-direction: alternate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: dotsFlashing;
+    background-color: var(--dots-flashing-color-start);
+    border-radius: 50%;
+    height: 0.5em;
+    width: 0.5em;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+
+  &::before {
+    animation-delay: 0s;
+    left: -0.75em;
+  }
+
+  &::after {
+    animation-delay: 1s;
+    left: 0.75em;
+  }
+}
+
+@keyframes dotsFlashing {
+  0% {
+    background-color: var(--dots-flashing-color-start);
+  }
+
+  50%,
+  100% {
+    background-color: var(--dots-flashing-color-end);
+  }
+}
