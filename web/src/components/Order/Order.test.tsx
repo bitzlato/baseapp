@@ -1,13 +1,12 @@
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
-import { SinonSpy, spy } from 'sinon';
 import { Order, OrderComponentProps } from './';
 import { TestComponentWrapper } from 'lib/test/wrapper';
 
 // tslint:disable:no-magic-numbers
 
 const defaultProps: OrderComponentProps = {
-  onSubmit: spy(),
+  onSubmit: jest.fn(),
   priceMarketBuy: 5,
   priceMarketSell: 10,
   currentMarketAskPrecision: 4,
@@ -48,7 +47,7 @@ describe('Order', () => {
       </TestComponentWrapper>,
     );
     wrapper.find('input').at(2).simulate('click');
-    expect((defaultProps.onSubmit as SinonSpy).calledOnceWith()).toBeFalsy();
+    expect(defaultProps.onSubmit).toHaveBeenCalledTimes(0);
     wrapper.unmount();
   });
 });

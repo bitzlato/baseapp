@@ -1,9 +1,8 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
-import { spy } from 'sinon';
 import { PercentageButton, PercentageButtonProps } from '.';
 
-const onClickSpy = spy();
+const onClickSpy = jest.fn();
 const defaultProps: PercentageButtonProps = {
   value: 100,
   className: 'cr-button-percentage-100',
@@ -17,7 +16,7 @@ describe('Close Button', () => {
   let wrapper: ShallowWrapper;
 
   beforeEach(() => {
-    onClickSpy.resetHistory();
+    onClickSpy.mockReset();
     wrapper = setup({ onClick: onClickSpy });
   });
 
@@ -27,6 +26,6 @@ describe('Close Button', () => {
 
   it('should call onClick callback', () => {
     wrapper.find('.cr-button-percentage-100').simulate('click');
-    expect(onClickSpy.calledOnce).toBeTruthy();
+    expect(onClickSpy).toHaveBeenCalledTimes(1);
   });
 });

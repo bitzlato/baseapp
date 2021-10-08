@@ -1,7 +1,6 @@
 import { mount, ReactWrapper, shallow, ShallowWrapper } from 'enzyme';
 import { TestComponentWrapper } from 'lib/test';
 import * as React from 'react';
-import { spy } from 'sinon';
 import { Markets, MarketsProps } from '.';
 
 const data = [
@@ -9,7 +8,7 @@ const data = [
   ['ETH/LTC', '0.223100', '+25.00%'],
   ['LTC/BTC', '0.223100', '-5.00%'],
 ];
-const onSelect = spy();
+const onSelect = jest.fn();
 
 const defaultProps: MarketsProps = {
   data,

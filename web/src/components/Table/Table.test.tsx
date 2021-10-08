@@ -1,8 +1,6 @@
-import { mount, ReactWrapper, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { TestComponentWrapper } from 'lib/test';
 import * as React from 'react';
-import { start } from 'repl';
-import { spy } from 'sinon';
 import { CellData, Filter, Table, TableProps, TableState } from '.';
 
 const setup = (props: TableProps) =>
@@ -144,11 +142,12 @@ describe('Table render', () => {
   });
 
   it.skip('should render selected row', () => {
-    const onSelect = spy();
+    const onSelect = jest.fn();
     const wrapper = setup({ filters, header, data, onSelect });
 
     wrapper.find('tbody tr').at(1).simulate('click');
-    expect(onSelect.calledOnceWith(1));
+    expect(onSelect).toHaveBeenCalledTimes(1);
+    expect(onSelect).toHaveBeenCalledWith(1);
 
     const selectedRow = wrapper.find('tbody tr').at(1);
     expect(selectedRow.hasClass('cr-table__row--selected')).toBeTruthy();
