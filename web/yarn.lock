@@ -2210,13 +2210,6 @@
     mkdirp "^1.0.4"
     rimraf "^2.7.1"
 
-"@openware/cryptofont@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@openware/cryptofont/-/cryptofont-2.3.0.tgz#2c97ebc755b0f8c179951de1c367067499af580a"
-  integrity sha512-UpcHwDPRuiaYw2guvO+jj0h1HoCvnK6TKYiJZj2FD4g+yOTWvFaWsIr90AvB96NNKXCRTTQQzyduzT6otViCbA==
-  dependencies:
-    cryptocoins-icons "^2.8.0"
-
 "@openware/react-components@^0.0.5":
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@openware/react-components/-/react-components-0.0.5.tgz#8212bdeb76c6f633174910249a31a1119d55363c"
@@ -5072,11 +5065,6 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
-
-cryptocoins-icons@^2.8.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/cryptocoins-icons/-/cryptocoins-icons-2.9.0.tgz#2abd9db764ca5c5f87620acc4d75abfa6d8142f7"
-  integrity sha512-bfhtws/Hs4YOv7GXrCQfZ9yzgVLqkJsFzgsTFVFBY/D1qPIICQI0UjcoFxea8dlBlwerxNu3Shp0T0ucBLHwng==
 
 "cryptocurrency-icons@https://github.com/bitzlato/cryptocurrency-icons.git":
   version "0.18.0"
