@@ -15,6 +15,6 @@
   "linuxAndroidStudioPath": "/snap/bin/android-studio",
   "cordova": {},
   "server": {
-    "hostname": "odax.openware.work"
+    "hostname": "market.bitzlato.com"
   }
 }

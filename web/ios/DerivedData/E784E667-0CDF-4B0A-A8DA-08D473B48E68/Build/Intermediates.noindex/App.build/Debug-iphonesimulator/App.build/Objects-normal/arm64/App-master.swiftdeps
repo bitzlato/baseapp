@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)"
+options: "b4046a9fbecd1a6ce102c2b47d7eed97534811089def4f62f939d290a68433ec"
+build_start_time: [1633626534, 419163942]
+build_end_time: [1633626534, 712210178]
+inputs:
+  "/Users/cognize/bz/devdax/baseapp/web/ios/App/App/AppDelegate.swift": !private [1633623705, 943276882]

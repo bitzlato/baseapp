@@ -8,7 +8,7 @@ import { AppConfig } from './config';
 import alias from './alias.js';
 
 const rootDir = path.resolve(__dirname, '..');
-const BUILD_DIR = path.resolve(rootDir, 'public');
+const BUILD_DIR = path.resolve(rootDir, 'build');
 
 const config: webpack.Configuration = {
   entry: {

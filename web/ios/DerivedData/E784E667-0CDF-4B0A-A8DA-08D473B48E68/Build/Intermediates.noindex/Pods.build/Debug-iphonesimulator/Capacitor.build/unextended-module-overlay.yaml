@@ -1,0 +1,13 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/cognize/bz/devdax/baseapp/web/ios/DerivedData/E784E667-0CDF-4B0A-A8DA-08D473B48E68/Build/Products/Debug-iphonesimulator/Capacitor/Capacitor.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/cognize/bz/devdax/baseapp/web/ios/DerivedData/E784E667-0CDF-4B0A-A8DA-08D473B48E68/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/Capacitor.build/unextended-module.modulemap",
+    }]
+  }]
+}
