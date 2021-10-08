@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Decimal, TickerTable } from '../../components';
@@ -21,7 +21,12 @@ const defaultTicker = {
   volume: '0.0',
 };
 
-const MarketsTableComponent = (props) => {
+interface Props {
+  handleChangeCurrentMarket?: (market: Market) => void;
+  markets: readonly Market[];
+}
+
+const MarketsTableComponent: FC<Props> = (props) => {
   useMarketsFetch();
   useMarketsTickersFetch();
   useRangerConnectFetch();
@@ -73,7 +78,9 @@ const MarketsTableComponent = (props) => {
 
   if (currentBidUnit) {
     currentBidUnitMarkets = currentBidUnitMarkets.length
-      ? currentBidUnitMarkets.filter((market) => market.quote_unit === currentBidUnit)
+      ? currentBidUnitMarkets.filter(
+          (market) => market.quote_unit === currentBidUnit || market.base_unit === currentBidUnit,
+        )
       : [];
   }
 
