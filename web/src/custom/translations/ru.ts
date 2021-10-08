@@ -1175,5 +1175,7 @@ export const ru: LangType = {
   'page.fees.table.network': 'Сеть',
   'page.fees.table.min_deposit': 'Мин. ввод',
   'page.fees.table.min_withdraw': 'Мин. вывод',
+  'page.fees.table.deposit_fee': 'Комиссия за ввод',
+  'page.fees.table.withdraw_fee': 'Комиссия за вывод',
   your_address: 'Ваш адрес',
 };

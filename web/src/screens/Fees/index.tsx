@@ -26,9 +26,9 @@ export const Fees: React.FC = () => {
     t('page.fees.table.coin'),
     t('page.fees.table.name'),
     t('page.fees.table.network'),
-    t('page.body.wallets.tabs.deposit.ccy.message.fee'),
+    t('page.fees.table.deposit_fee'),
     t('page.fees.table.min_deposit'),
-    t('page.body.wallets.tabs.withdraw.content.fee'),
+    t('page.fees.table.withdraw_fee'),
     t('page.fees.table.min_withdraw'),
   ];
 
