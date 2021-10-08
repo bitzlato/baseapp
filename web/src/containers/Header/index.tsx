@@ -21,7 +21,7 @@ import {
   toggleMarketSelector,
   toggleSidebar,
 } from '../../modules';
-import { HeaderToolbar } from '../HeaderToolbar';
+import { HeaderToolbar } from '../HeaderToolbar/HeaderToolbar';
 import { NavBar } from '../NavBar';
 
 import backIcon from './back.svg';
@@ -52,7 +52,8 @@ type Props = ReduxProps & DispatchProps & IntlProps & LocationProps;
 class Head extends React.Component<Props> {
   public render() {
     const { mobileWallet, location } = this.props;
-    const tradingCls = location.pathname.includes('/trading') ? 'pg-container-trading' : '';
+    const isTradingPage = location.pathname.includes('/trading');
+    const tradingCls = isTradingPage ? 'pg-container-trading' : '';
     const shouldRenderHeader = !noHeaderRoutes.some((r) => location.pathname.includes(r));
 
     if (!shouldRenderHeader) {
@@ -77,7 +78,7 @@ class Head extends React.Component<Props> {
           {this.renderMobileWalletNav()}
           <div className="pg-header__navbar">
             {this.renderMarketToolbar()}
-            <NavBar />
+            <NavBar responsiveMode={isTradingPage} />
           </div>
         </div>
       </header>

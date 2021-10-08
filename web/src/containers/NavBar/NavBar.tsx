@@ -4,6 +4,7 @@ import { selectUserLoggedIn } from 'src/modules';
 import { useT } from 'src/hooks/useT';
 import { Link } from 'react-router-dom';
 import { Button } from 'src/components/Button/Button';
+import cn from 'classnames';
 
 import { LanguageSwitcher } from './LanguageSwitcher/LanguageSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher/ThemeSwitcher';
@@ -12,7 +13,11 @@ import { LogoutButton } from './LogoutButton/LogoutButton';
 
 import s from './NavBar.postcss';
 
-export const NavBar: FC = () => {
+interface Props {
+  responsiveMode?: boolean;
+}
+
+export const NavBar: FC<Props> = ({ responsiveMode = false }) => {
   const t = useT();
   const isLoggedIn = useSelector(selectUserLoggedIn);
 
@@ -20,12 +25,12 @@ export const NavBar: FC = () => {
     <div className={s.navBar}>
       {!isLoggedIn && (
         <>
-          <div className={s.item}>
+          <div className={cn(s.item, responsiveMode && s.canBeHidden)}>
             <Button component={Link} to="/signin">
               {t('page.header.navbar.signIn')}
             </Button>
           </div>
-          <div className={s.item}>
+          <div className={cn(s.item, responsiveMode && s.canBeHidden)}>
             {/* signup ID is needed for GA event */}
             <Button id="signup" color="secondary" component={Link} to="/signup">
               {t('page.header.signUp')}

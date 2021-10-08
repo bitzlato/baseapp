@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { useT } from 'src/hooks/useT';
+import { HeaderToolbar } from 'src/containers/HeaderToolbar/HeaderToolbar';
+import { MarketsTable, Charts } from 'src/containers';
 
-import { MarketsTable, HeaderToolbar, Charts } from 'src/containers';
 import { LandingContainer } from '../LandingContainer';
 import { LandingLink } from '../LandingLink';
 
