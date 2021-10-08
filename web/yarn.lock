@@ -2210,11 +2210,6 @@
     mkdirp "^1.0.4"
     rimraf "^2.7.1"
 
-"@openware/coding-standards@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@openware/coding-standards/-/coding-standards-2.3.0.tgz#eb616a5ca76ce04d28622df1965119e5c8db5fe5"
-  integrity sha512-W1XjywQ5Q2eD+zd5veMEFLo/Mlaed5cXbQ0+88Bf/k54XYFDbitn3IKETMekjEjslm3+NlWO+PdAiawSwUMVaw==
-
 "@openware/cryptofont@2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@openware/cryptofont/-/cryptofont-2.3.0.tgz#2c97ebc755b0f8c179951de1c367067499af580a"
