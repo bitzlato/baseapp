@@ -1,4 +1,3 @@
-import update from 'immutability-helper';
 import { defaultStorageLimit } from '../../../api';
 import { sliceArray } from '../../../helpers';
 import { CommonError } from '../../types';
@@ -75,13 +74,11 @@ export const apiKeysReducer = (
         error: undefined,
       };
     case API_KEY_UPDATE:
-      const apiKeyIndex = state.apiKeys.findIndex((e) => e.kid === action.payload.kid);
-      const apiKeys = update(state.apiKeys, {
-        [apiKeyIndex]: {
-          state: { $set: action.payload.state },
-          updated_at: { $set: action.payload.updated_at },
-        },
-      });
+      const apiKeys = state.apiKeys.map((d) =>
+        d.kid === action.payload.kid
+          ? { ...d, state: action.payload.state, updated_at: action.payload.updated_at }
+          : { ...d },
+      );
 
       return {
         ...state,
