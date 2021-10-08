@@ -76,7 +76,6 @@
     "@capacitor/core": "^2.4.1",
     "@capacitor/ios": "2.4.1",
     "@ionic/cli": "^6.11.11",
-    "@openware/coding-standards": "2.3.0",
     "@types/axios": "^0.14.0",
     "@types/classnames": "^2.2.6",
     "@types/copy-webpack-plugin": "^6.0.0",
