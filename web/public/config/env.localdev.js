@@ -42,7 +42,7 @@ window.env = {
   ],
   captchaLogin: false,
   usernameEnabled: false,
-  wsApi: true,
+  wsApi: false,
   valuationPrimaryCurrency: 'USDT-ERC20',
   valuationPrimaryCurrencyName: 'USD',
   valuationSecondaryCurrency: 'BTC',

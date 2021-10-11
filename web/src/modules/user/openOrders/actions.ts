@@ -1,4 +1,4 @@
-import { Market } from '../../public/markets';
+import { Market, MarketId } from '../../public/markets';
 import { CommonError, OrderCommon, OrderEvent } from '../../types';
 import {
   OPEN_ORDERS_APPEND,
@@ -48,6 +48,7 @@ export interface OpenOrdersCancelFetch {
   payload: {
     order: OrderCommon;
     list: OrderCommon[];
+    id?: MarketId;
   };
 }
 
