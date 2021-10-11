@@ -36,6 +36,7 @@ const config: webpack.Configuration = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       chunkFilename: '[id].[contenthash].css',
+      ignoreOrder: true,
     }),
   ],
   optimization: {
