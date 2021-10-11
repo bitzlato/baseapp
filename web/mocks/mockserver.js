@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const colors = require('colors');
 const join = path.join;
 const Combinatorics = require('js-combinatorics');
 const normalizeHeader = require('header-case-normalizer');
