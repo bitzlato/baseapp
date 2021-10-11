@@ -29,7 +29,7 @@ export const Footer: FC = () => {
               <a className={s.link} href={getProductLink(languageCode, 'exchange')}>
                 {t('page.body.landing.footer.exchange')}
               </a>
-              <a className={s.link} href={getProductLink(languageCode, 'paymentGateway')}>
+              <a className={s.link} href={getProductLink(languageCode, 'payment-gateway')}>
                 {t('page.body.landing.footer.paymentGateway')}
               </a>
               <a className={s.link} href={getProductLink(languageCode, 'cryptoloan')}>

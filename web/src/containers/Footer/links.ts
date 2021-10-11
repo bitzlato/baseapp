@@ -1,6 +1,6 @@
 export const footerLinks = {};
 
-type Product = 'p2p' | 'paymentGateway' | 'cryptoloan' | 'exchange';
+type Product = 'p2p' | 'payment-gateway' | 'cryptoloan' | 'exchange';
 export const getProductLink = (locale: string, product: Product) => {
   switch (product) {
     case 'exchange':
@@ -11,7 +11,7 @@ export const getProductLink = (locale: string, product: Product) => {
   }
 };
 
-const faqLinks = {
+const faqLinks: Record<string, string> = {
   en: 'https://bitzlato.com/faq_category/exchange-en/',
   ru: 'https://bitzlato.com/ru/faq_category/exchange-en-2/',
 };
