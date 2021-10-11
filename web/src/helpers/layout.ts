@@ -64,7 +64,7 @@ const getLayouts = () => {
   const gridHeight = Math.max(minGridHeight, window.innerHeight - staticHeight - margin * 3);
 
   const currentTradingChartHeight = pixelsToGridUnits(
-    gridHeight - margin * 2 - gridUnitsToPixels(orderHeight, rowHeight, margin),
+    gridHeight * 0.58 - margin * 2,
     rowHeight,
     margin,
   );
