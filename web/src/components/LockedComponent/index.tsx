@@ -1,8 +1,9 @@
-import React, { FC, ReactElement, useCallback } from 'react';
-import { Button } from 'react-bootstrap';
-import { useHistory } from 'react-router';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Box } from '../Box';
+import { Text } from '../Text';
+import { Button } from '../Button/Button';
 import { LockedIcon } from 'src/assets/images/LockedIcon';
-import { ArrowRight } from 'src/assets/images/ArrowRight';
 
 interface Props {
   text: string;
@@ -10,24 +11,14 @@ interface Props {
   buttonText: string;
 }
 
-export const LockedComponent: FC<Props> = (props: Props): ReactElement => {
-  const { text, link, buttonText } = props;
-  const history = useHistory();
-
-  const handleClick = useCallback(() => history.push(link), []);
-
+export const LockedComponent: React.FC<Props> = ({ text, link, buttonText }) => {
   return (
-    <div className="cr-locked">
-      <LockedIcon className="cr-locked__icon" />
-      <span className="cr-locked__content">{text}</span>
-      <Button
-        onClick={handleClick}
-        size="lg"
-        variant="secondary"
-        className="cr-locked__btn-content"
-      >
-        {buttonText} <ArrowRight className="cr-locked__btn-icon" />
+    <Box padding="3x" col spacing="2x" alignCenter>
+      <LockedIcon />
+      <Text size="2x">{text}</Text>
+      <Button component={Link} to={link}>
+        {buttonText}
       </Button>
-    </div>
+    </Box>
   );
 };

@@ -45,7 +45,6 @@ export const ru: LangType = {
   'page.body.trade.header.newOrder.locked.minLevel.buttonText': 'Verify Your Account',
   'page.body.trade.header.newOrder.locked.login.text':
     'Please login to your account to start trading',
-  'page.body.trade.header.newOrder.locked.login.buttonText': 'Log in to Account',
 
   'error.order.create.minAmount': 'Кол-во слишком мало. Минимальное кол-во: {amount} {currency}',
   'error.order.create.minPrice': 'Цена слишком мала. Минимальная цена: {price} {currency}',

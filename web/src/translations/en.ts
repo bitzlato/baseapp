@@ -48,7 +48,6 @@ export const en = {
   'page.body.trade.header.newOrder.locked.minLevel.buttonText': 'Verify Your Account',
   'page.body.trade.header.newOrder.locked.login.text':
     'Please login to your account to start trading',
-  'page.body.trade.header.newOrder.locked.login.buttonText': 'Log in to Account',
 
   'error.order.create.minAmount': 'Amount is too low. Minimum amount is {amount} {currency}',
   'error.order.create.minPrice': 'Price is too low. Minimum price is {price} {currency}',
