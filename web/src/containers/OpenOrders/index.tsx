@@ -1,10 +1,9 @@
 import cn from 'classnames';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Form, Spinner } from 'react-bootstrap';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { openOrdersFetchInterval } from 'src/api';
-import { useOpenOrdersFetch } from 'src/hooks';
+import { useOpenOrdersFetch, userOpenOrdersFetchAction } from 'src/hooks';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { Decimal, OpenOrders } from '../../components';
 import { localeDate, setTradeColor } from '../../helpers';
@@ -16,26 +15,24 @@ import {
   selectOpenOrdersFetching,
   selectOpenOrdersList,
   selectUserLoggedIn,
-  userOrdersHistoryFetch,
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
 import { getTriggerSign } from './helpers';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { Box } from 'src/components/Box';
+import { useT } from 'src/hooks/useT';
 
-export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
+export const OpenOrdersComponent: React.FC = () => {
   const [hideOtherPairs, setHideOtherPairs] = useState<boolean>(true);
   const [showLoading, setShowLoading] = useState(false);
-  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
   const currentMarket = useSelector(selectCurrentMarket);
   const list = useSelector(selectOpenOrdersList);
   const fetching = useSelector(selectOpenOrdersFetching);
   const markets = useSelector(selectMarkets);
   const userLoggedIn = useSelector(selectUserLoggedIn);
-
-  const translate = React.useCallback((id: string) => formatMessage({ id: id }), [formatMessage]);
+  const t = useT();
 
   useOpenOrdersFetch(currentMarket, hideOtherPairs);
 
@@ -46,23 +43,23 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
 
   const renderHeaders = useMemo(
     () => [
-      translate('page.body.trade.header.openOrders.content.date'),
-      translate('page.body.trade.header.openOrders.content.market'),
-      translate('page.body.trade.header.openOrders.content.type'),
-      translate('page.body.trade.header.openOrders.content.price'),
-      translate('page.body.trade.header.openOrders.content.amount'),
-      translate('page.body.trade.header.openOrders.content.total'),
-      translate('page.body.trade.header.openOrders.content.trigger'),
-      translate('page.body.trade.header.openOrders.content.filled'),
+      t('page.body.trade.header.openOrders.content.date'),
+      t('page.body.trade.header.openOrders.content.market'),
+      t('page.body.trade.header.openOrders.content.type'),
+      t('page.body.trade.header.openOrders.content.price'),
+      t('page.body.trade.header.openOrders.content.amount'),
+      t('page.body.trade.header.openOrders.content.total'),
+      t('page.body.trade.header.openOrders.content.trigger'),
+      t('page.body.trade.header.openOrders.content.filled'),
       '',
     ],
     [],
   );
 
   const renderData = useCallback(
-    (data) => {
+    (data: OrderCommon[]) => {
       if (!data.length) {
-        return [[[''], [''], [''], translate('page.noDataToShow')]];
+        return [[[''], [''], [''], t('page.noDataToShow')]];
       }
 
       return data.map((item: OrderCommon) => {
@@ -92,9 +89,7 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
             {curMarket?.name && <MarketName name={curMarket?.name} />}
           </span>,
           <span key={id}>
-            {ord_type
-              ? translate(`page.body.trade.header.openOrders.content.type.${ord_type}`)
-              : '-'}
+            {ord_type ? t(`page.body.trade.header.openOrders.content.type.${ord_type}`) : '-'}
           </span>,
           <span style={{ color: setTradeColor(side).color }} key={id}>
             <Decimal fixed={priceFixed} thousSep=",">
@@ -117,8 +112,8 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
           <span key={id} className="split-lines">
             {trigger_price ? (
               <React.Fragment>
-                <span>{translate('page.body.trade.header.openOrders.lastPrice')}</span>&nbsp;
-                {getTriggerSign(ord_type, side)}&nbsp;&nbsp;
+                <span>{t('page.body.trade.header.openOrders.lastPrice')}</span>&nbsp;
+                {getTriggerSign(ord_type ?? '', side)}&nbsp;&nbsp;
                 <span style={{ color: setTradeColor(side).color }}>
                   {Decimal.format(trigger_price, priceFixed, ',')}
                 </span>
@@ -140,24 +135,25 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
     [markets],
   );
 
-  const handleCancel = useCallback(
-    (index: number) => {
-      const orderToDelete = list[index];
-      dispatch(openOrdersCancelFetch({ order: orderToDelete, list }));
-    },
-    [list],
-  );
+  const handleCancel = (index: number) => {
+    dispatch(
+      openOrdersCancelFetch({
+        order: list[index],
+        list,
+        id: currentMarket && hideOtherPairs ? currentMarket.id : undefined,
+      }),
+    );
+  };
 
-  const handleCancelAll = useCallback(() => {
+  const handleCancelAll = () => {
     currentMarket && dispatch(ordersCancelAllFetch({ market: currentMarket.id }));
-  }, [currentMarket]);
+  };
 
   const fetchOrders = () => {
     if (showLoading) {
       setShowLoading(false);
     }
-    // TODO: check parameters
-    dispatch(userOrdersHistoryFetch({ pageIndex: 0, limit: 25, type: 'open' }));
+    dispatch(userOpenOrdersFetchAction(currentMarket, hideOtherPairs));
   };
 
   React.useEffect(() => {
@@ -167,7 +163,7 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
         ? window.setInterval(fetchOrders, interval)
         : undefined;
     return () => clearInterval(intervalId);
-  }, [dispatch, userLoggedIn, currentMarket]);
+  }, [dispatch, userLoggedIn, currentMarket, hideOtherPairs]);
 
   const loading = fetching && showLoading;
   const classNames = cn('pg-open-orders', {
@@ -175,13 +171,10 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
     'pg-open-orders--loading': loading,
   });
 
-  const handleToggleCheckbox = React.useCallback(
-    (event) => {
-      event.preventDefault();
-      setHideOtherPairs(!hideOtherPairs);
-    },
-    [hideOtherPairs],
-  );
+  const handleToggleCheckbox = (event: React.MouseEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setHideOtherPairs(!hideOtherPairs);
+  };
 
   const renderContent = useMemo(() => {
     if (loading) {
@@ -206,7 +199,7 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
     <div className={classNames}>
       <div className="cr-table-header__content">
         <Box grow>
-          <FormattedMessage id="page.body.trade.header.openOrders" />
+          {t('page.body.trade.header.openOrders')}
           <Form className="cr-title-component__checkbox" onClick={handleToggleCheckbox}>
             <Form.Check
               type="checkbox"
@@ -214,7 +207,7 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
               id="hideOtherPairs"
               checked={hideOtherPairs}
               readOnly={true}
-              label={translate('page.body.trade.header.openOrders.hideOtherPairs')}
+              label={t('page.body.trade.header.openOrders.hideOtherPairs')}
             />
           </Form>
         </Box>
@@ -226,7 +219,7 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
                 disabled={!userLoggedIn}
                 onClick={fetchOrders}
               >
-                <FormattedMessage id="page.body.openOrders.header.button.refresh" />
+                {t('page.body.openOrders.header.button.refresh')}
               </button>
               <Box
                 row
@@ -237,9 +230,7 @@ export const OpenOrdersComponent: React.FC = (): React.ReactElement => {
                 onClick={handleCancelAll}
               >
                 <CloseIcon />
-                <span>
-                  <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
-                </span>
+                <span>{t('page.body.openOrders.header.button.cancelAll')}</span>
               </Box>
             </>
           )}
