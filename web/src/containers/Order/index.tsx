@@ -164,7 +164,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
         <LockedComponent
           text={this.translate('page.body.trade.header.newOrder.locked.login.text')}
           link={'/signin'}
-          buttonText={this.translate('page.body.trade.header.newOrder.locked.login.buttonText')}
+          buttonText={this.translate('page.header.navbar.signIn')}
         />
       );
     } else if (!allowed) {

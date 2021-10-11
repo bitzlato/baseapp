@@ -12,9 +12,10 @@ type BoxOwnProps<E = React.ElementType> = {
   alignStart?: boolean;
   grow?: boolean;
   justifyEnd?: boolean;
+  alignCenter?: boolean;
   selfStart?: boolean;
   spacing?: boolean | '2x' | '3x';
-  padding?: '2x';
+  padding?: '2x' | '3x';
   warningColor?: boolean;
 };
 
@@ -34,6 +35,7 @@ export const Box: Element = React.forwardRef(
       alignStart,
       padding,
       grow,
+      alignCenter,
       justifyEnd,
       selfStart,
       warningColor,
@@ -47,6 +49,7 @@ export const Box: Element = React.forwardRef(
       col && s.col,
       alignStart && s.alignStart,
       grow && s.grow,
+      alignCenter && s.alignCenter,
       justifyEnd && s.justifyEnd,
       selfStart && s.selfStart,
       row && spacing === true && s.rowSpacing,
@@ -56,6 +59,7 @@ export const Box: Element = React.forwardRef(
       col && spacing === '2x' && s.colSpacing2X,
       col && spacing === '3x' && s.colSpacing3X,
       padding === '2x' && s.padding2X,
+      padding === '3x' && s.padding3X,
       warningColor && s.warningColor,
     );
     return React.createElement(as, { ...props, ref, className: boxClassName });
