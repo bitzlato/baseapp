@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { alertPush, Market, sendError } from '../../../';
+import { alertPush, sendError } from '../../../';
 import { API, isFinexEnabled, RequestOptions } from '../../../../api';
 import { getCsrfToken, getOrderAPI } from '../../../../helpers';
 import { openOrdersCancelError, OpenOrdersCancelFetch, userOpenOrdersFetch } from '../actions';
@@ -40,12 +40,6 @@ export function* openOrdersCancelSaga(action: OpenOrdersCancelFetch) {
     }
 
     yield put(alertPush({ message: ['success.order.cancelling'], type: 'success' }));
-
-    if ('id' in action.payload) {
-      yield put(
-        userOpenOrdersFetch(id ? { market: { id: action.payload.id } as Market } : undefined),
-      );
-    }
   } catch (error) {
     yield put(
       sendError({

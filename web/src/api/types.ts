@@ -44,7 +44,6 @@ declare global {
     barong_upload_size_max_range?: string;
     themeSwitcher: 'visible' | 'hidden';
 
-    openOrdersFetchInterval: string;
     signInUrl: string;
     signUpUrl: string;
     logoUrl: string;

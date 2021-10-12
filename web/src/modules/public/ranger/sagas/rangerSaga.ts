@@ -11,10 +11,11 @@ import {
   take,
   takeEvery,
 } from 'redux-saga/effects';
+import { OrderEvent } from 'src/modules/types';
 import { rangerUrl } from '../../../../api';
 import { store } from '../../../../store';
 import { pushHistoryEmit } from '../../../user/history';
-import { selectOpenOrdersList, userOpenOrdersUpdate } from '../../../user/openOrders';
+import { userOpenOrdersUpdate } from '../../../user/openOrders';
 import { userOrdersHistoryRangerData } from '../../../user/ordersHistory';
 import { updateWalletsDataByRanger, walletsAddressDataWS } from '../../../user/wallets';
 import { alertPush } from '../../alert';
@@ -190,22 +191,11 @@ const initRanger = (
             // private
             case 'order':
               if (event) {
-                switch (event.state) {
-                  case 'wait':
-                  case 'pending':
-                    const orders = selectOpenOrdersList(store.getState());
-                    const updatedOrder =
-                      orders.length &&
-                      orders.find((order) => event.uuid && order.uuid === event.uuid);
-                    if (!updatedOrder) {
-                      emitter(alertPush({ message: ['success.order.created'], type: 'success' }));
-                    }
-                    break;
+                switch ((event as OrderEvent).state) {
                   case 'done':
                     emitter(alertPush({ message: ['success.order.done'], type: 'success' }));
                     break;
                   case 'reject':
-                  case 'execution_reject':
                     emitter(alertPush({ message: ['error.order.rejected'], type: 'error' }));
                     break;
                   default:
@@ -214,25 +204,21 @@ const initRanger = (
               }
 
               emitter(rangerUserOrderUpdate(event));
-
               return;
 
             // private
             case 'trade':
               emitter(pushHistoryEmit(event));
-
               return;
 
             // private
             case 'balances':
               emitter(updateWalletsDataByRanger({ ws: true, balances: event }));
-
               return;
 
             // private
             case 'deposit_address':
               emitter(walletsAddressDataWS(event));
-
               return;
 
             // private

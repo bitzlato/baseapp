@@ -42,7 +42,6 @@ export const defaultConfig: Config = {
   barong_upload_size_max_range: '20',
   themeSwitcher: 'visible',
 
-  openOrdersFetchInterval: '10000',
   signInUrl: '',
   signUpUrl: '',
   logoUrl: '',
@@ -104,8 +103,6 @@ export const barongUploadSizeMaxRange = Number(
   Cryptobase.config.barong_upload_size_max_range || '20',
 );
 export const themeSwitcher = () => Cryptobase.config.themeSwitcher;
-export const openOrdersFetchInterval = (): number =>
-  Number(Cryptobase.config.openOrdersFetchInterval);
 export const signInUrl = (): string => Cryptobase.config.signInUrl;
 export const signUpUrl = (): string => Cryptobase.config.signUpUrl;
 export const logoUrl = (): string => Cryptobase.config.logoUrl;

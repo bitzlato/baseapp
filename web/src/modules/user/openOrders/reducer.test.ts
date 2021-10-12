@@ -237,6 +237,16 @@ describe('Open Orders reducer', () => {
         ),
       ).toEqual(expectedState);
     });
+
+    it('remove cancel orders from the list', () => {
+      const orderEvent: OrderEvent = {
+        ...newOrderEvent,
+        state: 'cancel',
+      };
+      expect(
+        openOrdersReducer({ ...initialOpenOrdersState }, actions.userOpenOrdersUpdate(orderEvent)),
+      ).toEqual(initialOpenOrdersState);
+    });
   });
 
   it('should handle USER_OPEN_ORDERS_RESET', () => {

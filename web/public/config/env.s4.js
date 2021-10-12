@@ -24,7 +24,6 @@ window.env = {
   rangerReconnectPeriod: '1',
   msAlertDisplayTime: '10000',
   incrementalOrderBook: true,
-  openOrdersFetchInterval: '3000',
   isResizable: false,
   isDraggable: false,
   languages: ['en', 'ru'],

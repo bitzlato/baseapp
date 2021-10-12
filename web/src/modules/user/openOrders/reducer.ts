@@ -13,7 +13,7 @@ import {
   OPEN_ORDERS_RESET,
   OPEN_ORDERS_UPDATE,
 } from './constants';
-import { convertOrderEvent, insertIfNotExisted, insertOrUpdate } from './helpers';
+import { convertOrderEvent, insertOrUpdate } from './helpers';
 
 export interface OpenOrdersState {
   fetching: boolean;
@@ -51,7 +51,7 @@ export const openOrdersReducer = (
     case OPEN_ORDERS_APPEND:
       return {
         ...state,
-        list: sliceArray(insertIfNotExisted(state.list, action.payload), defaultStorageLimit()),
+        list: sliceArray(insertOrUpdate(state.list, action.payload), defaultStorageLimit()),
       };
     case OPEN_ORDERS_RESET:
       return initialOpenOrdersState;
