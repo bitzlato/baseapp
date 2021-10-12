@@ -5,6 +5,7 @@ import { SummaryField } from '../SummaryField';
 import { ccy, money, MoneyFormat } from '../MoneyFormat/MoneyFormat';
 import { Currency } from 'src/modules/public/currencies/types';
 import { Box } from '../Box';
+import { Text } from '../Text';
 
 interface Props {
   currency: Currency;
@@ -31,7 +32,7 @@ export const DepositSummary: React.FC<Props> = ({ currency }) => {
         <Box selfStart>
           <WarningIcon />
         </Box>
-        <Box warningColor>{t('page.body.wallets.tabs.deposit.ccy.message.warning')}</Box>
+        <Text warningColor>{t('page.body.wallets.tabs.deposit.ccy.message.warning')}</Text>
       </Box>
       {process.env.REACT_APP_RELEASE_STAGE === 'sandbox' && (
         <span>

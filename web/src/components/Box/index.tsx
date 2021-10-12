@@ -16,7 +16,6 @@ type BoxOwnProps<E = React.ElementType> = {
   selfStart?: boolean;
   spacing?: boolean | '2x' | '3x';
   padding?: '2x' | '3x';
-  warningColor?: boolean;
 };
 
 type Props<E extends React.ElementType> = BoxOwnProps<E> &
@@ -38,7 +37,6 @@ export const Box: Element = React.forwardRef(
       alignCenter,
       justifyEnd,
       selfStart,
-      warningColor,
       ...props
     }: BoxOwnProps,
     ref,
@@ -59,8 +57,7 @@ export const Box: Element = React.forwardRef(
       col && spacing === '2x' && s.colSpacing2X,
       col && spacing === '3x' && s.colSpacing3X,
       padding === '2x' && s.padding2X,
-      padding === '3x' && s.padding3X,
-      warningColor && s.warningColor,
+      padding === '3x' && s.padding3X
     );
     return React.createElement(as, { ...props, ref, className: boxClassName });
   },
