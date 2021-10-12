@@ -2,8 +2,7 @@ import cn from 'classnames';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Form, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { openOrdersFetchInterval } from 'src/api';
-import { useOpenOrdersFetch, userOpenOrdersFetchAction } from 'src/hooks';
+import { useOpenOrdersFetch } from 'src/hooks';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { Decimal, OpenOrders } from '../../components';
 import { localeDate, setTradeColor } from '../../helpers';
@@ -26,11 +25,10 @@ import { useT } from 'src/hooks/useT';
 
 export const OpenOrdersComponent: React.FC = () => {
   const [hideOtherPairs, setHideOtherPairs] = useState<boolean>(true);
-  const [showLoading, setShowLoading] = useState(false);
   const dispatch = useDispatch();
   const currentMarket = useSelector(selectCurrentMarket);
   const list = useSelector(selectOpenOrdersList);
-  const fetching = useSelector(selectOpenOrdersFetching);
+  const loading = useSelector(selectOpenOrdersFetching);
   const markets = useSelector(selectMarkets);
   const userLoggedIn = useSelector(selectUserLoggedIn);
   const t = useT();
@@ -141,7 +139,6 @@ export const OpenOrdersComponent: React.FC = () => {
       openOrdersCancelFetch({
         order: list[index],
         list,
-        id: currentMarket && hideOtherPairs ? currentMarket.id : undefined,
       }),
     );
   };
@@ -150,23 +147,6 @@ export const OpenOrdersComponent: React.FC = () => {
     currentMarket && dispatch(ordersCancelAllFetch({ market: currentMarket.id }));
   };
 
-  const fetchOrders = () => {
-    if (showLoading) {
-      setShowLoading(false);
-    }
-    dispatch(userOpenOrdersFetchAction(currentMarket, hideOtherPairs));
-  };
-
-  React.useEffect(() => {
-    const interval = openOrdersFetchInterval();
-    const intervalId =
-      userLoggedIn && currentMarket && interval > 0
-        ? window.setInterval(fetchOrders, interval)
-        : undefined;
-    return () => clearInterval(intervalId);
-  }, [dispatch, userLoggedIn, currentMarket, hideOtherPairs]);
-
-  const loading = fetching && showLoading;
   const classNames = cn('pg-open-orders', {
     'pg-open-orders--empty': !list.length,
     'pg-open-orders--loading': loading,
@@ -215,13 +195,6 @@ export const OpenOrdersComponent: React.FC = () => {
         <Box row spacing>
           {userLoggedIn && (
             <>
-              <button
-                className="cr-percentage-button"
-                disabled={!userLoggedIn}
-                onClick={fetchOrders}
-              >
-                {t('page.body.openOrders.header.button.refresh')}
-              </button>
               <Box
                 row
                 spacing

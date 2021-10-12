@@ -6,13 +6,19 @@ import { Decimal } from '../../../components';
 import { localeDate, setTradeColor } from '../../../helpers';
 import { selectMarkets } from '../../../modules';
 import { FIXED_VOL_PRECISION } from 'src/constants';
+import { OrderCommon } from 'src/modules/types';
 
-const OrdersItemComponent = (props) => {
+interface Props {
+  order: OrderCommon;
+  handleCancel: (order: OrderCommon) => () => void;
+}
+
+const OrdersItemComponent: React.FC<Props> = (props) => {
   const { order } = props;
   const intl = useIntl();
   const markets = useSelector(selectMarkets);
 
-  const getOrderType = (side: string, type: string) => {
+  const getOrderType = (side: string, type?: string) => {
     if (!side || !type) {
       return '';
     }
@@ -27,7 +33,7 @@ const OrdersItemComponent = (props) => {
   };
   const marketName = currentMarket ? currentMarket.name : order.market;
   const orderType = getOrderType(order.side, order.ord_type);
-  const filled = ((order.executed_volume / Number(order.origin_volume)) * 100).toFixed(2);
+  const filled = ((+(order.executed_volume || '0') / Number(order.origin_volume)) * 100).toFixed(2);
   const actualPrice =
     order.ord_type === 'market' || order.state === 'done' ? order.avg_price : order.price;
   const [orderDate, orderTime] = localeDate(
@@ -101,7 +107,7 @@ const OrdersItemComponent = (props) => {
           {order.state === 'wait' || order.state === 'trigger_wait' ? (
             <div
               className="pg-mobile-orders-item__row__button"
-              onClick={props.handleCancel(order.id)}
+              onClick={props.handleCancel(order)}
             >
               <span>{intl.formatMessage({ id: 'page.mobile.orders.header.cancel' })}</span>
               <CloseIcon />

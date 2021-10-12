@@ -48,7 +48,6 @@ export interface OpenOrdersCancelFetch {
   payload: {
     order: OrderCommon;
     list: OrderCommon[];
-    id?: MarketId;
   };
 }
 

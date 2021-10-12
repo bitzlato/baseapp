@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { OrderCommon } from 'src/modules/types';
 import { CloseIcon } from '../../../assets/images/CloseIcon';
 import { Pagination, TabPanel } from '../../../components';
 import { useMarketsFetch, useUserOrdersHistoryFetch } from '../../../hooks';
@@ -45,11 +46,11 @@ const OrdersComponent: React.FC<IOrdersComponentProps> = ({ withDropdownSelect }
     }
   };
 
-  const handleCancelSingleOrder = (id: number) => () => {
+  const handleCancelSingleOrder = (order: OrderCommon) => () => {
     if (shouldFetchCancelAll && shouldFetchCancelSingle) {
       dispatch(
         ordersHistoryCancelFetch({
-          id,
+          id: order.id!,
           type: userOrdersHistoryTabs[currentTabIndex],
           list: filteredOrders,
         }),

@@ -10,55 +10,19 @@ export const convertOrderEvent = (orderEvent: OrderEvent): OrderCommon => {
 };
 
 export const insertOrUpdate = (list: OrderCommon[], order: OrderCommon): OrderCommon[] => {
-  const { state, id, uuid } = order;
-  switch (state) {
+  switch (order.state) {
+    case 'pending':
     case 'wait':
-    case 'trigger_wait':
-      const index = list.findIndex(
-        (value: OrderCommon) => (value.uuid && value.uuid === uuid) || value.id === id,
-      );
-      if (index === -1) {
+      if (!list.find((d) => isSame(d, order))) {
         return [{ ...order }, ...list];
       }
+      return list.map((d) => (isSame(d, order) ? { ...order } : d));
 
-      return list.map((item) => {
-        if ((item.uuid && item.uuid === order.uuid) || item.id === order.id) {
-          return { ...order };
-        }
-
-        return item;
-      });
     default:
-      return list.reduce((memo: OrderCommon[], item: OrderCommon, i: number): OrderCommon[] => {
-        if ((item.uuid && item.uuid !== uuid) || item.id !== id) {
-          memo.push(item);
-        }
-
-        if (item.uuid && item.uuid === uuid) {
-          memo.splice(i, 1);
-        }
-
-        return memo;
-      }, []);
+      return list.filter((d) => !isSame(d, order));
   }
 };
 
-const findOrder = (list: OrderCommon[], order: OrderCommon): number => {
-  return list.findIndex(order.confirmed ? (v) => v.id === order.id : (v) => v.uuid === order.uuid);
-};
-
-export const insertIfNotExisted = (list: OrderCommon[], order: OrderCommon): OrderCommon[] => {
-  const index = findOrder(list, order);
-
-  return index === -1 ? [{ ...order }, ...list] : [...list];
-};
-
-export const removeOrder = (list: OrderCommon[], order: OrderCommon): OrderCommon[] => {
-  const index = findOrder(list, order);
-
-  if (index !== -1) {
-    list.splice(index, 1);
-  }
-
-  return [...list];
-};
+function isSame(a: OrderCommon, b: OrderCommon): boolean {
+  return (a.uuid !== undefined && b.uuid !== undefined && a.uuid === b.uuid) || a.id === b.id;
+}

@@ -41,7 +41,6 @@ export const mockConfig: Config = {
   captcha_type: 'none',
   password_min_entropy: 0,
 
-  openOrdersFetchInterval: '10000',
   signInUrl: '',
   signUpUrl: '',
   logoUrl: '',

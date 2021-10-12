@@ -69,7 +69,7 @@ export interface OrdersCancelAllError {
 export interface OrdersHistoryCancelFetch {
   type: typeof ORDERS_HISTORY_CANCEL_FETCH;
   payload: {
-    id: string | number;
+    id: number;
     type: string;
     list: OrderCommon[];
   };
