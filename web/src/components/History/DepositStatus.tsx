@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Deposit } from 'src/modules/user/history/types';
-import { Status } from './Status';
 import { SucceedIcon } from '../../containers/Wallets/SucceedIcon';
 import { useT } from 'src/hooks/useT';
 import { ExternalLink } from './ExternalLink';
 import { ConfirmingStatus } from './ConfirmingStatus';
 import { PendingStatus } from './PendingStatus';
 import { Box } from '../Box';
+import { Label } from '../Label/Label';
 
 interface Props {
   currency: string;
@@ -18,22 +18,20 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
   switch (item.state) {
     case 'dispatched':
       return (
-        <Status type="success">
+        <Label successColor>
           <SucceedIcon />
-        </Status>
+        </Label>
       );
     case 'errored':
       return item.public_message ? (
-        <Status type="failed">{item.public_message}</Status>
+        <Label failedColor>{item.public_message}</Label>
       ) : (
-        <Status type="failed">{t('page.body.history.deposit.content.status.errored')}</Status>
+        <Label failedColor>{t('page.body.history.deposit.content.status.errored')}</Label>
       );
     case 'skipped':
-      return <Status type="failed">{t('page.body.history.deposit.content.status.skipped')}</Status>;
+      return <Label failedColor>{t('page.body.history.deposit.content.status.skipped')}</Label>;
     case 'rejected':
-      return (
-        <Status type="failed">{t('page.body.history.deposit.content.status.canceled')}</Status>
-      );
+      return <Label failedColor>{t('page.body.history.deposit.content.status.canceled')}</Label>;
     case 'submitted':
       return <PendingStatus />;
     case 'invoiced':
@@ -41,30 +39,26 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
         <Box row spacing>
           {item.transfer_links.map((d) => (
             <ExternalLink key={d.title} href={d.url}>
-              <Status type="pending">{d.title}</Status>
+              <Label warningColor>{d.title}</Label>
             </ExternalLink>
           ))}
         </Box>
       ) : (
-        <Status type="pending">{t('page.body.wallets.table.invoiced')}</Status>
+        <Label warningColor>{t('page.body.wallets.table.invoiced')}</Label>
       );
     case 'canceled':
-      return (
-        <Status type="failed">{t('page.body.history.deposit.content.status.canceled')}</Status>
-      );
+      return <Label failedColor>{t('page.body.history.deposit.content.status.canceled')}</Label>;
     case 'accepted':
       return (
         <ConfirmingStatus txid={item.txid} confirmations={item.confirmations} currency={currency} />
       );
     case 'refunding':
-      return (
-        <Status type="pending">{t('page.body.history.deposit.content.status.refunding')}</Status>
-      );
+      return <Label warningColor>{t('page.body.history.deposit.content.status.refunding')}</Label>;
     default:
       return (
-        <Status type="failed" style={{ textTransform: 'capitalize' }}>
+        <Label failedColor capitalize>
           {item.state}
-        </Status>
+        </Label>
       );
   }
 };
