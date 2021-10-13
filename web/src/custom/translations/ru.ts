@@ -364,7 +364,10 @@ export const ru: LangType = {
   'page.body.history.deposit.content.status.processing': 'Обрабатывается',
   'page.body.history.deposit.content.status.fee_processing': 'Обрабатывается',
   'page.body.history.deposit.content.status.errored': 'Ошибка',
-  'page.body.history.deposit.content.status.refunding': 'Refunding',
+  'page.body.history.deposit.content.status.refunding': 'Возврат',
+  'page.body.history.deposit.content.status.wait_payment': 'Ожидается оплата',
+  'page.body.history.deposit.content.status.confirmed': 'Выполнен',
+  'page.body.history.deposit.content.status.confirming': 'Подтвержение',
 
   'page.body.history.withdraw': 'История выводов',
   'page.body.history.withdraw.header.id': 'ID',
@@ -410,6 +413,8 @@ export const ru: LangType = {
   'page.body.history.trade.header.total': 'Всего',
   'page.body.history.trade.header.amount': 'Кол.',
   'page.body.history.trade.header.balance': 'Баланс',
+
+  'page.body.history.quick': 'Quick exchange',
 
   'page.body.profile.header.account': 'Профиль',
 
@@ -803,7 +808,7 @@ export const ru: LangType = {
   'page.documentation.models.item.table.data.required.false': 'No',
 
   /* Quick Exchange */
-  'page.body.quick.exchange.header': 'Quick exchang',
+  'page.body.quick.exchange.header': 'Quick exchange',
 
   'page.body.quick.exchange.label.exchange': 'You exchange',
   'page.body.quick.exchange.label.receive': 'You receive',

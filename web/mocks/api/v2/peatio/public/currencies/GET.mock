@@ -22,7 +22,8 @@ Access-Control-Allow-Credentials: true
     "withdrawal_enabled": true,
     "base_factor": 100000000,
     "precision": 8,
-    "min_deposit_amount": "0.0"
+    "min_deposit_amount": "0.0",
+    "min_withdraw_amount": "0.0"
   },
   {
     "id": "btc",
@@ -40,7 +41,8 @@ Access-Control-Allow-Credentials: true
     "withdrawal_enabled": true,
     "base_factor": 100000000,
     "precision": 8,
-    "min_deposit_amount": "0.0"
+    "min_deposit_amount": "0.0",
+    "min_withdraw_amount": "0.0"
   },
   {
     "id": "dash",
@@ -58,7 +60,8 @@ Access-Control-Allow-Credentials: true
     "withdrawal_enabled": false,
     "base_factor": 100000000,
     "precision": 8,
-    "min_deposit_amount": "0.0"
+    "min_deposit_amount": "0.0",
+    "min_withdraw_amount": "0.0"
   },
   {
     "id": "eth",
@@ -77,7 +80,8 @@ Access-Control-Allow-Credentials: true
     "withdrawal_enabled": true,
     "base_factor": 1e+18,
     "precision": 8,
-    "min_deposit_amount": "0.0"
+    "min_deposit_amount": "0.0",
+    "min_withdraw_amount": "0.0"
   },
   {
     "id": "ltc",
@@ -112,7 +116,8 @@ Access-Control-Allow-Credentials: true
     "withdrawal_enabled": true,
     "base_factor": 1000000,
     "precision": 8,
-    "min_deposit_amount": "0.0"
+    "min_deposit_amount": "0.0",
+    "min_withdraw_amount": "0.0"
   },
   {
     "id": "usd",
@@ -128,7 +133,8 @@ Access-Control-Allow-Credentials: true
     "withdrawal_enabled": true,
     "base_factor": 1,
     "precision": 2,
-    "min_deposit_amount": "0.0"
+    "min_deposit_amount": "0.0",
+    "min_withdraw_amount": "0.0"
   },
   {
     "id": "xrp",
@@ -146,7 +152,8 @@ Access-Control-Allow-Credentials: true
     "withdrawal_enabled": true,
     "base_factor": 1000000,
     "precision": 8,
-    "min_deposit_amount": "0.0"
+    "min_deposit_amount": "0.0",
+    "min_withdraw_amount": "0.0"
   },
   {
     "id": "zar",
@@ -162,7 +169,8 @@ Access-Control-Allow-Credentials: true
     "withdrawal_enabled": false,
     "base_factor": 1,
     "precision": 2,
-    "min_deposit_amount": "0.0"
+    "min_deposit_amount": "0.0",
+    "min_withdraw_amount": "0.0"
    },
   {
     "id": "eur",
@@ -178,6 +186,7 @@ Access-Control-Allow-Credentials: true
     "withdrawal_enabled": false,
     "base_factor": 1,
     "precision": 2,
-    "min_deposit_amount": "0.0"
+    "min_deposit_amount": "0.0",
+    "min_withdraw_amount": "0.0"
   }
 ]

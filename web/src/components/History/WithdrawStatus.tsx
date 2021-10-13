@@ -5,7 +5,7 @@ import { useT } from 'src/hooks/useT';
 import { BlockchainLink } from './ExternalLink';
 import { ConfirmingStatus } from './ConfirmingStatus';
 import { PendingStatus } from './PendingStatus';
-import { SucceedIcon } from '../../containers/Wallets/SucceedIcon';
+import { SucceedIcon } from 'src/assets/icons/SucceedIcon';
 
 interface Props {
   currency: string;
