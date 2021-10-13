@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Withdraw } from 'src/modules/user/history/types';
-import { Status } from './Status';
+import { Label } from '../Label';
 import { useT } from 'src/hooks/useT';
 import { BlockchainLink } from './ExternalLink';
 import { ConfirmingStatus } from './ConfirmingStatus';
@@ -31,30 +31,28 @@ export const WithdrawStatus: React.FC<Props> = ({ item, currency }) => {
     case 'succeed':
       return (
         <BlockchainLink txid={item.blockchain_txid} currency={currency}>
-          <Status type="success">
+          <Label successColor>
             <SucceedIcon />
-          </Status>
+          </Label>
         </BlockchainLink>
       );
     case 'skipped':
     case 'failed':
     case 'errored':
       return item.public_message ? (
-        <Status type="failed">{item.public_message}</Status>
+        <Label failedColor>{item.public_message}</Label>
       ) : (
-        <Status type="failed">
-          {t(`page.body.history.withdraw.content.status.${item.state}`)}
-        </Status>
+        <Label failedColor>{t(`page.body.history.withdraw.content.status.${item.state}`)}</Label>
       );
     case 'under_review':
       return (
-        <Status type="failed">{t('page.body.history.withdraw.content.status.under_review')}</Status>
+        <Label failedColor>{t('page.body.history.withdraw.content.status.under_review')}</Label>
       );
     default:
       return (
-        <Status type="failed" style={{ textTransform: 'capitalize' }}>
+        <Label failedColor capitalize>
           {item.state}
-        </Status>
+        </Label>
       );
   }
 };

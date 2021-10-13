@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrencies } from 'src/modules';
-import { Status } from './Status';
 import { BlockchainLink } from './ExternalLink';
 import { PendingStatus } from './PendingStatus';
 import { Box } from '../Box';
+import { Label } from '../Label';
 
 interface Props {
   currency: string;
@@ -20,7 +20,7 @@ export const ConfirmingStatus: React.FC<Props> = ({ txid, currency, confirmation
   return (
     <Box row spacing justifyEnd>
       <BlockchainLink txid={txid} currency={currency}>
-        <Status type="pending">{content}</Status>
+        <Label warningColor>{content}</Label>
       </BlockchainLink>
       <PendingStatus />
     </Box>

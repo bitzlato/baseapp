@@ -20,7 +20,7 @@ import { getTriggerSign } from './helpers';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { Box } from 'src/components/Box';
-import { Text } from 'src/components/Text';
+import { Label } from 'src/components/Label';
 import { useT } from 'src/hooks/useT';
 
 export const OpenOrdersComponent: React.FC = () => {
@@ -58,7 +58,7 @@ export const OpenOrdersComponent: React.FC = () => {
   const renderData = useCallback(
     (data: OrderCommon[]) => {
       if (!data.length) {
-        return [[[''], [''], [''], <Text secondaryColor>{t('page.noDataToShow')}</Text>, ['']]];
+        return [[[''], [''], [''], <Label secondaryColor>{t('page.noDataToShow')}</Label>, ['']]];
       }
 
       return data.map((item: OrderCommon) => {
