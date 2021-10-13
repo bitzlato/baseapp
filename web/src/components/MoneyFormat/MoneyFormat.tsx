@@ -36,6 +36,7 @@ export const money = (amount: Money['amount'], currency: Money['currency']) => (
   amount,
   currency,
 });
+
 export const ccy = (code: Currency['code'], minorUnit: Currency['minorUnit']) => ({
   code,
   minorUnit,

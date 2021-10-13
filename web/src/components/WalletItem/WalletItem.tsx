@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { Wallet } from 'src/modules';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { LockIcon } from 'src/assets/icons/LockIcon';
-import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { money, MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 
 import s from './WalletItem.postcss';
 
@@ -18,19 +18,11 @@ export const WalletItem: FC<Props> = ({
   active = false,
   onClick,
 }: Props) => {
-  const hasLocked = parseFloat(locked) > 0;
+  const hasLocked = parseFloat(locked ?? '0') > 0;
   const currencySymbol = currency.split('-')[0].toUpperCase();
   const cryptoCurrency = {
     code: currencySymbol,
     minorUnit: fixed,
-  };
-  const balanceMoney = {
-    amount: balance,
-    currency: cryptoCurrency,
-  };
-  const lockedMoney = {
-    amount: locked,
-    currency: cryptoCurrency,
   };
 
   return (
@@ -42,14 +34,14 @@ export const WalletItem: FC<Props> = ({
         <span className={cn(s.row, s.title)}>
           <span>{currencySymbol}</span>
           <span>
-            <MoneyFormat money={balanceMoney} />
+            <MoneyFormat money={money(balance ?? 0, cryptoCurrency)} />
           </span>
         </span>
         <span className={cn(s.row, s.description)}>
           <span>{name}</span>
           {hasLocked && (
             <span className={s.amountLocked}>
-              <LockIcon /> <MoneyFormat money={lockedMoney} />
+              <LockIcon /> <MoneyFormat money={money(locked ?? 0, cryptoCurrency)} />
             </span>
           )}
         </span>
