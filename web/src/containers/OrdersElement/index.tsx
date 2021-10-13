@@ -64,7 +64,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
     let updateList = list;
 
     if (type === 'open') {
-      updateList = list.filter((o) => o.state === 'wait' || o.state === 'trigger_wait');
+      updateList = list.filter((o) => o.state === 'wait');
     }
 
     const emptyMsg = this.props.intl.formatMessage({ id: 'page.noDataToShow' });
@@ -84,7 +84,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
     );
   }
 
-  public renderContent = (list) => {
+  public renderContent = (list: OrderCommon[]) => {
     const { firstElemIndex, lastElemIndex, pageIndex, nextPageExists } = this.props;
 
     return (
@@ -129,11 +129,11 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
     ];
   };
 
-  private retrieveData = (list) => {
+  private retrieveData = (list: OrderCommon[]) => {
     return list.map((item) => this.renderOrdersHistoryRow(item));
   };
 
-  private renderOrdersHistoryRow = (item) => {
+  private renderOrdersHistoryRow = (item: OrderCommon) => {
     const {
       id,
       market,
@@ -158,8 +158,8 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
     const orderSide = this.getSide(side);
     const marketName = currentMarket ? currentMarket.name : market;
     const date = updated_at || created_at;
-    const status = this.setOrderStatus(state);
-    const actualPrice = this.getPrice(ord_type, status, avg_price, trigger_price, price);
+    const status = this.setOrderStatus(item);
+    const actualPrice = this.getPrice(item) || '0';
     const total = +actualPrice * +origin_volume;
     const executedVolume = Number(origin_volume) - Number(remaining_volume);
     const filled = ((executedVolume / Number(origin_volume)) * 100).toFixed(2);
@@ -202,7 +202,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
             <span>
               {this.props.intl.formatMessage({ id: 'page.body.trade.header.openOrders.lastPrice' })}
             </span>
-            &nbsp;{getTriggerSign(ord_type, side)}&nbsp;&nbsp;
+            &nbsp;{getTriggerSign(ord_type ?? '', side)}&nbsp;&nbsp;
             <span style={{ color: setTradeColor(side).color }}>
               {Decimal.format(trigger_price, currentMarket.price_precision, ',')}
             </span>
@@ -220,9 +220,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
       <span key={id} className="f-small">
         {status}
       </span>,
-      (state === 'wait' || state === 'trigger_wait') && (
-        <CloseIcon key={id} onClick={this.handleCancel(id)} />
-      ),
+      state === 'wait' && <CloseIcon key={id} onClick={this.handleCancel(id)} />,
     ];
   };
 
@@ -234,7 +232,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
     return this.props.intl.formatMessage({ id: `page.body.openOrders.header.side.${side}` });
   };
 
-  private getType = (orderType: string) => {
+  private getType = (orderType: string | undefined) => {
     if (!orderType) {
       return '';
     }
@@ -244,18 +242,16 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
     });
   };
 
-  private getPrice = (ord_type, status, avg_price, trigger_price, price) => {
-    if (ord_type === 'market' || status === 'done') {
-      return avg_price;
-    } else if (status === 'trigger_wait') {
-      return trigger_price;
+  private getPrice = (item: OrderCommon) => {
+    if (item.ord_type === 'market' || item.state === 'done') {
+      return item.avg_price;
     } else {
-      return price;
+      return item.price;
     }
   };
 
-  private setOrderStatus = (status: string) => {
-    switch (status) {
+  private setOrderStatus = (item: OrderCommon) => {
+    switch (item.state) {
       case 'done':
         return (
           <span className="pg-history-elem-executed">
@@ -263,22 +259,19 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
           </span>
         );
       case 'cancel':
-      case 'trigger_cancel':
-      case 'execution_reject':
         return (
           <span className="pg-history-elem-canceled">
-            <FormattedMessage id={`page.body.openOrders.content.status.${status}`} />
+            <FormattedMessage id={`page.body.openOrders.content.status.${item.state}`} />
           </span>
         );
       case 'wait':
-      case 'trigger_wait':
         return (
           <span className="pg-history-elem-opened">
-            <FormattedMessage id={`page.body.openOrders.content.status.${status}`} />
+            <FormattedMessage id={`page.body.openOrders.content.status.${item.state}`} />
           </span>
         );
       default:
-        return status;
+        return item.state;
     }
   };
 
