@@ -356,6 +356,9 @@ export const en = {
   'page.body.history.deposit.content.status.fee_processing': 'Processing',
   'page.body.history.deposit.content.status.errored': 'Errored',
   'page.body.history.deposit.content.status.refunding': 'Refunding',
+  'page.body.history.deposit.content.status.wait_payment': 'Waiting for payment',
+  'page.body.history.deposit.content.status.confirmed': 'Confirmed',
+  'page.body.history.deposit.content.status.confirming': 'Confirming',
 
   'page.body.history.withdraw': 'Withdrawal History',
   'page.body.history.withdraw.header.id': 'ID',
@@ -399,6 +402,8 @@ export const en = {
   'page.body.history.transfer.header.toAccount': 'To account',
   'page.body.history.transfer.header.status': 'Status',
   'page.body.history.transfer.content.status.completed': 'Completed',
+
+  'page.body.history.quick': 'Quick exchange',
 
   'page.body.profile.header.account': 'Profile',
 
@@ -788,7 +793,7 @@ export const en = {
   'page.documentation.models.item.table.data.required.false': 'No',
 
   /* Quick Exchange */
-  'page.body.quick.exchange.header': 'Quick exchang',
+  'page.body.quick.exchange.header': 'Quick exchange',
 
   'page.body.quick.exchange.label.exchange': 'You exchange',
   'page.body.quick.exchange.label.receive': 'You receive',

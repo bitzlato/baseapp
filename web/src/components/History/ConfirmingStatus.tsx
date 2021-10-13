@@ -2,9 +2,9 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrencies } from 'src/modules';
 import { BlockchainLink } from './ExternalLink';
-import { PendingStatus } from './PendingStatus';
 import { Box } from '../Box';
 import { Label } from '../Label';
+import { useT } from 'src/hooks/useT';
 
 interface Props {
   currency: string;
@@ -13,16 +13,17 @@ interface Props {
 }
 
 export const ConfirmingStatus: React.FC<Props> = ({ txid, currency, confirmations }) => {
+  const t = useT();
   const currencies = useSelector(selectCurrencies);
   const itemCurrency = currencies.find((cur) => cur.id === currency);
-  const min: number | undefined = itemCurrency?.min_confirmations;
+  const min = itemCurrency?.min_confirmations;
   const content = min !== undefined ? ` ${confirmations}/${min}` : '';
   return (
-    <Box row spacing justifyEnd>
+    <>
+      <Label warningColor>{t('page.body.history.deposit.content.status.confirming')} </Label>
       <BlockchainLink txid={txid} currency={currency}>
         <Label warningColor>{content}</Label>
       </BlockchainLink>
-      <PendingStatus />
-    </Box>
+    </>
   );
 };

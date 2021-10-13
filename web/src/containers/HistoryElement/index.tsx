@@ -182,9 +182,13 @@ class HistoryComponent extends React.Component<Props> {
 
         return [
           <div className="pg-history-elem__hide" key={txid}>
-            <a href={blockchainLink} target="_blank" rel="noopener noreferrer">
-              {truncateMiddle(txid, 30)}
-            </a>
+            {blockchainLink ? (
+              <a href={blockchainLink} target="_blank" rel="noopener noreferrer">
+                {truncateMiddle(txid, 30)}
+              </a>
+            ) : (
+              '-'
+            )}
           </div>,
           localeDate(created_at, 'fullDate'),
           <CurrencyTicker symbol={currency} />,
