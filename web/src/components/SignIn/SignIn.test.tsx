@@ -3,7 +3,7 @@ import { captchaLogin } from '../../api';
 import { SignInComponent, SignInProps } from './';
 
 import { shallow } from 'enzyme';
-import { TestComponentWrapper } from 'lib/test';
+import { TestComponentWrapper } from 'src/lib/test';
 import { Button } from 'react-bootstrap';
 
 const defaults: SignInProps = {

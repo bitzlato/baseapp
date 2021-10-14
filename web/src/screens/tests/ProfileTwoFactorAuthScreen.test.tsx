@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { TestComponentWrapper } from 'lib/test';
+import { TestComponentWrapper } from 'src/lib/test';
 import { ProfileTwoFactorAuthScreen } from '../';
 import { IntlProps } from '../../';
 

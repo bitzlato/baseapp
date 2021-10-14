@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import { TestComponentWrapper } from 'lib/test';
+import { TestComponentWrapper } from 'src/lib/test';
 import { VerificationScreen } from '..';
 import { IntlProps } from '../../';
 import { extractToken } from '../VerificationScreen';

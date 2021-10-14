@@ -1,5 +1,5 @@
 import { mount, ReactWrapper, shallow, ShallowWrapper } from 'enzyme';
-import { TestComponentWrapper } from 'lib/test';
+import { TestComponentWrapper } from 'src/lib/test';
 import * as React from 'react';
 import { Markets, MarketsProps } from '.';
 

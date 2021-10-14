@@ -2,7 +2,7 @@ import * as React from 'react';
 import { EmailForm, EmailFormProps } from './index';
 
 import { shallow } from 'enzyme';
-import { TestComponentWrapper } from 'lib/test';
+import { TestComponentWrapper } from 'src/lib/test';
 
 const defaults: EmailFormProps = {
   OnSubmit: jest.fn(),

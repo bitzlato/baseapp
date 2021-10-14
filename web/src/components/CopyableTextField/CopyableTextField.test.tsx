@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import { TestComponentWrapper } from 'lib/test';
+import { TestComponentWrapper } from 'src/lib/test';
 import * as React from 'react';
 import { CopyableTextField, CopyableTextFieldProps } from './';
 
