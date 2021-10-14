@@ -1,7 +1,7 @@
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { Order, OrderComponentProps } from './';
-import { TestComponentWrapper } from 'lib/test/wrapper';
+import { TestComponentWrapper } from 'src/lib/test/wrapper';
 
 // tslint:disable:no-magic-numbers
 
