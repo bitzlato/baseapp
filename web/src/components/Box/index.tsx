@@ -14,6 +14,7 @@ type BoxOwnProps<E = React.ElementType> = {
   justifyEnd?: boolean;
   alignCenter?: boolean;
   selfStart?: boolean;
+  wrap?: boolean;
   spacing?: boolean | '2x' | '3x';
   padding?: '2x' | '3x';
 };
@@ -37,6 +38,7 @@ export const Box: Element = React.forwardRef(
       alignCenter,
       justifyEnd,
       selfStart,
+      wrap,
       ...props
     }: BoxOwnProps,
     ref,
@@ -50,6 +52,7 @@ export const Box: Element = React.forwardRef(
       alignCenter && s.alignCenter,
       justifyEnd && s.justifyEnd,
       selfStart && s.selfStart,
+      wrap && s.wrap,
       row && spacing === true && s.rowSpacing,
       row && spacing === '2x' && s.rowSpacing2X,
       row && spacing === '3x' && s.rowSpacing3X,

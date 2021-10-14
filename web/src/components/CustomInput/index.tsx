@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FormControl } from 'react-bootstrap';
+import cn from 'classnames';
 
 export interface CustomInputProps {
   type: string;
@@ -9,6 +10,7 @@ export interface CustomInputProps {
   inputValue: string | number;
   handleFocusInput?: () => void;
   placeholder: string;
+  className?: string;
   classNameLabel?: string;
   classNameInput?: string;
   autoFocus?: boolean;
@@ -51,7 +53,7 @@ class CustomInput extends React.Component<Props> {
 
     return (
       <React.Fragment>
-        <div className="custom-input">
+        <div className={cn('custom-input', this.props.className)}>
           <label className={classNameLabel}>
             {(labelVisible || inputValue) && (label || defaultLabel)}
           </label>
