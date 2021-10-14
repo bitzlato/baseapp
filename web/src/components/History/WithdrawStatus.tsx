@@ -4,8 +4,6 @@ import { Label } from '../Label';
 import { useT } from 'src/hooks/useT';
 import { BlockchainLink } from './ExternalLink';
 import { ConfirmingStatus } from './ConfirmingStatus';
-import { PendingStatus } from './PendingStatus';
-import { SucceedIcon } from 'src/assets/icons/SucceedIcon';
 
 interface Props {
   currency: string;
@@ -14,12 +12,16 @@ interface Props {
 
 export const WithdrawStatus: React.FC<Props> = ({ item, currency }) => {
   const t = useT();
+
   switch (item.state) {
     case 'prepared':
     case 'accepted':
     case 'processing':
     case 'transfering':
-      return <PendingStatus />;
+      return (
+        <Label warningColor>{t('page.body.history.withdraw.content.status.processing')}</Label>
+      );
+
     case 'confirming':
       return (
         <ConfirmingStatus
@@ -28,29 +30,31 @@ export const WithdrawStatus: React.FC<Props> = ({ item, currency }) => {
           confirmations={item.confirmations}
         />
       );
+
     case 'succeed':
       return (
         <BlockchainLink txid={item.blockchain_txid} currency={currency}>
-          <Label successColor>
-            <SucceedIcon />
-          </Label>
+          <Label successColor>{t('page.body.history.withdraw.content.status.succeed')}</Label>
         </BlockchainLink>
       );
+
     case 'skipped':
     case 'failed':
     case 'errored':
-      return item.public_message ? (
-        <Label failedColor>{item.public_message}</Label>
-      ) : (
-        <Label failedColor>{t(`page.body.history.withdraw.content.status.${item.state}`)}</Label>
+      return (
+        <Label failedColor>
+          {item.public_message || t(`page.body.history.withdraw.content.status.${item.state}`)}
+        </Label>
       );
+
     case 'under_review':
       return (
-        <Label failedColor>{t('page.body.history.withdraw.content.status.under_review')}</Label>
+        <Label warningColor>{t('page.body.history.withdraw.content.status.under_review')}</Label>
       );
+
     default:
       return (
-        <Label failedColor capitalize>
+        <Label secondaryColor capitalize>
           {item.state}
         </Label>
       );

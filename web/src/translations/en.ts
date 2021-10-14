@@ -379,7 +379,7 @@ export const en = {
   'page.body.history.withdraw.content.status.succeed': 'Succeed',
   'page.body.history.withdraw.content.status.failed': 'Failed',
   'page.body.history.withdraw.content.status.confirming': 'Confirming',
-  'page.body.history.withdraw.content.status.errored': 'Error',
+  'page.body.history.withdraw.content.status.errored': 'Errored',
   'page.body.history.withdraw.content.status.under_review': 'Under review',
 
   'page.body.history.trade': 'Trade History',

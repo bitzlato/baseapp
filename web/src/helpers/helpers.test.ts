@@ -35,28 +35,6 @@ describe('Helpers', () => {
     fixed: 0,
   };
 
-  const depositColors = {
-    accepted: 'var(--system-green)',
-    collected: 'var(--system-green)',
-    submitted: '',
-    canceled: 'var(--system-red)',
-    rejected: 'var(--system-red)',
-  };
-
-  const withdrawColors = {
-    prepared: '',
-    submitted: '',
-    canceled: 'var(--system-red)',
-    accepted: 'var(--system-green)',
-    suspected: '',
-    rejected: 'var(--system-red)',
-    processing: '',
-    succeed: 'var(--system-green)',
-    failed: 'var(--system-red)',
-    errored: 'var(--system-red)',
-    confirming: '',
-  };
-
   const tradesColors = {
     sell: {
       color: 'var(--asks)',
@@ -142,36 +120,13 @@ describe('Helpers', () => {
 
   // historyTableUtils.js
   it('Should render correct depositColorMapping, withdrawColorMapping and tradesColorMapping', () => {
-    expect(helpers.depositColorMapping).toEqual(depositColors);
-    expect(helpers.withdrawColorMapping).toEqual(withdrawColors);
     expect(helpers.tradesColorMapping).toEqual(tradesColors);
-  });
-
-  it('Should return correct deposit status color', () => {
-    expect(helpers.setDepositStatusColor('accepted')).toEqual('var(--system-green)');
-    expect(helpers.setDepositStatusColor('collected')).toEqual('var(--system-green)');
-    expect(helpers.setDepositStatusColor('submitted')).toEqual('');
-    expect(helpers.setDepositStatusColor('canceled')).toEqual('var(--system-red)');
-    expect(helpers.setDepositStatusColor('rejected')).toEqual('var(--system-red)');
   });
 
   it('Should return correct date', () => {
     expect(helpers.formatDate('33/33/3333')).toEqual('31/12/3333');
     expect(helpers.formatDate('99/12/3333')).toEqual('31/12/3333');
     expect(helpers.formatDate('11/33/3333')).toEqual('11/12/3333');
-  });
-
-  it('Should return correct withdraw status color', () => {
-    expect(helpers.setWithdrawStatusColor('prepared')).toEqual('');
-    expect(helpers.setWithdrawStatusColor('submitted')).toEqual('');
-    expect(helpers.setWithdrawStatusColor('canceled')).toEqual('var(--system-red)');
-    expect(helpers.setWithdrawStatusColor('accepted')).toEqual('var(--system-green)');
-    expect(helpers.setWithdrawStatusColor('suspected')).toEqual('');
-    expect(helpers.setWithdrawStatusColor('rejected')).toEqual('var(--system-red)');
-    expect(helpers.setWithdrawStatusColor('processing')).toEqual('');
-    expect(helpers.setWithdrawStatusColor('succeed')).toEqual('var(--system-green)');
-    expect(helpers.setWithdrawStatusColor('failed')).toEqual('var(--system-red)');
-    expect(helpers.setWithdrawStatusColor('confirming')).toEqual('');
   });
 
   it('Should return correct trade type', () => {

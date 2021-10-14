@@ -13,7 +13,6 @@ import {
   localeDate,
   setTradesType,
   setTransferStatusColor,
-  setWithdrawStatusColor,
   truncateMiddle,
 } from '../../helpers';
 import {
@@ -34,6 +33,7 @@ import {
   Wallet,
   WalletHistoryList,
 } from '../../modules';
+import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
 
 interface HistoryProps {
   type: string;
@@ -214,9 +214,7 @@ class HistoryComponent extends React.Component<Props> {
           <CurrencyTicker symbol={currency} />,
           wallet && Decimal.format(amount, wallet.fixed, ','),
           wallet && Decimal.format(fee, wallet.fixed, ','),
-          <span style={{ color: setWithdrawStatusColor(item.state) }} key={txid || rid}>
-            {state}
-          </span>,
+          <WithdrawStatus key="status" currency={currency} item={item} />,
         ];
       }
       case 'trades': {
