@@ -1,16 +1,15 @@
-import cn from 'classnames';
 import * as React from 'react';
+import { Box } from '../Box';
 
 export interface SummaryFieldProps {
-  className?: string;
   message: string;
 }
 
-export const SummaryField: React.FC<SummaryFieldProps> = ({ message, className, children }) => {
+export const SummaryField: React.FC<SummaryFieldProps> = ({ message, children }) => {
   return (
-    <div className={cn('cr-summary-field', className)}>
+    <Box row spacing className="cr-summary-field">
       <span className="cr-summary-field-message">{message}</span>
       <span className="cr-summary-field-content">{children}</span>
-    </div>
+    </Box>
   );
 };

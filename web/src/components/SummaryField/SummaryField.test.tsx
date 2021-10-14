@@ -24,12 +24,6 @@ describe('SummaryField', () => {
     expect(wrapper.hasClass('cr-summary-field')).toBeTruthy();
   });
 
-  it('should pass along supplied className', () => {
-    const className = 'some-class';
-    const wrapper = setup({ className });
-    expect(wrapper.hasClass(className)).toBeTruthy();
-  });
-
   it('should render correct message', () => {
     const wrapper = setup();
     const { children, className } = wrapper.find('span').first().props();

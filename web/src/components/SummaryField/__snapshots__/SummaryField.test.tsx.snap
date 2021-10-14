@@ -1,8 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SummaryField should render 1`] = `
-<div
+<ForwardRef
   className="cr-summary-field"
+  row={true}
+  spacing={true}
 >
   <span
     className="cr-summary-field-message"
@@ -16,5 +18,5 @@ exports[`SummaryField should render 1`] = `
       Content
     </div>
   </span>
-</div>
+</ForwardRef>
 `;

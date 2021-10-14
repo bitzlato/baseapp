@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Box } from 'src/components/Box';
@@ -7,6 +7,7 @@ import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
 import { Beneficiary, Currency } from '../../modules';
 import { WithdrawSummary } from './WithdrawSummary';
 import { BeneficiaryAddress } from './BeneficiaryAddress';
+import s from './Withdraw.postcss';
 
 export interface WithdrawProps {
   currency: string;
@@ -71,9 +72,8 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
   }
 
   public render() {
-    const { amount, beneficiary, total, withdrawAmountFocused, otpCode } = this.state;
+    const { amount, beneficiary, total, otpCode } = this.state;
     const {
-      className,
       currency,
       type,
       enableInvoice,
@@ -81,50 +81,46 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
       withdrawAmountLabel,
       withdrawButtonLabel,
       isMobileDevice,
-      fixed,
       ccyInfo,
     } = this.props;
 
-    const cx = classnames('cr-withdraw', className);
-    const lastDividerClassName = classnames('cr-withdraw__divider', {
-      'cr-withdraw__divider-one': twoFactorAuthRequired,
-      'cr-withdraw__divider-two': !twoFactorAuthRequired,
-    });
-
-    const withdrawAmountClass = classnames('cr-withdraw__group__amount', {
-      'cr-withdraw__group__amount--focused': withdrawAmountFocused,
-    });
+    const label2fa = this.props.withdraw2faLabel || '2FA code';
 
     return (
-      <div className={cx}>
-        <div className="cr-withdraw-column">
-          <div className="cr-withdraw__group__address">
-            <Beneficiaries
-              currency={currency}
-              type={type}
-              enableInvoice={enableInvoice}
-              onChangeValue={this.handleChangeBeneficiary}
-            />
-          </div>
-          <div className="cr-withdraw__divider cr-withdraw__divider-one" />
-          <BeneficiaryAddress beneficiary={beneficiary} />
-          <div className={withdrawAmountClass}>
+      <Box padding={isMobileDevice ? undefined : '3x'} col spacing="3x">
+        <Beneficiaries
+          currency={currency}
+          type={type}
+          enableInvoice={enableInvoice}
+          onChangeValue={this.handleChangeBeneficiary}
+        />
+        <BeneficiaryAddress beneficiary={beneficiary} />
+        <Box grow row spacing='2x'>
+          <CustomInput
+            type="number"
+            className={s.numberInput}
+            label={withdrawAmountLabel || 'Withdrawal Amount'}
+            defaultLabel="Withdrawal Amount"
+            inputValue={amount}
+            placeholder={withdrawAmountLabel || 'Amount'}
+            handleChangeInput={this.handleChangeInputAmount}
+          />
+          {twoFactorAuthRequired && (
             <CustomInput
               type="number"
-              label={withdrawAmountLabel || 'Withdrawal Amount'}
-              defaultLabel="Withdrawal Amount"
-              inputValue={amount}
-              placeholder={withdrawAmountLabel || 'Amount'}
-              classNameInput="cr-withdraw__input"
-              handleChangeInput={this.handleChangeInputAmount}
+              className={s.numberInput}
+              label={label2fa}
+              placeholder={label2fa}
+              defaultLabel="2FA code"
+              handleChangeInput={this.handleChangeInputOtpCode}
+              inputValue={otpCode}
+              handleFocusInput={() => this.handleFieldFocus('code')}
+              autoFocus={false}
             />
-          </div>
-          <div className={lastDividerClassName} />
-          {!isMobileDevice && twoFactorAuthRequired && this.renderOtpCodeInput()}
-        </div>
-        <Box className="cr-withdraw-column" row spacing="2x">
+          )}
+        </Box>
+        <Box grow row spacing="2x" wrap>
           <WithdrawSummary total={total} currency={ccyInfo} />
-          {isMobileDevice && twoFactorAuthRequired && this.renderOtpCodeInput()}
           <Box selfStart>
             <Button
               variant="primary"
@@ -136,7 +132,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
             </Button>
           </Box>
         </Box>
-      </div>
+      </Box>
     );
   }
 
@@ -148,34 +144,6 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
     const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
 
     return Number(total) <= 0 || !Boolean(beneficiary.id) || isPending || !Boolean(otpCode);
-  };
-
-  private renderOtpCodeInput = () => {
-    const { otpCode, withdrawCodeFocused } = this.state;
-    const { withdraw2faLabel } = this.props;
-    const withdrawCodeClass = classnames('cr-withdraw__group__code', {
-      'cr-withdraw__group__code--focused': withdrawCodeFocused,
-    });
-
-    return (
-      <React.Fragment>
-        <div className={withdrawCodeClass}>
-          <CustomInput
-            type="number"
-            label={withdraw2faLabel || '2FA code'}
-            placeholder={withdraw2faLabel || '2FA code'}
-            defaultLabel="2FA code"
-            handleChangeInput={this.handleChangeInputOtpCode}
-            inputValue={otpCode}
-            handleFocusInput={() => this.handleFieldFocus('code')}
-            classNameLabel="cr-withdraw__label"
-            classNameInput="cr-withdraw__input"
-            autoFocus={false}
-          />
-        </div>
-        <div className="cr-withdraw__divider cr-withdraw__divider-two" />
-      </React.Fragment>
-    );
   };
 
   private handleClick = () =>
