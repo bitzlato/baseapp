@@ -1,10 +1,4 @@
 {
-  "ts-node": {
-    "transpileOnly": true,
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  },
   "compilerOptions": {
     "module": "amd",
     "target": "es6",
@@ -15,10 +9,6 @@
     "baseUrl": ".",
     "strict": true,
     "noEmit": true,
-    "paths": {
-      "lib/*": ["src/lib/*"],
-      "src/*": ["src/*"]
-    },
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true

@@ -1,11 +1,9 @@
-const alias = require('./webpack/alias');
-
 module.exports = {
   setupFilesAfterEnv: ['jest-enzyme', '<rootDir>/jest/setup.tsx'],
   testEnvironment: 'enzyme',
   verbose: true,
+  moduleDirectories: ['node_modules', '<rootDir>'],
   moduleNameMapper: {
-    ...alias.jest,
     '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
     '\\.(postcss)$': 'identity-obj-proxy',
     '^react-scroll-to-component$': 'identity-obj-proxy',
