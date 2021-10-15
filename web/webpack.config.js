@@ -8,6 +8,7 @@ const LodashWebpackPlugin = require('lodash-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
+const { BugsnagSourceMapUploaderPlugin } = require('webpack-bugsnag-plugins');
 
 const BUILD_DIR = path.resolve(__dirname, './build');
 const HASH = Math.round(Date.now() / 1000).toString();
