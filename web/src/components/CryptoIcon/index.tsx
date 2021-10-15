@@ -9,16 +9,16 @@ export interface CryptoIconProps {
 
 const findIcon = (code: string): string => {
   try {
-    return require(`cryptocurrency-icons/svg/color/${code.toLowerCase()}.svg`).default as string;
+    return require(`cryptocurrency-icons/svg/color/${code}.svg`);
   } catch (err) {
-    return require('cryptocurrency-icons/svg/color/generic.svg').default as string;
+    return require('cryptocurrency-icons/svg/color/generic.svg');
   }
 };
 
 export const CryptoIcon: React.FunctionComponent<CryptoIconProps> = (props) => {
   const { code, className = '', children } = props;
 
-  const icon = findIcon(code);
+  const icon = findIcon(code.toLowerCase());
 
   return (
     <span className={cx('cr-crypto-icon', className)}>
