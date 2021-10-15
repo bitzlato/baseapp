@@ -1,4 +1,4 @@
-import { CommonState, OrderSide, OrderStatus, OrderType } from '../../types';
+import { CommonState, OrderSide, OrderStatusType, OrderType } from '../../types';
 import { MarketId } from '../markets';
 
 export interface OrderBookOrder {
@@ -7,7 +7,7 @@ export interface OrderBookOrder {
   ord_type: OrderType;
   price: string;
   avg_price: string;
-  state: OrderStatus;
+  state: OrderStatusType;
   market: string;
   created_at: string;
   volume: string;

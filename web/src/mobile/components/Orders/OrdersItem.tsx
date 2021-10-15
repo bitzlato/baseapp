@@ -7,6 +7,9 @@ import { localeDate, setTradeColor } from '../../../helpers';
 import { selectMarkets } from '../../../modules';
 import { FIXED_VOL_PRECISION } from 'src/constants';
 import { OrderCommon } from 'src/modules/types';
+import { MarketName } from 'src/components/MarketName/MarketName';
+import { Label } from 'src/components/Label/Label';
+import { Box } from 'src/components/Box';
 
 interface Props {
   order: OrderCommon;
@@ -44,14 +47,16 @@ const OrdersItemComponent: React.FC<Props> = (props) => {
   return (
     <div key={order.id} className="pg-mobile-orders-item">
       <div className="pg-mobile-orders-item__row">
-        <div className="pg-mobile-orders-item__row__block">
+        <Box row spacing>
           <span style={{ color: setTradeColor(order.side).color }}>{orderType}</span>
-          <span>{marketName}</span>
-        </div>
-        <div className="pg-mobile-orders-item__row__block">
+          <Label primaryColor>
+            <MarketName name={marketName} />
+          </Label>
+        </Box>
+        <Box row spacing>
           <span>{orderDate}</span>
-          <span>{orderTime}</span>
-        </div>
+          <Label primaryColor>{orderTime}</Label>
+        </Box>
       </div>
       <div className="pg-mobile-orders-item__row">
         <div className="pg-mobile-orders-item__row__block">
@@ -105,10 +110,7 @@ const OrdersItemComponent: React.FC<Props> = (props) => {
         </div>
         <div className="pg-mobile-orders-item__row__button__wrapper">
           {order.state === 'wait' ? (
-            <div
-              className="pg-mobile-orders-item__row__button"
-              onClick={props.handleCancel(order)}
-            >
+            <div className="pg-mobile-orders-item__row__button" onClick={props.handleCancel(order)}>
               <span>{intl.formatMessage({ id: 'page.mobile.orders.header.cancel' })}</span>
               <CloseIcon />
             </div>
