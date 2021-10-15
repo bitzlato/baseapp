@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { Spinner } from 'react-bootstrap';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { compose } from 'redux';
+import { Box } from 'src/components/Box';
+import { Label } from 'src/components/Label';
+import { MarketName } from 'src/components/MarketName/MarketName';
 import { IntlProps } from '../../';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { History, Pagination } from '../../components';
@@ -25,6 +28,7 @@ import {
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
 import { getTriggerSign } from '../OpenOrders/helpers';
+import { OrderStatus } from './OrderStatus';
 
 interface OrdersProps {
   type: string;
@@ -156,22 +160,18 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
 
     const orderType = this.getType(ord_type);
     const orderSide = this.getSide(side);
-    const marketName = currentMarket ? currentMarket.name : market;
     const date = updated_at || created_at;
-    const status = this.setOrderStatus(item);
     const actualPrice = this.getPrice(item) || '0';
     const total = +actualPrice * +origin_volume;
     const executedVolume = Number(origin_volume) - Number(remaining_volume);
     const filled = ((executedVolume / Number(origin_volume)) * 100).toFixed(2);
 
     return [
-      <span key={id} className="split-lines f-small">
-        <span className="secondary">{localeDate(date, 'date')}</span>&nbsp;
-        <span>{localeDate(date, 'time')}</span>
-      </span>,
-      <span key={id} className="bold">
-        {marketName}
-      </span>,
+      <Box col spacing>
+        <Label secondaryColor>{localeDate(date, 'date')}</Label>
+        <Label>{localeDate(date, 'time')}</Label>
+      </Box>,
+      <MarketName name={currentMarket.name} />,
       <span style={{ color: setTradeColor(side).color }} key={id}>
         {orderSide}
       </span>,
@@ -196,7 +196,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
       <Decimal key={id} fixed={currentMarket.amount_precision} thousSep=",">
         {total}
       </Decimal>,
-      <span key={id} className="split-lines f-small justify-content-end">
+      <span key={id} className="split-lines justify-content-end">
         {trigger_price ? (
           <React.Fragment>
             <span>
@@ -211,16 +211,14 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
           '-'
         )}
       </span>,
-      <span style={{ color: setTradeColor(side).color }} className="f-small" key={id}>
+      <span style={{ color: setTradeColor(side).color }} key={id}>
         <Decimal fixed={2} thousSep=",">
           {+filled}
         </Decimal>
         %
       </span>,
-      <span key={id} className="f-small">
-        {status}
-      </span>,
-      state === 'wait' && <CloseIcon key={id} onClick={this.handleCancel(id)} />,
+      <OrderStatus value={item.state} />,
+      state === 'wait' && <Box row><CloseIcon key={id} onClick={this.handleCancel(id)} /></Box>,
     ];
   };
 
@@ -247,31 +245,6 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
       return item.avg_price;
     } else {
       return item.price;
-    }
-  };
-
-  private setOrderStatus = (item: OrderCommon) => {
-    switch (item.state) {
-      case 'done':
-        return (
-          <span className="pg-history-elem-executed">
-            <FormattedMessage id={`page.body.openOrders.content.status.done`} />
-          </span>
-        );
-      case 'cancel':
-        return (
-          <span className="pg-history-elem-canceled">
-            <FormattedMessage id={`page.body.openOrders.content.status.${item.state}`} />
-          </span>
-        );
-      case 'wait':
-        return (
-          <span className="pg-history-elem-opened">
-            <FormattedMessage id={`page.body.openOrders.content.status.${item.state}`} />
-          </span>
-        );
-      default:
-        return item.state;
     }
   };
 

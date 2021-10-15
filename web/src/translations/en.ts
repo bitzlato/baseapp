@@ -334,9 +334,7 @@ export const en = {
   'page.body.openOrders.content.status.done': 'Executed',
   'page.body.openOrders.content.status.wait': 'Open',
   'page.body.openOrders.content.status.cancel': 'Stopped',
-  'page.body.openOrders.content.status.trigger_wait': 'Open Trigger',
-  'page.body.openOrders.content.status.trigger_cancel': 'Canceled Trigger',
-  'page.body.openOrders.content.status.execution_reject': 'Rejected Trigger',
+  'page.body.openOrders.content.status.reject': 'Rejected',
   'page.body.openOrders.header.button.cancelAll': 'Cancel all',
   'page.body.openOrders.header.button.refresh': 'Refresh',
 

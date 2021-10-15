@@ -12,7 +12,7 @@ export interface CommonState {
   loading?: boolean;
 }
 
-export type OrderStatus = 'wait' | 'done' | 'cancel' | 'pending' | 'reject';
+export type OrderStatusType = 'wait' | 'done' | 'cancel' | 'pending' | 'reject';
 export type OrderSide = 'sell' | 'buy';
 export type OrderType =
   | 'limit'
@@ -25,7 +25,7 @@ export type OrderKind = 'bid' | 'ask';
 
 export interface OrderCommon {
   price: string;
-  state: OrderStatus;
+  state: OrderStatusType;
   remaining_volume: string;
   origin_volume: string;
   executed_volume?: string;

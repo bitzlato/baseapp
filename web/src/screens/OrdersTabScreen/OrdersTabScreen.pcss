@@ -113,19 +113,15 @@
             td {
               background-color: var(--table-background-color);
               color: var(--table-text-color);
-              font-size: 14px !important;
+              font-size: 12px;
               font-weight: 400;
               margin-bottom: calc(var(--gap) * 1.66) !important;
               margin-top: calc(var(--gap) * 1.66) !important;
-              padding: 15px 12px !important;
+              padding: var(--gap) !important;
               text-align: right;
 
               &:first-child {
                 padding-left: 24px !important;
-              }
-
-              &:last-child {
-                padding-right: !important;
               }
 
               &:first-child,
@@ -133,18 +129,6 @@
               &:nth-child(3),
               &:nth-child(4) {
                 text-align: left;
-              }
-
-              &:last-child {
-                align-items: center;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-end;
-                width: 80%;
-
-                &::first-letter {
-                  text-transform: uppercase;
-                }
               }
 
               svg {

@@ -343,9 +343,7 @@ export const ru: LangType = {
   'page.body.openOrders.content.status.done': 'Выполнен',
   'page.body.openOrders.content.status.wait': 'Открыт',
   'page.body.openOrders.content.status.cancel': 'Отменен',
-  'page.body.openOrders.content.status.trigger_wait': 'Триггер Открыт',
-  'page.body.openOrders.content.status.trigger_cancel': 'Триггер Отменен',
-  'page.body.openOrders.content.status.execution_reject': 'Триггер Отклонен',
+  'page.body.openOrders.content.status.reject': 'Отклонен',
   'page.body.openOrders.header.button.cancelAll': 'Отменить все',
   'page.body.openOrders.header.button.refresh': 'Обновить',
 
