@@ -46,7 +46,7 @@ class LegalDocuments extends React.Component<LegalDocumentsProps, State> {
     );
   }
 
-  private onCurrentTabChange = (index) => this.setState({ currentTabIndex: index });
+  private onCurrentTabChange = (index: number) => this.setState({ currentTabIndex: index });
 
   private renderModalBody = () => {
     return (

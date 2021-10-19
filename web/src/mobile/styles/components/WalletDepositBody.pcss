@@ -1,6 +1,7 @@
 /* stylelint-disable */
 .cr-mobile-wallet-deposit-body {
   position: relative;
+  background: var(--body-background-color);
 
   .cr-wallet-item__single {
     display: none;
@@ -8,30 +9,12 @@
   .cr-deposit-crypto {
     background: var(--body-background-color);
     display: flex;
-    padding: 0 14px 30px 14px;
     .cr-deposit-info {
       font-size: 14px;
       text-align: left;
     }
-    .cr-copyable-text-field {
-      border: none;
-    }
     .qr-code {
       margin: 0 0 0 20px;
-    }
-    .input-group {
-      display: flex;
-      .custom-input {
-        width: auto;
-        flex: 1;
-        label {
-          left: 0;
-          padding-left: 0;
-        }
-        input {
-          padding-left: 0;
-        }
-      }
     }
     & > div {
       &:first-child {

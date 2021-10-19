@@ -119,7 +119,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
             />
           )}
         </Box>
-        <Box grow row spacing="2x" wrap>
+        <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2x">
           <WithdrawSummary total={total} currency={ccyInfo} />
           <Box selfStart>
             <Button

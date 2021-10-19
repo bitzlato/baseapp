@@ -323,7 +323,7 @@ export const ru: LangType = {
   'page.body.wallets.deposits.addDepositModal.header': 'Укажите сумму пополнения',
   'page.body.wallets.deposits.addDepositModal.body.button': 'Отправить',
   'page.body.wallets.deposits.addDepositModal.body.invalidAmount': 'Недопустимое значение',
-  'page.body.wallets.deposits.addDepositModal.amount': 'Сумма',
+  'page.body.wallets.deposits.addDepositModal.amount': 'Сумма пополнения',
 
   'page.body.openOrders.tab.all': 'Все',
   'page.body.openOrders.tab.open': 'Открытые',

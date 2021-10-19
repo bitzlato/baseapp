@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { Box } from 'src/components/Box';
 import { formatCCYAddress } from 'src/helpers';
 import { selectMemberLevels, Wallet } from 'src/modules';
 import { defaultCurrency } from 'src/modules/public/currencies/defaults';
@@ -53,7 +54,7 @@ const WalletDepositBodyComponent: React.FC<Props> = (props) => {
       );
     }
 
-    if (user.level < memberLevels?.deposit.minimum_level) {
+    if (user.level < (memberLevels?.deposit.minimum_level ?? 0)) {
       return (
         <Blur
           className={blurClassName}
@@ -86,15 +87,17 @@ const WalletDepositBodyComponent: React.FC<Props> = (props) => {
         <React.Fragment>
           <CurrencyInfo wallet={wallet} />
           {renderDepositBlur}
-          <DepositCrypto
-            copiableTextFieldText={`${wallet.currency.toUpperCase()} ${label}`}
-            error={error}
-            handleGenerateAddress={props.handleGenerateAddress}
-            handleOnCopy={handleOnCopy}
-            wallet={wallet}
-            currency={currencyItem || defaultCurrency}
-            disabled={!walletAddress}
-          />
+          <Box padding="2x">
+            <DepositCrypto
+              copiableTextFieldText={`${wallet.currency.toUpperCase()} ${label}`}
+              error={error}
+              handleGenerateAddress={props.handleGenerateAddress}
+              handleOnCopy={handleOnCopy}
+              wallet={wallet}
+              currency={currencyItem || defaultCurrency}
+              disabled={!walletAddress}
+            />
+          </Box>
         </React.Fragment>
       );
     } else {

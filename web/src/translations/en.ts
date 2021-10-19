@@ -314,7 +314,7 @@ export const en = {
   'page.body.wallets.deposits.addDepositModal.header': 'Select amount to deposit',
   'page.body.wallets.deposits.addDepositModal.body.button': 'Submit',
   'page.body.wallets.deposits.addDepositModal.body.invalidAmount': 'Invalid amount',
-  'page.body.wallets.deposits.addDepositModal.amount': 'Amount',
+  'page.body.wallets.deposits.addDepositModal.amount': 'Deposit Amount',
 
   'page.body.openOrders.tab.all': 'All',
   'page.body.openOrders.tab.open': 'Open',

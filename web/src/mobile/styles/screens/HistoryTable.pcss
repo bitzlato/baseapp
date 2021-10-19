@@ -2,16 +2,13 @@
 .cr-mobile-history-table {
   background: var(--body-background-color);
 
-  &__row {
-    font-size: 14px;
-  }
-
   .pg-history-elem__pagination p {
     margin-bottom: 0;
   }
 
   .cr-table__body {
     tr {
+      font-size: 14px;
       border-bottom: 1px solid var(--divider-color-level-1) !important;
       margin: 0 17px !important;
       display: flex;
@@ -22,8 +19,8 @@
         border-bottom: none !important;
       }
     }
-    td {
-      padding: 12px 0 !important;
+    td:last-child {
+      text-align: right;
     }
   }
 }
