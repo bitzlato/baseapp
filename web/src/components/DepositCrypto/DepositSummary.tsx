@@ -9,15 +9,16 @@ import { Label } from '../Label';
 
 interface Props {
   currency: Currency;
+  showWarning?: boolean;
 }
 
-export const DepositSummary: React.FC<Props> = ({ currency }) => {
+export const DepositSummary: React.FC<Props> = ({ currency, showWarning }) => {
   const t = useT();
 
   const moneyCcy = ccy(currency.id, currency.precision);
 
   return (
-    <Box col spacing>
+    <Box grow col spacing>
       <SummaryField message={t('page.body.wallets.tabs.deposit.ccy.message.fee')}>
         {Number(currency.deposit_fee) == 0 ? (
           t('page.body.wallets.tabs.deposit.ccy.message.fee.free')
@@ -28,12 +29,14 @@ export const DepositSummary: React.FC<Props> = ({ currency }) => {
       <SummaryField message={t('page.body.wallets.tabs.deposit.ccy.message.minimum')}>
         <MoneyFormat money={money(currency.min_deposit_amount, moneyCcy)} />
       </SummaryField>
-      <Box row spacing alignStart>
-        <Box selfStart>
-          <WarningIcon />
+      {showWarning && (
+        <Box row spacing alignStart>
+          <Box selfStart>
+            <WarningIcon />
+          </Box>
+          <Label warningColor>{t('page.body.wallets.tabs.deposit.ccy.message.warning')}</Label>
         </Box>
-        <Label warningColor>{t('page.body.wallets.tabs.deposit.ccy.message.warning')}</Label>
-      </Box>
+      )}
       {process.env.REACT_APP_RELEASE_STAGE === 'sandbox' && (
         <span>
           <span>You can top up your balance by address </span>

@@ -6,6 +6,7 @@ import { connect, MapDispatchToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { Box } from 'src/components/Box';
 import { defaultCurrency } from 'src/modules/public/currencies/defaults';
 import { IntlProps } from '../../';
 import {
@@ -435,16 +436,18 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         <React.Fragment>
           <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
           {this.getBlurDeposit(isAccountActivated)}
-          <DepositCrypto
-            copiableTextFieldText={this.translate(
-              'page.body.wallets.tabs.deposit.ccy.message.address',
-            )}
-            error={error}
-            handleGenerateAddress={this.handleGenerateAddress}
-            handleOnCopy={this.handleOnCopy}
-            wallet={wallet}
-            currency={currencyItem ?? defaultCurrency}
-          />
+          <Box padding="3x" style={{ paddingBottom: 0}}>
+            <DepositCrypto
+              copiableTextFieldText={this.translate(
+                'page.body.wallets.tabs.deposit.ccy.message.address',
+              )}
+              error={error}
+              handleGenerateAddress={this.handleGenerateAddress}
+              handleOnCopy={this.handleOnCopy}
+              wallet={wallet}
+              currency={currencyItem ?? defaultCurrency}
+            />
+          </Box>
           {wallet.currency && (
             <WalletHistory label="deposit" type="deposits" currency={wallet.currency} />
           )}

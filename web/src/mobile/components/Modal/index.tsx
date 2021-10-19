@@ -3,7 +3,16 @@ import * as React from 'react';
 import { CloseIcon } from '../../../assets/images/CloseIcon';
 import { ArrowIcon } from '../../../containers/ToolBar/icons/ArrowIcon';
 
-const ModalComponent = (props) => {
+interface Props {
+  isOpen: boolean;
+  onClose?: () => void;
+  header?: React.ReactNode;
+  title?: React.ReactNode;
+  backTitle?: string;
+  onBack?: () => void;
+}
+
+export const Modal: React.FC<Props> = (props) => {
   const [shouldAnimate, setShouldAnimate] = React.useState(false);
 
   React.useEffect(() => {
@@ -16,7 +25,7 @@ const ModalComponent = (props) => {
     return () => setShouldAnimate(false);
   }, [props.isOpen]);
 
-  const handleOnClose = (event, strictTarget?: boolean) => {
+  const handleOnClose = (event: React.MouseEvent, strictTarget?: boolean) => {
     if (event) {
       event.preventDefault();
 
@@ -36,7 +45,7 @@ const ModalComponent = (props) => {
     setShouldAnimate(false);
 
     setTimeout(() => {
-      props.onBack();
+      props.onBack?.();
     }, 200);
   };
 
@@ -73,5 +82,3 @@ const ModalComponent = (props) => {
     </div>
   );
 };
-
-export const Modal = React.memo(ModalComponent);

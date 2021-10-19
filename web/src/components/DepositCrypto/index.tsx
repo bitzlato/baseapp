@@ -1,16 +1,17 @@
 import cn from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { formatCCYAddress } from '../../helpers';
-import { Currency, depositsCreateClear, selectMobileDeviceState, Wallet } from '../../modules';
-import { Box, boxStyle } from '../Box';
-import { CopyableTextField } from '../CopyableTextField';
+import { Currency, selectMobileDeviceState, Wallet } from '../../modules';
+import { Box } from '../Box';
+import { CopyableTextField } from 'src/components/CopyableTextField';
 import { MetaMaskButton } from '../MetaMaskButton';
 import { QRCode } from '../QRCode';
-import { DepositModal } from './DepositModal';
+import { DepositInvoice } from './DepositInvoice';
 import { DepositSummary } from './DepositSummary';
+import s from 'src/containers/Withdraw/BeneficiaryAddress.postcss';
 
 export interface DepositCryptoProps {
   /**
@@ -58,62 +59,24 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
     currency,
   } = props;
   const isMobileDevice = useSelector(selectMobileDeviceState);
-  const size = dimensions || QR_SIZE;
-  const disabled = !wallet.deposit_address?.address;
-  const onCopy = !disabled ? handleOnCopy : undefined;
-  const className = cn('cr-deposit-crypto', disabled && 'cr-copyable-text-field__disabled');
-
-  const dispatch = useDispatch();
-  const [isOpenDepositModal, setOpenDepositModal] = React.useState(false);
   const t = useT();
-
-  const handleOpenDepositModal = () => {
-    dispatch(depositsCreateClear());
-    setOpenDepositModal(!isOpenDepositModal);
-  };
 
   if (!wallet.deposit_address) {
     if (wallet.enable_invoice) {
-      return (
-        <div className="pg-beneficiaries">
-          {isOpenDepositModal && (
-            <DepositModal currency={currency} handleCloseModal={handleOpenDepositModal} />
-          )}
-          <div className="cr-deposit-crypto__create">
-            <div className="cr-deposit-crypto__create-btn">
-              <Button
-                block={true}
-                type="button"
-                onClick={handleOpenDepositModal}
-                size="lg"
-                variant="primary"
-              >
-                {t('page.body.wallets.tabs.deposit.ccy.button.create')}
-              </Button>
-            </div>
-          </div>
-        </div>
-      );
+      return <DepositInvoice currency={currency} />;
     } else {
-      const buttonLabel = t('page.body.wallets.tabs.deposit.ccy.button.generate', {
-        currency: wallet.name,
-      });
       return (
-        <Box col spacing="3x" className={className}>
-          <div className="cr-deposit-crypto__create">
-            <div className="cr-deposit-crypto__create-btn">
-              <Button
-                block={true}
-                type="button"
-                onClick={handleGenerateAddress}
-                size="lg"
-                variant="primary"
-              >
-                {buttonLabel}
-              </Button>
-            </div>
-          </div>
-        </Box>
+        <Button
+          block={true}
+          type="button"
+          onClick={handleGenerateAddress}
+          size="lg"
+          variant="primary"
+        >
+          {t('page.body.wallets.tabs.deposit.ccy.button.generate', {
+            currency: wallet.name,
+          })}
+        </Button>
       );
     }
   }
@@ -127,8 +90,12 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
     confirmations: currency.min_confirmations,
   });
 
+  const size = dimensions || QR_SIZE;
+  const disabled = !wallet.deposit_address?.address;
+  const onCopy = !disabled ? handleOnCopy : undefined;
+
   return (
-    <Box col spacing="3x" className={className}>
+    <Box col spacing="3x" className="cr-deposit-crypto">
       <Box row>
         <div className="cr-deposit-info">{text}</div>
         {walletAddress && (
@@ -141,19 +108,16 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
         {wallet.currency === 'eth' && !isMobileDevice && walletAddress && (
           <MetaMaskButton depositAddress={walletAddress} />
         )}
-        <form className="cr-deposit-crypto__copyable">
-          <fieldset className="cr-copyable-text-field" onClick={onCopy}>
-            <CopyableTextField
-              className="cr-deposit-crypto__copyable-area"
-              value={walletAddress || error}
-              fieldId={walletAddress ? 'copy_deposit_1' : 'copy_deposit_2'}
-              disabled={disabled}
-              label={copiableTextFieldText ? copiableTextFieldText : 'Deposit by Wallet Address'}
-            />
-          </fieldset>
-        </form>
+        <CopyableTextField
+          className={s.field}
+          value={walletAddress || error}
+          fieldId={walletAddress ? 'copy_deposit_1' : 'copy_deposit_2'}
+          disabled={disabled}
+          label={copiableTextFieldText ?? 'Deposit by Wallet Address'}
+          onCopy={onCopy}
+        />
       </Box>
-      <DepositSummary currency={currency} />
+      <DepositSummary currency={currency} showWarning />
     </Box>
   );
 };

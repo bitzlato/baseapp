@@ -77,15 +77,10 @@ const HistoryTable = (props: Props) => {
         ];
       });
   };
-  const mapRows = (row) => {
-    return <div className="cr-mobile-history-table__row">{row}</div>;
-  };
-
-  const tableData = retrieveData().map((row) => row.map(mapRows));
 
   return (
     <div className="cr-mobile-history-table">
-      <Table data={tableData} />
+      <Table data={retrieveData()} />
       <Pagination
         firstElemIndex={firstElemIndex}
         lastElemIndex={lastElemIndex}
