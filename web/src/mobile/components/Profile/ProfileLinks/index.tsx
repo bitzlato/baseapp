@@ -3,21 +3,31 @@ import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import { ChevronIcon } from '../../../assets/images/ChevronIcon';
 
-const ProfileLinksComponent = (props) => {
+export interface ProfileLink {
+  titleKey: string;
+  route: string;
+  children?: React.ReactNode;
+  state?: {};
+}
+interface Props {
+  links: ProfileLink[];
+}
+
+const ProfileLinksComponent: React.FC<Props> = (props) => {
   const intl = useIntl();
   const history = useHistory();
   const links = props.links || [];
 
-  const handleRedirect = (location) => {
-    if (history.location.pathname !== location.route) {
+  const handleRedirect = (link: ProfileLink) => {
+    if (history.location.pathname !== link.route) {
       history.push({
-        pathname: location.route,
-        state: location.state,
+        pathname: link.route,
+        state: link.state,
       });
     }
   };
 
-  const renderLinkChildren = (link) => {
+  const renderLinkChildren = (link: ProfileLink) => {
     if (link.children) {
       return <div className="pg-mobile-profile-links__item__right">{link.children}</div>;
     }
@@ -29,7 +39,7 @@ const ProfileLinksComponent = (props) => {
     );
   };
 
-  const renderLinksItem = (link, index) => {
+  const renderLinksItem = (link: ProfileLink, index: number) => {
     return (
       <div
         key={index}

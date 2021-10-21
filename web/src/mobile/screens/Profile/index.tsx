@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from 'src/api';
+import { Button } from 'src/components/Button/Button';
+import { useT } from 'src/hooks/useT';
 import { ChevronIcon } from '../../../assets/images/ChevronIcon';
 import { copy, getLanguageName } from '../../../helpers';
 import {
@@ -10,10 +12,10 @@ import {
   selectCurrentLanguage,
   selectUserInfo,
 } from '../../../modules';
-import { ProfileLinks, UserInfo } from '../../components';
+import { ProfileLink, ProfileLinks, UserInfo } from '../../components';
 
 const ProfileMobileScreenComponent: React.FC = () => {
-  const intl = useIntl();
+  const t = useT();
   const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
   const currentLanguage = useSelector(selectCurrentLanguage);
@@ -33,10 +35,7 @@ const ProfileMobileScreenComponent: React.FC = () => {
       children: (
         <div>
           <span className="color-accent">
-            {intl.formatMessage(
-              { id: 'page.mobile.profileLinks.link.verification' },
-              { level: user.level },
-            )}
+            {t('page.mobile.profileLinks.link.verification', { level: user.level })}
           </span>
           <ChevronIcon />
         </div>
@@ -51,13 +50,9 @@ const ProfileMobileScreenComponent: React.FC = () => {
       children: (
         <div>
           {user.otp ? (
-            <span className="color-green">
-              {intl.formatMessage({ id: 'page.mobile.profileLinks.link.2fa.enabled' })}
-            </span>
+            <span className="color-green">{t('page.mobile.profileLinks.link.2fa.enabled')}</span>
           ) : (
-            <span className="color-red">
-              {intl.formatMessage({ id: 'page.mobile.profileLinks.link.2fa.disabled' })}
-            </span>
+            <span className="color-red">{t('page.mobile.profileLinks.link.2fa.disabled')}</span>
           )}
           <ChevronIcon />
         </div>
@@ -71,7 +66,7 @@ const ProfileMobileScreenComponent: React.FC = () => {
       : null,
     { titleKey: 'page.mobile.profileLinks.main.activity', route: '/profile/account-activity' },
     { titleKey: 'page.mobile.profileLinks.main.apiKeys', route: '/profile/api-keys' },
-  ].filter(Boolean);
+  ].filter(Boolean) as ProfileLink[];
 
   const settingsLinks = [
     {
@@ -101,15 +96,18 @@ const ProfileMobileScreenComponent: React.FC = () => {
       titleKey: 'page.mobile.profileLinks.additional.referral',
       route: '/profile',
       children: (
-        <div className="referral-link" onClick={handleCopyText}>
+        <>
           <input
             type="text"
             id="referral-link"
             value={`${window.document.location.origin}/signup?refid=${user.uid}`}
-            readOnly={true}
+            readOnly
+            style={{ position: 'fixed', left: -9999 }}
           />
-          <span>{intl.formatMessage({ id: 'page.mobile.profileLinks.link.referral' })}</span>
-        </div>
+          <Button variant="primary" revertLightPrimary onClick={handleCopyText}>
+            {t('page.mobile.profileLinks.link.referral')}
+          </Button>
+        </>
       ),
     },
   ];
