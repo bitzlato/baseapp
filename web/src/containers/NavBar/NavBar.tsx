@@ -32,7 +32,7 @@ export const NavBar: FC<Props> = ({ responsiveMode = false }) => {
           </div>
           <div className={cn(s.item, responsiveMode && s.canBeHidden)}>
             {/* signup ID is needed for GA event */}
-            <Button id="signup" color="secondary" component={Link} to="/signup">
+            <Button id="signup" variant="secondary" component={Link} to="/signup">
               {t('page.header.signUp')}
             </Button>
           </div>

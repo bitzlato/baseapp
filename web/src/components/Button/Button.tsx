@@ -6,18 +6,20 @@ import s from './Button.postcss';
 type JSXElement = keyof JSX.IntrinsicElements | JSXElementConstructor<any>;
 type Props<C extends JSXElement, P = ComponentProps<C>> = P & {
   children: ReactNode;
-  color?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'primary-outline' | 'secondary-outline';
   component?: C;
-  size?: 'small' | 'medium' | 'large';
+  size?: 'small' | 'large';
   fullWidth?: boolean;
+  revertLightPrimary?: boolean;
 };
 
 export const Button = <T extends JSXElement = 'button'>({
   children,
-  color = 'primary',
+  variant = 'primary',
   component = 'button',
-  size = 'medium',
+  size,
   fullWidth = false,
+  revertLightPrimary,
   ...props
 }: Props<T>): ReturnType<FC<Props<T>>> => {
   const Component = component;
@@ -28,10 +30,12 @@ export const Button = <T extends JSXElement = 'button'>({
     <Component
       className={cn({
         [s.btn]: true,
-        [s.btnPrimary]: color === 'primary',
-        [s.btnSecondary]: color === 'secondary',
+        [s.btnPrimary]: variant === 'primary',
+        [s.btnSecondary]: variant === 'secondary',
+        [s.btnPrimaryOutline]: variant === 'primary-outline',
+        [s.btnSecondaryOutline]: variant === 'secondary-outline',
+        [s.btnRevertLightPrimary]: revertLightPrimary,
         [s.btnSmall]: size === 'small',
-        [s.btnMedium]: size === 'medium',
         [s.btnLarge]: size === 'large',
         [s.btnDisabled]: disabled,
       })}

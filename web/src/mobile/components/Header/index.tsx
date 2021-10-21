@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
-import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Box } from 'src/components/Box';
+import { Button } from 'src/components/Button/Button';
+import { useT } from 'src/hooks/useT';
 import { ProfileIcon } from '../../../assets/images/sidebar/ProfileIcon';
 import { Logo } from '../../../components';
 import { selectUserLoggedIn } from '../../../modules';
@@ -11,7 +12,8 @@ const noHeaderRoutes = ['/setup'];
 
 const HeaderComponent: React.FC = () => {
   const userLoggedIn = useSelector(selectUserLoggedIn);
-  const intl = useIntl();
+  const t = useT();
+
   const shouldRenderHeader = !noHeaderRoutes.some((r) => location.pathname.includes(r));
 
   if (!shouldRenderHeader) {
@@ -23,26 +25,22 @@ const HeaderComponent: React.FC = () => {
       <Link to="/" className="pg-mobile-header__logo">
         <Logo />
       </Link>
-      <div className="pg-mobile-header__account">
+      <Box row spacing>
         {userLoggedIn ? (
-          <Link to="/profile" className="pg-mobile-header__account__profile">
-            <ProfileIcon className="pg-mobile-header__account__profile__icon" />
+          <Link to="/profile">
+            <ProfileIcon className="pg-mobile-header__profile__icon" />
           </Link>
         ) : (
           <>
-            <Link to="/signin" className="pg-mobile-header__account__log-in">
-              <Button type="button" size="lg" variant="primary">
-                {intl.formatMessage({ id: 'page.header.navbar.signIn' })}
-              </Button>
-            </Link>
-            <Link id="signup" to="/signup" className="pg-mobile-header__account__log-in">
-              <Button type="button" size="lg" variant="primary">
-                {intl.formatMessage({ id: 'page.header.signUp' })}
-              </Button>
-            </Link>
+            <Button component={Link} to="/signin" variant="primary-outline" revertLightPrimary>
+              {t('page.header.navbar.signIn')}
+            </Button>
+            <Button component={Link} to="/signup" variant="primary" revertLightPrimary>
+              {t('page.header.signUp')}
+            </Button>
           </>
         )}
-      </div>
+      </Box>
     </div>
   );
 };

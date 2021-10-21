@@ -33,11 +33,22 @@
 }
 
 .btn {
-  border: 0;
+  align-items: center;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
+  display: flex;
+  font-size: 16px;
   font-weight: bold;
-  text-align: center;
+  height: 36px;
+  justify-content: center;
+  padding: 6px 16px;
+
+  @media (--breakpoint-down-md) {
+    height: 32px;
+  }
 
   &:hover {
     text-decoration: none;
@@ -47,18 +58,14 @@
   &.btnSmall {
     border-radius: 4px;
     font-size: 14px;
+    height: 29px;
     padding: 4px 10px;
-  }
-
-  &.btnMedium {
-    border-radius: 4px;
-    font-size: 16px;
-    padding: 6px 16px;
   }
 
   &.btnLarge {
     border-radius: 8px;
     font-size: 18px;
+    height: 51px;
     padding: 12px 32px;
   }
 
@@ -109,8 +116,70 @@
     color: var(--btnbase-secondary-color-disabled);
   }
 
+  &.btnPrimaryOutline {
+    background-color: inherit;
+    border: 1px solid var(--btnbase-primary-bg);
+    color: var(--btnbase-primary-bg);
+
+    &:hover,
+    &:focus {
+      border-color: var(--btnbase-primary-bg-hover);
+      color: var(--btnbase-primary-bg-hover);
+    }
+
+    &:focus-visible {
+      box-shadow: var(--btnbase-primary-box-shadow-focus);
+    }
+
+    &:active {
+      border-color: var(--btnbase-primary-bg-active);
+      color: var(--btnbase-primary-bg-active);
+    }
+
+    &.btnDisabled {
+      border-color: var(--btnbase-primary-bg-disabled);
+      color: var(--btnbase-primary-color-disabled);
+    }
+  }
+
+  &.btnSecondaryOutline {
+    background-color: inherit;
+    border: 1px solid var(--btnbase-secondary-bg);
+    color: var(--btnbase-secondary-bg);
+
+    &:hover,
+    &:focus {
+      border-color: var(--btnbase-secondary-bg-hover);
+      color: var(--btnbase-secondary-bg-hover);
+    }
+
+    &:focus-visible {
+      box-shadow: var(--btnbase-secondary-box-shadow-focus);
+    }
+
+    &:active {
+      border-color: var(--btnbase-secondary-bg-active);
+      color: var(--btnbase-secondary-bg-active);
+    }
+
+    &.btnDisabled {
+      border-color: var(--btnbase-secondary-bg-disabled);
+      color: var(--btnbase-secondary-color-disabled);
+    }
+  }
+
   /* states */
   &.btnDisabled {
     cursor: initial;
   }
+}
+
+:global(.light-mode) .btnRevertLightPrimary {
+  --btnbase-primary-bg: var(--btnbase-secondary-bg);
+  --btnbase-primary-bg-hover: var(--btnbase-secondary-bg-hover);
+  --btnbase-primary-bg-active: var(--btnbase-secondary-bg-active);
+  --btnbase-primary-bg-disabled: var(--btnbase-secondary-bg-disabled);
+  --btnbase-primary-color: var(--btnbase-secondary-color);
+  --btnbase-primary-color-disabled: var(--btnbase-secondary-color-disabled);
+  --btnbase-primary-box-shadow-focus: var(--btnbase-secondary-box-shadow-focus);
 }

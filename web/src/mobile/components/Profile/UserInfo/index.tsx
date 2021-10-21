@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'src/components/Button/Button';
+import { useT } from 'src/hooks/useT';
 import { logoutFetch, selectUserInfo } from '../../../../modules';
 
-const UserInfoComponent = (props) => {
-  const intl = useIntl();
+const UserInfoComponent = () => {
+  const t = useT();
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
 
@@ -16,13 +17,11 @@ const UserInfoComponent = (props) => {
     <div className="pg-mobile-user-info">
       <div className="pg-mobile-user-info__details">
         <span>{user.email}</span>
-        <span>
-          {intl.formatMessage({ id: 'page.mobile.userInfo.details.uid' }, { uid: user.uid })}
-        </span>
+        <span>{t('page.mobile.userInfo.details.uid', { uid: user.uid })}</span>
       </div>
-      <div className="pg-mobile-user-info__logout-button" onClick={handleLogoutUser}>
-        {intl.formatMessage({ id: 'page.mobile.userInfo.logout.button' })}
-      </div>
+      <Button variant="primary-outline" revertLightPrimary onClick={handleLogoutUser}>
+        {t('page.mobile.userInfo.logout.button')}
+      </Button>
     </div>
   );
 };
