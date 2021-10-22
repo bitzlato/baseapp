@@ -13,13 +13,13 @@ import { rangerMiddleware, sagaMiddleware, store } from './store';
 
 import '@openware/react-components/build/index.css';
 
-if (!Intl.PluralRules) {
+if (!Intl?.PluralRules) {
   require('@formatjs/intl-pluralrules/polyfill');
   require('@formatjs/intl-pluralrules/locale-data/en');
   require('@formatjs/intl-pluralrules/locale-data/ru');
 }
 // @ts-ignore
-if (!Intl.RelativeTimeFormat) {
+if (!Intl?.RelativeTimeFormat) {
   require('@formatjs/intl-relativetimeformat/polyfill');
   require('@formatjs/intl-relativetimeformat/locale-data/en');
   require('@formatjs/intl-relativetimeformat/locale-data/ru');

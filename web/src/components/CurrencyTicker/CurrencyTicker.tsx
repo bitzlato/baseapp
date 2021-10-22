@@ -7,10 +7,10 @@ import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selec
 import s from './CurrencyTicker.postcss';
 
 type Props = {
-  symbol: string;
+  symbol: string | undefined;
 };
 
-export const CurrencyTicker: FC<Props> = ({ symbol }: Props) => {
+export const CurrencyTicker: FC<Props> = ({ symbol = '' }: Props) => {
   const isMobile = useSelector(selectMobileDeviceState);
   const [currency, protocol] = symbol.split('-');
   const content = (
