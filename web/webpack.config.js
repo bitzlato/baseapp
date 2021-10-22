@@ -126,9 +126,21 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: 'swc-loader',
           options: {
-            cacheDirectory: true,
+            env: {
+              mode: 'entry',
+              coreJs: 3,
+            },
+            jsc: {
+              target: 'es2015',
+              parser: {
+                syntax: 'typescript',
+                tsx: true,
+                decorators: false,
+                dynamicImport: true,
+              },
+            },
           },
         },
       },

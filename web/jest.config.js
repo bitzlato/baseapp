@@ -17,7 +17,7 @@ module.exports = {
   // ---------------------------------------------------------------------------
   roots: ['<rootDir>'],
   transform: {
-    '^.+\\.(jsx?|tsx?)$': '@swc-node/jest',
+    '^.+\\.(jsx?|tsx?)$': '@swc/jest',
     '^.+\\.svg$': '<rootDir>/jest/svg-transform.js',
   },
   testRegex: '.src/.*.(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx|jsx|ts|js)?$',
