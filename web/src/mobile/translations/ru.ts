@@ -56,8 +56,8 @@ export const ru = {
 
   'page.mobile.wallets.deposit.history': 'История депозита',
   'page.mobile.wallets.withdraw.history': 'История вывода',
-  'page.mobile.wallets.banner.total': 'Всего',
   'page.mobile.wallets.banner.available': 'Доступно',
+  'page.mobile.wallets.banner.locked': 'Заблокировано',
 
   'page.mobile.copy.text': 'Скопировать адресс',
   'page.mobile.wallet.deposit.generate': 'Сгенерировать адресс депозита',

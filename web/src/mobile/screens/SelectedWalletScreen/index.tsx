@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
+import { defaultWallet } from 'src/modules/user/wallets/defaults';
 import { useWalletsFetch } from '../../../hooks';
 import { selectWallets } from '../../../modules/user/wallets';
 import { Subheader, WalletBanner, WalletHeader, WalletsButtons } from '../../components';
@@ -13,11 +14,7 @@ const SelectedWalletMobileScreen = () => {
   const history = useHistory();
   const wallets = useSelector(selectWallets) || [];
 
-  const wallet = wallets.find((item) => item.currency === currency) || {
-    name: '',
-    currency: '',
-    icon_id: '',
-  };
+  const wallet = wallets.find((item) => item.currency === currency) || defaultWallet;
 
   useWalletsFetch();
 
