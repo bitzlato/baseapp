@@ -3,19 +3,10 @@ import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { useMemberLevelFetch } from 'src/hooks/useMemberLevelsFetch';
+import { defaultWallet } from 'src/modules/user/wallets/defaults';
 import { useWalletsFetch } from '../../../hooks';
 import { selectWallets } from '../../../modules/user/wallets';
 import { Subheader, WalletBanner, WalletHeader, WalletWithdrawBody } from '../../components';
-
-const defaultWallet = {
-  name: '',
-  currency: '',
-  balance: '',
-  type: '',
-  address: '',
-  fee: '',
-  icon_id: '',
-};
 
 const WalletWithdraw: React.FC = () => {
   const { currency = '' } = useParams();

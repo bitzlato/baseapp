@@ -13,10 +13,11 @@ type BoxOwnProps<E = React.ElementType> = {
   grow?: boolean;
   justifyEnd?: boolean;
   justifyBetween?: boolean;
+  justifyCenter?: boolean;
   alignCenter?: boolean;
   selfStart?: boolean;
   wrap?: boolean;
-  spacing?: boolean | '2x' | '3x';
+  spacing?: boolean | '2x' | '3x' | '4x' | 'sm';
   padding?: '2x' | '3x';
 };
 
@@ -39,6 +40,7 @@ export const Box: Element = React.forwardRef(
       alignCenter,
       justifyEnd,
       justifyBetween,
+      justifyCenter,
       selfStart,
       wrap,
       ...props
@@ -54,14 +56,19 @@ export const Box: Element = React.forwardRef(
       alignCenter && s.alignCenter,
       justifyEnd && s.justifyEnd,
       justifyBetween && s.justifyBetween,
+      justifyCenter && s.justifyCenter,
       selfStart && s.selfStart,
       wrap && s.wrap,
       row && spacing === true && s.rowSpacing,
       row && spacing === '2x' && s.rowSpacing2X,
       row && spacing === '3x' && s.rowSpacing3X,
+      row && spacing === '4x' && s.rowSpacing4X,
+      row && spacing === 'sm' && s.rowSpacingSm,
       col && spacing === true && s.colSpacing,
       col && spacing === '2x' && s.colSpacing2X,
       col && spacing === '3x' && s.colSpacing3X,
+      col && spacing === '4x' && s.colSpacing4X,
+      col && spacing === 'sm' && s.colSpacingSm,
       padding === '2x' && s.padding2X,
       padding === '3x' && s.padding3X
     );

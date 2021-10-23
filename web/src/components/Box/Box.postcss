@@ -1,3 +1,9 @@
+.rowSpacingSm {
+  & > *:not(:first-child) {
+    margin-left: calc(var(--gap) / 2);
+  }
+}
+
 .rowSpacing {
   & > *:not(:first-child) {
     margin-left: var(--gap);
@@ -16,6 +22,18 @@
   }
 }
 
+.rowSpacing4X {
+  & > *:not(:first-child) {
+    margin-left: calc(var(--gap) * 4);
+  }
+}
+
+.colSpacingSm {
+  & > *:not(:first-child) {
+    margin-top: calc(var(--gap) / 2);
+  }
+}
+
 .colSpacing {
   & > *:not(:first-child) {
     margin-top: var(--gap);
@@ -31,6 +49,12 @@
 .colSpacing3X {
   & > *:not(:first-child) {
     margin-top: calc(var(--gap) * 3);
+  }
+}
+
+.colSpacing4X {
+  & > *:not(:first-child) {
+    margin-top: calc(var(--gap) * 4);
   }
 }
 
@@ -54,6 +78,10 @@
 
 .justifyBetween {
   justify-content: space-between;
+}
+
+.justifyCenter {
+  justify-content: center;
 }
 
 .alignCenter {
