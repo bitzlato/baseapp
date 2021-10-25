@@ -1,4 +1,5 @@
 // eslint-disable
+import { Money } from '@trzmaxim/money';
 import { Decimal } from '../components/Decimal';
 import { DEFAULT_CCY_PRECISION } from '../constants';
 import { Currency, Market, Ticker, Wallet } from '../modules';
@@ -30,7 +31,16 @@ const findMarketTicker = (marketPair: string, marketTickers: MarketTicker) => {
 };
 
 const getWalletTotal = (wallet: Wallet): number => {
-  return (Number(wallet.balance) || 0) + (Number(wallet.locked) || 0);
+  let amount = Money.fromDecimal(0, wallet.currency);
+  if (wallet.balance) {
+    amount = amount.add(wallet.balance);
+  }
+
+  if (wallet.locked) {
+    amount = amount.add(wallet.locked);
+  }
+
+  return Number(amount.toString());
 };
 
 export const estimateWithMarket = (
@@ -148,11 +158,9 @@ export const estimateValue = (
 
   if (wallets && wallets.length) {
     for (const wallet of wallets) {
-      const formattedWalletCurrency = wallet.currency.toLowerCase();
-
+      const formattedWalletCurrency = wallet.currency.code.toLowerCase();
       if (formattedWalletCurrency === formattedTargetCurrency) {
-        const walletTotal = (Number(wallet.balance) || 0) + (Number(wallet.locked) || 0);
-        estimatedValue += walletTotal;
+        estimatedValue += getWalletTotal(wallet);
       } else if (isMarketPresent(formattedTargetCurrency, formattedWalletCurrency, markets)) {
         estimatedValue += estimateWithMarket(
           formattedTargetCurrency,
@@ -165,7 +173,7 @@ export const estimateValue = (
       } else {
         estimatedValue += estimateWithoutMarket(
           formattedTargetCurrency,
-          wallet.currency,
+          wallet.currency.code,
           getWalletTotal(wallet),
           currencies,
           markets,

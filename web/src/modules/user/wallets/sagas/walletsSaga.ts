@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { Account, Currency, sendError, Wallet } from '../../../';
+import { Account, Currency, sendError, WalletSource } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import { walletsData, walletsError, WalletsFetch } from '../actions';
 
@@ -16,7 +16,7 @@ export function* walletsSaga(action: WalletsFetch) {
     const accounts: Account[] = yield call(API.get(walletsOptions), '/account/balances');
     const currencies: Currency[] = yield call(API.get(currenciesOptions), '/public/currencies');
 
-    const accountsByCurrencies = currencies.map<Wallet>((currency) => {
+    const accountsByCurrencies = currencies.map<WalletSource>((currency) => {
       let walletInfo = accounts.find((wallet) => wallet.currency === currency.id);
 
       if (!walletInfo) {

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { v4 } from 'uuid';
 import { Spinner } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { TRIGGER_BUY_PRICE_MULT, TRIGGER_BUY_PRICE_ADJUSTED_TYPES } from '../../constants';
 import {
   formatWithSeparators,
@@ -96,7 +96,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       width: 0,
     };
 
-    this.orderRef = React.createRef();
+    this.orderRef = React.createRef<HTMLDivElement>();
   }
 
   private orderRef;
@@ -126,7 +126,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.walletsFetch();
     }
 
-    if (+next.currentPrice && next.currentPrice !== this.state.priceLimit) {
+    if (next.currentPrice && next.currentPrice !== this.state.priceLimit) {
       this.setState({
         priceLimit: +next.currentPrice,
         trigger: +next.currentPrice,
@@ -187,8 +187,8 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
           onSubmit={this.handleSubmit}
           priceMarketBuy={Number((currentTicker || defaultCurrentTicker).last)}
           priceMarketSell={Number((currentTicker || defaultCurrentTicker).last)}
-          priceLimit={priceLimit}
-          trigger={trigger}
+          priceLimit={priceLimit ?? undefined}
+          trigger={trigger ?? undefined}
           to={currentMarket.base_unit}
           handleSendType={this.getOrderType}
           currentMarketAskPrecision={currentMarket.amount_precision}
@@ -364,9 +364,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
   };
 
   private getWallet(currency: string, wallets: Wallet[]) {
-    const currencyLower = currency.toLowerCase();
-
-    return wallets.find((w) => w.currency === currencyLower) as Wallet;
+    return wallets.find((w) => w.currency.code.toLowerCase() === currency.toLowerCase()) as Wallet;
   }
 
   private getOrderType = (index: number, label: string) => {
@@ -412,7 +410,7 @@ const mapStateToProps = (state: RootState) => ({
   user: selectUserInfo(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = (dispatch) => ({
   walletsFetch: () => dispatch(walletsFetch()),
   memberLevelsFetch: () => dispatch(memberLevelsFetch()),
   orderExecute: (payload) => dispatch(orderExecuteFetch(payload)),

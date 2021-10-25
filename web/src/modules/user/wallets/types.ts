@@ -1,19 +1,30 @@
-export interface Wallet {
+import { Currency, Money } from '@trzmaxim/money';
+
+export interface WalletSource {
   currency: string;
+  balance?: string;
+  locked?: string;
+  active?: boolean;
+  enable_invoice?: boolean;
+  deposit_address?: WalletAddress;
+  // from Currency
   name: string;
   type: 'fiat' | 'coin';
   fee: number;
   fixed: number;
-  balance?: string;
-  locked?: string;
   iconUrl?: string;
   explorerTransaction?: string;
   explorerAddress?: string;
-  deposit_address?: WalletAddress;
-  active?: boolean;
-  enable_invoice?: boolean;
   icon_id: string;
 }
+
+export interface Wallet extends Omit<WalletSource, 'currency' | 'balance' | 'locked' | 'fee'> {
+  currency: Currency;
+  balance?: Money;
+  locked?: Money;
+  fee: Money;
+}
+
 export interface WalletAddress {
   address: string;
   currencies: string[];

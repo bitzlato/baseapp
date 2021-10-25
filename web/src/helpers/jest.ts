@@ -62,7 +62,7 @@ export const loggerMiddleware: Middleware = (store: {}) => (next: any) => (actio
 export const setupMockStore = (appMiddleware: Middleware, log = false) => {
   const middlewares = log ? [loggerMiddleware, appMiddleware] : [appMiddleware];
 
-  return configureMockStore(middlewares);
+  return configureMockStore<{}>(middlewares);
 };
 
 export const setupMockAxios = () => {

@@ -8,7 +8,7 @@ import { Table } from 'src/components';
 import { currenciesFetch } from 'src/modules/public/currencies/actions';
 import { selectCurrencies } from 'src/modules/public/currencies/selectors';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
-import { ccy, money, MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { Box } from 'src/components/Box';
 
 export const Fees: React.FC = () => {
@@ -34,7 +34,6 @@ export const Fees: React.FC = () => {
 
   const data = currencies.map((d) => {
     const [token, network] = d.id.toUpperCase().split('-');
-    const mccy = ccy(d.id, d.precision);
     return [
       <Box row spacing>
         <CryptoCurrencyIcon currency={d.id} icon={d.icon_url} iconId={d.icon_id} size="small" />
@@ -42,19 +41,19 @@ export const Fees: React.FC = () => {
       </Box>,
       d.name,
       network || token,
-      Number(d.deposit_fee) == 0 ? (
+      d.deposit_fee.isZero() ? (
         t('page.body.wallets.tabs.deposit.ccy.message.fee.free')
       ) : (
-        <MoneyFormat money={money(d.deposit_fee, mccy)} />
+        <MoneyFormat money={d.deposit_fee} />
       ),
-      <MoneyFormat money={money(d.min_deposit_amount, mccy)} />,
-      <MoneyFormat money={money(d.withdraw_fee, mccy)} />,
-      <MoneyFormat money={money(d.min_withdraw_amount, mccy)} />,
+      <MoneyFormat money={d.min_deposit_amount} />,
+      <MoneyFormat money={d.withdraw_fee} />,
+      <MoneyFormat money={d.min_withdraw_amount} />,
     ];
   });
 
   return (
-    <Box padding='2x' className='container'>
+    <Box padding="2x" className="container">
       <div className={s.card}>
         <div className={cn('cr-table-header__content', s.feesHeader)}>
           <h3>{t('page.body.landing.footer.fees')}</h3>

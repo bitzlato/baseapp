@@ -14,7 +14,7 @@ import {
   WALLETS_WITHDRAW_CCY_ERROR,
   WALLETS_WITHDRAW_CCY_FETCH,
 } from './constants';
-import { Wallet, WalletAddress, WalletWithdrawCCY } from './types';
+import { WalletSource, WalletAddress, WalletWithdrawCCY } from './types';
 
 export interface WalletsFetch {
   type: typeof WALLETS_FETCH;
@@ -22,14 +22,14 @@ export interface WalletsFetch {
 
 export interface WalletsData {
   type: typeof WALLETS_DATA;
-  payload: Wallet[];
+  payload: WalletSource[];
 }
 
 export interface WalletsDataByRanger {
   type: typeof WALLETS_DATA_WS;
   payload: {
     ws: boolean;
-    balances;
+    balances: any;
   };
 }
 

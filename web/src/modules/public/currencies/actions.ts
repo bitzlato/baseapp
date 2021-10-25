@@ -1,6 +1,6 @@
 import { CommonError } from '../../types';
 import { CURRENCIES_DATA, CURRENCIES_ERROR, CURRENCIES_FETCH } from './constants';
-import { Currency } from './types';
+import { CurrencySource } from './types';
 
 export interface CurrenciesFetch {
   type: typeof CURRENCIES_FETCH;
@@ -8,7 +8,7 @@ export interface CurrenciesFetch {
 
 export interface CurrenciesData {
   type: typeof CURRENCIES_DATA;
-  payload: Currency[];
+  payload: CurrencySource[];
 }
 
 export interface CurrenciesError {

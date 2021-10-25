@@ -2,19 +2,16 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
-import { defaultWallet } from 'src/modules/user/wallets/defaults';
-import { useWalletsFetch } from '../../../hooks';
-import { selectWallets } from '../../../modules/user/wallets';
-import { Subheader, WalletBanner, WalletHeader, WalletsButtons } from '../../components';
-import { WalletsHistory } from '../WalletsHistory';
+import { useWalletsFetch } from 'src/hooks';
+import { selectWallet } from 'src/modules/user/wallets';
+import { Subheader, WalletBanner, WalletHeader, WalletsButtons } from 'src/mobile/components';
+import { WalletsHistory } from 'src/mobile/screens/WalletsHistory';
 
 const SelectedWalletMobileScreen = () => {
-  const { currency } = useParams();
+  const { currency } = useParams<{ currency?: string }>();
   const intl = useIntl();
   const history = useHistory();
-  const wallets = useSelector(selectWallets) || [];
-
-  const wallet = wallets.find((item) => item.currency === currency) || defaultWallet;
+  const wallet = useSelector(selectWallet(currency));
 
   useWalletsFetch();
 
@@ -25,10 +22,18 @@ const SelectedWalletMobileScreen = () => {
         backTitle={intl.formatMessage({ id: 'page.mobile.wallets.title' })}
         onGoBack={() => history.push('/wallets')}
       />
-      <WalletHeader currency={wallet.currency} iconId={wallet.icon_id} name={wallet.name} />
-      <WalletBanner wallet={wallet} />
-      <WalletsHistory />
-      <WalletsButtons currency={wallet.currency} />
+      {wallet && (
+        <>
+          <WalletHeader
+            currency={wallet.currency.code}
+            iconId={wallet.icon_id}
+            name={wallet.name}
+          />
+          <WalletBanner wallet={wallet} />
+          <WalletsHistory />
+          <WalletsButtons currency={wallet.currency} />
+        </>
+      )}
     </React.Fragment>
   );
 };

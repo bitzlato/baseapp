@@ -1,10 +1,10 @@
 import { CommonError } from '../../types';
 import * as actions from './actions';
 import { currenciesReducer, CurrenciesState, initialCurrenciesState } from './reducer';
-import { Currency } from './types';
+import { CurrencySource } from './types';
 
 describe('Currencies reducer', () => {
-  const fakeCurrencies: Currency[] = [
+  const fakeCurrencies: CurrencySource[] = [
     {
       id: 'bch',
       name: 'Bitcoin Cash',
@@ -21,6 +21,7 @@ describe('Currencies reducer', () => {
       withdraw_limit_72h: '0.2',
       deposit_enabled: true,
       withdrawal_enabled: true,
+      withdrawal_disabled_reason: '',
       base_factor: 100000000,
       precision: 8,
       icon_url: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg',
@@ -43,6 +44,7 @@ describe('Currencies reducer', () => {
       withdraw_limit_72h: '0.2',
       deposit_enabled: true,
       withdrawal_enabled: true,
+      withdrawal_disabled_reason: '',
       base_factor: 100000000,
       precision: 8,
       icon_url: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg',

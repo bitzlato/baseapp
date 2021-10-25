@@ -15,11 +15,11 @@ import {
   WALLETS_WITHDRAW_CCY_ERROR,
   WALLETS_WITHDRAW_CCY_FETCH,
 } from './constants';
-import { Wallet, WalletAddress } from './types';
+import { WalletSource, WalletAddress } from './types';
 
 export interface WalletsState {
   wallets: {
-    list: Wallet[];
+    list: WalletSource[];
     loading: boolean;
     withdrawSuccess: boolean;
     error?: CommonError;
@@ -37,7 +37,7 @@ export const initialWalletsState: WalletsState = {
   },
 };
 
-const getUpdatedWalletsList = (list: Wallet[], payload: WalletAddress) => {
+const getUpdatedWalletsList = (list: WalletSource[], payload: WalletAddress) => {
   if (list.length && payload.currencies?.length) {
     return list.map((wallet) => {
       if (payload.currencies.includes(wallet.currency)) {

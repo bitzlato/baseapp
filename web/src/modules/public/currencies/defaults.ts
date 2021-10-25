@@ -1,4 +1,11 @@
+import { Currency as MoneyCurrency, Money } from '@trzmaxim/money';
+
 import { Currency } from './types';
+
+const moneyCurrency: MoneyCurrency = {
+  code: '',
+  minorUnit: 8,
+};
 
 export const defaultCurrency: Currency = {
   id: '',
@@ -7,13 +14,13 @@ export const defaultCurrency: Currency = {
   explorer_transaction: '',
   explorer_address: '',
   type: 'coin',
-  deposit_fee: '0.0',
+  deposit_fee: Money.fromDecimal(0, moneyCurrency),
   min_confirmations: 6,
-  min_deposit_amount: '0.0',
-  withdraw_fee: '0.0',
-  min_withdraw_amount: '0.0',
-  withdraw_limit_24h: '0.0',
-  withdraw_limit_72h: '0.0',
+  min_deposit_amount: Money.fromDecimal(0, moneyCurrency),
+  withdraw_fee: Money.fromDecimal(0, moneyCurrency),
+  min_withdraw_amount: Money.fromDecimal(0, moneyCurrency),
+  withdraw_limit_24h: Money.fromDecimal(0, moneyCurrency),
+  withdraw_limit_72h: Money.fromDecimal(0, moneyCurrency),
   deposit_enabled: true,
   withdrawal_enabled: true,
   withdrawal_disabled_reason: '',
@@ -21,4 +28,5 @@ export const defaultCurrency: Currency = {
   precision: 8,
   icon_url: '',
   icon_id: '',
+  ...moneyCurrency,
 };

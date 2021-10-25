@@ -1,18 +1,27 @@
+import { Currency, Money } from '@trzmaxim/money';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { WalletList, WalletListProps } from '../../components';
 import { Wallet } from '../../modules';
 
 const onWalletSelectionChange = jest.fn();
+const BTC: Currency = {
+  code: 'BTC',
+  minorUnit: 8,
+};
+const USD: Currency = {
+  code: 'USD',
+  minorUnit: 2,
+};
 const walletItems: Wallet[] = [
   {
     active: false,
-    locked: '1',
-    fee: 0.123,
-    currency: 'BTC',
+    locked: Money.fromDecimal('1', BTC),
+    fee: Money.fromDecimal(0.123, BTC),
+    currency: BTC,
     icon_id: 'BTC',
     name: 'Bitcoin',
-    balance: '456',
+    balance: Money.fromDecimal('456', BTC),
     type: 'fiat',
     fixed: 8,
     explorerTransaction: 'https://testnet.blockchain.info/tx/#{txid}',
@@ -20,23 +29,23 @@ const walletItems: Wallet[] = [
   },
   {
     active: false,
-    fee: 0.123,
-    locked: '100',
-    currency: 'USD',
+    fee: Money.fromDecimal(0.123, USD),
+    locked: Money.fromDecimal('100', USD),
+    currency: USD,
     icon_id: 'USD',
     name: 'United states Dollar',
-    balance: '456',
+    balance: Money.fromDecimal('456', USD),
     type: 'coin',
     fixed: 8,
   },
   {
     active: false,
-    fee: 0.3,
-    locked: '0.4',
-    currency: 'BTC',
+    fee: Money.fromDecimal(0.3, BTC),
+    locked: Money.fromDecimal('0.4', BTC),
+    currency: BTC,
     icon_id: 'BTC',
     name: 'Bitcoin - 2',
-    balance: '2',
+    balance: Money.fromDecimal('2', BTC),
     type: 'fiat',
     fixed: 8,
   },

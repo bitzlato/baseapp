@@ -9,15 +9,11 @@ import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { IntlProps } from '../../';
 import { Decimal, History, Pagination } from '../../components';
-import {
-  localeDate,
-  setTradesType,
-  setTransferStatusColor,
-  truncateMiddle,
-} from '../../helpers';
+import { localeDate, setTradesType, setTransferStatusColor, truncateMiddle } from '../../helpers';
 import {
   currenciesFetch,
   Currency,
+  Deposit,
   fetchHistory,
   Market,
   RootState,
@@ -31,7 +27,9 @@ import {
   selectNextPageExists,
   selectWallets,
   Wallet,
+  WalletHistoryElement,
   WalletHistoryList,
+  Withdraw,
 } from '../../modules';
 import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
 
@@ -172,13 +170,15 @@ class HistoryComponent extends React.Component<Props> {
     return [...list].map((item) => this.renderTableRow(type, item));
   };
 
-  private renderTableRow = (type, item) => {
-    const { currencies, intl, marketsData, wallets } = this.props;
+  private renderTableRow = (type: string, item: WalletHistoryElement) => {
+    const { intl, marketsData, wallets } = this.props;
     switch (type) {
       case 'deposits': {
-        const { amount, created_at, currency, txid } = item;
-        const blockchainLink = getBlockchainLink(wallets, currency, txid);
-        const wallet = wallets.find((obj) => obj.currency === currency);
+        const { amount, created_at, currency, txid } = item as Deposit;
+        const wallet = wallets.find(
+          (obj) => obj.currency.code.toLowerCase() === currency.toLowerCase(),
+        );
+        const blockchainLink = getBlockchainLink(wallet, txid);
 
         return [
           <div className="pg-history-elem__hide" key={txid}>
@@ -193,16 +193,15 @@ class HistoryComponent extends React.Component<Props> {
           localeDate(created_at, 'fullDate'),
           <CurrencyTicker symbol={currency} />,
           wallet && Decimal.format(amount, wallet.fixed, ','),
-          <DepositStatus item={item} currency={currency} />,
+          <DepositStatus item={item as Deposit} currency={currency} />,
         ];
       }
       case 'withdraws': {
-        const { txid, created_at, currency, amount, fee, rid } = item;
-        const state = intl.formatMessage({
-          id: `page.body.history.withdraw.content.status.${item.state}`,
-        });
-        const blockchainLink = getBlockchainLink(wallets, currency, txid, rid);
-        const wallet = wallets.find((obj) => obj.currency === currency);
+        const { txid, created_at, currency, amount, fee, rid } = item as Withdraw;
+        const wallet = wallets.find(
+          (obj) => obj.currency.code.toLowerCase() === currency.toLowerCase(),
+        );
+        const blockchainLink = getBlockchainLink(wallet, txid, rid);
 
         return [
           <div className="pg-history-elem__hide" key={txid || rid}>
@@ -214,7 +213,7 @@ class HistoryComponent extends React.Component<Props> {
           <CurrencyTicker symbol={currency} />,
           wallet && Decimal.format(amount, wallet.fixed, ','),
           wallet && Decimal.format(fee, wallet.fixed, ','),
-          <WithdrawStatus key="status" currency={currency} item={item} />,
+          <WithdrawStatus key="status" currency={currency} item={item as Withdraw} />,
         ];
       }
       case 'trades': {

@@ -5,7 +5,7 @@ import { rootSaga, sendError } from '../../..';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
 import { CommonError } from '../../../types';
 import { currenciesData, currenciesError, currenciesFetch } from '../actions';
-import { Currency } from '../types';
+import { CurrencySource } from '../types';
 
 describe('Saga: currenciesFetchSaga', () => {
   let store: MockStoreEnhanced;
@@ -23,7 +23,7 @@ describe('Saga: currenciesFetchSaga', () => {
     mockAxios.reset();
   });
 
-  const fakeCurrencies: Currency[] = [
+  const fakeCurrencies: CurrencySource[] = [
     {
       id: 'bch',
       name: 'Bitcoin Cash',
@@ -40,6 +40,7 @@ describe('Saga: currenciesFetchSaga', () => {
       withdraw_limit_72h: '0.2',
       deposit_enabled: true,
       withdrawal_enabled: true,
+      withdrawal_disabled_reason: '',
       base_factor: 100000000,
       precision: 8,
       icon_url: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg',
@@ -62,6 +63,7 @@ describe('Saga: currenciesFetchSaga', () => {
       withdraw_limit_72h: '0.2',
       deposit_enabled: true,
       withdrawal_enabled: true,
+      withdrawal_disabled_reason: '',
       base_factor: 100000000,
       precision: 8,
       icon_url: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg',

@@ -14,6 +14,7 @@ import { CustomInput } from '../CustomInput';
 import { DepositSummary } from './DepositSummary';
 import s from 'src/containers/Withdraw/Withdraw.postcss';
 import { useHistory } from 'react-router';
+import { Money } from '@trzmaxim/money';
 
 interface Props {
   currency: Currency;
@@ -46,7 +47,7 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
 
   const handleChangeAmount = (value: string) => {
     setAmount(value);
-    setAmountValid(parseFloat(value) > parseFloat(currency.min_deposit_amount));
+    setAmountValid(Money.fromDecimal(value, currency).gt(currency.min_deposit_amount));
   };
 
   const isDisabled = !amount || !amountValid || isDepositCreateLoading || isDepositCreateSuccess;
