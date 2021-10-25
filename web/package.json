@@ -25,6 +25,7 @@
     "@formatjs/intl-pluralrules": "^3.2.5",
     "@formatjs/intl-relativetimeformat": "^7.0.0",
     "@openware/react-components": "^0.0.5",
+    "@trzmaxim/money": "^0.0.2",
     "@web3-react/core": "^6.1.1",
     "@web3-react/injected-connector": "^6.0.7",
     "axios": "^0.21.1",
