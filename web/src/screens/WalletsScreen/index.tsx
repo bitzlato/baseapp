@@ -1,3 +1,4 @@
+import { Money } from '@trzmaxim/money';
 import classnames from 'classnames';
 import * as React from 'react';
 import { Button, Spinner } from 'react-bootstrap';
@@ -91,11 +92,14 @@ const defaultBeneficiary: Beneficiary = {
 
 const defaultWallet: Wallet = {
   name: '',
-  currency: '',
-  balance: '',
+  currency: {
+    code: defaultCurrency.code,
+    minorUnit: defaultCurrency.minorUnit,
+  },
+  balance: Money.fromDecimal(0, defaultCurrency),
   type: 'coin',
   fixed: 0,
-  fee: 0,
+  fee: Money.fromDecimal(0, defaultCurrency),
   icon_id: '',
 };
 
@@ -160,7 +164,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     if (selectedWalletIndex === -1 && wallets.length) {
       this.setState({ selectedWalletIndex: 0 });
       wallets[0]?.currency &&
-        this.props.fetchBeneficiaries({ currency_id: wallets[0].currency.toLowerCase() });
+        this.props.fetchBeneficiaries({ currency_id: wallets[0].currency.code.toLowerCase() });
     }
 
     if (!this.props.currencies.length) {
@@ -189,7 +193,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     if (!wallets.length && next.wallets.length) {
       this.setState({ selectedWalletIndex: 0 });
       next.wallets[0]?.currency &&
-        this.props.fetchBeneficiaries({ currency_id: next.wallets[0].currency.toLowerCase() });
+        this.props.fetchBeneficiaries({ currency_id: next.wallets[0].currency.code.toLowerCase() });
     }
 
     if (!withdrawSuccess && next.withdrawSuccess) {
@@ -203,7 +207,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     ) {
       const selectedCurrency = (next.wallets[selectedWalletIndex] || { currency: '' }).currency;
 
-      this.props.fetchBeneficiaries({ currency_id: selectedCurrency.toLowerCase() });
+      this.props.fetchBeneficiaries({ currency_id: selectedCurrency.code.toLowerCase() });
     }
   }
 
@@ -218,12 +222,13 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
       withdrawConfirmModal,
       currentTabIndex,
     } = this.state;
-    const formattedWallets = wallets.map((wallet: Wallet) => ({
-      ...wallet,
-      currency: wallet.currency.toUpperCase(),
-      iconUrl: wallet.iconUrl ? wallet.iconUrl : '',
-    }));
-    const selectedCurrency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
+    const formattedWallets = wallets.map(
+      (wallet: Wallet): Wallet => ({
+        ...wallet,
+        iconUrl: wallet.iconUrl ? wallet.iconUrl : '',
+      }),
+    );
+    const selectedCurrency = (wallets[selectedWalletIndex] || { currency: '' }).currency.code;
     let confirmationAddress = '';
     let selectedWalletPrecision = DEFAULT_CCY_PRECISION;
 
@@ -357,7 +362,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const { currency } = this.props.wallets[selectedWalletIndex];
     const withdrawRequest = {
       amount,
-      currency: currency.toLowerCase(),
+      currency: currency.code.toLowerCase(),
       otp: otpCode,
       beneficiary_id: String(beneficiary.id),
     };
@@ -379,7 +384,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const wallet: Wallet = wallets[selectedWalletIndex] || defaultWallet;
 
     if (!wallet.deposit_address && wallets.length && wallet.type !== 'fiat') {
-      this.props.fetchAddress({ currency: wallets[selectedWalletIndex].currency });
+      this.props.fetchAddress({
+        currency: wallets[selectedWalletIndex].currency.code.toLowerCase(),
+      });
     }
   };
 
@@ -387,7 +394,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const { user, wallets, memberLevels, currencies } = this.props;
     const { selectedWalletIndex } = this.state;
     const wallet: Wallet = wallets[selectedWalletIndex] || defaultWallet;
-    const currencyItem = (currencies && currencies.find((item) => item.id === wallet.currency)) || {
+    const currencyItem = (currencies &&
+      currencies.find((item) => item.id === wallet.currency.code.toLowerCase())) || {
       min_confirmations: 6,
       deposit_enabled: false,
     };
@@ -425,18 +433,18 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
   private renderDeposit = (isAccountActivated: boolean) => {
     const { currencies, user, wallets } = this.props;
     const { selectedWalletIndex } = this.state;
-    const wallet: Wallet = wallets[selectedWalletIndex] || defaultWallet;
-    const currencyItem = currencies.find((item) => item.id === wallet.currency);
+    const wallet = wallets[selectedWalletIndex] || defaultWallet;
+    const currencyItem = currencies.find((item) => item.id === wallet.currency.code.toLowerCase());
     const error = this.props.intl.formatMessage({
       id: 'page.body.wallets.tabs.deposit.ccy.message.pending',
     });
 
-    if (wallets[selectedWalletIndex].type === 'coin') {
+    if (wallet.type === 'coin') {
       return (
         <React.Fragment>
-          <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
+          <CurrencyInfo wallet={wallet} />
           {this.getBlurDeposit(isAccountActivated)}
-          <Box padding="3x" style={{ paddingBottom: 0}}>
+          <Box padding="3x" style={{ paddingBottom: 0 }}>
             <DepositCrypto
               copiableTextFieldText={this.translate(
                 'page.body.wallets.tabs.deposit.ccy.message.address',
@@ -449,14 +457,18 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             />
           </Box>
           {wallet.currency && (
-            <WalletHistory label="deposit" type="deposits" currency={wallet.currency} />
+            <WalletHistory
+              label="deposit"
+              type="deposits"
+              currency={wallet.currency.code.toLowerCase()}
+            />
           )}
         </React.Fragment>
       );
     } else {
       return (
         <React.Fragment>
-          <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
+          <CurrencyInfo wallet={wallet} />
           {this.getBlurDeposit(isAccountActivated)}
           <DepositFiat
             title={this.title}
@@ -464,7 +476,11 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             uid={user ? user.uid : ''}
           />
           {wallet.currency && (
-            <WalletHistory label="deposit" type="deposits" currency={wallet.currency} />
+            <WalletHistory
+              label="deposit"
+              type="deposits"
+              currency={wallet.currency.code.toLowerCase()}
+            />
           )}
         </React.Fragment>
       );
@@ -475,7 +491,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const { currencies, user, wallets, memberLevels } = this.props;
     const { selectedWalletIndex } = this.state;
     const wallet = wallets[selectedWalletIndex] || defaultWallet;
-    const currencyItem = currencies && currencies.find((item) => item.id === wallet.currency);
+    const currencyItem =
+      currencies && currencies.find((item) => item.id === wallet.currency.code.toLowerCase());
 
     if (!currencyItem?.withdrawal_enabled) {
       return (
@@ -521,7 +538,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
     return (
       <React.Fragment>
-        <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
+        <CurrencyInfo wallet={wallet} />
         {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
         {this.getBlurWithdraw()}
         {this.renderWithdrawContent()}
@@ -529,7 +546,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
           <WalletHistory
             label="withdraw"
             type="withdraws"
-            currency={wallet.currency}
+            currency={wallet.currency.code}
             withdrawSuccess={withdrawSuccess}
           />
         )}
@@ -551,12 +568,12 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const wallet = wallets[selectedWalletIndex];
     const { currency, fee, type, enable_invoice } = wallet;
     const fixed = (wallet || { fixed: 0 }).fixed;
-    const currencyItem = currencies && currencies.find((item) => item.id === wallet.currency);
+    const currencyItem = currencies && currencies.find((item) => item.id === wallet.currency.code.toLowerCase());
 
     const withdrawProps: WithdrawProps = {
       withdrawDone,
-      currency,
-      fee,
+      currency: currency.code.toLowerCase(),
+      fee: parseInt(fee.toString()),
       onClick: this.toggleConfirmModal,
       twoFactorAuthRequired: this.isTwoFactorAuthRequired(level, otp),
       fixed,
@@ -600,7 +617,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const { wallets } = this.props;
 
     const nextWalletIndex = this.props.wallets.findIndex(
-      (wallet) => wallet.currency.toLowerCase() === value.currency.toLowerCase(),
+      (wallet) => wallet.currency.code.toLowerCase() === value.currency.code.toLowerCase(),
     );
 
     this.setState({
@@ -608,7 +625,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
       withdrawDone: false,
     });
 
-    this.props.fetchBeneficiaries({ currency_id: value.currency.toLowerCase() });
+    this.props.fetchBeneficiaries({ currency_id: value.currency.code.toLowerCase() });
     this.props.setMobileWalletUi(wallets[nextWalletIndex].name);
   };
 }

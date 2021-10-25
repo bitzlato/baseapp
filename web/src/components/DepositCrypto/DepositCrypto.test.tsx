@@ -1,3 +1,4 @@
+import { Money, Currency } from '@trzmaxim/money';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { Provider } from 'react-redux';
@@ -10,16 +11,20 @@ import { DepositCrypto } from './';
 const store = createStore(rootReducer);
 
 describe('DepositCrypto', () => {
-  let wrapper;
+  let wrapper: any;
   const handleOnCopy = jest.fn();
   const handleGenerateAddress = jest.fn();
+  const currency: Currency = {
+    code: 'ETH',
+    minorUnit: 8,
+  };
   const wallet: Wallet = {
-    currency: 'eth',
+    currency,
     icon_id: 'eth',
     name: '',
     fixed: 0,
     type: 'coin',
-    fee: 0,
+    fee: Money.fromDecimal(0, currency),
   };
 
   beforeEach(() => {

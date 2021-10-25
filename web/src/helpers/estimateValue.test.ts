@@ -1,4 +1,6 @@
-import { Currency, Market, Wallet } from '../modules';
+import { Money, Currency as MoneyCurrency } from '@trzmaxim/money';
+import { Currency, Market, Wallet } from 'src/modules';
+
 import { estimateUnitValue, estimateValue, findPrecision, MarketTicker } from './estimateValue';
 
 // tslint:disable no-object-literal-type-assertion
@@ -23,8 +25,16 @@ describe('estimateValue', () => {
 
   it('should return wallet total for target currency', () => {
     const targetCurrency = 'btc';
+    const currency: MoneyCurrency = {
+      code: 'BTC',
+      minorUnit: 8,
+    };
     const wallets = [
-      { currency: 'btc', balance: '95.1001', locked: '10.1234' },
+      {
+        currency,
+        balance: Money.fromDecimal('95.1001', currency),
+        locked: Money.fromDecimal('10.1234', currency),
+      },
     ] as unknown as Wallet[];
     const markets = [] as Market[];
     const marketTickers = {} as MarketTicker;
@@ -36,8 +46,16 @@ describe('estimateValue', () => {
 
   it('should convert using market ask unit', () => {
     const targetCurrency = 'btc';
+    const currency: MoneyCurrency = {
+      code: 'USD',
+      minorUnit: 4,
+    };
     const wallets = [
-      { currency: 'usd', balance: '903.0008', locked: '100.12345' },
+      {
+        currency,
+        balance: Money.fromDecimal('903.0008', currency),
+        locked: Money.fromDecimal('100.12345', currency),
+      },
     ] as unknown as Wallet[];
     const markets = [
       { id: 'btcusd', name: 'BTC/USD', base_unit: 'btc', quote_unit: 'usd' },
@@ -51,8 +69,16 @@ describe('estimateValue', () => {
 
   it('should convert using market bid unit', () => {
     const targetCurrency = 'btc';
+    const currency: MoneyCurrency = {
+      code: 'USD',
+      minorUnit: 4,
+    };
     const wallets = [
-      { currency: 'usd', balance: '903.0008', locked: '100.12345' },
+      {
+        currency,
+        balance: Money.fromDecimal('903.0008', currency),
+        locked: Money.fromDecimal('100.12345', currency),
+      },
     ] as unknown as Wallet[];
     const markets = [
       { id: 'usdbtc', name: 'USD/BTC', base_unit: 'usd', quote_unit: 'btc' },
@@ -66,7 +92,17 @@ describe('estimateValue', () => {
 
   it('should convert using secondary market #1', () => {
     const targetCurrency = 'btc';
-    const wallets = [{ currency: 'bch', balance: '900.0', locked: '100.0' }] as unknown as Wallet[];
+    const currency: MoneyCurrency = {
+      code: 'BCH',
+      minorUnit: 8,
+    };
+    const wallets = [
+      {
+        currency,
+        balance: Money.fromDecimal('900.0', currency),
+        locked: Money.fromDecimal('100.0', currency),
+      },
+    ] as unknown as Wallet[];
     const markets = [
       { id: 'btczar', name: 'BTC/ZAR', base_unit: 'btc', quote_unit: 'zar' },
       { id: 'bchzar', name: 'BCH/ZAR', base_unit: 'bch', quote_unit: 'zar' },
@@ -83,7 +119,17 @@ describe('estimateValue', () => {
 
   it('should convert using secondary market #2', () => {
     const targetCurrency = 'btc';
-    const wallets = [{ currency: 'bch', balance: '0.9', locked: '0.1' }] as unknown as Wallet[];
+    const currency: MoneyCurrency = {
+      code: 'BCH',
+      minorUnit: 8,
+    };
+    const wallets = [
+      {
+        currency,
+        balance: Money.fromDecimal('0.9', currency),
+        locked: Money.fromDecimal('0.1', currency),
+      },
+    ] as unknown as Wallet[];
     const markets = [
       { id: 'btczar', name: 'BTC/ZAR', base_unit: 'btc', quote_unit: 'zar' },
       { id: 'bchzar', name: 'BCH/ZAR', base_unit: 'bch', quote_unit: 'zar' },
@@ -100,7 +146,17 @@ describe('estimateValue', () => {
 
   it('should convert using secondary market #3', () => {
     const targetCurrency = 'btc';
-    const wallets = [{ currency: 'bch', balance: '2.004', locked: '0.001' }] as unknown as Wallet[];
+    const currency: MoneyCurrency = {
+      code: 'BCH',
+      minorUnit: 8,
+    };
+    const wallets = [
+      {
+        currency,
+        balance: Money.fromDecimal('2.004', currency),
+        locked: Money.fromDecimal('0.001', currency),
+      },
+    ] as unknown as Wallet[];
     const markets = [
       { id: 'btczar', name: 'BTC/ZAR', base_unit: 'btc', quote_unit: 'zar' },
       { id: 'bchzar', name: 'BCH/ZAR', base_unit: 'bch', quote_unit: 'zar' },
@@ -117,7 +173,17 @@ describe('estimateValue', () => {
 
   it('should NOT convert using tertiary market', () => {
     const targetCurrency = 'btc';
-    const wallets = [{ currency: 'bch', balance: '1.9', locked: '0.1' }] as unknown as Wallet[];
+    const currency: MoneyCurrency = {
+      code: 'BCH',
+      minorUnit: 8,
+    };
+    const wallets = [
+      {
+        currency,
+        balance: Money.fromDecimal('1.9', currency),
+        locked: Money.fromDecimal('0.1', currency),
+      },
+    ] as unknown as Wallet[];
     const markets = [
       { id: 'btczar', name: 'BTC/ZAR', base_unit: 'btc', quote_unit: 'zar' },
       { id: 'ltczar', name: 'LTC/ZAR', base_unit: 'ltc', quote_unit: 'zar' },

@@ -1,20 +1,21 @@
+import { Money } from '@trzmaxim/money';
 import classnames from 'classnames';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { DropdownComponent, Decimal } from '../';
-import { isUsernameEnabled } from '../../api';
-import { CloseIcon } from '../../assets/images/CloseIcon';
-import { Modal } from '../../components';
+import { DropdownComponent, Modal } from 'src/components';
+import { isUsernameEnabled } from 'src/api';
+import { CloseIcon } from 'src/assets/images/CloseIcon';
 import {
   createInternalTransfersFetch,
   selectInternalTransfersCreateSuccess,
   selectUserInfo,
   selectWallets,
   walletsFetch,
-} from '../../modules';
+} from 'src/modules';
+import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { InternalTransferInput } from './InternalInput';
 
 export const InternalTransferComponent = () => {
@@ -44,22 +45,17 @@ export const InternalTransferComponent = () => {
     }
   }, [transferSuccess]);
 
-  const walletsList = wallets.length
-    ? wallets.map((item) => item.currency && item.currency.toUpperCase())
-    : [];
+  const walletsList = wallets.map((item) => item.currency.code);
 
-  const wallet =
-    wallets.length &&
-    wallets.find((item) => item.currency.toLowerCase() === currency.toLowerCase());
+  const wallet = wallets.find((item) => item.currency.code === currency);
 
-  const balanceError = useMemo(
-    () =>
-      classnames('cr-internal-transfer__group--balance', {
-        'cr-internal-transfer__group--error': wallet && wallet.balance && +wallet.balance < +amount,
-      }),
-    [amount, wallet],
+  const amountMoney =
+    wallet && amount !== '' ? Money.fromDecimal(amount, wallet.currency) : undefined;
+  const isError = wallet && wallet.balance && amountMoney && wallet.balance.lt(amountMoney);
+  const balanceError = classnames(
+    'cr-internal-transfer__group--balance',
+    isError && 'cr-internal-transfer__group--error',
   );
-
   const translationUsername = isUsernameEnabled() ? 'username' : 'uid';
 
   const handleCreateTransfer = useCallback(() => {
@@ -115,10 +111,7 @@ export const InternalTransferComponent = () => {
         <div className="cr-modal__container-content__transfer">
           {translate('page.body.internal.transfer.modal.content.transfer')}
           <span>
-            <Decimal fixed={wallet ? wallet.fixed : 0} thousSep=",">
-              {amount.toString()}
-            </Decimal>
-            {currency}
+            {amountMoney && <MoneyFormat money={amountMoney} />} {currency}
           </span>
           {translate('page.body.internal.transfer.modal.content.to')}
           <span>{username}</span>
@@ -157,21 +150,17 @@ export const InternalTransferComponent = () => {
             clear={clear}
           />
           <div
-            onClick={() =>
-              setAmount(wallet ? Decimal.format(wallet.balance, wallet.fixed, '.') : '')
-            }
+            onClick={() => setAmount(wallet && wallet.balance ? wallet.balance.toString() : '')}
             className={balanceError}
           >
             {translate('page.body.internal.transfer.account.balance')}
             {wallet && wallet.balance && currency !== '' ? (
-              <Decimal fixed={wallet ? wallet.fixed : 0} thousSep=",">
-                {wallet.balance.toString()}
-              </Decimal>
+              <MoneyFormat money={wallet.balance} />
             ) : (
               0
             )}{' '}
             {currency}
-            {wallet && wallet.balance && +wallet.balance < +amount
+            {wallet && wallet.balance && isError
               ? translate('page.body.internal.transfer.insufficient.balance')
               : null}
           </div>
@@ -185,13 +174,7 @@ export const InternalTransferComponent = () => {
           onClick={() => setShow(!show)}
           size="lg"
           variant="primary"
-          disabled={
-            !username ||
-            !otp ||
-            !+amount ||
-            !currency ||
-            !(wallet && wallet.balance && +wallet.balance >= +amount)
-          }
+          disabled={!username || !otp || !+amount || !currency || isError}
         >
           {translate('page.body.internal.transfer.continue')}
         </Button>

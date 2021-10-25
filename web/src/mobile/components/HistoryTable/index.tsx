@@ -54,7 +54,9 @@ const HistoryTable = (props: Props) => {
   };
   const retrieveData = () => {
     const { currency, type } = props;
-    const { fixed } = wallets.find((w) => w.currency === currency) || {
+    const { fixed } = wallets.find(
+      (w) => w.currency.code.toLowerCase() === currency.toLowerCase(),
+    ) || {
       fixed: DEFAULT_CCY_PRECISION,
     };
     if (list.length === 0) {

@@ -37,12 +37,12 @@ export const WalletList: React.FC<WalletListProps> = ({
 
   return (
     <div className="cr-wallet-list">
-      {walletItems.map((p: Wallet, i: number) => (
+      {walletItems.map((wallet: Wallet, i: number) => (
         <WalletItem
-          key={i}
-          wallet={p}
+          key={wallet.currency.code}
+          wallet={wallet}
           active={activeIndex === i}
-          onClick={() => handleClick(i, p)}
+          onClick={() => handleClick(i, wallet)}
         />
       ))}
     </div>

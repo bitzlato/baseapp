@@ -19,12 +19,7 @@ import {
   selectAbilitiesSuccess,
 } from '../../modules';
 import { SwipeIcon } from '../../assets/images/swipe';
-import {
-  Decimal,
-  QuickExchangeForm,
-  DropdownComponent,
-  Timer,
-} from '../../components';
+import { Decimal, QuickExchangeForm, DropdownComponent, Timer } from '../../components';
 import {
   getCurrencyForMarket,
   getCurrencyFiltred,
@@ -135,10 +130,10 @@ export const QuickExchangeContainer = () => {
   );
 
   const walletsBaseList = walletsBaseUnit.length
-    ? walletsBaseUnit.map((item) => item.currency && item.currency.toUpperCase())
+    ? walletsBaseUnit.map((item) => item.currency.code)
     : [];
   const walletsQuoteList = walletsQuoteUnit.length
-    ? walletsQuoteUnit.map((item) => item.currency && item.currency.toUpperCase())
+    ? walletsQuoteUnit.map((item) => item.currency.code)
     : [];
 
   const handleChangeValue = (value: string, key: string) => {
@@ -294,7 +289,7 @@ export const QuickExchangeContainer = () => {
               <WarningIcon />
               <span>
                 {translate('page.body.quick.exchange.sublabel.min_amount')}{' '}
-                {currentSelectedMarket.min_amount} {walletBase.currency.toUpperCase()}
+                {currentSelectedMarket.min_amount} {walletBase.currency.code}
               </span>
             </div>
           )}
@@ -313,7 +308,7 @@ export const QuickExchangeContainer = () => {
             <div className="cr-quick-exchange__body-currency-block-dropdown-block-message">
               {translate('page.body.quick.exchange.sublabel.balance')}:{' '}
               <span>
-                {walletBase.balance} {walletBase.currency.toUpperCase()}
+                {walletBase.balance} {walletBase.currency.code}
               </span>
             </div>
           )}
@@ -385,9 +380,9 @@ export const QuickExchangeContainer = () => {
           </div>
         </div>
         <div className="cr-quick-exchange__body-summary-icons">
-          <CryptoCurrencyIcon icon={walletBase.iconUrl} currency={walletBase.currency} />
+          <CryptoCurrencyIcon icon={walletBase.iconUrl} currency={walletBase.currency.code} />
           <ArrowRight />
-          <CryptoCurrencyIcon icon={walletQuote.iconUrl} currency={walletQuote.currency} />
+          <CryptoCurrencyIcon icon={walletQuote.iconUrl} currency={walletQuote.currency.code} />
         </div>
         <div className="cr-quick-exchange__body-summary-currency">
           <div className="cr-quick-exchange__body-summary-currency-label">

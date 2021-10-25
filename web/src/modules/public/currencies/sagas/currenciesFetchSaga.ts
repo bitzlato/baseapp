@@ -1,8 +1,13 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
-import { sendError } from '../../../';
-import { API, RequestOptions } from '../../../../api';
-import { currenciesData, currenciesError, CurrenciesFetch } from '../actions';
-import { CURRENCIES_FETCH } from '../constants';
+import { sendError } from 'src/modules';
+import { API, RequestOptions } from 'src/api';
+import {
+  currenciesData,
+  currenciesError,
+  CurrenciesFetch,
+} from 'src/modules/public/currencies/actions';
+import { CURRENCIES_FETCH } from 'src/modules/public/currencies/constants';
+import { CurrencySource } from 'src/modules/public/currencies/types';
 
 const currenciesOptions: RequestOptions = {
   apiVersion: 'peatio',
@@ -14,7 +19,10 @@ export function* rootCurrenciesSaga() {
 
 export function* currenciesFetchSaga(action: CurrenciesFetch) {
   try {
-    const currencies = yield call(API.get(currenciesOptions), '/public/currencies');
+    const currencies: CurrencySource[] = yield call(
+      API.get(currenciesOptions),
+      '/public/currencies',
+    );
     yield put(currenciesData(currencies));
   } catch (error) {
     yield put(

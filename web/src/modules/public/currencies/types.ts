@@ -1,4 +1,6 @@
-export interface Currency {
+import { Currency as MoneyCurrency, Money } from '@trzmaxim/money';
+
+export interface CurrencySource {
   id: string;
   name: string;
   symbol: string;
@@ -19,4 +21,23 @@ export interface Currency {
   precision: number;
   icon_url: string;
   icon_id: string;
+}
+
+export interface Currency
+  extends Omit<
+      CurrencySource,
+      | 'deposit_fee'
+      | 'min_deposit_amount'
+      | 'withdraw_fee'
+      | 'min_withdraw_amount'
+      | 'withdraw_limit_24h'
+      | 'withdraw_limit_72h'
+    >,
+    MoneyCurrency {
+  deposit_fee: Money;
+  min_deposit_amount: Money;
+  withdraw_fee: Money;
+  min_withdraw_amount: Money;
+  withdraw_limit_24h: Money;
+  withdraw_limit_72h: Money;
 }

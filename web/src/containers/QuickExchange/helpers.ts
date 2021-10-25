@@ -45,10 +45,10 @@ const getCurrencyFiltred = (
 };
 
 const getWallet = (currency: string, wallets: Wallet[]) =>
-  wallets.find((w) => w.currency === currency.toLowerCase()) as Wallet;
+  wallets.find((w) => w.currency.code.toLowerCase() === currency.toLowerCase()) as Wallet;
 
 const getWallets = (wallets: Wallet[], marketsUnits: string[]) =>
-  wallets.filter((w) => marketsUnits.indexOf(w.currency) !== -1);
+  wallets.filter((w) => marketsUnits.indexOf(w.currency.code.toLowerCase()) !== -1);
 
 const getAvailableValue = (wallet: Wallet | undefined) => (wallet ? wallet.balance : 0);
 
@@ -74,7 +74,7 @@ const getBaseAmount = (
   prevBaseAmount: string,
   prevQuoteAmount: string,
 ) => {
-  if (+value <= +wallet.balance) {
+  if (+value <= +(wallet.balance?.toString() ?? 0)) {
     const quotePrice = Number(value || '0') * Number(marketPrice);
 
     return [value, String(quotePrice)];
@@ -92,7 +92,7 @@ const getQuoteAmount = (
 ) => {
   const baseValue = Number(value || '0') / Number(marketPrice);
 
-  if (+wallet.balance >= baseValue) {
+  if (+(wallet.balance?.toString() ?? 0) >= baseValue) {
     return [String(baseValue), value];
   }
 

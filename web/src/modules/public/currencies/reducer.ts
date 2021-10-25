@@ -1,10 +1,10 @@
 import { CommonState } from '../../types';
 import { CurrenciesAction } from './actions';
 import { CURRENCIES_DATA, CURRENCIES_ERROR, CURRENCIES_FETCH } from './constants';
-import { Currency } from './types';
+import { CurrencySource } from './types';
 
 export interface CurrenciesState extends CommonState {
-  list: Currency[];
+  list: CurrencySource[];
   loading: boolean;
   timestamp?: number;
 }

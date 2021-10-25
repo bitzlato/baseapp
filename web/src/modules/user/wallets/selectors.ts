@@ -1,7 +1,49 @@
+import { Currency, Money } from '@trzmaxim/money';
 import { RootState } from '../../';
-import { Wallet } from './types';
+import { WalletSource, Wallet } from './types';
 
-export const selectWallets = (state: RootState): Wallet[] => state.user.wallets.wallets.list;
+const createWallet = (walletSource: WalletSource): Wallet => {
+  const currency: Currency = {
+    code: walletSource.currency.toUpperCase(),
+    minorUnit: walletSource.fixed,
+  };
+
+  return {
+    ...walletSource,
+    currency,
+    balance: walletSource.balance ? Money.fromDecimal(walletSource.balance, currency) : undefined,
+    locked: walletSource.locked ? Money.fromDecimal(walletSource.locked, currency) : undefined,
+    fee: Money.fromDecimal(walletSource.fee, currency),
+  };
+};
+
+export const selectWallets = ({
+  user: {
+    wallets: {
+      wallets: { list },
+    },
+  },
+}: RootState): Wallet[] => list.map(createWallet);
+
+export const selectWallet =
+  (currencyCode?: string) =>
+  (state: RootState): Wallet | undefined => {
+    if (!currencyCode) {
+      return;
+    }
+
+    const wallets = selectWallets(state);
+    if (!Array.isArray(wallets)) {
+      return;
+    }
+
+    const wallet = wallets.find((item) => item.currency.code === currencyCode);
+    if (!wallet) {
+      return;
+    }
+
+    return wallet;
+  };
 
 export const selectWalletsLoading = (state: RootState): boolean =>
   state.user.wallets.wallets.loading;

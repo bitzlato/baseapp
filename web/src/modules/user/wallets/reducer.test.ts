@@ -1,10 +1,10 @@
 import { CommonError } from '../../types';
 import * as actions from './actions';
 import { initialWalletsState, walletsReducer } from './reducer';
-import { Wallet, WalletAddress } from './types';
+import { WalletSource, WalletAddress } from './types';
 
 describe('walletsList reducer', () => {
-  const wallets: Wallet[] = [
+  const wallets: WalletSource[] = [
     {
       balance: '0',
       currency: 'btc',
@@ -127,7 +127,7 @@ describe('walletsList reducer', () => {
       state: 'active',
     };
 
-    const updatedWallets: Wallet[] = [
+    const updatedWallets: WalletSource[] = [
       {
         balance: '0',
         currency: 'btc',

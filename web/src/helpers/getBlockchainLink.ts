@@ -1,14 +1,14 @@
 import { Wallet } from 'src/modules/user/wallets/types';
 
-export function getBlockchainLink(wallets: Wallet[], currency: string, txid: string, rid?: string) {
-  const currencyInfo = wallets && wallets.find((wallet) => wallet.currency === currency);
-  if (currencyInfo) {
-    if (txid && currencyInfo.explorerTransaction) {
-      return currencyInfo.explorerTransaction.replace('#{txid}', txid);
+export function getBlockchainLink(wallet: Wallet | undefined, txid: string, rid?: string) {
+  if (wallet) {
+    if (txid && wallet.explorerTransaction) {
+      return wallet.explorerTransaction.replace('#{txid}', txid);
     }
-    if (rid && currencyInfo.explorerAddress) {
-      return currencyInfo.explorerAddress.replace('#{address}', rid);
+    if (rid && wallet.explorerAddress) {
+      return wallet.explorerAddress.replace('#{address}', rid);
     }
   }
+
   return '';
 }

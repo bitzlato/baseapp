@@ -7,12 +7,12 @@ import { Box } from 'src/components/Box';
 import { formatCCYAddress } from 'src/helpers';
 import { selectMemberLevels, Wallet } from 'src/modules';
 import { defaultCurrency } from 'src/modules/public/currencies/defaults';
-import { Blur } from '../../../components/Blur';
-import { CurrencyInfo } from '../../../components/CurrencyInfo';
-import { DepositCrypto } from '../../../components/DepositCrypto';
-import { DepositFiat } from '../../../components/DepositFiat';
-import { selectCurrencies } from '../../../modules/public/currencies';
-import { selectUserInfo } from '../../../modules/user/profile';
+import { Blur } from 'src/components/Blur';
+import { CurrencyInfo } from 'src/components/CurrencyInfo';
+import { DepositCrypto } from 'src/components/DepositCrypto';
+import { DepositFiat } from 'src/components/DepositFiat';
+import { selectCurrencies } from 'src/modules/public/currencies';
+import { selectUserInfo } from 'src/modules/user/profile';
 
 interface Props {
   wallet: Wallet;
@@ -35,7 +35,8 @@ const WalletDepositBodyComponent: React.FC<Props> = (props) => {
   const renderDepositBlur = React.useMemo(() => {
     const { wallet } = props;
     const isAccountActivated = wallet.type === 'fiat' || wallet.balance;
-    const currencyItem = (currencies && currencies.find((item) => item.id === wallet.currency)) || {
+    const currencyItem = (currencies &&
+      currencies.find((item) => item.id === wallet.currency.code.toLowerCase())) || {
       min_confirmations: 6,
       deposit_enabled: false,
     };
@@ -72,12 +73,12 @@ const WalletDepositBodyComponent: React.FC<Props> = (props) => {
 
   const renderDeposit = () => {
     const { wallet } = props;
-    const currencyItem = currencies.find((item) => item.id === wallet.currency);
+    const currencyItem = currencies.find((item) => item.id === wallet.currency.code.toLowerCase());
     const error = intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.pending' });
 
     const selectedWalletAddress = '';
 
-    const walletAddress = formatCCYAddress(wallet.currency, selectedWalletAddress) || '';
+    const walletAddress = formatCCYAddress(wallet.currency.code, selectedWalletAddress) || '';
 
     const title = intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.fiat.message1' });
     const description = intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.fiat.message2' });
@@ -89,7 +90,7 @@ const WalletDepositBodyComponent: React.FC<Props> = (props) => {
           {renderDepositBlur}
           <Box padding="2x">
             <DepositCrypto
-              copiableTextFieldText={`${wallet.currency.toUpperCase()} ${label}`}
+              copiableTextFieldText={`${wallet.currency.code} ${label}`}
               error={error}
               handleGenerateAddress={props.handleGenerateAddress}
               handleOnCopy={handleOnCopy}

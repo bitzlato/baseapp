@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { AccountInterface, rootSaga, sendError, Wallet } from '../../..';
+import { AccountInterface, rootSaga, sendError, WalletSource } from '../../..';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
 import { CommonError } from '../../../types';
 import { walletsData, walletsError, walletsFetch } from '../actions';
@@ -196,7 +196,7 @@ describe('Module: Wallets', () => {
     },
   ];
 
-  const fakeWallets: Wallet[] = fakeCurrencies.map((currencyInfo) => {
+  const fakeWallets: WalletSource[] = fakeCurrencies.map((currencyInfo) => {
     let walletInfo = fakeAccounts.find((wallet) => wallet.currency === currencyInfo.id);
 
     if (!walletInfo) {

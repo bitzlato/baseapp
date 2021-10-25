@@ -83,7 +83,7 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
 
   const walletAddress =
     wallet.deposit_address && wallet.deposit_address.address
-      ? formatCCYAddress(wallet.currency, wallet.deposit_address.address)
+      ? formatCCYAddress(wallet.currency.code, wallet.deposit_address.address)
       : '';
 
   const text = t('page.body.wallets.tabs.deposit.ccy.message.submit', {
@@ -105,7 +105,7 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
         )}
       </Box>
       <Box row spacing="2x">
-        {wallet.currency === 'eth' && !isMobileDevice && walletAddress && (
+        {wallet.currency.code === 'ETH' && !isMobileDevice && walletAddress && (
           <MetaMaskButton depositAddress={walletAddress} />
         )}
         <CopyableTextField

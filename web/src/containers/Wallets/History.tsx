@@ -25,11 +25,13 @@ import {
 } from '../../modules';
 import { DepositStatus } from 'src/components/History/DepositStatus';
 import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
+import { FC } from 'react';
 
 export interface HistoryProps {
   label: string;
   type: 'deposits' | 'withdraws';
   currency: string;
+  withdrawSuccess?: boolean;
 }
 
 export interface ReduxProps {
@@ -41,7 +43,6 @@ export interface ReduxProps {
   firstElemIndex: number;
   lastElemIndex: number;
   nextPageExists: boolean;
-  withdrawSuccess?: boolean;
 }
 
 interface DispatchProps {
@@ -125,7 +126,9 @@ export class WalletTable extends React.Component<Props> {
 
   private retrieveData = (list) => {
     const { currency, type, wallets } = this.props;
-    const { fixed } = wallets.find((w) => w.currency === currency) || { fixed: 8 };
+    const { fixed } = wallets.find(
+      (w) => w.currency.code.toLowerCase() === currency.toLowerCase(),
+    ) || { fixed: 8 };
 
     if (!list.length) {
       return [[]];
@@ -172,4 +175,4 @@ export const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
 export const WalletHistory = compose(
   connect(mapStateToProps, mapDispatchToProps),
   injectIntl,
-)(WalletTable) as any;
+)(WalletTable) as FC<HistoryProps>;

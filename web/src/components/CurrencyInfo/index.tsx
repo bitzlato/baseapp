@@ -4,34 +4,22 @@ import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Wallet } from 'src/modules';
+import { Money } from '@trzmaxim/money';
 
 export interface CurrencyInfoProps {
   wallet: Wallet;
 }
 
-export const CurrencyInfo: FC<CurrencyInfoProps> = (props) => {
-  const balance = props.wallet && props.wallet.balance ? props.wallet.balance.toString() : '0';
-  const lockedAmount = props.wallet && props.wallet.locked ? props.wallet.locked.toString() : '0';
-  const currency = (props.wallet || { currency: '' }).currency.toUpperCase();
-  const selectedFixed = (props.wallet || { fixed: 0 }).fixed;
-  const cryptoCurrency = {
-    code: currency,
-    minorUnit: selectedFixed,
-  };
-
-  const iconUrl = props.wallet ? props.wallet.iconUrl : null;
-  const balanceMoney = {
-    amount: balance,
-    currency: cryptoCurrency,
-  };
-  const lockedMoney = {
-    amount: lockedAmount,
-    currency: cryptoCurrency,
-  };
+export const CurrencyInfo: FC<CurrencyInfoProps> = ({
+  wallet: { balance, locked, currency, iconUrl, icon_id },
+}) => {
+  const zeroMoney = Money.fromDecimal(0, currency);
+  const balanceMoney = balance ?? zeroMoney;
+  const lockedMoney = locked ?? zeroMoney;
 
   return (
     <div className="cr-wallet-item__single">
-      <CryptoCurrencyIcon icon={iconUrl} currency={props.wallet.currency} iconId={props.wallet.icon_id} />
+      <CryptoCurrencyIcon icon={iconUrl} currency={currency.code} iconId={icon_id} />
       <div className="cr-wallet-item__single-balance">
         <div>
           <div className="cr-wallet-item__amount-locked">
@@ -43,7 +31,7 @@ export const CurrencyInfo: FC<CurrencyInfoProps> = (props) => {
         </div>
         <div>
           <span className="cr-wallet-item__balance">
-            <CurrencyTicker symbol={currency} />
+            <CurrencyTicker symbol={currency.code} />
             &nbsp;
             <FormattedMessage id="page.body.wallets.balance" />
           </span>
