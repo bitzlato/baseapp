@@ -34,23 +34,61 @@ exports[`DepositCrypto should match snapshot 1`] = `
     currency={
       Object {
         "base_factor": 100000000,
+        "code": "",
         "deposit_enabled": true,
-        "deposit_fee": "0.0",
+        "deposit_fee": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 8,
+          },
+        },
         "explorer_address": "",
         "explorer_transaction": "",
         "icon_id": "",
         "icon_url": "",
         "id": "",
         "min_confirmations": 6,
-        "min_deposit_amount": "0.0",
-        "min_withdraw_amount": "0.0",
+        "min_deposit_amount": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 8,
+          },
+        },
+        "min_withdraw_amount": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 8,
+          },
+        },
+        "minorUnit": 8,
         "name": "",
         "precision": 8,
         "symbol": "",
         "type": "coin",
-        "withdraw_fee": "0.0",
-        "withdraw_limit_24h": "0.0",
-        "withdraw_limit_72h": "0.0",
+        "withdraw_fee": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 8,
+          },
+        },
+        "withdraw_limit_24h": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 8,
+          },
+        },
+        "withdraw_limit_72h": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 8,
+          },
+        },
         "withdrawal_disabled_reason": "",
         "withdrawal_enabled": true,
       }
@@ -62,8 +100,17 @@ exports[`DepositCrypto should match snapshot 1`] = `
     handleOnCopy={[MockFunction]}
     wallet={
       Object {
-        "currency": "eth",
-        "fee": 0,
+        "currency": Object {
+          "code": "ETH",
+          "minorUnit": 8,
+        },
+        "fee": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "ETH",
+            "minorUnit": 8,
+          },
+        },
         "fixed": 0,
         "icon_id": "eth",
         "name": "",

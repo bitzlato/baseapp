@@ -6,19 +6,40 @@ exports[`WalletList should render 1`] = `
 >
   <WalletItem
     active={true}
-    key="0"
+    key="BTC"
     onClick={[Function]}
     wallet={
       Object {
         "active": false,
-        "balance": "456",
-        "currency": "BTC",
+        "balance": Object {
+          "amount": "456.00000000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
+        "currency": Object {
+          "code": "BTC",
+          "minorUnit": 8,
+        },
         "explorerAddress": "https://testnet.blockchain.info/address/#{address}",
         "explorerTransaction": "https://testnet.blockchain.info/tx/#{txid}",
-        "fee": 0.123,
+        "fee": Object {
+          "amount": "0.12300000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
         "fixed": 8,
         "icon_id": "BTC",
-        "locked": "1",
+        "locked": Object {
+          "amount": "1.00000000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
         "name": "Bitcoin",
         "type": "fiat",
       }
@@ -26,17 +47,38 @@ exports[`WalletList should render 1`] = `
   />
   <WalletItem
     active={false}
-    key="1"
+    key="USD"
     onClick={[Function]}
     wallet={
       Object {
         "active": false,
-        "balance": "456",
-        "currency": "USD",
-        "fee": 0.123,
+        "balance": Object {
+          "amount": "456.00",
+          "currency": Object {
+            "code": "USD",
+            "minorUnit": 2,
+          },
+        },
+        "currency": Object {
+          "code": "USD",
+          "minorUnit": 2,
+        },
+        "fee": Object {
+          "amount": "0.12",
+          "currency": Object {
+            "code": "USD",
+            "minorUnit": 2,
+          },
+        },
         "fixed": 8,
         "icon_id": "USD",
-        "locked": "100",
+        "locked": Object {
+          "amount": "100.00",
+          "currency": Object {
+            "code": "USD",
+            "minorUnit": 2,
+          },
+        },
         "name": "United states Dollar",
         "type": "coin",
       }
@@ -44,17 +86,38 @@ exports[`WalletList should render 1`] = `
   />
   <WalletItem
     active={false}
-    key="2"
+    key="BTC"
     onClick={[Function]}
     wallet={
       Object {
         "active": false,
-        "balance": "2",
-        "currency": "BTC",
-        "fee": 0.3,
+        "balance": Object {
+          "amount": "2.00000000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
+        "currency": Object {
+          "code": "BTC",
+          "minorUnit": 8,
+        },
+        "fee": Object {
+          "amount": "0.30000000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
         "fixed": 8,
         "icon_id": "BTC",
-        "locked": "0.4",
+        "locked": Object {
+          "amount": "0.40000000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
         "name": "Bitcoin - 2",
         "type": "fiat",
       }
