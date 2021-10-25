@@ -1,24 +1,23 @@
 import React, { FC, ReactElement } from 'react';
 
-import { defaultFormatterOptions, format, FormatterOptions } from './formatter';
-import { Currency, Money } from './Money';
+import { defaultFormatOptions, FormatOptions, Money } from '@trzmaxim/money';
 import s from './MoneyFormat.postcss';
 
 type Renderer = (amountFormatted: string) => ReactElement;
 
-interface Props extends FormatterOptions {
+interface Props extends FormatOptions {
   money: Money;
   children?: Renderer;
 }
 
 export const MoneyFormat: FC<Props> = ({ money, children, ...options }: Props) => {
-  const amountFormatted = format(money, options);
+  const amountFormatted = money.toFormat(options);
 
   if (children) {
     return children(amountFormatted);
   }
 
-  const decimalSeparator = options.decimalSeparator ?? defaultFormatterOptions.decimalSeparator;
+  const decimalSeparator = options.decimalSeparator ?? defaultFormatOptions.decimalSeparator;
   const [integer, fractional] = amountFormatted.split(decimalSeparator);
 
   return (
@@ -31,13 +30,3 @@ export const MoneyFormat: FC<Props> = ({ money, children, ...options }: Props) =
     </>
   );
 };
-
-export const money = (amount: Money['amount'], currency: Money['currency']) => ({
-  amount,
-  currency,
-});
-
-export const ccy = (code: Currency['code'], minorUnit: Currency['minorUnit']) => ({
-  code,
-  minorUnit,
-});
