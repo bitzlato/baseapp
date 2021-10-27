@@ -3,6 +3,7 @@ import { Decimal, OrderForm } from '../';
 import { TabPanel } from '../../components';
 import { FilterPrice } from '../../filters';
 import { getAmount, getTotalPrice } from '../../helpers';
+import { Box } from '../Box';
 
 export type FormType = 'buy' | 'sell';
 
@@ -141,19 +142,19 @@ export class Order extends React.Component<OrderComponentProps, State> {
 
     if (width < splitBorder) {
       return (
-        <div className="cr-order">
+        <Box padding="2x" className="cr-order">
           <TabPanel
             fixed={true}
             panels={this.getPanels()}
             onTabChange={this.handleChangeTab}
             currentTabIndex={this.state.index}
           />
-        </div>
+        </Box>
       );
     }
 
     return (
-      <div className="cr-order cr-order--extended">
+      <Box row spacing className="cr-order cr-order--extended">
         <div className="cr-order--extended__buy">
           <TabPanel
             fixed={true}
@@ -170,7 +171,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
             currentTabIndex={this.state.index}
           />
         </div>
-      </div>
+      </Box>
     );
   }
 

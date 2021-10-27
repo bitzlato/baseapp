@@ -11,6 +11,7 @@ interface Props {
   failedColor?: boolean;
   capitalize?: boolean;
   bold?: boolean;
+  ellipsis?: boolean;
 }
 
 export const Label: React.FC<Props> = ({
@@ -23,6 +24,7 @@ export const Label: React.FC<Props> = ({
   failedColor,
   capitalize,
   bold,
+  ellipsis,
 }) => {
   const className = cn(
     size === '2x' && s.text2X,
@@ -34,6 +36,7 @@ export const Label: React.FC<Props> = ({
     failedColor && s.failedColor,
     capitalize && s.capitalize,
     bold && s.bold,
+    ellipsis && s.ellipsis,
   );
   return <span className={className}>{children}</span>;
 };

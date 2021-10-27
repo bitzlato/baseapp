@@ -243,6 +243,7 @@ module.exports = {
                 target: `wss://${process.env.PROXY_HOST}`,
                 changeOrigin: true,
                 ws: true,
+                headers: { Connection: 'keep-alive' },
                 onProxyReqWs: (proxyReq, _, socket) => {
                   proxyReq.removeHeader('origin');
                   proxyReq.setHeader('origin', `https://${process.env.PROXY_HOST}`);
