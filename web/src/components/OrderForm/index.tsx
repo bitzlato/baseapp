@@ -281,7 +281,8 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
 
   public getPriceInputs = () => {
     const { orderType, priceMarket } = this.state;
-    const { from, totalPrice, amount, currentMarketBidPrecision, translate } = this.props;
+    const { from, totalPrice, amount, currentMarketBidPrecision, translate, isMobileDevice } =
+      this.props;
 
     switch (orderType) {
       case 'Limit':
@@ -303,13 +304,13 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
 
         return (
           <Box grow padding row spacing className={s.input}>
-            <Label ellipsis size="sm" bold>
+            <Label ellipsis size={isMobileDevice ? 'sm' : undefined} bold>
               &asymp;{' '}
               <Label primaryColor>
                 {Decimal.format(safePrice, currentMarketBidPrecision, ',') || '0'}
               </Label>
             </Label>
-            <Label size="sm">
+            <Label size={isMobileDevice ? 'sm' : undefined}>
               <CurrencyTicker symbol={from} />
             </Label>
           </Box>

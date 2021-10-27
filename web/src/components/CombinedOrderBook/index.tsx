@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { OrderBook } from '../';
+import { Box } from '../Box/Box';
 import { CellData } from '../Table';
 
 export interface CombinedOrderBookProps {
@@ -90,12 +91,6 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
     );
   }
 
-  public renderNoData = (message: string) => (
-    <div className="cr-order-book cr-order-book--empty">
-      <span className="cr-order-book--empty-item">{message}</span>
-    </div>
-  );
-
   private orderBookLarge = () => {
     const {
       dataAsks,
@@ -120,7 +115,9 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
       <React.Fragment>
         <div className="cr-combined-order-book__large">
           {noDataBids ? (
-            this.renderNoData(noDataMessage)
+            <Box alignCenter className="cr-order-book">
+              {noDataMessage}
+            </Box>
           ) : (
             <OrderBook
               side={'right'}
@@ -133,7 +130,9 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
             />
           )}
           {noDataAsks ? (
-            this.renderNoData(noDataMessage)
+            <Box alignStart justifyCenter className="cr-order-book">
+              {noDataMessage}
+            </Box>
           ) : (
             <OrderBook
               side={'left'}
@@ -175,7 +174,9 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
       <React.Fragment>
         <div className="cr-combined-order-book__small">
           {noDataAsks ? (
-            this.renderNoData(noDataMessage)
+            <Box alignCenter className="cr-order-book">
+              {noDataMessage}
+            </Box>
           ) : (
             <OrderBook
               side={'left'}
@@ -189,7 +190,9 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
           )}
           <div className="cr-combined-order-book__market">{lastPrice}</div>
           {noDataBids ? (
-            this.renderNoData(noDataMessage)
+            <Box alignStart justifyCenter className="cr-order-book">
+              {noDataMessage}
+            </Box>
           ) : (
             <OrderBook
               side={'left'}

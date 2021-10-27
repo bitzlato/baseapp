@@ -18,7 +18,9 @@ export const LockedComponent: React.FC<Props> = ({ text, link, buttonText }) => 
   return (
     <Box padding="3x" col spacing="2x" alignCenter>
       <LockedIcon />
-      <Label size="2x">{text}</Label>
+      <Label size="2x" center style={{ maxWidth: 180 }}>
+        {text}
+      </Label>
       {isMobileDevice ? (
         <Button component={Link} to={link} variant="primary-outline" revertLightPrimary>
           {buttonText}

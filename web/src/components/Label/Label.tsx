@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import s from './Label.postcss';
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   size?: '2x' | 'sm';
   primaryColor?: boolean;
   secondaryColor?: boolean;
@@ -12,10 +12,11 @@ interface Props {
   capitalize?: boolean;
   bold?: boolean;
   ellipsis?: boolean;
+  center?: boolean;
 }
 
 export const Label: React.FC<Props> = ({
-  children,
+  className,
   size,
   primaryColor,
   secondaryColor,
@@ -25,8 +26,11 @@ export const Label: React.FC<Props> = ({
   capitalize,
   bold,
   ellipsis,
+  center,
+  ...others
 }) => {
-  const className = cn(
+  const c = cn(
+    className,
     size === '2x' && s.text2X,
     size === 'sm' && s.textSm,
     primaryColor && s.primaryColor,
@@ -37,6 +41,7 @@ export const Label: React.FC<Props> = ({
     capitalize && s.capitalize,
     bold && s.bold,
     ellipsis && s.ellipsis,
+    center && s.center,
   );
-  return <span className={className}>{children}</span>;
+  return <span className={c} {...others} />;
 };
