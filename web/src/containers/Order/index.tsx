@@ -27,6 +27,7 @@ import {
   selectUserInfo,
   selectUserLoggedIn,
   selectWallets,
+  selectWalletsLoading,
   setCurrentPrice,
   User,
   Wallet,
@@ -62,6 +63,7 @@ interface ReduxProps {
   memberLevels: MemberLevels;
   user: User;
   userLoggedIn: boolean;
+  walletsLoading: boolean;
 }
 
 interface StoreProps {
@@ -122,7 +124,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
   public componentWillReceiveProps(next: Props) {
     const { userLoggedIn } = this.props;
 
-    if (userLoggedIn && !next.wallets.length) {
+    if (userLoggedIn && !next.wallets.length && !next.walletsLoading) {
       this.props.walletsFetch();
     }
 
@@ -408,6 +410,7 @@ const mapStateToProps = (state: RootState) => ({
   isMobileDevice: selectMobileDeviceState(state),
   memberLevels: selectMemberLevels(state),
   user: selectUserInfo(state),
+  walletsLoading: selectWalletsLoading(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = (dispatch) => ({
