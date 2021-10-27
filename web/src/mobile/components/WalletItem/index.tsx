@@ -1,38 +1,34 @@
 import * as React from 'react';
+import { Money } from '@trzmaxim/money';
+import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { Wallet } from 'src/modules/user/wallets/types';
 import { CryptoIcon } from '../../../components/CryptoIcon';
-import { Decimal } from '../../../components/Decimal';
-import { DEFAULT_CCY_PRECISION } from '../../../constants';
 import { areEqualSelectedProps } from '../../../helpers/areEqualSelectedProps';
 
 interface Props {
-  wallet;
+  wallet: Wallet;
   onClick: (v: string) => void;
 }
 
-const WalletItemComponent = (props: Props) => {
-  const {
-    wallet: { currency = '', icon_id = '', name, balance = 0, fixed = DEFAULT_CCY_PRECISION },
-  } = props;
-
+const WalletItemComponent: React.FC<Props> = ({ wallet, onClick }) => {
   return (
-    <div className="cr-mobile-wallet-item" onClick={() => props.onClick(currency)}>
+    <div
+      className="cr-mobile-wallet-item"
+      onClick={() => onClick(wallet.currency.code.toLowerCase())}
+    >
       <div>
-        <CryptoIcon className="cr-wallet-item__icon" code={icon_id} />
-        <span className="cr-mobile-wallet-item__currency">{currency}</span>
-        <span className="cr-mobile-wallet-item__name">{name}</span>
+        <CryptoIcon className="cr-wallet-item__icon" code={wallet.icon_id} />
+        <span className="cr-mobile-wallet-item__currency">{wallet.currency.code}</span>
+        <span className="cr-mobile-wallet-item__name">{wallet.name}</span>
       </div>
       <div className="cr-mobile-wallet-item__balance">
-        <span>
-          <Decimal fixed={fixed} children={balance || 0} />
-        </span>
+        <MoneyFormat money={wallet.balance || Money.fromDecimal(0, wallet.currency)} />
       </div>
     </div>
   );
 };
 
-const WalletItem = React.memo(
+export const WalletItem = React.memo(
   WalletItemComponent,
   areEqualSelectedProps('wallet', ['currency', 'name', 'balance', 'fixed']),
 );
-
-export { WalletItem };

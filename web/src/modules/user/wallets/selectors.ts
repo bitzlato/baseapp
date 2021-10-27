@@ -37,6 +37,7 @@ export const selectWallet =
       return;
     }
 
+    currencyCode = currencyCode.toUpperCase();
     const wallet = wallets.find((item) => item.currency.code === currencyCode);
     if (!wallet) {
       return;
