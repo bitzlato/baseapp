@@ -142,14 +142,14 @@ export class Order extends React.Component<OrderComponentProps, State> {
 
     if (width < splitBorder) {
       return (
-        <Box padding="2x" className="cr-order">
+        <div className="cr-order">
           <TabPanel
             fixed={true}
             panels={this.getPanels()}
             onTabChange={this.handleChangeTab}
             currentTabIndex={this.state.index}
           />
-        </Box>
+        </div>
       );
     }
 
