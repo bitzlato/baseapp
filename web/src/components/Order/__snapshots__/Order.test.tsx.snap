@@ -2,7 +2,7 @@
 
 exports[`Order should match snapshot 1`] = `
 <div
-  class="cr-order cr-order--extended"
+  class="cr-order cr-order--extended row rowSpacing"
 >
   <div
     class="cr-order--extended__buy"

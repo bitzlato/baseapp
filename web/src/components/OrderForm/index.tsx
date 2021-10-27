@@ -17,6 +17,10 @@ import { OrderInput } from '../OrderInput';
 import { PercentageButton } from '../PercentageButton';
 import { getTriggerSign } from 'src/containers/OpenOrders/helpers';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { Box } from '../Box/Box';
+import { Label } from '../Label/Label';
+
+import s from './Input.postcss';
 
 type OnSubmitCallback = (order: OrderProps) => void;
 type DropdownElem = number | string | React.ReactNode;
@@ -122,9 +126,6 @@ interface OrderFormState {
   triggerFocused: boolean;
   side: string;
 }
-
-const handleSetValue = (value: string | number | undefined, defaultValue: string) =>
-  value || defaultValue;
 
 export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormState> {
   constructor(props: OrderFormProps) {
@@ -301,20 +302,17 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
         const priceText = translate('page.body.trade.header.newOrder.content.price');
 
         return (
-          <div className="cr-order-input">
-            <fieldset className="cr-order-input__fieldset">
-              <label className="cr-order-input__fieldset__label">{priceText}</label>
-              <div className="cr-order-input__fieldset__input">
-                &asymp;
-                <span className="cr-order-input__fieldset__input__price">
-                  {handleSetValue(Decimal.format(safePrice, currentMarketBidPrecision, ','), '0')}
-                </span>
-              </div>
-            </fieldset>
-            <div className="cr-order-input__crypto-icon">
+          <Box grow padding row spacing className={s.input}>
+            <Label ellipsis size="sm" bold>
+              &asymp;{' '}
+              <Label primaryColor>
+                {Decimal.format(safePrice, currentMarketBidPrecision, ',') || '0'}
+              </Label>
+            </Label>
+            <Label size="sm">
               <CurrencyTicker symbol={from} />
-            </div>
-          </div>
+            </Label>
+          </Box>
         );
       default:
         break;
