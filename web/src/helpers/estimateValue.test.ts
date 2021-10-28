@@ -1,4 +1,4 @@
-import { Money, Currency as MoneyCurrency } from '@trzmaxim/money';
+import { Money, Currency as MoneyCurrency } from '@bitzlato/money-js';
 import { Currency, Market, Wallet } from 'src/modules';
 
 import { estimateUnitValue, estimateValue, findPrecision, MarketTicker } from './estimateValue';

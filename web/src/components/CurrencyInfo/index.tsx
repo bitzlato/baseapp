@@ -4,7 +4,7 @@ import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Wallet } from 'src/modules';
-import { Money } from '@trzmaxim/money';
+import { Money } from '@bitzlato/money-js';
 
 export interface CurrencyInfoProps {
   wallet: Wallet;

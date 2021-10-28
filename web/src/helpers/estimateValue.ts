@@ -1,5 +1,5 @@
 // eslint-disable
-import { Money } from '@trzmaxim/money';
+import { Money } from '@bitzlato/money-js';
 import { Decimal } from '../components/Decimal';
 import { DEFAULT_CCY_PRECISION } from '../constants';
 import { Currency, Market, Ticker, Wallet } from '../modules';

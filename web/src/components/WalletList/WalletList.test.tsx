@@ -1,4 +1,4 @@
-import { Currency, Money } from '@trzmaxim/money';
+import { Currency, Money } from '@bitzlato/money-js';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { WalletList, WalletListProps } from '../../components';
