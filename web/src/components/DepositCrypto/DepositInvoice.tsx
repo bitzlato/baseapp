@@ -14,7 +14,7 @@ import { CustomInput } from '../CustomInput';
 import { DepositSummary } from './DepositSummary';
 import s from 'src/containers/Withdraw/Withdraw.postcss';
 import { useHistory } from 'react-router';
-import { Money } from '@trzmaxim/money';
+import { Money } from '@bitzlato/money-js';
 
 interface Props {
   currency: Currency;

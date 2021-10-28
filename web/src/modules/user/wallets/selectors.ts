@@ -1,4 +1,4 @@
-import { Currency, Money } from '@trzmaxim/money';
+import { Currency, Money } from '@bitzlato/money-js';
 import { RootState } from '../../';
 import { WalletSource, Wallet } from './types';
 

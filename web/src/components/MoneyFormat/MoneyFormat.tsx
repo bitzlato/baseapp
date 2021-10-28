@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 
-import { defaultFormatOptions, FormatOptions, Money } from '@trzmaxim/money';
+import { defaultFormatOptions, FormatOptions, Money } from '@bitzlato/money-js';
 import s from './MoneyFormat.postcss';
 
 type Renderer = (amountFormatted: string) => ReactElement;

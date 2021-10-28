@@ -299,6 +299,15 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@bitzlato/money-js@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@bitzlato/money-js/-/money-js-0.0.2.tgz#220cc1d135c236ee2f4c026c71ef3a7d08e68556"
+  integrity sha512-hLGimcgIlnwOD+P4xOT1agq81Q/z50eBC8xOXUzZjDn33/J2leWd3M6w2zpyrgn3KSr0pVut3JbxrDtqZX85HQ==
+  dependencies:
+    "@types/big.js" "^6.1.2"
+    big.js "^6.1.1"
+    toformat "^2.0.0"
+
 "@braintree/sanitize-url@^5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@braintree/sanitize-url/-/sanitize-url-5.0.2.tgz#b23080fa35520e993a8a37a0f5bca26aa4650a48"
@@ -1640,15 +1649,6 @@
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
   integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
-
-"@trzmaxim/money@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@trzmaxim/money/-/money-0.0.2.tgz#6cf1c9965feaced20b835ae3b0f562e63d298dca"
-  integrity sha512-EVExwL5ZMUH6I9lQTbYttYTadur6Am7i48Owlz/nKURCV1+Klbuc1B5iTHnigssxE29WWmMiYQfXiHR56UI5Xg==
-  dependencies:
-    "@types/big.js" "^6.1.2"
-    big.js "^6.1.1"
-    toformat "^2.0.0"
 
 "@types/archy@^0.0.32":
   version "0.0.32"

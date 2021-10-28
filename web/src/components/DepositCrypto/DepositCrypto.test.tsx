@@ -1,4 +1,4 @@
-import { Money, Currency } from '@trzmaxim/money';
+import { Money, Currency } from '@bitzlato/money-js';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { Provider } from 'react-redux';

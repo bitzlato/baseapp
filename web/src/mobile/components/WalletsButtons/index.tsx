@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Currency } from '@trzmaxim/money';
+import { Currency } from '@bitzlato/money-js';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';

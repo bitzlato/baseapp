@@ -1,4 +1,4 @@
-import { Money } from '@trzmaxim/money';
+import { Money } from '@bitzlato/money-js';
 import classnames from 'classnames';
 import * as React from 'react';
 import { Button, Spinner } from 'react-bootstrap';
@@ -568,7 +568,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const wallet = wallets[selectedWalletIndex];
     const { currency, fee, type, enable_invoice } = wallet;
     const fixed = (wallet || { fixed: 0 }).fixed;
-    const currencyItem = currencies && currencies.find((item) => item.id === wallet.currency.code.toLowerCase());
+    const currencyItem =
+      currencies && currencies.find((item) => item.id === wallet.currency.code.toLowerCase());
 
     const withdrawProps: WithdrawProps = {
       withdrawDone,

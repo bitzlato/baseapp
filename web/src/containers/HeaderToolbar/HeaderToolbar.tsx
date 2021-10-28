@@ -4,7 +4,7 @@ import { selectCurrentMarket, selectMarketTickers, RootState } from 'src/modules
 import { useT } from 'src/hooks/useT';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import cn from 'classnames';
-import { Money } from '@trzmaxim/money';
+import { Money } from '@bitzlato/money-js';
 
 import s from './HeaderToolbar.postcss';
 import { HeaderToolbarItem } from './HeaderToolbarItem';

@@ -1,4 +1,4 @@
-import { Money } from '@trzmaxim/money';
+import { Money } from '@bitzlato/money-js';
 import * as React from 'react';
 import { Box } from 'src/components/Box';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Money } from '@trzmaxim/money';
+import { Money } from '@bitzlato/money-js';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { Wallet } from 'src/modules/user/wallets/types';
 import { CryptoIcon } from '../../../components/CryptoIcon';

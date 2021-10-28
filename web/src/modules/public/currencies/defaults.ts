@@ -1,4 +1,4 @@
-import { Currency as MoneyCurrency, Money } from '@trzmaxim/money';
+import { Currency as MoneyCurrency, Money } from '@bitzlato/money-js';
 
 import { Currency } from './types';
 

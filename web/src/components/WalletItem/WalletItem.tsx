@@ -6,7 +6,7 @@ import { LockIcon } from 'src/assets/icons/LockIcon';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 
 import s from './WalletItem.postcss';
-import { Money } from '@trzmaxim/money';
+import { Money } from '@bitzlato/money-js';
 
 interface Props {
   active?: boolean;

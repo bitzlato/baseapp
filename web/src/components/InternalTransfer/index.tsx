@@ -1,4 +1,4 @@
-import { Money } from '@trzmaxim/money';
+import { Money } from '@bitzlato/money-js';
 import classnames from 'classnames';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
