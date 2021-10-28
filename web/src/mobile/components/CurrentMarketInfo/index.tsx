@@ -80,6 +80,10 @@ const CurrentMarketInfoComponent: React.FC = () => {
     setOpenMarketSelector(false);
   }, [currentMarket]);
 
+  React.useEffect(() => {
+    document.body.style.overflow = isOpenMarketSelector ? 'hidden' : '';
+  }, [isOpenMarketSelector]);
+
   return (
     <div className="pg-mobile-current-market-info">
       <div className="pg-mobile-current-market-info__left">
