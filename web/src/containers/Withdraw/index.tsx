@@ -1,17 +1,17 @@
-
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { Currency, Money } from '@bitzlato/money-js';
 import { Box } from 'src/components/Box';
 import { Beneficiaries, CustomInput } from '../../components';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
-import { Beneficiary, Currency } from '../../modules';
+import { Beneficiary, Currency as CurrencyInfo } from '../../modules';
 import { WithdrawSummary } from './WithdrawSummary';
 import { BeneficiaryAddress } from './BeneficiaryAddress';
 import s from './Withdraw.postcss';
 
 export interface WithdrawProps {
-  currency: string;
-  fee: number;
+  currency: Currency;
+  fee: Money;
   onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
   fixed: number;
   className?: string;
@@ -23,7 +23,7 @@ export interface WithdrawProps {
   withdrawButtonLabel?: string;
   withdrawDone: boolean;
   isMobileDevice?: boolean;
-  ccyInfo: Currency;
+  ccyInfo: CurrencyInfo;
 }
 
 const defaultBeneficiary: Beneficiary = {
@@ -89,13 +89,13 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
     return (
       <Box padding={isMobileDevice ? undefined : '3x'} col spacing="3x">
         <Beneficiaries
-          currency={currency}
+          currency={currency.code}
           type={type}
           enableInvoice={enableInvoice}
           onChangeValue={this.handleChangeBeneficiary}
         />
         <BeneficiaryAddress beneficiary={beneficiary} />
-        <Box grow row spacing='2x'>
+        <Box grow row spacing="2x">
           <CustomInput
             type="number"
             className={s.numberInput}
@@ -173,26 +173,16 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
 
   private handleChangeInputAmount = (value: string) => {
     const { fixed } = this.props;
-    const convertedValue = cleanPositiveFloatInput(String(value));
-
-    if (convertedValue.match(precisionRegExp(fixed))) {
-      const amount = convertedValue !== '' ? Number(parseFloat(convertedValue).toFixed(fixed)) : '';
-      const total = amount !== '' ? (amount - this.props.fee).toFixed(fixed) : '';
-
-      if (Number(total) <= 0) {
-        this.setTotal((0).toFixed(fixed));
-      } else {
-        this.setTotal(total);
-      }
-
+    const amount = cleanPositiveFloatInput(value);
+    if (amount.match(precisionRegExp(fixed))) {
+      const amountMoney = Money.fromDecimal(amount || '0', this.props.currency);
+      const totalMoney = amountMoney.subtract(this.props.fee);
+      const total = totalMoney.isNegative() ? (0).toFixed(fixed) : totalMoney.toString();
       this.setState({
-        amount: convertedValue,
+        total,
+        amount,
       });
     }
-  };
-
-  private setTotal = (value: string) => {
-    this.setState({ total: value });
   };
 
   private handleChangeBeneficiary = (value: Beneficiary) => {
