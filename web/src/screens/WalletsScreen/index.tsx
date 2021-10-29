@@ -546,7 +546,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
           <WalletHistory
             label="withdraw"
             type="withdraws"
-            currency={wallet.currency.code}
+            currency={wallet.currency.code.toLowerCase()}
             withdrawSuccess={withdrawSuccess}
           />
         )}
