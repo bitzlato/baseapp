@@ -19,7 +19,7 @@ import {
   WalletList,
 } from '../../components';
 import { DEFAULT_CCY_PRECISION } from '../../constants';
-import { Withdraw, WithdrawProps } from '../../containers';
+import { Withdraw } from '../../containers';
 import { ModalWithdrawConfirmation } from '../../containers/ModalWithdrawConfirmation';
 import { ModalWithdrawSubmit } from '../../containers/ModalWithdrawSubmit';
 import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
@@ -571,28 +571,30 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const currencyItem =
       currencies && currencies.find((item) => item.id === wallet.currency.code.toLowerCase());
 
-    const withdrawProps: WithdrawProps = {
-      withdrawDone,
-      currency: currency.code.toLowerCase(),
-      fee: parseInt(fee.toString()),
-      onClick: this.toggleConfirmModal,
-      twoFactorAuthRequired: this.isTwoFactorAuthRequired(level, otp),
-      fixed,
-      type,
-      enableInvoice: enable_invoice,
-      withdrawAmountLabel: this.props.intl.formatMessage({
-        id: 'page.body.wallets.tabs.withdraw.content.amount',
-      }),
-      withdraw2faLabel: this.props.intl.formatMessage({
-        id: 'page.body.wallets.tabs.withdraw.content.code2fa',
-      }),
-      withdrawButtonLabel: this.props.intl.formatMessage({
-        id: 'page.body.wallets.tabs.withdraw.content.button',
-      }),
-      ccyInfo: currencyItem || defaultCurrency,
-    };
-
-    return otp ? <Withdraw {...withdrawProps} /> : this.isOtpDisabled();
+    return otp ? (
+      <Withdraw
+        withdrawDone={withdrawDone}
+        currency={currency}
+        fee={fee}
+        onClick={this.toggleConfirmModal}
+        twoFactorAuthRequired={this.isTwoFactorAuthRequired(level, otp)}
+        fixed={fixed}
+        type={type}
+        enableInvoice={enable_invoice}
+        withdrawAmountLabel={this.props.intl.formatMessage({
+          id: 'page.body.wallets.tabs.withdraw.content.amount',
+        })}
+        withdraw2faLabel={this.props.intl.formatMessage({
+          id: 'page.body.wallets.tabs.withdraw.content.code2fa',
+        })}
+        withdrawButtonLabel={this.props.intl.formatMessage({
+          id: 'page.body.wallets.tabs.withdraw.content.button',
+        })}
+        ccyInfo={currencyItem || defaultCurrency}
+      />
+    ) : (
+      this.isOtpDisabled()
+    );
   };
 
   private isOtpDisabled = () => {

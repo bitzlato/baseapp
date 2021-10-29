@@ -13,7 +13,11 @@ import { useBeneficiariesFetch, useCurrenciesFetch } from '../../../hooks';
 import { selectCurrencies } from '../../../modules/public/currencies';
 import { Beneficiary } from '../../../modules/user/beneficiaries';
 import { selectUserInfo } from '../../../modules/user/profile';
-import { selectWithdrawSuccess, walletsWithdrawCcyFetch } from '../../../modules/user/wallets';
+import {
+  selectWithdrawSuccess,
+  Wallet,
+  walletsWithdrawCcyFetch,
+} from '../../../modules/user/wallets';
 import { ModalWithdrawConfirmation } from '../../components';
 
 const defaultBeneficiary: Beneficiary = {
@@ -26,7 +30,11 @@ const defaultBeneficiary: Beneficiary = {
   },
 };
 
-const WalletWithdrawBodyComponent = (props) => {
+interface Props {
+  wallet: Wallet;
+}
+
+const WalletWithdrawBodyComponent: React.FC<Props> = (props) => {
   const [withdrawSubmitModal, setWithdrawSubmitModal] = React.useState(false);
   const [withdrawData, setWithdrawData] = React.useState({
     amount: '',
@@ -58,7 +66,7 @@ const WalletWithdrawBodyComponent = (props) => {
     () => intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.button' }),
     [intl],
   );
-  const currencyItem = currencies && currencies.find((item) => item.id === currency);
+  const currencyItem = currencies && currencies.find((item) => item.id === currency.code);
 
   const isTwoFactorAuthRequired = (level: number, is2faEnabled: boolean) => {
     return level > 1 || (level === 1 && is2faEnabled);
@@ -108,7 +116,7 @@ const WalletWithdrawBodyComponent = (props) => {
 
     const withdrawRequest = {
       amount,
-      currency: currency.toLowerCase(),
+      currency: currency.code.toLowerCase(),
       otp: otpCode,
       beneficiary_id: String(beneficiary.id),
     };
@@ -157,7 +165,7 @@ const WalletWithdrawBodyComponent = (props) => {
       );
     }
 
-    if (user.level < memberLevels?.withdraw.minimum_level) {
+    if (user.level < (memberLevels?.withdraw.minimum_level ?? 0)) {
       return (
         <Blur
           className={`pg-blur-withdraw pg-blur-withdraw-${currencyItem?.type}`}
@@ -212,7 +220,7 @@ const WalletWithdrawBodyComponent = (props) => {
         <ModalWithdrawSubmit
           isMobileDevice
           show={withdrawSubmitModal}
-          currency={currency}
+          currency={currency.code}
           onSubmit={toggleSubmitModal}
         />
       </div>
@@ -220,7 +228,7 @@ const WalletWithdrawBodyComponent = (props) => {
         <ModalWithdrawConfirmation
           show={withdrawData.withdrawConfirmModal}
           amount={withdrawData.total}
-          currency={currency}
+          currency={currency.code}
           precision={currencyItem ? currencyItem.precision : 0}
           rid={getConfirmationAddress()}
           onSubmit={handleWithdraw}
@@ -231,6 +239,4 @@ const WalletWithdrawBodyComponent = (props) => {
   );
 };
 
-const WalletWithdrawBody = React.memo(WalletWithdrawBodyComponent);
-
-export { WalletWithdrawBody };
+export const WalletWithdrawBody = React.memo(WalletWithdrawBodyComponent);
