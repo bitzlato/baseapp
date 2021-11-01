@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { Modal } from '../../mobile/components/Modal';
+import { MobileModal } from '../../mobile/components/Modal';
 
 interface Props {
   handleToggleFailModal: () => void;
@@ -65,13 +65,13 @@ const BeneficiariesFailAddModalComponent: React.FC<Props> = (props: Props) => {
   }, [isMobileDevice]);
 
   return props.isMobileDevice ? (
-    <Modal
+    <MobileModal
       isOpen
       onClose={props.handleToggleFailModal}
       title={formatMessage({ id: 'page.body.wallets.beneficiaries.failAddModal.content' })}
     >
       {renderContent()}
-    </Modal>
+    </MobileModal>
   ) : (
     renderContent()
   );

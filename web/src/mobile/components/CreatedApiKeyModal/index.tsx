@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { CopyableTextField } from '../../../components';
 import { copy } from '../../../helpers';
 import { WarningIcon } from '../../assets/images/WarningIcon';
-import { Modal } from '../../components/Modal';
+import { MobileModal } from '../../components/Modal';
 
 export const CreatedApiKeyModalComponent = (props) => {
   const [apiKey, setApiKey] = React.useState({ kid: '', secret: '' });
@@ -69,14 +69,14 @@ export const CreatedApiKeyModalComponent = (props) => {
 
   return (
     <div className="pg-mobile-created-api-key-modal">
-      <Modal
+      <MobileModal
         isOpen={props.showModal}
         onClose={props.closeCreatedApiKeyModal}
         title={intl.formatMessage({ id: 'page.mobile.createdApiKeyModal.title' })}
       >
         {renderModalBody()}
         {renderModalFooter()}
-      </Modal>
+      </MobileModal>
     </div>
   );
 };

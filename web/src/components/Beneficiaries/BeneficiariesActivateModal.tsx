@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { LetterIcon } from '../../assets/images/LetterIcon';
-import { Modal } from '../../mobile/components/Modal';
+import { MobileModal } from '../../mobile/components/Modal';
 import {
   beneficiariesActivate,
   beneficiariesResendPin,
@@ -187,13 +187,13 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
   }, [isMobileDevice, renderConfirmationModalBody, renderConfirmationModalHeader]);
 
   return isMobileDevice ? (
-    <Modal
+    <MobileModal
       onClose={props.handleToggleConfirmationModal}
       title={formatMessage({ id: 'page.mobile.wallet.withdraw.modal.new.account' })}
       isOpen
     >
       {renderContent()}
-    </Modal>
+    </MobileModal>
   ) : (
     renderContent()
   );

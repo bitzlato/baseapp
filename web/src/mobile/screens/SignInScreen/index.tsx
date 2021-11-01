@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { selectSignInRequire2FA } from '../../../modules/user/auth';
 import { SignInScreen } from '../../../screens/SignInScreen';
-import { Modal } from '../../components';
+import { MobileModal } from '../../components';
 
 const SignInMobileScreen: React.FC = () => {
   const require2FA = useSelector(selectSignInRequire2FA);
@@ -21,7 +21,7 @@ const SignInMobileScreen: React.FC = () => {
 
   return (
     <div className={className}>
-      <Modal
+      <MobileModal
         isOpen={true}
         onClose={() => history.push('/trading')}
         onBack={() => !require2FA && history.push('/signup')}
@@ -29,7 +29,7 @@ const SignInMobileScreen: React.FC = () => {
         title={intl.formatMessage(title)}
       >
         <SignInScreen />
-      </Modal>
+      </MobileModal>
     </div>
   );
 };

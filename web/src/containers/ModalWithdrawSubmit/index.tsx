@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { IntlProps } from '../../';
 import { Modal } from '../../components';
-import { Modal as MobileModal } from '../../mobile/components/Modal';
+import { MobileModal } from '../../mobile/components/Modal';
 
 interface ModalWithdrawSubmitProps {
   currency: string;

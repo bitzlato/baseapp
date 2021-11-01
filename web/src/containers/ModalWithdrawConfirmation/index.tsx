@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { IntlProps } from '../../';
 import { Decimal, Modal } from '../../components';
-import { Modal as MobileModal } from '../../mobile/components/Modal';
+import { MobileModal as MobileModal } from '../../mobile/components/Modal';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 
 interface ModalWithdrawConfirmationProps {

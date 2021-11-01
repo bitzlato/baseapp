@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { CustomInput } from '../../../components/CustomInput';
-import { Modal } from '../../components/Modal';
+import { MobileModal } from '../../components/Modal';
 
 export const TwoFactorModalComponent = (props) => {
   const [code2FA, setCode2FA] = React.useState('');
@@ -64,14 +64,14 @@ export const TwoFactorModalComponent = (props) => {
 
   return (
     <div className="cr-mobile-two-fa-modal">
-      <Modal
+      <MobileModal
         isOpen={props.showModal}
         onClose={() => handleToggle2FA(false)}
         title={intl.formatMessage({ id: 'page.mobile.twoFactorModal.title' })}
       >
         {renderModalBody()}
         {renderModalFooter()}
-      </Modal>
+      </MobileModal>
     </div>
   );
 };

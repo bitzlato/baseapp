@@ -8,7 +8,7 @@ import { DEFAULT_CCY_PRECISION } from '../../../constants';
 import { MarketsTable } from '../../../containers';
 import { Market, selectCurrentMarket, selectMarkets, selectMarketTickers } from '../../../modules';
 import { ChevronIcon } from '../../assets/images/ChevronIcon';
-import { Modal } from '../../components';
+import { MobileModal } from '../../components';
 import { MarketName } from 'src/components/MarketName/MarketName';
 
 const defaultTicker = {
@@ -123,7 +123,7 @@ const CurrentMarketInfoComponent: React.FC = () => {
           </span>
         </div>
       </div>
-      <Modal
+      <MobileModal
         header={renderModalHeader}
         isOpen={isOpenMarketSelector}
         onClose={() => setOpenMarketSelector(!isOpenMarketSelector)}
@@ -133,7 +133,7 @@ const CurrentMarketInfoComponent: React.FC = () => {
           handleChangeCurrentMarket={() => setOpenMarketSelector(false)}
           markets={marketsSearchKey && filteredMarkets}
         />
-      </Modal>
+      </MobileModal>
     </div>
   );
 };

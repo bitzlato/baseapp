@@ -12,7 +12,7 @@ interface Props {
   onBack?: () => void;
 }
 
-export const Modal: React.FC<Props> = (props) => {
+export const MobileModal: React.FC<Props> = (props) => {
   const [shouldAnimate, setShouldAnimate] = React.useState(false);
 
   React.useEffect(() => {

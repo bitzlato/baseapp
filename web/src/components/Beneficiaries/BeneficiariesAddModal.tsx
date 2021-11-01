@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { CustomInput } from 'src/components/CustomInput';
 import { BZ_PUBLIC_NAME, isValidAddress } from 'src/helpers/validateBeneficiaryAddress';
-import { Modal } from 'src/mobile/components/Modal';
+import { MobileModal } from 'src/mobile/components/Modal';
 import {
   alertPush,
   beneficiariesCreate,
@@ -493,13 +493,13 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
   }, [type, isMobileDevice, getState]);
 
   return isMobileDevice ? (
-    <Modal
+    <MobileModal
       title={formatMessage({ id: 'page.body.wallets.beneficiaries.addAddressModal.header' })}
       onClose={props.handleToggleAddAddressModal}
       isOpen
     >
       {renderContent()}
-    </Modal>
+    </MobileModal>
   ) : (
     renderContent()
   );
