@@ -175,6 +175,7 @@ export const ru: LangType = {
   'page.body.landing.footer.support': 'Поддержка',
   'page.body.landing.footer.about': 'О нас',
   'page.body.landing.footer.blog': 'Блог',
+  'page.body.landing.footer.api': 'API',
   'page.body.landing.footer.reviews': 'Отзывы о платформе',
   'page.body.landing.footer.p2p': 'P2P обмен',
   'page.body.landing.footer.paymentGateway': 'Платежный шлюз',

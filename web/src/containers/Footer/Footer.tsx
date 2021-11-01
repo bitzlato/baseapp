@@ -51,6 +51,9 @@ export const Footer: FC = () => {
               <a className={s.link} href={getBitzlatoLink(languageCode, 'blog')}>
                 {t('page.body.landing.footer.blog')}
               </a>
+              <Link to="/docs" className={s.link}>
+                {t('page.body.landing.footer.api')}
+              </Link>
             </div>
           </div>
 

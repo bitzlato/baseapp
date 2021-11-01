@@ -176,6 +176,7 @@ export const en = {
   'page.body.landing.footer.support': 'Support',
   'page.body.landing.footer.about': 'About us',
   'page.body.landing.footer.blog': 'Blog',
+  'page.body.landing.footer.api': 'API',
   'page.body.landing.footer.reviews': 'Reviews',
   'page.body.landing.footer.p2p': 'P2P platform',
   'page.body.landing.footer.paymentGateway': 'Payment Gateway',
