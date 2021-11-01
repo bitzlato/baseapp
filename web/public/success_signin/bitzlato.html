@@ -1,30 +1,36 @@
 <html>
   <head>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="/config/env.js"></script>
     <style>
-      html,
-      body {
-        height: 100%;
-      }
-
-      html {
-        display: table;
-        margin: auto;
+      * {
+        box-sizing: border-box;
       }
 
       body {
-        display: table-cell;
-        vertical-align: middle;
+        margin: 0;
+        font-family: 'Montserrat', helvetica, sans-serif;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        margin-bottom: 2rem;
       }
     </style>
   </head>
   <body>
-    <img
-      src="https://market.bitzlato.com/assets/bitzlato_logo_blue.png"
-      style="margin-bottom: 2rem"
-    />
-    <center>Congratulations, you are successfully logged in! Redirecting to the market..</center>
+    <img src="https://market.bitzlato.com/assets/bitzlato_logo_blue.png" />
+    <center>Congratulations, you are successfully logged in! Redirecting to the market...</center>
     <script type="text/javascript">
       const authorizeOnPeatioWithAuth0ID = (id_token) =>
         fetch(window.env.auth0.auth_url + '?id_token=' + id_token, {
