@@ -1,6 +1,7 @@
 @media screen and (max-width: 767px), (max-height: 599px) {
   .pg-trading-screen-mobile .pg-ticker-table__table tbody {
     min-height: calc(60vh);
+    overflow-y: auto;
   }
 
   .pg-ticker-table {
@@ -45,6 +46,7 @@
 
       tbody {
         min-height: calc(100vh - 165px);
+        overflow: hidden;
       }
 
       thead > tr,
