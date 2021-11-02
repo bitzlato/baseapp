@@ -106,7 +106,7 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
       </Box>
       <Box row spacing="2x">
         {wallet.currency.code === 'ETH' && !isMobileDevice && walletAddress && (
-          <MetaMaskButton depositAddress={walletAddress} />
+          <MetaMaskButton depositAddress={walletAddress} currency={currency} />
         )}
         <CopyableTextField
           className={s.field}

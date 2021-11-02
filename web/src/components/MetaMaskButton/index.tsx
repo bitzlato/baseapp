@@ -1,63 +1,120 @@
-import { Web3Provider } from '@ethersproject/providers';
-import { useWeb3React as useWeb3ReactCore } from '@web3-react/core';
-import { InjectedConnector } from '@web3-react/injected-connector';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { MetaMaskLogo } from '../../assets/images/MetaMaskLogo';
-import { Web3ProviderWrapper } from '../../helpers';
-import { alertPush, sendError } from '../../modules';
+import BN from 'bignumber.js';
+import { Money } from '@bitzlato/money-js';
+import { getMetaMaskProvider, HexString, ProviderRpcError } from '@bitzlato/ethereum-provider';
+import MetaMaskOnboarding from '@metamask/onboarding';
 
-interface OwnProps {
+import { MetaMaskLogo } from '../../assets/images/MetaMaskLogo';
+import { alertPush, Currency } from '../../modules';
+import { useT } from 'src/hooks/useT';
+import { CustomInput } from '../CustomInput';
+
+import s from 'src/containers/Withdraw/Withdraw.postcss';
+
+interface Props {
   depositAddress: string;
+  currency: Currency;
 }
 
-type Props = OwnProps;
-
-export const injected = new InjectedConnector({ supportedChainIds: [1] });
-
-export const MetaMaskButtonComponent: React.FunctionComponent<Props> = (props: Props) => {
-  const { account, activate, connector, error } = useWeb3ReactCore<Web3Provider>();
-  const [activatingConnector, setActivatingConnector] = React.useState<any>();
+export const MetaMaskButton: React.FC<Props> = (props) => {
+  const t = useT();
   const dispatch = useDispatch();
+  const [isOpen, setOpen] = React.useState(false);
+  const [amount, setAmount] = React.useState('');
+  const [isAmountValid, setAmountValid] = React.useState(false);
 
-  const handleConnectWallet = React.useCallback(() => {
-    if (account) {
-      dispatch(alertPush({ message: ['metamask.success.connected'], type: 'success' }));
+  const toggleModal = () => {
+    setOpen(!isOpen);
+  };
+
+  const handleSubmit = async () => {
+    const provider = getMetaMaskProvider();
+    if (provider) {
+      try {
+        const accounts = await provider.request({ method: 'eth_requestAccounts' });
+        await provider.request({
+          method: 'eth_sendTransaction',
+          params: [
+            {
+              from: accounts[0],
+              to: props.depositAddress,
+              value: toWei(amount),
+            },
+          ],
+        });
+        toggleModal();
+      } catch (e) {
+        dispatch(alertPush({ message: [(e as ProviderRpcError).message], type: 'error' }));
+      }
     } else {
-      setActivatingConnector(injected);
-      // tslint:disable-next-line: no-floating-promises
-      activate(injected);
+      new MetaMaskOnboarding().startOnboarding();
     }
-  }, [account, activate, dispatch]);
+  };
 
-  React.useEffect(() => {
-    if (activatingConnector && activatingConnector === connector && account) {
-      dispatch(alertPush({ message: ['metamask.success.connected'], type: 'success' }));
-      setActivatingConnector(undefined);
-    }
-  }, [activatingConnector, connector, account, dispatch]);
-
-  React.useEffect(() => {
-    if (!!error) {
-      dispatch(
-        sendError({
-          error,
-          processingType: 'alert',
-          extraOptions: {
-            type: 'METAMASK_HANDLE_ERROR',
-          },
-        }),
+  const handleChangeAmount = (value: string) => {
+    setAmount(value);
+    try {
+      setAmountValid(
+        Money.fromDecimal(value, props.currency).gte(props.currency.min_deposit_amount),
       );
+    } catch (error) {
+      setAmountValid(false);
     }
+  };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [!!error, dispatch]);
-
-  return <MetaMaskLogo className="pg-metamask" onClick={handleConnectWallet} />;
+  return (
+    <>
+      <MetaMaskLogo
+        title={t('page.body.wallets.deposits.metamask')}
+        className="pg-metamask"
+        onClick={toggleModal}
+      />
+      {isOpen && (
+        <div className="expired-session-modal">
+          <div className="cr-modal">
+            <div className="cr-email-form">
+              <div className="cr-email-form__options-group">
+                <div className="cr-email-form__option">
+                  <div className="cr-email-form__option-inner">
+                    {t('page.body.wallets.deposits.addDepositModal.header')}
+                    <span className="cr-email-form__close" onClick={toggleModal} />
+                  </div>
+                </div>
+              </div>
+              <div className="cr-email-form__form-content">
+                <div className="cr-email-form__group">
+                  <CustomInput
+                    type="number"
+                    label={t('page.body.wallets.deposits.addDepositModal.amount')}
+                    placeholder={t('page.body.wallets.deposits.addDepositModal.amount')}
+                    defaultLabel="Amount"
+                    handleChangeInput={handleChangeAmount}
+                    inputValue={amount}
+                    className={s.numberInput}
+                    autoFocus={true}
+                  />
+                </div>
+                <div className="cr-email-form__button-wrapper">
+                  <Button
+                    disabled={!isAmountValid}
+                    onClick={handleSubmit}
+                    size="lg"
+                    variant="primary"
+                  >
+                    {t('page.body.wallets.deposits.addDepositModal.body.button')}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 };
 
-export const MetaMaskButton: React.FunctionComponent<Props> = (props: Props) => (
-  <Web3ProviderWrapper>
-    <MetaMaskButtonComponent {...props} />
-  </Web3ProviderWrapper>
-);
+function toWei(amount: string): HexString {
+  return new BN(amount).multipliedBy(1e18).toString(16);
+}

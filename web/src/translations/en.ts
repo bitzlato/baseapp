@@ -312,6 +312,7 @@ export const en = {
     'You need to confirm your account to add a beneficiary',
   'page.body.wallets.beneficiaries.failAddModal.button': 'Confirm an account',
 
+  'page.body.wallets.deposits.metamask': 'Deposit using the Metamask',
   'page.body.wallets.deposits.addDepositModal.header': 'Select amount to deposit',
   'page.body.wallets.deposits.addDepositModal.body.button': 'Submit',
   'page.body.wallets.deposits.addDepositModal.body.invalidAmount': 'Invalid amount',

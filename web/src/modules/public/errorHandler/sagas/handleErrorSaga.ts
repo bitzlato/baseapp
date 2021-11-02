@@ -2,7 +2,6 @@ import Bugsnag from '@bugsnag/js';
 import { call, put } from 'redux-saga/effects';
 import { alertPush } from '../../alert';
 import { ErrorHandlerFetch, getErrorData } from '../actions';
-import { getMetaMaskErrorMessage } from '../helpers/getMetaMaskErrorMessage';
 
 export function* handleErrorSaga(action: ErrorHandlerFetch) {
   const { processingType, extraOptions, error } = action.payload;
@@ -12,14 +11,6 @@ export function* handleErrorSaga(action: ErrorHandlerFetch) {
 
     if (type) {
       switch (type) {
-        case 'METAMASK_HANDLE_ERROR':
-          error.message = [getMetaMaskErrorMessage(error)];
-
-          if (error.message[0] === 'metamask.error.unknown') {
-            yield call(handleConsoleError, error);
-          }
-
-          break;
         default:
           window.console.log(`Unexpected action with type: ${type}`);
           break;
