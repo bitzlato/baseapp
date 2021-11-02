@@ -20,14 +20,13 @@
     "clean": "rimraf build src/**/*.postcss.d.ts"
   },
   "dependencies": {
+    "@bitzlato/ethereum-provider": "^0.1.0",
     "@bitzlato/money-js": "^0.0.2",
     "@bugsnag/js": "^7.11.0",
     "@bugsnag/plugin-react": "^7.11.0",
-    "@ethersproject/providers": "^5.0.13",
     "@formatjs/intl-pluralrules": "^3.2.5",
     "@formatjs/intl-relativetimeformat": "^7.0.0",
-    "@web3-react/core": "^6.1.1",
-    "@web3-react/injected-connector": "^6.0.7",
+    "@metamask/onboarding": "^1.0.1",
     "axios": "^0.21.1",
     "bignumber.js": "^9.0.1",
     "bitcoincash-regex": "^1.1.9",

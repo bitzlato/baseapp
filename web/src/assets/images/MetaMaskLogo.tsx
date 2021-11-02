@@ -1,13 +1,14 @@
 import * as React from 'react';
 
 interface Props {
+  title?: string;
   className?: string;
   onClick?: () => void;
 }
 
 export const MetaMaskLogo: React.FC<Props> = (props: Props) => {
   return (
-    <div className={props.className} onClick={props.onClick}>
+    <div title={props.title} className={props.className} onClick={props.onClick}>
       <svg
         width="35"
         height="33"

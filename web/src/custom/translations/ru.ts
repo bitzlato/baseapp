@@ -321,6 +321,7 @@ export const ru: LangType = {
     'You need to confirm your account to add a beneficiary',
   'page.body.wallets.beneficiaries.failAddModal.button': 'Confirm phone',
 
+  'page.body.wallets.deposits.metamask': 'Пополнить через Metamask',
   'page.body.wallets.deposits.addDepositModal.header': 'Укажите сумму пополнения',
   'page.body.wallets.deposits.addDepositModal.body.button': 'Отправить',
   'page.body.wallets.deposits.addDepositModal.body.invalidAmount': 'Недопустимое значение',
