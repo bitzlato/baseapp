@@ -26,7 +26,6 @@
     "@ethersproject/providers": "^5.0.13",
     "@formatjs/intl-pluralrules": "^3.2.5",
     "@formatjs/intl-relativetimeformat": "^7.0.0",
-    "@openware/react-components": "^0.0.5",
     "@web3-react/core": "^6.1.1",
     "@web3-react/injected-connector": "^6.0.7",
     "axios": "^0.21.1",
