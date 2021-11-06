@@ -161,13 +161,13 @@ export const MarketSelectorItems: FC<Props> = ({
       </button>
     );
   });
-  const renderCells = [
-    (data: CellData) => {
-      if (typeof data === 'string') {
-        return <MarketName name={data} />;
-      }
-    },
-  ];
+
+  const renderCell = (data: CellData) => {
+    if (typeof data === 'string') {
+      return <MarketName name={data} />;
+    }
+    return data;
+  };
 
   return (
     <div className={s.items}>
@@ -177,7 +177,7 @@ export const MarketSelectorItems: FC<Props> = ({
         onSelect={handleSelect}
         selectedKey={currentMarket?.name}
         rowKeyIndex={0}
-        renderCells={renderCells}
+        renderCell={renderCell}
       />
     </div>
   );

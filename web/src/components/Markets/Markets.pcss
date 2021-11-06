@@ -11,6 +11,7 @@
 
   .cr-table {
     background: var(--body-background-color);
+    table-layout: fixed;
 
     tbody {
       tr {
@@ -27,14 +28,11 @@
     th {
       font-size: 0.83em;
       font-weight: lighter;
-      padding: 6px 0;
     }
 
     td {
       color: var(--table-text-color);
       font-size: 0.83em;
-      padding: 6px 0;
-      width: 33%;
     }
 
     .__positive {
@@ -49,14 +47,23 @@
 
     th:first-child,
     td:first-child {
-      padding-left: 12px;
       text-align: left;
+    }
+
+    td,
+    th {
+      &:nth-child(2) {
+        overflow: hidden;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
 
     th:last-child,
     td:last-child {
-      padding-right: 12px;
       text-align: right;
+      width: 20%;
     }
 
     tr:nth-child(even) {

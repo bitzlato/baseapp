@@ -4,10 +4,6 @@
   text-align: left;
   width: 100%;
 
-  .cr-markets .cr-table__row--selected td {
-    color: var(--table-text-color);
-  }
-
   &--loading {
     align-items: center;
     background: transparent;
@@ -34,15 +30,6 @@
         padding-left: calc(var(--gap) * 2);
       }
     }
-
-    .cr-table {
-      td,
-      th {
-        &:nth-child(2) {
-          text-align: right;
-        }
-      }
-    }
   }
 
   .cr-table-header__content {
@@ -59,36 +46,4 @@
   margin-left: calc(var(--gap) * 2);
   margin-right: 0;
   padding: 0 !important;
-}
-
-.cr-markets {
-  padding-bottom: 0 !important;
-
-  .cr-table {
-    td {
-      cursor: pointer;
-    }
-
-    &__head {
-      th:last-child {
-        width: calc(var(--big-gap) * 1.3);
-      }
-    }
-
-    &__row {
-      &--selected {
-        td {
-          color: var(--table-text-color);
-        }
-      }
-    }
-
-    .__positive {
-      color: var(--bids) !important;
-    }
-
-    .__negative {
-      color: var(--asks) !important;
-    }
-  }
 }

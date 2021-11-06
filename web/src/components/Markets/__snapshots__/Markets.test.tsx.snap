@@ -44,7 +44,7 @@ exports[`Markets should render 1`] = `
         >
           <td>
             <span
-              style="white-space:nowrap"
+              class="noWrap"
             >
               <span
                 class="currency"
@@ -64,7 +64,12 @@ exports[`Markets should render 1`] = `
             </span>
           </td>
           <td>
-            0.223100
+            <span
+              class="ellipsis"
+              title="0.223100"
+            >
+              0.223100
+            </span>
           </td>
           <td>
             <span
@@ -79,7 +84,7 @@ exports[`Markets should render 1`] = `
         >
           <td>
             <span
-              style="white-space:nowrap"
+              class="noWrap"
             >
               <span
                 class="currency"
@@ -99,7 +104,12 @@ exports[`Markets should render 1`] = `
             </span>
           </td>
           <td>
-            0.223100
+            <span
+              class="ellipsis"
+              title="0.223100"
+            >
+              0.223100
+            </span>
           </td>
           <td>
             <span
@@ -114,7 +124,7 @@ exports[`Markets should render 1`] = `
         >
           <td>
             <span
-              style="white-space:nowrap"
+              class="noWrap"
             >
               <span
                 class="currency"
@@ -134,7 +144,12 @@ exports[`Markets should render 1`] = `
             </span>
           </td>
           <td>
-            0.223100
+            <span
+              class="ellipsis"
+              title="0.223100"
+            >
+              0.223100
+            </span>
           </td>
           <td>
             <span

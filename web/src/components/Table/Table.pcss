@@ -23,7 +23,11 @@
         color: var(--table-text-color);
         font-size: calc(var(--gap) * 4);
         font-weight: lighter;
-        padding: 6px 12px;
+        padding-left: 5px;
+
+        &:last-child {
+          padding-right: 5px;
+        }
       }
     }
   }
@@ -36,9 +40,13 @@
 
       td {
         color: var(--table-text-color);
-        padding: 6px 12px;
+        padding-left: 5px;
         position: relative;
         z-index: 10;
+
+        &:last-child {
+          padding-right: 5px;
+        }
       }
     }
 
