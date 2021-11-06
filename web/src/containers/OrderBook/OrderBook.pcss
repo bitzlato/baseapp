@@ -58,16 +58,9 @@
   }
 
   .cr-table {
-    &__head {
-      th {
-        width: 33% !important;
-      }
-    }
-
     &__body {
       td {
         color: var(--table-text-color);
-        width: 33% !important;
 
         span:first-child.cr-decimal__opacity {
           opacity: 0.6;
@@ -79,21 +72,13 @@
   .cr-combined-order-book {
     .cr-table {
       &__head {
-        th:first-child {
-          text-align: right;
-        }
-
-        th:nth-child(2) {
+        th {
           text-align: right;
         }
       }
 
       &__body {
-        td:first-child {
-          text-align: right;
-        }
-
-        td:nth-child(2) {
+        td {
           text-align: right;
         }
       }
@@ -128,7 +113,7 @@
           thead {
             display: table;
             position: fixed;
-            top: 32px;
+            top: 36px;
             width: 100%;
             z-index: 2222;
           }
@@ -146,10 +131,6 @@
           top: 0;
 
           .cr-table {
-            td {
-              width: 33% !important;
-            }
-
             &-background {
               left: 0;
               right: 0;
@@ -173,7 +154,7 @@
           border-top: 1px solid var(--order-book-last-market-price-border-color);
           left: 0;
           right: 0;
-          top: calc(50% + 35px);
+          top: calc(50% + 25px);
 
           .cr-table {
             &-container {
@@ -231,9 +212,9 @@
       }
 
       &-market {
+        background: var(--table-background-color);
         border-top: 1px solid var(--order-book-last-market-price-border-color);
         position: fixed;
-        background: var(--table-background-color);
       }
 
       .cr-table-background {

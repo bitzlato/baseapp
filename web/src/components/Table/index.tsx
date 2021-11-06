@@ -77,7 +77,7 @@ export interface TableProps {
   /**
    * Additional custom render functions
    */
-  renderCells?: readonly ((data: CellData) => React.ReactNode)[];
+  renderCell?: (data: CellData, col: number) => React.ReactNode;
 }
 
 /**
@@ -115,8 +115,7 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
     (row: CellData[]) => {
       return row && row.length ? (
         row.map((c, index: number) => {
-          const cellContent =
-            typeof props.renderCells?.[index] !== 'undefined' ? props.renderCells[index](c) : c;
+          const cellContent = props.renderCell !== undefined ? props.renderCell(c, index) : c;
           return (
             <td key={index} colSpan={row.length === 1 ? props.colSpan : undefined}>
               {cellContent}

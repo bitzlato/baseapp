@@ -5,6 +5,7 @@ import { hasDuplicates } from '../../helpers';
 import { FilterInput } from '../FilterInput';
 import { CellData, Table } from '../Table';
 import { MarketName } from '../MarketName/MarketName';
+import { Label } from '../Label/Label';
 
 export interface MarketsProps {
   /**
@@ -128,17 +129,27 @@ export const Markets = (props: MarketsProps) => {
 
     return fd.map((row) => row.map(mapRows));
   }, [data, mapRows, searchKey]);
-  const renderCells = [
-    (data: CellData) => {
-      if (typeof data === 'string') {
+
+  const renderCell = (data: CellData, col: number) => {
+    switch (col) {
+      case 0:
         return (
-          <span style={{ whiteSpace: 'nowrap' }}>
-            <MarketName name={data} />
-          </span>
+          <Label noWrap>
+            <MarketName name={data as string} />
+          </Label>
         );
-      }
-    },
-  ];
+      case 1:
+        const s = data as string;
+        return (
+          <Label ellipsis title={s}>
+            {s}
+          </Label>
+        );
+
+      default:
+        return data;
+    }
+  };
 
   return (
     <div className="cr-markets">
@@ -150,7 +161,7 @@ export const Markets = (props: MarketsProps) => {
         header={headers || DEFAULT_MARKET_HEADERS}
         onSelect={props.onSelect}
         titleComponent={title || 'Markets'}
-        renderCells={renderCells}
+        renderCell={renderCell}
       />
       <FilterInput data={props.data} filter={searchFilter} placeholder={filterPlaceholder} />
     </div>

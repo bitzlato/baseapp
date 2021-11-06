@@ -13,6 +13,7 @@ interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   bold?: boolean;
   ellipsis?: boolean;
   center?: boolean;
+  noWrap?: boolean;
 }
 
 export const Label: React.FC<Props> = ({
@@ -27,6 +28,7 @@ export const Label: React.FC<Props> = ({
   bold,
   ellipsis,
   center,
+  noWrap,
   ...others
 }) => {
   const c = cn(
@@ -42,6 +44,7 @@ export const Label: React.FC<Props> = ({
     bold && s.bold,
     ellipsis && s.ellipsis,
     center && s.center,
+    noWrap && s.noWrap,
   );
   return <span className={c} {...others} />;
 };
