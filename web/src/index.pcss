@@ -27,7 +27,7 @@
   --rgap: 0.5rem;
   --big-gap: 60px;
   --border-radius: 5px;
-  --mobile-footer-height: calc(52px + max(env(safe-area-inset-bottom) - 15px, 0));
+  --mobile-footer-height: calc(52px + max(env(safe-area-inset-bottom) - 15px, 0px));
   --mobile-bottom-buttons-height: 54px;
 }
 
@@ -96,7 +96,6 @@ input[type='button'] {
     line-height: 16px;
   }
 
-  td,
   th {
     font-size: 0.8em !important;
   }
@@ -124,7 +123,7 @@ input[type='button'] {
 
     td {
       background: transparent;
-      font-size: 1em !important;
+      font-size: 1em;
       padding-bottom: calc(var(--gap) * 1.38) !important;
       padding-top: calc(var(--gap) * 1.38) !important;
     }
