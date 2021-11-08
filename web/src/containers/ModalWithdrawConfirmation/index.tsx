@@ -75,7 +75,7 @@ class ModalWithdraw extends React.Component<Props> {
           className="btn-block mr-1 mt-1 btn-lg"
           onClick={this.props.onDismiss}
           size="lg"
-          variant="primary"
+          variant="secondary"
         >
           {this.translate('page.body.wallets.tabs.withdraw.modal.button.cancel')}
         </Button>
