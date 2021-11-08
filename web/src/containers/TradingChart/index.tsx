@@ -181,6 +181,8 @@ export class TradingChartComponent extends React.PureComponent<Props> {
     }
 
     this.tvWidget.onChartReady(() => {
+      // this.tvWidget!.activeChart().executeActionById('drawingToolbarAction');
+
       this.tvWidget!.activeChart().setSymbol(currentMarket.id, () => {
         print('Symbol set', currentMarket.id);
       });

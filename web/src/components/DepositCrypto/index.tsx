@@ -2,6 +2,8 @@ import cn from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { isMetaMaskInstalled } from '@bitzlato/ethereum-provider';
+
 import { useT } from 'src/hooks/useT';
 import { formatCCYAddress } from '../../helpers';
 import { Currency, selectMobileDeviceState, Wallet } from '../../modules';
@@ -93,6 +95,8 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
   const size = dimensions || QR_SIZE;
   const disabled = !wallet.deposit_address?.address;
   const onCopy = !disabled ? handleOnCopy : undefined;
+  const showMetamask =
+    wallet.currency.code === 'ETH' && (!isMobileDevice || isMetaMaskInstalled()) && walletAddress;
 
   return (
     <Box col spacing="3x" className="cr-deposit-crypto">
@@ -105,9 +109,9 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
         )}
       </Box>
       <Box row spacing="2x">
-        {wallet.currency.code === 'ETH' && !isMobileDevice && walletAddress && (
+        {showMetamask ? (
           <MetaMaskButton depositAddress={walletAddress} currency={currency} />
-        )}
+        ) : null}
         <CopyableTextField
           className={s.field}
           value={walletAddress || error}
