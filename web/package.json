@@ -20,7 +20,7 @@
     "clean": "rimraf build src/**/*.postcss.d.ts"
   },
   "dependencies": {
-    "@bitzlato/ethereum-provider": "^0.1.0",
+    "@bitzlato/ethereum-provider": "^0.1.1",
     "@bitzlato/money-js": "^0.0.2",
     "@bugsnag/js": "^7.11.0",
     "@bugsnag/plugin-react": "^7.11.0",

@@ -299,10 +299,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bitzlato/ethereum-provider@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@bitzlato/ethereum-provider/-/ethereum-provider-0.1.0.tgz#5d93e5e9d46ee32d727e9ae01595da18ccda84b9"
-  integrity sha512-jdt2P0n/xazu00IsZ0PReXPLz31YnRYtHHzEP2eYEXDVrL+7bqrhNgtD7/0dfNOlef5zyfAqb7S6+fq9EfqNdw==
+"@bitzlato/ethereum-provider@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@bitzlato/ethereum-provider/-/ethereum-provider-0.1.1.tgz#d0d21f81186897f571fb5c2047892bc5620339b3"
+  integrity sha512-89MM+pc9g3u2WNT7BUA59p1lJfVUitfKqSJlY9uAd/LQkpBev7JtQerfNz534YVApTfzF44PVnd+in/UtEbzVA==
 
 "@bitzlato/money-js@^0.0.2":
   version "0.0.2"

@@ -2,9 +2,14 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import BN from 'bignumber.js';
-import { Money } from '@bitzlato/money-js';
-import { getMetaMaskProvider, HexString, ProviderRpcError } from '@bitzlato/ethereum-provider';
 import MetaMaskOnboarding from '@metamask/onboarding';
+import { Money } from '@bitzlato/money-js';
+import {
+  getMetaMaskProvider,
+  HexString,
+  ProviderRpcError,
+  ChainId,
+} from '@bitzlato/ethereum-provider';
 
 import { MetaMaskLogo } from '../../assets/images/MetaMaskLogo';
 import { alertPush, Currency } from '../../modules';
@@ -25,8 +30,26 @@ export const MetaMaskButton: React.FC<Props> = (props) => {
   const [amount, setAmount] = React.useState('');
   const [isAmountValid, setAmountValid] = React.useState(false);
 
-  const toggleModal = () => {
-    setOpen(!isOpen);
+  const close = () => {
+    setOpen(false);
+  };
+
+  const open = async () => {
+    const provider = getMetaMaskProvider();
+    if (provider) {
+      try {
+        const chainId = await provider.request({ method: 'eth_chainId' });
+        if (isEqualChains(chainId, props.currency)) {
+          setOpen(true);
+        } else {
+          dispatch(alertPush({ message: ['metamask.error.unsupportedNetwork'], type: 'error' }));
+        }
+      } catch (e) {
+        dispatch(alertPush({ message: [(e as ProviderRpcError).message], type: 'error' }));
+      }
+    } else {
+      new MetaMaskOnboarding().startOnboarding();
+    }
   };
 
   const handleSubmit = async () => {
@@ -44,12 +67,10 @@ export const MetaMaskButton: React.FC<Props> = (props) => {
             },
           ],
         });
-        toggleModal();
       } catch (e) {
         dispatch(alertPush({ message: [(e as ProviderRpcError).message], type: 'error' }));
       }
-    } else {
-      new MetaMaskOnboarding().startOnboarding();
+      close();
     }
   };
 
@@ -69,7 +90,7 @@ export const MetaMaskButton: React.FC<Props> = (props) => {
       <MetaMaskLogo
         title={t('page.body.wallets.deposits.metamask')}
         className="pg-metamask"
-        onClick={toggleModal}
+        onClick={open}
       />
       {isOpen && (
         <div className="expired-session-modal">
@@ -79,7 +100,7 @@ export const MetaMaskButton: React.FC<Props> = (props) => {
                 <div className="cr-email-form__option">
                   <div className="cr-email-form__option-inner">
                     {t('page.body.wallets.deposits.addDepositModal.header')}
-                    <span className="cr-email-form__close" onClick={toggleModal} />
+                    <span className="cr-email-form__close" onClick={close} />
                   </div>
                 </div>
               </div>
@@ -117,4 +138,12 @@ export const MetaMaskButton: React.FC<Props> = (props) => {
 
 function toWei(amount: string): HexString {
   return new BN(amount).multipliedBy(1e18).toString(16);
+}
+
+function isEqualChains(chainId: HexString, currency: Currency): boolean {
+  const address = currency.explorer_address;
+  return (
+    (chainId === ChainId.Mainnet && address.startsWith('https://etherscan.io/')) ||
+    (chainId === ChainId.Ropsten && address.startsWith('https://ropsten.etherscan.io/'))
+  );
 }
