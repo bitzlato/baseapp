@@ -47,7 +47,7 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
 
   const handleChangeAmount = (value: string) => {
     setAmount(value);
-    setAmountValid(Money.fromDecimal(value, currency).gt(currency.min_deposit_amount));
+    setAmountValid(fromDecimal(value, currency).gt(currency.min_deposit_amount));
   };
 
   const isDisabled = !amount || !amountValid || isDepositCreateLoading || isDepositCreateSuccess;
@@ -73,3 +73,11 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
     </Box>
   );
 };
+
+function fromDecimal(amount: number | string, currency: Currency) {
+  try {
+    return Money.fromDecimal(amount, currency);
+  } catch (err) {
+    return Money.fromDecimal(0, currency);
+  }
+}
