@@ -7,6 +7,7 @@ import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
 import { Beneficiary, Currency as CurrencyInfo } from '../../modules';
 import { WithdrawSummary } from './WithdrawSummary';
 import { BeneficiaryAddress } from './BeneficiaryAddress';
+import { fromDecimalSilent } from 'src/helpers/fromDecimal';
 import s from './Withdraw.postcss';
 
 export interface WithdrawProps {
@@ -175,7 +176,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
     const { fixed } = this.props;
     const amount = cleanPositiveFloatInput(value);
     if (amount.match(precisionRegExp(fixed))) {
-      const amountMoney = Money.fromDecimal(amount || '0', this.props.currency);
+      const amountMoney = fromDecimalSilent(amount, this.props.currency);
       const totalMoney = amountMoney.subtract(this.props.fee);
       const total = totalMoney.isNegative() ? (0).toFixed(fixed) : totalMoney.toString();
       this.setState({

@@ -14,7 +14,7 @@ import { CustomInput } from '../CustomInput';
 import { DepositSummary } from './DepositSummary';
 import s from 'src/containers/Withdraw/Withdraw.postcss';
 import { useHistory } from 'react-router';
-import { Money } from '@bitzlato/money-js';
+import { fromDecimalSilent } from 'src/helpers/fromDecimal';
 
 interface Props {
   currency: Currency;
@@ -47,7 +47,7 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
 
   const handleChangeAmount = (value: string) => {
     setAmount(value);
-    setAmountValid(fromDecimal(value, currency).gt(currency.min_deposit_amount));
+    setAmountValid(fromDecimalSilent(value, currency).gt(currency.min_deposit_amount));
   };
 
   const isDisabled = !amount || !amountValid || isDepositCreateLoading || isDepositCreateSuccess;
@@ -73,11 +73,3 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
     </Box>
   );
 };
-
-function fromDecimal(amount: number | string, currency: Currency) {
-  try {
-    return Money.fromDecimal(amount, currency);
-  } catch (err) {
-    return Money.fromDecimal(0, currency);
-  }
-}
