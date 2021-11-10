@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@bitzlato/ethereum-provider": "^0.1.1",
-    "@bitzlato/money-js": "^0.0.2",
+    "@bitzlato/money-js": "^0.0.3",
     "@bugsnag/js": "^7.11.0",
     "@bugsnag/plugin-react": "^7.11.0",
     "@formatjs/intl-pluralrules": "^3.2.5",
