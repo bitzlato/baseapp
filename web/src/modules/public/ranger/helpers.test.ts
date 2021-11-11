@@ -10,6 +10,8 @@ import {
   streamsBuilder,
 } from './helpers';
 
+const BASE_EVENTS = ['global.tickers', 'order', 'trade', 'deposit_address', 'deposit', 'withdraw'];
+
 describe('ranger helpers', () => {
   describe('generateSocketURI', () => {
     it('build docker URI with streams', () => {
@@ -128,20 +130,12 @@ describe('ranger helpers', () => {
     });
 
     it('includes private streams', () => {
-      expect(streamsBuilder(true, [], undefined)).toEqual([
-        'global.tickers',
-        'order',
-        'trade',
-        'deposit_address',
-      ]);
+      expect(streamsBuilder(true, [], undefined)).toEqual(BASE_EVENTS);
     });
 
     it('includes public/privates streams with market', () => {
       expect(streamsBuilder(true, [], marketExample)).toEqual([
-        'global.tickers',
-        'order',
-        'trade',
-        'deposit_address',
+        ...BASE_EVENTS,
         'abcdefg.trades',
         'abcdefg.update',
       ]);
@@ -149,10 +143,7 @@ describe('ranger helpers', () => {
 
     it('includes previous subscriptions in the list', () => {
       expect(streamsBuilder(true, ['some subscription'], marketExample)).toEqual([
-        'global.tickers',
-        'order',
-        'trade',
-        'deposit_address',
+        ...BASE_EVENTS,
         'abcdefg.trades',
         'abcdefg.update',
         'some subscription',
@@ -161,10 +152,7 @@ describe('ranger helpers', () => {
 
     it('do not duplicates previous subscriptions', () => {
       expect(streamsBuilder(true, ['global.tickers'], marketExample)).toEqual([
-        'global.tickers',
-        'order',
-        'trade',
-        'deposit_address',
+        ...BASE_EVENTS,
         'abcdefg.trades',
         'abcdefg.update',
       ]);
@@ -176,13 +164,7 @@ describe('ranger helpers', () => {
         finex: true,
       };
 
-      expect(streamsBuilder(true, [], undefined)).toEqual([
-        'global.tickers',
-        'order',
-        'trade',
-        'deposit_address',
-        'balances',
-      ]);
+      expect(streamsBuilder(true, [], undefined)).toEqual([...BASE_EVENTS, 'balances']);
     });
   });
 
