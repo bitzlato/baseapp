@@ -4,3 +4,4 @@ export const HISTORY_ERROR = 'history/ERROR';
 export const HISTORY_RESET = 'history/RESET';
 export const HISTORY_PUSH_EMIT = 'history/PUSH_EMIT';
 export const HISTORY_PUSH_FINISH = 'history/PUSH_FINISH';
+export const HISTORY_UPDATE = 'history/UPDATE';

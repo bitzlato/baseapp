@@ -14,7 +14,7 @@ export const generateSocketURI = (baseUrl: string, s: string[]) => {
 export const formatTicker = (events: {
   [pair: string]: TickerEvent;
 }): { [pair: string]: Ticker } => {
-  const tickers = {};
+  const tickers: Record<string, Ticker> = {};
   for (const market in events) {
     if (events.hasOwnProperty(market)) {
       const event: TickerEvent = events[market];
@@ -43,7 +43,7 @@ export const streamsBuilder = (
   let streams: string[] = ['global.tickers'];
 
   if (withAuth) {
-    streams = [...streams, 'order', 'trade', 'deposit_address'];
+    streams = [...streams, 'order', 'trade', 'deposit_address', 'deposit', 'withdraw'];
 
     if (isFinexEnabled()) {
       streams = [...streams, 'balances'];

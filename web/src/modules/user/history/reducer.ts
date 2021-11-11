@@ -8,6 +8,7 @@ import {
   HISTORY_FETCH,
   HISTORY_PUSH_FINISH,
   HISTORY_RESET,
+  HISTORY_UPDATE,
 } from './constants';
 import { WalletHistoryList } from './types';
 
@@ -16,19 +17,21 @@ export interface HistoryState {
   fetching: boolean;
   page: number;
   nextPageExists: boolean;
+  type: '' | 'deposits' | 'withdraws' | 'trades';
 }
 
-const initialState: HistoryState = {
+export const initialHistoryState: HistoryState = {
   list: [],
   fetching: false,
   page: 0,
   nextPageExists: false,
+  type: '',
 };
 
-export const historyReducer = (state = initialState, action: HistoryActions) => {
+export const historyReducer = (state = initialHistoryState, action: HistoryActions) => {
   switch (action.type) {
     case HISTORY_FETCH:
-      return { ...state, fetching: true };
+      return { ...state, type: action.payload.type, fetching: true };
     case HISTORY_DATA:
       return {
         ...state,
@@ -52,7 +55,13 @@ export const historyReducer = (state = initialState, action: HistoryActions) => 
     case HISTORY_PUSH_FINISH: {
       let list = [...action.payload];
       list = getUnique(list, 'id');
-
+      return { ...state, list: sliceArray(list, defaultStorageLimit()) };
+    }
+    case HISTORY_UPDATE: {
+      const item = action.payload;
+      const index = state.list.findIndex((d) => d.id === item.id);
+      const list =
+        index === -1 ? [item, ...state.list] : state.list.map((d, i) => (i === index ? item : d));
       return { ...state, list: sliceArray(list, defaultStorageLimit()) };
     }
     default:

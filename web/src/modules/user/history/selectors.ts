@@ -5,7 +5,7 @@ export const selectHistory = (state: RootState): WalletHistoryList => state.user
 
 export const selectCurrentPage = (state: RootState): number => state.user.history.page;
 
-export const selectFirstElemIndex = (state: RootState, limit): number =>
+export const selectFirstElemIndex = (state: RootState, limit: number): number =>
   state.user.history.page * limit + 1;
 
 export const selectLastElemIndex = (state: RootState, limit: number): number =>
@@ -15,3 +15,5 @@ export const selectNextPageExists = (state: RootState, limit: number): boolean =
   state.user.history.nextPageExists;
 
 export const selectHistoryLoading = (state: RootState): boolean => state.user.history.fetching;
+
+export const selectHistoryType = (state: RootState) => state.user.history.type;

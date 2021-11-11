@@ -14,7 +14,7 @@ import {
 import { OrderEvent } from 'src/modules/types';
 import { rangerUrl } from '../../../../api';
 import { store } from '../../../../store';
-import { pushHistoryEmit } from '../../../user/history';
+import { pushHistoryEmit, updateHistory, selectHistoryType } from '../../../user/history';
 import { userOpenOrdersUpdate } from '../../../user/openOrders';
 import { userOrdersHistoryRangerData } from '../../../user/ordersHistory';
 import { updateWalletsDataByRanger, walletsAddressDataWS } from '../../../user/wallets';
@@ -181,7 +181,6 @@ const initRanger = (
                 case 'subscribed':
                 case 'unsubscribed':
                   emitter(subscriptionsUpdate({ subscriptions: event.streams }));
-
                   return;
                 default:
               }
@@ -209,6 +208,18 @@ const initRanger = (
             // private
             case 'trade':
               emitter(pushHistoryEmit(event));
+              return;
+
+            case 'deposit':
+              if (selectHistoryType(store.getState()) === 'deposits') {
+                emitter(updateHistory(event));
+              }
+              return;
+
+            case 'withdraw':
+              if (selectHistoryType(store.getState()) === 'withdraws') {
+                emitter(updateHistory(event));
+              }
               return;
 
             // private
