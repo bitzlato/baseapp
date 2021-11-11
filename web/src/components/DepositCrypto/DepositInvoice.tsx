@@ -6,7 +6,6 @@ import {
   Currency,
   depositsCreate,
   selectDepositsCreateLoading,
-  selectDepositsCreateSuccess,
   selectMobileDeviceState,
 } from '../../modules';
 import { Box } from '../Box';
@@ -30,16 +29,15 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
   const history = useHistory();
 
   const isDepositCreateLoading = useSelector(selectDepositsCreateLoading);
-  const isDepositCreateSuccess = useSelector(selectDepositsCreateSuccess);
 
   const handleSubmit = () => {
     dispatch(
       depositsCreate({
         currency: currency.id,
-        amount: amount,
+        amount,
       }),
     );
-    setAmount('');
+    handleChangeAmount('');
     if (isMobile) {
       history.push(`/wallets/${currency.id}/history`);
     }
@@ -47,10 +45,10 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
 
   const handleChangeAmount = (value: string) => {
     setAmount(value);
-    setAmountValid(fromDecimalSilent(value, currency).gt(currency.min_deposit_amount));
+    setAmountValid(fromDecimalSilent(value, currency).gte(currency.min_deposit_amount));
   };
 
-  const isDisabled = !amount || !amountValid || isDepositCreateLoading || isDepositCreateSuccess;
+  const isDisabled = !amountValid || isDepositCreateLoading;
 
   return (
     <Box col spacing="2x">
@@ -62,7 +60,7 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
         handleChangeInput={handleChangeAmount}
         inputValue={amount}
         className={s.numberInput}
-        autoFocus={true}
+        autoFocus
       />
       <Box grow row={!isMobile} col={isMobile} spacing="2x">
         <DepositSummary currency={currency} />
