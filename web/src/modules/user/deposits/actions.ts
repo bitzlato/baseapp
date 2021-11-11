@@ -1,11 +1,6 @@
 import { CommonError } from '../../../modules/types';
 import { Deposit } from '../history/types';
-import {
-  DEPOSITS_CREATE,
-  DEPOSITS_CREATE_CLEAR,
-  DEPOSITS_CREATE_DATA,
-  DEPOSITS_CREATE_ERROR,
-} from './constants';
+import { DEPOSITS_CREATE, DEPOSITS_CREATE_DATA, DEPOSITS_CREATE_ERROR } from './constants';
 
 export interface DepositsCreate {
   type: typeof DEPOSITS_CREATE;
@@ -25,15 +20,7 @@ export interface DepositsCreateError {
   error: CommonError;
 }
 
-export interface DepositsCreateClear {
-  type: typeof DEPOSITS_CREATE_CLEAR;
-}
-
-export type DepositsActions =
-  | DepositsCreate
-  | DepositsCreateData
-  | DepositsCreateClear
-  | DepositsCreateError;
+export type DepositsActions = DepositsCreate | DepositsCreateData | DepositsCreateError;
 
 export const depositsCreate = (payload: DepositsCreate['payload']): DepositsCreate => ({
   type: DEPOSITS_CREATE,
@@ -48,8 +35,4 @@ export const depositsCreateData = (payload: DepositsCreateData['payload']): Depo
 export const depositsCreateError = (error: CommonError): DepositsCreateError => ({
   type: DEPOSITS_CREATE_ERROR,
   error,
-});
-
-export const depositsCreateClear = (): DepositsCreateClear => ({
-  type: DEPOSITS_CREATE_CLEAR,
 });

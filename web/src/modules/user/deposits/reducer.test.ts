@@ -11,12 +11,7 @@ describe('Deposits reducer', () => {
   it('should handle depositsCreateError', () => {
     const expectedState = {
       ...initialDepositsState,
-      create: {
-        ...initialDepositsState.create,
-        fetching: false,
-        success: false,
-        error: error,
-      },
+      error,
     };
     expect(
       depositIntentionReducer(initialDepositsState, actions.depositsCreateError(error)),
