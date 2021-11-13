@@ -7,13 +7,19 @@ import { Box } from '../Box';
 
 export type FormType = 'buy' | 'sell';
 
-export type DropdownElem = number | string | React.ReactNode;
+export type OrderType =
+  | 'Limit'
+  | 'Stop-loss'
+  | 'Take-profit'
+  | 'Stop-limit'
+  | 'Take-limit'
+  | 'Market';
 
 export interface OrderProps {
   type: FormType;
   orderType: string | React.ReactNode;
-  price: number | string;
-  trigger: number | string;
+  price?: number | string;
+  trigger?: number | string;
   amount: number | string;
   available: number;
 }
@@ -73,8 +79,8 @@ export interface OrderComponentProps {
    * Precision of price value
    */
   currentMarketBidPrecision: number;
-  orderTypes?: DropdownElem[];
-  orderTypesIndex?: DropdownElem[];
+  orderTypes?: OrderType[];
+  orderTypesIndex?: OrderType[];
   /**
    *
    */
@@ -110,7 +116,7 @@ interface State {
   amountBuy: string;
 }
 
-const defaultOrderTypes: DropdownElem[] = [
+const defaultOrderTypes: OrderType[] = [
   'Limit',
   'Market',
   'Stop-loss',
