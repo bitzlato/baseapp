@@ -1,4 +1,4 @@
-import { DropdownElem } from '../components/Order';
+import { OrderType } from '../components/Order';
 
 export const PG_TITLE_PREFIX = 'Bitzlato';
 
@@ -11,14 +11,20 @@ export const DEFAULT_KYC_STEPS = ['email', 'phone', 'profile', 'document', 'addr
 
 export const DEFAULT_MARKET_HEADERS = ['Pair', 'Price', '24h Change'];
 
-export const DEFAULT_ORDER_TYPES: DropdownElem[] = ['Limit', 'Market'];
+export const DEFAULT_ORDER_TYPES: OrderType[] = ['Limit', 'Market'];
 export const AMOUNT_PERCENTAGE_ARRAY = [0.25, 0.5, 0.75, 1];
 
 export const DEFAULT_TABLE_PAGE_LIMIT = 25;
 export const HOST_URL =
   window.location.hostname === 'localhost' ? 'http://localhost:9002' : window.location.origin;
 
-export const ORDER_TYPES_WITH_TRIGGER = ['Stop-loss', 'Take-profit', 'Stop-limit', 'Take-limit'];
+export const ORDER_TYPES_WITH_TRIGGER: OrderType[] = [
+  'Stop-loss',
+  'Take-profit',
+  'Stop-limit',
+  'Take-limit',
+];
+export const ORDER_TYPES_WITH_LIMIT: OrderType[] = ['Limit', 'Stop-limit', 'Take-limit'];
 
 export const TRIGGER_BUY_PRICE_MULT = 1.1;
 export const TRIGGER_BUY_PRICE_ADJUSTED_TYPES = ['stop-loss', 'take-profit'];

@@ -7,12 +7,13 @@ import {
   ORDER_TYPES_WITH_TRIGGER,
   TRIGGER_BUY_PRICE_MULT,
   TRIGGER_BUY_PRICE_ADJUSTED_TYPES,
+  ORDER_TYPES_WITH_LIMIT,
 } from '../../constants';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
 import { OrderInput as OrderInputMobile } from '../../mobile/components';
 import { Decimal } from '../Decimal';
 import { DropdownComponent } from '../Dropdown';
-import { OrderProps } from '../Order';
+import { OrderProps, OrderType } from '../Order';
 import { OrderInput } from '../OrderInput';
 import { PercentageButton } from '../PercentageButton';
 import { getTriggerSign } from 'src/containers/OpenOrders/helpers';
@@ -23,7 +24,6 @@ import { Label } from '../Label/Label';
 import s from './Input.postcss';
 
 type OnSubmitCallback = (order: OrderProps) => void;
-type DropdownElem = number | string | React.ReactNode;
 type FormType = 'buy' | 'sell';
 
 export interface OrderFormProps {
@@ -46,11 +46,11 @@ export interface OrderFormProps {
   /**
    * Available types of order
    */
-  orderTypes: DropdownElem[];
+  orderTypes: OrderType[];
   /**
    * Available types of order without translations
    */
-  orderTypesIndex: DropdownElem[];
+  orderTypesIndex: OrderType[];
   /**
    * Additional class name. By default element receives `cr-order` class
    * @default empty
@@ -115,7 +115,7 @@ export interface OrderFormProps {
 }
 
 interface OrderFormState {
-  orderType: string | React.ReactNode;
+  orderType: OrderType;
   price: string;
   priceMarket: number;
   trigger: string;
@@ -571,16 +571,22 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
     const { available, type, amount } = this.props;
     const { price, priceMarket, orderType, trigger } = this.state;
 
-    const order = {
+    const order: OrderProps = {
       type,
       orderType,
       amount,
       available: available || 0,
-      ...((orderType as string).toLowerCase().includes('limit') && {
-        price: orderType === 'Market' ? priceMarket : price,
-      }),
-      ...(ORDER_TYPES_WITH_TRIGGER.includes(orderType as string) && { trigger }),
     };
+
+    if (orderType === 'Market') {
+      order.price = priceMarket;
+    } else if (ORDER_TYPES_WITH_LIMIT.includes(orderType)) {
+      order.price = price;
+    }
+
+    if (ORDER_TYPES_WITH_TRIGGER.includes(orderType)) {
+      order.trigger = trigger;
+    }
 
     this.props.onSubmit(order);
     this.handlePriceChange('');
