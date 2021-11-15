@@ -3,7 +3,7 @@ import cn from 'classnames';
 import s from './Label.postcss';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
-  size?: '2x' | 'sm';
+  size?: 'lg' | 'sm';
   primaryColor?: boolean;
   secondaryColor?: boolean;
   warningColor?: boolean;
@@ -33,7 +33,7 @@ export const Label: React.FC<Props> = ({
 }) => {
   const c = cn(
     className,
-    size === '2x' && s.text2X,
+    size === 'lg' && s.textLg,
     size === 'sm' && s.textSm,
     primaryColor && s.primaryColor,
     secondaryColor && s.secondaryColor,

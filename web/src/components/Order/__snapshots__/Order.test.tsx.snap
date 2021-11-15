@@ -192,7 +192,8 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="cr-order-item__total row justifyBetween selfStretch wrap"
+              class="row justifyBetween selfStretch wrap textLg"
+              style="line-height:18px"
             >
               <label />
               <div
@@ -221,7 +222,7 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="cr-order-item__available row justifyBetween selfStretch wrap"
+              class="row justifyBetween selfStretch wrap"
             >
               <label />
               <div
@@ -456,7 +457,8 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="cr-order-item__total row justifyBetween selfStretch wrap"
+              class="row justifyBetween selfStretch wrap textLg"
+              style="line-height:18px"
             >
               <label />
               <div
@@ -485,7 +487,7 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="cr-order-item__available row justifyBetween selfStretch wrap"
+              class="row justifyBetween selfStretch wrap"
             >
               <label />
               <div
