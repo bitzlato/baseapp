@@ -5,6 +5,18 @@
   margin-bottom: calc(var(--gap) * 2);
   width: 100%;
 
+  label {
+    margin-bottom: 0;
+  }
+
+  &__total {
+    font-size: 16px;
+  }
+
+  &__available {
+    font-size: 12px;
+  }
+
   .error-message {
     align-items: center;
     background: var(--system-red);
@@ -33,8 +45,6 @@
   .cr-dropdown,
   .cr-order-input,
   &__percentage-buttons,
-  &__total,
-  &__available,
   &__fee {
     display: flex;
     justify-content: space-between;
@@ -69,8 +79,6 @@
     line-height: calc(var(--font-size) * 2);
   }
 
-  &__total,
-  &__available,
   &__fee {
     &__label {
       text-align: left;
@@ -117,14 +125,14 @@
   }
 
   &__prices {
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 
     & > * {
-      font-weight: 500;
       font-size: 12px;
+      font-weight: 500;
       line-height: 15px;
     }
 

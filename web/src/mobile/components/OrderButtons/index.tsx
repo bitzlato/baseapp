@@ -1,27 +1,44 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
+import { Box } from 'src/components/Box/Box';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { useT } from 'src/hooks/useT';
 import { selectCurrentMarket } from '../../../modules';
 
-const OrderButtonsComponent = (props) => {
-  const intl = useIntl();
+interface Props {
+  redirectToCreateOrder: (index: number) => void;
+}
+
+const OrderButtonsComponent: React.FC<Props> = (props) => {
+  const t = useT();
   const currentMarket = useSelector(selectCurrentMarket);
+  const token = currentMarket?.base_unit.toUpperCase();
 
   return (
     <div className="cr-mobile-order-buttons">
-      <Button onClick={(e) => props.redirectToCreateOrder(0)} size="lg" variant="success">
-        {intl.formatMessage(
-          { id: 'page.mobile.orderButtons.buy' },
-          { base_unit: currentMarket ? currentMarket.base_unit : '' },
-        )}
-      </Button>
-      <Button onClick={(e) => props.redirectToCreateOrder(1)} size="lg" variant="danger">
-        {intl.formatMessage(
-          { id: 'page.mobile.orderButtons.sell' },
-          { base_unit: currentMarket ? currentMarket.base_unit : '' },
-        )}
-      </Button>
+      <Box
+        as={Button}
+        onClick={() => props.redirectToCreateOrder(0)}
+        size="lg"
+        variant="success"
+        row
+        spacing
+      >
+        <span>{t(`page.body.openOrders.header.side.buy`)}</span>
+        <CurrencyTicker symbol={token} />
+      </Box>
+      <Box
+        as={Button}
+        onClick={() => props.redirectToCreateOrder(1)}
+        size="lg"
+        variant="danger"
+        row
+        spacing
+      >
+        <span>{t(`page.body.openOrders.header.side.sell`)}</span>
+        <CurrencyTicker symbol={token} />
+      </Box>
     </div>
   );
 };

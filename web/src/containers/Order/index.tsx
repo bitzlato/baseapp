@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { v4 } from 'uuid';
 import { Spinner } from 'react-bootstrap';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { TRIGGER_BUY_PRICE_MULT, TRIGGER_BUY_PRICE_ADJUSTED_TYPES } from '../../constants';
+import { TRIGGER_BUY_PRICE_MULT } from '../../constants';
 import {
   formatWithSeparators,
   Order,
@@ -45,9 +45,10 @@ import {
   selectOrderExecuteLoading,
 } from '../../modules/user/orders';
 import { isWsApiEnabled } from 'src/api/config';
+import { isTriggerByPrice } from 'src/helpers/order';
 
 interface ReduxProps {
-  currentMarket?: Market;
+  currentMarket: Market;
   currentMarketFilters: FilterPrice[];
   executeLoading: boolean;
   marketTickers: {
@@ -231,11 +232,11 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     );
   }
 
-  private handleSubmit = (value: OrderProps) => {
+  private handleSubmit = (value: OrderProps): boolean => {
     const { currentMarket } = this.props;
 
     if (!currentMarket) {
-      return;
+      return false;
     }
 
     const { amount, available, orderType, price, trigger, type } = value;
@@ -245,15 +246,13 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     const withPrice = typeof price !== 'undefined';
     const withTrigger = typeof trigger !== 'undefined';
     const actualOrderPrice = withPrice ? price : trigger;
-    const priceMult = TRIGGER_BUY_PRICE_ADJUSTED_TYPES.includes((orderType as string).toLowerCase())
-      ? TRIGGER_BUY_PRICE_MULT
-      : 1;
+    const priceMult = isTriggerByPrice(orderType) ? TRIGGER_BUY_PRICE_MULT : 1;
 
     const resultData: OrderExecution = {
       market: currentMarket.id,
       side: type,
       volume: amount.toString(),
-      ord_type: (orderType as string).toLowerCase().replace('-', '_'),
+      ord_type: orderType.toLowerCase().replace('-', '_'),
       ...(withPrice && { price: price.toString() }),
       ...(withTrigger && { trigger_price: trigger.toString() }),
     };
@@ -337,15 +336,15 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     }
 
     if (
-      (+available < +amount * +actualOrderPrice * priceMult && resultData.side === 'buy') ||
-      (+available < +amount && resultData.side === 'sell')
+      (type === 'buy' && +available < +amount * +actualOrderPrice * priceMult) ||
+      (type === 'sell' && +available < +amount)
     ) {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.available', {
             available: formatWithSeparators(String(available), ','),
             currency:
-              resultData.side === 'buy'
+              type === 'buy'
                 ? currentMarket.quote_unit.toUpperCase()
                 : currentMarket.base_unit.toUpperCase(),
           }),
@@ -363,6 +362,8 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     if (orderAllowed) {
       this.props.orderExecute(resultData);
     }
+
+    return orderAllowed;
   };
 
   private getWallet(currency: string, wallets: Wallet[]) {

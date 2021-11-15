@@ -4,7 +4,11 @@ import { OrderButtons } from '../../';
 import { TabPanel } from '../../../../components';
 import { OrderBook, RecentTrades, TradingChart } from '../../../../containers';
 
-const ChartsComponent = (props) => {
+interface Props {
+  redirectToCreateOrder: (index: number) => void;
+}
+
+const ChartsComponent: React.FC<Props> = (props) => {
   const intl = useIntl();
   const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
 

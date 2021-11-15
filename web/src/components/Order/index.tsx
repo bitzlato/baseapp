@@ -4,9 +4,9 @@ import { TabPanel } from '../../components';
 import { FilterPrice } from '../../filters';
 import { getAmount, getTotalPrice } from '../../helpers';
 import { Box } from '../Box';
+import { OrderFormProps } from '../OrderForm';
 
 export type FormType = 'buy' | 'sell';
-
 export type OrderType =
   | 'Limit'
   | 'Stop-loss'
@@ -17,14 +17,12 @@ export type OrderType =
 
 export interface OrderProps {
   type: FormType;
-  orderType: string | React.ReactNode;
+  orderType: OrderType;
   price?: number | string;
   trigger?: number | string;
   amount: number | string;
   available: number;
 }
-
-export type OnSubmitCallback = (order: OrderProps) => void;
 
 export interface OrderComponentProps {
   /**
@@ -38,7 +36,7 @@ export interface OrderComponentProps {
   /**
    * Callback which is called when a form is submitted
    */
-  onSubmit: OnSubmitCallback;
+  onSubmit: (order: OrderProps) => boolean;
   /**
    * If orderType is 'Market' this value will be used as price for buy tab
    */
@@ -263,7 +261,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
     });
   };
 
-  private handleAmountChange = (amount, type) => {
+  private handleAmountChange = (amount: string, type: FormType) => {
     if (type === 'sell') {
       this.setState({ amountSell: amount });
     } else {
@@ -271,7 +269,12 @@ export class Order extends React.Component<OrderComponentProps, State> {
     }
   };
 
-  private handleChangeAmountByButton = (value, orderType, price, type) => {
+  private handleChangeAmountByButton: OrderFormProps['handleChangeAmountByButton'] = (
+    value,
+    orderType,
+    price,
+    type,
+  ) => {
     const { bids, asks, availableBase, availableQuote } = this.props;
     const proposals = this.isTypeSell(type) ? bids : asks;
     const available = this.isTypeSell(type) ? availableBase : availableQuote;
