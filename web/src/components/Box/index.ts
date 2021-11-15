@@ -1,1 +1,1 @@
-export { boxStyle, Box } from './Box';
+export { Box } from './Box';

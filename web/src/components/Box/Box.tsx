@@ -1,8 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 import s from './Box.postcss';
-
-export const boxStyle = s;
+import sLabel from '../Label/Label.postcss';
 
 type BoxOwnProps<E = React.ElementType> = {
   as?: E;
@@ -20,6 +19,7 @@ type BoxOwnProps<E = React.ElementType> = {
   wrap?: boolean;
   spacing?: boolean | '2x' | '3x' | '4x' | 'sm';
   padding?: boolean | '2x' | '3x';
+  textSize?: 'lg' | 'sm';
 };
 
 type Props<E extends React.ElementType> = BoxOwnProps<E> &
@@ -45,6 +45,7 @@ export const Box: Element = React.forwardRef(
       selfStart,
       selfStretch,
       wrap,
+      textSize,
       ...props
     }: BoxOwnProps,
     ref,
@@ -75,6 +76,8 @@ export const Box: Element = React.forwardRef(
       padding === true && s.padding,
       padding === '2x' && s.padding2X,
       padding === '3x' && s.padding3X,
+      textSize === 'lg' && sLabel.textLg,
+      textSize === 'sm' && sLabel.textSm,
     );
     return React.createElement(as, { ...props, ref, className: boxClassName });
   },
