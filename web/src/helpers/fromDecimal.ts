@@ -1,4 +1,4 @@
-import { Currency, Money } from "@bitzlato/money-js";
+import { Currency, Money } from '@bitzlato/money-js';
 
 export function fromDecimalSilent(amount: number | string, currency: Currency): Money {
   try {

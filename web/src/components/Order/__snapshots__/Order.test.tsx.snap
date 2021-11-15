@@ -192,21 +192,19 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="cr-order-item__total"
+              class="cr-order-item__total row justifyBetween selfStretch wrap"
             >
-              <label
-                class="cr-order-item__total__label"
-              />
+              <label />
               <div
-                class="cr-order-item__total__content"
+                class="row rowSpacingSm"
               >
                 <span
-                  class="cr-order-item__total__content__amount"
+                  class="primaryColor"
                 >
                   0.000000000
                 </span>
                 <span
-                  class="cr-order-item__total__content__currency"
+                  class="secondaryColor"
                 >
                   <span
                     class="currency"
@@ -223,21 +221,19 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="cr-order-item__available"
+              class="cr-order-item__available row justifyBetween selfStretch wrap"
             >
-              <label
-                class="cr-order-item__available__label"
-              />
+              <label />
               <div
-                class="cr-order-item__available__content"
+                class="row rowSpacingSm"
               >
                 <span
-                  class="cr-order-item__available__content__amount"
+                  class="primaryColor"
                 >
                   12.00000
                 </span>
                 <span
-                  class="cr-order-item__available__content__currency"
+                  class="secondaryColor"
                 >
                   <span
                     class="currency"
@@ -254,11 +250,18 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <button
-              class="btn-block mr-1 mt-1 btn-lg btn btn-success btn-block btn-lg"
+              class="btn-block mr-1 mt-1 btn-lg row rowSpacing btn btn-success btn-block btn-lg"
               disabled=""
               type="button"
             >
-              buy
+              <span />
+              <span
+                class="currency"
+              >
+                <span>
+                  ETH
+                </span>
+              </span>
             </button>
           </div>
         </div>
@@ -453,21 +456,19 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="cr-order-item__total"
+              class="cr-order-item__total row justifyBetween selfStretch wrap"
             >
-              <label
-                class="cr-order-item__total__label"
-              />
+              <label />
               <div
-                class="cr-order-item__total__content"
+                class="row rowSpacingSm"
               >
                 <span
-                  class="cr-order-item__total__content__amount"
+                  class="primaryColor"
                 >
                   0.000000000
                 </span>
                 <span
-                  class="cr-order-item__total__content__currency"
+                  class="secondaryColor"
                 >
                   <span
                     class="currency"
@@ -484,21 +485,19 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="cr-order-item__available"
+              class="cr-order-item__available row justifyBetween selfStretch wrap"
             >
-              <label
-                class="cr-order-item__available__label"
-              />
+              <label />
               <div
-                class="cr-order-item__available__content"
+                class="row rowSpacingSm"
               >
                 <span
-                  class="cr-order-item__available__content__amount"
+                  class="primaryColor"
                 >
                   200.0000
                 </span>
                 <span
-                  class="cr-order-item__available__content__currency"
+                  class="secondaryColor"
                 >
                   <span
                     class="currency"
@@ -515,11 +514,18 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <button
-              class="btn-block mr-1 mt-1 btn-lg btn btn-danger btn-block btn-lg"
+              class="btn-block mr-1 mt-1 btn-lg row rowSpacing btn btn-danger btn-block btn-lg"
               disabled=""
               type="button"
             >
-              sell
+              <span />
+              <span
+                class="currency"
+              >
+                <span>
+                  ETH
+                </span>
+              </span>
             </button>
           </div>
         </div>

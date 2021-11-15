@@ -2,8 +2,24 @@
   border: 1px solid var(--input-border-color);
   border-radius: 4px;
   height: 36px;
+  position: relative;
 
   @media (--breakpoint-down-md) {
     height: 38px;
+  }
+}
+
+.inputLabel {
+  background: var(--body-background-color) !important;
+  font-size: calc(var(--gap) * 2);
+  left: 12px !important;
+  margin-top: -7px !important;
+  padding: 0 calc(var(--gap) * 0.7);
+  position: absolute;
+  top: 0 !important;
+  z-index: 5000;
+
+  @media (--breakpoint-down-md) {
+    font-size: 10px;
   }
 }
