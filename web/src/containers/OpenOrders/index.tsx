@@ -180,17 +180,19 @@ export const OpenOrdersComponent: React.FC = () => {
     <div className={classNames}>
       <div className="cr-table-header__content">
         <Box grow>
-          {t('page.body.trade.header.openOrders')}
-          <Form className="cr-title-component__checkbox" onClick={handleToggleCheckbox}>
-            <Form.Check
-              type="checkbox"
-              custom
-              id="hideOtherPairs"
-              checked={hideOtherPairs}
-              readOnly={true}
-              label={t('page.body.trade.header.openOrders.hideOtherPairs')}
-            />
-          </Form>
+          <Box col spacing="sm">
+            <span>{t('page.body.trade.header.openOrders')}</span>
+            <Form className="cr-title-component__checkbox" onClick={handleToggleCheckbox}>
+              <Form.Check
+                type="checkbox"
+                custom
+                id="hideOtherPairs"
+                checked={hideOtherPairs}
+                readOnly={true}
+                label={t('page.body.trade.header.openOrders.hideOtherPairs')}
+              />
+            </Form>
+          </Box>
         </Box>
         <Box row spacing>
           {userLoggedIn && (

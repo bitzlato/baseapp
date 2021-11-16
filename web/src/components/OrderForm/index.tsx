@@ -423,7 +423,7 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
         </div>
 
         <div className="cr-order-item">
-          <Box selfStretch row justifyBetween wrap textSize="lg" style={{ lineHeight: '18px' }}>
+          <Box selfStretch row justifyBetween wrap textSize="lg">
             <label>{translate('page.body.trade.header.newOrder.content.total')}</label>
             <Box row spacing="sm">
               {isMarket(orderType) ? <Label secondaryColor>&asymp;</Label> : null}
