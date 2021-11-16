@@ -193,7 +193,6 @@ exports[`Order should match snapshot 1`] = `
           >
             <div
               class="row justifyBetween selfStretch wrap textLg"
-              style="line-height:18px"
             >
               <label />
               <div
@@ -458,7 +457,6 @@ exports[`Order should match snapshot 1`] = `
           >
             <div
               class="row justifyBetween selfStretch wrap textLg"
-              style="line-height:18px"
             >
               <label />
               <div
