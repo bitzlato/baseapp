@@ -20,15 +20,17 @@ export function* logoutSaga(action: LogoutFetch) {
     yield put(signInRequire2FA({ require2fa: false }));
     yield put(resetHistory());
   } catch (error) {
-    yield put(
-      sendError({
-        error,
-        processingType: 'alert',
-        extraOptions: {
-          actionError: logoutError,
-        },
-      }),
-    );
+    if (error.code !== 401) {
+      yield put(
+        sendError({
+          error,
+          processingType: 'alert',
+          extraOptions: {
+            actionError: logoutError,
+          },
+        }),
+      );
+    }
 
     if (error.message.indexOf('identity.session.not_found') > -1) {
       yield put(userReset());
