@@ -6,6 +6,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, RouterProps, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { getCookie } from 'src/helpers/getCookie';
 import { Fees } from 'src/screens/Fees';
 import { IntlProps } from '../../';
 import {
@@ -207,8 +208,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           break;
         default:
           const token = localStorage.getItem('csrfToken');
-
-          if (token) {
+          if (token || getCookie('bitzlatoId')) {
             this.props.userFetch();
             this.initInterval();
             this.check();
