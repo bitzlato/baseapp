@@ -208,7 +208,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           break;
         default:
           const token = localStorage.getItem('csrfToken');
-          if (token || getCookie('bitzlatoId')) {
+          if (token || getCookie('BitzlatoSessionExists') !== undefined) {
             this.props.userFetch();
             this.initInterval();
             this.check();
