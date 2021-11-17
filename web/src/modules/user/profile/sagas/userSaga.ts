@@ -16,14 +16,16 @@ export function* userSaga(action: UserFetch) {
     }
     yield put(userData({ user }));
   } catch (error) {
-    yield put(
-      sendError({
-        error,
-        processingType: 'alert',
-        extraOptions: {
-          actionError: userError,
-        },
-      }),
-    );
+    if (error.code !== 401) {
+      yield put(
+        sendError({
+          error,
+          processingType: 'alert',
+          extraOptions: {
+            actionError: userError,
+          },
+        }),
+      );
+    }
   }
 }
