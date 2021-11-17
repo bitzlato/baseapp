@@ -6,7 +6,6 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, RouterProps, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { getCookie } from 'src/helpers/getCookie';
 import { Fees } from 'src/screens/Fees';
 import { IntlProps } from '../../';
 import {
@@ -207,12 +206,9 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           this.props.history.replace('/maintenance');
           break;
         default:
-          const token = localStorage.getItem('csrfToken');
-          if (token || getCookie('BitzlatoSessionExists') === '1') {
-            this.props.userFetch();
-            this.initInterval();
-            this.check();
-          }
+          this.props.userFetch();
+          this.initInterval();
+          this.check();
       }
     }
 
