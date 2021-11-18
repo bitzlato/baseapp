@@ -77,7 +77,9 @@ export const MarketSelectorItems: FC<Props> = ({
   const handleSelect = (marketName: string) => {
     const market = markets.find((el) => el.name === marketName);
 
-    onItemSelect(market);
+    if (market !== undefined) {
+      onItemSelect(market);
+    }
   };
 
   const items: readonly Item[] = useMemo(() => {
@@ -86,8 +88,8 @@ export const MarketSelectorItems: FC<Props> = ({
 
       return {
         ...market,
-        last: parseInt(ticker.last, 10),
-        volume: parseInt(ticker.volume, 10),
+        last: Number.parseFloat(ticker.last),
+        volume: Number.parseFloat(ticker.volume),
         price_change_percent: ticker.price_change_percent,
         price_change_percent_num: Number.parseFloat(ticker.price_change_percent),
       };
@@ -95,8 +97,8 @@ export const MarketSelectorItems: FC<Props> = ({
 
     if (sortBy !== 'none') {
       result.sort((a, b) => {
-        const aValue = sortBy === 'id' ? a[sortBy] : parseInt(a[sortBy], 10);
-        const bValue = sortBy === 'id' ? b[sortBy] : parseInt(b[sortBy], 10);
+        const aValue = sortBy === 'id' ? a[sortBy] : Number.parseFloat(a[sortBy]);
+        const bValue = sortBy === 'id' ? b[sortBy] : Number.parseFloat(b[sortBy]);
 
         if (aValue === bValue) {
           return 0;
