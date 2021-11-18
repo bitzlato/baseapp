@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Spinner } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
-import { Route, RouterProps, Switch } from 'react-router';
+import { Route, RouteComponentProps, RouterProps, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Fees } from 'src/screens/Fees';
@@ -130,7 +130,7 @@ const PrivateRoute: React.FunctionComponent<any> = ({
   if (loading) {
     return renderLoader();
   }
-  const renderCustomerComponent = (props) => <CustomComponent {...props} />;
+  const renderCustomerComponent = (props: RouteComponentProps) => <CustomComponent {...props} />;
 
   if (isLogged) {
     return <Route {...rest} render={renderCustomerComponent} />;
@@ -162,7 +162,7 @@ const PublicRoute: React.FunctionComponent<any> = ({
     );
   }
 
-  const renderCustomerComponent = (props) => <CustomComponent {...props} />;
+  const renderCustomerComponent = (props: RouteComponentProps) => <CustomComponent {...props} />;
 
   return <Route {...rest} render={renderCustomerComponent} />;
 };
@@ -178,8 +178,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     'TabHide',
   ];
 
-  public timer;
-  public walletsFetchInterval;
+  public timer: number | undefined;
+  public walletsFetchInterval: number | undefined;
 
   constructor(props: LayoutProps) {
     super(props);
@@ -303,8 +303,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         <div className={mobileCls}>
           <Switch>
             <PublicRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
               path="/signin"
               component={() => {
                 window.location.href = '/signin';
@@ -312,8 +310,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               }}
             />
             <PublicRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
               path="/signup"
               component={() => {
                 window.location.href = '/signup';
@@ -453,8 +449,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           />
           <Route exact={true} path="/magic-link" component={MagicLink} />
           <PublicRoute
-            loading={userLoading}
-            isLogged={isLoggedIn}
             path="/signin"
             component={() => {
               window.location.href = '/signin';
@@ -462,8 +456,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             }}
           />
           <PublicRoute
-            loading={userLoading}
-            isLogged={isLoggedIn}
             path="/signup"
             component={() => {
               window.location.href = '/signup';
@@ -582,7 +574,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
   };
 
   private initInterval = () => {
-    this.timer = setInterval(() => {
+    this.timer = window.setInterval(() => {
       this.check();
     }, parseFloat(sessionCheckInterval()));
   };
