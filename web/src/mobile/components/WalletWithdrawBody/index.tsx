@@ -66,7 +66,8 @@ const WalletWithdrawBodyComponent: React.FC<Props> = (props) => {
     () => intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.button' }),
     [intl],
   );
-  const currencyItem = currencies && currencies.find((item) => item.id === currency.code);
+  const currencyLower = currency.code.toLowerCase();
+  const currencyItem = currencies && currencies.find((item) => item.id === currencyLower);
 
   const isTwoFactorAuthRequired = (level: number, is2faEnabled: boolean) => {
     return level > 1 || (level === 1 && is2faEnabled);
