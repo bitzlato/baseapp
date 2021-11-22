@@ -143,7 +143,6 @@ export const rootReducer = combineReducers({
 
 export function* rootSaga() {
   yield all([
-    call(rootQuickExchangeSaga),
     call(rootAbilitiesSaga),
     call(rootApiKeysSaga),
     call(rootAuthSaga),

@@ -1,31 +1,11 @@
 import * as React from 'react';
 
-interface SwipeIconProps {
-  className?: string;
-  onClick?: (e?: any) => void;
-}
-
-export const SwipeIcon: React.FC<SwipeIconProps> = (props: SwipeIconProps) => {
+export const SwipeIcon: React.FC = () => {
   return (
-    <svg
-      onClick={props.onClick}
-      width="40"
-      height="40"
-      viewBox="0 0 40 40"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M-8.74228e-07 20C-1.35705e-06 31.0457 8.9543 40 20 40C31.0457 40 40 31.0457 40 20C40 8.9543 31.0457 -3.91405e-07 20 -8.74228e-07C8.9543 -1.35705e-06 -3.91405e-07 8.9543 -8.74228e-07 20Z"
-        fill="#3C78E0"
-      />
-      <path
-        d="M26.2928 17.7071L27.707 16.2929L20.9999 9.58578L20.9999 26L22.9999 26L22.9999 14.4142L26.2928 17.7071Z"
-        fill="white"
-      />
-      <path
-        d="M13.7072 22.2829L12.293 23.6971L19.0001 30.4042L19.0001 13.99L17.0001 13.99L17.0001 25.5758L13.7072 22.2829Z"
-        fill="white"
+        d="m30.205 14.16 1.809-1.81-8.581-8.581v21h2.559V9.946Zm-16.103 5.854-1.809 1.809 8.581 8.581v-21h-2.559v14.823Z"
+        transform="translate(-6.298 -2.113) scale(.82596)"
       />
     </svg>
   );

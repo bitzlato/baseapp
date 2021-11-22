@@ -1,5 +1,4 @@
-import { isFinexEnabled } from '../../../api';
-import { buildFilterPrice, FilterPrice } from '../../../filters';
+import { FilterPrice } from '../../../filters';
 import { CommonState } from '../../types';
 import { MarketsAction } from './actions';
 import {
@@ -17,11 +16,13 @@ import {
 } from './constants';
 import { Market, Ticker } from './types';
 
+interface MarketFilters {
+  [marketId: string]: FilterPrice;
+}
+
 export interface MarketsState extends CommonState {
   list: Market[];
-  filters: {
-    [marketId: string]: FilterPrice;
-  };
+  filters: MarketFilters;
   currentMarket: Market | undefined;
   tickers: {
     [pair: string]: Ticker;
@@ -32,11 +33,7 @@ export interface MarketsState extends CommonState {
   tickersTimestamp?: number;
   successMarketPriceFetch: boolean;
   marketPrice: {
-    market: string;
-    side: string;
     price: string;
-    created_at?: string;
-    updated_at?: string;
   };
 }
 
@@ -49,13 +46,14 @@ export const initialMarketsState: MarketsState = {
   loading: false,
   successMarketPriceFetch: false,
   marketPrice: {
-    market: '',
-    side: '',
     price: '',
   },
 };
 
-export const marketsReducer = (state = initialMarketsState, action: MarketsAction) => {
+export const marketsReducer = (
+  state = initialMarketsState,
+  action: MarketsAction,
+): MarketsState => {
   switch (action.type) {
     case MARKETS_FETCH:
       return {
@@ -64,25 +62,10 @@ export const marketsReducer = (state = initialMarketsState, action: MarketsActio
         timestamp: Math.floor(Date.now() / 1000),
       };
     case MARKETS_DATA:
-      let filters = {};
-
-      if (isFinexEnabled() && action.payload) {
-        filters = action.payload.reduce((result, market: Market) => {
-          result[market.id] = result[market.id] || [];
-
-          if (market.filters) {
-            result[market.id] = market.filters.map(buildFilterPrice);
-          }
-
-          return result;
-        }, {});
-      }
-
       return {
         ...state,
         loading: false,
         list: action.payload,
-        filters: filters,
       };
     case MARKETS_ERROR:
       return {
@@ -126,16 +109,15 @@ export const marketsReducer = (state = initialMarketsState, action: MarketsActio
     case MARKET_PRICE_FETCH:
       return {
         ...state,
+        successMarketPriceFetch: true,
         marketPrice: {
           ...state.marketPrice,
-          market: action.payload.market,
-          side: action.payload.side,
         },
       };
     case MARKET_PRICE_DATA:
       return {
         ...state,
-        successMarketPriceFetch: true,
+        successMarketPriceFetch: false,
         marketPrice: {
           ...state.marketPrice,
           ...action.payload,

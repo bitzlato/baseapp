@@ -10,9 +10,5 @@ export const QuickExchange: React.FC = () => {
     setDocumentTitle('Quick Exchange');
   }, [dispatch]);
 
-  return (
-    <div className="pg-quick-exchange">
-      <QuickExchangeContainer />
-    </div>
-  );
+  return <QuickExchangeContainer />;
 };

@@ -46,7 +46,5 @@ export * from './Tooltip';
 export * from './TwoFactorAuth';
 export * from './UploadFile';
 export * from './WalletList';
-export * from './QuickExchangeForm';
-export * from './Timer';
 export * from './Info';
 export * from './LockedComponent';

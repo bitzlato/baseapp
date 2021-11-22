@@ -37,5 +37,5 @@ export const selectMarketFilters = (state: RootState): MarketsState['filters'] =
 export const selectMarketPrice = (state: RootState): MarketsState['marketPrice'] =>
   selectMarketsState(state).marketPrice;
 
-export const selectMarketPriceFetchSuccess = (state: RootState): boolean =>
+export const selectMarketPriceFetch = (state: RootState): boolean =>
   selectMarketsState(state).successMarketPriceFetch;

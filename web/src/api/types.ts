@@ -55,6 +55,7 @@ declare global {
     valuationSecondaryCurrency: string;
     valuationSecondaryCurrencyName: string;
     internalTransfer?: string | boolean;
+    quickExchange?: string | boolean;
   }
 
   interface Window {

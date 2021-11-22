@@ -4,7 +4,7 @@ import { nationalitiesNames } from '../../translations/nationalities';
 
 export const ru: LangType = {
   'page.header.navbar.signIn': 'Войти',
-  'page.header.navbar.quick.exchange': 'Quick exchange',
+  'page.header.navbar.quick.exchange': 'Быстрый обмен',
   'page.header.navbar.trade': 'Торговля',
   'page.header.navbar.wallets': 'Кошельки',
   'page.header.navbar.openOrders': 'Ордера',
@@ -414,7 +414,7 @@ export const ru: LangType = {
   'page.body.history.trade.header.amount': 'Кол.',
   'page.body.history.trade.header.balance': 'Баланс',
 
-  'page.body.history.quick': 'Quick exchange',
+  'page.body.history.quick': 'Быстрый обмен',
 
   'page.body.profile.header.account': 'Профиль',
 
@@ -808,25 +808,20 @@ export const ru: LangType = {
   'page.documentation.models.item.table.data.required.false': 'No',
 
   /* Quick Exchange */
-  'page.body.quick.exchange.header': 'Quick exchange',
+  'page.body.quick.exchange.header': 'Быстрый обмен',
+  'page.body.quick.exchange.label.exchange': 'Вы меняете',
+  'page.body.quick.exchange.label.receive': 'Вы получите',
+  'page.body.quick.exchange.label.currency': 'Валюта',
+  'page.body.quick.exchange.sublabel.min_amount': 'Минимальная сумма обмена',
+  'page.body.quick.exchange.sublabel.balance': 'Доступно',
+  'page.body.quick.exchange.estimated_price': 'Ориентировочная цена',
+  'page.body.quick.exchange.slippage': 'Допускается отклонение цены в рамках 2%',
+  'page.body.quick.exchange.button.rearrange': 'Переставить валюты',
+  'page.body.quick.exchange.button.exchange': 'Обменять',
 
-  'page.body.quick.exchange.label.exchange': 'You exchange',
-  'page.body.quick.exchange.label.receive': 'You receive',
-  'page.body.quick.exchange.label.currency': 'Currency',
-
-  'page.body.quick.exchange.sublabel.min_amount': 'Min exchange amount is',
-  'page.body.quick.exchange.sublabel.balance': 'Balance',
-
-  'page.body.quick.exchange.estimated_price': 'Estimated price',
-  'page.body.quick.exchange.slippage':
-    'Slippage is higher than 1%. Enter a lower amount to get a better price',
-
-  'page.body.quick.exchange.placeholder.exchange': 'You exchange',
-  'page.body.quick.exchange.placeholder.receive': 'You receive',
-
-  'page.body.quick.exchange.button.exchange': 'Exchange',
-
-  'success.quick.exchange.order.created': 'Order successfully created',
+  'quick.exchange.order.created': 'Обмен совершен успешно',
+  'quick.exchange.order.cancelled': 'Заявка отклонена',
+  'market.swap_order.outdated_price': 'Цена слишком сильно изменилась',
 
   // success messages
   'success.addresses.accepted': 'Ваш адрес успешно приняты',
