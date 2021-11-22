@@ -4,11 +4,12 @@ import {
   CREATE_QUICK_ORDER_DATA,
   CREATE_QUICK_ORDER_ERROR,
 } from './constants';
+import { QuickExchangeCreate } from './types';
 
 export interface CreateQuickExchangePayload {
-  market: string;
-  side: string;
-  amount: string;
+  from_currency: string;
+  to_currency: string;
+  volume: string;
   price: string;
 }
 
@@ -19,6 +20,9 @@ export interface CreateQuickExchangeFetch {
 
 export interface CreateQuickExchangeData {
   type: typeof CREATE_QUICK_ORDER_DATA;
+  payload: {
+    success: boolean;
+  };
 }
 
 export interface CreateQuickExchangeError {
@@ -38,8 +42,11 @@ export const createQuickExchangeFetch = (
   payload,
 });
 
-export const createQuickExchangeData = (): CreateQuickExchangeData => ({
+export const createQuickExchangeData = (
+  payload: CreateQuickExchangeData['payload'],
+): CreateQuickExchangeData => ({
   type: CREATE_QUICK_ORDER_DATA,
+  payload,
 });
 
 export const createQuickExchangeError = (error: CommonError): CreateQuickExchangeError => ({

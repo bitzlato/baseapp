@@ -25,7 +25,7 @@ export const defaultConfig: Config = {
   gaTrackerKey: '',
   minutesUntilAutoLogout: '5',
   msAlertDisplayTime: '5000',
-  msPricesUpdates: '1000',
+  msPricesUpdates: '5000',
   sessionCheckInterval: '15000',
   balancesFetchInterval: '3000',
   passwordEntropyStep: '14',
@@ -52,6 +52,7 @@ export const defaultConfig: Config = {
   valuationSecondaryCurrency: 'ETH',
   valuationSecondaryCurrencyName: 'ETH',
   internalTransfer: false,
+  quickExchange: false,
 };
 
 export const Cryptobase = {
@@ -118,3 +119,4 @@ export const valuationSecondaryCurrency = (): string =>
 export const valuationSecondaryCurrencyName = (): string =>
   Cryptobase.config.valuationSecondaryCurrencyName;
 export const showInternalTransfer = () => convertToBoolean(Cryptobase.config.internalTransfer);
+export const showQuickExhange = () => convertToBoolean(Cryptobase.config.quickExchange);

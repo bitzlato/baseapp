@@ -68,8 +68,8 @@ export interface MarketsTickersError {
 export interface MarketPriceFetch {
   type: typeof MARKET_PRICE_FETCH;
   payload: {
-    market: string;
-    side: string;
+    from_currency: string;
+    to_currency: string;
   };
 }
 

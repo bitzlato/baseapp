@@ -20,11 +20,13 @@ import { OrdersIcon } from 'src/assets/icons/OrdersIcon';
 import { HistoryIcon } from 'src/assets/icons/HistoryIcon';
 import { ApiIcon } from 'src/assets/icons/ApiIcon';
 import { InternalTransferIcon } from 'src/assets/icons/InternalTransferIcon';
-import { showInternalTransfer } from 'src/api/config';
+import { showInternalTransfer, showQuickExhange } from 'src/api/config';
 import { P2PIcon } from 'src/assets/icons/P2PIcon';
 import { getLinkToP2P } from 'src/containers/Header/HeaderNavigation/getLinkToP2P';
 
 import { SignupIcon } from 'src/assets/icons/SignupIcon';
+
+import { QuickExchangeIcon } from 'src/assets/icons/QuickExchangeIcon';
 
 import { SidebarItem } from './SidebarItem/SidebarItem';
 import { SidebarToggler } from './SidebarToggler/SidebarToggler';
@@ -112,6 +114,15 @@ export const Sidebar: FC = () => {
                 onClick={handleItemClick}
               >
                 {t('page.header.navbar.internal.transfer')}
+              </SidebarItem>
+            )}
+            {showQuickExhange() && (
+              <SidebarItem
+                to="/quick-exchange"
+                icon={<QuickExchangeIcon />}
+                onClick={handleItemClick}
+              >
+                {t('page.header.navbar.quick.exchange')}
               </SidebarItem>
             )}
             <SidebarItem icon={<LogoutIcon />} onClick={handleLogoutClick}>

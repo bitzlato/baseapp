@@ -14,12 +14,16 @@ type BoxOwnProps<E = React.ElementType> = {
   justifyBetween?: boolean;
   justifyCenter?: boolean;
   alignCenter?: boolean;
+  alignEnd?: boolean;
   selfStart?: boolean;
   selfStretch?: boolean;
+  selfCenter?: boolean;
   wrap?: boolean;
   spacing?: boolean | '2x' | '3x' | '4x' | 'sm';
   padding?: boolean | '2x' | '3x';
   textSize?: 'lg' | 'sm';
+  textColor?: 'primary' | 'secondary' | 'warning' | 'success' | 'failed';
+  bgColor?: 'body';
 };
 
 type Props<E extends React.ElementType> = BoxOwnProps<E> &
@@ -39,13 +43,17 @@ export const Box: Element = React.forwardRef(
       padding,
       grow,
       alignCenter,
+      alignEnd,
       justifyEnd,
       justifyBetween,
       justifyCenter,
       selfStart,
       selfStretch,
+      selfCenter,
       wrap,
       textSize,
+      textColor,
+      bgColor,
       ...props
     }: BoxOwnProps,
     ref,
@@ -57,11 +65,13 @@ export const Box: Element = React.forwardRef(
       alignStart && s.alignStart,
       grow && s.grow,
       alignCenter && s.alignCenter,
+      alignEnd && s.alignEnd,
       justifyEnd && s.justifyEnd,
       justifyBetween && s.justifyBetween,
       justifyCenter && s.justifyCenter,
       selfStart && s.selfStart,
       selfStretch && s.selfStretch,
+      selfCenter && s.selfCenter,
       wrap && s.wrap,
       row && spacing === true && s.rowSpacing,
       row && spacing === '2x' && s.rowSpacing2X,
@@ -78,6 +88,8 @@ export const Box: Element = React.forwardRef(
       padding === '3x' && s.padding3X,
       textSize === 'lg' && sLabel.textLg,
       textSize === 'sm' && sLabel.textSm,
+      textColor && sLabel[`${textColor}Color`],
+      bgColor && s[`${bgColor}BgColor`],
     );
     return React.createElement(as, { ...props, ref, className: boxClassName });
   },

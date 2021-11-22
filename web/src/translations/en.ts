@@ -4,14 +4,14 @@ import { nationalitiesNames } from './nationalities';
 
 export const en = {
   'page.header.navbar.signIn': 'Sign In',
-  'page.header.navbar.quick.exchange': 'Quick exchange',
+  'page.header.navbar.quick.exchange': 'Quick Exchange',
   'page.header.navbar.trade': 'Trade',
   'page.header.navbar.wallets': 'Wallets',
   'page.header.navbar.openOrders': 'Orders',
   'page.header.navbar.history': 'History',
   'page.header.navbar.api': 'API Documentation',
   'page.header.navbar.internal.transfer': 'Internal transfer',
-  'page.header.navbar.toP2P': 'P2P trading',
+  'page.header.navbar.toP2P': 'P2P Trading',
 
   'page.header.navbar.profile': 'Profile',
   'page.header.navbar.logout': 'Logout',
@@ -403,7 +403,7 @@ export const en = {
   'page.body.history.transfer.header.status': 'Status',
   'page.body.history.transfer.content.status.completed': 'Completed',
 
-  'page.body.history.quick': 'Quick exchange',
+  'page.body.history.quick': 'Quick Exchange',
 
   'page.body.profile.header.account': 'Profile',
 
@@ -793,25 +793,20 @@ export const en = {
   'page.documentation.models.item.table.data.required.false': 'No',
 
   /* Quick Exchange */
-  'page.body.quick.exchange.header': 'Quick exchange',
-
-  'page.body.quick.exchange.label.exchange': 'You exchange',
-  'page.body.quick.exchange.label.receive': 'You receive',
+  'page.body.quick.exchange.header': 'Quick Exchange',
+  'page.body.quick.exchange.label.exchange': 'You have',
+  'page.body.quick.exchange.label.receive': 'You get',
   'page.body.quick.exchange.label.currency': 'Currency',
-
-  'page.body.quick.exchange.sublabel.min_amount': 'Min exchange amount is',
-  'page.body.quick.exchange.sublabel.balance': 'Balance',
-
+  'page.body.quick.exchange.sublabel.min_amount': 'Min exchange amount',
+  'page.body.quick.exchange.sublabel.balance': 'Available',
   'page.body.quick.exchange.estimated_price': 'Estimated price',
-  'page.body.quick.exchange.slippage':
-    'Slippage is higher than 1%. Enter a lower amount to get a better price',
-
-  'page.body.quick.exchange.placeholder.exchange': 'You exchange',
-  'page.body.quick.exchange.placeholder.receive': 'You receive',
-
+  'page.body.quick.exchange.slippage': 'Price deviation is allowed within 2%',
+  'page.body.quick.exchange.button.rearrange': 'Rearrange currencies',
   'page.body.quick.exchange.button.exchange': 'Exchange',
 
-  'success.quick.exchange.order.created': 'Order successfully created',
+  'quick.exchange.order.created': 'Order successfully created',
+  'quick.exchange.order.cancelled': 'Order rejected',
+  'market.swap_order.outdated_price': 'The price has changed too much',
 
   /* Error pages */
 

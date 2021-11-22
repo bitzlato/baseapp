@@ -44,5 +44,4 @@ export * from './randomSecretHex';
 export * from './getVerificationStep';
 export * from './convertToString';
 export * from './hasDuplicates';
-export * from './ssToMMSS';
 export * from './mergeObjects';

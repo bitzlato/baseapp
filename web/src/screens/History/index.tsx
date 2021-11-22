@@ -16,6 +16,7 @@ import {
   selectAbilities,
   AbilitiesInterface,
 } from '../../modules';
+import { showQuickExhange } from 'src/api/config';
 
 interface ReduxProps {
   abilities: AbilitiesInterface;
@@ -70,7 +71,7 @@ class History extends React.Component<Props, State> {
     );
   }
 
-  private onCurrentTabChange = (index) => this.setState({ currentTabIndex: index });
+  private onCurrentTabChange = (index: number) => this.setState({ currentTabIndex: index });
 
   private handleMakeRequest = (index: number) => {
     if (this.state.tab === this.tabMapping[index]) {
@@ -82,11 +83,6 @@ class History extends React.Component<Props, State> {
 
   private renderTabs = () => {
     const { tab } = this.state;
-
-    const quickExchange = {
-      content: tab === 'quick_exchange' ? <HistoryElement type="quick_exchange" /> : null,
-      label: this.props.intl.formatMessage({ id: 'page.body.history.quick' }),
-    };
 
     const tabs = [
       {
@@ -107,8 +103,11 @@ class History extends React.Component<Props, State> {
       },
     ];
 
-    if (CanCan.checkAbilityByAction('read', 'QuickExchange', this.props.abilities)) {
-      tabs.push(quickExchange);
+    if (showQuickExhange()) {
+      tabs.push({
+        content: tab === 'quick_exchange' ? <HistoryElement type="quick_exchange" /> : null,
+        label: this.props.intl.formatMessage({ id: 'page.body.history.quick' }),
+      });
     }
 
     return tabs;
