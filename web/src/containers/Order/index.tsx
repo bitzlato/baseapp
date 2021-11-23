@@ -45,7 +45,7 @@ import {
   selectOrderExecuteLoading,
 } from '../../modules/user/orders';
 import { isWsApiEnabled } from 'src/api/config';
-import { isTriggerByPrice } from 'src/helpers/order';
+import { isMarket, isTriggerByPrice } from 'src/helpers/order';
 
 interface ReduxProps {
   currentMarket: Market;
@@ -357,6 +357,10 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
 
     if (isWsApiEnabled()) {
       resultData.uuid = v4();
+    }
+
+    if (isMarket(orderType)) {
+      delete resultData.price;
     }
 
     if (orderAllowed) {
