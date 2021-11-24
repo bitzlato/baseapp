@@ -30,7 +30,7 @@ import { BeneficiariesFailAddModal } from './BeneficiariesFailAddModal';
 interface OwnProps {
   currency: string;
   type: 'fiat' | 'coin';
-  enableInvoice?: boolean;
+  enableInvoice: boolean | undefined;
   onChangeValue: (beneficiary: Beneficiary) => void;
 }
 

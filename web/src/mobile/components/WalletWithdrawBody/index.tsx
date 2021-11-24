@@ -52,7 +52,7 @@ const WalletWithdrawBodyComponent: React.FC<Props> = (props) => {
   const currencies = useSelector(selectCurrencies);
   const withdrawSuccess = useSelector(selectWithdrawSuccess);
   const memberLevels = useSelector(selectMemberLevels);
-  const { currency, fee, type } = props.wallet;
+  const { currency, fee, type, enable_invoice } = props.wallet;
   const fixed = (props.wallet || { fixed: 0 }).fixed;
   const withdrawAmountLabel = React.useMemo(
     () => intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.amount' }),
@@ -197,6 +197,7 @@ const WalletWithdrawBodyComponent: React.FC<Props> = (props) => {
         withdrawButtonLabel={withdrawButtonLabel}
         twoFactorAuthRequired={isTwoFactorAuthRequired(user.level, user.otp)}
         ccyInfo={currencyItem ?? defaultCurrency}
+        enableInvoice={enable_invoice}
       />
     );
   }, [

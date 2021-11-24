@@ -17,7 +17,7 @@ export interface WithdrawProps {
   fixed: number;
   className?: string;
   type: 'fiat' | 'coin';
-  enableInvoice?: boolean;
+  enableInvoice: boolean | undefined;
   twoFactorAuthRequired?: boolean;
   withdrawAmountLabel?: string;
   withdraw2faLabel?: string;

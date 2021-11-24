@@ -17,7 +17,7 @@ import {
 interface Props {
   currency: string;
   type: 'fiat' | 'coin';
-  enableInvoice?: boolean;
+  enableInvoice: boolean | undefined;
   handleToggleAddAddressModal: () => void;
 }
 
@@ -101,7 +101,10 @@ const BeneficiariesAddModalComponent: React.FC<Props> = (props: Props) => {
 
   React.useEffect(() => {
     if (beneficiariesAddError && beneficiariesAddError.message) {
-      if (beneficiariesAddError.message.indexOf('account.withdraw.not_permitted') > -1) {
+      if (
+        beneficiariesAddError.message.indexOf('account.withdraw.not_permitted') > -1 ||
+        beneficiariesAddError.message.indexOf('record.not_found') > -1
+      ) {
         dispatch(alertPush({ message: beneficiariesAddError.message, type: 'error' }));
       }
     }
