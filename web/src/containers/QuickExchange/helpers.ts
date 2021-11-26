@@ -29,11 +29,11 @@ export function getCurrencies(markets: Market[], base: string, quote: string): S
     if (sell || (m.base_unit === quote && m.quote_unit === base)) {
       market = m;
       if (sell) {
-        baseCcy = getCurrency(m.quote_unit, m.price_precision);
-        quoteCcy = getCurrency(m.base_unit, m.amount_precision);
-      } else {
         baseCcy = getCurrency(m.base_unit, m.amount_precision);
         quoteCcy = getCurrency(m.quote_unit, m.price_precision);
+      } else {
+        baseCcy = getCurrency(m.quote_unit, m.price_precision);
+        quoteCcy = getCurrency(m.base_unit, m.amount_precision);
       }
     }
 

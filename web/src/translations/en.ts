@@ -799,7 +799,7 @@ export const en = {
   'page.body.quick.exchange.label.currency': 'Currency',
   'page.body.quick.exchange.sublabel.min_amount': 'Min exchange amount',
   'page.body.quick.exchange.sublabel.balance': 'Available',
-  'page.body.quick.exchange.estimated_price': 'Estimated price',
+  'page.body.quick.exchange.rate': 'Exchange rate',
   'page.body.quick.exchange.slippage': 'Price deviation is allowed within 2%',
   'page.body.quick.exchange.button.rearrange': 'Rearrange currencies',
   'page.body.quick.exchange.button.exchange': 'Exchange',

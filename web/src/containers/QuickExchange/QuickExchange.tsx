@@ -199,8 +199,8 @@ export const QuickExchangeContainer: React.FC = () => {
           itemRenderer={renderDropdownItem}
         />
       </Box>
-      {price && quoteCcy && market && (
-        <Box col spacing="sm">
+      {price && baseCcy && quoteCcy && market && (
+        <Box col spacing>
           <Box row spacing>
             <span>{t('page.body.quick.exchange.sublabel.min_amount')}:</span>
             <MoneyFormat
@@ -211,11 +211,10 @@ export const QuickExchangeContainer: React.FC = () => {
             />
           </Box>
           <Box row spacing>
-            <span>{t('page.body.quick.exchange.estimated_price')}:</span>
-            <Box as="span" row spacing="sm">
-              <span>~</span>
-              <MoneyFormat money={fromDecimalSilent(price, quoteCcy)} />
-            </Box>
+            <span>{t('page.body.quick.exchange.rate')}:</span>
+            <MoneyFormat money={fromDecimalSilent(1, baseCcy)} />
+            <span>≈</span>
+            <MoneyFormat money={fromDecimalSilent(price, quoteCcy)} />
           </Box>
           {/* <Box row spacing>
                 <WarningIcon className={s.quickExchangeWarningIcon} />
