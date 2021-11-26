@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Wallet } from 'src/modules';
@@ -26,7 +26,7 @@ export const CurrencyInfo: FC<CurrencyInfoProps> = ({
             <FormattedMessage id="page.body.wallets.locked" />
           </div>
           <span className="cr-wallet-item__balance-locked">
-            <MoneyFormat money={lockedMoney} />
+            <AmountFormat money={lockedMoney} />
           </span>
         </div>
         <div>
@@ -37,7 +37,7 @@ export const CurrencyInfo: FC<CurrencyInfoProps> = ({
           </span>
           &nbsp;
           <span className="cr-wallet-item__balance-amount">
-            <MoneyFormat money={balanceMoney} />
+            <AmountFormat money={balanceMoney} />
           </span>
         </div>
       </div>

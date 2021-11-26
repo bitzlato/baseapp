@@ -8,7 +8,7 @@ import { Table } from 'src/components';
 import { currenciesFetch } from 'src/modules/public/currencies/actions';
 import { selectCurrencies } from 'src/modules/public/currencies/selectors';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
-import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { Box } from 'src/components/Box';
 
 export const Fees: React.FC = () => {
@@ -44,11 +44,11 @@ export const Fees: React.FC = () => {
       d.deposit_fee.isZero() ? (
         t('page.body.wallets.tabs.deposit.ccy.message.fee.free')
       ) : (
-        <MoneyFormat money={d.deposit_fee} />
+        <AmountFormat money={d.deposit_fee} />
       ),
-      <MoneyFormat money={d.min_deposit_amount} />,
-      <MoneyFormat money={d.withdraw_fee} />,
-      <MoneyFormat money={d.min_withdraw_amount} />,
+      <AmountFormat money={d.min_deposit_amount} />,
+      <AmountFormat money={d.withdraw_fee} />,
+      <AmountFormat money={d.min_withdraw_amount} />,
     ];
   });
 

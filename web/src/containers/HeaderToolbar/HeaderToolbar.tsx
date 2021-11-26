@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentMarket, selectMarketTickers, RootState } from 'src/modules';
 import { useT } from 'src/hooks/useT';
-import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import cn from 'classnames';
 import { Money } from '@bitzlato/money-js';
 
@@ -45,28 +45,28 @@ export const HeaderToolbar: FC<Props> = ({ className }) => {
         label={t('page.body.trade.toolBar.lowest')}
         isLoading={isLoading}
       >
-        {low && <MoneyFormat money={low} />}
+        {low && <AmountFormat money={low} />}
       </HeaderToolbarItem>
       <HeaderToolbarItem
         color="negative"
         label={t('page.body.trade.toolBar.lastPrice')}
         isLoading={isLoading}
       >
-        {last && <MoneyFormat money={last} />}
+        {last && <AmountFormat money={last} />}
       </HeaderToolbarItem>
       <HeaderToolbarItem
         color="negative"
         label={t('page.body.trade.toolBar.highest')}
         isLoading={isLoading}
       >
-        {high && <MoneyFormat money={high} />}
+        {high && <AmountFormat money={high} />}
       </HeaderToolbarItem>
       <HeaderToolbarItem
         color="positive"
         label={t('page.body.trade.toolBar.volume')}
         isLoading={isLoading}
       >
-        {volume && <MoneyFormat money={volume} />}
+        {volume && <AmountFormat money={volume} />}
       </HeaderToolbarItem>
       <HeaderToolbarItem
         color={change?.startsWith('+') ? 'positive' : 'negative'}

@@ -15,7 +15,7 @@ import {
   selectWallets,
   walletsFetch,
 } from 'src/modules';
-import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { InternalTransferInput } from './InternalInput';
 
 export const InternalTransferComponent = () => {
@@ -111,7 +111,7 @@ export const InternalTransferComponent = () => {
         <div className="cr-modal__container-content__transfer">
           {translate('page.body.internal.transfer.modal.content.transfer')}
           <span>
-            {amountMoney && <MoneyFormat money={amountMoney} />} {currency}
+            {amountMoney && <AmountFormat money={amountMoney} />} {currency}
           </span>
           {translate('page.body.internal.transfer.modal.content.to')}
           <span>{username}</span>
@@ -155,7 +155,7 @@ export const InternalTransferComponent = () => {
           >
             {translate('page.body.internal.transfer.account.balance')}
             {wallet && wallet.balance && currency !== '' ? (
-              <MoneyFormat money={wallet.balance} />
+              <AmountFormat money={wallet.balance} />
             ) : (
               0
             )}{' '}

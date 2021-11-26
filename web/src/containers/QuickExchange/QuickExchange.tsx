@@ -22,7 +22,7 @@ import { cleanPositiveFloatInput } from '../../helpers';
 import { fromDecimalSilent } from 'src/helpers/fromDecimal';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
-import { CurrencyMoney } from 'src/components/CurrencyMoney/CurrencyMoney';
+import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { DropdownComponent } from './Dropdown';
 import { Card } from 'src/components/Card/Card';
 
@@ -156,7 +156,7 @@ export const QuickExchangeContainer: React.FC = () => {
         <Box row spacing justifyBetween wrap>
           <Box row spacing>
             <span>{t('page.body.quick.exchange.sublabel.balance')}:</span>
-            <CurrencyMoney money={baseWallet?.balance ?? fromDecimalSilent(0, DEFAULT_CURRENCY)} />
+            <MoneyFormat money={baseWallet?.balance ?? fromDecimalSilent(0, DEFAULT_CURRENCY)} />
           </Box>
           <Box row spacing>
             {PERCENTS.map((v) => (
@@ -203,7 +203,7 @@ export const QuickExchangeContainer: React.FC = () => {
         <Box col spacing="sm">
           <Box row spacing>
             <span>{t('page.body.quick.exchange.sublabel.min_amount')}:</span>
-            <CurrencyMoney
+            <MoneyFormat
               money={fromDecimalSilent(market.min_amount, {
                 code: market.base_unit,
                 minorUnit: market.amount_precision,
@@ -214,7 +214,7 @@ export const QuickExchangeContainer: React.FC = () => {
             <span>{t('page.body.quick.exchange.estimated_price')}:</span>
             <Box as="span" row spacing="sm">
               <span>~</span>
-              <CurrencyMoney money={fromDecimalSilent(price, quoteCcy)} />
+              <MoneyFormat money={fromDecimalSilent(price, quoteCcy)} />
             </Box>
           </Box>
           {/* <Box row spacing>

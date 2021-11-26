@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Money } from '@bitzlato/money-js';
-import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { Wallet } from 'src/modules/user/wallets/types';
 import { CryptoIcon } from '../../../components/CryptoIcon';
 import { areEqualSelectedProps } from '../../../helpers/areEqualSelectedProps';
@@ -22,7 +22,7 @@ const WalletItemComponent: React.FC<Props> = ({ wallet, onClick }) => {
         <span className="cr-mobile-wallet-item__name">{wallet.name}</span>
       </div>
       <div className="cr-mobile-wallet-item__balance">
-        <MoneyFormat money={wallet.balance || Money.fromDecimal(0, wallet.currency)} />
+        <AmountFormat money={wallet.balance || Money.fromDecimal(0, wallet.currency)} />
       </div>
     </div>
   );
