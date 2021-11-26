@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { Wallet } from 'src/modules';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { LockIcon } from 'src/assets/icons/LockIcon';
-import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 
 import s from './WalletItem.postcss';
 import { Money } from '@bitzlato/money-js';
@@ -32,14 +32,14 @@ export const WalletItem: FC<Props> = ({
         <span className={cn(s.row, s.title)}>
           <span>{currencySymbol}</span>
           <span>
-            <MoneyFormat money={balance ?? zeroMoney} />
+            <AmountFormat money={balance ?? zeroMoney} />
           </span>
         </span>
         <span className={cn(s.row, s.description)}>
           <span>{name}</span>
           {hasLocked && (
             <span className={s.amountLocked}>
-              <LockIcon /> <MoneyFormat money={locked} />
+              <LockIcon /> <AmountFormat money={locked} />
             </span>
           )}
         </span>
