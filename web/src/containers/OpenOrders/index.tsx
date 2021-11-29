@@ -1,11 +1,14 @@
-import cn from 'classnames';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Form, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { Currency } from '@bitzlato/money-js';
+import cn from 'classnames';
+
 import { useOpenOrdersFetch } from 'src/hooks';
+import { useT } from 'src/hooks/useT';
 import { CloseIcon } from '../../assets/images/CloseIcon';
-import { Decimal, OpenOrders } from '../../components';
-import { localeDate, setTradeColor } from '../../helpers';
+import { Table } from '../../components';
+import { localeDate } from '../../helpers';
 import {
   openOrdersCancelFetch,
   ordersCancelAllFetch,
@@ -17,14 +20,15 @@ import {
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
 import { getTriggerSign } from './helpers';
-import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { Box } from 'src/components/Box';
 import { Label } from 'src/components/Label';
-import { useT } from 'src/hooks/useT';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { fromDecimalSilent } from 'src/helpers/fromDecimal';
 
 export const OpenOrdersComponent: React.FC = () => {
-  const [hideOtherPairs, setHideOtherPairs] = useState<boolean>(true);
+  const [hideOtherPairs, setHideOtherPairs] = useState(true);
   const dispatch = useDispatch();
   const currentMarket = useSelector(selectCurrentMarket);
   const list = useSelector(selectOpenOrdersList);
@@ -35,15 +39,11 @@ export const OpenOrdersComponent: React.FC = () => {
 
   useOpenOrdersFetch(currentMarket, hideOtherPairs);
 
-  const headersKeys = useMemo(
-    () => ['Date', 'Market', 'Type', 'Price', 'Amount', 'Total', 'Trigger', 'Filled', ''],
-    [],
-  );
-
-  const renderHeaders = useMemo(
+  const headers = useMemo(
     () => [
       t('page.body.trade.header.openOrders.content.date'),
       t('page.body.trade.header.openOrders.content.market'),
+      t('page.body.trade.header.openOrders.content.side'),
       t('page.body.trade.header.openOrders.content.type'),
       t('page.body.trade.header.openOrders.content.price'),
       t('page.body.trade.header.openOrders.content.amount'),
@@ -65,7 +65,6 @@ export const OpenOrdersComponent: React.FC = () => {
 
       return data.map((item: OrderCommon) => {
         const {
-          id,
           price,
           created_at,
           remaining_volume,
@@ -76,70 +75,65 @@ export const OpenOrdersComponent: React.FC = () => {
           trigger_price,
         } = item;
         const executedVolume = Number(origin_volume) - Number(remaining_volume);
-        const filled = ((executedVolume / Number(origin_volume)) * 100).toFixed(2);
+        const filled = fromDecimalSilent(
+          ((executedVolume / Number(origin_volume)) * 100).toFixed(2),
+          FILLED_CURRENCY,
+        );
         const curMarket = markets.find((i) => i.id === market);
-        const priceFixed = curMarket?.price_precision || 0;
-        const amountFixed = curMarket?.amount_precision || 0;
+        const priceCurrency = getCurrency('', curMarket?.price_precision || 0);
+        const amountCurrency = getCurrency(
+          curMarket?.quote_unit ?? '',
+          curMarket?.amount_precision || 0,
+        );
+        const color = side === 'buy' ? 'bid' : 'ask';
 
         return [
-          <span key={id} className="split-lines">
-            <span className="secondary">{localeDate(created_at, 'date')}</span>&nbsp;
+          <Box col textSize="sm">
+            <Label color="secondary">{localeDate(created_at, 'date')}</Label>
             <span>{localeDate(created_at, 'time')}</span>
-          </span>,
-          <span key={id} className="bold">
-            {curMarket?.name && <MarketName name={curMarket?.name} />}
-          </span>,
-          <span key={id}>
+          </Box>,
+          <span className="bold">{curMarket?.name && <MarketName name={curMarket?.name} />}</span>,
+          <Label color={color}>
+            {t(`page.body.trade.header.openOrders.content.side.${side}`)}
+          </Label>,
+          <span>
             {ord_type ? t(`page.body.trade.header.openOrders.content.type.${ord_type}`) : '-'}
           </span>,
-          <span style={{ color: setTradeColor(side).color }} key={id}>
-            <Decimal fixed={priceFixed} thousSep=",">
-              {price}
-            </Decimal>
-          </span>,
-          <span key={id}>
-            <Decimal fixed={amountFixed} thousSep=",">
-              {+remaining_volume}
-            </Decimal>
-          </span>,
-          <span key={id}>
-            <Decimal fixed={amountFixed} thousSep=",">
-              {+remaining_volume * +price}
-            </Decimal>{' '}
-            <span className="cr-text__opacity">
-              {curMarket?.quote_unit && <CurrencyTicker symbol={curMarket?.quote_unit} />}
-            </span>
-          </span>,
-          <span key={id} className="split-lines">
+          <Label color={color}>
+            <AmountFormat money={fromDecimalSilent(price, priceCurrency)} />
+          </Label>,
+          <AmountFormat money={fromDecimalSilent(remaining_volume, amountCurrency)} />,
+          <MoneyFormat
+            money={fromDecimalSilent(remaining_volume, amountCurrency).multiply(price)}
+          />,
+          <span>
             {trigger_price ? (
               <React.Fragment>
-                <span>{t('page.body.trade.header.openOrders.lastPrice')}</span>&nbsp;
-                {getTriggerSign(ord_type ?? '', side)}&nbsp;&nbsp;
-                <span style={{ color: setTradeColor(side).color }}>
-                  {Decimal.format(trigger_price, priceFixed, ',')}
-                </span>
+                <span>{t('page.body.trade.header.openOrders.lastPrice')}</span>
+                &nbsp;
+                {getTriggerSign(ord_type ?? '', side)}&nbsp;
+                <Label color={color}>
+                  <AmountFormat money={fromDecimalSilent(trigger_price, priceCurrency)} />
+                </Label>
               </React.Fragment>
             ) : (
               '-'
             )}
           </span>,
-          <span style={{ color: setTradeColor(side).color }} key={id}>
-            <Decimal fixed={2} thousSep=",">
-              {+filled}
-            </Decimal>
-            %
-          </span>,
-          side,
+          <Label color={color}>
+            <AmountFormat money={filled} />%
+          </Label>,
+          <CloseIcon className="close" onClick={() => handleCancel(item)} />,
         ];
       });
     },
     [markets],
   );
 
-  const handleCancel = (index: number) => {
+  const handleCancel = (order: OrderCommon) => {
     dispatch(
       openOrdersCancelFetch({
-        order: list[index],
+        order,
         list,
       }),
     );
@@ -158,25 +152,6 @@ export const OpenOrdersComponent: React.FC = () => {
     event.preventDefault();
     setHideOtherPairs(!hideOtherPairs);
   };
-
-  const renderContent = useMemo(() => {
-    if (loading) {
-      return (
-        <div className="open-order-loading">
-          <Spinner animation="border" variant="primary" />
-        </div>
-      );
-    }
-
-    return (
-      <OpenOrders
-        headersKeys={headersKeys}
-        headers={renderHeaders}
-        data={renderData(list)}
-        onCancel={handleCancel}
-      />
-    );
-  }, [loading, list, markets]);
 
   return (
     <div className={classNames}>
@@ -214,7 +189,24 @@ export const OpenOrdersComponent: React.FC = () => {
           )}
         </Box>
       </div>
-      {renderContent}
+      {loading ? (
+        <div className="open-order-loading">
+          <Spinner animation="border" variant="primary" />
+        </div>
+      ) : (
+        <div className="cr-open-orders">
+          <Table header={headers} data={renderData(list)} />
+        </div>
+      )}
     </div>
   );
 };
+
+function getCurrency(code: Currency['code'], minorUnit: Currency['minorUnit']) {
+  return {
+    code,
+    minorUnit,
+  };
+}
+
+const FILLED_CURRENCY = getCurrency('', 2);

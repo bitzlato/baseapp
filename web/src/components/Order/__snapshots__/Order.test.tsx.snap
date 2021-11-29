@@ -192,7 +192,7 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="row justifyBetween selfStretch wrap textLg"
+              class="row justifyBetween selfStretch wrap lgSize"
             >
               <label />
               <div
@@ -456,7 +456,7 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="row justifyBetween selfStretch wrap textLg"
+              class="row justifyBetween selfStretch wrap lgSize"
             >
               <label />
               <div

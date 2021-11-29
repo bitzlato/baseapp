@@ -24,7 +24,6 @@ export * from './MarketDepths';
 export * from './Markets';
 export * from './MetaMaskButton';
 export * from './Modal';
-export * from './OpenOrders';
 export * from './Order';
 export * from './OrderBook';
 export * from './OrderForm';
