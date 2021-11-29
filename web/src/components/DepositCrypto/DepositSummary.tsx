@@ -32,7 +32,7 @@ export const DepositSummary: React.FC<Props> = ({ currency, showWarning }) => {
           <Box selfStart>
             <WarningIcon />
           </Box>
-          <Label warningColor>{t('page.body.wallets.tabs.deposit.ccy.message.warning')}</Label>
+          <Label color="warning">{t('page.body.wallets.tabs.deposit.ccy.message.warning')}</Label>
         </Box>
       )}
       {process.env.REACT_APP_RELEASE_STAGE === 'sandbox' && (

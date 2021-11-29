@@ -49,13 +49,13 @@ const OrdersItemComponent: React.FC<Props> = (props) => {
       <div className="pg-mobile-orders-item__row">
         <Box row spacing>
           <span style={{ color: setTradeColor(order.side).color }}>{orderType}</span>
-          <Label primaryColor>
+          <Label color="primary">
             <MarketName name={marketName} />
           </Label>
         </Box>
         <Box row spacing>
           <span>{orderDate}</span>
-          <Label primaryColor>{orderTime}</Label>
+          <Label color="primary">{orderTime}</Label>
         </Box>
       </div>
       <div className="pg-mobile-orders-item__row">

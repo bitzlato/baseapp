@@ -16,31 +16,35 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
 
   switch (item.state) {
     case 'dispatched':
-      return <Label successColor>{t('page.body.history.deposit.content.status.confirmed')}</Label>;
+      return (
+        <Label color="success">{t('page.body.history.deposit.content.status.confirmed')}</Label>
+      );
 
     case 'errored':
       return (
-        <Label failedColor>
+        <Label color="failed">
           {item.public_message || t('page.body.history.deposit.content.status.errored')}
         </Label>
       );
 
     case 'skipped':
-      return <Label failedColor>{t('page.body.history.deposit.content.status.skipped')}</Label>;
+      return <Label color="failed">{t('page.body.history.deposit.content.status.skipped')}</Label>;
 
     case 'rejected':
-      return <Label failedColor>{t('page.body.history.deposit.content.status.canceled')}</Label>;
+      return <Label color="failed">{t('page.body.history.deposit.content.status.canceled')}</Label>;
 
     case 'canceled':
-      return <Label failedColor>{t('page.body.history.deposit.content.status.canceled')}</Label>;
+      return <Label color="failed">{t('page.body.history.deposit.content.status.canceled')}</Label>;
 
     case 'submitted':
-      return <Label warningColor>{t('page.body.history.deposit.content.status.confirming')}</Label>;
+      return (
+        <Label color="warning">{t('page.body.history.deposit.content.status.confirming')}</Label>
+      );
 
     case 'invoiced':
       return item.transfer_links ? (
         <>
-          <Label key="label" warningColor>
+          <Label key="label" color="warning">
             {t('page.body.history.deposit.content.status.wait_payment')}{' '}
           </Label>
           {join(
@@ -49,13 +53,13 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
                 {d.title}
               </ExternalLink>
             )),
-            <Label key="sep" secondaryColor>
+            <Label key="sep" color="secondary">
               <span> / </span>
             </Label>,
           )}
         </>
       ) : (
-        <Label warningColor>{t('page.body.wallets.table.invoiced')}</Label>
+        <Label color="warning">{t('page.body.wallets.table.invoiced')}</Label>
       );
 
     case 'accepted':
@@ -64,11 +68,13 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
       );
 
     case 'refunding':
-      return <Label warningColor>{t('page.body.history.deposit.content.status.refunding')}</Label>;
+      return (
+        <Label color="warning">{t('page.body.history.deposit.content.status.refunding')}</Label>
+      );
 
     default:
       return (
-        <Label secondaryColor capitalize>
+        <Label color="secondary" capitalize>
           {item.state}
         </Label>
       );

@@ -21,10 +21,10 @@ const WalletBannerComponent: React.FC<Props> = ({ wallet }) => {
       <Box col spacing="sm">
         <Label size="sm">{t('page.mobile.wallets.banner.locked')}</Label>
         <Box row wrap spacing="sm">
-          <Label primaryColor>
+          <Label color="primary">
             <AmountFormat money={wallet.locked ?? zeroMoney} />
           </Label>
-          <Label primaryColor>
+          <Label color="primary">
             <CurrencyTicker symbol={wallet.currency.code} />
           </Label>
         </Box>
@@ -32,10 +32,10 @@ const WalletBannerComponent: React.FC<Props> = ({ wallet }) => {
       <Box col spacing="sm">
         <Label size="sm">{t('page.mobile.wallets.banner.available')}</Label>
         <Box row wrap spacing="sm">
-          <Label primaryColor>
+          <Label color="primary">
             <AmountFormat money={wallet.balance ?? zeroMoney} />
           </Label>
-          <Label primaryColor>
+          <Label color="primary">
             <CurrencyTicker symbol={wallet.currency.code} />
           </Label>
         </Box>
