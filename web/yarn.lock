@@ -3852,9 +3852,9 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
-"cryptocurrency-icons@https://github.com/bitzlato/cryptocurrency-icons.git":
+"cryptocurrency-icons@git+https://github.com/bitzlato/cryptocurrency-icons.git":
   version "0.18.0"
-  resolved "https://github.com/bitzlato/cryptocurrency-icons.git#2844c0e213547fcbcaaac9dd51474cec3a102304"
+  resolved "git+https://github.com/bitzlato/cryptocurrency-icons.git#2844c0e213547fcbcaaac9dd51474cec3a102304"
 
 css-b64-images@~0.2.5:
   version "0.2.5"
