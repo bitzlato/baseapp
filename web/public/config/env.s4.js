@@ -1,17 +1,17 @@
 window.env = {
   api: {
-    authUrl: 'https://market-s4.bitzlato.com/api/v2/barong',
-    tradeUrl: 'https://market-s4.bitzlato.com/api/v2/peatio',
-    finexUrl: 'https://market-s4.bitzlato.com/api/v2/finex',
-    applogicUrl: 'https://market-s4.bitzlato.com/api/v2/applogic',
-    rangerUrl: 'wss://market-s4.bitzlato.com/api/v2/ranger',
+    authUrl: 'https://s4.s-www.lgk.one/api/v2/barong',
+    tradeUrl: 'https://s4.s-www.lgk.one/api/v2/peatio',
+    finexUrl: 'https://s4.s-www.lgk.one/api/v2/finex',
+    applogicUrl: 'https://s4.s-www.lgk.one/api/v2/applogic',
+    rangerUrl: 'wss://s4.s-www.lgk.one/api/v2/ranger',
   },
   auth0: {
     domain: 'bitzlato-dev.auth0.com',
     client_id: 'OL926gD0Zha6h80uJx4TVhJLMKrJemjb',
-    redirect_uri: 'https://market-s4.bitzlato.com/success_signin',
-    auth_url: 'https://market-s4.bitzlato.com/api/v2/barong/identity/sessions/auth0',
-    signedin_url: 'https://market-s4.bitzlato.com/wallets',
+    redirect_uri: 'https://s4.s-www.lgk.one/success_signin',
+    auth_url: 'https://s4.s-www.lgk.one/api/v2/barong/identity/sessions/auth0',
+    signedin_url: 'https://s4.s-www.lgk.one/wallets',
   },
   signInUrl: '/signin/bitzlato.html',
   signUpUrl: '/signin/bitzlato.html',
@@ -31,7 +31,7 @@ window.env = {
   balancesFetchInterval: '3000',
   passwordEntropyStep: 14,
   directSigninUrl:
-    'https://bitzlato.com/auth/login?ex=true&returnTo=https%3A%2F%2Fmarket-s4.bitzlato.com%2Fsuccess_signin%2Fbitzlato.html',
+    'https://bitzlato.com/auth/login?ex=true&returnTo=https%3A%2F%2Fs4.s-www.lgk.one%2Fsuccess_signin%2Fbitzlato.html',
   kycSteps: [
     'email',
     // 'phone',
