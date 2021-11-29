@@ -36,7 +36,7 @@ Access-Control-Allow-Credentials: true
     "state": "hidden"
   },
   {
-    "id": "btceth",
+    "id": "ethbtc",
     "name": "BTC/ETH",
     "base_unit": "btc",
     "quote_unit": "eth",

@@ -10,10 +10,11 @@ interface Props {
 
 export const MoneyFormat: React.FC<Props> = ({ money }) => {
   return (
-    <Box as="span" row spacing="sm">
+    <Box as="span">
       <Box as="span" textColor="primary">
         <AmountFormat money={money} />
       </Box>
+      &nbsp;
       <CurrencyTicker symbol={money.currency.code} />
     </Box>
   );
