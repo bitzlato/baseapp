@@ -299,7 +299,7 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
             <label className={s.inputLabel}>{priceText}</label>
             <Label ellipsis size={isMobileDevice ? 'sm' : undefined} bold>
               &asymp;{' '}
-              <Label primaryColor>
+              <Label color="primary">
                 {Decimal.format(safePrice, currentMarketBidPrecision, ',') || '0'}
               </Label>
             </Label>
@@ -426,11 +426,11 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
           <Box selfStretch row justifyBetween wrap textSize="lg">
             <label>{translate('page.body.trade.header.newOrder.content.total')}</label>
             <Box row spacing="sm">
-              {isMarket(orderType) ? <Label secondaryColor>&asymp;</Label> : null}
-              <Label primaryColor>
+              {isMarket(orderType) ? <Label color="secondary">&asymp;</Label> : null}
+              <Label color="primary">
                 {Decimal.format(total, currentMarketAskPrecision + currentMarketBidPrecision, ',')}
               </Label>
-              <Label secondaryColor>
+              <Label color="secondary">
                 <CurrencyTicker symbol={from} />
               </Label>
             </Box>
@@ -440,8 +440,8 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
           <Box selfStretch row justifyBetween wrap>
             <label>{translate('page.body.trade.header.newOrder.content.available')}</label>
             <Box row spacing="sm">
-              <Label primaryColor>{Decimal.format(available, availablePrecision, ',')}</Label>
-              <Label secondaryColor>
+              <Label color="primary">{Decimal.format(available, availablePrecision, ',')}</Label>
+              <Label color="secondary">
                 <CurrencyTicker symbol={availableCurrency} />
               </Label>
             </Box>

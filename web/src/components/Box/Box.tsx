@@ -22,7 +22,7 @@ type BoxOwnProps<E = React.ElementType> = {
   spacing?: boolean | '2x' | '3x' | '4x' | 'sm';
   padding?: boolean | '2x' | '3x';
   textSize?: 'lg' | 'sm';
-  textColor?: 'primary' | 'secondary' | 'warning' | 'success' | 'failed';
+  textColor?: 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask';
   bgColor?: 'body';
 };
 
@@ -86,8 +86,7 @@ export const Box: Element = React.forwardRef(
       padding === true && s.padding,
       padding === '2x' && s.padding2X,
       padding === '3x' && s.padding3X,
-      textSize === 'lg' && sLabel.textLg,
-      textSize === 'sm' && sLabel.textSm,
+      textSize && sLabel[`${textSize}Size`],
       textColor && sLabel[`${textColor}Color`],
       bgColor && s[`${bgColor}BgColor`],
     );

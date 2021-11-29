@@ -4,11 +4,7 @@ import s from './Label.postcss';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   size?: 'lg' | 'sm';
-  primaryColor?: boolean;
-  secondaryColor?: boolean;
-  warningColor?: boolean;
-  successColor?: boolean;
-  failedColor?: boolean;
+  color?: 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask';
   capitalize?: boolean;
   bold?: boolean;
   ellipsis?: boolean;
@@ -19,27 +15,18 @@ interface Props extends React.HTMLAttributes<HTMLSpanElement> {
 export const Label: React.FC<Props> = ({
   className,
   size,
-  primaryColor,
-  secondaryColor,
-  warningColor,
-  successColor,
-  failedColor,
   capitalize,
   bold,
   ellipsis,
   center,
   noWrap,
+  color,
   ...others
 }) => {
   const c = cn(
     className,
-    size === 'lg' && s.textLg,
-    size === 'sm' && s.textSm,
-    primaryColor && s.primaryColor,
-    secondaryColor && s.secondaryColor,
-    warningColor && s.warningColor,
-    successColor && s.successColor,
-    failedColor && s.failedColor,
+    size && s[`${size}Size`],
+    color && s[`${color}Color`],
     capitalize && s.capitalize,
     bold && s.bold,
     ellipsis && s.ellipsis,

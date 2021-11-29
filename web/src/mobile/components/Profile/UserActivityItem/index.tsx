@@ -41,24 +41,29 @@ const UserActivityItemComponent: React.FC<Props> = ({ item }) => {
   return (
     <Box col spacing className="pg-mobile-profile-account-activity-screen__item">
       <Box row spacing="2x" justifyBetween>
-        <Label primaryColor>{userAgent}</Label>
-        <Label primaryColor>{itemDate}</Label>
+        <Label color="primary">{userAgent}</Label>
+        <Label color="primary">{itemDate}</Label>
         <Label>{itemTime}</Label>
       </Box>
       <Box row spacing="2x" justifyBetween>
         <Box col>
           <Label>{t('page.mobile.profile.accountActivity.action')}</Label>
-          <Label primaryColor>{resultOfUserAction}</Label>
+          <Label color="primary">{resultOfUserAction}</Label>
         </Box>
         <Box col>
           <Label>{t('page.mobile.profile.accountActivity.ip')}</Label>
-          <Label primaryColor>{item.user_ip}</Label>
+          <Label color="primary">{item.user_ip}</Label>
         </Box>
         <Box col>
           <Label>{t('page.mobile.profile.accountActivity.result')}</Label>
           <Label
-            successColor={result === 'succeed'}
-            failedColor={result === 'failed' || result === 'denied'}
+            color={
+              result === 'succeed'
+                ? 'success'
+                : result === 'failed' || result === 'denied'
+                ? 'failed'
+                : undefined
+            }
           >
             {result}
           </Label>

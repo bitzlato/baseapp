@@ -12,20 +12,20 @@ export const OrderStatus: React.FC<Props> = ({ value }) => {
 
   switch (value) {
     case 'done':
-      return <Label successColor>{t('page.body.openOrders.content.status.done')}</Label>;
+      return <Label color="success">{t('page.body.openOrders.content.status.done')}</Label>;
 
     case 'cancel':
-      return <Label secondaryColor>{t('page.body.openOrders.content.status.cancel')}</Label>;
+      return <Label color="secondary">{t('page.body.openOrders.content.status.cancel')}</Label>;
 
     case 'wait':
-      return <Label warningColor>{t('page.body.openOrders.content.status.wait')}</Label>;
+      return <Label color="warning">{t('page.body.openOrders.content.status.wait')}</Label>;
 
     case 'reject':
-      return <Label failedColor>{t('page.body.openOrders.content.status.reject')}</Label>;
+      return <Label color="failed">{t('page.body.openOrders.content.status.reject')}</Label>;
 
     default:
       return (
-        <Label secondaryColor capitalize>
+        <Label color="secondary" capitalize>
           {value}
         </Label>
       );

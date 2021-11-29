@@ -19,7 +19,7 @@ export const WithdrawStatus: React.FC<Props> = ({ item, currency }) => {
     case 'processing':
     case 'transfering':
       return (
-        <Label warningColor>{t('page.body.history.withdraw.content.status.processing')}</Label>
+        <Label color="warning">{t('page.body.history.withdraw.content.status.processing')}</Label>
       );
 
     case 'confirming':
@@ -34,7 +34,7 @@ export const WithdrawStatus: React.FC<Props> = ({ item, currency }) => {
     case 'succeed':
       return (
         <BlockchainLink txid={item.blockchain_txid} currency={currency}>
-          <Label successColor>{t('page.body.history.withdraw.content.status.succeed')}</Label>
+          <Label color="success">{t('page.body.history.withdraw.content.status.succeed')}</Label>
         </BlockchainLink>
       );
 
@@ -42,19 +42,19 @@ export const WithdrawStatus: React.FC<Props> = ({ item, currency }) => {
     case 'failed':
     case 'errored':
       return (
-        <Label failedColor>
+        <Label color="failed">
           {item.public_message || t(`page.body.history.withdraw.content.status.${item.state}`)}
         </Label>
       );
 
     case 'under_review':
       return (
-        <Label warningColor>{t('page.body.history.withdraw.content.status.under_review')}</Label>
+        <Label color="warning">{t('page.body.history.withdraw.content.status.under_review')}</Label>
       );
 
     default:
       return (
-        <Label secondaryColor capitalize>
+        <Label color="secondary" capitalize>
           {item.state}
         </Label>
       );

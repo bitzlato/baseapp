@@ -168,7 +168,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
 
     return [
       <Box col spacing>
-        <Label secondaryColor>{localeDate(date, 'date')}</Label>
+        <Label color="secondary">{localeDate(date, 'date')}</Label>
         <Label>{localeDate(date, 'time')}</Label>
       </Box>,
       <MarketName name={currentMarket.name} />,
@@ -218,7 +218,11 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
         %
       </span>,
       <OrderStatus value={item.state} />,
-      state === 'wait' && <Box row><CloseIcon key={id} onClick={this.handleCancel(id)} /></Box>,
+      state === 'wait' && (
+        <Box row>
+          <CloseIcon key={id} onClick={this.handleCancel(id)} />
+        </Box>
+      ),
     ];
   };
 

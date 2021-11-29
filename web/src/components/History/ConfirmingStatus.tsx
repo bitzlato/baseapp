@@ -19,9 +19,9 @@ export const ConfirmingStatus: React.FC<Props> = ({ txid, currency, confirmation
   const content = min !== undefined ? ` ${confirmations}/${min}` : '';
   return (
     <>
-      <Label warningColor>{t('page.body.history.deposit.content.status.confirming')} </Label>
+      <Label color="warning">{t('page.body.history.deposit.content.status.confirming')} </Label>
       <BlockchainLink txid={txid} currency={currency}>
-        <Label warningColor>{content}</Label>
+        <Label color="warning">{content}</Label>
       </BlockchainLink>
     </>
   );
