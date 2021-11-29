@@ -32,7 +32,7 @@
     "bitcoincash-regex": "^1.1.9",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
-    "cryptocurrency-icons": "https://github.com/bitzlato/cryptocurrency-icons.git",
+    "cryptocurrency-icons": "git+https://github.com/bitzlato/cryptocurrency-icons.git",
     "history": "^4.7.2",
     "i18n-iso-countries": "^3.7.8",
     "markdown-to-jsx": "^7.1.3",
