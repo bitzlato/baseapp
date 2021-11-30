@@ -10,7 +10,6 @@
   }
 
   .cr-dropdown,
-  .cr-order-input,
   &__percentage-buttons,
   &__fee {
     display: flex;
@@ -56,37 +55,6 @@
 
       &__currency {
         margin-left: var(--gap);
-      }
-    }
-  }
-
-  .cr-order-input {
-    &__fieldset__input {
-      color: var(--input-text-color);
-
-      &__price {
-        font-size: calc(var(--gap) * 1.75);
-      }
-    }
-
-    &__fieldset__label {
-      background: var(--body-background-color) !important;
-      font-size: calc(var(--gap) * 2);
-      left: 12px !important;
-      margin-top: -8px !important;
-      padding: 0 calc(var(--gap) * 0.7);
-      position: absolute;
-      top: 0 !important;
-      z-index: 5000;
-    }
-
-    &__input {
-      .cr-order-input__price {
-        background: transparent !important;
-        display: inline-block;
-        margin-bottom: 5px;
-        margin-right: 20px;
-        margin-top: 5px;
       }
     }
   }

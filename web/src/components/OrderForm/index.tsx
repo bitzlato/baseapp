@@ -177,7 +177,7 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
             value={price || ''}
             precision={currentMarketBidPrecision}
             handleChangeValue={this.handlePriceChange}
-            handleFocusInput={this.handleFieldFocus}
+            handleFocusInput={this.props.listenInputPrice}
           />
         ) : (
           <OrderInput
@@ -186,7 +186,7 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
             placeholder={priceText}
             value={price || ''}
             handleChangeValue={this.handlePriceChange}
-            handleFocusInput={this.handleFieldFocus}
+            handleFocusInput={this.props.listenInputPrice}
           />
         )}
       </React.Fragment>
@@ -215,7 +215,7 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
             value={trigger || ''}
             precision={currentMarketBidPrecision}
             handleChangeValue={this.handleTriggerChange}
-            handleFocusInput={this.handleFieldFocus}
+            handleFocusInput={this.props.listenInputTrigger}
           />
         ) : (
           <OrderInput
@@ -224,7 +224,7 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
             placeholder={triggerText}
             value={trigger || ''}
             handleChangeValue={this.handleTriggerChange}
-            handleFocusInput={this.handleFieldFocus}
+            handleFocusInput={this.props.listenInputTrigger}
           />
         )}
       </React.Fragment>
@@ -354,7 +354,6 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
               value={amount || ''}
               precision={currentMarketAskPrecision}
               handleChangeValue={this.handleAmountChange}
-              handleFocusInput={this.handleFieldFocus}
             />
           ) : (
             <OrderInput
@@ -363,7 +362,6 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
               placeholder={amountText}
               value={amount || ''}
               handleChangeValue={this.handleAmountChange}
-              handleFocusInput={this.handleFieldFocus}
             />
           )}
         </div>
@@ -430,27 +428,6 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
     this.setState({
       orderType: orderTypesIndex[index],
     });
-  };
-
-  private handleFieldFocus = (field?: string) => {
-    const { orderType } = this.state;
-    const { type, translate } = this.props;
-
-    const priceText = translate('page.body.trade.header.newOrder.content.price');
-    const triggerText = translate(`page.body.trade.header.newOrder.content.triggerPrice`, {
-      sign: getTriggerSign(String(orderType).toLowerCase(), type),
-    });
-
-    switch (field) {
-      case priceText:
-        this.props.listenInputPrice && this.props.listenInputPrice();
-        break;
-      case triggerText:
-        this.props.listenInputTrigger && this.props.listenInputTrigger();
-        break;
-      default:
-        break;
-    }
   };
 
   private handlePriceChange = (value: string) => {
