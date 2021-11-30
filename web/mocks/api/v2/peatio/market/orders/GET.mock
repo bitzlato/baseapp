@@ -18,5 +18,22 @@ Access-Control-Allow-Credentials: true
     "remaining_volume":"123.1234",
     "executed_volume":"50",
     "trades_count":0
+  },
+  {
+    "avg_price": "7.317095",
+    "created_at": 1638277696,
+    "executed_volume": "0.0003",
+    "id": 4294389,
+    "kind": "ask",
+    "market": "ethbtc",
+    "ord_type": "market",
+    "origin_volume": "0.0004",
+    "price": null,
+    "remaining_volume": "0.0001",
+    "side": "sell",
+    "state": "wait",
+    "trades_count": 1,
+    "updated_at": 1638277696,
+    "uuid": "5764b65a-fe5a-4b09-9d7d-4ca926d98e95"
   }
 ]

@@ -24,7 +24,7 @@ export type OrderType =
 export type OrderKind = 'bid' | 'ask';
 
 export interface OrderCommon {
-  price: string;
+  price: string | null;
   state: OrderStatusType;
   remaining_volume: string;
   origin_volume: string;

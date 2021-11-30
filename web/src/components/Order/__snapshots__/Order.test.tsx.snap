@@ -2,7 +2,7 @@
 
 exports[`Order should match snapshot 1`] = `
 <div
-  class="cr-order cr-order--extended row rowSpacing"
+  class="cr-order cr-order--extended row alignStart rowSpacing"
 >
   <div
     class="cr-order--extended__buy"
@@ -40,7 +40,9 @@ exports[`Order should match snapshot 1`] = `
           >
             <div
               class="cr-order-item__dropdown__label"
-            />
+            >
+              Order Type
+            </div>
             <div
               class="cr-dropdown cr-dropdown--default"
             >
@@ -83,7 +85,7 @@ exports[`Order should match snapshot 1`] = `
                 <label />
                 <input
                   class="form-control"
-                  placeholder="0"
+                  placeholder="Price"
                   type="number"
                   value=""
                 />
@@ -127,7 +129,7 @@ exports[`Order should match snapshot 1`] = `
                 <label />
                 <input
                   class="form-control"
-                  placeholder="0"
+                  placeholder="Amount"
                   type="number"
                   value=""
                 />
@@ -175,7 +177,9 @@ exports[`Order should match snapshot 1`] = `
             <div
               class="row justifyBetween selfStretch wrap lgSize"
             >
-              <label />
+              <label>
+                Total
+              </label>
               <div
                 class="row rowSpacingSm"
               >
@@ -204,7 +208,9 @@ exports[`Order should match snapshot 1`] = `
             <div
               class="row justifyBetween selfStretch wrap"
             >
-              <label />
+              <label>
+                Available
+              </label>
               <div
                 class="row rowSpacingSm"
               >
@@ -231,11 +237,13 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <button
-              class="btn-block mr-1 mt-1 btn-lg row rowSpacing btn btn-success btn-block btn-lg"
+              class="row rowSpacing btn btn-success btn-block btn-lg"
               disabled=""
               type="button"
             >
-              <span />
+              <span>
+                Buy
+              </span>
               <span
                 class="currency"
               >
@@ -285,7 +293,9 @@ exports[`Order should match snapshot 1`] = `
           >
             <div
               class="cr-order-item__dropdown__label"
-            />
+            >
+              Order Type
+            </div>
             <div
               class="cr-dropdown cr-dropdown--default"
             >
@@ -328,7 +338,7 @@ exports[`Order should match snapshot 1`] = `
                 <label />
                 <input
                   class="form-control"
-                  placeholder="0"
+                  placeholder="Price"
                   type="number"
                   value=""
                 />
@@ -372,7 +382,7 @@ exports[`Order should match snapshot 1`] = `
                 <label />
                 <input
                   class="form-control"
-                  placeholder="0"
+                  placeholder="Amount"
                   type="number"
                   value=""
                 />
@@ -420,7 +430,9 @@ exports[`Order should match snapshot 1`] = `
             <div
               class="row justifyBetween selfStretch wrap lgSize"
             >
-              <label />
+              <label>
+                Total
+              </label>
               <div
                 class="row rowSpacingSm"
               >
@@ -449,7 +461,9 @@ exports[`Order should match snapshot 1`] = `
             <div
               class="row justifyBetween selfStretch wrap"
             >
-              <label />
+              <label>
+                Available
+              </label>
               <div
                 class="row rowSpacingSm"
               >
@@ -476,11 +490,13 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <button
-              class="btn-block mr-1 mt-1 btn-lg row rowSpacing btn btn-danger btn-block btn-lg"
+              class="row rowSpacing btn btn-danger btn-block btn-lg"
               disabled=""
               type="button"
             >
-              <span />
+              <span>
+                Sell
+              </span>
               <span
                 class="currency"
               >
