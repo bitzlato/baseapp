@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { Box } from 'src/components/Box';
 import { Label } from 'src/components/Label';
 import { MarketName } from 'src/components/MarketName/MarketName';
+import { getActualPrice } from 'src/modules/helpers';
 import { IntlProps } from '../../';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { History, Pagination } from '../../components';
@@ -161,7 +162,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
     const orderType = this.getType(ord_type);
     const orderSide = this.getSide(side);
     const date = updated_at || created_at;
-    const actualPrice = this.getPrice(item) || '0';
+    const actualPrice = getActualPrice(item);
     const total = +actualPrice * +origin_volume;
     const executedVolume = Number(origin_volume) - Number(remaining_volume);
     const filled = ((executedVolume / Number(origin_volume)) * 100).toFixed(2);
@@ -242,14 +243,6 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
     return this.props.intl.formatMessage({
       id: `page.body.trade.header.openOrders.content.type.${orderType}`,
     });
-  };
-
-  private getPrice = (item: OrderCommon) => {
-    if (item.ord_type === 'market' || item.state === 'done') {
-      return item.avg_price;
-    } else {
-      return item.price;
-    }
   };
 
   private handleCancel = (id: number) => () => {

@@ -10,6 +10,7 @@ import { OrderCommon } from 'src/modules/types';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { Label } from 'src/components/Label/Label';
 import { Box } from 'src/components/Box';
+import { getActualPrice } from 'src/modules/helpers';
 
 interface Props {
   order: OrderCommon;
@@ -37,8 +38,7 @@ const OrdersItemComponent: React.FC<Props> = (props) => {
   const marketName = currentMarket ? currentMarket.name : order.market;
   const orderType = getOrderType(order.side, order.ord_type);
   const filled = ((+(order.executed_volume || '0') / Number(order.origin_volume)) * 100).toFixed(2);
-  const actualPrice =
-    order.ord_type === 'market' || order.state === 'done' ? order.avg_price : order.price;
+  const actualPrice = getActualPrice(order);
   const [orderDate, orderTime] = localeDate(
     order.updated_at ? order.updated_at : order.created_at,
     'fullDate',
@@ -85,7 +85,7 @@ const OrdersItemComponent: React.FC<Props> = (props) => {
             <span>{intl.formatMessage({ id: 'page.mobile.orders.header.volume' })}</span>
             <span className="pg-mobile-orders-item__row__block__value">
               <Decimal fixed={currentMarket.price_precision}>
-                {+order.remaining_volume * +order.price}
+                {+order.remaining_volume * +actualPrice}
               </Decimal>
             </span>
           </div>

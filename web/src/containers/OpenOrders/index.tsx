@@ -26,6 +26,7 @@ import { Label } from 'src/components/Label';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { fromDecimalSilent } from 'src/helpers/fromDecimal';
+import { getActualPrice } from 'src/modules/helpers';
 
 export const OpenOrdersComponent: React.FC = () => {
   const [hideOtherPairs, setHideOtherPairs] = useState(true);
@@ -65,7 +66,6 @@ export const OpenOrdersComponent: React.FC = () => {
 
       return data.map((item: OrderCommon) => {
         const {
-          price,
           created_at,
           remaining_volume,
           origin_volume,
@@ -86,6 +86,8 @@ export const OpenOrdersComponent: React.FC = () => {
           curMarket?.amount_precision || 0,
         );
         const color = side === 'buy' ? 'bid' : 'ask';
+        const actualPrice = getActualPrice(item);
+        const total = fromDecimalSilent(origin_volume, amountCurrency).multiply(actualPrice);
 
         return [
           <Box col textSize="sm">
@@ -100,12 +102,10 @@ export const OpenOrdersComponent: React.FC = () => {
             {ord_type ? t(`page.body.trade.header.openOrders.content.type.${ord_type}`) : '-'}
           </span>,
           <Label color={color}>
-            <AmountFormat money={fromDecimalSilent(price, priceCurrency)} />
+            <AmountFormat money={fromDecimalSilent(actualPrice, priceCurrency)} />
           </Label>,
-          <AmountFormat money={fromDecimalSilent(remaining_volume, amountCurrency)} />,
-          <MoneyFormat
-            money={fromDecimalSilent(remaining_volume, amountCurrency).multiply(price)}
-          />,
+          <AmountFormat money={fromDecimalSilent(origin_volume, amountCurrency)} />,
+          <MoneyFormat money={total} />,
           <span>
             {trigger_price ? (
               <React.Fragment>
