@@ -16,7 +16,7 @@ export interface OrderInputProps {
   value: string | number;
   precision: number;
   handleChangeValue: (text: string) => void;
-  handleFocusInput: (value?: string) => void;
+  handleFocusInput?: (value?: string) => void;
   onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -72,7 +72,7 @@ export const OrderInput: React.FunctionComponent<OrderInputProps> = React.memo(
             label={value && placeholder ? placeholder : ''}
             defaultLabel={value && placeholder ? placeholder : ''}
             onKeyPress={onKeyPress}
-            handleFocusInput={() => handleFocusInput(label)}
+            handleFocusInput={() => handleFocusInput?.(label)}
             labelVisible={isFocused}
           />
         </fieldset>

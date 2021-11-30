@@ -77,32 +77,24 @@ exports[`Order should match snapshot 1`] = `
             <div
               class="cr-order-input"
             >
-              <fieldset
-                class="cr-order-input__fieldset"
-              >
-                <div
-                  class="custom-input"
-                >
-                  <label />
-                  <input
-                    class="form-control"
-                    placeholder="0"
-                    type="number"
-                    value=""
-                  />
-                </div>
-              </fieldset>
               <div
-                class="cr-order-input__crypto-icon"
+                class="custom-input"
               >
-                <span
-                  class="currency"
-                >
-                  <span>
-                    BTC
-                  </span>
-                </span>
+                <label />
+                <input
+                  class="form-control"
+                  placeholder="0"
+                  type="number"
+                  value=""
+                />
               </div>
+              <span
+                class="currency cr-order-input__currency"
+              >
+                <span>
+                  BTC
+                </span>
+              </span>
             </div>
           </div>
           <div
@@ -129,32 +121,24 @@ exports[`Order should match snapshot 1`] = `
             <div
               class="cr-order-input"
             >
-              <fieldset
-                class="cr-order-input__fieldset"
-              >
-                <div
-                  class="custom-input"
-                >
-                  <label />
-                  <input
-                    class="form-control"
-                    placeholder="0"
-                    type="number"
-                    value=""
-                  />
-                </div>
-              </fieldset>
               <div
-                class="cr-order-input__crypto-icon"
+                class="custom-input"
               >
-                <span
-                  class="currency"
-                >
-                  <span>
-                    ETH
-                  </span>
-                </span>
+                <label />
+                <input
+                  class="form-control"
+                  placeholder="0"
+                  type="number"
+                  value=""
+                />
               </div>
+              <span
+                class="currency cr-order-input__currency"
+              >
+                <span>
+                  ETH
+                </span>
+              </span>
             </div>
           </div>
           <div
@@ -338,32 +322,24 @@ exports[`Order should match snapshot 1`] = `
             <div
               class="cr-order-input"
             >
-              <fieldset
-                class="cr-order-input__fieldset"
-              >
-                <div
-                  class="custom-input"
-                >
-                  <label />
-                  <input
-                    class="form-control"
-                    placeholder="0"
-                    type="number"
-                    value=""
-                  />
-                </div>
-              </fieldset>
               <div
-                class="cr-order-input__crypto-icon"
+                class="custom-input"
               >
-                <span
-                  class="currency"
-                >
-                  <span>
-                    BTC
-                  </span>
-                </span>
+                <label />
+                <input
+                  class="form-control"
+                  placeholder="0"
+                  type="number"
+                  value=""
+                />
               </div>
+              <span
+                class="currency cr-order-input__currency"
+              >
+                <span>
+                  BTC
+                </span>
+              </span>
             </div>
           </div>
           <div
@@ -390,32 +366,24 @@ exports[`Order should match snapshot 1`] = `
             <div
               class="cr-order-input"
             >
-              <fieldset
-                class="cr-order-input__fieldset"
-              >
-                <div
-                  class="custom-input"
-                >
-                  <label />
-                  <input
-                    class="form-control"
-                    placeholder="0"
-                    type="number"
-                    value=""
-                  />
-                </div>
-              </fieldset>
               <div
-                class="cr-order-input__crypto-icon"
+                class="custom-input"
               >
-                <span
-                  class="currency"
-                >
-                  <span>
-                    ETH
-                  </span>
-                </span>
+                <label />
+                <input
+                  class="form-control"
+                  placeholder="0"
+                  type="number"
+                  value=""
+                />
               </div>
+              <span
+                class="currency cr-order-input__currency"
+              >
+                <span>
+                  ETH
+                </span>
+              </span>
             </div>
           </div>
           <div
