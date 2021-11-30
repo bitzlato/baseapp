@@ -59,7 +59,7 @@ export const OpenOrdersComponent: React.FC = () => {
     (data: OrderCommon[]) => {
       if (!data.length) {
         return [
-          [[''], [''], [''], <Label color="secondary">{t('page.noDataToShow')}</Label>, ['']],
+          [[''], [''], [''], [''], <Label color="secondary">{t('page.noDataToShow')}</Label>, ['']],
         ];
       }
 
