@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { FilterPrice, PriceValidation, validatePriceStep } from '../../filters';
 import { AMOUNT_PERCENTAGE_ARRAY, TRIGGER_BUY_PRICE_MULT } from '../../constants';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
 import { OrderInput as OrderInputMobile } from '../../mobile/components';
@@ -95,7 +94,6 @@ export interface OrderFormProps {
   totalPrice: number;
   amount: string;
   isMobileDevice?: boolean;
-  currentMarketFilters: FilterPrice[];
   handleAmountChange: (amount: string, type: FormType) => void;
   handleChangeAmountByButton: (
     value: number,
@@ -111,11 +109,6 @@ interface OrderFormState {
   price: string;
   priceMarket: number;
   trigger: string;
-  isPriceValid: PriceValidation;
-  isTriggerValid: PriceValidation;
-  amountFocused: boolean;
-  priceFocused: boolean;
-  triggerFocused: boolean;
   side: string;
 }
 
@@ -128,17 +121,6 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
       price: '',
       priceMarket: this.props.priceMarket,
       trigger: '',
-      isPriceValid: {
-        valid: true,
-        priceStep: 0,
-      },
-      isTriggerValid: {
-        valid: true,
-        priceStep: 0,
-      },
-      priceFocused: false,
-      amountFocused: false,
-      triggerFocused: false,
     };
   }
 
@@ -179,13 +161,10 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
   }
 
   public renderPrice = () => {
-    const { price, priceFocused, isPriceValid } = this.state;
+    const { price } = this.state;
     const { from, isMobileDevice, currentMarketBidPrecision, translate } = this.props;
 
     const priceText = translate('page.body.trade.header.newOrder.content.price');
-    const priceErrorClass = cn('error-message', {
-      'error-message--visible': (priceFocused || isMobileDevice) && !isPriceValid.valid,
-    });
 
     return (
       <React.Fragment>
@@ -196,7 +175,6 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
               currency: from ? from.toUpperCase() : '',
             })}
             value={price || ''}
-            isFocused={priceFocused}
             precision={currentMarketBidPrecision}
             handleChangeValue={this.handlePriceChange}
             handleFocusInput={this.handleFieldFocus}
@@ -207,28 +185,18 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
             label={priceText}
             placeholder={priceText}
             value={price || ''}
-            isFocused={priceFocused}
-            isWrong={!isPriceValid.valid}
             handleChangeValue={this.handlePriceChange}
             handleFocusInput={this.handleFieldFocus}
           />
         )}
-        <div className={priceErrorClass}>
-          {translate('page.body.trade.header.newOrder.content.filterPrice', {
-            priceStep: isPriceValid.priceStep,
-          })}
-        </div>
       </React.Fragment>
     );
   };
 
   public renderTrigger = () => {
-    const { orderType, triggerFocused, trigger, isTriggerValid } = this.state;
+    const { orderType, trigger } = this.state;
     const { type, from, isMobileDevice, currentMarketBidPrecision, translate } = this.props;
 
-    const triggerErrorClass = cn('error-message', {
-      'error-message--visible': (triggerFocused || isMobileDevice) && !isTriggerValid.valid,
-    });
     const triggerText = translate(`page.body.trade.header.newOrder.content.triggerPrice`, {
       sign: getTriggerSign(String(orderType).toLowerCase(), type),
     });
@@ -245,7 +213,6 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
               { currency: from ? from.toUpperCase() : '' },
             )}
             value={trigger || ''}
-            isFocused={triggerFocused}
             precision={currentMarketBidPrecision}
             handleChangeValue={this.handleTriggerChange}
             handleFocusInput={this.handleFieldFocus}
@@ -256,17 +223,10 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
             label={triggerText}
             placeholder={triggerText}
             value={trigger || ''}
-            isFocused={triggerFocused}
-            isWrong={!isTriggerValid.valid}
             handleChangeValue={this.handleTriggerChange}
             handleFocusInput={this.handleFieldFocus}
           />
         )}
-        <div className={triggerErrorClass}>
-          {translate('page.body.trade.header.newOrder.content.filterPrice', {
-            priceStep: isTriggerValid.priceStep,
-          })}
-        </div>
       </React.Fragment>
     );
   };
@@ -345,7 +305,7 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
       bestAsk,
       translate,
     } = this.props;
-    const { orderType, amountFocused } = this.state;
+    const { orderType } = this.state;
 
     const total = this.getTotal();
 
@@ -392,7 +352,6 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
                 currency: to ? to.toUpperCase() : '',
               })}
               value={amount || ''}
-              isFocused={amountFocused}
               precision={currentMarketAskPrecision}
               handleChangeValue={this.handleAmountChange}
               handleFocusInput={this.handleFieldFocus}
@@ -403,7 +362,6 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
               label={amountText}
               placeholder={amountText}
               value={amount || ''}
-              isFocused={amountFocused}
               handleChangeValue={this.handleAmountChange}
               handleFocusInput={this.handleFieldFocus}
             />
@@ -479,27 +437,15 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
     const { type, translate } = this.props;
 
     const priceText = translate('page.body.trade.header.newOrder.content.price');
-    const amountText = translate('page.body.trade.header.newOrder.content.amount');
     const triggerText = translate(`page.body.trade.header.newOrder.content.triggerPrice`, {
       sign: getTriggerSign(String(orderType).toLowerCase(), type),
     });
 
     switch (field) {
       case priceText:
-        this.setState((prev) => ({
-          priceFocused: !prev.priceFocused,
-        }));
         this.props.listenInputPrice && this.props.listenInputPrice();
         break;
-      case amountText:
-        this.setState((prev) => ({
-          amountFocused: !prev.amountFocused,
-        }));
-        break;
       case triggerText:
-        this.setState((prev) => ({
-          triggerFocused: !prev.triggerFocused,
-        }));
         this.props.listenInputTrigger && this.props.listenInputTrigger();
         break;
       default:
@@ -508,13 +454,12 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
   };
 
   private handlePriceChange = (value: string) => {
-    const { currentMarketBidPrecision, currentMarketFilters } = this.props;
+    const { currentMarketBidPrecision } = this.props;
     const convertedValue = cleanPositiveFloatInput(String(value));
 
     if (convertedValue.match(precisionRegExp(currentMarketBidPrecision))) {
       this.setState({
         price: convertedValue,
-        isPriceValid: validatePriceStep(convertedValue, currentMarketFilters),
       });
     }
 
@@ -522,13 +467,12 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
   };
 
   private handleTriggerChange = (value: string) => {
-    const { currentMarketBidPrecision, currentMarketFilters } = this.props;
+    const { currentMarketBidPrecision } = this.props;
     const convertedValue = cleanPositiveFloatInput(String(value));
 
     if (convertedValue.match(precisionRegExp(currentMarketBidPrecision))) {
       this.setState({
         trigger: convertedValue,
-        isTriggerValid: validatePriceStep(convertedValue, currentMarketFilters),
       });
     }
 
@@ -587,13 +531,12 @@ export class OrderForm extends React.PureComponent<OrderFormProps, OrderFormStat
 
   private checkButtonIsDisabled = (): boolean => {
     const { disabled, available, amount, totalPrice } = this.props;
-    const { isPriceValid, orderType, priceMarket, price, trigger, isTriggerValid } = this.state;
+    const { orderType, priceMarket, price, trigger } = this.state;
     const safePrice = totalPrice / Number(amount) || priceMarket;
 
     const invalidAmount = Number(amount) <= 0;
-    const invalidLimitPrice = isLimit(orderType) && (Number(price) <= 0 || !isPriceValid.valid);
-    const invalidTriggerPrice =
-      isTrigger(orderType) && (Number(trigger) <= 0 || !isTriggerValid.valid);
+    const invalidLimitPrice = isLimit(orderType) && Number(price) <= 0;
+    const invalidTriggerPrice = isTrigger(orderType) && Number(trigger) <= 0;
     const invalidMarketPrice = safePrice <= 0 && isMarket(orderType);
 
     return (

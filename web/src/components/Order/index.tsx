@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Decimal, OrderForm } from '../';
 import { TabPanel } from '../../components';
-import { FilterPrice } from '../../filters';
 import { getAmount, getTotalPrice } from '../../helpers';
 import { Box } from '../Box';
 import { OrderFormProps } from '../OrderForm';
@@ -104,7 +103,6 @@ export interface OrderComponentProps {
    */
   defaultTabIndex?: number;
   isMobileDevice?: boolean;
-  currentMarketFilters: FilterPrice[];
   translate: (id: string, value?: any) => string;
 }
 
@@ -196,7 +194,6 @@ export class Order extends React.Component<OrderComponentProps, State> {
       orderTypesIndex,
       asks,
       bids,
-      currentMarketFilters,
       isMobileDevice,
       listenInputPrice,
       listenInputTrigger,
@@ -238,7 +235,6 @@ export class Order extends React.Component<OrderComponentProps, State> {
           listenInputTrigger={listenInputTrigger}
           handleAmountChange={this.handleAmountChange}
           handleChangeAmountByButton={this.handleChangeAmountByButton}
-          currentMarketFilters={currentMarketFilters}
           isMobileDevice={isMobileDevice}
           translate={translate}
         />

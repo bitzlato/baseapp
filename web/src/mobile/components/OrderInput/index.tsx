@@ -9,7 +9,7 @@ import { PlusIcon } from '../../assets/images/PlusIcon';
 
 export interface OrderInputProps {
   className?: string;
-  isFocused: boolean;
+  isFocused?: boolean;
   isWrong?: boolean;
   label?: string;
   placeholder?: string;

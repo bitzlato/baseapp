@@ -17,7 +17,7 @@ export interface OrderInputProps {
   /**
    * Checking if input focused
    */
-  isFocused: boolean;
+  isFocused?: boolean;
   /**
    * Checking if input wrong
    */
@@ -85,7 +85,7 @@ export const OrderInput: React.FunctionComponent<OrderInputProps> = React.memo(
 
     return (
       <div className={cr('cr-order-input', className)}>
-        <fieldset className={fieldsetFocusedClass}>
+        <fieldset>
           <CustomInput
             type="number"
             inputValue={value}
@@ -94,7 +94,7 @@ export const OrderInput: React.FunctionComponent<OrderInputProps> = React.memo(
             label={value && label ? label : ''}
             defaultLabel={value && label ? label : ''}
             onKeyPress={onKeyPress}
-            handleFocusInput={() => handleFocusInput(props.label)}
+            // handleFocusInput={() => handleFocusInput(props.label)}
           />
         </fieldset>
         <div className={cryptoIconClass}>

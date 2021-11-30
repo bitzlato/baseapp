@@ -104,9 +104,6 @@ exports[`Order should match snapshot 1`] = `
                 </span>
               </div>
             </div>
-            <div
-              class="error-message"
-            />
           </div>
           <div
             class="cr-order-item"
@@ -368,9 +365,6 @@ exports[`Order should match snapshot 1`] = `
                 </span>
               </div>
             </div>
-            <div
-              class="error-message"
-            />
           </div>
           <div
             class="cr-order-item"

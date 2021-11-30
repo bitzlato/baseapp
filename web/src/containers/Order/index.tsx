@@ -12,7 +12,6 @@ import {
   Decimal,
   LockedComponent,
 } from '../../components';
-import { FilterPrice } from '../../filters';
 import { IntlProps } from '../../';
 import {
   alertPush,
@@ -33,12 +32,7 @@ import {
   Wallet,
   walletsFetch,
 } from '../../modules';
-import {
-  Market,
-  selectCurrentMarket,
-  selectCurrentMarketFilters,
-  selectMarketTickers,
-} from '../../modules/public/markets';
+import { Market, selectCurrentMarket, selectMarketTickers } from '../../modules/public/markets';
 import {
   orderExecuteFetch,
   OrderExecution,
@@ -49,7 +43,6 @@ import { isMarket, isTriggerByPrice } from 'src/helpers/order';
 
 interface ReduxProps {
   currentMarket: Market;
-  currentMarketFilters: FilterPrice[];
   executeLoading: boolean;
   marketTickers: {
     [key: string]: {
@@ -142,7 +135,6 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       asks,
       bids,
       currentMarket,
-      currentMarketFilters,
       defaultTabIndex,
       executeLoading,
       isMobileDevice,
@@ -200,7 +192,6 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
           listenInputPrice={this.listenInputPrice}
           listenInputTrigger={this.listenInputTrigger}
           defaultTabIndex={defaultTabIndex}
-          currentMarketFilters={currentMarketFilters}
           isMobileDevice={isMobileDevice}
           translate={this.translate}
         />
@@ -406,7 +397,6 @@ const mapStateToProps = (state: RootState) => ({
   bids: selectDepthBids(state),
   asks: selectDepthAsks(state),
   currentMarket: selectCurrentMarket(state),
-  currentMarketFilters: selectCurrentMarketFilters(state),
   executeLoading: selectOrderExecuteLoading(state),
   marketTickers: selectMarketTickers(state),
   wallets: selectWallets(state),
