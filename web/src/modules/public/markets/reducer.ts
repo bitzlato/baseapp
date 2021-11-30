@@ -1,4 +1,3 @@
-import { FilterPrice } from '../../../filters';
 import { CommonState } from '../../types';
 import { MarketsAction } from './actions';
 import {
@@ -16,13 +15,8 @@ import {
 } from './constants';
 import { Market, Ticker } from './types';
 
-interface MarketFilters {
-  [marketId: string]: FilterPrice;
-}
-
 export interface MarketsState extends CommonState {
   list: Market[];
-  filters: MarketFilters;
   currentMarket: Market | undefined;
   tickers: {
     [pair: string]: Ticker;
@@ -39,7 +33,6 @@ export interface MarketsState extends CommonState {
 
 export const initialMarketsState: MarketsState = {
   list: [],
-  filters: {},
   currentMarket: undefined,
   tickers: {},
   tickerLoading: false,
