@@ -156,7 +156,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
     }
 
     return (
-      <Box row spacing className="cr-order cr-order--extended">
+      <Box row spacing alignStart className="cr-order cr-order--extended">
         <div className="cr-order--extended__buy">
           <TabPanel
             fixed={true}
@@ -194,34 +194,32 @@ export class Order extends React.Component<OrderComponentProps, State> {
       orderTypesIndex,
       asks,
       bids,
-      isMobileDevice,
       listenInputPrice,
       listenInputTrigger,
       translate,
     } = this.props;
     const { amountSell, amountBuy } = this.state;
-
-    const proposals = this.isTypeSell(type) ? bids : asks;
-    const available = this.isTypeSell(type) ? availableBase : availableQuote;
-    const priceMarket = this.isTypeSell(type) ? priceMarketSell : priceMarketBuy;
-    const disabledData = this.isTypeSell(type) ? {} : { disabled };
-    const amount = this.isTypeSell(type) ? amountSell : amountBuy;
-    const preLabel = this.isTypeSell(type)
+    const sell = isSell(type);
+    const proposals = sell ? bids : asks;
+    const available = sell ? availableBase : availableQuote;
+    const priceMarket = sell ? priceMarketSell : priceMarketBuy;
+    const amount = sell ? amountSell : amountBuy;
+    const preLabel = sell
       ? translate('page.body.trade.header.newOrder.content.tabs.sell')
       : translate('page.body.trade.header.newOrder.content.tabs.buy');
-    const label = this.isTypeSell(type) ? 'Sell' : 'Buy';
+    const label = sell ? 'Sell' : 'Buy';
 
     return {
       content: (
         <OrderForm
           type={type}
           from={from}
-          {...disabledData}
+          disabled={sell ? undefined : disabled}
           to={to}
           available={available}
           priceMarket={priceMarket}
           priceLimit={priceLimit}
-          trigger={trigger}
+          obTrigger={trigger}
           onSubmit={this.props.onSubmit}
           orderTypes={orderTypes || defaultOrderTypes}
           orderTypesIndex={orderTypesIndex || defaultOrderTypes}
@@ -229,14 +227,12 @@ export class Order extends React.Component<OrderComponentProps, State> {
           currentMarketBidPrecision={currentMarketBidPrecision}
           totalPrice={getTotalPrice(amount, priceMarket, proposals)}
           amount={amount}
-          bestAsk={this.bestOBPrice(asks)}
-          bestBid={this.bestOBPrice(bids)}
+          bestAsk={bestPrice(asks)}
+          bestBid={bestPrice(bids)}
           listenInputPrice={listenInputPrice}
           listenInputTrigger={listenInputTrigger}
-          handleAmountChange={this.handleAmountChange}
-          handleChangeAmountByButton={this.handleChangeAmountByButton}
-          isMobileDevice={isMobileDevice}
-          translate={translate}
+          onAmountChange={this.handleAmountChange}
+          onChangeAmountByButton={this.handleChangeAmountByButton}
         />
       ),
       label: preLabel || label,
@@ -265,15 +261,15 @@ export class Order extends React.Component<OrderComponentProps, State> {
     }
   };
 
-  private handleChangeAmountByButton: OrderFormProps['handleChangeAmountByButton'] = (
+  private handleChangeAmountByButton: OrderFormProps['onChangeAmountByButton'] = (
     value,
     orderType,
     price,
     type,
   ) => {
     const { bids, asks, availableBase, availableQuote } = this.props;
-    const proposals = this.isTypeSell(type) ? bids : asks;
-    const available = this.isTypeSell(type) ? availableBase : availableQuote;
+    const proposals = isSell(type) ? bids : asks;
+    const available = isSell(type) ? availableBase : availableQuote;
     let newAmount = '';
 
     switch (type) {
@@ -313,8 +309,8 @@ export class Order extends React.Component<OrderComponentProps, State> {
       this.setState({ amountBuy: newAmount });
     }
   };
-
-  private isTypeSell = (type: string) => type === 'sell';
-
-  private bestOBPrice = (list: string[][]) => list[0] && list[0][0];
 }
+
+const isSell = (type: string) => type === 'sell';
+
+const bestPrice = (list: string[][]) => list[0] && list[0][0];
