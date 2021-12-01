@@ -7,8 +7,8 @@ window.env = {
     rangerUrl: 'wss://market-sandbox.bitzlato.com/api/v2/ranger',
   },
   auth0: {
-    domain: 'bitzlato-dev.auth0.com',
-    client_id: 'OL926gD0Zha6h80uJx4TVhJLMKrJemjb',
+    domain: 'auth.bitzlato.com',
+    client_id: 'sW5Er9tgeD9T8XuklzCX_FcNX0ETttJK',
     redirect_uri: 'https://market-sandbox.bitzlato.com/success_signin',
     auth_url: 'https://market-sandbox.bitzlato.com/api/v2/barong/identity/sessions/auth0',
     signedin_url: 'https://market-sandbox.bitzlato.com/wallets',
