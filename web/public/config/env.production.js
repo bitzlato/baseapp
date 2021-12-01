@@ -7,7 +7,7 @@ window.env = {
     rangerUrl: 'wss://market.bitzlato.com/api/v2/ranger',
   },
   auth0: {
-    domain: 'auth.bitzlato.com',
+    domain: 'auth.bitzlato.bz',
     client_id: 'sW5Er9tgeD9T8XuklzCX_FcNX0ETttJK',
     redirect_uri: 'https://market.bitzlato.com/success_signin',
     auth_url: 'https://market.bitzlato.com/api/v2/barong/identity/sessions/auth0',
