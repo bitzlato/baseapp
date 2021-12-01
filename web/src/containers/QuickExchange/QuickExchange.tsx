@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Spinner } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { msPricesUpdates } from '../../api';
 import { useMarketsFetch } from '../../hooks';
 import { useT } from 'src/hooks/useT';
@@ -12,7 +12,6 @@ import {
   selectMarketPriceFetch,
   createQuickExchangeFetch,
   selectCurrentMarket,
-  selectQuickExchangeFetching,
 } from '../../modules';
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
@@ -45,7 +44,6 @@ export const QuickExchangeContainer: React.FC = () => {
   const markets = useSelector(selectMarkets) || [];
   const { price } = useSelector(selectMarketPrice);
   const marketPriceFetching = useSelector(selectMarketPriceFetch);
-  const exchangeFetching = useSelector(selectQuickExchangeFetching);
 
   const t = useT();
 
@@ -57,7 +55,7 @@ export const QuickExchangeContainer: React.FC = () => {
   );
 
   const updateMarketPrice = () => {
-    if (!marketPriceFetching && !exchangeFetching && market) {
+    if (!marketPriceFetching && market) {
       dispatch(marketPriceFetch({ from_currency: baseCurrency, to_currency: quoteCurrency }));
     }
   };
@@ -119,6 +117,8 @@ export const QuickExchangeContainer: React.FC = () => {
         price,
       }),
     );
+    setBaseAmount('');
+    setQuoteAmount('');
   };
 
   const renderDropdownItem = (d: string) => {
@@ -226,13 +226,9 @@ export const QuickExchangeContainer: React.FC = () => {
         onClick={handleSubmitExchange}
         size="lg"
         variant="primary"
-        disabled={exchangeFetching || !market || !baseAmount || !quoteAmount}
+        disabled={!market || !baseAmount || !quoteAmount}
       >
-        {exchangeFetching ? (
-          <Spinner animation="border" variant="primary" />
-        ) : (
-          t('page.body.quick.exchange.button.exchange')
-        )}
+        {t('page.body.quick.exchange.button.exchange')}
       </Button>
     </Card>
   );
