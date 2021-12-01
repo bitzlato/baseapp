@@ -1,14 +1,21 @@
 export const cleanPositiveFloatInput = (text: string) => {
-  let cleanInput = text
-    .replace(',', '.')
+  const thousands = text.search(/,[^.]*\./) !== -1;
+
+  if (thousands) {
+    text = text.replace(',', '');
+  } else {
+    text = text.replace(',', '.');
+  }
+
+  text = text
     .replace(/-+/, '')
     .replace(/^0+/, '0')
     .replace(/\.+/, '.')
     .replace(/^0+([1-9])/, '$1');
 
-  if (cleanInput[0] === '.') {
-    cleanInput = `0${cleanInput}`;
+  if (text[0] === '.') {
+    text = `0${text}`;
   }
 
-  return cleanInput;
+  return text;
 };

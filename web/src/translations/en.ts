@@ -803,9 +803,10 @@ export const en = {
   'page.body.quick.exchange.sublabel.min_amount': 'Min exchange amount',
   'page.body.quick.exchange.sublabel.balance': 'Available',
   'page.body.quick.exchange.rate': 'Exchange rate',
-  'page.body.quick.exchange.slippage': 'Price deviation is allowed within 2%',
   'page.body.quick.exchange.button.rearrange': 'Rearrange currencies',
   'page.body.quick.exchange.button.exchange': 'Exchange',
+  'page.body.quick.exchange.warning':
+    'Total amount you will receive is subject to the current exchange rate when the transaction is completed',
 
   'quick.exchange.order.created': 'Order successfully created',
   'quick.exchange.order.cancelled': 'Order rejected',

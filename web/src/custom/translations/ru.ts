@@ -818,9 +818,10 @@ export const ru: LangType = {
   'page.body.quick.exchange.sublabel.min_amount': 'Минимальная сумма обмена',
   'page.body.quick.exchange.sublabel.balance': 'Доступно',
   'page.body.quick.exchange.rate': 'Обменный курс',
-  'page.body.quick.exchange.slippage': 'Допускается отклонение цены в рамках 2%',
   'page.body.quick.exchange.button.rearrange': 'Переставить валюты',
   'page.body.quick.exchange.button.exchange': 'Обменять',
+  'page.body.quick.exchange.warning':
+    'Total amount you will receive is subject to the current exchange rate when the transaction is completed',
 
   'quick.exchange.order.created': 'Обмен совершен успешно',
   'quick.exchange.order.cancelled': 'Заявка отклонена',

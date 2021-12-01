@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { FormControl } from 'react-bootstrap';
 import cn from 'classnames';
+import { cleanPositiveFloatInput } from 'src/helpers/cleanPositiveFloatInput';
 
 export interface CustomInputProps {
   type: string;
@@ -51,6 +52,11 @@ class CustomInput extends React.Component<Props> {
       name,
     } = this.props;
 
+    const value =
+      type === 'number' && typeof inputValue === 'string'
+        ? cleanPositiveFloatInput(inputValue)
+        : inputValue;
+
     return (
       <React.Fragment>
         <div className={cn('custom-input', this.props.className)}>
@@ -59,7 +65,7 @@ class CustomInput extends React.Component<Props> {
           </label>
           <FormControl
             type={type}
-            value={inputValue.toString()}
+            value={value}
             placeholder={placeholder}
             autoFocus={autoFocus}
             onFocus={this.props.handleFocusInput}

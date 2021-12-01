@@ -400,6 +400,7 @@ describe('Helpers', () => {
       expect(helpers.cleanPositiveFloatInput('-')).toBe('');
       expect(helpers.cleanPositiveFloatInput('000')).toBe('0');
       expect(helpers.cleanPositiveFloatInput('00.0')).toBe('0.0');
+      expect(helpers.cleanPositiveFloatInput('1,000.0')).toBe('1000.0');
     });
   });
 

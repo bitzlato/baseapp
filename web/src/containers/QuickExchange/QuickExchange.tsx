@@ -18,13 +18,14 @@ import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
 import { CustomInput } from '../../components';
 import { getWallet, getCurrencies, calcQuoteAmount, calcBaseAmount } from './helpers';
-import { cleanPositiveFloatInput } from '../../helpers';
 import { fromDecimalSilent } from 'src/helpers/fromDecimal';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { DropdownComponent } from './Dropdown';
 import { Card } from 'src/components/Card/Card';
+import { WarningIcon } from 'src/mobile/assets/images/WarningIcon';
+import { Label } from 'src/components/Label/Label';
 
 import s from './QuickExchange.postcss';
 import inputS from 'src/containers/Withdraw/Withdraw.postcss';
@@ -83,7 +84,6 @@ export const QuickExchangeContainer: React.FC = () => {
   }, [currentMarket]);
 
   const handleChangeBase = (value: string) => {
-    value = cleanPositiveFloatInput(value);
     setBaseAmount(value);
     if (quoteCcy) {
       setQuoteAmount(calcQuoteAmount(value, quoteCcy, price));
@@ -91,8 +91,7 @@ export const QuickExchangeContainer: React.FC = () => {
   };
 
   const handleChangeQuote = (value: string) => {
-    value = cleanPositiveFloatInput(value);
-    setQuoteAmount(cleanPositiveFloatInput(value));
+    setQuoteAmount(value);
     if (baseCcy) {
       setBaseAmount(calcBaseAmount(value, baseCcy, price));
     }
@@ -202,6 +201,16 @@ export const QuickExchangeContainer: React.FC = () => {
       {price && baseCcy && quoteCcy && market && (
         <Box col spacing>
           <Box row spacing>
+            <WarningIcon className={s.quickExchangeWarningIcon} />
+            <Label color="warning">{t('page.body.quick.exchange.warning')}</Label>
+          </Box>
+          <Box row spacing>
+            <span>{t('page.body.quick.exchange.rate')}:</span>
+            <MoneyFormat money={fromDecimalSilent(1, baseCcy)} />
+            <span>≈</span>
+            <MoneyFormat money={fromDecimalSilent(price, quoteCcy)} />
+          </Box>
+          <Box row spacing>
             <span>{t('page.body.quick.exchange.sublabel.min_amount')}:</span>
             <MoneyFormat
               money={fromDecimalSilent(market.min_amount, {
@@ -210,16 +219,6 @@ export const QuickExchangeContainer: React.FC = () => {
               })}
             />
           </Box>
-          <Box row spacing>
-            <span>{t('page.body.quick.exchange.rate')}:</span>
-            <MoneyFormat money={fromDecimalSilent(1, baseCcy)} />
-            <span>≈</span>
-            <MoneyFormat money={fromDecimalSilent(price, quoteCcy)} />
-          </Box>
-          {/* <Box row spacing>
-                <WarningIcon className={s.quickExchangeWarningIcon} />
-                <span>{t('page.body.quick.exchange.slippage')}</span>
-              </Box> */}
         </Box>
       )}
       <Button
