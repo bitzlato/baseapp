@@ -142,6 +142,7 @@ export const QuickExchangeContainer: React.FC = () => {
             inputValue={baseAmount}
             placeholder={t('page.body.quick.exchange.label.exchange')}
             handleChangeInput={handleChangeBase}
+            prepareNumber
           />
           <DropdownComponent
             className={s.quickExchangeDropdown}
@@ -188,6 +189,7 @@ export const QuickExchangeContainer: React.FC = () => {
           inputValue={quoteAmount}
           placeholder={t('page.body.quick.exchange.label.receive')}
           handleChangeInput={handleChangeQuote}
+          prepareNumber
         />
         <DropdownComponent
           className={s.quickExchangeDropdown}

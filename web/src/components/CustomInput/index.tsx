@@ -23,6 +23,7 @@ export interface CustomInputProps {
   labelVisible?: boolean;
   autoComplete?: string;
   name?: string;
+  prepareNumber?: boolean;
 }
 
 interface OnChangeEvent {
@@ -50,12 +51,10 @@ class CustomInput extends React.Component<Props> {
       onKeyPress,
       autoComplete,
       name,
+      prepareNumber,
     } = this.props;
 
-    const value =
-      type === 'number' && typeof inputValue === 'string'
-        ? cleanPositiveFloatInput(inputValue)
-        : inputValue;
+    const value = prepareNumber ? cleanPositiveFloatInput(`${inputValue}`) : inputValue;
 
     return (
       <React.Fragment>
