@@ -7,8 +7,8 @@ window.env = {
     rangerUrl: 'ws://localhost:8080/api/v2/ranger',
   },
   auth0: {
-    domain: 'bitzlato-dev.auth0.com',
-    client_id: 'OL926gD0Zha6h80uJx4TVhJLMKrJemjb',
+    domain: 'auth.bitzlato.bz',
+    client_id: 'sW5Er9tgeD9T8XuklzCX_FcNX0ETttJK',
     redirect_uri: 'http://localhost:8080/success_signin',
     auth_url: 'http://localhost:8080/api/v2/barong/identity/sessions/auth0',
     signedin_url: 'http://localhost:8080/trading',
