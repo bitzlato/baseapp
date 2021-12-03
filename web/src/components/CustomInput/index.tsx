@@ -5,12 +5,12 @@ import { cleanPositiveFloatInput } from 'src/helpers/cleanPositiveFloatInput';
 
 export interface CustomInputProps {
   type: string;
-  label: string;
-  defaultLabel: string;
+  label: React.ReactNode;
+  defaultLabel?: string;
   handleChangeInput?: (value: string) => void;
   inputValue: string | number;
   handleFocusInput?: () => void;
-  placeholder: string;
+  placeholder?: string;
   className?: string;
   classNameLabel?: string;
   classNameInput?: string;

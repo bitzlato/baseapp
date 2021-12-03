@@ -4,12 +4,12 @@ import {
   CREATE_QUICK_ORDER_DATA,
   CREATE_QUICK_ORDER_ERROR,
 } from './constants';
-import { QuickExchangeCreate } from './types';
 
 export interface CreateQuickExchangePayload {
   from_currency: string;
   to_currency: string;
-  volume: string;
+  request_currency: string;
+  request_volume: string;
   price: string;
 }
 

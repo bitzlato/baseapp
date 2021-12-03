@@ -16,6 +16,7 @@ export interface WalletSource {
   explorerTransaction?: string;
   explorerAddress?: string;
   icon_id: string;
+  price: string;
 }
 
 export interface Wallet extends Omit<WalletSource, 'currency' | 'balance' | 'locked' | 'fee'> {

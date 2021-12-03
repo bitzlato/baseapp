@@ -35,6 +35,7 @@ export function* walletsSaga(action: WalletsFetch) {
         fixed: currency?.precision,
         iconUrl: currency?.icon_url,
         icon_id: currency.icon_id,
+        price: currency.price,
       };
     });
 

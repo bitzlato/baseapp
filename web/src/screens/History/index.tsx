@@ -16,7 +16,6 @@ import {
   selectAbilities,
   AbilitiesInterface,
 } from '../../modules';
-import { showQuickExhange } from 'src/api/config';
 
 interface ReduxProps {
   abilities: AbilitiesInterface;
@@ -102,13 +101,6 @@ class History extends React.Component<Props, State> {
         label: this.props.intl.formatMessage({ id: 'page.body.history.transfer' }),
       },
     ];
-
-    if (showQuickExhange()) {
-      tabs.push({
-        content: tab === 'quick_exchange' ? <HistoryElement type="quick_exchange" /> : null,
-        label: this.props.intl.formatMessage({ id: 'page.body.history.quick' }),
-      });
-    }
 
     return tabs;
   };

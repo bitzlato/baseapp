@@ -19,6 +19,12 @@ export const HeaderNavigation: FC = () => {
 
   return (
     <div className={s.navigation}>
+      {isLoggedIn && (
+        <HeaderNavigationItem to="/quick-exchange">
+          {t('page.header.navbar.quick-exchange')}
+        </HeaderNavigationItem>
+      )}
+
       <HeaderNavigationItem to="/trading">{t('page.header.navbar.trade')}</HeaderNavigationItem>
 
       {isLoggedIn && (

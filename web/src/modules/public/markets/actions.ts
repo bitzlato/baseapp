@@ -13,7 +13,7 @@ import {
   MARKET_PRICE_DATA,
   MARKET_PRICE_ERROR,
 } from './constants';
-import { Market, Ticker, TickerEvent, MarketPriceInterface } from './types';
+import { Market, Ticker, TickerEvent, MarketPriceResponse, MarketPriceParams } from './types';
 
 export interface MarketsFetch {
   type: typeof MARKETS_FETCH;
@@ -67,15 +67,12 @@ export interface MarketsTickersError {
 
 export interface MarketPriceFetch {
   type: typeof MARKET_PRICE_FETCH;
-  payload: {
-    from_currency: string;
-    to_currency: string;
-  };
+  payload: MarketPriceParams;
 }
 
 export interface MarketPriceData {
   type: typeof MARKET_PRICE_DATA;
-  payload: MarketPriceInterface;
+  payload: MarketPriceResponse;
 }
 
 export interface MarketPriceError {
@@ -142,7 +139,7 @@ export const marketsTickersPush = (payload: MarketsTickersPush['payload']): Mark
   payload,
 });
 
-export const marketPriceFetch = (payload: MarketPriceFetch['payload']): MarketPriceFetch => ({
+export const marketPriceFetch = (payload: MarketPriceParams): MarketPriceFetch => ({
   type: MARKET_PRICE_FETCH,
   payload,
 });

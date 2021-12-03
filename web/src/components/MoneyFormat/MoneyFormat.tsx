@@ -6,13 +6,14 @@ import { Box } from '../Box/Box';
 
 interface Props {
   money: Money;
+  zeroSymbol?: string;
 }
 
-export const MoneyFormat: React.FC<Props> = ({ money }) => {
+export const MoneyFormat: React.FC<Props> = ({ money, zeroSymbol }) => {
   return (
     <Box as="span">
       <Box as="span" textColor="primary">
-        <AmountFormat money={money} />
+        {zeroSymbol !== undefined && money.isZero() ? zeroSymbol : <AmountFormat money={money} />}
       </Box>
       &nbsp;
       <CurrencyTicker symbol={money.currency.code} />
