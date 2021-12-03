@@ -5,7 +5,7 @@ exports[`SignInScreen should render 1`] = `
   class="pg-sign-in-screen"
 >
   <div
-    class="pg-sign-in-screen__container"
+    class="pg-sign-in-screen__container loading"
   >
     <form>
       <div
@@ -79,7 +79,7 @@ exports[`SignInScreen should render 1`] = `
               disabled=""
               type="button"
             >
-              Sign In
+              Loading...
             </button>
           </div>
           <div

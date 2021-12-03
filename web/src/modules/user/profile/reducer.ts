@@ -160,7 +160,10 @@ const twoAuthReducer = (state: ProfileState['twoFactorAuth'], action: ProfileAct
   }
 };
 
-export const userReducer = (state: ProfileState['userData'], action: ProfileAction) => {
+export const userReducer = (
+  state: ProfileState['userData'],
+  action: ProfileAction,
+): ProfileState['userData'] => {
   switch (action.type) {
     case PROFILE_USER_FETCH:
       return {
