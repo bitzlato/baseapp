@@ -57,6 +57,20 @@ export interface TickerEvent {
   at: number;
 }
 
-export interface MarketPriceInterface {
-  price: string;
+export interface MarketPriceParams {
+  from_currency: string;
+  to_currency: string;
+  request_volume: string;
+  request_currency: string;
+}
+
+export interface MarketPriceResponse {
+  from_currency: string; // 'eth';
+  from_volume: string; // '0.1025498';
+  inverse_price: string; // '0.13979994';
+  request_currency: string; // 'eth';
+  request_price: string; // '7.153079';
+  request_volume: string; // '0.1025498';
+  to_currency: string; // 'bnb';
+  to_volume: string; // '0.7335';
 }

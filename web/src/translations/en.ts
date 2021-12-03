@@ -4,7 +4,7 @@ import { nationalitiesNames } from './nationalities';
 
 export const en = {
   'page.header.navbar.signIn': 'Sign In',
-  'page.header.navbar.quick.exchange': 'Quick Exchange',
+  'page.header.navbar.quick-exchange': 'Quick Exchange',
   'page.header.navbar.trade': 'Trade',
   'page.header.navbar.wallets': 'Wallets',
   'page.header.navbar.openOrders': 'Orders',
@@ -802,8 +802,14 @@ export const en = {
   'page.body.quick.exchange.label.currency': 'Currency',
   'page.body.quick.exchange.sublabel.min_amount': 'Min exchange amount',
   'page.body.quick.exchange.sublabel.balance': 'Available',
-  'page.body.quick.exchange.rate': 'Exchange rate',
+  'page.body.quick.exchange.rate': 'Rate',
+  'page.body.quick.exchange.reverse_rate': 'Reverse rate',
+  'page.body.quick.exchange.limit.order': 'Order limit',
+  'page.body.quick.exchange.limit.daily': 'Daily limit',
+  'page.body.quick.exchange.limit.weekly': 'Weekly limit',
+  'page.body.quick.exchange.button.tip': 'Enter an amount',
   'page.body.quick.exchange.button.rearrange': 'Rearrange currencies',
+  'page.body.quick.exchange.button.refresh': 'Refresh rate',
   'page.body.quick.exchange.button.exchange': 'Exchange',
   'page.body.quick.exchange.warning':
     'Total amount you will receive is subject to the current exchange rate when the transaction is completed',

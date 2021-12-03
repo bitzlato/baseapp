@@ -41,6 +41,7 @@ import { withdrawLimitReducer } from './user/withdrawLimit';
 import { marketsAdminReducer } from './admin/markets';
 import { platformCreateReducer } from './admin/platform';
 import { quickExchangeReducer } from './user/quickExchange';
+import { quickExchangePublicReducer } from './public/quickExchangePublic/reducer';
 
 export const publicReducer = combineReducers({
   alerts: alertReducer,
@@ -58,6 +59,7 @@ export const publicReducer = combineReducers({
   incrementDepth: incrementDepthReducer,
   ranger: rangerReducer,
   recentTrades: recentTradesReducer,
+  quickExchange: quickExchangePublicReducer,
 });
 
 export const userReducer = combineReducers({

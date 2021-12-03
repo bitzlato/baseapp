@@ -21,6 +21,7 @@ export interface CurrencySource {
   precision: number;
   icon_url: string;
   icon_id: string;
+  price: string;
 }
 
 export interface Currency

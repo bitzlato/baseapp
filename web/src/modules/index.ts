@@ -47,6 +47,8 @@ import { QuickExchangeState, rootQuickExchangeSaga } from './user/quickExchange'
 import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit';
 import { MarketsAdminState, rootMarketsAdminSaga } from './admin/markets';
 import { PlatformCreateState, rootPlatformCreateSaga } from './admin/platform';
+import { rootQuickExchangeLimitsSaga } from './public/quickExchangePublic/sagas';
+import { QuickExchangePublicState } from './public/quickExchangePublic/reducer';
 
 export * from './admin/config';
 export * from './admin/markets';
@@ -101,6 +103,7 @@ export interface RootState {
     ranger: RangerState;
     recentTrades: RecentTradesState;
     rgl: GridLayoutState;
+    quickExchange: QuickExchangePublicState;
   };
   user: {
     abilities: AbilitiesState;
@@ -179,5 +182,6 @@ export function* rootSaga() {
     call(rootWalletsSaga),
     call(rootWithdrawLimitSaga),
     call(rootQuickExchangeSaga),
+    call(rootQuickExchangeLimitsSaga),
   ]);
 }

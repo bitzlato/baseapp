@@ -70,9 +70,20 @@ export const Sidebar: FC = () => {
       <SidebarToggler onClick={handleTogglerClick} />
       <div className={cn(s.sidebar, isOpen && s.sidebarOpen)}>
         {isLoggedIn ? (
-          <SidebarItem to="/profile" icon={<ProfileIcon />} onClick={handleItemClick}>
-            {t('page.header.navbar.profile')}
-          </SidebarItem>
+          <>
+            <SidebarItem to="/profile" icon={<ProfileIcon />} onClick={handleItemClick}>
+              {t('page.header.navbar.profile')}
+            </SidebarItem>
+            {showQuickExhange() && (
+              <SidebarItem
+                to="/quick-exchange"
+                icon={<QuickExchangeIcon />}
+                onClick={handleItemClick}
+              >
+                {t('page.header.navbar.quick-exchange')}
+              </SidebarItem>
+            )}
+          </>
         ) : (
           <>
             <SidebarItem to="/signin" icon={<ProfileIcon />} onClick={handleItemClick}>
@@ -114,15 +125,6 @@ export const Sidebar: FC = () => {
                 onClick={handleItemClick}
               >
                 {t('page.header.navbar.internal.transfer')}
-              </SidebarItem>
-            )}
-            {showQuickExhange() && (
-              <SidebarItem
-                to="/quick-exchange"
-                icon={<QuickExchangeIcon />}
-                onClick={handleItemClick}
-              >
-                {t('page.header.navbar.quick.exchange')}
               </SidebarItem>
             )}
             <SidebarItem icon={<LogoutIcon />} onClick={handleLogoutClick}>

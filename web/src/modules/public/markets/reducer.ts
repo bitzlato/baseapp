@@ -13,7 +13,7 @@ import {
   MARKET_PRICE_DATA,
   MARKET_PRICE_ERROR,
 } from './constants';
-import { Market, Ticker } from './types';
+import { Market, MarketPriceResponse, Ticker } from './types';
 
 export interface MarketsState extends CommonState {
   list: Market[];
@@ -26,9 +26,7 @@ export interface MarketsState extends CommonState {
   timestamp?: number;
   tickersTimestamp?: number;
   successMarketPriceFetch: boolean;
-  marketPrice: {
-    price: string;
-  };
+  marketPrice: MarketPriceResponse;
 }
 
 export const initialMarketsState: MarketsState = {
@@ -39,7 +37,14 @@ export const initialMarketsState: MarketsState = {
   loading: false,
   successMarketPriceFetch: false,
   marketPrice: {
-    price: '',
+    from_currency: '',
+    from_volume: '',
+    inverse_price: '',
+    request_currency: '',
+    request_price: '',
+    request_volume: '',
+    to_currency: '',
+    to_volume: '',
   },
 };
 

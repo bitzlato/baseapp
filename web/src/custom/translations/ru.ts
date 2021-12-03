@@ -4,7 +4,7 @@ import { nationalitiesNames } from '../../translations/nationalities';
 
 export const ru: LangType = {
   'page.header.navbar.signIn': 'Войти',
-  'page.header.navbar.quick.exchange': 'Быстрый обмен',
+  'page.header.navbar.quick-exchange': 'Быстрый обмен',
   'page.header.navbar.trade': 'Торговля',
   'page.header.navbar.wallets': 'Кошельки',
   'page.header.navbar.openOrders': 'Ордера',
@@ -817,8 +817,14 @@ export const ru: LangType = {
   'page.body.quick.exchange.label.currency': 'Валюта',
   'page.body.quick.exchange.sublabel.min_amount': 'Минимальная сумма обмена',
   'page.body.quick.exchange.sublabel.balance': 'Доступно',
-  'page.body.quick.exchange.rate': 'Обменный курс',
+  'page.body.quick.exchange.rate': 'Курс',
+  'page.body.quick.exchange.reverse_rate': 'Обратный курс',
+  'page.body.quick.exchange.limit.order': 'Лимит на обмен',
+  'page.body.quick.exchange.limit.daily': 'Дневной лимит',
+  'page.body.quick.exchange.limit.weekly': 'Лимит в неделю',
+  'page.body.quick.exchange.button.tip': 'Введите сумму',
   'page.body.quick.exchange.button.rearrange': 'Переставить валюты',
+  'page.body.quick.exchange.button.refresh': 'Обновить курс',
   'page.body.quick.exchange.button.exchange': 'Обменять',
   'page.body.quick.exchange.warning':
     'Total amount you will receive is subject to the current exchange rate when the transaction is completed',

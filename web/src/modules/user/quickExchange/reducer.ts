@@ -5,13 +5,11 @@ import {
   CREATE_QUICK_ORDER_DATA,
   CREATE_QUICK_ORDER_ERROR,
 } from './constants';
-import type { QuickExchangeCreate } from './types';
 
 export interface QuickExchangeState {
   fetching: boolean;
   success: boolean;
   error?: CommonError;
-  data?: QuickExchangeCreate;
 }
 
 const initialState: QuickExchangeState = {
@@ -25,7 +23,7 @@ export const quickExchangeReducer = (
 ): QuickExchangeState => {
   switch (action.type) {
     case CREATE_QUICK_ORDER_FETCH:
-      return { ...state, data: undefined, fetching: true };
+      return { ...state, fetching: true };
     case CREATE_QUICK_ORDER_DATA:
       return {
         ...state,

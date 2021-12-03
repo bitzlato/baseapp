@@ -20,6 +20,7 @@ export const Button = <T extends JSXElement = 'button'>({
   size,
   fullWidth = false,
   revertLightPrimary,
+  className,
   ...props
 }: Props<T>): ReturnType<FC<Props<T>>> => {
   const Component = component;
@@ -28,17 +29,20 @@ export const Button = <T extends JSXElement = 'button'>({
 
   return (
     <Component
-      className={cn({
-        [s.btn]: true,
-        [s.btnPrimary]: variant === 'primary',
-        [s.btnSecondary]: variant === 'secondary',
-        [s.btnPrimaryOutline]: variant === 'primary-outline',
-        [s.btnSecondaryOutline]: variant === 'secondary-outline',
-        [s.btnRevertLightPrimary]: revertLightPrimary,
-        [s.btnSmall]: size === 'small',
-        [s.btnLarge]: size === 'large',
-        [s.btnDisabled]: disabled,
-      })}
+      className={cn(
+        {
+          [s.btn]: true,
+          [s.btnPrimary]: variant === 'primary',
+          [s.btnSecondary]: variant === 'secondary',
+          [s.btnPrimaryOutline]: variant === 'primary-outline',
+          [s.btnSecondaryOutline]: variant === 'secondary-outline',
+          [s.btnRevertLightPrimary]: revertLightPrimary,
+          [s.btnSmall]: size === 'small',
+          [s.btnLarge]: size === 'large',
+          [s.btnDisabled]: disabled,
+        },
+        className,
+      )}
       {...props}
     >
       {children}
