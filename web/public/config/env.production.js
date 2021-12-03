@@ -31,7 +31,7 @@ window.env = {
   balancesFetchInterval: '3000',
   passwordEntropyStep: 14,
   directSigninUrl:
-    'https://bitzlato.com/auth/login?ex=true&returnTo=https%3A%2F%2Fmarket.bitzlato.com%2Fwallets',
+    'https://bitzlato.com/auth/login?ex=true&returnTo=https%3A%2F%2Fmarket.bitzlato.com%2Ftrading',
   kycSteps: [
     'email',
     // 'phone',
