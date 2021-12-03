@@ -78,7 +78,7 @@ export const initialStateProfile: ProfileState = {
   },
   userData: {
     user: defaultUser,
-    isFetching: ifUserIsLoggedIn(),
+    isFetching: true,
   },
 };
 
