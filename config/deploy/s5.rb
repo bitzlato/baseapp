@@ -8,4 +8,3 @@ set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:stage)}/#{fetch(:applicatio
 
 server ENV.fetch( 'STAGING_SERVER_5' ), user: fetch(:user), roles: fetch(:roles)
 
-before 'link_env', 'link_auth0'
