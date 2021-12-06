@@ -832,6 +832,8 @@ export const ru: LangType = {
   'quick.exchange.order.created': 'Обмен совершен успешно',
   'quick.exchange.order.cancelled': 'Заявка отклонена',
   'market.swap_order.outdated_price': 'Цена слишком сильно изменилась',
+  'market.swap_order.invalid_currency': 'Неверная валюта',
+  'market.swap_order.invalid_market_volume': 'Неверная сумма обмена',
 
   // success messages
   'success.addresses.accepted': 'Ваш адрес успешно приняты',

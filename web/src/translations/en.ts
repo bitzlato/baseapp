@@ -817,6 +817,8 @@ export const en = {
   'quick.exchange.order.created': 'Order successfully created',
   'quick.exchange.order.cancelled': 'Order rejected',
   'market.swap_order.outdated_price': 'The price has changed too much',
+  'market.swap_order.invalid_currency': 'Invalid currency',
+  'market.swap_order.invalid_market_volume': 'Invalid amount',
 
   /* Error pages */
 
