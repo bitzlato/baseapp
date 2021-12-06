@@ -26,6 +26,7 @@ const extractSemver = (text) => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 
+/** @type {webpack.WebpackOptionsNormalized} */
 module.exports = {
   mode: isDevelopment ? 'development' : 'production',
 
@@ -255,6 +256,7 @@ module.exports = {
               '/api': {
                 target: `https://${process.env.PROXY_HOST}`,
                 changeOrigin: true,
+                cookieDomainRewrite: 'localhost',
               },
             }
           : undefined,
