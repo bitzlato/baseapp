@@ -1,7 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { useCurrenciesFetch, useMarketsFetch } from '../../hooks';
+import cn from 'classnames';
+import { useMarketsFetch, useWalletsFetch } from '../../hooks';
 import { useT } from 'src/hooks/useT';
 import {
   selectMarkets,
@@ -19,7 +20,7 @@ import { selectQuickExchangeLimits } from 'src/modules/public/quickExchangePubli
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
 import { CustomInput } from '../../components';
-import { getWallet, getCurrencies, getCurrency } from './helpers';
+import { getWallet, getCurrencies, getCurrency, DropdownItem, getItem } from './helpers';
 import { fromDecimalSilent } from 'src/helpers/fromDecimal';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
@@ -29,7 +30,6 @@ import { DropdownComponent } from './Dropdown';
 import { Card } from 'src/components/Card/Card';
 import { InfoIcon } from 'src/assets/images/InfoIcon';
 import { PriceLimit } from './PriceLimit';
-import { IconButton } from 'src/components/IconButton/IconButton';
 import { DotsFlashing } from 'src/components/DotsFlashing/DotsFlashing';
 import { RefreshIcon } from 'src/assets/icons/RefreshIcon';
 
@@ -41,8 +41,12 @@ const PERCENTS = [25, 50, 75, 100];
 export const QuickExchangeContainer: React.FC = () => {
   const currentMarket = useSelector(selectCurrentMarket);
 
-  const [fromCurrency, setFromCurrency] = useState(currentMarket?.base_unit ?? '');
-  const [toCurrency, setToCurrency] = useState(currentMarket?.quote_unit ?? '');
+  const [fromCurrency, setFromCurrency] = useState<DropdownItem>(() =>
+    getItem(currentMarket?.base_unit ?? '', !!currentMarket),
+  );
+  const [toCurrency, setToCurrency] = useState<DropdownItem>(() =>
+    getItem(currentMarket?.quote_unit ?? '', !!currentMarket),
+  );
   const [fromAmount, setFromAmount] = useState('');
   const [toAmount, setToAmount] = useState('');
   const [requestCurrency, setRequestCurrency] = useState('');
@@ -61,21 +65,21 @@ export const QuickExchangeContainer: React.FC = () => {
   const t = useT();
 
   useMarketsFetch();
-  useCurrenciesFetch();
+  useWalletsFetch();
 
   React.useEffect(() => {
     dispatch(quickExchangeLimitsFetch());
   }, [dispatch]);
 
-  const { fromCurrencies, toCurrencies, market, toCcy } = useMemo(
-    () => getCurrencies(markets, fromCurrency, toCurrency),
+  const { fromList, toList, market, toCcy } = useMemo(
+    () => getCurrencies(markets, fromCurrency.code, toCurrency.code),
     [markets, fromCurrency, toCurrency],
   );
 
-  const fromWallet = useMemo(() => getWallet(fromCurrency, wallets), [fromCurrency, wallets]);
+  const fromWallet = useMemo(() => getWallet(fromCurrency.code, wallets), [fromCurrency, wallets]);
 
   useEffect(() => {
-    const handle = window.setTimeout(handleRefresh, 100);
+    const handle = window.setTimeout(handleRefresh, 300);
     return () => window.clearTimeout(handle);
   }, [requestVolume, requestCurrency]);
 
@@ -87,15 +91,15 @@ export const QuickExchangeContainer: React.FC = () => {
         setFromAmount(price.from_volume);
       }
       setRateOutOfDate(false);
-      const handle = window.setTimeout(() => setRateOutOfDate(true), 15000);
+      const handle = window.setTimeout(() => setRateOutOfDate(true), 10000);
       return () => window.clearTimeout(handle);
     }
   }, [price.request_price, priceFetching]);
 
   useEffect(() => {
     if (currentMarket) {
-      setFromCurrency(currentMarket.base_unit);
-      setToCurrency(currentMarket.quote_unit);
+      setFromCurrency(getItem(currentMarket.base_unit, true));
+      setToCurrency(getItem(currentMarket.quote_unit, true));
     }
   }, [currentMarket]);
 
@@ -108,41 +112,51 @@ export const QuickExchangeContainer: React.FC = () => {
     }
   }, [exchangeSucess]);
 
-  const handleChangeBase = (value: string) => {
+  const handleChangeFrom = (value: string) => {
     setFromAmount(value);
     setToAmount('');
-    setRequestCurrency(fromCurrency);
+    setRequestCurrency(fromCurrency.code);
     setRequestVolume(value);
   };
 
-  const handleChangeQuote = (value: string) => {
+  const handleChangeTo = (value: string) => {
     setToAmount(value);
     setFromAmount('');
-    setRequestCurrency(toCurrency);
+    setRequestCurrency(toCurrency.code);
     setRequestVolume(value);
+  };
+
+  const handleSelectFrom = (value: DropdownItem) => {
+    setFromCurrency(value);
+    setToCurrency(getItem(toCurrency.code, value.match));
+  };
+
+  const handleSelectTo = (value: DropdownItem) => {
+    setToCurrency(value);
+    setFromCurrency(getItem(fromCurrency.code, value.match));
   };
 
   const handleUsePercent = (value: number) => {
     if (fromWallet?.balance) {
-      handleChangeBase(fromWallet.balance.multiply(value).divide(100).toFormat());
+      handleChangeFrom(fromWallet.balance.multiply(value).divide(100).toFormat());
     }
   };
 
   const handleRearrange = () => {
-    setFromAmount(toAmount);
+    setFromAmount('');
     setFromCurrency(toCurrency);
-    setToAmount(fromAmount);
+    setToAmount('');
     setToCurrency(fromCurrency);
-    setRequestVolume(requestCurrency === fromCurrency ? toAmount : fromAmount);
-    setRequestCurrency(requestCurrency === fromCurrency ? toCurrency : fromCurrency);
+    setRequestVolume('');
+    setRequestCurrency('');
   };
 
   const handleRefresh = () => {
-    if (!priceFetching && +requestVolume > 0) {
+    if (!noAmount && +requestVolume > 0) {
       dispatch(
         marketPriceFetch({
-          from_currency: fromCurrency,
-          to_currency: toCurrency,
+          from_currency: fromCurrency.code,
+          to_currency: toCurrency.code,
           request_volume: requestVolume,
           request_currency: requestCurrency,
         }),
@@ -153,8 +167,8 @@ export const QuickExchangeContainer: React.FC = () => {
   const handleExchange = () => {
     dispatch(
       createQuickExchangeFetch({
-        from_currency: fromCurrency,
-        to_currency: toCurrency,
+        from_currency: fromCurrency.code,
+        to_currency: toCurrency.code,
         request_currency: requestCurrency,
         request_volume: requestVolume,
         price: price.request_price,
@@ -162,16 +176,23 @@ export const QuickExchangeContainer: React.FC = () => {
     );
   };
 
-  const renderDropdownItem = (d: string) => {
+  const renderDropdownItem = (d: DropdownItem) => {
     return (
       <Box row spacing>
-        <CryptoCurrencyIcon size="small" icon={getWallet(d, wallets)?.iconUrl ?? ''} currency={d} />
-        <span>{d.toUpperCase()}</span>
+        <CryptoCurrencyIcon
+          size="small"
+          icon={getWallet(d.code, wallets)?.iconUrl ?? ''}
+          currency={d.code}
+        />
+        <Box as="span" textColor={d.match ? 'primary' : 'failed'}>
+          {d.code.toUpperCase()}
+        </Box>
       </Box>
     );
   };
 
   const noAmount = !(market && (fromAmount || toAmount));
+  const noMarket = !market && fromCurrency.code && toCurrency.code;
 
   return (
     <Card className={s.quickExchange} header={<h4>{t('page.body.quick.exchange.header')}</h4>}>
@@ -183,13 +204,13 @@ export const QuickExchangeContainer: React.FC = () => {
             label={t('page.body.quick.exchange.label.exchange')}
             labelVisible
             inputValue={fromAmount}
-            handleChangeInput={handleChangeBase}
+            handleChangeInput={handleChangeFrom}
           />
           <DropdownComponent
             className={s.quickExchangeDropdown}
-            list={fromCurrencies}
+            list={fromList}
             value={fromCurrency}
-            onSelect={setFromCurrency}
+            onSelect={handleSelectFrom}
             placeholder={t('page.body.quick.exchange.label.currency')}
             itemRenderer={renderDropdownItem}
           />
@@ -243,18 +264,18 @@ export const QuickExchangeContainer: React.FC = () => {
           }
           labelVisible
           inputValue={toAmount}
-          handleChangeInput={handleChangeQuote}
+          handleChangeInput={handleChangeTo}
         />
         <DropdownComponent
           className={s.quickExchangeDropdown}
-          list={toCurrencies}
+          list={toList}
           value={toCurrency}
-          onSelect={setToCurrency}
+          onSelect={handleSelectTo}
           placeholder={t('page.body.quick.exchange.label.currency')}
           itemRenderer={renderDropdownItem}
         />
       </Box>
-      {fromWallet && toCcy && market ? (
+      {fromWallet && toCcy && market && (
         <Box col spacing>
           <PriceLimit
             label={t('page.body.quick.exchange.limit.order')}
@@ -288,32 +309,36 @@ export const QuickExchangeContainer: React.FC = () => {
               <Box row spacing>
                 <span>{t('page.body.quick.exchange.rate')}:</span>
                 <MoneyFormat money={fromDecimalSilent(1, fromWallet.currency)} />
-                <span>≈</span>
+                <Box as="span" textColor="primary">
+                  ≈
+                </Box>
                 <MoneyFormat money={fromDecimalSilent(price.request_price, toCcy)} zeroSymbol="?" />
               </Box>
               <Box row spacing>
                 <span>{t('page.body.quick.exchange.reverse_rate')}:</span>
                 <MoneyFormat money={fromDecimalSilent(1, toCcy)} />
-                <span>≈</span>
+                <Box as="span" textColor="primary">
+                  ≈
+                </Box>
                 <MoneyFormat
                   money={fromDecimalSilent(price.inverse_price, fromWallet.currency)}
                   zeroSymbol="?"
                 />
               </Box>
             </Box>
-            <IconButton
-              className={s.quickExchangeRefresh}
+            <BzButton
+              variant="primary-outline"
+              className={cn(
+                s.quickExchangeRefresh,
+                !noAmount && rateOutOfDate && s.quickExchangeRefreshPulse,
+              )}
               title={t('page.body.quick.exchange.button.refresh')}
               onClick={handleRefresh}
               disabled={noAmount}
             >
               <RefreshIcon />
-            </IconButton>
+            </BzButton>
           </Box>
-        </Box>
-      ) : (
-        <Box selfCenter>
-          <DotsFlashing />
         </Box>
       )}
       <Box
@@ -327,10 +352,12 @@ export const QuickExchangeContainer: React.FC = () => {
         disabled={noAmount || rateOutOfDate || exchangeFetching}
       >
         <span>
-          {noAmount
-            ? t('page.body.quick.exchange.button.tip')
+          {noMarket
+            ? t('page.body.quick.exchange.tip.market')
+            : noAmount
+            ? t('page.body.quick.exchange.tip.amount')
             : rateOutOfDate
-            ? t('page.body.quick.exchange.button.refresh')
+            ? t('page.body.quick.exchange.tip.refresh')
             : t('page.body.quick.exchange.button.exchange')}
         </span>
         {exchangeFetching && <DotsFlashing />}

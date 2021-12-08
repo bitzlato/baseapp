@@ -807,18 +807,25 @@ export const en = {
   'page.body.quick.exchange.limit.order': 'Order limit',
   'page.body.quick.exchange.limit.daily': 'Daily limit',
   'page.body.quick.exchange.limit.weekly': 'Weekly limit',
-  'page.body.quick.exchange.button.tip': 'Enter an amount',
+  'page.body.quick.exchange.tip.amount': 'Enter an amount',
+  'page.body.quick.exchange.tip.refresh': 'Refresh the rate',
+  'page.body.quick.exchange.tip.market': 'Choose the correct pair',
   'page.body.quick.exchange.button.rearrange': 'Rearrange currencies',
   'page.body.quick.exchange.button.refresh': 'Refresh rate',
   'page.body.quick.exchange.button.exchange': 'Exchange',
   'page.body.quick.exchange.warning':
     'Total amount you will receive is subject to the current exchange rate when the transaction is completed',
+  'page.body.quick.exchange.no-market': 'There is no available market',
 
   'quick.exchange.order.created': 'Order successfully created',
   'quick.exchange.order.cancelled': 'Order rejected',
-  'market.swap_order.outdated_price': 'The price has changed too much',
+  'market.swap_order.outdated_price': 'The exchange price is outdated',
   'market.swap_order.invalid_currency': 'Invalid currency',
   'market.swap_order.invalid_market_volume': 'Invalid amount',
+  'market.swap_order.invalid_market': 'Invalid market',
+  'market.swap_order.reached_weekly_limit': 'Weekly limit exceeded',
+  'market.swap_order.reached_daily_limit': 'Daily limit exceeded',
+  'market.swap_order.reached_order_limit': 'Order limit exceeded',
 
   /* Error pages */
 

@@ -24,12 +24,32 @@
 }
 
 .quickExchangeRefresh {
-  padding: calc(var(--gap) * 0.5);
+  border-color: transparent !important;
+  height: initial;
+  padding: calc(var(--gap) * 1);
   width: initial;
 
   svg {
     height: 24px;
     width: 24px;
+  }
+}
+
+.quickExchangeRefreshPulse {
+  animation: pulse-brand-yellow 2s infinite;
+}
+
+@keyframes pulse-brand-yellow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--rgb-brand-yellow), 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(var(--rgb-brand-yellow), 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--rgb-brand-yellow), 0);
   }
 }
 

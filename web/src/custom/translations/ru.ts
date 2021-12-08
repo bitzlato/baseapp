@@ -822,18 +822,25 @@ export const ru: LangType = {
   'page.body.quick.exchange.limit.order': 'Лимит на обмен',
   'page.body.quick.exchange.limit.daily': 'Дневной лимит',
   'page.body.quick.exchange.limit.weekly': 'Лимит в неделю',
-  'page.body.quick.exchange.button.tip': 'Введите сумму',
+  'page.body.quick.exchange.tip.amount': 'Введите сумму',
+  'page.body.quick.exchange.tip.refresh': 'Обновите курс обмена',
+  'page.body.quick.exchange.tip.market': 'Выберите корректную пару',
   'page.body.quick.exchange.button.rearrange': 'Переставить валюты',
   'page.body.quick.exchange.button.refresh': 'Обновить курс',
   'page.body.quick.exchange.button.exchange': 'Обменять',
   'page.body.quick.exchange.warning':
-    'Total amount you will receive is subject to the current exchange rate when the transaction is completed',
+    'Общая сумма, которую вы получите, зависит от текущего обменного курса на момент завершения транзакции.',
+  'page.body.quick.exchange.no-market': 'No available market',
 
   'quick.exchange.order.created': 'Обмен совершен успешно',
   'quick.exchange.order.cancelled': 'Заявка отклонена',
-  'market.swap_order.outdated_price': 'Цена слишком сильно изменилась',
+  'market.swap_order.outdated_price': 'Курс обмена устарел',
   'market.swap_order.invalid_currency': 'Неверная валюта',
   'market.swap_order.invalid_market_volume': 'Неверная сумма обмена',
+  'market.swap_order.invalid_market': 'Неверный рынок',
+  'market.swap_order.reached_weekly_limit': 'Превышен недельный лимит',
+  'market.swap_order.reached_daily_limit': 'Превышен дневной лимит',
+  'market.swap_order.reached_order_limit': 'Превышен лимит на обмен',
 
   // success messages
   'success.addresses.accepted': 'Ваш адрес успешно приняты',

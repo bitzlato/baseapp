@@ -12,7 +12,7 @@ interface DropdownComponentProps<T> {
   itemRenderer?: (item: T) => React.ReactNode;
 }
 
-export const DropdownComponent = <T extends string | number = string>({
+export const DropdownComponent = <T extends object>({
   list,
   className,
   placeholder,
@@ -24,13 +24,13 @@ export const DropdownComponent = <T extends string | number = string>({
     <div className={cn(className, 'cr-dropdown')}>
       <Dropdown>
         <Dropdown.Toggle variant="primary" id="dropdown-basic">
-          {value ? itemRenderer?.(value) ?? value : placeholder}
+          {value ? itemRenderer?.(value) ?? value.toString() : placeholder}
           <ChevronIcon className="cr-dropdown__arrow" />
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          {list.map((item) => (
-            <Dropdown.Item key={item} onSelect={() => onSelect?.(item)}>
-              {itemRenderer?.(item) ?? item}
+          {list.map((item, i) => (
+            <Dropdown.Item key={i} onSelect={() => onSelect?.(item)}>
+              {itemRenderer?.(item) ?? item.toString()}
             </Dropdown.Item>
           ))}
         </Dropdown.Menu>
