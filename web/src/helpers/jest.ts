@@ -41,8 +41,6 @@ export const mockConfig: Config = {
   captcha_type: 'none',
   password_min_entropy: 0,
 
-  signInUrl: '',
-  signUpUrl: '',
   logoUrl: '',
   logoDarkUrl: '',
   sonic: false,

@@ -40,6 +40,7 @@ import {
 } from '../../modules/user/orders';
 import { isWsApiEnabled } from 'src/api/config';
 import { isMarket, isTriggerByPrice } from 'src/helpers/order';
+import { loginWithRedirect } from 'src/helpers/auth0';
 
 interface ReduxProps {
   currentMarket: Market;
@@ -158,8 +159,8 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       return (
         <LockedComponent
           text={this.translate('page.body.trade.header.newOrder.locked.login.text')}
-          link={'/signin'}
           buttonText={this.translate('page.header.navbar.signIn')}
+          onClick={loginWithRedirect}
         />
       );
     } else if (!allowed) {

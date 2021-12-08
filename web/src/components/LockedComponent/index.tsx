@@ -9,11 +9,12 @@ import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selec
 
 interface Props {
   text: string;
-  link: string;
+  link?: string;
   buttonText: string;
+  onClick?: () => void;
 }
 
-export const LockedComponent: React.FC<Props> = ({ text, link, buttonText }) => {
+export const LockedComponent: React.FC<Props> = ({ text, link, buttonText, onClick }) => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
   return (
     <Box padding="3x" col spacing="2x" alignCenter>
@@ -21,12 +22,21 @@ export const LockedComponent: React.FC<Props> = ({ text, link, buttonText }) => 
       <Label size="lg" center style={{ maxWidth: 180 }}>
         {text}
       </Label>
-      {isMobileDevice ? (
-        <Button component={Link} to={link} variant="primary-outline" revertLightPrimary>
+      {link ? (
+        <Button
+          component={Link}
+          to={link}
+          variant={isMobileDevice ? 'primary-outline' : 'primary'}
+          revertLightPrimary={isMobileDevice}
+        >
           {buttonText}
         </Button>
       ) : (
-        <Button component={Link} to={link} variant="primary">
+        <Button
+          variant={isMobileDevice ? 'primary-outline' : 'primary'}
+          revertLightPrimary={isMobileDevice}
+          onClick={onClick}
+        >
           {buttonText}
         </Button>
       )}

@@ -11,8 +11,6 @@ declare global {
       domain: string;
       client_id: string;
       redirect_uri: string;
-      auth_url: string;
-      signedin_url: string;
     };
     finex: string | boolean;
     withCredentials: string | boolean;
@@ -44,8 +42,6 @@ declare global {
     barong_upload_size_max_range?: string;
     themeSwitcher: 'visible' | 'hidden';
 
-    signInUrl: string;
-    signUpUrl: string;
     logoUrl: string;
     logoDarkUrl: string;
     sonic?: string | boolean;

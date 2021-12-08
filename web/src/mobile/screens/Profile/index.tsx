@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAuth0 } from 'src/api';
+import { isAuth0 } from 'src/api';
 import { Button } from 'src/components/Button/Button';
 import { useT } from 'src/hooks/useT';
 import { ChevronIcon } from '../../../assets/images/ChevronIcon';
@@ -58,7 +57,7 @@ const ProfileMobileScreenComponent: React.FC = () => {
         </div>
       ),
     },
-    !useAuth0()
+    !isAuth0()
       ? {
           titleKey: 'page.mobile.profileLinks.main.changePassword',
           route: '/profile/change-password',
