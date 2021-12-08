@@ -42,8 +42,6 @@ export const defaultConfig: Config = {
   barong_upload_size_max_range: '20',
   themeSwitcher: 'visible',
 
-  signInUrl: '',
-  signUpUrl: '',
   logoUrl: '',
   logoDarkUrl: '',
   sonic: false,
@@ -104,13 +102,12 @@ export const barongUploadSizeMaxRange = Number(
   Cryptobase.config.barong_upload_size_max_range || '20',
 );
 export const themeSwitcher = () => Cryptobase.config.themeSwitcher;
-export const signInUrl = (): string => Cryptobase.config.signInUrl;
-export const signUpUrl = (): string => Cryptobase.config.signUpUrl;
 export const logoUrl = (): string => Cryptobase.config.logoUrl;
 export const logoDarkUrl = (): string => Cryptobase.config.logoDarkUrl;
 export const isSonicEnabled = () => convertToBoolean(Cryptobase.config.sonic);
 export const isWsApiEnabled = () => convertToBoolean(Cryptobase.config.wsApi);
-export const useAuth0 = () => Cryptobase.config.auth0 !== undefined;
+export const isAuth0 = () => Cryptobase.config.auth0 !== undefined;
+export const auth0Config = () => Cryptobase.config.auth0;
 export const valuationPrimaryCurrency = (): string => Cryptobase.config.valuationPrimaryCurrency;
 export const valuationPrimaryCurrencyName = (): string =>
   Cryptobase.config.valuationPrimaryCurrencyName;

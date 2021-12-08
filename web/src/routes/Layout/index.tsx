@@ -9,7 +9,7 @@ import { compose } from 'redux';
 import { Fees } from 'src/screens/Fees';
 import { IntlProps } from '../../';
 import {
-  useAuth0,
+  isAuth0,
   minutesUntilAutoLogout,
   sessionCheckInterval,
   showLanding,
@@ -78,6 +78,8 @@ import {
   QuickExchange,
   LandingScreen,
 } from '../../screens';
+import { loginWithRedirect } from 'src/helpers/auth0';
+import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
 
 interface ReduxProps {
   colorTheme: string;
@@ -236,13 +238,13 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       }
     }
 
-    if (
-      !this.props.user.email &&
-      nextProps.user.email &&
-      !this.props.location.pathname.includes('/setup')
-    ) {
-      this.props.userFetch();
-    }
+    // if (
+    //   !this.props.user.email &&
+    //   nextProps.user.email &&
+    //   !this.props.location.pathname.includes('/setup')
+    // ) {
+    //   this.props.userFetch();
+    // }
 
     if (!this.props.isLoggedIn && nextProps.isLoggedIn && !this.props.user.email) {
       this.initInterval();
@@ -302,20 +304,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       return (
         <div className={mobileCls}>
           <Switch>
-            <PublicRoute
-              path="/signin"
-              component={() => {
-                window.location.href = '/signin';
-                return null;
-              }}
-            />
-            <PublicRoute
-              path="/signup"
-              component={() => {
-                window.location.href = '/signup';
-                return null;
-              }}
-            />
+            <PublicRoute path="/signin" component={SignInAuth0} />
+            <PublicRoute path="/signup" component={SignInAuth0} />
             <PublicRoute
               loading={userLoading}
               isLogged={isLoggedIn}
@@ -400,7 +390,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               path="/profile/2fa"
               component={ProfileAuthMobileScreen}
             />
-            {!useAuth0() && (
+            {!isAuth0() && (
               <PrivateRoute
                 loading={userLoading}
                 isLogged={isLoggedIn}
@@ -454,20 +444,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             component={SetupScreen}
           />
           <Route exact={true} path="/magic-link" component={MagicLink} />
-          <PublicRoute
-            path="/signin"
-            component={() => {
-              window.location.href = '/signin';
-              return null;
-            }}
-          />
-          <PublicRoute
-            path="/signup"
-            component={() => {
-              window.location.href = '/signup';
-              return null;
-            }}
-          />
+          <PublicRoute path="/signin" component={SignInAuth0} />
+          <PublicRoute path="/signup" component={SignInAuth0} />
           <PublicRoute
             loading={userLoading}
             isLogged={isLoggedIn}
@@ -603,9 +581,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
   };
 
   private handleSubmitExpSessionModal = () => {
-    const { history } = this.props;
     this.handleChangeExpSessionModalState();
-    history.push('/signin');
+    loginWithRedirect();
   };
 
   private handleRenderExpiredSessionModal = () => (

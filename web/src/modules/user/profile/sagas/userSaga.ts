@@ -1,16 +1,18 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { sendError, User } from '../../../';
 import { API, isFinexEnabled, RequestOptions } from '../../../../api';
-import { userData, userError, UserFetch } from '../actions';
+import { userData, userError } from '../actions';
 import { abilitiesFetch } from '../../abilities';
+import { fetchBitzlatoId } from 'src/helpers/auth0';
 
 const userOptions: RequestOptions = {
   apiVersion: 'barong',
 };
 
-export function* userSaga(action: UserFetch) {
+export function* userSaga() {
   try {
-    const user = yield call(API.get(userOptions), '/resource/users/me');
+    yield call(fetchBitzlatoId);
+    const user: User = yield call(API.get(userOptions), '/resource/users/me');
     if (isFinexEnabled()) {
       yield put(abilitiesFetch());
     }

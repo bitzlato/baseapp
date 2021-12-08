@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Box } from 'src/components/Box';
 import { Button } from 'src/components/Button/Button';
+import { loginWithRedirect } from 'src/helpers/auth0';
 import { useT } from 'src/hooks/useT';
 import { ProfileIcon } from '../../../assets/images/sidebar/ProfileIcon';
 import { Logo } from '../../../components';
@@ -32,10 +33,10 @@ const HeaderComponent: React.FC = () => {
           </Link>
         ) : (
           <>
-            <Button component={Link} to="/signin" variant="primary-outline" revertLightPrimary>
+            <Button onClick={loginWithRedirect} variant="primary-outline" revertLightPrimary>
               {t('page.header.navbar.signIn')}
             </Button>
-            <Button component={Link} to="/signup" variant="primary" revertLightPrimary>
+            <Button onClick={loginWithRedirect} variant="primary" revertLightPrimary>
               {t('page.header.signUp')}
             </Button>
           </>

@@ -28,6 +28,8 @@ import { SignupIcon } from 'src/assets/icons/SignupIcon';
 
 import { QuickExchangeIcon } from 'src/assets/icons/QuickExchangeIcon';
 
+import { loginWithRedirect } from 'src/helpers/auth0';
+
 import { SidebarItem } from './SidebarItem/SidebarItem';
 import { SidebarToggler } from './SidebarToggler/SidebarToggler';
 
@@ -60,6 +62,10 @@ export const Sidebar: FC = () => {
   const handleItemClick = () => {
     dispatch(toggleSidebar(false));
   };
+  const handleLoginClick = () => {
+    handleItemClick();
+    loginWithRedirect();
+  };
   const handleLogoutClick = () => {
     handleItemClick();
     dispatch(logoutFetch());
@@ -86,10 +92,10 @@ export const Sidebar: FC = () => {
           </>
         ) : (
           <>
-            <SidebarItem to="/signin" icon={<ProfileIcon />} onClick={handleItemClick}>
+            <SidebarItem icon={<ProfileIcon />} onClick={handleLoginClick}>
               {t('page.header.navbar.signIn')}
             </SidebarItem>
-            <SidebarItem to="/signup" icon={<SignupIcon />} onClick={handleItemClick}>
+            <SidebarItem icon={<SignupIcon />} onClick={handleLoginClick}>
               {t('page.header.signUp')}
             </SidebarItem>
           </>

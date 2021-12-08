@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserLoggedIn } from 'src/modules';
 import { useT } from 'src/hooks/useT';
-import { Link } from 'react-router-dom';
 import { Button } from 'src/components/Button/Button';
 import cn from 'classnames';
+
+import { loginWithRedirect } from 'src/helpers/auth0';
 
 import { LanguageSwitcher } from './LanguageSwitcher/LanguageSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher/ThemeSwitcher';
@@ -26,13 +27,11 @@ export const NavBar: FC<Props> = ({ responsiveMode = false }) => {
       {!isLoggedIn && (
         <>
           <div className={cn(s.item, responsiveMode && s.canBeHidden)}>
-            <Button component={Link} to="/signin">
-              {t('page.header.navbar.signIn')}
-            </Button>
+            <Button onClick={loginWithRedirect}>{t('page.header.navbar.signIn')}</Button>
           </div>
           <div className={cn(s.item, responsiveMode && s.canBeHidden)}>
             {/* signup ID is needed for GA event */}
-            <Button id="signup" variant="secondary" component={Link} to="/signup">
+            <Button id="signup" variant="secondary" onClick={loginWithRedirect}>
               {t('page.header.signUp')}
             </Button>
           </div>

@@ -9,12 +9,8 @@ window.env = {
   auth0: {
     domain: 'auth.bitzlato.bz',
     client_id: 'sW5Er9tgeD9T8XuklzCX_FcNX0ETttJK',
-    redirect_uri: 'https://market.bitzlato.com/success_signin',
-    auth_url: 'https://market.bitzlato.com/api/v2/barong/identity/sessions/auth0',
-    signedin_url: 'https://market.bitzlato.com/wallets',
+    redirect_uri: 'https://market.bitzlato.com/wallets',
   },
-  signInUrl: '/signin',
-  signUpUrl: '/signin',
   logoUrl: 'https://market.bitzlato.com/assets/bitzlato_logo--sm--blue--nav.svg',
   logoDarkUrl: 'https://market.bitzlato.com/assets/bitzlato_logo--sm--white--nav.svg',
   minutesUntilAutoLogout: '120',
@@ -30,8 +26,6 @@ window.env = {
   sessionCheckInterval: '15000',
   balancesFetchInterval: '3000',
   passwordEntropyStep: 14,
-  directSigninUrl:
-    'https://bitzlato.com/auth/login?ex=true&returnTo=https%3A%2F%2Fmarket.bitzlato.com%2Ftrading',
   kycSteps: [
     'email',
     // 'phone',
