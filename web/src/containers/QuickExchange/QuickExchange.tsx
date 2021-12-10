@@ -356,7 +356,7 @@ export const QuickExchangeContainer: React.FC = () => {
             ? t('page.body.quick.exchange.tip.market')
             : noAmount
             ? t('page.body.quick.exchange.tip.amount')
-            : rateOutOfDate
+            : rateOutOfDate && !exchangeFetching
             ? t('page.body.quick.exchange.tip.refresh')
             : t('page.body.quick.exchange.button.exchange')}
         </span>

@@ -23,7 +23,7 @@ export const quickExchangeReducer = (
 ): QuickExchangeState => {
   switch (action.type) {
     case CREATE_QUICK_ORDER_FETCH:
-      return { ...state, fetching: true };
+      return { ...state, fetching: true, success: false };
     case CREATE_QUICK_ORDER_DATA:
       return {
         ...state,
