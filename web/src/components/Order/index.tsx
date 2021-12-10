@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { DEFAULT_ORDER_TYPES } from 'src/helpers/order';
 import { Decimal, OrderForm } from '../';
 import { TabPanel } from '../../components';
 import { getAmount, getTotalPrice } from '../../helpers';
@@ -77,7 +76,7 @@ export interface OrderComponentProps {
    * Precision of price value
    */
   currentMarketBidPrecision: number;
-  orderTypes?: OrderType[];
+  orderTypes: OrderType[];
   /**
    *
    */
@@ -211,7 +210,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
           priceLimit={priceLimit}
           obTrigger={trigger}
           onSubmit={this.props.onSubmit}
-          orderTypes={orderTypes || DEFAULT_ORDER_TYPES}
+          orderTypes={orderTypes}
           currentMarketAskPrecision={currentMarketAskPrecision}
           currentMarketBidPrecision={currentMarketBidPrecision}
           totalPrice={getTotalPrice(amount, priceMarket, proposals)}
