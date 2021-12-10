@@ -6,7 +6,6 @@ import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { selectMemberLevels } from 'src/modules';
-import { defaultCurrency } from 'src/modules/public/currencies/defaults';
 import { Blur } from '../../../components/Blur';
 import { ModalWithdrawSubmit, Withdraw } from '../../../containers';
 import { useBeneficiariesFetch, useCurrenciesFetch } from '../../../hooks';
@@ -52,8 +51,8 @@ const WalletWithdrawBodyComponent: React.FC<Props> = (props) => {
   const currencies = useSelector(selectCurrencies);
   const withdrawSuccess = useSelector(selectWithdrawSuccess);
   const memberLevels = useSelector(selectMemberLevels);
-  const { currency, fee, type, enable_invoice } = props.wallet;
-  const fixed = (props.wallet || { fixed: 0 }).fixed;
+  const { currency, withdraw_fee, type, enable_invoice } = props.wallet;
+  const fixed = (props.wallet || { precision: 0 }).precision;
   const withdrawAmountLabel = React.useMemo(
     () => intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.amount' }),
     [intl],
@@ -186,7 +185,7 @@ const WalletWithdrawBodyComponent: React.FC<Props> = (props) => {
     return (
       <Withdraw
         isMobileDevice
-        fee={fee}
+        fee={withdraw_fee}
         type={type}
         fixed={fixed}
         currency={currency}
@@ -196,7 +195,7 @@ const WalletWithdrawBodyComponent: React.FC<Props> = (props) => {
         withdrawDone={withdrawData.withdrawDone}
         withdrawButtonLabel={withdrawButtonLabel}
         twoFactorAuthRequired={isTwoFactorAuthRequired(user.level, user.otp)}
-        ccyInfo={currencyItem ?? defaultCurrency}
+        wallet={props.wallet}
         enableInvoice={enable_invoice}
       />
     );
@@ -205,7 +204,7 @@ const WalletWithdrawBodyComponent: React.FC<Props> = (props) => {
     user.level,
     user.otp,
     memberLevels?.withdraw.minimum_level,
-    fee,
+    withdraw_fee,
     type,
     fixed,
     currency,

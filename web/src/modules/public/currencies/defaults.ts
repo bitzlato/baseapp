@@ -1,26 +1,22 @@
-import { Currency as MoneyCurrency, Money } from '@bitzlato/money-js';
+import { DEFAULT_CCY_PRECISION } from 'src/constants';
+import { createCcy, createMoney } from 'src/helpers/money';
 
-import { Currency } from './types';
+import { ApiCurrency } from './types';
 
-export const DEFAULT_CURRENCY: MoneyCurrency = {
-  code: '',
-  minorUnit: 8,
-};
+export const DEFAULT_CURRENCY = createCcy('', DEFAULT_CCY_PRECISION);
 
-export const defaultCurrency: Currency = {
+export const defaultCurrency: ApiCurrency = {
   id: '',
   name: '',
   symbol: '',
   explorer_transaction: '',
   explorer_address: '',
   type: 'coin',
-  deposit_fee: Money.fromDecimal(0, DEFAULT_CURRENCY),
+  deposit_fee: createMoney(0, DEFAULT_CURRENCY),
   min_confirmations: 6,
-  min_deposit_amount: Money.fromDecimal(0, DEFAULT_CURRENCY),
-  withdraw_fee: Money.fromDecimal(0, DEFAULT_CURRENCY),
-  min_withdraw_amount: Money.fromDecimal(0, DEFAULT_CURRENCY),
-  withdraw_limit_24h: Money.fromDecimal(0, DEFAULT_CURRENCY),
-  withdraw_limit_72h: Money.fromDecimal(0, DEFAULT_CURRENCY),
+  min_deposit_amount: createMoney(0, DEFAULT_CURRENCY),
+  withdraw_fee: createMoney(0, DEFAULT_CURRENCY),
+  min_withdraw_amount: createMoney(0, DEFAULT_CURRENCY),
   deposit_enabled: true,
   withdrawal_enabled: true,
   withdrawal_disabled_reason: '',
@@ -28,5 +24,6 @@ export const defaultCurrency: Currency = {
   precision: 8,
   icon_url: '',
   icon_id: '',
+  price: '1.0',
   ...DEFAULT_CURRENCY,
 };

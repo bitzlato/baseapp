@@ -37,10 +37,10 @@ exports[`DepositCrypto should match snapshot 1`] = `
         "code": "",
         "deposit_enabled": true,
         "deposit_fee": Object {
-          "amount": "0.00000000",
+          "amount": "0.0000",
           "currency": Object {
             "code": "",
-            "minorUnit": 8,
+            "minorUnit": 4,
           },
         },
         "explorer_address": "",
@@ -50,43 +50,30 @@ exports[`DepositCrypto should match snapshot 1`] = `
         "id": "",
         "min_confirmations": 6,
         "min_deposit_amount": Object {
-          "amount": "0.00000000",
+          "amount": "0.0000",
           "currency": Object {
             "code": "",
-            "minorUnit": 8,
+            "minorUnit": 4,
           },
         },
         "min_withdraw_amount": Object {
-          "amount": "0.00000000",
+          "amount": "0.0000",
           "currency": Object {
             "code": "",
-            "minorUnit": 8,
+            "minorUnit": 4,
           },
         },
-        "minorUnit": 8,
+        "minorUnit": 4,
         "name": "",
         "precision": 8,
+        "price": "1.0",
         "symbol": "",
         "type": "coin",
         "withdraw_fee": Object {
-          "amount": "0.00000000",
+          "amount": "0.0000",
           "currency": Object {
             "code": "",
-            "minorUnit": 8,
-          },
-        },
-        "withdraw_limit_24h": Object {
-          "amount": "0.00000000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 8,
-          },
-        },
-        "withdraw_limit_72h": Object {
-          "amount": "0.00000000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 8,
+            "minorUnit": 4,
           },
         },
         "withdrawal_disabled_reason": "",
@@ -100,21 +87,60 @@ exports[`DepositCrypto should match snapshot 1`] = `
     handleOnCopy={[MockFunction]}
     wallet={
       Object {
-        "currency": Object {
-          "code": "ETH",
-          "minorUnit": 8,
-        },
-        "fee": Object {
-          "amount": "0.00000000",
+        "balance": Object {
+          "amount": "0.0000",
           "currency": Object {
-            "code": "ETH",
-            "minorUnit": 8,
+            "code": "",
+            "minorUnit": 4,
           },
         },
-        "fixed": 0,
-        "icon_id": "eth",
+        "currency": Object {
+          "code": "",
+          "minorUnit": 4,
+        },
+        "explorer_address": "",
+        "explorer_transaction": "",
+        "icon_id": "",
+        "icon_url": "",
+        "limit_1_month": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
+        "limit_24_hour": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
+        "locked": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
+        "min_withdraw_amount": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
         "name": "",
+        "precision": 4,
+        "price": "0",
         "type": "coin",
+        "withdraw_fee": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
       }
     }
   />

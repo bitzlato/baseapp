@@ -1,5 +1,5 @@
 import { Money, Currency as MoneyCurrency } from '@bitzlato/money-js';
-import { Currency, Market, Wallet } from 'src/modules';
+import { ApiCurrency, Market, Wallet } from 'src/modules';
 
 import { estimateUnitValue, estimateValue, findPrecision, MarketTicker } from './estimateValue';
 
@@ -10,7 +10,7 @@ describe('estimateValue', () => {
     { id: 'usd', precision: 4 },
     { id: 'btc', precision: 3 },
     { id: 'zar', precision: 8 },
-  ] as Currency[];
+  ] as ApiCurrency[];
 
   it('should return 0 if no data', () => {
     const targetCurrency = 'btc';

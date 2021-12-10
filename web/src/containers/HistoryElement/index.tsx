@@ -12,7 +12,7 @@ import { Decimal, History, Pagination } from '../../components';
 import { localeDate, setTradesType, setTransferStatusColor, truncateMiddle } from '../../helpers';
 import {
   currenciesFetch,
-  Currency,
+  ApiCurrency,
   Deposit,
   fetchHistory,
   Market,
@@ -38,7 +38,7 @@ interface HistoryProps {
 }
 
 interface ReduxProps {
-  currencies: Currency[];
+  currencies: ApiCurrency[];
   marketsData: Market[];
   wallets: Wallet[];
   list: WalletHistoryList;
@@ -192,7 +192,7 @@ class HistoryComponent extends React.Component<Props> {
           </div>,
           localeDate(created_at, 'fullDate'),
           <CurrencyTicker symbol={currency} />,
-          wallet && Decimal.format(amount, wallet.fixed, ','),
+          wallet && Decimal.format(amount, wallet.precision, ','),
           <DepositStatus item={item as Deposit} currency={currency} />,
         ];
       }
@@ -211,8 +211,8 @@ class HistoryComponent extends React.Component<Props> {
           </div>,
           localeDate(created_at, 'fullDate'),
           <CurrencyTicker symbol={currency} />,
-          wallet && Decimal.format(amount, wallet.fixed, ','),
-          wallet && Decimal.format(fee, wallet.fixed, ','),
+          wallet && Decimal.format(amount, wallet.precision, ','),
+          wallet && Decimal.format(fee, wallet.precision, ','),
           <WithdrawStatus key="status" currency={currency} item={item as Withdraw} />,
         ];
       }
@@ -259,7 +259,7 @@ class HistoryComponent extends React.Component<Props> {
 
         return [
           localeDate(created_at, 'fullDate'),
-          wallet && Decimal.format(amount, wallet.fixed, ','),
+          wallet && Decimal.format(amount, wallet.precision, ','),
           <CurrencyTicker symbol={currency} />,
           direction && direction.replace(/^./, direction[0].toUpperCase()),
           toAccount,

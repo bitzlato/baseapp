@@ -232,7 +232,8 @@ export const en = {
   'page.body.wallets.tabs.withdraw.content.total': 'Total Withdrawal Amount',
   'page.body.wallets.tabs.withdraw.content.min': 'Min Withdrawal Amount',
   'page.body.wallets.tabs.withdraw.content.limit24h': 'Withdrawal Limit 24h',
-  'page.body.wallets.tabs.withdraw.content.limit72h': 'Withdrawal Limit 72h',
+  'page.body.wallets.tabs.withdraw.content.limit1month': 'Withdrawal Limit for 1 month',
+  'page.body.wallets.tabs.withdraw.content.unlimited': 'Unlimited',
   'page.body.wallets.tabs.withdraw.content.button': 'WITHDRAW',
   'page.body.wallets.tabs.withdraw.disabled.message': 'Withdraw was disabled by administration',
   'page.body.wallets.warning.withdraw.verification':

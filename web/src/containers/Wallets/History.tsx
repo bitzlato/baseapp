@@ -3,12 +3,12 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { compose } from 'redux';
 import { IntlProps } from '../../';
-import { CellData, History, Pagination } from '../../components';
+import { History, Pagination } from '../../components';
 import { Decimal } from '../../components/Decimal';
 import { localeDate, sortByDateDesc } from '../../helpers';
 import {
   currenciesFetch,
-  Currency,
+  ApiCurrency,
   fetchHistory,
   resetHistory,
   RootState,
@@ -35,7 +35,7 @@ export interface HistoryProps {
 }
 
 export interface ReduxProps {
-  currencies: Currency[];
+  currencies: ApiCurrency[];
   list: WalletHistoryList;
   wallets: Wallet[];
   fetching: boolean;
@@ -126,9 +126,9 @@ export class WalletTable extends React.Component<Props> {
 
   private retrieveData = (list) => {
     const { currency, type, wallets } = this.props;
-    const { fixed } = wallets.find(
+    const { precision } = wallets.find(
       (w) => w.currency.code.toLowerCase() === currency.toLowerCase(),
-    ) || { fixed: 8 };
+    ) || { precision: 8 };
 
     if (!list.length) {
       return [[]];
@@ -147,7 +147,7 @@ export class WalletTable extends React.Component<Props> {
           ) : (
             <WithdrawStatus item={item} currency={currency} />
           ),
-          <Decimal key={index} fixed={fixed} thousSep=",">
+          <Decimal key={index} fixed={precision} thousSep=",">
             {amount}
           </Decimal>,
         ];

@@ -15,7 +15,8 @@ import {
   WALLETS_WITHDRAW_CCY_ERROR,
   WALLETS_WITHDRAW_CCY_FETCH,
 } from './constants';
-import { WalletSource, WalletAddress } from './types';
+import { WalletSource } from './types';
+import { WalletAddress } from 'src/modules/public/accounts/types';
 
 export interface WalletsState {
   wallets: {

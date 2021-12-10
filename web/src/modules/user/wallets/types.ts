@@ -1,35 +1,38 @@
-import { Currency, Money } from '@bitzlato/money-js';
+import type { Currency, Money } from '@bitzlato/money-js';
+import type { AccountBalanceSource } from 'src/modules/public/accounts/types';
 
-export interface WalletSource {
-  currency: string;
-  balance?: string;
-  locked?: string;
-  active?: boolean;
-  enable_invoice?: boolean;
-  deposit_address?: WalletAddress;
-  // from Currency
+export interface WalletSource extends AccountBalanceSource {
+  // from CurrencySource
   name: string;
   type: 'fiat' | 'coin';
-  fee: number;
-  fixed: number;
-  iconUrl?: string;
-  explorerTransaction?: string;
-  explorerAddress?: string;
+  withdraw_fee: string;
+  precision: number;
+  icon_url?: string;
+  explorer_transaction?: string;
+  explorer_address?: string;
   icon_id: string;
   price: string;
+  min_withdraw_amount: string;
 }
 
-export interface Wallet extends Omit<WalletSource, 'currency' | 'balance' | 'locked' | 'fee'> {
+export interface Wallet
+  extends Omit<
+    WalletSource,
+    | 'currency'
+    | 'balance'
+    | 'locked'
+    | 'limit_24_hour'
+    | 'limit_1_month'
+    | 'withdraw_fee'
+    | 'min_withdraw_amount'
+  > {
   currency: Currency;
-  balance?: Money;
-  locked?: Money;
-  fee: Money;
-}
-
-export interface WalletAddress {
-  address: string;
-  currencies: string[];
-  state?: string;
+  balance: Money;
+  locked: Money;
+  limit_24_hour: Money;
+  limit_1_month: Money;
+  withdraw_fee: Money;
+  min_withdraw_amount: Money;
 }
 
 export interface WalletWithdrawCCY {
@@ -45,11 +48,4 @@ export interface WalletWithdrawFiat {
   currency_type: string;
   otp: string;
   beneficiary_id: string;
-}
-
-export interface AccountInterface {
-  currency: string;
-  balance?: string;
-  locked?: string;
-  deposit_address?: WalletAddress;
 }

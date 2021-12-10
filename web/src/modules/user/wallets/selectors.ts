@@ -1,21 +1,23 @@
-import { Currency, Money } from '@bitzlato/money-js';
+import { createCcy, createMoney } from 'src/helpers/money';
 import { RootState } from '../../';
 import { WalletSource, Wallet } from './types';
 
 const createWallet = (walletSource: WalletSource): Wallet => {
-  const currency: Currency = {
-    code: walletSource.currency.toUpperCase(),
-    minorUnit: walletSource.fixed,
-  };
+  const currency = createCcy(walletSource.currency.toUpperCase(), walletSource.precision);
 
   return {
     ...walletSource,
     currency,
-    balance: walletSource.balance ? Money.fromDecimal(walletSource.balance, currency) : undefined,
-    locked: walletSource.locked ? Money.fromDecimal(walletSource.locked, currency) : undefined,
-    fee: Money.fromDecimal(walletSource.fee, currency),
+    balance: createMoney(walletSource.balance, currency),
+    locked: createMoney(walletSource.locked, currency),
+    withdraw_fee: createMoney(walletSource.withdraw_fee, currency),
+    limit_24_hour: createMoney(walletSource.limit_24_hour, USD),
+    limit_1_month: createMoney(walletSource.limit_1_month, USD),
+    min_withdraw_amount: createMoney(walletSource.min_withdraw_amount, currency),
   };
 };
+
+const USD = createCcy('USD', 2);
 
 export const selectWallets = ({
   user: {

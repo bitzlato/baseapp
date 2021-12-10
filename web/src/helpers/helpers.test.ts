@@ -1,4 +1,4 @@
-import { Currency } from '../modules/public/currencies';
+import { ApiCurrency } from '../modules/public/currencies';
 import * as helpers from './';
 
 describe('Constants regexps', () => {
@@ -160,7 +160,7 @@ describe('Helpers', () => {
       { id: 'usd', precision: 4 },
       { id: 'btc', precision: 8 },
       { id: 'zar', precision: 8 },
-    ] as Currency[];
+    ] as ApiCurrency[];
     expect(helpers.handleCCYPrecision(currencies, 'btc', 4)).toBe(8);
     expect(helpers.handleCCYPrecision(currencies, 'trst', 4)).toBe(4);
   });

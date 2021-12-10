@@ -1,10 +1,10 @@
-import { Money, Currency } from '@bitzlato/money-js';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { defaultCurrency } from 'src/modules/public/currencies/defaults';
-import { rootReducer, Wallet } from '../../modules';
+import { defaultWallet } from 'src/modules/user/wallets/defaults';
+import { rootReducer } from '../../modules';
 import { CopyableTextField } from '../CopyableTextField';
 import { DepositCrypto } from './';
 
@@ -14,18 +14,6 @@ describe('DepositCrypto', () => {
   let wrapper: any;
   const handleOnCopy = jest.fn();
   const handleGenerateAddress = jest.fn();
-  const currency: Currency = {
-    code: 'ETH',
-    minorUnit: 8,
-  };
-  const wallet: Wallet = {
-    currency,
-    icon_id: 'eth',
-    name: '',
-    fixed: 0,
-    type: 'coin',
-    fee: Money.fromDecimal(0, currency),
-  };
 
   beforeEach(() => {
     wrapper = shallow(
@@ -35,7 +23,7 @@ describe('DepositCrypto', () => {
           error={'error123'}
           handleGenerateAddress={handleGenerateAddress}
           handleOnCopy={handleOnCopy}
-          wallet={wallet}
+          wallet={defaultWallet}
           disabled={false}
           currency={defaultCurrency}
         />

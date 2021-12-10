@@ -10,7 +10,6 @@ exports[`WalletList should render 1`] = `
     onClick={[Function]}
     wallet={
       Object {
-        "active": false,
         "balance": Object {
           "amount": "456.00000000",
           "currency": Object {
@@ -22,17 +21,23 @@ exports[`WalletList should render 1`] = `
           "code": "BTC",
           "minorUnit": 8,
         },
-        "explorerAddress": "https://testnet.blockchain.info/address/#{address}",
-        "explorerTransaction": "https://testnet.blockchain.info/tx/#{txid}",
-        "fee": Object {
-          "amount": "0.12300000",
+        "explorer_address": "https://testnet.blockchain.info/address/#{address}",
+        "explorer_transaction": "https://testnet.blockchain.info/tx/#{txid}",
+        "icon_id": "BTC",
+        "limit_1_month": Object {
+          "amount": "0.00000000",
           "currency": Object {
             "code": "BTC",
             "minorUnit": 8,
           },
         },
-        "fixed": 8,
-        "icon_id": "BTC",
+        "limit_24_hour": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
         "locked": Object {
           "amount": "1.00000000",
           "currency": Object {
@@ -40,8 +45,24 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
+        "min_withdraw_amount": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
         "name": "Bitcoin",
+        "precision": 8,
+        "price": "1",
         "type": "fiat",
+        "withdraw_fee": Object {
+          "amount": "0.12300000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
       }
     }
   />
@@ -51,7 +72,6 @@ exports[`WalletList should render 1`] = `
     onClick={[Function]}
     wallet={
       Object {
-        "active": false,
         "balance": Object {
           "amount": "456.00",
           "currency": Object {
@@ -63,15 +83,21 @@ exports[`WalletList should render 1`] = `
           "code": "USD",
           "minorUnit": 2,
         },
-        "fee": Object {
-          "amount": "0.12",
+        "icon_id": "USD",
+        "limit_1_month": Object {
+          "amount": "0.00",
           "currency": Object {
             "code": "USD",
             "minorUnit": 2,
           },
         },
-        "fixed": 8,
-        "icon_id": "USD",
+        "limit_24_hour": Object {
+          "amount": "0.00",
+          "currency": Object {
+            "code": "USD",
+            "minorUnit": 2,
+          },
+        },
         "locked": Object {
           "amount": "100.00",
           "currency": Object {
@@ -79,8 +105,24 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 2,
           },
         },
+        "min_withdraw_amount": Object {
+          "amount": "0.00",
+          "currency": Object {
+            "code": "USD",
+            "minorUnit": 2,
+          },
+        },
         "name": "United states Dollar",
+        "precision": 8,
+        "price": "1",
         "type": "coin",
+        "withdraw_fee": Object {
+          "amount": "0.12",
+          "currency": Object {
+            "code": "USD",
+            "minorUnit": 2,
+          },
+        },
       }
     }
   />
@@ -90,7 +132,6 @@ exports[`WalletList should render 1`] = `
     onClick={[Function]}
     wallet={
       Object {
-        "active": false,
         "balance": Object {
           "amount": "2.00000000",
           "currency": Object {
@@ -102,15 +143,21 @@ exports[`WalletList should render 1`] = `
           "code": "BTC",
           "minorUnit": 8,
         },
-        "fee": Object {
-          "amount": "0.30000000",
+        "icon_id": "BTC",
+        "limit_1_month": Object {
+          "amount": "0.00000000",
           "currency": Object {
             "code": "BTC",
             "minorUnit": 8,
           },
         },
-        "fixed": 8,
-        "icon_id": "BTC",
+        "limit_24_hour": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
         "locked": Object {
           "amount": "0.40000000",
           "currency": Object {
@@ -118,8 +165,24 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
+        "min_withdraw_amount": Object {
+          "amount": "0.00000000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
         "name": "Bitcoin - 2",
+        "precision": 8,
+        "price": "1",
         "type": "fiat",
+        "withdraw_fee": Object {
+          "amount": "0.30000000",
+          "currency": Object {
+            "code": "BTC",
+            "minorUnit": 8,
+          },
+        },
       }
     }
   />
