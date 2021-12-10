@@ -2,6 +2,7 @@ import { mount, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { Order, OrderComponentProps } from './';
 import { TestComponentWrapper } from 'src/lib/test/wrapper';
+import { DEFAULT_ORDER_TYPES } from 'src/helpers/order';
 
 // tslint:disable:no-magic-numbers
 
@@ -17,8 +18,8 @@ const defaultProps: OrderComponentProps = {
   to: 'eth',
   asks: [['10', '1']],
   bids: [['10', '1']],
-  currentMarketFilters: [],
   translate: jest.fn(),
+  orderTypes: DEFAULT_ORDER_TYPES,
 };
 
 const setup = (props: Partial<OrderComponentProps> = {}) =>
