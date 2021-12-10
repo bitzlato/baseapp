@@ -3,12 +3,12 @@ import { WarningIcon } from 'src/mobile/assets/images/WarningIcon';
 import { useT } from 'src/hooks/useT';
 import { SummaryField } from 'src/components/SummaryField';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { Currency } from 'src/modules/public/currencies/types';
+import { ApiCurrency } from 'src/modules/public/currencies/types';
 import { Box } from 'src/components/Box';
 import { Label } from 'src/components/Label';
 
 interface Props {
-  currency: Currency;
+  currency: ApiCurrency;
   showWarning?: boolean;
 }
 

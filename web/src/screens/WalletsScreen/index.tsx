@@ -1,4 +1,3 @@
-import { Money } from '@bitzlato/money-js';
 import classnames from 'classnames';
 import * as React from 'react';
 import { Button, Spinner } from 'react-bootstrap';
@@ -9,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Box } from 'src/components/Box';
 import { defaultCurrency } from 'src/modules/public/currencies/defaults';
+import { defaultWallet } from 'src/modules/user/wallets/defaults';
 import { IntlProps } from '../../';
 import {
   Blur,
@@ -30,7 +30,7 @@ import {
   beneficiariesFetch,
   Beneficiary,
   currenciesFetch,
-  Currency,
+  ApiCurrency,
   MemberLevels,
   memberLevelsFetch,
   RootState,
@@ -64,7 +64,7 @@ interface ReduxProps {
   beneficiariesActivateSuccess: boolean;
   beneficiariesDeleteSuccess: boolean;
   beneficiariesAddSuccess: boolean;
-  currencies: Currency[];
+  currencies: ApiCurrency[];
   memberLevels?: MemberLevels;
 }
 
@@ -88,19 +88,6 @@ const defaultBeneficiary: Beneficiary = {
   data: {
     address: '',
   },
-};
-
-const defaultWallet: Wallet = {
-  name: '',
-  currency: {
-    code: defaultCurrency.code,
-    minorUnit: defaultCurrency.minorUnit,
-  },
-  balance: Money.fromDecimal(0, defaultCurrency),
-  type: 'coin',
-  fixed: 0,
-  fee: Money.fromDecimal(0, defaultCurrency),
-  icon_id: '',
 };
 
 interface WalletsState {
@@ -225,7 +212,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const formattedWallets = wallets.map(
       (wallet: Wallet): Wallet => ({
         ...wallet,
-        iconUrl: wallet.iconUrl ? wallet.iconUrl : '',
+        icon_url: wallet.icon_url ? wallet.icon_url : '',
       }),
     );
     const selectedCurrency = (wallets[selectedWalletIndex] || { currency: '' }).currency.code;
@@ -233,7 +220,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     let selectedWalletPrecision = DEFAULT_CCY_PRECISION;
 
     if (wallets[selectedWalletIndex]) {
-      selectedWalletPrecision = wallets[selectedWalletIndex].fixed;
+      selectedWalletPrecision = wallets[selectedWalletIndex].precision;
       confirmationAddress =
         wallets[selectedWalletIndex].type === 'fiat'
           ? beneficiary.name
@@ -563,24 +550,19 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const {
       user: { level, otp },
       wallets,
-      currencies,
     } = this.props;
     const wallet = wallets[selectedWalletIndex];
-    const { currency, fee, type, enable_invoice } = wallet;
-    const fixed = (wallet || { fixed: 0 }).fixed;
-    const currencyItem =
-      currencies && currencies.find((item) => item.id === wallet.currency.code.toLowerCase());
 
     return otp ? (
       <Withdraw
         withdrawDone={withdrawDone}
-        currency={currency}
-        fee={fee}
+        currency={wallet.currency}
+        fee={wallet.withdraw_fee}
         onClick={this.toggleConfirmModal}
         twoFactorAuthRequired={this.isTwoFactorAuthRequired(level, otp)}
-        fixed={fixed}
-        type={type}
-        enableInvoice={enable_invoice}
+        fixed={wallet.precision}
+        type={wallet.type}
+        enableInvoice={wallet.enable_invoice}
         withdrawAmountLabel={this.props.intl.formatMessage({
           id: 'page.body.wallets.tabs.withdraw.content.amount',
         })}
@@ -590,7 +572,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         withdrawButtonLabel={this.props.intl.formatMessage({
           id: 'page.body.wallets.tabs.withdraw.content.button',
         })}
-        ccyInfo={currencyItem || defaultCurrency}
+        wallet={wallet}
       />
     ) : (
       this.isOtpDisabled()

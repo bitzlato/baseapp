@@ -1,4 +1,4 @@
-import { Currency as MoneyCurrency, Money } from '@bitzlato/money-js';
+import { Currency, Money } from '@bitzlato/money-js';
 
 export interface CurrencySource {
   id: string;
@@ -12,8 +12,6 @@ export interface CurrencySource {
   min_deposit_amount: string;
   withdraw_fee: string;
   min_withdraw_amount: string;
-  withdraw_limit_24h: string;
-  withdraw_limit_72h: string;
   deposit_enabled: boolean;
   withdrawal_enabled: boolean;
   withdrawal_disabled_reason: string;
@@ -24,21 +22,14 @@ export interface CurrencySource {
   price: string;
 }
 
-export interface Currency
+export interface ApiCurrency
   extends Omit<
       CurrencySource,
-      | 'deposit_fee'
-      | 'min_deposit_amount'
-      | 'withdraw_fee'
-      | 'min_withdraw_amount'
-      | 'withdraw_limit_24h'
-      | 'withdraw_limit_72h'
+      'deposit_fee' | 'min_deposit_amount' | 'withdraw_fee' | 'min_withdraw_amount'
     >,
-    MoneyCurrency {
+    Currency {
   deposit_fee: Money;
   min_deposit_amount: Money;
   withdraw_fee: Money;
   min_withdraw_amount: Money;
-  withdraw_limit_24h: Money;
-  withdraw_limit_72h: Money;
 }

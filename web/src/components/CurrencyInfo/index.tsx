@@ -11,7 +11,7 @@ export interface CurrencyInfoProps {
 }
 
 export const CurrencyInfo: FC<CurrencyInfoProps> = ({
-  wallet: { balance, locked, currency, iconUrl, icon_id },
+  wallet: { balance, locked, currency, icon_url, icon_id },
 }) => {
   const zeroMoney = Money.fromDecimal(0, currency);
   const balanceMoney = balance ?? zeroMoney;
@@ -19,7 +19,7 @@ export const CurrencyInfo: FC<CurrencyInfoProps> = ({
 
   return (
     <div className="cr-wallet-item__single">
-      <CryptoCurrencyIcon icon={iconUrl} currency={currency.code} iconId={icon_id} />
+      <CryptoCurrencyIcon icon={icon_url} currency={currency.code} iconId={icon_id} />
       <div className="cr-wallet-item__single-balance">
         <div>
           <div className="cr-wallet-item__amount-locked">

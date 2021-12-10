@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import {
-  Currency,
+  ApiCurrency,
   depositsCreate,
   selectDepositsCreateLoading,
   selectMobileDeviceState,
@@ -16,7 +16,7 @@ import { useHistory } from 'react-router';
 import { fromDecimalSilent } from 'src/helpers/fromDecimal';
 
 interface Props {
-  currency: Currency;
+  currency: ApiCurrency;
 }
 
 export const DepositInvoice: React.FC<Props> = ({ currency }) => {

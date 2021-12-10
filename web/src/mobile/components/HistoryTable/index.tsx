@@ -54,10 +54,10 @@ const HistoryTable = (props: Props) => {
   };
   const retrieveData = () => {
     const { currency, type } = props;
-    const { fixed } = wallets.find(
+    const { precision } = wallets.find(
       (w) => w.currency.code.toLowerCase() === currency.toLowerCase(),
     ) || {
-      fixed: DEFAULT_CCY_PRECISION,
+      precision: DEFAULT_CCY_PRECISION,
     };
     if (list.length === 0) {
       return [[]];
@@ -70,7 +70,12 @@ const HistoryTable = (props: Props) => {
           'amount' in item ? Number(item.amount) : Number(item.price) * Number(item.volume);
 
         return [
-          <RowItem amount={amount} fixed={fixed} currency={currency} createdAt={item.created_at} />,
+          <RowItem
+            amount={amount}
+            fixed={precision}
+            currency={currency}
+            createdAt={item.created_at}
+          />,
           type === 'deposits' ? (
             <DepositStatus item={item} currency={currency} />
           ) : (

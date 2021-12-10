@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const WalletItem: FC<Props> = ({
-  wallet: { name, balance, locked, iconUrl, icon_id: iconId, currency },
+  wallet: { name, balance, locked, icon_url, icon_id, currency },
   active = false,
   onClick,
 }: Props) => {
@@ -26,7 +26,7 @@ export const WalletItem: FC<Props> = ({
   return (
     <button className={cn(s.item, active && s.itemActive)} type="button" onClick={onClick}>
       <span className={s.icon}>
-        <CryptoCurrencyIcon currency={currency.code} iconId={iconId} icon={iconUrl} />
+        <CryptoCurrencyIcon currency={currency.code} iconId={icon_id} icon={icon_url} />
       </span>
       <span className={s.info}>
         <span className={cn(s.row, s.title)}>

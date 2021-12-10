@@ -12,7 +12,7 @@ import {
 } from '@bitzlato/ethereum-provider';
 
 import { MetaMaskLogo } from '../../assets/images/MetaMaskLogo';
-import { alertPush, Currency } from '../../modules';
+import { alertPush, ApiCurrency } from '../../modules';
 import { useT } from 'src/hooks/useT';
 import { CustomInput } from '../CustomInput';
 
@@ -20,7 +20,7 @@ import s from 'src/containers/Withdraw/Withdraw.postcss';
 
 interface Props {
   depositAddress: string;
-  currency: Currency;
+  currency: ApiCurrency;
 }
 
 export const MetaMaskButton: React.FC<Props> = (props) => {
@@ -140,7 +140,7 @@ function toWei(amount: string): HexString {
   return new BN(amount).multipliedBy(1e18).toString(16);
 }
 
-function isEqualChains(chainId: HexString, currency: Currency): boolean {
+function isEqualChains(chainId: HexString, currency: ApiCurrency): boolean {
   const address = currency.explorer_address;
   return (
     (chainId === ChainId.Mainnet && address.startsWith('https://etherscan.io/')) ||

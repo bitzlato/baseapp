@@ -1,7 +1,7 @@
-import { Currency } from '../modules';
+import { ApiCurrency } from '../modules';
 
 export const handleCCYPrecision = (
-  currencies: Currency[],
+  currencies: ApiCurrency[],
   currency: string,
   defaultPrecision: number,
 ): number => {

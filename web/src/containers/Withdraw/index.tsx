@@ -4,7 +4,7 @@ import { Currency, Money } from '@bitzlato/money-js';
 import { Box } from 'src/components/Box';
 import { Beneficiaries, CustomInput } from '../../components';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
-import { Beneficiary, Currency as CurrencyInfo } from '../../modules';
+import { Beneficiary, Wallet } from '../../modules';
 import { WithdrawSummary } from './WithdrawSummary';
 import { BeneficiaryAddress } from './BeneficiaryAddress';
 import { fromDecimalSilent } from 'src/helpers/fromDecimal';
@@ -24,7 +24,7 @@ export interface WithdrawProps {
   withdrawButtonLabel?: string;
   withdrawDone: boolean;
   isMobileDevice?: boolean;
-  ccyInfo: CurrencyInfo;
+  wallet: Wallet;
 }
 
 const defaultBeneficiary: Beneficiary = {
@@ -82,7 +82,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
       withdrawAmountLabel,
       withdrawButtonLabel,
       isMobileDevice,
-      ccyInfo,
+      wallet,
     } = this.props;
 
     const label2fa = this.props.withdraw2faLabel || '2FA code';
@@ -121,7 +121,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
           )}
         </Box>
         <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2x">
-          <WithdrawSummary total={total} currency={ccyInfo} />
+          <WithdrawSummary total={total} wallet={wallet} />
           <Box selfStart>
             <Button
               variant="primary"

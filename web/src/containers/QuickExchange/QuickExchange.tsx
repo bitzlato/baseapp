@@ -181,7 +181,7 @@ export const QuickExchangeContainer: React.FC = () => {
       <Box row spacing>
         <CryptoCurrencyIcon
           size="small"
-          icon={getWallet(d.code, wallets)?.iconUrl ?? ''}
+          icon={getWallet(d.code, wallets)?.icon_url ?? ''}
           currency={d.code}
         />
         <Box as="span" textColor={d.match ? 'primary' : 'failed'}>

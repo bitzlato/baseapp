@@ -140,7 +140,7 @@ export const InternalTransferComponent = () => {
             field="amount"
             handleChangeInput={setAmount}
             value={amount}
-            fixed={wallet ? wallet.fixed : 0}
+            fixed={wallet?.precision ?? 0}
           />
           <DropdownComponent
             className="pg-confirm__content-address__row__content-number-dropdown"

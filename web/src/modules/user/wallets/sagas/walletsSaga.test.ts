@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { AccountInterface, rootSaga, sendError, WalletSource } from '../../..';
+import { AccountBalanceSource, rootSaga, sendError, WalletSource } from '../../..';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
 import { CommonError } from '../../../types';
 import { walletsData, walletsError, walletsFetch } from '../actions';
@@ -27,7 +27,7 @@ describe('Module: Wallets', () => {
     message: ['Server error'],
   };
 
-  const fakeAccounts: AccountInterface[] = [
+  const fakeAccounts: AccountBalanceSource[] = [
     {
       currency: 'eth',
       balance: '0',
@@ -37,31 +37,43 @@ describe('Module: Wallets', () => {
         address: '0x00eec1e95026faf0412d7a29b94d514d31446141',
         state: 'active',
       },
+      limit_24_hour: '0',
+      limit_1_month: '0',
     },
     {
       currency: 'fth',
       balance: '0',
       locked: '0',
+      limit_24_hour: '0',
+      limit_1_month: '0',
     },
     {
       currency: 'gmt',
       balance: '0',
       locked: '0',
+      limit_24_hour: '0',
+      limit_1_month: '0',
     },
     {
       currency: 'ksys',
       balance: '0',
       locked: '0',
+      limit_24_hour: '0',
+      limit_1_month: '0',
     },
     {
       currency: 'kyn',
       balance: '0',
       locked: '0',
+      limit_24_hour: '0',
+      limit_1_month: '0',
     },
     {
       currency: 'usd',
       balance: '0',
       locked: '0',
+      limit_24_hour: '0',
+      limit_1_month: '0',
     },
   ];
 

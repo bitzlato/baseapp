@@ -2,7 +2,7 @@
 import { Money } from '@bitzlato/money-js';
 import { Decimal } from '../components/Decimal';
 import { DEFAULT_CCY_PRECISION } from '../constants';
-import { Currency, Market, Ticker, Wallet } from '../modules';
+import { ApiCurrency, Market, Ticker, Wallet } from '../modules';
 import { handleCCYPrecision } from './';
 
 export interface MarketTicker {
@@ -47,7 +47,7 @@ export const estimateWithMarket = (
   targetCurrency: string,
   walletCurrency: string,
   walletTotal: number,
-  currencies: Currency[],
+  currencies: ApiCurrency[],
   markets: Market[],
   marketTickers: MarketTicker,
 ): number => {
@@ -91,7 +91,7 @@ const estimateWithoutMarket = (
   targetCurrency: string,
   walletCurrency: string,
   walletTotal: number,
-  currencies: Currency[],
+  currencies: ApiCurrency[],
   markets: Market[],
   marketTickers: MarketTicker,
 ): number => {
@@ -148,7 +148,7 @@ const estimateWithoutMarket = (
 
 export const estimateValue = (
   targetCurrency: string,
-  currencies: Currency[],
+  currencies: ApiCurrency[],
   wallets: Wallet[],
   markets: Market[],
   marketTickers: MarketTicker,
@@ -197,7 +197,7 @@ export const estimateUnitValue = (
   targetCurrency: string,
   currentCurrency: string,
   total: number,
-  currencies: Currency[],
+  currencies: ApiCurrency[],
   markets: Market[],
   marketTickers: MarketTicker,
 ): string => {

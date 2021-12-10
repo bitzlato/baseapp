@@ -6,7 +6,7 @@ import { isMetaMaskInstalled } from '@bitzlato/ethereum-provider';
 
 import { useT } from 'src/hooks/useT';
 import { formatCCYAddress } from '../../helpers';
-import { Currency, selectMobileDeviceState, Wallet } from '../../modules';
+import { ApiCurrency, selectMobileDeviceState, Wallet } from '../../modules';
 import { Box } from '../Box';
 import { CopyableTextField } from 'src/components/CopyableTextField';
 import { MetaMaskButton } from '../MetaMaskButton';
@@ -43,7 +43,7 @@ export interface DepositCryptoProps {
    */
   handleGenerateAddress: () => void;
   disabled?: boolean;
-  currency: Currency;
+  currency: ApiCurrency;
 }
 
 /**
