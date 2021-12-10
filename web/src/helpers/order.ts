@@ -26,3 +26,14 @@ export function isTriggerByPrice(orderType: OrderType): boolean {
 export function isMarket(orderType: OrderType): boolean {
   return orderType === 'Market';
 }
+
+export const DEFAULT_ORDER_TYPES: OrderType[] = [
+  'Limit',
+  'Market',
+  'Stop-loss',
+  'Take-profit',
+  'Stop-limit',
+  'Take-limit',
+];
+
+export const BZ_ORDER_TYPES: OrderType[] = ['Limit', 'Market'];
