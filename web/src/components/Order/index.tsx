@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { DEFAULT_ORDER_TYPES } from 'src/helpers/order';
 import { Decimal, OrderForm } from '../';
 import { TabPanel } from '../../components';
 import { getAmount, getTotalPrice } from '../../helpers';
@@ -77,7 +78,6 @@ export interface OrderComponentProps {
    */
   currentMarketBidPrecision: number;
   orderTypes?: OrderType[];
-  orderTypesIndex?: OrderType[];
   /**
    *
    */
@@ -111,15 +111,6 @@ interface State {
   amountSell: string;
   amountBuy: string;
 }
-
-const defaultOrderTypes: OrderType[] = [
-  'Limit',
-  'Market',
-  'Stop-loss',
-  'Take-profit',
-  'Stop-limit',
-  'Take-limit',
-];
 
 const splitBorder = 449;
 const defaultWidth = 635;
@@ -191,7 +182,6 @@ export class Order extends React.Component<OrderComponentProps, State> {
       currentMarketAskPrecision,
       currentMarketBidPrecision,
       orderTypes,
-      orderTypesIndex,
       asks,
       bids,
       listenInputPrice,
@@ -221,8 +211,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
           priceLimit={priceLimit}
           obTrigger={trigger}
           onSubmit={this.props.onSubmit}
-          orderTypes={orderTypes || defaultOrderTypes}
-          orderTypesIndex={orderTypesIndex || defaultOrderTypes}
+          orderTypes={orderTypes || DEFAULT_ORDER_TYPES}
           currentMarketAskPrecision={currentMarketAskPrecision}
           currentMarketBidPrecision={currentMarketBidPrecision}
           totalPrice={getTotalPrice(amount, priceMarket, proposals)}

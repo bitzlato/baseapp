@@ -39,7 +39,7 @@ import {
   selectOrderExecuteLoading,
 } from '../../modules/user/orders';
 import { isWsApiEnabled } from 'src/api/config';
-import { isMarket, isTriggerByPrice } from 'src/helpers/order';
+import { BZ_ORDER_TYPES, isMarket, isTriggerByPrice } from 'src/helpers/order';
 import { loginWithRedirect } from 'src/helpers/auth0';
 
 interface ReduxProps {
@@ -189,6 +189,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
           handleSendType={this.getOrderType}
           currentMarketAskPrecision={currentMarket.amount_precision}
           currentMarketBidPrecision={currentMarket.price_precision}
+          orderTypes={BZ_ORDER_TYPES}
           width={this.state.width}
           listenInputPrice={this.listenInputPrice}
           listenInputTrigger={this.listenInputTrigger}

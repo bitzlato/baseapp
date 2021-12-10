@@ -42,10 +42,6 @@ export interface OrderFormProps {
    */
   orderTypes: OrderType[];
   /**
-   * Available types of order without translations
-   */
-  orderTypesIndex: OrderType[];
-  /**
    * Additional class name. By default element receives `cr-order` class
    * @default empty
    */
@@ -119,7 +115,6 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   bestAsk,
   priceLimit,
   obTrigger,
-  orderTypesIndex,
   priceMarket,
   disabled,
   totalPrice,
@@ -129,7 +124,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   onAmountChange,
   onChangeAmountByButton,
 }) => {
-  const [orderType, setorderType] = React.useState<OrderType>('Limit');
+  const [orderType, setorderType] = React.useState<OrderType>(orderTypes[0] ?? 'Limit');
   const [price, setprice] = React.useState('');
   const [trigger, settrigger] = React.useState('');
 
@@ -157,7 +152,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   }, [from, to]);
 
   const handleOrderTypeChange = (index: number) => {
-    setorderType(orderTypesIndex[index]);
+    setorderType(orderTypes[index]);
   };
 
   const handlePriceChange = (value: string) => {
