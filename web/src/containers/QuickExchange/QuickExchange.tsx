@@ -19,9 +19,10 @@ import { quickExchangeLimitsFetch } from 'src/modules/public/quickExchangePublic
 import { selectQuickExchangeLimits } from 'src/modules/public/quickExchangePublic/selectors';
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
-import { CustomInput } from '../../components';
+import { NumberInput } from 'src/components/NumberInput/NumberInput';
 import { getWallet, getCurrencies, getCurrency, DropdownItem, getItem } from './helpers';
 import { fromDecimalSilent } from 'src/helpers/fromDecimal';
+import { parseNumeric } from 'src/helpers/parseNumeric';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
@@ -34,7 +35,6 @@ import { DotsFlashing } from 'src/components/DotsFlashing/DotsFlashing';
 import { RefreshIcon } from 'src/assets/icons/RefreshIcon';
 
 import s from './QuickExchange.postcss';
-import inputS from 'src/containers/Withdraw/Withdraw.postcss';
 
 const PERCENTS = [25, 50, 75, 100];
 
@@ -157,7 +157,7 @@ export const QuickExchangeContainer: React.FC = () => {
         marketPriceFetch({
           from_currency: fromCurrency.code,
           to_currency: toCurrency.code,
-          request_volume: requestVolume,
+          request_volume: parseNumeric(requestVolume, { trimRightDot: true }),
           request_currency: requestCurrency,
         }),
       );
@@ -198,13 +198,13 @@ export const QuickExchangeContainer: React.FC = () => {
     <Card className={s.quickExchange} header={<h4>{t('page.body.quick.exchange.header')}</h4>}>
       <Box col spacing>
         <Box grow row spacing="2x">
-          <CustomInput
-            type="number"
-            className={inputS.numberInput}
+          <Box
+            flex1
+            as={NumberInput}
             label={t('page.body.quick.exchange.label.exchange')}
             labelVisible
-            inputValue={fromAmount}
-            handleChangeInput={handleChangeFrom}
+            value={fromAmount}
+            onChange={handleChangeFrom}
           />
           <DropdownComponent
             className={s.quickExchangeDropdown}
@@ -243,9 +243,9 @@ export const QuickExchangeContainer: React.FC = () => {
         <SwipeIcon />
       </Button>
       <Box grow row spacing="2x">
-        <CustomInput
-          type="number"
-          className={inputS.numberInput}
+        <Box
+          flex1
+          as={NumberInput}
           label={
             <Box row spacing="sm">
               <span>{t('page.body.quick.exchange.label.receive')}</span>
@@ -263,8 +263,8 @@ export const QuickExchangeContainer: React.FC = () => {
             </Box>
           }
           labelVisible
-          inputValue={toAmount}
-          handleChangeInput={handleChangeTo}
+          value={toAmount}
+          onChange={handleChangeTo}
         />
         <DropdownComponent
           className={s.quickExchangeDropdown}
