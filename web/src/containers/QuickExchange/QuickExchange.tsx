@@ -113,6 +113,7 @@ export const QuickExchangeContainer: React.FC = () => {
   }, [exchangeSucess]);
 
   const handleChangeFrom = (value: string) => {
+    value = parseNumeric(value);
     setFromAmount(value);
     setToAmount('');
     setRequestCurrency(fromCurrency.code);
@@ -120,6 +121,7 @@ export const QuickExchangeContainer: React.FC = () => {
   };
 
   const handleChangeTo = (value: string) => {
+    value = parseNumeric(value);
     setToAmount(value);
     setFromAmount('');
     setRequestCurrency(toCurrency.code);

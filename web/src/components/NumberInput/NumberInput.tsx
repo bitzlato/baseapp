@@ -2,7 +2,6 @@ import * as React from 'react';
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { FormControl, FormControlProps } from 'react-bootstrap';
-import { parseNumeric } from 'src/helpers/parseNumeric';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
 import s from './NumberInput.postcss';
 
@@ -27,8 +26,9 @@ export const NumberInput: React.FC<Props> = ({
       <label className={labelClassName}>{(labelVisible || props.value) && label}</label>
       <FormControl
         {...props}
-        onChange={(e) => onChange(parseNumeric(e.target.value))}
+        onChange={(e) => onChange(e.target.value)}
         type={isMobileDevice ? 'number' : undefined}
+        placeholder={!labelVisible && label}
       />
     </div>
   );

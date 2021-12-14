@@ -2,15 +2,17 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Currency, Money } from '@bitzlato/money-js';
 import { Box } from 'src/components/Box';
-import { Beneficiaries, CustomInput } from '../../components';
-import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
+import { Beneficiaries } from '../../components';
+import { precisionRegExp } from '../../helpers';
 import { Beneficiary, Wallet } from '../../modules';
 import { WithdrawSummary } from './WithdrawSummary';
 import { BeneficiaryAddress } from './BeneficiaryAddress';
 import { fromDecimalSilent } from 'src/helpers/fromDecimal';
-import s from './Withdraw.postcss';
+import { NumberInput } from 'src/components/NumberInput/NumberInput';
+import { parseInteger, parseNumeric } from 'src/helpers/parseNumeric';
+import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 
-export interface WithdrawProps {
+interface Props {
   currency: Currency;
   fee: Money;
   onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
@@ -27,172 +29,101 @@ export interface WithdrawProps {
   wallet: Wallet;
 }
 
-const defaultBeneficiary: Beneficiary = {
-  id: 0,
-  currency: '',
-  name: '',
-  state: '',
-  data: {
-    address: '',
-  },
-};
+export const Withdraw: React.FC<Props> = (props) => {
+  const [amount, setAmount] = React.useState('');
+  const [beneficiary, setBeneficiary] = React.useState(defaultBeneficiary);
+  const [otpCode, setOtpCode] = React.useState('');
+  const [total, setTotal] = React.useState('');
 
-interface WithdrawState {
-  amount: string;
-  beneficiary: Beneficiary;
-  otpCode: string;
-  withdrawAmountFocused: boolean;
-  withdrawCodeFocused: boolean;
-  total: string;
-}
+  const {
+    currency,
+    type,
+    enableInvoice,
+    twoFactorAuthRequired,
+    isMobileDevice,
+    wallet,
+    withdrawDone,
+  } = props;
 
-export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
-  public state = {
-    amount: '',
-    beneficiary: defaultBeneficiary,
-    otpCode: '',
-    withdrawAmountFocused: false,
-    withdrawCodeFocused: false,
-    total: '',
+  const reset = () => {
+    setAmount('');
+    setBeneficiary(defaultBeneficiary);
+    setOtpCode('');
+    setTotal('');
   };
 
-  public componentWillReceiveProps(nextProps: WithdrawProps) {
-    const { currency, withdrawDone } = this.props;
+  React.useEffect(() => {
+    reset();
+  }, [currency.code]);
 
-    if (
-      (nextProps && JSON.stringify(nextProps.currency) !== JSON.stringify(currency)) ||
-      (nextProps.withdrawDone && !withdrawDone)
-    ) {
-      this.setState({
-        amount: '',
-        otpCode: '',
-        total: '',
-        beneficiary: defaultBeneficiary,
-      });
+  React.useEffect(() => {
+    if (withdrawDone) {
+      reset();
     }
-  }
+  }, [withdrawDone]);
 
-  public render() {
-    const { amount, beneficiary, total, otpCode } = this.state;
-    const {
-      currency,
-      type,
-      enableInvoice,
-      twoFactorAuthRequired,
-      withdrawAmountLabel,
-      withdrawButtonLabel,
-      isMobileDevice,
-      wallet,
-    } = this.props;
-
-    const label2fa = this.props.withdraw2faLabel || '2FA code';
-
-    return (
-      <Box padding={isMobileDevice ? undefined : '3x'} col spacing="3x">
-        <Beneficiaries
-          currency={currency.code}
-          type={type}
-          enableInvoice={enableInvoice}
-          onChangeValue={this.handleChangeBeneficiary}
-        />
-        <BeneficiaryAddress beneficiary={beneficiary} />
-        <Box grow row spacing="2x">
-          <CustomInput
-            type="number"
-            className={s.numberInput}
-            label={withdrawAmountLabel || 'Withdrawal Amount'}
-            defaultLabel="Withdrawal Amount"
-            inputValue={amount}
-            placeholder={withdrawAmountLabel || 'Amount'}
-            handleChangeInput={this.handleChangeInputAmount}
-          />
-          {twoFactorAuthRequired && (
-            <CustomInput
-              type="number"
-              className={s.numberInput}
-              label={label2fa}
-              placeholder={label2fa}
-              defaultLabel="2FA code"
-              handleChangeInput={this.handleChangeInputOtpCode}
-              inputValue={otpCode}
-              handleFocusInput={() => this.handleFieldFocus('code')}
-              autoFocus={false}
-            />
-          )}
-        </Box>
-        <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2x">
-          <WithdrawSummary total={total} wallet={wallet} />
-          <Box selfStart>
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={this.handleClick}
-              disabled={this.handleCheckButtonDisabled(total, beneficiary, otpCode)}
-            >
-              {withdrawButtonLabel ? withdrawButtonLabel : 'Withdraw'}
-            </Button>
-          </Box>
-        </Box>
-      </Box>
-    );
-  }
-
-  private handleCheckButtonDisabled = (
-    total: string,
-    beneficiary: Beneficiary,
-    otpCode: string,
-  ) => {
+  const handleCheckButtonDisabled = (total: string, beneficiary: Beneficiary, otpCode: string) => {
     const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
-
     return Number(total) <= 0 || !Boolean(beneficiary.id) || isPending || !Boolean(otpCode);
   };
 
-  private handleClick = () =>
-    this.props.onClick(
-      this.state.amount,
-      this.state.total,
-      this.state.beneficiary,
-      this.state.otpCode,
-    );
+  const handleClick = () => props.onClick(amount, total, beneficiary, otpCode);
 
-  private handleFieldFocus = (field: string) => {
-    switch (field) {
-      case 'amount':
-        this.setState((prev) => ({
-          withdrawAmountFocused: !prev.withdrawAmountFocused,
-        }));
-        break;
-      case 'code':
-        this.setState((prev) => ({
-          withdrawCodeFocused: !prev.withdrawCodeFocused,
-        }));
-        break;
-      default:
-        break;
+  const handleChangeInputAmount = (value: string) => {
+    const amount = parseNumeric(value);
+    if (amount.match(precisionRegExp(props.fixed))) {
+      const amountMoney = fromDecimalSilent(amount, props.currency);
+      const totalMoney = amountMoney.subtract(props.fee);
+      const total = totalMoney.isNegative() ? (0).toFixed(props.fixed) : totalMoney.toString();
+      setTotal(total);
+      setAmount(amount);
     }
   };
 
-  private handleChangeInputAmount = (value: string) => {
-    const { fixed } = this.props;
-    const amount = cleanPositiveFloatInput(value);
-    if (amount.match(precisionRegExp(fixed))) {
-      const amountMoney = fromDecimalSilent(amount, this.props.currency);
-      const totalMoney = amountMoney.subtract(this.props.fee);
-      const total = totalMoney.isNegative() ? (0).toFixed(fixed) : totalMoney.toString();
-      this.setState({
-        total,
-        amount,
-      });
-    }
+  const handleChangeOtpCode = (otpCode: string) => {
+    setOtpCode(parseInteger(otpCode));
   };
 
-  private handleChangeBeneficiary = (value: Beneficiary) => {
-    this.setState({
-      beneficiary: value,
-    });
-  };
-
-  private handleChangeInputOtpCode = (otpCode: string) => {
-    this.setState({ otpCode });
-  };
-}
+  return (
+    <Box padding={isMobileDevice ? undefined : '3x'} col spacing="3x">
+      <Beneficiaries
+        currency={currency.code}
+        type={type}
+        enableInvoice={enableInvoice}
+        onChangeValue={setBeneficiary}
+      />
+      <BeneficiaryAddress beneficiary={beneficiary} />
+      <Box grow row spacing="2x">
+        <Box
+          flex1
+          as={NumberInput}
+          value={amount}
+          onChange={handleChangeInputAmount}
+          label={props.withdrawAmountLabel}
+        />
+        {twoFactorAuthRequired && (
+          <Box
+            flex1
+            as={NumberInput}
+            value={otpCode}
+            onChange={handleChangeOtpCode}
+            label={props.withdraw2faLabel}
+          />
+        )}
+      </Box>
+      <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2x">
+        <WithdrawSummary total={total} wallet={wallet} />
+        <Box selfStart>
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={handleClick}
+            disabled={handleCheckButtonDisabled(total, beneficiary, otpCode)}
+          >
+            {props.withdrawButtonLabel}
+          </Button>
+        </Box>
+      </Box>
+    </Box>
+  );
+};

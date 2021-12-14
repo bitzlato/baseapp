@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Box } from 'src/components/Box';
 import { defaultCurrency } from 'src/modules/public/currencies/defaults';
+import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 import { defaultWallet } from 'src/modules/user/wallets/defaults';
 import { IntlProps } from '../../';
 import {
@@ -79,16 +80,6 @@ interface DispatchProps {
   currenciesFetch: typeof currenciesFetch;
   memberLevelsFetch: typeof memberLevelsFetch;
 }
-
-const defaultBeneficiary: Beneficiary = {
-  id: 0,
-  currency: '',
-  name: '',
-  state: '',
-  data: {
-    address: '',
-  },
-};
 
 interface WalletsState {
   activeIndex: number;

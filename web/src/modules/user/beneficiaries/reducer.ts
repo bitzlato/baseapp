@@ -19,17 +19,8 @@ import {
   BENEFICIARIES_RESEND_PIN_ERROR,
   BENEFICIARIES_RESET_STATE,
 } from './constants';
+import { defaultBeneficiary } from './defaults';
 import { Beneficiary } from './types';
-
-const defaultBeneficiary: Beneficiary = {
-  id: 0,
-  currency: '',
-  name: '',
-  state: '',
-  data: {
-    address: '',
-  },
-};
 
 export interface BeneficiariesState {
   activate: {
