@@ -44,7 +44,7 @@ exports[`Order should match snapshot 1`] = `
               Order Type
             </div>
             <div
-              class="cr-dropdown cr-dropdown--default"
+              class="cr-dropdown"
             >
               <div
                 class="dropdown"
@@ -56,6 +56,7 @@ exports[`Order should match snapshot 1`] = `
                   id="dropdown-basic"
                   type="button"
                 >
+                  Market
                   <svg
                     class="cr-dropdown__arrow"
                     fill="none"
@@ -77,26 +78,43 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="cr-order-input"
+              class="input row grow padding"
             >
+              <label
+                class="inputLabel"
+              >
+                Price
+              </label>
               <div
-                class="custom-input"
+                class="row grow rowSpacing"
               >
-                <label />
-                <input
-                  class="form-control"
-                  placeholder="Price"
-                  type="number"
-                  value=""
-                />
-              </div>
-              <span
-                class="currency cr-order-input__currency"
-              >
-                <span>
-                  BTC
+                <span
+                  class="bold ellipsis"
+                >
+                  ≈ 
+                  <span
+                    class="primaryColor"
+                  >
+                    5
+                    <span
+                      class="fractional"
+                    >
+                      .00
+                    </span>
+                  </span>
                 </span>
-              </span>
+                <span
+                  class=""
+                >
+                  <span
+                    class="currency"
+                  >
+                    <span>
+                      BTC
+                    </span>
+                  </span>
+                </span>
+              </div>
             </div>
           </div>
           <div
@@ -106,14 +124,24 @@ exports[`Order should match snapshot 1`] = `
               class="cr-order-item__prices"
             >
               <span
-                class="bids"
+                class="row smSize bidColor"
               >
-                ▲ 10.00000
+                ▲ 10
+                <span
+                  class="fractional"
+                >
+                  .00
+                </span>
               </span>
               <span
-                class="asks"
+                class="row smSize askColor"
               >
-                ▼ 10.00000
+                ▼ 10
+                <span
+                  class="fractional"
+                >
+                  .00
+                </span>
               </span>
             </div>
           </div>
@@ -139,6 +167,39 @@ exports[`Order should match snapshot 1`] = `
               >
                 <span>
                   ETH
+                </span>
+              </span>
+            </div>
+          </div>
+          <div
+            class="cr-order-item"
+          >
+            <div
+              class="row justifyBetween selfStretch wrap"
+            >
+              <label>
+                Min Amount
+              </label>
+              <span
+                class=""
+              >
+                <span
+                  class="primaryColor"
+                >
+                  0
+                  <span
+                    class="fractional"
+                  >
+                    .00
+                  </span>
+                </span>
+                 
+                <span
+                  class="currency"
+                >
+                  <span>
+                    ETH
+                  </span>
                 </span>
               </span>
             </div>
@@ -184,13 +245,24 @@ exports[`Order should match snapshot 1`] = `
                 class="row rowSpacingSm"
               >
                 <span
-                  class="primaryColor"
-                >
-                  0.000000000
-                </span>
-                <span
                   class="secondaryColor"
                 >
+                  ≈
+                </span>
+                <span
+                  class=""
+                >
+                  <span
+                    class="primaryColor"
+                  >
+                    0
+                    <span
+                      class="fractional"
+                    >
+                      .00
+                    </span>
+                  </span>
+                   
                   <span
                     class="currency"
                   >
@@ -211,26 +283,28 @@ exports[`Order should match snapshot 1`] = `
               <label>
                 Available
               </label>
-              <div
-                class="row rowSpacingSm"
+              <span
+                class=""
               >
                 <span
                   class="primaryColor"
                 >
-                  12.00000
-                </span>
-                <span
-                  class="secondaryColor"
-                >
+                  12
                   <span
-                    class="currency"
+                    class="fractional"
                   >
-                    <span>
-                      BTC
-                    </span>
+                    .00
                   </span>
                 </span>
-              </div>
+                 
+                <span
+                  class="currency"
+                >
+                  <span>
+                    BTC
+                  </span>
+                </span>
+              </span>
             </div>
           </div>
           <div
@@ -297,7 +371,7 @@ exports[`Order should match snapshot 1`] = `
               Order Type
             </div>
             <div
-              class="cr-dropdown cr-dropdown--default"
+              class="cr-dropdown"
             >
               <div
                 class="dropdown"
@@ -309,6 +383,7 @@ exports[`Order should match snapshot 1`] = `
                   id="dropdown-basic"
                   type="button"
                 >
+                  Market
                   <svg
                     class="cr-dropdown__arrow"
                     fill="none"
@@ -330,26 +405,43 @@ exports[`Order should match snapshot 1`] = `
             class="cr-order-item"
           >
             <div
-              class="cr-order-input"
+              class="input row grow padding"
             >
+              <label
+                class="inputLabel"
+              >
+                Price
+              </label>
               <div
-                class="custom-input"
+                class="row grow rowSpacing"
               >
-                <label />
-                <input
-                  class="form-control"
-                  placeholder="Price"
-                  type="number"
-                  value=""
-                />
-              </div>
-              <span
-                class="currency cr-order-input__currency"
-              >
-                <span>
-                  BTC
+                <span
+                  class="bold ellipsis"
+                >
+                  ≈ 
+                  <span
+                    class="primaryColor"
+                  >
+                    10
+                    <span
+                      class="fractional"
+                    >
+                      .00
+                    </span>
+                  </span>
                 </span>
-              </span>
+                <span
+                  class=""
+                >
+                  <span
+                    class="currency"
+                  >
+                    <span>
+                      BTC
+                    </span>
+                  </span>
+                </span>
+              </div>
             </div>
           </div>
           <div
@@ -359,14 +451,24 @@ exports[`Order should match snapshot 1`] = `
               class="cr-order-item__prices"
             >
               <span
-                class="bids"
+                class="row smSize bidColor"
               >
-                ▲ 10.00000
+                ▲ 10
+                <span
+                  class="fractional"
+                >
+                  .00
+                </span>
               </span>
               <span
-                class="asks"
+                class="row smSize askColor"
               >
-                ▼ 10.00000
+                ▼ 10
+                <span
+                  class="fractional"
+                >
+                  .00
+                </span>
               </span>
             </div>
           </div>
@@ -392,6 +494,39 @@ exports[`Order should match snapshot 1`] = `
               >
                 <span>
                   ETH
+                </span>
+              </span>
+            </div>
+          </div>
+          <div
+            class="cr-order-item"
+          >
+            <div
+              class="row justifyBetween selfStretch wrap"
+            >
+              <label>
+                Min Amount
+              </label>
+              <span
+                class=""
+              >
+                <span
+                  class="primaryColor"
+                >
+                  0
+                  <span
+                    class="fractional"
+                  >
+                    .00
+                  </span>
+                </span>
+                 
+                <span
+                  class="currency"
+                >
+                  <span>
+                    ETH
+                  </span>
                 </span>
               </span>
             </div>
@@ -437,13 +572,24 @@ exports[`Order should match snapshot 1`] = `
                 class="row rowSpacingSm"
               >
                 <span
-                  class="primaryColor"
-                >
-                  0.000000000
-                </span>
-                <span
                   class="secondaryColor"
                 >
+                  ≈
+                </span>
+                <span
+                  class=""
+                >
+                  <span
+                    class="primaryColor"
+                  >
+                    0
+                    <span
+                      class="fractional"
+                    >
+                      .00
+                    </span>
+                  </span>
+                   
                   <span
                     class="currency"
                   >
@@ -464,26 +610,28 @@ exports[`Order should match snapshot 1`] = `
               <label>
                 Available
               </label>
-              <div
-                class="row rowSpacingSm"
+              <span
+                class=""
               >
                 <span
                   class="primaryColor"
                 >
-                  200.0000
-                </span>
-                <span
-                  class="secondaryColor"
-                >
+                  200
                   <span
-                    class="currency"
+                    class="fractional"
                   >
-                    <span>
-                      ETH
-                    </span>
+                    .00
                   </span>
                 </span>
-              </div>
+                 
+                <span
+                  class="currency"
+                >
+                  <span>
+                    ETH
+                  </span>
+                </span>
+              </span>
             </div>
           </div>
           <div

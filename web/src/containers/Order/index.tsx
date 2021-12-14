@@ -189,6 +189,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
           handleSendType={this.getOrderType}
           currentMarketAskPrecision={currentMarket.amount_precision}
           currentMarketBidPrecision={currentMarket.price_precision}
+          minAmount={currentMarket.min_amount}
           orderTypes={BZ_ORDER_TYPES}
           width={this.state.width}
           listenInputPrice={this.listenInputPrice}

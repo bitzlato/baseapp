@@ -42,6 +42,7 @@ export const en = {
   'page.body.trade.header.newOrder.content.amount': 'Amount',
   'page.body.trade.header.newOrder.content.total': 'Total',
   'page.body.trade.header.newOrder.content.available': 'Available',
+  'page.body.trade.header.newOrder.content.minAmount': 'Min Amount',
   'page.body.trade.header.newOrder.content.filterPrice': 'Valid price step is {priceStep}',
   'page.body.trade.header.newOrder.locked.minLevel.text':
     'Please verify your account to start trading',

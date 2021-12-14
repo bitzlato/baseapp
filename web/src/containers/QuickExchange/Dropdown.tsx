@@ -12,7 +12,7 @@ interface DropdownComponentProps<T> {
   itemRenderer?: (item: T) => React.ReactNode;
 }
 
-export const DropdownComponent = <T extends object>({
+export const DropdownComponent = <T extends Object>({
   list,
   className,
   placeholder,

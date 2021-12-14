@@ -38,6 +38,7 @@ export const ru: LangType = {
   'page.body.trade.header.newOrder.content.triggerPrice': 'Trigger price {sign} Market p.',
   'page.body.trade.header.newOrder.content.amount': 'Кол.',
   'page.body.trade.header.newOrder.content.total': 'Всего',
+  'page.body.trade.header.newOrder.content.minAmount': 'Мин. кол.',
   'page.body.trade.header.newOrder.content.available': 'Доступно',
   'page.body.trade.header.newOrder.content.filterPrice': 'Валидный шаг цены {priceStep}',
   'page.body.trade.header.newOrder.locked.minLevel.text':

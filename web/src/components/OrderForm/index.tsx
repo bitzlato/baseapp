@@ -7,8 +7,6 @@ import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selec
 import { AMOUNT_PERCENTAGE_ARRAY, TRIGGER_BUY_PRICE_MULT } from '../../constants';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
 import { OrderInput as OrderInputMobile } from '../../mobile/components';
-import { Decimal } from '../Decimal';
-import { DropdownComponent } from '../Dropdown';
 import { OrderProps, OrderType, FormType } from '../Order';
 import { OrderInput } from '../OrderInput';
 import { PercentageButton } from '../PercentageButton';
@@ -17,6 +15,11 @@ import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Box } from 'src/components/Box/Box';
 import { Label } from 'src/components/Label/Label';
 import { isLimit, isMarket, isTrigger, isTriggerByPrice } from 'src/helpers/order';
+import { DropdownComponent } from 'src/containers/QuickExchange/Dropdown';
+import { AmountFormat } from '../AmountFormat/AmountFormat';
+import { MoneyFormat } from '../MoneyFormat/MoneyFormat';
+import { createCcy, createMoney } from 'src/helpers/money';
+import { StorageKeys } from 'src/helpers/storageKeys';
 
 import s from './Input.postcss';
 
@@ -99,6 +102,7 @@ export interface OrderFormProps {
     price: string,
     type: string,
   ) => void;
+  minAmount: string;
 }
 
 export const OrderForm: React.FC<OrderFormProps> = ({
@@ -123,8 +127,12 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   listenInputTrigger,
   onAmountChange,
   onChangeAmountByButton,
+  minAmount,
 }) => {
-  const [orderType, setorderType] = React.useState<OrderType>(orderTypes[0] ?? 'Limit');
+  const [orderType, setorderType] = React.useState<OrderType>(
+    (localStorage.getItem(`${StorageKeys.orderType}-${type}`) as OrderType) ?? 'Market',
+  );
+
   const [price, setprice] = React.useState('');
   const [trigger, settrigger] = React.useState('');
 
@@ -132,14 +140,14 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   const isMobileDevice = useSelector(selectMobileDeviceState);
 
   React.useEffect(() => {
-    const nextPriceLimitTruncated = Decimal.format(priceLimit, currentMarketBidPrecision);
+    const nextPriceLimitTruncated = createMoney(priceLimit!, bidCcy).toFormat();
     if (isLimit(orderType) && priceLimit && nextPriceLimitTruncated !== price) {
       handlePriceChange(nextPriceLimitTruncated);
     }
   }, [priceLimit]);
 
   React.useEffect(() => {
-    const nextTriggerTruncated = Decimal.format(obTrigger, currentMarketBidPrecision);
+    const nextTriggerTruncated = createMoney(obTrigger!, bidCcy).toFormat();
     if (isTriggerByPrice(orderType) && obTrigger && nextTriggerTruncated !== trigger) {
       handleTriggerChange(nextTriggerTruncated);
     }
@@ -151,8 +159,9 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     onAmountChange('', type);
   }, [from, to]);
 
-  const handleOrderTypeChange = (index: number) => {
-    setorderType(orderTypes[index]);
+  const handleOrderTypeChange = (value: OrderType) => {
+    localStorage.setItem(`${StorageKeys.orderType}-${type}`, value);
+    setorderType(value);
   };
 
   const handlePriceChange = (value: string) => {
@@ -318,20 +327,23 @@ export const OrderForm: React.FC<OrderFormProps> = ({
         );
       case 'Market':
         const safePrice = totalPrice / Number(amount) || priceMarket;
+        const price = createMoney(safePrice, createCcy(from, currentMarketBidPrecision));
         return (
-          <Box grow padding row spacing className={s.input}>
+          <Box grow padding row className={s.input}>
             <label className={s.inputLabel}>
               {t('page.body.trade.header.newOrder.content.price')}
             </label>
-            <Label ellipsis size={isMobileDevice ? 'sm' : undefined} bold>
-              &asymp;{' '}
-              <Label color="primary">
-                {Decimal.format(safePrice, currentMarketBidPrecision, ',') || '0'}
+            <Box grow row spacing>
+              <Label ellipsis size={isMobileDevice ? 'sm' : undefined} bold>
+                &asymp;{' '}
+                <Box as="span" textColor="primary">
+                  <AmountFormat money={price} />
+                </Box>
               </Label>
-            </Label>
-            <Label size={isMobileDevice ? 'sm' : undefined}>
-              <CurrencyTicker symbol={from} />
-            </Label>
+              <Label size={isMobileDevice ? 'sm' : undefined}>
+                <CurrencyTicker symbol={from} />
+              </Label>
+            </Box>
           </Box>
         );
       default:
@@ -353,9 +365,10 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   };
 
   const total = getTotal();
-  const isBuy = type === 'buy';
-  const availablePrecision = isBuy ? currentMarketBidPrecision : currentMarketAskPrecision;
-  const availableCurrency = isBuy ? from : to;
+  const bidCcy = createCcy(from, currentMarketBidPrecision);
+  const askCcy = createCcy(to, currentMarketAskPrecision);
+  const availableCcy = type === 'buy' ? bidCcy : askCcy;
+
   const amountText = t('page.body.trade.header.newOrder.content.amount');
 
   return (
@@ -364,21 +377,21 @@ export const OrderForm: React.FC<OrderFormProps> = ({
         <div className="cr-order-item__dropdown__label">
           {t('page.body.trade.header.newOrder.content.orderType')}
         </div>
-        <DropdownComponent list={orderTypes} onSelect={handleOrderTypeChange} placeholder="" />
+        <DropdownComponent list={orderTypes} value={orderType} onSelect={handleOrderTypeChange} />
       </div>
       <div className="cr-order-item">{getPriceInputs()}</div>
       <div className="cr-order-item">
         {!isMobileDevice && (bestBid || bestAsk) ? (
           <div className="cr-order-item__prices">
             {bestBid ? (
-              <span className="bids">
-                &#x25B2; {Decimal.format(bestBid, currentMarketBidPrecision, ',')}
-              </span>
+              <Box row as="span" textColor="bid" textSize="sm">
+                ▲ <AmountFormat money={createMoney(bestBid, bidCcy)} />
+              </Box>
             ) : null}
             {bestAsk ? (
-              <span className="asks">
-                &#x25BC; {Decimal.format(bestAsk, currentMarketBidPrecision, ',')}
-              </span>
+              <Box row as="span" textColor="ask" textSize="sm">
+                ▼ <AmountFormat money={createMoney(bestAsk, bidCcy)} />
+              </Box>
             ) : null}
           </div>
         ) : null}
@@ -406,6 +419,13 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       </div>
 
       <div className="cr-order-item">
+        <Box selfStretch row justifyBetween wrap>
+          <label>{t('page.body.trade.header.newOrder.content.minAmount')}</label>
+          <MoneyFormat money={createMoney(minAmount, askCcy)} />
+        </Box>
+      </div>
+
+      <div className="cr-order-item">
         <div className="cr-order-item__percentage-buttons">
           {AMOUNT_PERCENTAGE_ARRAY.map((value) => (
             <PercentageButton value={value} key={value} onClick={handleChangeAmountByButton} />
@@ -418,26 +438,18 @@ export const OrderForm: React.FC<OrderFormProps> = ({
           <label>{t('page.body.trade.header.newOrder.content.total')}</label>
           <Box row spacing="sm">
             {isMarket(orderType) ? <Label color="secondary">&asymp;</Label> : null}
-            <Label color="primary">
-              {Decimal.format(total, currentMarketAskPrecision + currentMarketBidPrecision, ',')}
-            </Label>
-            <Label color="secondary">
-              <CurrencyTicker symbol={from} />
-            </Label>
+            <MoneyFormat money={createMoney(total, bidCcy)} />
           </Box>
         </Box>
       </div>
+
       <div className="cr-order-item">
         <Box selfStretch row justifyBetween wrap>
           <label>{t('page.body.trade.header.newOrder.content.available')}</label>
-          <Box row spacing="sm">
-            <Label color="primary">{Decimal.format(available, availablePrecision, ',')}</Label>
-            <Label color="secondary">
-              <CurrencyTicker symbol={availableCurrency} />
-            </Label>
-          </Box>
+          <MoneyFormat money={createMoney(available!, availableCcy)} />
         </Box>
       </div>
+
       <div className="cr-order-item">
         <Box
           as={Button}
