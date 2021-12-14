@@ -1,5 +1,6 @@
-import { mount, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
+import { mount, shallow, ShallowWrapper } from 'enzyme';
 import { Order, OrderComponentProps } from './';
 import { TestComponentWrapper } from 'src/lib/test/wrapper';
 import { DEFAULT_ORDER_TYPES } from 'src/helpers/order';
@@ -20,6 +21,7 @@ const defaultProps: OrderComponentProps = {
   bids: [['10', '1']],
   translate: jest.fn(),
   orderTypes: DEFAULT_ORDER_TYPES,
+  minAmount: '0',
 };
 
 const setup = (props: Partial<OrderComponentProps> = {}) =>
@@ -47,7 +49,7 @@ describe('Order', () => {
         <Order {...{ ...defaultProps }} />
       </TestComponentWrapper>,
     );
-    wrapper.find('input').at(2).simulate('click');
+    wrapper.find(Button).at(0).simulate('click');
     expect(defaultProps.onSubmit).toHaveBeenCalledTimes(0);
     wrapper.unmount();
   });

@@ -76,6 +76,7 @@ export interface OrderComponentProps {
    * Precision of price value
    */
   currentMarketBidPrecision: number;
+  minAmount: string;
   orderTypes: OrderType[];
   /**
    *
@@ -215,6 +216,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
           currentMarketBidPrecision={currentMarketBidPrecision}
           totalPrice={getTotalPrice(amount, priceMarket, proposals)}
           amount={amount}
+          minAmount={this.props.minAmount}
           bestAsk={bestPrice(asks)}
           bestBid={bestPrice(bids)}
           listenInputPrice={listenInputPrice}
