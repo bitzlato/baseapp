@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { selectMemberLevels } from 'src/modules';
+import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 import { Blur } from '../../../components/Blur';
 import { ModalWithdrawSubmit, Withdraw } from '../../../containers';
 import { useBeneficiariesFetch, useCurrenciesFetch } from '../../../hooks';
@@ -18,16 +19,6 @@ import {
   walletsWithdrawCcyFetch,
 } from '../../../modules/user/wallets';
 import { ModalWithdrawConfirmation } from '../../components';
-
-const defaultBeneficiary: Beneficiary = {
-  id: 0,
-  currency: '',
-  name: '',
-  state: '',
-  data: {
-    address: '',
-  },
-};
 
 interface Props {
   wallet: Wallet;

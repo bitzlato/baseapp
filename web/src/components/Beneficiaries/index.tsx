@@ -26,6 +26,7 @@ import { TrashBin } from '../../assets/images/TrashBin';
 import { BeneficiariesActivateModal } from './BeneficiariesActivateModal';
 import { BeneficiariesAddModal } from './BeneficiariesAddModal';
 import { BeneficiariesFailAddModal } from './BeneficiariesFailAddModal';
+import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 
 interface OwnProps {
   currency: string;
@@ -33,16 +34,6 @@ interface OwnProps {
   enableInvoice: boolean | undefined;
   onChangeValue: (beneficiary: Beneficiary) => void;
 }
-
-const defaultBeneficiary: Beneficiary = {
-  id: 0,
-  currency: '',
-  name: '',
-  state: '',
-  data: {
-    address: '',
-  },
-};
 
 type Props = OwnProps;
 
