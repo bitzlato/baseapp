@@ -9,7 +9,7 @@
     "style:lint": "stylelint '**/*.pcss'",
     "mockAPI": "node mocks/mockAPI.js",
     "mockWS": "node mocks/mockWS.js",
-    "start": "cross-env NODE_ENV=development webpack serve",
+    "start": "cross-env NODE_ENV=development REACT_APP_GIT_SHA=$(git rev-parse HEAD) webpack serve",
     "start-mock": "cross-env MOCK=1 npm-run-all -p start mockAPI mockWS",
     "build": "cross-env NODE_ENV=production webpack",
     "analyze": "cross-env NODE_ENV=production ANALYZE=enable webpack",

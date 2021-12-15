@@ -783,7 +783,8 @@ export const ru: LangType = {
   'page.body.customization.images.header_logo.title': 'Header logo',
 
   /* Documentation */
-  'page.documentation.header.version.title': 'Version:',
+  'page.documentation.header.version.title': 'Backend version:',
+  'page.documentation.header.version.ui': 'Frontend version:',
   'page.documentation.header.contactInfo.title': 'Contact information:',
   'page.documentation.header.license.title': 'License:',
 
