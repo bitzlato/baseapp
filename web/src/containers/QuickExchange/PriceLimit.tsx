@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React from 'react';
 import { Currency } from '@bitzlato/money-js';
-import { fromDecimalSilent } from 'src/helpers/fromDecimal';
+import { createMoney } from 'src/helpers/money';
 import { Box } from 'src/components/Box/Box';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { getCurrency } from './helpers';
@@ -16,9 +16,9 @@ export const PriceLimit: React.FC<Props> = (props) => {
   return (
     <Box row spacing>
       <span>{props.label}:</span>
-      <MoneyFormat money={fromDecimalSilent(props.limit, props.ccy).divide(props.price)} />
+      <MoneyFormat money={createMoney(props.limit, props.ccy).divide(props.price)} />
       <span>
-        (<MoneyFormat money={fromDecimalSilent(props.limit, USD_CCY)} />)
+        (<MoneyFormat money={createMoney(props.limit, USD_CCY)} />)
       </span>
     </Box>
   );

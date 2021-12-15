@@ -25,7 +25,7 @@ import { Box } from 'src/components/Box';
 import { Label } from 'src/components/Label';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
-import { fromDecimalSilent } from 'src/helpers/fromDecimal';
+import { createMoney } from 'src/helpers/money';
 import { getActualPrice } from 'src/modules/helpers';
 
 export const OpenOrdersComponent: React.FC = () => {
@@ -75,7 +75,7 @@ export const OpenOrdersComponent: React.FC = () => {
           trigger_price,
         } = item;
         const executedVolume = Number(origin_volume) - Number(remaining_volume);
-        const filled = fromDecimalSilent(
+        const filled = createMoney(
           ((executedVolume / Number(origin_volume)) * 100).toFixed(2),
           FILLED_CURRENCY,
         );
@@ -87,7 +87,7 @@ export const OpenOrdersComponent: React.FC = () => {
         );
         const color = side === 'buy' ? 'bid' : 'ask';
         const actualPrice = getActualPrice(item);
-        const total = fromDecimalSilent(origin_volume, amountCurrency).multiply(actualPrice);
+        const total = createMoney(origin_volume, amountCurrency).multiply(actualPrice);
 
         return [
           <Box col textSize="sm">
@@ -102,9 +102,9 @@ export const OpenOrdersComponent: React.FC = () => {
             {ord_type ? t(`page.body.trade.header.openOrders.content.type.${ord_type}`) : '-'}
           </span>,
           <Label color={color}>
-            <AmountFormat money={fromDecimalSilent(actualPrice, priceCurrency)} />
+            <AmountFormat money={createMoney(actualPrice, priceCurrency)} />
           </Label>,
-          <AmountFormat money={fromDecimalSilent(origin_volume, amountCurrency)} />,
+          <AmountFormat money={createMoney(origin_volume, amountCurrency)} />,
           <MoneyFormat money={total} />,
           <span>
             {trigger_price ? (
@@ -113,7 +113,7 @@ export const OpenOrdersComponent: React.FC = () => {
                 &nbsp;
                 {getTriggerSign(ord_type ?? '', side)}&nbsp;
                 <Label color={color}>
-                  <AmountFormat money={fromDecimalSilent(trigger_price, priceCurrency)} />
+                  <AmountFormat money={createMoney(trigger_price, priceCurrency)} />
                 </Label>
               </React.Fragment>
             ) : (

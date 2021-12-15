@@ -7,7 +7,7 @@ import { precisionRegExp } from '../../helpers';
 import { Beneficiary, Wallet } from '../../modules';
 import { WithdrawSummary } from './WithdrawSummary';
 import { BeneficiaryAddress } from './BeneficiaryAddress';
-import { fromDecimalSilent } from 'src/helpers/fromDecimal';
+import { createMoney } from 'src/helpers/money';
 import { NumberInput } from 'src/components/NumberInput/NumberInput';
 import { parseInteger, parseNumeric } from 'src/helpers/parseNumeric';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
@@ -72,7 +72,7 @@ export const Withdraw: React.FC<Props> = (props) => {
   const handleChangeInputAmount = (value: string) => {
     const amount = parseNumeric(value);
     if (amount.match(precisionRegExp(props.fixed))) {
-      const amountMoney = fromDecimalSilent(amount, props.currency);
+      const amountMoney = createMoney(amount, props.currency);
       const totalMoney = amountMoney.subtract(props.fee);
       const total = totalMoney.isNegative() ? (0).toFixed(props.fixed) : totalMoney.toString();
       setTotal(total);

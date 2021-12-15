@@ -13,7 +13,7 @@ import { CustomInput } from '../CustomInput';
 import { DepositSummary } from './DepositSummary';
 import s from 'src/containers/Withdraw/Withdraw.postcss';
 import { useHistory } from 'react-router';
-import { fromDecimalSilent } from 'src/helpers/fromDecimal';
+import { createMoney } from 'src/helpers/money';
 
 interface Props {
   currency: ApiCurrency;
@@ -45,7 +45,7 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
 
   const handleChangeAmount = (value: string) => {
     setAmount(value);
-    setAmountValid(fromDecimalSilent(value, currency).gte(currency.min_deposit_amount));
+    setAmountValid(createMoney(value, currency).gte(currency.min_deposit_amount));
   };
 
   const isDisabled = !amountValid || isDepositCreateLoading;

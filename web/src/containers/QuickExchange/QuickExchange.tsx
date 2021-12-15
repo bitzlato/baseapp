@@ -21,7 +21,7 @@ import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
 import { NumberInput } from 'src/components/NumberInput/NumberInput';
 import { getWallet, getCurrencies, getCurrency, DropdownItem, getItem } from './helpers';
-import { fromDecimalSilent } from 'src/helpers/fromDecimal';
+import { createMoney } from 'src/helpers/money';
 import { parseNumeric } from 'src/helpers/parseNumeric';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
@@ -220,7 +220,7 @@ export const QuickExchangeContainer: React.FC = () => {
         <Box row spacing justifyBetween wrap>
           <Box row spacing>
             <span>{t('page.body.quick.exchange.sublabel.balance')}:</span>
-            <MoneyFormat money={fromWallet?.balance ?? fromDecimalSilent(0, DEFAULT_CURRENCY)} />
+            <MoneyFormat money={fromWallet?.balance ?? createMoney(0, DEFAULT_CURRENCY)} />
           </Box>
           <Box row spacing>
             {PERCENTS.map((v) => (
@@ -300,7 +300,7 @@ export const QuickExchangeContainer: React.FC = () => {
           <Box row spacing>
             <span>{t('page.body.quick.exchange.sublabel.min_amount')}:</span>
             <MoneyFormat
-              money={fromDecimalSilent(
+              money={createMoney(
                 market.min_amount,
                 getCurrency(market.base_unit, market.amount_precision),
               )}
@@ -310,20 +310,20 @@ export const QuickExchangeContainer: React.FC = () => {
             <Box col spacing>
               <Box row spacing>
                 <span>{t('page.body.quick.exchange.rate')}:</span>
-                <MoneyFormat money={fromDecimalSilent(1, fromWallet.currency)} />
+                <MoneyFormat money={createMoney(1, fromWallet.currency)} />
                 <Box as="span" textColor="primary">
                   ≈
                 </Box>
-                <MoneyFormat money={fromDecimalSilent(price.request_price, toCcy)} zeroSymbol="?" />
+                <MoneyFormat money={createMoney(price.request_price, toCcy)} zeroSymbol="?" />
               </Box>
               <Box row spacing>
                 <span>{t('page.body.quick.exchange.reverse_rate')}:</span>
-                <MoneyFormat money={fromDecimalSilent(1, toCcy)} />
+                <MoneyFormat money={createMoney(1, toCcy)} />
                 <Box as="span" textColor="primary">
                   ≈
                 </Box>
                 <MoneyFormat
-                  money={fromDecimalSilent(price.inverse_price, fromWallet.currency)}
+                  money={createMoney(price.inverse_price, fromWallet.currency)}
                   zeroSymbol="?"
                 />
               </Box>
