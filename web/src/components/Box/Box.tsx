@@ -3,6 +3,8 @@ import cn from 'classnames';
 import s from './Box.postcss';
 import sLabel from '../Label/Label.postcss';
 
+export type TextColor = 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask';
+
 type BoxOwnProps<E = React.ElementType> = {
   as?: E;
   className?: string;
@@ -23,7 +25,7 @@ type BoxOwnProps<E = React.ElementType> = {
   spacing?: boolean | '2x' | '3x' | '4x' | 'sm';
   padding?: boolean | '2x' | '3x';
   textSize?: 'lg' | 'sm';
-  textColor?: 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask';
+  textColor?: TextColor;
   bgColor?: 'body';
 };
 

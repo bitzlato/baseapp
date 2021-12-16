@@ -11,15 +11,10 @@ interface SwapState {
   fromList: DropdownItem[];
   toList: DropdownItem[];
   market?: Market;
-  fromCcy?: Currency;
-  toCcy?: Currency;
 }
 
 export function getCurrencies(markets: Market[], base: string, quote: string): SwapState {
   let market: Market | undefined;
-  let fromCcy: Currency | undefined;
-  let toCcy: Currency | undefined;
-
   const fromList: DropdownItem[] = [];
   const toList: DropdownItem[] = [];
 
@@ -27,13 +22,6 @@ export function getCurrencies(markets: Market[], base: string, quote: string): S
     const sell = m.base_unit === base && m.quote_unit === quote;
     if (sell || (m.base_unit === quote && m.quote_unit === base)) {
       market = m;
-      if (sell) {
-        fromCcy = getCurrency(m.base_unit, m.amount_precision);
-        toCcy = getCurrency(m.quote_unit, m.price_precision);
-      } else {
-        fromCcy = getCurrency(m.quote_unit, m.price_precision);
-        toCcy = getCurrency(m.base_unit, m.amount_precision);
-      }
     }
 
     if (quote !== m.base_unit) insertUnique(fromList, m.base_unit, m.quote_unit === quote);
@@ -50,8 +38,6 @@ export function getCurrencies(markets: Market[], base: string, quote: string): S
     fromList,
     toList,
     market,
-    fromCcy,
-    toCcy,
   };
 }
 

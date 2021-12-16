@@ -14,14 +14,15 @@ import {
   selectCurrentMarket,
   selectQuickExchangeSuccess,
   selectQuickExchangeFetching,
+  marketPriceReset,
 } from '../../modules';
 import { quickExchangeLimitsFetch } from 'src/modules/public/quickExchangePublic/actions';
 import { selectQuickExchangeLimits } from 'src/modules/public/quickExchangePublic/selectors';
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
 import { NumberInput } from 'src/components/NumberInput/NumberInput';
-import { getWallet, getCurrencies, getCurrency, DropdownItem, getItem } from './helpers';
-import { createMoney } from 'src/helpers/money';
+import { getWallet, getCurrencies, DropdownItem, getItem } from './helpers';
+import { createMoney, ZERO_MONEY } from 'src/helpers/money';
 import { parseNumeric } from 'src/helpers/parseNumeric';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
@@ -33,6 +34,7 @@ import { InfoIcon } from 'src/assets/images/InfoIcon';
 import { PriceLimit } from './PriceLimit';
 import { DotsFlashing } from 'src/components/DotsFlashing/DotsFlashing';
 import { RefreshIcon } from 'src/assets/icons/RefreshIcon';
+import { AmountDescription } from './AmountDescription';
 
 import s from './QuickExchange.postcss';
 
@@ -71,12 +73,13 @@ export const QuickExchangeContainer: React.FC = () => {
     dispatch(quickExchangeLimitsFetch());
   }, [dispatch]);
 
-  const { fromList, toList, market, toCcy } = useMemo(
+  const { fromList, toList, market } = useMemo(
     () => getCurrencies(markets, fromCurrency.code, toCurrency.code),
     [markets, fromCurrency, toCurrency],
   );
 
   const fromWallet = useMemo(() => getWallet(fromCurrency.code, wallets), [fromCurrency, wallets]);
+  const toWallet = useMemo(() => getWallet(toCurrency.code, wallets), [fromCurrency, wallets]);
 
   useEffect(() => {
     const handle = window.setTimeout(handleRefresh, 300);
@@ -111,6 +114,10 @@ export const QuickExchangeContainer: React.FC = () => {
       setRequestCurrency('');
     }
   }, [exchangeSucess]);
+
+  useEffect(() => {
+    dispatch(marketPriceReset());
+  }, []);
 
   const handleChangeFrom = (value: string) => {
     value = parseNumeric(value);
@@ -151,10 +158,11 @@ export const QuickExchangeContainer: React.FC = () => {
     setToCurrency(fromCurrency);
     setRequestVolume('');
     setRequestCurrency('');
+    dispatch(marketPriceReset());
   };
 
   const handleRefresh = () => {
-    if (!noAmount && +requestVolume > 0) {
+    if (!createMoney(requestVolume, DEFAULT_CURRENCY).isZero()) {
       dispatch(
         marketPriceFetch({
           from_currency: fromCurrency.code,
@@ -193,34 +201,48 @@ export const QuickExchangeContainer: React.FC = () => {
     );
   };
 
-  const noAmount = !(market && (fromAmount || toAmount));
+  const noAmount =
+    createMoney(fromAmount, DEFAULT_CURRENCY).isZero() ||
+    createMoney(toAmount, DEFAULT_CURRENCY).isZero();
   const noMarket = !market && fromCurrency.code && toCurrency.code;
+
+  const minAmount =
+    market && fromWallet ? createMoney(market.min_amount, fromWallet.currency) : ZERO_MONEY;
 
   return (
     <Card className={s.quickExchange} header={<h4>{t('page.body.quick.exchange.header')}</h4>}>
       <Box col spacing>
-        <Box grow row spacing="2x">
-          <Box
-            flex1
-            as={NumberInput}
-            label={t('page.body.quick.exchange.label.exchange')}
-            labelVisible
-            value={fromAmount}
-            onChange={handleChangeFrom}
-          />
-          <DropdownComponent
-            className={s.quickExchangeDropdown}
-            list={fromList}
-            value={fromCurrency}
-            onSelect={handleSelectFrom}
-            placeholder={t('page.body.quick.exchange.label.currency')}
-            itemRenderer={renderDropdownItem}
+        <Box col spacing="sm">
+          <Box grow row alignStart spacing="2x">
+            <Box
+              flex1
+              as={NumberInput}
+              label={t('page.body.quick.exchange.label.exchange')}
+              labelVisible
+              value={fromAmount}
+              onChange={handleChangeFrom}
+            />
+            <DropdownComponent
+              className={s.quickExchangeDropdown}
+              list={fromList}
+              value={fromCurrency}
+              onSelect={handleSelectFrom}
+              placeholder={t('page.body.quick.exchange.label.currency')}
+              itemRenderer={renderDropdownItem}
+            />
+          </Box>
+          <AmountDescription
+            market={market}
+            fromWallet={fromWallet}
+            toWallet={toWallet}
+            price={price}
+            fromAmount={fromAmount}
           />
         </Box>
         <Box row spacing justifyBetween wrap>
           <Box row spacing>
             <span>{t('page.body.quick.exchange.sublabel.balance')}:</span>
-            <MoneyFormat money={fromWallet?.balance ?? createMoney(0, DEFAULT_CURRENCY)} />
+            <MoneyFormat money={fromWallet?.balance ?? ZERO_MONEY} />
           </Box>
           <Box row spacing>
             {PERCENTS.map((v) => (
@@ -277,7 +299,7 @@ export const QuickExchangeContainer: React.FC = () => {
           itemRenderer={renderDropdownItem}
         />
       </Box>
-      {fromWallet && toCcy && market && (
+      {fromWallet && toWallet && (
         <Box col spacing>
           <PriceLimit
             label={t('page.body.quick.exchange.limit.order')}
@@ -297,28 +319,26 @@ export const QuickExchangeContainer: React.FC = () => {
             ccy={fromWallet.currency}
             price={fromWallet.price}
           />
-          <Box row spacing>
+          <Box row spacing wrap>
             <span>{t('page.body.quick.exchange.sublabel.min_amount')}:</span>
-            <MoneyFormat
-              money={createMoney(
-                market.min_amount,
-                getCurrency(market.base_unit, market.amount_precision),
-              )}
-            />
+            <MoneyFormat money={minAmount} />
           </Box>
           <Box row spacing="2x" justifyBetween>
             <Box col spacing>
-              <Box row spacing>
+              <Box row spacing wrap>
                 <span>{t('page.body.quick.exchange.rate')}:</span>
                 <MoneyFormat money={createMoney(1, fromWallet.currency)} />
                 <Box as="span" textColor="primary">
                   ≈
                 </Box>
-                <MoneyFormat money={createMoney(price.request_price, toCcy)} zeroSymbol="?" />
+                <MoneyFormat
+                  money={createMoney(price.request_price, toWallet.currency)}
+                  zeroSymbol="?"
+                />
               </Box>
-              <Box row spacing>
+              <Box row spacing wrap>
                 <span>{t('page.body.quick.exchange.reverse_rate')}:</span>
-                <MoneyFormat money={createMoney(1, toCcy)} />
+                <MoneyFormat money={createMoney(1, toWallet.currency)} />
                 <Box as="span" textColor="primary">
                   ≈
                 </Box>

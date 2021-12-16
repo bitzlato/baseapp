@@ -8,28 +8,35 @@ import s from './NumberInput.postcss';
 interface Props extends Omit<FormControlProps, 'onChange'> {
   label?: React.ReactNode;
   onChange: (value: string) => void;
+  inputClassName?: string;
   labelClassName?: string;
   labelVisible?: boolean;
+  error?: React.ReactNode;
 }
 
 export const NumberInput: React.FC<Props> = ({
   label,
   onChange,
+  className,
+  inputClassName,
   labelClassName,
   labelVisible,
+  error,
   ...props
 }) => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
 
   return (
-    <div className={cn(s.numberInput, isMobileDevice && s.numberInputNoButtons, props.className)}>
+    <div className={cn(s.numberInput, isMobileDevice && s.numberInputNoButtons, className)}>
       <label className={labelClassName}>{(labelVisible || props.value) && label}</label>
       <FormControl
         {...props}
+        className={inputClassName}
         onChange={(e) => onChange(e.target.value)}
         type={isMobileDevice ? 'number' : undefined}
-        placeholder={!labelVisible && label}
+        placeholder={!labelVisible ? label : undefined}
       />
+      {error && <p className={s.numberInputError}>{error}</p>}
     </div>
   );
 };

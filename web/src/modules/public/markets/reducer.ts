@@ -12,6 +12,7 @@ import {
   MARKET_PRICE_FETCH,
   MARKET_PRICE_DATA,
   MARKET_PRICE_ERROR,
+  MARKET_PRICE_RESET,
 } from './constants';
 import { Market, MarketPriceResponse, Ticker } from './types';
 
@@ -29,6 +30,17 @@ export interface MarketsState extends CommonState {
   marketPrice: MarketPriceResponse;
 }
 
+const defaultMarketPrice: MarketPriceResponse = {
+  from_currency: '',
+  from_volume: '',
+  inverse_price: '',
+  request_currency: '',
+  request_price: '',
+  request_volume: '',
+  to_currency: '',
+  to_volume: '',
+};
+
 export const initialMarketsState: MarketsState = {
   list: [],
   currentMarket: undefined,
@@ -36,16 +48,7 @@ export const initialMarketsState: MarketsState = {
   tickerLoading: false,
   loading: false,
   successMarketPriceFetch: false,
-  marketPrice: {
-    from_currency: '',
-    from_volume: '',
-    inverse_price: '',
-    request_currency: '',
-    request_price: '',
-    request_volume: '',
-    to_currency: '',
-    to_volume: '',
-  },
+  marketPrice: { ...defaultMarketPrice },
 };
 
 export const marketsReducer = (
@@ -125,8 +128,14 @@ export const marketsReducer = (
       return {
         ...state,
         successMarketPriceFetch: false,
-        marketPrice: initialMarketsState.marketPrice,
+        marketPrice: { ...defaultMarketPrice },
       };
+    case MARKET_PRICE_RESET:
+      return {
+        ...state,
+        marketPrice: { ...defaultMarketPrice },
+      };
+
     default:
       return state;
   }

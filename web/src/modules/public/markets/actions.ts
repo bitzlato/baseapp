@@ -12,6 +12,7 @@ import {
   MARKET_PRICE_FETCH,
   MARKET_PRICE_DATA,
   MARKET_PRICE_ERROR,
+  MARKET_PRICE_RESET,
 } from './constants';
 import { Market, Ticker, TickerEvent, MarketPriceResponse, MarketPriceParams } from './types';
 
@@ -80,6 +81,10 @@ export interface MarketPriceError {
   error: CommonError;
 }
 
+export interface MarketPriceReset {
+  type: typeof MARKET_PRICE_RESET;
+}
+
 export type MarketsAction =
   | MarketsFetch
   | MarketsData
@@ -91,7 +96,8 @@ export type MarketsAction =
   | SetCurrentMarketIfUnset
   | MarketPriceFetch
   | MarketPriceData
-  | MarketPriceError;
+  | MarketPriceError
+  | MarketPriceReset;
 
 export const marketsFetch = (payload?: MarketsFetch['payload']): MarketsFetch => ({
   type: MARKETS_FETCH,
@@ -152,4 +158,8 @@ export const marketPriceData = (payload: MarketPriceData['payload']): MarketPric
 export const marketPriceError = (error: CommonError): MarketPriceError => ({
   type: MARKET_PRICE_ERROR,
   error,
+});
+
+export const marketPriceReset = (): MarketPriceReset => ({
+  type: MARKET_PRICE_RESET,
 });
