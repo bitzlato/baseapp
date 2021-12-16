@@ -833,7 +833,10 @@ export const ru: LangType = {
   'page.body.quick.exchange.button.exchange': 'Обменять',
   'page.body.quick.exchange.warning':
     'Общая сумма, которую вы получите, зависит от текущего обменного курса на момент завершения транзакции.',
-  'page.body.quick.exchange.no-market': 'No available market',
+  'page.body.quick.exchange.no-market': 'Нет подходящего рынка',
+  'page.body.quick.exchange.insufficient_balance': 'Недостаточно средств.',
+  'page.body.quick.exchange.top_up_balance': 'Пожалуйста, пополните свой кошелек',
+  'page.body.quick.exchange.less_than_min_amount': 'Минимальная сумма {value}',
 
   'quick.exchange.order.created': 'Обмен совершен успешно',
   'quick.exchange.order.cancelled': 'Заявка отклонена',

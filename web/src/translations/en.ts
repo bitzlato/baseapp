@@ -819,6 +819,9 @@ export const en = {
   'page.body.quick.exchange.warning':
     'Total amount you will receive is subject to the current exchange rate when the transaction is completed',
   'page.body.quick.exchange.no-market': 'There is no available market',
+  'page.body.quick.exchange.insufficient_balance': 'Balance is insufficient.',
+  'page.body.quick.exchange.top_up_balance': 'Please top-up your wallet',
+  'page.body.quick.exchange.less_than_min_amount': 'Minimum amount is {value}',
 
   'quick.exchange.order.created': 'Order successfully created',
   'quick.exchange.order.cancelled': 'Order rejected',
