@@ -20,7 +20,7 @@ import { OrdersIcon } from 'src/assets/icons/OrdersIcon';
 import { HistoryIcon } from 'src/assets/icons/HistoryIcon';
 import { ApiIcon } from 'src/assets/icons/ApiIcon';
 import { InternalTransferIcon } from 'src/assets/icons/InternalTransferIcon';
-import { showInternalTransfer, showQuickExhange } from 'src/api/config';
+import { showInternalTransfer } from 'src/api/config';
 import { P2PIcon } from 'src/assets/icons/P2PIcon';
 import { getLinkToP2P } from 'src/containers/Header/HeaderNavigation/getLinkToP2P';
 
@@ -76,20 +76,9 @@ export const Sidebar: FC = () => {
       <SidebarToggler onClick={handleTogglerClick} />
       <div className={cn(s.sidebar, isOpen && s.sidebarOpen)}>
         {isLoggedIn ? (
-          <>
-            <SidebarItem to="/profile" icon={<ProfileIcon />} onClick={handleItemClick}>
-              {t('page.header.navbar.profile')}
-            </SidebarItem>
-            {showQuickExhange() && (
-              <SidebarItem
-                to="/quick-exchange"
-                icon={<QuickExchangeIcon />}
-                onClick={handleItemClick}
-              >
-                {t('page.header.navbar.quick-exchange')}
-              </SidebarItem>
-            )}
-          </>
+          <SidebarItem to="/profile" icon={<ProfileIcon />} onClick={handleItemClick}>
+            {t('page.header.navbar.profile')}
+          </SidebarItem>
         ) : (
           <>
             <SidebarItem icon={<ProfileIcon />} onClick={handleLoginClick}>
@@ -100,6 +89,9 @@ export const Sidebar: FC = () => {
             </SidebarItem>
           </>
         )}
+        <SidebarItem to="/quick-exchange" icon={<QuickExchangeIcon />} onClick={handleItemClick}>
+          {t('page.header.navbar.quick-exchange')}
+        </SidebarItem>
         <SidebarItem to="/trading" icon={<TrandingIcon />} onClick={handleItemClick}>
           {t('page.header.navbar.trade')}
         </SidebarItem>

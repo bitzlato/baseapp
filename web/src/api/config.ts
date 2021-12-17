@@ -50,7 +50,6 @@ export const defaultConfig: Config = {
   valuationSecondaryCurrency: 'ETH',
   valuationSecondaryCurrencyName: 'ETH',
   internalTransfer: false,
-  quickExchange: false,
 };
 
 export const Cryptobase = {
@@ -116,4 +115,3 @@ export const valuationSecondaryCurrency = (): string =>
 export const valuationSecondaryCurrencyName = (): string =>
   Cryptobase.config.valuationSecondaryCurrencyName;
 export const showInternalTransfer = () => convertToBoolean(Cryptobase.config.internalTransfer);
-export const showQuickExhange = () => convertToBoolean(Cryptobase.config.quickExchange);

@@ -11,7 +11,6 @@ import s from './QuickExchange.postcss';
 interface AmountDescriptionProps {
   market: Market | undefined;
   fromWallet: Wallet | undefined;
-  toWallet: Wallet | undefined;
   price: MarketPriceResponse;
   fromAmount: string;
 }
@@ -19,13 +18,12 @@ interface AmountDescriptionProps {
 export const AmountDescription: React.FC<AmountDescriptionProps> = ({
   market,
   fromWallet,
-  toWallet,
   price,
   fromAmount,
 }) => {
   const t = useT();
 
-  if (market && fromWallet && toWallet && price.request_price) {
+  if (market && fromWallet && price.request_price) {
     const fromCurrency = fromWallet.currency.code.toLowerCase();
     const inverse = market.quote_unit === fromCurrency;
 

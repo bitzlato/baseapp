@@ -418,12 +418,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             />
             <Route exact={true} path="/trading/:market?" component={TradingScreenMobile} />
             {showLanding() && <Route exact={true} path="/" component={LandingScreenMobile} />}
-            <PrivateRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/quick-exchange"
-              component={QuickExchange}
-            />
+            <Route path="/quick-exchange" component={QuickExchange} />
             <Route path="**">
               <Redirect to="/trading/" />
             </Route>
@@ -518,12 +513,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/internal-transfer"
             component={InternalTransfer}
           />
-          <PrivateRoute
-            loading={userLoading}
-            isLogged={isLoggedIn}
-            path="/quick-exchange"
-            component={QuickExchange}
-          />
+          <Route path="/quick-exchange" component={QuickExchange} />
           <Route path="**">
             <Redirect to="/trading/" />
           </Route>
