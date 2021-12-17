@@ -2,7 +2,47 @@
 
 exports[`WalletsScreen should render 1`] = `
 Array [
-  "0",
+  <div
+    class="pg-estimated-value"
+  >
+    <span
+      class="pg-estimated-value__title"
+    >
+      Estimated Value
+    </span>
+    <div
+      class="pg-estimated-value__container"
+    >
+      <span
+        class="value-container"
+      >
+        <span
+          class="value"
+        >
+          0.0000
+        </span>
+        <span
+          class="value-sign"
+        >
+          USD
+        </span>
+      </span>
+      <span
+        class="value-container"
+      >
+        <span
+          class="value"
+        >
+          0.0000
+        </span>
+        <span
+          class="value-sign"
+        >
+          ETH
+        </span>
+      </span>
+    </div>
+  </div>,
   <div
     class="pg-container pg-wallet"
   >
