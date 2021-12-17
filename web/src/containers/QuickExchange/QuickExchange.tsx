@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import cn from 'classnames';
-import { useMarketsFetch, useWalletsFetch } from '../../hooks';
+import { useCurrenciesFetch, useMarketsFetch, useWalletsFetch } from '../../hooks';
 import { useT } from 'src/hooks/useT';
 import {
   selectMarkets,
@@ -15,14 +15,16 @@ import {
   selectQuickExchangeSuccess,
   selectQuickExchangeFetching,
   marketPriceReset,
+  selectCurrencies,
+  selectUserLoggedIn,
 } from '../../modules';
 import { quickExchangeLimitsFetch } from 'src/modules/public/quickExchangePublic/actions';
 import { selectQuickExchangeLimits } from 'src/modules/public/quickExchangePublic/selectors';
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
 import { NumberInput } from 'src/components/NumberInput/NumberInput';
-import { getWallet, getCurrencies, DropdownItem, getItem } from './helpers';
-import { createMoney, ZERO_MONEY } from 'src/helpers/money';
+import { getWallet, getCurrencies, DropdownItem, getItem, getCurrency } from './helpers';
+import { createCcy, createMoney, ZERO_MONEY } from 'src/helpers/money';
 import { parseNumeric } from 'src/helpers/parseNumeric';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
@@ -35,6 +37,8 @@ import { PriceLimit } from './PriceLimit';
 import { DotsFlashing } from 'src/components/DotsFlashing/DotsFlashing';
 import { RefreshIcon } from 'src/assets/icons/RefreshIcon';
 import { AmountDescription } from './AmountDescription';
+import { DEFAULT_CCY_PRECISION } from 'src/constants';
+import { loginWithRedirect } from 'src/helpers/auth0';
 
 import s from './QuickExchange.postcss';
 
@@ -55,6 +59,10 @@ export const QuickExchangeContainer: React.FC = () => {
   const [requestVolume, setRequestVolume] = useState('');
   const [rateOutOfDate, setRateOutOfDate] = useState(true);
 
+  useMarketsFetch();
+  useWalletsFetch();
+  useCurrenciesFetch();
+
   const dispatch = useDispatch();
   const wallets = useSelector(selectWallets) || [];
   const markets = useSelector(selectMarkets) || [];
@@ -63,11 +71,10 @@ export const QuickExchangeContainer: React.FC = () => {
   const limits = useSelector(selectQuickExchangeLimits);
   const exchangeSucess = useSelector(selectQuickExchangeSuccess);
   const exchangeFetching = useSelector(selectQuickExchangeFetching);
+  const currencies = useSelector(selectCurrencies);
+  const isLoggedIn = useSelector(selectUserLoggedIn);
 
   const t = useT();
-
-  useMarketsFetch();
-  useWalletsFetch();
 
   React.useEffect(() => {
     dispatch(quickExchangeLimitsFetch());
@@ -79,7 +86,11 @@ export const QuickExchangeContainer: React.FC = () => {
   );
 
   const fromWallet = useMemo(() => getWallet(fromCurrency.code, wallets), [fromCurrency, wallets]);
-  const toWallet = useMemo(() => getWallet(toCurrency.code, wallets), [fromCurrency, wallets]);
+  const fromCcy = useMemo(
+    () => getCurrency(fromCurrency.code, currencies),
+    [fromCurrency, currencies],
+  );
+  const toCcy = useMemo(() => getCurrency(toCurrency.code, currencies), [fromCurrency, currencies]);
 
   useEffect(() => {
     const handle = window.setTimeout(handleRefresh, 300);
@@ -175,15 +186,19 @@ export const QuickExchangeContainer: React.FC = () => {
   };
 
   const handleExchange = () => {
-    dispatch(
-      createQuickExchangeFetch({
-        from_currency: fromCurrency.code,
-        to_currency: toCurrency.code,
-        request_currency: requestCurrency,
-        request_volume: requestVolume,
-        price: price.request_price,
-      }),
-    );
+    if (!isLoggedIn) {
+      loginWithRedirect();
+    } else {
+      dispatch(
+        createQuickExchangeFetch({
+          from_currency: fromCurrency.code,
+          to_currency: toCurrency.code,
+          request_currency: requestCurrency,
+          request_volume: requestVolume,
+          price: price.request_price,
+        }),
+      );
+    }
   };
 
   const renderDropdownItem = (d: DropdownItem) => {
@@ -206,8 +221,7 @@ export const QuickExchangeContainer: React.FC = () => {
     createMoney(toAmount, DEFAULT_CURRENCY).isZero();
   const noMarket = !market && fromCurrency.code && toCurrency.code;
 
-  const minAmount =
-    market && fromWallet ? createMoney(market.min_amount, fromWallet.currency) : ZERO_MONEY;
+  const minAmount = market && fromCcy ? createMoney(market.min_amount, fromCcy) : ZERO_MONEY;
 
   return (
     <Card className={s.quickExchange} header={<h4>{t('page.body.quick.exchange.header')}</h4>}>
@@ -234,7 +248,6 @@ export const QuickExchangeContainer: React.FC = () => {
           <AmountDescription
             market={market}
             fromWallet={fromWallet}
-            toWallet={toWallet}
             price={price}
             fromAmount={fromAmount}
           />
@@ -242,7 +255,12 @@ export const QuickExchangeContainer: React.FC = () => {
         <Box row spacing justifyBetween wrap>
           <Box row spacing>
             <span>{t('page.body.quick.exchange.sublabel.balance')}:</span>
-            <MoneyFormat money={fromWallet?.balance ?? ZERO_MONEY} />
+            <MoneyFormat
+              money={
+                fromWallet?.balance ??
+                createMoney(0, createCcy(fromCurrency.code, DEFAULT_CCY_PRECISION))
+              }
+            />
           </Box>
           <Box row spacing>
             {PERCENTS.map((v) => (
@@ -299,25 +317,25 @@ export const QuickExchangeContainer: React.FC = () => {
           itemRenderer={renderDropdownItem}
         />
       </Box>
-      {fromWallet && toWallet && (
+      {fromCcy && toCcy && (
         <Box col spacing>
           <PriceLimit
             label={t('page.body.quick.exchange.limit.order')}
             limit={limits.order_limit}
-            ccy={fromWallet.currency}
-            price={fromWallet.price}
+            ccy={fromCcy}
+            price={fromCcy.price}
           />
           <PriceLimit
             label={t('page.body.quick.exchange.limit.daily')}
             limit={limits.daily_limit}
-            ccy={fromWallet.currency}
-            price={fromWallet.price}
+            ccy={fromCcy}
+            price={fromCcy.price}
           />
           <PriceLimit
             label={t('page.body.quick.exchange.limit.weekly')}
             limit={limits.weekly_limit}
-            ccy={fromWallet.currency}
-            price={fromWallet.price}
+            ccy={fromCcy}
+            price={fromCcy.price}
           />
           <Box row spacing wrap>
             <span>{t('page.body.quick.exchange.sublabel.min_amount')}:</span>
@@ -327,25 +345,19 @@ export const QuickExchangeContainer: React.FC = () => {
             <Box col spacing>
               <Box row spacing wrap>
                 <span>{t('page.body.quick.exchange.rate')}:</span>
-                <MoneyFormat money={createMoney(1, fromWallet.currency)} />
+                <MoneyFormat money={createMoney(1, fromCcy)} />
                 <Box as="span" textColor="primary">
                   ≈
                 </Box>
-                <MoneyFormat
-                  money={createMoney(price.request_price, toWallet.currency)}
-                  zeroSymbol="?"
-                />
+                <MoneyFormat money={createMoney(price.request_price, toCcy)} zeroSymbol="?" />
               </Box>
               <Box row spacing wrap>
                 <span>{t('page.body.quick.exchange.reverse_rate')}:</span>
-                <MoneyFormat money={createMoney(1, toWallet.currency)} />
+                <MoneyFormat money={createMoney(1, toCcy)} />
                 <Box as="span" textColor="primary">
                   ≈
                 </Box>
-                <MoneyFormat
-                  money={createMoney(price.inverse_price, fromWallet.currency)}
-                  zeroSymbol="?"
-                />
+                <MoneyFormat money={createMoney(price.inverse_price, fromCcy)} zeroSymbol="?" />
               </Box>
             </Box>
             <BzButton
@@ -367,7 +379,6 @@ export const QuickExchangeContainer: React.FC = () => {
         row
         spacing="2x"
         as={BzButton}
-        className={s.quickExchangeButton}
         size="large"
         variant="primary"
         onClick={handleExchange}

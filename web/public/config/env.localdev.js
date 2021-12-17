@@ -42,5 +42,4 @@ window.env = {
   valuationPrimaryCurrencyName: 'USD',
   valuationSecondaryCurrency: 'BTC',
   valuationSecondaryCurrencyName: 'BTC',
-  quickExchange: true,
 };

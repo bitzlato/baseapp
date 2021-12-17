@@ -1,6 +1,5 @@
-import type { Currency } from '@bitzlato/money-js';
 import { lowerBound } from 'src/helpers/lowerBound';
-import type { Market, Wallet } from '../../modules';
+import type { ApiCurrency, Market, Wallet } from '../../modules';
 
 export interface DropdownItem {
   code: string;
@@ -69,11 +68,9 @@ export function getWallet(currency: string, wallets: Wallet[]): Wallet | undefin
   return wallets.find((w) => w.currency.code.toLowerCase() === lowerCurrency);
 }
 
-export function getCurrency(code: Currency['code'], minorUnit: Currency['minorUnit']) {
-  return {
-    code,
-    minorUnit,
-  };
+export function getCurrency(currency: string, currencies: ApiCurrency[]): ApiCurrency | undefined {
+  const lowerCurrency = currency.toLowerCase();
+  return currencies.find((d) => d.code.toLowerCase() === lowerCurrency);
 }
 
 export function getItem(code: string, match: boolean): DropdownItem {
