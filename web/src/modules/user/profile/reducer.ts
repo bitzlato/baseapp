@@ -39,6 +39,7 @@ export interface ProfileState {
     error?: CommonError;
     isFetching: boolean;
     success?: boolean;
+    verifyEmail: boolean;
   };
 }
 
@@ -79,6 +80,7 @@ export const initialStateProfile: ProfileState = {
   userData: {
     user: defaultUser,
     isFetching: true,
+    verifyEmail: false,
   },
 };
 
@@ -160,7 +162,7 @@ const twoAuthReducer = (state: ProfileState['twoFactorAuth'], action: ProfileAct
   }
 };
 
-export const userReducer = (
+const userReducer = (
   state: ProfileState['userData'],
   action: ProfileAction,
 ): ProfileState['userData'] => {
@@ -169,11 +171,13 @@ export const userReducer = (
       return {
         ...state,
         isFetching: true,
+        verifyEmail: false,
       };
     case PROFILE_USER_DATA:
       return {
         ...state,
         isFetching: false,
+        verifyEmail: false,
         user: action.payload.user,
       };
     case PROFILE_USER_ERROR:
@@ -181,6 +185,7 @@ export const userReducer = (
         ...state,
         isFetching: false,
         error: action.error,
+        verifyEmail: action.error.message.indexOf('identity.session.auth0.email_not_verified') > -1,
       };
     case PROFILE_RESET_USER:
       return {
@@ -228,7 +233,10 @@ export const userReducer = (
   }
 };
 
-export const profileReducer = (state = initialStateProfile, action: ProfileAction) => {
+export const profileReducer = (
+  state = initialStateProfile,
+  action: ProfileAction,
+): ProfileState => {
   switch (action.type) {
     case PROFILE_CHANGE_PASSWORD_FETCH:
     case PROFILE_CHANGE_PASSWORD_DATA:

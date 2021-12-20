@@ -1,5 +1,6 @@
 import Bugsnag from '@bugsnag/js';
 import { call, put } from 'redux-saga/effects';
+import { CommonError } from 'src/modules/types';
 import { alertPush } from '../../alert';
 import { ErrorHandlerFetch, getErrorData } from '../actions';
 
@@ -7,18 +8,13 @@ export function* handleErrorSaga(action: ErrorHandlerFetch) {
   const { processingType, extraOptions, error } = action.payload;
 
   if (extraOptions) {
-    const { params, type, actionError } = extraOptions;
-
-    if (type) {
-      switch (type) {
-        default:
-          window.console.log(`Unexpected action with type: ${type}`);
-          break;
-      }
-    }
-
+    const { params, actionError } = extraOptions;
     if (actionError) {
-      params ? yield put(actionError(params)) : yield put(actionError(error));
+      if (params) {
+        yield put(actionError(params));
+      } else {
+        yield put(actionError(error));
+      }
     }
   }
 
@@ -39,22 +35,21 @@ export function* handleErrorSaga(action: ErrorHandlerFetch) {
   yield put(getErrorData());
 }
 
-function* handleCustomError(error) {
+function* handleCustomError(error: CommonError) {
   for (const item of error.message) {
     yield call(Bugsnag.notify, item);
   }
 }
 
-function* handleAlertError(error) {
+function* handleAlertError(error: CommonError) {
   yield put(
     alertPush({
-      message: error.message,
-      code: error.code,
       type: 'error',
+      ...error,
     }),
   );
 }
 
-function* handleConsoleError(error) {
+function* handleConsoleError(error: CommonError) {
   yield call(window.console.error, error.message[0]);
 }

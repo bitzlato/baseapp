@@ -5,6 +5,7 @@ import { OrdersState } from './user/orders';
 export interface CommonError {
   code: number;
   message: string[];
+  payload?: Record<string, string>;
 }
 
 export interface CommonState {

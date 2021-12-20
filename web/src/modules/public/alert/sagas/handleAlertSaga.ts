@@ -7,13 +7,17 @@ import {
   userReset,
 } from '../../../';
 import { msAlertDisplayTime } from '../../../../api';
-import { selectUserInfo } from '../../../user/profile';
+import { selectUserInfo, User } from '../../../user/profile';
 import { alertData, alertDelete, AlertPush } from '../actions';
 
 export function* handleAlertSaga(action: AlertPush) {
   if (action.payload.type === 'error') {
     switch (action.payload.code) {
       case 401:
+        if (action.payload.message.indexOf('identity.session.auth0.email_not_verified') > -1) {
+          return;
+        }
+
         if (
           action.payload.message.indexOf('identity.session.not_active') > -1 ||
           action.payload.message.indexOf('authz.invalid_session') > -1 ||
@@ -38,8 +42,7 @@ export function* handleAlertSaga(action: AlertPush) {
           ) {
             yield call(callAlertData, action);
           } else {
-            const user = yield select(selectUserInfo);
-
+            const user: User = yield select(selectUserInfo);
             if (
               !user.email.length &&
               action.payload.message.indexOf('authz.invalid_session') > -1

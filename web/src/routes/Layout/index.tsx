@@ -56,6 +56,7 @@ import {
   walletsReset,
   AbilitiesInterface,
   selectAbilities,
+  selectVerifyEmail,
 } from '../../modules';
 import {
   ChangeForgottenPasswordScreen,
@@ -80,6 +81,7 @@ import {
 } from '../../screens';
 import { loginWithRedirect } from 'src/helpers/auth0';
 import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
+import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
 
 interface ReduxProps {
   colorTheme: string;
@@ -90,6 +92,7 @@ interface ReduxProps {
   userLoading?: boolean;
   platformAccessStatus: string;
   abilities: AbilitiesInterface;
+  verifyEmail: boolean;
 }
 
 interface DispatchProps {
@@ -288,6 +291,14 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
 
     if (!platformAccessStatus.length) {
       return renderLoader();
+    }
+
+    if (this.props.verifyEmail) {
+      return (
+        <div className={isMobileDevice ? mobileCls : desktopCls}>
+          <VerifyEmailModal />
+        </div>
+      );
     }
 
     if (wizardStep() !== 'false' && this.props.location.pathname !== '/setup') {
@@ -591,7 +602,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
   };
 }
 
-const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state) => ({
+const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state): ReduxProps => ({
   colorTheme: selectCurrentColorTheme(state),
   currentMarket: selectCurrentMarket(state),
   user: selectUserInfo(state),
@@ -600,6 +611,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state) => (
   userLoading: selectUserFetching(state),
   platformAccessStatus: selectPlatformAccessStatus(state),
   abilities: selectAbilities(state),
+  verifyEmail: selectVerifyEmail(state),
 });
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch) => ({

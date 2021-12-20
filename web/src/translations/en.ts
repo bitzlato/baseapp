@@ -909,6 +909,7 @@ export const en = {
   'identity.session.invalid_params': 'Invalid Email or Password',
   'identity.session.missing_otp': 'The account has enabled 2FA but OTP code is missing',
   'identity.session.invalid_otp': 'OTP code is invalid',
+  'identity.session.auth0.email_not_verified': 'Your email is not verified',
 
   'username.taken': 'This username is already taken',
   'first_name.invalid': 'First name is invalid',
@@ -1165,6 +1166,10 @@ export const en = {
   'account.internal_transfer.insufficient_balance': 'Insufficient_balance',
   'account.internal_transfer.can_not_tranfer_to_yourself': 'Can not tranfer to yourself',
   'success.internal.transfer.created': 'Internal transfer was created',
+
+  // verify email
+  'verify.email.header': 'Verify email',
+  'verify.email.content': 'Please verify your email address {email} and press OK',
 
   ...nationalitiesNames,
   ...customTranslations,

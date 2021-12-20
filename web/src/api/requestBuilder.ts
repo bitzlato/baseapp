@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { CommonError } from 'src/modules/types';
 import { applogicUrl, authUrl, finexUrl, tradeUrl, withCredentials } from './config';
 
 export type HTTPMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
@@ -64,13 +65,14 @@ export const defaultResponse: Partial<AxiosError['response']> = {
   },
 };
 
-export const formatError = (responseError: AxiosError) => {
+export const formatError = (responseError: AxiosError): CommonError => {
   const response = responseError.response || defaultResponse;
-  const errors = (response.data && (response.data.errors || [response.data.error])) || [];
+  const { errors, error, ...payload } = response.data ?? {};
 
   return {
-    code: response.status,
-    message: errors,
+    code: response.status!,
+    message: error ? [error] : errors ?? [],
+    payload: Object.keys(payload).length ? payload : undefined,
   };
 };
 
