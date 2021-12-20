@@ -28,3 +28,8 @@ export const selectUserFetching = (state: RootState): boolean =>
 
 export const selectUserDataChange = (state: RootState): boolean | undefined =>
   state.user.profile.userData.success;
+
+export const selectVerifyEmail = (state: RootState): boolean =>
+  state.user.profile.userData.verifyEmail;
+
+export const selectUserDataError = (state: RootState) => state.user.profile.userData.error;

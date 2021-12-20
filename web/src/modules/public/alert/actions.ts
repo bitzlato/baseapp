@@ -4,6 +4,7 @@ export interface Alert {
   type: string;
   code?: number;
   message: string[];
+  payload?: Record<string, string>;
 }
 
 export interface AlertPush {

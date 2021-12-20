@@ -920,6 +920,8 @@ export const ru: LangType = {
   'identity.session.invalid_params': 'Неправильный адрес электронной почты или пароль',
   'identity.session.missing_otp': 'Отсутствует код 2FA',
   'identity.session.invalid_otp': 'Код 2FA недействителен',
+  'identity.session.auth0.email_not_verified': 'Почтовый адрес не подтвержден',
+
   'username.taken': 'Никнейм уже используется',
   'first_name.invalid': 'Имя неверное',
   'last_name.invalid': 'Фамилия неверная',
@@ -1185,6 +1187,10 @@ export const ru: LangType = {
   'account.internal_transfer.insufficient_balance': 'Insufficient_balance',
   'account.internal_transfer.can_not_tranfer_to_yourself': 'Can not tranfer to yourself',
   'success.internal.transfer.created': 'Internal transfer was created',
+
+  // verify email
+  'verify.email.header': 'Verify email',
+  'verify.email.content': 'Please verify your email address {email} and press OK',
 
   ...nationalitiesNames,
   ...mobileTranslationsRu,
