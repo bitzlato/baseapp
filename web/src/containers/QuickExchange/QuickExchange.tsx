@@ -98,7 +98,7 @@ export const QuickExchangeContainer: React.FC = () => {
   }, [requestVolume, requestCurrency]);
 
   useEffect(() => {
-    if (!priceFetching && requestVolume) {
+    if (!priceFetching && price.request_price) {
       if (price.request_currency === price.from_currency) {
         setToAmount(price.to_volume);
       } else {
@@ -108,7 +108,7 @@ export const QuickExchangeContainer: React.FC = () => {
       const handle = window.setTimeout(() => setRateOutOfDate(true), 10000);
       return () => window.clearTimeout(handle);
     }
-  }, [price.request_price, priceFetching]);
+  }, [priceFetching]);
 
   useEffect(() => {
     if (currentMarket) {
@@ -128,7 +128,14 @@ export const QuickExchangeContainer: React.FC = () => {
 
   useEffect(() => {
     dispatch(marketPriceReset());
-  }, []);
+  }, [fromCurrency.code, toCurrency.code]);
+
+  const resetInput = () => {
+    setFromAmount('');
+    setToAmount('');
+    setRequestVolume('');
+    setRequestCurrency('');
+  };
 
   const handleChangeFrom = (value: string) => {
     value = parseNumeric(value);
@@ -149,11 +156,13 @@ export const QuickExchangeContainer: React.FC = () => {
   const handleSelectFrom = (value: DropdownItem) => {
     setFromCurrency(value);
     setToCurrency(getItem(toCurrency.code, value.match));
+    resetInput();
   };
 
   const handleSelectTo = (value: DropdownItem) => {
     setToCurrency(value);
     setFromCurrency(getItem(fromCurrency.code, value.match));
+    resetInput();
   };
 
   const handleUsePercent = (value: number) => {
@@ -165,13 +174,9 @@ export const QuickExchangeContainer: React.FC = () => {
   };
 
   const handleRearrange = () => {
-    setFromAmount('');
     setFromCurrency(toCurrency);
-    setToAmount('');
     setToCurrency(fromCurrency);
-    setRequestVolume('');
-    setRequestCurrency('');
-    dispatch(marketPriceReset());
+    resetInput();
   };
 
   const handleRefresh = () => {
@@ -219,9 +224,7 @@ export const QuickExchangeContainer: React.FC = () => {
     );
   };
 
-  const noAmount =
-    createMoney(fromAmount, DEFAULT_CURRENCY).isZero() ||
-    createMoney(toAmount, DEFAULT_CURRENCY).isZero();
+  const noAmount = createMoney(requestVolume, DEFAULT_CURRENCY).isZero();
   const noMarket = !market && fromCurrency.code && toCurrency.code;
 
   const minAmount = market
@@ -373,7 +376,7 @@ export const QuickExchangeContainer: React.FC = () => {
               )}
               title={t('page.body.quick.exchange.button.refresh')}
               onClick={handleRefresh}
-              disabled={noAmount}
+              disabled={noAmount || priceFetching}
             >
               <RefreshIcon />
             </BzButton>
