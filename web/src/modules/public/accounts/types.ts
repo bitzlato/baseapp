@@ -1,4 +1,4 @@
-import type { Currency as MoneyCurrency, Money } from '@bitzlato/money-js';
+import type { Currency, Money } from '@bitzlato/money-js';
 
 export interface AccountBalanceSource {
   currency: string;
@@ -18,7 +18,7 @@ export interface WalletAddress {
 
 export interface AccountBalance
   extends Omit<AccountBalanceSource, 'balance' | 'locked' | 'limit_24_hour' | 'limit_1_month'>,
-    MoneyCurrency {
+    Currency {
   balance: Money;
   locked: Money;
   limit_24_hour: Money;

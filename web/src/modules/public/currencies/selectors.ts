@@ -1,4 +1,4 @@
-import { Currency as MoneyCurrency, Money } from '@bitzlato/money-js';
+import { createCcy, createMoney } from 'src/helpers/money';
 import { RootState } from 'src/modules';
 import { CurrenciesState } from './reducer';
 
@@ -10,17 +10,14 @@ export const selectCurrencies = (state: RootState): ApiCurrency[] => {
   const { list } = selectCurrenciesState(state);
 
   return list.map((source) => {
-    const moneyCurrency: MoneyCurrency = {
-      code: source.id.toUpperCase(),
-      minorUnit: source.precision,
-    };
+    const moneyCurrency = createCcy(source.id.toUpperCase(), source.precision);
 
     return {
       ...source,
-      deposit_fee: Money.fromDecimal(source.deposit_fee, moneyCurrency),
-      min_deposit_amount: Money.fromDecimal(source.min_deposit_amount, moneyCurrency),
-      withdraw_fee: Money.fromDecimal(source.withdraw_fee, moneyCurrency),
-      min_withdraw_amount: Money.fromDecimal(source.min_withdraw_amount, moneyCurrency),
+      deposit_fee: createMoney(source.deposit_fee, moneyCurrency),
+      min_deposit_amount: createMoney(source.min_deposit_amount, moneyCurrency),
+      withdraw_fee: createMoney(source.withdraw_fee, moneyCurrency),
+      min_withdraw_amount: createMoney(source.min_withdraw_amount, moneyCurrency),
       ...moneyCurrency,
     };
   });

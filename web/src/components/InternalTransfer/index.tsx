@@ -1,4 +1,3 @@
-import { Money } from '@bitzlato/money-js';
 import classnames from 'classnames';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
@@ -17,6 +16,7 @@ import {
 } from 'src/modules';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { InternalTransferInput } from './InternalInput';
+import { createMoney } from 'src/helpers/money';
 
 export const InternalTransferComponent = () => {
   const { formatMessage } = useIntl();
@@ -49,8 +49,7 @@ export const InternalTransferComponent = () => {
 
   const wallet = wallets.find((item) => item.currency.code === currency);
 
-  const amountMoney =
-    wallet && amount !== '' ? Money.fromDecimal(amount, wallet.currency) : undefined;
+  const amountMoney = wallet && amount !== '' ? createMoney(amount, wallet.currency) : undefined;
   const isError = wallet && wallet.balance && amountMoney && wallet.balance.lt(amountMoney);
   const balanceError = classnames(
     'cr-internal-transfer__group--balance',

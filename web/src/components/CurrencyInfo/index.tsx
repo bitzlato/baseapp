@@ -4,7 +4,7 @@ import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Wallet } from 'src/modules';
-import { Money } from '@bitzlato/money-js';
+import { createMoney } from 'src/helpers/money';
 
 export interface CurrencyInfoProps {
   wallet: Wallet;
@@ -13,7 +13,7 @@ export interface CurrencyInfoProps {
 export const CurrencyInfo: FC<CurrencyInfoProps> = ({
   wallet: { balance, locked, currency, icon_url, icon_id },
 }) => {
-  const zeroMoney = Money.fromDecimal(0, currency);
+  const zeroMoney = createMoney(0, currency);
   const balanceMoney = balance ?? zeroMoney;
   const lockedMoney = locked ?? zeroMoney;
 
