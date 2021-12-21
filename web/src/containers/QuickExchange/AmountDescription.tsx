@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box } from 'src/components/Box/Box';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
-import { createMoney } from 'src/helpers/money';
+import { createMoneyDown } from 'src/helpers/money';
 import { useT } from 'src/hooks/useT';
 import { Market, MarketPriceResponse } from 'src/modules/public/markets/types';
 import { Wallet } from 'src/modules/user/wallets/types';
@@ -27,12 +27,12 @@ export const AmountDescription: React.FC<AmountDescriptionProps> = ({
     const fromCurrency = fromWallet.currency.code.toLowerCase();
     const inverse = market.quote_unit === fromCurrency;
 
-    let minAmount = createMoney(market.min_amount, fromWallet.currency);
+    let minAmount = createMoneyDown(market.min_amount, fromWallet.currency);
     if (inverse) {
       minAmount = minAmount.divide(price.request_price);
     }
-    const maxAmount = fromWallet.balance;
-    const amount = createMoney(fromAmount, fromWallet.currency);
+    const maxAmount = createMoneyDown(fromWallet.balance.toString(), fromWallet.currency);
+    const amount = createMoneyDown(fromAmount, fromWallet.currency);
 
     if ((maxAmount.isZero() && fromAmount) || amount.greaterThan(maxAmount)) {
       return (
