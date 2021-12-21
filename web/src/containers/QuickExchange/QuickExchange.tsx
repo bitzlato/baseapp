@@ -202,6 +202,7 @@ export const QuickExchangeContainer: React.FC = () => {
   };
 
   const renderDropdownItem = (d: DropdownItem) => {
+    const currency = d.code.split('-')[0];
     return (
       <Box row spacing>
         <CryptoCurrencyIcon
@@ -209,8 +210,8 @@ export const QuickExchangeContainer: React.FC = () => {
           icon={getWallet(d.code, wallets)?.icon_url ?? ''}
           currency={d.code}
         />
-        <Box as="span" textColor={d.match ? 'primary' : 'failed'}>
-          {d.code.toUpperCase()}
+        <Box textColor={d.match ? 'primary' : 'failed'} textTr="uppercase" as="span">
+          {currency}
         </Box>
       </Box>
     );

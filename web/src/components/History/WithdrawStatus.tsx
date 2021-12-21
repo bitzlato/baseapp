@@ -54,7 +54,7 @@ export const WithdrawStatus: React.FC<Props> = ({ item, currency }) => {
 
     default:
       return (
-        <Label color="secondary" capitalize>
+        <Label color="secondary" tr="capitalize">
           {item.state}
         </Label>
       );

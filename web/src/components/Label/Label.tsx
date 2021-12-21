@@ -5,7 +5,7 @@ import s from './Label.postcss';
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   size?: 'lg' | 'sm';
   color?: 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask';
-  capitalize?: boolean;
+  tr?: 'capitalize' | 'uppercase';
   bold?: boolean;
   ellipsis?: boolean;
   center?: boolean;
@@ -15,7 +15,7 @@ interface Props extends React.HTMLAttributes<HTMLSpanElement> {
 export const Label: React.FC<Props> = ({
   className,
   size,
-  capitalize,
+  tr,
   bold,
   ellipsis,
   center,
@@ -27,7 +27,7 @@ export const Label: React.FC<Props> = ({
     className,
     size && s[`${size}Size`],
     color && s[`${color}Color`],
-    capitalize && s.capitalize,
+    tr && s[`${tr}Transform`],
     bold && s.bold,
     ellipsis && s.ellipsis,
     center && s.center,

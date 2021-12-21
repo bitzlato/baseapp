@@ -26,6 +26,7 @@ type BoxOwnProps<E = React.ElementType> = {
   padding?: boolean | '2x' | '3x';
   textSize?: 'lg' | 'sm';
   textColor?: TextColor;
+  textTr?: 'capitalize' | 'uppercase';
   bgColor?: 'body';
 };
 
@@ -57,6 +58,7 @@ export const Box: Element = React.forwardRef(
       wrap,
       textSize,
       textColor,
+      textTr,
       bgColor,
       ...props
     }: BoxOwnProps,
@@ -93,6 +95,7 @@ export const Box: Element = React.forwardRef(
       padding === '3x' && s.padding3X,
       textSize && sLabel[`${textSize}Size`],
       textColor && sLabel[`${textColor}Color`],
+      textTr && sLabel[`${textTr}Transform`],
       bgColor && s[`${bgColor}BgColor`],
     );
     return React.createElement(as, { ...props, ref, className: boxClassName });

@@ -25,7 +25,7 @@ export const OrderStatus: React.FC<Props> = ({ value }) => {
 
     default:
       return (
-        <Label color="secondary" capitalize>
+        <Label color="secondary" tr="capitalize">
           {value}
         </Label>
       );
