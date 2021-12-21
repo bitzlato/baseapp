@@ -24,7 +24,7 @@ import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
 import { NumberInput } from 'src/components/NumberInput/NumberInput';
 import { getWallet, getCurrencies, DropdownItem, getItem, getCurrency } from './helpers';
-import { createCcy, createMoney, ZERO_MONEY } from 'src/helpers/money';
+import { createCcy, createMoney, createMoneyDown, ZERO_MONEY } from 'src/helpers/money';
 import { parseNumeric } from 'src/helpers/parseNumeric';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
@@ -157,8 +157,10 @@ export const QuickExchangeContainer: React.FC = () => {
   };
 
   const handleUsePercent = (value: number) => {
-    if (fromWallet?.balance) {
-      handleChangeFrom(fromWallet.balance.multiply(value).divide(100).toFormat());
+    const balance = fromWallet?.balance;
+    if (balance) {
+      const m = createMoneyDown(balance.toString(), balance.currency);
+      handleChangeFrom(m.multiply(value).divide(100).toString());
     }
   };
 
@@ -222,7 +224,9 @@ export const QuickExchangeContainer: React.FC = () => {
     createMoney(toAmount, DEFAULT_CURRENCY).isZero();
   const noMarket = !market && fromCurrency.code && toCurrency.code;
 
-  const minAmount = market && fromCcy ? createMoney(market.min_amount, fromCcy) : ZERO_MONEY;
+  const minAmount = market
+    ? createMoney(market.min_amount, market.base_unit === fromCurrency.code ? fromCcy! : toCcy!)
+    : ZERO_MONEY;
 
   return (
     <Card className={s.quickExchange} header={<h4>{t('page.body.quick.exchange.header')}</h4>}>

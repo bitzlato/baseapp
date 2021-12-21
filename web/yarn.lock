@@ -304,10 +304,10 @@
   resolved "https://registry.yarnpkg.com/@bitzlato/ethereum-provider/-/ethereum-provider-0.1.1.tgz#d0d21f81186897f571fb5c2047892bc5620339b3"
   integrity sha512-89MM+pc9g3u2WNT7BUA59p1lJfVUitfKqSJlY9uAd/LQkpBev7JtQerfNz534YVApTfzF44PVnd+in/UtEbzVA==
 
-"@bitzlato/money-js@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@bitzlato/money-js/-/money-js-0.0.3.tgz#55e89672edb44e8bdefd8831d9d5221588a442a3"
-  integrity sha512-2kWYeObvROslm4MahsfZAHIYqFqIqpNeQaimSZH1YEG8XDd8I4CVQGUBQgmPf1EQ0MGOI+uzytJKwhK/ORWJgA==
+"@bitzlato/money-js@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@bitzlato/money-js/-/money-js-0.0.4.tgz#40a6cc2710f0d915ba0f126cc24eedbc8204e3f4"
+  integrity sha512-cDwzt8Lzx2ktttbXeV65WZriHgQjnWDOF/iaksvchq7i9nu9H4U7drmwLPW450oYkgg7JYjElqiziHzcqLrypw==
   dependencies:
     "@types/big.js" "^6.1.2"
     big.js "^6.1.1"

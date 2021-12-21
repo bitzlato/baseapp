@@ -13,4 +13,12 @@ export function createMoney(amount: number | string, currency: Currency): Money 
   }
 }
 
+export function createMoneyDown(amount: number | string, currency: Currency): Money {
+  try {
+    return Money.fromDecimal(amount, currency, Money.ROUND_DOWN);
+  } catch (err) {
+    return Money.fromDecimal(0, currency);
+  }
+}
+
 export const ZERO_MONEY = createMoney(0, DEFAULT_CURRENCY);
