@@ -384,12 +384,12 @@ export const OrderForm: React.FC<OrderFormProps> = ({
         {!isMobileDevice && (bestBid || bestAsk) ? (
           <div className="cr-order-item__prices">
             {bestBid ? (
-              <Box row as="span" textColor="bid" textSize="sm">
+              <Box as="span" textColor="bid" textSize="sm">
                 ▲ <AmountFormat money={createMoney(bestBid, bidCcy)} />
               </Box>
             ) : null}
             {bestAsk ? (
-              <Box row as="span" textColor="ask" textSize="sm">
+              <Box as="span" textColor="ask" textSize="sm">
                 ▼ <AmountFormat money={createMoney(bestAsk, bidCcy)} />
               </Box>
             ) : null}
