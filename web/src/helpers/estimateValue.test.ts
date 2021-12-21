@@ -1,7 +1,7 @@
-import { Money, Currency as MoneyCurrency } from '@bitzlato/money-js';
 import { ApiCurrency, Market, Wallet } from 'src/modules';
 
 import { estimateUnitValue, estimateValue, findPrecision, MarketTicker } from './estimateValue';
+import { createCcy, createMoney } from './money';
 
 // tslint:disable no-object-literal-type-assertion
 describe('estimateValue', () => {
@@ -25,15 +25,12 @@ describe('estimateValue', () => {
 
   it('should return wallet total for target currency', () => {
     const targetCurrency = 'btc';
-    const currency: MoneyCurrency = {
-      code: 'BTC',
-      minorUnit: 8,
-    };
+    const currency = createCcy('BTC', 8);
     const wallets = [
       {
+        balance: createMoney('95.1001', currency),
         currency,
-        balance: Money.fromDecimal('95.1001', currency),
-        locked: Money.fromDecimal('10.1234', currency),
+        locked: createMoney('10.1234', currency),
       },
     ] as unknown as Wallet[];
     const markets = [] as Market[];
@@ -46,15 +43,12 @@ describe('estimateValue', () => {
 
   it('should convert using market ask unit', () => {
     const targetCurrency = 'btc';
-    const currency: MoneyCurrency = {
-      code: 'USD',
-      minorUnit: 4,
-    };
+    const currency = createCcy('USD', 4);
     const wallets = [
       {
         currency,
-        balance: Money.fromDecimal('903.0008', currency),
-        locked: Money.fromDecimal('100.12345', currency),
+        balance: createMoney('903.0008', currency),
+        locked: createMoney('100.12345', currency),
       },
     ] as unknown as Wallet[];
     const markets = [
@@ -69,15 +63,12 @@ describe('estimateValue', () => {
 
   it('should convert using market bid unit', () => {
     const targetCurrency = 'btc';
-    const currency: MoneyCurrency = {
-      code: 'USD',
-      minorUnit: 4,
-    };
+    const currency = createCcy('USD', 4);
     const wallets = [
       {
         currency,
-        balance: Money.fromDecimal('903.0008', currency),
-        locked: Money.fromDecimal('100.12345', currency),
+        balance: createMoney('903.0008', currency),
+        locked: createMoney('100.12345', currency),
       },
     ] as unknown as Wallet[];
     const markets = [
@@ -92,15 +83,12 @@ describe('estimateValue', () => {
 
   it('should convert using secondary market #1', () => {
     const targetCurrency = 'btc';
-    const currency: MoneyCurrency = {
-      code: 'BCH',
-      minorUnit: 8,
-    };
+    const currency = createCcy('BCH', 8);
     const wallets = [
       {
         currency,
-        balance: Money.fromDecimal('900.0', currency),
-        locked: Money.fromDecimal('100.0', currency),
+        balance: createMoney('900.0', currency),
+        locked: createMoney('100.0', currency),
       },
     ] as unknown as Wallet[];
     const markets = [
@@ -119,15 +107,12 @@ describe('estimateValue', () => {
 
   it('should convert using secondary market #2', () => {
     const targetCurrency = 'btc';
-    const currency: MoneyCurrency = {
-      code: 'BCH',
-      minorUnit: 8,
-    };
+    const currency = createCcy('BCH', 8);
     const wallets = [
       {
         currency,
-        balance: Money.fromDecimal('0.9', currency),
-        locked: Money.fromDecimal('0.1', currency),
+        balance: createMoney('0.9', currency),
+        locked: createMoney('0.1', currency),
       },
     ] as unknown as Wallet[];
     const markets = [
@@ -146,15 +131,12 @@ describe('estimateValue', () => {
 
   it('should convert using secondary market #3', () => {
     const targetCurrency = 'btc';
-    const currency: MoneyCurrency = {
-      code: 'BCH',
-      minorUnit: 8,
-    };
+    const currency = createCcy('BCH', 8);
     const wallets = [
       {
         currency,
-        balance: Money.fromDecimal('2.004', currency),
-        locked: Money.fromDecimal('0.001', currency),
+        balance: createMoney('2.004', currency),
+        locked: createMoney('0.001', currency),
       },
     ] as unknown as Wallet[];
     const markets = [
@@ -173,15 +155,12 @@ describe('estimateValue', () => {
 
   it('should NOT convert using tertiary market', () => {
     const targetCurrency = 'btc';
-    const currency: MoneyCurrency = {
-      code: 'BCH',
-      minorUnit: 8,
-    };
+    const currency = createCcy('BCH', 8);
     const wallets = [
       {
         currency,
-        balance: Money.fromDecimal('1.9', currency),
-        locked: Money.fromDecimal('0.1', currency),
+        balance: createMoney('1.9', currency),
+        locked: createMoney('0.1', currency),
       },
     ] as unknown as Wallet[];
     const markets = [

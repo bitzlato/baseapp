@@ -4,9 +4,9 @@ import { Wallet } from 'src/modules';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { LockIcon } from 'src/assets/icons/LockIcon';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoney } from 'src/helpers/money';
 
 import s from './WalletItem.postcss';
-import { Money } from '@bitzlato/money-js';
 
 interface Props {
   active?: boolean;
@@ -19,7 +19,7 @@ export const WalletItem: FC<Props> = ({
   active = false,
   onClick,
 }: Props) => {
-  const zeroMoney = Money.fromDecimal(0, currency);
+  const zeroMoney = createMoney(0, currency);
   const hasLocked = locked?.gt(zeroMoney) === true;
   const currencySymbol = currency.code.split('-')[0];
 

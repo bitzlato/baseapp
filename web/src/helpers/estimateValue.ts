@@ -1,9 +1,9 @@
 // eslint-disable
-import { Money } from '@bitzlato/money-js';
 import { Decimal } from '../components/Decimal';
 import { DEFAULT_CCY_PRECISION } from '../constants';
 import { ApiCurrency, Market, Ticker, Wallet } from '../modules';
 import { handleCCYPrecision } from './';
+import { createMoney } from './money';
 
 export interface MarketTicker {
   [key: string]: Ticker;
@@ -31,7 +31,7 @@ const findMarketTicker = (marketPair: string, marketTickers: MarketTicker) => {
 };
 
 const getWalletTotal = (wallet: Wallet): number => {
-  let amount = Money.fromDecimal(0, wallet.currency);
+  let amount = createMoney(0, wallet.currency);
   if (wallet.balance) {
     amount = amount.add(wallet.balance);
   }

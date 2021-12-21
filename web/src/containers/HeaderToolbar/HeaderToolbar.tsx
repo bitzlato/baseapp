@@ -4,10 +4,10 @@ import { selectCurrentMarket, selectMarketTickers, RootState } from 'src/modules
 import { useT } from 'src/hooks/useT';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import cn from 'classnames';
-import { Money } from '@bitzlato/money-js';
+import { HeaderToolbarItem } from './HeaderToolbarItem';
+import { createMoney } from 'src/helpers/money';
 
 import s from './HeaderToolbar.postcss';
-import { HeaderToolbarItem } from './HeaderToolbarItem';
 
 interface Props {
   className?: string;
@@ -26,10 +26,10 @@ const select = (state: RootState) => {
 
   return {
     isLoading: state.public.markets.tickerLoading,
-    low: ticker && currency ? Money.fromDecimal(ticker.low, currency) : undefined,
-    last: ticker && currency ? Money.fromDecimal(ticker.last, currency) : undefined,
-    high: ticker && currency ? Money.fromDecimal(ticker.high, currency) : undefined,
-    volume: ticker && currency ? Money.fromDecimal(ticker.volume, currency) : undefined,
+    low: ticker && currency ? createMoney(ticker.low, currency) : undefined,
+    last: ticker && currency ? createMoney(ticker.last, currency) : undefined,
+    high: ticker && currency ? createMoney(ticker.high, currency) : undefined,
+    volume: ticker && currency ? createMoney(ticker.volume, currency) : undefined,
     change: ticker ? ticker.price_change_percent : undefined,
   };
 };

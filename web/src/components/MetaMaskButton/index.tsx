@@ -3,7 +3,6 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import BN from 'bignumber.js';
 import MetaMaskOnboarding from '@metamask/onboarding';
-import { Money } from '@bitzlato/money-js';
 import {
   getMetaMaskProvider,
   HexString,
@@ -15,6 +14,7 @@ import { MetaMaskLogo } from '../../assets/images/MetaMaskLogo';
 import { alertPush, ApiCurrency } from '../../modules';
 import { useT } from 'src/hooks/useT';
 import { CustomInput } from '../CustomInput';
+import { createMoney } from 'src/helpers/money';
 
 import s from 'src/containers/Withdraw/Withdraw.postcss';
 
@@ -77,9 +77,7 @@ export const MetaMaskButton: React.FC<Props> = (props) => {
   const handleChangeAmount = (value: string) => {
     setAmount(value);
     try {
-      setAmountValid(
-        Money.fromDecimal(value, props.currency).gte(props.currency.min_deposit_amount),
-      );
+      setAmountValid(createMoney(value, props.currency).gte(props.currency.min_deposit_amount));
     } catch (error) {
       setAmountValid(false);
     }

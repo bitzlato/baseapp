@@ -24,7 +24,7 @@ import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
 import { NumberInput } from 'src/components/NumberInput/NumberInput';
 import { getWallet, getCurrencies, DropdownItem, getItem, getCurrency } from './helpers';
-import { createCcy, createMoney, createMoneyDown, ZERO_MONEY } from 'src/helpers/money';
+import { createCcy, createMoney, ZERO_MONEY } from 'src/helpers/money';
 import { parseNumeric } from 'src/helpers/parseNumeric';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
@@ -168,7 +168,7 @@ export const QuickExchangeContainer: React.FC = () => {
   const handleUsePercent = (value: number) => {
     const balance = fromWallet?.balance;
     if (balance) {
-      const m = createMoneyDown(balance.toString(), balance.currency);
+      const m = createMoney(balance.toString(), balance.currency);
       handleChangeFrom(m.multiply(value).divide(100).toFormat());
     }
   };

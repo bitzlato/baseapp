@@ -1,4 +1,3 @@
-import { Money } from '@bitzlato/money-js';
 import * as React from 'react';
 import { Box } from 'src/components/Box';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
@@ -7,13 +6,14 @@ import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { useT } from 'src/hooks/useT';
 import { Wallet } from 'src/modules/user/wallets/types';
 import { areEqualSelectedProps } from '../../../helpers/areEqualSelectedProps';
+import { createMoney } from 'src/helpers/money';
 
 interface Props {
   wallet: Wallet;
 }
 
 const WalletBannerComponent: React.FC<Props> = ({ wallet }) => {
-  const zeroMoney = Money.fromDecimal(0, wallet.currency);
+  const zeroMoney = createMoney(0, wallet.currency);
   const t = useT();
 
   return (
