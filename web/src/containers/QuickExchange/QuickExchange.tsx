@@ -160,7 +160,7 @@ export const QuickExchangeContainer: React.FC = () => {
     const balance = fromWallet?.balance;
     if (balance) {
       const m = createMoneyDown(balance.toString(), balance.currency);
-      handleChangeFrom(m.multiply(value).divide(100).toString());
+      handleChangeFrom(m.multiply(value).divide(100).toFormat());
     }
   };
 
