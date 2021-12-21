@@ -1,7 +1,7 @@
 export const ru = {
   'page.mobile.header.signIn': 'Войти',
   'page.mobile.footer.home': 'Главная',
-  'page.mobile.footer.orders': 'Ордера',
+  'page.mobile.footer.quick': 'Быстрый обмен',
   'page.mobile.footer.trading': 'Торговля',
   'page.mobile.footer.wallets': 'Кошельки',
   'page.mobile.footer.profile': 'Профиль',
@@ -72,6 +72,9 @@ export const ru = {
 
   'page.mobile.userInfo.details.uid': 'UID: {uid}',
   'page.mobile.userInfo.logout.button': 'Выход',
+
+  'page.mobile.profileLinks.history.orders': 'Orders',
+
   'page.mobile.profileLinks.main.verification': 'Profile verification',
   'page.mobile.profileLinks.main.2fa': 'Two-factor authentication',
   'page.mobile.profileLinks.main.changePassword': 'Change password',

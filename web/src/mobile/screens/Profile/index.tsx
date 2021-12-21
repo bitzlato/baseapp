@@ -27,6 +27,10 @@ const ProfileMobileScreenComponent: React.FC = () => {
     );
   };
 
+  const historyLinks: ProfileLink[] = [
+    { titleKey: 'page.mobile.profileLinks.history.orders', route: '/orders' },
+  ];
+
   const mainLinks = [
     {
       titleKey: 'page.mobile.profileLinks.main.verification',
@@ -114,6 +118,7 @@ const ProfileMobileScreenComponent: React.FC = () => {
   return (
     <div className="pg-mobile-profile-screen">
       <UserInfo />
+      <ProfileLinks links={historyLinks} />
       <ProfileLinks links={mainLinks} />
       <ProfileLinks links={settingsLinks} />
       <ProfileLinks links={additionalLinks} />

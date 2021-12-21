@@ -1,7 +1,7 @@
 export const en = {
   'page.mobile.header.signIn': 'Log In',
   'page.mobile.footer.home': 'Home',
-  'page.mobile.footer.orders': 'Orders',
+  'page.mobile.footer.quick': 'Quick Exchange',
   'page.mobile.footer.trading': 'Trade',
   'page.mobile.footer.wallets': 'Wallets',
   'page.mobile.footer.profile': 'Profile',
@@ -72,6 +72,9 @@ export const en = {
 
   'page.mobile.userInfo.details.uid': 'UID: {uid}',
   'page.mobile.userInfo.logout.button': 'Logout',
+
+  'page.mobile.profileLinks.history.orders': 'Orders',
+
   'page.mobile.profileLinks.main.verification': 'Profile verification',
   'page.mobile.profileLinks.main.2fa': 'Two-factor authentication',
   'page.mobile.profileLinks.main.changePassword': 'Change password',
