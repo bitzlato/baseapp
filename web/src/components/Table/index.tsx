@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import * as React from 'react';
+import cn from 'classnames';
 import { useIntl } from 'react-intl';
 
 export type CellData = string | number | React.ReactNode | undefined;
@@ -78,6 +78,7 @@ export interface TableProps {
    * Additional custom render functions
    */
   renderCell?: (data: CellData, col: number) => React.ReactNode;
+  tableClassName?: string;
 }
 
 /**
@@ -102,14 +103,6 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
     side,
     rowBackgroundColor = 'rgba(184, 233, 245, 0.7)',
   } = props;
-
-  const cn = React.useMemo(
-    () =>
-      classNames('cr-table-header__content', {
-        'cr-table-header__content-empty': !titleComponent && filters.length === 0,
-      }),
-    [titleComponent, filters.length],
-  );
 
   const renderRowCells = React.useCallback(
     (row: CellData[]) => {
@@ -159,7 +152,7 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
 
   const renderFilters = React.useCallback(() => {
     const getClassName = (filterName: string) =>
-      classNames('cr-table__filter', {
+      cn('cr-table__filter', {
         'cr-table__filter--active': activeFilter === filterName,
       });
 
@@ -201,7 +194,7 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
       const dataToBeMapped = resultData || rows;
       const renderBackgroundRow = (r: CellData[], i: number) => renderRowBackground(i);
 
-      const className = classNames('cr-table-background', {
+      const className = cn('cr-table-background', {
         'cr-table-background--left': side === 'left',
         'cr-table-background--right': side === 'right',
       });
@@ -216,7 +209,7 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
   const renderBody = React.useCallback(
     (rows: CellData[][], rowKeyIndexValue: number | undefined) => {
       const rowClassName = (key: string) =>
-        classNames({
+        cn({
           'cr-table__row--selected': selectedRowKey === key,
         });
 
@@ -250,13 +243,18 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
     setSelectedRowKey(props.selectedKey);
   }, [props.selectedKey]);
 
+  const className = cn(
+    'cr-table-header__content',
+    !titleComponent && filters.length === 0 && 'cr-table-header__content-empty',
+  );
+
   return (
     <div className="cr-table-container">
-      <div className={cn}>
+      <div className={className}>
         {titleComponent ? <div className={'cr-title-component'}>{props.titleComponent}</div> : null}
         {filters.length ? <div className="cr-table__filters">{renderFilters()}</div> : null}
       </div>
-      <table className={'cr-table'}>
+      <table className={cn('cr-table', props.tableClassName)}>
         {header && header.length && renderHead(header)}
         {renderBody(data, rowKeyIndex)}
       </table>

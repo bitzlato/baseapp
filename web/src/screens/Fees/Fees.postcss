@@ -1,38 +1,36 @@
-.card {
-  background-color: var(--body-background-color);
-  border-radius: var(--border-radius);
-  box-shadow: 3px 3px 10px 3px var(--shadow-color-level-1);
-  overflow: hidden;
-  width: 100%;
-}
-
-.feesHeader {
-  padding-left: calc(var(--gap) * 3);
-  padding-right: calc(var(--gap) * 3);
-
-  h3 {
-    margin: 0;
-  }
-}
-
 .feesTable {
-  :global(.cr-table) {
-    text-align: left;
+  text-align: left;
 
-    th,
-    td {
-      &:first-child {
-        padding-left: calc(var(--gap) * 3);
-      }
+  th,
+  td {
+    &:first-child {
+      padding-left: 0;
+    }
 
-      &:last-child {
-        padding-right: calc(var(--gap) * 3);
-        width: initial;
-      }
+    &:last-child {
+      padding-right: 0;
+      width: initial;
+    }
 
-      &:nth-child(n+4) {
-        text-align: right !important;
-      }
+    &:nth-child(n+4) {
+      text-align: right !important;
     }
   }
+}
+
+.feesRect {
+  background-color: var(--primary-cta-color);
+  border-radius: var(--border-radius);
+  color: var(--text-contrast-color);
+  font-weight: bold;
+  height: 64px;
+  width: 64px;
+
+  & > span {
+    opacity: 1;
+  }
+}
+
+.feesMaker {
+  margin-left: calc(var(--gap) * 16);
 }
