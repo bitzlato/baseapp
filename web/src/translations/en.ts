@@ -1180,6 +1180,10 @@ export const en = {
   'order.action_role.not_permitted': 'Action is not permitted for your user role',
   'order.action_level.not_permitted': 'Action is not permitted for your user verification level',
 
+  'page.fees.trading': 'Trading fees',
+  'page.fees.taker': 'Taker fee',
+  'page.fees.maker': 'Maker fee',
+  'page.fees.table.header': 'Deposit/withdrawal fees',
   'page.fees.table.coin': 'Coin',
   'page.fees.table.name': 'Name',
   'page.fees.table.network': 'Network',

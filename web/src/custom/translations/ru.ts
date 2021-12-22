@@ -1200,6 +1200,10 @@ export const ru: LangType = {
   'order.action_role.not_permitted': 'Action is not permitted for your user role',
   'order.action_level.not_permitted': 'Action is not permitted for your user verification level',
 
+  'page.fees.trading': 'Торговые комиссии',
+  'page.fees.taker': 'Комиссия для тейкеров',
+  'page.fees.maker': 'Комиссия для мейкеров',
+  'page.fees.table.header': 'Комисси за ввод/вывод',
   'page.fees.table.coin': 'Монета',
   'page.fees.table.name': 'Имя',
   'page.fees.table.network': 'Сеть',

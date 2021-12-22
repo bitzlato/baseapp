@@ -6,7 +6,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, RouteComponentProps, RouterProps, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { Fees } from 'src/screens/Fees';
+import { Fees } from 'src/screens/Fees/Fees';
 import { IntlProps } from '../../';
 import {
   isAuth0,
