@@ -220,7 +220,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     applyCustomizationSettings(null, this.props.toggleChartRebuild);
   }
 
-  public componentWillReceiveProps(nextProps: LayoutProps) {
+  public UNSAFE_componentWillReceiveProps(nextProps: LayoutProps) {
     if (
       !(
         nextProps.location.pathname.includes('/magic-link') ||

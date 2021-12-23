@@ -66,7 +66,7 @@ class HistoryComponent extends React.Component<Props> {
     }
   }
 
-  public componentWillReceiveProps(nextProps: Props) {
+  public UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const { currencies } = this.props;
 
     if (!currencies.length && nextProps.currencies.length) {
