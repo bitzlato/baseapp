@@ -5,7 +5,7 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { kycSteps } from '../../api';
 import { Tooltip } from '../../components';
-import { Label, labelFetch, selectLabelData, selectUserInfo, User } from '../../modules';
+import { Label, labelFetch, RootState, selectLabelData, selectUserInfo, User } from '../../modules';
 
 /* Icons */
 import { CheckBigIcon } from '../../assets/images/kyc/CheckBigIcon';
@@ -283,7 +283,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
   };
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   user: selectUserInfo(state),
   labels: selectLabelData(state),
 });

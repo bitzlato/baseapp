@@ -2,10 +2,18 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { Form } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
+import { ApiKeyDataInterface } from 'src/modules/user/apiKeys/actions';
 import { CloseIcon } from '../../../../assets/images/CloseIcon';
 import { localeDate } from '../../../../helpers';
 
-const ApiKeysItemComponent = (props) => {
+interface Props {
+  index: number;
+  item: ApiKeyDataInterface;
+  handleUpdateKey: (item: ApiKeyDataInterface) => void;
+  handleDeleteKey: (item: ApiKeyDataInterface) => void;
+}
+
+const ApiKeysItemComponent: React.FC<Props> = (props) => {
   const { index, item } = props;
   const intl = useIntl();
 
