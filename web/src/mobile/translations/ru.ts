@@ -46,9 +46,7 @@ export const ru = {
   'page.mobile.currentMarketInfo.high': 'High',
   'page.mobile.currentMarketInfo.low': 'Low',
 
-  'page.header.signIn.forgotPassword': 'Забыли пароль?',
   'page.header.signIN.noAccountYet': 'Нет аккаунта?',
-  'page.header.signUp.terms': 'Я согласен со всеми заявлениями с точки зрения обслуживания',
   'page.header.signUp.alreadyRegistered': 'Уже зарегистрированы?',
 
   'page.mobile.reset.header': 'Отправить подтверждение снова',
@@ -73,13 +71,13 @@ export const ru = {
   'page.mobile.userInfo.details.uid': 'UID: {uid}',
   'page.mobile.userInfo.logout.button': 'Выход',
 
-  'page.mobile.profileLinks.history.orders': 'Orders',
+  'page.mobile.profileLinks.history.orders': 'Ордера',
 
-  'page.mobile.profileLinks.main.verification': 'Profile verification',
-  'page.mobile.profileLinks.main.2fa': 'Two-factor authentication',
-  'page.mobile.profileLinks.main.changePassword': 'Change password',
-  'page.mobile.profileLinks.main.activity': 'Account activity',
-  'page.mobile.profileLinks.main.apiKeys': 'My API keys',
+  'page.mobile.profileLinks.main.verification': 'Верификация профиля',
+  'page.mobile.profileLinks.main.2fa': 'Двухфакторная аутентификация',
+  'page.mobile.profileLinks.main.changePassword': 'Изменить пароль',
+  'page.mobile.profileLinks.main.activity': 'Активность аккаунта',
+  'page.mobile.profileLinks.main.apiKeys': 'Мои ключи API',
 
   'page.mobile.profileLinks.settings.language': 'Язык',
   'page.mobile.profileLinks.settings.theme': 'Тема',
@@ -87,10 +85,10 @@ export const ru = {
   'page.mobile.profileLinks.additional.referral': 'Реферальная ссылка',
   'page.mobile.profileLinks.link.referral.success': 'Успешно скопированно!',
 
-  'page.mobile.profileLinks.link.verification': 'Level {level}',
+  'page.mobile.profileLinks.link.verification': 'Уровень {level}',
   'page.mobile.profileLinks.link.2fa.enabled': 'Включен',
   'page.mobile.profileLinks.link.2fa.disabled': 'Отключен',
-  'page.mobile.profileLinks.link.referral': 'Скопировать ссылку',
+  'page.mobile.profileLinks.link.referral': 'Скопировать',
 
   'page.mobile.profileColorTheme.theme.dark': 'Темная',
   'page.mobile.profileColorTheme.theme.light': 'Светлая',
@@ -98,7 +96,7 @@ export const ru = {
   'page.mobile.wallets.title': 'Кошельки',
 
   'page.mobile.profile.accountActivity.title': 'Активность аккаунта',
-  'page.mobile.profile.apiKeys.title': 'My API keys',
+  'page.mobile.profile.apiKeys.title': 'Мои ключи API',
   'page.mobile.profile.theme.title': 'Тема',
   'page.mobile.profile.language.title': 'Язык',
   'page.mobile.profile.changePassword.title': 'Изменить пароль',
@@ -108,17 +106,15 @@ export const ru = {
   'page.mobile.profile.accountActivity.result': 'Результат',
 
   'page.mobile.profile.apiKeys.item.kid': 'Kid',
-  'page.mobile.profile.apiKeys.item.algorithm': 'Algorithm',
-  'page.mobile.profile.apiKeys.item.created': 'Created',
-  'page.mobile.profile.apiKeys.item.updated': 'Updated',
-  'page.mobile.profile.apiKeys.item.delete': 'Delete',
+  'page.mobile.profile.apiKeys.item.algorithm': 'Алгоритм',
+  'page.mobile.profile.apiKeys.item.created': 'Создан',
+  'page.mobile.profile.apiKeys.item.updated': 'Обновлен',
+  'page.mobile.profile.apiKeys.item.delete': 'Удалить',
 
   'page.mobile.confirm.profile': 'Identity verification',
   'page.mobile.confirm.document': 'ID verification',
   'page.mobile.confirm.address': 'Residence verification',
   'page.mobile.confirm.back': 'Назад',
-
-  'page.body.profile.header.account.content.twoFactorAuthentication': 'Two-factor authentication',
 
   'page.profile.kyc.title': '2FA',
 
