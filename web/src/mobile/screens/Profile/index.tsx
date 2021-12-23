@@ -36,12 +36,12 @@ const ProfileMobileScreenComponent: React.FC = () => {
       titleKey: 'page.mobile.profileLinks.main.verification',
       route: '/profile/verification',
       children: (
-        <div>
+        <>
           <span className="color-accent">
             {t('page.mobile.profileLinks.link.verification', { level: user.level })}
           </span>
           <ChevronIcon />
-        </div>
+        </>
       ),
     },
     {
@@ -51,14 +51,14 @@ const ProfileMobileScreenComponent: React.FC = () => {
         enable2fa: !user.otp,
       },
       children: (
-        <div>
+        <>
           {user.otp ? (
             <span className="color-green">{t('page.mobile.profileLinks.link.2fa.enabled')}</span>
           ) : (
             <span className="color-red">{t('page.mobile.profileLinks.link.2fa.disabled')}</span>
           )}
           <ChevronIcon />
-        </div>
+        </>
       ),
     },
     !isAuth0()
@@ -76,20 +76,22 @@ const ProfileMobileScreenComponent: React.FC = () => {
       titleKey: 'page.mobile.profileLinks.settings.language',
       route: '/profile/language',
       children: (
-        <div>
+        <>
           <span>{getLanguageName(currentLanguage)}</span>
           <ChevronIcon />
-        </div>
+        </>
       ),
     },
     {
       titleKey: 'page.mobile.profileLinks.settings.theme',
       route: '/profile/theme',
       children: (
-        <div>
-          <span className="text-capitalize">{currentTheme}</span>
+        <>
+          <span className="text-capitalize">
+            {t(`page.mobile.profileColorTheme.theme.${currentTheme}`)}
+          </span>
           <ChevronIcon />
-        </div>
+        </>
       ),
     },
   ];

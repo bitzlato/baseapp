@@ -424,7 +424,7 @@ export const en = {
   'page.body.profile.header.account.content.password.change.success': 'Success!',
   'page.body.profile.header.account.content.password.change': 'Change password',
 
-  'page.body.profile.header.account.content.twoFactorAuthentication': '2FA',
+  'page.body.profile.header.account.content.twoFactorAuthentication': 'Two-factor authentication',
   'page.body.profile.header.account.content.twoFactorAuthentication.message.enable': 'Enabled',
   'page.body.profile.header.account.content.twoFactorAuthentication.message.disable': 'Disabled',
   'page.body.profile.header.account.content.twoFactorAuthentication.header': 'Google Authenticator',

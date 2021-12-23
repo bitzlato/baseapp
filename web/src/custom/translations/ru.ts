@@ -62,12 +62,12 @@ export const ru: LangType = {
   'page.body.trade.header.marketDepths.content.cumulativeVolume': 'Общий объем:',
   'page.body.trade.header.marketDepths.content.cumulativeValue': 'Общее значение:',
 
-  'page.body.trade.toolBar.lowest': 'Низший 24h',
+  'page.body.trade.toolBar.lowest': 'Наименьшая за 24',
   'page.body.trade.toolBar.lastPrice': 'Последняя цена',
   'page.body.trade.toolBar.selectMarket': 'Выберите рынок',
-  'page.body.trade.toolBar.highest': 'Наибольший 24h',
-  'page.body.trade.toolBar.volume': '24h Объем',
-  'page.body.trade.toolBar.change': 'Изменение',
+  'page.body.trade.toolBar.highest': 'Нивысшая за 24ч',
+  'page.body.trade.toolBar.volume': 'Объем за 24ч',
+  'page.body.trade.toolBar.change': 'Изменение за 24ч',
 
   'page.body.trade.header.asks': 'Заявки на продажу',
   'page.body.trade.header.bids': 'Заявки на покупку',
@@ -111,13 +111,13 @@ export const ru: LangType = {
   'page.body.charts.tabs.depth': 'Глубина рынка',
 
   /* Markets Table */
-  'page.body.marketsTable.filter.all': 'All',
-  'page.body.marketsTable.header.pair': 'Market',
-  'page.body.marketsTable.header.lastPrice': 'Last Price',
-  'page.body.marketsTable.header.change': '24 Change',
-  'page.body.marketsTable.header.high': '24  high',
-  'page.body.marketsTable.header.low': '24 low',
-  'page.body.marketsTable.header.volume': '24 Volume',
+  'page.body.marketsTable.filter.all': 'Все',
+  'page.body.marketsTable.header.pair': 'Рынок',
+  'page.body.marketsTable.header.lastPrice': 'Цена',
+  'page.body.marketsTable.header.change': 'Изм за 24ч',
+  'page.body.marketsTable.header.high': 'Наив за 24ч',
+  'page.body.marketsTable.header.low': 'Наим за 24ч',
+  'page.body.marketsTable.header.volume': 'Объем за 24ч',
 
   /* Landing */
   'page.body.landing.header.button1': 'profile',
@@ -458,7 +458,7 @@ export const ru: LangType = {
   'page.body.profile.header.account.content.twoFactorAuthentication.modalHeader':
     'Двухфакторная аутентификация включена',
 
-  'page.body.profile.header.account.profile': 'Верификация Вашего профиля',
+  'page.body.profile.header.account.profile': 'Верификация профиля',
   'page.body.profile.header.account.profile.email.title': 'Почта - подтверждено',
   'page.body.profile.header.account.profile.email.message': 'Депозиты и вывод средств не разрешены',
   'page.body.profile.header.account.profile.phone.unverified.title': 'Телефон - подтвердить',
@@ -529,8 +529,8 @@ export const ru: LangType = {
   'page.body.profile.content.result.denied': 'Отказано',
 
   /* Profile - verification */
-  'page.body.profile.verification.email.title': 'Email address',
-  'page.body.profile.verification.email.subtitle': 'Withdrawal allowed',
+  'page.body.profile.verification.email.title': 'Почта',
+  'page.body.profile.verification.email.subtitle': 'Вывод средств разрешен',
   'page.body.profile.verification.email.rejected.tooltip': 'Your email was rejected',
   'page.body.profile.verification.phone.title': 'Verify Phone number',
   'page.body.profile.verification.phone.subtitle': 'To allow Deposits and Trades',
@@ -547,8 +547,8 @@ export const ru: LangType = {
   'page.body.profile.verification.pending': 'Pending',
   'page.body.profile.verification.reverify': 'Reverify',
   'page.body.profile.verification.verify': 'Verify',
-  'page.body.profile.verification.verified': 'Verified',
-  'page.body.profile.verification.progress.level': 'Level',
+  'page.body.profile.verification.verified': 'Подтверждено',
+  'page.body.profile.verification.progress.level': 'Уровень',
   'page.body.profile.verification.progress.tooltip.email.default':
     'Email address to to get level 1 and allow Withdrawal',
   'page.body.profile.verification.progress.tooltip.email.rejected': 'Your email was rejected',
@@ -1203,7 +1203,7 @@ export const ru: LangType = {
   'page.fees.trading': 'Торговые комиссии',
   'page.fees.taker': 'Комиссия для тейкеров',
   'page.fees.maker': 'Комиссия для мейкеров',
-  'page.fees.table.header': 'Комисси за ввод/вывод',
+  'page.fees.table.header': 'Комиссии за ввод/вывод',
   'page.fees.table.coin': 'Монета',
   'page.fees.table.name': 'Имя',
   'page.fees.table.network': 'Сеть',

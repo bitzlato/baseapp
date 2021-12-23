@@ -46,9 +46,7 @@ export const en = {
   'page.mobile.currentMarketInfo.high': 'High',
   'page.mobile.currentMarketInfo.low': 'Low',
 
-  'page.header.signIn.forgotPassword': 'Forgot password?',
   'page.header.signIN.noAccountYet': 'No account yet?',
-  'page.header.signUp.terms': 'I  agree all statements in terms of service',
   'page.header.signUp.alreadyRegistered': 'Already registered?',
 
   'page.mobile.reset.header': 'Resend confirmation',
@@ -117,8 +115,6 @@ export const en = {
   'page.mobile.confirm.document': 'ID verification',
   'page.mobile.confirm.address': 'Residence verification',
   'page.mobile.confirm.back': 'Back',
-
-  'page.body.profile.header.account.content.twoFactorAuthentication': 'Two-factor authentication',
 
   'page.profile.kyc.title': '2FA',
 

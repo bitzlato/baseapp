@@ -5,6 +5,7 @@ import { Decimal } from '../Decimal';
 import { FIXED_VOL_PRECISION } from 'src/constants';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { Box } from '../Box/Box';
 
 interface Props {
   currentBidUnit: string;
@@ -25,7 +26,7 @@ export const TickerTable: React.FC<Props> = ({
 
   const renderItem = React.useCallback(
     (market, index: number) => {
-      const marketChangeColor = +(market.change || 0) < 0 ? 'negative' : 'positive';
+      const marketChangeColor = +(market.change || 0) < 0 ? 'ask' : 'bid';
 
       return (
         <tr key={index} onClick={() => redirectToTrading(market.id)}>
@@ -38,7 +39,9 @@ export const TickerTable: React.FC<Props> = ({
             </span>
           </td>
           <td>
-            <span className={marketChangeColor}>{market.price_change_percent}</span>
+            <Box as="span" textColor={marketChangeColor} className={marketChangeColor}>
+              {market.price_change_percent}
+            </Box>
           </td>
           <td>
             <span>
