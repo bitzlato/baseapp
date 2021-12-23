@@ -63,7 +63,7 @@ export class WalletTable extends React.Component<Props> {
     }
   }
 
-  public componentWillReceiveProps(nextProps: Props) {
+  public UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const { currencies, currency, type, withdrawSuccess } = this.props;
     if (nextProps.currency !== currency || nextProps.type !== type) {
       this.props.resetHistory();

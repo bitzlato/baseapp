@@ -161,7 +161,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     this.props.clearWallets();
   }
 
-  public componentWillReceiveProps(next: Props) {
+  public UNSAFE_componentWillReceiveProps(next: Props) {
     const {
       wallets,
       beneficiariesActivateSuccess,
