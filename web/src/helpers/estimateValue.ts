@@ -1,9 +1,8 @@
-// eslint-disable
 import { Decimal } from '../components/Decimal';
 import { DEFAULT_CCY_PRECISION } from '../constants';
 import { ApiCurrency, Market, Ticker, Wallet } from '../modules';
 import { handleCCYPrecision } from './';
-import { createMoney } from './money';
+import { createCcy, createMoney } from './money';
 
 export interface MarketTicker {
   [key: string]: Ticker;
@@ -152,7 +151,7 @@ export const estimateValue = (
   wallets: Wallet[],
   markets: Market[],
   marketTickers: MarketTicker,
-): string => {
+) => {
   const formattedTargetCurrency = targetCurrency.toLowerCase();
   let estimatedValue = 0;
 
@@ -188,9 +187,7 @@ export const estimateValue = (
     formattedTargetCurrency,
     DEFAULT_CCY_PRECISION,
   );
-  const precisedEstimatedValue = Decimal.format(estimatedValue, targetCurrencyPrecision);
-
-  return precisedEstimatedValue;
+  return createMoney(estimatedValue, createCcy(formattedTargetCurrency, targetCurrencyPrecision));
 };
 
 export const estimateUnitValue = (
@@ -200,7 +197,7 @@ export const estimateUnitValue = (
   currencies: ApiCurrency[],
   markets: Market[],
   marketTickers: MarketTicker,
-): string => {
+) => {
   const estimated =
     estimateWithMarket(
       targetCurrency,
@@ -225,18 +222,5 @@ export const estimateUnitValue = (
     DEFAULT_CCY_PRECISION,
   );
 
-  return Decimal.format(estimated, targetCurrencyPrecision);
-};
-
-export const findPrecision = (unit: string, markets: Market[]) => {
-  for (const market of markets) {
-    if (market.base_unit === unit) {
-      return market.amount_precision;
-    }
-    if (market.quote_unit === unit) {
-      return market.price_precision;
-    }
-  }
-
-  return 4;
+  return createMoney(estimated, createCcy(formattedTargetCurrency, targetCurrencyPrecision));
 };

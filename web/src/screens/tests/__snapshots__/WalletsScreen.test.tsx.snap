@@ -19,7 +19,12 @@ Array [
         <span
           class="value"
         >
-          0.0000
+          0
+          <span
+            class="fractional"
+          >
+            .00
+          </span>
         </span>
         <span
           class="value-sign"
@@ -33,7 +38,12 @@ Array [
         <span
           class="value"
         >
-          0.0000
+          0
+          <span
+            class="fractional"
+          >
+            .00
+          </span>
         </span>
         <span
           class="value-sign"
