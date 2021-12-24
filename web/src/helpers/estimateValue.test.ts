@@ -1,6 +1,6 @@
 import { ApiCurrency, Market, Wallet } from 'src/modules';
 
-import { estimateUnitValue, estimateValue, findPrecision, MarketTicker } from './estimateValue';
+import { estimateUnitValue, estimateValue, MarketTicker } from './estimateValue';
 import { createCcy, createMoney } from './money';
 
 // tslint:disable no-object-literal-type-assertion
@@ -18,9 +18,9 @@ describe('estimateValue', () => {
     const markets = [] as Market[];
     const marketTickers = {} as MarketTicker;
 
-    expect(estimateValue(targetCurrency, currencies, wallets, markets, marketTickers)).toEqual(
-      '0.000',
-    );
+    expect(
+      estimateValue(targetCurrency, currencies, wallets, markets, marketTickers).toString(),
+    ).toEqual('0.000');
   });
 
   it('should return wallet total for target currency', () => {
@@ -36,9 +36,9 @@ describe('estimateValue', () => {
     const markets = [] as Market[];
     const marketTickers = {} as MarketTicker;
 
-    expect(estimateValue(targetCurrency, currencies, wallets, markets, marketTickers)).toEqual(
-      '105.223',
-    );
+    expect(
+      estimateValue(targetCurrency, currencies, wallets, markets, marketTickers).toString(),
+    ).toEqual('105.223');
   });
 
   it('should convert using market ask unit', () => {
@@ -56,9 +56,9 @@ describe('estimateValue', () => {
     ] as Market[];
     const marketTickers = { btcusd: { last: '1.0001' } } as unknown as MarketTicker;
 
-    expect(estimateValue(targetCurrency, currencies, wallets, markets, marketTickers)).toEqual(
-      '1003.023',
-    );
+    expect(
+      estimateValue(targetCurrency, currencies, wallets, markets, marketTickers).toString(),
+    ).toEqual('1003.023');
   });
 
   it('should convert using market bid unit', () => {
@@ -76,9 +76,9 @@ describe('estimateValue', () => {
     ] as Market[];
     const marketTickers = { usdbtc: { last: '0.9999' } } as unknown as MarketTicker;
 
-    expect(estimateValue(targetCurrency, currencies, wallets, markets, marketTickers)).toEqual(
-      '1003.023',
-    );
+    expect(
+      estimateValue(targetCurrency, currencies, wallets, markets, marketTickers).toString(),
+    ).toEqual('1003.023');
   });
 
   it('should convert using secondary market #1', () => {
@@ -100,9 +100,9 @@ describe('estimateValue', () => {
       bchzar: { last: '10' },
     } as unknown as MarketTicker;
 
-    expect(estimateValue(targetCurrency, currencies, wallets, markets, marketTickers)).toEqual(
-      '100000.000',
-    );
+    expect(
+      estimateValue(targetCurrency, currencies, wallets, markets, marketTickers).toString(),
+    ).toEqual('100000.000');
   });
 
   it('should convert using secondary market #2', () => {
@@ -124,9 +124,9 @@ describe('estimateValue', () => {
       bchzar: { last: '10' },
     } as unknown as MarketTicker;
 
-    expect(estimateValue(targetCurrency, currencies, wallets, markets, marketTickers)).toEqual(
-      '1.000',
-    );
+    expect(
+      estimateValue(targetCurrency, currencies, wallets, markets, marketTickers).toString(),
+    ).toEqual('1.000');
   });
 
   it('should convert using secondary market #3', () => {
@@ -148,9 +148,9 @@ describe('estimateValue', () => {
       bchzar: { last: '5.005' },
     } as unknown as MarketTicker;
 
-    expect(estimateValue(targetCurrency, currencies, wallets, markets, marketTickers)).toEqual(
-      '1.004',
-    );
+    expect(
+      estimateValue(targetCurrency, currencies, wallets, markets, marketTickers).toString(),
+    ).toEqual('1.004');
   });
 
   it('should NOT convert using tertiary market', () => {
@@ -174,9 +174,9 @@ describe('estimateValue', () => {
       bchltc: { last: '1' },
     } as unknown as MarketTicker;
 
-    expect(estimateValue(targetCurrency, currencies, wallets, markets, marketTickers)).toEqual(
-      '0.000',
-    );
+    expect(
+      estimateValue(targetCurrency, currencies, wallets, markets, marketTickers).toString(),
+    ).toEqual('0.000');
   });
 
   it('should convert single value', () => {
@@ -193,7 +193,14 @@ describe('estimateValue', () => {
     } as unknown as MarketTicker;
 
     expect(
-      estimateUnitValue(targetCurrency, currentCurrency, total, currencies, markets, marketTickers),
+      estimateUnitValue(
+        targetCurrency,
+        currentCurrency,
+        total,
+        currencies,
+        markets,
+        marketTickers,
+      ).toString(),
     ).toEqual('2.000');
   });
 
@@ -211,7 +218,14 @@ describe('estimateValue', () => {
     } as unknown as MarketTicker;
 
     expect(
-      estimateUnitValue(targetCurrency, currentCurrency, total, currencies, markets, marketTickers),
+      estimateUnitValue(
+        targetCurrency,
+        currentCurrency,
+        total,
+        currencies,
+        markets,
+        marketTickers,
+      ).toString(),
     ).toEqual('2.000');
   });
 
@@ -229,7 +243,14 @@ describe('estimateValue', () => {
     } as unknown as MarketTicker;
 
     expect(
-      estimateUnitValue(targetCurrency, currentCurrency, total, currencies, markets, marketTickers),
+      estimateUnitValue(
+        targetCurrency,
+        currentCurrency,
+        total,
+        currencies,
+        markets,
+        marketTickers,
+      ).toString(),
     ).toEqual('0.002');
   });
 
@@ -245,32 +266,14 @@ describe('estimateValue', () => {
     } as unknown as MarketTicker;
 
     expect(
-      estimateUnitValue(targetCurrency, currentCurrency, total, currencies, markets, marketTickers),
+      estimateUnitValue(
+        targetCurrency,
+        currentCurrency,
+        total,
+        currencies,
+        markets,
+        marketTickers,
+      ).toString(),
     ).toEqual('0.00000001');
-  });
-
-  it('should find precision using market ask unit', () => {
-    const unit = 'btc';
-    const markets = [
-      { id: 'btczar', name: 'BTC/ZAR', base_unit: 'btc', quote_unit: 'zar', amount_precision: 3 },
-    ] as Market[];
-
-    expect(findPrecision(unit, markets)).toEqual(3);
-  });
-
-  it('should find precision using market bid unit', () => {
-    const unit = 'btc';
-    const markets = [
-      { id: 'zarbtc', name: 'ZAR/BTC', base_unit: 'zar', quote_unit: 'btc', price_precision: 5 },
-    ] as Market[];
-
-    expect(findPrecision(unit, markets)).toEqual(5);
-  });
-
-  it('should return 4 as a default precision', () => {
-    const unit = 'btc';
-    const markets = [] as Market[];
-
-    expect(findPrecision(unit, markets)).toEqual(4);
   });
 });

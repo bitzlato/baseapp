@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import {
   useMarketsFetch,
@@ -7,7 +6,6 @@ import {
   useRangerConnectFetch,
   useWalletsFetch,
 } from 'src/hooks';
-import { formatWithSeparators } from '../../../components';
 import {
   valuationPrimaryCurrency,
   valuationPrimaryCurrencyName,
@@ -16,6 +14,8 @@ import {
 } from '../../../api';
 import { estimateUnitValue, estimateValue } from '../../../helpers/estimateValue';
 import { selectCurrencies, selectMarkets, selectMarketTickers, Wallet } from '../../../modules';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { useT } from 'src/hooks/useT';
 
 interface EstimatedValueProps {
   wallets: Wallet[];
@@ -24,11 +24,7 @@ interface EstimatedValueProps {
 type Props = EstimatedValueProps;
 
 const EstimatedValue: React.FC<Props> = (props: Props): React.ReactElement => {
-  const { formatMessage } = useIntl();
-  const translate = React.useCallback(
-    (id: string, value?: any) => formatMessage({ id: id }, { ...value }),
-    [formatMessage],
-  );
+  const t = useT();
 
   const { wallets } = props;
   const currencies = useSelector(selectCurrencies);
@@ -41,11 +37,11 @@ const EstimatedValue: React.FC<Props> = (props: Props): React.ReactElement => {
   useRangerConnectFetch();
 
   const renderSecondaryCurrencyValuation = React.useCallback(
-    (value: string) => {
-      const estimatedValueSecondary = estimateUnitValue(
+    (total: string) => {
+      let value = estimateUnitValue(
         valuationSecondaryCurrency(),
         valuationPrimaryCurrency(),
-        +value,
+        +total,
         currencies,
         markets,
         tickers,
@@ -53,7 +49,9 @@ const EstimatedValue: React.FC<Props> = (props: Props): React.ReactElement => {
 
       return (
         <span className="value-container">
-          <span className="value">{formatWithSeparators(estimatedValueSecondary, ',')}</span>
+          <span className="value">
+            <AmountFormat money={value} />
+          </span>
           <span className="value-sign">{valuationSecondaryCurrencyName().toUpperCase()}</span>
         </span>
       );
@@ -61,21 +59,28 @@ const EstimatedValue: React.FC<Props> = (props: Props): React.ReactElement => {
     [currencies, markets, tickers],
   );
 
+  const primaryName = valuationPrimaryCurrencyName().toUpperCase();
+
   const estimatedValue = React.useMemo(() => {
-    return estimateValue(valuationPrimaryCurrency(), currencies, wallets, markets, tickers);
+    let value = estimateValue(valuationPrimaryCurrency(), currencies, wallets, markets, tickers);
+    if (primaryName === 'USD') {
+      value.currency.minorUnit = 2;
+    }
+    return value;
   }, [currencies, wallets, markets, tickers]);
 
   return (
     <div className="pg-estimated-value">
-      <span className="pg-estimated-value__title">
-        {translate('page.body.wallets.estimated_value')}
-      </span>
+      <span className="pg-estimated-value__title">{t('page.body.wallets.estimated_value')}</span>
       <div className="pg-estimated-value__container">
         <span className="value-container">
-          <span className="value">{formatWithSeparators(estimatedValue, ',')}</span>
-          <span className="value-sign">{valuationPrimaryCurrencyName().toUpperCase()}</span>
+          <span className="value">
+            <AmountFormat money={estimatedValue} />
+          </span>
+          <span className="value-sign">{primaryName}</span>
         </span>
-        {valuationSecondaryCurrency() && renderSecondaryCurrencyValuation(estimatedValue)}
+        {valuationSecondaryCurrency() &&
+          renderSecondaryCurrencyValuation(estimatedValue.toString())}
       </div>
     </div>
   );
