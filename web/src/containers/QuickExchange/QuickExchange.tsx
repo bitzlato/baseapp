@@ -232,7 +232,7 @@ export const QuickExchangeContainer: React.FC = () => {
     : ZERO_MONEY;
 
   return (
-    <Card className={s.quickExchange} header={<h4>{t('page.body.quick.exchange.header')}</h4>}>
+    <Card size="md" header={<h4>{t('page.body.quick.exchange.header')}</h4>}>
       <Box col spacing>
         <Box col spacing="sm">
           <Box grow row alignStart spacing="2x">

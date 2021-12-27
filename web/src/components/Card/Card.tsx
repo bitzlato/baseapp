@@ -3,15 +3,17 @@ import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
 import { Box } from 'src/components/Box/Box';
+import { capitalize } from 'src/helpers/capitalize';
 
 import s from './Card.postcss';
 
 interface Props {
   className?: string;
   header: React.ReactNode;
+  size?: 'md';
 }
 
-export const Card: React.FC<Props> = ({ className, header, children }) => {
+export const Card: React.FC<Props> = ({ className, header, size, children }) => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
 
   if (isMobileDevice) {
@@ -27,9 +29,11 @@ export const Card: React.FC<Props> = ({ className, header, children }) => {
     );
   }
 
+  const c = cn(s.card, size && s[`card${capitalize(size)}`], className);
+
   return (
     <Box padding="2x" row justifyCenter>
-      <Box grow col className={cn(s.card, className)} bgColor="body">
+      <Box grow col className={c} bgColor="body">
         <Box padding="3x" textColor="primary" className={s.cardHeader}>
           {header}
         </Box>

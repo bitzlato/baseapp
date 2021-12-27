@@ -6,7 +6,6 @@ import { Card } from 'src/components/Card/Card';
 import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
 import { loginWithRedirect } from 'src/helpers/auth0';
-import s from 'src/containers/QuickExchange/QuickExchange.postcss';
 
 export const VerifyEmailModal: React.FC = () => {
   const t = useT();
@@ -14,7 +13,7 @@ export const VerifyEmailModal: React.FC = () => {
   const email = userError?.payload?.email ?? '';
 
   return (
-    <Card className={s.quickExchange} header={<h4>{t('verify.email.header')}</h4>}>
+    <Card size="md" header={<h4>{t('verify.email.header')}</h4>}>
       <Box as="p" textSize="lg">
         {t('verify.email.content', { email })}
       </Box>
