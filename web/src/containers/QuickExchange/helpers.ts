@@ -1,66 +1,64 @@
 import { lowerBound } from 'src/helpers/lowerBound';
 import type { ApiCurrency, Market, Wallet } from '../../modules';
 
-export interface DropdownItem {
-  code: string;
-  match: boolean;
-}
-
 interface SwapState {
-  fromList: DropdownItem[];
-  toList: DropdownItem[];
+  fromList: string[];
+  toList: string[];
   market?: Market;
+  recommendTo?: string;
 }
 
-export function getCurrencies(markets: Market[], base: string, quote: string): SwapState {
+export function getCurrencies(markets: Market[], from: string, to: string): SwapState {
   let market: Market | undefined;
-  const fromList: DropdownItem[] = [];
-  const toList: DropdownItem[] = [];
+  const fromList: string[] = [];
+  const toList: string[] = [];
+  let recommendTo: string | undefined;
 
   for (let m of markets) {
-    const sell = m.base_unit === base && m.quote_unit === quote;
-    if (sell || (m.base_unit === quote && m.quote_unit === base)) {
+    const sell = m.base_unit === from && m.quote_unit === to;
+    if (sell || (m.base_unit === to && m.quote_unit === from)) {
       market = m;
     }
 
-    if (quote !== m.base_unit) insertUnique(fromList, m.base_unit, m.quote_unit === quote);
-    if (quote !== m.quote_unit) insertUnique(fromList, m.quote_unit, m.base_unit === quote);
+    insertUnique(fromList, m.base_unit);
+    insertUnique(fromList, m.quote_unit);
 
-    if (base !== m.base_unit) insertUnique(toList, m.base_unit, m.quote_unit === base);
-    if (base !== m.quote_unit) insertUnique(toList, m.quote_unit, m.base_unit === base);
+    if (from === m.base_unit) insertUnique(toList, m.quote_unit);
+    if (from === m.quote_unit) insertUnique(toList, m.base_unit);
   }
 
-  fromList.sort(compareItems);
-  toList.sort(compareItems);
+  if (!market && toList.length) {
+    let index = toList.findIndex((d) => d.indexOf('usdt') !== -1);
+    if (index !== -1) {
+      recommendTo = toList[index];
+    } else {
+      index = toList.findIndex((d) => d.indexOf('usdc') !== -1);
+      if (index !== -1) {
+        recommendTo = toList[index];
+      } else {
+        recommendTo = toList[0];
+      }
+    }
+  }
 
   return {
     fromList,
     toList,
     market,
+    recommendTo,
   };
 }
 
-function insertUnique(items: DropdownItem[], code: string, match: boolean) {
-  const value = { code, match };
+function insertUnique(items: string[], value: string) {
   const index = lowerBound(items, value, lessName);
   const found = index !== items.length && !lessName(value, items[index]);
   if (!found) {
     items.splice(index, 0, value);
-  } else {
-    const d = items[index];
-    d.match ||= match;
   }
 }
 
-function lessName(a: DropdownItem, b: DropdownItem) {
-  return a.code < b.code;
-}
-
-function compareItems(a: DropdownItem, b: DropdownItem): number {
-  if (a.match !== b.match) {
-    return Number(b.match) - Number(a.match);
-  }
-  return a.code === b.code ? 0 : a.code < b.code ? -1 : 1;
+function lessName(a: string, b: string): boolean {
+  return a < b;
 }
 
 export function getWallet(currency: string, wallets: Wallet[]): Wallet | undefined {
@@ -71,8 +69,4 @@ export function getWallet(currency: string, wallets: Wallet[]): Wallet | undefin
 export function getCurrency(currency: string, currencies: ApiCurrency[]): ApiCurrency | undefined {
   const lowerCurrency = currency.toLowerCase();
   return currencies.find((d) => d.code.toLowerCase() === lowerCurrency);
-}
-
-export function getItem(code: string, match: boolean): DropdownItem {
-  return { code, match };
 }
