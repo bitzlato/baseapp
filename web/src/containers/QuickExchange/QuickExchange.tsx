@@ -23,7 +23,7 @@ import { selectQuickExchangeLimits } from 'src/modules/public/quickExchangePubli
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
 import { NumberInput } from 'src/components/NumberInput/NumberInput';
-import { getWallet, getCurrencies, DropdownItem, getItem, getCurrency } from './helpers';
+import { getWallet, getCurrencies, getCurrency } from './helpers';
 import { createCcy, createMoney, ZERO_MONEY } from 'src/helpers/money';
 import { parseNumeric } from 'src/helpers/parseNumeric';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
@@ -47,12 +47,8 @@ const PERCENTS = [25, 50, 75, 100];
 export const QuickExchangeContainer: React.FC = () => {
   const currentMarket = useSelector(selectCurrentMarket);
 
-  const [fromCurrency, setFromCurrency] = useState<DropdownItem>(() =>
-    getItem(currentMarket?.base_unit ?? '', !!currentMarket),
-  );
-  const [toCurrency, setToCurrency] = useState<DropdownItem>(() =>
-    getItem(currentMarket?.quote_unit ?? '', !!currentMarket),
-  );
+  const [fromCurrency, setFromCurrency] = useState(() => currentMarket?.base_unit ?? '');
+  const [toCurrency, setToCurrency] = useState(() => currentMarket?.quote_unit ?? '');
   const [fromAmount, setFromAmount] = useState('');
   const [toAmount, setToAmount] = useState('');
   const [requestCurrency, setRequestCurrency] = useState('');
@@ -80,17 +76,14 @@ export const QuickExchangeContainer: React.FC = () => {
     dispatch(quickExchangeLimitsFetch());
   }, [dispatch]);
 
-  const { fromList, toList, market } = useMemo(
-    () => getCurrencies(markets, fromCurrency.code, toCurrency.code),
+  const { fromList, toList, market, recommendTo } = useMemo(
+    () => getCurrencies(markets, fromCurrency, toCurrency),
     [markets, fromCurrency, toCurrency],
   );
 
-  const fromWallet = useMemo(() => getWallet(fromCurrency.code, wallets), [fromCurrency, wallets]);
-  const fromCcy = useMemo(
-    () => getCurrency(fromCurrency.code, currencies),
-    [fromCurrency, currencies],
-  );
-  const toCcy = useMemo(() => getCurrency(toCurrency.code, currencies), [fromCurrency, currencies]);
+  const fromWallet = useMemo(() => getWallet(fromCurrency, wallets), [fromCurrency, wallets]);
+  const fromCcy = useMemo(() => getCurrency(fromCurrency, currencies), [fromCurrency, currencies]);
+  const toCcy = useMemo(() => getCurrency(toCurrency, currencies), [fromCurrency, currencies]);
 
   useEffect(() => {
     const handle = window.setTimeout(handleRefresh, 300);
@@ -112,8 +105,8 @@ export const QuickExchangeContainer: React.FC = () => {
 
   useEffect(() => {
     if (currentMarket) {
-      setFromCurrency(getItem(currentMarket.base_unit, true));
-      setToCurrency(getItem(currentMarket.quote_unit, true));
+      setFromCurrency(currentMarket.base_unit);
+      setToCurrency(currentMarket.quote_unit);
     }
   }, [currentMarket]);
 
@@ -128,7 +121,13 @@ export const QuickExchangeContainer: React.FC = () => {
 
   useEffect(() => {
     dispatch(marketPriceReset());
-  }, [fromCurrency.code, toCurrency.code]);
+  }, [fromCurrency, toCurrency]);
+
+  useEffect(() => {
+    if (recommendTo) {
+      setToCurrency(recommendTo);
+    }
+  }, [recommendTo]);
 
   const resetInput = () => {
     setFromAmount('');
@@ -141,7 +140,7 @@ export const QuickExchangeContainer: React.FC = () => {
     value = parseNumeric(value);
     setFromAmount(value);
     setToAmount('');
-    setRequestCurrency(fromCurrency.code);
+    setRequestCurrency(fromCurrency);
     setRequestVolume(value);
   };
 
@@ -149,19 +148,17 @@ export const QuickExchangeContainer: React.FC = () => {
     value = parseNumeric(value);
     setToAmount(value);
     setFromAmount('');
-    setRequestCurrency(toCurrency.code);
+    setRequestCurrency(toCurrency);
     setRequestVolume(value);
   };
 
-  const handleSelectFrom = (value: DropdownItem) => {
+  const handleSelectFrom = (value: string) => {
     setFromCurrency(value);
-    setToCurrency(getItem(toCurrency.code, value.match));
     resetInput();
   };
 
-  const handleSelectTo = (value: DropdownItem) => {
+  const handleSelectTo = (value: string) => {
     setToCurrency(value);
-    setFromCurrency(getItem(fromCurrency.code, value.match));
     resetInput();
   };
 
@@ -183,8 +180,8 @@ export const QuickExchangeContainer: React.FC = () => {
     if (!createMoney(requestVolume, DEFAULT_CURRENCY).isZero()) {
       dispatch(
         marketPriceFetch({
-          from_currency: fromCurrency.code,
-          to_currency: toCurrency.code,
+          from_currency: fromCurrency,
+          to_currency: toCurrency,
           request_volume: parseNumeric(requestVolume, { trimRightDot: true }),
           request_currency: requestCurrency,
         }),
@@ -198,8 +195,8 @@ export const QuickExchangeContainer: React.FC = () => {
     } else {
       dispatch(
         createQuickExchangeFetch({
-          from_currency: fromCurrency.code,
-          to_currency: toCurrency.code,
+          from_currency: fromCurrency,
+          to_currency: toCurrency,
           request_currency: requestCurrency,
           request_volume: requestVolume,
           price: price.request_price,
@@ -208,16 +205,16 @@ export const QuickExchangeContainer: React.FC = () => {
     }
   };
 
-  const renderDropdownItem = (d: DropdownItem) => {
-    const currency = d.code.split('-')[0];
+  const renderDropdownItem = (d: string) => {
+    const currency = d.split('-')[0];
     return (
       <Box row spacing>
         <CryptoCurrencyIcon
           size="small"
-          icon={getWallet(d.code, wallets)?.icon_url ?? ''}
-          currency={d.code}
+          icon={getWallet(d, wallets)?.icon_url ?? ''}
+          currency={d}
         />
-        <Box textColor={d.match ? 'primary' : 'failed'} textTr="uppercase" as="span">
+        <Box textColor="primary" textTr="uppercase" as="span">
           {currency}
         </Box>
       </Box>
@@ -225,10 +222,10 @@ export const QuickExchangeContainer: React.FC = () => {
   };
 
   const noAmount = createMoney(requestVolume, DEFAULT_CURRENCY).isZero();
-  const noMarket = !market && fromCurrency.code && toCurrency.code;
+  const noMarket = !market && fromCurrency && toCurrency;
 
   const minAmount = market
-    ? createMoney(market.min_amount, market.base_unit === fromCurrency.code ? fromCcy! : toCcy!)
+    ? createMoney(market.min_amount, market.base_unit === fromCurrency ? fromCcy! : toCcy!)
     : ZERO_MONEY;
 
   return (
@@ -266,7 +263,7 @@ export const QuickExchangeContainer: React.FC = () => {
             <MoneyFormat
               money={
                 fromWallet?.balance ??
-                createMoney(0, createCcy(fromCurrency.code, DEFAULT_CCY_PRECISION))
+                createMoney(0, createCcy(fromCurrency, DEFAULT_CCY_PRECISION))
               }
             />
           </Box>

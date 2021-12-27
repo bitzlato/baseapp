@@ -36,10 +36,8 @@ export const AmountDescription: React.FC<AmountDescriptionProps> = ({
 
     if ((maxAmount.isZero() && fromAmount) || amount.greaterThan(maxAmount)) {
       return (
-        <Box as="span">
-          <Box as="span" textColor="failed">
-            {t('page.body.quick.exchange.insufficient_balance')}
-          </Box>
+        <Box as="span" textColor="failed">
+          <Box as="span">{t('page.body.quick.exchange.insufficient_balance')}</Box>
           &nbsp;
           <Box as={Link} to={`/wallets/${fromCurrency}/deposit`} className={s.link}>
             {t('page.body.quick.exchange.top_up_balance')}
