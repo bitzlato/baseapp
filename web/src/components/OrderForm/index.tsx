@@ -419,7 +419,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       </div>
 
       <div className="cr-order-item">
-        <Box selfStretch row justifyBetween wrap>
+        <Box self="stretch" row justify="between" wrap>
           <label>{t('page.body.trade.header.newOrder.content.minAmount')}</label>
           <MoneyFormat money={createMoney(minAmount, askCcy)} />
         </Box>
@@ -434,7 +434,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       </div>
 
       <div className="cr-order-item">
-        <Box selfStretch row justifyBetween wrap textSize="lg">
+        <Box self="stretch" row justify="between" wrap textSize="lg">
           <label>{t('page.body.trade.header.newOrder.content.total')}</label>
           <Box row spacing="sm">
             {isMarket(orderType) ? <Label color="secondary">&asymp;</Label> : null}
@@ -444,7 +444,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       </div>
 
       <div className="cr-order-item">
-        <Box selfStretch row justifyBetween wrap>
+        <Box self="stretch" row justify="between" wrap>
           <label>{t('page.body.trade.header.newOrder.content.available')}</label>
           <MoneyFormat money={createMoney(available!, availableCcy)} />
         </Box>

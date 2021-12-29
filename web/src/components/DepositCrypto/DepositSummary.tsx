@@ -29,7 +29,7 @@ export const DepositSummary: React.FC<Props> = ({ currency, showWarning }) => {
       </SummaryField>
       {showWarning && (
         <Box row spacing alignStart>
-          <Box selfStart>
+          <Box self="start">
             <WarningIcon />
           </Box>
           <Label color="warning">{t('page.body.wallets.tabs.deposit.ccy.message.warning')}</Label>

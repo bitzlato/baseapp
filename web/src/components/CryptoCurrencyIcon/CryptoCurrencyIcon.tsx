@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import cn from 'classnames';
 import { CryptoIcon } from 'src/components/CryptoIcon';
 import { BlockchainIcon } from 'src/components/BlockchainIcon/BlockchainIcon';
+import { capitalize } from 'src/helpers/capitalize';
 
 import s from './CryptoCurrencyIcon.postcss';
 
@@ -9,17 +10,17 @@ interface Props {
   icon?: string | null;
   currency: string;
   iconId?: string;
-  size?: 'small' | 'medium';
+  size?: 'small' | 'medium' | 'large';
 }
 
 export const CryptoCurrencyIcon: FC<Props> = ({ currency, icon, iconId, size }) => {
-  const sizeClassName = cn(size === 'small' && s.iconSmall, size === 'medium' && s.iconMedium);
+  const className = cn(size && s[`icon${capitalize(size)}`]);
 
   if (icon) {
     return (
       <img
         alt={currency}
-        className={cn('cr-wallet-item__single__image-icon', sizeClassName)}
+        className={cn('cr-wallet-item__single__image-icon', className)}
         src={icon}
       />
     );
@@ -28,7 +29,7 @@ export const CryptoCurrencyIcon: FC<Props> = ({ currency, icon, iconId, size }) 
   const [cryptoCurrency, protocol] = currency.split('-');
 
   return (
-    <span className={cn(s.icon, sizeClassName)}>
+    <span className={cn(s.icon, className)}>
       <CryptoIcon code={iconId ?? cryptoCurrency} />
       {protocol && (
         <span className={s.blockchainIcon}>

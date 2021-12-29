@@ -85,7 +85,7 @@ export const Withdraw: React.FC<Props> = (props) => {
   };
 
   return (
-    <Box padding={isMobileDevice ? undefined : '3x'} col spacing="3x">
+    <Box padding={isMobileDevice ? undefined : '3'} col spacing="3">
       <Beneficiaries
         currency={currency.code}
         type={type}
@@ -93,7 +93,7 @@ export const Withdraw: React.FC<Props> = (props) => {
         onChangeValue={setBeneficiary}
       />
       <BeneficiaryAddress beneficiary={beneficiary} />
-      <Box grow row spacing="2x">
+      <Box grow row spacing="2">
         <Box
           flex1
           as={NumberInput}
@@ -111,9 +111,9 @@ export const Withdraw: React.FC<Props> = (props) => {
           />
         )}
       </Box>
-      <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2x">
+      <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2">
         <WithdrawSummary total={total} wallet={wallet} />
-        <Box selfStart>
+        <Box self="start">
           <Button
             variant="primary"
             size="lg"

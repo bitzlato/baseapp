@@ -17,7 +17,7 @@ const WalletBannerComponent: React.FC<Props> = ({ wallet }) => {
   const t = useT();
 
   return (
-    <Box padding="2x" row spacing="4x" justifyCenter className="cr-wallet-banner-mobile">
+    <Box padding="2" row spacing="4" justify="center" className="cr-wallet-banner-mobile">
       <Box col spacing="sm">
         <Label size="sm">{t('page.mobile.wallets.banner.locked')}</Label>
         <Box row wrap spacing="sm">

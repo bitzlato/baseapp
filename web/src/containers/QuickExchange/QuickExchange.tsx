@@ -232,7 +232,7 @@ export const QuickExchangeContainer: React.FC = () => {
     <Card size="md" header={<h4>{t('page.body.quick.exchange.header')}</h4>}>
       <Box col spacing>
         <Box col spacing="sm">
-          <Box grow row alignStart spacing="2x">
+          <Box grow row alignStart spacing="2">
             <Box
               flex1
               as={NumberInput}
@@ -257,7 +257,7 @@ export const QuickExchangeContainer: React.FC = () => {
             fromAmount={fromAmount}
           />
         </Box>
-        <Box row spacing justifyBetween wrap>
+        <Box row spacing justify="between" wrap>
           <Box row spacing>
             <span>{t('page.body.quick.exchange.sublabel.balance')}:</span>
             <MoneyFormat
@@ -289,7 +289,7 @@ export const QuickExchangeContainer: React.FC = () => {
       >
         <SwipeIcon />
       </Button>
-      <Box grow row spacing="2x">
+      <Box grow row spacing="2">
         <Box
           flex1
           as={NumberInput}
@@ -346,7 +346,7 @@ export const QuickExchangeContainer: React.FC = () => {
             <span>{t('page.body.quick.exchange.sublabel.min_amount')}:</span>
             <MoneyFormat money={minAmount} />
           </Box>
-          <Box row spacing="2x" justifyBetween>
+          <Box row spacing="2" justify="between">
             <Box col spacing>
               <Box row spacing wrap>
                 <span>{t('page.body.quick.exchange.rate')}:</span>
@@ -382,7 +382,7 @@ export const QuickExchangeContainer: React.FC = () => {
       )}
       <Box
         row
-        spacing="2x"
+        spacing="2"
         as={BzButton}
         size="large"
         variant="primary"

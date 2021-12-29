@@ -115,7 +115,7 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
       <React.Fragment>
         <div className="cr-combined-order-book__large">
           {noDataBids ? (
-            <Box alignCenter className="cr-order-book">
+            <Box align="center" className="cr-order-book">
               {noDataMessage}
             </Box>
           ) : (
@@ -130,7 +130,7 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
             />
           )}
           {noDataAsks ? (
-            <Box alignStart justifyCenter className="cr-order-book">
+            <Box alignStart justify="center" className="cr-order-book">
               {noDataMessage}
             </Box>
           ) : (
@@ -174,7 +174,7 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
       <React.Fragment>
         <div className="cr-combined-order-book__small">
           {noDataAsks ? (
-            <Box alignCenter className="cr-order-book">
+            <Box align="center" className="cr-order-book">
               {noDataMessage}
             </Box>
           ) : (
@@ -190,7 +190,7 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
           )}
           <div className="cr-combined-order-book__market">{lastPrice}</div>
           {noDataBids ? (
-            <Box alignStart justifyCenter className="cr-order-book">
+            <Box alignStart justify="center" className="cr-order-book">
               {noDataMessage}
             </Box>
           ) : (

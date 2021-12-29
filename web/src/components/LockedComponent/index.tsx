@@ -17,7 +17,7 @@ interface Props {
 export const LockedComponent: React.FC<Props> = ({ text, link, buttonText, onClick }) => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
   return (
-    <Box padding="3x" col spacing="2x" alignCenter>
+    <Box padding="3" col spacing="2" align="center">
       <LockedIcon />
       <Label size="lg" center style={{ maxWidth: 180 }}>
         {text}
