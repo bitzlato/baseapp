@@ -29,7 +29,6 @@
     "@metamask/onboarding": "^1.0.1",
     "axios": "^0.21.1",
     "bignumber.js": "^9.0.1",
-    "bitcoincash-regex": "^1.1.9",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
     "cryptocurrency-icons": "git+https://github.com/bitzlato/cryptocurrency-icons.git",

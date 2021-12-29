@@ -2743,11 +2743,6 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-bitcoincash-regex@^1.1.9:
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/bitcoincash-regex/-/bitcoincash-regex-1.1.9.tgz#09f1b0308aa81bc4971f79bb93c2300675d67da6"
-  integrity sha512-VthlTDYcqjUlnxLe0h3rK2X0umt314bSvDOFx/GJ+FJ64vbcCo58NZONpoO1MqYSRkSxroAYJN/qwq7oxZpt3A==
-
 bluebird@3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"

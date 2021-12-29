@@ -6,14 +6,17 @@ const createWallet = (walletSource: WalletSource): Wallet => {
   const currency = createCcy(walletSource.currency.toUpperCase(), walletSource.precision);
 
   return {
+    ...currency,
     ...walletSource,
     currency,
     balance: createMoney(walletSource.balance, currency),
     locked: createMoney(walletSource.locked, currency),
     withdraw_fee: createMoney(walletSource.withdraw_fee, currency),
+    deposit_fee: createMoney(walletSource.deposit_fee, currency),
     limit_24_hour: createMoney(walletSource.limit_24_hour, USD),
     limit_1_month: createMoney(walletSource.limit_1_month, USD),
     min_withdraw_amount: createMoney(walletSource.min_withdraw_amount, currency),
+    min_deposit_amount: createMoney(walletSource.min_deposit_amount, currency),
   };
 };
 

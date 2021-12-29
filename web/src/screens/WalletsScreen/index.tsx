@@ -245,7 +245,6 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 onWalletSelectionChange={this.onWalletSelectionChange}
                 walletItems={formattedWallets}
                 activeIndex={this.state.walletIndex}
-                onActiveIndexChange={this.onActiveIndexChange}
               />
             </div>
             <div
@@ -287,11 +286,6 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
   private onCurrentTabChange = (tabIndex: number) => {
     this.replaceHistory(this.state.walletIndex, tabIndex);
     this.setState({ tabIndex });
-  };
-
-  private onActiveIndexChange = (walletIndex: number) => {
-    this.replaceHistory(walletIndex, this.state.tabIndex);
-    this.setState({ walletIndex });
   };
 
   private toggleSubmitModal = () => {
@@ -360,26 +354,6 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     this.toggleConfirmModal();
   };
 
-  private handleOnCopy = () => {
-    this.props.fetchSuccess({
-      message: ['page.body.wallets.tabs.deposit.ccy.message.success'],
-      type: 'success',
-    });
-  };
-
-  private handleGenerateAddress = () => {
-    const { walletIndex: selectedWalletIndex } = this.state;
-    const { wallets } = this.props;
-
-    const wallet: Wallet = wallets[selectedWalletIndex] || defaultWallet;
-
-    if (!wallet.deposit_address && wallets.length && wallet.type !== 'fiat') {
-      this.props.fetchAddress({
-        currency: wallets[selectedWalletIndex].currency.code.toLowerCase(),
-      });
-    }
-  };
-
   private getBlurDeposit = (isAccountActivated: boolean) => {
     const { user, wallets, memberLevels, currencies } = this.props;
     const { walletIndex: selectedWalletIndex } = this.state;
@@ -421,13 +395,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
   };
 
   private renderDeposit = (isAccountActivated: boolean) => {
-    const { currencies, user, wallets } = this.props;
+    const { user, wallets } = this.props;
     const { walletIndex: selectedWalletIndex } = this.state;
     const wallet = wallets[selectedWalletIndex] || defaultWallet;
-    const currencyItem = currencies.find((item) => item.id === wallet.currency.code.toLowerCase());
-    const error = this.props.intl.formatMessage({
-      id: 'page.body.wallets.tabs.deposit.ccy.message.pending',
-    });
 
     if (wallet.type === 'coin') {
       return (
@@ -435,16 +405,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
           <CurrencyInfo wallet={wallet} />
           {this.getBlurDeposit(isAccountActivated)}
           <Box padding="3x" style={{ paddingBottom: 0 }}>
-            <DepositCrypto
-              copiableTextFieldText={this.translate(
-                'page.body.wallets.tabs.deposit.ccy.message.address',
-              )}
-              error={error}
-              handleGenerateAddress={this.handleGenerateAddress}
-              handleOnCopy={this.handleOnCopy}
-              wallet={wallet}
-              currency={currencyItem ?? defaultCurrency}
-            />
+            <DepositCrypto wallet={wallet} />
           </Box>
           {wallet.currency && (
             <WalletHistory
@@ -601,7 +562,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     return level > 1 || (level === 1 && is2faEnabled);
   }
 
-  private onWalletSelectionChange = (value: Wallet) => {
+  private onWalletSelectionChange = (value: Wallet, walletIndex: number) => {
     const { wallets } = this.props;
 
     const nextWalletIndex = this.props.wallets.findIndex(
@@ -615,6 +576,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
     this.props.fetchBeneficiaries({ currency_id: value.currency.code.toLowerCase() });
     this.props.setMobileWalletUi(wallets[nextWalletIndex].name);
+
+    this.replaceHistory(walletIndex, this.state.tabIndex);
+    this.setState({ walletIndex });
   };
 }
 

@@ -17,13 +17,25 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
+        "base_factor": 100000000,
+        "code": "",
         "currency": Object {
           "code": "BTC",
           "minorUnit": 8,
         },
+        "deposit_enabled": true,
+        "deposit_fee": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
         "explorer_address": "https://testnet.blockchain.info/address/#{address}",
         "explorer_transaction": "https://testnet.blockchain.info/tx/#{txid}",
         "icon_id": "BTC",
+        "icon_url": "",
+        "id": "",
         "limit_1_month": Object {
           "amount": "0.00000000",
           "currency": Object {
@@ -45,6 +57,14 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
+        "min_confirmations": 6,
+        "min_deposit_amount": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
         "min_withdraw_amount": Object {
           "amount": "0.00000000",
           "currency": Object {
@@ -52,9 +72,11 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
+        "minorUnit": 4,
         "name": "Bitcoin",
         "precision": 8,
         "price": "1",
+        "symbol": "",
         "type": "fiat",
         "withdraw_fee": Object {
           "amount": "0.12300000",
@@ -63,6 +85,8 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
+        "withdrawal_disabled_reason": "",
+        "withdrawal_enabled": true,
       }
     }
   />
@@ -79,11 +103,25 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 2,
           },
         },
+        "base_factor": 100000000,
+        "code": "",
         "currency": Object {
           "code": "USD",
           "minorUnit": 2,
         },
+        "deposit_enabled": true,
+        "deposit_fee": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
+        "explorer_address": "",
+        "explorer_transaction": "",
         "icon_id": "USD",
+        "icon_url": "",
+        "id": "",
         "limit_1_month": Object {
           "amount": "0.00",
           "currency": Object {
@@ -105,6 +143,14 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 2,
           },
         },
+        "min_confirmations": 6,
+        "min_deposit_amount": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
         "min_withdraw_amount": Object {
           "amount": "0.00",
           "currency": Object {
@@ -112,9 +158,11 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 2,
           },
         },
+        "minorUnit": 4,
         "name": "United states Dollar",
         "precision": 8,
         "price": "1",
+        "symbol": "",
         "type": "coin",
         "withdraw_fee": Object {
           "amount": "0.12",
@@ -123,6 +171,8 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 2,
           },
         },
+        "withdrawal_disabled_reason": "",
+        "withdrawal_enabled": true,
       }
     }
   />
@@ -139,11 +189,25 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
+        "base_factor": 100000000,
+        "code": "",
         "currency": Object {
           "code": "BTC",
           "minorUnit": 8,
         },
+        "deposit_enabled": true,
+        "deposit_fee": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
+        "explorer_address": "",
+        "explorer_transaction": "",
         "icon_id": "BTC",
+        "icon_url": "",
+        "id": "",
         "limit_1_month": Object {
           "amount": "0.00000000",
           "currency": Object {
@@ -165,6 +229,14 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
+        "min_confirmations": 6,
+        "min_deposit_amount": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
         "min_withdraw_amount": Object {
           "amount": "0.00000000",
           "currency": Object {
@@ -172,9 +244,11 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
+        "minorUnit": 4,
         "name": "Bitcoin - 2",
         "precision": 8,
         "price": "1",
+        "symbol": "",
         "type": "fiat",
         "withdraw_fee": Object {
           "amount": "0.30000000",
@@ -183,6 +257,8 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
+        "withdrawal_disabled_reason": "",
+        "withdrawal_enabled": true,
       }
     }
   />

@@ -1,12 +1,10 @@
-import cn from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { isMetaMaskInstalled } from '@bitzlato/ethereum-provider';
 
 import { useT } from 'src/hooks/useT';
-import { formatCCYAddress } from '../../helpers';
-import { ApiCurrency, selectMobileDeviceState, Wallet } from '../../modules';
+import { alertPush, selectMobileDeviceState, Wallet, walletsAddressFetch } from '../../modules';
 import { Box } from '../Box';
 import { CopyableTextField } from 'src/components/CopyableTextField';
 import { MetaMaskButton } from '../MetaMaskButton';
@@ -15,57 +13,27 @@ import { DepositInvoice } from './DepositInvoice';
 import { DepositSummary } from './DepositSummary';
 import s from 'src/containers/Withdraw/BeneficiaryAddress.postcss';
 
-export interface DepositCryptoProps {
-  /**
-   * Wallet
-   */
+interface Props {
   wallet: Wallet;
-  /**
-   * Data which is used to display error if data is undefined
-   */
-  error: string;
-  /**
-   * Defines the size of QR code component.
-   * @default 118
-   */
-  dimensions?: number;
-  /**
-   * @default 'Deposit by Wallet Address'
-   * Renders text of the label of CopyableTextField component
-   */
-  copiableTextFieldText?: string;
-  /**
-   * Renders text alert about success copy address
-   */
-  handleOnCopy: () => void;
-  /**
-   * Generate wallet address for selected wallet
-   */
-  handleGenerateAddress: () => void;
-  disabled?: boolean;
-  currency: ApiCurrency;
 }
 
-/**
- *  Component that displays wallet details that can be used to deposit cryptocurrency.
- */
-export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
-  const QR_SIZE = 118;
-  const {
-    copiableTextFieldText,
-    dimensions,
-    error,
-    handleGenerateAddress,
-    handleOnCopy,
-    wallet,
-    currency,
-  } = props;
+export const DepositCrypto: React.FC<Props> = (props) => {
+  const { wallet } = props;
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const t = useT();
+  const dispatch = useDispatch();
+
+  const handleGenerateAddress = () => {
+    const currency = wallet.currency.code.toLowerCase();
+    if (currency && !wallet.deposit_address && wallet.type !== 'fiat') {
+      dispatch(walletsAddressFetch({ currency }));
+      // dispatch(walletsFetch());
+    }
+  };
 
   if (!wallet.deposit_address) {
     if (wallet.enable_invoice) {
-      return <DepositInvoice currency={currency} />;
+      return <DepositInvoice currency={wallet} />;
     } else {
       return (
         <Button
@@ -83,16 +51,22 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
     }
   }
 
+  const handleOnCopy = () => {
+    dispatch(
+      alertPush({
+        type: 'success',
+        message: ['page.body.wallets.tabs.deposit.ccy.message.success'],
+      }),
+    );
+  };
+
   const walletAddress =
-    wallet.deposit_address && wallet.deposit_address.address
-      ? formatCCYAddress(wallet.currency.code, wallet.deposit_address.address)
-      : '';
+    wallet.deposit_address && wallet.deposit_address.address ? wallet.deposit_address.address : '';
 
   const text = t('page.body.wallets.tabs.deposit.ccy.message.submit', {
-    confirmations: currency.min_confirmations,
+    confirmations: wallet.min_confirmations,
   });
 
-  const size = dimensions || QR_SIZE;
   const disabled = !wallet.deposit_address?.address;
   const onCopy = !disabled ? handleOnCopy : undefined;
   const showMetamask =
@@ -104,24 +78,24 @@ export const DepositCrypto: React.FC<DepositCryptoProps> = (props) => {
         <div className="cr-deposit-info">{text}</div>
         {walletAddress && (
           <div className="d-none d-md-block qr-code-wrapper">
-            <QRCode dimensions={size} data={walletAddress} />
+            <QRCode dimensions={QR_SIZE} data={walletAddress} />
           </div>
         )}
       </Box>
       <Box row spacing="2x">
-        {showMetamask ? (
-          <MetaMaskButton depositAddress={walletAddress} currency={currency} />
-        ) : null}
+        {showMetamask ? <MetaMaskButton depositAddress={walletAddress} currency={wallet} /> : null}
         <CopyableTextField
           className={s.field}
-          value={walletAddress || error}
+          value={walletAddress || t('page.body.wallets.tabs.deposit.ccy.message.pending')}
           fieldId={walletAddress ? 'copy_deposit_1' : 'copy_deposit_2'}
           disabled={disabled}
-          label={copiableTextFieldText ?? 'Deposit by Wallet Address'}
+          label={t('page.body.wallets.tabs.deposit.ccy.message.address')}
           onCopy={onCopy}
         />
       </Box>
-      <DepositSummary currency={currency} showWarning />
+      <DepositSummary currency={wallet} showWarning />
     </Box>
   );
 };
+
+const QR_SIZE = 118;
