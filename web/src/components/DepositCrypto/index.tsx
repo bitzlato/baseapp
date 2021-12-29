@@ -73,7 +73,7 @@ export const DepositCrypto: React.FC<Props> = (props) => {
     wallet.currency.code === 'ETH' && (!isMobileDevice || isMetaMaskInstalled()) && walletAddress;
 
   return (
-    <Box col spacing="3x" className="cr-deposit-crypto">
+    <Box col spacing="3" className="cr-deposit-crypto">
       <Box row>
         <div className="cr-deposit-info">{text}</div>
         {walletAddress && (
@@ -82,7 +82,7 @@ export const DepositCrypto: React.FC<Props> = (props) => {
           </div>
         )}
       </Box>
-      <Box row spacing="2x">
+      <Box row spacing="2">
         {showMetamask ? <MetaMaskButton depositAddress={walletAddress} currency={wallet} /> : null}
         <CopyableTextField
           className={s.field}

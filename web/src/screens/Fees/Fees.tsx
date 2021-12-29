@@ -58,16 +58,16 @@ export const Fees: React.FC = () => {
   });
 
   return (
-    <Box padding="2x" className="container">
+    <Box padding="2" className="container">
       <Card header={<h3>{t('page.body.landing.footer.fees')}</h3>}>
-        <Box col spacing="4x">
-          <Box col spacing="2x">
+        <Box col spacing="4">
+          <Box col spacing="2">
             <Box textColor="primary" as="h4">
               {t('page.fees.trading')}
             </Box>
-            <Box row textSize="lg" justifyCenter>
-              <Box row spacing="3x">
-                <Box row justifyCenter className={s.feesRect}>
+            <Box row textSize="lg" justify="center">
+              <Box row spacing="3">
+                <Box row justify="center" className={s.feesRect}>
                   <AmountFormat
                     money={createMoney(anyGroup?.taker ?? 0, CCY).multiply(100)}
                     minFractionDigits={1}
@@ -78,8 +78,8 @@ export const Fees: React.FC = () => {
                   {t('page.fees.taker')}
                 </Box>
               </Box>
-              <Box className={s.feesMaker} row spacing="3x">
-                <Box row justifyCenter className={s.feesRect}>
+              <Box className={s.feesMaker} row spacing="3">
+                <Box row justify="center" className={s.feesRect}>
                   <AmountFormat
                     money={createMoney(anyGroup?.maker ?? 0, CCY).multiply(100)}
                     minFractionDigits={1}
@@ -92,7 +92,7 @@ export const Fees: React.FC = () => {
               </Box>
             </Box>
           </Box>
-          <Box col spacing="2x">
+          <Box col spacing="2">
             <Box textColor="primary" as="h4">
               {t('page.fees.table.header')}
             </Box>

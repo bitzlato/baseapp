@@ -404,7 +404,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         <React.Fragment>
           <CurrencyInfo wallet={wallet} />
           {this.getBlurDeposit(isAccountActivated)}
-          <Box padding="3x" style={{ paddingBottom: 0 }}>
+          <Box padding="3" style={{ paddingBottom: 0 }}>
             <DepositCrypto wallet={wallet} />
           </Box>
           {wallet.currency && (

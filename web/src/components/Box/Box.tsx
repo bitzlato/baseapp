@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+import { capitalize } from 'src/helpers/capitalize';
 import s from './Box.postcss';
 import sLabel from '../Label/Label.postcss';
 
@@ -13,20 +14,16 @@ type BoxOwnProps<E = React.ElementType> = {
   alignStart?: boolean;
   grow?: boolean;
   flex1?: boolean;
-  justifyEnd?: boolean;
-  justifyBetween?: boolean;
-  justifyCenter?: boolean;
-  alignCenter?: boolean;
-  alignEnd?: boolean;
-  selfStart?: boolean;
-  selfStretch?: boolean;
-  selfCenter?: boolean;
   wrap?: boolean;
-  spacing?: boolean | '2x' | '3x' | '4x' | 'sm';
-  padding?: boolean | '2x' | '3x';
+  justify?: 'end' | 'center' | 'between';
+  align?: 'end' | 'center';
+  self?: 'start' | 'center' | 'stretch';
+  spacing?: boolean | '2' | '3' | '4' | '5' | 'sm';
+  padding?: boolean | '2' | '3' | '5';
   textSize?: 'lg' | 'sm';
   textColor?: TextColor;
   textTr?: 'capitalize' | 'uppercase';
+  textAlign?: 'start';
   bgColor?: 'body';
 };
 
@@ -47,18 +44,14 @@ export const Box: Element = React.forwardRef(
       padding,
       grow,
       flex1,
-      alignCenter,
-      alignEnd,
-      justifyEnd,
-      justifyBetween,
-      justifyCenter,
-      selfStart,
-      selfStretch,
-      selfCenter,
+      align,
+      justify,
+      self,
       wrap,
       textSize,
       textColor,
       textTr,
+      textAlign,
       bgColor,
       ...props
     }: BoxOwnProps,
@@ -71,31 +64,16 @@ export const Box: Element = React.forwardRef(
       alignStart && s.alignStart,
       grow && s.grow,
       flex1 && s.flex1,
-      alignCenter && s.alignCenter,
-      alignEnd && s.alignEnd,
-      justifyEnd && s.justifyEnd,
-      justifyBetween && s.justifyBetween,
-      justifyCenter && s.justifyCenter,
-      selfStart && s.selfStart,
-      selfStretch && s.selfStretch,
-      selfCenter && s.selfCenter,
       wrap && s.wrap,
-      row && spacing === true && s.rowSpacing,
-      row && spacing === '2x' && s.rowSpacing2X,
-      row && spacing === '3x' && s.rowSpacing3X,
-      row && spacing === '4x' && s.rowSpacing4X,
-      row && spacing === 'sm' && s.rowSpacingSm,
-      col && spacing === true && s.colSpacing,
-      col && spacing === '2x' && s.colSpacing2X,
-      col && spacing === '3x' && s.colSpacing3X,
-      col && spacing === '4x' && s.colSpacing4X,
-      col && spacing === 'sm' && s.colSpacingSm,
-      padding === true && s.padding,
-      padding === '2x' && s.padding2X,
-      padding === '3x' && s.padding3X,
+      align && s[`align${capitalize(align)}`],
+      justify && s[`justify${capitalize(justify)}`],
+      self && s[`self${capitalize(self)}`],
+      spacing && s[`${row ? 'row' : 'col'}Spacing${spacing === true ? '' : capitalize(spacing)}`],
+      padding && s[`padding${padding === true ? '' : capitalize(padding)}`],
       textSize && sLabel[`${textSize}Size`],
       textColor && sLabel[`${textColor}Color`],
       textTr && sLabel[`${textTr}Transform`],
+      textAlign && s[`textAlign${capitalize(textAlign)}`],
       bgColor && s[`${bgColor}BgColor`],
     );
     return React.createElement(as, { ...props, ref, className: boxClassName });

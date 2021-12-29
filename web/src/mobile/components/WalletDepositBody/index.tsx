@@ -68,7 +68,7 @@ const WalletDepositBodyComponent: React.FC<Props> = (props) => {
         <React.Fragment>
           <CurrencyInfo wallet={wallet} />
           {renderDepositBlur}
-          <Box padding="2x">
+          <Box padding="2">
             <DepositCrypto wallet={wallet} />
           </Box>
         </React.Fragment>

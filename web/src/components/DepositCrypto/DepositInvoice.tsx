@@ -51,7 +51,7 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
   const isDisabled = !amountValid || isDepositCreateLoading;
 
   return (
-    <Box col spacing="2x">
+    <Box col spacing="2">
       <CustomInput
         type="number"
         label={t('page.body.wallets.deposits.addDepositModal.amount')}
@@ -62,7 +62,7 @@ export const DepositInvoice: React.FC<Props> = ({ currency }) => {
         className={s.numberInput}
         autoFocus
       />
-      <Box grow row={!isMobile} col={isMobile} spacing="2x">
+      <Box grow row={!isMobile} col={isMobile} spacing="2">
         <DepositSummary currency={currency} />
         <Button disabled={isDisabled} onClick={handleSubmit} size="lg" variant="primary">
           {t('page.body.wallets.tabs.deposit.ccy.button.create')}

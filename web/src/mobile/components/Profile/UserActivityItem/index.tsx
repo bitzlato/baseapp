@@ -40,12 +40,12 @@ const UserActivityItemComponent: React.FC<Props> = ({ item }) => {
 
   return (
     <Box col spacing className="pg-mobile-profile-account-activity-screen__item">
-      <Box row spacing="2x" justifyBetween>
+      <Box row spacing="2" justify="between">
         <Label color="primary">{userAgent}</Label>
         <Label color="primary">{itemDate}</Label>
         <Label>{itemTime}</Label>
       </Box>
-      <Box row spacing="2x" justifyBetween>
+      <Box row spacing="2" justify="between">
         <Box col>
           <Label>{t('page.mobile.profile.accountActivity.action')}</Label>
           <Label color="primary">{resultOfUserAction}</Label>

@@ -5,12 +5,16 @@ import { OpenOrders } from '../../';
 import { OrderBook, OrderComponent } from '../../../../containers';
 import { selectUserLoggedIn } from '../../../../modules';
 
-const CreateOrderComponent = (props) => {
+interface Props {
+  currentOrderTypeIndex: number;
+}
+
+const CreateOrderComponent: React.FC<Props> = (props) => {
   const userLoggedIn = useSelector(selectUserLoggedIn);
 
   return (
     <div className="pg-mobile-create-order">
-      <Box grow padding="2x" row spacing="2x" className="pg-mobile-create-order__row-double">
+      <Box grow padding="2" row spacing="2" className="pg-mobile-create-order__row-double">
         <OrderBook />
         <OrderComponent defaultTabIndex={props.currentOrderTypeIndex} />
       </Box>
