@@ -31,10 +31,21 @@ exports[`DepositCrypto should match snapshot 1`] = `
   }
 >
   <DepositCrypto
-    currency={
+    wallet={
       Object {
+        "balance": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
         "base_factor": 100000000,
         "code": "",
+        "currency": Object {
+          "code": "",
+          "minorUnit": 4,
+        },
         "deposit_enabled": true,
         "deposit_fee": Object {
           "amount": "0.0000",
@@ -48,6 +59,27 @@ exports[`DepositCrypto should match snapshot 1`] = `
         "icon_id": "",
         "icon_url": "",
         "id": "",
+        "limit_1_month": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
+        "limit_24_hour": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
+        "locked": Object {
+          "amount": "0.0000",
+          "currency": Object {
+            "code": "",
+            "minorUnit": 4,
+          },
+        },
         "min_confirmations": 6,
         "min_deposit_amount": Object {
           "amount": "0.0000",
@@ -78,69 +110,6 @@ exports[`DepositCrypto should match snapshot 1`] = `
         },
         "withdrawal_disabled_reason": "",
         "withdrawal_enabled": true,
-      }
-    }
-    dimensions={118}
-    disabled={false}
-    error="error123"
-    handleGenerateAddress={[MockFunction]}
-    handleOnCopy={[MockFunction]}
-    wallet={
-      Object {
-        "balance": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
-        "currency": Object {
-          "code": "",
-          "minorUnit": 4,
-        },
-        "explorer_address": "",
-        "explorer_transaction": "",
-        "icon_id": "",
-        "icon_url": "",
-        "limit_1_month": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
-        "limit_24_hour": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
-        "locked": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
-        "min_withdraw_amount": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
-        "name": "",
-        "precision": 4,
-        "price": "0",
-        "type": "coin",
-        "withdraw_fee": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
       }
     }
   />

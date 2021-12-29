@@ -23,17 +23,7 @@ export function* walletsSaga(action: WalletsFetch) {
 
       return {
         ...account,
-        name: currency?.name,
-        explorer_transaction: currency.explorer_transaction,
-        explorer_address: currency.explorer_address,
-        withdraw_fee: currency.withdraw_fee,
-        type: currency.type,
-        fixed: currency.precision,
-        icon_url: currency?.icon_url,
-        icon_id: currency.icon_id,
-        price: currency.price,
-        precision: currency.precision,
-        min_withdraw_amount: currency.min_withdraw_amount,
+        ...currency,
       };
     });
 

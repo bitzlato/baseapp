@@ -2,6 +2,7 @@ import { Currency } from '@bitzlato/money-js';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { createMoney } from 'src/helpers/money';
+import { defaultWallet } from 'src/modules/user/wallets/defaults';
 import { WalletList, WalletListProps } from '../../components';
 import { Wallet } from '../../modules';
 
@@ -16,6 +17,7 @@ const USD: Currency = {
 };
 const walletItems: Wallet[] = [
   {
+    ...defaultWallet,
     locked: createMoney('1', BTC),
     withdraw_fee: createMoney(0.123, BTC),
     currency: BTC,
@@ -32,6 +34,7 @@ const walletItems: Wallet[] = [
     explorer_address: 'https://testnet.blockchain.info/address/#{address}',
   },
   {
+    ...defaultWallet,
     withdraw_fee: createMoney(0.123, USD),
     locked: createMoney('100', USD),
     currency: USD,
@@ -46,6 +49,7 @@ const walletItems: Wallet[] = [
     limit_1_month: createMoney(0, USD),
   },
   {
+    ...defaultWallet,
     withdraw_fee: createMoney(0.3, BTC),
     locked: createMoney('0.4', BTC),
     currency: BTC,
@@ -65,7 +69,6 @@ const defaultProps: WalletListProps = {
   activeIndex: 0,
   onWalletSelectionChange: onWalletSelectionChange,
   walletItems: walletItems,
-  onActiveIndexChange: jest.fn,
 };
 
 const setup = (props: Partial<WalletListProps> = {}) =>

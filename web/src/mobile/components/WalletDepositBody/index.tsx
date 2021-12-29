@@ -4,49 +4,33 @@ import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Box } from 'src/components/Box';
-import { formatCCYAddress } from 'src/helpers';
 import { selectMemberLevels, Wallet } from 'src/modules';
-import { defaultCurrency } from 'src/modules/public/currencies/defaults';
 import { Blur } from 'src/components/Blur';
 import { CurrencyInfo } from 'src/components/CurrencyInfo';
 import { DepositCrypto } from 'src/components/DepositCrypto';
 import { DepositFiat } from 'src/components/DepositFiat';
-import { selectCurrencies } from 'src/modules/public/currencies';
 import { selectUserInfo } from 'src/modules/user/profile';
 
 interface Props {
   wallet: Wallet;
-  handleGenerateAddress: () => void;
 }
 
 const WalletDepositBodyComponent: React.FC<Props> = (props) => {
   const intl = useIntl();
   const history = useHistory();
-  const currencies = useSelector(selectCurrencies);
   const user = useSelector(selectUserInfo);
   const memberLevels = useSelector(selectMemberLevels);
-  const label = React.useMemo(
-    () => intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.address' }),
-    [intl],
-  );
-
-  const handleOnCopy = () => ({});
 
   const renderDepositBlur = React.useMemo(() => {
     const { wallet } = props;
     const isAccountActivated = wallet.type === 'fiat' || wallet.balance;
-    const currencyItem = (currencies &&
-      currencies.find((item) => item.id === wallet.currency.code.toLowerCase())) || {
-      min_confirmations: 6,
-      deposit_enabled: false,
-    };
 
     const blurClassName = classnames(`pg-blur-deposit-${wallet.type}`, {
       'pg-blur-deposit-coin--active': isAccountActivated && wallet.type === 'coin',
       'pg-blur-deposit-fiat--active': isAccountActivated && wallet.type === 'fiat',
     });
 
-    if (!currencyItem?.deposit_enabled) {
+    if (!wallet.deposit_enabled) {
       return (
         <Blur
           className={blurClassName}
@@ -69,16 +53,12 @@ const WalletDepositBodyComponent: React.FC<Props> = (props) => {
     }
 
     return null;
-  }, [props.wallet, currencies, user, memberLevels]);
+  }, [props.wallet, user, memberLevels]);
 
   const renderDeposit = () => {
     const { wallet } = props;
-    const currencyItem = currencies.find((item) => item.id === wallet.currency.code.toLowerCase());
-    const error = intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.pending' });
 
     const selectedWalletAddress = '';
-
-    const walletAddress = formatCCYAddress(wallet.currency.code, selectedWalletAddress) || '';
 
     const title = intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.fiat.message1' });
     const description = intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.fiat.message2' });
@@ -89,15 +69,7 @@ const WalletDepositBodyComponent: React.FC<Props> = (props) => {
           <CurrencyInfo wallet={wallet} />
           {renderDepositBlur}
           <Box padding="2x">
-            <DepositCrypto
-              copiableTextFieldText={`${wallet.currency.code} ${label}`}
-              error={error}
-              handleGenerateAddress={props.handleGenerateAddress}
-              handleOnCopy={handleOnCopy}
-              wallet={wallet}
-              currency={currencyItem || defaultCurrency}
-              disabled={!walletAddress}
-            />
+            <DepositCrypto wallet={wallet} />
           </Box>
         </React.Fragment>
       );

@@ -9,7 +9,6 @@ export * from './copy';
 export * from './customizationSettings';
 export * from './emailValidation';
 export * from './filterData';
-export * from './formatCCYAddress';
 export * from './formatDate';
 export * from './getCsrfToken';
 export * from './getHistorySagaParam';
