@@ -8,29 +8,20 @@
     }
 
     &:last-child {
-      padding-right: 0;
+      padding-right: 0 !important;
       width: initial;
     }
 
-    &:nth-child(n+4) {
-      text-align: right !important;
+    @media (--breakpoint-up-md) {
+      &:nth-child(n+4) {
+        text-align: right !important;
+      }
+    }
+
+    @media (--breakpoint-down-md) {
+      &:nth-child(n+2) {
+        text-align: right !important;
+      }
     }
   }
-}
-
-.feesRect {
-  background-color: var(--primary-cta-color);
-  border-radius: var(--border-radius);
-  color: var(--text-contrast-color);
-  font-weight: bold;
-  height: 64px;
-  width: 64px;
-
-  & > span {
-    opacity: 1;
-  }
-}
-
-.feesMaker {
-  margin-left: calc(var(--gap) * 16);
 }

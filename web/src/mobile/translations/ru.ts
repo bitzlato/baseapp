@@ -72,6 +72,7 @@ export const ru = {
   'page.mobile.userInfo.logout.button': 'Выход',
 
   'page.mobile.profileLinks.history.orders': 'Ордера',
+  'page.mobile.profileLinks.history.fees': 'Комиссии',
 
   'page.mobile.profileLinks.main.verification': 'Верификация профиля',
   'page.mobile.profileLinks.main.2fa': 'Двухфакторная аутентификация',

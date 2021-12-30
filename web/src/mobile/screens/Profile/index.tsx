@@ -29,6 +29,7 @@ const ProfileMobileScreenComponent: React.FC = () => {
 
   const historyLinks: ProfileLink[] = [
     { titleKey: 'page.mobile.profileLinks.history.orders', route: '/orders' },
+    { titleKey: 'page.mobile.profileLinks.history.fees', route: '/fees' },
   ];
 
   const mainLinks = [

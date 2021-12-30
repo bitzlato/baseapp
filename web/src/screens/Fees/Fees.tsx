@@ -1,21 +1,30 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { setDocumentTitle } from '../../helpers';
 import { Table } from 'src/components';
 import { currenciesFetch } from 'src/modules/public/currencies/actions';
 import { selectCurrencies } from 'src/modules/public/currencies/selectors';
+import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
+import { selectTradingFees } from 'src/modules/public/tradingFees/selectors';
+import { tradingFeesFetch } from 'src/modules/public/tradingFees/actions';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { Box } from 'src/components/Box';
 import { Card } from 'src/components/Card/Card';
-import { selectTradingFees, tradingFeesFetch } from 'src/modules/public/tradingFees';
-import { createCcy, createMoney } from 'src/helpers/money';
+import { TradingFees } from 'src/containers/Fees/TradingFees';
+import { Subheader } from 'src/mobile/components/Subheader';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import s from './Fees.postcss';
 
-export const Fees: React.FC = () => {
+export const FeesScreen: React.FC = () => {
   const t = useT();
   const dispatch = useDispatch();
+  const isMobile = useSelector(selectMobileDeviceState);
+
+  const isDesktop = !isMobile ? true : undefined;
+  const history = useHistory();
 
   useEffect(() => {
     setDocumentTitle(t('page.body.landing.footer.fees'));
@@ -25,12 +34,11 @@ export const Fees: React.FC = () => {
 
   const currencies = useSelector(selectCurrencies);
   const tradingFees = useSelector(selectTradingFees);
-  const anyGroup = tradingFees.find((d) => d.group === 'any');
 
   const header = [
     t('page.fees.table.coin'),
-    t('page.fees.table.name'),
-    t('page.fees.table.network'),
+    isDesktop && t('page.fees.table.name'),
+    isDesktop && t('page.fees.table.network'),
     t('page.fees.table.deposit_fee'),
     t('page.fees.table.min_deposit'),
     t('page.fees.table.withdraw_fee'),
@@ -38,14 +46,19 @@ export const Fees: React.FC = () => {
   ];
 
   const data = currencies.map((d) => {
-    const [token, network] = d.id.toUpperCase().split('-');
+    const ccy = d.id.toUpperCase();
+    const [token, network] = ccy.split('-');
     return [
-      <Box row spacing>
-        <CryptoCurrencyIcon currency={d.id} icon={d.icon_url} iconId={d.icon_id} size="small" />
-        <span>{token.toUpperCase()}</span>
-      </Box>,
-      d.name,
-      network || token,
+      isDesktop ? (
+        <Box row spacing>
+          <CryptoCurrencyIcon currency={d.id} icon={d.icon_url} iconId={d.icon_id} size="small" />
+          <span>{token}</span>
+        </Box>
+      ) : (
+        <CurrencyTicker symbol={ccy} />
+      ),
+      isDesktop && d.name,
+      isDesktop && (network || token),
       d.deposit_fee.isZero() ? (
         t('page.body.wallets.tabs.deposit.ccy.message.fee.free')
       ) : (
@@ -57,51 +70,38 @@ export const Fees: React.FC = () => {
     ];
   });
 
-  return (
-    <Box padding="2" className="container">
-      <Card header={<h3>{t('page.body.landing.footer.fees')}</h3>}>
-        <Box col spacing="4">
-          <Box col spacing="2">
-            <Box textColor="primary" as="h4">
-              {t('page.fees.trading')}
-            </Box>
-            <Box row textSize="lg" justify="center">
-              <Box row spacing="3">
-                <Box row justify="center" className={s.feesRect}>
-                  <AmountFormat
-                    money={createMoney(anyGroup?.taker ?? 0, CCY).multiply(100)}
-                    minFractionDigits={1}
-                  />
-                  &nbsp;%
-                </Box>
-                <Box textSize="lg" textColor="primary" as="span">
-                  {t('page.fees.taker')}
-                </Box>
-              </Box>
-              <Box className={s.feesMaker} row spacing="3">
-                <Box row justify="center" className={s.feesRect}>
-                  <AmountFormat
-                    money={createMoney(anyGroup?.maker ?? 0, CCY).multiply(100)}
-                    minFractionDigits={1}
-                  />
-                  &nbsp;%
-                </Box>
-                <Box textSize="lg" textColor="primary" as="span">
-                  {t('page.fees.maker')}
-                </Box>
-              </Box>
-            </Box>
-          </Box>
+  if (isMobile) {
+    return (
+      <>
+        <Subheader
+          title={t('page.mobile.profileLinks.history.fees')}
+          backTitle={t('page.body.profile.header.account')}
+          onGoBack={() => history.push('/profile')}
+        />
+        <Card>
+          <TradingFees tradingFees={tradingFees} />
+        </Card>
+        <Card>
           <Box col spacing="2">
             <Box textColor="primary" as="h4">
               {t('page.fees.table.header')}
             </Box>
             <Table tableClassName={s.feesTable} header={header} data={data} />
           </Box>
+        </Card>
+      </>
+    );
+  }
+
+  return (
+    <Card size="lg" header={<h3>{t('page.body.landing.footer.fees')}</h3>}>
+      <Box col spacing="4">
+        <TradingFees tradingFees={tradingFees} />
+        <Box textColor="primary" as="h4">
+          {t('page.fees.table.header')}
         </Box>
-      </Card>
-    </Box>
+        <Table tableClassName={s.feesTable} header={header} data={data} />
+      </Box>
+    </Card>
   );
 };
-
-const CCY = createCcy('', 2);
