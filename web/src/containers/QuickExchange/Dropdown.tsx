@@ -27,7 +27,7 @@ export const DropdownComponent = <T extends Object>({
           {value ? itemRenderer?.(value) ?? value.toString() : placeholder}
           <ChevronIcon className="cr-dropdown__arrow" />
         </Dropdown.Toggle>
-        <Dropdown.Menu>
+        <Dropdown.Menu popperConfig={{ strategy: 'fixed' }}>
           {list.map((item, i) => (
             <Dropdown.Item key={i} onSelect={() => onSelect?.(item)}>
               {itemRenderer?.(item) ?? item.toString()}
