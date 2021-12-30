@@ -72,6 +72,7 @@ export const en = {
   'page.mobile.userInfo.logout.button': 'Logout',
 
   'page.mobile.profileLinks.history.orders': 'Orders',
+  'page.mobile.profileLinks.history.fees': 'Fees',
 
   'page.mobile.profileLinks.main.verification': 'Profile verification',
   'page.mobile.profileLinks.main.2fa': 'Two-factor authentication',

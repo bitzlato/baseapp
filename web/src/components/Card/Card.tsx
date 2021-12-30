@@ -20,7 +20,14 @@ export const Card: React.FC<Props> = ({ className, header, size, children }) => 
     return (
       <Box col spacing="sm" className={s.cardMobile}>
         {header && (
-          <Box padding="3" textColor="primary" bgColor="body" row justify="center">
+          <Box
+            padding="3"
+            row
+            justify="center"
+            textColor="primary"
+            bgColor="body"
+            className={s.cardHeader}
+          >
             {header}
           </Box>
         )}
@@ -31,7 +38,7 @@ export const Card: React.FC<Props> = ({ className, header, size, children }) => 
     );
   }
 
-  const c = cn(s.card, size && s[`card${capitalize(size)}`], className);
+  const c = cn(s.cardDesktop, size && s[`card${capitalize(size)}`], className);
 
   return (
     <Box padding="2" row justify="center">

@@ -6,7 +6,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, RouteComponentProps, RouterProps, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { Fees } from 'src/screens/Fees/Fees';
+import { FeesScreen } from 'src/screens/Fees/Fees';
 import { IntlProps } from '../../';
 import {
   isAuth0,
@@ -430,6 +430,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             <Route exact={true} path="/trading/:market?" component={TradingScreenMobile} />
             {showLanding() && <Route exact={true} path="/" component={LandingScreenMobile} />}
             <Route path="/quick-exchange" component={QuickExchange} />
+            <Route path="/fees" component={FeesScreen} />
             <Route path="**">
               <Redirect to="/trading/" />
             </Route>
@@ -477,7 +478,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             component={EmailVerificationScreen}
           />
           <Route path="/docs" component={DocumentationScreen} />
-          <Route path="/fees" component={Fees} />
+          <Route path="/fees" component={FeesScreen} />
           <Route path="/restriction" component={RestrictedScreen} />
           <Route path="/maintenance" component={MaintenanceScreen} />
           <Route exact={true} path="/trading/:market?" component={TradingScreen} />
