@@ -150,11 +150,14 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     const { walletIndex } = this.state;
 
     if (!wallets.length && next.wallets.length) {
+      const index = getCurrencyIndex(next.wallets, next.match.params.currency)
+
       this.setState({
-        walletIndex: getCurrencyIndex(next.wallets, next.match.params.currency),
+        walletIndex: index,
       });
-      next.wallets[0]?.currency &&
-        this.props.fetchBeneficiaries({ currency_id: next.wallets[0].currency.code.toLowerCase() });
+
+      index > 0 && next.wallets[index]?.currency &&
+        this.props.fetchBeneficiaries({ currency_id: next.wallets[index].currency.code.toLowerCase() });
     }
 
     if (
