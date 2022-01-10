@@ -5,9 +5,10 @@ import { useHistory, useParams } from 'react-router';
 import { useMemberLevelFetch } from 'src/hooks/useMemberLevelsFetch';
 import { useWalletsFetch } from 'src/hooks';
 import { selectWallet } from 'src/modules/user/wallets';
-import { Subheader, WalletBanner, WalletHeader, WalletWithdrawBody } from 'src/mobile/components';
+import { Subheader, WalletBanner, WalletHeader } from 'src/mobile/components';
+import { Withdraw } from 'src/containers/Withdraw';
 
-const WalletWithdraw: React.FC = () => {
+export const WalletWithdraw: React.FC = () => {
   const { currency } = useParams<{ currency?: string }>();
   const intl = useIntl();
   const history = useHistory();
@@ -31,11 +32,9 @@ const WalletWithdraw: React.FC = () => {
             name={wallet.name}
           />
           <WalletBanner wallet={wallet} />
-          <WalletWithdrawBody wallet={wallet} />
+          <Withdraw wallet={wallet} />
         </>
       )}
     </div>
   );
 };
-
-export { WalletWithdraw };

@@ -86,32 +86,26 @@ exports[`Order should match snapshot 1`] = `
                 Price
               </label>
               <div
-                class="row grow rowSpacing"
+                class="row grow rowSpacingSm"
               >
+                <span>
+                  ≈
+                </span>
                 <span
-                  class="bold ellipsis"
+                  class="grow primaryColor ellipsis bold"
                 >
-                  ≈ 
+                  5
                   <span
-                    class="primaryColor"
+                    class="fractional"
                   >
-                    5
-                    <span
-                      class="fractional"
-                    >
-                      .00
-                    </span>
+                    .00
                   </span>
                 </span>
                 <span
-                  class=""
+                  class="currency"
                 >
-                  <span
-                    class="currency"
-                  >
-                    <span>
-                      BTC
-                    </span>
+                  <span>
+                    BTC
                   </span>
                 </span>
               </div>
@@ -413,32 +407,26 @@ exports[`Order should match snapshot 1`] = `
                 Price
               </label>
               <div
-                class="row grow rowSpacing"
+                class="row grow rowSpacingSm"
               >
+                <span>
+                  ≈
+                </span>
                 <span
-                  class="bold ellipsis"
+                  class="grow primaryColor ellipsis bold"
                 >
-                  ≈ 
+                  10
                   <span
-                    class="primaryColor"
+                    class="fractional"
                   >
-                    10
-                    <span
-                      class="fractional"
-                    >
-                      .00
-                    </span>
+                    .00
                   </span>
                 </span>
                 <span
-                  class=""
+                  class="currency"
                 >
-                  <span
-                    class="currency"
-                  >
-                    <span>
-                      BTC
-                    </span>
+                  <span>
+                    BTC
                   </span>
                 </span>
               </div>

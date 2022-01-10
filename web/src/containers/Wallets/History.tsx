@@ -22,6 +22,9 @@ import {
   selectWallets,
   Wallet,
   WalletHistoryList,
+  selectWithdrawSuccess,
+  Deposit,
+  Withdraw,
 } from '../../modules';
 import { DepositStatus } from 'src/components/History/DepositStatus';
 import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
@@ -31,7 +34,6 @@ export interface HistoryProps {
   label: string;
   type: 'deposits' | 'withdraws';
   currency: string;
-  withdrawSuccess?: boolean;
 }
 
 export interface ReduxProps {
@@ -43,6 +45,7 @@ export interface ReduxProps {
   firstElemIndex: number;
   lastElemIndex: number;
   nextPageExists: boolean;
+  withdrawSuccess: boolean;
 }
 
 interface DispatchProps {
@@ -124,7 +127,7 @@ export class WalletTable extends React.Component<Props> {
     this.props.fetchHistory({ page: Number(page) + 1, currency, type, limit: 6 });
   };
 
-  private retrieveData = (list) => {
+  private retrieveData = (list: WalletHistoryList) => {
     const { currency, type, wallets } = this.props;
     const { precision } = wallets.find(
       (w) => w.currency.code.toLowerCase() === currency.toLowerCase(),
@@ -137,18 +140,15 @@ export class WalletTable extends React.Component<Props> {
     return list
       .sort((a, b) => sortByDateDesc(a.created_at, b.created_at))
       .map((item, index) => {
-        const amount =
-          'amount' in item ? Number(item.amount) : Number(item.price) * Number(item.volume);
-
         return [
           <div title={`${item.id} - ${item.state}`}>{localeDate(item.created_at, 'fullDate')}</div>,
           type === 'deposits' ? (
-            <DepositStatus item={item} currency={currency} />
+            <DepositStatus item={item as Deposit} currency={currency} />
           ) : (
-            <WithdrawStatus item={item} currency={currency} />
+            <WithdrawStatus item={item as Withdraw} currency={currency} />
           ),
           <Decimal key={index} fixed={precision} thousSep=",">
-            {amount}
+            {Number(item.amount)}
           </Decimal>,
         ];
       });
@@ -164,6 +164,7 @@ export const mapStateToProps = (state: RootState): ReduxProps => ({
   firstElemIndex: selectFirstElemIndex(state, 6),
   lastElemIndex: selectLastElemIndex(state, 6),
   nextPageExists: selectNextPageExists(state, 6),
+  withdrawSuccess: selectWithdrawSuccess(state),
 });
 
 export const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = (dispatch) => ({

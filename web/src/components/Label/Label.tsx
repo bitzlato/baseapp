@@ -3,7 +3,7 @@ import cn from 'classnames';
 import s from './Label.postcss';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
-  size?: 'lg' | 'sm';
+  size?: 'lg' | 'sm' | 'xl';
   color?: 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask';
   tr?: 'capitalize' | 'uppercase';
   bold?: boolean;

@@ -74,4 +74,4 @@ const ModalWithdraw = (props: ModalWithdrawConfirmationProps) => {
   );
 };
 
-export const ModalWithdrawConfirmation = React.memo(ModalWithdraw);
+export const ModalWithdrawConfirmationMobile = React.memo(ModalWithdraw);

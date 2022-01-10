@@ -100,5 +100,5 @@ export interface TransferLink {
   url: string;
 }
 
-export type WalletHistoryElement = Withdraw | Deposit | PrivateTrade;
+export type WalletHistoryElement = Withdraw | Deposit;
 export type WalletHistoryList = WalletHistoryElement[];

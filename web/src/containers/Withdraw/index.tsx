@@ -1,129 +1,204 @@
-import React from 'react';
+import cn from 'classnames';
+import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { Currency, Money } from '@bitzlato/money-js';
-import { Box } from 'src/components/Box';
-import { Beneficiaries } from '../../components';
-import { precisionRegExp } from '../../helpers';
-import { Beneficiary, Wallet } from '../../modules';
-import { WithdrawSummary } from './WithdrawSummary';
-import { BeneficiaryAddress } from './BeneficiaryAddress';
-import { createMoney } from 'src/helpers/money';
-import { NumberInput } from 'src/components/NumberInput/NumberInput';
-import { parseInteger, parseNumeric } from 'src/helpers/parseNumeric';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { useT } from 'src/hooks/useT';
+import { selectMemberLevels, selectMobileDeviceState } from 'src/modules';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
+import { Blur } from 'src/components/Blur';
+import { ModalWithdrawConfirmation, ModalWithdrawSubmit } from 'src/containers';
+import { useBeneficiariesFetch } from 'src/hooks';
+import { Beneficiary } from 'src/modules/user/beneficiaries';
+import { selectUserInfo } from 'src/modules/user/profile';
+import { selectWithdrawSuccess, Wallet, walletsWithdrawCcyFetch } from 'src/modules/user/wallets';
+import { ModalWithdrawConfirmationMobile } from 'src/mobile/components';
+import { WithdrawBody } from './WithdrawBody';
 
 interface Props {
-  currency: Currency;
-  fee: Money;
-  onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
-  fixed: number;
-  className?: string;
-  type: 'fiat' | 'coin';
-  enableInvoice: boolean | undefined;
-  twoFactorAuthRequired?: boolean;
-  withdrawAmountLabel?: string;
-  withdraw2faLabel?: string;
-  withdrawButtonLabel?: string;
-  withdrawDone: boolean;
-  isMobileDevice?: boolean;
   wallet: Wallet;
 }
 
-export const Withdraw: React.FC<Props> = (props) => {
-  const [amount, setAmount] = React.useState('');
-  const [beneficiary, setBeneficiary] = React.useState(defaultBeneficiary);
-  const [otpCode, setOtpCode] = React.useState('');
-  const [total, setTotal] = React.useState('');
+export const Withdraw: React.FC<Props> = ({ wallet }) => {
+  const [withdrawSubmitModal, setWithdrawSubmitModal] = React.useState(false);
+  const [withdrawData, setWithdrawData] = React.useState({
+    amount: '',
+    beneficiary: defaultBeneficiary,
+    otpCode: '',
+    withdrawConfirmModal: false,
+    total: '',
+    withdrawDone: false,
+  });
 
-  const {
-    currency,
-    type,
-    enableInvoice,
-    twoFactorAuthRequired,
-    isMobileDevice,
-    wallet,
-    withdrawDone,
-  } = props;
+  const t = useT();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUserInfo);
+  const withdrawSuccess = useSelector(selectWithdrawSuccess);
+  const memberLevels = useSelector(selectMemberLevels);
+  const isMobileDevice = useSelector(selectMobileDeviceState);
 
-  const reset = () => {
-    setAmount('');
-    setBeneficiary(defaultBeneficiary);
-    setOtpCode('');
-    setTotal('');
-  };
+  const { currency } = wallet;
 
-  React.useEffect(() => {
-    reset();
-  }, [currency.code]);
+  useBeneficiariesFetch();
 
   React.useEffect(() => {
-    if (withdrawDone) {
-      reset();
+    if (withdrawSuccess) {
+      toggleSubmitModal();
     }
-  }, [withdrawDone]);
+  }, [withdrawSuccess]);
 
-  const handleCheckButtonDisabled = (total: string, beneficiary: Beneficiary, otpCode: string) => {
-    const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
-    return Number(total) <= 0 || !Boolean(beneficiary.id) || isPending || !Boolean(otpCode);
-  };
+  const getConfirmationAddress = () => {
+    let confirmationAddress = '';
 
-  const handleClick = () => props.onClick(amount, total, beneficiary, otpCode);
-
-  const handleChangeInputAmount = (value: string) => {
-    const amount = parseNumeric(value);
-    if (amount.match(precisionRegExp(props.fixed))) {
-      const amountMoney = createMoney(amount, props.currency);
-      const totalMoney = amountMoney.subtract(props.fee);
-      const total = totalMoney.isNegative() ? (0).toFixed(props.fixed) : totalMoney.toString();
-      setTotal(total);
-      setAmount(amount);
+    if (wallet) {
+      confirmationAddress =
+        wallet.type === 'fiat'
+          ? withdrawData.beneficiary.name
+          : withdrawData.beneficiary.data
+          ? (withdrawData.beneficiary.data.address as string)
+          : '';
     }
+
+    return confirmationAddress;
   };
 
-  const handleChangeOtpCode = (otpCode: string) => {
-    setOtpCode(parseInteger(otpCode));
+  const toggleConfirmModal = (
+    amount?: string,
+    total?: string,
+    beneficiary?: Beneficiary,
+    otpCode?: string,
+  ) => {
+    setWithdrawData((state: any) => ({
+      amount: amount || '',
+      beneficiary: beneficiary || defaultBeneficiary,
+      otpCode: otpCode || '',
+      withdrawConfirmModal: !state.withdrawConfirmModal,
+      total: total || '',
+      withdrawDone: false,
+    }));
   };
+
+  const toggleSubmitModal = () => {
+    setWithdrawSubmitModal((state) => !state);
+    setWithdrawData((state) => ({ ...state, withdrawDone: true }));
+  };
+
+  const handleWithdraw = () => {
+    const { otpCode, amount, beneficiary } = withdrawData;
+    const withdrawRequest = {
+      amount,
+      currency: currency.code.toLowerCase(),
+      otp: otpCode,
+      beneficiary_id: String(beneficiary.id),
+    };
+    dispatch(walletsWithdrawCcyFetch(withdrawRequest));
+    toggleConfirmModal();
+  };
+
+  const renderContent = () => {
+    if (!wallet?.withdrawal_enabled) {
+      return (
+        <Blur
+          className="pg-blur-withdraw"
+          text={
+            wallet.withdrawal_disabled_reason ||
+            t('page.body.wallets.tabs.withdraw.disabled.message')
+          }
+        />
+      );
+    }
+
+    if (user.level < (memberLevels?.withdraw.minimum_level ?? 0)) {
+      return (
+        <Blur
+          className={`pg-blur-withdraw pg-blur-withdraw-${wallet?.type}`}
+          text={t('page.body.wallets.warning.withdraw.verification')}
+          onClick={() => history.push('/confirm')}
+          linkText={t('page.body.wallets.warning.withdraw.verification.button')}
+        />
+      );
+    }
+
+    if (!user.otp) {
+      if (isMobileDevice) {
+        return (
+          <div className="cr-mobile-wallet-withdraw__otp-disabled">
+            <span className="cr-mobile-wallet-withdraw__otp-disabled__text">
+              {t('page.body.wallets.tabs.withdraw.content.enable2fa')}
+            </span>
+            <Button
+              block={true}
+              onClick={() => history.push('/profile/2fa', { enable2fa: true })}
+              size="lg"
+              variant="primary"
+            >
+              {t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
+            </Button>
+          </div>
+        );
+      } else {
+        return (
+          <Blur
+            className={`pg-blur-withdraw pg-blur-withdraw-${wallet.type}`}
+            text={t('page.body.wallets.warning.withdraw.2fa')}
+            linkText={t('page.body.wallets.warning.withdraw.2fa.button')}
+            onClick={() => history.push('/security/2fa', { enable2fa: true })}
+          />
+        );
+      }
+    }
+
+    return (
+      <WithdrawBody
+        onClick={toggleConfirmModal}
+        withdrawDone={withdrawData.withdrawDone}
+        wallet={wallet}
+      />
+    );
+  };
+
+  const className = isMobileDevice
+    ? cn(
+        'cr-mobile-wallet-withdraw-body',
+        !wallet.withdrawal_enabled && 'cr-mobile-wallet-withdraw-body--disabled',
+      )
+    : undefined;
 
   return (
-    <Box padding={isMobileDevice ? undefined : '3'} col spacing="3">
-      <Beneficiaries
-        currency={currency.code}
-        type={type}
-        enableInvoice={enableInvoice}
-        onChangeValue={setBeneficiary}
-      />
-      <BeneficiaryAddress beneficiary={beneficiary} />
-      <Box grow row spacing="2">
-        <Box
-          flex1
-          as={NumberInput}
-          value={amount}
-          onChange={handleChangeInputAmount}
-          label={props.withdrawAmountLabel}
+    <div className={className}>
+      {renderContent()}
+      <div className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body__submit' : undefined}>
+        <ModalWithdrawSubmit
+          isMobileDevice
+          show={withdrawSubmitModal}
+          currency={currency.code}
+          onSubmit={toggleSubmitModal}
         />
-        {twoFactorAuthRequired && (
-          <Box
-            flex1
-            as={NumberInput}
-            value={otpCode}
-            onChange={handleChangeOtpCode}
-            label={props.withdraw2faLabel}
+      </div>
+      {isMobileDevice ? (
+        <div className={'cr-mobile-wallet-withdraw-body__confirmation'}>
+          <ModalWithdrawConfirmationMobile
+            show={withdrawData.withdrawConfirmModal}
+            amount={withdrawData.total}
+            currency={currency.code}
+            precision={wallet ? wallet.precision : 0}
+            rid={getConfirmationAddress()}
+            onSubmit={handleWithdraw}
+            onDismiss={toggleConfirmModal}
           />
-        )}
-      </Box>
-      <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2">
-        <WithdrawSummary total={total} wallet={wallet} />
-        <Box self="start">
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={handleClick}
-            disabled={handleCheckButtonDisabled(total, beneficiary, otpCode)}
-          >
-            {props.withdrawButtonLabel}
-          </Button>
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      ) : (
+        <ModalWithdrawConfirmation
+          show={withdrawData.withdrawConfirmModal}
+          amount={withdrawData.total}
+          currency={currency.code}
+          precision={wallet ? wallet.precision : 0}
+          rid={getConfirmationAddress()}
+          onSubmit={handleWithdraw}
+          onDismiss={toggleConfirmModal}
+        />
+      )}
+    </div>
   );
 };
