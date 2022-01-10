@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { FormControl, FormControlProps } from 'react-bootstrap';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
+import { Box } from 'src/components/Box/Box';
 import s from './NumberInput.postcss';
 
 interface Props extends Omit<FormControlProps, 'onChange'> {
@@ -28,7 +29,9 @@ export const NumberInput: React.FC<Props> = ({
 
   return (
     <div className={cn(s.numberInput, isMobileDevice && s.numberInputNoButtons, className)}>
-      <label className={labelClassName}>{(labelVisible || props.value) && label}</label>
+      <Box ellipsis as="label">
+        {(labelVisible || props.value) && label}
+      </Box>
       <FormControl
         {...props}
         className={inputClassName}

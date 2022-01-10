@@ -333,16 +333,12 @@ export const OrderForm: React.FC<OrderFormProps> = ({
             <label className={s.inputLabel}>
               {t('page.body.trade.header.newOrder.content.price')}
             </label>
-            <Box grow row spacing>
-              <Label ellipsis size={isMobileDevice ? 'sm' : undefined} bold>
-                &asymp;{' '}
-                <Box as="span" textColor="primary">
-                  <AmountFormat money={price} />
-                </Box>
-              </Label>
-              <Label size={isMobileDevice ? 'sm' : undefined}>
-                <CurrencyTicker symbol={from} />
-              </Label>
+            <Box grow row spacing="sm" textSize={isMobileDevice ? 'sm' : undefined}>
+              <span>&asymp;</span>
+              <Box as="span" grow ellipsis textColor="primary" bold>
+                <AmountFormat money={price} />
+              </Box>
+              <CurrencyTicker symbol={from} />
             </Box>
           </Box>
         );

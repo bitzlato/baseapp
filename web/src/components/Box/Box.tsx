@@ -25,6 +25,8 @@ type BoxOwnProps<E = React.ElementType> = {
   textTr?: 'capitalize' | 'uppercase';
   textAlign?: 'start';
   bgColor?: 'body';
+  ellipsis?: boolean;
+  bold?: boolean;
 };
 
 type Props<E extends React.ElementType> = BoxOwnProps<E> &
@@ -53,6 +55,8 @@ export const Box: Element = React.forwardRef(
       textTr,
       textAlign,
       bgColor,
+      ellipsis,
+      bold,
       ...props
     }: BoxOwnProps,
     ref,
@@ -75,6 +79,8 @@ export const Box: Element = React.forwardRef(
       textTr && sLabel[`${textTr}Transform`],
       textAlign && s[`textAlign${capitalize(textAlign)}`],
       bgColor && s[`${bgColor}BgColor`],
+      ellipsis && sLabel.ellipsis,
+      bold && sLabel.bold,
     );
     return React.createElement(as, { ...props, ref, className: boxClassName });
   },
