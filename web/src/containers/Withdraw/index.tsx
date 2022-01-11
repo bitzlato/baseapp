@@ -170,7 +170,7 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
       {renderContent()}
       <div className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body__submit' : undefined}>
         <ModalWithdrawSubmit
-          isMobileDevice
+          isMobileDevice={isMobileDevice}
           show={withdrawSubmitModal}
           currency={currency.code}
           onSubmit={toggleSubmitModal}
