@@ -156,8 +156,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         walletIndex: index,
       });
 
-      index > 0 && next.wallets[index]?.currency &&
+      if (index > 0 && next.wallets[index]?.currency) {
         this.props.fetchBeneficiaries({ currency_id: next.wallets[index].currency.code.toLowerCase() });
+      }
     }
 
     if (
