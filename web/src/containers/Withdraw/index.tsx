@@ -40,7 +40,7 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
 
   const { currency } = wallet;
 
-  useBeneficiariesFetch();
+  useBeneficiariesFetch({ currency_id: currency.code.toLowerCase() });
 
   React.useEffect(() => {
     if (withdrawSuccess) {
