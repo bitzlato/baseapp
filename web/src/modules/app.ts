@@ -42,14 +42,12 @@ import { marketsAdminReducer } from './admin/markets';
 import { platformCreateReducer } from './admin/platform';
 import { quickExchangeReducer } from './user/quickExchange';
 import { quickExchangePublicReducer } from './public/quickExchangePublic/reducer';
-import { tradingFeesReducer } from './public/tradingFees/reducer';
 
 export const publicReducer = combineReducers({
   alerts: alertReducer,
   blocklistAccess: blocklistAccessReducer,
   colorTheme: changeColorThemeReducer,
   currencies: currenciesReducer,
-  tradingFees: tradingFeesReducer,
   errorHandler: errorHandlerReducer,
   rgl: gridLayoutReducer,
   i18n: changeLanguageReducer,

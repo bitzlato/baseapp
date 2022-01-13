@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
+import { useFetchCache } from 'src/hooks/useFetchCache';
+import { useAlert } from 'src/hooks/useAlert';
 import { setDocumentTitle } from '../../helpers';
 import { Table } from 'src/components';
 import { currenciesFetch } from 'src/modules/public/currencies/actions';
 import { selectCurrencies } from 'src/modules/public/currencies/selectors';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
-import { selectTradingFees } from 'src/modules/public/tradingFees/selectors';
-import { tradingFeesFetch } from 'src/modules/public/tradingFees/actions';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { Box } from 'src/components/Box';
@@ -16,6 +16,7 @@ import { Card } from 'src/components/Card/Card';
 import { TradingFees } from 'src/containers/Fees/TradingFees';
 import { Subheader } from 'src/mobile/components/Subheader';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { TradingFee } from 'src/modules/public/tradingFees/types';
 import s from './Fees.postcss';
 
 export const FeesScreen: React.FC = () => {
@@ -29,11 +30,12 @@ export const FeesScreen: React.FC = () => {
   useEffect(() => {
     setDocumentTitle(t('page.body.landing.footer.fees'));
     dispatch(currenciesFetch());
-    dispatch(tradingFeesFetch());
   }, [dispatch]);
 
   const currencies = useSelector(selectCurrencies);
-  const tradingFees = useSelector(selectTradingFees);
+
+  const { data = [], error } = useFetchCache<TradingFee[]>('/api/v2/peatio/public/trading_fees');
+  useAlert(error);
 
   const header = [
     t('page.fees.table.coin'),
@@ -45,7 +47,7 @@ export const FeesScreen: React.FC = () => {
     t('page.fees.table.min_withdraw'),
   ];
 
-  const data = currencies.map((d) => {
+  const tableData = currencies.map((d) => {
     const ccy = d.id.toUpperCase();
     const [token, network] = ccy.split('-');
     return [
@@ -79,14 +81,14 @@ export const FeesScreen: React.FC = () => {
           onGoBack={() => history.push('/profile')}
         />
         <Card>
-          <TradingFees tradingFees={tradingFees} />
+          <TradingFees tradingFees={data} />
         </Card>
         <Card>
           <Box col spacing="2">
             <Box textColor="primary" as="h4">
               {t('page.fees.table.header')}
             </Box>
-            <Table tableClassName={s.feesTable} header={header} data={data} />
+            <Table tableClassName={s.feesTable} header={header} data={tableData} />
           </Box>
         </Card>
       </>
@@ -96,11 +98,11 @@ export const FeesScreen: React.FC = () => {
   return (
     <Card size="lg" header={<h3>{t('page.body.landing.footer.fees')}</h3>}>
       <Box col spacing="4">
-        <TradingFees tradingFees={tradingFees} />
+        <TradingFees tradingFees={data} />
         <Box textColor="primary" as="h4">
           {t('page.fees.table.header')}
         </Box>
-        <Table tableClassName={s.feesTable} header={header} data={data} />
+        <Table tableClassName={s.feesTable} header={header} data={tableData} />
       </Box>
     </Card>
   );

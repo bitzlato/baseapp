@@ -49,8 +49,6 @@ import { MarketsAdminState, rootMarketsAdminSaga } from './admin/markets';
 import { PlatformCreateState, rootPlatformCreateSaga } from './admin/platform';
 import { rootQuickExchangeLimitsSaga } from './public/quickExchangePublic/sagas';
 import { QuickExchangePublicState } from './public/quickExchangePublic/reducer';
-import { rootTradingFeesSaga } from './public/tradingFees/sagas/currenciesFetchSaga';
-import { TradingFeesState } from './public/tradingFees/reducer';
 
 export * from './admin/config';
 export * from './admin/markets';
@@ -94,7 +92,6 @@ export interface RootState {
     blocklistAccess: BlocklistAccessState;
     colorTheme: ColorThemeState;
     currencies: CurrenciesState;
-    tradingFees: TradingFeesState;
     depth: DepthState;
     errorHandler: ErrorHandlerState;
     i18n: LanguageState;
@@ -157,7 +154,6 @@ export function* rootSaga() {
     call(rootBlocklistAccessSaga),
     call(rootConfigUpdateSaga),
     call(rootCurrenciesSaga),
-    call(rootTradingFeesSaga),
     call(rootDocumentationSaga),
     call(rootEmailVerificationSaga),
     call(rootErrorHandlerSaga),
