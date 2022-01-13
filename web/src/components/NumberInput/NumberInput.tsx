@@ -6,7 +6,7 @@ import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selec
 import { Box } from 'src/components/Box/Box';
 import s from './NumberInput.postcss';
 
-interface Props extends Omit<FormControlProps, 'onChange'> {
+export interface NumberInputProps extends Omit<FormControlProps, 'onChange'> {
   label?: React.ReactNode;
   onChange: (value: string) => void;
   inputClassName?: string;
@@ -15,7 +15,7 @@ interface Props extends Omit<FormControlProps, 'onChange'> {
   error?: React.ReactNode;
 }
 
-export const NumberInput: React.FC<Props> = ({
+export const NumberInput: React.FC<NumberInputProps> = ({
   label,
   onChange,
   className,

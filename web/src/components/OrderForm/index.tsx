@@ -15,7 +15,7 @@ import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Box } from 'src/components/Box/Box';
 import { Label } from 'src/components/Label/Label';
 import { isLimit, isMarket, isTrigger, isTriggerByPrice } from 'src/helpers/order';
-import { DropdownComponent } from 'src/containers/QuickExchange/Dropdown';
+import { Dropdown2 } from 'src/components/Dropdown/Dropdown2';
 import { AmountFormat } from '../AmountFormat/AmountFormat';
 import { MoneyFormat } from '../MoneyFormat/MoneyFormat';
 import { createCcy, createMoney } from 'src/helpers/money';
@@ -373,7 +373,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
         <div className="cr-order-item__dropdown__label">
           {t('page.body.trade.header.newOrder.content.orderType')}
         </div>
-        <DropdownComponent list={orderTypes} value={orderType} onSelect={handleOrderTypeChange} />
+        <Dropdown2 list={orderTypes} value={orderType} onSelect={handleOrderTypeChange} />
       </div>
       <div className="cr-order-item">{getPriceInputs()}</div>
       <div className="cr-order-item">

@@ -30,7 +30,7 @@ import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurr
 import { Box } from 'src/components/Box/Box';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { Button as BzButton } from 'src/components/Button/Button';
-import { DropdownComponent } from './Dropdown';
+import { Dropdown2 } from '../../components/Dropdown/Dropdown2';
 import { Card } from 'src/components/Card/Card';
 import { InfoIcon } from 'src/assets/images/InfoIcon';
 import { PriceLimit } from './PriceLimit';
@@ -241,7 +241,7 @@ export const QuickExchangeContainer: React.FC = () => {
               value={fromAmount}
               onChange={handleChangeFrom}
             />
-            <DropdownComponent
+            <Dropdown2
               className={s.quickExchangeDropdown}
               list={fromList}
               value={fromCurrency}
@@ -313,7 +313,7 @@ export const QuickExchangeContainer: React.FC = () => {
           value={toAmount}
           onChange={handleChangeTo}
         />
-        <DropdownComponent
+        <Dropdown2
           className={s.quickExchangeDropdown}
           list={toList}
           value={toCurrency}
