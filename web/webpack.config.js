@@ -235,7 +235,7 @@ module.exports = {
   devServer: isDevelopment
     ? {
         compress: false,
-        host: 'localhost',
+        host: process.env.HOST ?? 'localhost',
         port: process.env.PORT ?? 3000,
         historyApiFallback: true,
         hot: true,
