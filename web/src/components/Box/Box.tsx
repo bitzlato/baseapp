@@ -17,7 +17,7 @@ type BoxOwnProps<E = React.ElementType> = {
   wrap?: boolean;
   justify?: 'end' | 'center' | 'between';
   align?: 'end' | 'center';
-  self?: 'start' | 'center' | 'stretch';
+  self?: 'start' | 'center' | 'end' | 'stretch';
   spacing?: boolean | '2' | '3' | '4' | '5' | 'sm';
   padding?: boolean | '2' | '3' | '5';
   textSize?: 'lg' | 'sm';

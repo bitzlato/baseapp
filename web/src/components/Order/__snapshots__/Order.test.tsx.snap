@@ -56,20 +56,24 @@ exports[`Order should match snapshot 1`] = `
                   id="dropdown-basic"
                   type="button"
                 >
-                  Market
-                  <svg
-                    class="cr-dropdown__arrow"
-                    fill="none"
-                    height="8"
-                    viewBox="0 0 12 8"
-                    width="12"
-                    xmlns="http://www.w3.org/2000/svg"
+                  <div
+                    class="row grow justifyBetween rowSpacing"
                   >
-                    <path
-                      d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
-                      fill="var(--icons)"
-                    />
-                  </svg>
+                    Market
+                    <svg
+                      class="cr-dropdown__arrow"
+                      fill="none"
+                      height="8"
+                      viewBox="0 0 12 8"
+                      width="12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
+                        fill="var(--icons)"
+                      />
+                    </svg>
+                  </div>
                 </button>
               </div>
             </div>
@@ -377,20 +381,24 @@ exports[`Order should match snapshot 1`] = `
                   id="dropdown-basic"
                   type="button"
                 >
-                  Market
-                  <svg
-                    class="cr-dropdown__arrow"
-                    fill="none"
-                    height="8"
-                    viewBox="0 0 12 8"
-                    width="12"
-                    xmlns="http://www.w3.org/2000/svg"
+                  <div
+                    class="row grow justifyBetween rowSpacing"
                   >
-                    <path
-                      d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
-                      fill="var(--icons)"
-                    />
-                  </svg>
+                    Market
+                    <svg
+                      class="cr-dropdown__arrow"
+                      fill="none"
+                      height="8"
+                      viewBox="0 0 12 8"
+                      width="12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
+                        fill="var(--icons)"
+                      />
+                    </svg>
+                  </div>
                 </button>
               </div>
             </div>
