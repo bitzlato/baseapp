@@ -1,6 +1,4 @@
-import cn from 'classnames';
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useT } from 'src/hooks/useT';
@@ -14,6 +12,7 @@ import { selectUserInfo } from 'src/modules/user/profile';
 import { selectWithdrawSuccess, Wallet, walletsWithdrawCcyFetch } from 'src/modules/user/wallets';
 import { ModalWithdrawConfirmationMobile } from 'src/mobile/components';
 import { WithdrawBody } from './WithdrawBody';
+import { Box } from 'src/components/Box/Box';
 
 interface Props {
   wallet: Wallet;
@@ -96,51 +95,36 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
     toggleConfirmModal();
   };
 
-  const renderContent = () => {
+  const renderBlur = () => {
     if (!wallet?.withdrawal_enabled) {
       return (
         <Blur
-          className="pg-blur-withdraw"
           text={
             wallet.withdrawal_disabled_reason ||
             t('page.body.wallets.tabs.withdraw.disabled.message')
           }
         />
       );
-    }
-
-    if (user.level < (memberLevels?.withdraw.minimum_level ?? 0)) {
+    } else if (user.level < (memberLevels?.withdraw.minimum_level ?? 0)) {
       return (
         <Blur
-          className={`pg-blur-withdraw pg-blur-withdraw-${wallet?.type}`}
           text={t('page.body.wallets.warning.withdraw.verification')}
           onClick={() => history.push('/confirm')}
           linkText={t('page.body.wallets.warning.withdraw.verification.button')}
         />
       );
-    }
-
-    if (!user.otp) {
+    } else if (!user.otp) {
       if (isMobileDevice) {
         return (
-          <div className="cr-mobile-wallet-withdraw__otp-disabled">
-            <span className="cr-mobile-wallet-withdraw__otp-disabled__text">
-              {t('page.body.wallets.tabs.withdraw.content.enable2fa')}
-            </span>
-            <Button
-              block={true}
-              onClick={() => history.push('/profile/2fa', { enable2fa: true })}
-              size="lg"
-              variant="primary"
-            >
-              {t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
-            </Button>
-          </div>
+          <Blur
+            text={t('page.body.wallets.tabs.withdraw.content.enable2fa')}
+            onClick={() => () => history.push('/profile/2fa', { enable2fa: true })}
+            linkText={t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
+          />
         );
       } else {
         return (
           <Blur
-            className={`pg-blur-withdraw pg-blur-withdraw-${wallet.type}`}
             text={t('page.body.wallets.warning.withdraw.2fa')}
             linkText={t('page.body.wallets.warning.withdraw.2fa.button')}
             onClick={() => history.push('/security/2fa', { enable2fa: true })}
@@ -148,26 +132,20 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
         );
       }
     }
+    return null;
+  };
 
-    return (
+  return (
+    <Box
+      className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body' : undefined}
+      position="relative"
+    >
+      {renderBlur()}
       <WithdrawBody
         onClick={toggleConfirmModal}
         withdrawDone={withdrawData.withdrawDone}
         wallet={wallet}
       />
-    );
-  };
-
-  const className = isMobileDevice
-    ? cn(
-        'cr-mobile-wallet-withdraw-body',
-        !wallet.withdrawal_enabled && 'cr-mobile-wallet-withdraw-body--disabled',
-      )
-    : undefined;
-
-  return (
-    <div className={className}>
-      {renderContent()}
       <div className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body__submit' : undefined}>
         <ModalWithdrawSubmit
           isMobileDevice={isMobileDevice}
@@ -177,7 +155,7 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
         />
       </div>
       {isMobileDevice ? (
-        <div className={'cr-mobile-wallet-withdraw-body__confirmation'}>
+        <div className="cr-mobile-wallet-withdraw-body__confirmation">
           <ModalWithdrawConfirmationMobile
             show={withdrawData.withdrawConfirmModal}
             amount={withdrawData.total}
@@ -199,6 +177,6 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
           onDismiss={toggleConfirmModal}
         />
       )}
-    </div>
+    </Box>
   );
 };

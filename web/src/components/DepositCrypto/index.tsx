@@ -1,14 +1,23 @@
 import * as React from 'react';
+import { useHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { isMetaMaskInstalled } from '@bitzlato/ethereum-provider';
 
 import { useT } from 'src/hooks/useT';
-import { alertPush, selectMobileDeviceState, Wallet, walletsAddressFetch } from '../../modules';
+import {
+  alertPush,
+  selectMemberLevels,
+  selectMobileDeviceState,
+  selectUserInfo,
+  Wallet,
+  walletsAddressFetch,
+} from '../../modules';
 import { Box } from '../Box';
 import { CopyableTextField } from 'src/components/CopyableTextField';
 import { MetaMaskButton } from '../MetaMaskButton';
 import { QRCode } from '../QRCode';
+import { Blur } from '../Blur';
 import { DepositInvoice } from './DepositInvoice';
 import { DepositSummary } from './DepositSummary';
 import s from 'src/containers/Withdraw/BeneficiaryAddress.postcss';
@@ -17,11 +26,13 @@ interface Props {
   wallet: Wallet;
 }
 
-export const DepositCrypto: React.FC<Props> = (props) => {
-  const { wallet } = props;
-  const isMobileDevice = useSelector(selectMobileDeviceState);
+export const DepositCrypto: React.FC<Props> = ({ wallet }) => {
   const t = useT();
   const dispatch = useDispatch();
+  const history = useHistory();
+  const isMobileDevice = useSelector(selectMobileDeviceState);
+  const user = useSelector(selectUserInfo);
+  const memberLevels = useSelector(selectMemberLevels);
 
   const handleGenerateAddress = () => {
     const currency = wallet.currency.code.toLowerCase();
@@ -73,27 +84,40 @@ export const DepositCrypto: React.FC<Props> = (props) => {
     wallet.currency.code === 'ETH' && (!isMobileDevice || isMetaMaskInstalled()) && walletAddress;
 
   return (
-    <Box col spacing="3" className="cr-deposit-crypto">
-      <Box row>
-        <div className="cr-deposit-info">{text}</div>
-        {walletAddress && (
-          <div className="d-none d-md-block qr-code-wrapper">
-            <QRCode dimensions={QR_SIZE} data={walletAddress} />
-          </div>
-        )}
-      </Box>
-      <Box row spacing="2">
-        {showMetamask ? <MetaMaskButton depositAddress={walletAddress} currency={wallet} /> : null}
-        <CopyableTextField
-          className={s.field}
-          value={walletAddress || t('page.body.wallets.tabs.deposit.ccy.message.pending')}
-          fieldId={walletAddress ? 'copy_deposit_1' : 'copy_deposit_2'}
-          disabled={disabled}
-          label={t('page.body.wallets.tabs.deposit.ccy.message.address')}
-          onCopy={onCopy}
+    <Box position="relative">
+      {!wallet?.deposit_enabled ? (
+        <Blur text={t('page.body.wallets.tabs.deposit.disabled.message')} />
+      ) : user.level < (memberLevels?.deposit.minimum_level ?? 0) ? (
+        <Blur
+          text={t('page.body.wallets.warning.deposit.verification')}
+          onClick={() => history.push('/confirm')}
+          linkText={t('page.body.wallets.warning.deposit.verification.button')}
         />
+      ) : null}
+      <Box col spacing="3" className="cr-deposit-crypto">
+        <Box row>
+          <div className="cr-deposit-info">{text}</div>
+          {walletAddress && (
+            <div className="d-none d-md-block qr-code-wrapper">
+              <QRCode dimensions={QR_SIZE} data={walletAddress} />
+            </div>
+          )}
+        </Box>
+        <Box row spacing="2">
+          {showMetamask ? (
+            <MetaMaskButton depositAddress={walletAddress} currency={wallet} />
+          ) : null}
+          <CopyableTextField
+            className={s.field}
+            value={walletAddress || t('page.body.wallets.tabs.deposit.ccy.message.pending')}
+            fieldId={walletAddress ? 'copy_deposit_1' : 'copy_deposit_2'}
+            disabled={disabled}
+            label={t('page.body.wallets.tabs.deposit.ccy.message.address')}
+            onCopy={onCopy}
+          />
+        </Box>
+        <DepositSummary currency={wallet} showWarning />
       </Box>
-      <DepositSummary currency={wallet} showWarning />
     </Box>
   );
 };
