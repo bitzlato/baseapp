@@ -15,6 +15,7 @@ type BoxOwnProps<E = React.ElementType> = {
   grow?: boolean;
   flex1?: boolean;
   wrap?: boolean;
+  position?: 'relative' | 'absolute';
   justify?: 'end' | 'center' | 'between';
   align?: 'end' | 'center';
   self?: 'start' | 'center' | 'end' | 'stretch';
@@ -47,6 +48,7 @@ export const Box: Element = React.forwardRef(
       grow,
       flex1,
       align,
+      position,
       justify,
       self,
       wrap,
@@ -70,6 +72,7 @@ export const Box: Element = React.forwardRef(
       flex1 && s.flex1,
       wrap && s.wrap,
       align && s[`align${capitalize(align)}`],
+      position && s[`position${capitalize(position)}`],
       justify && s[`justify${capitalize(justify)}`],
       self && s[`self${capitalize(self)}`],
       spacing && s[`${row ? 'row' : 'col'}Spacing${spacing === true ? '' : capitalize(spacing)}`],

@@ -5,7 +5,9 @@ import { useHistory, useParams } from 'react-router';
 import { useMemberLevelFetch } from 'src/hooks/useMemberLevelsFetch';
 import { useCurrenciesFetch, useRangerConnectFetch, useWalletsFetch } from 'src/hooks';
 import { selectWallet } from 'src/modules/user/wallets';
-import { Subheader, WalletDepositBody, WalletHeader } from 'src/mobile/components';
+import { Subheader, WalletHeader } from 'src/mobile/components';
+import { DepositCrypto } from 'src/components/DepositCrypto';
+import { Card } from 'src/components/Card/Card';
 
 const WalletDeposit: React.FC = () => {
   const intl = useIntl();
@@ -32,7 +34,9 @@ const WalletDeposit: React.FC = () => {
             iconId={wallet.icon_id}
             name={wallet.name}
           />
-          <WalletDepositBody wallet={wallet} />
+          <Card>
+            <DepositCrypto wallet={wallet} />
+          </Card>
         </>
       )}
     </React.Fragment>

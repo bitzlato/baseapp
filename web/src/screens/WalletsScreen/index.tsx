@@ -11,14 +11,7 @@ import { Withdraw } from 'src/containers/Withdraw';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 import { defaultWallet } from 'src/modules/user/wallets/defaults';
 import { IntlProps } from '../../';
-import {
-  Blur,
-  CurrencyInfo,
-  DepositCrypto,
-  DepositFiat,
-  TabPanel,
-  WalletList,
-} from '../../components';
+import { CurrencyInfo, DepositCrypto, DepositFiat, TabPanel, WalletList } from '../../components';
 import { DEFAULT_CCY_PRECISION } from '../../constants';
 import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
 import { WalletHistory } from '../../containers/Wallets/History';
@@ -266,46 +259,6 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     ];
   }
 
-  private getBlurDeposit = (isAccountActivated: boolean) => {
-    const { user, wallets, memberLevels, currencies } = this.props;
-    const { walletIndex: selectedWalletIndex } = this.state;
-    const wallet: Wallet = wallets[selectedWalletIndex] || defaultWallet;
-    const currencyItem = (currencies &&
-      currencies.find((item) => item.id === wallet.currency.code.toLowerCase())) || {
-      min_confirmations: 6,
-      deposit_enabled: false,
-    };
-
-    const blurClassName = classnames(`pg-blur-deposit-${wallets[selectedWalletIndex].type}`, {
-      'pg-blur-deposit-coin--active':
-        isAccountActivated && wallets[selectedWalletIndex].type === 'coin',
-      'pg-blur-deposit-fiat--active':
-        isAccountActivated && wallets[selectedWalletIndex].type === 'fiat',
-    });
-
-    if (!currencyItem?.deposit_enabled) {
-      return (
-        <Blur
-          className={blurClassName}
-          text={this.translate('page.body.wallets.tabs.deposit.disabled.message')}
-        />
-      );
-    }
-
-    if (memberLevels && user.level < memberLevels?.deposit.minimum_level) {
-      return (
-        <Blur
-          className={blurClassName}
-          text={this.translate('page.body.wallets.warning.deposit.verification')}
-          onClick={() => this.props.history.push('/confirm')}
-          linkText={this.translate('page.body.wallets.warning.deposit.verification.button')}
-        />
-      );
-    }
-
-    return null;
-  };
-
   private renderDeposit = (isAccountActivated: boolean) => {
     const { user, wallets } = this.props;
     const { walletIndex: selectedWalletIndex } = this.state;
@@ -315,7 +268,6 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
       return (
         <React.Fragment>
           <CurrencyInfo wallet={wallet} />
-          {this.getBlurDeposit(isAccountActivated)}
           <Box padding="3" style={{ paddingBottom: 0 }}>
             <DepositCrypto wallet={wallet} />
           </Box>
@@ -334,7 +286,6 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
       return (
         <React.Fragment>
           <CurrencyInfo wallet={wallet} />
-          {this.getBlurDeposit(isAccountActivated)}
           <DepositFiat
             title={this.title}
             description={this.description}
