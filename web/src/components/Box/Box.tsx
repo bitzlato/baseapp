@@ -20,7 +20,7 @@ type BoxOwnProps<E = React.ElementType> = {
   self?: 'start' | 'center' | 'end' | 'stretch';
   spacing?: boolean | '2' | '3' | '4' | '5' | 'sm';
   padding?: boolean | '2' | '3' | '4' | '5';
-  textSize?: 'lg' | 'sm';
+  textSize?: 'sm' | 'lg' | 'xl';
   textColor?: TextColor;
   textTr?: 'capitalize' | 'uppercase';
   textAlign?: 'start';

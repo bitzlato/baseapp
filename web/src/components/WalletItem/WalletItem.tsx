@@ -1,49 +1,66 @@
 import React, { FC } from 'react';
 import cn from 'classnames';
-import { Wallet } from 'src/modules';
+import { Money } from '@bitzlato/money-js';
+import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
-import { LockIcon } from 'src/assets/icons/LockIcon';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { createMoney } from 'src/helpers/money';
+import { Box } from 'src/components/Box/Box';
+import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { Wallet } from 'src/modules/user/wallets/types';
+import { GeneralBalance } from 'src/modules/account/types';
 
 import s from './WalletItem.postcss';
 
+export interface WalletItemData {
+  name: string;
+  currency: string;
+  balance: Money;
+  balanceP2P: Money;
+  balanceMarket: Money;
+  approximate: Money;
+  locked: Money;
+  icon: string;
+  hasTransfer: boolean;
+}
+
 interface Props {
   active?: boolean;
-  wallet: Wallet;
+  wallet: WalletItemData;
   onClick?: () => void;
 }
 
-export const WalletItem: FC<Props> = ({
-  wallet: { name, balance, locked, icon_url, icon_id, currency },
-  active = false,
-  onClick,
-}: Props) => {
-  const zeroMoney = createMoney(0, currency);
-  const hasLocked = locked?.gt(zeroMoney) === true;
-  const currencySymbol = currency.code.split('-')[0];
-
+export const WalletItem: FC<Props> = ({ wallet, active, onClick }) => {
   return (
-    <button className={cn(s.item, active && s.itemActive)} type="button" onClick={onClick}>
-      <span className={s.icon}>
-        <CryptoCurrencyIcon currency={currency.code} iconId={icon_id} icon={icon_url} />
-      </span>
-      <span className={s.info}>
-        <span className={cn(s.row, s.title)}>
-          <span>{currencySymbol}</span>
-          <span>
-            <AmountFormat money={balance ?? zeroMoney} />
+    <Box
+      row
+      spacing="2"
+      padding="2"
+      as="button"
+      className={cn(s.item, active && s.itemActive)}
+      type="button"
+      onClick={onClick}
+    >
+      <CryptoCurrencyIcon size="medium" currency={wallet.currency} />
+      <Box grow row align="start" justify="between">
+        <Box col align="start" textAlign="start">
+          <span className={s.title}>{getCurrencyCodeSymbol(wallet.currency)}</span>
+          <span className={s.description}>{wallet.name}</span>
+        </Box>
+        <Box col align="end">
+          <span className={s.title}>
+            <AmountFormat money={wallet.balance} />
           </span>
-        </span>
-        <span className={cn(s.row, s.description)}>
-          <span>{name}</span>
-          {hasLocked && (
-            <span className={s.amountLocked}>
-              <LockIcon /> <AmountFormat money={locked} />
+          {wallet.approximate.isZero() ? null : (
+            <span className={s.description}>
+              <Box as="span" textColor="secondary">
+                &asymp;
+              </Box>
+              &nbsp;
+              <MoneyFormat money={wallet.approximate} />
             </span>
           )}
-        </span>
-      </span>
-    </button>
+        </Box>
+      </Box>
+    </Box>
   );
 };

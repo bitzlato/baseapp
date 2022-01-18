@@ -1,28 +1,30 @@
 import React from 'react';
-import { WalletItem } from 'src/components/WalletItem/WalletItem';
-import { Wallet } from '../../modules';
+import { WalletItem, WalletItemData } from 'src/components/WalletItem/WalletItem';
+import { Box } from 'src/components/Box/Box';
 
 export interface WalletListProps {
-  walletItems: Wallet[];
+  className?: string;
+  walletItems: WalletItemData[];
   activeIndex: number;
-  onWalletSelectionChange(item: Wallet, index: number): void;
+  onWalletSelectionChange(index: number): void;
 }
 
 export const WalletList: React.FC<WalletListProps> = ({
+  className,
   onWalletSelectionChange,
   activeIndex,
   walletItems,
 }) => {
   return (
-    <div className="cr-wallet-list">
-      {walletItems.map((wallet: Wallet, i: number) => (
+    <Box col className={className}>
+      {walletItems.map((wallet, i) => (
         <WalletItem
-          key={wallet.currency.code}
+          key={wallet.currency}
           wallet={wallet}
           active={activeIndex === i}
-          onClick={() => onWalletSelectionChange(wallet, i)}
+          onClick={() => onWalletSelectionChange(i)}
         />
       ))}
-    </div>
+    </Box>
   );
 };

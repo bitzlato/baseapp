@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WalletList should render 1`] = `
-<div
-  className="cr-wallet-list"
+<ForwardRef
+  col={true}
 >
   <WalletItem
     active={true}
@@ -10,46 +10,37 @@ exports[`WalletList should render 1`] = `
     onClick={[Function]}
     wallet={
       Object {
+        "approximate": Object {
+          "amount": "41000.00",
+          "currency": Object {
+            "code": "USD",
+            "minorUnit": 2,
+          },
+        },
         "balance": Object {
-          "amount": "456.00000000",
+          "amount": "1.00000000",
           "currency": Object {
             "code": "BTC",
             "minorUnit": 8,
           },
         },
-        "base_factor": 100000000,
-        "code": "",
-        "currency": Object {
-          "code": "BTC",
-          "minorUnit": 8,
-        },
-        "deposit_enabled": true,
-        "deposit_fee": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
-        "explorer_address": "https://testnet.blockchain.info/address/#{address}",
-        "explorer_transaction": "https://testnet.blockchain.info/tx/#{txid}",
-        "icon_id": "BTC",
-        "icon_url": "",
-        "id": "",
-        "limit_1_month": Object {
-          "amount": "0.00000000",
+        "balanceMarket": Object {
+          "amount": "0.50000000",
           "currency": Object {
             "code": "BTC",
             "minorUnit": 8,
           },
         },
-        "limit_24_hour": Object {
-          "amount": "0.00000000",
+        "balanceP2P": Object {
+          "amount": "0.50000000",
           "currency": Object {
             "code": "BTC",
             "minorUnit": 8,
           },
         },
+        "currency": "BTC",
+        "hasTransfer": true,
+        "icon": "BTC",
         "locked": Object {
           "amount": "1.00000000",
           "currency": Object {
@@ -57,210 +48,57 @@ exports[`WalletList should render 1`] = `
             "minorUnit": 8,
           },
         },
-        "min_confirmations": 6,
-        "min_deposit_amount": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
-        "min_withdraw_amount": Object {
-          "amount": "0.00000000",
-          "currency": Object {
-            "code": "BTC",
-            "minorUnit": 8,
-          },
-        },
-        "minorUnit": 4,
         "name": "Bitcoin",
-        "precision": 8,
-        "price": "1",
-        "symbol": "",
-        "type": "fiat",
-        "withdraw_fee": Object {
-          "amount": "0.12300000",
-          "currency": Object {
-            "code": "BTC",
-            "minorUnit": 8,
-          },
-        },
-        "withdrawal_disabled_reason": "",
-        "withdrawal_enabled": true,
       }
     }
   />
   <WalletItem
     active={false}
-    key="USD"
+    key="ETH"
     onClick={[Function]}
     wallet={
       Object {
+        "approximate": Object {
+          "amount": "41000.00",
+          "currency": Object {
+            "code": "USD",
+            "minorUnit": 2,
+          },
+        },
         "balance": Object {
-          "amount": "456.00",
+          "amount": "1.00000000",
           "currency": Object {
-            "code": "USD",
-            "minorUnit": 2,
+            "code": "ETH",
+            "minorUnit": 8,
           },
         },
-        "base_factor": 100000000,
-        "code": "",
-        "currency": Object {
-          "code": "USD",
-          "minorUnit": 2,
-        },
-        "deposit_enabled": true,
-        "deposit_fee": Object {
-          "amount": "0.0000",
+        "balanceMarket": Object {
+          "amount": "0.50000000",
           "currency": Object {
-            "code": "",
-            "minorUnit": 4,
+            "code": "ETH",
+            "minorUnit": 8,
           },
         },
-        "explorer_address": "",
-        "explorer_transaction": "",
-        "icon_id": "USD",
-        "icon_url": "",
-        "id": "",
-        "limit_1_month": Object {
-          "amount": "0.00",
+        "balanceP2P": Object {
+          "amount": "0.50000000",
           "currency": Object {
-            "code": "USD",
-            "minorUnit": 2,
+            "code": "ETH",
+            "minorUnit": 8,
           },
         },
-        "limit_24_hour": Object {
-          "amount": "0.00",
-          "currency": Object {
-            "code": "USD",
-            "minorUnit": 2,
-          },
-        },
+        "currency": "ETH",
+        "hasTransfer": true,
+        "icon": "ETH",
         "locked": Object {
-          "amount": "100.00",
+          "amount": "1.00000000",
           "currency": Object {
-            "code": "USD",
-            "minorUnit": 2,
+            "code": "ETH",
+            "minorUnit": 8,
           },
         },
-        "min_confirmations": 6,
-        "min_deposit_amount": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
-        "min_withdraw_amount": Object {
-          "amount": "0.00",
-          "currency": Object {
-            "code": "USD",
-            "minorUnit": 2,
-          },
-        },
-        "minorUnit": 4,
-        "name": "United states Dollar",
-        "precision": 8,
-        "price": "1",
-        "symbol": "",
-        "type": "coin",
-        "withdraw_fee": Object {
-          "amount": "0.12",
-          "currency": Object {
-            "code": "USD",
-            "minorUnit": 2,
-          },
-        },
-        "withdrawal_disabled_reason": "",
-        "withdrawal_enabled": true,
+        "name": "Ethereum",
       }
     }
   />
-  <WalletItem
-    active={false}
-    key="BTC"
-    onClick={[Function]}
-    wallet={
-      Object {
-        "balance": Object {
-          "amount": "2.00000000",
-          "currency": Object {
-            "code": "BTC",
-            "minorUnit": 8,
-          },
-        },
-        "base_factor": 100000000,
-        "code": "",
-        "currency": Object {
-          "code": "BTC",
-          "minorUnit": 8,
-        },
-        "deposit_enabled": true,
-        "deposit_fee": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
-        "explorer_address": "",
-        "explorer_transaction": "",
-        "icon_id": "BTC",
-        "icon_url": "",
-        "id": "",
-        "limit_1_month": Object {
-          "amount": "0.00000000",
-          "currency": Object {
-            "code": "BTC",
-            "minorUnit": 8,
-          },
-        },
-        "limit_24_hour": Object {
-          "amount": "0.00000000",
-          "currency": Object {
-            "code": "BTC",
-            "minorUnit": 8,
-          },
-        },
-        "locked": Object {
-          "amount": "0.40000000",
-          "currency": Object {
-            "code": "BTC",
-            "minorUnit": 8,
-          },
-        },
-        "min_confirmations": 6,
-        "min_deposit_amount": Object {
-          "amount": "0.0000",
-          "currency": Object {
-            "code": "",
-            "minorUnit": 4,
-          },
-        },
-        "min_withdraw_amount": Object {
-          "amount": "0.00000000",
-          "currency": Object {
-            "code": "BTC",
-            "minorUnit": 8,
-          },
-        },
-        "minorUnit": 4,
-        "name": "Bitcoin - 2",
-        "precision": 8,
-        "price": "1",
-        "symbol": "",
-        "type": "fiat",
-        "withdraw_fee": Object {
-          "amount": "0.30000000",
-          "currency": Object {
-            "code": "BTC",
-            "minorUnit": 8,
-          },
-        },
-        "withdrawal_disabled_reason": "",
-        "withdrawal_enabled": true,
-      }
-    }
-  />
-</div>
+</ForwardRef>
 `;

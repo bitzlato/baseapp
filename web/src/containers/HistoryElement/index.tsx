@@ -32,6 +32,7 @@ import {
   Withdraw,
 } from '../../modules';
 import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
+import { TransferHistory } from '../Wallets/TransferHistory';
 
 interface HistoryProps {
   type: string;
@@ -76,6 +77,14 @@ class HistoryComponent extends React.Component<Props> {
 
   public render() {
     const { list, fetching } = this.props;
+
+    if (this.props.type === 'transfers') {
+      return (
+        <div className="pg-history-elem">
+          <TransferHistory wallets={this.props.wallets} />
+        </div>
+      );
+    }
 
     return (
       <div className={`pg-history-elem ${list.length ? '' : 'pg-history-elem-empty'}`}>

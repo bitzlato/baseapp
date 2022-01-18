@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { PG_TITLE_PREFIX } from '../constants';
+import { setDocumentTitle } from 'src/helpers/setDocumentTitle';
 
-export const useDocumentTitle = (title) => {
+export const useDocumentTitle = (title: string) => {
   React.useEffect(() => {
-    document.title = [PG_TITLE_PREFIX, title].join(': ');
+    setDocumentTitle(title);
   }, [title]);
 };

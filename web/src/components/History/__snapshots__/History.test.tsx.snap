@@ -54,6 +54,5 @@ exports[`History should render 1`] = `
       "Total",
     ]
   }
-  titleComponent="Trades History"
 />
 `;
