@@ -6,6 +6,7 @@ declare global {
       applogicUrl: string;
       rangerUrl: string;
       finexUrl: string;
+      accountUrl: string;
     };
     auth0?: {
       domain: string;

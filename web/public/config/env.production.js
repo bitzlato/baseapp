@@ -5,6 +5,7 @@ window.env = {
     finexUrl: 'https://market.bitzlato.com/api/v2/finex',
     applogicUrl: 'https://market.bitzlato.com/api/v2/applogic',
     rangerUrl: 'wss://market.bitzlato.com/api/v2/ranger',
+    accountUrl: 'https://account.bitzlato.com/api/private/v1',
   },
   auth0: {
     domain: 'auth.bitzlato.bz',

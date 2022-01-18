@@ -14,6 +14,7 @@ export const mockConfig: Config = {
     applogicUrl: '/api/v2/applogic',
     rangerUrl: '/api/v2/ranger',
     finexUrl: '/api/v2/finex',
+    accountUrl: '/api/private/v1',
   },
   finex: false,
   withCredentials: false,
