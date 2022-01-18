@@ -68,6 +68,7 @@ export const authUrl = () => Cryptobase.config.api.authUrl;
 export const applogicUrl = () => Cryptobase.config.api.applogicUrl;
 export const rangerUrl = () => Cryptobase.config.api.rangerUrl;
 export const finexUrl = () => Cryptobase.config.api.finexUrl || tradeUrl();
+export const accountUrl = () => Cryptobase.config.api.accountUrl;
 export const withCredentials = () => convertToBoolean(Cryptobase.config.withCredentials);
 export const incrementalOrderBook = () => convertToBoolean(Cryptobase.config.incrementalOrderBook);
 export const isResizableGrid = () => convertToBoolean(Cryptobase.config.isResizable);

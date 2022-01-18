@@ -5,6 +5,7 @@ window.env = {
     finexUrl: 'https://market-sandbox.bitzlato.com/api/v2/finex',
     applogicUrl: 'https://market-sandbox.bitzlato.com/api/v2/applogic',
     rangerUrl: 'wss://market-sandbox.bitzlato.com/api/v2/ranger',
+    accountUrl: 'https://account.s-www.lgk.one/api/private/v1',
   },
   auth0: {
     domain: 'auth.bitzlato.bz',
