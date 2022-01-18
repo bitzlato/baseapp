@@ -16,10 +16,10 @@ type BoxOwnProps<E = React.ElementType> = {
   wrap?: boolean;
   position?: 'relative' | 'absolute';
   justify?: 'end' | 'center' | 'between';
-  align?: 'start' | 'end' | 'center';
+  align?: 'start' | 'end' | 'center' | 'stretch';
   self?: 'start' | 'center' | 'end' | 'stretch';
   spacing?: boolean | '2' | '3' | '4' | '5' | 'sm';
-  padding?: boolean | '2' | '3' | '5';
+  padding?: boolean | '2' | '3' | '4' | '5';
   textSize?: 'lg' | 'sm';
   textColor?: TextColor;
   textTr?: 'capitalize' | 'uppercase';

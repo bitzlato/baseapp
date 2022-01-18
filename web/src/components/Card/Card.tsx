@@ -9,11 +9,12 @@ import s from './Card.postcss';
 
 interface Props {
   className?: string;
+  outer?: React.ReactNode;
   header?: React.ReactNode;
   size?: 'md' | 'lg';
 }
 
-export const Card: React.FC<Props> = ({ className, header, size, children }) => {
+export const Card: React.FC<Props> = ({ className, outer, header, size, children }) => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
 
   if (isMobileDevice) {
@@ -38,23 +39,24 @@ export const Card: React.FC<Props> = ({ className, header, size, children }) => 
     );
   }
 
-  const c = cn(s.cardDesktop, size && s[`card${capitalize(size)}`], className);
-
   return (
-    <Box padding="2" row justify="center">
-      <Box grow col className={c} bgColor="body">
-        {header ? (
-          <>
-            <Box padding="3" textColor="primary" className={s.cardHeader}>
-              {header}
-            </Box>
-            <Box padding="3" col spacing="2">
-              {children}
-            </Box>
-          </>
-        ) : (
-          children
-        )}
+    <Box padding="4" row justify="center">
+      <Box grow col spacing="4" className={cn(size && s[`card${capitalize(size)}`])}>
+        {outer}
+        <Box col className={cn(s.cardDesktop, className)} bgColor="body">
+          {header ? (
+            <>
+              <Box padding="3" textColor="primary" className={s.cardHeader}>
+                {header}
+              </Box>
+              <Box padding="3" col spacing="2">
+                {children}
+              </Box>
+            </>
+          ) : (
+            children
+          )}
+        </Box>
       </Box>
     </Box>
   );

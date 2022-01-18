@@ -30,7 +30,7 @@ export const CryptoCurrencyIcon: FC<Props> = ({ currency, icon, iconId, size }) 
 
   return (
     <span className={cn(s.icon, className)}>
-      <CryptoIcon code={iconId ?? cryptoCurrency} />
+      <CryptoIcon code={iconId ?? cryptoCurrency!} />
       {protocol && (
         <span className={s.blockchainIcon}>
           <BlockchainIcon protocol={protocol} />
