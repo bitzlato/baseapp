@@ -74,11 +74,11 @@ import {
   RestrictedScreen,
   TradingScreen,
   VerificationScreen,
-  WalletsScreen,
   SetupScreen,
   QuickExchange,
   LandingScreen,
 } from '../../screens';
+import { WalletsScreen } from 'src/screens/WalletsScreen/WalletsScreen';
 import { loginWithRedirect } from 'src/helpers/auth0';
 import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
 import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';

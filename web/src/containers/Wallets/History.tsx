@@ -29,6 +29,7 @@ import {
 import { DepositStatus } from 'src/components/History/DepositStatus';
 import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
 import { FC } from 'react';
+import s from './TransferHistory.postcss';
 
 export interface HistoryProps {
   label: string;
@@ -95,10 +96,12 @@ export class WalletTable extends React.Component<Props> {
 
     return (
       <div className="pg-history-elem__wallet">
-        <div className="pg-history-elem__label">
-          {this.props.intl.formatMessage({ id: `page.body.history.${label}` })}
-        </div>
-        <History headers={this.getHeaders(label)} data={this.retrieveData(list)} />
+        <h4>{this.props.intl.formatMessage({ id: `page.body.history.${label}` })}</h4>
+        <History
+          headers={this.getHeaders(label)}
+          data={this.retrieveData(list)}
+          tableClassName={s.transferHistory}
+        />
         <Pagination
           firstElemIndex={firstElemIndex}
           lastElemIndex={lastElemIndex}

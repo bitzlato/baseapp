@@ -17,17 +17,24 @@ export function useFetch<T>(url: string, options?: Options): FetchResult<T> {
 
   useEffect(() => {
     if (!options?.skipRequest) {
+      let controller: AbortController | undefined = new AbortController();
       (async () => {
         setIsLoading(true);
         try {
-          setData(await fetchData(url, options));
+          const data = await fetchData(url, { ...options, signal: controller.signal });
+          if (!controller.signal.aborted) {
+            setData(data);
+            setIsLoading(false);
+          }
         } catch (error) {
-          setError(error as FetchError);
-          setData(undefined);
-        } finally {
-          setIsLoading(false);
+          if (!controller.signal.aborted) {
+            setError(error as FetchError);
+            setData(undefined);
+            setIsLoading(false);
+          }
         }
       })();
+      return () => controller?.abort();
     }
   }, [url, options?.skipRequest]);
 
@@ -40,7 +47,10 @@ async function fetchData(url: string, options?: RequestInit) {
     const json = await res.json();
     if (!res.ok) {
       const { errors, error, ...rest } = json ?? {};
-      throw new FetchError(res.status, error ? [error] : errors ?? ['Server error'], rest);
+      if (errors && errors.length && typeof errors[0] === 'string') {
+        throw new FetchError(res.status, errors, rest);
+      }
+      throw new FetchError(res.status, error ? [error] : ['Server error'], rest);
     }
     return json;
   } catch (error) {
@@ -49,6 +59,17 @@ async function fetchData(url: string, options?: RequestInit) {
     }
     throw new FetchError(500, [(error as Error).toString()], {});
   }
+}
+
+export function postData(url: string, data: Object, options?: RequestInit) {
+  return fetchData(url, {
+    ...options,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
 }
 
 export class FetchError extends Error {

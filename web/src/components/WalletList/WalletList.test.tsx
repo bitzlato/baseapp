@@ -1,67 +1,35 @@
-import { Currency } from '@bitzlato/money-js';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
-import { createMoney } from 'src/helpers/money';
-import { defaultWallet } from 'src/modules/user/wallets/defaults';
+import { BTC_CCY, createCcy, createMoney, USD_CCY } from 'src/helpers/money';
 import { WalletList, WalletListProps } from '../../components';
-import { Wallet } from '../../modules';
+import { WalletItemData } from '../WalletItem/WalletItem';
 
 const onWalletSelectionChange = jest.fn();
-const BTC: Currency = {
-  code: 'BTC',
-  minorUnit: 8,
-};
-const USD: Currency = {
-  code: 'USD',
-  minorUnit: 2,
-};
-const walletItems: Wallet[] = [
+
+const ETH_CCY = createCcy('ETH', 8);
+
+const walletItems: WalletItemData[] = [
   {
-    ...defaultWallet,
-    locked: createMoney('1', BTC),
-    withdraw_fee: createMoney(0.123, BTC),
-    currency: BTC,
-    icon_id: 'BTC',
     name: 'Bitcoin',
-    balance: createMoney('456', BTC),
-    type: 'fiat',
-    precision: 8,
-    price: '1',
-    min_withdraw_amount: createMoney(0, BTC),
-    limit_24_hour: createMoney(0, BTC),
-    limit_1_month: createMoney(0, BTC),
-    explorer_transaction: 'https://testnet.blockchain.info/tx/#{txid}',
-    explorer_address: 'https://testnet.blockchain.info/address/#{address}',
+    currency: 'BTC',
+    icon: 'BTC',
+    balance: createMoney('1', BTC_CCY),
+    balanceP2P: createMoney('0.5', BTC_CCY),
+    balanceMarket: createMoney('0.5', BTC_CCY),
+    approximate: createMoney('41000', USD_CCY),
+    locked: createMoney('1', BTC_CCY),
+    hasTransfer: true,
   },
   {
-    ...defaultWallet,
-    withdraw_fee: createMoney(0.123, USD),
-    locked: createMoney('100', USD),
-    currency: USD,
-    icon_id: 'USD',
-    name: 'United states Dollar',
-    balance: createMoney('456', USD),
-    type: 'coin',
-    precision: 8,
-    price: '1',
-    min_withdraw_amount: createMoney(0, USD),
-    limit_24_hour: createMoney(0, USD),
-    limit_1_month: createMoney(0, USD),
-  },
-  {
-    ...defaultWallet,
-    withdraw_fee: createMoney(0.3, BTC),
-    locked: createMoney('0.4', BTC),
-    currency: BTC,
-    icon_id: 'BTC',
-    name: 'Bitcoin - 2',
-    balance: createMoney('2', BTC),
-    type: 'fiat',
-    precision: 8,
-    price: '1',
-    min_withdraw_amount: createMoney(0, BTC),
-    limit_24_hour: createMoney(0, BTC),
-    limit_1_month: createMoney(0, BTC),
+    name: 'Ethereum',
+    currency: 'ETH',
+    icon: 'ETH',
+    balance: createMoney('1', ETH_CCY),
+    balanceP2P: createMoney('0.5', ETH_CCY),
+    balanceMarket: createMoney('0.5', ETH_CCY),
+    approximate: createMoney('41000', USD_CCY),
+    locked: createMoney('1', ETH_CCY),
+    hasTransfer: true,
   },
 ];
 
@@ -83,10 +51,6 @@ describe('WalletList', () => {
 
   it('should render', () => {
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should have correct className', () => {
-    expect(wrapper.hasClass('cr-wallet-list')).toBeTruthy();
   });
 
   it('should handle onWalletSelectionChange callback when an element is pressed', () => {
