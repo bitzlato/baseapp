@@ -2,7 +2,7 @@ import React from 'react';
 import { useT } from 'src/hooks/useT';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { Box } from 'src/components/Box';
-import { TradingFee } from 'src/modules/public/tradingFees';
+import { TradingFee } from 'src/modules/public/tradingFees/types';
 import { createCcy, createMoney } from 'src/helpers/money';
 import s from './TradingFees.postcss';
 

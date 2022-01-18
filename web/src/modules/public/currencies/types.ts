@@ -17,7 +17,7 @@ export interface CurrencySource {
   withdrawal_disabled_reason: string;
   base_factor: number;
   precision: number;
-  icon_url: string;
+  icon_url?: string;
   icon_id: string;
   price: string;
 }

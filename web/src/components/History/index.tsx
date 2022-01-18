@@ -11,17 +11,17 @@ export interface HistoryProps {
    * List of headers for history table
    */
   headers?: string[];
+  tableClassName?: string;
 }
 
 export class History extends React.PureComponent<HistoryProps> {
   private defaultHeaders = ['Time', 'Action', 'Price', 'Amount', 'Total'];
-  private title = 'Trades History';
 
   public render() {
     const { headers = this.defaultHeaders } = this.props;
     const tableData = this.props.data.map((row) => row.map(this.mapRows));
 
-    return <Table data={tableData} header={headers} titleComponent={this.title} />;
+    return <Table data={tableData} header={headers} tableClassName={this.props.tableClassName} />;
   }
 
   public renderAction(actionType: string) {

@@ -14,3 +14,8 @@ export function createMoney(amount: number | string, currency: Currency): Money 
 }
 
 export const ZERO_MONEY = createMoney(0, DEFAULT_CURRENCY);
+export const PENCE_CCY = createCcy('$', 2);
+export const ZERO_PENCE = createMoney(0, PENCE_CCY);
+export const USD_CCY = createCcy('USD', 2);
+export const ZERO_USD = createMoney(0, USD_CCY);
+export const BTC_CCY = createCcy('BTC', 8);
