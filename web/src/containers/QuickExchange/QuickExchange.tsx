@@ -232,7 +232,7 @@ export const QuickExchangeContainer: React.FC = () => {
     <Card size="md" header={<h4>{t('page.body.quick.exchange.header')}</h4>}>
       <Box col spacing>
         <Box col spacing="sm">
-          <Box grow row alignStart spacing="2">
+          <Box grow row spacing="2">
             <Box
               flex1
               as={NumberInput}

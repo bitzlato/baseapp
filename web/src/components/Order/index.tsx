@@ -147,7 +147,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
     }
 
     return (
-      <Box row spacing alignStart className="cr-order cr-order--extended">
+      <Box row spacing align="start" className="cr-order cr-order--extended">
         <div className="cr-order--extended__buy">
           <TabPanel
             fixed={true}

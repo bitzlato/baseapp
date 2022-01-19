@@ -11,13 +11,12 @@ type BoxOwnProps<E = React.ElementType> = {
   className?: string;
   row?: boolean;
   col?: boolean;
-  alignStart?: boolean;
   grow?: boolean;
   flex1?: boolean;
   wrap?: boolean;
   position?: 'relative' | 'absolute';
   justify?: 'end' | 'center' | 'between';
-  align?: 'end' | 'center';
+  align?: 'start' | 'end' | 'center';
   self?: 'start' | 'center' | 'end' | 'stretch';
   spacing?: boolean | '2' | '3' | '4' | '5' | 'sm';
   padding?: boolean | '2' | '3' | '5';
@@ -43,7 +42,6 @@ export const Box: Element = React.forwardRef(
       row,
       col,
       spacing,
-      alignStart,
       padding,
       grow,
       flex1,
@@ -67,7 +65,6 @@ export const Box: Element = React.forwardRef(
       className,
       row && s.row,
       col && s.col,
-      alignStart && s.alignStart,
       grow && s.grow,
       flex1 && s.flex1,
       wrap && s.wrap,

@@ -130,7 +130,7 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
             />
           )}
           {noDataAsks ? (
-            <Box alignStart justify="center" className="cr-order-book">
+            <Box align="start" justify="center" className="cr-order-book">
               {noDataMessage}
             </Box>
           ) : (
@@ -190,7 +190,7 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
           )}
           <div className="cr-combined-order-book__market">{lastPrice}</div>
           {noDataBids ? (
-            <Box alignStart justify="center" className="cr-order-book">
+            <Box align="start" justify="center" className="cr-order-book">
               {noDataMessage}
             </Box>
           ) : (
