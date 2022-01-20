@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { DropdownComponent, Modal } from 'src/components';
+import { Modal } from 'src/components';
 import { isUsernameEnabled } from 'src/api';
 import { CloseIcon } from 'src/assets/images/CloseIcon';
 import {
@@ -17,6 +17,7 @@ import {
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { InternalTransferInput } from './InternalInput';
 import { createMoney } from 'src/helpers/money';
+import { SelectString } from '../Select/Select';
 
 export const InternalTransferComponent = () => {
   const { formatMessage } = useIntl();
@@ -31,7 +32,6 @@ export const InternalTransferComponent = () => {
   const [currency, setCurrency] = useState('');
   const [amount, setAmount] = useState('');
   const [otp, setOtp] = useState('');
-  const [clear, setClear] = useState(false);
 
   const [show, setShow] = useState(false);
 
@@ -67,7 +67,6 @@ export const InternalTransferComponent = () => {
 
     dispatch(createInternalTransfersFetch(payload));
     setShow(false);
-    setClear(false);
   }, [username, otp, amount, currency, dispatch]);
 
   const translate = useCallback((id: string) => formatMessage({ id: id }), [formatMessage]);
@@ -82,7 +81,6 @@ export const InternalTransferComponent = () => {
     setCurrency('');
     setAmount('');
     setOtp('');
-    setClear(true);
   };
 
   const renderFooter = useMemo(() => {
@@ -141,12 +139,11 @@ export const InternalTransferComponent = () => {
             value={amount}
             fixed={wallet?.precision ?? 0}
           />
-          <DropdownComponent
+          <SelectString
             className="pg-confirm__content-address__row__content-number-dropdown"
-            list={walletsList}
-            onSelect={(value) => setCurrency(walletsList[value])}
+            options={walletsList}
+            onChange={(value) => setCurrency(value!)}
             placeholder="Currency"
-            clear={clear}
           />
           <div
             onClick={() => setAmount(wallet && wallet.balance ? wallet.balance.toString() : '')}

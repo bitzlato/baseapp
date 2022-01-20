@@ -1,6 +1,6 @@
-import classnames from 'classnames';
 import * as React from 'react';
-import { DropdownComponent } from '../Dropdown';
+import classnames from 'classnames';
+import { SelectString } from '../Select/Select';
 
 export enum HideMode {
   hide = 'hide',
@@ -81,8 +81,8 @@ export const TabPanel: React.FC<TabPanelProps> = ({
 
     const tabNames = panels
       .map((panel) => panel.label)
-      .filter((label) => label !== panels[currentTabIndex].label);
-    tabNames.unshift(panels[currentTabIndex].label);
+      .filter((label) => label !== panels[currentTabIndex]!.label);
+    tabNames.unshift(panels[currentTabIndex]!.label);
 
     return tabNames;
   }, [currentTabIndex, panels]);
@@ -102,12 +102,9 @@ export const TabPanel: React.FC<TabPanelProps> = ({
   );
 
   const handleOrderTypeChange = React.useCallback(
-    (index: number) => {
-      const currentLabels = dropdownLabels();
-
-      const activeIndex = panels.findIndex((tab) => tab.label === currentLabels[index]);
-
-      createOnTabChangeHandler(activeIndex, panels[activeIndex])();
+    (label: string | null) => {
+      const activeIndex = panels.findIndex((tab) => tab.label === label);
+      createOnTabChangeHandler(activeIndex, panels[activeIndex]!)();
     },
     [createOnTabChangeHandler, dropdownLabels, panels],
   );
@@ -141,15 +138,14 @@ export const TabPanel: React.FC<TabPanelProps> = ({
 
   const tabPanelRender = React.useCallback(() => {
     if (isDropdown) {
+      const options = dropdownLabels();
       return (
-        <div className="cr-tab-panel__dropdown">
-          <DropdownComponent
-            list={dropdownLabels()}
-            className="cr-dropdown--mobile"
-            onSelect={handleOrderTypeChange}
-            placeholder=""
-          />
-        </div>
+        <SelectString
+          options={options}
+          defaultValue={options[0]}
+          size="small"
+          onChange={handleOrderTypeChange}
+        />
       );
     } else {
       return (

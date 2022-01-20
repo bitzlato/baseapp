@@ -44,37 +44,81 @@ exports[`Order should match snapshot 1`] = `
               Order Type
             </div>
             <div
-              class="cr-dropdown"
+              class="selfStretch positionRelative"
             >
               <div
-                class="dropdown"
+                class="reactSelect reactSelectSmall css-b62m3t-container"
               >
-                <button
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  class="dropdown-toggle btn btn-primary"
-                  id="dropdown-basic"
-                  type="button"
+                <span
+                  class="css-1f43avz-a11yText-A11yText"
+                  id="react-select-2-live-region"
+                />
+                <span
+                  aria-atomic="false"
+                  aria-live="polite"
+                  aria-relevant="additions text"
+                  class="css-1f43avz-a11yText-A11yText"
+                />
+                <div
+                  class="reactSelect__control css-1s2u09g-control"
                 >
                   <div
-                    class="row grow justifyBetween rowSpacing"
+                    class="reactSelect__value-container reactSelect__value-container--has-value css-319lph-ValueContainer"
                   >
-                    Market
-                    <svg
-                      class="cr-dropdown__arrow"
-                      fill="none"
-                      height="8"
-                      viewBox="0 0 12 8"
-                      width="12"
-                      xmlns="http://www.w3.org/2000/svg"
+                    <div
+                      class="reactSelect__single-value css-qc6sy-singleValue"
                     >
-                      <path
-                        d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
-                        fill="var(--icons)"
+                      Market
+                    </div>
+                    <div
+                      class="reactSelect__input-container css-6j8wv5-Input"
+                      data-value=""
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        aria-controls="react-select-2-listbox"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        aria-owns="react-select-2-listbox"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        class="reactSelect__input"
+                        id="react-select-2-input"
+                        role="combobox"
+                        spellcheck="false"
+                        style="label:input;color:inherit;background:0;opacity:1;width:100%;grid-area:1 / 2;font:inherit;min-width:2px;border:0;margin:0;outline:0;padding:0"
+                        tabindex="0"
+                        type="text"
+                        value=""
                       />
-                    </svg>
+                    </div>
                   </div>
-                </button>
+                  <div
+                    class="reactSelect__indicators css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <span
+                      class="reactSelect__indicator-separator css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      class="reactSelect__indicator reactSelect__dropdown-indicator css-tlfecz-indicatorContainer"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="css-tj5bde-Svg"
+                        focusable="false"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        width="20"
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -369,37 +413,81 @@ exports[`Order should match snapshot 1`] = `
               Order Type
             </div>
             <div
-              class="cr-dropdown"
+              class="selfStretch positionRelative"
             >
               <div
-                class="dropdown"
+                class="reactSelect reactSelectSmall css-b62m3t-container"
               >
-                <button
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  class="dropdown-toggle btn btn-primary"
-                  id="dropdown-basic"
-                  type="button"
+                <span
+                  class="css-1f43avz-a11yText-A11yText"
+                  id="react-select-3-live-region"
+                />
+                <span
+                  aria-atomic="false"
+                  aria-live="polite"
+                  aria-relevant="additions text"
+                  class="css-1f43avz-a11yText-A11yText"
+                />
+                <div
+                  class="reactSelect__control css-1s2u09g-control"
                 >
                   <div
-                    class="row grow justifyBetween rowSpacing"
+                    class="reactSelect__value-container reactSelect__value-container--has-value css-319lph-ValueContainer"
                   >
-                    Market
-                    <svg
-                      class="cr-dropdown__arrow"
-                      fill="none"
-                      height="8"
-                      viewBox="0 0 12 8"
-                      width="12"
-                      xmlns="http://www.w3.org/2000/svg"
+                    <div
+                      class="reactSelect__single-value css-qc6sy-singleValue"
                     >
-                      <path
-                        d="M1.41 0.590088L6 5.17009L10.59 0.590088L12 2.00009L6 8.00009L0 2.00009L1.41 0.590088Z"
-                        fill="var(--icons)"
+                      Market
+                    </div>
+                    <div
+                      class="reactSelect__input-container css-6j8wv5-Input"
+                      data-value=""
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        aria-controls="react-select-3-listbox"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        aria-owns="react-select-3-listbox"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        class="reactSelect__input"
+                        id="react-select-3-input"
+                        role="combobox"
+                        spellcheck="false"
+                        style="label:input;color:inherit;background:0;opacity:1;width:100%;grid-area:1 / 2;font:inherit;min-width:2px;border:0;margin:0;outline:0;padding:0"
+                        tabindex="0"
+                        type="text"
+                        value=""
                       />
-                    </svg>
+                    </div>
                   </div>
-                </button>
+                  <div
+                    class="reactSelect__indicators css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <span
+                      class="reactSelect__indicator-separator css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      class="reactSelect__indicator reactSelect__dropdown-indicator css-tlfecz-indicatorContainer"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="css-tj5bde-Svg"
+                        focusable="false"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        width="20"
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

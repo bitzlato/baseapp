@@ -10,7 +10,8 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { IntlProps } from '../../../bootstrap';
 import { languages } from '../../../api/config';
-import { CustomInput, SearchDropdown } from '../../../components';
+import { CustomInput } from '../../../components';
+import { Select } from 'src/components/Select/Select';
 import { formatDate, isDateInFuture } from '../../../helpers';
 import {
   editIdentity,
@@ -224,10 +225,10 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
           </div>
           <div className="pg-confirm__content-identity__forms__row">
             <div className="pg-confirm__content-identity__forms__row__content">
-              <SearchDropdown
+              <Select
                 className="pg-confirm__content-identity__forms__row__content-number-dropdown"
                 options={dataCountries}
-                onSelect={this.selectCountry}
+                onChange={this.selectCountry}
                 placeholder={this.translate('page.body.kyc.identity.CoR')}
               />
             </div>

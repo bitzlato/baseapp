@@ -79,6 +79,7 @@ module.exports = {
                   ? '[name]__[local]--[hash:base64:5]'
                   : '[hash:base64]',
                 exportLocalsConvention: 'camelCaseOnly',
+                exportGlobals: true,
               },
               importLoaders: 1,
             },

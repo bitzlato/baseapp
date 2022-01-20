@@ -30,6 +30,7 @@
   /* stylelint-disable-next-line length-zero-no-unit */
   --mobile-footer-height: calc(52px + max(env(safe-area-inset-bottom) - 15px, 0px));
   --mobile-bottom-buttons-height: 54px;
+  --control-height: 48px;
 }
 
 #root {
@@ -45,7 +46,7 @@ input[type='button'] {
   appearance: none;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   input,
   select,
   textarea {
@@ -137,17 +138,6 @@ input[type='button'] {
       padding-bottom: calc(var(--gap) * 1.38) !important;
       padding-top: calc(var(--gap) * 1.38) !important;
     }
-  }
-}
-
-.cr-dropdown {
-  .dropdown-toggle {
-    border-radius: var(--border-radius);
-  }
-
-  &__list-item {
-    cursor: default;
-    font-weight: var(--font-weight);
   }
 }
 

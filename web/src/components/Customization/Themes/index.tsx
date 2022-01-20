@@ -1,7 +1,8 @@
 import * as React from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { SelectOption, Select } from 'src/components/Select/Select';
 import { SettingsIcon } from '../../../assets/images/customization/SettingsIcon';
-import { DropdownComponent, TabPanel } from '../../../components';
+import { TabPanel } from '../../../components';
 import { applyCustomizationSettingsColors } from '../../../helpers';
 import {
   AVAILABLE_THEME_PRESETS,
@@ -82,11 +83,11 @@ export class CustomizationThemes extends React.Component<Props, State> {
         <label className="pg-customization-themes__themes__dropdown-label">
           {translate('page.body.customization.themes.selector.label')}
         </label>
-        <DropdownComponent
+        <Select
           className="pg-customization-themes__themes__dropdown"
-          list={this.handleGetThemesTitlesList()}
-          onSelect={this.handleChangeCurrentTheme}
-          placeholder={translate(AVAILABLE_THEME_PRESETS[currentThemeIndex].title)}
+          options={this.handleGetThemesTitlesList()}
+          onChange={this.handleChangeCurrentTheme}
+          placeholder={translate(AVAILABLE_THEME_PRESETS[currentThemeIndex]!.title)}
         />
       </div>
     );
@@ -183,7 +184,10 @@ export class CustomizationThemes extends React.Component<Props, State> {
   private handleGetThemesTitlesList = () => {
     const { translate } = this.props;
 
-    return AVAILABLE_THEME_PRESETS.map((item) => translate(item.title));
+    return AVAILABLE_THEME_PRESETS.map((item) => ({
+      value: item.title,
+      label: translate(item.title),
+    }));
   };
 
   private handleSetColorSettingsItem = (item?: ThemeColorTitleInterface) => {
@@ -196,9 +200,10 @@ export class CustomizationThemes extends React.Component<Props, State> {
     this.setState({ colorSettingsItem: newSettings });
   };
 
-  private handleChangeCurrentTheme = (index: number) => {
+  private handleChangeCurrentTheme = (item: SelectOption | null) => {
     const { handleTriggerChartRebuild } = this.props;
-    const { title, ...themeToSet } = AVAILABLE_THEME_PRESETS[index];
+    const index = AVAILABLE_THEME_PRESETS.findIndex((d) => d.title === item!.value)!;
+    const { title, ...themeToSet } = AVAILABLE_THEME_PRESETS[index]!;
     const settingsToSet = {
       ...themeToSet,
       theme_colors: {
@@ -208,7 +213,10 @@ export class CustomizationThemes extends React.Component<Props, State> {
     };
 
     this.handleSetCurrentTheme(index);
-    applyCustomizationSettingsColors(settingsToSet, handleTriggerChartRebuild);
+    applyCustomizationSettingsColors(
+      settingsToSet as CustomizationSettingsInterface,
+      handleTriggerChartRebuild,
+    );
   };
 
   private handleSetCurrentTheme = (themeIndex: number) => {
