@@ -30,7 +30,7 @@ import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurr
 import { Box } from 'src/components/Box/Box';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { Button as BzButton } from 'src/components/Button/Button';
-import { Dropdown2 } from '../../components/Dropdown/Dropdown2';
+import { SelectString } from 'src/components/Select/Select';
 import { Card } from 'src/components/Card/Card';
 import { InfoIcon } from 'src/assets/images/InfoIcon';
 import { PriceLimit } from './PriceLimit';
@@ -152,13 +152,13 @@ export const QuickExchangeContainer: React.FC = () => {
     setRequestVolume(value);
   };
 
-  const handleSelectFrom = (value: string) => {
-    setFromCurrency(value);
+  const handleSelectFrom = (value: string | null) => {
+    setFromCurrency(value ?? '');
     resetInput();
   };
 
-  const handleSelectTo = (value: string) => {
-    setToCurrency(value);
+  const handleSelectTo = (value: string | null) => {
+    setToCurrency(value ?? '');
     resetInput();
   };
 
@@ -206,7 +206,6 @@ export const QuickExchangeContainer: React.FC = () => {
   };
 
   const renderDropdownItem = (d: string) => {
-    const currency = d.split('-')[0];
     return (
       <Box row spacing>
         <CryptoCurrencyIcon
@@ -214,8 +213,8 @@ export const QuickExchangeContainer: React.FC = () => {
           icon={getWallet(d, wallets)?.icon_url ?? ''}
           currency={d}
         />
-        <Box textColor="primary" textTr="uppercase" as="span">
-          {currency}
+        <Box textTr="uppercase" as="span">
+          {d.split('-')[0]}
         </Box>
       </Box>
     );
@@ -241,11 +240,11 @@ export const QuickExchangeContainer: React.FC = () => {
               value={fromAmount}
               onChange={handleChangeFrom}
             />
-            <Dropdown2
+            <SelectString
               className={s.quickExchangeDropdown}
-              list={fromList}
+              options={fromList}
               value={fromCurrency}
-              onSelect={handleSelectFrom}
+              onChange={handleSelectFrom}
               placeholder={t('page.body.quick.exchange.label.currency')}
               itemRenderer={renderDropdownItem}
             />
@@ -313,11 +312,11 @@ export const QuickExchangeContainer: React.FC = () => {
           value={toAmount}
           onChange={handleChangeTo}
         />
-        <Dropdown2
+        <SelectString
           className={s.quickExchangeDropdown}
-          list={toList}
+          options={toList}
           value={toCurrency}
-          onSelect={handleSelectTo}
+          onChange={handleSelectTo}
           placeholder={t('page.body.quick.exchange.label.currency')}
           itemRenderer={renderDropdownItem}
         />

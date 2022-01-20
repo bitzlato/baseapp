@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { IntlProps } from '../../../bootstrap';
 import { barongUploadSizeMaxRange, barongUploadSizeMinRange, languages } from '../../../api/config';
-import { CustomInput, DropdownComponent, UploadFile } from '../../../components';
+import { CustomInput, UploadFile } from '../../../components';
 import { formatDate, isDateInFuture, randomSecureHex } from '../../../helpers';
 import {
   alertPush,
@@ -25,6 +25,7 @@ import {
 import DocumentFrontExample from 'src/assets/images/kyc/DocumentFrontExample.svg';
 import DocumentBackExample from 'src/assets/images/kyc/DocumentBackExample.svg';
 import DocumentSelfieExample from 'src/assets/images/kyc/DocumentSelfieExample.svg';
+import { SelectString } from 'src/components/Select/Select';
 
 interface ReduxProps {
   lang: string;
@@ -136,7 +137,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         idNumber && !this.handleValidateInput('idNumber', idNumber),
     });
 
-    const onSelect = (value) => this.handleChangeDocumentsType(this.data[value]);
+    const onSelect = (value: string | null) => this.handleChangeDocumentsType(value!);
 
     return (
       <React.Fragment>
@@ -145,10 +146,10 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
             <div className="pg-confirm__content-documents__row__content-label">
               {this.translate('page.body.kyc.documentsType')}
             </div>
-            <DropdownComponent
+            <SelectString
               className="pg-confirm__content-documents__row__content-number-dropdown"
-              list={this.data}
-              onSelect={onSelect}
+              options={this.data}
+              onChange={onSelect}
               placeholder={this.translate('page.body.kyc.documentsType.placeholder')}
             />
           </div>

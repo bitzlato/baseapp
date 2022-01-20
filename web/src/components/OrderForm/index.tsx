@@ -15,11 +15,11 @@ import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Box } from 'src/components/Box/Box';
 import { Label } from 'src/components/Label/Label';
 import { isLimit, isMarket, isTrigger, isTriggerByPrice } from 'src/helpers/order';
-import { Dropdown2 } from 'src/components/Dropdown/Dropdown2';
 import { AmountFormat } from '../AmountFormat/AmountFormat';
 import { MoneyFormat } from '../MoneyFormat/MoneyFormat';
 import { createCcy, createMoney } from 'src/helpers/money';
 import { StorageKeys } from 'src/helpers/storageKeys';
+import { SelectString } from 'src/components/Select/Select';
 
 import s from './Input.postcss';
 
@@ -159,9 +159,9 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     onAmountChange('', type);
   }, [from, to]);
 
-  const handleOrderTypeChange = (value: OrderType) => {
-    localStorage.setItem(`${StorageKeys.orderType}-${type}`, value);
-    setorderType(value);
+  const handleOrderTypeChange = (value: OrderType | null) => {
+    localStorage.setItem(`${StorageKeys.orderType}-${type}`, value!);
+    setorderType(value!);
   };
 
   const handlePriceChange = (value: string) => {
@@ -373,7 +373,14 @@ export const OrderForm: React.FC<OrderFormProps> = ({
         <div className="cr-order-item__dropdown__label">
           {t('page.body.trade.header.newOrder.content.orderType')}
         </div>
-        <Dropdown2 list={orderTypes} value={orderType} onSelect={handleOrderTypeChange} />
+        <Box
+          self="stretch"
+          as={SelectString}
+          size="small"
+          options={orderTypes}
+          value={orderType}
+          onChange={handleOrderTypeChange as any}
+        />
       </div>
       <div className="cr-order-item">{getPriceInputs()}</div>
       <div className="cr-order-item">

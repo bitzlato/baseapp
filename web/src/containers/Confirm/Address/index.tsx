@@ -7,9 +7,10 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { Select } from 'src/components/Select/Select';
 import { IntlProps } from '../../../bootstrap';
 import { barongUploadSizeMaxRange, barongUploadSizeMinRange, languages } from '../../../api/config';
-import { CustomInput, SearchDropdown, UploadFile } from '../../../components';
+import { CustomInput, UploadFile } from '../../../components';
 import {
   alertPush,
   RootState,
@@ -145,10 +146,10 @@ class AddressComponent extends React.Component<Props, State> {
             <div className="pg-confirm__content-address__row__content-label">
               {this.translate('page.body.kyc.documents.country')}
             </div>
-            <SearchDropdown
+            <Select
               className="pg-confirm__content-address__row__content-number-dropdown"
               options={dataCountries}
-              onSelect={this.selectCountry}
+              onChange={this.selectCountry}
               placeholder={this.translate('page.body.kyc.documents.country.placeholder')}
             />
           </div>
