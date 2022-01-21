@@ -155,7 +155,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
 
     const allowed = memberLevels && user.level >= memberLevels.trading.minimum_level;
 
-    if (true) {
+    if (!userLoggedIn) {
       return (
         <LockedComponent
           text={this.translate('page.body.trade.header.newOrder.locked.login.text')}
