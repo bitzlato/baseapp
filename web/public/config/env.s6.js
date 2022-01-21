@@ -7,7 +7,7 @@ window.env = {
     rangerUrl: 'wss://s6.s-www.lgk.one/api/v2/ranger',
   },
   auth0: {
-    domain: 'bitzlato-dev.auth0.com',
+    domain: 'auth.lgk.one',
     client_id: 'OL926gD0Zha6h80uJx4TVhJLMKrJemjb',
     redirect_uri: 'https://s6.s-www.lgk.one/wallets',
   },
