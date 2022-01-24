@@ -24,6 +24,7 @@ env.js
 # sonic
 bin/
 .vscode
+!/shared/.vscode
 
 # environment config
 web/public/config/env.js
