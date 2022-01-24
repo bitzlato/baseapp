@@ -7,7 +7,7 @@ import { DepositStatus } from 'src/components/History/DepositStatus';
 import { getBlockchainLink } from 'src/helpers/getBlockchainLink';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { MarketName } from 'src/components/MarketName/MarketName';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { Decimal, History, Pagination } from '../../components';
 import { localeDate, setTradesType, setTransferStatusColor, truncateMiddle } from '../../helpers';
 import {

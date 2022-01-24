@@ -12,7 +12,7 @@ import {
   Decimal,
   LockedComponent,
 } from '../../components';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import {
   alertPush,
   MemberLevels,

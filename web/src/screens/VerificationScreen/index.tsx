@@ -3,7 +3,7 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { Redirect } from 'react-router';
 import { compose } from 'redux';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { languages } from '../../api';
 import { changeLanguage, RootState, selectEmailVerified, verificationFetch } from '../../modules';
 import { CommonError } from '../../modules/types';

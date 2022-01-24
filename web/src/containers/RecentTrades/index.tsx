@@ -3,7 +3,7 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { compose } from 'redux';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { TabPanel } from '../../components';
 import {
   Market,

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { CustomInput } from '../../components';
 
 type OnClearError = () => void;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import {
   Market,
   RootState,

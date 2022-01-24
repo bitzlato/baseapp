@@ -8,7 +8,7 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { IntlProps } from '../../../';
+import { IntlProps } from '../../../bootstrap';
 import { languages } from '../../../api/config';
 import { CustomInput, SearchDropdown } from '../../../components';
 import { formatDate, isDateInFuture } from '../../../helpers';

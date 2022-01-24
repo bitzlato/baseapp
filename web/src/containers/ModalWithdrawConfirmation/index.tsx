@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { Decimal, Modal } from '../../components';
 import { MobileModal as MobileModal } from '../../mobile/components/Modal';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';

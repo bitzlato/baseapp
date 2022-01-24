@@ -37,9 +37,7 @@ const AlertsContainer = React.lazy(() =>
 const CustomizationContainer = React.lazy(() =>
   import('./containers/Customization').then(({ Customization }) => ({ default: Customization })),
 );
-const HeaderContainer = React.lazy(() =>
-  import('./containers/Header').then(({ Header }) => ({ default: Header })),
-);
+const Header = React.lazy(() => import('./components/Header/Header'));
 const LayoutContainer = React.lazy(() =>
   import('./routes').then(({ Layout }) => ({ default: Layout })),
 );
@@ -64,7 +62,7 @@ const RenderDeviceContainers = () => {
   if (browserHistory.location.pathname === '/setup' || !isMobileDevice) {
     return (
       <React.Fragment>
-        <HeaderContainer />
+        <Header />
         <CustomizationContainer />
         <AlertsContainer />
         <LayoutContainer />

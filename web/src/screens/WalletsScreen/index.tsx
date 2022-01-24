@@ -10,7 +10,7 @@ import { Box } from 'src/components/Box';
 import { Withdraw } from 'src/containers/Withdraw';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 import { defaultWallet } from 'src/modules/user/wallets/defaults';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { CurrencyInfo, DepositCrypto, DepositFiat, TabPanel, WalletList } from '../../components';
 import { DEFAULT_CCY_PRECISION } from '../../constants';
 import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';

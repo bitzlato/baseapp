@@ -20,7 +20,7 @@ import {
   passwordErrorThirdSolution,
   setDocumentTitle,
 } from '../../helpers';
-import { IntlProps } from '../../index';
+import { IntlProps } from '../../bootstrap';
 import {
   entropyPasswordFetch,
   GeetestCaptchaResponse,

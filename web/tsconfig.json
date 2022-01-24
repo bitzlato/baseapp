@@ -12,13 +12,12 @@
     "noEmit": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "shared/Header": ["../shared/src/components/Header"],
+      "shared/Footer": ["../shared/src/components/Footer/Footer"]
+    }
   },
-  "include": [
-    "./src"
-  ],
-  "exclude": [
-    "./src/*.test.*",
-    "./src/charting_library"
-  ]
+  "include": ["./src"],
+  "exclude": ["./src/*.test.*", "./src/charting_library"]
 }

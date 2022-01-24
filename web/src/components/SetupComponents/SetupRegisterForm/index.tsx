@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { EMAIL_REGEX } from 'src/helpers';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { passwordMinEntropy } from '../../../api/config';
-import { IntlProps } from '../../../';
+import { IntlProps } from '../../../bootstrap';
 import { compose } from 'redux';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RootState, selectCurrentPasswordEntropy, entropyPasswordFetch } from '../../../modules';
