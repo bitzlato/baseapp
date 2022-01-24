@@ -4,7 +4,7 @@ import { connect, MapStateToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { BackgroundMaintenance } from '../../assets/images/BackgroundMaintenance';
 import { Logo } from '../../components';
 import { setDocumentTitle } from '../../helpers';

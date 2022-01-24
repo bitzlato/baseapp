@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 import { TestComponentWrapper } from 'src/lib/test';
 import { VerificationScreen } from '..';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { extractToken } from '../VerificationScreen';
 
 const setup = (props: Partial<IntlProps> = {}) =>

@@ -3,7 +3,7 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { incrementalOrderBook } from '../../api';
 import { Decimal } from '../../components/Decimal';
 import { GridChildInterface, GridItem } from '../../components/GridItem';

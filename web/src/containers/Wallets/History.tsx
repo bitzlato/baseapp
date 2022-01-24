@@ -2,7 +2,7 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { compose } from 'redux';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { History, Pagination } from '../../components';
 import { Decimal } from '../../components/Decimal';
 import { localeDate, sortByDateDesc } from '../../helpers';

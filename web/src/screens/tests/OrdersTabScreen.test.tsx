@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { TestComponentWrapper } from 'src/lib/test';
 import { OrdersTabScreen } from '../';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 
 const setup = (props: Partial<IntlProps> = {}) =>
   shallow(

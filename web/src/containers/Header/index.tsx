@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Sidebar } from 'src/containers/Sidebar/Sidebar';
 import { MarketSelector } from 'src/containers/MarketSelector/MarketSelector';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { showLanding } from '../../api';
 import { Logo } from '../../components';
 import {
@@ -23,11 +23,11 @@ import {
 } from '../../modules';
 import { HeaderToolbar } from '../HeaderToolbar/HeaderToolbar';
 import { NavBar } from '../NavBar';
+import { HeaderNavigation } from './HeaderNavigation/HeaderNavigation';
 
 import backIcon from './back.svg';
 import backLightIcon from './backLight.svg';
 import s from './Header.postcss';
-import { HeaderNavigation } from './HeaderNavigation/HeaderNavigation';
 
 interface ReduxProps {
   colorTheme: string;
@@ -61,27 +61,29 @@ class Head extends React.Component<Props> {
     }
 
     return (
-      <header className={`pg-header ${s.header}`}>
-        <div className={`pg-container pg-header__content ${tradingCls} ${s.headerContent}`}>
-          <Sidebar />
-          <div onClick={(e) => this.redirectToLanding()} className="pg-header__logo">
-            <Logo />
+      <>
+        <header className={`pg-header ${s.header}`}>
+          <div className={`pg-container pg-header__content ${tradingCls} ${s.headerContent}`}>
+            <Sidebar />
+            <div onClick={(e) => this.redirectToLanding()} className="pg-header__logo">
+              <Logo />
+            </div>
+            {this.renderMarketToggler()}
+            <div className="pg-header__location">
+              {mobileWallet ? (
+                <span>{mobileWallet}</span>
+              ) : (
+                <span>{location.pathname.split('/')[1]}</span>
+              )}
+            </div>
+            {this.renderMobileWalletNav()}
+            <div className="pg-header__navbar">
+              {this.renderMarketToolbar()}
+              <NavBar responsiveMode={isTradingPage} />
+            </div>
           </div>
-          {this.renderMarketToggler()}
-          <div className="pg-header__location">
-            {mobileWallet ? (
-              <span>{mobileWallet}</span>
-            ) : (
-              <span>{location.pathname.split('/')[1]}</span>
-            )}
-          </div>
-          {this.renderMobileWalletNav()}
-          <div className="pg-header__navbar">
-            {this.renderMarketToolbar()}
-            <NavBar responsiveMode={isTradingPage} />
-          </div>
-        </div>
-      </header>
+        </header>
+      </>
     );
   }
 

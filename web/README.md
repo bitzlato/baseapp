@@ -29,10 +29,18 @@ Please note, that BaseApp license only allows Non-Commercial use of this compone
 $ yarn install
 ```
 
+## Prepare shared components in dev mode
+
+You need to run a dev server in `shared` folder
+
+```bash
+$ yarn start --port=3001
+```
+
 ## Run in developement mode
 
 ```bash
-$ yarn start-mock
+$ SHARED_URL=http://localhsot:3001 yarn start-mock
 ```
 
 This command will also start a fake api backend for helping development.
@@ -42,7 +50,7 @@ Once you happy with the result, save, build an image and run it with OpenDAX doc
 
 ```bash
 $ cp public/config/env.localdev.js public/config/env.js
-$ PORT=8080 PROXY_HOST=market-s1.bitzlato.com yarn start
+$ SHARED_URL=http://localhsot:3001 PORT=8080 PROXY_HOST=market-s1.bitzlato.com yarn start
 ```
 
 This command will run development server with proxying of API requests to the staging server `market-s1.bitzlato.com`.

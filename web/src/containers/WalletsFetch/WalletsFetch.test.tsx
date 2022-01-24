@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 import { connect, Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { rootReducer } from '../../modules';
 import { WalletsFetch } from './';
 

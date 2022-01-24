@@ -5,6 +5,7 @@ import * as ReactDOM from 'react-dom';
 import { WrappedComponentProps } from 'react-intl';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { Provider } from 'react-redux';
+
 import { App } from './App';
 import { FetchCacheProvider } from './hooks/useFetchCache';
 import './index.pcss';
@@ -17,6 +18,8 @@ if (!Intl?.PluralRules) {
   require('@formatjs/intl-pluralrules/locale-data/en');
   require('@formatjs/intl-pluralrules/locale-data/ru');
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 if (!Intl?.RelativeTimeFormat) {
   require('@formatjs/intl-relativetimeformat/polyfill');
@@ -29,14 +32,11 @@ rangerMiddleware.run(rangerSagas);
 
 export type IntlProps = WrappedComponentProps;
 
-const render = () =>
-  ReactDOM.render(
-    <Provider store={store}>
-      <FetchCacheProvider value={new Map()}>
-        <App />
-      </FetchCacheProvider>
-    </Provider>,
-    document.getElementById('root') as HTMLElement,
-  );
-
-render();
+ReactDOM.render(
+  <Provider store={store}>
+    <FetchCacheProvider value={new Map()}>
+      <App />
+    </FetchCacheProvider>
+  </Provider>,
+  document.getElementById('root') as HTMLElement,
+);

@@ -7,7 +7,7 @@ import { Route, RouteComponentProps, RouterProps, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { FeesScreen } from 'src/screens/Fees/Fees';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import {
   isAuth0,
   minutesUntilAutoLogout,

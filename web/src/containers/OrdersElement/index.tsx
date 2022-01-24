@@ -7,7 +7,7 @@ import { Box } from 'src/components/Box';
 import { Label } from 'src/components/Label';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { getActualPrice } from 'src/modules/helpers';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { History, Pagination } from '../../components';
 import { Decimal } from '../../components/Decimal';

@@ -6,7 +6,7 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { CopyableTextField, CustomInput } from '../../components';
 import { copy, setDocumentTitle } from '../../helpers';

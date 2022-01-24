@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { compose } from 'redux';
-import { IntlProps } from '../../';
+import { IntlProps } from '../../bootstrap';
 import { TabPanel } from '../../components';
 import { OrdersElement } from '../../containers/OrdersElement';
 import { setDocumentTitle } from '../../helpers';
