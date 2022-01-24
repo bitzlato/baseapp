@@ -50,7 +50,7 @@ if Gem.loaded_specs.key?('capistrano-sentry')
 end
 
 set :nvm_node, File.read('.nvmrc').strip
-set :nvm_map_bins, %w{node npm yarn rake}
+set :nvm_map_bins, %w{node npm yarn rake corepack}
 
 # Removed --production flat. We need development tools
 #
@@ -83,6 +83,12 @@ task :yarn_build do
   on roles('app') do
     within release_path do
       execute :yarn, :build
+    end
+    within release_path.join('../shared') do
+      execute :corepack, :enable
+      execute :yarn, :rebuild, "@swc/core core-js core-js-pure esbuild fsevents"
+      execute :yarn, :build
+      execute :cp, "-R build #{release_path}/build/shared"
     end
   end
 end
