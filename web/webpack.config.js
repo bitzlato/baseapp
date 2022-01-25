@@ -10,6 +10,8 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
 const { BugsnagSourceMapUploaderPlugin } = require('webpack-bugsnag-plugins');
 
+const deps = require('./package.json').dependencies;
+
 const BUILD_DIR = path.resolve(__dirname, './build');
 const HASH = Math.round(Date.now() / 1000).toString();
 
@@ -244,7 +246,10 @@ module.exports = {
       remotes: {
         shared: `shared@${sharedURL}/shared.js`,
       },
-      shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+      shared: {
+        react: { requiredVersion: deps.react, singleton: true },
+        'react-dom': { requiredVersion: deps['react-dom'], singleton: true },
+      },
     }),
   ].filter(Boolean),
 
