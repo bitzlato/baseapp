@@ -5,33 +5,12 @@ export const footer = style({
   fontFamily: "'Montserrat', helvetica, sans-serif",
 });
 
-export const title = sprinkles({
-  color: 'footerTitle',
-  fontSize: 'small',
-  fontWeight: '600',
-  mb: '4x',
-  textTransform: 'uppercase',
-});
-
-export const links = style([
-  sprinkles({
-    display: 'flex',
-    flexDirection: 'column',
-    mr: '5x',
-    mb: '9x',
-  }),
-  {
-    minWidth: 90,
-    whiteSpace: 'nowrap',
-  },
-]);
-
 export const link = sprinkles({
   color: {
     default: 'footerLinkColor',
     hover: 'footerLinkColorHover',
   },
-  fontSize: 'small',
+  fontSize: ['medium', 'small'],
   textDecoration: {
     default: 'none',
     hover: 'underline',
@@ -39,6 +18,7 @@ export const link = sprinkles({
 });
 
 export const socialNetwork = sprinkles({
+  display: 'block',
   color: {
     default: 'footerSocialIcon',
     hover: 'footerSocialIconHover',

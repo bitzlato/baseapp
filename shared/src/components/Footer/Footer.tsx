@@ -3,10 +3,11 @@ import cn from 'classnames';
 import { Icon } from 'components/Icon';
 import { Stack } from 'components/Stack';
 import { createT } from 'i18n';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Language, RenderLinkComponent, Theme } from 'types';
 import { themeDark, themeLight } from 'theme/vars.css';
 import * as s from './Footer.css';
+import { FooterMenu } from './FooterMenu';
 
 type Product = 'p2p' | 'payment-gateway' | 'cryptoloan' | 'exchange';
 export const getProductLink = (locale: string, product: Product) => {
@@ -41,8 +42,12 @@ interface Props {
 }
 
 export const Footer: FC<Props> = ({ theme, language, renderMarketLink }) => {
+  const [active, setActive] = useState<string | undefined>();
   const themeClassName = theme === 'light' ? themeLight : themeDark;
   const t = createT(language);
+
+  const handleClick = (section: string) =>
+    setActive((prev) => (prev !== section ? section : undefined));
 
   return (
     <>
@@ -52,102 +57,116 @@ export const Footer: FC<Props> = ({ theme, language, renderMarketLink }) => {
         borderBottomWidth="2x"
         borderBottomColor="footerBorder"
         borderBottomStyle="solid"
-        py="7x"
+        py={['4x', '7x']}
+        px={['4x', '0']}
       >
-        <Stack justifyContent="center" marginRight="8x">
-          <>
-            <Box className={s.title}>{t('Products')}</Box>
-            <Box className={s.links}>
-              <Box as="a" className={s.link} href={getProductLink(language, 'p2p')}>
-                {t('P2P Platform')}
-              </Box>
-              <Box as="a" className={s.link} href={getProductLink(language, 'exchange')}>
-                {t('Exchange')}
-              </Box>
-              <Box as="a" className={s.link} href={getProductLink(language, 'payment-gateway')}>
-                {t('Payment Gateway')}
-              </Box>
-              <Box as="a" className={s.link} href={getProductLink(language, 'cryptoloan')}>
-                {t('Crypto Loan')}
-              </Box>
+        <Stack
+          direction={['column', 'row']}
+          justifyContent="center"
+          marginBottom={['0', '9x']}
+          marginRight={['0', '8x']}
+        >
+          <FooterMenu
+            section="products"
+            title={t('Products')}
+            active={active === 'products'}
+            onTitleClick={handleClick}
+          >
+            <Box as="a" className={s.link} href={getProductLink(language, 'p2p')}>
+              {t('P2P Platform')}
             </Box>
-          </>
-          <>
-            <Box className={s.title}>{t('Information')}</Box>
-            <Box className={s.links}>
-              <Box as="a" className={s.link} href={getBitzlatoLink(language, 'knowledgebase')}>
-                {t('Support')}
-              </Box>
-              <Box as="a" className={s.link} href={getBitzlatoLink(language, 'faq')}>
-                {t('FAQ')}
-              </Box>
-              <Box as="a" className={s.link} href={getBitzlatoLink(language, 'blog')}>
-                {t('Blog')}
-              </Box>
-              {renderMarketLink({
-                key: 'api',
-                className: s.link,
-                to: '/docs',
-                children: t('API'),
-              })}
+            <Box as="a" className={s.link} href={getProductLink(language, 'exchange')}>
+              {t('Exchange')}
             </Box>
-          </>
-          <>
-            <Box className={s.title}>{t('Company')}</Box>
-            <Box className={s.links}>
-              <Box as="a" className={s.link} href={getBitzlatoLink(language, 'about')}>
-                {t('About us')}
-              </Box>
-              <Box as="a" className={s.link} href={getBitzlatoLink(language, 'reviews')}>
-                {t('Reviews')}
-              </Box>
-              {renderMarketLink({
-                key: 'fees',
-                className: s.link,
-                to: '/fees',
-                children: t('Fees'),
-              })}
+            <Box as="a" className={s.link} href={getProductLink(language, 'payment-gateway')}>
+              {t('Payment Gateway')}
             </Box>
-          </>
-          <>
-            <Box className={s.title}>{t('Legal documents')}</Box>
-            <Box className={s.links}>
-              <Box
-                as="a"
-                className={s.link}
-                href={getBitzlatoLink(language, 'official-replies-from-bitzlato')}
-              >
-                {t('Official replies from Bitzlato')}
-              </Box>
-              <Box
-                as="a"
-                className={s.link}
-                href={getBitzlatoLink(
-                  language,
-                  'anti-money-laundering-policy-and-know-your-client-policy',
-                )}
-              >
-                {t('AML/KYC Policy')}
-              </Box>
-              <Box
-                as="a"
-                className={s.link}
-                href={getBitzlatoLink(language, 'terms-of-service-bitzlato')}
-              >
-                {t('Terms of Service Bitzlato')}
-              </Box>
-              <Box
-                as="a"
-                className={s.link}
-                href={getBitzlatoLink(language, 'exchange-terms-and-conditions')}
-              >
-                {t('Exchange terms and conditions')}
-              </Box>
-              <Box as="a" className={s.link} href={getBitzlatoLink(language, 'policy')}>
-                {t('Security Policy')}
-              </Box>
+            <Box as="a" className={s.link} href={getProductLink(language, 'cryptoloan')}>
+              {t('Crypto Loan')}
             </Box>
-          </>
+          </FooterMenu>
+          <FooterMenu
+            section="information"
+            title={t('Information')}
+            active={active === 'information'}
+            onTitleClick={handleClick}
+          >
+            <Box as="a" className={s.link} href={getBitzlatoLink(language, 'knowledgebase')}>
+              {t('Support')}
+            </Box>
+            <Box as="a" className={s.link} href={getBitzlatoLink(language, 'faq')}>
+              {t('FAQ')}
+            </Box>
+            <Box as="a" className={s.link} href={getBitzlatoLink(language, 'blog')}>
+              {t('Blog')}
+            </Box>
+            {renderMarketLink({
+              key: 'api',
+              className: s.link,
+              to: '/docs',
+              children: t('API'),
+            })}
+          </FooterMenu>
+          <FooterMenu
+            section="company"
+            title={t('Company')}
+            active={active === 'company'}
+            onTitleClick={handleClick}
+          >
+            <Box as="a" className={s.link} href={getBitzlatoLink(language, 'about')}>
+              {t('About us')}
+            </Box>
+            <Box as="a" className={s.link} href={getBitzlatoLink(language, 'reviews')}>
+              {t('Reviews')}
+            </Box>
+            {renderMarketLink({
+              key: 'fees',
+              className: s.link,
+              to: '/fees',
+              children: t('Fees'),
+            })}
+          </FooterMenu>
+          <FooterMenu
+            section="legal_documents"
+            title={t('Legal documents')}
+            active={active === 'legal_documents'}
+            onTitleClick={handleClick}
+          >
+            <Box
+              as="a"
+              className={s.link}
+              href={getBitzlatoLink(language, 'official-replies-from-bitzlato')}
+            >
+              {t('Official replies from Bitzlato')}
+            </Box>
+            <Box
+              as="a"
+              className={s.link}
+              href={getBitzlatoLink(
+                language,
+                'anti-money-laundering-policy-and-know-your-client-policy',
+              )}
+            >
+              {t('AML/KYC Policy')}
+            </Box>
+            <Box
+              as="a"
+              className={s.link}
+              href={getBitzlatoLink(language, 'terms-of-service-bitzlato')}
+            >
+              {t('Terms of Service Bitzlato')}
+            </Box>
+            <Box
+              as="a"
+              className={s.link}
+              href={getBitzlatoLink(language, 'exchange-terms-and-conditions')}
+            >
+              {t('Exchange terms and conditions')}
+            </Box>
+            <Box as="a" className={s.link} href={getBitzlatoLink(language, 'policy')}>
+              {t('Security Policy')}
+            </Box>
+          </FooterMenu>
         </Stack>
 
         {language === 'ru' ? (
