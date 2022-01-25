@@ -191,7 +191,7 @@ const Header: FC = () => {
       ? {
           key: 'history',
           type: 'internal',
-          icon: 'history' as IconName,
+          icon: 'history',
           to: '/history',
           children: t('page.header.navbar.history'),
         }

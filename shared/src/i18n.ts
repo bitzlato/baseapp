@@ -12,13 +12,19 @@ const dictionaries: Record<string, Dictionary> = {
 export const createT = (language: Language) => {
   const dictionary = dictionaries[language];
 
-  return (key: string) => {
+  return (key: string): string => {
     if (dictionary && key in dictionary) {
-      return dictionary[key];
+      const result = dictionary[key];
+      if (typeof result === 'string') {
+        return result;
+      }
     }
 
     if (key in defaultDictionary) {
-      return defaultDictionary[key];
+      const result = defaultDictionary[key];
+      if (typeof result === 'string') {
+        return result;
+      }
     }
 
     return key;
