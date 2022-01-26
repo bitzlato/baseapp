@@ -58,6 +58,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     modules: ['node_modules', __dirname],
+    fallback: { stream: require.resolve('stream-browserify') },
   },
 
   module: {
