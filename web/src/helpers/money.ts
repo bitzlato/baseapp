@@ -13,6 +13,10 @@ export function createMoney(amount: number | string, currency: Currency): Money 
   }
 }
 
+export function createMoneyWithoutCcy(amount: number | string, minorUnit: number): Money {
+  return createMoney(amount, createCcy('', minorUnit))
+}
+
 export const ZERO_MONEY = createMoney(0, DEFAULT_CURRENCY);
 export const PENCE_CCY = createCcy('$', 2);
 export const ZERO_PENCE = createMoney(0, PENCE_CCY);

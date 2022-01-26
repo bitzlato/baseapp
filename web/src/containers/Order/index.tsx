@@ -6,10 +6,8 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { TRIGGER_BUY_PRICE_MULT } from '../../constants';
 import {
-  formatWithSeparators,
   Order,
   OrderProps,
-  Decimal,
   LockedComponent,
 } from '../../components';
 import { IntlProps } from '../../bootstrap';
@@ -41,6 +39,7 @@ import {
 import { isWsApiEnabled } from 'src/api/config';
 import { BZ_ORDER_TYPES, isMarket, isTriggerByPrice } from 'src/helpers/order';
 import { loginWithRedirect } from 'src/helpers/auth0';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 interface ReduxProps {
   currentMarket: Market;
@@ -257,7 +256,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.minAmount', {
-            amount: Decimal.format(currentMarket.min_amount, currentMarket.amount_precision, ','),
+            amount: createMoneyWithoutCcy(currentMarket.min_amount, currentMarket.amount_precision).toFormat(),
             currency: currentMarket.base_unit.toUpperCase(),
           }),
         ],
@@ -271,7 +270,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.minPrice', {
-            price: Decimal.format(currentMarket.min_price, currentMarket.price_precision, ','),
+            price: createMoneyWithoutCcy(currentMarket.min_price, currentMarket.price_precision).toFormat(),
             currency: currentMarket.quote_unit.toUpperCase(),
           }),
         ],
@@ -285,7 +284,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.minTriggerPrice', {
-            price: Decimal.format(currentMarket.min_price, currentMarket.price_precision, ','),
+            price: createMoneyWithoutCcy(currentMarket.min_price, currentMarket.price_precision).toFormat(),
             currency: currentMarket.quote_unit.toUpperCase(),
           }),
         ],
@@ -299,7 +298,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.maxPrice', {
-            price: Decimal.format(currentMarket.max_price, currentMarket.price_precision, ','),
+            price: createMoneyWithoutCcy(currentMarket.max_price, currentMarket.price_precision).toFormat(),
             currency: currentMarket.quote_unit.toUpperCase(),
           }),
         ],
@@ -319,7 +318,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.maxTriggerPrice', {
-            price: Decimal.format(currentMarket.max_price, currentMarket.price_precision, ','),
+            price: createMoneyWithoutCcy(currentMarket.max_price, currentMarket.price_precision).toFormat(),
             currency: currentMarket.quote_unit.toUpperCase(),
           }),
         ],
@@ -336,7 +335,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.available', {
-            available: formatWithSeparators(String(available), ','),
+            available: createMoneyWithoutCcy(available, currentMarket.amount_precision).toFormat(),
             currency:
               type === 'buy'
                 ? currentMarket.quote_unit.toUpperCase()

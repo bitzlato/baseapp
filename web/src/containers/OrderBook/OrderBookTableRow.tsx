@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Decimal } from '../../components/Decimal';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { DiffAmountFormat } from 'src/components/DiffAmountFormat/DiffAmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 const OrderBookTableRowComponent = (props) => {
   const { type, fixed, prevValue, price, total } = props;
@@ -7,14 +9,12 @@ const OrderBookTableRowComponent = (props) => {
   if (type === 'price') {
     return (
       <span>
-        <Decimal fixed={fixed} prevValue={prevValue}>
-          {price}
-        </Decimal>
+        <DiffAmountFormat currentValue={createMoneyWithoutCcy(price, fixed)} prevValue={createMoneyWithoutCcy(prevValue, fixed)} />
       </span>
     );
   }
 
-  return <Decimal fixed={fixed}>{total}</Decimal>;
+  return <AmountFormat money={createMoneyWithoutCcy(total, fixed)} />;
 };
 
 export const OrderBookTableRow = React.memo(OrderBookTableRowComponent);

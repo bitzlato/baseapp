@@ -3,8 +3,8 @@ import * as React from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { incrementalOrderBook } from '../../api';
-import { Decimal } from '../../components/Decimal';
 import { Markets } from '../../components/Markets';
 import { useMarketsTickersFetch } from '../../hooks';
 import { setCurrentPrice, selectUserInfo } from '../../modules';
@@ -54,11 +54,10 @@ export const MarketsComponent = () => {
 
       return [
         market.name,
-        Decimal.format(
+        createMoneyWithoutCcy(
           Number((marketTickers[market.id] || defaultTicker).last),
           market.amount_precision,
-          ',',
-        ),
+        ).toFormat(),
         (marketTickers[market.id] || defaultTicker).price_change_percent,
       ];
     });

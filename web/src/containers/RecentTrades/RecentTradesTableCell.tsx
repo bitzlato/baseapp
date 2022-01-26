@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { Decimal } from '../../components/Decimal';
 import { setTradeColor } from '../../helpers';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
+import { DiffAmountFormat } from 'src/components/DiffAmountFormat/DiffAmountFormat';
+
 
 const TradeTableCellComponent = (props) => {
   const { type, takerType, higlightedDate, amountFixed, amount, priceFixed, price, prevValue, id } =
@@ -16,17 +19,13 @@ const TradeTableCellComponent = (props) => {
     case 'amount':
       return (
         <span style={{ color: setTradeColor(takerType).color }}>
-          <Decimal fixed={amountFixed} thousSep="," key={id}>
-            {amount}
-          </Decimal>
+          <AmountFormat key={id} money={createMoneyWithoutCcy(amount, amountFixed)} />
         </span>
       );
     case 'price':
       return (
         <span style={{ color: setTradeColor(takerType).color }}>
-          <Decimal fixed={priceFixed} thousSep="," prevValue={prevValue} key={id}>
-            {price}
-          </Decimal>
+          <DiffAmountFormat key={id} currentValue={createMoneyWithoutCcy(price, priceFixed)} prevValue={createMoneyWithoutCcy(prevValue, priceFixed)} />
         </span>
       );
     default:

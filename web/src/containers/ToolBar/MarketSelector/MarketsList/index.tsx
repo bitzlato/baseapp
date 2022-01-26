@@ -4,9 +4,10 @@ import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { IntlProps } from '../../../../bootstrap';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { incrementalOrderBook } from '../../../../api';
 import { SortAsc, SortDefault, SortDesc } from '../../../../assets/images/SortIcons';
-import { Decimal, Table } from '../../../../components';
+import { Table } from '../../../../components';
 import {
   depthFetch,
   Market,
@@ -207,10 +208,10 @@ class MarketsListComponent extends React.Component<Props, State> {
         return [
           market.name,
           <span className={classname}>
-            {Decimal.format(Number(market.last), market.price_precision, ',')}
+            {createMoneyWithoutCcy(Number(market.last), market.price_precision).toFormat()}
           </span>,
           <span className={classname}>
-            {Decimal.format(Number(market.volume), market.price_precision, ',')}
+            {createMoneyWithoutCcy(Number(market.volume), market.price_precision).toFormat()}
           </span>,
           <span className={classname}>{market.price_change_percent}</span>,
         ];

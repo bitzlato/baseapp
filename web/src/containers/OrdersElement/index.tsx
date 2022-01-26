@@ -10,7 +10,6 @@ import { getActualPrice } from 'src/modules/helpers';
 import { IntlProps } from '../../bootstrap';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { History, Pagination } from '../../components';
-import { Decimal } from '../../components/Decimal';
 import { localeDate, setTradeColor } from '../../helpers';
 import {
   Market,
@@ -30,6 +29,8 @@ import {
 import { OrderCommon } from '../../modules/types';
 import { getTriggerSign } from '../OpenOrders/helpers';
 import { OrderStatus } from './OrderStatus';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 interface OrdersProps {
   type: string;
@@ -178,25 +179,17 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
       </span>,
       <span key={id}>{orderType}</span>,
       avg_price ? (
-        <Decimal key={id} fixed={currentMarket.price_precision} thousSep=",">
-          {avg_price}
-        </Decimal>
+        <AmountFormat key={id} money={createMoneyWithoutCcy(avg_price, currentMarket.price_precision)} />
       ) : (
         '-'
       ),
       price ? (
-        <Decimal key={id} fixed={currentMarket.price_precision} thousSep=",">
-          {price}
-        </Decimal>
+        <AmountFormat key={id} money={createMoneyWithoutCcy(price, currentMarket.price_precision)} />
       ) : (
         '-'
       ),
-      <Decimal key={id} fixed={currentMarket.amount_precision} thousSep=",">
-        {origin_volume}
-      </Decimal>,
-      <Decimal key={id} fixed={currentMarket.amount_precision} thousSep=",">
-        {total}
-      </Decimal>,
+      <AmountFormat key={id} money={createMoneyWithoutCcy(origin_volume, currentMarket.price_precision)} />,
+      <AmountFormat key={id} money={createMoneyWithoutCcy(total, currentMarket.amount_precision)} />,
       <span key={id} className="split-lines justify-content-end">
         {trigger_price ? (
           <React.Fragment>
@@ -205,7 +198,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
             </span>
             &nbsp;{getTriggerSign(ord_type ?? '', side)}&nbsp;&nbsp;
             <span style={{ color: setTradeColor(side).color }}>
-              {Decimal.format(trigger_price, currentMarket.price_precision, ',')}
+              {createMoneyWithoutCcy(trigger_price, currentMarket.price_precision).toFormat()}
             </span>
           </React.Fragment>
         ) : (
@@ -213,9 +206,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
         )}
       </span>,
       <span style={{ color: setTradeColor(side).color }} key={id}>
-        <Decimal fixed={2} thousSep=",">
-          {+filled}
-        </Decimal>
+        <AmountFormat key={id} money={createMoneyWithoutCcy(+filled, 2)} />
         %
       </span>,
       <OrderStatus value={item.state} />,
