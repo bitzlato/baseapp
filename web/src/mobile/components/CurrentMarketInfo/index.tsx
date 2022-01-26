@@ -3,13 +3,14 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { CloseIcon } from '../../../assets/images/CloseIcon';
-import { Decimal, FilterInput } from '../../../components';
+import { FilterInput } from '../../../components';
 import { DEFAULT_CCY_PRECISION } from '../../../constants';
 import { MarketsTable } from '../../../containers';
 import { Market, selectCurrentMarket, selectMarkets, selectMarketTickers } from '../../../modules';
 import { ChevronIcon } from '../../assets/images/ChevronIcon';
 import { MobileModal } from '../../components';
 import { MarketName } from 'src/components/MarketName/MarketName';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 const defaultTicker = {
   amount: '0.0',
@@ -98,7 +99,7 @@ const CurrentMarketInfoComponent: React.FC = () => {
         </div>
         <div className="pg-mobile-current-market-info__left__price-change">
           <span className={currentMarketChangeClass}>
-            {Decimal.format(currentMarketTicker.last, currentMarketPricePrecision, ',')}
+            {createMoneyWithoutCcy(currentMarketTicker.last, currentMarketPricePrecision).toFormat()}
           </span>
           <span className={currentMarketChangeClass}>
             {currentMarketTicker.price_change_percent}
@@ -113,13 +114,13 @@ const CurrentMarketInfoComponent: React.FC = () => {
         </div>
         <div className="pg-mobile-current-market-info__right__col">
           <span className={currentMarketChangeClass}>
-            {Decimal.format(currentMarketTicker.volume, currentMarketPricePrecision, ',')}
+            {createMoneyWithoutCcy(currentMarketTicker.volume, currentMarketPricePrecision).toFormat()}
           </span>
           <span className={currentMarketChangeClass}>
-            {Decimal.format(currentMarketTicker.high, currentMarketPricePrecision, ',')}
+            {createMoneyWithoutCcy(currentMarketTicker.high, currentMarketPricePrecision).toFormat()}
           </span>
           <span className={currentMarketChangeClass}>
-            {Decimal.format(currentMarketTicker.low, currentMarketPricePrecision, ',')}
+            {createMoneyWithoutCcy(currentMarketTicker.low, currentMarketPricePrecision).toFormat()}
           </span>
         </div>
       </div>

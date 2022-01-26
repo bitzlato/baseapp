@@ -1,11 +1,12 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Market } from '../../modules';
-import { Decimal } from '../Decimal';
-import { FIXED_VOL_PRECISION } from 'src/constants';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Box } from '../Box/Box';
+import { AmountFormat } from '../AmountFormat/AmountFormat';
+import { Money } from '@bitzlato/money-js';
+import { createCcy, createMoney } from 'src/helpers/money';
 
 interface Props {
   currentBidUnit: string;
@@ -27,15 +28,14 @@ export const TickerTable: React.FC<Props> = ({
   const renderItem = React.useCallback(
     (market, index: number) => {
       const marketChangeColor = +(market.change || 0) < 0 ? 'ask' : 'bid';
+      const ccy = createCcy('',  market.price_precision);
 
       return (
         <tr key={index} onClick={() => redirectToTrading(market.id)}>
           <td>{market && <MarketName name={market.name} />}</td>
           <td>
             <span>
-              <Decimal fixed={market.price_precision} thousSep=",">
-                {market.last}
-              </Decimal>
+              <AmountFormat money={createMoney(market.last ?? 0, ccy)} />
             </span>
           </td>
           <td>
@@ -45,23 +45,17 @@ export const TickerTable: React.FC<Props> = ({
           </td>
           <td>
             <span>
-              <Decimal fixed={market.price_precision} thousSep=",">
-                {market.high}
-              </Decimal>
+              <AmountFormat money={createMoney(market.high ?? 0, ccy)} />
             </span>
           </td>
           <td>
             <span>
-              <Decimal fixed={market.price_precision} thousSep=",">
-                {market.low}
-              </Decimal>
+              <AmountFormat money={createMoney(market.low ?? 0, ccy)} />
             </span>
           </td>
           <td>
             <span>
-              <Decimal fixed={FIXED_VOL_PRECISION} thousSep=",">
-                {market.volume}
-              </Decimal>
+              <AmountFormat money={createMoney(market.volume ?? 0, ccy)} />
             </span>
           </td>
         </tr>

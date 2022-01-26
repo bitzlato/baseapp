@@ -1,8 +1,7 @@
-import { Decimal } from '../components/Decimal';
 import { DEFAULT_CCY_PRECISION } from '../constants';
 import { ApiCurrency, Market, Ticker, Wallet } from '../modules';
 import { handleCCYPrecision } from './';
-import { createCcy, createMoney } from './money';
+import { createCcy, createMoney, createMoneyWithoutCcy } from './money';
 
 export interface MarketTicker {
   [key: string]: Ticker;
@@ -61,22 +60,22 @@ export const estimateWithMarket = (
   );
 
   if (formattedTargetCurrency === formattedWalletCurrency) {
-    return Number(Decimal.format(walletTotal, targetCurrencyPrecision));
+    return Number(createMoneyWithoutCcy(walletTotal, targetCurrencyPrecision).toString());
   }
 
   if (market && marketTicker) {
     if (formattedTargetCurrency === market.base_unit) {
       const precisedValue = Number(
-        Decimal.format(
+        createMoneyWithoutCcy(
           walletTotal * (Number(marketTicker.last) !== 0 ? 1 / Number(marketTicker.last) : 0),
           targetCurrencyPrecision,
-        ),
+        ).toString(),
       );
 
       return precisedValue;
     } else {
       const precisedValue = Number(
-        Decimal.format(walletTotal * Number(marketTicker.last), targetCurrencyPrecision),
+        createMoneyWithoutCcy(walletTotal * Number(marketTicker.last), targetCurrencyPrecision).toString(),
       );
 
       return precisedValue;

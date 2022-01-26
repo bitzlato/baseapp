@@ -4,7 +4,6 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { compose } from 'redux';
 import { IntlProps } from '../../bootstrap';
 import { History, Pagination } from '../../components';
-import { Decimal } from '../../components/Decimal';
 import { localeDate, sortByDateDesc } from '../../helpers';
 import {
   currenciesFetch,
@@ -30,6 +29,8 @@ import { DepositStatus } from 'src/components/History/DepositStatus';
 import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
 import { FC } from 'react';
 import s from './TransferHistory.postcss';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 export interface HistoryProps {
   label: string;
@@ -150,9 +151,7 @@ export class WalletTable extends React.Component<Props> {
           ) : (
             <WithdrawStatus item={item as Withdraw} currency={currency} />
           ),
-          <Decimal key={index} fixed={precision} thousSep=",">
-            {Number(item.amount)}
-          </Decimal>,
+          <AmountFormat key={index} money={createMoneyWithoutCcy(Number(item.amount), precision)} />
         ];
       });
   };

@@ -4,7 +4,7 @@ import { Spinner } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { IntlProps } from '../../bootstrap';
-import { CombinedOrderBook, Decimal } from '../../components';
+import { CombinedOrderBook } from '../../components';
 import { colors } from '../../constants';
 import { accumulateVolume, calcMaxVolume, sortBids, sortAsks } from '../../helpers';
 import {
@@ -28,6 +28,9 @@ import {
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
+import { DiffAmountFormat } from 'src/components/DiffAmountFormat/DiffAmountFormat';
 
 interface ReduxProps {
   asks: string[][];
@@ -224,7 +227,7 @@ class OrderBookContainer extends React.Component<Props, State> {
       return (
         <React.Fragment>
           <span className={cn}>
-            {Decimal.format(lastPrice, currentMarket.price_precision, ',')}
+            {createMoneyWithoutCcy(lastPrice, currentMarket.price_precision).toFormat()}
           </span>
           <span>
             {this.props.intl.formatMessage({ id: 'page.body.trade.orderbook.lastMarket' })}
@@ -324,55 +327,49 @@ class OrderBookContainer extends React.Component<Props, State> {
                 : accumulateVolume(array.slice(0).reverse()).slice(0).reverse();
 
               return [
-                <Decimal
+                <DiffAmountFormat
                   key={i}
-                  fixed={priceFixed}
-                  thousSep=","
-                  prevValue={array[i + 1] ? array[i + 1][0] : 0}
-                >
-                  {price}
-                </Decimal>,
-                <Decimal key={i} fixed={amountFixed} thousSep=",">
-                  {volume}
-                </Decimal>,
-                <Decimal key={i} fixed={amountFixed} thousSep=",">
-                  {total[i]}
-                </Decimal>,
+                  currentValue={createMoneyWithoutCcy(volume ?? 0, priceFixed)}
+                  prevValue={createMoneyWithoutCcy(
+                    array[i + 1] ? array[i + 1]?.[0] ?? 0 : 0,
+                    priceFixed,
+                  )}
+                />,
+                <AmountFormat key={i} money={createMoneyWithoutCcy(volume ?? 0, amountFixed)} />,
+                <AmountFormat key={i} money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)} />,
               ];
             default:
               if (isLarge) {
                 return [
-                  <Decimal key={i} fixed={amountFixed} thousSep=",">
-                    {total[i]}
-                  </Decimal>,
-                  <Decimal key={i} fixed={amountFixed} thousSep=",">
-                    {volume}
-                  </Decimal>,
-                  <Decimal
+                  <AmountFormat
                     key={i}
-                    fixed={priceFixed}
-                    thousSep=","
-                    prevValue={array[i - 1] ? array[i - 1][0] : 0}
-                  >
-                    {price}
-                  </Decimal>,
+                    money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                  />,
+                  <AmountFormat key={i} money={createMoneyWithoutCcy(volume ?? 0, amountFixed)} />,
+                  <DiffAmountFormat
+                    key={i}
+                    currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
+                    prevValue={createMoneyWithoutCcy(
+                      array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
+                      priceFixed,
+                    )}
+                  />,
                 ];
               } else {
                 return [
-                  <Decimal
+                  <DiffAmountFormat
                     key={i}
-                    fixed={priceFixed}
-                    thousSep=","
-                    prevValue={array[i - 1] ? array[i - 1][0] : 0}
-                  >
-                    {price}
-                  </Decimal>,
-                  <Decimal key={i} fixed={amountFixed} thousSep=",">
-                    {volume}
-                  </Decimal>,
-                  <Decimal key={i} fixed={amountFixed} thousSep=",">
-                    {total[i]}
-                  </Decimal>,
+                    currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
+                    prevValue={createMoneyWithoutCcy(
+                      array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
+                      priceFixed,
+                    )}
+                  />,
+                  <AmountFormat key={i} money={createMoneyWithoutCcy(volume ?? 0, amountFixed)} />,
+                  <AmountFormat
+                    key={i}
+                    money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                  />,
                 ];
               }
           }
@@ -397,46 +394,47 @@ class OrderBookContainer extends React.Component<Props, State> {
           switch (side) {
             case 'asks':
               return [
-                <Decimal
+                <DiffAmountFormat
                   key={i}
-                  fixed={priceFixed}
-                  thousSep=","
-                  prevValue={array[i + 1] ? array[i + 1][0] : 0}
-                >
-                  {price}
-                </Decimal>,
-                <Decimal key={i} fixed={amountFixed} thousSep=",">
-                  {total[i]}
-                </Decimal>,
+                  currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
+                  prevValue={createMoneyWithoutCcy(
+                    array[i + 1] ? array[i + 1]?.[0] ?? 0 : 0,
+                    priceFixed,
+                  )}
+                />,
+                <AmountFormat key={i} money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)} />,
               ];
             default:
               if (isLarge) {
                 return [
-                  <Decimal key={i} fixed={amountFixed}>
-                    {total[i]}
-                  </Decimal>,
-                  <Decimal
+                  <AmountFormat
                     key={i}
-                    fixed={priceFixed}
-                    thousSep=","
-                    prevValue={array[i - 1] ? array[i - 1][0] : 0}
-                  >
-                    {price}
-                  </Decimal>,
+                    money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                  />,
+
+                  <DiffAmountFormat
+                    key={i}
+                    currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
+                    prevValue={createMoneyWithoutCcy(
+                      array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
+                      priceFixed,
+                    )}
+                  />,
                 ];
               } else {
                 return [
-                  <Decimal
+                  <DiffAmountFormat
                     key={i}
-                    fixed={priceFixed}
-                    thousSep=","
-                    prevValue={array[i - 1] ? array[i - 1][0] : 0}
-                  >
-                    {price}
-                  </Decimal>,
-                  <Decimal key={i} fixed={amountFixed} thousSep=",">
-                    {total[i]}
-                  </Decimal>,
+                    currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
+                    prevValue={createMoneyWithoutCcy(
+                      array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
+                      priceFixed,
+                    )}
+                  />,
+                  <AmountFormat
+                    key={i}
+                    money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                  />,
                 ];
               }
           }

@@ -1,12 +1,13 @@
 import React, { FC, useMemo, useState } from 'react';
 import cn from 'classnames';
 import { Market, Ticker } from 'src/modules';
-import { Decimal, Table, CellData } from 'src/components';
+import { Table, CellData } from 'src/components';
 import { useT } from 'src/hooks/useT';
 import { SortIcon } from 'src/components/SortIcon/SortIcon';
 import { MarketName } from 'src/components/MarketName/MarketName';
 
 import s from './MarketSelectorItems.postcss';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 interface Props {
   currentMarket?: Market | undefined;
@@ -136,10 +137,10 @@ export const MarketSelectorItems: FC<Props> = ({
           return [
             item.name,
             <span className={cellClassName}>
-              {Decimal.format(Number(item.last), item.price_precision, ',')}
+              {createMoneyWithoutCcy(Number(item.last), item.price_precision).toFormat()}
             </span>,
             <span className={cellClassName}>
-              {Decimal.format(Number(item.volume), item.price_precision, ',')}
+              {createMoneyWithoutCcy(Number(item.volume), item.price_precision).toFormat()}
             </span>,
             <span className={cellClassName}>{item.price_change_percent}</span>,
           ];

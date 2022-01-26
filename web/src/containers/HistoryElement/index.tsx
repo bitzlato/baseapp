@@ -8,7 +8,7 @@ import { getBlockchainLink } from 'src/helpers/getBlockchainLink';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { IntlProps } from '../../bootstrap';
-import { Decimal, History, Pagination } from '../../components';
+import { History, Pagination } from '../../components';
 import { localeDate, setTradesType, setTransferStatusColor, truncateMiddle } from '../../helpers';
 import {
   currenciesFetch,
@@ -33,6 +33,8 @@ import {
 } from '../../modules';
 import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
 import { TransferHistory } from '../Wallets/TransferHistory';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 interface HistoryProps {
   type: string;
@@ -201,7 +203,7 @@ class HistoryComponent extends React.Component<Props> {
           </div>,
           localeDate(created_at, 'fullDate'),
           <CurrencyTicker symbol={currency} />,
-          wallet && Decimal.format(amount, wallet.precision, ','),
+          wallet && createMoneyWithoutCcy(amount, wallet.precision).toFormat(),
           <DepositStatus item={item as Deposit} currency={currency} />,
         ];
       }
@@ -220,8 +222,8 @@ class HistoryComponent extends React.Component<Props> {
           </div>,
           localeDate(created_at, 'fullDate'),
           <CurrencyTicker symbol={currency} />,
-          wallet && Decimal.format(amount, wallet.precision, ','),
-          wallet && Decimal.format(fee, wallet.precision, ','),
+          wallet && createMoneyWithoutCcy(amount, wallet.precision).toFormat(),
+          wallet && createMoneyWithoutCcy(fee, wallet.precision).toFormat(),
           <WithdrawStatus key="status" currency={currency} item={item as Withdraw} />,
         ];
       }
@@ -245,15 +247,9 @@ class HistoryComponent extends React.Component<Props> {
             {sideText}
           </span>,
           <MarketName name={marketName} />,
-          <Decimal key={id} fixed={marketToDisplay.price_precision} thousSep=",">
-            {price}
-          </Decimal>,
-          <Decimal key={id} fixed={marketToDisplay.amount_precision} thousSep=",">
-            {amount}
-          </Decimal>,
-          <Decimal key={id} fixed={marketToDisplay.amount_precision} thousSep=",">
-            {total}
-          </Decimal>,
+          <AmountFormat key={id} money={createMoneyWithoutCcy(price ?? 0, marketToDisplay.price_precision)} />,
+          <AmountFormat key={id} money={createMoneyWithoutCcy(amount ?? 0, marketToDisplay.amount_precision)} />,
+          <AmountFormat key={id} money={createMoneyWithoutCcy(total ?? 0, marketToDisplay.amount_precision)} />,
         ];
       }
       case 'transfers': {
@@ -268,7 +264,7 @@ class HistoryComponent extends React.Component<Props> {
 
         return [
           localeDate(created_at, 'fullDate'),
-          wallet && Decimal.format(amount, wallet.precision, ','),
+          wallet && createMoneyWithoutCcy(amount, wallet.precision).toFormat(),
           <CurrencyTicker symbol={currency} />,
           direction && direction.replace(/^./, direction[0].toUpperCase()),
           toAccount,
