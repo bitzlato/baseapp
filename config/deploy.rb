@@ -52,9 +52,7 @@ end
 set :nvm_node, File.read('.nvmrc').strip
 set :nvm_map_bins, %w{node npm yarn rake corepack}
 
-# Removed --production flat. We need development tools
-#
-set :yarn_flags, '--silent --no-progress'
+set :yarn_flags, '--immutable'
 
 set :default_env, {
   REACT_APP_RELEASE_STAGE: fetch(:stage),
@@ -85,7 +83,6 @@ task :yarn_build do
       execute :yarn, :build
     end
     within release_path.join('../shared') do
-      execute :corepack, :enable
       execute :yarn, :rebuild, "@swc/core core-js core-js-pure esbuild fsevents"
       execute :yarn, :build
       execute :cp, "-R build #{release_path}/build/shared"
