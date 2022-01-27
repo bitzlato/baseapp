@@ -194,7 +194,11 @@ module.exports = {
   },
 
   plugins: [
-    process.env.ANALYZE && new StatoscopeWebpackPlugin(),
+    process.env.ANALYZE &&
+      new StatoscopeWebpackPlugin({
+        name: 'baseapp',
+        saveStatsTo: 'statoscope-reports/stats-[name]-[hash].json',
+      }),
 
     !isDevelopment &&
       new CopyWebpackPlugin({
