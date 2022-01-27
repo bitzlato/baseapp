@@ -1,8 +1,8 @@
 import { FC, useContext } from 'react';
-import Beta from 'assets/svg/Beta.svg';
+import Beta from 'shared/src/assets/svg/Beta.svg';
+import { Box } from 'shared/src/components/Box';
 
 import * as s from './Logo.css';
-import { Box } from './Box';
 import { HeaderContext } from './HeaderContext';
 
 export const Logo: FC = () => {

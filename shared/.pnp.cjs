@@ -4583,7 +4583,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["core-js", [
         ["npm:3.20.2", {
-          "packageLocation": "./.yarn/cache/core-js-npm-3.20.2-656ea79cc8-dc055a5a79.zip/node_modules/core-js/",
+          "packageLocation": "./.yarn/unplugged/core-js-npm-3.20.2-656ea79cc8/node_modules/core-js/",
           "packageDependencies": [
             ["core-js", "npm:3.20.2"]
           ],
@@ -4603,7 +4603,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["core-js-pure", [
         ["npm:3.20.0", {
-          "packageLocation": "./.yarn/cache/core-js-pure-npm-3.20.0-56d266097f-b5ae660153.zip/node_modules/core-js-pure/",
+          "packageLocation": "./.yarn/unplugged/core-js-pure-npm-3.20.0-56d266097f/node_modules/core-js-pure/",
           "packageDependencies": [
             ["core-js-pure", "npm:3.20.0"]
           ],
@@ -5331,7 +5331,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["esbuild", [
         ["npm:0.11.23", {
-          "packageLocation": "./.yarn/cache/esbuild-npm-0.11.23-3c7e5ace5a-d55bea84f9.zip/node_modules/esbuild/",
+          "packageLocation": "./.yarn/unplugged/esbuild-npm-0.11.23-3c7e5ace5a/node_modules/esbuild/",
           "packageDependencies": [
             ["esbuild", "npm:0.11.23"]
           ],

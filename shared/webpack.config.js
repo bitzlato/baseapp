@@ -31,7 +31,6 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
-    modules: ['node_modules', path.resolve(__dirname, './src')],
   },
 
   module: {
@@ -98,8 +97,8 @@ module.exports = {
       name: 'shared',
       filename: 'shared.js',
       exposes: {
-        './Header': './src/components/Header',
-        './Footer': './src/components/Footer/Footer',
+        './Header': './src/Header',
+        './Footer': './src/Footer',
       },
       shared: {
         react: {

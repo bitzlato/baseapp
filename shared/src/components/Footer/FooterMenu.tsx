@@ -1,4 +1,4 @@
-import { Box } from 'components/Box';
+import { Box } from 'shared/src/components/Box';
 import { FC } from 'react';
 import cn from 'classnames';
 

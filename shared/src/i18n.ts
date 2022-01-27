@@ -1,4 +1,4 @@
-import { Language } from 'types';
+import { Language } from 'shared/src/types';
 import en from './locales/en.json';
 import ru from './locales/ru.json';
 

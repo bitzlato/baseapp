@@ -1,10 +1,10 @@
 import { FC, useCallback, useContext } from 'react';
-import { Notify } from 'types';
-import { Box } from 'components/Box';
-import { HeaderContext } from 'components/HeaderContext';
-import { Icon } from 'components/Icon';
-import { Button } from 'components/Button';
-import { Dropdown, RenderMenuFn } from 'components/Dropdown/Dropdown';
+import { Notify } from 'shared/src/types';
+import { Box } from 'shared/src/components/Box';
+import { HeaderContext } from 'shared/src/components/Header/HeaderContext';
+import { Icon } from 'shared/src/components/Icon';
+import { Button } from 'shared/src/components/Button';
+import { Dropdown, RenderMenuFn } from 'shared/src/components/Dropdown/Dropdown';
 import * as s from './Notifications.css';
 
 interface Props {

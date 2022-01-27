@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { item as dropdownItem } from 'components/Dropdown/DropdownItem.css';
+import { item as dropdownItem } from 'shared/src/components/Dropdown/DropdownItem.css';
 
 export const item = style([
   dropdownItem,

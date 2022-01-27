@@ -1,5 +1,6 @@
 {
   "name": "shared",
+  "version": "3.0.0",
   "private": true,
   "engines": {
     "node": ">=16.13.1 <17"

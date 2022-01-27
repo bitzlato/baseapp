@@ -4,15 +4,15 @@ import { Logo } from './Logo';
 import { Navigation } from './Navigation';
 import { UserPanel } from './UserPanel/UserPanel';
 import * as s from './Header.css';
-import { Box } from './Box';
-import { themeDark, themeLight } from 'theme/vars.css';
+import { Box } from 'shared/src/components/Box';
+import { themeDark, themeLight } from 'shared/src/theme/vars.css';
 import { HamburgerMenu } from './HamburgerMenu';
 import { HeaderContext, HeaderContextValue } from './HeaderContext';
 import {
   USER_STATUS_AUTHORIZATION_REQUIRED,
   USER_STATUS_AUTHORIZED,
   USER_STATUS_NOT_AUTHORIZED,
-} from 'constants';
+} from 'shared/src/constants';
 
 type Props = HeaderContextValue;
 

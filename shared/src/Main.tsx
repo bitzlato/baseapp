@@ -1,12 +1,12 @@
-import { IconName } from 'components/Icon';
+import { IconName } from './components/Icon';
 import { FC, useEffect, useState } from 'react';
 import {
   Header,
   USER_STATUS_NOT_AUTHORIZED,
   USER_STATUS_AUTHORIZATION_REQUIRED,
   USER_STATUS_AUTHORIZED,
-} from './components/Header';
-import { Footer } from 'components/Footer/Footer';
+} from './Header';
+import { Footer } from './Footer';
 import { Language, Links, Notify, Theme } from './types';
 
 const MARKET_URL = 'https://market.bitzlato.com' as const;

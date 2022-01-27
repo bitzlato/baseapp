@@ -2,8 +2,8 @@ import { FC } from 'react';
 import cn from 'classnames';
 
 import * as s from './LanguageSwitcherItem.css';
-import { Box } from 'components/Box';
-import { Language } from 'types';
+import { Box } from 'shared/src/components/Box';
+import { Language } from 'shared/src/types';
 
 interface Props {
   isActive: boolean;

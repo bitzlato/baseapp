@@ -1,5 +1,5 @@
 import { Children, FC, ReactNode } from 'react';
-import { Sprinkles } from 'theme/sprinkles.css';
+import { Sprinkles } from 'shared/src/theme/sprinkles.css';
 import { Box } from './Box';
 
 interface Props {

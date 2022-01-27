@@ -1,11 +1,11 @@
 import { FC, useCallback, useContext } from 'react';
 import cn from 'classnames';
-import { Box } from 'components/Box';
-import { Language } from 'types';
-import { HeaderContext } from 'components/HeaderContext';
+import { Box } from 'shared/src/components/Box';
+import { Language } from 'shared/src/types';
+import { HeaderContext } from 'shared/src/components/Header/HeaderContext';
 import * as s from './LanguageSelect.css';
-import { Dropdown, RenderButtonFn, RenderMenuFn } from 'components/Dropdown/Dropdown';
-import { DropdownItem } from 'components/Dropdown/DropdownItem';
+import { Dropdown, RenderButtonFn, RenderMenuFn } from 'shared/src/components/Dropdown/Dropdown';
+import { DropdownItem } from 'shared/src/components/Dropdown/DropdownItem';
 
 export interface LanguageSelectContext {
   language: Language;

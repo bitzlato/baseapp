@@ -1,9 +1,9 @@
 import { JSXElementConstructor, AllHTMLAttributes, forwardRef } from 'react';
 import cn from 'classnames';
-import { OptionalWithUndefined } from 'types';
+import { OptionalWithUndefined } from 'shared/src/types';
 
-import * as resetStyles from 'theme/reset.css';
-import { sprinkles, Sprinkles } from 'theme/sprinkles.css';
+import * as resetStyles from 'shared/src/theme/reset.css';
+import { sprinkles, Sprinkles } from 'shared/src/theme/sprinkles.css';
 
 type SprinklesKeys = keyof Sprinkles;
 type JSXElement = keyof JSX.IntrinsicElements | JSXElementConstructor<any>;

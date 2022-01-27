@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import cn from 'classnames';
-import { LinkType, RenderLinkComponent, RenderNavLinkComponent } from 'types';
-import { Box } from 'components/Box';
-import { Icon, IconName } from 'components/Icon';
+import { LinkType, RenderLinkComponent, RenderNavLinkComponent } from 'shared/src/types';
+import { Box } from 'shared/src/components/Box';
+import { Icon, IconName } from 'shared/src/components/Icon';
 import * as s from './DropdownItem.css';
 
 type Props = {

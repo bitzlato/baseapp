@@ -1,4 +1,4 @@
-import { sprinkles } from 'theme/sprinkles.css';
+import { sprinkles } from 'shared/src/theme/sprinkles.css';
 
 export const user = sprinkles({
   display: 'flex',
