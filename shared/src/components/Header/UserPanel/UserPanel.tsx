@@ -1,19 +1,19 @@
 import { FC, useContext } from 'react';
-import { Box } from 'components/Box';
-import { Button } from 'components/Button';
-import { ThemeSwitcher } from 'components/ThemeSwitcher';
-import ToProfileIcon from 'assets/svg/ToProfileIcon.svg';
-import SpeedIcon from 'assets/svg/SpeedIcon.svg';
-import LogoutIcon from 'assets/svg/LogoutIcon.svg';
-import { Spinner } from 'components/Spinner';
-import { sprinkles } from 'theme/sprinkles.css';
-import { Stack } from 'components/Stack';
+import { Box } from 'shared/src/components/Box';
+import { Button } from 'shared/src/components/Button';
+import { ThemeSwitcher } from 'shared/src/components/Header/ThemeSwitcher';
+import ToProfileIcon from 'shared/src/assets/svg/ToProfileIcon.svg';
+import SpeedIcon from 'shared/src/assets/svg/SpeedIcon.svg';
+import LogoutIcon from 'shared/src/assets/svg/LogoutIcon.svg';
+import { Spinner } from 'shared/src/components/Spinner';
+import { sprinkles } from 'shared/src/theme/sprinkles.css';
+import { Stack } from 'shared/src/components/Stack';
 import {
   USER_STATUS_AUTHORIZATION_REQUIRED,
   USER_STATUS_AUTHORIZED,
   USER_STATUS_NOT_AUTHORIZED,
-} from 'constants';
-import { getUserContext, HeaderContext } from 'components/HeaderContext';
+} from 'shared/src/constants';
+import { getUserContext, HeaderContext } from 'shared/src/components/Header/HeaderContext';
 import { UserMenu } from './UserMenu';
 import { Notifications } from './Notifications';
 import { LanguageSelect } from './LanguageSelect';
@@ -41,14 +41,14 @@ export const UserPanel: FC<Props> = ({ responsiveMode = false }) => {
       display="flex"
       alignItems="stretch"
       fontSize="medium"
-      ml={responsiveMode ? 0 : 'auto'}
+      ml={responsiveMode ? '0' : 'auto'}
       height="full"
     >
       {userContext.status === USER_STATUS_AUTHORIZATION_REQUIRED && (
         <>
           <Box
             className={responsiveMode ? s.canBeHidden : undefined}
-            mr={enableMobileMenu ? [0, '5x'] : '5x'}
+            mr={enableMobileMenu ? ['0', '5x'] : '5x'}
             alignSelf="center"
           >
             <Button onClick={userContext.onSignInClick}>{t('signIn')}</Button>

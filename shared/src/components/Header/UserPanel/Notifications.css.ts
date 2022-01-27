@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from 'theme/vars.css';
+import { vars } from 'shared/src/theme/vars.css';
 
 export const unread = style({
   position: 'relative',

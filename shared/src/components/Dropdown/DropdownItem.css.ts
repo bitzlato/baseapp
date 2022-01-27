@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
-import { sprinkles } from 'theme/sprinkles.css';
-import { vars } from 'theme/vars.css';
-import * as resetStyles from 'theme/reset.css';
+import { sprinkles } from 'shared/src/theme/sprinkles.css';
+import { vars } from 'shared/src/theme/vars.css';
+import * as resetStyles from 'shared/src/theme/reset.css';
 
 export const item = style([
   resetStyles.base,

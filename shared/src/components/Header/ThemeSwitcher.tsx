@@ -1,10 +1,10 @@
 import { FC, useContext } from 'react';
-import Moon from 'assets/svg/Moon.svg';
-import Sun from 'assets/svg/Sun.svg';
-import { Theme } from 'types';
+import Moon from 'shared/src/assets/svg/Moon.svg';
+import Sun from 'shared/src/assets/svg/Sun.svg';
+import { Theme } from 'shared/src/types';
+import { Box } from 'shared/src/components/Box';
 
 import * as s from './ThemeSwitcher.css';
-import { Box } from './Box';
 import { HeaderContext } from './HeaderContext';
 
 export interface ThemeSwitcherContext {

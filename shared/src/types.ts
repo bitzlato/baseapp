@@ -1,9 +1,9 @@
-import { IconName } from 'components/Icon';
+import { IconName } from 'shared/src/components/Icon';
 import {
   USER_STATUS_AUTHORIZATION_REQUIRED,
   USER_STATUS_AUTHORIZED,
   USER_STATUS_NOT_AUTHORIZED,
-} from 'constants';
+} from 'shared/src/constants';
 import { ReactNode } from 'react';
 
 export type Language = 'en' | 'ru' | 'ar' | 'es' | 'fr' | 'pt' | 'zh';

@@ -1,11 +1,11 @@
-import { Box } from 'components/Box';
+import { Box } from 'shared/src/components/Box';
 import cn from 'classnames';
-import { Icon } from 'components/Icon';
-import { Stack } from 'components/Stack';
-import { createT } from 'i18n';
+import { Icon } from 'shared/src/components/Icon';
+import { Stack } from 'shared/src/components/Stack';
+import { createT } from 'shared/src/i18n';
 import { FC, useState } from 'react';
-import { Language, RenderLinkComponent, Theme } from 'types';
-import { themeDark, themeLight } from 'theme/vars.css';
+import { Language, RenderLinkComponent, Theme } from 'shared/src/types';
+import { themeDark, themeLight } from 'shared/src/theme/vars.css';
 import * as s from './Footer.css';
 import { FooterMenu } from './FooterMenu';
 

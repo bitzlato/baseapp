@@ -1,12 +1,12 @@
 import { createContext } from 'react';
-import { themeDark, themeLight } from 'theme/vars.css';
+import { themeDark, themeLight } from 'shared/src/theme/vars.css';
 import {
   Links,
   RenderLinkComponent,
   RenderNavLinkComponent,
   TranslateFn,
   UserContext,
-} from 'types';
+} from 'shared/src/types';
 import { LanguageSelectContext } from './UserPanel/LanguageSelect';
 import { ThemeSwitcherContext } from './ThemeSwitcher';
 

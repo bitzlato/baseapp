@@ -1,8 +1,8 @@
-import { Box } from 'components/Box';
+import { Box } from 'shared/src/components/Box';
 import cn from 'classnames';
-import { HeaderContext } from 'components/HeaderContext';
+import { HeaderContext } from 'shared/src/components/Header/HeaderContext';
 import { FC, useContext, useState } from 'react';
-import { Language } from 'types';
+import { Language } from 'shared/src/types';
 
 import * as s from './LanguageSwitcher.css';
 import { LanguageSwitcherItem } from './LanguageSwitcherItem';

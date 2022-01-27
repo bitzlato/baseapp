@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
-import { sprinkles } from 'theme/sprinkles.css';
-import { vars } from 'theme/vars.css';
-import { item as dropdownItem } from './Dropdown/DropdownItem.css';
+import { sprinkles } from 'shared/src/theme/sprinkles.css';
+import { vars } from 'shared/src/theme/vars.css';
+import { item as dropdownItem } from 'shared/src/components/Dropdown/DropdownItem.css';
 
 export const item = style([
   dropdownItem,

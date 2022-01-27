@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { sprinkles } from 'theme/sprinkles.css';
+import { sprinkles } from 'shared/src/theme/sprinkles.css';
 
 export const title = sprinkles({
   color: 'footerTitle',

@@ -1,5 +1,5 @@
-import { Box } from 'components/Box';
-import { getThemeClassName, HeaderContext } from 'components/HeaderContext';
+import { Box } from 'shared/src/components/Box';
+import { getThemeClassName, HeaderContext } from 'shared/src/components/Header/HeaderContext';
 import { forwardRef, PropsWithChildren, useContext } from 'react';
 import cn from 'classnames';
 

@@ -1,11 +1,11 @@
 import { FC, useCallback, useContext } from 'react';
-import { Links, User } from 'types';
-import { Box } from 'components/Box';
-import { DropdownItem } from 'components/Dropdown/DropdownItem';
-import { HeaderContext } from 'components/HeaderContext';
-import ToProfileIcon from 'assets/svg/ToProfileIcon.svg';
+import { Links, User } from 'shared/src/types';
+import { Box } from 'shared/src/components/Box';
+import { DropdownItem } from 'shared/src/components/Dropdown/DropdownItem';
+import { HeaderContext } from 'shared/src/components/Header/HeaderContext';
+import ToProfileIcon from 'shared/src/assets/svg/ToProfileIcon.svg';
 import * as s from './UserMenu.css';
-import { Dropdown, RenderMenuFn } from 'components/Dropdown/Dropdown';
+import { Dropdown, RenderMenuFn } from 'shared/src/components/Dropdown/Dropdown';
 
 export interface Props {
   user: User;

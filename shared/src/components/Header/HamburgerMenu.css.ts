@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from 'theme/vars.css';
+import { vars } from 'shared/src/theme/vars.css';
 
 const hamburgerPadding = 16;
 const hamburgerItemSize = 18;

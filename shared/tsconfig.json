@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "target": "esnext",
     "module": "es2022",
     "jsx": "react-jsx",

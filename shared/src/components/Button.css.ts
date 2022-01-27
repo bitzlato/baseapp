@@ -1,5 +1,5 @@
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
-import { sprinkles } from 'theme/sprinkles.css';
+import { sprinkles } from 'shared/src/theme/sprinkles.css';
 
 export const button = recipe({
   base: sprinkles({

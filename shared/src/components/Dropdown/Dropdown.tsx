@@ -1,12 +1,16 @@
 import { FC, ReactNode, useCallback, useContext, useRef, useState } from 'react';
-import { useEscapeKeyDown } from 'hooks/useEscapeKeyDown';
-import { useOnClickOutside } from 'hooks/useOnClickOutside';
-import { OptionalWithUndefined, RenderLinkComponent, RenderNavLinkComponent } from 'types';
-import { Box } from 'components/Box';
-import { Sprinkles } from 'theme/sprinkles.css';
-import { HeaderContext } from 'components/HeaderContext';
+import { useEscapeKeyDown } from 'shared/src/hooks/useEscapeKeyDown';
+import { useOnClickOutside } from 'shared/src/hooks/useOnClickOutside';
+import {
+  OptionalWithUndefined,
+  RenderLinkComponent,
+  RenderNavLinkComponent,
+} from 'shared/src/types';
+import { Box } from 'shared/src/components/Box';
+import { Sprinkles } from 'shared/src/theme/sprinkles.css';
+import { HeaderContext } from 'shared/src/components/Header/HeaderContext';
 import { DropdownMenu } from './DropdownMenu';
-import { Portal } from 'components/Portal';
+import { Portal } from 'shared/src/components/Portal';
 
 export type RenderButtonFn = (props: { open: boolean }) => ReactNode;
 
