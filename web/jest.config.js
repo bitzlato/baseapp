@@ -2,7 +2,6 @@ module.exports = {
   setupFilesAfterEnv: ['jest-enzyme', '<rootDir>/jest/setup.tsx'],
   testEnvironment: 'enzyme',
   verbose: true,
-  moduleDirectories: ['node_modules', '<rootDir>'],
   moduleNameMapper: {
     '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
     '\\.(postcss)$': 'identity-obj-proxy',
