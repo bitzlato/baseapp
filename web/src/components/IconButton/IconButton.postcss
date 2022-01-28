@@ -1,6 +1,10 @@
 .icon-button {
   background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
   color: var(--icons);
+  outline-color: var(--input-border-color-active);
+  padding: var(--gap);
 
   &:hover:not(:disabled) {
     color: var(--primary-text-color);
@@ -8,5 +12,10 @@
 
   & > svg {
     fill: currentColor;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.48;
   }
 }

@@ -1212,6 +1212,7 @@ export const en = {
   market: 'Market',
   Rearrange: 'Rearrange',
   'Transfer History': 'Transfer History',
+  'Transfer was successfully created': 'Transfer was successfully created',
   Date: 'Date',
   From: 'From',
   To: 'To',

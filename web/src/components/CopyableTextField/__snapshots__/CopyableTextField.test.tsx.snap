@@ -24,7 +24,7 @@ exports[`CopyableTextField should render 1`] = `
       class="input-group-append"
     >
       <button
-        class="cr-percentage-button iconButton"
+        class="iconButton"
         title="Copy"
         type="button"
       >

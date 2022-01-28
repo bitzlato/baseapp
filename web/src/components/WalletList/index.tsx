@@ -7,6 +7,7 @@ export interface WalletListProps {
   walletItems: WalletItemData[];
   activeIndex: number;
   onWalletSelectionChange(index: number): void;
+  isMobileDevice?: boolean;
 }
 
 export const WalletList: React.FC<WalletListProps> = ({
@@ -14,6 +15,7 @@ export const WalletList: React.FC<WalletListProps> = ({
   onWalletSelectionChange,
   activeIndex,
   walletItems,
+  isMobileDevice,
 }) => {
   return (
     <Box col className={className}>
@@ -23,6 +25,7 @@ export const WalletList: React.FC<WalletListProps> = ({
           wallet={wallet}
           active={activeIndex === i}
           onClick={() => onWalletSelectionChange(i)}
+          isMobileDevice={isMobileDevice}
         />
       ))}
     </Box>

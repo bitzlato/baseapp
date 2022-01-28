@@ -17,14 +17,19 @@ import s from './TransferHistory.postcss';
 interface Props {
   currency?: Currency;
   wallets?: Wallet[];
+  transfers?: number;
 }
 
-export const TransferHistory: React.FC<Props> = ({ currency, wallets }) => {
+export const TransferHistory: React.FC<Props> = ({ currency, wallets, transfers }) => {
   const t = useT();
 
-  const { data = [], error } = useFetch<TransferRecord[]>(accountUrl() + '/transfers', {
-    credentials: 'include',
-  });
+  const { data = [], error } = useFetch<TransferRecord[]>(
+    `${accountUrl()}/transfers`,
+    {
+      credentials: 'include',
+    },
+    [transfers],
+  );
 
   useAlert(error);
 

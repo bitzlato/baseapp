@@ -10,7 +10,11 @@ interface Options extends RequestInit {
   skipRequest?: boolean;
 }
 
-export function useFetch<T>(url: string, options?: Options): FetchResult<T> {
+export function useFetch<T>(
+  url: string,
+  options?: Options,
+  deps: React.DependencyList = [],
+): FetchResult<T> {
   const [data, setData] = useState<T | undefined>(undefined);
   const [error, setError] = useState<FetchError | undefined>();
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +40,7 @@ export function useFetch<T>(url: string, options?: Options): FetchResult<T> {
       })();
       return () => controller?.abort();
     }
-  }, [url, options?.skipRequest]);
+  }, [url, options?.skipRequest, ...deps]);
 
   return { data, error, isLoading };
 }

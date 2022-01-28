@@ -1,30 +1,35 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { useCurrenciesFetch, useDocumentTitle, useWalletsFetch } from '../../../hooks';
-import { selectWallets } from '../../../modules/user/wallets';
-import { EstimatedValueMobile, WalletItem } from '../../components';
+import { Box } from 'src/components/Box';
+import { WalletList } from 'src/components/WalletList';
+import { Estimated } from 'src/containers/Wallets/Estimated';
+import { useGeneralWallets } from 'src/hooks/useGeneralWallets';
+import { useDocumentTitle } from '../../../hooks';
 
-const WalletsMobileScreen: React.FC = () => {
-  const wallets = useSelector(selectWallets) || [];
+export const WalletsMobileScreen: React.FC = () => {
+  useDocumentTitle('Wallets');
   const history = useHistory();
 
-  useWalletsFetch();
-  useCurrenciesFetch();
-  useDocumentTitle('Wallets');
+  const list = useGeneralWallets();
+
+  const handleSelection = (i: number) => {
+    history.push(`/wallets/${list[i]!.currency.toLowerCase()}`);
+  };
 
   return (
-    <div>
-      <EstimatedValueMobile />
-      {wallets.map((wallet, index) => (
-        <WalletItem
-          onClick={(c) => history.push(`/wallets/${c}/history`)}
-          wallet={wallet}
-          key={index}
-        />
-      ))}
-    </div>
+    <Box col spacing="sm">
+      <div />
+      <Box bgColor="body" padding="2X3">
+        <Estimated />
+      </Box>
+      <Box
+        bgColor="body"
+        as={WalletList}
+        walletItems={list}
+        activeIndex={-1}
+        onWalletSelectionChange={handleSelection}
+        isMobileDevice
+      />
+    </Box>
   );
 };
-
-export { WalletsMobileScreen };

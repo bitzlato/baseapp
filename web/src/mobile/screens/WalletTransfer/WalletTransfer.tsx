@@ -1,34 +1,43 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { useMemberLevelFetch } from 'src/hooks/useMemberLevelsFetch';
-import { selectWallet } from 'src/modules/user/wallets';
 import { Subheader } from 'src/mobile/components';
-import { Withdraw } from 'src/containers/Withdraw';
 import { useGeneralWallet } from 'src/hooks/useGeneralWallets';
 import { WalletMobileBalance } from '../SelectedWalletScreen/WalletMobileBalance';
 import { useT } from 'src/hooks/useT';
 import { Box } from 'src/components/Box/Box';
+import { Transfer } from 'src/containers/Wallets/Transfer';
 
-export const WalletWithdraw: React.FC = () => {
+export const WalletTransfer: React.FC = () => {
   const currency = useParams<{ currency?: string }>().currency?.toUpperCase() ?? '';
   const t = useT();
   const history = useHistory();
-  const wallet = useSelector(selectWallet(currency));
 
   useMemberLevelFetch();
 
-  const generalWallet = useGeneralWallet(currency);
+  const wallet = useGeneralWallet(currency);
 
   return (
     <Box col spacing="sm">
       <Subheader
-        title={t('page.body.wallets.tabs.withdraw')}
+        title={t('Transfer.noun')}
         backTitle={t('page.body.wallets.balance')}
         onGoBack={() => history.goBack()}
       />
-      {generalWallet && <WalletMobileBalance wallet={generalWallet} />}
-      {wallet && <Withdraw wallet={wallet} />}
+      {wallet && (
+        <>
+          <WalletMobileBalance wallet={wallet} />
+          {wallet.hasTransfer && (
+            <Box bgColor="body" padding="2X3">
+              <Transfer
+                currency={wallet.balance.currency}
+                balanceMarket={wallet.balanceMarket.toString()}
+                balanceP2P={wallet.balanceP2P.toString()}
+              />
+            </Box>
+          )}
+        </>
+      )}
     </Box>
   );
 };

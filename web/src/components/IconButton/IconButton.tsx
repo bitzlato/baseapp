@@ -6,11 +6,5 @@ export const IconButton: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>>
   className,
   ...props
 }) => {
-  return (
-    <button
-      className={cn('cr-percentage-button', s.iconButton, className)}
-      type="button"
-      {...props}
-    />
-  );
+  return <button className={cn(s.iconButton, className)} type="button" {...props} />;
 };

@@ -1,34 +1,30 @@
 import * as React from 'react';
-import { Currency } from '@bitzlato/money-js';
-import { Button } from 'react-bootstrap';
-import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';
+import { Box } from 'src/components/Box/Box';
+import { Button } from 'src/components/Button/Button';
+import { useT } from 'src/hooks/useT';
+import type { SelectOption } from 'src/components/Select/Select';
 
 interface Props {
-  currency: Currency;
+  currency: string;
+  options: SelectOption[];
 }
 
-const WalletsButtonsComponent: React.FC<Props> = (props) => {
-  const intl = useIntl();
+const WalletsButtonsComponent: React.FC<Props> = ({ currency, options }) => {
+  const t = useT();
   const history = useHistory();
-
   return (
-    <div className="cr-mobile-wallets-buttons">
-      <Button
-        onClick={() => history.push(`/wallets/${props.currency.code.toLowerCase()}/deposit`)}
-        size="lg"
-        variant="success"
-      >
-        {intl.formatMessage({ id: 'page.body.wallets.tabs.deposit' })}
-      </Button>
-      <Button
-        onClick={() => history.push(`/wallets/${props.currency.code.toLowerCase()}/withdraw`)}
-        size="lg"
-        variant="danger"
-      >
-        {intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw' })}
-      </Button>
-    </div>
+    <Box row spacing justify="around" className="cr-mobile-wallets-buttons">
+      {options.map((d) => (
+        <Button
+          key={d.value}
+          variant="primary-outline"
+          onClick={() => history.push(`/wallets/${currency.toLowerCase()}/${d.value}`)}
+        >
+          {t(d.label)}
+        </Button>
+      ))}
+    </Box>
   );
 };
 

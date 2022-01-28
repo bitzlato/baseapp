@@ -1,46 +1,40 @@
 import * as React from 'react';
-import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { useMemberLevelFetch } from 'src/hooks/useMemberLevelsFetch';
-import { useCurrenciesFetch, useRangerConnectFetch, useWalletsFetch } from 'src/hooks';
+import { useRangerConnectFetch } from 'src/hooks';
 import { selectWallet } from 'src/modules/user/wallets';
-import { Subheader, WalletHeader } from 'src/mobile/components';
+import { Subheader } from 'src/mobile/components';
 import { DepositCrypto } from 'src/components/DepositCrypto';
-import { Card } from 'src/components/Card/Card';
+import { useT } from 'src/hooks/useT';
+import { useGeneralWallet } from 'src/hooks/useGeneralWallets';
+import { WalletMobileBalance } from '../SelectedWalletScreen/WalletMobileBalance';
+import { Box } from 'src/components/Box/Box';
 
-const WalletDeposit: React.FC = () => {
-  const intl = useIntl();
+export const WalletDeposit: React.FC = () => {
+  const t = useT();
   const history = useHistory();
-  const { currency } = useParams<{ currency?: string }>();
+  const currency = useParams<{ currency?: string }>().currency?.toUpperCase() ?? '';
   const wallet = useSelector(selectWallet(currency));
 
-  useCurrenciesFetch();
-  useWalletsFetch();
   useRangerConnectFetch();
   useMemberLevelFetch();
 
+  const generalWallet = useGeneralWallet(currency);
+
   return (
-    <React.Fragment>
+    <Box col spacing="sm">
       <Subheader
-        title={intl.formatMessage({ id: 'page.body.wallets.tabs.deposit' })}
-        backTitle={intl.formatMessage({ id: 'page.body.wallets.balance' })}
-        onGoBack={() => history.push(`/wallets/${currency}/history`)}
+        title={t('page.body.wallets.tabs.deposit')}
+        backTitle={t('page.body.wallets.balance')}
+        onGoBack={() => history.goBack()}
       />
+      {generalWallet && <WalletMobileBalance wallet={generalWallet} />}
       {wallet && (
-        <>
-          <WalletHeader
-            currency={wallet.currency.code}
-            iconId={wallet.icon_id}
-            name={wallet.name}
-          />
-          <Card>
-            <DepositCrypto wallet={wallet} />
-          </Card>
-        </>
+        <Box bgColor="body" padding="2X3">
+          <DepositCrypto wallet={wallet} />
+        </Box>
       )}
-    </React.Fragment>
+    </Box>
   );
 };
-
-export { WalletDeposit };
