@@ -15,15 +15,15 @@ type BoxOwnProps<E = React.ElementType> = {
   flex1?: boolean;
   wrap?: boolean;
   position?: 'relative' | 'absolute';
-  justify?: 'end' | 'center' | 'between';
+  justify?: 'end' | 'center' | 'between' | 'around';
   align?: 'start' | 'end' | 'center' | 'stretch';
   self?: 'start' | 'center' | 'end' | 'stretch';
   spacing?: boolean | '2' | '3' | '4' | '5' | 'sm';
-  padding?: boolean | '2' | '3' | '4' | '5';
+  padding?: boolean | '2' | '3' | '4' | '5' | '2X3';
   textSize?: 'sm' | 'lg' | 'xl';
   textColor?: TextColor;
   textTr?: 'capitalize' | 'uppercase';
-  textAlign?: 'start';
+  textAlign?: 'start' | 'center';
   bgColor?: 'body';
   ellipsis?: boolean;
   bold?: boolean;

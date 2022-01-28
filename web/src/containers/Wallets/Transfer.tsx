@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Currency } from '@bitzlato/money-js';
 import { parseNumeric } from 'src/helpers/parseNumeric';
 import { Box } from 'src/components/Box/Box';
@@ -14,23 +15,31 @@ import { FetchError, postData } from 'src/hooks/useFetch';
 import { TransferHistory } from './TransferHistory';
 import { useAlert } from 'src/hooks/useAlert';
 import { accountUrl } from 'src/api/config';
+import { alertPush } from 'src/modules/public/alert/actions';
 import s from './Transfer.postcss';
 
 interface Props {
   currency: Currency;
   balanceMarket: string;
   balanceP2P: string;
+  transfers?: number;
+  onChangeTransfers?: () => void;
 }
 
-export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P }) => {
+export const Transfer: React.FC<Props> = ({
+  currency,
+  balanceMarket,
+  balanceP2P,
+  transfers,
+  onChangeTransfers,
+}) => {
   const [from, setFrom] = useState<TransferPlace | undefined>();
   const [to, setTo] = useState<TransferPlace | undefined>();
   const [amount, setAmount] = useState('');
-
   const [error, setError] = useState<FetchError | undefined>();
-  const [succeed, setSucceed] = useState(0);
 
   const t = useT();
+  const dispatch = useDispatch();
 
   useAlert(error);
 
@@ -63,8 +72,12 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
         description: 'Transfer by market web-client',
       };
       try {
-        await postData(accountUrl() + '/transfers', data, { credentials: 'include' });
-        setSucceed(succeed + 1);
+        await postData(`${accountUrl()}/transfers`, data, { credentials: 'include' });
+        setFrom(undefined);
+        setTo(undefined);
+        setAmount('');
+        onChangeTransfers?.();
+        dispatch(alertPush({ message: ['Transfer was successfully created'], type: 'success' }));
       } catch (e) {
         setError(e as FetchError);
       }
@@ -128,7 +141,7 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
           {t('Transfer.verb')}
         </Box>
       </Box>
-      <TransferHistory key={succeed} currency={currency} />
+      <TransferHistory currency={currency} transfers={transfers} />
     </>
   );
 };

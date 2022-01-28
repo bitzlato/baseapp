@@ -33,11 +33,11 @@ import {
   ProfileMobileScreen,
   ProfileThemeMobileScreen,
   ProfileVerificationMobileScreen,
-  SelectedWalletMobileScreen,
+  // SelectedWalletMobileScreen,
   TradingScreenMobile,
-  WalletDeposit,
+  // WalletDeposit,
   WalletsMobileScreen,
-  WalletWithdraw,
+  // WalletWithdraw,
 } from '../../mobile/screens';
 import {
   logoutFetch,
@@ -82,6 +82,7 @@ import { WalletsScreen } from 'src/screens/WalletsScreen/WalletsScreen';
 import { loginWithRedirect } from 'src/helpers/auth0';
 import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
 import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
+import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -341,7 +342,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               path="/email-verification"
               component={EmailVerificationMobileScreen}
             />
-            <PrivateRoute
+            {/* <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}
               path="/wallets/:currency/history"
@@ -362,14 +363,26 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}
-              path="/confirm"
-              component={ConfirmMobileScreen}
+              path="/wallets/:currency/transfer"
+              component={WalletTransfer}
+            /> */}
+            <PrivateRoute
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path={['/wallets/:currency/:tab?']}
+              component={WalletMobileScreen}
             />
             <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}
               path="/wallets"
               component={WalletsMobileScreen}
+            />
+            <PrivateRoute
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path="/confirm"
+              component={ConfirmMobileScreen}
             />
             <PrivateRoute
               loading={userLoading}

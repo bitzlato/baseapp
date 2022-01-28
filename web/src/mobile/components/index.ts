@@ -12,7 +12,6 @@ export * from './Profile';
 export * from './Subheader';
 export * from './TradingTabs';
 export * from './TwoFactorModal';
-export * from './WalletBanner';
 export * from './WalletHeader';
 export * from './WalletItem';
 export * from './WalletsButtons';

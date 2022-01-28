@@ -33,6 +33,7 @@ export const WalletsScreen: React.FC = () => {
   const wallets = useSelector(selectWallets);
   const [listIndex, setListIndex] = useState(0);
   const [tab, setTab] = useState(params.tab);
+  const [transfers, setTransfers] = useState(0);
 
   const t = useT();
   useWalletsFetch();
@@ -40,10 +41,14 @@ export const WalletsScreen: React.FC = () => {
 
   const skipRequest = process.env.REACT_APP_RELEASE_STAGE === 'sandbox';
 
-  const { data: balances = [] } = useFetch<GeneralBalance[]>(accountUrl() + '/balances', {
-    skipRequest,
-    credentials: 'include',
-  });
+  const { data: balances = [] } = useFetch<GeneralBalance[]>(
+    `${accountUrl()}/balances`,
+    {
+      skipRequest,
+      credentials: 'include',
+    },
+    [transfers],
+  );
 
   const list = useMemo(() => getList(wallets, balances), [wallets, balances]);
 
@@ -148,6 +153,8 @@ export const WalletsScreen: React.FC = () => {
                       currency={item.balance.currency}
                       balanceMarket={item.balanceMarket.toString()}
                       balanceP2P={item.balanceP2P.toString()}
+                      transfers={transfers}
+                      onChangeTransfers={() => setTransfers(transfers + 1)}
                     />
                   )}
                 </TabPanel>
@@ -169,7 +176,6 @@ const enum TabId {
   deposit = 'deposit',
   withdraw = 'withdraw',
   transfer = 'transfer',
-  gift = 'gift',
 }
 
 const TABS: SelectOption[] = [

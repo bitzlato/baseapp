@@ -44,7 +44,7 @@ export const Estimated: React.FC = () => {
   return isMobileDevice ? (
     <Box col spacing align="stretch">
       <Box self="center">{t('Estimated value')}</Box>
-      <Box row spacing justify="between" textSize="xl">
+      <Box row spacing justify="around" textSize="xl">
         {values}
       </Box>
     </Box>

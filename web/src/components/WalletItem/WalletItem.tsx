@@ -6,9 +6,6 @@ import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurr
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { Box } from 'src/components/Box/Box';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
-import { Wallet } from 'src/modules/user/wallets/types';
-import { GeneralBalance } from 'src/modules/account/types';
-
 import s from './WalletItem.postcss';
 
 export interface WalletItemData {
@@ -27,14 +24,16 @@ interface Props {
   active?: boolean;
   wallet: WalletItemData;
   onClick?: () => void;
+  isMobileDevice?: boolean;
 }
 
-export const WalletItem: FC<Props> = ({ wallet, active, onClick }) => {
+export const WalletItem: FC<Props> = ({ wallet, active, onClick, isMobileDevice }) => {
+  const color = isMobileDevice ? 'primary' : undefined;
   return (
     <Box
       row
       spacing="2"
-      padding="2"
+      padding={isMobileDevice ? '2X3' : '2'}
       as="button"
       className={cn(s.item, active && s.itemActive)}
       type="button"
@@ -43,21 +42,23 @@ export const WalletItem: FC<Props> = ({ wallet, active, onClick }) => {
       <CryptoCurrencyIcon size="medium" currency={wallet.currency} />
       <Box grow row align="start" justify="between">
         <Box col align="start" textAlign="start">
-          <span className={s.title}>{getCurrencyCodeSymbol(wallet.currency)}</span>
+          <Box textColor={color} className={s.title}>
+            {getCurrencyCodeSymbol(wallet.currency)}
+          </Box>
           <span className={s.description}>{wallet.name}</span>
         </Box>
         <Box col align="end">
-          <span className={s.title}>
+          <Box className={s.title} textColor={color}>
             <AmountFormat money={wallet.balance} />
-          </span>
+          </Box>
           {wallet.approximate.isZero() ? null : (
-            <span className={s.description}>
+            <Box className={s.description} textColor={color}>
               <Box as="span" textColor="secondary">
                 &asymp;
               </Box>
               &nbsp;
               <MoneyFormat money={wallet.approximate} />
-            </span>
+            </Box>
           )}
         </Box>
       </Box>

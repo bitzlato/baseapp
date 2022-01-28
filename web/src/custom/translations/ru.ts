@@ -1232,6 +1232,7 @@ export const ru: LangType = {
   market: 'Биржа',
   Rearrange: 'Переставить',
   'Transfer History': 'История переводов',
+  'Transfer was successfully created': 'Перевод успешно создан',
   Date: 'Дата',
   From: 'Из',
   To: 'В',

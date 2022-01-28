@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button } from 'src/components/Button/Button';
 import { Box } from 'src/components/Box';
 import { Beneficiaries } from '../../components';
 import { precisionRegExp } from '../../helpers';
@@ -100,15 +100,14 @@ export const WithdrawBody: React.FC<Props> = (props) => {
       </Box>
       <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2">
         <WithdrawSummary total={total} wallet={wallet} />
-        <Box self="start">
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={handleClick}
-            disabled={handleCheckButtonDisabled(total, beneficiary, otpCode)}
-          >
-            {t('page.body.wallets.tabs.withdraw.content.button')}
-          </Button>
+        <Box
+          self="end"
+          as={Button}
+          variant="primary"
+          onClick={handleClick}
+          disabled={handleCheckButtonDisabled(total, beneficiary, otpCode)}
+        >
+          {t('page.body.wallets.tabs.withdraw.content.button')}
         </Box>
       </Box>
     </Box>
