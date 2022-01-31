@@ -1,0 +1,45 @@
+{
+  "name": "@bitzlato/baseapp",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "web"
+  ],
+  "engines": {
+    "node": ">=16.13.1 <17"
+  },
+  "packageManager": "yarn@3.1.1",
+  "scripts": {
+    "start": "yarn workspaces foreach -pvi run start",
+    "build": "yarn workspaces foreach -pvi run build",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.2.135",
+    "@swc/jest": "^0.2.17",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@types/enzyme": "^3.10.11",
+    "@types/jest": "^27.4.0",
+    "@types/react": "^17",
+    "@types/react-dom": "^17.0.11",
+    "@types/testing-library__jest-dom": "^5",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
+    "html-webpack-plugin": "^5.5.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.4.7",
+    "mini-css-extract-plugin": "^2.5.3",
+    "prettier": "^2.5.1",
+    "swc-loader": "^0.1.15",
+    "typescript": "^4.5.5",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.3"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

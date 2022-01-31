@@ -37,3 +37,15 @@ web/.env.local
 web/.env.development.local
 web/.env.test.local
 web/.env.production.local
+web/.env
+
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+shared/build
+web/build
