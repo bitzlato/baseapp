@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "target": "esnext",
     "module": "es2022",
     "jsx": "react-jsx",
@@ -15,6 +15,11 @@
     "noUnusedParameters": true,
     "esModuleInterop": true,
     "noEmit": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "paths": {
+      "shared/Header": ["shared/src/Header"],
+      "shared/Footer": ["shared/src/Footer"]
+    }
+  },
+  "exclude": ["./web/build", "./web/public"]
 }
