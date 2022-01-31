@@ -21,11 +21,6 @@
 env.js
 /.envrc
 
-# sonic
-bin/
-.vscode
-!/shared/.vscode
-
 # environment config
 web/public/config/env.js
 
@@ -42,4 +37,3 @@ web/.env.local
 web/.env.development.local
 web/.env.test.local
 web/.env.production.local
-web/.env

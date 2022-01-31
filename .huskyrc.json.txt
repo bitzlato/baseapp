@@ -1,5 +1,0 @@
-{
-    "hooks": {
-        "pre-push": "yarn lint && CI=true yarn test --no-watch"
-    }
-}
