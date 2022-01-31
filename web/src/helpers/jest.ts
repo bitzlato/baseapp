@@ -7,50 +7,6 @@ import { Cryptobase } from '../api';
 // tslint:disable-next-line
 import * as WebSocket from 'ws';
 
-export const mockConfig: Config = {
-  api: {
-    authUrl: '/api/v2/barong',
-    tradeUrl: '/api/v2/peatio',
-    applogicUrl: '/api/v2/applogic',
-    rangerUrl: '/api/v2/ranger',
-    finexUrl: '/api/v2/finex',
-    accountUrl: '/api/private/v1',
-  },
-  finex: false,
-  withCredentials: false,
-  incrementalOrderBook: false,
-  isResizable: false,
-  isDraggable: false,
-  showLanding: true,
-  captchaLogin: false,
-  usernameEnabled: false,
-  gaTrackerKey: '',
-  minutesUntilAutoLogout: '5',
-  msAlertDisplayTime: '5000',
-  msPricesUpdates: '1000',
-  sessionCheckInterval: '15000',
-  balancesFetchInterval: '3000',
-  passwordEntropyStep: '14',
-  storage: {
-    defaultStorageLimit: '50',
-    orderBookSideLimit: '25',
-  },
-  languages: ['en', 'ru'],
-  kycSteps: ['email', 'phone', 'profile', 'document', 'address'],
-  themeSwitcher: 'visible',
-  captcha_id: undefined,
-  captcha_type: 'none',
-  password_min_entropy: 0,
-
-  logoUrl: '',
-  logoDarkUrl: '',
-  sonic: false,
-  valuationPrimaryCurrency: 'USD',
-  valuationPrimaryCurrencyName: 'USD',
-  valuationSecondaryCurrency: 'ETH',
-  valuationSecondaryCurrencyName: 'ETH',
-};
-
 // tslint:disable no-any no-console
 export const loggerMiddleware: Middleware = (store: {}) => (next: any) => (action: Action) => {
   console.log(`dispatching: ${JSON.stringify(action)}`);
@@ -65,7 +21,7 @@ export const setupMockStore = (appMiddleware: Middleware, log = false) => {
 };
 
 export const setupMockAxios = () => {
-  Cryptobase.config = mockConfig;
+  Cryptobase.config = window.env;
 
   return new MockAdapter(Axios);
 };
