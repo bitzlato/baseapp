@@ -7,7 +7,8 @@ import { Wallet } from 'src/modules/user/wallets/types';
 export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletItemData[] {
   const res: WalletItemData[] = [];
 
-  for (let wallet of wallets) {
+  for (let index = 0; index < wallets.length; index++) {
+    const wallet = wallets[index]!;
     const ccy = wallet.currency;
     const id = ccy.code;
     const item = balances.find((d) => d.currency_id === id);
@@ -21,11 +22,17 @@ export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletIt
       balanceMarket: item?.market_balance ? createMoney(item.market_balance, ccy) : wallet.balance,
       locked: item ? getLocked(ccy, item) : wallet.locked,
       approximate: createMoney(wallet.price, PENCE_CCY).multiply(balance.toString()),
-      hasTransfer: item !== undefined,
+      hasTransfer: item !== undefined && item.p2p_balance !== null,
+      index,
     });
   }
 
-  return res;
+  return res.sort((a, b) => {
+    if (a.hasTransfer !== b.hasTransfer) {
+      return Number(b.hasTransfer) - Number(a.hasTransfer);
+    }
+    return a.index - b.index;
+  });
 }
 
 function getBalance(ccy: Currency, balance: GeneralBalance): Money {

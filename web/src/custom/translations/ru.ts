@@ -1220,7 +1220,7 @@ export const ru: LangType = {
   'Transfer.noun': 'Перевод',
   Gifts: 'Чеки',
   'P2P Balance': 'Баланс P2P',
-  'Market Balance': 'Биржевой баланс',
+  'Exchange Balance': 'Биржевой баланс',
   Locked: 'Заблокировано',
 
   'Transfer from': 'Перевод из',
@@ -1231,6 +1231,8 @@ export const ru: LangType = {
   p2p: 'P2P',
   market: 'Биржа',
   Rearrange: 'Переставить',
+  'Transfer Fee': 'Комиссия перевода',
+  Free: 'Бесплатно',
   'Transfer History': 'История переводов',
   'Transfer was successfully created': 'Перевод успешно создан',
   Date: 'Дата',

@@ -74,8 +74,38 @@
 
 .colSpacing5 {
   & > *:not(:first-child) {
-    margin-top: calc(var(--gap) * 4);
+    margin-top: calc(var(--gap) * 5);
   }
+}
+
+.gap {
+  --mgap: var(--gap);
+
+  margin: calc(var(--mgap) / -2) calc(var(--mgap) / -2);
+}
+
+.gap > * {
+  margin: calc(var(--mgap) / 2) calc(var(--mgap) / 2);
+}
+
+.gapSm {
+  --mgap: calc(var(--gap) / 2);
+}
+
+.gap2 {
+  --mgap: calc(var(--gap) * 2);
+}
+
+.gap3 {
+  --mgap: calc(var(--gap) * 3);
+}
+
+.gap4 {
+  --mgap: calc(var(--gap) * 4);
+}
+
+.gap5 {
+  --mgap: calc(var(--gap) * 5);
 }
 
 .row {
@@ -183,4 +213,8 @@
 
 .textAlignCenter {
   text-align: center;
+}
+
+.textAlignEnd {
+  text-align: right;
 }

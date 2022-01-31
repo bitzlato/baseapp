@@ -16,7 +16,7 @@ export const WithdrawSummary: React.FC<Props> = ({ wallet, total }) => {
   const t = useT();
 
   return (
-    <Box grow col spacing>
+    <Box flex1 col spacing="sm">
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.fee')}>
         <AmountFormat money={wallet.withdraw_fee} />
       </SummaryField>

@@ -7,9 +7,11 @@ export interface SummaryFieldProps {
 
 export const SummaryField: React.FC<SummaryFieldProps> = ({ message, children }) => {
   return (
-    <Box row spacing className="cr-summary-field">
-      <span className="cr-summary-field-message">{message}</span>
-      <span className="cr-summary-field-content">{children}</span>
+    <Box row spacing justify="between" textColor="primary">
+      <span>{message}:</span>
+      <Box textAlign="end" as="span">
+        {children}
+      </Box>
     </Box>
   );
 };
