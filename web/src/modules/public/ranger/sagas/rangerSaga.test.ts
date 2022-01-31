@@ -87,7 +87,7 @@ describe('Ranger module', () => {
     price_precision: 6,
   };
 
-  describe('automatically reconnect when connection is lost', async () => {
+  describe('automatically reconnect when connection is lost', () => {
     it('reconnects after some time', async () => {
       return new Promise<void>((resolve) => {
         store.subscribe(() => {
