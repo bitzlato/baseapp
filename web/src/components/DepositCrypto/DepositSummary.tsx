@@ -16,7 +16,7 @@ export const DepositSummary: React.FC<Props> = ({ currency, showWarning }) => {
   const t = useT();
 
   return (
-    <Box grow col spacing>
+    <Box grow col spacing="sm">
       <SummaryField message={t('page.body.wallets.tabs.deposit.ccy.message.fee')}>
         {currency.deposit_fee.isZero() ? (
           t('page.body.wallets.tabs.deposit.ccy.message.fee.free')

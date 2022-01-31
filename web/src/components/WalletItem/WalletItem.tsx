@@ -18,6 +18,7 @@ export interface WalletItemData {
   locked: Money;
   icon: string;
   hasTransfer: boolean;
+  index: number;
 }
 
 interface Props {

@@ -118,9 +118,9 @@ export const WalletsScreen: React.FC = () => {
                     ))}
                   </TabList>
                 </Box>
-                <Box row spacing="5">
+                <Box row gap="5" wrap style={{ marginTop: 'calc(var(--gap) * 5 / 2)' }}>
                   <Balance title={t('P2P Balance')} money={item.balanceP2P} />
-                  <Balance title={t('Market Balance')} money={item.balanceMarket} />
+                  <Balance title={t('Exchange Balance')} money={item.balanceMarket} />
                   <Balance title={t('Locked')} money={item.locked} />
                 </Box>
                 <TabPanel value={TabId.deposit}>

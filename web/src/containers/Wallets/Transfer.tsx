@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Button as BootstrapButton } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Currency } from '@bitzlato/money-js';
 import { parseNumeric } from 'src/helpers/parseNumeric';
 import { Box } from 'src/components/Box/Box';
@@ -16,7 +17,11 @@ import { TransferHistory } from './TransferHistory';
 import { useAlert } from 'src/hooks/useAlert';
 import { accountUrl } from 'src/api/config';
 import { alertPush } from 'src/modules/public/alert/actions';
+import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
+import { SummaryField } from 'src/components/SummaryField';
+import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import s from './Transfer.postcss';
+import sQuickExchange from 'src/containers/QuickExchange/QuickExchange.postcss';
 
 interface Props {
   currency: Currency;
@@ -39,18 +44,25 @@ export const Transfer: React.FC<Props> = ({
   const [error, setError] = useState<FetchError | undefined>();
 
   const t = useT();
+  const isMobileDevice = useSelector(selectMobileDeviceState);
   const dispatch = useDispatch();
 
   useAlert(error);
 
+  useEffect(() => {
+    setFrom(undefined);
+    setTo(undefined);
+    setAmount('');
+  }, [currency.code]);
+
   const handleSetFrom = (value: TransferPlace) => {
     setFrom(value);
-    setTo(value === DropId.market ? DROPS[0] : DROPS[1]);
+    setTo(value === 'market' ? DROPS[0] : DROPS[1]);
   };
 
   const handleSetTo = (value: TransferPlace) => {
     setTo(value);
-    setFrom(value === DropId.market ? DROPS[0] : DROPS[1]);
+    setFrom(value === 'market' ? DROPS[0] : DROPS[1]);
   };
 
   const handleChangeAmount = (value: string) => {
@@ -60,6 +72,10 @@ export const Transfer: React.FC<Props> = ({
   const handlerRearrange = () => {
     setFrom(to);
     setTo(from);
+  };
+
+  const handleUsePercent = (value: number) => {
+    handleChangeAmount(available.multiply(value).divide(100).toFormat());
   };
 
   const handleTransfer = async () => {
@@ -73,10 +89,15 @@ export const Transfer: React.FC<Props> = ({
       };
       try {
         await postData(`${accountUrl()}/transfers`, data, { credentials: 'include' });
+
         setFrom(undefined);
         setTo(undefined);
         setAmount('');
+
+        setError(undefined);
+
         onChangeTransfers?.();
+
         dispatch(alertPush({ message: ['Transfer was successfully created'], type: 'success' }));
       } catch (e) {
         setError(e as FetchError);
@@ -88,14 +109,14 @@ export const Transfer: React.FC<Props> = ({
     return t(d);
   };
 
+  const available =
+    from === 'market'
+      ? createMoney(balanceMarket, currency)
+      : from === 'p2p'
+      ? createMoney(balanceP2P, currency)
+      : createMoney(0, currency);
   const m = createMoney(amount, currency);
-  const disable =
-    m.isZero() ||
-    m.greaterThan(
-      from === DropId.market
-        ? createMoney(balanceMarket, currency)
-        : createMoney(balanceP2P, currency),
-    );
+  const disable = m.isZero() || m.greaterThan(available);
 
   return (
     <>
@@ -129,16 +150,41 @@ export const Transfer: React.FC<Props> = ({
             itemRenderer={renderDropItem as any}
           />
         </Box>
-        <Box
-          flex1
-          as={MoneyInput}
-          currency={currency.code}
-          label={t('Amount')}
-          value={amount}
-          onChange={handleChangeAmount}
-        />
-        <Box self="end" as={Button} variant="primary" onClick={handleTransfer} disabled={disable}>
-          {t('Transfer.verb')}
+        <Box col spacing>
+          <MoneyInput
+            currency={currency.code}
+            label={t('Amount')}
+            value={amount}
+            onChange={handleChangeAmount}
+          />
+          <Box row spacing justify="between" wrap>
+            <Box row spacing textColor="secondary">
+              <span>{t('page.body.quick.exchange.sublabel.balance')}:</span>
+              <MoneyFormat money={available} />
+            </Box>
+            <Box self="end" row spacing>
+              {PERCENTS.map((v) => (
+                <BootstrapButton
+                  key={v}
+                  variant="secondary"
+                  className={sQuickExchange.quickExchangeAll}
+                  onClick={() => handleUsePercent(v)}
+                >
+                  {v}%
+                </BootstrapButton>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+        <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2">
+          <SummaryField message={t('Transfer Fee')}>
+            <span>{t('Free')}</span>
+          </SummaryField>
+          <Box flex1 self="end" row justify="end">
+            <Button variant="primary" onClick={handleTransfer} disabled={disable}>
+              {t('Transfer.verb')}
+            </Button>
+          </Box>
         </Box>
       </Box>
       <TransferHistory currency={currency} transfers={transfers} />
@@ -146,9 +192,5 @@ export const Transfer: React.FC<Props> = ({
   );
 };
 
-const enum DropId {
-  p2p = 'p2p',
-  market = 'market',
-}
-
-const DROPS: TransferPlace[] = [DropId.p2p, DropId.market];
+const DROPS: TransferPlace[] = ['p2p', 'market'];
+const PERCENTS = [25, 50, 75, 100];

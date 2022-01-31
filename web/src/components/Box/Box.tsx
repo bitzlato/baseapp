@@ -19,11 +19,12 @@ type BoxOwnProps<E = React.ElementType> = {
   align?: 'start' | 'end' | 'center' | 'stretch';
   self?: 'start' | 'center' | 'end' | 'stretch';
   spacing?: boolean | '2' | '3' | '4' | '5' | 'sm';
+  gap?: boolean | '2' | '3' | '4' | '5' | 'sm';
   padding?: boolean | '2' | '3' | '4' | '5' | '2X3';
   textSize?: 'sm' | 'lg' | 'xl';
   textColor?: TextColor;
   textTr?: 'capitalize' | 'uppercase';
-  textAlign?: 'start' | 'center';
+  textAlign?: 'start' | 'center' | 'end';
   bgColor?: 'body';
   ellipsis?: boolean;
   bold?: boolean;
@@ -42,6 +43,7 @@ export const Box: Element = React.forwardRef(
       row,
       col,
       spacing,
+      gap,
       padding,
       grow,
       flex1,
@@ -73,6 +75,8 @@ export const Box: Element = React.forwardRef(
       justify && s[`justify${capitalize(justify)}`],
       self && s[`self${capitalize(self)}`],
       spacing && s[`${row ? 'row' : 'col'}Spacing${spacing === true ? '' : capitalize(spacing)}`],
+      gap && s.gap,
+      gap && s[`gap${gap === true ? '' : capitalize(gap)}`],
       padding && s[`padding${padding === true ? '' : capitalize(padding)}`],
       textSize && sLabel[`${textSize}Size`],
       textColor && sLabel[`${textColor}Color`],
