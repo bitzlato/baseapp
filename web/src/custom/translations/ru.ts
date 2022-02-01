@@ -1215,6 +1215,8 @@ export const ru: LangType = {
 
   'Estimated value': 'Оценочная стоимость',
   Wallets: 'Кошельки',
+  Coin: 'Валюта',
+  'Total balance': 'Общий баланс',
   'Deposit.noun': 'Ввод',
   'Withdraw.noun': 'Вывод',
   'Transfer.noun': 'Перевод',
@@ -1222,6 +1224,10 @@ export const ru: LangType = {
   'P2P Balance': 'Баланс P2P',
   'Exchange Balance': 'Биржевой баланс',
   Locked: 'Заблокировано',
+
+  p2p_deposit_withdraw:
+    'В настоящее время ввод и вывод BTC осуществляются с помощью кошельков P2P, пожалуйста, {transfer} активы в/из кошелька p2p.',
+  p2p_transfer: 'переведите',
 
   'Transfer from': 'Перевод из',
   'Transfer to': 'Перевод в',

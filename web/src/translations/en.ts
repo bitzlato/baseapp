@@ -1195,6 +1195,8 @@ export const en = {
 
   'Estimated value': 'Estimated value',
   Wallets: 'Wallets',
+  Coin: 'Coin',
+  'Total balance': 'Total balance',
   'Deposit.noun': 'Deposit',
   'Withdraw.noun': 'Withdraw',
   'Transfer.noun': 'Transfer',
@@ -1203,7 +1205,12 @@ export const en = {
   'Exchange Balance': 'Exchange Balance',
   Locked: 'Locked',
 
+  p2p_deposit_withdraw:
+    'Currently, BTC deposits and withdrawals are done by P2P wallets, please {transfer} assets from/to p2p wallet.',
+  p2p_transfer: 'transfer',
+
   'Transfer from': 'Transfer from',
+
   'Transfer to': 'Transfer to',
   'Transfer.verb': 'Transfer',
   Currency: 'Currency',

@@ -1,8 +1,9 @@
-import { shallow, ShallowWrapper } from 'enzyme';
+import { mount, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { BTC_CCY, createCcy, createMoney, USD_CCY } from 'src/helpers/money';
+import { TestComponentWrapper } from 'src/lib/test/wrapper';
 import { WalletList, WalletListProps } from '../../components';
-import { WalletItemData } from '../WalletItem/WalletItem';
+import { WalletItem, WalletItemData } from '../WalletItem/WalletItem';
 
 const onWalletSelectionChange = jest.fn();
 
@@ -19,6 +20,7 @@ const walletItems: WalletItemData[] = [
     approximate: createMoney('41000', USD_CCY),
     locked: createMoney('1', BTC_CCY),
     hasTransfer: true,
+    index: 0,
   },
   {
     name: 'Ethereum',
@@ -30,6 +32,7 @@ const walletItems: WalletItemData[] = [
     approximate: createMoney('41000', USD_CCY),
     locked: createMoney('1', ETH_CCY),
     hasTransfer: true,
+    index: 1,
   },
 ];
 
@@ -40,21 +43,27 @@ const defaultProps: WalletListProps = {
 };
 
 const setup = (props: Partial<WalletListProps> = {}) =>
-  shallow(<WalletList {...{ ...defaultProps, ...props }} />);
+  shallow(
+    <TestComponentWrapper>
+      <WalletList {...{ ...defaultProps, ...props }} />
+    </TestComponentWrapper>,
+  );
+
+const setup2 = (props: Partial<WalletListProps> = {}) =>
+  mount(
+    <TestComponentWrapper>
+      <WalletList {...{ ...defaultProps, ...props }} />
+    </TestComponentWrapper>,
+  );
 
 describe('WalletList', () => {
-  let wrapper: ShallowWrapper;
-
-  beforeEach(() => {
-    wrapper = setup();
-  });
-
   it('should render', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(setup()).toMatchSnapshot();
   });
 
   it('should handle onWalletSelectionChange callback when an element is pressed', () => {
-    const first = wrapper.find('[onClick]').first();
+    const wrapper = setup2();
+    const first = wrapper.find('button').first();
     first.simulate('click');
     expect(onWalletSelectionChange).toHaveBeenCalled();
     expect(onWalletSelectionChange).toHaveBeenCalledTimes(1);
