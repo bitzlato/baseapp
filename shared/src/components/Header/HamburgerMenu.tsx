@@ -1,14 +1,14 @@
 import { FC, useCallback, useContext } from 'react';
 import cn from 'classnames';
 import { Box } from 'shared/src/components/Box';
-import * as s from './HamburgerMenu.css';
 import { DropdownItem } from 'shared/src/components/Dropdown/DropdownItem';
 import { Dropdown, RenderButtonFn, RenderMenuFn } from 'shared/src/components/Dropdown/Dropdown';
+import { Button } from 'shared/src/components/Button';
+import { USER_STATUS_AUTHORIZATION_REQUIRED } from 'shared/src/constants';
+import * as s from './HamburgerMenu.css';
 import { getUserContext, HeaderContext } from './HeaderContext';
 import { ThemeSwitcher } from './ThemeSwitcher';
 import { LanguageSwitcher } from './LanguageSwitcher/LanguageSwitcher';
-import { Button } from 'shared/src/components/Button';
-import { USER_STATUS_AUTHORIZATION_REQUIRED } from 'shared/src/constants';
 
 export const HamburgerMenu: FC = () => {
   const context = useContext(HeaderContext);
@@ -60,7 +60,7 @@ export const HamburgerMenu: FC = () => {
         <LanguageSwitcher />
       </>
     ),
-    [renderMenu],
+    [renderMenu, t, userContext],
   );
 
   return (

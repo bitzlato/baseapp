@@ -1,6 +1,6 @@
 import { defaultStorageLimit } from '../../../api';
 import { sliceArray } from '../../../helpers';
-import { RangerAction } from './actions';
+import type { RangerAction } from './actions';
 import {
   RANGER_CONNECT_DATA,
   RANGER_CONNECT_ERROR,

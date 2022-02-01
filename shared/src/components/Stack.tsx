@@ -32,6 +32,7 @@ export const Stack: FC<Props> = ({
     >
       {stackItems.map((item, index) => (
         <Box
+          // eslint-disable-next-line react/no-array-index-key
           key={index}
           display={display}
           marginBottom={index !== stackItems.length - 1 ? marginBottom : undefined}

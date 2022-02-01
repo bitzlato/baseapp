@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { TestComponentWrapper } from 'src/lib/test';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { HistoryScreen } from '../History';
 
 const setup = (props: Partial<IntlProps> = {}) =>

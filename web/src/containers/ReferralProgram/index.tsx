@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps } from 'react-redux';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { CopyableTextField } from '../../components';
 import { copy } from '../../helpers';
 import { alertPush, RootState, selectUserInfo, User } from '../../modules';

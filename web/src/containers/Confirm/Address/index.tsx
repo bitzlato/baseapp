@@ -8,7 +8,7 @@ import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Select } from 'src/components/Select/Select';
-import { IntlProps } from '../../../bootstrap';
+import { IntlProps } from 'src/types';
 import { barongUploadSizeMaxRange, barongUploadSizeMinRange, languages } from '../../../api/config';
 import { CustomInput, UploadFile } from '../../../components';
 import {

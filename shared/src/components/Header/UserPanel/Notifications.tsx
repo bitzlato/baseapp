@@ -85,7 +85,7 @@ export const Notifications: FC<Props> = ({ notifications, onAllRead }) => {
         </Box>
       </>
     ),
-    [notifications],
+    [notifications, onAllRead, t],
   );
 
   return (

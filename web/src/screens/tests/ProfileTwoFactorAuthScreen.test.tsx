@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { TestComponentWrapper } from 'src/lib/test';
 import { ProfileTwoFactorAuthScreen } from '../';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 
 const setup = (props: Partial<IntlProps> = {}) =>
   shallow(

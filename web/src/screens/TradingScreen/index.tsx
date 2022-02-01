@@ -3,7 +3,7 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { incrementalOrderBook } from '../../api';
 import { GridChildInterface, GridItem } from '../../components/GridItem';
@@ -268,7 +268,9 @@ class Trading extends React.Component<Props, StateProps> {
 
   private setTradingTitle = (market: Market, tickers: ReduxProps['tickers']) => {
     const tickerPrice = tickers[market.id] ? tickers[market.id].last : '0.0';
-    document.title = `${createMoneyWithoutCcy(tickerPrice, market.price_precision).toFormat()} ${market.name}`;
+    document.title = `${createMoneyWithoutCcy(tickerPrice, market.price_precision).toFormat()} ${
+      market.name
+    }`;
   };
 
   private handleResize = (layout, oldItem, newItem) => {

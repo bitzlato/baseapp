@@ -1,8 +1,7 @@
+/* eslint-disable global-require */
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { WrappedComponentProps } from 'react-intl';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { Provider } from 'react-redux';
 
@@ -29,8 +28,6 @@ if (!Intl?.RelativeTimeFormat) {
 
 sagaMiddleware.run(rootSaga);
 rangerMiddleware.run(rangerSagas);
-
-export type IntlProps = WrappedComponentProps;
 
 ReactDOM.render(
   <Provider store={store}>

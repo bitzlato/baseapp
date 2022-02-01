@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Sidebar } from 'src/containers/Sidebar/Sidebar';
 import { MarketSelector } from 'src/containers/MarketSelector/MarketSelector';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { showLanding } from '../../api';
 import { Logo } from '../../components';
 import {

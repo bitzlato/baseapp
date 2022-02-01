@@ -10,7 +10,7 @@ import {
   OrderProps,
   LockedComponent,
 } from '../../components';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import {
   alertPush,
   MemberLevels,

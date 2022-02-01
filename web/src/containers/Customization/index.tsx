@@ -4,7 +4,7 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import { IntlProps } from '../../bootstrap';
+import type { IntlProps } from 'src/types';
 import { PaletteIcon } from '../../assets/images/customization/PaletteIcon';
 import {
   CustomizationFonts,

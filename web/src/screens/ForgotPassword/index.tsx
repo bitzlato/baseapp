@@ -7,7 +7,7 @@ import { compose } from 'redux';
 import { captchaType } from '../../api/config';
 import { Captcha, EmailForm } from '../../components';
 import { EMAIL_REGEX, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import {
   forgotPassword,
   GeetestCaptchaResponse,

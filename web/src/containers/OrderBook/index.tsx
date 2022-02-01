@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Spinner } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { CombinedOrderBook } from '../../components';
 import { colors } from '../../constants';
 import { accumulateVolume, calcMaxVolume, sortBids, sortAsks } from '../../helpers';

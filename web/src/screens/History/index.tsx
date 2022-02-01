@@ -2,7 +2,7 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { compose } from 'redux';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { TabPanel } from '../../components';
 import { HistoryElement } from '../../containers/HistoryElement';
 import { CanCan } from '../../containers';

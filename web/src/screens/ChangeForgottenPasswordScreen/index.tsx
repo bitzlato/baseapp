@@ -3,7 +3,7 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouterProps, withRouter } from 'react-router';
 import { compose } from 'redux';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { ChangePassword } from '../../components';
 import { setDocumentTitle } from '../../helpers';
 import {

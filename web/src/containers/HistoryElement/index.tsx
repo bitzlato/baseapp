@@ -7,7 +7,7 @@ import { DepositStatus } from 'src/components/History/DepositStatus';
 import { getBlockchainLink } from 'src/helpers/getBlockchainLink';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { MarketName } from 'src/components/MarketName/MarketName';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { History, Pagination } from '../../components';
 import { localeDate, setTradesType, setTransferStatusColor, truncateMiddle } from '../../helpers';
 import {
@@ -247,9 +247,18 @@ class HistoryComponent extends React.Component<Props> {
             {sideText}
           </span>,
           <MarketName name={marketName} />,
-          <AmountFormat key={id} money={createMoneyWithoutCcy(price ?? 0, marketToDisplay.price_precision)} />,
-          <AmountFormat key={id} money={createMoneyWithoutCcy(amount ?? 0, marketToDisplay.amount_precision)} />,
-          <AmountFormat key={id} money={createMoneyWithoutCcy(total ?? 0, marketToDisplay.amount_precision)} />,
+          <AmountFormat
+            key={id}
+            money={createMoneyWithoutCcy(price ?? 0, marketToDisplay.price_precision)}
+          />,
+          <AmountFormat
+            key={id}
+            money={createMoneyWithoutCcy(amount ?? 0, marketToDisplay.amount_precision)}
+          />,
+          <AmountFormat
+            key={id}
+            money={createMoneyWithoutCcy(total ?? 0, marketToDisplay.amount_precision)}
+          />,
         ];
       }
       case 'transfers': {
