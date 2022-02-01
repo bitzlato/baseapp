@@ -22,6 +22,7 @@ import { useFetch } from 'src/hooks/useFetch';
 import { Estimated } from 'src/containers/Wallets/Estimated';
 import { getList } from './helpers';
 import { Balance } from './Balance';
+import { InvoiceExplanation } from './InvoiceExplanation';
 import { accountUrl } from 'src/api';
 import type { SelectOption } from 'src/components/Select/Select';
 
@@ -126,7 +127,14 @@ export const WalletsScreen: React.FC = () => {
                 <TabPanel value={TabId.deposit}>
                   {wallet && (
                     <>
-                      {wallet.enable_invoice ? null : <DepositCrypto wallet={wallet} />}
+                      {wallet.enable_invoice ? (
+                        <InvoiceExplanation
+                          currency={item.currency}
+                          onClick={() => onTabSelected(TabId.transfer)}
+                        />
+                      ) : (
+                        <DepositCrypto wallet={wallet} />
+                      )}
                       <WalletHistory
                         label="deposit"
                         type="deposits"
@@ -138,7 +146,14 @@ export const WalletsScreen: React.FC = () => {
                 <TabPanel value={TabId.withdraw}>
                   {wallet && (
                     <>
-                      {wallet.enable_invoice ? null : <Withdraw wallet={wallet} />}
+                      {wallet.enable_invoice ? (
+                        <InvoiceExplanation
+                          currency={item.currency}
+                          onClick={() => onTabSelected(TabId.transfer)}
+                        />
+                      ) : (
+                        <Withdraw wallet={wallet} />
+                      )}
                       <WalletHistory
                         label="withdraw"
                         type="withdraws"

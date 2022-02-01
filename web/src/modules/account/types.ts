@@ -45,4 +45,5 @@ export interface TransferRecord {
   sending_state: string;
   description: string;
   meta: {};
+  public_state: 'processing' | 'transfered' | 'canceled';
 }

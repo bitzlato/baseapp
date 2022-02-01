@@ -13,6 +13,7 @@ import { WalletHistory } from 'src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { selectWallet } from 'src/modules/user/wallets/selectors';
+import { InvoiceExplanation } from 'src/screens/WalletsScreen/InvoiceExplanation';
 
 export const WalletMobileScreen: React.FC = () => {
   const params = useParams<UrlParams>();
@@ -25,7 +26,7 @@ export const WalletMobileScreen: React.FC = () => {
 
   const generals = useGeneralWallets([transfers]);
 
-  const handleTabSelection = (value: string) => {
+  const handleTabSelection = (value: TabId) => {
     setTab(value);
     history.replace(`/wallets/${currency.toLowerCase()}/${value}`);
   };
@@ -51,7 +52,7 @@ export const WalletMobileScreen: React.FC = () => {
         <>
           <WalletMobileBalance wallet={general} />
           <Box bgColor="body" padding="2X3" col spacing="2">
-            <Tabs value={tabValue} onSelectionChange={handleTabSelection}>
+            <Tabs value={tabValue} onSelectionChange={handleTabSelection as any}>
               <Box grow justify="around" as={TabList}>
                 {tabs.map((d) => (
                   <Tab key={d.value} value={d.value} size="small">
@@ -60,11 +61,25 @@ export const WalletMobileScreen: React.FC = () => {
                 ))}
               </Box>
               <TabPanel value="deposit">
-                {wallet.enable_invoice ? null : <DepositCrypto wallet={wallet} />}
+                {wallet.enable_invoice ? (
+                  <InvoiceExplanation
+                    currency={general.currency}
+                    onClick={() => handleTabSelection('transfer')}
+                  />
+                ) : (
+                  <DepositCrypto wallet={wallet} />
+                )}
                 <WalletHistory label="deposit" type="deposits" currency={currency.toLowerCase()} />
               </TabPanel>
               <TabPanel value="withdraw">
-                {wallet.enable_invoice ? null : <Withdraw wallet={wallet} />}
+                {wallet.enable_invoice ? (
+                  <InvoiceExplanation
+                    currency={general.currency}
+                    onClick={() => handleTabSelection('transfer')}
+                  />
+                ) : (
+                  <Withdraw wallet={wallet} />
+                )}
                 <WalletHistory
                   label="withdraw"
                   type="withdraws"

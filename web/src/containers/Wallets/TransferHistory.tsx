@@ -13,6 +13,7 @@ import { accountUrl } from 'src/api/config';
 import { Wallet } from 'src/modules/user/wallets/types';
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import s from './TransferHistory.postcss';
+import { TextColor } from 'src/components/Box/Box';
 
 interface Props {
   currency?: Currency;
@@ -45,9 +46,19 @@ export const TransferHistory: React.FC<Props> = ({ currency, wallets, transfers 
         d.amount,
         currency ?? wallets?.find((w) => d.currency_id === w.currency.code) ?? DEFAULT_CURRENCY,
       );
+      const textColor: TextColor =
+        d.public_state === 'transfered'
+          ? 'success'
+          : d.public_state === 'canceled'
+          ? 'failed'
+          : d.public_state === 'processing'
+          ? 'warning'
+          : 'secondary';
       return [
         <div title={`#${d.id}`}>{localeDate(d.created_at, 'fullDate')}</div>,
-        <Box textTr="capitalize">{d.sending_state}</Box>,
+        <Box textTr="capitalize" textColor={textColor}>
+          {d.public_state}
+        </Box>,
         t(d.source),
         t(d.destination),
         <MoneyFormat money={money} />,
