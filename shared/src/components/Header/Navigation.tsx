@@ -1,8 +1,8 @@
 import { FC, useContext } from 'react';
 import { Box } from 'shared/src/components/Box';
+import { Stack } from 'shared/src/components/Stack';
 import { HeaderContext } from './HeaderContext';
 import * as s from './Navigation.css';
-import { Stack } from 'shared/src/components/Stack';
 
 export const Navigation: FC = () => {
   const { navLinks, renderNavLinkComponent } = useContext(HeaderContext);

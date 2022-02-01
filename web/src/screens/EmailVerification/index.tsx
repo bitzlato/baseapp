@@ -6,7 +6,7 @@ import { connect, MapStateToProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { captchaType } from '../../api/config';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { Captcha } from '../../components';
 import { EMAIL_REGEX, setDocumentTitle } from '../../helpers';
 import {

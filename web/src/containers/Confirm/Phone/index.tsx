@@ -6,7 +6,7 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { IntlProps } from '../../../bootstrap';
+import { IntlProps } from 'src/types';
 import { CustomInput } from '../../../components';
 import {
   changeUserLevel,

@@ -4,7 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { withRouter } from 'react-router';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { CodeVerification, CopyableTextField, Pagination, Table } from '../../components';
 import { localeDate } from '../../helpers/localeDate';
 

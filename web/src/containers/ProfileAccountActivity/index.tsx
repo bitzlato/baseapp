@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { Pagination, Table } from '../../components';
 import { getUserAgent, localeDate } from '../../helpers';
 import {

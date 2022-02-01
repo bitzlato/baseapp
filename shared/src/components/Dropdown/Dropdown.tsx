@@ -9,8 +9,8 @@ import {
 import { Box } from 'shared/src/components/Box';
 import { Sprinkles } from 'shared/src/theme/sprinkles.css';
 import { HeaderContext } from 'shared/src/components/Header/HeaderContext';
-import { DropdownMenu } from './DropdownMenu';
 import { Portal } from 'shared/src/components/Portal';
+import { DropdownMenu } from './DropdownMenu';
 
 export type RenderButtonFn = (props: { open: boolean }) => ReactNode;
 

@@ -3,7 +3,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { ProfileApiKeys, ProfileVerification } from '../../containers';
 import { ProfileAccountActivity } from '../../containers/ProfileAccountActivity';
 import { ProfileAuthDetails } from '../../containers/ProfileAuthDetails';

@@ -51,7 +51,7 @@ export const Sidebar: FC = () => {
     if (isOpen) {
       dispatch(toggleSidebar(false));
     }
-  }, [isOpen]);
+  }, [dispatch, isOpen]);
 
   useOnClickOutside(elementRef, handleOnOutsideClick);
   useEscapeKeyDown(handleOnOutsideClick);

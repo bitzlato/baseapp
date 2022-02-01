@@ -1,5 +1,5 @@
-import { IconName } from './components/Icon';
 import { FC, useEffect, useState } from 'react';
+import { IconName } from './components/Icon';
 import {
   Header,
   USER_STATUS_NOT_AUTHORIZED,
@@ -28,13 +28,13 @@ const languages2 = {
 
 export const Main: FC = () => {
   const [theme, setTheme] = useState<Theme>('dark');
-  const handleThemeChange = (theme: Theme) => {
-    setTheme(theme);
+  const handleThemeChange = (nextTheme: Theme) => {
+    setTheme(nextTheme);
   };
 
   const [language, setLanguage] = useState<Language>('en');
-  const handleLanguageChange = (language: Language) => {
-    setLanguage(language);
+  const handleLanguageChange = (nextLanguage: Language) => {
+    setLanguage(nextLanguage);
   };
 
   const [status, setStatus] = useState<

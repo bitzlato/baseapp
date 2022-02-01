@@ -7,8 +7,8 @@ import {
   TranslateFn,
   UserContext,
 } from 'shared/src/types';
-import { LanguageSelectContext } from './UserPanel/LanguageSelect';
-import { ThemeSwitcherContext } from './ThemeSwitcher';
+import type { LanguageSelectContext } from './UserPanel/LanguageSelect';
+import type { ThemeSwitcherContext } from './ThemeSwitcher';
 
 export type HeaderContextValue = UserContext &
   LanguageSelectContext &

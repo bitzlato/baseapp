@@ -25,11 +25,12 @@ type Props = {
 );
 
 export const DropdownItem: FC<Props> = (props) => {
-  const { icon, children, closeMenu } = props;
+  const { icon, children, closeMenu, ...rest } = props;
 
   const handleClick = () => {
     if ('onClick' in props) {
-      props.onClick();
+      const { onClick } = props;
+      onClick();
     }
     closeMenu();
   };
@@ -45,11 +46,11 @@ export const DropdownItem: FC<Props> = (props) => {
     </>
   );
 
-  if ('onClick' in props) {
+  if ('onClick' in rest) {
     return (
       <Box
         as="button"
-        className={cn(s.item, props.isActive && s.itemActive)}
+        className={cn(s.item, rest.isActive && s.itemActive)}
         type="button"
         onClick={handleClick}
       >
@@ -58,29 +59,39 @@ export const DropdownItem: FC<Props> = (props) => {
     );
   }
 
-  if (props.type === 'internal') {
+  if (rest.type === 'internal') {
+    const { to } = rest;
+    if ('renderNavLinkComponent' in rest) {
+      const { renderNavLinkComponent } = rest;
+
+      return (
+        <>
+          {renderNavLinkComponent({
+            className: s.item,
+            activeClassName: s.itemActive,
+            to,
+            onClick: handleClick,
+            children: body,
+          })}
+        </>
+      );
+    }
+
+    const { renderLinkComponent } = rest;
     return (
       <>
-        {'renderNavLinkComponent' in props
-          ? props.renderNavLinkComponent({
-              className: s.item,
-              activeClassName: s.itemActive,
-              to: props.to,
-              onClick: handleClick,
-              children: body,
-            })
-          : props.renderLinkComponent({
-              className: s.item,
-              to: props.to,
-              onClick: handleClick,
-              children: body,
-            })}
+        {renderLinkComponent({
+          className: s.item,
+          to,
+          onClick: handleClick,
+          children: body,
+        })}
       </>
     );
   }
 
   return (
-    <Box as="a" className={s.item} href={props.to} onClick={handleClick}>
+    <Box as="a" className={s.item} href={rest.to} onClick={handleClick}>
       {body}
     </Box>
   );

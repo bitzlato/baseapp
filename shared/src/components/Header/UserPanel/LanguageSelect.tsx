@@ -3,9 +3,9 @@ import cn from 'classnames';
 import { Box } from 'shared/src/components/Box';
 import { Language } from 'shared/src/types';
 import { HeaderContext } from 'shared/src/components/Header/HeaderContext';
-import * as s from './LanguageSelect.css';
 import { Dropdown, RenderButtonFn, RenderMenuFn } from 'shared/src/components/Dropdown/Dropdown';
 import { DropdownItem } from 'shared/src/components/Dropdown/DropdownItem';
+import * as s from './LanguageSelect.css';
 
 export interface LanguageSelectContext {
   language: Language;
@@ -40,7 +40,7 @@ export const LanguageSelect: FC = () => {
           </DropdownItem>
         );
       }),
-    [language, languages],
+    [language, languages, onLanguageChange],
   );
 
   return (

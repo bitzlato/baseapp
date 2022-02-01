@@ -6,7 +6,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { ProfileTwoFactorAuth } from '../';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { isAuth0, isUsernameEnabled } from '../../api';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { ChangePassword, CustomInput, Modal } from '../../components';

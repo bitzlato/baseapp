@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { IntlProps } from '../../bootstrap';
+import { IntlProps } from 'src/types';
 import { kycSteps } from '../../api';
 import { CrossIcon } from '../../assets/images/kyc/CrossIcon';
 import { Info, Logo } from '../../components';
