@@ -32,7 +32,7 @@ export const WalletMobileBalance: React.FC<Props> = ({ wallet }) => {
           </span>
         </Box>
         <Box row spacing justify="between">
-          <span>{t('Market Balance')}</span>
+          <span>{t('Exchange Balance')}</span>
           <span>
             <AmountFormat money={wallet.balanceMarket} />
           </span>

@@ -1,5 +1,7 @@
+import { Money } from '@bitzlato/money-js';
 import * as React from 'react';
-import { Decimal, OrderForm } from '../';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
+import { OrderForm } from '../';
 import { TabPanel } from '../../components';
 import { getAmount, getTotalPrice } from '../../helpers';
 import { Box } from '../Box';
@@ -267,17 +269,14 @@ export class Order extends React.Component<OrderComponentProps, State> {
         switch (orderType) {
           case 'Market':
             newAmount = available
-              ? Decimal.format(
-                  getAmount(Number(available), proposals, value),
-                  this.props.currentMarketAskPrecision,
-                )
+              ? createMoneyWithoutCcy(getAmount(Number(available), proposals, value), this.props.currentMarketAskPrecision).toFormat()
               : '';
 
             break;
           default:
             newAmount =
               available && +price
-                ? Decimal.format((available / +price) * value, this.props.currentMarketAskPrecision)
+                ? createMoneyWithoutCcy((available / +price) * value, this.props.currentMarketAskPrecision).toFormat()
                 : '';
 
             break;
@@ -285,7 +284,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
         break;
       case 'sell':
         newAmount = available
-          ? Decimal.format(available * value, this.props.currentMarketAskPrecision)
+          ? createMoneyWithoutCcy(available * value, this.props.currentMarketAskPrecision).toFormat()
           : '';
 
         break;

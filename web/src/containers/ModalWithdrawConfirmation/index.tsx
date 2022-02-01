@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { IntlProps } from '../../bootstrap';
-import { Decimal, Modal } from '../../components';
+import { Modal } from '../../components';
 import { MobileModal as MobileModal } from '../../mobile/components/Modal';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 interface ModalWithdrawConfirmationProps {
   amount: string;
@@ -60,7 +61,7 @@ class ModalWithdraw extends React.Component<Props> {
       <div className="pg-exchange-modal-submit-body modal-body__withdraw-confirm">
         <p>
           {this.translate('page.body.wallets.tabs.withdraw.modal.message1')}
-          {Decimal.format(amount, precision, ',')} <CurrencyTicker symbol={currency} />
+          {createMoneyWithoutCcy(amount, precision).toFormat()} <CurrencyTicker symbol={currency} />
           {this.translate('page.body.wallets.tabs.withdraw.modal.message2')} {rid}
         </p>
       </div>

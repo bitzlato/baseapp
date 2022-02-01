@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Decimal, TickerTable } from '../../components';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
+import { TickerTable } from '../../components';
 import { useMarketsFetch, useMarketsTickersFetch, useRangerConnectFetch } from '../../hooks';
 import {
   Market,
@@ -88,36 +89,36 @@ const MarketsTableComponent: FC<Props> = (props) => {
     ? currentBidUnitMarkets
         .map((market) => ({
           ...market,
-          last: Decimal.format(
+          last: createMoneyWithoutCcy(
             Number((marketTickers[market.id] || defaultTicker).last),
             market.amount_precision,
-          ),
-          open: Decimal.format(
+          ).toFormat(),
+          open: createMoneyWithoutCcy(
             Number((marketTickers[market.id] || defaultTicker).open),
             market.price_precision,
-          ),
+          ).toFormat(),
           price_change_percent: String(
             (marketTickers[market.id] || defaultTicker).price_change_percent,
           ),
-          high: Decimal.format(
+          high: createMoneyWithoutCcy(
             Number((marketTickers[market.id] || defaultTicker).high),
             market.amount_precision,
-          ),
-          low: Decimal.format(
+          ).toFormat(),
+          low: createMoneyWithoutCcy(
             Number((marketTickers[market.id] || defaultTicker).low),
             market.amount_precision,
-          ),
-          volume: Decimal.format(
+          ).toFormat(),
+          volume: createMoneyWithoutCcy(
             Number((marketTickers[market.id] || defaultTicker).volume),
             market.amount_precision,
-          ),
+          ).toFormat(),
         }))
         .map((market) => ({
           ...market,
-          change: Decimal.format(
+          change: createMoneyWithoutCcy(
             (+market.last - +market.open).toFixed(market.price_precision),
             market.price_precision,
-          ),
+          ).toFormat(),
         }))
     : [];
 

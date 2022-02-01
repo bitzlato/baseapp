@@ -100,14 +100,14 @@ export const WithdrawBody: React.FC<Props> = (props) => {
       </Box>
       <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2">
         <WithdrawSummary total={total} wallet={wallet} />
-        <Box
-          self="end"
-          as={Button}
-          variant="primary"
-          onClick={handleClick}
-          disabled={handleCheckButtonDisabled(total, beneficiary, otpCode)}
-        >
-          {t('page.body.wallets.tabs.withdraw.content.button')}
+        <Box flex1 self="end" row justify="end">
+          <Button
+            variant="primary"
+            onClick={handleClick}
+            disabled={handleCheckButtonDisabled(total, beneficiary, otpCode)}
+          >
+            {t('page.body.wallets.tabs.withdraw.content.button')}
+          </Button>
         </Box>
       </Box>
     </Box>

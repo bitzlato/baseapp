@@ -10,7 +10,7 @@ export interface SelectOption<T extends string = string> {
 }
 
 interface SelectProps<T extends string> extends ReactSelectProps<SelectOption<T>, false> {
-  value?: SelectOption<T>;
+  value?: SelectOption<T> | null;
   placeholderAsLabel?: boolean;
   itemRenderer?: (item: SelectOption<T>) => React.ReactNode;
   size?: 'small';
@@ -63,7 +63,7 @@ export const SelectString = <T extends string>({
     <Select
       {...props}
       options={options.map(toOption)}
-      value={value ? toOption(value) : undefined}
+      value={value ? toOption(value) : null}
       defaultValue={defaultValue ? toOption(defaultValue) : undefined}
       onChange={(d: SelectOption<T> | null) => onChange(d ? toValue(d) : null)}
       placeholderAsLabel={placeholderAsLabel}

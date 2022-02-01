@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Decimal } from '../../../components/Decimal';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { localeDate } from '../../../helpers';
 
 const RowItemComponent = (props) => {
@@ -7,7 +8,7 @@ const RowItemComponent = (props) => {
     <div className="cr-mobile-table-row">
       <div className="cr-mobile-table-row__amount">
         <div className="cr-mobile-table-row__amount-value">
-          <Decimal fixed={props.fixed}>{props.amount}</Decimal>
+          <AmountFormat money={createMoneyWithoutCcy(props.amount, props.fixed)} />
         </div>
         <span className="cr-mobile-table-row__amount-currency">{props.currency}</span>
       </div>

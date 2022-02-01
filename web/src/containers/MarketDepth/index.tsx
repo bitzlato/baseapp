@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Decimal } from '../../components/Decimal';
 import { MarketDepths } from '../../components/MarketDepths';
 import {
   selectChartRebuildState,
@@ -11,6 +10,7 @@ import {
   selectDepthBids,
   selectOrderBookLoading,
 } from '../../modules';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 export const MarketDepthsComponent = () => {
   const asksItems = useSelector(selectDepthAsks);
@@ -39,19 +39,19 @@ export const MarketDepthsComponent = () => {
         <span className="pg-market-depth__tooltip">
           <span>
             <FormattedMessage id="page.body.trade.header.marketDepths.content.price" /> :{' '}
-            {Decimal.format(price, currentMarket.price_precision)} {bidCurrency}
+            {createMoneyWithoutCcy(price, currentMarket.price_precision).toFormat()} {bidCurrency}
           </span>
           <span>
             <FormattedMessage id="page.body.trade.header.marketDepths.content.volume" /> :{' '}
-            {Decimal.format(volume, currentMarket.amount_precision)} {askCurrency}
+            {createMoneyWithoutCcy(volume, currentMarket.amount_precision).toFormat()} {askCurrency}
           </span>
           <span>
             <FormattedMessage id="page.body.trade.header.marketDepths.content.cumulativeVolume" /> :{' '}
-            {Decimal.format(cumulativeVolume, currentMarket.amount_precision)} {askCurrency}
+            {createMoneyWithoutCcy(cumulativeVolume, currentMarket.amount_precision).toFormat()} {askCurrency}
           </span>
           <span>
             <FormattedMessage id="page.body.trade.header.marketDepths.content.cumulativeValue" /> :{' '}
-            {Decimal.format(cumulativePrice, currentMarket.price_precision)} {bidCurrency}
+            {createMoneyWithoutCcy(cumulativePrice, currentMarket.price_precision).toFormat()} {bidCurrency}
           </span>
         </span>
       );
@@ -64,20 +64,27 @@ export const MarketDepthsComponent = () => {
       let cumulativeVolumeData = 0;
       let cumulativePriceData = 0;
 
-      return data.map((item, index) => {
+      return data.map((item) => {
         const [price, volume] = item;
-        const numberVolume = Decimal.format(volume, currentMarket.amount_precision);
-        const numberPrice = Decimal.format(price, currentMarket.price_precision);
+
+        const numberVolume = createMoneyWithoutCcy(volume, currentMarket.amount_precision).toString();
+        const numberPrice = createMoneyWithoutCcy(price, currentMarket.price_precision).toString();
 
         cumulativeVolumeData = +numberVolume + cumulativeVolumeData;
+        const cumulativeVolumeDataFormated =  createMoneyWithoutCcy(cumulativeVolumeData, currentMarket.amount_precision).toFormat();
+
         cumulativePriceData = cumulativePriceData + +numberPrice * +numberVolume;
+        const cumulativePriceDataFormated =  createMoneyWithoutCcy(cumulativePriceData, currentMarket.price_precision).toFormat();
+
+        const volumeFormated = createMoneyWithoutCcy(+volume, currentMarket.amount_precision).toFormat();
+        const priceFormated = createMoneyWithoutCcy(+numberPrice, currentMarket.price_precision).toFormat();
 
         return {
-          [type]: Decimal.format(cumulativeVolumeData, currentMarket.amount_precision),
-          cumulativePrice: Decimal.format(cumulativePriceData, currentMarket.price_precision),
-          cumulativeVolume: +Decimal.format(cumulativeVolumeData, currentMarket.amount_precision),
-          volume: Decimal.format(+volume, currentMarket.amount_precision),
-          price: Decimal.format(+numberPrice, currentMarket.price_precision),
+          [type]: cumulativeVolumeDataFormated,
+          cumulativePrice: cumulativePriceDataFormated,
+          cumulativeVolume: + cumulativeVolumeDataFormated,
+          volume: volumeFormated,
+          price: priceFormated,
           name: tipLayout({
             volume,
             price,

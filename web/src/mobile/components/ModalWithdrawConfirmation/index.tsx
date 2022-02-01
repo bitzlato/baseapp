@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
-import { Decimal } from '../../../components';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { MobileModal } from '../../components';
 
 interface ModalWithdrawConfirmationProps {
@@ -40,7 +40,7 @@ const ModalWithdraw = (props: ModalWithdrawConfirmationProps) => {
             {formatMessage({ id: 'page.mobile.wallet.withdraw.modal.confirmation.message1' })}
           </span>
           <span className="mobile-modal-body__withdraw-confirm--light">
-            {Decimal.format(amount, precision, ',')} <CurrencyTicker symbol={currency} />
+            {createMoneyWithoutCcy(amount, precision).toFormat()} <CurrencyTicker symbol={currency} />
           </span>
         </div>
         <div className="mobile-modal-body__withdraw-confirm--block">
