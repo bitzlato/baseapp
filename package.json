@@ -12,8 +12,9 @@
   "scripts": {
     "start": "yarn workspaces foreach -pvi run start",
     "build": "yarn workspaces foreach -pvi run build",
-    "test:lint": "eslint .",
-    "test:unit": "jest"
+    "lint": "eslint .",
+    "lint:style": "stylelint **/*.{pcss,postcss}",
+    "test": "jest"
   },
   "devDependencies": {
     "@swc/core": "^1.2.135",
@@ -46,6 +47,9 @@
     "jest": "^27.4.7",
     "mini-css-extract-plugin": "^2.5.3",
     "prettier": "^2.5.1",
+    "stylelint": "^14.3.0",
+    "stylelint-config-standard": "^24.0.0",
+    "stylelint-order": "^5.0.0",
     "swc-loader": "^0.1.15",
     "typescript": "^4.5.5",
     "webpack": "^5.67.0",

@@ -1,43 +1,8 @@
-/.npmrc
-
-.domains
-
-# dependencies
-/node_modules
-
-# testing
-/coverage
-
-# production
-/.idea
-/android
-/ios
-.gradle/
-
 # misc
+.envrc
 .DS_Store
-/.env.local
-/.env
-env.js
-/.envrc
-
-# environment config
-web/public/config/env.js
 
 log/
-
-# baseapp
-web/.DS_Store
-web/node_modules
-web/build
-web/npm-debug.log*
-web/yarn-debug.log*
-web/yarn-error.log*
-web/.env.local
-web/.env.development.local
-web/.env.test.local
-web/.env.production.local
-web/.env
 
 .yarn/*
 !.yarn/cache
@@ -48,4 +13,7 @@ web/.env
 !.yarn/versions
 
 shared/build
+web/public/config/env.js
 web/build
+web/**/*.postcss.d.ts
+web/statoscope-reports
