@@ -1,0 +1,41 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  },
+  "extends": ["airbnb", "airbnb/hooks", "plugin:jest/recommended"],
+  "rules": {
+    "import/prefer-default-export": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "extends": ["plugin:prettier/recommended", "prettier"],
+      "parserOptions": {
+        "ecmaVersion": 2022
+      }
+    },
+    {
+      "files": ["*.{ts,tsx}"],
+      "extends": ["airbnb-typescript", "plugin:prettier/recommended", "prettier"],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        // react
+        "react/function-component-definition": [
+          "error",
+          { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }
+        ], // override Airbnb rule
+        "react/jsx-props-no-spreading": "off", // override Airbnb rule
+        "react/prop-types": "off",
+        "react/react-in-jsx-scope": "off", // Disabled for React 17
+        "react/require-default-props": "off", // override Airbnb rule
+
+        // typescript
+        "@typescript-eslint/no-explicit-any": "warn"
+      }
+    }
+  ]
+}
