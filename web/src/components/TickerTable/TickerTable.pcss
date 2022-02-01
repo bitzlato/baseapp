@@ -91,14 +91,38 @@
     width: 100%;
   }
 
+  &__col--fixed {
+    background: var(--subheader-background-color);
+    //border-right: 1px solid var(--table-border-color);
+    padding-left: 24px;
+
+    left: 0;
+    position: sticky;
+    z-index: 2;
+  }
+
+  &__head--fixed {
+    background-color: var(--subheader-background-color);;
+    border-bottom: 1px solid var(--table-border-color);
+
+    top: 0;
+    position: sticky;
+    z-index: 1;
+
+    .pg-ticker-table__col--fixed {
+      border-bottom: inherit;
+      border-bottom: 1px solid var(--table-border-color);
+    }
+  }
+
   &__table {
     align-items: center;
     display: inline-block;
     flex-direction: column;
-    height: 100%;
+    height: max-content;
     justify-content: flex-start;
     min-width: 900px;
-    overflow: auto;
+    overflow: unset;
     width: 100%;
 
     thead,
@@ -109,6 +133,7 @@
       height: 100%;
       justify-content: flex-start;
       width: 100%;
+      overflow: visible;
 
       tr {
         align-items: center;
@@ -116,7 +141,7 @@
         flex-direction: row;
         height: 38px;
         justify-content: space-evenly;
-        padding: 0 24px;
+        padding-right: 24px;
         width: 100%;
 
         th,
@@ -140,6 +165,7 @@
           color: var(--bright);
           font-size: 12px;
           line-height: 12px;
+          top: 0;
         }
 
         td {
@@ -154,7 +180,7 @@
     }
 
     tbody {
-      overflow-y: auto;
+      overflow: visible;
 
       tr {
         &:hover {
@@ -163,6 +189,12 @@
 
           td {
             color: var(--primary-text-color);
+          }
+
+          td.pg-ticker-table__col--fixed {
+            background-color: var(--dropdown-background-color);
+            color: var(--primary-text-color);
+            cursor: pointer;
           }
         }
       }
