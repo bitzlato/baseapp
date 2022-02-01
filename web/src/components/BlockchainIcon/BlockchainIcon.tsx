@@ -27,6 +27,15 @@ export const BlockchainIcon: FC<Props> = ({ className, protocol }) => {
         />
       );
 
+    case 'arc20':
+      return (
+        <img
+          className={className}
+          src={require(`cryptocurrency-icons/svg/color/avax.svg`)}
+          alt="Avalanche"
+        />
+      );
+
     case 'bep20':
       return <BNBIcon className={className} />;
 

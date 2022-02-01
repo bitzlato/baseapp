@@ -1505,7 +1505,7 @@ __metadata:
     copy-webpack-plugin: ^9.0.1
     core-js: ^3.18.1
     cross-env: ^7.0.2
-    cryptocurrency-icons: "git+https://github.com/bitzlato/cryptocurrency-icons.git#commit=6603ea77476928a7db1d8240922750313e79b3b8"
+    cryptocurrency-icons: "git+https://github.com/bitzlato/cryptocurrency-icons.git#1c1db76ce934c5a81fa67d1ebad689c7e0a85504"
     css-loader: ^6.4.0
     css-minimizer-webpack-plugin: ^3.1.1
     cypress: ^3.1.5
@@ -5243,10 +5243,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cryptocurrency-icons@git+https://github.com/bitzlato/cryptocurrency-icons.git#commit=6603ea77476928a7db1d8240922750313e79b3b8":
+"cryptocurrency-icons@git+https://github.com/bitzlato/cryptocurrency-icons.git#1c1db76ce934c5a81fa67d1ebad689c7e0a85504":
   version: 0.18.0
-  resolution: "cryptocurrency-icons@https://github.com/bitzlato/cryptocurrency-icons.git#commit=6603ea77476928a7db1d8240922750313e79b3b8"
-  checksum: ae14904f174ebd366fb94bc21962206eeaea72bb410080b20334acadb50d692df9df5730f15956bf0faebbbf0b7f423da7461e3cc6bc2527084be5c2cbb8413c
+  resolution: "cryptocurrency-icons@https://github.com/bitzlato/cryptocurrency-icons.git#commit=1c1db76ce934c5a81fa67d1ebad689c7e0a85504"
+  checksum: 45a590610134dc2d61d9380dc6d51a0cde0d4ee9d48684918581876612de26aaa118e8c4b0ffa69025f38630d09459c3ed39adc650907f5941b21156b7de3044
   languageName: node
   linkType: hard
 

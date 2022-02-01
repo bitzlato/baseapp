@@ -8,6 +8,7 @@ export interface CryptoIconProps {
 }
 
 const findIcon = (code: string): string => {
+  code = MAP.get(code) ?? code;
   try {
     return require(`cryptocurrency-icons/svg/color/${code}.svg`);
   } catch (err) {
@@ -26,3 +27,5 @@ export const CryptoIcon: React.FunctionComponent<CryptoIconProps> = (props) => {
     </span>
   );
 };
+
+const MAP = new Map<string, string>([['usdte', 'usdt']]);

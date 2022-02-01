@@ -30,7 +30,7 @@
     "bignumber.js": "^9.0.1",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
-    "cryptocurrency-icons": "git+https://github.com/bitzlato/cryptocurrency-icons.git#commit=6603ea77476928a7db1d8240922750313e79b3b8",
+    "cryptocurrency-icons": "git+https://github.com/bitzlato/cryptocurrency-icons.git#1c1db76ce934c5a81fa67d1ebad689c7e0a85504",
     "history": "^4.7.2",
     "i18n-iso-countries": "^3.7.8",
     "markdown-to-jsx": "^7.1.3",
