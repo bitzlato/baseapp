@@ -52,8 +52,6 @@ end
 set :nvm_node, File.read('.nvmrc').strip
 set :nvm_map_bins, %w{node npm yarn rake corepack}
 
-set :yarn_flags, '--immutable'
-
 set :default_env, {
   REACT_APP_RELEASE_STAGE: fetch(:stage),
   REACT_APP_SENTRY_KEY:  ENV['SENTRY_KEY'],
@@ -65,30 +63,26 @@ set :default_env, {
   PUBLIC_URL: fetch(:public_url),
 }
 
-after 'deploy:updated', 'yarn_build'
+task :yarn_build do
+  on roles('app') do
+    within release_path do
+      execute :yarn, :rebuild
+      execute :yarn, :build
+      execute :cp, "-R shared/build web/build/shared"
+    end
+  end
+end
 
-# set :web_release_path, -> { release_path + '/web' }
+after 'deploy:updated', 'yarn_build'
 
 task :link_env do
   on roles('app') do
     within release_path do
-      execute :ln, "-s env.#{fetch(:stage)}.js public/config/env.js"
+      execute :ln, "-s env.#{fetch(:stage)}.js web/public/config/env.js"
     end
   end
 end
 
-task :yarn_build do
-  on roles('app') do
-    within release_path do
-      execute :yarn, :build
-    end
-    within release_path.join('../shared') do
-      execute :yarn, :rebuild, "@swc/core core-js core-js-pure esbuild fsevents"
-      execute :yarn, :build
-      execute :cp, "-R build #{release_path}/build/shared"
-    end
-  end
-end
 before 'yarn_build', 'link_env'
 
 task :change_release_path do
@@ -97,7 +91,8 @@ task :change_release_path do
   end
 end
 
-after 'git:create_release', 'change_release_path'
+before 'deploy:publishing', 'change_release_path'
+
 
 if defined? Slackistrano
   Rake::Task['deploy:starting'].prerequisites.delete('slack:deploy:starting')
