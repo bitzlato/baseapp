@@ -32,7 +32,7 @@ export const TickerTable: React.FC<Props> = ({
 
       return (
         <tr key={index} onClick={() => redirectToTrading(market.id)}>
-          <td>{market && <MarketName name={market.name} />}</td>
+          <td className="pg-ticker-table__col--fixed">{market && <MarketName name={market.name} />}</td>
           <td>
             <span>
               <AmountFormat money={createMoney(market.last ?? 0, ccy)} />
@@ -89,9 +89,9 @@ export const TickerTable: React.FC<Props> = ({
       </div>
       <div className="pg-ticker-table__table-wrap">
         <table className="pg-ticker-table__table">
-          <thead>
+          <thead className="pg-ticker-table__head--fixed">
             <tr>
-              <th scope="col">{formatMessage({ id: 'page.body.marketsTable.header.pair' })}</th>
+              <th scope="col" className="pg-ticker-table__col--fixed">{formatMessage({ id: 'page.body.marketsTable.header.pair' })}</th>
               <th scope="col">
                 {formatMessage({ id: 'page.body.marketsTable.header.lastPrice' })}
               </th>
