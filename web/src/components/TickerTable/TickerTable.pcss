@@ -93,7 +93,7 @@
 
   &__col--fixed {
     background: var(--subheader-background-color);
-    //border-right: 1px solid var(--table-border-color);
+    border-right: 1px solid var(--table-border-color);
     padding-left: 24px;
 
     left: 0;
@@ -107,10 +107,9 @@
 
     top: 0;
     position: sticky;
-    z-index: 1;
+    z-index: 3;
 
     .pg-ticker-table__col--fixed {
-      border-bottom: inherit;
       border-bottom: 1px solid var(--table-border-color);
     }
   }
@@ -141,7 +140,7 @@
         flex-direction: row;
         height: 38px;
         justify-content: space-evenly;
-        padding-right: 24px;
+        padding: 0 24px 0 0;
         width: 100%;
 
         th,
@@ -162,7 +161,6 @@
         }
 
         th {
-          color: var(--bright);
           font-size: 12px;
           line-height: 12px;
           top: 0;
