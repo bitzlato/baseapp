@@ -9,7 +9,10 @@ const OrderBookTableRowComponent = (props) => {
   if (type === 'price') {
     return (
       <span>
-        <DiffAmountFormat currentValue={createMoneyWithoutCcy(price, fixed)} prevValue={createMoneyWithoutCcy(prevValue, fixed)} />
+        <DiffAmountFormat
+          currentValue={createMoneyWithoutCcy(price, fixed)}
+          prevValue={createMoneyWithoutCcy(prevValue, fixed)}
+        />
       </span>
     );
   }

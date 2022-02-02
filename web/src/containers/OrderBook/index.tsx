@@ -329,14 +329,23 @@ class OrderBookContainer extends React.Component<Props, State> {
               return [
                 <DiffAmountFormat
                   key={i}
-                  currentValue={createMoneyWithoutCcy(volume ?? 0, priceFixed)}
+                  currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
                   prevValue={createMoneyWithoutCcy(
                     array[i + 1] ? array[i + 1]?.[0] ?? 0 : 0,
                     priceFixed,
                   )}
+                  minFractionDigits={priceFixed}
                 />,
-                <AmountFormat key={i} money={createMoneyWithoutCcy(volume ?? 0, amountFixed)} />,
-                <AmountFormat key={i} money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)} />,
+                <AmountFormat
+                  key={i}
+                  money={createMoneyWithoutCcy(volume ?? 0, amountFixed)}
+                  minFractionDigits={amountFixed}
+                />,
+                <AmountFormat
+                  key={i}
+                  money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                  minFractionDigits={amountFixed}
+                />,
               ];
             default:
               if (isLarge) {
@@ -344,8 +353,13 @@ class OrderBookContainer extends React.Component<Props, State> {
                   <AmountFormat
                     key={i}
                     money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                    minFractionDigits={amountFixed}
                   />,
-                  <AmountFormat key={i} money={createMoneyWithoutCcy(volume ?? 0, amountFixed)} />,
+                  <AmountFormat
+                    key={i}
+                    money={createMoneyWithoutCcy(volume ?? 0, amountFixed)}
+                    minFractionDigits={amountFixed}
+                  />,
                   <DiffAmountFormat
                     key={i}
                     currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
@@ -353,6 +367,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                       array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
                       priceFixed,
                     )}
+                    minFractionDigits={priceFixed}
                   />,
                 ];
               } else {
@@ -364,11 +379,17 @@ class OrderBookContainer extends React.Component<Props, State> {
                       array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
                       priceFixed,
                     )}
+                    minFractionDigits={priceFixed}
                   />,
-                  <AmountFormat key={i} money={createMoneyWithoutCcy(volume ?? 0, amountFixed)} />,
+                  <AmountFormat
+                    key={i}
+                    money={createMoneyWithoutCcy(volume ?? 0, amountFixed)}
+                    minFractionDigits={amountFixed}
+                  />,
                   <AmountFormat
                     key={i}
                     money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                    minFractionDigits={amountFixed}
                   />,
                 ];
               }
@@ -401,8 +422,13 @@ class OrderBookContainer extends React.Component<Props, State> {
                     array[i + 1] ? array[i + 1]?.[0] ?? 0 : 0,
                     priceFixed,
                   )}
+                  minFractionDigits={priceFixed}
                 />,
-                <AmountFormat key={i} money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)} />,
+                <AmountFormat
+                  key={i}
+                  money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                  minFractionDigits={amountFixed}
+                />,
               ];
             default:
               if (isLarge) {
@@ -410,6 +436,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                   <AmountFormat
                     key={i}
                     money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                    minFractionDigits={amountFixed}
                   />,
 
                   <DiffAmountFormat
@@ -419,6 +446,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                       array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
                       priceFixed,
                     )}
+                    minFractionDigits={priceFixed}
                   />,
                 ];
               } else {
@@ -430,10 +458,12 @@ class OrderBookContainer extends React.Component<Props, State> {
                       array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
                       priceFixed,
                     )}
+                    minFractionDigits={priceFixed}
                   />,
                   <AmountFormat
                     key={i}
                     money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                    minFractionDigits={amountFixed}
                   />,
                 ];
               }
