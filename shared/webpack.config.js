@@ -17,7 +17,7 @@ module.exports = {
 
   bail: !isDevelopment,
 
-  devtool: isDevelopment ? 'eval-cheap-module-source-map' : 'source-map',
+  devtool: isDevelopment ? 'eval-cheap-module-source-map' : 'hidden-source-map',
 
   entry: './src/index.ts',
 
@@ -123,6 +123,7 @@ module.exports = {
   ].filter(Boolean),
 
   devServer: {
+    port: 3001,
     hot: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
