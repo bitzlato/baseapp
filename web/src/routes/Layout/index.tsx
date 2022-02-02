@@ -33,11 +33,7 @@ import {
   ProfileMobileScreen,
   ProfileThemeMobileScreen,
   ProfileVerificationMobileScreen,
-  // SelectedWalletMobileScreen,
   TradingScreenMobile,
-  // WalletDeposit,
-  WalletsMobileScreen,
-  // WalletWithdraw,
 } from '../../mobile/screens';
 import {
   logoutFetch,
@@ -83,6 +79,7 @@ import { loginWithRedirect } from 'src/helpers/auth0';
 import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
 import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
 import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
+import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -342,30 +339,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               path="/email-verification"
               component={EmailVerificationMobileScreen}
             />
-            {/* <PrivateRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/wallets/:currency/history"
-              component={SelectedWalletMobileScreen}
-            />
-            <PrivateRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/wallets/:currency/deposit"
-              component={WalletDeposit}
-            />
-            <PrivateRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/wallets/:currency/withdraw"
-              component={WalletWithdraw}
-            />
-            <PrivateRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/wallets/:currency/transfer"
-              component={WalletTransfer}
-            /> */}
             <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}
