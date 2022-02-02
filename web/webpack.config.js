@@ -28,11 +28,11 @@ const extractSemver = (text) => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 
-let sharedURL = '/shared'; // production
+let sharedURL = isDevelopment ? 'http://localhost:3001' : '/shared'; // production
 if (process.env.SHARED_URL) {
   sharedURL = process.env.SHARED_URL; // e.g. http://localhost:3001
 } else if (process.env.PROXY_HOST) {
-  sharedURL = `${process.env.PROXY_HOST}/shared`; // for stages
+  sharedURL = `https://${process.env.PROXY_HOST}/shared`; // for stages
 }
 
 /** @type {webpack.WebpackOptionsNormalized} */
@@ -57,7 +57,12 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
-    fallback: { stream: require.resolve('stream-browserify') },
+    fallback: {
+      stream: require.resolve('stream-browserify'),
+      events: require.resolve('events/'),
+      buffer: require.resolve('buffer/'),
+      url: require.resolve('url/'),
+    },
   },
 
   module: {
@@ -92,7 +97,7 @@ module.exports = {
               postcssOptions: {
                 plugins: [
                   [
-                    'postcss-preset-env',
+                    require.resolve('postcss-preset-env'),
                     {
                       stage: 1,
                       features: {
@@ -101,7 +106,7 @@ module.exports = {
                       importFrom: ['src/styles/mediaQueries.css'],
                     },
                   ],
-                  'postcss-nested',
+                  require.resolve('postcss-nested'),
                 ],
               },
             },
@@ -150,6 +155,11 @@ module.exports = {
                 tsx: true,
                 decorators: false,
                 dynamicImport: true,
+              },
+              transform: {
+                react: {
+                  runtime: 'automatic',
+                },
               },
             },
           },
@@ -261,7 +271,7 @@ module.exports = {
     ? {
         compress: false,
         host: process.env.HOST ?? 'localhost',
-        port: process.env.PORT ?? 3000,
+        port: process.env.PORT ?? 8080,
         historyApiFallback: true,
         hot: true,
         proxy: process.env.PROXY_HOST
@@ -293,8 +303,4 @@ module.exports = {
           : undefined,
       }
     : undefined,
-
-  stats: {
-    children: !isDevelopment,
-  },
 };
