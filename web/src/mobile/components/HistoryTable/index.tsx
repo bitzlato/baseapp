@@ -34,7 +34,7 @@ const HistoryTable = (props: Props) => {
   const lastElemIndex = useSelector((state: RootState) =>
     selectLastElemIndex(state, DEFAULT_LIMIT),
   );
-  const nextPageExists = useSelector((state: RootState) => selectNextPageExists(state));
+  const nextPageExists = useSelector(selectNextPageExists);
 
   useWalletsFetch();
   useHistoryFetch({

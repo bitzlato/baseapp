@@ -12,7 +12,7 @@ export interface PublicTrade {
 }
 
 export interface PrivateTrade extends PublicTrade {
-  side?: string;
+  side: string;
   order_id?: number;
 }
 
@@ -100,5 +100,5 @@ export interface TransferLink {
   url: string;
 }
 
-export type WalletHistoryElement = Withdraw | Deposit;
+export type WalletHistoryElement = Withdraw | Deposit | PrivateTrade;
 export type WalletHistoryList = WalletHistoryElement[];

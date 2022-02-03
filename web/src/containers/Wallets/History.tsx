@@ -141,7 +141,7 @@ export class WalletTable extends React.Component<Props> {
       return [[]];
     }
 
-    return list
+    return (list as (Withdraw | Deposit)[])
       .sort((a, b) => sortByDateDesc(a.created_at, b.created_at))
       .map((item, index) => {
         return [
