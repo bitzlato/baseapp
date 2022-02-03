@@ -5,4 +5,4 @@ export PROXY_HOST=s1.s-www.lgk.one
 # export PORT=8080
 
 # development and build env vars
-# export SHARED_URL=http://localhost:3001
+# export SHARED_URL=http://localhost:3003

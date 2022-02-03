@@ -28,9 +28,9 @@ const extractSemver = (text) => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 
-let sharedURL = isDevelopment ? 'http://localhost:3001' : '/shared'; // production
+let sharedURL = isDevelopment ? 'http://localhost:3003' : '/shared'; // production
 if (process.env.SHARED_URL) {
-  sharedURL = process.env.SHARED_URL; // e.g. http://localhost:3001
+  sharedURL = process.env.SHARED_URL; // e.g. http://localhost:3003
 } else if (process.env.PROXY_HOST) {
   sharedURL = `https://${process.env.PROXY_HOST}/shared`; // for stages
 }

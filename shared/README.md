@@ -2,23 +2,16 @@
 
 Includes common components: Header, etc.
 
-## Prepare
-
-```sh
-corepack enable
-yarn rebuild
-```
-
 ## Dev mode
 
 ```sh
-yarn start --port=3001
+yarn start --port=3003
 ```
 
 To run with `baseapp`, you need to specify `SHARED_URL`
 
 ```sh
-baseapp ❱ SHARED_URL=http://localhost:3001 PROXY_HOST=... yarn start
+baseapp ❱ SHARED_URL=http://localhost:3003 PROXY_HOST=... yarn start
 ```
 
 ## Deploy

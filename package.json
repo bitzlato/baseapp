@@ -11,7 +11,7 @@
   "packageManager": "yarn@3.1.1",
   "scripts": {
     "start": "yarn workspace web start",
-    "start:all": "SHARED_URL=http://localhost:3001 yarn workspaces foreach -pvi --from '{shared,web}' run start",
+    "start:all": "SHARED_URL=http://localhost:3003 yarn workspaces foreach -pvi --from '{shared,web}' run start",
     "build": "yarn workspaces foreach -pvi run build",
     "lint": "eslint .",
     "lint:style": "stylelint **/*.{pcss,postcss}",
