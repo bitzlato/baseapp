@@ -7,7 +7,7 @@ import { Beneficiary, selectMobileDeviceState, selectUserInfo, Wallet } from '..
 import { WithdrawSummary } from './WithdrawSummary';
 import { BeneficiaryAddress } from './BeneficiaryAddress';
 import { createMoney } from 'src/helpers/money';
-import { NumberInput } from 'src/components/NumberInput/NumberInput';
+import { NumberInput } from 'src/components/Input/NumberInput';
 import { parseInteger, parseNumeric } from 'src/helpers/parseNumeric';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 import { useT } from 'src/hooks/useT';
