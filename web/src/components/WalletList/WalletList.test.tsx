@@ -1,9 +1,8 @@
-import { mount, shallow, ShallowWrapper } from 'enzyme';
-import * as React from 'react';
+import { mount, shallow } from 'enzyme';
 import { BTC_CCY, createCcy, createMoney, USD_CCY } from 'src/helpers/money';
 import { TestComponentWrapper } from 'src/lib/test/wrapper';
 import { WalletList, WalletListProps } from '../../components';
-import { WalletItem, WalletItemData } from '../WalletItem/WalletItem';
+import { WalletItemData } from '../WalletItem/WalletItem';
 
 const onWalletSelectionChange = jest.fn();
 
@@ -58,7 +57,7 @@ const setup2 = (props: Partial<WalletListProps> = {}) =>
 
 describe('WalletList', () => {
   it('should render', () => {
-    expect(setup()).toMatchSnapshot();
+    expect(setup().render()).toMatchSnapshot();
   });
 
   it('should handle onWalletSelectionChange callback when an element is pressed', () => {
