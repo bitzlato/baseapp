@@ -815,6 +815,7 @@ export const ru: LangType = {
 
   /* Quick Exchange */
   'page.body.quick.exchange.header': 'Быстрый обмен',
+  'page.body.quick.exchange.label.limits': 'Лимиты',
   'page.body.quick.exchange.label.exchange': 'Вы меняете',
   'page.body.quick.exchange.label.receive': 'Вы получите',
   'page.body.quick.exchange.label.currency': 'Валюта',

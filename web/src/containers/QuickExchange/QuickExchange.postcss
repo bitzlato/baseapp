@@ -11,11 +11,25 @@
 }
 
 .quickExchangeSwap {
+  flex: 0.5;
+  background-color: transparent;
+  border: none;
   align-self: center;
   padding: calc(var(--gap) * 0.5);
 
   svg {
     fill: var(--to-profile-button-icon-fill);
+  }
+
+  &:hover, &:focus {
+    svg {
+      fill: var(--primary-text-color);
+    }
+    background-color: transparent !important;
+  }
+
+  &:active {
+    background-color: transparent !important;
   }
 }
 
