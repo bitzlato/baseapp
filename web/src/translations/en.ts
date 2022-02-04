@@ -800,6 +800,7 @@ export const en = {
 
   /* Quick Exchange */
   'page.body.quick.exchange.header': 'Quick Exchange',
+  'page.body.quick.exchange.label.limits': 'Limits',
   'page.body.quick.exchange.label.exchange': 'You have',
   'page.body.quick.exchange.label.receive': 'You get',
   'page.body.quick.exchange.label.currency': 'Currency',
