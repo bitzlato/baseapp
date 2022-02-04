@@ -18,6 +18,7 @@ import {
   sendError,
   beneficiariesResetState,
   selectBeneficiariesDeleteSuccess,
+  Wallet,
 } from '../../modules';
 import { ChevronIcon } from '../../assets/images/ChevronIcon';
 import { PlusIcon } from '../../assets/images/PlusIcon';
@@ -28,14 +29,10 @@ import { BeneficiariesAddModal } from './BeneficiariesAddModal';
 import { BeneficiariesFailAddModal } from './BeneficiariesFailAddModal';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 
-interface OwnProps {
-  currency: string;
-  type: 'fiat' | 'coin';
-  enableInvoice: boolean | undefined;
+interface Props {
+  wallet: Wallet;
   onChangeValue: (beneficiary: Beneficiary) => void;
 }
-
-type Props = OwnProps;
 
 const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
   const [currentWithdrawalBeneficiary, setWithdrawalBeneficiary] =
@@ -46,7 +43,9 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
   const [isOpenTip, setTipState] = React.useState(false);
   const [isOpenDropdown, setDropdownState] = React.useState(false);
 
-  const { currency, type, onChangeValue, enableInvoice } = props;
+  const { onChangeValue } = props;
+  const { type } = props.wallet;
+  const currency = props.wallet.currency.code;
 
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -375,7 +374,7 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
   );
 
   const renderDropdownItem = React.useCallback(
-    (item: Beneficiary, index: number, type: OwnProps['type']) => {
+    (item: Beneficiary, index: number, type: Wallet['type']) => {
       const isPending = item.state && item.state.toLowerCase() === 'pending';
       const itemClassName = classnames('pg-beneficiaries__dropdown__body__item', 'item', {
         'item--pending': isPending,
@@ -464,13 +463,11 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
   const renderBeneficiariesAddModal = React.useMemo(() => {
     return (
       <BeneficiariesAddModal
-        currency={currency}
-        type={type}
-        enableInvoice={enableInvoice}
-        handleToggleAddAddressModal={() => setAddressModalState(false)}
+        wallet={props.wallet}
+        onCloseModal={() => setAddressModalState(false)}
       />
     );
-  }, [currency, type, enableInvoice]);
+  }, [currency, type]);
 
   const renderActivateModal = React.useMemo(() => {
     return (
@@ -498,7 +495,7 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
   return (
     <div className="pg-beneficiaries">
       <span className="pg-beneficiaries__title">
-        {props.type === 'coin'
+        {type === 'coin'
           ? formatMessage({ id: 'page.body.wallets.beneficiaries.title' })
           : formatMessage({ id: 'page.body.wallets.beneficiaries.fiat.title' })}
       </span>

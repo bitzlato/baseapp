@@ -12,10 +12,10 @@ import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurr
 import { Tabs } from 'src/components/Tabs/Tabs';
 import { Tab, TabList, TabPanel } from 'src/components/Tabs';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
-import { DepositCrypto } from 'src/components/DepositCrypto';
+import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
 import { GeneralBalance } from 'src/modules/account/types';
 import { WalletHistory } from 'src/containers/Wallets/History';
-import { Withdraw } from 'src/containers/Withdraw';
+import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { useHistory, useParams } from 'react-router';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { useFetch } from 'src/hooks/useFetch';
@@ -127,7 +127,7 @@ export const WalletsScreen: React.FC = () => {
                 <TabPanel value={TabId.deposit}>
                   {wallet && (
                     <>
-                      {wallet.enable_invoice ? (
+                      {item.currency === 'BTC' ? (
                         <InvoiceExplanation
                           currency={item.currency}
                           onClick={() => onTabSelected(TabId.transfer)}
@@ -146,7 +146,7 @@ export const WalletsScreen: React.FC = () => {
                 <TabPanel value={TabId.withdraw}>
                   {wallet && (
                     <>
-                      {wallet.enable_invoice ? (
+                      {item.currency === 'BTC' ? (
                         <InvoiceExplanation
                           currency={item.currency}
                           onClick={() => onTabSelected(TabId.transfer)}

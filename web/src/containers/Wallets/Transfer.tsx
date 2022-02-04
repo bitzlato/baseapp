@@ -129,8 +129,8 @@ export const Transfer: React.FC<Props> = ({
             value={from as any}
             onChange={handleSetFrom as any}
             placeholder={t('Transfer from')}
-            placeholderAsLabel
-            itemRenderer={renderDropItem as any}
+            label={t('Transfer from')}
+            formatOptionLabel={renderDropItem as any}
           />
           <IconButton
             className={s.transferRearrange}
@@ -146,8 +146,8 @@ export const Transfer: React.FC<Props> = ({
             value={to as any}
             onChange={handleSetTo as any}
             placeholder={t('Transfer to')}
-            placeholderAsLabel
-            itemRenderer={renderDropItem as any}
+            label={t('Transfer to')}
+            formatOptionLabel={renderDropItem as any}
           />
         </Box>
         <Box col spacing>

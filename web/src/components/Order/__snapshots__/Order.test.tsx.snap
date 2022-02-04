@@ -46,6 +46,9 @@ exports[`Order should match snapshot 1`] = `
             <div
               class="selfStretch positionRelative"
             >
+              <label
+                class="reactSelectLabel ellipsis"
+              />
               <div
                 class="reactSelect reactSelectSmall css-b62m3t-container"
               >
@@ -415,6 +418,9 @@ exports[`Order should match snapshot 1`] = `
             <div
               class="selfStretch positionRelative"
             >
+              <label
+                class="reactSelectLabel ellipsis"
+              />
               <div
                 class="reactSelect reactSelectSmall css-b62m3t-container"
               >

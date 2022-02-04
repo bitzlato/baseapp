@@ -1,48 +1,64 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
+import { isEqualArrays } from 'src/helpers/isEqualArrays';
 
 export interface FetchResult<T> {
   data: T | undefined;
   error: FetchError | undefined;
   isLoading: boolean;
+  deps: React.DependencyList;
 }
 
-interface Options extends RequestInit {
-  skipRequest?: boolean;
+export interface RequestOptions extends RequestInit {
+  skipRequest?: boolean | undefined;
 }
+
+const INITIAL: FetchResult<any> = {
+  isLoading: false,
+  data: undefined,
+  error: undefined,
+  deps: [],
+};
 
 export function useFetch<T>(
   url: string,
-  options?: Options,
+  options?: RequestOptions,
   deps: React.DependencyList = [],
 ): FetchResult<T> {
-  const [data, setData] = useState<T | undefined>(undefined);
-  const [error, setError] = useState<FetchError | undefined>();
-  const [isLoading, setIsLoading] = useState(false);
+  deps = [url, ...deps];
+
+  const [state, dispatch] = useReducer(
+    (p: FetchResult<T>, c: Partial<FetchResult<T>>) => ({ ...p, ...c }),
+    deps,
+    (deps) => ({
+      ...INITIAL,
+      deps,
+    }),
+  );
 
   useEffect(() => {
+    if (!isEqualArrays(deps, state.deps)) {
+      dispatch({ ...INITIAL, deps });
+    }
     if (!options?.skipRequest) {
       let controller: AbortController | undefined = new AbortController();
       (async () => {
-        setIsLoading(true);
+        dispatch({ isLoading: true });
         try {
           const data = await fetchData(url, { ...options, signal: controller.signal });
           if (!controller.signal.aborted) {
-            setData(data);
-            setIsLoading(false);
+            dispatch({ isLoading: false, data });
           }
         } catch (error) {
           if (!controller.signal.aborted) {
-            setError(error as FetchError);
-            setData(undefined);
-            setIsLoading(false);
+            dispatch({ isLoading: false, data: undefined, error: error as FetchError });
           }
         }
       })();
       return () => controller?.abort();
     }
-  }, [url, options?.skipRequest, ...deps]);
+  }, deps);
 
-  return { data, error, isLoading };
+  return isEqualArrays(deps, state.deps) ? state : INITIAL;
 }
 
 async function fetchData(url: string, options?: RequestInit) {

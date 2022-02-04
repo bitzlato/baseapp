@@ -8,7 +8,7 @@ export * from './CopyableTextField';
 export * from './CurrencyInfo';
 export * from './CustomInput';
 export * from './Customization';
-export * from './DepositCrypto';
+export * from './DepositCrypto/DepositCrypto';
 export * from './DepositFiat';
 export * from './Documentation';
 export * from './EmailForm';

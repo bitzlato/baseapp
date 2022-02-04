@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { DepositStatus } from 'src/components/History/DepositStatus';
@@ -30,12 +30,16 @@ import { TransferHistory } from '../Wallets/TransferHistory';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { useT } from 'src/hooks/useT';
+import { useFetchCache } from 'src/hooks/useFetchCache';
+import { Blockchain } from 'src/modules/public/blockchains/types';
+import { tradeUrl } from 'src/api/config';
+import { DEFAULT_BLOCKCHAIN } from 'web/src/modules/public/blockchains/defaults';
 
 interface Props {
   type: string;
 }
 
-export const HistoryElement: React.FC<Props> = ({ type }) => {
+export const HistoryElement: FC<Props> = ({ type }) => {
   const dispatch = useDispatch();
   const currencies = useSelector(selectCurrencies);
   const markets = useSelector(selectMarkets);
@@ -47,6 +51,10 @@ export const HistoryElement: React.FC<Props> = ({ type }) => {
   const lastElemIndex = useSelector((state: RootState) => selectLastElemIndex(state, 25));
   const nextPageExists = useSelector(selectNextPageExists);
   const t = useT();
+
+  const { data: blockchains = [] } = useFetchCache<Blockchain[]>(
+    `${tradeUrl()}/public/blockchains`,
+  );
 
   useEffect(() => {
     dispatch(fetchHistory({ page: 0, type, limit: 25 }));
@@ -111,11 +119,12 @@ export const HistoryElement: React.FC<Props> = ({ type }) => {
   const renderTableRow = (item: WalletHistoryElement) => {
     switch (type) {
       case 'deposits': {
-        const { amount, created_at, currency, txid } = item as Deposit;
+        const { amount, created_at, currency, txid, blockchain_id } = item as Deposit;
         const wallet = wallets.find(
           (obj) => obj.currency.code.toLowerCase() === currency.toLowerCase(),
         );
-        const blockchainLink = getBlockchainLink(wallet, txid);
+        const blockchain = blockchains.find((d) => d.id === blockchain_id) ?? DEFAULT_BLOCKCHAIN;
+        const blockchainLink = getBlockchainLink(blockchain, txid);
 
         return [
           <div className="pg-history-elem__hide" key={txid}>
@@ -130,15 +139,16 @@ export const HistoryElement: React.FC<Props> = ({ type }) => {
           localeDate(created_at, 'fullDate'),
           <CurrencyTicker symbol={currency} />,
           wallet && createMoneyWithoutCcy(amount, wallet.precision).toFormat(),
-          <DepositStatus item={item as Deposit} currency={currency} />,
+          <DepositStatus item={item as Deposit} minConfirmations={blockchain.min_confirmations} />,
         ];
       }
       case 'withdraws': {
-        const { created_at, currency, amount, fee, rid } = item as Withdraw;
+        const { created_at, currency, amount, fee, rid, blockchain_id } = item as Withdraw;
         const wallet = wallets.find(
           (obj) => obj.currency.code.toLowerCase() === currency.toLowerCase(),
         );
-        const blockchainLink = getBlockchainLink(wallet, '', rid);
+        const blockchain = blockchains.find((d) => d.id === blockchain_id) ?? DEFAULT_BLOCKCHAIN;
+        const blockchainLink = getBlockchainLink(blockchain, '', rid);
 
         return [
           <div className="pg-history-elem__hide" key={rid}>
@@ -150,7 +160,11 @@ export const HistoryElement: React.FC<Props> = ({ type }) => {
           <CurrencyTicker symbol={currency} />,
           wallet && createMoneyWithoutCcy(amount, wallet.precision).toFormat(),
           wallet && createMoneyWithoutCcy(fee, wallet.precision).toFormat(),
-          <WithdrawStatus key="status" currency={currency} item={item as Withdraw} />,
+          <WithdrawStatus
+            key="status"
+            item={item as Withdraw}
+            minConfirmations={blockchain.min_confirmations}
+          />,
         ];
       }
       case 'trades': {
@@ -191,7 +205,7 @@ export const HistoryElement: React.FC<Props> = ({ type }) => {
     }
   };
 
-  const data = list.map((item) => renderTableRow(item));
+  const tableData = list.map((item) => renderTableRow(item));
 
   return (
     <div className={`pg-history-elem ${list.length ? '' : 'pg-history-elem-empty'}`}>
@@ -201,8 +215,8 @@ export const HistoryElement: React.FC<Props> = ({ type }) => {
         </div>
       )}
       {list.length ? (
-        <React.Fragment>
-          <History headers={getHeaders()} data={data} />
+        <>
+          <History headers={getHeaders()} data={tableData} />
           <Pagination
             firstElemIndex={firstElemIndex}
             lastElemIndex={lastElemIndex}
@@ -211,7 +225,7 @@ export const HistoryElement: React.FC<Props> = ({ type }) => {
             onClickPrevPage={onClickPrevPage}
             onClickNextPage={onClickNextPage}
           />
-        </React.Fragment>
+        </>
       ) : null}
       {!list.length && !fetching ? (
         <p className="pg-history-elem__empty">{t('page.noDataToShow')}</p>
