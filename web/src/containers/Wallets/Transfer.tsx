@@ -6,7 +6,7 @@ import { parseNumeric } from 'src/helpers/parseNumeric';
 import { Box } from 'src/components/Box/Box';
 import { Button } from 'src/components/Button/Button';
 import { SelectString } from 'src/components/Select/Select';
-import { MoneyInput } from 'src/components/NumberInput/MoneyInput';
+import { MoneyInput } from 'src/components/Input/MoneyInput';
 import { useT } from 'src/hooks/useT';
 import { SwipeIcon } from 'src/assets/images/swipe';
 import { IconButton } from 'src/components/IconButton/IconButton';

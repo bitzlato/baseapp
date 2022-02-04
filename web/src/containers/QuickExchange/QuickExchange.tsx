@@ -23,7 +23,7 @@ import { quickExchangeLimitsFetch } from 'src/modules/public/quickExchangePublic
 import { selectQuickExchangeLimits } from 'src/modules/public/quickExchangePublic/selectors';
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { SwipeIcon } from '../../assets/images/swipe';
-import { NumberInput } from 'src/components/NumberInput/NumberInput';
+import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { getWallet, getCurrencies, getCurrency } from './helpers';
 import { createCcy, createMoney, ZERO_MONEY } from 'src/helpers/money';
 import { parseNumeric } from 'src/helpers/parseNumeric';
@@ -263,7 +263,7 @@ export const QuickExchangeContainer: React.FC = () => {
                 value={fromCurrency}
                 onChange={handleSelectFrom}
                 placeholder={t('page.body.quick.exchange.label.currency')}
-                itemRenderer={renderDropdownItem}
+                formatOptionLabel={renderDropdownItem}
               />
             </Box>
             <AmountDescription
@@ -350,7 +350,7 @@ export const QuickExchangeContainer: React.FC = () => {
             value={toCurrency}
             onChange={handleSelectTo}
             placeholder={t('page.body.quick.exchange.label.currency')}
-            itemRenderer={renderDropdownItem}
+            formatOptionLabel={renderDropdownItem}
           />
         </Box>
         {fromCcy && toCcy && (
