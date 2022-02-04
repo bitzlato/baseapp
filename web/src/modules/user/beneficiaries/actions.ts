@@ -88,6 +88,7 @@ export interface BeneficiariesCreate {
     name: string;
     data: string;
     description?: string;
+    blockchain_id: number;
   };
 }
 

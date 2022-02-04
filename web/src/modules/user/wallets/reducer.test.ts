@@ -1,88 +1,50 @@
-import { WalletAddress } from 'src/modules/public/accounts/types';
+import { DepositAddress } from 'src/modules/public/accounts/types';
 import { CommonError } from '../../types';
 import * as actions from './actions';
 import { initialWalletsState, walletsReducer } from './reducer';
 import type { WalletSource } from './types';
 
+const DEFAULT_WALLET: WalletSource = {
+  balance: '0',
+  locked: '0',
+  price: '1',
+  min_withdraw_amount: '0',
+  limit_24_hour: '0',
+  limit_1_month: '0',
+  currency: 'btc',
+  name: 'Bitcoin',
+  withdraw_fee: '0',
+  type: 'coin',
+  precision: 8,
+  icon_id: '',
+  blockchain_ids: [],
+  cc_code: '',
+  deposit_enabled: true,
+  deposit_fee: '0',
+  description: null,
+  homepage: null,
+  id: '0',
+  min_deposit_amount: '',
+  position: 0,
+  withdraw_limit_24h: '0',
+  withdraw_limit_72h: '0',
+  withdrawal_enabled: true,
+};
+
 describe('walletsList reducer', () => {
   const wallets: WalletSource[] = [
     {
-      balance: '0',
-      locked: '0',
-      price: '1',
-      min_withdraw_amount: '0',
-      limit_24_hour: '0',
-      limit_1_month: '0',
-      currency: 'btc',
-      name: 'Bitcoin',
-      explorer_address: 'https://testnet.blockchain.info/address/#{address}',
-      explorer_transaction: 'https://testnet.blockchain.info/tx/#{txid}',
-      withdraw_fee: '0',
-      type: 'coin',
-      precision: 8,
-      icon_id: '',
-
-      id: '',
-      symbol: '',
-      deposit_fee: '',
-      min_confirmations: 0,
-      min_deposit_amount: '',
-      deposit_enabled: false,
-      withdrawal_enabled: false,
-      withdrawal_disabled_reason: '',
-      base_factor: 0,
+      ...DEFAULT_WALLET,
     },
     {
-      balance: '0',
-      locked: '0',
-      price: '1',
-      min_withdraw_amount: '0',
-      limit_24_hour: '0',
-      limit_1_month: '0',
+      ...DEFAULT_WALLET,
       currency: 'bch',
       name: 'Bitcoin Cash',
-      explorer_address: 'https://www.blocktrail.com/tBCC/address/#{address}',
-      explorer_transaction: 'https://www.blocktrail.com/tBCC/tx/#{txid}',
-      withdraw_fee: '0',
-      type: 'coin',
-      precision: 8,
-      icon_id: '',
-
-      id: '',
-      symbol: '',
-      deposit_fee: '',
-      min_confirmations: 0,
-      min_deposit_amount: '',
-      deposit_enabled: false,
-      withdrawal_enabled: false,
-      withdrawal_disabled_reason: '',
-      base_factor: 0,
     },
     {
-      balance: '0',
-      locked: '0',
-      price: '1',
-      min_withdraw_amount: '0',
-      limit_24_hour: '0',
-      limit_1_month: '0',
+      ...DEFAULT_WALLET,
       currency: 'eth',
       name: 'Ethereum',
-      explorer_address: 'https://rinkeby.etherscan.io/address/#{address}',
-      explorer_transaction: 'https://rinkeby.etherscan.io/tx/#{txid}',
-      withdraw_fee: '0',
-      type: 'coin',
-      precision: 8,
-      icon_id: '',
-
-      id: '',
-      symbol: '',
-      deposit_fee: '',
-      min_confirmations: 0,
-      min_deposit_amount: '',
-      deposit_enabled: false,
-      withdrawal_enabled: false,
-      withdrawal_disabled_reason: '',
-      base_factor: 0,
     },
   ];
 
@@ -96,10 +58,6 @@ describe('walletsList reducer', () => {
     currency: 'btc',
     otp: '123123',
     beneficiary_id: '2NCimTNGnbm92drX7ARcwBKw6rvr456VWym',
-  };
-
-  const addressFetchPayload = {
-    currency: 'btc',
   };
 
   it('should handle WALLETS_FETCH', () => {
@@ -153,123 +111,8 @@ describe('walletsList reducer', () => {
       },
     };
     expect(
-      walletsReducer(initialWalletsState, actions.walletsAddressFetch(addressFetchPayload)),
+      walletsReducer(initialWalletsState, actions.walletsAddressFetch({ blockchainId: 0 })),
     ).toEqual(expectedState);
-  });
-
-  it('should handle WALLETS_ADDRESS_DATA', () => {
-    const initialState = {
-      wallets: {
-        list: wallets,
-        loading: false,
-        withdrawSuccess: false,
-        mobileWalletChosen: '',
-      },
-    };
-
-    const addressDataPayload: WalletAddress = {
-      currencies: ['btc', 'tbtc'],
-      address: 'address',
-      state: 'active',
-    };
-
-    const updatedWallets: WalletSource[] = [
-      {
-        balance: '0',
-        locked: '0',
-        price: '1',
-        min_withdraw_amount: '0',
-        limit_24_hour: '0',
-        limit_1_month: '0',
-        currency: 'btc',
-        name: 'Bitcoin',
-        explorer_address: 'https://testnet.blockchain.info/address/#{address}',
-        explorer_transaction: 'https://testnet.blockchain.info/tx/#{txid}',
-        withdraw_fee: '0',
-        type: 'coin',
-        precision: 8,
-        deposit_address: {
-          currencies: ['btc', 'tbtc'],
-          address: 'address',
-          state: 'active',
-        },
-        icon_id: '',
-
-        id: '',
-        symbol: '',
-        deposit_fee: '',
-        min_confirmations: 0,
-        min_deposit_amount: '',
-        deposit_enabled: false,
-        withdrawal_enabled: false,
-        withdrawal_disabled_reason: '',
-        base_factor: 0,
-      },
-      {
-        balance: '0',
-        locked: '0',
-        price: '1',
-        min_withdraw_amount: '0',
-        limit_24_hour: '0',
-        limit_1_month: '0',
-        currency: 'bch',
-        name: 'Bitcoin Cash',
-        explorer_address: 'https://www.blocktrail.com/tBCC/address/#{address}',
-        explorer_transaction: 'https://www.blocktrail.com/tBCC/tx/#{txid}',
-        withdraw_fee: '0',
-        type: 'coin',
-        precision: 8,
-        icon_id: '',
-
-        id: '',
-        symbol: '',
-        deposit_fee: '',
-        min_confirmations: 0,
-        min_deposit_amount: '',
-        deposit_enabled: false,
-        withdrawal_enabled: false,
-        withdrawal_disabled_reason: '',
-        base_factor: 0,
-      },
-      {
-        balance: '0',
-        locked: '0',
-        price: '1',
-        min_withdraw_amount: '0',
-        limit_24_hour: '0',
-        limit_1_month: '0',
-        currency: 'eth',
-        name: 'Ethereum',
-        explorer_address: 'https://rinkeby.etherscan.io/address/#{address}',
-        explorer_transaction: 'https://rinkeby.etherscan.io/tx/#{txid}',
-        withdraw_fee: '0',
-        type: 'coin',
-        precision: 8,
-        icon_id: '',
-
-        id: '',
-        symbol: '',
-        deposit_fee: '',
-        min_confirmations: 0,
-        min_deposit_amount: '',
-        deposit_enabled: false,
-        withdrawal_enabled: false,
-        withdrawal_disabled_reason: '',
-        base_factor: 0,
-      },
-    ];
-
-    const expectedState = {
-      wallets: {
-        list: updatedWallets,
-        loading: false,
-        withdrawSuccess: false,
-        mobileWalletChosen: '',
-      },
-    };
-    expect(walletsReducer(initialState, actions.walletsAddressData(addressDataPayload))).toEqual(
-      expectedState,
-    );
   });
 
   it('should handle WALLETS_ADDRESS_ERROR', () => {

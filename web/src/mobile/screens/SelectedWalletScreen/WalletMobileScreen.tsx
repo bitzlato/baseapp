@@ -8,9 +8,9 @@ import { SelectOption } from 'src/components/Select/Select';
 import { WalletMobileBalance } from './WalletMobileBalance';
 import { useGeneralWallets } from 'src/hooks/useGeneralWallets';
 import { Tab, TabList, TabPanel, Tabs } from 'src/components/Tabs';
-import { DepositCrypto } from 'src/components/DepositCrypto';
+import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
 import { WalletHistory } from 'src/containers/Wallets/History';
-import { Withdraw } from 'src/containers/Withdraw';
+import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { selectWallet } from 'src/modules/user/wallets/selectors';
 import { InvoiceExplanation } from 'src/screens/WalletsScreen/InvoiceExplanation';
@@ -61,7 +61,7 @@ export const WalletMobileScreen: React.FC = () => {
                 ))}
               </Box>
               <TabPanel value="deposit">
-                {wallet.enable_invoice ? (
+                {general.currency === 'BTC' ? (
                   <InvoiceExplanation
                     currency={general.currency}
                     onClick={() => handleTabSelection('transfer')}
@@ -72,7 +72,7 @@ export const WalletMobileScreen: React.FC = () => {
                 <WalletHistory label="deposit" type="deposits" currency={currency.toLowerCase()} />
               </TabPanel>
               <TabPanel value="withdraw">
-                {wallet.enable_invoice ? (
+                {general.currency === 'BTC' ? (
                   <InvoiceExplanation
                     currency={general.currency}
                     onClick={() => handleTabSelection('transfer')}

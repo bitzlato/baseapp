@@ -16,7 +16,7 @@ import {
   WALLETS_WITHDRAW_CCY_FETCH,
 } from './constants';
 import { WalletSource } from './types';
-import { WalletAddress } from 'src/modules/public/accounts/types';
+import { DepositAddress } from 'src/modules/public/accounts/types';
 
 export interface WalletsState {
   wallets: {
@@ -38,13 +38,14 @@ export const initialWalletsState: WalletsState = {
   },
 };
 
-const getUpdatedWalletsList = (list: WalletSource[], payload: WalletAddress) => {
+const getUpdatedWalletsList = (list: WalletSource[], payload: DepositAddress) => {
   if (list.length && payload.currencies?.length) {
     return list.map((wallet) => {
       if (payload.currencies.includes(wallet.currency)) {
-        let depositAddress: WalletAddress = {
+        let depositAddress: DepositAddress = {
           address: payload.address,
           currencies: payload.currencies,
+          state: payload.state,
         };
 
         if (payload.state) {

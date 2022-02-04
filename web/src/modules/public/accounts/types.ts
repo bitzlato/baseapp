@@ -6,14 +6,12 @@ export interface AccountBalanceSource {
   locked: string;
   limit_24_hour: string;
   limit_1_month: string;
-  enable_invoice?: boolean;
-  deposit_address?: WalletAddress;
 }
 
-export interface WalletAddress {
+export interface DepositAddress {
   address: string;
   currencies: string[];
-  state?: string;
+  state: string;
 }
 
 export interface AccountBalance

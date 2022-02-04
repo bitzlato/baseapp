@@ -50,21 +50,23 @@ export type WithdrawState =
   | 'confirming';
 
 export interface Withdraw {
-  currency: string;
-  id: number;
-  type: string;
   amount: string;
-  fee: string;
+  blockchain_id: number;
   blockchain_txid: string;
+  confirmations: number;
+  created_at: string;
+  currency: string;
+  done_at: string;
+  fee: string;
+  id: number;
+  note: string | null;
+  price?: number;
+  public_message?: string;
   rid: string;
   state: WithdrawState;
-  created_at: string;
+  transfer_type: string;
+  type: string;
   updated_at: string;
-  completed_at: string;
-  done_at: string;
-  price?: number;
-  confirmations: number;
-  public_message?: string;
 }
 
 export type DepositState =
@@ -79,20 +81,21 @@ export type DepositState =
   | 'refunding';
 
 export interface Deposit {
-  currency: string;
-  id: number;
   amount: string;
-  fee: string;
-  txid: string;
-  created_at: string;
-  confirmations: number;
+  blockchain_id: number;
   completed_at: string;
-  state: DepositState;
+  confirmations: number;
+  created_at: string;
+  currency: string;
+  fee: string;
+  id: number;
   price?: number;
   public_message?: string;
-  transfer_links?: TransferLink[];
-  transfer_type?: string;
+  state: DepositState;
   tid?: string;
+  transfer_links?: TransferLink[];
+  transfer_type: string;
+  txid: string;
 }
 
 export interface TransferLink {

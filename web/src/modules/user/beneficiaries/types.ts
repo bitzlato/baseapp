@@ -19,10 +19,13 @@ export interface BeneficiaryBank {
 }
 
 export interface Beneficiary {
-  id: number;
+  blockchain_id: number;
   currency: string;
-  name: string;
-  state: string;
-  description?: string;
   data: BeneficiaryCrypto | BeneficiaryBank;
+  description?: string;
+  id: number;
+  name: string;
+  sent_at: string;
+  state: string;
+  uid: string;
 }

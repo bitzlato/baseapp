@@ -1,14 +1,10 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
-import { useT } from 'src/hooks/useT';
-import { selectMemberLevels, selectMobileDeviceState } from 'src/modules';
+import { selectMobileDeviceState } from 'src/modules';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
-import { Blur } from 'src/components/Blur';
 import { ModalWithdrawConfirmation, ModalWithdrawSubmit } from 'src/containers';
 import { useBeneficiariesFetch } from 'src/hooks';
 import { Beneficiary } from 'src/modules/user/beneficiaries';
-import { selectUserInfo } from 'src/modules/user/profile';
 import { selectWithdrawSuccess, Wallet, walletsWithdrawCcyFetch } from 'src/modules/user/wallets';
 import { ModalWithdrawConfirmationMobile } from 'src/mobile/components';
 import { WithdrawBody } from './WithdrawBody';
@@ -29,12 +25,8 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
     withdrawDone: false,
   });
 
-  const t = useT();
-  const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector(selectUserInfo);
   const withdrawSuccess = useSelector(selectWithdrawSuccess);
-  const memberLevels = useSelector(selectMemberLevels);
   const isMobileDevice = useSelector(selectMobileDeviceState);
 
   const { currency } = wallet;
@@ -48,18 +40,7 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
   }, [withdrawSuccess]);
 
   const getConfirmationAddress = () => {
-    let confirmationAddress = '';
-
-    if (wallet) {
-      confirmationAddress =
-        wallet.type === 'fiat'
-          ? withdrawData.beneficiary.name
-          : withdrawData.beneficiary.data
-          ? (withdrawData.beneficiary.data.address as string)
-          : '';
-    }
-
-    return confirmationAddress;
+    return withdrawData.beneficiary.data ? (withdrawData.beneficiary.data.address as string) : '';
   };
 
   const toggleConfirmModal = (
@@ -95,52 +76,11 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
     toggleConfirmModal();
   };
 
-  const renderBlur = () => {
-    if (!wallet?.withdrawal_enabled) {
-      return (
-        <Blur
-          text={
-            wallet.withdrawal_disabled_reason ||
-            t('page.body.wallets.tabs.withdraw.disabled.message')
-          }
-        />
-      );
-    } else if (user.level < (memberLevels?.withdraw.minimum_level ?? 0)) {
-      return (
-        <Blur
-          text={t('page.body.wallets.warning.withdraw.verification')}
-          onClick={() => history.push('/confirm')}
-          linkText={t('page.body.wallets.warning.withdraw.verification.button')}
-        />
-      );
-    } else if (!user.otp) {
-      if (isMobileDevice) {
-        return (
-          <Blur
-            text={t('page.body.wallets.tabs.withdraw.content.enable2fa')}
-            onClick={() => () => history.push('/profile/2fa', { enable2fa: true })}
-            linkText={t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
-          />
-        );
-      } else {
-        return (
-          <Blur
-            text={t('page.body.wallets.warning.withdraw.2fa')}
-            linkText={t('page.body.wallets.warning.withdraw.2fa.button')}
-            onClick={() => history.push('/security/2fa', { enable2fa: true })}
-          />
-        );
-      }
-    }
-    return null;
-  };
-
   return (
     <Box
       className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body' : undefined}
       position="relative"
     >
-      {renderBlur()}
       <WithdrawBody
         onClick={toggleConfirmModal}
         withdrawDone={withdrawData.withdrawDone}
@@ -160,7 +100,7 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
             show={withdrawData.withdrawConfirmModal}
             amount={withdrawData.total}
             currency={currency.code}
-            precision={wallet ? wallet.precision : 0}
+            precision={wallet.precision}
             rid={getConfirmationAddress()}
             onSubmit={handleWithdraw}
             onDismiss={toggleConfirmModal}
@@ -171,7 +111,7 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
           show={withdrawData.withdrawConfirmModal}
           amount={withdrawData.total}
           currency={currency.code}
-          precision={wallet ? wallet.precision : 0}
+          precision={wallet.precision}
           rid={getConfirmationAddress()}
           onSubmit={handleWithdraw}
           onDismiss={toggleConfirmModal}

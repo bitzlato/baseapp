@@ -1,25 +1,26 @@
 import { Currency, Money } from '@bitzlato/money-js';
 
 export interface CurrencySource {
-  id: string;
-  name: string;
-  symbol: string;
-  explorer_transaction: string;
-  explorer_address: string;
-  type: 'fiat' | 'coin';
-  deposit_fee: string;
-  min_confirmations: number;
-  min_deposit_amount: string;
-  withdraw_fee: string;
-  min_withdraw_amount: string;
+  blockchain_ids: number[];
+  cc_code: string;
   deposit_enabled: boolean;
-  withdrawal_enabled: boolean;
-  withdrawal_disabled_reason: string;
-  base_factor: number;
-  precision: number;
-  icon_url?: string | undefined;
+  deposit_fee: string;
+  description: string | null;
+  homepage: string | null;
   icon_id: string;
+  icon_url?: string;
+  id: string;
+  min_deposit_amount: string;
+  min_withdraw_amount: string;
+  name: string;
+  position: number;
+  precision: number;
   price: string;
+  type: 'coin' | 'fiat';
+  withdraw_fee: string;
+  withdraw_limit_24h: string;
+  withdraw_limit_72h: string;
+  withdrawal_enabled: boolean;
 }
 
 export interface ApiCurrency
