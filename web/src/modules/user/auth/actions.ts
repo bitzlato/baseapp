@@ -48,9 +48,9 @@ export interface SignInFetch {
   payload: {
     email: string;
     password: string;
-    data?: string;
+    data?: string | undefined;
     otp_code?: string;
-    captcha_response?: string | GeetestCaptchaResponse;
+    captcha_response?: string | GeetestCaptchaResponse | undefined;
   };
 }
 
@@ -73,19 +73,21 @@ export interface SignInData {
 export interface SignUpFetch {
   type: typeof AUTH_SIGN_UP_FETCH;
   payload: {
-    username?: string;
+    username?: string | undefined;
     email: string;
     password: string;
     data: string;
-    captcha_response?: string | GeetestCaptchaResponse;
-    refid?: string;
+    captcha_response?: string | GeetestCaptchaResponse | undefined;
+    refid?: string | undefined;
   };
-  callbackAction?: {
-    scope: string;
-    component: string;
-    key: string;
-    value: any;
-  };
+  callbackAction?:
+    | {
+        scope: string;
+        component: string;
+        key: string;
+        value: any;
+      }
+    | undefined;
 }
 
 export interface SignUpData {
@@ -191,7 +193,7 @@ export const signInRequire2FA = (payload: SignInRequire2FA['payload']): SignInRe
 
 export const signUp = (
   payload: SignUpFetch['payload'],
-  callbackAction?: SignUpFetch['callbackAction'],
+  callbackAction?: SignUpFetch['callbackAction'] | undefined,
 ): SignUpFetch => ({
   type: AUTH_SIGN_UP_FETCH,
   payload,

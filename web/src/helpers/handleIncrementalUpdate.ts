@@ -9,10 +9,10 @@ export const handleIncrementalUpdate = (
     return depthOld;
   }
 
-  const index = depthOld.findIndex(([price]) => +price === +newLevel[0]);
+  const index = depthOld.findIndex(([price]) => +price! === +newLevel[0]!);
 
   if (index === -1) {
-    if (+newLevel[1]) {
+    if (+newLevel[1]!) {
       const data = [...depthOld, newLevel];
       if (type === 'asks') {
         return sortAsks(data);
@@ -39,14 +39,14 @@ export const handleIncrementalUpdateArray = (
   newLevels: string[][],
   type: string,
 ): string[][] => {
-  const prices = {};
+  const prices: Record<string, string> = {};
 
   // tslint:disable-next-line:prefer-for-of
   for (let i = 0; i < newLevels.length; i += 1) {
-    prices[newLevels[i][0]] = newLevels[i][1];
+    prices[newLevels[i]![0]!] = newLevels[i]![1]!;
   }
 
-  const rest = depthOld.filter(([price]) => !prices[price]);
+  const rest = depthOld.filter(([price]) => !prices[price!]);
   const newData = newLevels.filter(([_, amount]) => Number(amount) !== 0);
   const result = [...rest, ...newData];
 

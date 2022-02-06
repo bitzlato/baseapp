@@ -112,7 +112,7 @@ describe('Orders History reducer', () => {
 
   it('should handle ORDERS_HISTORY_CANCEL_DATA', () => {
     const initialState = { ...initialOrdersHistoryState, cancelFetching: true };
-    const payload = [];
+    const payload: OrderCommon[] = [];
     const expectedState = { ...initialState, ...payload, cancelFetching: false };
     expect(ordersHistoryReducer(initialState, actions.ordersHistoryCancelData(payload))).toEqual(
       expectedState,

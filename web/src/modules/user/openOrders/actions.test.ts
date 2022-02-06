@@ -42,7 +42,7 @@ describe('Open Orders actions', () => {
   });
 
   it('should check userOpenOrdersData action creator', () => {
-    const payload = [];
+    const payload: OrderCommon[] = [];
     const expectedAction = { type: OPEN_ORDERS_DATA, payload };
     expect(actions.userOpenOrdersData(payload)).toEqual(expectedAction);
   });
@@ -133,7 +133,7 @@ describe('Open Orders actions', () => {
   });
 
   it('should check openOrdersCancelData action creator', () => {
-    const payload = [];
+    const payload: OrderCommon[] = [];
     const expectedAction = { type: OPEN_ORDERS_CANCEL_DATA, payload };
     expect(actions.openOrdersCancelData(payload)).toEqual(expectedAction);
   });

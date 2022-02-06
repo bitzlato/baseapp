@@ -1,15 +1,15 @@
 import { call, put } from 'redux-saga/effects';
 import { sendError } from '../../../../';
 import { API, RequestOptions } from '../../../../../api';
-import { labelData, labelError, LabelFetch } from '../actions';
+import { Label, labelData, labelError } from '../actions';
 
 const userOptions: RequestOptions = {
   apiVersion: 'barong',
 };
 
-export function* labelSaga(action: LabelFetch) {
+export function* labelSaga() {
   try {
-    const payload = yield call(API.get(userOptions), '/resource/labels');
+    const payload: Label[] = yield call(API.get(userOptions), '/resource/labels');
     yield put(labelData(payload));
   } catch (error) {
     yield put(

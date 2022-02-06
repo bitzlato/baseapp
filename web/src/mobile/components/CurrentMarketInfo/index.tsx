@@ -99,7 +99,10 @@ const CurrentMarketInfoComponent: React.FC = () => {
         </div>
         <div className="pg-mobile-current-market-info__left__price-change">
           <span className={currentMarketChangeClass}>
-            {createMoneyWithoutCcy(currentMarketTicker.last, currentMarketPricePrecision).toFormat()}
+            {createMoneyWithoutCcy(
+              currentMarketTicker.last,
+              currentMarketPricePrecision,
+            ).toFormat()}
           </span>
           <span className={currentMarketChangeClass}>
             {currentMarketTicker.price_change_percent}
@@ -114,10 +117,16 @@ const CurrentMarketInfoComponent: React.FC = () => {
         </div>
         <div className="pg-mobile-current-market-info__right__col">
           <span className={currentMarketChangeClass}>
-            {createMoneyWithoutCcy(currentMarketTicker.volume, currentMarketPricePrecision).toFormat()}
+            {createMoneyWithoutCcy(
+              currentMarketTicker.volume,
+              currentMarketPricePrecision,
+            ).toFormat()}
           </span>
           <span className={currentMarketChangeClass}>
-            {createMoneyWithoutCcy(currentMarketTicker.high, currentMarketPricePrecision).toFormat()}
+            {createMoneyWithoutCcy(
+              currentMarketTicker.high,
+              currentMarketPricePrecision,
+            ).toFormat()}
           </span>
           <span className={currentMarketChangeClass}>
             {createMoneyWithoutCcy(currentMarketTicker.low, currentMarketPricePrecision).toFormat()}
@@ -132,7 +141,7 @@ const CurrentMarketInfoComponent: React.FC = () => {
       >
         <MarketsTable
           handleChangeCurrentMarket={() => setOpenMarketSelector(false)}
-          markets={marketsSearchKey && filteredMarkets}
+          markets={marketsSearchKey ? filteredMarkets : undefined}
         />
       </MobileModal>
     </div>

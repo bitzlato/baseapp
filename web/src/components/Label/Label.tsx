@@ -3,13 +3,13 @@ import cn from 'classnames';
 import s from './Label.postcss';
 
 interface Props extends React.HTMLAttributes<HTMLSpanElement> {
-  size?: 'lg' | 'sm' | 'xl';
-  color?: 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask';
-  tr?: 'capitalize' | 'uppercase';
-  bold?: boolean;
-  ellipsis?: boolean;
-  center?: boolean;
-  noWrap?: boolean;
+  size?: 'lg' | 'sm' | 'xl' | undefined;
+  color?: 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask' | undefined;
+  tr?: 'capitalize' | 'uppercase' | undefined;
+  bold?: boolean | undefined;
+  ellipsis?: boolean | undefined;
+  center?: boolean | undefined;
+  noWrap?: boolean | undefined;
 }
 
 export const Label: React.FC<Props> = ({

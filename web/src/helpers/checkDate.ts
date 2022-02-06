@@ -22,5 +22,5 @@ const months = {
 };
 
 export const monthNameToNumber = (month: string) => {
-  return months[month];
+  return months[month as keyof typeof months];
 };

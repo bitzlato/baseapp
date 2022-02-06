@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import React from 'react';
 import { TestComponentWrapper } from 'src/lib/test';
 import { ProfileScreen } from '../';
 

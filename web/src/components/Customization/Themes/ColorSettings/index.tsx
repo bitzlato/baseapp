@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import { SketchPicker } from 'react-color';
+import { ColorResult, SketchPicker } from 'react-color';
 import { handleConvertColorCode } from '../';
 import { ArrowIcon } from '../../../../assets/images/customization/ArrowIcon';
 import { ThemeColorTitleInterface } from '../../../../themes';
@@ -9,11 +9,11 @@ interface OwnProps {
   item: ThemeColorTitleInterface;
   handleCloseColorSettings: () => void;
   translate: (key: string) => string;
-  handleTriggerChartRebuild?: () => void;
+  handleTriggerChartRebuild?: (() => void) | undefined;
 }
 
 interface State {
-  currentItemColor?: string;
+  currentItemColor?: string | undefined;
 }
 
 type Props = OwnProps;
@@ -43,7 +43,7 @@ export class ColorSettings extends React.Component<Props, State> {
         <div className="pg-customization-color-settings__header">
           <div
             className="pg-customization-color-settings__header__chevron"
-            onClick={(e) => handleCloseColorSettings()}
+            onClick={() => handleCloseColorSettings()}
           >
             <ArrowIcon />
           </div>
@@ -71,7 +71,7 @@ export class ColorSettings extends React.Component<Props, State> {
     return currentItemColor || bodyStyles.getPropertyValue(grbItemColor);
   };
 
-  private setCurrentItemColor = (color) => {
+  private setCurrentItemColor = (color: ColorResult) => {
     const { handleTriggerChartRebuild, item } = this.props;
     const rootElement = document.documentElement;
     const newItemColor = color && color.rgb && `${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}`;

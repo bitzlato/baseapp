@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 
 type Props = {

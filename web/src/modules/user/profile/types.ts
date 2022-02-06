@@ -30,7 +30,7 @@ export interface User {
   uid: string;
   profiles: UserProfile[];
   csrf_token?: string;
-  data?: string;
+  data?: string | undefined;
   referal_uid: string | null;
   labels: Label[];
   phone: Phone[];

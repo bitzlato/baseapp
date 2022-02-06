@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import { getLanguageName } from 'src/helpers';
@@ -13,6 +13,7 @@ import {
 import enIcon from 'src/assets/images/sidebar/en.svg';
 import ruIcon from 'src/assets/images/sidebar/ru.svg';
 import { languages } from 'src/api/config';
+import { Language } from 'src/types';
 
 import s from './LanguageSwitcher.postcss';
 
@@ -68,7 +69,7 @@ export const LanguageSwitcher: FC = () => {
               active={language === currentLanguage}
               onClick={() => handleLanguageChange(code)}
             >
-              <img className={s.flag} src={iconByCode[code]} alt={language} />
+              <img className={s.flag} src={iconByCode[code as Language]} alt={language} />
               <span>{language}</span>
             </Dropdown.Item>
           );

@@ -6,7 +6,11 @@ import { copy } from '../../../helpers';
 import { WarningIcon } from '../../assets/images/WarningIcon';
 import { MobileModal } from '../../components/Modal';
 
-export const CreatedApiKeyModalComponent = (props) => {
+export const CreatedApiKeyModalComponent = (props: {
+  apiKey: React.SetStateAction<{ kid: string; secret: string }>;
+  closeCreatedApiKeyModal: React.MouseEventHandler<HTMLElement> | undefined;
+  showModal: boolean;
+}) => {
   const [apiKey, setApiKey] = React.useState({ kid: '', secret: '' });
   const intl = useIntl();
 
@@ -71,7 +75,7 @@ export const CreatedApiKeyModalComponent = (props) => {
     <div className="pg-mobile-created-api-key-modal">
       <MobileModal
         isOpen={props.showModal}
-        onClose={props.closeCreatedApiKeyModal}
+        onClose={props.closeCreatedApiKeyModal as any}
         title={intl.formatMessage({ id: 'page.mobile.createdApiKeyModal.title' })}
       >
         {renderModalBody()}

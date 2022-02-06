@@ -13,7 +13,7 @@ const sessionsConfig = (csrfToken?: string): RequestOptions => {
 
 export function* editIdentitySaga(action: EditIdentityFetch) {
   try {
-    const response = yield call(
+    const response: { message?: string } = yield call(
       API.put(sessionsConfig(getCsrfToken())),
       '/resource/profiles',
       action.payload,

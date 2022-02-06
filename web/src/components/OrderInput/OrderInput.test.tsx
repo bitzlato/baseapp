@@ -1,12 +1,10 @@
 import { shallow } from 'enzyme';
-import * as React from 'react';
 import { OrderInput, OrderInputProps } from '.';
 
 const defaultProps: OrderInputProps = {
   currency: 'eth',
   handleChangeValue: () => undefined,
   handleFocusInput: () => undefined,
-  isFocused: false,
   value: '',
   onKeyPress: jest.fn(),
 };

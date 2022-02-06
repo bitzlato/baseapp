@@ -13,7 +13,7 @@ const TOKEN_CHAIN = {
 };
 
 export function isValidAddress(address: string, currency: string, networkType = 'prod'): boolean {
-  currency = TOKEN_CHAIN[currency.split('-')[1]] ?? currency;
+  currency = TOKEN_CHAIN[currency.split('-')[1]! as keyof typeof TOKEN_CHAIN] ?? currency;
 
   const regex = CUSTOM_REGEX[currency];
 

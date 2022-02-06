@@ -43,7 +43,7 @@ interface OwnProps {
 }
 
 interface State {
-  sortBy: string;
+  sortBy: keyof Market | 'none';
   reverseOrder: boolean;
 }
 
@@ -166,7 +166,7 @@ class MarketsListComponent extends React.Component<Props, State> {
         marketsMapped.sort((a, b) => (a[sortBy] > b[sortBy] ? 1 : b[sortBy] > a[sortBy] ? -1 : 0));
       } else {
         marketsMapped.sort((a, b) =>
-          +a[sortBy] > +b[sortBy] ? 1 : +b[sortBy] > +a[sortBy] ? -1 : 0,
+          +a[sortBy]! > +b[sortBy]! ? 1 : +b[sortBy]! > +a[sortBy]! ? -1 : 0,
         );
       }
     }
@@ -221,7 +221,7 @@ class MarketsListComponent extends React.Component<Props, State> {
   private handleHeaderClick = (key: string) => {
     const { sortBy, reverseOrder } = this.state;
     if (key !== sortBy) {
-      this.setState({ sortBy: key, reverseOrder: false });
+      this.setState({ sortBy: key as keyof Market, reverseOrder: false });
     } else if (key === sortBy && !reverseOrder) {
       this.setState({ reverseOrder: true });
     } else {

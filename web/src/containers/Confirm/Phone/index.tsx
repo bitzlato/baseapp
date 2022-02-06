@@ -19,7 +19,7 @@ import {
 } from '../../../modules';
 
 interface ReduxProps {
-  verifyPhoneSuccess?: string;
+  verifyPhoneSuccess?: string | undefined;
   loading: boolean;
 }
 
@@ -234,7 +234,7 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
     return condition.test(convertedText);
   };
 
-  private handleSendCode = (event) => {
+  private handleSendCode = (event: any) => {
     event.preventDefault();
     const requestProps = {
       phone_number: String(this.state.phoneNumber),

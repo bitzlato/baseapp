@@ -5,23 +5,23 @@ import cn from 'classnames';
 export interface CustomInputProps {
   type: string;
   label: React.ReactNode;
-  defaultLabel?: string;
-  handleChangeInput?: (value: string) => void;
-  inputValue: string | number;
-  handleFocusInput?: () => void;
-  placeholder?: string;
-  className?: string;
-  classNameLabel?: string;
-  classNameInput?: string;
-  autoFocus?: boolean;
-  onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  readOnly?: boolean;
+  defaultLabel?: string | undefined;
+  handleChangeInput?: ((value: string) => void) | undefined;
+  inputValue: string | number | undefined;
+  handleFocusInput?: (() => void) | undefined;
+  placeholder?: string | undefined;
+  className?: string | undefined;
+  classNameLabel?: string | undefined;
+  classNameInput?: string | undefined;
+  autoFocus?: boolean | undefined;
+  onKeyPress?: ((event: React.KeyboardEvent<HTMLInputElement>) => void) | undefined;
+  readOnly?: boolean | undefined;
   id?: string;
-  handleClick?: (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
-  isDisabled?: boolean;
-  labelVisible?: boolean;
-  autoComplete?: string;
-  name?: string;
+  handleClick?: ((event: React.MouseEvent<HTMLInputElement, MouseEvent>) => void) | undefined;
+  isDisabled?: boolean | undefined;
+  labelVisible?: boolean | undefined;
+  autoComplete?: string | undefined;
+  name?: string | undefined;
 }
 
 interface OnChangeEvent {
@@ -59,16 +59,16 @@ class CustomInput extends React.Component<Props> {
           </label>
           <FormControl
             type={type}
-            value={inputValue}
+            value={inputValue as string | number}
             placeholder={placeholder}
             autoFocus={autoFocus}
             onFocus={this.props.handleFocusInput}
             onBlur={this.props.handleFocusInput}
             onChange={(e) => this.handleChangeValue(e)}
-            readOnly={readOnly}
-            id={id}
+            readOnly={readOnly as boolean}
+            id={id as string}
             onClick={handleClick}
-            disabled={isDisabled}
+            disabled={isDisabled as boolean}
             onKeyPress={onKeyPress}
             autoComplete={autoComplete}
             name={name}

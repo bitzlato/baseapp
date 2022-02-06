@@ -13,7 +13,7 @@ import {
 import { CustomInput } from '../CustomInput';
 import { PasswordStrengthMeter } from '../index';
 
-export const ChangePasswordComponent = (props) => {
+export const ChangePasswordComponent = (props: any) => {
   const [oldPassword, setOldPassword] = React.useState('');
   const [newPassword, setNewPassword] = React.useState('');
   const [confirmationPassword, setConfirmationPassword] = React.useState('');

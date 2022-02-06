@@ -1,4 +1,3 @@
-import { Money } from '@bitzlato/money-js';
 import * as React from 'react';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { OrderForm } from '../';
@@ -49,11 +48,11 @@ export interface OrderComponentProps {
   /**
    * If orderType is 'Limit' this value will be used as price
    */
-  priceLimit?: number;
+  priceLimit?: number | undefined;
   /**
    * If orderType is 'Stop-loss', 'Take-profit', 'Stop-limit', 'Take-limit' this value will be used as trigger price
    */
-  trigger?: number;
+  trigger?: number | undefined;
   /**
    * Name of currency for price field
    */
@@ -65,8 +64,8 @@ export interface OrderComponentProps {
   /**
    * Whether order is disabled to execute
    */
-  disabled?: boolean;
-  handleSendType?: (index: number, label: string) => void;
+  disabled?: boolean | undefined;
+  handleSendType?: ((index: number, label: string) => void) | undefined;
   /**
    * Index of tab to switch on
    */
@@ -83,7 +82,7 @@ export interface OrderComponentProps {
   /**
    *
    */
-  width?: number;
+  width?: number | undefined;
   /**
    * proposals for buy
    */
@@ -95,16 +94,16 @@ export interface OrderComponentProps {
   /**
    * start handling change price
    */
-  listenInputPrice?: () => void;
+  listenInputPrice?: (() => void) | undefined;
   /**
    * start handling change trigger price
    */
-  listenInputTrigger?: () => void;
+  listenInputTrigger?: (() => void) | undefined;
   /**
    * default tab index
    */
-  defaultTabIndex?: number;
-  isMobileDevice?: boolean;
+  defaultTabIndex?: number | undefined;
+  isMobileDevice?: boolean | undefined;
   translate: (id: string, value?: any) => string;
 }
 
@@ -269,14 +268,20 @@ export class Order extends React.Component<OrderComponentProps, State> {
         switch (orderType) {
           case 'Market':
             newAmount = available
-              ? createMoneyWithoutCcy(getAmount(Number(available), proposals, value), this.props.currentMarketAskPrecision).toFormat()
+              ? createMoneyWithoutCcy(
+                  getAmount(Number(available), proposals, value),
+                  this.props.currentMarketAskPrecision,
+                ).toFormat()
               : '';
 
             break;
           default:
             newAmount =
               available && +price
-                ? createMoneyWithoutCcy((available / +price) * value, this.props.currentMarketAskPrecision).toFormat()
+                ? createMoneyWithoutCcy(
+                    (available / +price) * value,
+                    this.props.currentMarketAskPrecision,
+                  ).toFormat()
                 : '';
 
             break;
@@ -284,7 +289,10 @@ export class Order extends React.Component<OrderComponentProps, State> {
         break;
       case 'sell':
         newAmount = available
-          ? createMoneyWithoutCcy(available * value, this.props.currentMarketAskPrecision).toFormat()
+          ? createMoneyWithoutCcy(
+              available * value,
+              this.props.currentMarketAskPrecision,
+            ).toFormat()
           : '';
 
         break;

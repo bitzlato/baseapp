@@ -3,7 +3,7 @@ import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { DiffAmountFormat } from 'src/components/DiffAmountFormat/DiffAmountFormat';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 
-const OrderBookTableRowComponent = (props) => {
+const OrderBookTableRowComponent = (props: any) => {
   const { type, fixed, prevValue, price, total } = props;
 
   if (type === 'price') {

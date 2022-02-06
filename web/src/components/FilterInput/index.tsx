@@ -77,7 +77,7 @@ export class FilterInput extends React.Component<FilterInputProps, SearchInputSt
           onChange={this.filterList}
         />
         <span className="cr-search__cancel">
-          <SearchFieldCloseIcon onClick={(e) => this.filterList()} />
+          <SearchFieldCloseIcon onClick={() => this.filterList()} />
         </span>
       </div>
     );

@@ -11,9 +11,9 @@ export interface SelectOption<T extends string = string> {
 
 interface SelectProps<T extends string> extends ReactSelectProps<SelectOption<T>, false> {
   value?: SelectOption<T> | null;
-  placeholderAsLabel?: boolean;
-  itemRenderer?: (item: SelectOption<T>) => React.ReactNode;
-  size?: 'small';
+  placeholderAsLabel?: boolean | undefined;
+  itemRenderer?: (item: SelectOption<T>) => React.ReactNode | undefined;
+  size?: 'small' | undefined;
 }
 
 export const Select = <T extends string>({
@@ -34,7 +34,7 @@ export const Select = <T extends string>({
         {...props}
         className={cn(s.reactSelect, size === 'small' && s.reactSelectSmall)}
         classNamePrefix={s.reactSelect}
-        formatOptionLabel={itemRenderer}
+        formatOptionLabel={itemRenderer as (item: SelectOption<T>) => React.ReactNode | undefined}
         getOptionValue={toValue}
       />
     </Box>
@@ -45,9 +45,9 @@ interface SelectStringProps<T extends string>
   extends Omit<SelectProps<T>, 'value' | 'onChange' | 'options' | 'itemRenderer' | 'defaultValue'> {
   options: T[];
   value?: T;
-  defaultValue?: T;
+  defaultValue?: T | undefined;
   onChange: (value: T | null) => void;
-  itemRenderer?: (value: T) => React.ReactNode;
+  itemRenderer?: ((value: T) => React.ReactNode) | undefined;
 }
 
 export const SelectString = <T extends string>({
@@ -64,10 +64,14 @@ export const SelectString = <T extends string>({
       {...props}
       options={options.map(toOption)}
       value={value ? toOption(value) : null}
-      defaultValue={defaultValue ? toOption(defaultValue) : undefined}
+      defaultValue={(defaultValue ? toOption(defaultValue) : undefined) as SelectOption<T>}
       onChange={(d: SelectOption<T> | null) => onChange(d ? toValue(d) : null)}
       placeholderAsLabel={placeholderAsLabel}
-      itemRenderer={itemRenderer ? (d) => itemRenderer(toValue(d)) : undefined}
+      itemRenderer={
+        (itemRenderer ? (d) => itemRenderer(toValue(d)) : undefined) as (
+          item: SelectOption<T>,
+        ) => React.ReactNode
+      }
     />
   );
 };

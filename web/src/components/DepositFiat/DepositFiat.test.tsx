@@ -1,9 +1,8 @@
 import { shallow } from 'enzyme';
-import * as React from 'react';
 import { DepositFiat } from './';
 
 describe('DepositFiat', () => {
-  let wrapper;
+  let wrapper: any;
 
   beforeEach(() => {
     wrapper = shallow(<DepositFiat title={'text123'} description={'123123'} uid={'42389734'} />);

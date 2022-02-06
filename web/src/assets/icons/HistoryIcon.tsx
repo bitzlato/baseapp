@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 export const HistoryIcon: FC = () => (
   <svg viewBox="-32 0 512 512" xmlns="http://www.w3.org/2000/svg">

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import s from './SidebarItem.postcss';

@@ -9,11 +9,11 @@ export interface OrderBookProps {
   /**
    * Max value of volume which is used to calculate width of background row
    */
-  maxVolume?: number;
+  maxVolume?: number | undefined;
   /**
    * Data which is used to calculate width of each background row
    */
-  orderBookEntry?: number[];
+  orderBookEntry?: number[] | undefined;
   /**
    * Defines a position of background row
    */
@@ -21,15 +21,15 @@ export interface OrderBookProps {
   /**
    * Renders table header
    */
-  headers?: React.ReactNode[];
+  headers?: React.ReactNode[] | undefined;
   /**
    * Renders table title
    */
-  title?: React.ReactNode;
+  title?: React.ReactNode | undefined;
   /**
    * Sets row background color
    */
-  rowBackgroundColor?: string;
+  rowBackgroundColor?: string | undefined;
   /**
    * Callback that is called when a market is selected
    */
@@ -57,7 +57,7 @@ export class OrderBook extends React.PureComponent<OrderBookProps> {
     const getRowWidth = (index: number) => {
       if (resultData && resultData.length) {
         return {
-          width: `${resultData[index].value}%`,
+          width: `${resultData[index]?.value}%`,
         };
       }
 

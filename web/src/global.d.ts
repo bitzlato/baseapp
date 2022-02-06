@@ -3,13 +3,28 @@ declare module 'src/*.svg' {
   export = content;
 }
 
+declare module './*.svg' {
+  const content: string;
+  export = content;
+}
+
 declare module '*.png';
 declare module '*.jpg';
 
 declare module '*.postcss' {
   interface IClassNames {
-    [className: string]: string;
+    [className: string]: any;
   }
   const classNames: IClassNames;
   export = classNames;
+}
+
+declare module 'react-maskinput' {
+  const Component: any;
+  export = Component;
+}
+
+declare module 'react-fade-in' {
+  const Component: any;
+  export = Component;
 }

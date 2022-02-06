@@ -27,7 +27,7 @@ export interface ToggleMobileDeviceAction {
 
 export interface ToggleSidebarAction {
   type: string;
-  payload?: boolean;
+  payload?: boolean | undefined;
 }
 
 export interface TriggerApplyWindowEnvs {

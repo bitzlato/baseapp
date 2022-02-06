@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import cn from 'classnames';
 import { ArrowRightIcon } from 'src/assets/icons/ArrowRightIcon';
 import { Market } from 'src/modules';

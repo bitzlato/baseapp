@@ -27,7 +27,7 @@ export interface ApiKeysState {
   modal: ApiKeyStateModal;
   pageIndex: number;
   nextPageExists: boolean;
-  error?: CommonError;
+  error?: CommonError | undefined;
 }
 
 export const initialApiKeysState: ApiKeysState = {

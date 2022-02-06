@@ -7,7 +7,7 @@ export function lowerBound<T>(arr: T[], value: T, less = (a: T, b: T) => a < b):
     it = first;
     step = count >> 1;
     it += step;
-    if (less(arr[it], value)) {
+    if (less(arr[it]!, value)) {
       first = it + 1;
       count -= step + 1;
     } else {

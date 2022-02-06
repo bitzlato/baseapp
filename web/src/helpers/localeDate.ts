@@ -1,8 +1,8 @@
 import moment from 'moment-timezone';
 import { getTimezone } from './timezone';
 
-export const localeDate = (date, format, timezone = getTimezone()) => {
-  const getFormat = (type) => {
+export const localeDate = (date: moment.MomentInput, format: string, timezone = getTimezone()) => {
+  const getFormat = (type: string) => {
     return {
       fullDate: 'DD-MM-YYYY HH:mm:ss',
       shortDate: 'DD-MM-YYYY HH:mm',

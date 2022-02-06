@@ -49,7 +49,7 @@ describe('Saga: memberLevelsFetchSaga', () => {
         const actions = store.getActions();
         if (actions.length === expectedMemberLevelsActionsFetch.length) {
           expect(actions).toEqual(expectedMemberLevelsActionsFetch);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -75,7 +75,7 @@ describe('Saga: memberLevelsFetchSaga', () => {
         const actions = store.getActions();
         if (actions.length === expectedMemberLevelsActionsError.length) {
           expect(actions).toEqual(expectedMemberLevelsActionsError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

@@ -11,9 +11,9 @@ import {
 import { KlineEvent } from './types';
 
 export interface KlineState extends CommonState {
-  last?: KlineEvent;
-  marketId?: string;
-  period?: string;
+  last?: KlineEvent | undefined;
+  marketId?: string | undefined;
+  period?: string | undefined;
   loading: boolean;
   data: any;
   range: {
@@ -35,12 +35,12 @@ export const klineArrayToObject = (el: KlineRawElement[]): KlineEvent => {
   });
 
   return {
-    time: time * 1e3,
-    open,
-    high,
-    low,
-    close,
-    volume,
+    time: time! * 1e3,
+    open: open!,
+    high: high!,
+    low: low!,
+    close: close!,
+    volume: volume!,
   };
 };
 

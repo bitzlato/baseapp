@@ -10,15 +10,10 @@ import { IntlProps } from 'src/types';
 import { showLanding } from '../../api';
 import { Logo } from '../../components';
 import {
-  Market,
   RootState,
   selectCurrentColorTheme,
-  selectCurrentMarket,
-  selectMarketSelectorState,
   selectMobileWalletUi,
-  selectSidebarState,
   setMobileWalletUi,
-  toggleMarketSelector,
   toggleSidebar,
 } from '../../modules';
 import { HeaderToolbar } from '../HeaderToolbar/HeaderToolbar';
@@ -65,7 +60,7 @@ class Head extends React.Component<Props> {
         <header className={`pg-header ${s.header}`}>
           <div className={`pg-container pg-header__content ${tradingCls} ${s.headerContent}`}>
             <Sidebar />
-            <div onClick={(e) => this.redirectToLanding()} className="pg-header__logo">
+            <div onClick={() => this.redirectToLanding()} className="pg-header__logo">
               <Logo />
             </div>
             {this.renderMarketToggler()}
@@ -124,8 +119,6 @@ class Head extends React.Component<Props> {
   };
 
   private backWallets = () => this.props.setMobileWalletUi('');
-
-  private closeMenu = (e: any) => this.props.setMobileWalletUi('');
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({

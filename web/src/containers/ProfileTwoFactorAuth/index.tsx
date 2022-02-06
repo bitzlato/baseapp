@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Form } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-export const ProfileTwoFactorAuth = (props) => {
+export const ProfileTwoFactorAuth = (props: any) => {
   const { is2faEnabled = false } = props;
   const className = is2faEnabled
     ? 'pg-profile-page__label-value__enabled'

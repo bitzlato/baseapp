@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
-import * as React from 'react';
 import { CryptoIcon, CryptoIconProps } from '.';
 
 const defaultProps: CryptoIconProps = {

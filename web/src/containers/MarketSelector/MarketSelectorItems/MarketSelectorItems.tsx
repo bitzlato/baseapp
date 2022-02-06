@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import cn from 'classnames';
 import { Market, Ticker } from 'src/modules';
 import { Table, CellData } from 'src/components';
@@ -18,7 +18,7 @@ interface Props {
 }
 
 interface SortState {
-  sortBy: string;
+  sortBy: keyof Item | 'none';
   reversed: boolean;
 }
 
@@ -63,7 +63,7 @@ export const MarketSelectorItems: FC<Props> = ({
   const t = useT();
   const [{ sortBy, reversed }, setSort] = useState<SortState>(initialSortState);
 
-  const handleHeaderClick = (headerId: string) => {
+  const handleHeaderClick = (headerId: keyof Item) => {
     setSort((prevState) => {
       if (headerId !== prevState.sortBy) {
         return { sortBy: headerId, reversed: false };
@@ -98,8 +98,8 @@ export const MarketSelectorItems: FC<Props> = ({
 
     if (sortBy !== 'none') {
       result.sort((a, b) => {
-        const aValue = sortBy === 'id' ? a[sortBy] : Number.parseFloat(a[sortBy]);
-        const bValue = sortBy === 'id' ? b[sortBy] : Number.parseFloat(b[sortBy]);
+        const aValue = sortBy === 'id' ? a[sortBy] : Number.parseFloat(a[sortBy] as string);
+        const bValue = sortBy === 'id' ? b[sortBy] : Number.parseFloat(b[sortBy] as string);
 
         if (aValue === bValue) {
           return 0;
@@ -155,7 +155,7 @@ export const MarketSelectorItems: FC<Props> = ({
         className={s.headerButton}
         key={cell.id}
         type="button"
-        onClick={() => handleHeaderClick(cell.id)}
+        onClick={() => handleHeaderClick(cell.id as keyof Item)}
       >
         {t(cell.i18nKey)}
         <span className={s.sortIcon}>

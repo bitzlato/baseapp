@@ -29,11 +29,11 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
 
   const { handleToggleConfirmationModal, beneficiariesAddData } = props;
 
-  const handleChangeFieldValue = React.useCallback((key: string, value: string) => {
+  const handleChangeFieldValue = React.useCallback((value: string) => {
     setConfirmationModalCode(value);
   }, []);
 
-  const handleChangeFieldFocus = React.useCallback((key: string) => {
+  const handleChangeFieldFocus = React.useCallback(() => {
     setConfirmationModalCodeFocused((v) => !v);
   }, []);
 
@@ -98,9 +98,9 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
                   })
             }
             defaultLabel={field}
-            handleChangeInput={(value) => handleChangeFieldValue(field, value)}
+            handleChangeInput={handleChangeFieldValue}
             inputValue={confirmationModalCode}
-            handleFocusInput={() => handleChangeFieldFocus(`${field}Focused`)}
+            handleFocusInput={handleChangeFieldFocus}
             classNameLabel="cr-email-form__label"
             classNameInput="cr-email-form__input"
             autoFocus={true}

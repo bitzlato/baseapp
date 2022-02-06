@@ -2,9 +2,9 @@ import { ALERT_DATA, ALERT_DELETE, ALERT_DELETE_BY_INDEX, ALERT_PUSH } from './c
 
 export interface Alert {
   type: string;
-  code?: number;
+  code?: number | undefined;
   message: string[];
-  payload?: Record<string, string>;
+  payload?: Record<string, string> | undefined;
 }
 
 export interface AlertPush {

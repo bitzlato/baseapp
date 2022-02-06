@@ -6,7 +6,7 @@ import { HistoryTable } from '../../components/HistoryTable';
 
 const WalletsHistory: React.FC = () => {
   const intl = useIntl();
-  const { currency } = useParams();
+  const { currency } = useParams<{ currency: string }>();
   const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
 
   const renderTabs = () => [

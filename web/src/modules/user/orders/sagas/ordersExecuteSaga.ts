@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { RANGER_DIRECT_WRITE } from 'src/modules/public/ranger/constants';
+import { OrderCommon } from 'web/src/modules/types';
 import { alertPush, sendError } from '../../../';
 import { API, isFinexEnabled, isWsApiEnabled, RequestOptions } from '../../../../api';
 import { getCsrfToken, getOrderAPI } from '../../../../helpers';
@@ -30,11 +31,15 @@ export function* ordersExecuteSaga(action: OrderExecuteFetch) {
             type: ord_type,
           }
         : action.payload;
-      const order = yield call(API.post(executeOptions(getCsrfToken())), '/market/orders', params);
+      const order: OrderCommon = yield call(
+        API.post(executeOptions(getCsrfToken())),
+        '/market/orders',
+        params,
+      );
       yield put(orderExecuteData());
 
       if (getOrderAPI() === 'finex') {
-        if (order.type !== 'market') {
+        if ((order as any).type !== 'market') {
           yield put(userOpenOrdersAppend(order));
         }
       } else {

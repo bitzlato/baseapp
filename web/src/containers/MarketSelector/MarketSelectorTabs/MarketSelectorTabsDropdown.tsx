@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useState, useRef, useCallback } from 'react';
+import { FC, ReactNode } from 'react';
 import { ArrowRightIcon } from 'src/assets/icons/ArrowRightIcon';
 import cn from 'classnames';
 

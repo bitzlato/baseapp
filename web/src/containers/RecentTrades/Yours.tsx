@@ -36,12 +36,12 @@ export const RecentTradesYours = () => {
     [formatMessage],
   );
 
-  const renderRow = (item, i) => {
+  const renderRow = (item: any, i: number) => {
     const { id, created_at, price, amount, taker_type } = item;
     const priceFixed = currentMarket ? currentMarket.price_precision : 0;
     const amountFixed = currentMarket ? currentMarket.amount_precision : 0;
     const higlightedDate = handleHighlightValue(
-      String(localeDate([...list][i - 1] ? [...list][i - 1].created_at : '', 'time')),
+      String(localeDate([...list][i - 1] ? [...list][i - 1]!.created_at : '', 'time')),
       String(localeDate(created_at, 'time')),
     );
 
@@ -56,7 +56,7 @@ export const RecentTradesYours = () => {
       <TradeTableCell
         price={price}
         priceFixed={priceFixed}
-        prevValue={[...list][i - 1] ? [...list][i - 1].price : 0}
+        prevValue={[...list][i - 1] ? [...list][i - 1]!.price : 0}
         amountFixed={amountFixed}
         takerType={taker_type}
         id={id}
@@ -74,7 +74,7 @@ export const RecentTradesYours = () => {
   };
 
   const handleOnSelect = (index: string) => {
-    const priceToSet = list[Number(index)] ? Number(list[Number(index)].price) : 0;
+    const priceToSet = list[Number(index)] ? Number(list[Number(index)]!.price) : 0;
 
     if (currentPrice !== priceToSet) {
       dispatch(setCurrentPrice(priceToSet));

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { CopyableTextField } from 'src/components/CopyableTextField';
 import { Beneficiary } from 'src/modules/user/beneficiaries';

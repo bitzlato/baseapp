@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import * as React from 'react';
 import { PasswordStrengthMeter, PasswordStrengthMeterProps } from './';
 
 const defaults: PasswordStrengthMeterProps = {

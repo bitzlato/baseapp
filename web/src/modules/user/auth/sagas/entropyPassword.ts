@@ -9,10 +9,12 @@ const config: RequestOptions = {
 
 export function* entropyPassword(action: EntropyPasswordFetch) {
   try {
-    const data = yield call(API.post(config), '/identity/password/validate', action.payload);
+    const data: {
+      entropy: number;
+    } = yield call(API.post(config), '/identity/password/validate', action.payload);
     yield put(entropyPasswordData(data));
   } catch (error) {
-    yield put(entropyPasswordError(error));
+    yield put(entropyPasswordError(error as any));
     yield put(
       sendError({
         error,

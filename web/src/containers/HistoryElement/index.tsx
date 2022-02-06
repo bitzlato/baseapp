@@ -208,7 +208,7 @@ class HistoryComponent extends React.Component<Props> {
         ];
       }
       case 'withdraws': {
-        const { txid, created_at, currency, amount, fee, rid } = item as Withdraw;
+        const { txid, created_at, currency, amount, fee, rid } = item as Withdraw & { txid: any };
         const wallet = wallets.find(
           (obj) => obj.currency.code.toLowerCase() === currency.toLowerCase(),
         );
@@ -228,7 +228,7 @@ class HistoryComponent extends React.Component<Props> {
         ];
       }
       case 'trades': {
-        const { id, created_at, side, market, price, amount, total } = item;
+        const { id, created_at, side, market, price, amount, total } = item as any;
         const marketToDisplay = marketsData.find((m) => m.id === market) || {
           name: '',
           price_precision: 0,
@@ -263,9 +263,9 @@ class HistoryComponent extends React.Component<Props> {
       }
       case 'transfers': {
         const { id, created_at, currency, amount, direction, receiver_username, receiver_uid } =
-          item;
+          item as any;
         const status = intl.formatMessage({
-          id: `page.body.history.transfer.content.status.${item.status}`,
+          id: `page.body.history.transfer.content.status.${(item as any).status}`,
         });
         const wallet = wallets.find((obj) => obj.currency === currency);
 
@@ -277,7 +277,7 @@ class HistoryComponent extends React.Component<Props> {
           <CurrencyTicker symbol={currency} />,
           direction && direction.replace(/^./, direction[0].toUpperCase()),
           toAccount,
-          <span style={{ color: setTransferStatusColor(item.status) }} key={id}>
+          <span style={{ color: setTransferStatusColor((item as any).status) }} key={id}>
             {status}
           </span>,
         ];
@@ -298,7 +298,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
   page: selectCurrentPage(state),
   firstElemIndex: selectFirstElemIndex(state, 25),
   lastElemIndex: selectLastElemIndex(state, 25),
-  nextPageExists: selectNextPageExists(state, 25),
+  nextPageExists: selectNextPageExists(state),
 });
 
 export const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = (dispatch) => ({

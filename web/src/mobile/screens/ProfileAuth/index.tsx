@@ -15,7 +15,7 @@ export const ProfileAuthMobileScreen: React.FC = React.memo(() => {
   const intl = useIntl();
   const user = useSelector(selectUserInfo);
 
-  const handleToggle2FA = (code2FA, shouldFetch) => {
+  const handleToggle2FA = (code2FA: string, shouldFetch: boolean) => {
     if (shouldFetch) {
       dispatch(
         toggle2faFetch({

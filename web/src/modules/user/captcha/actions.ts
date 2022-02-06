@@ -32,7 +32,7 @@ export interface GeetestCaptchaFetch {
 export interface GeetestCaptchaSuccess {
   type: typeof GEETEST_CAPTCHA_SUCCESS_DATA;
   payload: {
-    captcha_response?: GeetestCaptchaResponse;
+    captcha_response?: GeetestCaptchaResponse | undefined;
   };
 }
 
@@ -46,7 +46,7 @@ export interface SetGeetestShouldReset {
 export interface RecaptchaSuccess {
   type: typeof RECAPTCHA_SUCCESS_DATA;
   payload: {
-    captcha_response?: string;
+    captcha_response?: string | undefined;
   };
 }
 

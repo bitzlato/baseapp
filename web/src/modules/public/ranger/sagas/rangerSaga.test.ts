@@ -48,6 +48,7 @@ describe('Ranger module', () => {
         applogicUrl: '',
         rangerUrl: `ws://localhost:${echoServerPort}`,
         finexUrl: '',
+        accountUrl: '',
       },
     };
   });
@@ -115,7 +116,7 @@ describe('Ranger module', () => {
 
             case 4:
               expect(lastAction).toEqual({ type: RANGER_CONNECT_DATA });
-              resolve();
+              resolve(undefined);
               break;
 
             default:
@@ -189,12 +190,11 @@ describe('Ranger module', () => {
                 type: RANGER_SUBSCRIPTIONS_DATA,
                 payload: { subscriptions: ['btceur.trades'] },
               });
-              resolve();
+              resolve(undefined);
               break;
 
             default:
               fail();
-              break;
           }
         });
 
@@ -267,7 +267,6 @@ describe('Ranger module', () => {
 
             default:
               fail(`Unexpected action ${actions.length}`);
-              break;
           }
         });
         store.dispatch(rangerConnectFetch({ withAuth: false }));
@@ -344,7 +343,6 @@ describe('Ranger module', () => {
 
                 default:
                   fail(`Unexpected action ${actions.length}`);
-                  break;
               }
             });
           });
@@ -473,7 +471,6 @@ describe('Ranger module', () => {
 
               default:
                 fail(`Unexpected action ${actions.length}`);
-                break;
             }
           });
         });
@@ -527,7 +524,6 @@ describe('Ranger module', () => {
 
               default:
                 fail(`Unexpected action ${actions.length}`);
-                break;
             }
           });
         });
@@ -588,7 +584,6 @@ describe('Ranger module', () => {
 
               default:
                 fail(`Unexpected action ${actions.length}`);
-                break;
             }
           });
           store.dispatch(rangerConnectFetch({ withAuth: false }));
@@ -663,7 +658,6 @@ describe('Ranger module', () => {
                 return;
               default:
                 fail(`Unexpected action ${actions.length}`);
-                break;
             }
           });
           store.dispatch(rangerConnectFetch({ withAuth: true }));
@@ -736,7 +730,6 @@ describe('Ranger module', () => {
                 return;
               default:
                 fail(`Unexpected action ${actions.length}`);
-                break;
             }
           });
           store.dispatch(rangerConnectFetch({ withAuth: true }));
@@ -793,7 +786,6 @@ describe('Ranger module', () => {
 
               default:
                 fail(`Unexpected action ${actions.length}`);
-                break;
             }
           });
           store.dispatch(rangerConnectFetch({ withAuth: true }));

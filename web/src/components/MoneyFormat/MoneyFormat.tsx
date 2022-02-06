@@ -6,8 +6,8 @@ import { Box, TextColor } from '../Box/Box';
 
 interface Props {
   money: Money;
-  zeroSymbol?: string;
-  textColor?: TextColor;
+  zeroSymbol?: string | undefined;
+  textColor?: TextColor | undefined;
 }
 
 export const MoneyFormat: React.FC<Props> = ({ money, zeroSymbol, ...props }) => {

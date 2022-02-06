@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -165,7 +165,7 @@ export const SignInScreen: React.FC = () => {
     dispatch(signInRequire2FA({ require2fa: false }));
   }, [dispatch]);
 
-  const renderCaptcha = React.useMemo(
+  const renderCaptcha = useMemo(
     () => <Captcha error={errorSignIn || emailError} />,
     [errorSignIn, emailError],
   );

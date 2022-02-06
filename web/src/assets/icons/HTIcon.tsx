@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 export const HTIcon: FC<JSX.IntrinsicElements['svg']> = (props) => {
   return (

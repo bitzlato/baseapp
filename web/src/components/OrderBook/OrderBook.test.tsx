@@ -1,6 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
-import * as React from 'react';
 import { CellData } from '../../components/Table';
 import { mapValues, OrderBook, OrderBookProps } from './';
 

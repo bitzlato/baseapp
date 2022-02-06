@@ -295,4 +295,4 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = (dispatc
 export const ProfileVerification = connect(
   mapStateToProps,
   mapDispatchProps,
-)(ProfileVerificationComponent);
+)(ProfileVerificationComponent as any);

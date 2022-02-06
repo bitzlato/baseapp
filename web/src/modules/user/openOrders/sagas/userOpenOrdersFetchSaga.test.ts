@@ -94,7 +94,7 @@ describe('Open Orders Fetch', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsFetch.length) {
           expect(actions).toEqual(expectedActionsFetch);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -110,7 +110,7 @@ describe('Open Orders Fetch', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsError.length) {
           expect(actions).toEqual(expectedActionsError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

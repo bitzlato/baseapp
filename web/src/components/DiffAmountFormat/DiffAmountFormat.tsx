@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { FormatOptions, Money } from '@bitzlato/money-js';
 import { getDiffValue } from 'src/helpers/getDiffValue';
@@ -17,5 +17,5 @@ export const DiffAmountFormat: FC<Props> = (props) => {
       <span className="cr-decimal__opacity">{higlightedValue[0]}</span>
       <span>{higlightedValue[1]}</span>
     </>
-  )
+  );
 };

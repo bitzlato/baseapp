@@ -1,24 +1,25 @@
+import { Language } from 'src/types';
 import { languages } from '../../../api/config';
 import { ChangeLanguageAction } from './actions';
 import { CHANGE_LANGUAGE } from './constants';
 
 export interface LanguageState {
-  lang: string;
+  lang: Language;
 }
 
 const defaultLanguage = {
-  code: languages[0],
+  code: languages[0]!,
 };
 
-const detectLanguage = () => {
+const detectLanguage = (): Language => {
   const fromLocalStorage = localStorage.getItem('lang_code');
   if (fromLocalStorage) {
-    return fromLocalStorage;
+    return fromLocalStorage as Language;
   }
 
   const fromNavigator = navigator.language.split('-')[0];
-  if (languages.includes(fromNavigator)) {
-    return fromNavigator;
+  if (fromNavigator && languages.includes(fromNavigator as Language)) {
+    return fromNavigator as Language;
   }
 
   return defaultLanguage.code;

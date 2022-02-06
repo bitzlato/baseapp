@@ -48,7 +48,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
     setPageIndex(currentPageIndex + 1);
   };
 
-  const handleCreateApiKey = (code2FA, shouldFetch) => {
+  const handleCreateApiKey = (code2FA: string, shouldFetch: boolean) => {
     if (shouldFetch) {
       const payload = {
         totp_code: code2FA,
@@ -57,7 +57,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
     }
   };
 
-  const handleUpdateApiKey = (code2FA, shouldFetch) => {
+  const handleUpdateApiKey = (code2FA: string, shouldFetch: boolean) => {
     if (shouldFetch && itemToUpdate) {
       const payload = {
         totp_code: code2FA,
@@ -70,7 +70,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
     }
   };
 
-  const handleDeleteApiKey = (code2FA, shouldFetch) => {
+  const handleDeleteApiKey = (code2FA: string, shouldFetch: boolean) => {
     if (shouldFetch && itemToUpdate) {
       const payload = {
         totp_code: code2FA,
@@ -80,7 +80,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
     }
   };
 
-  const handleTriggerAction = (code2FA, shouldFetch) => {
+  const handleTriggerAction = (code2FA: string, shouldFetch: boolean) => {
     switch (currentAction) {
       case 'create':
         handleCreateApiKey(code2FA, shouldFetch);
@@ -100,7 +100,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
     setCurrentAction('');
   };
 
-  const handleSetApiKeyProcess = (actionToSet, item?: ApiKeyDataInterface) => {
+  const handleSetApiKeyProcess = (actionToSet: string, item?: ApiKeyDataInterface) => {
     setShow2FAModal((state) => !state);
 
     switch (actionToSet) {

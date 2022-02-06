@@ -96,7 +96,7 @@ describe('Markets reducer', () => {
       ...initialMarketsState,
       currentMarket: fakeMarkets[0],
     };
-    expect(marketsReducer(initialMarketsState, actions.setCurrentMarket(fakeMarkets[0]))).toEqual(
+    expect(marketsReducer(initialMarketsState, actions.setCurrentMarket(fakeMarkets[0]!))).toEqual(
       expectedState,
     );
   });
@@ -108,7 +108,7 @@ describe('Markets reducer', () => {
         currentMarket: fakeMarkets[0],
       };
       expect(
-        marketsReducer(initialMarketsState, actions.setCurrentMarketIfUnset(fakeMarkets[0])),
+        marketsReducer(initialMarketsState, actions.setCurrentMarketIfUnset(fakeMarkets[0]!)),
       ).toEqual(expectedState);
     });
 
@@ -117,7 +117,9 @@ describe('Markets reducer', () => {
         ...initialMarketsState,
         currentMarket: fakeMarkets[0],
       };
-      expect(marketsReducer(state, actions.setCurrentMarketIfUnset(fakeMarkets[1]))).toEqual(state);
+      expect(marketsReducer(state, actions.setCurrentMarketIfUnset(fakeMarkets[1]!))).toEqual(
+        state,
+      );
     });
   });
 

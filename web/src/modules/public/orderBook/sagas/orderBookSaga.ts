@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { OrderBookState, sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import { orderBookData, orderBookError, OrderBookFetch } from '../actions';
 
@@ -14,7 +14,7 @@ export function* orderBookSaga(action: OrderBookFetch) {
       throw new Error(`ERROR: Empty market provided to orderBookSaga`);
     }
 
-    const orderBook = yield call(
+    const orderBook: OrderBookState = yield call(
       API.get(orderBookOptions),
       `/public/markets/${market.id}/order-book`,
     );

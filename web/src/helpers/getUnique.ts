@@ -1,7 +1,7 @@
-export const getUnique = (arr, comp) => {
+export const getUnique = (arr: any[], comp: string) => {
   return arr
     .map((item) => item[comp])
     .map((item, i, final) => final.indexOf(item) === i && i)
-    .filter((item) => arr[item])
-    .map((item) => arr[item]);
+    .filter((item) => arr[item as any])
+    .map((item) => arr[item as any]);
 };

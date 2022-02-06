@@ -15,14 +15,18 @@ const ChangePasswordScreenComponent: React.FC = () => {
   const intl = useIntl();
   const history = useHistory();
 
-  const handleChangePassword = (payload) => {
+  const handleChangePassword = (payload: {
+    old_password: string;
+    new_password: string;
+    confirm_password: string;
+  }) => {
     if (payload) {
       dispatch(changePasswordFetch(payload));
       history.push('/profile');
     }
   };
 
-  const fetchCurrentPasswordEntropy = (payload) => {
+  const fetchCurrentPasswordEntropy = (payload: { password: string }) => {
     if (payload) {
       dispatch(entropyPasswordFetch(payload));
     }

@@ -179,17 +179,29 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
       </span>,
       <span key={id}>{orderType}</span>,
       avg_price ? (
-        <AmountFormat key={id} money={createMoneyWithoutCcy(avg_price, currentMarket.price_precision)} />
+        <AmountFormat
+          key={id}
+          money={createMoneyWithoutCcy(avg_price, currentMarket.price_precision)}
+        />
       ) : (
         '-'
       ),
       price ? (
-        <AmountFormat key={id} money={createMoneyWithoutCcy(price, currentMarket.price_precision)} />
+        <AmountFormat
+          key={id}
+          money={createMoneyWithoutCcy(price, currentMarket.price_precision)}
+        />
       ) : (
         '-'
       ),
-      <AmountFormat key={id} money={createMoneyWithoutCcy(origin_volume, currentMarket.price_precision)} />,
-      <AmountFormat key={id} money={createMoneyWithoutCcy(total, currentMarket.amount_precision)} />,
+      <AmountFormat
+        key={id}
+        money={createMoneyWithoutCcy(origin_volume, currentMarket.price_precision)}
+      />,
+      <AmountFormat
+        key={id}
+        money={createMoneyWithoutCcy(total, currentMarket.amount_precision)}
+      />,
       <span key={id} className="split-lines justify-content-end">
         {trigger_price ? (
           <React.Fragment>
@@ -206,13 +218,12 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
         )}
       </span>,
       <span style={{ color: setTradeColor(side).color }} key={id}>
-        <AmountFormat key={id} money={createMoneyWithoutCcy(+filled, 2)} />
-        %
+        <AmountFormat key={id} money={createMoneyWithoutCcy(+filled, 2)} />%
       </span>,
       <OrderStatus value={item.state} />,
       state === 'wait' && (
         <Box row>
-          <CloseIcon key={id} onClick={this.handleCancel(id)} />
+          <CloseIcon key={id} onClick={this.handleCancel(id!)} />
         </Box>
       ),
     ];

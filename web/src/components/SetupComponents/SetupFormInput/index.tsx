@@ -74,7 +74,7 @@ export class SetupFormInput extends React.Component<SetupFormInputProps, SetupFo
     });
   };
 
-  private handleChangeValue = (e) => {
+  private handleChangeValue = (e: any) => {
     this.props.handleChangeInput && this.props.handleChangeInput(e.target.value);
   };
 

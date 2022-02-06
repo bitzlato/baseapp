@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';

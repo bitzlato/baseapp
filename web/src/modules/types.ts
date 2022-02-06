@@ -9,7 +9,7 @@ export interface CommonError {
 }
 
 export interface CommonState {
-  error?: CommonError;
+  error?: CommonError | undefined;
   loading?: boolean;
 }
 
@@ -32,7 +32,7 @@ export interface OrderCommon {
   executed_volume?: string;
   side: OrderSide;
   market: string;
-  ord_type?: OrderType;
+  ord_type?: OrderType | undefined;
   avg_price?: string;
   volume?: number;
   trigger_price?: string;

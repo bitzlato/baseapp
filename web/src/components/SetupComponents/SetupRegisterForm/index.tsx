@@ -223,7 +223,7 @@ class SetupRegister extends React.Component<Props, SetupRegisterFormState> {
   };
 
   private handleRegister = () => {
-    const { email, password, confirmPassword } = this.state;
+    const { email, password } = this.state;
 
     this.props.handleRegister(email, password);
   };

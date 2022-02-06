@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 export const OrdersIcon: FC = () => (
   <svg width="24" height="24" viewBox="0 0 510 510" xmlns="http://www.w3.org/2000/svg">

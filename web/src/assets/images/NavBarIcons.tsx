@@ -1,6 +1,8 @@
-import * as React from 'react';
+interface Props {
+  fillColor: string;
+}
 
-export const AvatarIcon = ({ fillColor }) => {
+export const AvatarIcon = ({ fillColor }: Props) => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -11,7 +13,7 @@ export const AvatarIcon = ({ fillColor }) => {
   );
 };
 
-export const CloseIcon = ({ fillColor }) => {
+export const CloseIcon = ({ fillColor }: Props) => {
   return (
     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0.655151 1.34485L4.99998 5.34485L9.34481 1.34485" stroke={fillColor} />
@@ -19,7 +21,7 @@ export const CloseIcon = ({ fillColor }) => {
   );
 };
 
-export const OpenIcon = ({ fillColor }) => {
+export const OpenIcon = ({ fillColor }: Props) => {
   return (
     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M9.34479 5.34485L4.99996 1.34485L0.655132 5.34485" stroke={fillColor} />

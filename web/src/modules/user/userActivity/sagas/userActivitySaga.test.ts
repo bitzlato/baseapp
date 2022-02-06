@@ -88,7 +88,7 @@ describe('User activity', () => {
           const actions = store.getActions();
           if (actions.length === expectedActionsFetchWithFirstPage.length) {
             expect(actions).toEqual(expectedActionsFetchWithFirstPage);
-            resolve();
+            resolve(undefined);
           }
         });
       });
@@ -104,7 +104,7 @@ describe('User activity', () => {
           const actions = store.getActions();
           if (actions.length === expectedActionsError.length) {
             expect(actions).toEqual(expectedActionsError);
-            resolve();
+            resolve(undefined);
           }
         });
       });

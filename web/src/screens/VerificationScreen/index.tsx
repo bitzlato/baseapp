@@ -3,7 +3,7 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { Redirect } from 'react-router';
 import { compose } from 'redux';
-import { IntlProps } from 'src/types';
+import { IntlProps, Language } from 'src/types';
 import { languages } from '../../api';
 import { changeLanguage, RootState, selectEmailVerified, verificationFetch } from '../../modules';
 import { CommonError } from '../../modules/types';
@@ -14,8 +14,8 @@ interface DispatchProps {
 }
 
 interface ReduxProps {
-  isEmailVerified?: boolean;
-  error?: CommonError;
+  isEmailVerified?: boolean | undefined;
+  error?: CommonError | undefined;
 }
 
 export interface RouterProps {
@@ -40,7 +40,7 @@ class Verification extends React.Component<Props, IntlProps> {
       this.props.verification({ token });
     }
 
-    if (lang && languages.includes(lang.toLowerCase())) {
+    if (lang && languages.includes(lang.toLowerCase() as Language)) {
       this.props.changeLanguage(lang.toLowerCase());
     }
   }

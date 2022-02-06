@@ -23,7 +23,7 @@ const parsePositiveNumeric = (value: string, onlyInteger: boolean = false): stri
   }
 
   if (onlyInteger) {
-    const arr = numeric.split('.');
+    const arr = numeric.split('.') as [string, ...string[]];
     return arr.length > 1 ? arr.slice(0, -1).join('') : arr[0];
   }
 

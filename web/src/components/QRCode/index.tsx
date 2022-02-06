@@ -12,7 +12,7 @@ export interface QRCodeProps {
    * Defines the size of QR code component.
    * @default 118x118
    */
-  dimensions?: number;
+  dimensions?: number | undefined;
 }
 
 /**
@@ -21,7 +21,7 @@ export interface QRCodeProps {
 const QRCodeComponent: React.FC<QRCodeProps> = ({ data = '', dimensions }) => {
   return (
     <div className="qr-code">
-      <QRCodeGenerator value={data} size={dimensions} renderAs="svg" />
+      <QRCodeGenerator value={data} size={dimensions as number} renderAs="svg" />
     </div>
   );
 };

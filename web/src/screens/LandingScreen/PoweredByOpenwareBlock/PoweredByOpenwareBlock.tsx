@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useT } from 'src/hooks/useT';
 
 import s from './PoweredByOpenwareBlock.postcss';

@@ -31,7 +31,7 @@ describe('Open Orders reducer', () => {
 
   it('should handle USER_OPEN_ORDERS_DATA', () => {
     const initialState = { ...initialOpenOrdersState, fetching: true };
-    const payload = [];
+    const payload: OrderCommon[] = [];
     const expectedState = { ...initialState, ...payload, fetching: false };
     expect(openOrdersReducer(initialState, actions.userOpenOrdersData(payload))).toEqual(
       expectedState,
@@ -285,7 +285,7 @@ describe('Open Orders reducer', () => {
       ...initialOpenOrdersState,
       cancelFetching: true,
     };
-    const payload = [];
+    const payload: OrderCommon[] = [];
     const expectedState = {
       ...initialOpenOrdersState,
       cancelError: false,

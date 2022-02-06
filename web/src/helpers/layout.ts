@@ -250,7 +250,7 @@ const getLayouts = () => {
 export const layouts = getLayouts();
 
 export const getLayoutFromLS = (key: string): LayoutGrid | undefined => {
-  let obj = {};
+  let obj: Record<string, any> = {};
   if (localStorage) {
     try {
       obj = JSON.parse(localStorage.getItem('rgl') || '') || {};
@@ -262,7 +262,7 @@ export const getLayoutFromLS = (key: string): LayoutGrid | undefined => {
   return obj[key];
 };
 
-export const saveLayoutToLS = (key: string, value): void => {
+export const saveLayoutToLS = (key: string, value: any): void => {
   if (localStorage) {
     localStorage.setItem('rgl', JSON.stringify({ [key]: value }));
   }

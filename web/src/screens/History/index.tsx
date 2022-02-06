@@ -73,11 +73,12 @@ class History extends React.Component<Props, State> {
   private onCurrentTabChange = (index: number) => this.setState({ currentTabIndex: index });
 
   private handleMakeRequest = (index: number) => {
-    if (this.state.tab === this.tabMapping[index]) {
+    const tab = this.tabMapping[index];
+    if (this.state.tab === this.tabMapping[index] || !tab) {
       return;
     }
     this.props.resetHistory();
-    this.setState({ tab: this.tabMapping[index] });
+    this.setState({ tab });
   };
 
   private renderTabs = () => {

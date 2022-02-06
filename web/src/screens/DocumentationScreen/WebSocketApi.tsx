@@ -11,7 +11,7 @@ export const WebSocketApi: React.FC = () => {
         url: 'https://raw.githubusercontent.com/bitzlato/peatio/master/docs/api/websocket_api.md',
       },
       {} as any,
-    ).then((d: string) => {
+    ).then((d: any) => {
       setContent(d);
     });
   });

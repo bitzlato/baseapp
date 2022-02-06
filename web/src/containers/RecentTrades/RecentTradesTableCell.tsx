@@ -4,8 +4,7 @@ import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { DiffAmountFormat } from 'src/components/DiffAmountFormat/DiffAmountFormat';
 
-
-const TradeTableCellComponent = (props) => {
+const TradeTableCellComponent = (props: any) => {
   const { type, takerType, higlightedDate, amountFixed, amount, priceFixed, price, prevValue, id } =
     props;
 
@@ -25,7 +24,11 @@ const TradeTableCellComponent = (props) => {
     case 'price':
       return (
         <span style={{ color: setTradeColor(takerType).color }}>
-          <DiffAmountFormat key={id} currentValue={createMoneyWithoutCcy(price, priceFixed)} prevValue={createMoneyWithoutCcy(prevValue, priceFixed)} />
+          <DiffAmountFormat
+            key={id}
+            currentValue={createMoneyWithoutCcy(price, priceFixed)}
+            prevValue={createMoneyWithoutCcy(prevValue, priceFixed)}
+          />
         </span>
       );
     default:

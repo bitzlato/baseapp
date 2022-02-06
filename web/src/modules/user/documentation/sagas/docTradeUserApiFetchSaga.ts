@@ -1,16 +1,19 @@
 import { call, put } from 'redux-saga/effects';
 import { API, RequestOptions } from '../../../../api';
-import { sendError } from '../../../index';
-import { docTradeUserApiData, docTradeUserApiError, DocTradeUserApiFetch } from '../actions';
+import { DocTradeUserApiDataInterface, sendError } from '../../../index';
+import { docTradeUserApiData, docTradeUserApiError } from '../actions';
 
 const docTradeUserApiFetchOptions: RequestOptions = {
   apiVersion: 'peatio',
   withHeaders: false,
 };
 
-export function* docTradeUserApiFetchSaga(action: DocTradeUserApiFetch) {
+export function* docTradeUserApiFetchSaga() {
   try {
-    const payload = yield call(API.get(docTradeUserApiFetchOptions), '/swagger');
+    const payload: DocTradeUserApiDataInterface = yield call(
+      API.get(docTradeUserApiFetchOptions),
+      '/swagger',
+    );
     yield put(docTradeUserApiData(payload));
   } catch (error) {
     yield put(

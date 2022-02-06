@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import cn from 'classnames';
 

@@ -13,6 +13,8 @@ export const transferColorMapping = {
   completed: 'var(--system-green)',
 };
 
-export const setTradesType = (type: string) => tradesColorMapping[type] || { color: '', text: '' };
+export const setTradesType = (type: string) =>
+  tradesColorMapping[type as keyof typeof tradesColorMapping] || { color: '', text: '' };
 
-export const setTransferStatusColor = (status: string): string => transferColorMapping[status];
+export const setTransferStatusColor = (status: string): string =>
+  transferColorMapping[status as keyof typeof transferColorMapping];

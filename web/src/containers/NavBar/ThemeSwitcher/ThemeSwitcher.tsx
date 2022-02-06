@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { themeSwitcher } from 'src/api/config';
 import { Moon } from 'src/assets/images/Moon';

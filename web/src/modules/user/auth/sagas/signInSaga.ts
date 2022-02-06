@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import { changeLanguage } from '../../../public/i18n';
-import { userData } from '../../profile';
+import { User, userData } from '../../profile';
 import {
   signInData,
   signInError,
@@ -17,7 +17,7 @@ const sessionsConfig: RequestOptions = {
 
 export function* signInSaga(action: SignInFetch) {
   try {
-    const user = yield call(API.post(sessionsConfig), '/identity/sessions', action.payload);
+    const user: User = yield call(API.post(sessionsConfig), '/identity/sessions', action.payload);
 
     if (user.state === 'pending') {
       yield put(signUpRequireVerification({ requireVerification: true }));
@@ -27,12 +27,15 @@ export function* signInSaga(action: SignInFetch) {
       }
       yield put(userData({ user }));
 
-      localStorage.setItem('csrfToken', user.csrf_token);
+      localStorage.setItem('csrfToken', user.csrf_token as any);
       yield put(signInRequire2FA({ require2fa: user.otp }));
     }
     yield put(signInData());
   } catch (error) {
-    if (error.code === 401 && error.message.indexOf('identity.session.missing_otp') > -1) {
+    if (
+      (error as any).code === 401 &&
+      (error as any).message.indexOf('identity.session.missing_otp') > -1
+    ) {
       yield put(signInRequire2FA({ require2fa: true }));
       yield put(signInData());
     } else {

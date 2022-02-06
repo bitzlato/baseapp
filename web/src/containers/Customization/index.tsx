@@ -156,7 +156,7 @@ class CustomizationContainer extends React.Component<Props, State> {
 
     return (
       <div className={customizationClassName}>
-        <div className="pg-customization__toggler" onClick={(e) => this.handleToggleIsOpen()}>
+        <div className="pg-customization__toggler" onClick={() => this.handleToggleIsOpen()}>
           <PaletteIcon />
         </div>
         <TabPanel
@@ -171,7 +171,7 @@ class CustomizationContainer extends React.Component<Props, State> {
 
   private handleClickResetButton = () => {
     this.setState({ resetToDefault: !this.state.resetToDefault });
-    applyCustomizationSettings(null, this.props.toggleChartRebuild);
+    applyCustomizationSettings(undefined, this.props.toggleChartRebuild);
   };
 
   private handleClickSaveButton = () => {
@@ -181,7 +181,10 @@ class CustomizationContainer extends React.Component<Props, State> {
       : undefined;
     const rootElement = document.documentElement;
     const bodyElement = document.querySelector<HTMLElement>('body')!;
-    const currentColors: { [key: string]: ThemeColorInterface[] } = {
+    const currentColors: {
+      dark: ThemeColorInterface[];
+      light: ThemeColorInterface[];
+    } = {
       dark: [],
       light: [],
     };
@@ -262,7 +265,7 @@ class CustomizationContainer extends React.Component<Props, State> {
     return false;
   };
 
-  private handleUpdateState = (key: string) => (value) => {
+  private handleUpdateState = (key: string) => (value: any) => {
     // @ts-ignore
     this.setState({
       [key]: value,

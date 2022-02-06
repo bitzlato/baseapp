@@ -3,14 +3,17 @@ import { AddressesAction } from './actions';
 import { SEND_ADDRESSES_DATA, SEND_ADDRESSES_ERROR, SEND_ADDRESSES_FETCH } from './constants';
 
 export interface AddressesState {
-  success?: string;
-  error?: CommonError;
+  success?: string | undefined;
+  error?: CommonError | undefined;
   loading: boolean;
 }
 
 export const initialAddressesState: AddressesState = { loading: false };
 
-export const addressesReducer = (state = initialAddressesState, action: AddressesAction) => {
+export const addressesReducer = (
+  state = initialAddressesState,
+  action: AddressesAction,
+): AddressesState => {
   switch (action.type) {
     case SEND_ADDRESSES_FETCH:
       return {

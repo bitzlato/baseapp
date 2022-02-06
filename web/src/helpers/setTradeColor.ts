@@ -7,4 +7,5 @@ const tradesColorMapping = {
   },
 };
 
-export const setTradeColor = (side: string) => tradesColorMapping[side] || { color: '' };
+export const setTradeColor = (side: string) =>
+  tradesColorMapping[side as keyof typeof tradesColorMapping] || { color: '' };

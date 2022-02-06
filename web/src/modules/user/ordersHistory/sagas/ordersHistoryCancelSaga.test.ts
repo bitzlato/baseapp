@@ -58,7 +58,7 @@ describe('Orders History Cancel', () => {
     message: ['Server error'],
   };
 
-  const mockOrderCancel = (id) => {
+  const mockOrderCancel = (id: number) => {
     mockAxios.onPost(`/market/orders/${id}/cancel`).reply(200);
   };
 
@@ -84,7 +84,7 @@ describe('Orders History Cancel', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsFetch.length) {
           expect(actions).toEqual(expectedActionsFetch);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -100,7 +100,7 @@ describe('Orders History Cancel', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsError.length) {
           expect(actions).toEqual(expectedActionsError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

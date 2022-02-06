@@ -82,7 +82,7 @@ describe('API - Keys saga', () => {
         const actions = store.getActions();
         if (actions.length === expectedApiKeysFetchSuccess.length) {
           expect(actions).toEqual(expectedApiKeysFetchSuccess);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -98,7 +98,7 @@ describe('API - Keys saga', () => {
         const actions = store.getActions();
         if (actions.length === expectedApiKeysFetchError.length) {
           expect(actions).toEqual(expectedApiKeysFetchError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

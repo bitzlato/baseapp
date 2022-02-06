@@ -68,7 +68,7 @@ const passwordStrengthClassName = (passwordStrengthMeterLength: number) => {
   }
 };
 
-const passwordStrengthStatus = (passwordStrengthMeterLength: number, translate) => {
+const passwordStrengthStatus = (passwordStrengthMeterLength: number, translate: any) => {
   switch (passwordStrengthMeterLength) {
     case 0:
       return translate('page.header.signUp.password.too.weak') || 'TOO WEAK';

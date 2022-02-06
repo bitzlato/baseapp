@@ -1,4 +1,4 @@
-import { Market, MarketId } from '../../public/markets';
+import { Market } from '../../public/markets';
 import { CommonError, OrderCommon, OrderEvent } from '../../types';
 import {
   OPEN_ORDERS_APPEND,
@@ -14,9 +14,11 @@ import {
 
 export interface UserOpenOrdersFetch {
   type: typeof OPEN_ORDERS_FETCH;
-  payload?: {
-    market: Market;
-  };
+  payload?:
+    | {
+        market: Market;
+      }
+    | undefined;
 }
 
 export interface UserOpenOrdersData {

@@ -17,7 +17,7 @@ export const formatTicker = (events: {
   const tickers: Record<string, Ticker> = {};
   for (const market in events) {
     if (events.hasOwnProperty(market)) {
-      const event: TickerEvent = events[market];
+      const event: TickerEvent = events[market]!;
       const { amount, avg_price, high, last, low, open, price_change_percent, volume } = event;
       tickers[market] = {
         amount,
@@ -94,7 +94,7 @@ export const periodsMapString: { [pair: number]: string } = {
 export const periodStringToMinutes = (period: string): number =>
   periodsMapNumber[period] || +DEFAULT_TRADING_VIEW_INTERVAL;
 export const periodMinutesToString = (period: number): string =>
-  periodsMapString[period] || periodsMapString[+DEFAULT_TRADING_VIEW_INTERVAL];
+  periodsMapString[period] || periodsMapString[+DEFAULT_TRADING_VIEW_INTERVAL]!;
 
 export const marketKlineStreams = (marketId: string, periodString: string) => ({
   channels: [`${marketId}.kline-${periodString}`],

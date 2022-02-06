@@ -5,11 +5,7 @@ import { Spinner } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { TRIGGER_BUY_PRICE_MULT } from '../../constants';
-import {
-  Order,
-  OrderProps,
-  LockedComponent,
-} from '../../components';
+import { Order, OrderProps, LockedComponent } from '../../components';
 import { IntlProps } from 'src/types';
 import {
   alertPush,
@@ -256,7 +252,10 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.minAmount', {
-            amount: createMoneyWithoutCcy(currentMarket.min_amount, currentMarket.amount_precision).toFormat(),
+            amount: createMoneyWithoutCcy(
+              currentMarket.min_amount,
+              currentMarket.amount_precision,
+            ).toFormat(),
             currency: currentMarket.base_unit.toUpperCase(),
           }),
         ],
@@ -270,7 +269,10 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.minPrice', {
-            price: createMoneyWithoutCcy(currentMarket.min_price, currentMarket.price_precision).toFormat(),
+            price: createMoneyWithoutCcy(
+              currentMarket.min_price,
+              currentMarket.price_precision,
+            ).toFormat(),
             currency: currentMarket.quote_unit.toUpperCase(),
           }),
         ],
@@ -284,7 +286,10 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.minTriggerPrice', {
-            price: createMoneyWithoutCcy(currentMarket.min_price, currentMarket.price_precision).toFormat(),
+            price: createMoneyWithoutCcy(
+              currentMarket.min_price,
+              currentMarket.price_precision,
+            ).toFormat(),
             currency: currentMarket.quote_unit.toUpperCase(),
           }),
         ],
@@ -298,7 +303,10 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.maxPrice', {
-            price: createMoneyWithoutCcy(currentMarket.max_price, currentMarket.price_precision).toFormat(),
+            price: createMoneyWithoutCcy(
+              currentMarket.max_price,
+              currentMarket.price_precision,
+            ).toFormat(),
             currency: currentMarket.quote_unit.toUpperCase(),
           }),
         ],
@@ -318,7 +326,10 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
       this.props.pushAlert({
         message: [
           this.translate('error.order.create.maxTriggerPrice', {
-            price: createMoneyWithoutCcy(currentMarket.max_price, currentMarket.price_precision).toFormat(),
+            price: createMoneyWithoutCcy(
+              currentMarket.max_price,
+              currentMarket.price_precision,
+            ).toFormat(),
             currency: currentMarket.quote_unit.toUpperCase(),
           }),
         ],
@@ -329,7 +340,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     }
 
     if (
-      (type === 'buy' && +available < +amount * +actualOrderPrice * priceMult) ||
+      (type === 'buy' && +available < +amount * +actualOrderPrice! * priceMult) ||
       (type === 'sell' && +available < +amount)
     ) {
       this.props.pushAlert({
@@ -367,7 +378,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     return wallets.find((w) => w.currency.code.toLowerCase() === currency.toLowerCase()) as Wallet;
   }
 
-  private getOrderType = (index: number, label: string) => {
+  private getOrderType = (_index: number, label: string) => {
     this.setState({
       orderSide: label.toLowerCase(),
     });

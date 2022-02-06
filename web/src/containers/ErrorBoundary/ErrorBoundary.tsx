@@ -6,14 +6,14 @@ import { selectUserInfo, RootState, selectUserLoggedIn } from 'src/modules';
 import { ErrorWrapper } from 'src/containers/Errors';
 
 let BugsnagErrorBoundary: ComponentType | undefined;
-let bugsnagUser: { uid: string; email: string; username: string } | undefined;
+let bugsnagUser: { uid: string; email: string; username?: string | undefined } | undefined;
 const bugsnagKey = process.env.REACT_APP_BUGSNAG_KEY;
 if (typeof bugsnagKey === 'string' && bugsnagKey !== '') {
   Bugsnag.start({
     apiKey: bugsnagKey,
-    appVersion: process.env.REACT_APP_BUGSNAG_VERSION,
-    releaseStage: process.env.REACT_APP_RELEASE_STAGE,
-    plugins: [new BugsnagPluginReact()],
+    appVersion: process.env.REACT_APP_BUGSNAG_VERSION as any,
+    releaseStage: process.env.REACT_APP_RELEASE_STAGE as any,
+    plugins: [new BugsnagPluginReact() as any],
     enabledReleaseStages: ['production', 'staging', 's2', 's3', 's4', 's5', 'sandbox'],
     onError: (event) => {
       if (bugsnagUser) {
@@ -60,6 +60,10 @@ export const ErrorBoundary = BugsnagErrorBoundary
         };
       }, [user]);
 
-      return <BugsnagErrorBoundary>{children}</BugsnagErrorBoundary>;
+      return BugsnagErrorBoundary ? (
+        <BugsnagErrorBoundary>{children}</BugsnagErrorBoundary>
+      ) : (
+        <>{children}</>
+      );
     }
   : ErrorWrapper;

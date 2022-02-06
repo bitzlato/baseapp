@@ -31,11 +31,11 @@ export interface OrderFormProps {
   /**
    * Price that is applied during total order amount calculation when type is Market
    */
-  priceLimit?: number;
+  priceLimit?: number | undefined;
   /**
    * Price that is applied when user clicks orderbook row
    */
-  obTrigger?: number;
+  obTrigger?: number | undefined;
   /**
    * Type of form, can be 'buy' or 'sell'
    */
@@ -48,7 +48,7 @@ export interface OrderFormProps {
    * Additional class name. By default element receives `cr-order` class
    * @default empty
    */
-  className?: string;
+  className?: string | undefined;
   /**
    * Name of currency for price field
    */
@@ -60,7 +60,7 @@ export interface OrderFormProps {
   /**
    * Amount of money in a wallet
    */
-  available?: number;
+  available?: number | undefined;
   /**
    * Precision of amount, total, available, fee value
    */
@@ -72,15 +72,15 @@ export interface OrderFormProps {
   /**
    * Best ask price
    */
-  bestAsk?: string;
+  bestAsk?: string | undefined;
   /**
    * Best boid price
    */
-  bestBid?: string;
+  bestBid?: string | undefined;
   /**
    * Whether order is disabled to execute
    */
-  disabled?: boolean;
+  disabled?: boolean | undefined;
   /**
    * Callback that is called when form is submitted
    */
@@ -88,11 +88,11 @@ export interface OrderFormProps {
   /**
    * start handling change price
    */
-  listenInputPrice?: () => void;
+  listenInputPrice?: (() => void) | undefined;
   /**
    * start handling change trigger price
    */
-  listenInputTrigger?: () => void;
+  listenInputTrigger?: (() => void) | undefined;
   totalPrice: number;
   amount: string;
   onAmountChange: (amount: string, type: FormType) => void;

@@ -12,7 +12,7 @@ import {
   selectLastElemIndex,
   selectNextPageExists,
 } from '../../../modules';
-import { selectFirstElemIndex, selectHistory, TransferLink } from '../../../modules/user/history';
+import { selectFirstElemIndex, selectHistory } from '../../../modules/user/history';
 import { selectWallets } from '../../../modules/user/wallets';
 import { RowItem } from './Rowitem';
 
@@ -34,9 +34,7 @@ const HistoryTable = (props: Props) => {
   const lastElemIndex = useSelector((state: RootState) =>
     selectLastElemIndex(state, DEFAULT_LIMIT),
   );
-  const nextPageExists = useSelector((state: RootState) =>
-    selectNextPageExists(state, DEFAULT_LIMIT),
-  );
+  const nextPageExists = useSelector((state: RootState) => selectNextPageExists(state));
 
   useWalletsFetch();
   useHistoryFetch({

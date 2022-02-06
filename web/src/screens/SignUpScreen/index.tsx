@@ -38,10 +38,10 @@ import {
 } from '../../modules';
 
 interface ReduxProps {
-  requireVerification?: boolean;
-  loading?: boolean;
+  requireVerification?: boolean | undefined;
+  loading?: boolean | undefined;
   currentPasswordEntropy: number;
-  captcha_response?: string | GeetestCaptchaResponse;
+  captcha_response?: string | GeetestCaptchaResponse | undefined;
   reCaptchaSuccess: boolean;
   geetestCaptchaSuccess: boolean;
 }
@@ -233,17 +233,17 @@ class SignUp extends React.Component<Props> {
 
   private translate = (key: string) => this.props.intl.formatMessage({ id: key });
 
-  private handleOutsideClick = (event) => {
+  private handleOutsideClick = (event: MouseEvent) => {
     const wrapperElement = this.passwordWrapper.current;
 
-    if (wrapperElement && !wrapperElement.contains(event.target)) {
+    if (wrapperElement && !wrapperElement.contains(event.target as Node)) {
       this.setState({
         passwordPopUp: false,
       });
     }
   };
 
-  private handleCheckboxClick = (event) => {
+  private handleCheckboxClick = (event: React.MouseEvent<HTMLInputElement>) => {
     if (event) {
       event.preventDefault();
 

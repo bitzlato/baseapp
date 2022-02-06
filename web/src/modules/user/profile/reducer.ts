@@ -26,13 +26,13 @@ import { User } from './types';
 export interface ProfileState {
   passwordChange: {
     success?: boolean;
-    error?: CommonError;
+    error?: CommonError | undefined;
   };
   twoFactorAuth: {
     barcode: string;
     url: string;
     success?: boolean;
-    error?: CommonError;
+    error?: CommonError | undefined;
   };
   userData: {
     user: User;
@@ -42,16 +42,6 @@ export interface ProfileState {
     verifyEmail: boolean;
   };
 }
-
-const ifUserIsLoggedIn = () => {
-  const csrfTokenExist = localStorage.getItem('csrfToken');
-
-  if (csrfTokenExist === null) {
-    return false;
-  }
-
-  return true;
-};
 
 export const defaultUser = {
   username: '',

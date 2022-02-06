@@ -79,10 +79,7 @@ class ConfirmComponent extends React.Component<Props> {
         </div>
         <h3 className="pg-confirm__title">
           <FormattedMessage id={`page.confirm.title.${step}`} />
-          <CrossIcon
-            className="pg-confirm__title__icon"
-            onClick={(e) => history.push('/profile')}
-          />
+          <CrossIcon className="pg-confirm__title__icon" onClick={() => history.push('/profile')} />
         </h3>
         {['profile', 'address'].includes(step) && (
           <Info variant="warning" text={this.translate('page.confirm.title.warning')} />
@@ -126,13 +123,13 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
   labels: selectLabelData(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   labelFetch: () => dispatch(labelFetch()),
-  toggleSidebar: (payload) => dispatch(toggleSidebar(payload)),
+  toggleSidebar: (payload?: boolean) => dispatch(toggleSidebar(payload)),
 });
 
 export const ConfirmScreen = compose(
   injectIntl,
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
-)(ConfirmComponent) as any; // tslint:disable-line
+)(ConfirmComponent) as any;

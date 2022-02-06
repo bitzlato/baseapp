@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import cn from 'classnames';
 import { Money } from '@bitzlato/money-js';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
@@ -22,10 +22,10 @@ export interface WalletItemData {
 }
 
 interface Props {
-  active?: boolean;
+  active?: boolean | undefined;
   wallet: WalletItemData;
-  onClick?: () => void;
-  isMobileDevice?: boolean;
+  onClick?: (() => void) | undefined;
+  isMobileDevice?: boolean | undefined;
 }
 
 export const WalletItem: FC<Props> = ({ wallet, active, onClick, isMobileDevice }) => {

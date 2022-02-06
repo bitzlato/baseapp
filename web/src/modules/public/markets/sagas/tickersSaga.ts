@@ -9,12 +9,15 @@ const tickersOptions: RequestOptions = {
 
 export function* tickersSaga() {
   try {
-    const tickers = yield call(API.get(tickersOptions), `/public/markets/tickers`);
+    const tickers: Record<string, any> = yield call(
+      API.get(tickersOptions),
+      `/public/markets/tickers`,
+    );
 
     if (tickers) {
       const pairs = Object.keys(tickers);
 
-      const convertedTickers = pairs.reduce((result, pair) => {
+      const convertedTickers = pairs.reduce<Record<string, any>>((result, pair) => {
         result[pair] = tickers[pair].ticker;
 
         return result;

@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent } from 'react';
+import { FC, ChangeEvent } from 'react';
 
 import s from './MarketSelectorSearchInput.postcss';
 import { SearchIcon } from 'src/assets/icons/SearchIcon';

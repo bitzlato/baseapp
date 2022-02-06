@@ -42,7 +42,7 @@ describe('blacklistAccessFetchSaga test', () => {
         const actions = store.getActions();
         if (actions.length === expectedActions.length) {
           expect(actions).toEqual(expectedActions);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -69,7 +69,7 @@ describe('blacklistAccessFetchSaga test', () => {
         const actions = store.getActions();
         if (actions.length === expectedActions.length) {
           expect(actions).toEqual(expectedActions);
-          resolve();
+          resolve(undefined);
         }
       });
     });

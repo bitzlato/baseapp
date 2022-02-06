@@ -1,4 +1,4 @@
-import { CommonError, OrderEvent } from '../../types';
+import { CommonError, OrderCommon, OrderEvent } from '../../types';
 import * as actions from './actions';
 import {
   ORDERS_CANCEL_ALL_DATA,
@@ -60,7 +60,7 @@ describe('Orders History actions', () => {
   });
 
   it('should check ordersHistoryCancelData action creator', () => {
-    const payload = [];
+    const payload: OrderCommon[] = [];
     const expectedAction = { type: ORDERS_HISTORY_CANCEL_DATA, payload };
     expect(actions.ordersHistoryCancelData(payload)).toEqual(expectedAction);
   });

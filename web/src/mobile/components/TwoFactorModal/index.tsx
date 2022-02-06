@@ -5,12 +5,15 @@ import { useIntl } from 'react-intl';
 import { CustomInput } from '../../../components/CustomInput';
 import { MobileModal } from '../../components/Modal';
 
-export const TwoFactorModalComponent = (props) => {
+export const TwoFactorModalComponent = (props: {
+  handleToggle2FA: (arg0: string, arg1: boolean) => void;
+  showModal: boolean;
+}) => {
   const [code2FA, setCode2FA] = React.useState('');
   const [code2FAFocus, setCode2FAFocus] = React.useState(false);
   const intl = useIntl();
 
-  const handleToggle2FA = (shouldFetch) => {
+  const handleToggle2FA = (shouldFetch: boolean) => {
     props.handleToggle2FA(code2FA, shouldFetch);
     setCode2FA('');
   };

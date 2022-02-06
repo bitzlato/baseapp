@@ -1,11 +1,11 @@
-import React, { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { LogoIcon } from '../../../../assets/images/LogoIcon';
 import { CustomizationSettingsInterface, LogoInterface } from '../../../../themes';
 import { CustomInput } from '../../../index';
 
 interface ParentProps {
   resetToDefault: boolean;
-  imageTitle: string;
+  imageTitle: 'header_logo';
   maxWidth: number;
   handleSetHeaderLogo: (value: LogoInterface) => void;
   translate: (key: string) => string;
@@ -21,11 +21,11 @@ const DEFAULT_IMAGE: LogoInterface = {
 export const ImageSettings: FC<Props> = (props: Props) => {
   const [imageFromConfig, setImageFromConfig] = useState<LogoInterface>(DEFAULT_IMAGE);
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleSetImageFromConfig();
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (props.resetToDefault) {
       handleSetImageFromConfig();
     }
@@ -36,7 +36,7 @@ export const ImageSettings: FC<Props> = (props: Props) => {
       ? JSON.parse(window.env.palette)
       : undefined;
 
-    const imageFromSettings: LogoInterface = settingsFromConfig?.[props.imageTitle];
+    const imageFromSettings: LogoInterface | undefined = settingsFromConfig?.[props.imageTitle];
 
     setImageFromConfig(imageFromSettings || DEFAULT_IMAGE);
   };
@@ -59,11 +59,11 @@ export const ImageSettings: FC<Props> = (props: Props) => {
           <img
             src={imageFromConfig.url}
             alt={`${props.imageTitle}`}
-            style={imageFromConfig.width ? { width: `${imageFromConfig.width}px` } : null}
+            style={imageFromConfig.width ? { width: `${imageFromConfig.width}px` } : undefined}
           />
         ) : (
           <LogoIcon
-            styles={imageFromConfig.width ? { width: `${imageFromConfig.width}px` } : null}
+            styles={imageFromConfig.width ? { width: `${imageFromConfig.width}px` } : undefined}
           />
         )}
       </div>

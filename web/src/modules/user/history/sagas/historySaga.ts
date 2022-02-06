@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { sendError, WalletHistoryList } from '../../../';
 import { API, defaultStorageLimit, RequestOptions } from '../../../../api';
 import { getHistorySagaParam, sliceArray } from '../../../../helpers';
 import { failHistory, HistoryFetch, successHistory } from '../actions';
@@ -18,20 +18,26 @@ export function* historySaga(action: HistoryFetch) {
       transfers: '/account/internal_transfers',
     };
     const params = getHistorySagaParam(action.payload);
-    const data = yield call(API.get(config), `${coreEndpoint[type]}?${params}`);
+    const data: unknown = yield call(
+      API.get(config),
+      `${coreEndpoint[type as keyof typeof coreEndpoint]}?${params}`,
+    );
 
     let nextPageExists = false;
 
-    if (limit && data.length === limit) {
+    if (limit && (data as any).length === limit) {
       const testActionPayload = {
         ...action.payload,
         page: (page + 1) * limit,
         limit: 1,
       };
       const testParams = getHistorySagaParam(testActionPayload);
-      const checkData = yield call(API.get(config), `${coreEndpoint[type]}?${testParams}`);
+      const checkData: unknown = yield call(
+        API.get(config),
+        `${coreEndpoint[type as keyof typeof coreEndpoint]}?${testParams}`,
+      );
 
-      if (checkData.length === 1) {
+      if ((checkData as any).length === 1) {
         nextPageExists = true;
       }
     }
@@ -41,7 +47,7 @@ export function* historySaga(action: HistoryFetch) {
       updatedData = sliceArray(data, defaultStorageLimit());
     }
 
-    yield put(successHistory({ list: updatedData, page, nextPageExists }));
+    yield put(successHistory({ list: updatedData as WalletHistoryList, page, nextPageExists }));
   } catch (error) {
     yield put(
       sendError({

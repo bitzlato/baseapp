@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { SortAsc, SortDefault, SortDesc } from 'src/assets/images/SortIcons';
 
 type Props = {

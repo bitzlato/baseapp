@@ -6,7 +6,7 @@ import { DepositIntention } from './types';
 export interface DepositIntentionState {
   data: DepositIntention;
   fetching: boolean;
-  error?: CommonError;
+  error?: CommonError | undefined;
 }
 
 export const initialDepositsState: DepositIntentionState = {

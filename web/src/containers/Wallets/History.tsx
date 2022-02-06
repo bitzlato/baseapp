@@ -151,7 +151,10 @@ export class WalletTable extends React.Component<Props> {
           ) : (
             <WithdrawStatus item={item as Withdraw} currency={currency} />
           ),
-          <AmountFormat key={index} money={createMoneyWithoutCcy(Number(item.amount), precision)} />
+          <AmountFormat
+            key={index}
+            money={createMoneyWithoutCcy(Number(item.amount), precision)}
+          />,
         ];
       });
   };
@@ -165,7 +168,7 @@ export const mapStateToProps = (state: RootState): ReduxProps => ({
   page: selectCurrentPage(state),
   firstElemIndex: selectFirstElemIndex(state, 6),
   lastElemIndex: selectLastElemIndex(state, 6),
-  nextPageExists: selectNextPageExists(state, 6),
+  nextPageExists: selectNextPageExists(state),
   withdrawSuccess: selectWithdrawSuccess(state),
 });
 

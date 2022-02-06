@@ -19,7 +19,7 @@ export interface EmailVerificationFetch {
   type: typeof EMAIL_VERIFICATION_FETCH;
   payload: {
     email: string;
-    captcha_response?: string | GeetestCaptchaResponse;
+    captcha_response?: string | GeetestCaptchaResponse | undefined;
   };
 }
 

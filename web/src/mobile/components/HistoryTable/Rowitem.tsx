@@ -3,7 +3,12 @@ import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { localeDate } from '../../../helpers';
 
-const RowItemComponent = (props) => {
+const RowItemComponent = (props: {
+  amount: string | number;
+  fixed: number;
+  currency: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined;
+  createdAt: any;
+}) => {
   return (
     <div className="cr-mobile-table-row">
       <div className="cr-mobile-table-row__amount">

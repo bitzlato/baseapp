@@ -36,49 +36,49 @@ export interface TableProps {
   /**
    * Renders table head.
    */
-  header?: React.ReactNode[];
+  header?: React.ReactNode[] | undefined;
   /**
    *  Pair name & filter is used to filter table data depending on a filter
    */
-  filters?: Filter[];
+  filters?: Filter[] | undefined;
   /**
    * Row's unique key, could be a number - element's index in data
    */
-  rowKeyIndex?: number;
+  rowKeyIndex?: number | undefined;
   /**
    * Key of selected row, could be a string
    */
-  selectedKey?: string;
+  selectedKey?: string | undefined;
   /**
    * Callback called when a row is selected
    */
-  onSelect?: (key: string) => void;
+  onSelect?: ((key: string) => void) | undefined;
   /**
    * Header which is displayed above the table
    */
-  titleComponent?: React.ReactNode;
+  titleComponent?: React.ReactNode | undefined;
   /**
    * Defines whether row background shows or not, and calculates width of it
    */
-  rowBackground?: (row: number) => React.CSSProperties;
+  rowBackground?: ((row: number) => React.CSSProperties) | undefined;
   /**
    * Defines from what side row background starts `(left, right)`
    * @default 'left'
    */
-  side?: 'left' | 'right';
+  side?: 'left' | 'right' | undefined;
   /**
    * Sets row background color
    */
-  rowBackgroundColor?: string;
+  rowBackgroundColor?: string | undefined;
   /**
    * Sets colspan count for empty table
    */
-  colSpan?: number;
+  colSpan?: number | undefined;
   /**
    * Additional custom render functions
    */
-  renderCell?: (data: CellData, col: number) => React.ReactNode;
-  tableClassName?: string;
+  renderCell?: ((data: CellData, col: number) => React.ReactNode) | undefined;
+  tableClassName?: string | undefined;
 }
 
 /**
@@ -192,7 +192,7 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
   const renderBackground = React.useCallback(
     (rows: CellData[][]) => {
       const dataToBeMapped = resultData || rows;
-      const renderBackgroundRow = (r: CellData[], i: number) => renderRowBackground(i);
+      const renderBackgroundRow = (_: CellData[], i: number) => renderRowBackground(i);
 
       const className = cn('cr-table-background', {
         'cr-table-background--left': side === 'left',

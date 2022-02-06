@@ -1,14 +1,14 @@
-import React, { FC, useContext, ReactNode } from 'react';
+import { FC, useContext, ReactNode } from 'react';
 import cn from 'classnames';
 import { TabsContext } from 'src/components/Tabs';
 
 import s from './Tab.postcss';
 
 interface Props {
-  activeClassName?: string;
+  activeClassName?: string | undefined;
   children: ReactNode;
-  className?: string;
-  size?: 'small' | 'medium' | 'large';
+  className?: string | undefined;
+  size?: 'small' | 'medium' | 'large' | undefined;
   value: string;
 }
 
@@ -25,15 +25,17 @@ export const Tab: FC<Props> = ({
 
   return (
     <button
-      className={cn({
-        [s.tab]: true,
-        [s.tabActive]: isActive,
-        [s.tabSmall]: size === 'small',
-        [s.tabMedium]: size === 'medium',
-        [s.tabLarge]: size === 'large',
-        [className]: true,
-        [activeClassName]: isActive,
-      })}
+      className={cn(
+        {
+          [s.tab]: true,
+          [s.tabActive]: isActive,
+          [s.tabSmall]: size === 'small',
+          [s.tabMedium]: size === 'medium',
+          [s.tabLarge]: size === 'large',
+        },
+        className,
+        isActive && activeClassName,
+      )}
       type="button"
       onClick={handleClick}
     >

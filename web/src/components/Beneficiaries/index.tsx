@@ -156,7 +156,7 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
       filteredByState = handleFilterByState(beneficiariesList, 'pending');
     }
 
-    if (filteredByState.length) {
+    if (filteredByState.length >= 1 && filteredByState[0]) {
       handleSetCurrentAddress(filteredByState[0]);
     }
   }, []);
@@ -288,7 +288,7 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
           <div className={dropdownClassName}>
             <div
               className="pg-beneficiaries__dropdown__select fiat-select select"
-              onClick={(e) => setDropdownState(!isOpenDropdown)}
+              onClick={() => setDropdownState(!isOpenDropdown)}
             >
               <div className="select__left">
                 <span className="select__left__title">

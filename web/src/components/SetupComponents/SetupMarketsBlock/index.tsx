@@ -234,10 +234,10 @@ export class SetupMarketsBlock extends React.Component<
 
         return undefined;
       })
-      .filter((item) => item !== undefined);
+      .filter((item) => item !== undefined) as MarketUpdateItem[];
 
     this.props.handleClickSave(payloadMarkets);
   };
 
-  private getAllMarketsNames = (marketsList) => marketsList.map((market) => market.name);
+  private getAllMarketsNames = (marketsList: any) => marketsList.map((market: any) => market.name);
 }

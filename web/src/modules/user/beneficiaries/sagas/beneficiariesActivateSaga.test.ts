@@ -82,7 +82,7 @@ describe('Beneficiaries Activate', () => {
           const actions = store.getActions();
           if (actions.length === expectedBeneficiariesActivateSuccess.length) {
             expect(actions).toEqual(expectedBeneficiariesActivateSuccess);
-            resolve();
+            resolve(undefined);
           }
         });
       });
@@ -98,7 +98,7 @@ describe('Beneficiaries Activate', () => {
           const actions = store.getActions();
           if (actions.length === expectedBeneficiariesActivateError.length) {
             expect(actions).toEqual(expectedBeneficiariesActivateError);
-            resolve();
+            resolve(undefined);
           }
         });
       });
