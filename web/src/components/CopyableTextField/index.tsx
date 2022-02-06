@@ -16,7 +16,7 @@ export interface CopyableTextFieldProps {
    * Additional class name for styling. By default element receives `cr-button` class
    * @default empty
    */
-  className?: string;
+  className?: string | undefined;
   /**
    * String value that makes copy field be unique
    */
@@ -25,9 +25,9 @@ export interface CopyableTextFieldProps {
    * @default 'false'
    * If true, Button will be disabled.
    */
-  disabled?: boolean;
-  label?: string;
-  onCopy?: () => void;
+  disabled?: boolean | undefined;
+  label?: string | undefined;
+  onCopy?: (() => void) | undefined;
 }
 
 /**

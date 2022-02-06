@@ -96,7 +96,7 @@ class ChangeForgottenPasswordComponent extends React.Component<
     );
   }
 
-  private handleSendNewPassword = (payload) => {
+  private handleSendNewPassword = (payload: any) => {
     const { confirmToken } = this.state;
     this.props.changeForgotPasswordFetch({
       ...payload,

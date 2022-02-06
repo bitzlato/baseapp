@@ -4,8 +4,8 @@ import type { ApiCurrency, Market, Wallet } from '../../modules';
 interface SwapState {
   fromList: string[];
   toList: string[];
-  market?: Market;
-  recommendTo?: string;
+  market?: Market | undefined;
+  recommendTo?: string | undefined;
 }
 
 export function getCurrencies(markets: Market[], from: string, to: string): SwapState {
@@ -51,7 +51,7 @@ export function getCurrencies(markets: Market[], from: string, to: string): Swap
 
 function insertUnique(items: string[], value: string) {
   const index = lowerBound(items, value, lessName);
-  const found = index !== items.length && !lessName(value, items[index]);
+  const found = index !== items.length && !lessName(value, items[index]!);
   if (!found) {
     items.splice(index, 0, value);
   }

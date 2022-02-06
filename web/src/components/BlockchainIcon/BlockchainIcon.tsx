@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { HTIcon } from 'src/assets/icons/HTIcon';
 import { BNBIcon } from 'src/assets/icons/BNBIcon';
 

@@ -3,11 +3,11 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { changeColorTheme, selectCurrentColorTheme } from '../../../modules';
+import { changeColorTheme, selectCurrentColorTheme, Theme } from '../../../modules';
 import { CheckIcon } from '../../assets/images/CheckIcon';
 import { Subheader } from '../../components/Subheader';
 
-const COLOR_THEMES = ['dark', 'light'];
+const COLOR_THEMES: Theme[] = ['dark', 'light'];
 
 const ProfileThemeMobileScreenComponent: React.FC = () => {
   const intl = useIntl();
@@ -21,7 +21,7 @@ const ProfileThemeMobileScreenComponent: React.FC = () => {
     }
   };
 
-  const renderThemeListItem = (colorTheme, index) => {
+  const renderThemeListItem = (colorTheme: Theme, index: number) => {
     const listItemClassName = classnames('pg-mobile-profile-theme-screen__list__item', {
       'pg-mobile-profile-theme-screen__list__item--active': colorTheme === currentColorTheme,
     });

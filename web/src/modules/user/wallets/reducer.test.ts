@@ -21,6 +21,16 @@ describe('walletsList reducer', () => {
       type: 'coin',
       precision: 8,
       icon_id: '',
+
+      id: '',
+      symbol: '',
+      deposit_fee: '',
+      min_confirmations: 0,
+      min_deposit_amount: '',
+      deposit_enabled: false,
+      withdrawal_enabled: false,
+      withdrawal_disabled_reason: '',
+      base_factor: 0,
     },
     {
       balance: '0',
@@ -37,6 +47,16 @@ describe('walletsList reducer', () => {
       type: 'coin',
       precision: 8,
       icon_id: '',
+
+      id: '',
+      symbol: '',
+      deposit_fee: '',
+      min_confirmations: 0,
+      min_deposit_amount: '',
+      deposit_enabled: false,
+      withdrawal_enabled: false,
+      withdrawal_disabled_reason: '',
+      base_factor: 0,
     },
     {
       balance: '0',
@@ -53,6 +73,16 @@ describe('walletsList reducer', () => {
       type: 'coin',
       precision: 8,
       icon_id: '',
+
+      id: '',
+      symbol: '',
+      deposit_fee: '',
+      min_confirmations: 0,
+      min_deposit_amount: '',
+      deposit_enabled: false,
+      withdrawal_enabled: false,
+      withdrawal_disabled_reason: '',
+      base_factor: 0,
     },
   ];
 
@@ -164,6 +194,16 @@ describe('walletsList reducer', () => {
           state: 'active',
         },
         icon_id: '',
+
+        id: '',
+        symbol: '',
+        deposit_fee: '',
+        min_confirmations: 0,
+        min_deposit_amount: '',
+        deposit_enabled: false,
+        withdrawal_enabled: false,
+        withdrawal_disabled_reason: '',
+        base_factor: 0,
       },
       {
         balance: '0',
@@ -180,6 +220,16 @@ describe('walletsList reducer', () => {
         type: 'coin',
         precision: 8,
         icon_id: '',
+
+        id: '',
+        symbol: '',
+        deposit_fee: '',
+        min_confirmations: 0,
+        min_deposit_amount: '',
+        deposit_enabled: false,
+        withdrawal_enabled: false,
+        withdrawal_disabled_reason: '',
+        base_factor: 0,
       },
       {
         balance: '0',
@@ -196,6 +246,16 @@ describe('walletsList reducer', () => {
         type: 'coin',
         precision: 8,
         icon_id: '',
+
+        id: '',
+        symbol: '',
+        deposit_fee: '',
+        min_confirmations: 0,
+        min_deposit_amount: '',
+        deposit_enabled: false,
+        withdrawal_enabled: false,
+        withdrawal_disabled_reason: '',
+        base_factor: 0,
       },
     ];
 

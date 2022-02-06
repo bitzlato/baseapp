@@ -1,8 +1,8 @@
-const buildQueryArray = (data) => {
+const buildQueryArray = (data: any) => {
   let queryArray = '';
 
   if (data && data[0] && data[1]) {
-    data[1].reduce((acc, cur) => {
+    data[1].reduce((acc: any, cur: any) => {
       queryArray = `${queryArray}${data[0]}[]=${encodeURIComponent(cur)}&`;
 
       return acc;
@@ -14,7 +14,7 @@ const buildQueryArray = (data) => {
 };
 
 // tslint:disable:no-any
-export const buildQueryString = (action: any, key?: string) =>
+export const buildQueryString = (action: any) =>
   Object.entries(action)
     .filter((w) => w[1] !== '' && w[1] !== undefined)
     .map((k: any) => {

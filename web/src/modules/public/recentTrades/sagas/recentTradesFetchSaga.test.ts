@@ -89,7 +89,7 @@ describe('Recent Trades module', () => {
         const actions = store.getActions();
         if (actions.length === expectedActions.length) {
           expect(actions).toEqual(expectedActions);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -116,7 +116,7 @@ describe('Recent Trades module', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsError.length) {
           expect(actions).toEqual(expectedActionsError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

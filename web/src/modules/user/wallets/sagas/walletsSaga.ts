@@ -1,13 +1,13 @@
 import { call, put } from 'redux-saga/effects';
 import { AccountBalanceSource, CurrencySource, sendError, WalletSource } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { walletsData, walletsError, WalletsFetch } from '../actions';
+import { walletsData, walletsError } from '../actions';
 
 const OPTIONS: RequestOptions = {
   apiVersion: 'peatio',
 };
 
-export function* walletsSaga(action: WalletsFetch) {
+export function* walletsSaga() {
   try {
     const accounts: AccountBalanceSource[] = yield call(API.get(OPTIONS), '/account/balances');
     const currencies: CurrencySource[] = yield call(API.get(OPTIONS), '/public/currencies');

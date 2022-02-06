@@ -7,27 +7,27 @@ import sLabel from '../Label/Label.postcss';
 export type TextColor = 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask';
 
 type BoxOwnProps<E = React.ElementType> = {
-  as?: E;
-  className?: string;
-  row?: boolean;
-  col?: boolean;
-  grow?: boolean;
-  flex1?: boolean;
-  wrap?: boolean;
-  position?: 'relative' | 'absolute';
-  justify?: 'end' | 'center' | 'between' | 'around';
-  align?: 'start' | 'end' | 'center' | 'stretch';
-  self?: 'start' | 'center' | 'end' | 'stretch';
-  spacing?: boolean | '2' | '3' | '4' | '5' | 'sm';
-  gap?: boolean | '2' | '3' | '4' | '5' | 'sm';
-  padding?: boolean | '2' | '3' | '4' | '5' | '2X3';
-  textSize?: 'sm' | 'lg' | 'xl';
-  textColor?: TextColor;
-  textTr?: 'capitalize' | 'uppercase';
-  textAlign?: 'start' | 'center' | 'end';
-  bgColor?: 'body';
-  ellipsis?: boolean;
-  bold?: boolean;
+  as?: E | undefined;
+  className?: string | undefined;
+  row?: boolean | undefined;
+  col?: boolean | undefined;
+  grow?: boolean | undefined;
+  flex1?: boolean | undefined;
+  wrap?: boolean | undefined;
+  position?: 'relative' | 'absolute' | undefined;
+  justify?: 'end' | 'center' | 'between' | 'around' | undefined;
+  align?: 'start' | 'end' | 'center' | 'stretch' | undefined;
+  self?: 'start' | 'center' | 'end' | 'stretch' | undefined;
+  spacing?: boolean | '2' | '3' | '4' | '5' | 'sm' | undefined;
+  gap?: boolean | '2' | '3' | '4' | '5' | 'sm' | undefined;
+  padding?: boolean | '2' | '3' | '4' | '5' | '2X3' | undefined;
+  textSize?: 'sm' | 'lg' | 'xl' | undefined;
+  textColor?: TextColor | undefined;
+  textTr?: 'capitalize' | 'uppercase' | undefined;
+  textAlign?: 'start' | 'center' | 'end' | undefined;
+  bgColor?: 'body' | undefined;
+  ellipsis?: boolean | undefined;
+  bold?: boolean | undefined;
 };
 
 type Props<E extends React.ElementType> = BoxOwnProps<E> &

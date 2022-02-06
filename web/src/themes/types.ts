@@ -13,7 +13,7 @@ export interface LogoInterface {
 }
 
 export interface CustomizationSettingsInterface {
-  theme_id: number;
+  theme_id?: number;
   theme_colors: {
     [key: string]: ThemeColorInterface[];
   };

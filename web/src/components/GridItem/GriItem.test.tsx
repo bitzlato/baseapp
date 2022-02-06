@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import * as React from 'react';
 import { GridItem, GridItemProps } from '.';
 
 const defaultProps: GridItemProps = {

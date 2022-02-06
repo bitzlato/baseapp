@@ -10,7 +10,7 @@ export class ErrorWrapper extends React.Component<{}, { error: string }> {
     return { error: error.toString() };
   }
 
-  componentDidCatch(error: Error | string, info: React.ErrorInfo) {
+  componentDidCatch(error: Error | string) {
     this.setState({ error: error.toString() });
   }
 

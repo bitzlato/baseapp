@@ -26,7 +26,7 @@ import {
 
 interface ReduxProps {
   user: User;
-  passwordChangeSuccess?: boolean;
+  passwordChangeSuccess?: boolean | undefined;
   currentPasswordEntropy: number;
 }
 
@@ -276,8 +276,9 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
   };
 
   private handleFieldFocus = (field: string) => {
-    // @ts-ignore
+    // @ts-expect-error
     this.setState((prev) => ({
+      // @ts-expect-error
       [field]: !prev[field],
     }));
   };
@@ -289,11 +290,20 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
   currentPasswordEntropy: selectCurrentPasswordEntropy(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  changePassword: ({ old_password, new_password, confirm_password }) =>
-    dispatch(changePasswordFetch({ old_password, new_password, confirm_password })),
-  toggle2fa: ({ code, enable }) => dispatch(toggle2faFetch({ code, enable })),
-  fetchCurrentPasswordEntropy: (payload) => dispatch(entropyPasswordFetch(payload)),
+const mapDispatchToProps = (dispatch: any) => ({
+  changePassword: ({
+    old_password,
+    new_password,
+    confirm_password,
+  }: {
+    old_password: string;
+    new_password: string;
+    confirm_password: string;
+  }) => dispatch(changePasswordFetch({ old_password, new_password, confirm_password })),
+  toggle2fa: ({ code, enable }: { code: string; enable: boolean }) =>
+    dispatch(toggle2faFetch({ code, enable })),
+  fetchCurrentPasswordEntropy: (payload: { password: string }) =>
+    dispatch(entropyPasswordFetch(payload)),
   changePasswordReset: () => dispatch(changePasswordReset()),
 });
 

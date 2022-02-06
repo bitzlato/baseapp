@@ -31,7 +31,7 @@ export const ParametersItem: React.FC<ItemInterface> = (props: ItemInterface) =>
   }, [intl]);
 
   const getTableData = React.useCallback(() => {
-    return item.parameters.map((parameter) => {
+    return item.parameters.map((parameter: any) => {
       const getFormattedSchema = () => {
         switch (parameter.type) {
           case 'number':

@@ -15,7 +15,7 @@ export const initialLayoutState: GridLayoutState = {
   layouts: getLayoutFromLS('layouts') || layouts,
 };
 
-export const gridLayoutReducer = (state = initialLayoutState, action) => {
+export const gridLayoutReducer = (state = initialLayoutState, action: any) => {
   switch (action.type) {
     case SAVE_LAYOUTS:
       saveLayoutToLS(action.payload.key, action.payload.layouts);

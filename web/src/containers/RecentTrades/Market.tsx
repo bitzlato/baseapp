@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table } from '../../components';
@@ -19,21 +19,21 @@ const handleHighlightValue = (prevValue: string, curValue: string) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <span className="cr-decimal__opacity">{val}</span>
       <span>{highlighted}</span>
-    </React.Fragment>
+    </>
   );
 };
 
-const RecentTradesMarket = ({ recentTrades }) => {
+const RecentTradesMarket = ({ recentTrades }: any) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const currentMarket = useSelector(selectCurrentMarket);
   const currentPrice = useSelector(selectCurrentPrice);
 
-  const headers = React.useMemo(() => {
+  const headers = useMemo(() => {
     return [
       formatMessage({ id: 'page.body.trade.header.recentTrades.content.time' }),
       formatMessage({ id: 'page.body.trade.header.recentTrades.content.amount' }),
@@ -41,11 +41,11 @@ const RecentTradesMarket = ({ recentTrades }) => {
     ];
   }, []);
 
-  const getTrades = React.useCallback(() => {
+  const getTrades = useCallback(() => {
     const priceFixed = currentMarket ? currentMarket.price_precision : 0;
     const amountFixed = currentMarket ? currentMarket.amount_precision : 0;
 
-    const renderRow = (item, i) => {
+    const renderRow = (item: any, i: number) => {
       const { created_at, taker_type, price, amount } = item;
       const higlightedDate = handleHighlightValue(
         String(localeDate(recentTrades[i - 1] ? recentTrades[i - 1].created_at : '', 'time')),
@@ -77,7 +77,7 @@ const RecentTradesMarket = ({ recentTrades }) => {
     return recentTrades.length > 0 ? recentTrades.map(renderRow) : [[]];
   }, [currentMarket, recentTrades]);
 
-  const handleOnSelect = React.useCallback(
+  const handleOnSelect = useCallback(
     (index: string) => {
       const priceToSet = recentTrades[Number(index)]
         ? Number(recentTrades[Number(index)].price)
@@ -90,7 +90,7 @@ const RecentTradesMarket = ({ recentTrades }) => {
     [currentPrice, recentTrades],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (currentMarket) {
       dispatch(recentTradesFetch(currentMarket));
     }

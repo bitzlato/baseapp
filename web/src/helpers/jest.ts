@@ -8,7 +8,7 @@ import { Cryptobase } from '../api';
 import * as WebSocket from 'ws';
 
 // tslint:disable no-any no-console
-export const loggerMiddleware: Middleware = (store: {}) => (next: any) => (action: Action) => {
+export const loggerMiddleware: Middleware = () => (next: any) => (action: Action) => {
   console.log(`dispatching: ${JSON.stringify(action)}`);
 
   return next(action);
@@ -32,7 +32,7 @@ export const mockNetworkError = (mockAxios: any) => {
 
 export const createEchoServer = (port: number, debug: boolean) => {
   const server = new WebSocket.Server({ port: port });
-  server.on('connection', (ws, request) => {
+  server.on('connection', (ws) => {
     if (debug) {
       ws.addEventListener('open', () => {
         console.log(`Ping Server: listening on port ${port}`);

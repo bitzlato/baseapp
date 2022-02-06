@@ -26,7 +26,7 @@ interface RouterProps {
 interface ReduxProps {
   barcode: string;
   qrUrl: string;
-  success?: boolean;
+  success?: boolean | undefined;
   isMobileDevice: boolean;
 }
 
@@ -209,8 +209,9 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
   };
 
   private handleFieldFocus = (field: string) => {
-    // @ts-ignore
+    // @ts-expect-error
     this.setState((prev) => ({
+      // @ts-expect-error
       [field]: !prev[field],
     }));
   };

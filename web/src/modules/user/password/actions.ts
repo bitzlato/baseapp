@@ -12,7 +12,7 @@ export interface ForgotPasswordFetch {
   type: typeof PASSWORD_FORGOT_FETCH;
   payload: {
     email: string;
-    captcha_response?: string | GeetestCaptchaResponse;
+    captcha_response?: string | GeetestCaptchaResponse | undefined;
   };
 }
 

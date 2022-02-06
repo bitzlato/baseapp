@@ -1,15 +1,18 @@
 import { call, put } from 'redux-saga/effects';
 import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { geetestCaptchaData, geetestCaptchaError, GeetestCaptchaFetch } from '../actions';
+import { geetestCaptchaData, geetestCaptchaError, GeetestCaptchaKeys } from '../actions';
 
 const sessionsConfig: RequestOptions = {
   apiVersion: 'barong',
 };
 
-export function* geetestCaptchaSaga(action: GeetestCaptchaFetch) {
+export function* geetestCaptchaSaga() {
   try {
-    const keys = yield call(API.get(sessionsConfig), '/identity/users/register_geetest');
+    const keys: GeetestCaptchaKeys = yield call(
+      API.get(sessionsConfig),
+      '/identity/users/register_geetest',
+    );
     yield put(geetestCaptchaData(keys));
   } catch (error) {
     yield put(

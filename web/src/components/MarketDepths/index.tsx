@@ -1,16 +1,16 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-// import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, TooltipPayload, XAxis, YAxis } from 'recharts';
-
-import AreaChart from 'recharts/lib/chart/AreaChart';
-import Tooltip from 'recharts/lib/component/Tooltip';
-import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
-import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid';
-import Area from 'recharts/lib/cartesian/Area';
-import XAxis from 'recharts/lib/cartesian/XAxis';
-import YAxis from 'recharts/lib/cartesian/YAxis';
-import { TooltipPayload } from 'recharts/lib/numberAxis/Funnel';
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  TooltipPayload,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 import { colors } from '../../constants';
 import { convertRgbToHex, getStylesValueByKey } from '../../helpers';
@@ -32,10 +32,10 @@ export interface TooltipColors {
 type TooltipPayloadProp = TooltipPayload & { payload?: TooltipPayload };
 
 interface CustomToolTipProps {
-  toolTipColors?: TooltipColors;
-  active?: boolean;
+  toolTipColors?: TooltipColors | undefined;
+  active?: boolean | undefined;
   external: KeyValuePairMarketDepths[];
-  payload?: TooltipPayloadProp[];
+  payload?: TooltipPayloadProp[] | undefined;
 }
 
 interface CustomActiveDotProps {
@@ -51,7 +51,7 @@ export interface MarketDepthsProps {
    * class
    * @default empty
    */
-  className?: string;
+  className?: string | undefined;
   /**
    * MarketDepths details data for building the plot
    */
@@ -63,12 +63,12 @@ export interface MarketDepthsProps {
   /**
    * Settings to be applied to a chart
    */
-  settings?: MarketDepthsSettings;
+  settings?: MarketDepthsSettings | undefined;
   /**
    * If true, grid will be hidden
    * @default false
    */
-  hideCartesianGrid?: boolean;
+  hideCartesianGrid?: boolean | undefined;
   /**
    * Defines interval of values that should be displayed on x-axis
    */
@@ -81,7 +81,7 @@ export interface MarketDepthsProps {
    * Orientation for y-axis
    * @default 'left'
    */
-  orientation?: 'left' | 'right';
+  orientation?: 'left' | 'right' | undefined;
   /**
    * Chart type
    * @default 'step'
@@ -98,17 +98,18 @@ export interface MarketDepthsProps {
     | 'monotone'
     | 'step'
     | 'stepBefore'
-    | 'stepAfter';
+    | 'stepAfter'
+    | undefined;
   /**
    * Property for gradient of background of ask or bid
    * @default false
    */
-  gradientHide?: boolean;
+  gradientHide?: boolean | undefined;
   /**
    * Current color theme mode
    *  @default 'dark'
    */
-  colorTheme?: string;
+  colorTheme?: string | undefined;
 }
 
 export interface MarketDepthsSettings {
@@ -251,7 +252,7 @@ export class MarketDepths extends React.PureComponent<MarketDepthsProps> {
 
     return (
       <div className={cx}>
-        <ResponsiveContainer width="100%" height={settings.height}>
+        <ResponsiveContainer width="100%" height={settings.height as string}>
           <AreaChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
             {this.defineGradient(colorSettings, gradientHide)}
             {hideCartesianGrid ? null : (
@@ -275,19 +276,20 @@ export class MarketDepths extends React.PureComponent<MarketDepthsProps> {
             {settings.tooltip ? (
               <Tooltip content={<CustomTooltip toolTipColors={toolTipColors} external={data} />} />
             ) : null}
+
             <Area
               type={chartType ? chartType : 'step'}
               dataKey="bid"
               stroke={colorSettings.strokeAreaBidColor}
               fill="url(#bidChartColor)"
-              activeDot={settings.activeDot}
+              activeDot={settings.activeDot as CustomActiveDotProps}
             />
             <Area
               type={chartType ? chartType : 'step'}
               dataKey="ask"
               stroke={colorSettings.strokeAreaAskColor}
               fill="url(#askChartColor)"
-              activeDot={settings.activeDot}
+              activeDot={settings.activeDot as CustomActiveDotProps}
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -295,7 +297,7 @@ export class MarketDepths extends React.PureComponent<MarketDepthsProps> {
     );
   }
 
-  public defineGradient = (colorSettings, value?: boolean) => {
+  public defineGradient = (colorSettings: ReturnType<typeof getColorSettings>, value?: boolean) => {
     if (value) {
       return (
         <defs>

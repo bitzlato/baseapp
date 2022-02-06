@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import cn from 'classnames';
@@ -72,7 +72,7 @@ export const QuickExchangeContainer: React.FC = () => {
 
   const t = useT();
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(quickExchangeLimitsFetch());
   }, [dispatch]);
 

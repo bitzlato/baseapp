@@ -83,11 +83,11 @@ import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMob
 
 interface ReduxProps {
   colorTheme: string;
-  currentMarket?: Market;
+  currentMarket?: Market | undefined;
   user: User;
   isLoggedIn: boolean;
   isMobileDevice: boolean;
-  userLoading?: boolean;
+  userLoading?: boolean | undefined;
   platformAccessStatus: string;
   abilities: AbilitiesInterface;
   verifyEmail: boolean;
@@ -215,7 +215,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       }
     }
 
-    applyCustomizationSettings(null, this.props.toggleChartRebuild);
+    applyCustomizationSettings(undefined, this.props.toggleChartRebuild);
   }
 
   public UNSAFE_componentWillReceiveProps(nextProps: LayoutProps) {
@@ -302,7 +302,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     if (wizardStep() !== 'false' && this.props.location.pathname !== '/setup') {
       return (
         <div className={isMobileDevice ? mobileCls : desktopCls}>
-          <Route loading={userLoading} isLogged={isLoggedIn}>
+          <Route>
             <Redirect to={'/setup'} />
           </Route>
         </div>
@@ -413,10 +413,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               path="/profile"
               component={ProfileMobileScreen}
             />
-            <Route exact={true} path="/trading/:market?" component={TradingScreenMobile} />
-            {showLanding() && <Route exact={true} path="/" component={LandingScreenMobile} />}
-            <Route path="/quick-exchange" component={QuickExchange} />
-            <Route path="/fees" component={FeesScreen} />
+            <Route exact={true} path="/trading/:market?" component={TradingScreenMobile as any} />
+            {showLanding() && (
+              <Route exact={true} path="/" component={LandingScreenMobile as any} />
+            )}
+            <Route path="/quick-exchange" component={QuickExchange as any} />
+            <Route path="/fees" component={FeesScreen as any} />
             <Route path="**">
               <Redirect to="/trading/" />
             </Route>
@@ -436,7 +438,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/setup"
             component={SetupScreen}
           />
-          <Route exact={true} path="/magic-link" component={MagicLink} />
+          <Route exact={true} path="/magic-link" component={MagicLink as any} />
           <PublicRoute path="/signin" component={SignInAuth0} />
           <PublicRoute path="/signup" component={SignInAuth0} />
           <PublicRoute
@@ -463,12 +465,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/email-verification"
             component={EmailVerificationScreen}
           />
-          <Route path="/docs" component={DocumentationScreen} />
-          <Route path="/fees" component={FeesScreen} />
-          <Route path="/restriction" component={RestrictedScreen} />
-          <Route path="/maintenance" component={MaintenanceScreen} />
-          <Route exact={true} path="/trading/:market?" component={TradingScreen} />
-          {showLanding() && <Route exact={true} path="/" component={LandingScreen} />}
+          <Route path="/docs" component={DocumentationScreen as any} />
+          <Route path="/fees" component={FeesScreen as any} />
+          <Route path="/restriction" component={RestrictedScreen as any} />
+          <Route path="/maintenance" component={MaintenanceScreen as any} />
+          <Route exact={true} path="/trading/:market?" component={TradingScreen as any} />
+          {showLanding() && <Route exact={true} path="/" component={LandingScreen as any} />}
           <PrivateRoute
             loading={userLoading}
             isLogged={isLoggedIn}
@@ -511,7 +513,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/internal-transfer"
             component={InternalTransfer}
           />
-          <Route path="/quick-exchange" component={QuickExchange} />
+          <Route path="/quick-exchange" component={QuickExchange as any} />
           <Route path="**">
             <Redirect to="/trading/" />
           </Route>

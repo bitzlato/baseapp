@@ -23,7 +23,7 @@ import {
 
 interface ReduxProps {
   lang: string;
-  success?: string;
+  success?: string | undefined;
   isMobileDevice: boolean;
   loading: boolean;
 }
@@ -233,7 +233,7 @@ class AddressComponent extends React.Component<Props, State> {
     };
   };
 
-  private handleUploadScan = (uploadEvent, id) => {
+  private handleUploadScan = (uploadEvent: any, id: string) => {
     const allFiles: File[] = uploadEvent.target.files;
     const maxDocsCount = 1;
     const additionalFileList =
@@ -247,13 +247,13 @@ class AddressComponent extends React.Component<Props, State> {
 
     switch (id) {
       case 'fileScan':
-        const sizeKB = (additionalFileList[0].size / 1024).toFixed(1);
+        const sizeKB = (additionalFileList[0]!.size / 1024).toFixed(1);
 
-        if (additionalFileList[0].size > barongUploadSizeMaxRange * 1024 * 1024) {
+        if (additionalFileList[0]!.size > barongUploadSizeMaxRange * 1024 * 1024) {
           this.setState({
             fileSizeErrorMessage: this.translate('page.body.kyc.uploadFile.error.tooBig', sizeKB),
           });
-        } else if (additionalFileList[0].size < barongUploadSizeMinRange * 1024 * 1024) {
+        } else if (additionalFileList[0]!.size < barongUploadSizeMinRange * 1024 * 1024) {
           this.setState({
             fileSizeErrorMessage: this.translate('page.body.kyc.uploadFile.error.tooSmall', sizeKB),
           });
@@ -287,7 +287,7 @@ class AddressComponent extends React.Component<Props, State> {
     }
   };
 
-  private selectCountry = (option) => {
+  private selectCountry = (option: any) => {
     this.setState({
       country: countries.getAlpha2Code(option.value, this.props.lang),
     });
@@ -316,7 +316,7 @@ class AddressComponent extends React.Component<Props, State> {
     const { address, city, country, fileScan, postcode } = this.state;
 
     const request = new FormData();
-    request.append('upload[]', fileScan[0]);
+    request.append('upload[]', fileScan[0]!);
     request.append('address', address);
     request.append('city', city);
     request.append('country', country);

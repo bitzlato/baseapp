@@ -214,7 +214,7 @@ describe('Module: Wallets', () => {
     if (!walletInfo) {
       walletInfo = {
         currency: currencyInfo.id,
-      };
+      } as any;
     }
 
     return {
@@ -228,7 +228,7 @@ describe('Module: Wallets', () => {
       iconUrl: currencyInfo.icon_url,
       icon_id: '',
     };
-  });
+  }) as any;
 
   const mockWallets = () => {
     mockAxios.onGet('/account/balances').reply(200, fakeAccounts);
@@ -254,7 +254,7 @@ describe('Module: Wallets', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsFetch.length) {
           expect(actions).toEqual(expectedActionsFetch);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -271,7 +271,7 @@ describe('Module: Wallets', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsError.length) {
           expect(actions).toEqual(expectedActionsError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

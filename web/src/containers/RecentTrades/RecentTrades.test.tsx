@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import * as React from 'react';
 import { connect, Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { RecentTrades } from '..';

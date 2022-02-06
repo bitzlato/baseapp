@@ -32,8 +32,8 @@ import { IdentityData } from '../../../modules/user/kyc/identity/types';
 import * as countries from 'i18n-iso-countries';
 
 interface ReduxProps {
-  editSuccess?: string;
-  sendSuccess?: string;
+  editSuccess?: string | undefined;
+  sendSuccess?: string | undefined;
   lang: string;
   labels: Label[];
   user: User;
@@ -385,7 +385,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
     });
   };
 
-  private selectCountry = (option) => {
+  private selectCountry = (option: any) => {
     this.setState({
       countryOfBirth: countries.getAlpha2Code(option.value, this.props.lang),
     });
@@ -449,7 +449,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
     );
   };
 
-  private sendData = (event) => {
+  private sendData = (event: any) => {
     event.preventDefault();
     const { labels, user } = this.props;
     const dob = !isDateInFuture(this.state.dateOfBirth) ? this.state.dateOfBirth : '';

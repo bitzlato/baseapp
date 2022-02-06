@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
@@ -23,8 +23,8 @@ const defaultTicker = {
 };
 
 interface Props {
-  handleChangeCurrentMarket?: (market: Market) => void;
-  markets: readonly Market[];
+  handleChangeCurrentMarket?: ((market: Market) => void) | undefined;
+  markets?: readonly Market[] | undefined;
 }
 
 const MarketsTableComponent: FC<Props> = (props) => {
@@ -36,7 +36,7 @@ const MarketsTableComponent: FC<Props> = (props) => {
   const markets = useSelector(selectMarkets);
   const marketTickers = useSelector(selectMarketTickers);
   const userData = useSelector(selectUserInfo);
-  const [currentBidUnit, setCurrentBidUnit] = React.useState('');
+  const [currentBidUnit, setCurrentBidUnit] = useState('');
 
   const handleRedirectToTrading = (id: string) => {
     const currentMarket: Market | undefined = markets.find((item) => item.id === id);
@@ -143,4 +143,4 @@ const MarketsTableComponent: FC<Props> = (props) => {
   );
 };
 
-export const MarketsTable = React.memo(MarketsTableComponent);
+export const MarketsTable = memo(MarketsTableComponent);

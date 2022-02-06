@@ -1675,7 +1675,7 @@ __metadata:
     "@types/enzyme": ^3.10.11
     "@types/eslint": ^8
     "@types/jest": ^27.4.0
-    "@types/react": ^17
+    "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.11
     "@types/testing-library__jest-dom": ^5
     "@typescript-eslint/eslint-plugin": ^5.10.1
@@ -3699,6 +3699,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/d3-path@npm:^1":
+  version: 1.0.9
+  resolution: "@types/d3-path@npm:1.0.9"
+  checksum: acbf7376fd7bef61701bce915bf5a9cb5eaa9741b7919d3e644f841a65faf1aea3cf63ba949c21ddda8c9849221394856a2054805aa698d3bb5ac3fe7d029817
+  languageName: node
+  linkType: hard
+
+"@types/d3-shape@npm:^1":
+  version: 1.3.8
+  resolution: "@types/d3-shape@npm:1.3.8"
+  dependencies:
+    "@types/d3-path": ^1
+  checksum: a7f78a3f0be1215b512efb636ba381768ab4104ef9b72b7fcc2ab9810e7d6fc2ee062f3103ef99236f4462deabac60d2fd96375315ec7ad33278757918c94592
+  languageName: node
+  linkType: hard
+
 "@types/enzyme@npm:^3.10.11":
   version: 3.10.11
   resolution: "@types/enzyme@npm:3.10.11"
@@ -3791,6 +3807,13 @@ __metadata:
   version: 4.7.8
   resolution: "@types/history@npm:4.7.8"
   checksum: 9c867532afd80f72a7101a5bb3c10c1ad7cc8c2c14e92fdbc54d5fed0ef8cdb6060c0f261a39884e243424636c6ff85d8aaffb984e2edaac348d2f216f9eedeb
+  languageName: node
+  linkType: hard
+
+"@types/history@npm:^4.7.11":
+  version: 4.7.11
+  resolution: "@types/history@npm:4.7.11"
+  checksum: c92e2ba407dcab0581a9afdf98f533aa41b61a71133420a6d92b1ca9839f741ab1f9395b17454ba5b88cb86020b70b22d74a1950ccfbdfd9beeaa5459fdc3464
   languageName: node
   linkType: hard
 
@@ -3916,6 +3939,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/multicoin-address-validator@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@types/multicoin-address-validator@npm:0.5.0"
+  checksum: 94a1f9147fdc7420bd3708dbe39774072dbb9983197b11c2d93fa204387dbb98efb8caf98a0b1b34d2fe82c16992e5fe741f627e8484bd2b3a6fade42d800fa6
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 14.14.22
   resolution: "@types/node@npm:14.14.22"
@@ -3995,7 +4025,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^17, @types/react-dom@npm:^17.0.11":
+"@types/react-color@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "@types/react-color@npm:3.0.6"
+  dependencies:
+    "@types/react": "*"
+    "@types/reactcss": "*"
+  checksum: 8cd881d6eb725190be942c1d71f7917d3dd1b418417740f64fa6c03ae3ba16cb91d07c4b3b348cf5bae20071c8ca5d4aaf514c9a5318077d5e50bd782a5e8da2
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^17.0.11":
   version: 17.0.11
   resolution: "@types/react-dom@npm:17.0.11"
   dependencies:
@@ -4004,7 +4044,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-redux@npm:^7.1.20":
+"@types/react-google-recaptcha@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "@types/react-google-recaptcha@npm:2.1.3"
+  dependencies:
+    "@types/react": "*"
+  checksum: b322326e3614035392b760ebbf546a4a23abda7fe5e4c357512ff914bce8dac524fde3ce3f532602e09d215bd2352928c06328b4a817767f43dc0c762ecb5b86
+  languageName: node
+  linkType: hard
+
+"@types/react-redux@npm:^7.1.20, @types/react-redux@npm:^7.1.22":
   version: 7.1.22
   resolution: "@types/react-redux@npm:7.1.22"
   dependencies:
@@ -4016,36 +4065,43 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-redux@npm:^7.1.9":
-  version: 7.1.16
-  resolution: "@types/react-redux@npm:7.1.16"
+"@types/react-router-dom@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "@types/react-router-dom@npm:5.3.3"
   dependencies:
-    "@types/hoist-non-react-statics": ^3.3.0
-    "@types/react": "*"
-    hoist-non-react-statics: ^3.3.0
-    redux: ^4.0.0
-  checksum: c07ee677be781df70aa6209d4152373ec470f6c99b50051e302add8b57d49e89322250959bf9e192738cccc5dbbe05c77514339a45b46ec973c8326227408f26
-  languageName: node
-  linkType: hard
-
-"@types/react-router-dom@npm:^5.1.3":
-  version: 5.1.7
-  resolution: "@types/react-router-dom@npm:5.1.7"
-  dependencies:
-    "@types/history": "*"
+    "@types/history": ^4.7.11
     "@types/react": "*"
     "@types/react-router": "*"
-  checksum: ad40f55557bb7cd8d19d783c1d7dbca85e8874e03cced37e464f74f9f0a588a9a7e411de74da362d1a5c5bf80f7aaca78fe9a66d26741e47c5c06e49a62d1229
+  checksum: 28c4ea48909803c414bf5a08502acbb8ba414669b4b43bb51297c05fe5addc4df0b8fd00e0a9d1e3535ec4073ef38aaafac2c4a2b95b787167d113bc059beff3
   languageName: node
   linkType: hard
 
-"@types/react-router@npm:*, @types/react-router@npm:^5.1.11":
+"@types/react-router@npm:*":
   version: 5.1.11
   resolution: "@types/react-router@npm:5.1.11"
   dependencies:
     "@types/history": "*"
     "@types/react": "*"
   checksum: 2fd07f4a764d4d2a2d83a86519bdfd77a49fdc1311000ed29d1aa28f21858b821bcb62303cbe51d27ac8fa0128ec63e63bf14ce766c4d3eed6b91caf9ccfe71e
+  languageName: node
+  linkType: hard
+
+"@types/react-router@npm:^5.1.18":
+  version: 5.1.18
+  resolution: "@types/react-router@npm:5.1.18"
+  dependencies:
+    "@types/history": ^4.7.11
+    "@types/react": "*"
+  checksum: f08b37ee822f9f9ff904ffd0778fe2bb7c717ed3ee311610382ee024d02a35169bd3301ecde863cac21aae8fdee919501e8ea22bad0260c02c10cfbdba5c71be
+  languageName: node
+  linkType: hard
+
+"@types/react-scroll@npm:^1.8.3":
+  version: 1.8.3
+  resolution: "@types/react-scroll@npm:1.8.3"
+  dependencies:
+    "@types/react": "*"
+  checksum: c3b0928b2a0bff92bc9c52de4c95c448f0569d01828fb80c135cf183819743dfbf859a57b60debc67501d7f64f7e1694c992e5d09898281c987869dd0ceace94
   languageName: node
   linkType: hard
 
@@ -4058,35 +4114,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16.9.11, @types/react@npm:>=16.9.35":
-  version: 17.0.0
-  resolution: "@types/react@npm:17.0.0"
-  dependencies:
-    "@types/prop-types": "*"
-    csstype: ^3.0.2
-  checksum: 0767d1c635613cb08de1ad6b8f73e3ee01ae0069733fa56382c72a8dbed741849e74f62a17756c7b76ccd2b57dd9891d5767c3134f35788720c6bb9c186a933b
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:17":
-  version: 17.0.19
-  resolution: "@types/react@npm:17.0.19"
+"@types/react@npm:^17.0.39":
+  version: 17.0.39
+  resolution: "@types/react@npm:17.0.39"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: d5af52623dd863e5a9f64eb72979f19c21e03012e25ee93adc93f664ed7976e81b654128dc653b225ad5ba2aaae24e0febe37face272bb051d6289e23ed7177d
+  checksum: bf04d3c2894559012710d595553e12b422d3b91cd8f4f7e122d8cb044ba9c2ba17f6e8a4e09581359cc5509ddc59cd8c8fabd6774f3505a40a45393f074d6e6e
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17":
-  version: 17.0.38
-  resolution: "@types/react@npm:17.0.38"
+"@types/reactcss@npm:*":
+  version: 1.2.6
+  resolution: "@types/reactcss@npm:1.2.6"
   dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: 4079f4f959cd4a4bfaeda8b89fe8a1b1f8bdc9d87acfdc5f74a0b39cec9ec6a470724357c62778c0f063180b360c250e920c5a142f1dbcda67d9cc25a6d43a85
+    "@types/react": "*"
+  checksum: f4711d707a1af653178c8941080e989a945feb0c529d848fed36687ee5e8a462cda183383caadf8848497b5c03bec16e6cdf22fc70462913d8d706cabb597130
+  languageName: node
+  linkType: hard
+
+"@types/recharts@npm:^1.8.23":
+  version: 1.8.23
+  resolution: "@types/recharts@npm:1.8.23"
+  dependencies:
+    "@types/d3-shape": ^1
+    "@types/react": "*"
+  checksum: 0588f6245f067583f14f98637e24c117cb7f90128926f9b09fa7ed7411a6391d47198afba60201759efd588d5e520cc88d04afdc11fda1d70c62ccee52c0f02f
   languageName: node
   linkType: hard
 
@@ -4162,12 +4216,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/swagger-ui-react@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@types/swagger-ui-react@npm:4.1.1"
+  dependencies:
+    "@types/react": "*"
+  checksum: 45888b93de441be5f9b3bb2acb8cdbc2f0dc9b88be3120bc5d1b8e9a2b8c37f66adb1b25a833e26983d91892c71bb6d2e92e3d4df3ad329394720be4c44e2924
+  languageName: node
+  linkType: hard
+
 "@types/testing-library__jest-dom@npm:^5, @types/testing-library__jest-dom@npm:^5.9.1":
   version: 5.14.2
   resolution: "@types/testing-library__jest-dom@npm:5.14.2"
   dependencies:
     "@types/jest": "*"
   checksum: e08715a565cc189112a6611485d779a0f1ceb546a9d4601b21aacff7596d7acf8b7c702e4c5f825677431ff601df3e635887dc8a5735da1a263cc857eb7c3833
+  languageName: node
+  linkType: hard
+
+"@types/ua-parser-js@npm:^0.7.36":
+  version: 0.7.36
+  resolution: "@types/ua-parser-js@npm:0.7.36"
+  checksum: 8c24d4dc12ed1b8b98195838093391c358c81bf75e9cae0ecec8f7824b441e069daaa17b974a3e257172caddb671439f0c0b44bf43bfcf409b7a574a25aab948
   languageName: node
   linkType: hard
 
@@ -18363,7 +18433,7 @@ __metadata:
     "@pmmmwh/react-refresh-webpack-plugin": ^0.5.4
     "@svgr/webpack": ^6.2.1
     "@swc/core": ^1.2.135
-    "@types/react": ^17
+    "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.11
     "@vanilla-extract/css": ^1.6.8
     "@vanilla-extract/recipes": ^0.2.3
@@ -20671,14 +20741,21 @@ __metadata:
     "@types/enzyme": ^3.10.11
     "@types/history": ^4.7.0
     "@types/jest": ^26.0.10
+    "@types/multicoin-address-validator": ^0.5.0
     "@types/node": ^10.9.4
     "@types/qrcode.react": ^1.0.1
-    "@types/react": ^17
-    "@types/react-dom": ^17
-    "@types/react-redux": ^7.1.9
-    "@types/react-router": ^5.1.11
-    "@types/react-router-dom": ^5.1.3
+    "@types/react": ^17.0.39
+    "@types/react-color": ^3.0.6
+    "@types/react-dom": ^17.0.11
+    "@types/react-google-recaptcha": ^2.1.3
+    "@types/react-redux": ^7.1.22
+    "@types/react-router": ^5.1.18
+    "@types/react-router-dom": ^5.3.3
+    "@types/react-scroll": ^1.8.3
+    "@types/recharts": ^1.8.23
     "@types/redux-mock-store": ^1.0.3
+    "@types/swagger-ui-react": ^4.1.1
+    "@types/ua-parser-js": ^0.7.36
     "@types/uuid": ^8.3.1
     "@types/ws": ^6.0.4
     axios: ^0.21.1

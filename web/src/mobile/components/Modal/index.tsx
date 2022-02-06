@@ -5,11 +5,11 @@ import { ArrowIcon } from '../../../containers/ToolBar/icons/ArrowIcon';
 
 interface Props {
   isOpen: boolean;
-  onClose?: () => void;
-  header?: React.ReactNode;
-  title?: React.ReactNode;
-  backTitle?: string;
-  onBack?: () => void;
+  onClose?: (() => void) | undefined;
+  header?: React.ReactNode | undefined;
+  title?: React.ReactNode | undefined;
+  backTitle?: string | undefined;
+  onBack?: (() => void) | undefined;
 }
 
 export const MobileModal: React.FC<Props> = (props) => {

@@ -66,7 +66,7 @@ describe('Beneficiaries Delete', () => {
           const actions = store.getActions();
           if (actions.length === expectedBeneficiariesDeleteSuccess.length) {
             expect(actions).toEqual(expectedBeneficiariesDeleteSuccess);
-            resolve();
+            resolve(undefined);
           }
         });
       });
@@ -82,7 +82,7 @@ describe('Beneficiaries Delete', () => {
           const actions = store.getActions();
           if (actions.length === expectedBeneficiariesDeleteError.length) {
             expect(actions).toEqual(expectedBeneficiariesDeleteError);
-            resolve();
+            resolve(undefined);
           }
         });
       });

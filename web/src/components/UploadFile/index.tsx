@@ -1,26 +1,26 @@
 import classnames from 'classnames';
-import React, { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { TipIcon } from '../../assets/images/TipIcon';
 import { changeElementPosition } from '../../helpers';
 
 interface OwnPropsTranslations {
-  title?: string;
-  label?: string;
-  buttonText?: string;
-  sizesText?: string;
-  formatsText?: string;
-  tipText?: string;
-  isMobileDevice?: boolean;
-  fileSizeErrorMessage?: string;
+  title?: string | undefined;
+  label?: string | undefined;
+  buttonText?: string | undefined;
+  sizesText?: string | undefined;
+  formatsText?: string | undefined;
+  tipText?: string | undefined;
+  isMobileDevice?: boolean | undefined;
+  fileSizeErrorMessage?: string | undefined;
 }
 
 interface OwnProps extends OwnPropsTranslations {
   handleUploadScan: (e: any) => void;
-  id?: string;
-  exampleImagePath?: string;
-  uploadedFile?: string;
-  accept?: string;
+  id?: string | undefined;
+  exampleImagePath?: string | undefined;
+  uploadedFile?: string | undefined;
+  accept?: string | undefined;
 }
 
 type Props = OwnProps;
@@ -133,4 +133,4 @@ const UploadFileComponent: React.FC<Props> = ({
   );
 };
 
-export const UploadFile = React.memo(UploadFileComponent);
+export const UploadFile = memo(UploadFileComponent);

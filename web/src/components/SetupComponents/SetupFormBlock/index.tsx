@@ -8,7 +8,7 @@ export interface SetupFormBlockProps {
 
 export class SetupFormBlock extends React.Component<SetupFormBlockProps> {
   public render() {
-    const { title, subtitle, children } = this.props;
+    const { title, subtitle } = this.props;
 
     return (
       <div className="setup-form-block">

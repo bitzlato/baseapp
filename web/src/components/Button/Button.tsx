@@ -1,10 +1,9 @@
-import React, { FC, ComponentProps, JSXElementConstructor, ReactNode } from 'react';
+import { FC, ComponentProps, ReactNode, ElementType } from 'react';
 import cn from 'classnames';
 
 import s from './Button.postcss';
 
-type JSXElement = keyof JSX.IntrinsicElements | JSXElementConstructor<any>;
-type Props<C extends JSXElement, P = ComponentProps<C>> = P & {
+type ButtonProps<C extends ElementType = 'button'> = {
   children: ReactNode;
   variant?: 'primary' | 'secondary' | 'primary-outline' | 'secondary-outline';
   component?: C;
@@ -13,16 +12,23 @@ type Props<C extends JSXElement, P = ComponentProps<C>> = P & {
   revertLightPrimary?: boolean;
 };
 
-export const Button = <T extends JSXElement = 'button'>({
+type Props<C extends ElementType = 'button'> = ButtonProps<C> &
+  Omit<ComponentProps<C>, keyof ButtonProps>;
+
+type ButtonComponent = <C extends ElementType = 'button'>(
+  props: Props<C>,
+) => ReturnType<FC<Props<C>>>;
+
+export const Button: ButtonComponent = ({
   children,
   variant = 'primary',
-  component = 'button',
+  component = 'button' as const,
   size,
   fullWidth = false,
   revertLightPrimary,
   className,
   ...props
-}: Props<T>): ReturnType<FC<Props<T>>> => {
+}) => {
   const Component = component;
   const disabled =
     'disabled' in props && typeof props.disabled === 'boolean' ? props.disabled : false;

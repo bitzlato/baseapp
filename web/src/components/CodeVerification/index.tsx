@@ -1,16 +1,25 @@
 import classnames from 'classnames';
-import React, { FC, ReactElement, useCallback } from 'react';
+import { ChangeEvent, FC, ReactElement, useCallback } from 'react';
 
 export interface CodeVerificationProps {
   placeholder: string;
   type: string;
   codeLength: number;
   code: string;
-  inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
+  inputMode?:
+    | 'text'
+    | 'none'
+    | 'tel'
+    | 'url'
+    | 'email'
+    | 'numeric'
+    | 'decimal'
+    | 'search'
+    | undefined;
   onChange: (value: string) => void;
-  onSubmit?: (e: any) => void; // tslint:disable-line
-  showPaste2FA?: boolean;
-  isMobile?: boolean;
+  onSubmit?: (e: any) => void | undefined;
+  showPaste2FA?: boolean | undefined;
+  isMobile?: boolean | undefined;
 }
 
 const CodeVerification: FC<CodeVerificationProps> = (
@@ -49,7 +58,7 @@ const CodeVerification: FC<CodeVerificationProps> = (
     });
   }, [code]);
 
-  const onCodeChange = (e) => {
+  const onCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (
       e.target.value.length <= codeLength &&
       (e.target.value.match(/^[0-9\b]+$/) || e.target.value === '')

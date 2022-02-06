@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
-import React from 'react';
 import { QRCode, QRCodeProps } from '.';
 
 const setup = (props: QRCodeProps) =>

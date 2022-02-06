@@ -3,7 +3,7 @@ export function parseHash(): Record<string, string> {
   for (const kv of location.hash.substring(1).split('&')) {
     const [key, value] = kv.split('=');
     if (key) {
-      result[key] = value;
+      result[key] = value!;
     }
   }
   return result;

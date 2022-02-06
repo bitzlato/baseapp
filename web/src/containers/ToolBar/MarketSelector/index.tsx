@@ -7,12 +7,12 @@ import {
   selectCurrentMarket,
   selectMarketSelectorState,
 } from '../../../modules';
-import searchIcon from '../icons/search.svg';
+import searchIcon from 'src/containers/ToolBar/icons/search.svg';
 import { MarketsList } from './MarketsList';
 import { MarketsTabs } from './MarketsTabs';
 
 interface ReduxProps {
-  currentMarket?: Market;
+  currentMarket?: Market | undefined;
   isOpen: boolean;
 }
 
@@ -62,13 +62,13 @@ class MarketSelectorComponent extends React.Component<ReduxProps, State> {
     );
   }
 
-  private searchFieldChangeHandler = (e) => {
+  private searchFieldChangeHandler = (e: any) => {
     this.setState({
       searchFieldValue: e.target.value,
     });
   };
 
-  private marketsTabsSelectHandler = (value) => {
+  private marketsTabsSelectHandler = (value: string) => {
     this.setState({
       marketsTabsSelectedValue: value,
     });

@@ -1,3 +1,5 @@
+import { Language } from '../types';
+
 const hostUrl =
   window.location.hostname === 'localhost' ? 'http://localhost:9002' : window.location.origin;
 const protocolSSL = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
@@ -13,6 +15,7 @@ export const defaultConfig: Config = {
     applogicUrl: `${hostUrl}/api/v2/applogic`,
     rangerUrl: `${rangerHostUrl}/api/v2/ranger`,
     finexUrl: `${hostUrl}/api/v2/finex`,
+    accountUrl: '',
   },
   finex: false,
   withCredentials: false,
@@ -88,7 +91,7 @@ export const passwordEntropyStep = () => Number(Cryptobase.config.passwordEntrop
 export const languages =
   Cryptobase.config.languages && Cryptobase.config.languages.length > 0
     ? Cryptobase.config.languages
-    : ['en'];
+    : (['en'] as Language[]);
 export const kycSteps = () => Cryptobase.config.kycSteps;
 export const isUsernameEnabled = () => convertToBoolean(Cryptobase.config.usernameEnabled);
 export const captchaType = () => Cryptobase.config.captcha_type;

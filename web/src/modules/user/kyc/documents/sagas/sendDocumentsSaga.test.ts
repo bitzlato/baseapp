@@ -61,7 +61,7 @@ describe('KYC - Documents', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsSuccess.length) {
           expect(actions).toEqual(expectedActionsSuccess);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -77,7 +77,7 @@ describe('KYC - Documents', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsError.length) {
           expect(actions).toEqual(expectedActionsError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

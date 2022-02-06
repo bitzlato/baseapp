@@ -9,7 +9,7 @@ import {
 export interface QuickExchangeState {
   fetching: boolean;
   success: boolean;
-  error?: CommonError;
+  error?: CommonError | undefined;
 }
 
 const initialState: QuickExchangeState = {

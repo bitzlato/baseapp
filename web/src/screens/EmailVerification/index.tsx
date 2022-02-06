@@ -35,7 +35,7 @@ interface OwnProps {
     };
   };
   success: boolean;
-  error?: CommonError;
+  error?: CommonError | undefined;
 }
 
 interface DispatchProps {
@@ -46,7 +46,7 @@ interface DispatchProps {
 interface ReduxProps {
   emailVerificationLoading: boolean;
   isMobileDevice: boolean;
-  captcha_response?: string | GeetestCaptchaResponse;
+  captcha_response?: string | GeetestCaptchaResponse | undefined;
   reCaptchaSuccess: boolean;
   geetestCaptchaSuccess: boolean;
   user: User;

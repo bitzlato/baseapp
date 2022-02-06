@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import cn from 'classnames';
 import { BlockchainIcon } from 'src/components/BlockchainIcon/BlockchainIcon';
@@ -17,7 +17,7 @@ export const CurrencyTicker: FC<Props> = ({ symbol = '', className }: Props) => 
   const [currency, protocol] = symbol.split('-');
   const content = (
     <span className={cn(s.currency, className)}>
-      <span>{currency.toUpperCase()}</span>
+      <span>{currency?.toUpperCase()}</span>
       {protocol && <BlockchainIcon className={s.blockchainIcon} protocol={protocol} />}
     </span>
   );

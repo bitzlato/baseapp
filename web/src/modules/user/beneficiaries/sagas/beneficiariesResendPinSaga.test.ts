@@ -65,7 +65,7 @@ describe('Beneficiaries resend pin', () => {
         const actions = store.getActions();
         if (actions.length === expectedBeneficiariesResendPinSuccess.length) {
           expect(actions).toEqual(expectedBeneficiariesResendPinSuccess);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -81,7 +81,7 @@ describe('Beneficiaries resend pin', () => {
         const actions = store.getActions();
         if (actions.length === expectedBeneficiariesResendPinError.length) {
           expect(actions).toEqual(expectedBeneficiariesResendPinError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

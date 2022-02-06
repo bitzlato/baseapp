@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect, MapStateToProps } from 'react-redux';
+import { Language } from 'src/types';
 import {
   geetestCaptchaFetch,
   GeetestCaptchaKeys,
@@ -12,13 +13,13 @@ import {
 const initGeetest = require('../../helpers/geetest.js');
 
 interface OwnProps {
-  shouldCaptchaReset?: boolean;
-  onSuccess?: (value?: GeetestCaptchaResponse) => void;
+  shouldCaptchaReset?: boolean | undefined;
+  onSuccess?: (value?: GeetestCaptchaResponse) => void | undefined;
 }
 
 interface ReduxProps {
-  lang: string;
-  geetestCaptchaKeys?: GeetestCaptchaKeys;
+  lang: Language;
+  geetestCaptchaKeys?: GeetestCaptchaKeys | undefined;
 }
 
 interface DispatchProps {
@@ -28,13 +29,13 @@ interface DispatchProps {
 type Props = ReduxProps & DispatchProps & OwnProps;
 
 class GeetestCaptchaComponent extends React.Component<Props> {
-  public constructor(props) {
+  public constructor(props: Props) {
     super(props);
-    this.captchaContainerRef = React.createRef();
+    this.captchaContainerRef = React.createRef<HTMLDivElement>();
   }
 
   private captchaContainerRef;
-  private captcha;
+  private captcha: any;
 
   public componentDidMount() {
     this.props.geetestCaptchaFetch();
@@ -78,7 +79,7 @@ class GeetestCaptchaComponent extends React.Component<Props> {
     return <div ref={this.captchaContainerRef} />;
   }
 
-  private captchaComingHandler = (captcha) => {
+  private captchaComingHandler = (captcha: any) => {
     this.captcha = captcha;
     this.captcha.appendTo(this.captchaContainerRef.current);
     this.captcha.onSuccess(this.captchaSuccessHandler);
@@ -102,4 +103,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (
   geetestCaptchaKeys: selectCaptchaKeys(state),
 });
 
-export const GeetestCaptcha = connect(mapStateToProps, mapDispatchProps)(GeetestCaptchaComponent);
+export const GeetestCaptcha = connect(
+  mapStateToProps,
+  mapDispatchProps,
+)(GeetestCaptchaComponent as any);

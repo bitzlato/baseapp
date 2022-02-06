@@ -1,15 +1,15 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { MemberLevels, sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { memberLevelsData, memberLevelsError, MemberLevelsFetch } from '../actions';
+import { memberLevelsData, memberLevelsError } from '../actions';
 
 const requestOptions: RequestOptions = {
   apiVersion: 'peatio',
 };
 
-export function* memberLevelsSaga(action: MemberLevelsFetch) {
+export function* memberLevelsSaga() {
   try {
-    const data = yield call(API.get(requestOptions), '/public/member-levels');
+    const data: MemberLevels = yield call(API.get(requestOptions), '/public/member-levels');
     yield put(memberLevelsData(data));
   } catch (error) {
     yield put(

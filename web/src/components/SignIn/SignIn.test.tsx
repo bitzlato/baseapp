@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { captchaLogin } from '../../api';
 import { SignInComponent, SignInProps } from './';
 

@@ -4,7 +4,7 @@ export function join<T>(arr: T[], separator: T): T[] {
     if (i > 0) {
       res.push(separator);
     }
-    res.push(arr[i]);
+    res.push(arr[i]!);
   }
   return res;
 }

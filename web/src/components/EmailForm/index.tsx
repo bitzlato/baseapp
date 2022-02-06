@@ -1,5 +1,5 @@
 import cr from 'classnames';
-import React, { FormEvent } from 'react';
+import { FormEvent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { CustomInput } from '../CustomInput';
@@ -9,27 +9,27 @@ import { GeetestCaptchaResponse } from '../../modules';
 import { selectMobileDeviceState } from '../../modules/public/globalSettings';
 
 export interface EmailFormProps {
-  title?: string;
-  buttonLabel?: string;
-  errorMessage?: string;
-  isLoading?: boolean;
+  title?: string | undefined;
+  buttonLabel?: string | undefined;
+  errorMessage?: string | undefined;
+  isLoading?: boolean | undefined;
   OnSubmit: () => void;
-  className?: string;
-  emailLabel?: string;
+  className?: string | undefined;
+  emailLabel?: string | undefined;
   email: string;
   message: string;
   emailError: string;
   emailFocused: boolean;
-  placeholder?: string;
+  placeholder?: string | undefined;
   validateForm: () => void;
   handleInputEmail: (value: string) => void;
   handleFieldFocus: () => void;
   handleReturnBack: () => void;
-  captchaType?: 'recaptcha' | 'geetest' | 'none';
-  renderCaptcha?: JSX.Element | null;
-  reCaptchaSuccess?: boolean;
-  geetestCaptchaSuccess?: boolean;
-  captcha_response?: string | GeetestCaptchaResponse;
+  captchaType?: 'recaptcha' | 'geetest' | 'none' | undefined;
+  renderCaptcha?: JSX.Element | null | undefined;
+  reCaptchaSuccess?: boolean | undefined;
+  geetestCaptchaSuccess?: boolean | undefined;
+  captcha_response?: string | GeetestCaptchaResponse | undefined;
 }
 
 export const EmailForm: React.FC<EmailFormProps> = (props) => {

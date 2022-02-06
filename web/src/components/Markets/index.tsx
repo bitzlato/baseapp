@@ -15,11 +15,11 @@ export interface MarketsProps {
   /**
    * Row's unique key, could be a number - element's index in data
    */
-  rowKeyIndex?: number;
+  rowKeyIndex?: number | undefined;
   /**
    * Key of selected row, could be a string
    */
-  selectedKey?: string;
+  selectedKey?: string | undefined;
   /**
    * Callback that is called when a market is selected
    */
@@ -28,19 +28,19 @@ export interface MarketsProps {
    * Defines whether to show filters or not
    * @default true
    */
-  filters?: boolean;
+  filters?: boolean | undefined;
   /**
    * List of headers for table
    */
-  headers?: string[];
+  headers?: string[] | undefined;
   /**
    * Title of widget
    */
-  title?: string;
+  title?: string | undefined;
   /**
    * Value for FilterInput placeholder
    */
-  filterPlaceholder?: string;
+  filterPlaceholder?: string | undefined;
 }
 
 export const Markets = (props: MarketsProps) => {
@@ -71,7 +71,7 @@ export const Markets = (props: MarketsProps) => {
   }, []);
 
   const mapRows = React.useCallback(
-    (cell: CellData, idx: number) => {
+    (cell: CellData) => {
       const isChangeValue =
         typeof cell === 'string' && (cell.charAt(0) === '-' || cell.charAt(0) === '+');
 

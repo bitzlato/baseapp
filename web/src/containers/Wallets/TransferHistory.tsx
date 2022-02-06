@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Currency } from '@bitzlato/money-js';
 import { useT } from 'src/hooks/useT';
 import { useAlert } from 'src/hooks/useAlert';
@@ -16,9 +16,9 @@ import s from './TransferHistory.postcss';
 import { TextColor } from 'src/components/Box/Box';
 
 interface Props {
-  currency?: Currency;
-  wallets?: Wallet[];
-  transfers?: number;
+  currency?: Currency | undefined;
+  wallets?: Wallet[] | undefined;
+  transfers?: number | undefined;
 }
 
 export const TransferHistory: React.FC<Props> = ({ currency, wallets, transfers }) => {

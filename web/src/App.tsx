@@ -10,6 +10,7 @@ import * as mobileTranslations from './mobile/translations';
 import { selectCurrentLanguage, selectMobileDeviceState } from './modules';
 import { languageMap } from './translations';
 import { ErrorBoundary } from './containers/ErrorBoundary/ErrorBoundary';
+import { Language } from './types';
 
 const gaKey = gaTrackerKey();
 const browserHistory = createBrowserHistory();
@@ -45,7 +46,7 @@ const FooterContainer = React.lazy(() =>
   import('./containers/Footer/Footer').then(({ Footer }) => ({ default: Footer })),
 );
 
-const getTranslations = (lang: string, isMobileDevice: boolean) => {
+const getTranslations = (lang: Language, isMobileDevice: boolean) => {
   if (isMobileDevice) {
     return {
       ...languageMap[lang],

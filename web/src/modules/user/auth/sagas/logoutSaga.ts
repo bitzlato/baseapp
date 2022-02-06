@@ -5,13 +5,13 @@ import { signInRequire2FA } from '../../auth';
 import { resetHistory } from '../../history';
 import { userOpenOrdersReset } from '../../openOrders';
 import { userReset } from '../../profile';
-import { logoutError, LogoutFetch } from '../actions';
+import { logoutError } from '../actions';
 
 const requestOptions: RequestOptions = {
   apiVersion: 'barong',
 };
 
-export function* logoutSaga(action: LogoutFetch) {
+export function* logoutSaga() {
   try {
     yield call(API.delete(requestOptions), '/identity/sessions');
     yield put(userReset());
@@ -30,7 +30,7 @@ export function* logoutSaga(action: LogoutFetch) {
       }),
     );
 
-    if (error.message.indexOf('identity.session.not_found') > -1) {
+    if ((error as any).message.indexOf('identity.session.not_found') > -1) {
       yield put(userReset());
     }
   }

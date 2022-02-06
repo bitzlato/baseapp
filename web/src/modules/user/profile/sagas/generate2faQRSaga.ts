@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import { getCsrfToken } from '../../../../helpers';
-import { ChangePasswordFetch, generate2faQRData, generate2faQRError } from '../actions';
+import { generate2faQRData, generate2faQRError } from '../actions';
 
 const generate2faQROptions = (csrfToken?: string): RequestOptions => {
   return {
@@ -18,7 +18,7 @@ interface GenerateQRResponse {
   };
 }
 
-export function* generate2faQRSaga(action: ChangePasswordFetch) {
+export function* generate2faQRSaga() {
   try {
     const qrData: GenerateQRResponse = yield call(
       API.post(generate2faQROptions(getCsrfToken())),

@@ -1,8 +1,8 @@
-import React, { FC, useState, ReactNode, useMemo } from 'react';
+import { FC, useState, ReactNode, useMemo } from 'react';
 import { TabsContext } from 'src/components/Tabs';
 
 type Props = {
-  children?: ReactNode;
+  children?: ReactNode | undefined;
 } & (
   | {
       // uncontrolled

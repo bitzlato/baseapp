@@ -7,12 +7,14 @@ export interface PlatformCreateFetch {
     platform_name: string;
     platform_url: string;
   };
-  callbackAction?: {
-    scope: string;
-    component: string;
-    key: string;
-    value: any;
-  };
+  callbackAction?:
+    | {
+        scope: string;
+        component: string;
+        key: string;
+        value: any;
+      }
+    | undefined;
 }
 
 export interface PlatformCreateData {

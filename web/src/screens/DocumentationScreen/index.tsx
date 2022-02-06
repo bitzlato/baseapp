@@ -1,4 +1,4 @@
-import React, { FC, Suspense, lazy } from 'react';
+import { FC, Suspense, lazy } from 'react';
 import { Tabs, TabList, Tab, TabPanel } from 'src/components/Tabs';
 
 import { DocumentationEndpoints, DocumentationHeader, DocumentationModels } from '../../components';

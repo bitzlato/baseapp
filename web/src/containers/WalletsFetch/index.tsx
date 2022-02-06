@@ -12,7 +12,7 @@ interface DispatchProps {
 export type WalletsFetchProps = DispatchProps;
 
 export class WalletsFetchComponent extends React.Component<WalletsFetchProps> {
-  private walletsFetchInterval;
+  private walletsFetchInterval: NodeJS.Timeout | undefined;
 
   public componentDidMount(): void {
     if (!isFinexEnabled()) {
@@ -23,7 +23,7 @@ export class WalletsFetchComponent extends React.Component<WalletsFetchProps> {
   }
 
   public componentWillUnmount(): void {
-    if (!isFinexEnabled()) {
+    if (!isFinexEnabled() && this.walletsFetchInterval) {
       clearInterval(this.walletsFetchInterval);
     }
   }

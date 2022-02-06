@@ -1,4 +1,3 @@
-import type { Currency, Money } from '@bitzlato/money-js';
 import type { AccountBalance, AccountBalanceSource } from 'src/modules/public/accounts/types';
 import type { ApiCurrency, CurrencySource } from 'src/modules/public/currencies/types';
 

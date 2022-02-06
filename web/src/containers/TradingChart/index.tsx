@@ -36,7 +36,7 @@ interface ReduxProps {
   markets: Market[];
   colorTheme: string;
   chartRebuild: boolean;
-  currentMarket?: Market;
+  currentMarket?: Market | undefined;
   tickers: MarketsState['tickers'];
   kline: KlineState;
   lang: string;

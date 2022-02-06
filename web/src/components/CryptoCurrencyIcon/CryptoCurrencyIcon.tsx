@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import cn from 'classnames';
 import { CryptoIcon } from 'src/components/CryptoIcon';
 import { BlockchainIcon } from 'src/components/BlockchainIcon/BlockchainIcon';
@@ -7,10 +7,10 @@ import { capitalize } from 'src/helpers/capitalize';
 import s from './CryptoCurrencyIcon.postcss';
 
 interface Props {
-  icon?: string | null;
+  icon?: string | null | undefined;
   currency: string;
-  iconId?: string;
-  size?: 'small' | 'medium' | 'large';
+  iconId?: string | undefined;
+  size?: 'small' | 'medium' | 'large' | undefined;
 }
 
 export const CryptoCurrencyIcon: FC<Props> = ({ currency, icon, iconId, size }) => {

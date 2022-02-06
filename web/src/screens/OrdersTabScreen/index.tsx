@@ -87,15 +87,16 @@ class Orders extends React.PureComponent<Props, State> {
     );
   }
 
-  private onCurrentTabChange = (index) => this.setState({ currentTabIndex: index });
+  private onCurrentTabChange = (index: number) => this.setState({ currentTabIndex: index });
 
   private handleMakeRequest = (index: number) => {
     this.renderTabs();
-    if (this.state.tab === this.tabMapping[index]) {
+    const tab = this.tabMapping[index];
+    if (this.state.tab === this.tabMapping[index] || !tab) {
       return;
     }
     this.props.resetOrdersHistory();
-    this.setState({ tab: this.tabMapping[index] });
+    this.setState({ tab });
   };
 
   private renderTabs = () => {

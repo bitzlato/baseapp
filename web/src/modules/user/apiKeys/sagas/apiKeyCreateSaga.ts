@@ -2,7 +2,13 @@ import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import { getCsrfToken } from '../../../../helpers';
-import { apiKeyCreate, ApiKeyCreateFetch, apiKeys2FAModal, apiKeysError } from '../actions';
+import {
+  apiKeyCreate,
+  ApiKeyCreateFetch,
+  ApiKeyDataInterface,
+  apiKeys2FAModal,
+  apiKeysError,
+} from '../actions';
 
 const createOptions = (csrfToken?: string): RequestOptions => {
   return {
@@ -13,7 +19,7 @@ const createOptions = (csrfToken?: string): RequestOptions => {
 
 export function* apiKeyCreateSaga(action: ApiKeyCreateFetch) {
   try {
-    const apiKey = yield call(
+    const apiKey: ApiKeyDataInterface = yield call(
       API.post(createOptions(getCsrfToken())),
       '/resource/api_keys',
       action.payload,

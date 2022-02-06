@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import { Order, OrderComponentProps } from './';

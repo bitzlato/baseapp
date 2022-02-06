@@ -56,12 +56,14 @@ export interface MarketsListError {
 export interface MarketUpdateFetch {
   type: typeof MARKET_UPDATE_FETCH;
   payload: MarketUpdateItem[];
-  callbackAction?: {
-    scope: string;
-    component: string;
-    key: string;
-    value: any;
-  };
+  callbackAction?:
+    | {
+        scope: string;
+        component: string;
+        key: string;
+        value: any;
+      }
+    | undefined;
 }
 
 export interface MarketUpdateData {

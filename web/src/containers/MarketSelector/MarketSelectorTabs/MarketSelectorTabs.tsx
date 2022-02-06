@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import cn from 'classnames';
 
 import s from './MarketSelectorTabs.postcss';
@@ -28,7 +28,7 @@ export const MarketSelectorTabs: FC<Props> = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const currencies = useMemo((): readonly string[] => {
     return Array.from(
-      new Set(markets.reduce((acc, market) => [...acc, ...market.name.split('/')], [])),
+      new Set(markets.reduce<string[]>((acc, market) => [...acc, ...market.name.split('/')], [])),
     );
   }, [markets]);
   const primary = currencies.slice(0, TABS_LIMIT);

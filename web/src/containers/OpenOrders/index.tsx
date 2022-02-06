@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Form, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Currency } from '@bitzlato/money-js';
@@ -108,14 +108,14 @@ export const OpenOrdersComponent: React.FC = () => {
           <MoneyFormat money={total} />,
           <span>
             {trigger_price ? (
-              <React.Fragment>
+              <>
                 <span>{t('page.body.trade.header.openOrders.lastPrice')}</span>
                 &nbsp;
                 {getTriggerSign(ord_type ?? '', side)}&nbsp;
                 <Label color={color}>
                   <AmountFormat money={createMoney(trigger_price, priceCurrency)} />
                 </Label>
-              </React.Fragment>
+              </>
             ) : (
               '-'
             )}

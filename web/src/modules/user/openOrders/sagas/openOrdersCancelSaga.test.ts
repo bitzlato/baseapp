@@ -88,7 +88,7 @@ describe('Open Orders Cancel', () => {
     message: ['Server error'],
   };
 
-  const mockOrderCancel = (id) => {
+  const mockOrderCancel = (id: number | string) => {
     mockAxios.onPost(`/market/orders/${id}/cancel`).reply(200);
   };
 
@@ -114,13 +114,13 @@ describe('Open Orders Cancel', () => {
   ];
 
   it('should cancel order', async () => {
-    mockOrderCancel(fakeOrder.id);
+    mockOrderCancel(fakeOrder.id!);
     const promise = new Promise((resolve) => {
       store.subscribe(() => {
         const actions = store.getActions();
         if (actions.length === expectedActionsFetch.length) {
           expect(actions).toEqual(expectedActionsFetch);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -130,13 +130,13 @@ describe('Open Orders Cancel', () => {
   });
 
   it('should cancel order with UUID', async () => {
-    mockOrderCancel(fakeFinexOrder.uuid);
+    mockOrderCancel(fakeFinexOrder.uuid!);
     const promise = new Promise((resolve) => {
       store.subscribe(() => {
         const actions = store.getActions();
         if (actions.length === expectedActionsFinexFetch.length) {
           expect(actions).toEqual(expectedActionsFinexFetch);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -152,7 +152,7 @@ describe('Open Orders Cancel', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsError.length) {
           expect(actions).toEqual(expectedActionsError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

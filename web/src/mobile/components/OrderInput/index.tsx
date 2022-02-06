@@ -8,16 +8,16 @@ import { MinusIcon } from '../../assets/images/MinusIcon';
 import { PlusIcon } from '../../assets/images/PlusIcon';
 
 export interface OrderInputProps {
-  className?: string;
-  isFocused?: boolean;
-  isWrong?: boolean;
-  label?: string;
-  placeholder?: string;
+  className?: string | undefined;
+  isFocused?: boolean | undefined;
+  isWrong?: boolean | undefined;
+  label?: string | undefined;
+  placeholder?: string | undefined;
   value: string | number;
   precision: number;
   handleChangeValue: (text: string) => void;
-  handleFocusInput?: (value?: string) => void;
-  onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleFocusInput?: ((value?: string) => void) | undefined;
+  onKeyPress?: ((event: React.KeyboardEvent<HTMLInputElement>) => void) | undefined;
 }
 
 export const OrderInput: React.FunctionComponent<OrderInputProps> = React.memo(

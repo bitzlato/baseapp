@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { InternalTransferComponent } from '../../components';
 import { setDocumentTitle } from '../../helpers';

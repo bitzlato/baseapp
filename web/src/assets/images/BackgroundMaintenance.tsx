@@ -1,12 +1,6 @@
-import * as React from 'react';
+import { FC } from 'react';
 
-interface BackgroundMaintenanceProps {
-  className?: string;
-}
-
-export const BackgroundMaintenance: React.FC<BackgroundMaintenanceProps> = (
-  props: BackgroundMaintenanceProps,
-) => (
+export const BackgroundMaintenance: FC = () => (
   <svg
     width="514"
     height="486"

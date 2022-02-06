@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { EmailForm, EmailFormProps } from './index';
 
 import { shallow } from 'enzyme';

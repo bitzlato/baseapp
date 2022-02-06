@@ -1,7 +1,13 @@
 import { call, put } from 'redux-saga/effects';
 import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { apiKeys2FAModal, apiKeysData, apiKeysError, ApiKeysFetch } from '../actions';
+import {
+  ApiKeyDataInterface,
+  apiKeys2FAModal,
+  apiKeysData,
+  apiKeysError,
+  ApiKeysFetch,
+} from '../actions';
 
 const apiKeysOptions: RequestOptions = {
   apiVersion: 'barong',
@@ -10,14 +16,14 @@ const apiKeysOptions: RequestOptions = {
 export function* apiKeysSaga(action: ApiKeysFetch) {
   try {
     const { pageIndex, limit } = action.payload;
-    const apiKeys = yield call(
+    const apiKeys: ApiKeyDataInterface[] = yield call(
       API.get(apiKeysOptions),
       `/resource/api_keys?page=${pageIndex + 1}&limit=${limit}`,
     );
     let nextPageExists = false;
 
     if (apiKeys.length === limit) {
-      const checkData = yield call(
+      const checkData: any[] = yield call(
         API.get(apiKeysOptions),
         `/resource/api_keys?page=${(pageIndex + 1) * limit + 1}&limit=${1}`,
       );

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import {
@@ -24,6 +24,8 @@ import { MarketSelector } from 'src/containers/MarketSelector/MarketSelector';
 import { HeaderToolbar } from 'src/containers/HeaderToolbar/HeaderToolbar';
 import { useT } from 'src/hooks/useT';
 import { getLinkToP2P } from 'src/containers/Header/HeaderNavigation/getLinkToP2P';
+
+type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
 const languages = {
   en: 'English',
@@ -127,7 +129,7 @@ const Header: FC = () => {
       to: p2pURL,
       children: t('page.header.navbar.toP2P'),
     },
-  ].filter(Boolean);
+  ].filter(Boolean) as Links;
 
   const hamburgerLinks = [
     userProps.status === USER_STATUS_AUTHORIZED
@@ -216,7 +218,7 @@ const Header: FC = () => {
       children: t('page.body.profile.content.action.logout'),
       onClick: userProps.onLogoutClick,
     },
-  ].filter(Boolean);
+  ].filter(Boolean) as Links;
 
   const translate = (key: string) => {
     switch (key) {
@@ -248,8 +250,6 @@ const Header: FC = () => {
       theme={colorTheme}
       language={currentCode}
       languages={languages}
-      target="market"
-      p2pUrl={`https://bitzlato.com/${currentCode}/p2p`}
       navLinks={navLinks}
       hamburgerLinks={hamburgerLinks}
       t={translate}

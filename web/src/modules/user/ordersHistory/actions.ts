@@ -52,9 +52,11 @@ export interface TestOrdersHistoryState {
 
 export interface OrdersCancelAllFetch {
   type: typeof ORDERS_CANCEL_ALL_FETCH;
-  payload?: {
-    market: string;
-  };
+  payload?:
+    | {
+        market: string;
+      }
+    | undefined;
 }
 
 export interface OrdersCancelAllData {

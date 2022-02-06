@@ -21,7 +21,7 @@ export class PriceBar extends React.Component<Props> {
         : percentage + gap > 100
         ? '0'
         : `${100 - percentage - gap}%`;
-    const style = {};
+    const style: Record<string, string> = {};
     style[position] = positionValue;
 
     return (

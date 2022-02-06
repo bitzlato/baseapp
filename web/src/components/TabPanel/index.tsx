@@ -27,7 +27,7 @@ export interface TabPanelProps {
    * Determines whether tabs should be full container width
    * @default false
    */
-  fixed?: boolean;
+  fixed?: boolean | undefined;
   /**
    * Tab change mode:
    * `hide` mode will mount but hide inactive tabs changing `display` css
@@ -35,15 +35,15 @@ export interface TabPanelProps {
    * `unmount` mode will not mount the tab content of inactive tabs.
    * @default hide
    */
-  hideMode?: HideMode;
+  hideMode?: HideMode | undefined;
   /**
    * Callback which is called when currently active tab is changed
    */
-  onTabChange?: OnTabChangeCallback;
+  onTabChange?: OnTabChangeCallback | undefined;
   /**
    * Function which is called for changing currently active tab is changed
    */
-  onCurrentTabChange?: OnCurrentTabChange;
+  onCurrentTabChange?: OnCurrentTabChange | undefined;
   /**
    * Index of tab to switch on
    */
@@ -54,11 +54,11 @@ export interface TabPanelProps {
   /**
    * Optinal JSX element to head
    */
-  optionalHead?: React.ReactNode;
+  optionalHead?: React.ReactNode | undefined;
   /**
    * Determines whether tab header should looks like dropdown or tab switcher
    */
-  isDropdown?: boolean;
+  isDropdown?: boolean | undefined;
 }
 
 /**
@@ -175,7 +175,7 @@ export const TabPanel: React.FC<TabPanelProps> = ({
     () =>
       hideMode === HideMode.hide
         ? panels.map(renderTabContent)
-        : panels.filter((panel, index) => index === currentTabIndex).map(renderTabContent),
+        : panels.filter((_, index) => index === currentTabIndex).map(renderTabContent),
     [currentTabIndex, hideMode, panels, renderTabContent],
   );
 

@@ -34,7 +34,7 @@ export interface DepthState extends CommonState {
 }
 
 export interface DepthIncrementState {
-  marketId?: MarketId;
+  marketId?: MarketId | undefined;
   asks: string[][];
   bids: string[][];
   loading: boolean;

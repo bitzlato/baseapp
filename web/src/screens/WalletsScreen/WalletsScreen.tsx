@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Card } from 'src/components/Card/Card';
 import { Box } from 'src/components/Box/Box';

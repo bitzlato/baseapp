@@ -1,3 +1,5 @@
+import { Language } from 'src/types';
+
 declare global {
   interface Config {
     api: {
@@ -32,7 +34,7 @@ declare global {
       defaultStorageLimit: string | number;
       orderBookSideLimit: string | number;
     };
-    languages: string[];
+    languages: Language[];
     kycSteps: string[];
     captcha_type: 'recaptcha' | 'geetest' | 'none';
     captcha_id?: string;

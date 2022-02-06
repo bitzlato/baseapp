@@ -109,7 +109,7 @@ describe('Table render', () => {
   it('should render thead from header props array', () => {
     const wrapper = setup({ header, data }).render();
     const thElements = wrapper.find('thead').find('th');
-    expect(thElements.length).toBe(data[0].length);
+    expect(thElements.length).toBe(data[0]?.length);
   });
 
   it('Check invalid data', () => {

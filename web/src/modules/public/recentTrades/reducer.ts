@@ -14,8 +14,8 @@ import { PublicTradeEvent } from './types';
 export interface RecentTradesState {
   list: PublicTrade[];
   loading: boolean;
-  lastTrade?: PublicTrade;
-  error?: CommonError;
+  lastTrade?: PublicTrade | undefined;
+  error?: CommonError | undefined;
 }
 
 const initialState: RecentTradesState = {

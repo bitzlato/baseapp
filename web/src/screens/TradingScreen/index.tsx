@@ -85,7 +85,7 @@ interface StateProps {
 const ReactGridLayout = WidthProvider(Responsive);
 type Props = DispatchProps & ReduxProps & RouteComponentProps & IntlProps;
 
-const TradingWrapper = (props) => {
+const TradingWrapper = (props: any) => {
   const { orderComponentResized, orderBookComponentResized, layouts, handleResize, handeDrag } =
     props;
   const children = React.useMemo(() => {
@@ -178,7 +178,7 @@ class Trading extends React.Component<Props, StateProps> {
     this.props.setCurrentPrice(undefined);
   }
 
-  public UNSAFE_componentWillReceiveProps(nextProps) {
+  public UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const {
       history,
       markets,
@@ -222,7 +222,11 @@ class Trading extends React.Component<Props, StateProps> {
       const firstActiveMarket =
         markets.length && markets.find((item) => item.state && item.state !== 'hidden');
 
-      if (nextProps.currentMarket.state && nextProps.currentMarket.state === 'hidden') {
+      if (
+        nextProps.currentMarket.state &&
+        nextProps.currentMarket.state === 'hidden' &&
+        firstActiveMarket
+      ) {
         history.replace(`/trading/${firstActiveMarket.id}`);
 
         this.props.setCurrentMarket(firstActiveMarket);
@@ -267,13 +271,14 @@ class Trading extends React.Component<Props, StateProps> {
   };
 
   private setTradingTitle = (market: Market, tickers: ReduxProps['tickers']) => {
-    const tickerPrice = tickers[market.id] ? tickers[market.id].last : '0.0';
+    const ticker = tickers[market.id];
+    const tickerPrice = ticker ? ticker.last : '0.0';
     document.title = `${createMoneyWithoutCcy(tickerPrice, market.price_precision).toFormat()} ${
       market.name
     }`;
   };
 
-  private handleResize = (layout, oldItem, newItem) => {
+  private handleResize = (_layout: any, oldItem: any, newItem: any) => {
     switch (oldItem.i) {
       case '1':
         this.setState({
@@ -290,7 +295,7 @@ class Trading extends React.Component<Props, StateProps> {
     }
   };
 
-  private handeDrag = (layout, oldItem, newItem) => {
+  private handeDrag = (layout: any /* , oldItem, newItem */) => {
     for (const elem of layout) {
       if (elem.y < 0) {
         elem.y = 0;

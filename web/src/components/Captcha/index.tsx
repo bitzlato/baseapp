@@ -11,27 +11,25 @@ import {
   setRecaptchaSuccess,
 } from '../../modules';
 
-export const CaptchaComponent = (props) => {
+export const CaptchaComponent = (props: any) => {
   const dispatch = useDispatch();
   const shouldGeetestReset = useSelector(selectShouldGeetestReset);
 
-  let reCaptchaRef;
-
-  reCaptchaRef = React.useRef();
+  const reCaptchaRef = React.useRef(null);
   const geetestCaptchaRef = React.useRef(null);
 
   React.useEffect(() => {
     if (props.error || props.success) {
       if (reCaptchaRef.current) {
-        reCaptchaRef.current.reset();
+        (reCaptchaRef.current as ReCAPTCHA).reset();
       }
     }
   }, [props.error, props.success, reCaptchaRef]);
 
   useSetShouldGeetestReset(props.error, props.success, geetestCaptchaRef);
 
-  const handleRecaptchaChange = (value: string) => {
-    dispatch(setRecaptchaSuccess({ captcha_response: value }));
+  const handleRecaptchaChange = (value: string | null) => {
+    dispatch(setRecaptchaSuccess({ captcha_response: value ?? undefined }));
   };
 
   const handleGeetestCaptchaChange = (value?: GeetestCaptchaResponse) => {
@@ -40,22 +38,21 @@ export const CaptchaComponent = (props) => {
 
   const renderCaptcha = () => {
     switch (captchaType()) {
-      case 'recaptcha':
+      case 'recaptcha': {
+        const sitekey = captchaId();
         return (
           <div className="pg-captcha--recaptcha">
-            {captchaId() && (
-              <ReCAPTCHA
-                ref={reCaptchaRef}
-                sitekey={captchaId()}
-                onChange={handleRecaptchaChange}
-              />
+            {sitekey && (
+              <ReCAPTCHA ref={reCaptchaRef} sitekey={sitekey} onChange={handleRecaptchaChange} />
             )}
           </div>
         );
+      }
       case 'geetest':
         return (
           <div className="pg-captcha--geetest">
             <GeetestCaptcha
+              // @ts-expect-error
               ref={geetestCaptchaRef}
               shouldCaptchaReset={shouldGeetestReset}
               onSuccess={handleGeetestCaptchaChange}

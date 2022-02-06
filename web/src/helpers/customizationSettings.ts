@@ -33,7 +33,7 @@ export const applyCustomizationSettingsColors = (
     : undefined;
 
   if (!settingsFromConfig && window.sessionStorage.getItem('palette/show') === 'true') {
-    settingsFromConfig = JSON.parse(window.sessionStorage.getItem('palette/data'));
+    settingsFromConfig = JSON.parse(window.sessionStorage.getItem('palette/data')!);
   }
 
   const rootElement = document.documentElement;
@@ -89,7 +89,7 @@ export const applyCustomizationSettingsColors = (
 2. Set color style variables of root and body elements and rebuild chart
 */
 export const applyCustomizationSettings = (
-  customization?: CustomizationSettingsInterface | null,
+  customization?: CustomizationSettingsInterface,
   toggleChartRebuild?: () => void,
 ) => {
   clearCustomizationSettings();

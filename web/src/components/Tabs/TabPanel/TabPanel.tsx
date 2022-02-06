@@ -1,4 +1,4 @@
-import React, { FC, useContext, ReactNode } from 'react';
+import { FC, useContext, ReactNode } from 'react';
 import { TabsContext } from 'src/components/Tabs';
 
 interface Props {

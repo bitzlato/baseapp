@@ -1,4 +1,4 @@
-export const sliceArray = (data, limit) => {
+export const sliceArray = (data: any, limit: number) => {
   const temp = data;
   if (!temp) {
     return temp;

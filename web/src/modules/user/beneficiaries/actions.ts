@@ -22,9 +22,11 @@ import { Beneficiary } from './types';
 
 export interface BeneficiariesFetch {
   type: typeof BENEFICIARIES_FETCH;
-  payload?: {
-    currency_id: string;
-  };
+  payload?:
+    | {
+        currency_id: string;
+      }
+    | undefined;
 }
 
 export interface BeneficiariesData {

@@ -90,7 +90,7 @@ describe('recentTrade reducer', () => {
     taker_type: 'sell',
   };
 
-  let tz;
+  let tz: any;
 
   beforeEach(() => {
     tz = getTimezone();

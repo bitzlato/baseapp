@@ -1,10 +1,8 @@
 import { shallow } from 'enzyme';
-import React from 'react';
 import { TestComponentWrapper } from 'src/lib/test';
-import { IntlProps } from 'src/types';
 import { EmailVerificationScreen } from '../EmailVerification';
 
-const setup = (props: Partial<IntlProps> = {}) =>
+const setup = () =>
   shallow(
     <TestComponentWrapper>
       <EmailVerificationScreen />

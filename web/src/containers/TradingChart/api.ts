@@ -5,6 +5,7 @@ import { LibrarySymbolInfo } from '../../charting_library/datafeed-api';
 import { buildQueryString, getTimestampPeriod } from '../../helpers';
 import {
   klineArrayToObject,
+  KlineEvent,
   KlineState,
   klineUpdatePeriod,
   klineUpdateTimeRange,
@@ -13,7 +14,7 @@ import { Market } from '../../modules/public/markets';
 import { periodMinutesToString } from '../../modules/public/ranger/helpers';
 import { store } from '../../store';
 
-export const print = (...x) => window.console.log.apply(null, ['>>>> TC', ...x]);
+export const print = (...x: string[]) => window.console.log.apply(null, ['>>>> TC', ...x]);
 export interface CurrentKlineSubscription {
   marketId?: string;
   periodString?: string;
@@ -57,10 +58,31 @@ const config = {
 
 export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Market[]) => {
   const dataFeed = {
-    onReady: (cb) => {
+    onReady: (
+      cb: (arg0: {
+        supports_timescale_marks: boolean;
+        supports_time: boolean;
+        supported_resolutions: string[];
+      }) => void,
+    ) => {
       setTimeout(() => cb(config), 0);
     },
-    searchSymbols: (userInput, exchange, symbolType, onResultReadyCallback) => {
+    searchSymbols: (
+      _userInput: any,
+      _exchange: any,
+      _symbolType: any,
+      onResultReadyCallback: (
+        arg0: {
+          symbol: string;
+          full_name: string;
+          description: string;
+          exchange: string;
+          ticker: string;
+          type: string;
+          currency_code: string;
+        }[],
+      ) => void,
+    ) => {
       const symbols = markets.map((m) => ({
         symbol: m.id,
         full_name: m.name,
@@ -72,7 +94,11 @@ export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Mar
       }));
       setTimeout(() => onResultReadyCallback(symbols), 0);
     },
-    resolveSymbol: (symbolName, onSymbolResolvedCallback, onResolveErrorCallback) => {
+    resolveSymbol: (
+      symbolName: string,
+      onSymbolResolvedCallback: (arg0: any) => void,
+      onResolveErrorCallback: (arg0: string) => void,
+    ) => {
       const symbol = markets.find((m) => m.id === symbolName || m.name === symbolName);
 
       if (!symbol) {
@@ -98,13 +124,7 @@ export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Mar
 
       return setTimeout(() => onSymbolResolvedCallback(symbolStub), 0);
     },
-    getTimescaleMarks: async (
-      symbolInfo: LibrarySymbolInfo,
-      from,
-      to,
-      onDataCallback,
-      resolution,
-    ) => {
+    getTimescaleMarks: async () => {
       const range = tradingChart.tvWidget!.activeChart().getVisibleRange();
       const period = tradingChart.tvWidget!.activeChart().resolution();
       store.dispatch(klineUpdateTimeRange(range));
@@ -112,12 +132,10 @@ export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Mar
     },
     getBars: async (
       symbolInfo: LibrarySymbolInfo,
-      resolution,
-      from,
-      to,
-      onHistoryCallback,
-      onErrorCallback,
-      firstDataRequest,
+      resolution: string,
+      from: number,
+      to: number,
+      onHistoryCallback: (arg0: never[], arg1: { noData: boolean }) => any,
     ) => {
       const url = makeHistoryUrl(
         symbolInfo.ticker || symbolInfo.name.toLowerCase(),
@@ -136,18 +154,16 @@ export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Mar
 
           return onHistoryCallback(bars, { noData: false });
         })
-        .catch((e) => {
+        .catch(() => {
           return onHistoryCallback([], { noData: true });
         });
     },
     subscribeBars: (
       symbolInfo: LibrarySymbolInfo,
-      resolution,
-      onRealtimeCallback,
-      subscribeUID: string,
-      onResetCacheNeededCallback,
+      resolution: string,
+      onRealtimeCallback: (arg0: KlineEvent) => void,
     ) => {
-      dataFeed.onRealtimeCallback = (kline: KlineState) => {
+      dataFeed.onRealtimeCallback = ((kline: KlineState) => {
         if (
           kline.last &&
           kline.marketId === tradingChart.currentKlineSubscription.marketId &&
@@ -155,7 +171,7 @@ export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Mar
         ) {
           onRealtimeCallback(kline.last);
         }
-      };
+      }) as any;
       const marketId: string = symbolInfo.ticker!;
       const periodString = periodMinutesToString(resolutionToSeconds(resolution));
 
@@ -165,14 +181,14 @@ export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Mar
         periodString,
       };
     },
-    unsubscribeBars: (subscribeUID: string) => {
+    unsubscribeBars: () => {
       const { marketId, periodString } = tradingChart.currentKlineSubscription;
       if (marketId && periodString) {
         tradingChart.props.unSubscribeKline(marketId, periodString);
       }
       tradingChart.currentKlineSubscription = {};
     },
-    onRealtimeCallback: (kline: KlineState) => {
+    onRealtimeCallback: (_kline: KlineState) => {
       // window.console.log(`default onRealtimeCallback called with ${JSON.stringify(bar)}`);
     },
   };

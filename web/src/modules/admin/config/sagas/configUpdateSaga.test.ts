@@ -4,7 +4,7 @@ import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
 import { rootSaga, sendError } from '../../../index';
 import { CommonError } from '../../../types';
-import { configUpdate, configUpdateData, configUpdateError } from '../actions';
+import { configUpdate, configUpdateError } from '../actions';
 import { ConfigUpdateDataInterface } from '../types';
 
 describe('Saga: configUpdateSaga', () => {
@@ -49,7 +49,7 @@ describe('Saga: configUpdateSaga', () => {
         const actions = store.getActions();
         if (actions.length === expectedActions.length) {
           expect(actions).toEqual(expectedActions);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -77,7 +77,7 @@ describe('Saga: configUpdateSaga', () => {
         const actions = store.getActions();
         if (actions.length === expectedActions.length) {
           expect(actions).toEqual(expectedActions);
-          resolve();
+          resolve(undefined);
         }
       });
     });

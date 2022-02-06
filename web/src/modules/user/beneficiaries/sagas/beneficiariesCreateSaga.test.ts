@@ -81,7 +81,7 @@ describe('Beneficiaries Create', () => {
           const actions = store.getActions();
           if (actions.length === expectedBeneficiariesCreateSuccess.length) {
             expect(actions).toEqual(expectedBeneficiariesCreateSuccess);
-            resolve();
+            resolve(undefined);
           }
         });
       });
@@ -97,7 +97,7 @@ describe('Beneficiaries Create', () => {
           const actions = store.getActions();
           if (actions.length === expectedBeneficiariesCreateError.length) {
             expect(actions).toEqual(expectedBeneficiariesCreateError);
-            resolve();
+            resolve(undefined);
           }
         });
       });

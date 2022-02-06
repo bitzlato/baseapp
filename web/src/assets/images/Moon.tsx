@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 export const Moon: FC = () => (
   <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.04 18">

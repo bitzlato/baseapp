@@ -18,9 +18,11 @@ import { Market, Ticker, TickerEvent, MarketPriceResponse, MarketPriceParams } f
 
 export interface MarketsFetch {
   type: typeof MARKETS_FETCH;
-  payload?: {
-    type: string;
-  };
+  payload?:
+    | {
+        type: string;
+      }
+    | undefined;
 }
 
 export interface MarketsData {

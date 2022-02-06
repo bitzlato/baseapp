@@ -1,4 +1,4 @@
-import { Channel, eventChannel, EventChannel } from 'redux-saga';
+import { Channel, eventChannel, EventChannel, Task } from 'redux-saga';
 import {
   all,
   call,
@@ -79,7 +79,7 @@ const initRanger = (
       window.console.log(`WebSocket error ${error}`);
       window.console.dir(error);
     };
-    ws.onclose = (event) => {
+    ws.onclose = () => {
       channel.close();
     };
     ws.onmessage = ({ data }) => {
@@ -87,7 +87,7 @@ const initRanger = (
 
       try {
         payload = JSON.parse(data as string);
-      } catch (e) {
+      } catch (e: any) {
         window.console.error(`Error parsing : ${e.data}`);
       }
 
@@ -146,9 +146,9 @@ const initRanger = (
           if (klineMatch) {
             emitter(
               klinePush({
-                marketId: klineMatch[1],
+                marketId: klineMatch[1]!,
                 kline: event,
-                period: klineMatch[2],
+                period: klineMatch[2]!,
               }),
             );
 
@@ -161,7 +161,7 @@ const initRanger = (
             emitter(
               recentTradesPush({
                 trades: event.trades,
-                market: tradesMatch[1],
+                market: tradesMatch[1]!,
               }),
             );
 
@@ -255,7 +255,7 @@ const initRanger = (
 
 function* writter(socket: WebSocket, buffer: { messages: object[] }) {
   while (true) {
-    const data = yield take(RANGER_DIRECT_WRITE);
+    const data: { payload: any } = yield take(RANGER_DIRECT_WRITE);
     if (socket.readyState === socket.OPEN) {
       socket.send(JSON.stringify(data.payload));
     } else {
@@ -264,10 +264,10 @@ function* writter(socket: WebSocket, buffer: { messages: object[] }) {
   }
 }
 
-function* reader(channel) {
+function* reader(channel: any) {
   while (true) {
-    const action = yield take(channel);
-    yield put(action);
+    const action: unknown = yield take(channel);
+    yield put(action as any);
   }
 }
 
@@ -288,21 +288,21 @@ const switchMarket = (subscribeOnInitOnly: boolean) => {
   };
 };
 
-function* watchDisconnect(socket: WebSocket, channel: Channel<{}>) {
+function* watchDisconnect(socket: WebSocket) {
   yield take(RANGER_DISCONNECT_FETCH);
   socket.close();
 }
 
-function* bindSocket(channel: Channel<{}>, socket: WebSocket, buffer: RangerBuffer) {
+function* bindSocket(channel: Channel<{}>, socket: WebSocket, buffer: RangerBuffer): Generator {
   return yield all([
     call(reader, channel),
     call(writter, socket, buffer),
-    call(watchDisconnect, socket, channel),
+    call(watchDisconnect, socket),
   ]);
 }
 
 function* dispatchCurrentMarketOrderUpdates(action: UserOrderUpdate) {
-  let market;
+  let market: Market | undefined;
 
   try {
     market = yield select(selectCurrentMarket);
@@ -319,7 +319,7 @@ function* dispatchOrderHistoryUpdates(action: UserOrderUpdate) {
   yield put(userOrdersHistoryRangerData(action.payload));
 }
 
-function* getSubscriptions() {
+function* getSubscriptions(): Generator<any> {
   try {
     return yield select(selectSubscriptions);
   } catch (error) {
@@ -327,11 +327,11 @@ function* getSubscriptions() {
   }
 }
 
-export function* rangerSagas() {
+export function* rangerSagas(): Generator<any, any, any> {
   let initialized = false;
   let connectFetchPayload: RangerConnectFetch['payload'] | undefined;
   const buffer: RangerBuffer = { messages: [] };
-  let pipes;
+  let pipes: Task | undefined;
   yield takeEvery(MARKETS_SET_CURRENT_MARKET, switchMarket(false));
   yield takeEvery(MARKETS_SET_CURRENT_MARKET_IFUNSET, switchMarket(true));
   yield takeEvery(RANGER_USER_ORDER_UPDATE, dispatchCurrentMarketOrderUpdates);
@@ -363,7 +363,7 @@ export function* rangerSagas() {
     }
 
     if (connectFetchPayload) {
-      const prevSubs = yield getSubscriptions();
+      const prevSubs: string[] = yield getSubscriptions();
       const [channel, socket] = yield call(
         initRanger,
         connectFetchPayload,

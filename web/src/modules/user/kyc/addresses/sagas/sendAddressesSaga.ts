@@ -13,7 +13,7 @@ const sessionsConfig = (csrfToken?: string): RequestOptions => {
 
 export function* sendAddressesSaga(action: SendAddressesFetch) {
   try {
-    const response = yield call(
+    const response: { message?: string } = yield call(
       API.post(sessionsConfig(getCsrfToken())),
       '/resource/addresses',
       action.payload,

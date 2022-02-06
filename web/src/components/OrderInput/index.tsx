@@ -4,14 +4,14 @@ import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { CustomInput } from '../../components';
 
 export interface OrderInputProps {
-  className?: string;
+  className?: string | undefined;
   currency: string;
-  label?: string;
-  placeholder?: string;
+  label?: string | undefined;
+  placeholder?: string | undefined;
   value: string | number;
   handleChangeValue: (text: string) => void;
-  handleFocusInput?: () => void;
-  onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleFocusInput?: (() => void) | undefined;
+  onKeyPress?: ((event: React.KeyboardEvent<HTMLInputElement>) => void) | undefined;
 }
 
 export const OrderInput: React.FunctionComponent<OrderInputProps> = React.memo(

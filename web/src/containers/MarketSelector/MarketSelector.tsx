@@ -1,4 +1,4 @@
-import React, { FC, useRef, useCallback, useState, useMemo } from 'react';
+import { FC, useRef, useCallback, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   RootState,
@@ -34,7 +34,7 @@ const selector = (state: RootState) => ({
 export const MarketSelector: FC = () => {
   const { isOpen, currentMarket, markets, marketTickers, user } = useSelector(selector);
   const dispatch = useDispatch();
-  const wrapperRef = useRef<HTMLDivElement>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleSearchValueChange = (value: string) => {

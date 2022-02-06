@@ -37,7 +37,7 @@ const OrdersComponent: React.FC<IOrdersComponentProps> = ({ withDropdownSelect }
   const ordersNextPageExists = useSelector(selectOrdersNextPageExists);
   const filteredOrders =
     currentTabIndex === 0 ? orders.filter((o) => ['wait', 'pending'].includes(o.state)) : orders;
-  useUserOrdersHistoryFetch(currentPageIndex, userOrdersHistoryTabs[currentTabIndex], 25);
+  useUserOrdersHistoryFetch(currentPageIndex, userOrdersHistoryTabs[currentTabIndex]!, 25);
   useMarketsFetch();
 
   const handleCancelAllOrders = () => {
@@ -51,7 +51,7 @@ const OrdersComponent: React.FC<IOrdersComponentProps> = ({ withDropdownSelect }
       dispatch(
         ordersHistoryCancelFetch({
           id: order.id!,
-          type: userOrdersHistoryTabs[currentTabIndex],
+          type: userOrdersHistoryTabs[currentTabIndex]!,
           list: filteredOrders,
         }),
       );

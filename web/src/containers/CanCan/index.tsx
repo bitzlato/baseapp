@@ -18,7 +18,7 @@ export interface TargetByField {
 }
 
 interface OwnProps {
-  action: string;
+  action: keyof AbilitiesInterface;
   target: string | TargetByField;
   children?: React.ReactNode;
 }
@@ -27,7 +27,7 @@ type Props = ReduxProps & OwnProps;
 
 class CanCanService extends React.Component<Props> {
   public static check = (
-    action: string,
+    action: keyof AbilitiesInterface,
     target: string | TargetByField,
     abilities: AbilitiesInterface,
     loading: boolean,
@@ -50,25 +50,26 @@ class CanCanService extends React.Component<Props> {
   };
 
   public static checkAbilityByAction = (
-    action: string,
+    action: keyof AbilitiesInterface,
     target: string,
     abilities: AbilitiesInterface,
-  ) => abilities[action] && abilities[action].join('::').split('::').includes(target);
+  ) => abilities[action] && abilities[action]!.join('::').split('::').includes(target);
 
   public static checkFieldByAction = (
-    action: string,
+    action: keyof AbilitiesInterface,
     target: TargetByField,
     abilities: AbilitiesInterface,
   ) =>
     abilities[action] &&
     (CanCanService.checkAbilityByAction(action, target.name, abilities) ||
       (target.field &&
-        abilities[action].filter(
-          (item) =>
+        abilities[action]!.filter(
+          (item: any) =>
             item instanceof Object && item[target.name] && item[target.name].includes(target.field),
         ).length) ||
       (!target.field &&
-        abilities[action].filter((item) => item instanceof Object && item[target.name]).length));
+        abilities[action]!.filter((item: any) => item instanceof Object && item[target.name])
+          .length));
 
   public render() {
     const { abilities, action, target, loading } = this.props;
@@ -88,27 +89,28 @@ class CanCanService extends React.Component<Props> {
     return null;
   }
 
-  private checkAbilityByAction = (action: string, target: string) => {
+  private checkAbilityByAction = (action: keyof AbilitiesInterface, target: string) => {
     const { abilities } = this.props;
 
-    return abilities[action] && abilities[action].join('::').split('::').includes(target);
+    return abilities[action] && abilities[action]!.join('::').split('::').includes(target);
   };
 
-  private checkFieldByAction = (action: string, target: TargetByField) => {
+  private checkFieldByAction = (action: keyof AbilitiesInterface, target: TargetByField) => {
     const { abilities } = this.props;
 
     return (
       abilities[action] &&
       (this.checkAbilityByAction(action, target.name) ||
         (target.field &&
-          abilities[action].filter(
-            (item) =>
+          abilities[action]!.filter(
+            (item: any) =>
               item instanceof Object &&
               item[target.name] &&
               item[target.name].includes(target.field),
           ).length) ||
         (!target.field &&
-          abilities[action].filter((item) => item instanceof Object && item[target.name]).length))
+          abilities[action]!.filter((item: any) => item instanceof Object && item[target.name])
+            .length))
     );
   };
 }

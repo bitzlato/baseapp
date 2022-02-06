@@ -1,6 +1,6 @@
 import { OrderCommon } from '../../types';
 
-const ListReduceHelper = (list, order) => {
+const ListReduceHelper = (list: OrderCommon[], order: OrderCommon) => {
   const listReduce = list.reduce((memo: OrderCommon[], item: OrderCommon): OrderCommon[] => {
     if (order.id !== item.id) {
       memo.push(item);

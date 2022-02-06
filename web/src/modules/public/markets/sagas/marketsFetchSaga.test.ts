@@ -111,7 +111,7 @@ describe('Markets & Tickers sagas', () => {
     const expectedActions = [
       marketsFetch(),
       marketsData(fakeMarkets),
-      setCurrentMarketIfUnset(fakeMarkets[0]),
+      setCurrentMarketIfUnset(fakeMarkets[0]!),
     ];
     mockMarkets();
     const promise = new Promise((resolve) => {

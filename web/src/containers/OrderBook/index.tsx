@@ -74,7 +74,7 @@ class OrderBookContainer extends React.Component<Props, State> {
       width: 0,
     };
 
-    this.orderRef = React.createRef();
+    this.orderRef = React.createRef<HTMLDivElement>();
   }
 
   private orderRef;
@@ -156,7 +156,7 @@ class OrderBookContainer extends React.Component<Props, State> {
     );
   }
 
-  private orderBook = (bids, asks, isLarge: boolean) => {
+  private orderBook = (bids: any[], asks: any[], isLarge: boolean) => {
     const { colorTheme, currentMarket } = this.props;
     const asksData = isLarge ? asks : asks.slice(0).reverse();
 
@@ -194,7 +194,7 @@ class OrderBookContainer extends React.Component<Props, State> {
   };
 
   public lastPrice() {
-    const { currentMarket, isMobileDevice, lastRecentTrade, marketTickers } = this.props;
+    const { currentMarket, lastRecentTrade, marketTickers } = this.props;
 
     if (currentMarket) {
       let lastPrice = '';
@@ -399,14 +399,14 @@ class OrderBookContainer extends React.Component<Props, State> {
   };
 
   private getOrderBookData = (
-    isMobileDevice,
-    isLarge,
-    side,
-    array,
-    priceFixed,
-    amountFixed,
-    total,
-    message,
+    _isMobileDevice: boolean,
+    isLarge: boolean,
+    side: string,
+    array: any[],
+    priceFixed: number | undefined,
+    amountFixed: number | undefined,
+    total: number[],
+    message: string,
   ) => {
     return array.length
       ? array.map((item, i) => {
@@ -417,17 +417,17 @@ class OrderBookContainer extends React.Component<Props, State> {
               return [
                 <DiffAmountFormat
                   key={i}
-                  currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
+                  currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed as any)}
                   prevValue={createMoneyWithoutCcy(
                     array[i + 1] ? array[i + 1]?.[0] ?? 0 : 0,
-                    priceFixed,
+                    priceFixed as any,
                   )}
-                  minFractionDigits={priceFixed}
+                  minFractionDigits={priceFixed as any}
                 />,
                 <AmountFormat
                   key={i}
-                  money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
-                  minFractionDigits={amountFixed}
+                  money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed as any)}
+                  minFractionDigits={amountFixed as any}
                 />,
               ];
             default:
@@ -435,35 +435,35 @@ class OrderBookContainer extends React.Component<Props, State> {
                 return [
                   <AmountFormat
                     key={i}
-                    money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
-                    minFractionDigits={amountFixed}
+                    money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed as any)}
+                    minFractionDigits={amountFixed as any}
                   />,
 
                   <DiffAmountFormat
                     key={i}
-                    currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
+                    currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed as any)}
                     prevValue={createMoneyWithoutCcy(
                       array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
-                      priceFixed,
+                      priceFixed as any,
                     )}
-                    minFractionDigits={priceFixed}
+                    minFractionDigits={priceFixed as any}
                   />,
                 ];
               } else {
                 return [
                   <DiffAmountFormat
                     key={i}
-                    currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
+                    currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed as any)}
                     prevValue={createMoneyWithoutCcy(
                       array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
-                      priceFixed,
+                      priceFixed as any,
                     )}
-                    minFractionDigits={priceFixed}
+                    minFractionDigits={priceFixed as any}
                   />,
                   <AmountFormat
                     key={i}
-                    money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
-                    minFractionDigits={amountFixed}
+                    money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed as any)}
+                    minFractionDigits={amountFixed as any}
                   />,
                 ];
               }
@@ -474,7 +474,7 @@ class OrderBookContainer extends React.Component<Props, State> {
 
   private handleOnSelectBids = (index: string) => {
     const { currentPrice, bids } = this.props;
-    const priceToSet = bids[Number(index)] && Number(bids[Number(index)][0]);
+    const priceToSet = bids[Number(index)] && Number(bids[Number(index)]![0]);
 
     if (currentPrice !== priceToSet) {
       this.props.setCurrentPrice(priceToSet);
@@ -485,7 +485,7 @@ class OrderBookContainer extends React.Component<Props, State> {
     const { asks, currentPrice, forceLarge } = this.props;
     const isLarge = forceLarge || this.state.width >= breakpoint;
     const asksData = isLarge ? asks : asks.slice(0).reverse();
-    const priceToSet = asksData[Number(index)] && Number(asksData[Number(index)][0]);
+    const priceToSet = asksData[Number(index)] && Number(asksData[Number(index)]![0]);
 
     if (currentPrice !== priceToSet) {
       this.props.setCurrentPrice(priceToSet);

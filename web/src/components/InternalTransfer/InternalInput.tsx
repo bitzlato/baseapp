@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { CustomInput } from '../';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
@@ -59,7 +59,7 @@ export const InternalTransferInput = (props: InternalTransferInputProps) => {
 
           break;
         case 'otp':
-          const converted = cleanPositiveFloatInput(String(value));
+          // const converted = cleanPositiveFloatInput(String(value));
 
           if ((value.length <= 6 && value.match(/^\d+$/)) || value === '') {
             setInputValue(value);

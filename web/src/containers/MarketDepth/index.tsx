@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { MarketDepths } from '../../components/MarketDepths';
 import {
-  selectChartRebuildState,
   selectCurrentColorTheme,
   selectCurrentMarket,
   selectDepthAsks,
@@ -15,9 +14,8 @@ import { createMoneyWithoutCcy } from 'src/helpers/money';
 export const MarketDepthsComponent = () => {
   const asksItems = useSelector(selectDepthAsks);
   const bidsItems = useSelector(selectDepthBids);
-  const chartRebuild = useSelector(selectChartRebuildState);
   const colorTheme = useSelector(selectCurrentColorTheme);
-  const currentMarket = useSelector(selectCurrentMarket);
+  const currentMarket = useSelector(selectCurrentMarket)!;
   const loading = useSelector(selectOrderBookLoading);
 
   const settings = React.useMemo(() => {
@@ -47,11 +45,13 @@ export const MarketDepthsComponent = () => {
           </span>
           <span>
             <FormattedMessage id="page.body.trade.header.marketDepths.content.cumulativeVolume" /> :{' '}
-            {createMoneyWithoutCcy(cumulativeVolume, currentMarket.amount_precision).toFormat()} {askCurrency}
+            {createMoneyWithoutCcy(cumulativeVolume, currentMarket.amount_precision).toFormat()}{' '}
+            {askCurrency}
           </span>
           <span>
             <FormattedMessage id="page.body.trade.header.marketDepths.content.cumulativeValue" /> :{' '}
-            {createMoneyWithoutCcy(cumulativePrice, currentMarket.price_precision).toFormat()} {bidCurrency}
+            {createMoneyWithoutCcy(cumulativePrice, currentMarket.price_precision).toFormat()}{' '}
+            {bidCurrency}
           </span>
         </span>
       );
@@ -64,25 +64,40 @@ export const MarketDepthsComponent = () => {
       let cumulativeVolumeData = 0;
       let cumulativePriceData = 0;
 
-      return data.map((item) => {
+      return data.map((item: any) => {
         const [price, volume] = item;
 
-        const numberVolume = createMoneyWithoutCcy(volume, currentMarket.amount_precision).toString();
+        const numberVolume = createMoneyWithoutCcy(
+          volume,
+          currentMarket.amount_precision,
+        ).toString();
         const numberPrice = createMoneyWithoutCcy(price, currentMarket.price_precision).toString();
 
         cumulativeVolumeData = +numberVolume + cumulativeVolumeData;
-        const cumulativeVolumeDataFormated =  createMoneyWithoutCcy(cumulativeVolumeData, currentMarket.amount_precision).toFormat();
+        const cumulativeVolumeDataFormated = createMoneyWithoutCcy(
+          cumulativeVolumeData,
+          currentMarket.amount_precision,
+        ).toFormat();
 
         cumulativePriceData = cumulativePriceData + +numberPrice * +numberVolume;
-        const cumulativePriceDataFormated =  createMoneyWithoutCcy(cumulativePriceData, currentMarket.price_precision).toFormat();
+        const cumulativePriceDataFormated = createMoneyWithoutCcy(
+          cumulativePriceData,
+          currentMarket.price_precision,
+        ).toFormat();
 
-        const volumeFormated = createMoneyWithoutCcy(+volume, currentMarket.amount_precision).toFormat();
-        const priceFormated = createMoneyWithoutCcy(+numberPrice, currentMarket.price_precision).toFormat();
+        const volumeFormated = createMoneyWithoutCcy(
+          +volume,
+          currentMarket.amount_precision,
+        ).toFormat();
+        const priceFormated = createMoneyWithoutCcy(
+          +numberPrice,
+          currentMarket.price_precision,
+        ).toFormat();
 
         return {
           [type]: cumulativeVolumeDataFormated,
           cumulativePrice: cumulativePriceDataFormated,
-          cumulativeVolume: + cumulativeVolumeDataFormated,
+          cumulativeVolume: +cumulativeVolumeDataFormated,
           volume: volumeFormated,
           price: priceFormated,
           name: tipLayout({
@@ -101,8 +116,8 @@ export const MarketDepthsComponent = () => {
     const cumulativeData = cumulative(data, type);
 
     return type === 'bid'
-      ? cumulativeData.sort((a, b) => b.bid - a.bid)
-      : cumulativeData.sort((a, b) => a.ask - b.ask);
+      ? cumulativeData.sort((a: any, b: any) => b.bid - a.bid)
+      : cumulativeData.sort((a: any, b: any) => a.ask - b.ask);
   }, []);
 
   const convertToDepthFormat = React.useMemo(() => {

@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { PublicTrade, sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import { recentTradesData, recentTradesError, RecentTradesFetch } from '../actions';
 
@@ -14,7 +14,10 @@ export function* recentTradesFetchSaga(action: RecentTradesFetch) {
       throw new Error(`ERROR: Empty market provided to recentTradesFetchSaga`);
     }
 
-    const trades = yield call(API.get(tradesOptions), `/public/markets/${market.id}/trades`);
+    const trades: PublicTrade[] = yield call(
+      API.get(tradesOptions),
+      `/public/markets/${market.id}/trades`,
+    );
     yield put(recentTradesData(trades));
   } catch (error) {
     yield put(

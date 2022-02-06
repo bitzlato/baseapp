@@ -9,7 +9,7 @@ import {
   SetupMarketsBlock,
 } from '../../components';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import logo from '../../assets/images/setup/logo.svg';
+import logo from 'src/assets/images/setup/logo.svg';
 import bgStep1 from '../../assets/images/setup/step1-background.png';
 import bgStep2 from '../../assets/images/setup/step2-background.png';
 import bgStep3 from '../../assets/images/setup/step3-background.png';
@@ -269,7 +269,7 @@ export class Setup extends React.Component<Props, SetupScreenState> {
     const { enabledMarkets } = this.props;
 
     if (enabledMarkets.length) {
-      window.location.replace(`/trading/${enabledMarkets[0].id}#settings`);
+      window.location.replace(`/trading/${enabledMarkets[0]?.id}#settings`);
     }
   };
 
@@ -344,4 +344,4 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = (dispa
   platformCreate: (payload, cbAction) => dispatch(platformCreate(payload, cbAction)),
 });
 
-export const SetupScreen = connect(mapStateToProps, mapDispatchToProps)(Setup);
+export const SetupScreen = connect(mapStateToProps, mapDispatchToProps)(Setup as any);

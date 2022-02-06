@@ -7,10 +7,10 @@ export const selectTotalNumber = (state: RootState): number => state.user.userAc
 export const selectUserActivityCurrentPage = (state: RootState): number =>
   state.user.userActivity.page;
 
-export const selectUserActivityPageCount = (state: RootState, limit): number =>
+export const selectUserActivityPageCount = (state: RootState, limit: number): number =>
   Math.ceil(state.user.userActivity.total / limit);
 
-export const selectUserActivityFirstElemIndex = (state: RootState, limit): number =>
+export const selectUserActivityFirstElemIndex = (state: RootState, limit: number): number =>
   state.user.userActivity.page * limit + 1;
 
 export const selectUserActivityLastElemIndex = (state: RootState, limit: number): number => {

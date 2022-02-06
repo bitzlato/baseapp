@@ -343,12 +343,6 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
     return <React.Fragment>{body}</React.Fragment>;
   };
 
-  private handleChangeFocusField = () => {
-    this.setState((prev) => ({
-      codeFocused: !prev.codeFocused,
-    }));
-  };
-
   private handleHide2FAModal = () => {
     const payload: ApiKeys2FAModal['payload'] = { active: false };
     this.props.toggleApiKeys2FAModal(payload);
@@ -403,7 +397,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
     this.props.toggleApiKeys2FAModal(payload);
   };
 
-  private handleToggleStateKeyClick = (apiKey) => () => {
+  private handleToggleStateKeyClick = (apiKey: ApiKeyDataInterface) => () => {
     const payload: ApiKeys2FAModal['payload'] = { active: true, action: 'updateKey', apiKey };
     this.props.toggleApiKeys2FAModal(payload);
   };
@@ -421,7 +415,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
     this.props.fetchSuccess({ message: [`success.api_keys.copied.${type}`], type: 'success' });
   };
 
-  private handleDeleteKeyClick = (apiKey) => {
+  private handleDeleteKeyClick = (apiKey: ApiKeyDataInterface) => {
     const payload: ApiKeys2FAModal['payload'] = { active: true, action: 'deleteKey', apiKey };
     this.props.toggleApiKeys2FAModal(payload);
   };

@@ -34,10 +34,10 @@ export const NumberInput: React.FC<NumberInputProps> = ({
       </Box>
       <FormControl
         {...props}
-        className={inputClassName}
+        className={inputClassName as string}
         onChange={(e) => onChange(e.target.value)}
-        type={isMobileDevice ? 'number' : undefined}
-        placeholder={!labelVisible ? label : undefined}
+        type={(isMobileDevice ? 'number' : undefined) as string}
+        placeholder={(!labelVisible ? label : undefined) as string}
       />
       {error && <p className={s.numberInputError}>{error}</p>}
     </div>

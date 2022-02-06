@@ -54,7 +54,7 @@ describe('Module: phone', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsFetch.length) {
           expect(actions).toEqual(expectedActionsFetch);
-          resolve();
+          resolve(undefined);
         }
       });
     });

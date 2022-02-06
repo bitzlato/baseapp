@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { TwoFactorAuth, TwoFactorAuthProps } from './';
 
 import { shallow } from 'enzyme';

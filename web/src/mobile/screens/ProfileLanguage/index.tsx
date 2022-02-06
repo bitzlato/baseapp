@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { Language } from 'src/types';
 import { languages } from '../../../api/config';
 import { getLanguageName } from '../../../helpers';
 import {
@@ -43,7 +44,7 @@ const ProfileLanguageMobileScreenComponent: React.FC = () => {
     dispatch(changeLanguage(language));
   };
 
-  const renderLanguageListItem = (language, index) => {
+  const renderLanguageListItem = (language: Language, index: number) => {
     const listItemClassName = classnames('pg-mobile-profile-language-screen__list__item', {
       'pg-mobile-profile-language-screen__list__item--active': language === currentLanguage,
     });

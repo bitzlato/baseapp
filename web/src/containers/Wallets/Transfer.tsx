@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button as BootstrapButton } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Currency } from '@bitzlato/money-js';
@@ -126,7 +126,7 @@ export const Transfer: React.FC<Props> = ({
             flex1
             as={SelectString}
             options={DROPS}
-            value={from}
+            value={from as any}
             onChange={handleSetFrom as any}
             placeholder={t('Transfer from')}
             placeholderAsLabel
@@ -143,7 +143,7 @@ export const Transfer: React.FC<Props> = ({
             flex1
             as={SelectString}
             options={DROPS}
-            value={to}
+            value={to as any}
             onChange={handleSetTo as any}
             placeholder={t('Transfer to')}
             placeholderAsLabel

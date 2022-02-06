@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import * as React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { defaultWallet } from 'src/modules/user/wallets/defaults';

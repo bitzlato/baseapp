@@ -11,20 +11,20 @@ import { GeetestCaptchaResponse } from '../../modules';
 import { selectMobileDeviceState } from '../../modules/public/globalSettings';
 
 export interface SignInProps {
-  labelSignIn?: string;
-  labelSignUp?: string;
-  emailLabel?: string;
-  passwordLabel?: string;
-  receiveConfirmationLabel?: string;
-  forgotPasswordLabel?: string;
-  isLoading?: boolean;
-  title?: string;
+  labelSignIn?: string | undefined;
+  labelSignUp?: string | undefined;
+  emailLabel?: string | undefined;
+  passwordLabel?: string | undefined;
+  receiveConfirmationLabel?: string | undefined;
+  forgotPasswordLabel?: string | undefined;
+  isLoading?: boolean | undefined;
+  title?: string | undefined;
   onForgotPassword: (email?: string) => void;
   onConfirmationResend?: (email?: string) => void;
   onSignUp: () => void;
   onSignIn: () => void;
-  className?: string;
-  image?: string;
+  className?: string | undefined;
+  image?: string | undefined;
   email: string;
   emailError: string;
   password: string;
@@ -38,11 +38,11 @@ export interface SignInProps {
   handleChangeFocusField: (value: string) => void;
   changePassword: (value: string) => void;
   changeEmail: (value: string) => void;
-  captchaType?: 'recaptcha' | 'geetest' | 'none';
-  renderCaptcha?: JSX.Element | null;
-  reCaptchaSuccess?: boolean;
-  geetestCaptchaSuccess?: boolean;
-  captcha_response?: string | GeetestCaptchaResponse;
+  captchaType?: 'recaptcha' | 'geetest' | 'none' | undefined;
+  renderCaptcha?: JSX.Element | null | undefined;
+  reCaptchaSuccess?: boolean | undefined;
+  geetestCaptchaSuccess?: boolean | undefined;
+  captcha_response?: string | GeetestCaptchaResponse | undefined;
 }
 
 const SignIn: React.FC<SignInProps> = ({

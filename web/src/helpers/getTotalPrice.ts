@@ -30,7 +30,7 @@ export const getTotalPrice = (amount: string, priceMarket: number, proposals: st
 
   if (sum > 0 && list.length >= 1) {
     // sum is bigger then order book liqudity
-    const lastPrice = Number(list[list.length - 1][0]);
+    const lastPrice = Number(list[list.length - 1]![0]);
     total += lastPrice * sum;
   }
 

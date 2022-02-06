@@ -84,7 +84,7 @@ describe('Beneficiaries Fetch', () => {
         const actions = store.getActions();
         if (actions.length === expectedBeneficiariesActionsFetch.length) {
           expect(actions).toEqual(expectedBeneficiariesActionsFetch);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -100,7 +100,7 @@ describe('Beneficiaries Fetch', () => {
         const actions = store.getActions();
         if (actions.length === expectedBeneficiariesActionsError.length) {
           expect(actions).toEqual(expectedBeneficiariesActionsError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

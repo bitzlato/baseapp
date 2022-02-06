@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { QuickExchangeContainer } from '../../containers';
 import { setDocumentTitle } from '../../helpers';

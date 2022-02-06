@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../../';
 import { API, isFinexEnabled, RequestOptions } from '../../../../api';
 import { getCsrfToken, getOrderAPI } from '../../../../helpers';
-import { openOrdersCancelError, OpenOrdersCancelFetch, userOpenOrdersFetch } from '../actions';
+import { openOrdersCancelError, OpenOrdersCancelFetch } from '../actions';
 
 const ordersCancelOptions = (csrfToken?: string): RequestOptions => {
   return {

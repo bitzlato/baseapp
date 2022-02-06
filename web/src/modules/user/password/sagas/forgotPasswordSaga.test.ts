@@ -75,7 +75,7 @@ describe('FORGOT PASSWORD SAGA', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsFetch.length) {
           expect(actions).toEqual(expectedActionsFetch);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -92,7 +92,7 @@ describe('FORGOT PASSWORD SAGA', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsError.length) {
           expect(actions).toEqual(expectedActionsError);
-          resolve();
+          resolve(undefined);
         }
       });
     });
@@ -109,7 +109,7 @@ describe('FORGOT PASSWORD SAGA', () => {
         const actions = store.getActions();
         if (actions.length === expectedActionsNetworkError.length) {
           expect(actions).toEqual(expectedActionsNetworkError);
-          resolve();
+          resolve(undefined);
         }
       });
     });

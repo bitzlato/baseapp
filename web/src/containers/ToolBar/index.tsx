@@ -14,7 +14,7 @@ import { resetLayouts } from '../../modules/public/gridLayout';
 import { MarketSelector } from './MarketSelector';
 
 interface ReduxProps {
-  currentMarket?: Market;
+  currentMarket?: Market | undefined;
   markets: Market[];
   marketTickers: {
     [key: string]: Ticker;

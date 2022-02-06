@@ -24,8 +24,8 @@ import { CommonError } from '../../modules/types';
 
 interface ReduxProps {
   success: boolean;
-  error?: CommonError;
-  captcha_response?: string | GeetestCaptchaResponse;
+  error?: CommonError | undefined;
+  captcha_response?: string | GeetestCaptchaResponse | undefined;
   reCaptchaSuccess: boolean;
   geetestCaptchaSuccess: boolean;
 }

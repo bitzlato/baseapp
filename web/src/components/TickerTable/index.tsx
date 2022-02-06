@@ -5,7 +5,6 @@ import { MarketName } from 'src/components/MarketName/MarketName';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Box } from '../Box/Box';
 import { AmountFormat } from '../AmountFormat/AmountFormat';
-import { Money } from '@bitzlato/money-js';
 import { createCcy, createMoney } from 'src/helpers/money';
 
 interface Props {
@@ -28,11 +27,13 @@ export const TickerTable: React.FC<Props> = ({
   const renderItem = React.useCallback(
     (market, index: number) => {
       const marketChangeColor = +(market.change || 0) < 0 ? 'ask' : 'bid';
-      const ccy = createCcy('',  market.price_precision);
+      const ccy = createCcy('', market.price_precision);
 
       return (
         <tr key={index} onClick={() => redirectToTrading(market.id)}>
-          <td className="pg-ticker-table__col--fixed">{market && <MarketName name={market.name} />}</td>
+          <td className="pg-ticker-table__col--fixed">
+            {market && <MarketName name={market.name} />}
+          </td>
           <td>
             <span>
               <AmountFormat money={createMoney(market.last ?? 0, ccy)} />
@@ -91,7 +92,9 @@ export const TickerTable: React.FC<Props> = ({
         <table className="pg-ticker-table__table">
           <thead className="pg-ticker-table__head--fixed">
             <tr>
-              <th scope="col" className="pg-ticker-table__col--fixed">{formatMessage({ id: 'page.body.marketsTable.header.pair' })}</th>
+              <th scope="col" className="pg-ticker-table__col--fixed">
+                {formatMessage({ id: 'page.body.marketsTable.header.pair' })}
+              </th>
               <th scope="col">
                 {formatMessage({ id: 'page.body.marketsTable.header.lastPrice' })}
               </th>

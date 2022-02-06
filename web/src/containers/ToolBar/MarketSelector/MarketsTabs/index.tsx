@@ -26,9 +26,9 @@ export class MarketsTabsComponent extends React.Component<Props, State> {
     scrollLeft: 0,
   };
 
-  public constructor(props) {
+  public constructor(props: Props) {
     super(props);
-    this.tabsRef = React.createRef();
+    this.tabsRef = React.createRef<HTMLDivElement>();
   }
 
   private tabsRef;
@@ -77,7 +77,7 @@ export class MarketsTabsComponent extends React.Component<Props, State> {
   };
 
   private handleOnMouseWheel = (event: React.WheelEvent) => {
-    this.tabsRef.current.scrollLeft += event.deltaX;
+    this.tabsRef.current!.scrollLeft += event.deltaX;
   };
 
   private handleSelectButton = (index: number) => {
@@ -92,7 +92,7 @@ export class MarketsTabsComponent extends React.Component<Props, State> {
           if (markets.length > 0) {
             listOfQuote = markets.reduce(this.quoteCurrencies, listOfQuote);
           }
-          this.props.onSelect(listOfQuote[this.state.selectedItem]);
+          this.props.onSelect(listOfQuote[this.state.selectedItem]!);
         }
       },
     );
@@ -100,8 +100,8 @@ export class MarketsTabsComponent extends React.Component<Props, State> {
 
   private quoteCurrencies = (pV: string[], cV: Market) => {
     const [, quote] = cV.name.split('/');
-    if (pV.indexOf(quote) === -1) {
-      pV.push(quote);
+    if (pV.indexOf(quote!) === -1) {
+      pV.push(quote!);
     }
 
     return pV;

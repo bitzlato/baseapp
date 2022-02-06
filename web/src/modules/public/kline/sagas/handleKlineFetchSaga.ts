@@ -24,10 +24,10 @@ export function* handleKlineFetchSaga(action: KlineFetch) {
       endPoint = `${endPoint}?${buildQueryString(payload)}`;
     }
 
-    const data = yield call(API.get(klineRequestOptions), endPoint);
+    const data: any[] = yield call(API.get(klineRequestOptions), endPoint);
 
     const convertedData = data.map((elem) => {
-      const [date, open, high, low, close, volume] = elem.map((e) => {
+      const [date, open, high, low, close, volume] = elem.map((e: any) => {
         switch (typeof e) {
           case 'number':
             return e;

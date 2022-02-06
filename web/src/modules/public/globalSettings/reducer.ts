@@ -29,7 +29,7 @@ export const initialChangeColorThemeState: ColorThemeState = {
   applyWindowEnvsTrigger: false,
 };
 
-export const changeColorThemeReducer = (state = initialChangeColorThemeState, action) => {
+export const changeColorThemeReducer = (state = initialChangeColorThemeState, action: any) => {
   switch (action.type) {
     case CHANGE_COLOR_THEME:
       localStorage.setItem('colorTheme', action.payload);

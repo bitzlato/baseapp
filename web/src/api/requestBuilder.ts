@@ -18,7 +18,7 @@ export interface RequestOptions {
 export interface Request {
   method: HTTPMethod;
   url: string;
-  body?: JsonBody;
+  body?: JsonBody | undefined;
 }
 
 const getAPI = () => {

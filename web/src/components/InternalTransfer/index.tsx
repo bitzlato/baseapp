@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
@@ -35,11 +35,11 @@ export const InternalTransferComponent = () => {
 
   const [show, setShow] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(walletsFetch());
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (transferSuccess) {
       handleResetState();
     }
@@ -93,18 +93,18 @@ export const InternalTransferComponent = () => {
 
   const renderHeader = useMemo(() => {
     return (
-      <React.Fragment>
+      <>
         <div className="cr-modal__container-header-text">
           {translate('page.body.internal.transfer.header')}
         </div>
         <CloseIcon className={'cr-modal__container-header-cancel'} onClick={() => setShow(false)} />
-      </React.Fragment>
+      </>
     );
   }, [translate, setShow]);
 
   const renderBody = useMemo(() => {
     return (
-      <React.Fragment>
+      <>
         <div className="cr-modal__container-content__transfer">
           {translate('page.body.internal.transfer.modal.content.transfer')}
           <span>
@@ -117,7 +117,7 @@ export const InternalTransferComponent = () => {
         <div className="cr-modal__container-content--notice">
           {translate(`page.body.internal.transfer.notice.${translationUsername}`)}
         </div>
-      </React.Fragment>
+      </>
     );
   }, [translate, translationUsername, amount, currency, username]);
 
@@ -170,7 +170,7 @@ export const InternalTransferComponent = () => {
           onClick={() => setShow(!show)}
           size="lg"
           variant="primary"
-          disabled={!username || !otp || !+amount || !currency || isError}
+          disabled={(!username || !otp || !+amount || !currency || isError) as boolean}
         >
           {translate('page.body.internal.transfer.continue')}
         </Button>

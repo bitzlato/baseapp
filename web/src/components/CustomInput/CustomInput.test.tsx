@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { CustomInput, CustomInputProps } from './';
 
 import { shallow } from 'enzyme';

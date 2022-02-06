@@ -332,7 +332,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     });
   };
 
-  private handleUploadScan = (uploadEvent, id) => {
+  private handleUploadScan = (uploadEvent: any, id: string) => {
     const allFiles: File[] = uploadEvent.target.files;
     const maxDocsCount = 1;
     const additionalFileList =
@@ -344,18 +344,18 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
       return;
     }
 
-    const sizeKB = (additionalFileList[0].size / 1024).toFixed(1);
+    const sizeKB = (additionalFileList[0]!.size / 1024).toFixed(1);
 
     switch (id) {
       case 'front':
-        if (additionalFileList[0].size > barongUploadSizeMaxRange * 1024 * 1024) {
+        if (additionalFileList[0]!.size > barongUploadSizeMaxRange * 1024 * 1024) {
           this.setState({
             frontFileSizeErrorMessage: this.translate(
               'page.body.kyc.uploadFile.error.tooBig',
               sizeKB,
             ),
           });
-        } else if (additionalFileList[0].size < barongUploadSizeMinRange * 1024 * 1024) {
+        } else if (additionalFileList[0]!.size < barongUploadSizeMinRange * 1024 * 1024) {
           this.setState({
             frontFileSizeErrorMessage: this.translate(
               'page.body.kyc.uploadFile.error.tooSmall',
@@ -369,14 +369,14 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         this.setState({ fileFront: additionalFileList });
         break;
       case 'back':
-        if (additionalFileList[0].size > barongUploadSizeMaxRange * 1024 * 1024) {
+        if (additionalFileList[0]!.size > barongUploadSizeMaxRange * 1024 * 1024) {
           this.setState({
             backFileSizeErrorMessage: this.translate(
               'page.body.kyc.uploadFile.error.tooBig',
               sizeKB,
             ),
           });
-        } else if (additionalFileList[0].size < barongUploadSizeMinRange * 1024 * 1024) {
+        } else if (additionalFileList[0]!.size < barongUploadSizeMinRange * 1024 * 1024) {
           this.setState({
             backFileSizeErrorMessage: this.translate(
               'page.body.kyc.uploadFile.error.tooSmall',
@@ -390,14 +390,14 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         this.setState({ fileBack: additionalFileList });
         break;
       case 'selfie':
-        if (additionalFileList[0].size > barongUploadSizeMaxRange * 1024 * 1024) {
+        if (additionalFileList[0]!.size > barongUploadSizeMaxRange * 1024 * 1024) {
           this.setState({
             selfieFileSizeErrorMessage: this.translate(
               'page.body.kyc.uploadFile.error.tooBig',
               sizeKB,
             ),
           });
-        } else if (additionalFileList[0].size < barongUploadSizeMinRange * 1024 * 1024) {
+        } else if (additionalFileList[0]!.size < barongUploadSizeMinRange * 1024 * 1024) {
           this.setState({
             selfieFileSizeErrorMessage: this.translate(
               'page.body.kyc.uploadFile.error.tooSmall',
@@ -502,7 +502,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     request.append('doc_number', idNumber);
     request.append('identificator', identificator);
     request.append('doc_category', docCategory);
-    request.append('upload[]', upload[0]);
+    request.append('upload[]', upload[0]!);
 
     return request;
   };

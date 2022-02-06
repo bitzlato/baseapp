@@ -11,13 +11,13 @@ import {
 import { PrivateTradeEvent, WalletHistoryElement, WalletHistoryList } from './types';
 
 export interface HistoryFetchPayload {
-  currency?: string;
+  currency?: string | undefined;
   page: number;
   type: string;
-  limit?: number;
-  market?: string;
-  time_from?: string;
-  time_to?: string;
+  limit?: number | undefined;
+  market?: string | undefined;
+  time_from?: string | undefined;
+  time_to?: string | undefined;
 }
 
 interface HistorySuccessPayload {
