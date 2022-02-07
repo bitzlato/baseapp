@@ -1,17 +1,15 @@
-import { shallow } from 'enzyme';
-import { TestComponentWrapper } from 'src/lib/test';
-import { ProfileScreen } from '../';
-
-const setup = () =>
-  shallow(
-    <TestComponentWrapper>
-      <ProfileScreen />
-    </TestComponentWrapper>,
-  );
+import { render } from '@testing-library/react';
+import { TestComponentWrapper } from 'web/src/lib/test';
+import { ProfileScreen } from 'web/src/screens/ProfileScreen/ProfileScreen';
 
 describe('ProfileScreen test', () => {
   it('should render', () => {
-    const wrapper = setup().render();
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = render(
+      <TestComponentWrapper>
+        <ProfileScreen />
+      </TestComponentWrapper>,
+    );
+
+    expect(asFragment().children[0]).toMatchSnapshot();
   });
 });
