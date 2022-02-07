@@ -2,9 +2,10 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { IntlProps } from 'src/types';
-import { Pagination, Table } from '../../components';
-import { getUserAgent, localeDate } from '../../helpers';
+import { IntlProps } from 'web/src/types';
+import { Card } from 'web/src/components/Card/Card';
+import { Pagination, Table } from 'web/src/components';
+import { getUserAgent, localeDate } from 'web/src/helpers';
 import {
   getUserActivity,
   RootState,
@@ -17,7 +18,7 @@ import {
   selectUserActivityNextPageExists,
   selectUserActivityPageCount,
   UserActivityDataInterface,
-} from '../../modules';
+} from 'web/src/modules';
 
 interface ReduxProps {
   loading: boolean;
@@ -47,20 +48,20 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
     const { loading, userActivity } = this.props;
     const emptyMsg = this.props.intl.formatMessage({ id: 'page.noDataToShow' });
 
+    const cardHeader = (
+      <h4>
+        <FormattedMessage id="page.body.profile.header.accountActivity" />
+      </h4>
+    );
     return (
-      <div className="pg-profile-page__activity">
-        <div className="pg-profile-page-header">
-          <h3>
-            <FormattedMessage id="page.body.profile.header.accountActivity" />
-          </h3>
-        </div>
+      <Card className="pg-profile-page__activity" size="xlg" header={cardHeader}>
         <div className={`pg-history-elem ${userActivity.length ? '' : 'pg-history-empty'}`}>
           {userActivity.length ? this.renderContent() : null}
           {!userActivity.length && !loading ? (
             <p className="pg-history-elem__empty">{emptyMsg}</p>
           ) : null}
         </div>
-      </div>
+      </Card>
     );
   }
 

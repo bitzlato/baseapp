@@ -65,7 +65,6 @@ import {
   MagicLink,
   MaintenanceScreen,
   OrdersTabScreen,
-  ProfileScreen,
   ProfileTwoFactorAuthScreen,
   RestrictedScreen,
   TradingScreen,
@@ -80,6 +79,7 @@ import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
 import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
 import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
 import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
+import { ProfileScreen } from 'web/src/screens/ProfileScreen/ProfileScreen';
 
 interface ReduxProps {
   colorTheme: string;
