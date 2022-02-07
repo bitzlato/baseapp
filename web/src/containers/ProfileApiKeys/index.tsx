@@ -4,9 +4,10 @@ import { Button, Form } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { withRouter } from 'react-router';
-import { IntlProps } from 'src/types';
-import { CodeVerification, CopyableTextField, Pagination, Table } from '../../components';
-import { localeDate } from '../../helpers/localeDate';
+import { IntlProps } from 'web/src/types';
+import { Card } from 'web/src/components/Card/Card';
+import { CodeVerification, CopyableTextField, Pagination, Table } from 'web/src/components';
+import { localeDate } from 'web/src/helpers/localeDate';
 
 import {
   alertPush,
@@ -102,19 +103,18 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
       </div>
     ) : null;
 
+    const cardHeader = (
+      <>
+        <h4>{this.t('page.body.profile.apiKeys.header')}</h4>
+        {user.otp && dataLoaded && (
+          <span className="pg-profile-page__pull-right" onClick={this.handleCreateKeyClick}>
+            {this.t('page.body.profile.apiKeys.header.create')}
+          </span>
+        )}
+      </>
+    );
     return (
-      <div className="pg-profile-page__api-keys">
-        <div className="pg-profile-page-header">
-          <div className="pg-profile-page__api-keys__header">
-            <h3>{this.t('page.body.profile.apiKeys.header')}</h3>
-            {user.otp && dataLoaded && (
-              <span className="pg-profile-page__pull-right" onClick={this.handleCreateKeyClick}>
-                {this.t('page.body.profile.apiKeys.header.create')}
-              </span>
-            )}
-          </div>
-        </div>
-
+      <Card className="pg-profile-page__api-keys" size="xlg" header={cardHeader}>
         {!user.otp && (
           <p className="pg-profile-page__label pg-profile-page__text-center">
             {this.t('page.body.profile.apiKeys.noOtp')}
@@ -142,7 +142,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
         )}
 
         {modal}
-      </div>
+      </Card>
     );
   }
 

@@ -1,28 +1,4 @@
 .pg-profile-page {
-  align-items: flex-start !important;
-  color: var(--secondary-contrast-cta-color);
-  flex-wrap: wrap;
-  height: 100%;
-  margin-bottom: 24px !important;
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: 400;
-  }
-
-  h3 {
-    margin: calc(var(--gap) * 1.37) 0;
-    padding: 0;
-  }
-
-  &__qr {
-    width: calc(var(--big-gap) * 1.66);
-  }
-
   &__details {
     background-color: var(--body-background-color);
     border-radius: calc(var(--gap) * 0.66);
@@ -46,19 +22,8 @@
     }
   }
 
-  &-header {
-    background: var(--subheader-background-color);
-    border-bottom: 1px solid var(--divider-color-level-2);
-    border-radius: calc(var(--gap) * 0.66) calc(var(--gap) * 0.66) 0 0;
-    color: var(--primary-text-color);
-    display: flex;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0 calc(var(--gap) * 3) 0 calc(var(--gap) * 3.4);
-  }
-
   &__box {
-    padding: calc(var(--gap) * 4) calc(var(--gap) * 4) calc(var(--gap) * 4) calc(var(--gap) * 1);
+    padding-bottom: calc(var(--gap) * 1);
     width: 100%;
 
     &-header {
@@ -107,13 +72,6 @@
         margin-top: calc(var(--gap) * 2);
       }
     }
-  }
-
-  &__col {
-    align-items: center;
-    display: flex;
-    float: right;
-    width: 45%;
   }
 
   &__left-col {
@@ -461,8 +419,8 @@
 
           .cr-copyable-text-field {
             border: none;
-            padding: 6px 2px;
             height: 48px;
+            padding: 6px 2px;
 
             .input-group {
               display: flex;
@@ -692,7 +650,7 @@
 
       input[type='number']::-webkit-inner-spin-button,
       input[type='number']::-webkit-outer-spin-button {
-        -webkit-appearance: none;
+        appearance: none;
         margin: 0;
       }
     }

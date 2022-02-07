@@ -7,7 +7,6 @@ export * from './History';
 export * from './LandingScreen';
 export * from './MagicLinkScreen';
 export * from './OrdersTabScreen';
-export * from './ProfileScreen';
 export * from './ProfileTwoFactorAuthScreen';
 export * from './SignInScreen';
 export * from './SignUpScreen';

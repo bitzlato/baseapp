@@ -11,7 +11,7 @@ interface Props {
   className?: string;
   outer?: React.ReactNode;
   header?: React.ReactNode;
-  size?: 'md' | 'lg';
+  size?: 'md' | 'lg' | 'xlg';
 }
 
 export const Card: React.FC<Props> = ({ className, outer, header, size, children }) => {
