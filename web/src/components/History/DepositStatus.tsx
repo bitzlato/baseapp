@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Deposit } from 'src/modules/user/history/types';
 import { useT } from 'src/hooks/useT';
 import { ExternalLink } from './ExternalLink';
@@ -7,11 +7,11 @@ import { Label } from '../Label/Label';
 import { join } from 'src/helpers/join';
 
 interface Props {
-  currency: string;
   item: Deposit;
+  minConfirmations: number;
 }
 
-export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
+export const DepositStatus: FC<Props> = ({ item, minConfirmations }) => {
   const t = useT();
 
   switch (item.state) {
@@ -64,7 +64,7 @@ export const DepositStatus: React.FC<Props> = ({ item, currency }) => {
 
     case 'accepted':
       return (
-        <ConfirmingStatus txid={item.txid} confirmations={item.confirmations} currency={currency} />
+        <ConfirmingStatus confirmations={item.confirmations} minConfirmations={minConfirmations} />
       );
 
     case 'refunding':

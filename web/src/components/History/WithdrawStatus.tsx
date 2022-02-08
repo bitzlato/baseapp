@@ -1,16 +1,15 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Withdraw } from 'src/modules/user/history/types';
 import { Label } from '../Label';
 import { useT } from 'src/hooks/useT';
-import { BlockchainLink } from './ExternalLink';
 import { ConfirmingStatus } from './ConfirmingStatus';
 
 interface Props {
-  currency: string;
   item: Withdraw;
+  minConfirmations: number;
 }
 
-export const WithdrawStatus: React.FC<Props> = ({ item, currency }) => {
+export const WithdrawStatus: FC<Props> = ({ item, minConfirmations }) => {
   const t = useT();
 
   switch (item.state) {
@@ -24,18 +23,12 @@ export const WithdrawStatus: React.FC<Props> = ({ item, currency }) => {
 
     case 'confirming':
       return (
-        <ConfirmingStatus
-          currency={currency}
-          txid={item.blockchain_txid}
-          confirmations={item.confirmations}
-        />
+        <ConfirmingStatus confirmations={item.confirmations} minConfirmations={minConfirmations} />
       );
 
     case 'succeed':
       return (
-        <BlockchainLink txid={item.blockchain_txid} currency={currency}>
-          <Label color="success">{t('page.body.history.withdraw.content.status.succeed')}</Label>
-        </BlockchainLink>
+        <Label color="success">{t('page.body.history.withdraw.content.status.succeed')}</Label>
       );
 
     case 'skipped':
