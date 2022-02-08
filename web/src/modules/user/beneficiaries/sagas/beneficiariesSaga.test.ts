@@ -32,23 +32,9 @@ describe('Beneficiaries Fetch', () => {
       data: {
         address: '0xa96bbd0de64ef10659ae49d5ca4bb8109169007eb90d53aa3f87b6dc65530d8a',
       },
-    },
-    {
-      id: 2,
-      currency: 'usd',
-      name: 'Second company',
-      state: 'active',
-      description: 'Information about second company',
-      data: {
-        address: 'Somestreet 42, City',
-        country: 'Wakanda',
-        full_name: 'Some name',
-        account_number: '1234512345',
-        account_type: 'Account type',
-        bank_name: 'First bank',
-        bank_address: 'Anotherstreet 13',
-        bank_country: 'Wakanda',
-      },
+      blockchain_id: 0,
+      sent_at: '',
+      uid: '',
     },
   ];
 

@@ -33,6 +33,8 @@ describe('CurrencyHistory', () => {
       confirmations: 1,
       completed_at: '2018-12-03T17:14:56+01:00',
       state: 'accepted',
+      blockchain_id: 0,
+      transfer_type: '',
     },
     {
       id: 393,
@@ -44,6 +46,8 @@ describe('CurrencyHistory', () => {
       confirmations: 0,
       completed_at: '2018-11-16T09:56:56+01:00',
       state: 'canceled',
+      blockchain_id: 0,
+      transfer_type: '',
     },
   ];
 

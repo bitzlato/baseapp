@@ -1,4 +1,3 @@
-import { DepositAddress } from 'src/modules/public/accounts/types';
 import { CommonError } from '../../types';
 import * as actions from './actions';
 import { initialWalletsState, walletsReducer } from './reducer';
