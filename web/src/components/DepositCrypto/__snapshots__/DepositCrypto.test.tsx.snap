@@ -40,7 +40,8 @@ exports[`DepositCrypto should match snapshot 1`] = `
             "minorUnit": 4,
           },
         },
-        "base_factor": 100000000,
+        "blockchain_ids": Array [],
+        "cc_code": "",
         "code": "",
         "currency": Object {
           "code": "",
@@ -54,8 +55,8 @@ exports[`DepositCrypto should match snapshot 1`] = `
             "minorUnit": 4,
           },
         },
-        "explorer_address": "",
-        "explorer_transaction": "",
+        "description": null,
+        "homepage": null,
         "icon_id": "",
         "icon_url": "",
         "id": "",
@@ -80,7 +81,6 @@ exports[`DepositCrypto should match snapshot 1`] = `
             "minorUnit": 4,
           },
         },
-        "min_confirmations": 6,
         "min_deposit_amount": Object {
           "amount": "0.0000",
           "currency": Object {
@@ -97,9 +97,9 @@ exports[`DepositCrypto should match snapshot 1`] = `
         },
         "minorUnit": 4,
         "name": "",
+        "position": 0,
         "precision": 8,
         "price": "1.0",
-        "symbol": "",
         "type": "coin",
         "withdraw_fee": Object {
           "amount": "0.0000",
@@ -108,7 +108,8 @@ exports[`DepositCrypto should match snapshot 1`] = `
             "minorUnit": 4,
           },
         },
-        "withdrawal_disabled_reason": "",
+        "withdraw_limit_24h": "0",
+        "withdraw_limit_72h": "0",
         "withdrawal_enabled": true,
       }
     }

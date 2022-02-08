@@ -1,8 +1,8 @@
 import { Blockchain } from './types';
 
 export const DEFAULT_BLOCKCHAIN: Blockchain = {
-  explorer_address: 'https://testnet.blockchain.info/address/#{address}',
-  explorer_transaction: 'https://testnet.blockchain.info/tx/#{txid}',
+  explorer_address: '',
+  explorer_transaction: '',
   height: 1500000,
   id: 2,
   is_transaction_price_too_high: false,

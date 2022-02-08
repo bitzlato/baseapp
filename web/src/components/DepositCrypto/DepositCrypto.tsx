@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { isMetaMaskInstalled } from '@bitzlato/ethereum-provider';
@@ -30,7 +30,7 @@ interface Props {
   wallet: Wallet;
 }
 
-export const DepositCrypto: React.FC<Props> = ({ wallet }) => {
+export const DepositCrypto: FC<Props> = ({ wallet }) => {
   const t = useT();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -102,7 +102,7 @@ export const DepositCrypto: React.FC<Props> = ({ wallet }) => {
             <Box row>
               <div className="cr-deposit-info">
                 {t('page.body.wallets.tabs.deposit.ccy.message.submit', {
-                  confirmations: blockchain?.min_confirmations ?? 0,
+                  confirmations: blockchain.min_confirmations,
                 })}
               </div>
               {depositAddress && (
@@ -113,7 +113,11 @@ export const DepositCrypto: React.FC<Props> = ({ wallet }) => {
             </Box>
             <Box row spacing="2">
               {showMetamask ? (
-                <MetaMaskButton depositAddress={depositAddress.address} currency={wallet} />
+                <MetaMaskButton
+                  depositAddress={depositAddress.address}
+                  explorerAddress={blockchain.explorer_address}
+                  currency={wallet}
+                />
               ) : null}
               <CopyableTextField
                 className={s.field}

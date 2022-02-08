@@ -33,7 +33,7 @@ interface SelectStringProps<T extends string, U>
   > {
   options: T[];
   value?: T | null;
-  defaultValue?: T;
+  defaultValue?: T | undefined;
   onChange: (value: T | null) => void;
   formatOptionLabel?: (value: T) => ReactNode;
 }

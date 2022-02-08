@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import BN from 'bignumber.js';
@@ -20,15 +20,16 @@ import s from 'src/containers/Withdraw/Withdraw.postcss';
 
 interface Props {
   depositAddress: string;
+  explorerAddress: string;
   currency: ApiCurrency;
 }
 
-export const MetaMaskButton: React.FC<Props> = (props) => {
+export const MetaMaskButton: FC<Props> = (props) => {
   const t = useT();
   const dispatch = useDispatch();
-  const [isOpen, setOpen] = React.useState(false);
-  const [amount, setAmount] = React.useState('');
-  const [isAmountValid, setAmountValid] = React.useState(false);
+  const [isOpen, setOpen] = useState(false);
+  const [amount, setAmount] = useState('');
+  const [isAmountValid, setAmountValid] = useState(false);
 
   const close = () => {
     setOpen(false);
@@ -39,7 +40,7 @@ export const MetaMaskButton: React.FC<Props> = (props) => {
     if (provider) {
       try {
         const chainId = await provider.request({ method: 'eth_chainId' });
-        if (isEqualChains(chainId, props.currency)) {
+        if (isEqualChains(chainId, props.explorerAddress)) {
           setOpen(true);
         } else {
           dispatch(alertPush({ message: ['metamask.error.unsupportedNetwork'], type: 'error' }));
@@ -138,10 +139,9 @@ function toWei(amount: string): HexString {
   return new BN(amount).multipliedBy(1e18).toString(16);
 }
 
-function isEqualChains(chainId: HexString, currency: ApiCurrency): boolean {
-  const address = currency.explorer_address;
+function isEqualChains(chainId: HexString, explorerAddress: string): boolean {
   return (
-    (chainId === ChainId.Mainnet && address.startsWith('https://etherscan.io/')) ||
-    (chainId === ChainId.Ropsten && address.startsWith('https://ropsten.etherscan.io/'))
+    (chainId === ChainId.Mainnet && explorerAddress.startsWith('https://etherscan.io/')) ||
+    (chainId === ChainId.Ropsten && explorerAddress.startsWith('https://ropsten.etherscan.io/'))
   );
 }

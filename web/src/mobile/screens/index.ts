@@ -16,4 +16,3 @@ export * from './ProfileVerificationScreen';
 export * from './SignInScreen';
 export * from './SignUpScreen';
 export * from './Trading';
-export * from './WalletsHistory';
