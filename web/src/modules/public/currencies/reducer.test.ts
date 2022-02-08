@@ -1,52 +1,23 @@
 import { CommonError } from '../../types';
 import * as actions from './actions';
+import { defaultCurrencySource } from './defaults';
 import { currenciesReducer, CurrenciesState, initialCurrenciesState } from './reducer';
 import { CurrencySource } from './types';
 
 describe('Currencies reducer', () => {
   const fakeCurrencies: CurrencySource[] = [
     {
+      ...defaultCurrencySource,
       id: 'bch',
       name: 'Bitcoin Cash',
-      symbol: '฿',
-      explorer_transaction: 'https://testnet.blockchain.info/tx/',
-      explorer_address: 'https://testnet.blockchain.info/address/',
-      type: 'coin',
-      deposit_fee: '0.0',
-      min_confirmations: 6,
       min_deposit_amount: '0.0000748',
-      withdraw_fee: '0.0',
-      min_withdraw_amount: '0.0',
-      price: '',
-      deposit_enabled: true,
-      withdrawal_enabled: true,
-      withdrawal_disabled_reason: '',
-      base_factor: 100000000,
-      precision: 8,
-      icon_url: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg',
-      icon_id: '',
     },
 
     {
+      ...defaultCurrencySource,
       id: 'eur',
       name: 'Euro',
-      symbol: '€',
-      explorer_transaction: 'https://testnet.blockchain.info/tx/',
-      explorer_address: 'https://testnet.blockchain.info/address/',
-      type: 'coin',
-      deposit_fee: '0.0',
-      min_confirmations: 4,
       min_deposit_amount: '0.0000748',
-      withdraw_fee: '0.0',
-      min_withdraw_amount: '0.0',
-      price: '',
-      deposit_enabled: true,
-      withdrawal_enabled: true,
-      withdrawal_disabled_reason: '',
-      base_factor: 100000000,
-      precision: 8,
-      icon_url: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg',
-      icon_id: '',
     },
   ];
 

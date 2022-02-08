@@ -15,6 +15,7 @@ describe('HISTORY_UPDATE', () => {
     tid: 'TID2C3AAFEF91',
     transfer_type: 'crypto',
     txid: '0xc0623d83757b3f8174a7890623df3605788e088f0f26b4c1f5041bc516c9bdd6',
+    blockchain_id: 0,
   };
 
   const updatedDeposit: Deposit = {
@@ -29,6 +30,7 @@ describe('HISTORY_UPDATE', () => {
     tid: 'TID2C3AAFEF91',
     transfer_type: 'crypto',
     txid: '0xc0623d83757b3f8174a7890623df3605788e088f0f26b4c1f5041bc516c9bdd6',
+    blockchain_id: 0,
   };
 
   it('insert new deposit', () => {

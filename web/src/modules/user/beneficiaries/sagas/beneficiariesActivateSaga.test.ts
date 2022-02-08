@@ -43,6 +43,9 @@ describe('Beneficiaries Activate', () => {
     data: {
       address: '0xa96bbd0de64ef10659ae49d5ca4bb8109169007eb90d53aa3f87b6dc65530d8a',
     },
+    blockchain_id: 0,
+    sent_at: '',
+    uid: '',
   };
 
   const error: CommonError = {
