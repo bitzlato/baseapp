@@ -35,9 +35,6 @@ const MobileFooter = React.lazy(() =>
 const AlertsContainer = React.lazy(() =>
   import('./containers/Alerts').then(({ Alerts }) => ({ default: Alerts })),
 );
-const CustomizationContainer = React.lazy(() =>
-  import('./containers/Customization').then(({ Customization }) => ({ default: Customization })),
-);
 const Header = React.lazy(() => import('./components/Header/Header'));
 const LayoutContainer = React.lazy(() =>
   import('./routes').then(({ Layout }) => ({ default: Layout })),
@@ -60,11 +57,10 @@ const getTranslations = (lang: Language, isMobileDevice: boolean) => {
 const RenderDeviceContainers = () => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
 
-  if (browserHistory.location.pathname === '/setup' || !isMobileDevice) {
+  if (!isMobileDevice) {
     return (
       <>
         <Header />
-        <CustomizationContainer />
         <AlertsContainer />
         <LayoutContainer />
         <FooterContainer />

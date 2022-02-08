@@ -24,7 +24,7 @@ import {
 } from '../../api';
 import { ExpiredSessionModal } from '../../components';
 import { WalletsFetch } from '../../containers';
-import { applyCustomizationSettings, toggleColorTheme } from '../../helpers';
+import { toggleColorTheme } from '../../helpers';
 import {
   ChangeForgottenPasswordMobileScreen,
   ConfirmMobileScreen,
@@ -53,7 +53,6 @@ import {
   selectUserFetching,
   selectUserInfo,
   selectUserLoggedIn,
-  toggleChartRebuild,
   User,
   userFetch,
   walletsReset,
@@ -76,7 +75,6 @@ import {
   RestrictedScreen,
   TradingScreen,
   VerificationScreen,
-  SetupScreen,
   QuickExchange,
   LandingScreen,
 } from '../../screens';
@@ -109,11 +107,7 @@ interface LayoutState {
   isShownExpSessionModal: boolean;
 }
 
-interface OwnProps {
-  toggleChartRebuild: typeof toggleChartRebuild;
-}
-
-export type LayoutProps = ReduxProps & DispatchProps & LocationProps & IntlProps & OwnProps;
+export type LayoutProps = ReduxProps & DispatchProps & LocationProps & IntlProps;
 
 const renderLoader = () => (
   <div className="pg-loader-container">
@@ -215,8 +209,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           this.check();
       }
     }
-
-    applyCustomizationSettings(undefined, this.props.toggleChartRebuild);
   }
 
   public UNSAFE_componentWillReceiveProps(nextProps: LayoutProps) {
@@ -431,13 +423,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     return (
       <div className={desktopCls}>
         <Switch>
-          <PublicRoute
-            loading={userLoading}
-            isLogged={isLoggedIn}
-            path="/setup"
-            component={SetupScreen}
-          />
-          <Route exact path="/magic-link" component={MagicLink as any} />
+          <Route path="/magic-link" component={MagicLink as any} />
           <PublicRoute path="/signin" component={SignInAuth0} />
           <PublicRoute path="/signup" component={SignInAuth0} />
           <PublicRoute
@@ -602,9 +588,8 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state): Red
   verifyEmail: selectVerifyEmail(state),
 });
 
-const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch) => ({
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch): DispatchProps => ({
   logout: () => dispatch(logoutFetch()),
-  toggleChartRebuild: () => dispatch(toggleChartRebuild()),
   userFetch: () => dispatch(userFetch()),
   walletsReset: () => dispatch(walletsReset()),
 });

@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import { all, call } from 'redux-saga/effects';
-import { adminReducer, publicReducer, userReducer } from './app';
-import { ConfigUpdateState, rootConfigUpdateSaga } from './admin/config';
+import { publicReducer, userReducer } from './app';
 import { AlertState, rootHandleAlertSaga } from './public/alert';
 import { BlocklistAccessState, rootBlocklistAccessSaga } from './public/blocklistAccess';
 import { CurrenciesState, rootCurrenciesSaga } from './public/currencies';
@@ -45,14 +44,9 @@ import { rootUserActivitySaga, UserActivityState } from './user/userActivity';
 import { rootWalletsSaga, WalletsState } from './user/wallets';
 import { QuickExchangeState, rootQuickExchangeSaga } from './user/quickExchange';
 import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit';
-import { MarketsAdminState, rootMarketsAdminSaga } from './admin/markets';
-import { PlatformCreateState, rootPlatformCreateSaga } from './admin/platform';
 import { rootQuickExchangeLimitsSaga } from './public/quickExchangePublic/sagas';
 import { QuickExchangePublicState } from './public/quickExchangePublic/reducer';
 
-export * from './admin/config';
-export * from './admin/markets';
-export * from './admin/platform';
 export * from './public/alert';
 export * from './public/blocklistAccess';
 export * from './public/currencies';
@@ -131,17 +125,11 @@ export interface RootState {
     quickExchange: QuickExchangeState;
     depositIntentionState: DepositIntentionState;
   };
-  admin: {
-    configUpdate: ConfigUpdateState;
-    markets: MarketsAdminState;
-    platform: PlatformCreateState;
-  };
 }
 
 export const rootReducer = combineReducers({
   public: publicReducer,
   user: userReducer,
-  admin: adminReducer,
 });
 
 export function* rootSaga() {
@@ -152,7 +140,6 @@ export function* rootSaga() {
     call(rootBeneficiariesSaga),
     call(rootDepositIntentionSaga),
     call(rootBlocklistAccessSaga),
-    call(rootConfigUpdateSaga),
     call(rootCurrenciesSaga),
     call(rootDocumentationSaga),
     call(rootEmailVerificationSaga),
@@ -163,7 +150,6 @@ export function* rootSaga() {
     call(rootInternalTransfersSaga),
     call(rootKlineFetchSaga),
     call(rootLabelSaga),
-    call(rootMarketsAdminSaga),
     call(rootMarketsSaga),
     call(rootMemberLevelsSaga),
     call(rootOpenOrdersSaga),
@@ -171,7 +157,6 @@ export function* rootSaga() {
     call(rootOrdersHistorySaga),
     call(rootOrdersSaga),
     call(rootPasswordSaga),
-    call(rootPlatformCreateSaga),
     call(rootProfileSaga),
     call(rootRecentTradesSaga),
     call(rootSendAddressesSaga),

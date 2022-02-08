@@ -2,7 +2,6 @@ export * from './Alerts';
 export * from './ChangePassword';
 export * from './Charts';
 export * from './Confirm';
-export * from './Customization';
 export * from './Errors';
 export * from './GeetestCaptcha';
 export * from './Header';
