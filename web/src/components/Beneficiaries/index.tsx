@@ -122,7 +122,7 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
   const handleFilterByState = React.useCallback(
     (beneficiariesList: Beneficiary[], filter: string | string[]) => {
       if (beneficiariesList.length) {
-        return beneficiariesList.filter((item) => filter.includes(item.state.toLowerCase()));
+        return beneficiariesList.filter((item) => filter.includes(item.state?.toLowerCase() ?? ''));
       }
 
       return [];
