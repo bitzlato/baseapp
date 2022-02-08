@@ -20,7 +20,7 @@ export function* beneficiariesCreateSaga(action: BeneficiariesCreate) {
   try {
     const payload: Beneficiary = yield call(
       API.post(config(getCsrfToken())),
-      '/account/beneficiaries',
+      '/account/beneficiaries/',
       action.payload,
     );
     yield put(beneficiariesCreateData(payload));
