@@ -2,15 +2,15 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
+import { MarketName } from 'src/components/MarketName/MarketName';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { CloseIcon } from '../../../assets/images/CloseIcon';
 import { FilterInput } from '../../../components';
 import { DEFAULT_CCY_PRECISION } from '../../../constants';
 import { MarketsTable } from '../../../containers';
 import { Market, selectCurrentMarket, selectMarkets, selectMarketTickers } from '../../../modules';
 import { ChevronIcon } from '../../assets/images/ChevronIcon';
-import { MobileModal } from '../../components';
-import { MarketName } from 'src/components/MarketName/MarketName';
-import { createMoneyWithoutCcy } from 'src/helpers/money';
+import { MobileModal } from '..';
 
 const defaultTicker = {
   amount: '0.0',

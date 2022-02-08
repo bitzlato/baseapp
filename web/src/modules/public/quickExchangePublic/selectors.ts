@@ -1,4 +1,4 @@
-import { RootState } from '../../';
+import { RootState } from '../..';
 import { QuickExchangeLimits } from './types';
 
 export const selectQuickExchangeLimits = (state: RootState): QuickExchangeLimits =>

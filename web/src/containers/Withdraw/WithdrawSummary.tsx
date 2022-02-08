@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Box } from 'src/components/Box';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { useT } from 'src/hooks/useT';
-import { SummaryField } from '../../components';
-import { Wallet } from '../../modules';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { createMoney } from 'src/helpers/money';
+import { SummaryField } from '../../components';
+import { Wallet } from '../../modules';
 
 interface Props {
   wallet: Wallet;
@@ -21,7 +21,7 @@ export const WithdrawSummary: React.FC<Props> = ({ wallet, total }) => {
         <AmountFormat money={wallet.withdraw_fee} />
       </SummaryField>
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.total')}>
-        <AmountFormat money={createMoney(total ? total : 0, wallet.currency)} />
+        <AmountFormat money={createMoney(total || 0, wallet.currency)} />
       </SummaryField>
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.min')}>
         <AmountFormat money={wallet.min_withdraw_amount} />

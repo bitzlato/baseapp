@@ -13,15 +13,15 @@ import { IconButton } from 'src/components/IconButton/IconButton';
 import { TransferPlace, TransferPost } from 'src/modules/account/types';
 import { createMoney } from 'src/helpers/money';
 import { FetchError, postData } from 'src/hooks/useFetch';
-import { TransferHistory } from './TransferHistory';
 import { useAlert } from 'src/hooks/useAlert';
 import { accountUrl } from 'src/api/config';
 import { alertPush } from 'src/modules/public/alert/actions';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
 import { SummaryField } from 'src/components/SummaryField';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
-import s from './Transfer.postcss';
 import sQuickExchange from 'src/containers/QuickExchange/QuickExchange.postcss';
+import s from './Transfer.postcss';
+import { TransferHistory } from './TransferHistory';
 
 interface Props {
   currency: Currency;
@@ -84,7 +84,7 @@ export const Transfer: React.FC<Props> = ({
         source: from,
         destination: to,
         currency_id: currency.code,
-        amount: amount,
+        amount,
         description: 'Transfer by market web-client',
       };
       try {

@@ -140,7 +140,7 @@ describe('Beneficiaries reducer', () => {
         data: [],
         fetching: false,
         success: false,
-        error: error,
+        error,
       },
     };
 
@@ -204,7 +204,7 @@ describe('Beneficiaries reducer', () => {
         ...initialBeneficiariesState.activate,
         fetching: false,
         success: false,
-        error: error,
+        error,
       },
     };
     expect(
@@ -269,7 +269,7 @@ describe('Beneficiaries reducer', () => {
         ...initialBeneficiariesState.create,
         fetching: false,
         success: false,
-        error: error,
+        error,
       },
     };
     expect(
@@ -325,7 +325,7 @@ describe('Beneficiaries reducer', () => {
         ...initialBeneficiariesState.delete,
         fetching: false,
         success: false,
-        error: error,
+        error,
       },
     };
     expect(
@@ -381,7 +381,7 @@ describe('Beneficiaries reducer', () => {
         ...initialBeneficiariesState.resendPin,
         fetching: false,
         success: false,
-        error: error,
+        error,
       },
     };
     expect(

@@ -1,9 +1,8 @@
 import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { rootSaga, sendError } from '../../../';
+import { rootSaga, sendError, Market } from '../../..';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
-import { Market } from '../../../../modules';
 import { CommonError, OrderCommon } from '../../../types';
 import { userOpenOrdersError, userOpenOrdersFetch } from '../actions';
 

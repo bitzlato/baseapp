@@ -1,6 +1,6 @@
 import { DEFAULT_CCY_PRECISION } from '../constants';
 import { ApiCurrency, Market, Ticker, Wallet } from '../modules';
-import { handleCCYPrecision } from './';
+import { handleCCYPrecision } from '.';
 import { createCcy, createMoney, createMoneyWithoutCcy } from './money';
 
 export interface MarketTicker {
@@ -73,13 +73,15 @@ export const estimateWithMarket = (
       );
 
       return precisedValue;
-    } else {
-      const precisedValue = Number(
-        createMoneyWithoutCcy(walletTotal * Number(marketTicker.last), targetCurrencyPrecision).toString(),
-      );
-
-      return precisedValue;
     }
+    const precisedValue = Number(
+      createMoneyWithoutCcy(
+        walletTotal * Number(marketTicker.last),
+        targetCurrencyPrecision,
+      ).toString(),
+    );
+
+    return precisedValue;
   }
 
   return 0;
@@ -137,9 +139,8 @@ const estimateWithoutMarket = (
       markets,
       marketTickers,
     );
-  } else {
-    // 'No secondary currency found for', wallet.currency
   }
+  // 'No secondary currency found for', wallet.currency
 
   return 0;
 };

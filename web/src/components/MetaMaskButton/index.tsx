@@ -10,13 +10,12 @@ import {
   ChainId,
 } from '@bitzlato/ethereum-provider';
 
+import { useT } from 'src/hooks/useT';
+import { createMoney } from 'src/helpers/money';
+import s from 'src/containers/Withdraw/Withdraw.postcss';
 import { MetaMaskLogo } from '../../assets/images/MetaMaskLogo';
 import { alertPush, ApiCurrency } from '../../modules';
-import { useT } from 'src/hooks/useT';
 import { CustomInput } from '../CustomInput';
-import { createMoney } from 'src/helpers/money';
-
-import s from 'src/containers/Withdraw/Withdraw.postcss';
 
 interface Props {
   depositAddress: string;
@@ -112,7 +111,7 @@ export const MetaMaskButton: React.FC<Props> = (props) => {
                     handleChangeInput={handleChangeAmount}
                     inputValue={amount}
                     className={s.numberInput}
-                    autoFocus={true}
+                    autoFocus
                   />
                 </div>
                 <div className="cr-email-form__button-wrapper">

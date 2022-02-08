@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import { ColorResult, SketchPicker } from 'react-color';
-import { handleConvertColorCode } from '../';
+import { handleConvertColorCode } from '..';
 import { ArrowIcon } from '../../../../assets/images/customization/ArrowIcon';
 import { ThemeColorTitleInterface } from '../../../../themes';
 

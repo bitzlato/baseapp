@@ -8,6 +8,9 @@ import { getBlockchainLink } from 'src/helpers/getBlockchainLink';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { IntlProps } from 'src/types';
+import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { History, Pagination } from '../../components';
 import { localeDate, setTradesType, setTransferStatusColor, truncateMiddle } from '../../helpers';
 import {
@@ -31,10 +34,7 @@ import {
   WalletHistoryList,
   Withdraw,
 } from '../../modules';
-import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
 import { TransferHistory } from '../Wallets/TransferHistory';
-import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 interface HistoryProps {
   type: string;
@@ -109,7 +109,7 @@ class HistoryComponent extends React.Component<Props> {
     const { type, firstElemIndex, lastElemIndex, page, nextPageExists } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <History headers={this.renderHeaders(type)} data={this.retrieveData()} />
         <Pagination
           firstElemIndex={firstElemIndex}
@@ -119,7 +119,7 @@ class HistoryComponent extends React.Component<Props> {
           onClickPrevPage={this.onClickPrevPage}
           onClickNextPage={this.onClickNextPage}
         />
-      </React.Fragment>
+      </>
     );
   };
 

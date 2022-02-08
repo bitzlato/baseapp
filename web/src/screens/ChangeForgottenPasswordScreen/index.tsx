@@ -89,7 +89,7 @@ class ChangeForgottenPasswordComponent extends React.Component<
             }
             currentPasswordEntropy={currentPasswordEntropy}
             fetchCurrentPasswordEntropy={this.props.fetchCurrentPasswordEntropy}
-            hideOldPassword={true}
+            hideOldPassword
           />
         </div>
       </div>

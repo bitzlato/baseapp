@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 import { defaultWallet } from 'src/modules/user/wallets/defaults';
 import { rootReducer } from '../../modules';
 import { CopyableTextField } from '../CopyableTextField';
-import { DepositCrypto } from './';
+import { DepositCrypto } from '.';
 
 const store = createStore(rootReducer);
 

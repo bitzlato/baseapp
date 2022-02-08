@@ -5,7 +5,6 @@ import { Subheader } from 'src/mobile/components';
 import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
 import { SelectOption } from 'src/components/Select/Select';
-import { WalletMobileBalance } from './WalletMobileBalance';
 import { useGeneralWallets } from 'src/hooks/useGeneralWallets';
 import { Tab, TabList, TabPanel, Tabs } from 'src/components/Tabs';
 import { DepositCrypto } from 'src/components/DepositCrypto';
@@ -14,6 +13,7 @@ import { Withdraw } from 'src/containers/Withdraw';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { selectWallet } from 'src/modules/user/wallets/selectors';
 import { InvoiceExplanation } from 'src/screens/WalletsScreen/InvoiceExplanation';
+import { WalletMobileBalance } from './WalletMobileBalance';
 
 export const WalletMobileScreen: React.FC = () => {
   const params = useParams<UrlParams>();

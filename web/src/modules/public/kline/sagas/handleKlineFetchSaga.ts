@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { sendError } from '../../..';
 import { API, isFinexEnabled, RequestOptions } from '../../../../api';
 import { buildQueryString, getTimestampPeriod } from '../../../../helpers';
 import { klineData, klineError, KlineFetch } from '../actions';

@@ -1,6 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { Deposit, fetchHistory } from '../../..';
-import { alertPush, sendError } from '../../../';
+import { Deposit, fetchHistory, alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { getCsrfToken } from '../../../../helpers';
 import { DepositsCreate, depositsCreateData, depositsCreateError } from '../actions';

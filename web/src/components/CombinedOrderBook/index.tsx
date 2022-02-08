@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { OrderBook } from '../';
+import { OrderBook } from '..';
 import { Box } from '../Box/Box';
 import { CellData } from '../Table';
 
@@ -112,7 +112,7 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
     const reverseHead = headers.slice(0).reverse();
 
     return (
-      <React.Fragment>
+      <>
         <div className="cr-combined-order-book__large">
           {noDataBids ? (
             <Box align="center" className="cr-order-book">
@@ -120,7 +120,7 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
             </Box>
           ) : (
             <OrderBook
-              side={'right'}
+              side="right"
               headers={reverseHead}
               data={dataBids}
               rowBackgroundColor={rowBackgroundColorBids}
@@ -135,7 +135,7 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
             </Box>
           ) : (
             <OrderBook
-              side={'left'}
+              side="left"
               headers={headers}
               data={dataAsks}
               rowBackgroundColor={rowBackgroundColorAsks}
@@ -148,7 +148,7 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
         <div className="cr-combined-order-book__market cr-combined-order-book__large-market">
           {lastPrice}
         </div>
-      </React.Fragment>
+      </>
     );
   };
 
@@ -171,40 +171,38 @@ export class CombinedOrderBook extends React.PureComponent<CombinedOrderBookProp
     } = this.props;
 
     return (
-      <React.Fragment>
-        <div className="cr-combined-order-book__small">
-          {noDataAsks ? (
-            <Box align="center" className="cr-order-book">
-              {noDataMessage}
-            </Box>
-          ) : (
-            <OrderBook
-              side={'left'}
-              headers={headers}
-              data={dataAsks}
-              rowBackgroundColor={rowBackgroundColorAsks}
-              maxVolume={maxVolume}
-              orderBookEntry={orderBookEntryAsks.reverse()}
-              onSelect={onSelectAsks}
-            />
-          )}
-          <div className="cr-combined-order-book__market">{lastPrice}</div>
-          {noDataBids ? (
-            <Box align="start" justify="center" className="cr-order-book">
-              {noDataMessage}
-            </Box>
-          ) : (
-            <OrderBook
-              side={'left'}
-              data={dataBids}
-              rowBackgroundColor={rowBackgroundColorBids}
-              maxVolume={maxVolume}
-              orderBookEntry={orderBookEntryBids}
-              onSelect={onSelectBids}
-            />
-          )}
-        </div>
-      </React.Fragment>
+      <div className="cr-combined-order-book__small">
+        {noDataAsks ? (
+          <Box align="center" className="cr-order-book">
+            {noDataMessage}
+          </Box>
+        ) : (
+          <OrderBook
+            side="left"
+            headers={headers}
+            data={dataAsks}
+            rowBackgroundColor={rowBackgroundColorAsks}
+            maxVolume={maxVolume}
+            orderBookEntry={orderBookEntryAsks.reverse()}
+            onSelect={onSelectAsks}
+          />
+        )}
+        <div className="cr-combined-order-book__market">{lastPrice}</div>
+        {noDataBids ? (
+          <Box align="start" justify="center" className="cr-order-book">
+            {noDataMessage}
+          </Box>
+        ) : (
+          <OrderBook
+            side="left"
+            data={dataBids}
+            rowBackgroundColor={rowBackgroundColorBids}
+            maxVolume={maxVolume}
+            orderBookEntry={orderBookEntryBids}
+            onSelect={onSelectBids}
+          />
+        )}
+      </div>
     );
   };
 }

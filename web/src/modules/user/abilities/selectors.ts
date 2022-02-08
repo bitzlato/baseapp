@@ -1,5 +1,5 @@
-import { RootState } from '../../';
-import { AbilitiesState } from './';
+import { RootState } from '../..';
+import { AbilitiesState } from '.';
 
 export const selectAbilities = (state: RootState): AbilitiesState['abilities'] =>
   state.user.abilities.abilities;

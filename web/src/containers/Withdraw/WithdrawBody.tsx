@@ -1,17 +1,17 @@
 import React from 'react';
 import { Button } from 'src/components/Button/Button';
 import { Box } from 'src/components/Box';
-import { Beneficiaries } from '../../components';
-import { precisionRegExp } from '../../helpers';
-import { Beneficiary, selectMobileDeviceState, selectUserInfo, Wallet } from '../../modules';
-import { WithdrawSummary } from './WithdrawSummary';
-import { BeneficiaryAddress } from './BeneficiaryAddress';
 import { createMoney } from 'src/helpers/money';
 import { NumberInput } from 'src/components/NumberInput/NumberInput';
 import { parseInteger, parseNumeric } from 'src/helpers/parseNumeric';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 import { useT } from 'src/hooks/useT';
 import { useSelector } from 'react-redux';
+import { BeneficiaryAddress } from './BeneficiaryAddress';
+import { WithdrawSummary } from './WithdrawSummary';
+import { Beneficiary, selectMobileDeviceState, selectUserInfo, Wallet } from '../../modules';
+import { precisionRegExp } from '../../helpers';
+import { Beneficiaries } from '../../components';
 
 interface Props {
   onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
@@ -51,7 +51,7 @@ export const WithdrawBody: React.FC<Props> = (props) => {
 
   const handleCheckButtonDisabled = (total: string, beneficiary: Beneficiary, otpCode: string) => {
     const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
-    return Number(total) <= 0 || !Boolean(beneficiary.id) || isPending || !Boolean(otpCode);
+    return Number(total) <= 0 || !beneficiary.id || isPending || !otpCode;
   };
 
   const handleClick = () => props.onClick(amount, total, beneficiary, otpCode);

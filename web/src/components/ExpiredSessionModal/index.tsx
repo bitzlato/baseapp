@@ -32,7 +32,7 @@ export class ExpiredSessionModal extends React.Component<ExpiredSessionModalProp
             <div className="cr-email-form__form-content">
               <div className="cr-email-form__button-wrapper">
                 <Button
-                  block={true}
+                  block
                   type="button"
                   onClick={this.props.handleSubmitExpSessionModal}
                   size="lg"

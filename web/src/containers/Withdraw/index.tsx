@@ -11,8 +11,8 @@ import { Beneficiary } from 'src/modules/user/beneficiaries';
 import { selectUserInfo } from 'src/modules/user/profile';
 import { selectWithdrawSuccess, Wallet, walletsWithdrawCcyFetch } from 'src/modules/user/wallets';
 import { ModalWithdrawConfirmationMobile } from 'src/mobile/components';
-import { WithdrawBody } from './WithdrawBody';
 import { Box } from 'src/components/Box/Box';
+import { WithdrawBody } from './WithdrawBody';
 
 interface Props {
   wallet: Wallet;
@@ -105,7 +105,8 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
           }
         />
       );
-    } else if (user.level < (memberLevels?.withdraw.minimum_level ?? 0)) {
+    }
+    if (user.level < (memberLevels?.withdraw.minimum_level ?? 0)) {
       return (
         <Blur
           text={t('page.body.wallets.warning.withdraw.verification')}
@@ -113,7 +114,8 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
           linkText={t('page.body.wallets.warning.withdraw.verification.button')}
         />
       );
-    } else if (!user.otp) {
+    }
+    if (!user.otp) {
       if (isMobileDevice) {
         return (
           <Blur
@@ -122,15 +124,14 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
             linkText={t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
           />
         );
-      } else {
-        return (
-          <Blur
-            text={t('page.body.wallets.warning.withdraw.2fa')}
-            linkText={t('page.body.wallets.warning.withdraw.2fa.button')}
-            onClick={() => history.push('/security/2fa', { enable2fa: true })}
-          />
-        );
       }
+      return (
+        <Blur
+          text={t('page.body.wallets.warning.withdraw.2fa')}
+          linkText={t('page.body.wallets.warning.withdraw.2fa.button')}
+          onClick={() => history.push('/security/2fa', { enable2fa: true })}
+        />
+      );
     }
     return null;
   };

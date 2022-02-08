@@ -1,5 +1,9 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
+import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+import logo from 'src/assets/images/setup/logo.svg';
+import { CloseSetupIcon } from 'src/assets/images/setup/CloseSetupIcon';
+import { SetupCongratsBlock } from 'src/components/SetupComponents/SetupCongratsBlock';
 import {
   SetupInfoBlock,
   SetupFormBlock,
@@ -8,13 +12,9 @@ import {
   SetupLoginForm,
   SetupMarketsBlock,
 } from '../../components';
-import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import logo from 'src/assets/images/setup/logo.svg';
 import bgStep1 from '../../assets/images/setup/step1-background.png';
 import bgStep2 from '../../assets/images/setup/step2-background.png';
 import bgStep3 from '../../assets/images/setup/step3-background.png';
-import { CloseSetupIcon } from 'src/assets/images/setup/CloseSetupIcon';
-import { SetupCongratsBlock } from 'src/components/SetupComponents/SetupCongratsBlock';
 import {
   getMarketsAdminList,
   MarketItem,
@@ -117,132 +117,131 @@ export class Setup extends React.Component<Props, SetupScreenState> {
 
     if (+currentStep > 1 && !user.email.length) {
       return this.renderLogin();
-    } else {
-      switch (currentStep) {
-        case '1':
-          return (
-            <React.Fragment>
-              <div className="setup-screen__left">
-                <SetupInfoBlock
-                  logo={logo}
-                  backgroundImage={bgStep1}
-                  title="Installation"
-                  description="Create your first super admin account to access the management part of your trading platform. Use real email to be able to recover access to your platform"
-                />
+    }
+    switch (currentStep) {
+      case '1':
+        return (
+          <>
+            <div className="setup-screen__left">
+              <SetupInfoBlock
+                logo={logo}
+                backgroundImage={bgStep1}
+                title="Installation"
+                description="Create your first super admin account to access the management part of your trading platform. Use real email to be able to recover access to your platform"
+              />
+            </div>
+            <div className="setup-screen__right">
+              <div className="setup-screen__right-wrapper">
+                <SetupFormBlock
+                  title="Admin account"
+                  subtitle="Create the first admin account for your exchange to access the admin panel."
+                >
+                  <SetupRegisterForm handleRegister={this.handleRegister} />
+                </SetupFormBlock>
               </div>
-              <div className="setup-screen__right">
-                <div className="setup-screen__right-wrapper">
-                  <SetupFormBlock
-                    title="Admin account"
-                    subtitle="Create the first admin account for your exchange to access the admin panel."
-                  >
-                    <SetupRegisterForm handleRegister={this.handleRegister} />
-                  </SetupFormBlock>
+            </div>
+          </>
+        );
+      case '2':
+        return (
+          <>
+            <div className="setup-screen__left">
+              <SetupInfoBlock
+                logo={logo}
+                backgroundImage={bgStep1}
+                title="Installation"
+                description="Start configuration process by providing the name and URL of your trading platform"
+              />
+            </div>
+            <div className="setup-screen__right">
+              <div className="setup-screen__right-wrapper">
+                <SetupFormBlock
+                  title="General Settings"
+                  subtitle="Define name and URL of your platform"
+                >
+                  <SetupGeneralSettingsForm
+                    handleCreateSettingsSecrets={this.handleCreateSettingsSecrets}
+                  />
+                </SetupFormBlock>
+              </div>
+            </div>
+          </>
+        );
+      case '3':
+        return (
+          <>
+            <div className="setup-screen__left">
+              <SetupInfoBlock
+                logo={logo}
+                backgroundImage={bgStep2}
+                title="Configure the liquidity network"
+                description="XLN is a liquidity network by Openware. Everyone can join it by deploying the OpenDAX platform or integrating with our APIs. XLN provides aggregated liquidity and creates a beneficial environment for all market participants"
+              />
+            </div>
+            <div className="setup-screen__right">
+              <div className="setup-screen__right-wrapper">
+                <SetupFormBlock
+                  title="Select Markets"
+                  subtitle="Make your list of market pairs that you want to add to your platform. All that market pairs has liquidity on them. You will be able do to congifure or edit you pair after deployment"
+                >
+                  <SetupMarketsBlock
+                    marketsList={this.props.markets}
+                    handleClickSave={this.handleSaveMarketsList}
+                    fetchMarkets={this.props.getMarketsList}
+                  />
+                </SetupFormBlock>
+              </div>
+            </div>
+          </>
+        );
+      case '4':
+        return (
+          <>
+            <div className="setup-screen__left">
+              <SetupInfoBlock
+                logo={logo}
+                backgroundImage={bgStep3}
+                title="Welcome to OpenDax software"
+                description=""
+              />
+            </div>
+            <div className="setup-screen__right">
+              <div className="setup-screen__right-wrapper">
+                <div
+                  className="setup-screen__right-wrapper__close"
+                  onClick={this.handleCompleteSetup}
+                >
+                  <CloseSetupIcon />
                 </div>
-              </div>
-            </React.Fragment>
-          );
-        case '2':
-          return (
-            <React.Fragment>
-              <div className="setup-screen__left">
-                <SetupInfoBlock
-                  logo={logo}
-                  backgroundImage={bgStep1}
-                  title="Installation"
-                  description="Start configuration process by providing the name and URL of your trading platform"
-                />
-              </div>
-              <div className="setup-screen__right">
-                <div className="setup-screen__right-wrapper">
-                  <SetupFormBlock
-                    title="General Settings"
-                    subtitle="Define name and URL of your platform"
-                  >
-                    <SetupGeneralSettingsForm
-                      handleCreateSettingsSecrets={this.handleCreateSettingsSecrets}
-                    />
-                  </SetupFormBlock>
-                </div>
-              </div>
-            </React.Fragment>
-          );
-        case '3':
-          return (
-            <React.Fragment>
-              <div className="setup-screen__left">
-                <SetupInfoBlock
-                  logo={logo}
-                  backgroundImage={bgStep2}
-                  title="Configure the liquidity network"
-                  description="XLN is a liquidity network by Openware. Everyone can join it by deploying the OpenDAX platform or integrating with our APIs. XLN provides aggregated liquidity and creates a beneficial environment for all market participants"
-                />
-              </div>
-              <div className="setup-screen__right">
-                <div className="setup-screen__right-wrapper">
-                  <SetupFormBlock
-                    title="Select Markets"
-                    subtitle="Make your list of market pairs that you want to add to your platform. All that market pairs has liquidity on them. You will be able do to congifure or edit you pair after deployment"
-                  >
-                    <SetupMarketsBlock
-                      marketsList={this.props.markets}
-                      handleClickSave={this.handleSaveMarketsList}
-                      fetchMarkets={this.props.getMarketsList}
-                    />
-                  </SetupFormBlock>
-                </div>
-              </div>
-            </React.Fragment>
-          );
-        case '4':
-          return (
-            <React.Fragment>
-              <div className="setup-screen__left">
-                <SetupInfoBlock
-                  logo={logo}
-                  backgroundImage={bgStep3}
-                  title="Welcome to OpenDax software"
-                  description=""
-                />
-              </div>
-              <div className="setup-screen__right">
-                <div className="setup-screen__right-wrapper">
-                  <div
-                    className="setup-screen__right-wrapper__close"
+                <SetupFormBlock
+                  title="Congratulations! Your exchange is live!"
+                  subtitle="Use a customisation tool to change the visual appearance of your platform. You can change the colour scheme, fonts, spacing and platform`s logo."
+                >
+                  <SetupCongratsBlock />
+                </SetupFormBlock>
+                <div className="setup-screen__step-footer__congrat">
+                  <Button
+                    block
+                    type="button"
+                    size="lg"
+                    variant="primary"
                     onClick={this.handleCompleteSetup}
                   >
-                    <CloseSetupIcon />
-                  </div>
-                  <SetupFormBlock
-                    title="Congratulations! Your exchange is live!"
-                    subtitle="Use a customisation tool to change the visual appearance of your platform. You can change the colour scheme, fonts, spacing and platform`s logo."
-                  >
-                    <SetupCongratsBlock />
-                  </SetupFormBlock>
-                  <div className="setup-screen__step-footer__congrat">
-                    <Button
-                      block={true}
-                      type="button"
-                      size="lg"
-                      variant="primary"
-                      onClick={this.handleCompleteSetup}
-                    >
-                      Continue and Customize
-                    </Button>
-                  </div>
+                    Continue and Customize
+                  </Button>
                 </div>
               </div>
-            </React.Fragment>
-          );
-        default:
-          window.location.replace('/');
-      }
+            </div>
+          </>
+        );
+      default:
+        window.location.replace('/');
     }
   };
 
   private renderLogin = () => {
     return (
-      <React.Fragment>
+      <>
         <div className="setup-screen__left">
           <SetupInfoBlock
             logo={logo}
@@ -261,7 +260,7 @@ export class Setup extends React.Component<Props, SetupScreenState> {
             </SetupFormBlock>
           </div>
         </div>
-      </React.Fragment>
+      </>
     );
   };
 

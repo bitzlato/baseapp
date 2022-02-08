@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { buildQueryString, getOrderAPI } from 'src/helpers';
 import { OrderCommon } from 'src/modules/types';
-import { sendError } from '../../../';
+import { sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { userOpenOrdersData, userOpenOrdersError, UserOpenOrdersFetch } from '../actions';
 
@@ -16,7 +16,10 @@ export function* userOpenOrdersFetchSaga(action: UserOpenOrdersFetch) {
       payload = { ...payload, market: action.payload.market.id };
     }
 
-    const list: OrderCommon[] = yield call(API.get(ordersOptions), `/market/orders?${buildQueryString(payload)}`);
+    const list: OrderCommon[] = yield call(
+      API.get(ordersOptions),
+      `/market/orders?${buildQueryString(payload)}`,
+    );
     yield put(userOpenOrdersData(list));
   } catch (error) {
     yield put(

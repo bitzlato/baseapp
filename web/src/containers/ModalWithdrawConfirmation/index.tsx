@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { IntlProps } from 'src/types';
-import { Modal } from '../../components';
-import { MobileModal as MobileModal } from '../../mobile/components/Modal';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
+import { Modal } from '../../components';
+import { MobileModal } from '../../mobile/components/Modal';
 
 interface ModalWithdrawConfirmationProps {
   amount: string;
@@ -24,6 +24,7 @@ class ModalWithdraw extends React.Component<Props> {
   public translate = (e: string) => {
     return this.props.intl.formatMessage({ id: e });
   };
+
   public render() {
     const { show, isMobileDevice } = this.props;
 
@@ -72,7 +73,7 @@ class ModalWithdraw extends React.Component<Props> {
     return (
       <div className="pg-exchange-modal-submit-footer modal-footer__withdraw-confirm">
         <Button
-          block={true}
+          block
           className="btn-block mr-1 mt-1 btn-lg"
           onClick={this.props.onDismiss}
           size="lg"
@@ -81,7 +82,7 @@ class ModalWithdraw extends React.Component<Props> {
           {this.translate('page.body.wallets.tabs.withdraw.modal.button.cancel')}
         </Button>
         <Button
-          block={true}
+          block
           className="btn-block mr-1 mt-1 btn-lg"
           onClick={this.props.onSubmit}
           size="lg"

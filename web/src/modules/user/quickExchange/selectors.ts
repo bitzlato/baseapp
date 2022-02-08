@@ -1,4 +1,4 @@
-import { RootState } from '../../';
+import { RootState } from '../..';
 
 export const selectQuickExchangeSuccess = (state: RootState): boolean =>
   state.user.quickExchange.success;

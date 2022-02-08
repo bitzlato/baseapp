@@ -17,9 +17,9 @@ import {
   changeUserDataFetch,
   changeLanguage,
   selectUserFetching,
+  logoutFetch,
 } from 'src/modules';
 import { loginWithRedirect } from 'src/helpers/auth0';
-import { logoutFetch } from 'src/modules';
 import { MarketSelector } from 'src/containers/MarketSelector/MarketSelector';
 import { HeaderToolbar } from 'src/containers/HeaderToolbar/HeaderToolbar';
 import { useT } from 'src/hooks/useT';

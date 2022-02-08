@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { sendError } from '../../..';
 import { getCsrfToken } from '../../../../helpers';
 import { API, RequestOptions, isSonicEnabled } from '../../../../api';
 import { ConfigUpdate, configUpdateData, configUpdateError } from '../actions';

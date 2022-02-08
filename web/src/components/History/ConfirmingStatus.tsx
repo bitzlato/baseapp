@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrencies } from 'src/modules';
+import { useT } from 'src/hooks/useT';
 import { BlockchainLink } from './ExternalLink';
 import { Label } from '../Label';
-import { useT } from 'src/hooks/useT';
 
 interface Props {
   currency: string;

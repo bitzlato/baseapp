@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isMetaMaskInstalled } from '@bitzlato/ethereum-provider';
 
 import { useT } from 'src/hooks/useT';
+import { CopyableTextField } from 'src/components/CopyableTextField';
+import s from 'src/containers/Withdraw/BeneficiaryAddress.postcss';
 import {
   alertPush,
   selectMemberLevels,
@@ -14,13 +16,11 @@ import {
   walletsAddressFetch,
 } from '../../modules';
 import { Box } from '../Box';
-import { CopyableTextField } from 'src/components/CopyableTextField';
 import { MetaMaskButton } from '../MetaMaskButton';
 import { QRCode } from '../QRCode';
 import { Blur } from '../Blur';
 import { DepositInvoice } from './DepositInvoice';
 import { DepositSummary } from './DepositSummary';
-import s from 'src/containers/Withdraw/BeneficiaryAddress.postcss';
 
 interface Props {
   wallet: Wallet;
@@ -45,21 +45,14 @@ export const DepositCrypto: React.FC<Props> = ({ wallet }) => {
   if (!wallet.deposit_address) {
     if (wallet.enable_invoice) {
       return <DepositInvoice currency={wallet} />;
-    } else {
-      return (
-        <Button
-          block={true}
-          type="button"
-          onClick={handleGenerateAddress}
-          size="lg"
-          variant="primary"
-        >
-          {t('page.body.wallets.tabs.deposit.ccy.button.generate', {
-            currency: wallet.name,
-          })}
-        </Button>
-      );
     }
+    return (
+      <Button block type="button" onClick={handleGenerateAddress} size="lg" variant="primary">
+        {t('page.body.wallets.tabs.deposit.ccy.button.generate', {
+          currency: wallet.name,
+        })}
+      </Button>
+    );
   }
 
   const handleOnCopy = () => {

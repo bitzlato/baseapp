@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
-import { OrderForm } from '../';
-import { TabPanel } from '../../components';
+import { OrderForm, TabPanel } from '..';
 import { getAmount, getTotalPrice } from '../../helpers';
 import { Box } from '../Box';
 import { OrderFormProps } from '../OrderForm';
@@ -138,7 +137,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
       return (
         <div className="cr-order">
           <TabPanel
-            fixed={true}
+            fixed
             panels={this.getPanels()}
             onTabChange={this.handleChangeTab}
             currentTabIndex={this.state.index}
@@ -151,7 +150,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
       <Box row spacing align="start" className="cr-order cr-order--extended">
         <div className="cr-order--extended__buy">
           <TabPanel
-            fixed={true}
+            fixed
             panels={[this.getPanel('buy')]}
             onTabChange={this.handleChangeTab}
             currentTabIndex={this.state.index}
@@ -159,7 +158,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
         </div>
         <div className="cr-order--extended__sell">
           <TabPanel
-            fixed={true}
+            fixed
             panels={[this.getPanel('sell')]}
             onTabChange={this.handleChangeTab}
             currentTabIndex={this.state.index}
@@ -240,7 +239,7 @@ export class Order extends React.Component<OrderComponentProps, State> {
     }
 
     this.setState({
-      index: index,
+      index,
     });
   };
 

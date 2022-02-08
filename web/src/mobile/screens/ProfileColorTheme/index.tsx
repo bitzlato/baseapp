@@ -41,7 +41,7 @@ const ProfileThemeMobileScreenComponent: React.FC = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Subheader
         title={intl.formatMessage({ id: 'page.mobile.profile.theme.title' })}
         backTitle={intl.formatMessage({ id: 'page.body.profile.header.account' })}
@@ -52,7 +52,7 @@ const ProfileThemeMobileScreenComponent: React.FC = () => {
           {COLOR_THEMES.map(renderThemeListItem)}
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

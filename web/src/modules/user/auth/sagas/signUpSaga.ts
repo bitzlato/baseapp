@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { User, userData } from '../../profile';
 import { signUpData, signUpError, SignUpFetch, signUpRequireVerification } from '../actions';

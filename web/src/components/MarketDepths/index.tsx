@@ -268,7 +268,7 @@ export class MarketDepths extends React.PureComponent<MarketDepthsProps> {
               stroke={colorSettings.strokeAxisColor}
             />
             <YAxis
-              orientation={orientation ? orientation : 'left'}
+              orientation={orientation || 'left'}
               dataKey={settings.dataKeyY || 'bid'}
               interval={intervalY || 'preserveStartEnd'}
               stroke={colorSettings.strokeAxisColor}
@@ -278,14 +278,14 @@ export class MarketDepths extends React.PureComponent<MarketDepthsProps> {
             ) : null}
 
             <Area
-              type={chartType ? chartType : 'step'}
+              type={chartType || 'step'}
               dataKey="bid"
               stroke={colorSettings.strokeAreaBidColor}
               fill="url(#bidChartColor)"
               activeDot={settings.activeDot as CustomActiveDotProps}
             />
             <Area
-              type={chartType ? chartType : 'step'}
+              type={chartType || 'step'}
               dataKey="ask"
               stroke={colorSettings.strokeAreaAskColor}
               fill="url(#askChartColor)"

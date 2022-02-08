@@ -1,4 +1,4 @@
-import { RootState } from '../../';
+import { RootState } from '../..';
 
 export const selectUserActivity = (state: RootState) => state.user.userActivity.list;
 
@@ -16,9 +16,8 @@ export const selectUserActivityFirstElemIndex = (state: RootState, limit: number
 export const selectUserActivityLastElemIndex = (state: RootState, limit: number): number => {
   if (state.user.userActivity.page * limit + limit > selectTotalNumber(state)) {
     return selectTotalNumber(state);
-  } else {
-    return state.user.userActivity.page * limit + limit;
   }
+  return state.user.userActivity.page * limit + limit;
 };
 
 export const selectUserActivityNextPageExists = (state: RootState, limit: number): boolean =>

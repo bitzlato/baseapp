@@ -3,8 +3,12 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { compose } from 'redux';
 import { IntlProps } from 'src/types';
-import { History, Pagination } from '../../components';
-import { localeDate, sortByDateDesc } from '../../helpers';
+import { DepositStatus } from 'src/components/History/DepositStatus';
+import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
+import { FC } from 'react';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
+import s from './TransferHistory.postcss';
 import {
   currenciesFetch,
   ApiCurrency,
@@ -25,12 +29,8 @@ import {
   Deposit,
   Withdraw,
 } from '../../modules';
-import { DepositStatus } from 'src/components/History/DepositStatus';
-import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
-import { FC } from 'react';
-import s from './TransferHistory.postcss';
-import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { createMoneyWithoutCcy } from 'src/helpers/money';
+import { localeDate, sortByDateDesc } from '../../helpers';
+import { History, Pagination } from '../../components';
 
 export interface HistoryProps {
   label: string;

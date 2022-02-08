@@ -1,4 +1,4 @@
-import { CommonError } from '../../../modules/types';
+import { CommonError } from '../../types';
 import { Deposit } from '../history/types';
 import { DEPOSITS_CREATE, DEPOSITS_CREATE_DATA, DEPOSITS_CREATE_ERROR } from './constants';
 

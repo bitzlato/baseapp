@@ -1,4 +1,4 @@
-//tslint:disable-next-line
+// tslint:disable-next-line
 import QRCodeGenerator from 'qrcode.react';
 import React from 'react';
 

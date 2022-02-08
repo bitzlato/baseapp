@@ -1,5 +1,5 @@
 import { createCcy, createMoney } from 'src/helpers/money';
-import { RootState } from '../../';
+import { RootState } from '../..';
 import { WalletSource, Wallet } from './types';
 
 const createWallet = (walletSource: WalletSource): Wallet => {

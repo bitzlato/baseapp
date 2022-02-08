@@ -29,7 +29,7 @@ describe('ConfigUpdate actions', () => {
   });
 
   it('should check ConfigUpdateError action creator', () => {
-    const expectedAction = { type: CONFIG_UPDATE_ERROR, error: error };
+    const expectedAction = { type: CONFIG_UPDATE_ERROR, error };
     expect(actions.configUpdateError(error)).toEqual(expectedAction);
   });
 });

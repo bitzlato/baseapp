@@ -1,3 +1,4 @@
+import type { WalletAddress } from 'src/modules/public/accounts/types';
 import { CommonError } from '../../types';
 import {
   SET_MOBILE_WALLET_UI,
@@ -15,7 +16,6 @@ import {
   WALLETS_WITHDRAW_CCY_FETCH,
 } from './constants';
 import type { WalletSource, WalletWithdrawCCY } from './types';
-import type { WalletAddress } from 'src/modules/public/accounts/types';
 
 export interface WalletsFetch {
   type: typeof WALLETS_FETCH;

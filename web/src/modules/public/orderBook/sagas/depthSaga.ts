@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { DepthState, sendError } from '../../../';
+import { DepthState, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { depthData, depthError, DepthFetch } from '../actions';
 

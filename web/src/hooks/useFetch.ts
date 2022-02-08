@@ -21,7 +21,7 @@ export function useFetch<T>(
 
   useEffect(() => {
     if (!options?.skipRequest) {
-      let controller: AbortController | undefined = new AbortController();
+      const controller: AbortController | undefined = new AbortController();
       (async () => {
         setIsLoading(true);
         try {

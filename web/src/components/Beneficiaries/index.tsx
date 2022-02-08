@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 import {
   beneficiariesCreateData,
   beneficiariesDelete,
@@ -26,7 +27,6 @@ import { TrashBin } from '../../assets/images/TrashBin';
 import { BeneficiariesActivateModal } from './BeneficiariesActivateModal';
 import { BeneficiariesAddModal } from './BeneficiariesAddModal';
 import { BeneficiariesFailAddModal } from './BeneficiariesFailAddModal';
-import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 
 interface OwnProps {
   currency: string;

@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { changeLanguage } from '../../../public/i18n';
 import { User, userData } from '../../profile';
@@ -41,7 +41,7 @@ export function* signInSaga(action: SignInFetch) {
     } else {
       yield put(
         sendError({
-          error: error,
+          error,
           processingType: 'alert',
           extraOptions: {
             actionError: signInError,

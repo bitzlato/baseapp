@@ -59,7 +59,7 @@ describe('Saga: configUpdateSaga', () => {
     return promise;
   });
 
-  xit('should trigger an error on config update', async () => {
+  it.skip('should trigger an error on config update', async () => {
     const expectedActions = [
       configUpdate(fakeConfig),
       sendError({

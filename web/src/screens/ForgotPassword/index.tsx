@@ -4,10 +4,10 @@ import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redu
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { IntlProps } from 'src/types';
 import { captchaType } from '../../api/config';
 import { Captcha, EmailForm } from '../../components';
 import { EMAIL_REGEX, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
-import { IntlProps } from 'src/types';
 import {
   forgotPassword,
   GeetestCaptchaResponse,
@@ -137,8 +137,6 @@ class ForgotPasswordComponent extends React.Component<Props, ForgotPasswordState
       this.setState({
         emailError: ERROR_INVALID_EMAIL,
       });
-
-      return;
     }
   };
 

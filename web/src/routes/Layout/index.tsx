@@ -8,6 +8,13 @@ import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { FeesScreen } from 'src/screens/Fees/Fees';
 import type { IntlProps } from 'src/types';
+import { WalletsScreen } from 'src/screens/WalletsScreen/WalletsScreen';
+import { loginWithRedirect } from 'src/helpers/auth0';
+import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
+import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
+import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
+import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
+import { ProfileScreen } from 'web/src/screens/ProfileScreen/ProfileScreen';
 import {
   isAuth0,
   minutesUntilAutoLogout,
@@ -73,13 +80,6 @@ import {
   QuickExchange,
   LandingScreen,
 } from '../../screens';
-import { WalletsScreen } from 'src/screens/WalletsScreen/WalletsScreen';
-import { loginWithRedirect } from 'src/helpers/auth0';
-import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
-import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
-import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
-import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
-import { ProfileScreen } from 'web/src/screens/ProfileScreen/ProfileScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -123,7 +123,7 @@ const renderLoader = () => (
 
 const STORE_KEY = 'lastAction';
 
-//tslint:disable-next-line no-any
+// tslint:disable-next-line no-any
 const PrivateRoute: React.FunctionComponent<any> = ({
   component: CustomComponent,
   loading,
@@ -141,12 +141,12 @@ const PrivateRoute: React.FunctionComponent<any> = ({
 
   return (
     <Route {...rest}>
-      <Redirect to={'/signin'} />
+      <Redirect to="/signin" />
     </Route>
   );
 };
 
-//tslint:disable-next-line no-any
+// tslint:disable-next-line no-any
 const PublicRoute: React.FunctionComponent<any> = ({
   component: CustomComponent,
   loading,
@@ -157,10 +157,10 @@ const PublicRoute: React.FunctionComponent<any> = ({
     return renderLoader();
   }
 
-  if (isLogged && rest['path'] !== '/setup') {
+  if (isLogged && rest.path !== '/setup') {
     return (
       <Route {...rest}>
-        <Redirect to={'/wallets'} />
+        <Redirect to="/wallets" />
       </Route>
     );
   }
@@ -182,6 +182,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
   ];
 
   public timer: number | undefined;
+
   public walletsFetchInterval: number | undefined;
 
   constructor(props: LayoutProps) {
@@ -303,7 +304,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       return (
         <div className={isMobileDevice ? mobileCls : desktopCls}>
           <Route>
-            <Redirect to={'/setup'} />
+            <Redirect to="/setup" />
           </Route>
         </div>
       );
@@ -413,10 +414,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               path="/profile"
               component={ProfileMobileScreen}
             />
-            <Route exact={true} path="/trading/:market?" component={TradingScreenMobile as any} />
-            {showLanding() && (
-              <Route exact={true} path="/" component={LandingScreenMobile as any} />
-            )}
+            <Route exact path="/trading/:market?" component={TradingScreenMobile as any} />
+            {showLanding() && <Route exact path="/" component={LandingScreenMobile as any} />}
             <Route path="/quick-exchange" component={QuickExchange as any} />
             <Route path="/fees" component={FeesScreen as any} />
             <Route path="**">
@@ -438,7 +437,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/setup"
             component={SetupScreen}
           />
-          <Route exact={true} path="/magic-link" component={MagicLink as any} />
+          <Route exact path="/magic-link" component={MagicLink as any} />
           <PublicRoute path="/signin" component={SignInAuth0} />
           <PublicRoute path="/signup" component={SignInAuth0} />
           <PublicRoute
@@ -469,8 +468,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           <Route path="/fees" component={FeesScreen as any} />
           <Route path="/restriction" component={RestrictedScreen as any} />
           <Route path="/maintenance" component={MaintenanceScreen as any} />
-          <Route exact={true} path="/trading/:market?" component={TradingScreen as any} />
-          {showLanding() && <Route exact={true} path="/" component={LandingScreen as any} />}
+          <Route exact path="/trading/:market?" component={TradingScreen as any} />
+          {showLanding() && <Route exact path="/" component={LandingScreen as any} />}
           <PrivateRoute
             loading={userLoading}
             isLogged={isLoggedIn}

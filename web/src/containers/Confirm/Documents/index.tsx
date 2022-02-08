@@ -9,6 +9,10 @@ import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { IntlProps } from 'src/types';
+import DocumentFrontExample from 'src/assets/images/kyc/DocumentFrontExample.svg';
+import DocumentBackExample from 'src/assets/images/kyc/DocumentBackExample.svg';
+import DocumentSelfieExample from 'src/assets/images/kyc/DocumentSelfieExample.svg';
+import { SelectString } from 'src/components/Select/Select';
 import { barongUploadSizeMaxRange, barongUploadSizeMinRange, languages } from '../../../api/config';
 import { CustomInput, UploadFile } from '../../../components';
 import { formatDate, isDateInFuture, randomSecureHex } from '../../../helpers';
@@ -21,11 +25,6 @@ import {
   selectSendDocumentsSuccess,
   sendDocuments,
 } from '../../../modules';
-
-import DocumentFrontExample from 'src/assets/images/kyc/DocumentFrontExample.svg';
-import DocumentBackExample from 'src/assets/images/kyc/DocumentBackExample.svg';
-import DocumentSelfieExample from 'src/assets/images/kyc/DocumentSelfieExample.svg';
-import { SelectString } from 'src/components/Select/Select';
 
 interface ReduxProps {
   lang: string;
@@ -140,132 +139,130 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     const onSelect = (value: string | null) => this.handleChangeDocumentsType(value!);
 
     return (
-      <React.Fragment>
-        <div className="pg-confirm__content-documents">
-          <div className="pg-confirm__content-documents__row__content">
-            <div className="pg-confirm__content-documents__row__content-label">
-              {this.translate('page.body.kyc.documentsType')}
-            </div>
-            <SelectString
-              className="pg-confirm__content-documents__row__content-number-dropdown"
-              options={this.data}
-              onChange={onSelect}
-              placeholder={this.translate('page.body.kyc.documentsType.placeholder')}
-            />
+      <div className="pg-confirm__content-documents">
+        <div className="pg-confirm__content-documents__row__content">
+          <div className="pg-confirm__content-documents__row__content-label">
+            {this.translate('page.body.kyc.documentsType')}
           </div>
-          <div className="pg-confirm__content-documents__row">
-            <fieldset className={idNumberFocusedClass}>
-              <CustomInput
-                type="string"
-                label={this.translate('page.body.kyc.documents.idNumber')}
-                labelVisible={true}
-                defaultLabel={''}
-                placeholder={this.translate('page.body.kyc.documents.idNumber.placeholder')}
-                inputValue={idNumber}
-                handleChangeInput={this.handleChangeIdNumber}
-                handleFocusInput={this.handleFieldFocus('idNumber')}
-              />
-            </fieldset>
-          </div>
-          <div className="pg-confirm__content-documents__row input-group">
-            <fieldset className={issuedDateFocusedClass}>
-              <div className="custom-input">
-                <label>{this.translate('page.body.kyc.documents.issuedDate')}</label>
-                <div className="input-group input-group-lg">
-                  <MaskInput
-                    maskString="00/00/0000"
-                    mask="00/00/0000"
-                    onChange={this.handleChangeIssuedDate}
-                    onFocus={this.handleFieldFocus('issuedDate')}
-                    onBlur={this.handleFieldFocus('issuedDate')}
-                    value={issuedDate}
-                    className="group-input"
-                    placeholder={this.translate('page.body.kyc.documents.issuedDate.placeholder')}
-                  />
-                </div>
-              </div>
-            </fieldset>
-            <fieldset className={expireDateFocusedClass}>
-              <div className="custom-input">
-                <label>{this.translate('page.body.kyc.documents.expiryDate')}</label>
-                <div className="input-group input-group-lg">
-                  <MaskInput
-                    maskString="00/00/0000"
-                    mask="00/00/0000"
-                    onChange={this.handleChangeExpiration}
-                    onFocus={this.handleFieldFocus('expireDate')}
-                    onBlur={this.handleFieldFocus('expireDate')}
-                    value={expireDate}
-                    className="group-input"
-                    placeholder={this.translate('page.body.kyc.documents.expiryDate.placeholder')}
-                  />
-                </div>
-              </div>
-            </fieldset>
-          </div>
-          {this.state.documentsType ? (
-            <UploadFile
-              isMobileDevice={isMobileDevice}
-              id="fileFront"
-              title={this.translate('page.body.kyc.documents.uploadFile.front.title')}
-              label={this.translate('page.body.kyc.documents.uploadFile.front.label')}
-              buttonText={this.translate('page.body.kyc.documents.uploadFile.front.button')}
-              sizesText={this.uploadFileSizeGuide()}
-              formatsText={this.translate('page.body.kyc.documents.uploadFile.front.formats')}
-              handleUploadScan={(uploadEvent) => this.handleUploadScan(uploadEvent, 'front')}
-              exampleImagePath={DocumentFrontExample}
-              uploadedFile={fileFront[0] && (fileFront[0] as File).name}
-              fileSizeErrorMessage={frontFileSizeErrorMessage}
-            />
-          ) : null}
-          {this.state.documentsType && this.state.documentsType !== 'Passport' ? (
-            <UploadFile
-              isMobileDevice={isMobileDevice}
-              id="fileBack"
-              title={this.translate('page.body.kyc.documents.uploadFile.back.title')}
-              label={this.translate('page.body.kyc.documents.uploadFile.back.label')}
-              buttonText={this.translate('page.body.kyc.documents.uploadFile.back.button')}
-              sizesText={this.uploadFileSizeGuide()}
-              formatsText={this.translate('page.body.kyc.documents.uploadFile.back.formats')}
-              handleUploadScan={(uploadEvent) => this.handleUploadScan(uploadEvent, 'back')}
-              exampleImagePath={DocumentBackExample}
-              uploadedFile={fileBack[0] && (fileBack[0] as File).name}
-              fileSizeErrorMessage={backFileSizeErrorMessage}
-            />
-          ) : null}
-          {this.state.documentsType ? (
-            <UploadFile
-              isMobileDevice={isMobileDevice}
-              id="fileSelfie"
-              title={this.translate('page.body.kyc.documents.uploadFile.selfie.title')}
-              label={this.translate('page.body.kyc.documents.uploadFile.selfie.label')}
-              buttonText={this.translate('page.body.kyc.documents.uploadFile.selfie.button')}
-              sizesText={this.uploadFileSizeGuide()}
-              formatsText={this.translate('page.body.kyc.documents.uploadFile.selfie.formats')}
-              handleUploadScan={(uploadEvent) => this.handleUploadScan(uploadEvent, 'selfie')}
-              exampleImagePath={DocumentSelfieExample}
-              uploadedFile={fileSelfie[0] && (fileSelfie[0] as File).name}
-              fileSizeErrorMessage={selfieFileSizeErrorMessage}
-            />
-          ) : null}
-          <div className="pg-confirm__content-deep">
-            <Button
-              onClick={this.sendDocuments}
-              disabled={this.handleCheckButtonDisabled()}
-              size="lg"
-              variant="primary"
-              type="button"
-              block={true}
-            >
-              {loading ? (
-                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-              ) : (
-                this.translate('page.body.kyc.submit')
-              )}
-            </Button>
-          </div>
+          <SelectString
+            className="pg-confirm__content-documents__row__content-number-dropdown"
+            options={this.data}
+            onChange={onSelect}
+            placeholder={this.translate('page.body.kyc.documentsType.placeholder')}
+          />
         </div>
-      </React.Fragment>
+        <div className="pg-confirm__content-documents__row">
+          <fieldset className={idNumberFocusedClass}>
+            <CustomInput
+              type="string"
+              label={this.translate('page.body.kyc.documents.idNumber')}
+              labelVisible
+              defaultLabel=""
+              placeholder={this.translate('page.body.kyc.documents.idNumber.placeholder')}
+              inputValue={idNumber}
+              handleChangeInput={this.handleChangeIdNumber}
+              handleFocusInput={this.handleFieldFocus('idNumber')}
+            />
+          </fieldset>
+        </div>
+        <div className="pg-confirm__content-documents__row input-group">
+          <fieldset className={issuedDateFocusedClass}>
+            <div className="custom-input">
+              <label>{this.translate('page.body.kyc.documents.issuedDate')}</label>
+              <div className="input-group input-group-lg">
+                <MaskInput
+                  maskString="00/00/0000"
+                  mask="00/00/0000"
+                  onChange={this.handleChangeIssuedDate}
+                  onFocus={this.handleFieldFocus('issuedDate')}
+                  onBlur={this.handleFieldFocus('issuedDate')}
+                  value={issuedDate}
+                  className="group-input"
+                  placeholder={this.translate('page.body.kyc.documents.issuedDate.placeholder')}
+                />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset className={expireDateFocusedClass}>
+            <div className="custom-input">
+              <label>{this.translate('page.body.kyc.documents.expiryDate')}</label>
+              <div className="input-group input-group-lg">
+                <MaskInput
+                  maskString="00/00/0000"
+                  mask="00/00/0000"
+                  onChange={this.handleChangeExpiration}
+                  onFocus={this.handleFieldFocus('expireDate')}
+                  onBlur={this.handleFieldFocus('expireDate')}
+                  value={expireDate}
+                  className="group-input"
+                  placeholder={this.translate('page.body.kyc.documents.expiryDate.placeholder')}
+                />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        {this.state.documentsType ? (
+          <UploadFile
+            isMobileDevice={isMobileDevice}
+            id="fileFront"
+            title={this.translate('page.body.kyc.documents.uploadFile.front.title')}
+            label={this.translate('page.body.kyc.documents.uploadFile.front.label')}
+            buttonText={this.translate('page.body.kyc.documents.uploadFile.front.button')}
+            sizesText={this.uploadFileSizeGuide()}
+            formatsText={this.translate('page.body.kyc.documents.uploadFile.front.formats')}
+            handleUploadScan={(uploadEvent) => this.handleUploadScan(uploadEvent, 'front')}
+            exampleImagePath={DocumentFrontExample}
+            uploadedFile={fileFront[0] && (fileFront[0] as File).name}
+            fileSizeErrorMessage={frontFileSizeErrorMessage}
+          />
+        ) : null}
+        {this.state.documentsType && this.state.documentsType !== 'Passport' ? (
+          <UploadFile
+            isMobileDevice={isMobileDevice}
+            id="fileBack"
+            title={this.translate('page.body.kyc.documents.uploadFile.back.title')}
+            label={this.translate('page.body.kyc.documents.uploadFile.back.label')}
+            buttonText={this.translate('page.body.kyc.documents.uploadFile.back.button')}
+            sizesText={this.uploadFileSizeGuide()}
+            formatsText={this.translate('page.body.kyc.documents.uploadFile.back.formats')}
+            handleUploadScan={(uploadEvent) => this.handleUploadScan(uploadEvent, 'back')}
+            exampleImagePath={DocumentBackExample}
+            uploadedFile={fileBack[0] && (fileBack[0] as File).name}
+            fileSizeErrorMessage={backFileSizeErrorMessage}
+          />
+        ) : null}
+        {this.state.documentsType ? (
+          <UploadFile
+            isMobileDevice={isMobileDevice}
+            id="fileSelfie"
+            title={this.translate('page.body.kyc.documents.uploadFile.selfie.title')}
+            label={this.translate('page.body.kyc.documents.uploadFile.selfie.label')}
+            buttonText={this.translate('page.body.kyc.documents.uploadFile.selfie.button')}
+            sizesText={this.uploadFileSizeGuide()}
+            formatsText={this.translate('page.body.kyc.documents.uploadFile.selfie.formats')}
+            handleUploadScan={(uploadEvent) => this.handleUploadScan(uploadEvent, 'selfie')}
+            exampleImagePath={DocumentSelfieExample}
+            uploadedFile={fileSelfie[0] && (fileSelfie[0] as File).name}
+            fileSizeErrorMessage={selfieFileSizeErrorMessage}
+          />
+        ) : null}
+        <div className="pg-confirm__content-deep">
+          <Button
+            onClick={this.sendDocuments}
+            disabled={this.handleCheckButtonDisabled()}
+            size="lg"
+            variant="primary"
+            type="button"
+            block
+          >
+            {loading ? (
+              <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+            ) : (
+              this.translate('page.body.kyc.submit')
+            )}
+          </Button>
+        </div>
+      </div>
     );
   }
 

@@ -1,5 +1,5 @@
 import { ApiCurrency } from '../modules/public/currencies';
-import * as helpers from './';
+import * as helpers from '.';
 
 describe('Constants regexps', () => {
   it('should validate correct passwords', () => {

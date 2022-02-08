@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError, User } from '../../../';
+import { sendError, User } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { getCsrfToken } from '../../../../helpers';
 import { changeUserData, changeUserDataError, ChangeUserDataFetch } from '../actions';

@@ -184,7 +184,7 @@ describe('Beneficiaries actions', () => {
       id: 1,
     };
 
-    const expectedAction = { type: BENEFICIARIES_RESEND_PIN_DATA, payload: payload };
+    const expectedAction = { type: BENEFICIARIES_RESEND_PIN_DATA, payload };
     expect(actions.beneficiariesResendPinData(payload)).toEqual(expectedAction);
   });
 

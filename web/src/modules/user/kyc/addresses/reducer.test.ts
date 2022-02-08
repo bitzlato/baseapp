@@ -37,7 +37,7 @@ describe('Addresses reducer', () => {
   it('should handle SEND_ADDRESSES_ERROR', () => {
     const expectedState = {
       ...initialAddressesState,
-      error: error,
+      error,
     };
     expect(addressesReducer(initialAddressesState, actions.sendAddressesError(error))).toEqual(
       expectedState,

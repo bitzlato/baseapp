@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { API, RequestOptions } from '../../../../api';
-import { alertPush } from '../../../../modules/public/alert';
+import { alertPush } from '../../../public/alert';
 import { abilitiesData, abilitiesError, AbilitiesInterface } from '../actions';
 
 const applogicRequestOptions: RequestOptions = {

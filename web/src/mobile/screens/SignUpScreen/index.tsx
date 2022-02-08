@@ -11,7 +11,7 @@ const SignUpMobileScreen: React.FC = () => {
   return (
     <div>
       <MobileModal
-        isOpen={true}
+        isOpen
         onClose={() => history.push('/trading')}
         onBack={() => history.push('/signin')}
         backTitle={intl.formatMessage({ id: 'page.body.landing.header.button2' })}

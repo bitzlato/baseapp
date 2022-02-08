@@ -1,8 +1,8 @@
 import { Button } from 'react-bootstrap';
-import { SignUpForm, SignUpFormProps } from './';
 
 import { shallow } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
+import { SignUpForm, SignUpFormProps } from '.';
 
 const defaults: SignUpFormProps = {
   onSignUp: jest.fn(),

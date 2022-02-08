@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { rootReducer } from '../../';
+import { rootReducer } from '../..';
 import {
   selectTotalNumber,
   selectUserActivity,

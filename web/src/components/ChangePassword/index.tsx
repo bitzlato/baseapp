@@ -149,7 +149,7 @@ export const ChangePasswordComponent = (props: any) => {
               handleFocusInput={() => setOldPasswordFocus(!oldPasswordFocus)}
               classNameLabel="cr-email-form__label"
               classNameInput="cr-email-form__input"
-              autoFocus={true}
+              autoFocus
               labelVisible={oldPasswordFocus}
             />
           </div>
@@ -220,7 +220,7 @@ export const ChangePasswordComponent = (props: any) => {
     return (
       <div className="pg-mobile-change-password__footer">
         <Button
-          block={true}
+          block
           disabled={!isValidForm()}
           onClick={handleChangePassword}
           size="lg"

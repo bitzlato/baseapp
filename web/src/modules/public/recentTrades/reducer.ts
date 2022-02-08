@@ -49,8 +49,6 @@ export const extendTradeWithPriceChange = (
 
     return trade;
   }
-
-  return;
 };
 
 export const recentTradesReducer = (state = initialState, action: RecentTradesActions) => {

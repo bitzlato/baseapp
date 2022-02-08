@@ -54,6 +54,7 @@ type Props = ReduxProps & DispatchProps;
 
 export class TradingChartComponent extends React.PureComponent<Props> {
   public currentKlineSubscription: CurrentKlineSubscription = {};
+
   public tvWidget: IChartingLibraryWidget | null = null;
 
   private datafeed = dataFeedObject(this, this.props.markets);

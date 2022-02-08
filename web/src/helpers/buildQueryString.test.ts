@@ -1,6 +1,6 @@
-import { buildQueryString } from './';
+import { buildQueryString } from '.';
 
-describe('Describe build query string helper', () => {
+describe('build query string helper', () => {
   it('should build correct query string without any parameter', () => {
     expect(buildQueryString({})).toEqual('');
   });

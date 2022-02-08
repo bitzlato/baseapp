@@ -20,11 +20,11 @@ import { useHistory, useParams } from 'react-router';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { useFetch } from 'src/hooks/useFetch';
 import { Estimated } from 'src/containers/Wallets/Estimated';
+import { accountUrl } from 'src/api';
+import type { SelectOption } from 'src/components/Select/Select';
 import { getList } from './helpers';
 import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
-import { accountUrl } from 'src/api';
-import type { SelectOption } from 'src/components/Select/Select';
 
 import s from './WalletsScreen.postcss';
 

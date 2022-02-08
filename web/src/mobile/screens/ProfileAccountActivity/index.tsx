@@ -41,7 +41,7 @@ const ProfileAccountActivityMobileScreenComponent: React.FC = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Subheader
         title={intl.formatMessage({ id: 'page.mobile.profile.accountActivity.title' })}
         backTitle={intl.formatMessage({ id: 'page.body.profile.header.account' })}
@@ -64,7 +64,7 @@ const ProfileAccountActivityMobileScreenComponent: React.FC = () => {
           />
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

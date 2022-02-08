@@ -35,7 +35,7 @@ const ChangePasswordScreenComponent: React.FC = () => {
   const currentPasswordEntropy = useSelector(selectCurrentPasswordEntropy);
 
   return (
-    <React.Fragment>
+    <>
       <Subheader
         title={intl.formatMessage({ id: 'page.mobile.profile.changePassword.title' })}
         backTitle={intl.formatMessage({ id: 'page.body.profile.header.account' })}
@@ -48,7 +48,7 @@ const ChangePasswordScreenComponent: React.FC = () => {
           fetchCurrentPasswordEntropy={fetchCurrentPasswordEntropy}
         />
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

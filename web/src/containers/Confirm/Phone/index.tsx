@@ -95,13 +95,13 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                   handleClick={this.addPlusSignToPhoneNumber}
                   handleChangeInput={this.handleChangePhoneNumber}
                   onKeyPress={this.handleSendEnterPress}
-                  autoFocus={true}
+                  autoFocus
                   handleFocusInput={this.handleFieldFocus('phoneNumber')}
                   labelVisible={phoneNumberFocused}
                 />
                 <InputGroup.Append>
                   <Button
-                    block={true}
+                    block
                     onClick={this.handleSendCode}
                     size="lg"
                     variant="primary"
@@ -136,7 +136,7 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
         </div>
         <div className="pg-confirm__content-deep">
           <Button
-            block={true}
+            block
             onClick={this.confirmPhone}
             size="lg"
             variant="primary"

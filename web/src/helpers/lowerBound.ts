@@ -2,7 +2,8 @@
 export function lowerBound<T>(arr: T[], value: T, less = (a: T, b: T) => a < b): number {
   let first = 0;
   let count = arr.length;
-  let it: number, step: number;
+  let it: number;
+  let step: number;
   while (count > 0) {
     it = first;
     step = count >> 1;

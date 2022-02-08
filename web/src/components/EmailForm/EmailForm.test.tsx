@@ -1,7 +1,6 @@
-import { EmailForm, EmailFormProps } from './index';
-
 import { shallow } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
+import { EmailForm, EmailFormProps } from './index';
 
 const defaults: EmailFormProps = {
   OnSubmit: jest.fn(),

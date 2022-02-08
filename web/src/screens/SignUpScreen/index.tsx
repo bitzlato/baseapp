@@ -6,6 +6,7 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { IntlProps } from 'src/types';
 import { isUsernameEnabled } from '../../api';
 import { captchaType } from '../../api/config';
 import { Captcha, Modal, SignUpForm } from '../../components';
@@ -20,7 +21,6 @@ import {
   passwordErrorThirdSolution,
   setDocumentTitle,
 } from '../../helpers';
-import { IntlProps } from 'src/types';
 import {
   entropyPasswordFetch,
   GeetestCaptchaResponse,
@@ -94,6 +94,7 @@ class SignUp extends React.Component<Props> {
   };
 
   private myRef = React.createRef<HTMLInputElement>();
+
   private passwordWrapper = React.createRef<HTMLDivElement>();
 
   public componentDidMount() {
@@ -115,7 +116,7 @@ class SignUp extends React.Component<Props> {
     const { email } = this.state;
 
     if (!prev.requireVerification && this.props.requireVerification) {
-      this.props.history.push('/email-verification', { email: email });
+      this.props.history.push('/email-verification', { email });
     }
   }
 
@@ -395,7 +396,7 @@ class SignUp extends React.Component<Props> {
   private renderModalFooter = () => {
     return (
       <div className="pg-exchange-modal-submit-footer">
-        <Button block={true} onClick={this.closeModal} size="lg" variant="primary">
+        <Button block onClick={this.closeModal} size="lg" variant="primary">
           {this.props.intl.formatMessage({ id: 'page.header.signUp.modal.footer' })}
         </Button>
       </div>
@@ -455,8 +456,6 @@ class SignUp extends React.Component<Props> {
         passwordError: '',
         hasConfirmed: false,
       });
-
-      return;
     }
   };
 }

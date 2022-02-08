@@ -44,7 +44,8 @@ export const AmountDescription: React.FC<AmountDescriptionProps> = ({
           </Box>
         </Box>
       );
-    } else if (!amount.isZero() && amount.lessThan(minAmount)) {
+    }
+    if (!amount.isZero() && amount.lessThan(minAmount)) {
       return (
         <Box as="span" textColor="failed">
           {t('page.body.quick.exchange.less_than_min_amount', {

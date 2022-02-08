@@ -69,9 +69,9 @@ describe('Table render', () => {
       data: dataForSelect,
       header: headerForSelect,
       rowKeyIndex: keyIndex,
-      selectedKey: selectedKey,
+      selectedKey,
     });
-    let renderedComponent = component.render();
+    const renderedComponent = component.render();
     const expected = `${selectedKey}`;
     const result = renderedComponent
       .find('.cr-table__row--selected')

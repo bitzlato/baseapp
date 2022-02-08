@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { buildQueryString } from 'src/helpers/buildQueryString';
-import { MarketPriceResponse as MarketPriceResponse, sendError } from '../../../';
+import { MarketPriceResponse, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { marketPriceData, marketPriceError, MarketPriceFetch } from '../actions';
 

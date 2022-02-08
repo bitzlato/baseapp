@@ -84,7 +84,7 @@ const CodeVerification: FC<CodeVerificationProps> = (
       <div className="pg-code-verification__wrapper">{getCodeBlocks()}</div>
       <div className="pg-code-verification__input">
         <input
-          autoFocus={true}
+          autoFocus
           type={type}
           value={code}
           inputMode={inputMode}

@@ -70,10 +70,10 @@ export class FilterInput extends React.Component<FilterInputProps, SearchInputSt
           <img alt="search icon" src={SearchIcon} />
         </span>
         <input
-          type={'text'}
+          type="text"
           className={cx}
           value={key}
-          placeholder={placeholder ? placeholder : 'Search'}
+          placeholder={placeholder || 'Search'}
           onChange={this.filterList}
         />
         <span className="cr-search__cancel">

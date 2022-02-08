@@ -134,7 +134,7 @@ class RecentTradesComponent extends React.Component<RecentTradesProps, State> {
 
     this.setState({
       tab: this.tabMapping[index]!,
-      index: index,
+      index,
     });
   };
 }

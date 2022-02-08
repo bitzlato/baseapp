@@ -1,5 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme';
-import { HideMode, TabPanel, TabPanelProps } from './';
+import { HideMode, TabPanel, TabPanelProps } from '.';
 
 const defaultProps: TabPanelProps = {
   panels: [

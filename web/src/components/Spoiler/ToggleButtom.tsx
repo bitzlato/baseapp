@@ -1,5 +1,4 @@
-import { FC } from 'react';
-import { useContext } from 'react';
+import { FC, useContext } from 'react';
 import { AccordionContext, useAccordionToggle } from 'react-bootstrap';
 import { ChevronIcon } from 'src/assets/images/ChevronIcon';
 import cn from 'classnames';
@@ -11,7 +10,7 @@ interface Props {
   eventKey: string;
 }
 
-export const ToggleButton: FC<Props> = ({title, eventKey}) => {
+export const ToggleButton: FC<Props> = ({ title, eventKey }) => {
   const currentEventKey = useContext(AccordionContext);
   const decoratedOnClick = useAccordionToggle(eventKey);
 

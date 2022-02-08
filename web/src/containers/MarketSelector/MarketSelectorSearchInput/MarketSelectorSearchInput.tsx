@@ -1,9 +1,9 @@
 import { FC, ChangeEvent } from 'react';
 
-import s from './MarketSelectorSearchInput.postcss';
 import { SearchIcon } from 'src/assets/icons/SearchIcon';
 import { CrossIcon } from 'src/assets/icons/CrossIcon';
 import { useT } from 'src/hooks/useT';
+import s from './MarketSelectorSearchInput.postcss';
 
 interface Props {
   value: string;
@@ -14,7 +14,7 @@ export const MarketSelectorSearchInput: FC<Props> = ({ value, onChange }: Props)
   const t = useT();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const { value } = e.target;
 
     onChange(value);
   };

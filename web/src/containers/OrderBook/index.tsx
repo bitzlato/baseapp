@@ -4,6 +4,10 @@ import { Spinner } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { IntlProps } from 'src/types';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
+import { DiffAmountFormat } from 'src/components/DiffAmountFormat/DiffAmountFormat';
 import { CombinedOrderBook } from '../../components';
 import { colors } from '../../constants';
 import { accumulateVolume, calcMaxVolume, sortBids, sortAsks } from '../../helpers';
@@ -27,10 +31,6 @@ import {
   Theme,
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
-import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
-import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { createMoneyWithoutCcy } from 'src/helpers/money';
-import { DiffAmountFormat } from 'src/components/DiffAmountFormat/DiffAmountFormat';
 
 interface ReduxProps {
   asks: string[][];
@@ -186,8 +186,8 @@ class OrderBookContainer extends React.Component<Props, State> {
         onSelectAsks={this.handleOnSelectAsks}
         onSelectBids={this.handleOnSelectBids}
         isLarge={isLarge}
-        noDataAsks={!asksData.length ? true : false}
-        noDataBids={!bids.length ? true : false}
+        noDataAsks={!asksData.length}
+        noDataBids={!bids.length}
         noDataMessage={this.props.intl.formatMessage({ id: 'page.noDataToShow' })}
       />
     );
@@ -225,25 +225,22 @@ class OrderBookContainer extends React.Component<Props, State> {
       });
 
       return (
-        <React.Fragment>
+        <>
           <span className={cn}>
             {createMoneyWithoutCcy(lastPrice, currentMarket.price_precision).toFormat()}
           </span>
           <span>
             {this.props.intl.formatMessage({ id: 'page.body.trade.orderbook.lastMarket' })}
           </span>
-        </React.Fragment>
-      );
-    } else {
-      return (
-        <React.Fragment>
-          <span className={'cr-combined-order-book__market-negative'}>0</span>
-          <span>
-            {this.props.intl.formatMessage({ id: 'page.body.trade.orderbook.lastMarket' })}
-          </span>
-        </React.Fragment>
+        </>
       );
     }
+    return (
+      <>
+        <span className="cr-combined-order-book__market-negative">0</span>
+        <span>{this.props.intl.formatMessage({ id: 'page.body.trade.orderbook.lastMarket' })}</span>
+      </>
+    );
   }
 
   private renderHeaders = () => {
@@ -370,29 +367,28 @@ class OrderBookContainer extends React.Component<Props, State> {
                     minFractionDigits={priceFixed}
                   />,
                 ];
-              } else {
-                return [
-                  <DiffAmountFormat
-                    key={i}
-                    currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
-                    prevValue={createMoneyWithoutCcy(
-                      array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
-                      priceFixed,
-                    )}
-                    minFractionDigits={priceFixed}
-                  />,
-                  <AmountFormat
-                    key={i}
-                    money={createMoneyWithoutCcy(volume ?? 0, amountFixed)}
-                    minFractionDigits={amountFixed}
-                  />,
-                  <AmountFormat
-                    key={i}
-                    money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
-                    minFractionDigits={amountFixed}
-                  />,
-                ];
               }
+              return [
+                <DiffAmountFormat
+                  key={i}
+                  currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed)}
+                  prevValue={createMoneyWithoutCcy(
+                    array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
+                    priceFixed,
+                  )}
+                  minFractionDigits={priceFixed}
+                />,
+                <AmountFormat
+                  key={i}
+                  money={createMoneyWithoutCcy(volume ?? 0, amountFixed)}
+                  minFractionDigits={amountFixed}
+                />,
+                <AmountFormat
+                  key={i}
+                  money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed)}
+                  minFractionDigits={amountFixed}
+                />,
+              ];
           }
         })
       : [[[''], message]];
@@ -449,24 +445,23 @@ class OrderBookContainer extends React.Component<Props, State> {
                     minFractionDigits={priceFixed as any}
                   />,
                 ];
-              } else {
-                return [
-                  <DiffAmountFormat
-                    key={i}
-                    currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed as any)}
-                    prevValue={createMoneyWithoutCcy(
-                      array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
-                      priceFixed as any,
-                    )}
-                    minFractionDigits={priceFixed as any}
-                  />,
-                  <AmountFormat
-                    key={i}
-                    money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed as any)}
-                    minFractionDigits={amountFixed as any}
-                  />,
-                ];
               }
+              return [
+                <DiffAmountFormat
+                  key={i}
+                  currentValue={createMoneyWithoutCcy(price ?? 0, priceFixed as any)}
+                  prevValue={createMoneyWithoutCcy(
+                    array[i - 1] ? array[i - 1]?.[0] ?? 0 : 0,
+                    priceFixed as any,
+                  )}
+                  minFractionDigits={priceFixed as any}
+                />,
+                <AmountFormat
+                  key={i}
+                  money={createMoneyWithoutCcy(total[i] ?? 0, amountFixed as any)}
+                  minFractionDigits={amountFixed as any}
+                />,
+              ];
           }
         })
       : [[[''], message]];

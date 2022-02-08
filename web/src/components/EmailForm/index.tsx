@@ -134,14 +134,14 @@ export const EmailForm: React.FC<EmailFormProps> = (props) => {
           {props.renderCaptcha}
           <div className="cr-email-form__button-wrapper">
             <Button
-              block={true}
+              block
               type="button"
               disabled={isButtonDisabled()}
               onClick={(e) => handleClick(e as any)}
               size="lg"
               variant="primary"
             >
-              {isLoading ? 'Loading...' : buttonLabel ? buttonLabel : 'Send'}
+              {isLoading ? 'Loading...' : buttonLabel || 'Send'}
             </Button>
           </div>
         </div>

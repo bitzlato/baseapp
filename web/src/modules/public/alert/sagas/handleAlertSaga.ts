@@ -5,7 +5,7 @@ import {
   signInRequire2FA,
   userOpenOrdersReset,
   userReset,
-} from '../../../';
+} from '../../..';
 import { msAlertDisplayTime } from '../../../../api';
 import { selectUserInfo, User } from '../../../user/profile';
 import { alertData, alertDelete, AlertPush } from '../actions';
@@ -33,25 +33,18 @@ export function* handleAlertSaga(action: AlertPush) {
 
         if (action.payload.message.indexOf('identity.session.not_active') > -1) {
           yield put(alertData(action.payload));
-
-          return;
+        } else if (
+          action.payload.message.indexOf('authz.client_session_mismatch') > -1 ||
+          action.payload.message.indexOf('authz.csrf_token_mismatch') > -1
+        ) {
+          yield call(callAlertData, action);
         } else {
-          if (
-            action.payload.message.indexOf('authz.client_session_mismatch') > -1 ||
-            action.payload.message.indexOf('authz.csrf_token_mismatch') > -1
-          ) {
-            yield call(callAlertData, action);
+          const user: User = yield select(selectUserInfo);
+          if (!user.email.length && action.payload.message.indexOf('authz.invalid_session') > -1) {
+            break;
           } else {
-            const user: User = yield select(selectUserInfo);
-            if (
-              !user.email.length &&
-              action.payload.message.indexOf('authz.invalid_session') > -1
-            ) {
-              break;
-            } else {
-              yield call(callAlertData, action);
-              break;
-            }
+            yield call(callAlertData, action);
+            break;
           }
         }
         break;

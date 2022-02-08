@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { CodeVerification } from '../';
+import { CodeVerification } from '..';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 
 export interface TwoFactorAuthProps {
@@ -61,7 +61,7 @@ export const TwoFactorAuthComponent: React.FC<TwoFactorAuthProps> = ({
                 type="text"
                 placeholder="X"
                 inputMode="decimal"
-                showPaste2FA={true}
+                showPaste2FA
                 isMobile={isMobile}
               />
             </div>
@@ -72,7 +72,7 @@ export const TwoFactorAuthComponent: React.FC<TwoFactorAuthProps> = ({
                 size="lg"
                 variant="primary"
               >
-                {isLoading ? 'Loading...' : buttonLabel ? buttonLabel : 'Sign in'}
+                {isLoading ? 'Loading...' : buttonLabel || 'Sign in'}
               </Button>
             </div>
           </div>

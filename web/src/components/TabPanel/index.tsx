@@ -147,13 +147,12 @@ export const TabPanel: React.FC<TabPanelProps> = ({
           onChange={handleOrderTypeChange}
         />
       );
-    } else {
-      return (
-        <div className={'cr-tab-panel__navigation-container-navigation'} role="tablist">
-          {panels.map(renderTabPanel)}
-        </div>
-      );
     }
+    return (
+      <div className="cr-tab-panel__navigation-container-navigation" role="tablist">
+        {panels.map(renderTabPanel)}
+      </div>
+    );
   }, [dropdownLabels, handleOrderTypeChange, isDropdown, panels, renderTabPanel]);
 
   const renderTabContent = React.useCallback(

@@ -1,4 +1,4 @@
-import { RootState } from '../../';
+import { RootState } from '../..';
 import { CommonError } from '../../types';
 import { WithdrawLimit } from './types';
 

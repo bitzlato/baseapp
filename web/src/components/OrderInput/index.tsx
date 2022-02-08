@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cn from 'classnames';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
-import { CustomInput } from '../../components';
+import { CustomInput } from '..';
 
 export interface OrderInputProps {
   className?: string | undefined;

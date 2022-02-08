@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { SetupFormInput } from '..';
 import { Button } from 'react-bootstrap';
+import { SetupFormInput } from '..';
 import { EMAIL_REGEX } from '../../../helpers';
 
 export interface SetupLoginFormProps {
@@ -27,7 +27,7 @@ export class SetupLoginForm extends React.Component<SetupLoginFormProps, SetupLo
     const isEmailValid = email.match(EMAIL_REGEX) && password.length;
 
     return (
-      <React.Fragment>
+      <>
         <form className="setup-login-form" autoComplete="off">
           <SetupFormInput label="Email" value={email} handleChangeInput={this.handleChangeEmail} />
           <SetupFormInput
@@ -39,7 +39,7 @@ export class SetupLoginForm extends React.Component<SetupLoginFormProps, SetupLo
         </form>
         <div className="setup-screen__button">
           <Button
-            block={true}
+            block
             type="button"
             size="lg"
             variant="primary"
@@ -49,7 +49,7 @@ export class SetupLoginForm extends React.Component<SetupLoginFormProps, SetupLo
             Next
           </Button>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 

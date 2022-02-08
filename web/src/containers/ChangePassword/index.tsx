@@ -46,7 +46,7 @@ class ChangePasswordComponent extends React.Component<Props, ChangePasswordState
     const { showForm } = this.state;
 
     return (
-      <React.Fragment>
+      <>
         <label className="pg-profile-page__label">
           <div>
             <FormattedMessage id="page.body.profile.header.account.content.password" />
@@ -54,24 +54,22 @@ class ChangePasswordComponent extends React.Component<Props, ChangePasswordState
           <span className="pg-profile-page__label-value">***********</span>
         </label>
         {showForm ? this.renderForm() : this.renderPasswordView()}
-      </React.Fragment>
+      </>
     );
   }
 
   private renderPasswordView = () => {
     return (
-      <React.Fragment>
-        <Button
-          className="pg-profile-page__btn-secondary"
-          onClick={this.toggleShowForm}
-          size="lg"
-          variant="primary"
-        >
-          {this.props.intl.formatMessage({
-            id: 'page.body.profile.header.account.content.password.button.change',
-          })}
-        </Button>
-      </React.Fragment>
+      <Button
+        className="pg-profile-page__btn-secondary"
+        onClick={this.toggleShowForm}
+        size="lg"
+        variant="primary"
+      >
+        {this.props.intl.formatMessage({
+          id: 'page.body.profile.header.account.content.password.button.change',
+        })}
+      </Button>
     );
   };
 
@@ -82,7 +80,7 @@ class ChangePasswordComponent extends React.Component<Props, ChangePasswordState
       <div>
         <div className="pg-change-password-form">
           <div className="pg-change-password-form__group">
-            <label className="pg-change-password-form__label"></label>
+            <label className="pg-change-password-form__label" />
             <CustomInput
               label={this.props.intl.formatMessage({
                 id: 'page.body.profile.header.account.content.password.old',
