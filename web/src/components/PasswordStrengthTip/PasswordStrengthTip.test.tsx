@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import { PasswordStrengthTip, PasswordStrengthTipProps } from './';
+import { PasswordStrengthTip, PasswordStrengthTipProps } from '.';
 
 const defaults: PasswordStrengthTipProps = {
   passwordErrorFirstSolved: false,

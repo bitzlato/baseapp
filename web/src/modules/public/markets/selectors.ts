@@ -1,4 +1,4 @@
-import { RootState } from '../../';
+import { RootState } from '../..';
 import { MarketsState } from './reducer';
 import { Market } from './types';
 

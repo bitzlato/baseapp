@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError, WalletHistoryList } from '../../../';
+import { sendError, WalletHistoryList } from '../../..';
 import { API, defaultStorageLimit, RequestOptions } from '../../../../api';
 import { getHistorySagaParam, sliceArray } from '../../../../helpers';
 import { failHistory, HistoryFetch, successHistory } from '../actions';

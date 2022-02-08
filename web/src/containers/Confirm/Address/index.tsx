@@ -100,90 +100,88 @@ class AddressComponent extends React.Component<Props, State> {
     });
 
     return (
-      <React.Fragment>
-        <div className="pg-confirm__content-address">
-          <div className="pg-confirm__content-address__row">
-            <fieldset className={addressFocusedClass}>
-              <CustomInput
-                type="string"
-                inputValue={address}
-                placeholder={this.translate('page.body.kyc.address.address.placeholder')}
-                label={this.translate('page.body.kyc.address.address')}
-                defaultLabel={''}
-                labelVisible={true}
-                handleChangeInput={(e) => this.handleChange(e, 'address')}
-                handleFocusInput={this.handleFieldFocus('address')}
-              />
-            </fieldset>
-          </div>
-          <div className="pg-confirm__content-address__row input-group">
-            <fieldset className={cityFocusedClass}>
-              <CustomInput
-                type="string"
-                label={this.translate('page.body.kyc.address.city')}
-                labelVisible={true}
-                defaultLabel={''}
-                placeholder={this.translate('page.body.kyc.address.city.placeholder')}
-                inputValue={city}
-                handleChangeInput={(e) => this.handleChange(e, 'city')}
-                handleFocusInput={this.handleFieldFocus('city')}
-              />
-            </fieldset>
-            <fieldset className={postcodeFocusedClass}>
-              <CustomInput
-                type="string"
-                label={this.translate('page.body.kyc.address.postcode')}
-                labelVisible={true}
-                defaultLabel={''}
-                placeholder={this.translate('page.body.kyc.address.postcode.placeholder')}
-                inputValue={postcode}
-                handleChangeInput={(e) => this.handleChange(e, 'postcode')}
-                handleFocusInput={this.handleFieldFocus('postcode')}
-              />
-            </fieldset>
-          </div>
-          <div className="pg-confirm__content-address__row__content">
-            <div className="pg-confirm__content-address__row__content-label">
-              {this.translate('page.body.kyc.documents.country')}
-            </div>
-            <Select
-              className="pg-confirm__content-address__row__content-number-dropdown"
-              options={dataCountries}
-              onChange={this.selectCountry}
-              placeholder={this.translate('page.body.kyc.documents.country.placeholder')}
+      <div className="pg-confirm__content-address">
+        <div className="pg-confirm__content-address__row">
+          <fieldset className={addressFocusedClass}>
+            <CustomInput
+              type="string"
+              inputValue={address}
+              placeholder={this.translate('page.body.kyc.address.address.placeholder')}
+              label={this.translate('page.body.kyc.address.address')}
+              defaultLabel=""
+              labelVisible
+              handleChangeInput={(e) => this.handleChange(e, 'address')}
+              handleFocusInput={this.handleFieldFocus('address')}
             />
-          </div>
-          <UploadFile
-            id="fileScan"
-            isMobileDevice={isMobileDevice}
-            title={this.translate('page.body.kyc.address.uploadFile.title')}
-            label={this.translate('page.body.kyc.address.uploadFile.label')}
-            buttonText={this.translate('page.body.kyc.address.uploadFile.button')}
-            sizesText={this.uploadFileSizeGuide()}
-            formatsText={this.translate('page.body.kyc.address.uploadFile.formats')}
-            tipText={this.translate('page.body.kyc.address.uploadFile.tip')}
-            handleUploadScan={(uploadEvent) => this.handleUploadScan(uploadEvent, 'fileScan')}
-            uploadedFile={fileScan[0] && (fileScan[0] as File).name}
-            fileSizeErrorMessage={this.state.fileSizeErrorMessage}
-          />
-          <div className="pg-confirm__content-deep">
-            <Button
-              onClick={this.sendAddress}
-              disabled={this.handleCheckButtonDisabled()}
-              size="lg"
-              variant="primary"
-              type="button"
-              block={true}
-            >
-              {loading ? (
-                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-              ) : (
-                this.translate('page.body.kyc.submit')
-              )}
-            </Button>
-          </div>
+          </fieldset>
         </div>
-      </React.Fragment>
+        <div className="pg-confirm__content-address__row input-group">
+          <fieldset className={cityFocusedClass}>
+            <CustomInput
+              type="string"
+              label={this.translate('page.body.kyc.address.city')}
+              labelVisible
+              defaultLabel=""
+              placeholder={this.translate('page.body.kyc.address.city.placeholder')}
+              inputValue={city}
+              handleChangeInput={(e) => this.handleChange(e, 'city')}
+              handleFocusInput={this.handleFieldFocus('city')}
+            />
+          </fieldset>
+          <fieldset className={postcodeFocusedClass}>
+            <CustomInput
+              type="string"
+              label={this.translate('page.body.kyc.address.postcode')}
+              labelVisible
+              defaultLabel=""
+              placeholder={this.translate('page.body.kyc.address.postcode.placeholder')}
+              inputValue={postcode}
+              handleChangeInput={(e) => this.handleChange(e, 'postcode')}
+              handleFocusInput={this.handleFieldFocus('postcode')}
+            />
+          </fieldset>
+        </div>
+        <div className="pg-confirm__content-address__row__content">
+          <div className="pg-confirm__content-address__row__content-label">
+            {this.translate('page.body.kyc.documents.country')}
+          </div>
+          <Select
+            className="pg-confirm__content-address__row__content-number-dropdown"
+            options={dataCountries}
+            onChange={this.selectCountry}
+            placeholder={this.translate('page.body.kyc.documents.country.placeholder')}
+          />
+        </div>
+        <UploadFile
+          id="fileScan"
+          isMobileDevice={isMobileDevice}
+          title={this.translate('page.body.kyc.address.uploadFile.title')}
+          label={this.translate('page.body.kyc.address.uploadFile.label')}
+          buttonText={this.translate('page.body.kyc.address.uploadFile.button')}
+          sizesText={this.uploadFileSizeGuide()}
+          formatsText={this.translate('page.body.kyc.address.uploadFile.formats')}
+          tipText={this.translate('page.body.kyc.address.uploadFile.tip')}
+          handleUploadScan={(uploadEvent) => this.handleUploadScan(uploadEvent, 'fileScan')}
+          uploadedFile={fileScan[0] && (fileScan[0] as File).name}
+          fileSizeErrorMessage={this.state.fileSizeErrorMessage}
+        />
+        <div className="pg-confirm__content-deep">
+          <Button
+            onClick={this.sendAddress}
+            disabled={this.handleCheckButtonDisabled()}
+            size="lg"
+            variant="primary"
+            type="button"
+            block
+          >
+            {loading ? (
+              <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+            ) : (
+              this.translate('page.body.kyc.submit')
+            )}
+          </Button>
+        </div>
+      </div>
     );
   }
 

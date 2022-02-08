@@ -1,3 +1,4 @@
+import { DepositAddress } from 'src/modules/public/accounts/types';
 import { CommonError } from '../../types';
 import { WalletsAction } from './actions';
 import {
@@ -16,7 +17,6 @@ import {
   WALLETS_WITHDRAW_CCY_FETCH,
 } from './constants';
 import { WalletSource } from './types';
-import { DepositAddress } from 'src/modules/public/accounts/types';
 
 export interface WalletsState {
   wallets: {

@@ -7,8 +7,8 @@ import { useBeneficiariesFetch } from 'src/hooks';
 import { Beneficiary } from 'src/modules/user/beneficiaries';
 import { selectWithdrawSuccess, Wallet, walletsWithdrawCcyFetch } from 'src/modules/user/wallets';
 import { ModalWithdrawConfirmationMobile } from 'src/mobile/components';
-import { WithdrawBody } from './WithdrawBody';
 import { Box } from 'src/components/Box/Box';
+import { WithdrawBody } from './WithdrawBody';
 
 interface Props {
   wallet: Wallet;

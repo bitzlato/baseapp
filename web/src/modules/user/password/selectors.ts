@@ -1,4 +1,4 @@
-import { RootState } from '../../';
+import { RootState } from '../..';
 import { PasswordState } from './reducer';
 
 export const selectForgotPasswordSuccess = (

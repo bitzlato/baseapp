@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import { OrderButtons } from '../../';
+import { OrderButtons } from '../..';
 import { TabPanel } from '../../../../components';
 import { OrderBook, RecentTrades, TradingChart } from '../../../../containers';
 
@@ -14,7 +14,7 @@ const ChartsComponent: React.FC<Props> = (props) => {
 
   const renderTabs = () => [
     {
-      content: currentTabIndex === 0 ? <OrderBook forceLarge={true} /> : null,
+      content: currentTabIndex === 0 ? <OrderBook forceLarge /> : null,
       label: intl.formatMessage({ id: 'page.mobile.charts.label.orderBook' }),
     },
     {

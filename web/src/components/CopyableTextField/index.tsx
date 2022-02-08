@@ -3,7 +3,7 @@ import * as React from 'react';
 import { InputGroup } from 'react-bootstrap';
 import { CopyIcon } from 'src/assets/icons/CopyIcon';
 import { useT } from 'src/hooks/useT';
-import { CustomInput } from '../';
+import { CustomInput } from '..';
 import { copy } from '../../helpers';
 import { IconButton } from '../IconButton/IconButton';
 

@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
-import { OrdersTabScreen } from '../';
+import { OrdersTabScreen } from '..';
 
 const setup = () =>
   shallow(

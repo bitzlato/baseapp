@@ -19,8 +19,8 @@ describe('Request Builder', () => {
     };
     const response: AxiosResponse = {
       statusText: '',
-      headers: headers,
-      config: config,
+      headers,
+      config,
       status: 500,
       data: {
         error: 'Error',
@@ -30,8 +30,8 @@ describe('Request Builder', () => {
     const responseError: AxiosError = {
       name: '',
       message: '',
-      config: config,
-      response: response,
+      config,
+      response,
       isAxiosError: true,
       toJSON: () => response,
     };
@@ -49,8 +49,8 @@ describe('Request Builder', () => {
     };
     const response: AxiosResponse = {
       statusText: '',
-      headers: headers,
-      config: config,
+      headers,
+      config,
       status: 500,
       data: {
         errors: ['Error'],
@@ -60,8 +60,8 @@ describe('Request Builder', () => {
     const responseError: AxiosError = {
       name: '',
       message: '',
-      config: config,
-      response: response,
+      config,
+      response,
       isAxiosError: true,
       toJSON: () => response,
     };
@@ -78,7 +78,7 @@ describe('Request Builder', () => {
     const responseError: AxiosError = {
       name: '',
       message: '',
-      config: config,
+      config,
       isAxiosError: true,
       toJSON: () => config,
     };
@@ -102,8 +102,8 @@ describe('Request Builder', () => {
     const responseError: AxiosError = {
       name: '',
       message: '',
-      config: config,
-      response: response,
+      config,
+      response,
       isAxiosError: true,
       toJSON: () => response,
     };

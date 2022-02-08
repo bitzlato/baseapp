@@ -2,10 +2,10 @@ import Axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { Action, Middleware } from 'redux';
 import configureMockStore from 'redux-mock-store';
+import * as WebSocket from 'ws';
 import { Cryptobase } from '../api';
 
 // tslint:disable-next-line
-import * as WebSocket from 'ws';
 
 // tslint:disable no-any no-console
 export const loggerMiddleware: Middleware = () => (next: any) => (action: Action) => {
@@ -31,7 +31,7 @@ export const mockNetworkError = (mockAxios: any) => {
 };
 
 export const createEchoServer = (port: number, debug: boolean) => {
-  const server = new WebSocket.Server({ port: port });
+  const server = new WebSocket.Server({ port });
   server.on('connection', (ws) => {
     if (debug) {
       ws.addEventListener('open', () => {

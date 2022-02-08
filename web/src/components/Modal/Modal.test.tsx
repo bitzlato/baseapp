@@ -1,6 +1,6 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Button } from 'react-bootstrap';
-import { Modal, ModalProps } from './';
+import { Modal, ModalProps } from '.';
 
 const defaults: ModalProps = {
   show: true,
@@ -29,7 +29,7 @@ describe('Basic Modal', () => {
 
   it('should pass along supplied className', () => {
     const className = 'new-class';
-    const wrapper = setup({ className }); //tslint:disable-line
+    const wrapper = setup({ className }); // tslint:disable-line
     expect(wrapper.hasClass(className)).toBeTruthy();
   });
 

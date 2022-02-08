@@ -92,7 +92,7 @@ describe('walletsList reducer', () => {
         list: [],
         loading: false,
         withdrawSuccess: false,
-        error: error,
+        error,
         mobileWalletChosen: '',
       },
     };
@@ -120,7 +120,7 @@ describe('walletsList reducer', () => {
         list: [],
         loading: false,
         withdrawSuccess: false,
-        error: error,
+        error,
         mobileWalletChosen: '',
       },
     };
@@ -163,7 +163,7 @@ describe('walletsList reducer', () => {
         list: [],
         loading: false,
         withdrawSuccess: false,
-        error: error,
+        error,
         mobileWalletChosen: '',
       },
     };

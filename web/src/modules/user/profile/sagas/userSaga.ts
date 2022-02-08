@@ -1,9 +1,9 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError, User } from '../../../';
+import { fetchBitzlatoId } from 'src/helpers/auth0';
+import { sendError, User } from '../../..';
 import { API, isFinexEnabled, RequestOptions } from '../../../../api';
 import { userData, userError } from '../actions';
 import { abilitiesFetch } from '../../abilities';
-import { fetchBitzlatoId } from 'src/helpers/auth0';
 
 const userOptions: RequestOptions = {
   apiVersion: 'barong',

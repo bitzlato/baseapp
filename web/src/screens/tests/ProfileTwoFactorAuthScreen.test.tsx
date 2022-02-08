@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
-import { ProfileTwoFactorAuthScreen } from '../';
+import { ProfileTwoFactorAuthScreen } from '..';
 
 const setup = () =>
   shallow(

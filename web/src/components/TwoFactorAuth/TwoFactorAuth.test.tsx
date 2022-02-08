@@ -1,6 +1,5 @@
-import { TwoFactorAuth, TwoFactorAuthProps } from './';
-
 import { shallow } from 'enzyme';
+import { TwoFactorAuth, TwoFactorAuthProps } from '.';
 
 const defaults: TwoFactorAuthProps = {
   onSubmit: jest.fn(),

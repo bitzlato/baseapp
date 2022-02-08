@@ -56,13 +56,13 @@ export class SetupMarketsBlock extends React.Component<
     const { marketsList } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <div className="setup-markets-block">
           <div className="setup-markets-block__list">
             <div className="setup-markets-block__list__title">Selected to your platform</div>
             <select
               size={marketsList.length}
-              multiple={true}
+              multiple
               value={selectedAddedMarkets}
               onChange={(e) =>
                 this.handleSelectAddedMarket(
@@ -105,7 +105,7 @@ export class SetupMarketsBlock extends React.Component<
             <div className="setup-markets-block__list__title">Library</div>
             <select
               size={marketsList.length}
-              multiple={true}
+              multiple
               value={selectedAvailableMarkets}
               onChange={(e) =>
                 this.handleSelectAvailableMarket(
@@ -119,7 +119,7 @@ export class SetupMarketsBlock extends React.Component<
         </div>
         <div className="setup-screen__button">
           <Button
-            block={true}
+            block
             type="button"
             size="lg"
             variant="primary"
@@ -129,7 +129,7 @@ export class SetupMarketsBlock extends React.Component<
             Save
           </Button>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -203,7 +203,7 @@ export class SetupMarketsBlock extends React.Component<
       .filter((item) => item !== undefined);
 
     this.setState({
-      addedMarkets: addedMarkets,
+      addedMarkets,
       availableMarkets: this.getAllMarketsNames(availableMarkets),
       selectedAvailableMarkets: [],
       selectedAddedMarkets: [],

@@ -1,6 +1,6 @@
-import { handleIncrementalUpdate, handleIncrementalUpdateArray } from './';
+import { handleIncrementalUpdate, handleIncrementalUpdateArray } from '.';
 
-describe('Describe incremental update of order book asks', () => {
+describe('incremental update of order book asks', () => {
   it('should append value to order book', () => {
     const asks: string[][] = [
       ['0.60', '0.1'],
@@ -173,7 +173,7 @@ describe('Describe incremental update of order book asks', () => {
   });
 });
 
-describe('Describe incremental update of order book bids', () => {
+describe('incremental update of order book bids', () => {
   it('should append value to order book', () => {
     const bids: string[][] = [
       ['0.95', '0.5'],
@@ -353,7 +353,7 @@ describe('Describe incremental update of order book bids', () => {
   });
 });
 
-describe('Describe incremental array update of order book asks', () => {
+describe('incremental array update of order book asks', () => {
   it('should append values to order book', () => {
     const asks: string[][] = [
       ['0.60', '0.1'],

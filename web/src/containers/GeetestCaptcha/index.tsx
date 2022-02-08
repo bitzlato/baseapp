@@ -35,6 +35,7 @@ class GeetestCaptchaComponent extends React.Component<Props> {
   }
 
   private captchaContainerRef;
+
   private captcha: any;
 
   public componentDidMount() {
@@ -55,7 +56,7 @@ class GeetestCaptchaComponent extends React.Component<Props> {
           new_captcha: false,
           product: 'popup',
           width: '100%',
-          lang: lang,
+          lang,
           https: true,
         },
         this.captchaComingHandler,

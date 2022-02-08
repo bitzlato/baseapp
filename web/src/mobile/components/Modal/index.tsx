@@ -53,10 +53,10 @@ export const MobileModal: React.FC<Props> = (props) => {
     <div className="cr-mobile-modal__header">
       <div className="cr-mobile-modal__header-back" onClick={handleOnBack}>
         {props.backTitle ? (
-          <React.Fragment>
+          <>
             <ArrowIcon />
             <span>{props.backTitle}</span>
-          </React.Fragment>
+          </>
         ) : null}
       </div>
       <div className="cr-mobile-modal__header-title">{props.title}</div>

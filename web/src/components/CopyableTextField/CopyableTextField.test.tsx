@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
-import { CopyableTextField, CopyableTextFieldProps } from './';
+import { CopyableTextField, CopyableTextFieldProps } from '.';
 
 const defaultProps: CopyableTextFieldProps = {
   value: '1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4dfE',

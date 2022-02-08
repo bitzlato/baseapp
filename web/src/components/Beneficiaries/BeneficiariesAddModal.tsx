@@ -10,16 +10,16 @@ import {
   selectMobileDeviceState,
   Wallet,
 } from 'src/modules';
-import { Box } from '../Box/Box';
-import { Button } from '../Button/Button';
-import { TextInput } from '../Input/TextInput';
 import { useFetchCache } from 'src/hooks/useFetchCache';
 import { Blockchain } from 'src/modules/public/blockchains/types';
 import { tradeUrl } from 'src/api/config';
-import { Select } from '../Select/Select';
-import { BlockchainIcon2 } from '../BlockchainIcon/BlockchainIcon2';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { Card } from 'web/src/components/Card/Card';
+import { Box } from '../Box/Box';
+import { Button } from '../Button/Button';
+import { TextInput } from '../Input/TextInput';
+import { Select } from '../Select/Select';
+import { BlockchainIcon2 } from '../BlockchainIcon/BlockchainIcon2';
 
 interface Props {
   wallet: Wallet;

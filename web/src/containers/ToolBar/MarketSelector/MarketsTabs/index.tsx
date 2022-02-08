@@ -69,7 +69,7 @@ export class MarketsTabsComponent extends React.Component<Props, State> {
     });
 
     return (
-      //tslint:disable-next-line
+      // tslint:disable-next-line
       <div className={classname} key={index} onClick={() => this.handleSelectButton(index)}>
         {item}
       </div>
@@ -113,5 +113,5 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
   user: selectUserInfo(state),
 });
 
-//tslint:disable-next-line:no-any
+// tslint:disable-next-line:no-any
 export const MarketsTabs = connect(mapStateToProps, {})(MarketsTabsComponent) as any;

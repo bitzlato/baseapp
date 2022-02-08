@@ -22,7 +22,7 @@ export const Logo: FC = (): ReactElement => {
       ? JSON.parse(window.env.palette)
       : undefined;
 
-    return settingsFromConfig?.['header_logo'];
+    return settingsFromConfig?.header_logo;
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { CommonError, CommonState } from '../../../modules/types';
+import { CommonError, CommonState } from '../../types';
 import { DocumentationAction } from './actions';
 import {
   DOC_TRADE_USER_API_DATA,

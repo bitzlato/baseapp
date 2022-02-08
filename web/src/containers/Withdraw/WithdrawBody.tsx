@@ -2,17 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { Button } from 'src/components/Button/Button';
 import { Box } from 'src/components/Box';
-import { Beneficiaries, Blur } from '../../components';
-import { precisionRegExp } from '../../helpers';
-import {
-  Beneficiary,
-  selectMemberLevels,
-  selectMobileDeviceState,
-  selectUserInfo,
-  Wallet,
-} from '../../modules';
-import { WithdrawSummary } from './WithdrawSummary';
-import { BeneficiaryAddress } from './BeneficiaryAddress';
 import { createMoney } from 'src/helpers/money';
 import { NumberInput } from 'src/components/Input/NumberInput';
 import { parseInteger, parseNumeric } from 'src/helpers/parseNumeric';
@@ -22,6 +11,17 @@ import { useSelector } from 'react-redux';
 import { useFetchCache } from 'src/hooks/useFetchCache';
 import { Blockchain } from 'src/modules/public/blockchains/types';
 import { tradeUrl } from 'src/api/config';
+import { BeneficiaryAddress } from './BeneficiaryAddress';
+import { WithdrawSummary } from './WithdrawSummary';
+import {
+  Beneficiary,
+  selectMemberLevels,
+  selectMobileDeviceState,
+  selectUserInfo,
+  Wallet,
+} from '../../modules';
+import { precisionRegExp } from '../../helpers';
+import { Beneficiaries, Blur } from '../../components';
 
 interface Props {
   onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
@@ -67,7 +67,7 @@ export const WithdrawBody: React.FC<Props> = (props) => {
 
   const handleCheckButtonDisabled = (total: string, beneficiary: Beneficiary, otpCode: string) => {
     const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
-    return Number(total) <= 0 || !Boolean(beneficiary.id) || isPending || !Boolean(otpCode);
+    return Number(total) <= 0 || !beneficiary.id || isPending || !otpCode;
   };
 
   const handleClick = () => props.onClick(amount, total, beneficiary, otpCode);
@@ -90,9 +90,11 @@ export const WithdrawBody: React.FC<Props> = (props) => {
   const renderBlur = () => {
     if (blockchain?.is_transaction_price_too_high) {
       return <Blur text={t('is_transaction_price_too_high')} />;
-    } else if (!wallet.withdrawal_enabled) {
+    }
+    if (!wallet.withdrawal_enabled) {
       return <Blur text={t('page.body.wallets.tabs.withdraw.disabled.message')} />;
-    } else if (user.level < (memberLevels?.withdraw.minimum_level ?? 0)) {
+    }
+    if (user.level < (memberLevels?.withdraw.minimum_level ?? 0)) {
       return (
         <Blur
           text={t('page.body.wallets.warning.withdraw.verification')}
@@ -100,7 +102,8 @@ export const WithdrawBody: React.FC<Props> = (props) => {
           linkText={t('page.body.wallets.warning.withdraw.verification.button')}
         />
       );
-    } else if (!user.otp) {
+    }
+    if (!user.otp) {
       if (isMobileDevice) {
         return (
           <Blur
@@ -109,15 +112,14 @@ export const WithdrawBody: React.FC<Props> = (props) => {
             linkText={t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
           />
         );
-      } else {
-        return (
-          <Blur
-            text={t('page.body.wallets.warning.withdraw.2fa')}
-            linkText={t('page.body.wallets.warning.withdraw.2fa.button')}
-            onClick={() => history.push('/security/2fa', { enable2fa: true })}
-          />
-        );
       }
+      return (
+        <Blur
+          text={t('page.body.wallets.warning.withdraw.2fa')}
+          linkText={t('page.body.wallets.warning.withdraw.2fa.button')}
+          onClick={() => history.push('/security/2fa', { enable2fa: true })}
+        />
+      );
     }
     return null;
   };

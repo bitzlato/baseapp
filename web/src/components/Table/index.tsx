@@ -168,8 +168,8 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
       c ? <th key={index}>{c}</th> : <th key={index}>&nbsp;</th>,
     );
     return (
-      <thead className={'cr-table__head'}>
-        <tr className={'cr-table__head-row'}>{cells}</tr>
+      <thead className="cr-table__head">
+        <tr className="cr-table__head-row">{cells}</tr>
       </thead>
     );
   }, []);
@@ -224,7 +224,7 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
         );
       });
 
-      return <tbody className={'cr-table__body'}>{rowElements}</tbody>;
+      return <tbody className="cr-table__body">{rowElements}</tbody>;
     },
     [handleSelect, renderRowCells, resultData, selectedRowKey],
   );
@@ -251,7 +251,7 @@ export const Table: React.FC<TableProps> = (props: TableProps) => {
   return (
     <div className="cr-table-container">
       <div className={className}>
-        {titleComponent ? <div className={'cr-title-component'}>{props.titleComponent}</div> : null}
+        {titleComponent ? <div className="cr-title-component">{props.titleComponent}</div> : null}
         {filters.length ? <div className="cr-table__filters">{renderFilters()}</div> : null}
       </div>
       <table className={cn('cr-table', props.tableClassName)}>

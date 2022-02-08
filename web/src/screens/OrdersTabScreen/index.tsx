@@ -64,12 +64,10 @@ class Orders extends React.PureComponent<Props, State> {
 
   public render() {
     const cancelAll = this.props.list.length ? (
-      <React.Fragment>
-        <span onClick={this.handleCancelAll}>
-          <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
-          <span className="pg-orders-tab__close" />
-        </span>
-      </React.Fragment>
+      <span onClick={this.handleCancelAll}>
+        <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
+        <span className="pg-orders-tab__close" />
+      </span>
     ) : null;
 
     return (

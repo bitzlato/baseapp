@@ -47,7 +47,7 @@ describe('configReducer', () => {
       ...initialConfigUpdateState,
       loading: false,
       success: false,
-      error: error,
+      error,
     };
     expect(configUpdateReducer(initialConfigUpdateState, actions.configUpdateError(error))).toEqual(
       expectedState,

@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import { connect, Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { rootReducer } from '../../modules';
-import { WalletsFetch } from './';
+import { WalletsFetch } from '.';
 
 const store = createStore(rootReducer);
 const Wallets = connect()(WalletsFetch);

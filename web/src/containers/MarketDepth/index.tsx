@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { MarketDepths } from '../../components/MarketDepths';
 import {
   selectCurrentColorTheme,
@@ -9,7 +10,6 @@ import {
   selectDepthBids,
   selectOrderBookLoading,
 } from '../../modules';
-import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 export const MarketDepthsComponent = () => {
   const asksItems = useSelector(selectDepthAsks);
@@ -79,7 +79,7 @@ export const MarketDepthsComponent = () => {
           currentMarket.amount_precision,
         ).toFormat();
 
-        cumulativePriceData = cumulativePriceData + +numberPrice * +numberVolume;
+        cumulativePriceData += +numberPrice * +numberVolume;
         const cumulativePriceDataFormated = createMoneyWithoutCcy(
           cumulativePriceData,
           currentMarket.price_precision,

@@ -1,6 +1,6 @@
-import { convertRgbToHex } from './';
+import { convertRgbToHex } from '.';
 
-describe('Describe convert rgb value to hex', () => {
+describe('convert rgb value to hex', () => {
   it('should convert values', () => {
     expect(convertRgbToHex('255, 255, 255')).toEqual('#ffffff');
     expect(convertRgbToHex('255, 255, 255, 1')).toEqual('#ffffff');

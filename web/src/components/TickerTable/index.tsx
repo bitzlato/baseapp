@@ -1,11 +1,11 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Market } from '../../modules';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { createCcy, createMoney } from 'src/helpers/money';
+import { Market } from '../../modules';
 import { Box } from '../Box/Box';
 import { AmountFormat } from '../AmountFormat/AmountFormat';
-import { createCcy, createMoney } from 'src/helpers/money';
 
 interface Props {
   currentBidUnit: string;

@@ -12,8 +12,8 @@ import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { accountUrl } from 'src/api/config';
 import { Wallet } from 'src/modules/user/wallets/types';
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
-import s from './TransferHistory.postcss';
 import { TextColor } from 'src/components/Box/Box';
+import s from './TransferHistory.postcss';
 
 interface Props {
   currency?: Currency | undefined;

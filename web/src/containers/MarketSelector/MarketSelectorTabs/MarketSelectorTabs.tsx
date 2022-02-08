@@ -1,12 +1,12 @@
 import { FC, useMemo, useState } from 'react';
 import cn from 'classnames';
 
-import s from './MarketSelectorTabs.postcss';
 import { Market } from 'src/modules';
 import { useT } from 'src/hooks/useT';
-import { MarketSelectorTabsDropdown } from './MarketSelectorTabsDropdown';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Tabs, TabList, Tab } from 'src/components/Tabs';
+import { MarketSelectorTabsDropdown } from './MarketSelectorTabsDropdown';
+import s from './MarketSelectorTabs.postcss';
 
 interface Props {
   markets: readonly Market[];

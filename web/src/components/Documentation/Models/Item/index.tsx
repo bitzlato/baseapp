@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-scroll';
-import { Table } from '../../../../components';
+import { Table } from '../../..';
 
 interface ItemInterface {
   item: any;
@@ -42,9 +42,9 @@ export const DocumentationModelsItem: React.FC<ItemInterface> = (props: ItemInte
                   <span>&nbsp;]</span>
                 </div>
               );
-            } else {
-              return property.type;
             }
+            return property.type;
+
           case undefined:
             if (property.$ref) {
               const refElements = property.$ref.split('/');
@@ -55,9 +55,9 @@ export const DocumentationModelsItem: React.FC<ItemInterface> = (props: ItemInte
                   {linkTitle}
                 </Link>
               );
-            } else {
-              return property.type;
             }
+            return property.type;
+
           default:
             return property.type;
         }
@@ -67,7 +67,7 @@ export const DocumentationModelsItem: React.FC<ItemInterface> = (props: ItemInte
         key,
         getFormattedType(),
         property.description,
-        !!property.required
+        property.required
           ? intl.formatMessage({ id: 'page.documentation.models.item.table.data.required.true' })
           : intl.formatMessage({ id: 'page.documentation.models.item.table.data.required.false' }),
       ];

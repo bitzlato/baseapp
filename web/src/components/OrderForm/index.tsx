@@ -4,22 +4,22 @@ import { useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { useT } from 'src/hooks/useT';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
+import { getTriggerSign } from 'src/containers/OpenOrders/helpers';
+import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { Box } from 'src/components/Box/Box';
+import { Label } from 'src/components/Label/Label';
+import { isLimit, isMarket, isTrigger, isTriggerByPrice } from 'src/helpers/order';
+import { createCcy, createMoney } from 'src/helpers/money';
+import { StorageKeys } from 'src/helpers/storageKeys';
+import { SelectString } from 'src/components/Select/Select';
 import { AMOUNT_PERCENTAGE_ARRAY, TRIGGER_BUY_PRICE_MULT } from '../../constants';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
 import { OrderInput as OrderInputMobile } from '../../mobile/components';
 import { OrderProps, OrderType, FormType } from '../Order';
 import { OrderInput } from '../OrderInput';
 import { PercentageButton } from '../PercentageButton';
-import { getTriggerSign } from 'src/containers/OpenOrders/helpers';
-import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
-import { Box } from 'src/components/Box/Box';
-import { Label } from 'src/components/Label/Label';
-import { isLimit, isMarket, isTrigger, isTriggerByPrice } from 'src/helpers/order';
 import { AmountFormat } from '../AmountFormat/AmountFormat';
 import { MoneyFormat } from '../MoneyFormat/MoneyFormat';
-import { createCcy, createMoney } from 'src/helpers/money';
-import { StorageKeys } from 'src/helpers/storageKeys';
-import { SelectString } from 'src/components/Select/Select';
 
 import s from './Input.postcss';
 
@@ -249,7 +249,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     const priceText = t('page.body.trade.header.newOrder.content.price');
 
     return (
-      <React.Fragment>
+      <>
         {isMobileDevice ? (
           <OrderInputMobile
             label={priceText}
@@ -271,7 +271,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
             handleFocusInput={listenInputPrice}
           />
         )}
-      </React.Fragment>
+      </>
     );
   };
 
@@ -281,7 +281,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     });
 
     return (
-      <React.Fragment>
+      <>
         {isMobileDevice ? (
           <OrderInputMobile
             label={triggerText}
@@ -306,7 +306,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
             handleFocusInput={listenInputTrigger}
           />
         )}
-      </React.Fragment>
+      </>
     );
   };
 
@@ -351,13 +351,14 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     const safeAmount = Number(amount) || 0;
     if (isMarket(orderType)) {
       return totalPrice;
-    } else if (isLimit(orderType)) {
-      return safeAmount * (Number(price) || 0);
-    } else if (type === 'buy') {
-      return TRIGGER_BUY_PRICE_MULT * safeAmount * (Number(trigger) || 0);
-    } else {
-      return safeAmount * (Number(trigger) || 0);
     }
+    if (isLimit(orderType)) {
+      return safeAmount * (Number(price) || 0);
+    }
+    if (type === 'buy') {
+      return TRIGGER_BUY_PRICE_MULT * safeAmount * (Number(trigger) || 0);
+    }
+    return safeAmount * (Number(trigger) || 0);
   };
 
   const total = getTotal();
@@ -456,7 +457,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       <div className="cr-order-item">
         <Box
           as={Button}
-          block={true}
+          block
           disabled={checkButtonIsDisabled()}
           onClick={handleSubmit}
           size="lg"

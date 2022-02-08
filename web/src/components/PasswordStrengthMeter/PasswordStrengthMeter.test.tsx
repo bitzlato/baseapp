@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import { PasswordStrengthMeter, PasswordStrengthMeterProps } from './';
+import { PasswordStrengthMeter, PasswordStrengthMeterProps } from '.';
 
 const defaults: PasswordStrengthMeterProps = {
   currentPasswordEntropy: 0,

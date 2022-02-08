@@ -128,7 +128,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
         )}
 
         {user.otp && dataLoaded && apiKeys.length > 0 && (
-          <React.Fragment>
+          <>
             <Table header={this.getTableHeaders()} data={this.getTableData(apiKeys)} />
             <Pagination
               firstElemIndex={firstElemIndex}
@@ -138,7 +138,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
               onClickPrevPage={this.onClickPrevPage}
               onClickNextPage={this.onClickNextPage}
             />
-          </React.Fragment>
+          </>
         )}
 
         {modal}
@@ -229,7 +229,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
       case 'createKey':
         button = (
           <Button
-            block={true}
+            block
             onClick={this.handleCreateKey}
             disabled={isDisabled}
             size="lg"
@@ -241,7 +241,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
         break;
       case 'createSuccess':
         button = (
-          <Button block={true} onClick={this.handleCreateSuccess} size="lg" variant="primary">
+          <Button block onClick={this.handleCreateSuccess} size="lg" variant="primary">
             {this.t('page.body.profile.apiKeys.modal.btn.create')}
           </Button>
         );
@@ -251,7 +251,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
               <fieldset onClick={() => this.handleCopy('access-key-id', 'access')}>
                 <CopyableTextField
                   className="pg-copyable-text-field__input"
-                  fieldId={'access-key-id'}
+                  fieldId="access-key-id"
                   value={(modal.apiKey && modal.apiKey.kid) || ''}
                   label={this.t('page.body.profile.apiKeys.modal.access_key')}
                 />
@@ -270,7 +270,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
               <fieldset onClick={() => this.handleCopy('secret-key-id', 'secret')}>
                 <CopyableTextField
                   className="pg-copyable-text-field__input"
-                  fieldId={'secret_key-id'}
+                  fieldId="secret_key-id"
                   value={secret || ''}
                   label={this.t('page.body.profile.apiKeys.modal.secret_key')}
                 />
@@ -288,7 +288,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
       case 'updateKey':
         button = (
           <Button
-            block={true}
+            block
             onClick={this.handleUpdateKey}
             disabled={isDisabled}
             size="lg"
@@ -303,7 +303,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
       case 'deleteKey':
         button = (
           <Button
-            block={true}
+            block
             onClick={this.handleDeleteKey}
             disabled={isDisabled}
             size="lg"
@@ -330,7 +330,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
             type="text"
             placeholder="X"
             inputMode="decimal"
-            showPaste2FA={true}
+            showPaste2FA
             isMobile={isMobile}
           />
         </div>
@@ -340,7 +340,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
       body
     );
 
-    return <React.Fragment>{body}</React.Fragment>;
+    return <>{body}</>;
   };
 
   private handleHide2FAModal = () => {
@@ -405,7 +405,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
   private handleUpdateKey = () => {
     const apiKey: ApiKeyDataInterface = { ...this.props.modal.apiKey } as any;
     apiKey.state = apiKey.state === 'active' ? 'disabled' : 'active';
-    const payload: ApiKeyUpdateFetch['payload'] = { totp_code: this.state.otpCode, apiKey: apiKey };
+    const payload: ApiKeyUpdateFetch['payload'] = { totp_code: this.state.otpCode, apiKey };
     this.props.updateApiKey(payload);
     this.setState({ otpCode: '' });
   };

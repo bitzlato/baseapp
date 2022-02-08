@@ -57,7 +57,7 @@ class ModalWithdrawSubmitComponent extends React.Component<Props> {
     return (
       <div className="pg-exchange-modal-submit-footer modal-footer__withdraw-submit">
         <Button
-          block={true}
+          block
           className="btn-block mr-1 mt-1 btn-lg"
           onClick={this.props.onSubmit}
           size="lg"

@@ -2,6 +2,9 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
+import s from 'src/containers/Withdraw/Withdraw.postcss';
+import { useHistory } from 'react-router';
+import { createMoney } from 'src/helpers/money';
 import {
   ApiCurrency,
   depositsCreate,
@@ -11,9 +14,6 @@ import {
 import { Box } from '../Box';
 import { CustomInput } from '../CustomInput';
 import { DepositSummary } from './DepositSummary';
-import s from 'src/containers/Withdraw/Withdraw.postcss';
-import { useHistory } from 'react-router';
-import { createMoney } from 'src/helpers/money';
 
 interface Props {
   currency: ApiCurrency;

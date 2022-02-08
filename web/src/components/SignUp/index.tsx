@@ -4,7 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { CustomInput, PasswordStrengthMeter } from '../';
+import { CustomInput, PasswordStrengthMeter } from '..';
 import { isUsernameEnabled } from '../../api';
 import { captchaType, passwordMinEntropy } from '../../api/config';
 import {
@@ -360,9 +360,7 @@ const SignUpFormComponent: React.FC<SignUpFormProps> = ({
               autoFocus={false}
               labelVisible={confirmPasswordFocused}
             />
-            {confirmationError && (
-              <div className={'cr-sign-up-form__error'}>{confirmationError}</div>
-            )}
+            {confirmationError && <div className="cr-sign-up-form__error">{confirmationError}</div>}
           </div>
           <div
             className={cr('cr-sign-up-form__group', {
@@ -389,20 +387,20 @@ const SignUpFormComponent: React.FC<SignUpFormProps> = ({
               custom
               id="agreeWithTerms"
               checked={hasConfirmed}
-              label={termsMessage ? termsMessage : 'I  agree all statements in terms of service'}
+              label={termsMessage || 'I  agree all statements in terms of service'}
             />
           </Form>
           {renderCaptcha}
           <div className="cr-sign-up-form__button-wrapper">
             <Button
-              block={true}
+              block
               type="button"
               disabled={disableButton}
               onClick={(e) => handleClick(e as any)}
               size="lg"
               variant="primary"
             >
-              {isLoading ? 'Loading...' : labelSignUp ? labelSignUp : 'Sign up'}
+              {isLoading ? 'Loading...' : labelSignUp || 'Sign up'}
             </Button>
           </div>
           {isMobileDevice && renderLogIn()}

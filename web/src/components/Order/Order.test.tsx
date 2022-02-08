@@ -1,8 +1,8 @@
 import { Button } from 'react-bootstrap';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
-import { Order, OrderComponentProps } from './';
 import { TestComponentWrapper } from 'src/lib/test/wrapper';
 import { DEFAULT_ORDER_TYPES } from 'src/helpers/order';
+import { Order, OrderComponentProps } from '.';
 
 // tslint:disable:no-magic-numbers
 

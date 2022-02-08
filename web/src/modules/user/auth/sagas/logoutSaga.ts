@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
-import { sendError } from '../../../';
+import { sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { signInRequire2FA } from '../../auth';
+import { signInRequire2FA } from '..';
 import { resetHistory } from '../../history';
 import { userOpenOrdersReset } from '../../openOrders';
 import { userReset } from '../../profile';

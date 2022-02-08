@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { CustomInput } from '../../../components/CustomInput';
-import { MobileModal } from '../../components/Modal';
+import { MobileModal } from '../Modal';
 
 export const TwoFactorModalComponent = (props: {
   handleToggle2FA: (arg0: string, arg1: boolean) => void;
@@ -39,7 +39,7 @@ export const TwoFactorModalComponent = (props: {
             inputValue={code2FA}
             classNameLabel="cr-email-form__label"
             classNameInput="cr-email-form__input"
-            autoFocus={true}
+            autoFocus
             labelVisible={code2FAFocus}
           />
         </div>
@@ -53,7 +53,7 @@ export const TwoFactorModalComponent = (props: {
     return (
       <div className="pg-exchange-modal-submit-footer">
         <Button
-          block={true}
+          block
           disabled={!isValid2FA}
           onClick={() => handleToggle2FA(true)}
           size="lg"

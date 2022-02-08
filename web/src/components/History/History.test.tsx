@@ -1,6 +1,6 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import { History, HistoryProps } from '.';
-import { CellData } from '../';
+import { CellData } from '..';
 
 const data: CellData[][] = [
   ['10:40', 'Market', 'BTC/USDT', 'Buy', '9.400,0', '0, 4005', '3.459'],

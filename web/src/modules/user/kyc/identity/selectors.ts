@@ -1,4 +1,4 @@
-import { RootState } from '../../../';
+import { RootState } from '../../..';
 import { IdentityState } from './reducer';
 
 export const selectEditIdentitySuccess = (state: RootState): IdentityState['edit']['success'] =>

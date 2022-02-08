@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
-import { TextInputProps } from './TextInput';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Box } from 'src/components/Box/Box';
+import { TextInputProps } from './TextInput';
 import s from './MoneyInput.postcss';
 
 interface Props extends TextInputProps {

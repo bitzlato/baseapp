@@ -1,4 +1,4 @@
-import { RootState } from '../../../modules';
+import { RootState } from '../..';
 import { ColorThemeState } from './reducer';
 
 export const selectCurrentColorTheme = (state: RootState): ColorThemeState['color'] =>

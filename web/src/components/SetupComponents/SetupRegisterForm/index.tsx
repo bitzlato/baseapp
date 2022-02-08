@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { SetupFormInput } from '../';
-import { PasswordStrengthMeter } from '../../';
 import { Button } from 'react-bootstrap';
-import { EMAIL_REGEX } from 'src/helpers';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import { passwordMinEntropy } from '../../../api/config';
-import { IntlProps } from 'src/types';
-import { compose } from 'redux';
-import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import { RootState, selectCurrentPasswordEntropy, entropyPasswordFetch } from '../../../modules';
 import {
+  EMAIL_REGEX,
   passwordErrorFirstSolution,
   passwordErrorSecondSolution,
   passwordErrorThirdSolution,
-} from '../../../helpers';
+} from 'src/helpers';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import { IntlProps } from 'src/types';
+import { compose } from 'redux';
+import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+import { passwordMinEntropy } from '../../../api/config';
+import { PasswordStrengthMeter } from '../..';
+import { SetupFormInput } from '..';
+import { RootState, selectCurrentPasswordEntropy, entropyPasswordFetch } from '../../../modules';
 
 export interface SetupRegisterFormProps {
   handleRegister: (email: string, password: string) => void;
@@ -74,7 +74,7 @@ class SetupRegister extends React.Component<Props, SetupRegisterFormState> {
     const isConfirmPasswordValid = password === confirmPassword;
 
     return (
-      <React.Fragment>
+      <>
         <form className="setup-register-form" autoComplete="off">
           <SetupFormInput label="Email" value={email} handleChangeInput={this.handleChangeEmail} />
           {email && !isEmailValid ? (
@@ -108,7 +108,7 @@ class SetupRegister extends React.Component<Props, SetupRegisterFormState> {
             handleChangeInput={this.handleChangeConfirmPassword}
           />
           {confirmPassword && !isConfirmPasswordValid ? (
-            <div className={'cr-sign-up-form__error'}>
+            <div className="cr-sign-up-form__error">
               <FormattedMessage id="page.header.signUp.confirmPassword.message.error" />
             </div>
           ) : null}
@@ -122,13 +122,13 @@ class SetupRegister extends React.Component<Props, SetupRegisterFormState> {
                 checked={agreementConfirmed}
                 onChange={() => this.handleToggleConfirmAgreement()}
               />
-              <span className="checkmark"></span>
+              <span className="checkmark" />
             </label>
           </div>
         </div>
         <div className="setup-screen__button">
           <Button
-            block={true}
+            block
             type="button"
             size="lg"
             variant="primary"
@@ -138,7 +138,7 @@ class SetupRegister extends React.Component<Props, SetupRegisterFormState> {
             Next
           </Button>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 

@@ -40,7 +40,7 @@ export function useFetch<T>(
       dispatch({ ...INITIAL, deps });
     }
     if (!options?.skipRequest) {
-      let controller: AbortController | undefined = new AbortController();
+      const controller: AbortController | undefined = new AbortController();
       (async () => {
         dispatch({ isLoading: true });
         try {

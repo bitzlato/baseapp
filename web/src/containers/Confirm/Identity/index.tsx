@@ -9,9 +9,10 @@ import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { IntlProps } from 'src/types';
+import { Select } from 'src/components/Select/Select';
+import * as countries from 'i18n-iso-countries';
 import { languages } from '../../../api/config';
 import { CustomInput } from '../../../components';
-import { Select } from 'src/components/Select/Select';
 import { formatDate, isDateInFuture } from '../../../helpers';
 import {
   editIdentity,
@@ -28,8 +29,6 @@ import {
   User,
 } from '../../../modules';
 import { IdentityData } from '../../../modules/user/kyc/identity/types';
-
-import * as countries from 'i18n-iso-countries';
 
 interface ReduxProps {
   editSuccess?: string | undefined;
@@ -178,9 +177,9 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                   firstNameFocused ? '' : this.translate('page.body.kyc.identity.firstName')
                 }
                 handleChangeInput={(e) => this.handleChange(e, 'firstName')}
-                autoFocus={true}
+                autoFocus
                 label={this.translate('page.body.kyc.identity.firstName')}
-                defaultLabel={''}
+                defaultLabel=""
                 handleFocusInput={this.handleFieldFocus('firstName')}
                 labelVisible={firstNameFocused}
               />
@@ -196,7 +195,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                   lastNameFocused ? '' : this.translate('page.body.kyc.identity.lastName')
                 }
                 label={this.translate('page.body.kyc.identity.lastName')}
-                defaultLabel={''}
+                defaultLabel=""
                 handleFocusInput={this.handleFieldFocus('lastName')}
                 labelVisible={lastNameFocused}
               />
@@ -246,7 +245,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                     : this.translate('page.body.kyc.identity.residentialAddress')
                 }
                 label={this.translate('page.body.kyc.identity.residentialAddress')}
-                defaultLabel={''}
+                defaultLabel=""
                 handleChangeInput={(e) => this.handleChange(e, 'residentialAddress')}
                 handleFocusInput={this.handleFieldFocus('residentialAddress')}
                 labelVisible={residentialAddressFocused}
@@ -263,7 +262,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                 handleChangeInput={(e) => this.handleChange(e, 'city')}
                 placeholder={cityFocused ? '' : this.translate('page.body.kyc.identity.city')}
                 label={this.translate('page.body.kyc.identity.city')}
-                defaultLabel={''}
+                defaultLabel=""
                 handleFocusInput={this.handleFieldFocus('city')}
                 labelVisible={cityFocused}
               />
@@ -300,7 +299,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
             size="lg"
             variant="primary"
             type="submit"
-            block={true}
+            block
           >
             {loading ? (
               <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />

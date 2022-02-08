@@ -4,9 +4,13 @@ import { v4 } from 'uuid';
 import { Spinner } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { IntlProps } from 'src/types';
+import { isWsApiEnabled } from 'src/api/config';
+import { BZ_ORDER_TYPES, isMarket, isTriggerByPrice } from 'src/helpers/order';
+import { loginWithRedirect } from 'src/helpers/auth0';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { TRIGGER_BUY_PRICE_MULT } from '../../constants';
 import { Order, OrderProps, LockedComponent } from '../../components';
-import { IntlProps } from 'src/types';
 import {
   alertPush,
   MemberLevels,
@@ -32,10 +36,6 @@ import {
   OrderExecution,
   selectOrderExecuteLoading,
 } from '../../modules/user/orders';
-import { isWsApiEnabled } from 'src/api/config';
-import { BZ_ORDER_TYPES, isMarket, isTriggerByPrice } from 'src/helpers/order';
-import { loginWithRedirect } from 'src/helpers/auth0';
-import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 interface ReduxProps {
   currentMarket: Market;
@@ -158,43 +158,43 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
           onClick={loginWithRedirect}
         />
       );
-    } else if (!allowed) {
+    }
+    if (!allowed) {
       return (
         <LockedComponent
           text={this.translate('page.body.trade.header.newOrder.locked.minLevel.text')}
-          link={'/profile'}
+          link="/profile"
           buttonText={this.translate('page.body.trade.header.newOrder.locked.minLevel.buttonText')}
         />
       );
-    } else {
-      return (
-        <Order
-          asks={asks}
-          bids={bids}
-          disabled={executeLoading}
-          from={currentMarket.quote_unit}
-          availableBase={this.getAvailableValue(walletBase)}
-          availableQuote={this.getAvailableValue(walletQuote)}
-          onSubmit={this.handleSubmit}
-          priceMarketBuy={Number((currentTicker || defaultCurrentTicker).last)}
-          priceMarketSell={Number((currentTicker || defaultCurrentTicker).last)}
-          priceLimit={priceLimit ?? undefined}
-          trigger={trigger ?? undefined}
-          to={currentMarket.base_unit}
-          handleSendType={this.getOrderType}
-          currentMarketAskPrecision={currentMarket.amount_precision}
-          currentMarketBidPrecision={currentMarket.price_precision}
-          minAmount={currentMarket.min_amount}
-          orderTypes={BZ_ORDER_TYPES}
-          width={this.state.width}
-          listenInputPrice={this.listenInputPrice}
-          listenInputTrigger={this.listenInputTrigger}
-          defaultTabIndex={defaultTabIndex}
-          isMobileDevice={isMobileDevice}
-          translate={this.translate}
-        />
-      );
     }
+    return (
+      <Order
+        asks={asks}
+        bids={bids}
+        disabled={executeLoading}
+        from={currentMarket.quote_unit}
+        availableBase={this.getAvailableValue(walletBase)}
+        availableQuote={this.getAvailableValue(walletQuote)}
+        onSubmit={this.handleSubmit}
+        priceMarketBuy={Number((currentTicker || defaultCurrentTicker).last)}
+        priceMarketSell={Number((currentTicker || defaultCurrentTicker).last)}
+        priceLimit={priceLimit ?? undefined}
+        trigger={trigger ?? undefined}
+        to={currentMarket.base_unit}
+        handleSendType={this.getOrderType}
+        currentMarketAskPrecision={currentMarket.amount_precision}
+        currentMarketBidPrecision={currentMarket.price_precision}
+        minAmount={currentMarket.min_amount}
+        orderTypes={BZ_ORDER_TYPES}
+        width={this.state.width}
+        listenInputPrice={this.listenInputPrice}
+        listenInputTrigger={this.listenInputTrigger}
+        defaultTabIndex={defaultTabIndex}
+        isMobileDevice={isMobileDevice}
+        translate={this.translate}
+      />
+    );
   };
 
   public render() {
@@ -205,7 +205,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     }
 
     return (
-      <div className={'pg-order'} ref={this.orderRef}>
+      <div className="pg-order" ref={this.orderRef}>
         <div className="cr-table-header__content">
           <div className="cr-title-component">
             {this.translate('page.body.trade.header.newOrder')}

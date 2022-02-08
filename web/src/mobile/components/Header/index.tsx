@@ -18,7 +18,7 @@ const HeaderComponent: React.FC = () => {
   const shouldRenderHeader = !noHeaderRoutes.some((r) => location.pathname.includes(r));
 
   if (!shouldRenderHeader) {
-    return <React.Fragment />;
+    return <></>;
   }
 
   return (

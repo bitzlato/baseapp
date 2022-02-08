@@ -14,7 +14,7 @@ export function getCurrencies(markets: Market[], from: string, to: string): Swap
   const toList: string[] = [];
   let recommendTo: string | undefined;
 
-  for (let m of markets) {
+  for (const m of markets) {
     const sell = m.base_unit === from && m.quote_unit === to;
     if (sell || (m.base_unit === to && m.quote_unit === from)) {
       market = m;

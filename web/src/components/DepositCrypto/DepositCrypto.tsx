@@ -4,6 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isMetaMaskInstalled } from '@bitzlato/ethereum-provider';
 
 import { useT } from 'src/hooks/useT';
+import { Box } from 'src/components/Box';
+import { CopyableTextField } from 'src/components/CopyableTextField';
+import { Select } from 'src/components/Select/Select';
+import { MetaMaskButton } from 'src/components/MetaMaskButton';
+import { QRCode } from 'src/components/QRCode';
+import { Blur } from 'src/components/Blur';
+import { useFetchCache } from 'src/hooks/useFetchCache';
+import { tradeUrl } from 'src/api/config';
+import { Blockchain } from 'src/modules/public/blockchains/types';
+import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
+import s from 'src/containers/Withdraw/BeneficiaryAddress.postcss';
+import { BlockchainIcon2 } from '../BlockchainIcon/BlockchainIcon2';
+import { DepositSummary } from './DepositSummary';
 import {
   alertPush,
   DepositAddress,
@@ -12,19 +25,6 @@ import {
   selectUserInfo,
   Wallet,
 } from '../../modules';
-import { Box } from 'src/components/Box';
-import { CopyableTextField } from 'src/components/CopyableTextField';
-import { Select } from 'src/components/Select/Select';
-import { MetaMaskButton } from 'src/components/MetaMaskButton';
-import { QRCode } from 'src/components/QRCode';
-import { Blur } from 'src/components/Blur';
-import { DepositSummary } from './DepositSummary';
-import { useFetchCache } from 'src/hooks/useFetchCache';
-import { tradeUrl } from 'src/api/config';
-import { Blockchain } from 'src/modules/public/blockchains/types';
-import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
-import { BlockchainIcon2 } from '../BlockchainIcon/BlockchainIcon2';
-import s from 'src/containers/Withdraw/BeneficiaryAddress.postcss';
 
 interface Props {
   wallet: Wallet;

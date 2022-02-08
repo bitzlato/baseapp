@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { RANGER_DIRECT_WRITE } from 'src/modules/public/ranger/constants';
 import { OrderCommon } from 'web/src/modules/types';
-import { alertPush, sendError } from '../../../';
+import { alertPush, sendError } from '../../..';
 import { API, isFinexEnabled, isWsApiEnabled, RequestOptions } from '../../../../api';
 import { getCsrfToken, getOrderAPI } from '../../../../helpers';
 import { userOpenOrdersAppend } from '../../openOrders';
@@ -23,8 +23,8 @@ export function* ordersExecuteSaga(action: OrderExecuteFetch) {
       const { market, side, volume, price, ord_type, trigger_price } = action.payload;
       const params = isFinexEnabled()
         ? {
-            market: market,
-            side: side,
+            market,
+            side,
             amount: volume,
             ...(typeof price !== 'undefined' && { price }),
             ...(typeof trigger_price !== 'undefined' && { trigger_price }),
@@ -42,10 +42,8 @@ export function* ordersExecuteSaga(action: OrderExecuteFetch) {
         if ((order as any).type !== 'market') {
           yield put(userOpenOrdersAppend(order));
         }
-      } else {
-        if (order.ord_type !== 'market') {
-          yield put(userOpenOrdersAppend(order));
-        }
+      } else if (order.ord_type !== 'market') {
+        yield put(userOpenOrdersAppend(order));
       }
 
       yield put(alertPush({ message: ['success.order.created'], type: 'success' }));

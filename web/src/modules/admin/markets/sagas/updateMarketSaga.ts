@@ -3,7 +3,7 @@ import { API, RequestOptions } from '../../../../api';
 import { getCsrfToken } from '../../../../helpers';
 import { alertPush } from '../../../public/alert';
 import { updateMarketError, updateMarketData, MarketUpdateFetch } from '../actions';
-import { sendError } from '../../../';
+import { sendError } from '../../..';
 
 const enableMarketsConfig = (csrfToken?: string): RequestOptions => {
   return {

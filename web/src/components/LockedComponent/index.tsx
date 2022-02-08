@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box } from '../Box';
-import { Label } from '../Label';
-import { Button } from '../Button/Button';
 import { LockedIcon } from 'src/assets/images/LockedIcon';
 import { useSelector } from 'react-redux';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
+import { Box } from '../Box';
+import { Label } from '../Label';
+import { Button } from '../Button/Button';
 
 interface Props {
   text: string;

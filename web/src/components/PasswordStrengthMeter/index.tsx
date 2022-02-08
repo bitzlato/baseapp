@@ -19,7 +19,7 @@ const renderPasswordStrengthMeter = (passwordStrengthMeterLength: number) => (
       className={`pg-password-strength-meter__block ${passwordStrengthClassName(
         passwordStrengthMeterLength,
       )}`}
-    ></div>
+    />
   </div>
 );
 

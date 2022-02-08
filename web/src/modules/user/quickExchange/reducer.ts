@@ -1,4 +1,4 @@
-import { CommonError } from '../../../modules/types';
+import { CommonError } from '../../types';
 import { CreateQuickExchangeActions } from './actions';
 import {
   CREATE_QUICK_ORDER_FETCH,

@@ -70,7 +70,7 @@ describe('UserActivity reducer', () => {
       list: [],
       page: 0,
       total: 0,
-      error: error,
+      error,
     };
     expect(userActivityReducer(initialUserActivityState, actions.userActivityError(error))).toEqual(
       expectedState,

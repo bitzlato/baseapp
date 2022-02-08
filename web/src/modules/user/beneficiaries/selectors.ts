@@ -1,5 +1,5 @@
-import { RootState } from '../../../modules';
-import { CommonError } from '../../../modules/types';
+import { RootState } from '../..';
+import { CommonError } from '../../types';
 import { Beneficiary } from './types';
 
 /* Beneficiaries fetch */
