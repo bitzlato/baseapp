@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { configUpdateReducer } from './admin/config';
 import { alertReducer } from './public/alert';
 import { blocklistAccessReducer } from './public/blocklistAccess';
 import { currenciesReducer } from './public/currencies';
@@ -38,8 +37,6 @@ import { profileReducer } from './user/profile';
 import { userActivityReducer } from './user/userActivity';
 import { walletsReducer } from './user/wallets';
 import { withdrawLimitReducer } from './user/withdrawLimit';
-import { marketsAdminReducer } from './admin/markets';
-import { platformCreateReducer } from './admin/platform';
 import { quickExchangeReducer } from './user/quickExchange';
 import { quickExchangePublicReducer } from './public/quickExchangePublic/reducer';
 
@@ -87,10 +84,4 @@ export const userReducer = combineReducers({
   quickExchange: quickExchangeReducer,
   abilities: abilitiesReducer,
   depositIntentionState: depositIntentionReducer,
-});
-
-export const adminReducer = combineReducers({
-  configUpdate: configUpdateReducer,
-  markets: marketsAdminReducer,
-  platform: platformCreateReducer,
 });

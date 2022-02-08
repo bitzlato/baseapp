@@ -16,5 +16,3 @@ export * from './RestrictedScreen';
 export * from './MaintenanceScreen';
 export * from './InternalTransfer';
 export * from './QuickExchange';
-
-export * from './SetupScreen';
