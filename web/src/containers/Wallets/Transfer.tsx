@@ -115,8 +115,10 @@ export const Transfer: React.FC<Props> = ({
       : from === 'p2p'
       ? createMoney(balanceP2P, currency)
       : createMoney(0, currency);
+
   const m = createMoney(amount, currency);
-  const disable = m.isZero() || m.greaterThan(available);
+  const disablePercents = !from || !to || available.isZero();
+  const disableTransfer = disablePercents || m.isZero() || m.greaterThan(available);
 
   return (
     <>
@@ -166,6 +168,7 @@ export const Transfer: React.FC<Props> = ({
               {PERCENTS.map((v) => (
                 <BootstrapButton
                   key={v}
+                  disabled={disablePercents}
                   variant="secondary"
                   className={sQuickExchange.quickExchangeAll}
                   onClick={() => handleUsePercent(v)}
@@ -181,7 +184,7 @@ export const Transfer: React.FC<Props> = ({
             <span>{t('Free')}</span>
           </SummaryField>
           <Box flex1 self="end" row justify="end">
-            <Button variant="primary" onClick={handleTransfer} disabled={disable}>
+            <Button variant="primary" onClick={handleTransfer} disabled={disableTransfer}>
               {t('Transfer.verb')}
             </Button>
           </Box>

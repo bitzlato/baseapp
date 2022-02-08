@@ -221,9 +221,10 @@ export const QuickExchangeContainer: React.FC = () => {
       </Box>
     );
   };
-  const isMobileDevice = useSelector(selectMobileDeviceState);
+  const isMobileDevice= useSelector(selectMobileDeviceState);
   const noAmount = createMoney(requestVolume, DEFAULT_CURRENCY).isZero();
-  const noMarket = !market && fromCurrency && toCurrency;
+  const noMarket = !market && !!fromCurrency && !!toCurrency;
+  const disablePercents = noMarket || !!fromWallet?.balance.isZero();
 
   const minAmount = market
     ? createMoney(market.min_amount, market.base_unit === fromCurrency ? fromCcy! : toCcy!)
@@ -288,6 +289,7 @@ export const QuickExchangeContainer: React.FC = () => {
                 <Button
                   key={v}
                   variant="secondary"
+                  disabled={disablePercents}
                   className={s.quickExchangeAll}
                   onClick={() => handleUsePercent(v)}
                 >
