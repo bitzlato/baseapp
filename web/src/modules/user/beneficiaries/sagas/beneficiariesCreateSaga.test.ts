@@ -52,7 +52,7 @@ describe('Beneficiaries Create', () => {
     };
 
     const mockBeneficiariesCreate = () => {
-      mockAxios.onPost('/account/beneficiaries').reply(200, fakeSuccessPayload);
+      mockAxios.onPost('/account/beneficiaries/').reply(200, fakeSuccessPayload);
     };
 
     const error: CommonError = {
