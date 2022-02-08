@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { Wallet } from 'src/modules/user/wallets/types';
+import { createMoney } from 'src/helpers/money';
 import { CryptoIcon } from '../../../components/CryptoIcon';
 import { areEqualSelectedProps } from '../../../helpers/areEqualSelectedProps';
-import { createMoney } from 'src/helpers/money';
 
 interface Props {
   wallet: Wallet;

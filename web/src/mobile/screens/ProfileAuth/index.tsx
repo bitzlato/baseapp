@@ -35,7 +35,7 @@ export const ProfileAuthMobileScreen: React.FC = React.memo(() => {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <Subheader
         title={intl.formatMessage({ id: 'page.profile.kyc.title' })}
         backTitle={intl.formatMessage({ id: 'page.body.profile.header.account' })}
@@ -50,6 +50,6 @@ export const ProfileAuthMobileScreen: React.FC = React.memo(() => {
         </div>
         <TwoFactorModal showModal={showModal} handleToggle2FA={handleToggle2FA} />
       </div>
-    </React.Fragment>
+    </>
   );
 });

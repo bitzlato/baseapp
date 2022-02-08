@@ -1,13 +1,13 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import { connect, MapStateToProps } from 'react-redux';
+import searchIcon from 'src/containers/ToolBar/icons/search.svg';
 import {
   Market,
   RootState,
   selectCurrentMarket,
   selectMarketSelectorState,
 } from '../../../modules';
-import searchIcon from 'src/containers/ToolBar/icons/search.svg';
 import { MarketsList } from './MarketsList';
 import { MarketsTabs } from './MarketsTabs';
 
@@ -45,7 +45,7 @@ class MarketSelectorComponent extends React.Component<ReduxProps, State> {
         <div className={listClassName}>
           <MarketsTabs onSelect={this.marketsTabsSelectHandler} />
           <MarketsList search={searchFieldValue} currencyQuote={marketsTabsSelectedValue} />
-          <div className={'pg-trading-header-selector-search-wrapper'}>
+          <div className="pg-trading-header-selector-search-wrapper">
             <div className={searchSelectorClassName}>
               <div className="pg-trading-header-selector-search-icon">
                 <img alt="" src={searchIcon} />

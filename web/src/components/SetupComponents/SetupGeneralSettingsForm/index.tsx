@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { SetupFormInput } from '../';
 import { Button } from 'react-bootstrap';
+import { SetupFormInput } from '..';
 import { DOMAIN_REGEX, EXCHANGE_NAME_REGEX } from '../../../helpers';
 
 export interface SetupGeneralSettingsFormProps {
@@ -31,7 +31,7 @@ export class SetupGeneralSettingsForm extends React.Component<
     const validExchangeName = exchangeName && !!exchangeName.match(EXCHANGE_NAME_REGEX);
 
     return (
-      <React.Fragment>
+      <>
         <form className="setup-general-settings-form">
           <SetupFormInput
             label="Exchange Name"
@@ -48,7 +48,7 @@ export class SetupGeneralSettingsForm extends React.Component<
         </form>
         <div className="setup-screen__button">
           <Button
-            block={true}
+            block
             type="button"
             size="lg"
             variant="primary"
@@ -58,7 +58,7 @@ export class SetupGeneralSettingsForm extends React.Component<
             Next
           </Button>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 

@@ -78,7 +78,7 @@ const UploadFileComponent: React.FC<Props> = ({
             accept={accept}
             className="pg-upload-file__content__form__input"
             data-multiple-caption="files selected"
-            draggable={true}
+            draggable
             multiple={false}
             name="files[]"
             type="file"
@@ -98,7 +98,7 @@ const UploadFileComponent: React.FC<Props> = ({
                 </span>
               ) : null}
               <span className="pg-upload-file__content__form__error__text">
-                {fileSizeErrorMessage ? fileSizeErrorMessage : ''}
+                {fileSizeErrorMessage || ''}
               </span>
               {sizesText ? (
                 <span className="pg-upload-file__content__form__info__text">{sizesText}</span>

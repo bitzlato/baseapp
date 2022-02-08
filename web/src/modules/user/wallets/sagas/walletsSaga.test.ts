@@ -242,7 +242,7 @@ describe('Module: Wallets', () => {
     }),
   ];
 
-  xit('should fetch wallets in success flow', async () => {
+  it.skip('should fetch wallets in success flow', async () => {
     mockWallets();
     const promise = new Promise<void>((resolve) => {
       store.subscribe(() => {

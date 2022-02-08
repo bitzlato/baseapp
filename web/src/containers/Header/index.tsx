@@ -52,33 +52,31 @@ class Head extends React.Component<Props> {
     const shouldRenderHeader = !noHeaderRoutes.some((r) => location.pathname.includes(r));
 
     if (!shouldRenderHeader) {
-      return <React.Fragment />;
+      return <></>;
     }
 
     return (
-      <>
-        <header className={`pg-header ${s.header}`}>
-          <div className={`pg-container pg-header__content ${tradingCls} ${s.headerContent}`}>
-            <Sidebar />
-            <div onClick={() => this.redirectToLanding()} className="pg-header__logo">
-              <Logo />
-            </div>
-            {this.renderMarketToggler()}
-            <div className="pg-header__location">
-              {mobileWallet ? (
-                <span>{mobileWallet}</span>
-              ) : (
-                <span>{location.pathname.split('/')[1]}</span>
-              )}
-            </div>
-            {this.renderMobileWalletNav()}
-            <div className="pg-header__navbar">
-              {this.renderMarketToolbar()}
-              <NavBar responsiveMode={isTradingPage} />
-            </div>
+      <header className={`pg-header ${s.header}`}>
+        <div className={`pg-container pg-header__content ${tradingCls} ${s.headerContent}`}>
+          <Sidebar />
+          <div onClick={() => this.redirectToLanding()} className="pg-header__logo">
+            <Logo />
           </div>
-        </header>
-      </>
+          {this.renderMarketToggler()}
+          <div className="pg-header__location">
+            {mobileWallet ? (
+              <span>{mobileWallet}</span>
+            ) : (
+              <span>{location.pathname.split('/')[1]}</span>
+            )}
+          </div>
+          {this.renderMobileWalletNav()}
+          <div className="pg-header__navbar">
+            {this.renderMarketToolbar()}
+            <NavBar responsiveMode={isTradingPage} />
+          </div>
+        </div>
+      </header>
     );
   }
 

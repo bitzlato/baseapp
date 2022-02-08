@@ -1,7 +1,7 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
-import { CellData } from '../../components/Table';
-import { mapValues, OrderBook, OrderBookProps } from './';
+import { CellData } from '../Table';
+import { mapValues, OrderBook, OrderBookProps } from '.';
 
 const data: CellData[][] = [
   ['12349', '14', '12'],
@@ -12,7 +12,7 @@ const data: CellData[][] = [
 ];
 
 const defaultProps: OrderBookProps = {
-  data: data,
+  data,
   headers: ['Total', 'Amount', 'Price'],
   title: 'Bids',
   onSelect: jest.fn(),

@@ -41,13 +41,14 @@ const resolutionToSeconds = (r: string): number => {
   const minutes = parseInt(r, 10);
   if (r === '1D') {
     return 1440;
-  } else if (r === 'D') {
-    return 4320;
-  } else if (!isNaN(minutes)) {
-    return minutes;
-  } else {
-    return 1;
   }
+  if (r === 'D') {
+    return 4320;
+  }
+  if (!isNaN(minutes)) {
+    return minutes;
+  }
+  return 1;
 };
 
 const config = {
@@ -114,7 +115,7 @@ export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Mar
         timezone: 'Etc/UTC',
         ticker: symbol.id,
         minmov: 1,
-        pricescale: Math.pow(10, symbol.price_precision),
+        pricescale: 10 ** symbol.price_precision,
         has_intraday: true,
         intraday_multipliers: ['1', '5', '15', '30', '60', '120', '240', '360', '720', 'd', '3d'],
         supported_resolutions: ['1', '5', '15', '30', '60', '120', '240', '360', '720', 'd', '3d'],

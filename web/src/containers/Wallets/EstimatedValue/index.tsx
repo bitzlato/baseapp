@@ -6,6 +6,8 @@ import {
   useRangerConnectFetch,
   useWalletsFetch,
 } from 'src/hooks';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { useT } from 'src/hooks/useT';
 import {
   valuationPrimaryCurrency,
   valuationPrimaryCurrencyName,
@@ -14,8 +16,6 @@ import {
 } from '../../../api';
 import { estimateUnitValue, estimateValue } from '../../../helpers/estimateValue';
 import { selectCurrencies, selectMarkets, selectMarketTickers, Wallet } from '../../../modules';
-import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { useT } from 'src/hooks/useT';
 
 interface EstimatedValueProps {
   wallets: Wallet[];
@@ -38,7 +38,7 @@ const EstimatedValue: React.FC<Props> = (props: Props): React.ReactElement => {
 
   const renderSecondaryCurrencyValuation = React.useCallback(
     (total: string) => {
-      let value = estimateUnitValue(
+      const value = estimateUnitValue(
         valuationSecondaryCurrency(),
         valuationPrimaryCurrency(),
         +total,
@@ -62,7 +62,7 @@ const EstimatedValue: React.FC<Props> = (props: Props): React.ReactElement => {
   const primaryName = valuationPrimaryCurrencyName().toUpperCase();
 
   const estimatedValue = React.useMemo(() => {
-    let value = estimateValue(valuationPrimaryCurrency(), currencies, wallets, markets, tickers);
+    const value = estimateValue(valuationPrimaryCurrency(), currencies, wallets, markets, tickers);
     if (primaryName === 'USD') {
       value.currency.minorUnit = 2;
     }

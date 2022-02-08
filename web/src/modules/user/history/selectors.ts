@@ -1,4 +1,4 @@
-import { RootState } from '../../';
+import { RootState } from '../..';
 import { WalletHistoryList } from './types';
 
 export const selectHistory = (state: RootState): WalletHistoryList => state.user.history.list;

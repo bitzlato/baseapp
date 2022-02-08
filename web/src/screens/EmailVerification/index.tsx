@@ -5,8 +5,8 @@ import { injectIntl } from 'react-intl';
 import { connect, MapStateToProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { captchaType } from '../../api/config';
 import { IntlProps } from 'src/types';
+import { captchaType } from '../../api/config';
 import { Captcha } from '../../components';
 import { EMAIL_REGEX, setDocumentTitle } from '../../helpers';
 import {
@@ -102,13 +102,7 @@ class EmailVerificationComponent extends React.Component<Props> {
             )}
             {isMobileDevice && (
               <div className="pg-emailverification-body-container">
-                <Button
-                  block={true}
-                  type="button"
-                  onClick={this.handleClick}
-                  size="lg"
-                  variant="primary"
-                >
+                <Button block type="button" onClick={this.handleClick} size="lg" variant="primary">
                   {this.props.intl.formatMessage({ id: 'page.mobile.reset.header' })}
                 </Button>
               </div>

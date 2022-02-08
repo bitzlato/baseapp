@@ -122,5 +122,5 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (
   abilities: selectAbilities(state),
 });
 
-//tslint:disable-next-line:no-any
+// tslint:disable-next-line:no-any
 export const CanCan = connect(mapStateToProps, null)(CanCanService as any) as any;

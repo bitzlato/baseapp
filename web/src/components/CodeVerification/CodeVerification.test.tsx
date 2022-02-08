@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import { CodeVerification, CodeVerificationProps } from '../';
+import { CodeVerification, CodeVerificationProps } from '..';
 
 const defaultProps: CodeVerificationProps = {
   placeholder: '',

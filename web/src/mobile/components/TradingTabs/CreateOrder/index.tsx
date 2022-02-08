@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { Box } from 'src/components/Box';
-import { OpenOrders } from '../../';
+import { OpenOrders } from '../..';
 import { OrderBook, OrderComponent } from '../../../../containers';
 import { selectUserLoggedIn } from '../../../../modules';
 

@@ -4,8 +4,8 @@ import { selectCurrentMarket, selectMarketTickers, RootState } from 'src/modules
 import { useT } from 'src/hooks/useT';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import cn from 'classnames';
-import { HeaderToolbarItem } from './HeaderToolbarItem';
 import { createMoney } from 'src/helpers/money';
+import { HeaderToolbarItem } from './HeaderToolbarItem';
 
 import s from './HeaderToolbar.postcss';
 

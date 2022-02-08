@@ -19,9 +19,8 @@ export const handleIncrementalUpdate = (
       }
 
       return sortBids(data);
-    } else {
-      return depthOld;
     }
+    return depthOld;
   }
 
   const result = [...depthOld];

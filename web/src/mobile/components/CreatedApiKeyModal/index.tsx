@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { CopyableTextField } from '../../../components';
 import { copy } from '../../../helpers';
 import { WarningIcon } from '../../assets/images/WarningIcon';
-import { MobileModal } from '../../components/Modal';
+import { MobileModal } from '../Modal';
 
 export const CreatedApiKeyModalComponent = (props: {
   apiKey: React.SetStateAction<{ kid: string; secret: string }>;
@@ -27,7 +27,7 @@ export const CreatedApiKeyModalComponent = (props: {
           <fieldset onClick={() => copy('access-key-id')}>
             <CopyableTextField
               className="pg-copyable-text-field__input"
-              fieldId={'access-key-id'}
+              fieldId="access-key-id"
               value={apiKey.kid || ''}
               label={intl.formatMessage({ id: 'page.body.profile.apiKeys.modal.access_key' })}
             />
@@ -37,7 +37,7 @@ export const CreatedApiKeyModalComponent = (props: {
           <fieldset onClick={() => copy('secret-key-id')}>
             <CopyableTextField
               className="pg-copyable-text-field__input"
-              fieldId={'secret_key-id'}
+              fieldId="secret_key-id"
               value={apiKey.secret || ''}
               label={intl.formatMessage({ id: 'page.body.profile.apiKeys.modal.secret_key' })}
             />
@@ -64,7 +64,7 @@ export const CreatedApiKeyModalComponent = (props: {
   const renderModalFooter = () => {
     return (
       <div className="cr-mobile-modal__footer">
-        <Button block={true} onClick={props.closeCreatedApiKeyModal} size="lg" variant="primary">
+        <Button block onClick={props.closeCreatedApiKeyModal} size="lg" variant="primary">
           {intl.formatMessage({ id: 'page.mobile.createdApiKeyModal.confirm' })}
         </Button>
       </div>

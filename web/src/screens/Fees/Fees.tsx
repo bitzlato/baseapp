@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { useFetchCache } from 'src/hooks/useFetchCache';
 import { useAlert } from 'src/hooks/useAlert';
-import { setDocumentTitle } from '../../helpers';
 import { Table } from 'src/components';
 import { currenciesFetch } from 'src/modules/public/currencies/actions';
 import { selectCurrencies } from 'src/modules/public/currencies/selectors';
@@ -17,6 +16,7 @@ import { TradingFees } from 'src/containers/Fees/TradingFees';
 import { Subheader } from 'src/mobile/components/Subheader';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { TradingFee } from 'src/modules/public/tradingFees/types';
+import { setDocumentTitle } from '../../helpers';
 import s from './Fees.postcss';
 
 export const FeesScreen: React.FC = () => {

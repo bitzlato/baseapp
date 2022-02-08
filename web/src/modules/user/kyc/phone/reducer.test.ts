@@ -45,7 +45,7 @@ describe('Phone reducer', () => {
     const expectedState = {
       ...initialPhoneState,
       codeSend: false,
-      error: error,
+      error,
     };
     expect(phoneReducer(initialPhoneState, actions.sendCodeError(error))).toEqual(expectedState);
   });
@@ -74,7 +74,7 @@ describe('Phone reducer', () => {
     const expectedState = {
       ...initialPhoneState,
       codeSend: false,
-      error: error,
+      error,
     };
     expect(phoneReducer(initialPhoneState, actions.resendCodeError(error))).toEqual(expectedState);
   });
@@ -101,7 +101,7 @@ describe('Phone reducer', () => {
     const expectedState = {
       ...initialPhoneState,
       codeSend: false,
-      error: error,
+      error,
       loading: false,
     };
     expect(phoneReducer(initialPhoneState, actions.verifyPhoneError(error))).toEqual(expectedState);

@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { alertPush, sendError } from '../../../';
+import { alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { getCsrfToken } from '../../../../helpers';
 import { toggle2faData, toggle2faError, Toggle2FAFetch, toggleUser2fa } from '../actions';
@@ -13,7 +13,7 @@ const enable2faOptions = (csrfToken?: string): RequestOptions => {
 
 export function* toggle2faSaga(action: Toggle2FAFetch) {
   try {
-    const enable = action.payload.enable;
+    const { enable } = action.payload;
     const code = { code: action.payload.code };
 
     yield call(

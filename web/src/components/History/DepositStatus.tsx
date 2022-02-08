@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Deposit } from 'src/modules/user/history/types';
 import { useT } from 'src/hooks/useT';
+import { join } from 'src/helpers/join';
 import { ExternalLink } from './ExternalLink';
 import { ConfirmingStatus } from './ConfirmingStatus';
 import { Label } from '../Label/Label';
-import { join } from 'src/helpers/join';
 
 interface Props {
   item: Deposit;

@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { CustomInput } from '../';
+import { CustomInput } from '..';
 import { captchaLogin } from '../../api';
 import { EMAIL_REGEX } from '../../helpers';
 import { GeetestCaptchaResponse } from '../../modules';
@@ -183,7 +183,7 @@ const SignIn: React.FC<SignInProps> = ({
           <div className="cr-sign-in-form__options-group">
             <div className="cr-sign-in-form__option">
               <div className="cr-sign-in-form__option-inner __selected">
-                {labelSignIn ? labelSignIn : 'Sign In'}
+                {labelSignIn || 'Sign In'}
               </div>
             </div>
             <div className="cr-sign-in-form__option">
@@ -191,7 +191,7 @@ const SignIn: React.FC<SignInProps> = ({
                 className="cr-sign-in-form__option-inner cr-sign-in-form__tab-signup"
                 onClick={onSignUp}
               >
-                {labelSignUp ? labelSignUp : 'Sign Up'}
+                {labelSignUp || 'Sign Up'}
               </div>
             </div>
           </div>
@@ -219,7 +219,7 @@ const SignIn: React.FC<SignInProps> = ({
               autoFocus={!isMobileDevice}
               labelVisible={emailFocused}
             />
-            {emailError && <div className={'cr-sign-in-form__error'}>{emailError}</div>}
+            {emailError && <div className="cr-sign-in-form__error">{emailError}</div>}
           </div>
           <div
             className={cr('cr-sign-in-form__group', {
@@ -238,20 +238,20 @@ const SignIn: React.FC<SignInProps> = ({
               autoFocus={false}
               labelVisible={passwordFocused}
             />
-            {passwordError && <div className={'cr-sign-in-form__error'}>{passwordError}</div>}
+            {passwordError && <div className="cr-sign-in-form__error">{passwordError}</div>}
           </div>
           {captchaLogin() && renderCaptcha}
           {isMobileDevice && renderForgotButton}
           <div className="cr-sign-in-form__button-wrapper">
             <Button
-              block={true}
+              block
               type="button"
               disabled={isLoading || !email.match(EMAIL_REGEX) || !password || isButtonDisabled}
               onClick={handleClick as any}
               size="lg"
               variant="primary"
             >
-              {isLoading ? 'Loading...' : labelSignIn ? labelSignIn : 'Sign in'}
+              {isLoading ? 'Loading...' : labelSignIn || 'Sign in'}
             </Button>
           </div>
           {!isMobileDevice && renderForgotButton}

@@ -5,8 +5,8 @@ import { Button } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { ProfileTwoFactorAuth } from '../';
 import { IntlProps } from 'src/types';
+import { ProfileTwoFactorAuth } from '..';
 import { isAuth0, isUsernameEnabled } from '../../api';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { ChangePassword, CustomInput, Modal } from '../../components';
@@ -160,14 +160,12 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 
   private renderProfileTwoFactor = () => {
     return (
-      <React.Fragment>
-        <div className="pg-profile-page__row">
-          <ProfileTwoFactorAuth
-            is2faEnabled={this.props.user.otp}
-            navigateTo2fa={this.handleNavigateTo2fa}
-          />
-        </div>
-      </React.Fragment>
+      <div className="pg-profile-page__row">
+        <ProfileTwoFactorAuth
+          is2faEnabled={this.props.user.otp}
+          navigateTo2fa={this.handleNavigateTo2fa}
+        />
+      </div>
     );
   };
 
@@ -206,7 +204,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             inputValue={code2FA}
             classNameLabel="cr-email-form__label"
             classNameInput="cr-email-form__input"
-            autoFocus={true}
+            autoFocus
           />
         </div>
       </div>
@@ -220,7 +218,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     return (
       <div className="pg-exchange-modal-submit-footer">
         <Button
-          block={true}
+          block
           disabled={!isValid2FA}
           onClick={this.handleDisable2FA}
           size="lg"

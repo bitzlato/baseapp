@@ -1,4 +1,4 @@
-import { RootState } from '../../../modules';
+import { RootState } from '../..';
 import { BlocklistAccessState } from './reducer';
 
 export const selectBlocklistAccessLoading = (state: RootState): BlocklistAccessState['loading'] =>

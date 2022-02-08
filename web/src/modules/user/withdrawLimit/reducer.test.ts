@@ -53,7 +53,7 @@ describe('withdrawLimitList reducer', () => {
       },
       loading: false,
       success: false,
-      error: error,
+      error,
     };
     expect(
       withdrawLimitReducer(initialWithdrawLimitState, actions.withdrawLimitError(error)),

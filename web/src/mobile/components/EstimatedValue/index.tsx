@@ -28,7 +28,7 @@ const EstimatedValueMobile = React.memo(() => {
   const markets = useSelector(selectMarkets);
   const currencies = useSelector(selectCurrencies);
   const tickers = useSelector(selectMarketTickers);
-  let estimatedValue = estimateValue(
+  const estimatedValue = estimateValue(
     valuationPrimaryCurrency(),
     currencies,
     wallets,

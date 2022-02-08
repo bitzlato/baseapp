@@ -39,7 +39,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
       case 'verified':
         return (
           <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--verified">
-            <FormattedMessage id={`page.body.profile.verification.progress.level`} />
+            <FormattedMessage id="page.body.profile.verification.progress.level" />
             <span>&nbsp;{index + 1}</span>
             <CheckIcon />
           </div>
@@ -56,7 +56,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
             }
           >
             <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--pending">
-              <FormattedMessage id={`page.body.profile.verification.progress.level`} />
+              <FormattedMessage id="page.body.profile.verification.progress.level" />
               <span>&nbsp;{index + 1}</span>
               <ClocksIcon />
             </div>
@@ -72,7 +72,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
             }
           >
             <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--rejected">
-              <FormattedMessage id={`page.body.profile.verification.progress.level`} />
+              <FormattedMessage id="page.body.profile.verification.progress.level" />
               <span>&nbsp;{index + 1}</span>
               <CrossIcon />
             </div>
@@ -81,7 +81,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
       case 'blocked':
         return (
           <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked">
-            <FormattedMessage id={`page.body.profile.verification.progress.level`} />
+            <FormattedMessage id="page.body.profile.verification.progress.level" />
             <span>&nbsp;{index + 1}</span>
           </div>
         );
@@ -95,7 +95,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
             }
           >
             <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--active">
-              <FormattedMessage id={`page.body.profile.verification.progress.level`} />
+              <FormattedMessage id="page.body.profile.verification.progress.level" />
               <span>&nbsp;{index + 1}</span>
             </div>
           </OverlayTrigger>

@@ -58,7 +58,7 @@ const ProfileLanguageMobileScreenComponent: React.FC = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Subheader
         title={intl.formatMessage({ id: 'page.mobile.profile.language.title' })}
         backTitle={intl.formatMessage({ id: 'page.body.profile.header.account' })}
@@ -69,7 +69,7 @@ const ProfileLanguageMobileScreenComponent: React.FC = () => {
           {languages.map(renderLanguageListItem)}
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

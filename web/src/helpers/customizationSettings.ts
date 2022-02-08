@@ -42,8 +42,8 @@ export const applyCustomizationSettingsColors = (
 
   if (rootElement) {
     AVAILABLE_COLOR_TITLES.reduce((result, item) => {
-      let darkModeColor = undefined;
-      let lightModeColor = undefined;
+      let darkModeColor;
+      let lightModeColor;
 
       if (customization?.theme_colors?.dark) {
         darkModeColor = customization.theme_colors.dark.find((color) => color.key === item.key);

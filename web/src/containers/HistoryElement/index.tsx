@@ -5,8 +5,15 @@ import { DepositStatus } from 'src/components/History/DepositStatus';
 import { getBlockchainLink } from 'src/helpers/getBlockchainLink';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { MarketName } from 'src/components/MarketName/MarketName';
-import { History, Pagination } from '../../components';
-import { localeDate, setTradesType, truncateMiddle } from '../../helpers';
+import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
+import { useT } from 'src/hooks/useT';
+import { useFetchCache } from 'src/hooks/useFetchCache';
+import { Blockchain } from 'src/modules/public/blockchains/types';
+import { tradeUrl } from 'src/api/config';
+import { DEFAULT_BLOCKCHAIN } from 'web/src/modules/public/blockchains/defaults';
+import { TransferHistory } from '../Wallets/TransferHistory';
 import {
   currenciesFetch,
   Deposit,
@@ -25,15 +32,8 @@ import {
   RootState,
   selectLastElemIndex,
 } from '../../modules';
-import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
-import { TransferHistory } from '../Wallets/TransferHistory';
-import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { createMoneyWithoutCcy } from 'src/helpers/money';
-import { useT } from 'src/hooks/useT';
-import { useFetchCache } from 'src/hooks/useFetchCache';
-import { Blockchain } from 'src/modules/public/blockchains/types';
-import { tradeUrl } from 'src/api/config';
-import { DEFAULT_BLOCKCHAIN } from 'web/src/modules/public/blockchains/defaults';
+import { localeDate, setTradesType, truncateMiddle } from '../../helpers';
+import { History, Pagination } from '../../components';
 
 interface Props {
   type: string;

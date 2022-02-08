@@ -1,5 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme';
-import { FilterInput, FilterInputProps } from './';
+import { FilterInput, FilterInputProps } from '.';
 
 const data = [
   {

@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { MemberLevels, sendError } from '../../../';
+import { MemberLevels, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { memberLevelsData, memberLevelsError } from '../actions';
 

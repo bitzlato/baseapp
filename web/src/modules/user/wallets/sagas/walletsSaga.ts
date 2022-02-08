@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { AccountBalanceSource, CurrencySource, sendError, WalletSource } from '../../../';
+import { AccountBalanceSource, CurrencySource, sendError, WalletSource } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { walletsData, walletsError } from '../actions';
 

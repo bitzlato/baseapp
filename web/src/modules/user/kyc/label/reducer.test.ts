@@ -37,7 +37,7 @@ describe('Label reducer', () => {
   it('should handle GET_LABEL_ERROR', () => {
     const expectedState = {
       ...initialLabelState,
-      error: error,
+      error,
     };
     expect(labelReducer(initialLabelState, actions.labelError(error))).toEqual(expectedState);
   });

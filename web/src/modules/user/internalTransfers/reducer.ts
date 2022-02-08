@@ -1,4 +1,4 @@
-import { CommonError } from '../../../modules/types';
+import { CommonError } from '../../types';
 import { CreateInternalTransfersActions } from './actions';
 import {
   CREATE_INTERNAL_TRANSFERS_DATA,

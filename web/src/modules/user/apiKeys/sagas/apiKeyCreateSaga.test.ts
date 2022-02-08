@@ -2,7 +2,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
-import { rootSaga, sendError } from '../../../../modules/index';
+import { rootSaga, sendError } from '../../../index';
 import { CommonError } from '../../../types';
 import { apiKeyCreate, apiKeyCreateFetch, ApiKeyDataInterface, apiKeysError } from '../actions';
 

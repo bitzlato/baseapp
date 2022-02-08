@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { CustomInput } from '../';
+import { CustomInput } from '..';
 import { cleanPositiveFloatInput, precisionRegExp } from '../../helpers';
 
 interface InternalTransferInputProps {
@@ -17,7 +17,7 @@ export const InternalTransferInput = (props: InternalTransferInputProps) => {
   const [inputValue, setInputValue] = useState('');
   const [inputFocused, setInputFocused] = useState(false);
 
-  const translate = useCallback((id: string) => formatMessage({ id: id }), [formatMessage]);
+  const translate = useCallback((id: string) => formatMessage({ id }), [formatMessage]);
 
   const focusedClass = useMemo(
     () =>

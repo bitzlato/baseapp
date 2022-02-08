@@ -27,7 +27,7 @@ export const gridLayoutReducer = (state = initialLayoutState, action: any) => {
       resetLayout(action.payload.key);
 
       return {
-        layouts: layouts,
+        layouts,
       };
     default:
       return state;

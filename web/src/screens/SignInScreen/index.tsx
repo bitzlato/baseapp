@@ -63,7 +63,7 @@ export const SignInScreen: React.FC = () => {
 
   useEffect(() => {
     if (requireEmailVerification) {
-      history.push('/email-verification', { email: email });
+      history.push('/email-verification', { email });
     }
   }, [requireEmailVerification, history]);
 
@@ -147,8 +147,6 @@ export const SignInScreen: React.FC = () => {
     if (!password) {
       setEmailError('');
       setPasswordError(formatMessage({ id: ERROR_EMPTY_PASSWORD }));
-
-      return;
     }
   }, [email, password, formatMessage]);
 

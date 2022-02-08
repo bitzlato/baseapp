@@ -1,9 +1,8 @@
-import { captchaLogin } from '../../api';
-import { SignInComponent, SignInProps } from './';
-
 import { shallow } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
 import { Button } from 'react-bootstrap';
+import { SignInComponent, SignInProps } from '.';
+import { captchaLogin } from '../../api';
 
 const defaults: SignInProps = {
   onForgotPassword: jest.fn(),

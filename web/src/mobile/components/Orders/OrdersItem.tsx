@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
-import { CloseIcon } from '../../../assets/images/CloseIcon';
-import { localeDate, setTradeColor } from '../../../helpers';
-import { selectMarkets } from '../../../modules';
 import { FIXED_VOL_PRECISION } from 'src/constants';
 import { OrderCommon } from 'src/modules/types';
 import { MarketName } from 'src/components/MarketName/MarketName';
@@ -12,6 +9,9 @@ import { Box } from 'src/components/Box';
 import { getActualPrice } from 'src/modules/helpers';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { selectMarkets } from '../../../modules';
+import { localeDate, setTradeColor } from '../../../helpers';
+import { CloseIcon } from '../../../assets/images/CloseIcon';
 
 interface Props {
   order: OrderCommon;
@@ -64,8 +64,7 @@ const OrdersItemComponent: React.FC<Props> = (props) => {
           <span>{intl.formatMessage({ id: 'page.mobile.orders.header.filled' })}</span>
           <div className="pg-mobile-orders-item__row__block__value">
             <Box textColor={order.side === 'buy' ? 'bid' : 'ask'}>
-              <AmountFormat money={createMoneyWithoutCcy(filled, FIXED_VOL_PRECISION)} />
-              %
+              <AmountFormat money={createMoneyWithoutCcy(filled, FIXED_VOL_PRECISION)} />%
             </Box>
           </div>
         </div>
@@ -73,13 +72,23 @@ const OrdersItemComponent: React.FC<Props> = (props) => {
           <div>
             <span>{intl.formatMessage({ id: 'page.mobile.orders.header.amount' })}</span>
             <span className="pg-mobile-orders-item__row__block__value">
-              <AmountFormat money={createMoneyWithoutCcy(order.remaining_volume, currentMarket.amount_precision)} />
+              <AmountFormat
+                money={createMoneyWithoutCcy(
+                  order.remaining_volume,
+                  currentMarket.amount_precision,
+                )}
+              />
             </span>
           </div>
           <div className="pg-mobile-orders-item__second__row">
             <span>{intl.formatMessage({ id: 'page.mobile.orders.header.volume' })}</span>
             <span className="pg-mobile-orders-item__row__block__value">
-              <AmountFormat money={createMoneyWithoutCcy(+order.remaining_volume * +actualPrice, currentMarket.price_precision)} />
+              <AmountFormat
+                money={createMoneyWithoutCcy(
+                  +order.remaining_volume * +actualPrice,
+                  currentMarket.price_precision,
+                )}
+              />
             </span>
           </div>
         </div>
@@ -87,14 +96,18 @@ const OrdersItemComponent: React.FC<Props> = (props) => {
           <div>
             <span>{intl.formatMessage({ id: 'page.mobile.orders.header.price' })}</span>
             <span className="pg-mobile-orders-item__row__block__value">
-              <AmountFormat money={createMoneyWithoutCcy(actualPrice, currentMarket.price_precision)} />
+              <AmountFormat
+                money={createMoneyWithoutCcy(actualPrice, currentMarket.price_precision)}
+              />
             </span>
           </div>
           <div className="pg-mobile-orders-item__second__row">
             <span>{intl.formatMessage({ id: 'page.mobile.orders.header.trigger' })}</span>
             <span className="pg-mobile-orders-item__row__block__value">
               {order.trigger_price ? (
-                <AmountFormat money={createMoneyWithoutCcy(order.trigger_price, currentMarket.price_precision)} />
+                <AmountFormat
+                  money={createMoneyWithoutCcy(order.trigger_price, currentMarket.price_precision)}
+                />
               ) : (
                 '-'
               )}

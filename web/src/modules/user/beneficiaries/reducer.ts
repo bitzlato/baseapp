@@ -1,4 +1,4 @@
-import { CommonError } from '../../../modules/types';
+import { CommonError } from '../../types';
 import { BeneficiariesActions } from './actions';
 import {
   BENEFICIARIES_ACTIVATE,

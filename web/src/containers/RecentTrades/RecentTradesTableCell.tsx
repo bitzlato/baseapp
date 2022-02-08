@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { setTradeColor } from '../../helpers';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { DiffAmountFormat } from 'src/components/DiffAmountFormat/DiffAmountFormat';
+import { setTradeColor } from '../../helpers';
 
 const TradeTableCellComponent = (props: any) => {
   const { type, takerType, higlightedDate, amountFixed, amount, priceFixed, price, prevValue, id } =

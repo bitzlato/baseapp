@@ -6,9 +6,15 @@ import cn from 'classnames';
 
 import { useOpenOrdersFetch } from 'src/hooks';
 import { useT } from 'src/hooks/useT';
-import { CloseIcon } from '../../assets/images/CloseIcon';
-import { Table } from '../../components';
-import { localeDate } from '../../helpers';
+import { MarketName } from 'src/components/MarketName/MarketName';
+import { Box } from 'src/components/Box';
+import { Label } from 'src/components/Label';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { createMoney } from 'src/helpers/money';
+import { getActualPrice } from 'src/modules/helpers';
+import { getTriggerSign } from './helpers';
+import { OrderCommon } from '../../modules/types';
 import {
   openOrdersCancelFetch,
   ordersCancelAllFetch,
@@ -18,15 +24,9 @@ import {
   selectOpenOrdersList,
   selectUserLoggedIn,
 } from '../../modules';
-import { OrderCommon } from '../../modules/types';
-import { getTriggerSign } from './helpers';
-import { MarketName } from 'src/components/MarketName/MarketName';
-import { Box } from 'src/components/Box';
-import { Label } from 'src/components/Label';
-import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
-import { createMoney } from 'src/helpers/money';
-import { getActualPrice } from 'src/modules/helpers';
+import { localeDate } from '../../helpers';
+import { Table } from '../../components';
+import { CloseIcon } from '../../assets/images/CloseIcon';
 
 export const OpenOrdersComponent: React.FC = () => {
   const [hideOtherPairs, setHideOtherPairs] = useState(true);
@@ -165,7 +165,7 @@ export const OpenOrdersComponent: React.FC = () => {
                 custom
                 id="hideOtherPairs"
                 checked={hideOtherPairs}
-                readOnly={true}
+                readOnly
                 label={t('page.body.trade.header.openOrders.hideOtherPairs')}
               />
             </Form>
@@ -173,19 +173,17 @@ export const OpenOrdersComponent: React.FC = () => {
         </Box>
         <Box row spacing>
           {userLoggedIn && (
-            <>
-              <Box
-                row
-                spacing
-                as="button"
-                className="cr-percentage-button"
-                disabled={!userLoggedIn}
-                onClick={handleCancelAll}
-              >
-                <CloseIcon />
-                <span>{t('page.body.openOrders.header.button.cancelAll')}</span>
-              </Box>
-            </>
+            <Box
+              row
+              spacing
+              as="button"
+              className="cr-percentage-button"
+              disabled={!userLoggedIn}
+              onClick={handleCancelAll}
+            >
+              <CloseIcon />
+              <span>{t('page.body.openOrders.header.button.cancelAll')}</span>
+            </Box>
           )}
         </Box>
       </div>

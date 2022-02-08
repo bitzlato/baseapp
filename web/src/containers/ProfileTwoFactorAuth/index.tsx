@@ -1,5 +1,3 @@
-/* tslint:disable jsx-no-multiline-js */
-import * as React from 'react';
 import { Form } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
@@ -16,7 +14,7 @@ export const ProfileTwoFactorAuth = (props: any) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <label className="pg-profile-page__label">
         <div>
           <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication" />
@@ -38,6 +36,6 @@ export const ProfileTwoFactorAuth = (props: any) => {
           checked={is2faEnabled}
         />
       </Form>
-    </React.Fragment>
+    </>
   );
 };

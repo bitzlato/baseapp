@@ -130,9 +130,7 @@ const TradingWrapper = (props: any) => {
       draggableHandle=".cr-table-header__content, .pg-trading-screen__tab-panel, .draggable-container"
       rowHeight={14}
       layouts={layouts}
-      onLayoutChange={() => {
-        return;
-      }}
+      onLayoutChange={() => {}}
       margin={[5, 5]}
       onResize={handleResize}
       onDrag={handeDrag}
@@ -243,9 +241,9 @@ class Trading extends React.Component<Props, StateProps> {
     const { rgl } = this.props;
 
     return (
-      <div className={'pg-trading-screen'}>
-        <div className={'pg-trading-wrap'}>
-          <div data-react-toolbox="grid" className={'cr-grid'}>
+      <div className="pg-trading-screen">
+        <div className="pg-trading-wrap">
+          <div data-react-toolbox="grid" className="cr-grid">
             <div className="cr-grid__grid-wrapper">
               <TradingWrapper
                 layouts={rgl.layouts}

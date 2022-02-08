@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { PublicTrade, sendError } from '../../../';
+import { PublicTrade, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { recentTradesData, recentTradesError, RecentTradesFetch } from '../actions';
 

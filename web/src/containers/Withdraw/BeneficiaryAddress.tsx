@@ -5,8 +5,8 @@ import { Beneficiary } from 'src/modules/user/beneficiaries';
 import { alertPush } from 'src/modules/public/alert/actions';
 import { useT } from 'src/hooks/useT';
 
-import s from './BeneficiaryAddress.postcss';
 import { Box } from 'src/components/Box';
+import s from './BeneficiaryAddress.postcss';
 
 interface Props {
   beneficiary: Beneficiary;

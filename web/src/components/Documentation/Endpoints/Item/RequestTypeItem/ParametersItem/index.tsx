@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import { Table } from '../../../../../../components';
+import { Table } from '../../../../..';
 
 interface ItemInterface {
   item: any;
@@ -45,7 +45,7 @@ export const ParametersItem: React.FC<ItemInterface> = (props: ItemInterface) =>
         parameter.name,
         parameter.in,
         parameter.description,
-        !!parameter.required
+        parameter.required
           ? intl.formatMessage({
               id: 'page.documentation.endpoints.requestTypeItem.parameters.table.data.required.true',
             })
@@ -59,14 +59,14 @@ export const ParametersItem: React.FC<ItemInterface> = (props: ItemInterface) =>
 
   if (item.parameters && Object.keys(item.parameters).length) {
     return (
-      <React.Fragment>
+      <>
         <h3>
           {intl.formatMessage({
             id: 'page.documentation.endpoints.requestTypeItem.parameters.title',
           })}
         </h3>
         <Table header={getTableHeaders()} data={getTableData()} />
-      </React.Fragment>
+      </>
     );
   }
 

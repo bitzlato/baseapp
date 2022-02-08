@@ -15,8 +15,8 @@ import {
   walletsFetch,
 } from 'src/modules';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { InternalTransferInput } from './InternalInput';
 import { createMoney } from 'src/helpers/money';
+import { InternalTransferInput } from './InternalInput';
 import { SelectString } from '../Select/Select';
 
 export const InternalTransferComponent = () => {
@@ -69,7 +69,7 @@ export const InternalTransferComponent = () => {
     setShow(false);
   }, [username, otp, amount, currency, dispatch]);
 
-  const translate = useCallback((id: string) => formatMessage({ id: id }), [formatMessage]);
+  const translate = useCallback((id: string) => formatMessage({ id }), [formatMessage]);
 
   const handleNavigateTo2fa = useCallback((enable2fa: boolean) => {
     history.push('/security/2fa', { enable2fa });
@@ -85,7 +85,7 @@ export const InternalTransferComponent = () => {
 
   const renderFooter = useMemo(() => {
     return (
-      <Button block={true} type="button" onClick={handleCreateTransfer} size="lg" variant="primary">
+      <Button block type="button" onClick={handleCreateTransfer} size="lg" variant="primary">
         {translate('page.body.internal.transfer.continue')}
       </Button>
     );
@@ -97,7 +97,7 @@ export const InternalTransferComponent = () => {
         <div className="cr-modal__container-header-text">
           {translate('page.body.internal.transfer.header')}
         </div>
-        <CloseIcon className={'cr-modal__container-header-cancel'} onClick={() => setShow(false)} />
+        <CloseIcon className="cr-modal__container-header-cancel" onClick={() => setShow(false)} />
       </>
     );
   }, [translate, setShow]);
@@ -165,7 +165,7 @@ export const InternalTransferComponent = () => {
       </div>
       <div className="cr-internal-transfer__inputs">
         <Button
-          block={true}
+          block
           type="button"
           onClick={() => setShow(!show)}
           size="lg"

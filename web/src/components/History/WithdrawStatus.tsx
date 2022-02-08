@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Withdraw } from 'src/modules/user/history/types';
-import { Label } from '../Label';
 import { useT } from 'src/hooks/useT';
+import { Label } from '../Label';
 import { ConfirmingStatus } from './ConfirmingStatus';
 
 interface Props {

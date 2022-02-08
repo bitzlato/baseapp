@@ -36,7 +36,7 @@ describe('Documents reducer', () => {
   it('should handle SEND_DOCUMENTS_ERROR', () => {
     const expectedState = {
       ...initialDocumentsState,
-      error: error,
+      error,
     };
     expect(documentsReducer(initialDocumentsState, actions.sendDocumentsError(error))).toEqual(
       expectedState,

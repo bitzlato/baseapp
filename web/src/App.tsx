@@ -62,13 +62,13 @@ const RenderDeviceContainers = () => {
 
   if (browserHistory.location.pathname === '/setup' || !isMobileDevice) {
     return (
-      <React.Fragment>
+      <>
         <Header />
         <CustomizationContainer />
         <AlertsContainer />
         <LayoutContainer />
         <FooterContainer />
-      </React.Fragment>
+      </>
     );
   }
 

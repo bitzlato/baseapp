@@ -1,6 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { History, Pagination } from '../../components';
-import { localeDate, sortByDateDesc } from '../../helpers';
+import { DepositStatus } from 'src/components/History/DepositStatus';
+import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
+import { FC, useEffect } from 'react';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
+import { useT } from 'web/src/hooks/useT';
+import { useFetchCache } from 'web/src/hooks/useFetchCache';
+import { Blockchain } from 'web/src/modules/public/blockchains/types';
+import { tradeUrl } from 'web/src/api/config';
+import { DEFAULT_BLOCKCHAIN } from 'web/src/modules/public/blockchains/defaults';
+import s from './TransferHistory.postcss';
 import {
   currenciesFetch,
   fetchHistory,
@@ -18,17 +27,8 @@ import {
   Deposit,
   Withdraw,
 } from '../../modules';
-import { DepositStatus } from 'src/components/History/DepositStatus';
-import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
-import { FC, useEffect } from 'react';
-import s from './TransferHistory.postcss';
-import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { createMoneyWithoutCcy } from 'src/helpers/money';
-import { useT } from 'web/src/hooks/useT';
-import { useFetchCache } from 'web/src/hooks/useFetchCache';
-import { Blockchain } from 'web/src/modules/public/blockchains/types';
-import { tradeUrl } from 'web/src/api/config';
-import { DEFAULT_BLOCKCHAIN } from 'web/src/modules/public/blockchains/defaults';
+import { localeDate, sortByDateDesc } from '../../helpers';
+import { History, Pagination } from '../../components';
 
 interface Props {
   label: string;

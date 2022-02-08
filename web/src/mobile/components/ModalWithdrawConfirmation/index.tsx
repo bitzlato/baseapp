@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
-import { MobileModal } from '../../components';
+import { MobileModal } from '..';
 
 interface ModalWithdrawConfirmationProps {
   amount: string;
@@ -40,7 +40,8 @@ const ModalWithdraw = (props: ModalWithdrawConfirmationProps) => {
             {formatMessage({ id: 'page.mobile.wallet.withdraw.modal.confirmation.message1' })}
           </span>
           <span className="mobile-modal-body__withdraw-confirm--light">
-            {createMoneyWithoutCcy(amount, precision).toFormat()} <CurrencyTicker symbol={currency} />
+            {createMoneyWithoutCcy(amount, precision).toFormat()}{' '}
+            <CurrencyTicker symbol={currency} />
           </span>
         </div>
         <div className="mobile-modal-body__withdraw-confirm--block">
@@ -52,7 +53,7 @@ const ModalWithdraw = (props: ModalWithdrawConfirmationProps) => {
       </div>
       <div className="pg-exchange-modal-submit-footer modal-footer__withdraw-confirm">
         <Button
-          block={true}
+          block
           className="btn-block mr-1 mt-1 btn-lg"
           onClick={onDismiss}
           size="lg"
@@ -61,7 +62,7 @@ const ModalWithdraw = (props: ModalWithdrawConfirmationProps) => {
           {formatMessage({ id: 'page.body.wallets.tabs.withdraw.modal.button.cancel' })}
         </Button>
         <Button
-          block={true}
+          block
           className="btn-block mr-1 mt-1 btn-lg"
           onClick={onSubmit}
           size="lg"

@@ -55,7 +55,7 @@ describe('Identity reducer', () => {
       ...initialIdentityState,
       send: {
         ...initialIdentityState.send,
-        error: error,
+        error,
         loading: false,
       },
     };
@@ -96,7 +96,7 @@ describe('Identity reducer', () => {
       ...initialIdentityState,
       edit: {
         ...initialIdentityState.edit,
-        error: error,
+        error,
         loading: false,
       },
     };

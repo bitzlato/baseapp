@@ -1,6 +1,5 @@
-import { CustomInput, CustomInputProps } from './';
-
 import { shallow } from 'enzyme';
+import { CustomInput, CustomInputProps } from '.';
 
 const defaults: CustomInputProps = {
   type: '',

@@ -1,7 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import { BTC_CCY, createCcy, createMoney, USD_CCY } from 'src/helpers/money';
 import { TestComponentWrapper } from 'src/lib/test/wrapper';
-import { WalletList, WalletListProps } from '../../components';
+import { WalletList, WalletListProps } from '..';
 import { WalletItemData } from '../WalletItem/WalletItem';
 
 const onWalletSelectionChange = jest.fn();
@@ -37,8 +37,8 @@ const walletItems: WalletItemData[] = [
 
 const defaultProps: WalletListProps = {
   activeIndex: 0,
-  onWalletSelectionChange: onWalletSelectionChange,
-  walletItems: walletItems,
+  onWalletSelectionChange,
+  walletItems,
 };
 
 const setup = (props: Partial<WalletListProps> = {}) =>

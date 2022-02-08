@@ -2,7 +2,7 @@ import * as React from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { SelectOption, Select } from 'src/components/Select/Select';
 import { SettingsIcon } from '../../../assets/images/customization/SettingsIcon';
-import { TabPanel } from '../../../components';
+import { TabPanel } from '../..';
 import { applyCustomizationSettingsColors } from '../../../helpers';
 import {
   AVAILABLE_THEME_PRESETS,

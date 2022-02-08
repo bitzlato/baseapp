@@ -2,8 +2,29 @@ import { useState, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import cn from 'classnames';
-import { useCurrenciesFetch, useMarketsFetch, useWalletsFetch } from '../../hooks';
 import { useT } from 'src/hooks/useT';
+import { quickExchangeLimitsFetch } from 'src/modules/public/quickExchangePublic/actions';
+import { selectQuickExchangeLimits } from 'src/modules/public/quickExchangePublic/selectors';
+import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
+import { NumberInput } from 'web/src/components/Input/NumberInput';
+import { createCcy, createMoney, ZERO_MONEY } from 'src/helpers/money';
+import { parseNumeric } from 'src/helpers/parseNumeric';
+import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { Box } from 'src/components/Box/Box';
+import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
+import { Button as BzButton } from 'src/components/Button/Button';
+import { SelectString } from 'src/components/Select/Select';
+import { Card } from 'src/components/Card/Card';
+import { InfoIcon } from 'src/assets/images/InfoIcon';
+import { DotsFlashing } from 'src/components/DotsFlashing/DotsFlashing';
+import { RefreshIcon } from 'src/assets/icons/RefreshIcon';
+import { DEFAULT_CCY_PRECISION } from 'src/constants';
+import { loginWithRedirect } from 'src/helpers/auth0';
+import { Spoiler } from 'src/components/Spoiler/Spoiler';
+import { AmountDescription } from './AmountDescription';
+import { Limits } from './Limits';
+import { getWallet, getCurrencies, getCurrency } from './helpers';
+import { SwipeIcon } from '../../assets/images/swipe';
 import {
   selectMarkets,
   selectWallets,
@@ -19,28 +40,7 @@ import {
   selectUserLoggedIn,
   selectMobileDeviceState,
 } from '../../modules';
-import { quickExchangeLimitsFetch } from 'src/modules/public/quickExchangePublic/actions';
-import { selectQuickExchangeLimits } from 'src/modules/public/quickExchangePublic/selectors';
-import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
-import { SwipeIcon } from '../../assets/images/swipe';
-import { NumberInput } from 'web/src/components/Input/NumberInput';
-import { getWallet, getCurrencies, getCurrency } from './helpers';
-import { createCcy, createMoney, ZERO_MONEY } from 'src/helpers/money';
-import { parseNumeric } from 'src/helpers/parseNumeric';
-import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
-import { Box } from 'src/components/Box/Box';
-import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
-import { Button as BzButton } from 'src/components/Button/Button';
-import { SelectString } from 'src/components/Select/Select';
-import { Card } from 'src/components/Card/Card';
-import { InfoIcon } from 'src/assets/images/InfoIcon';
-import { Limits } from './Limits';
-import { DotsFlashing } from 'src/components/DotsFlashing/DotsFlashing';
-import { RefreshIcon } from 'src/assets/icons/RefreshIcon';
-import { AmountDescription } from './AmountDescription';
-import { DEFAULT_CCY_PRECISION } from 'src/constants';
-import { loginWithRedirect } from 'src/helpers/auth0';
-import { Spoiler } from 'src/components/Spoiler/Spoiler';
+import { useCurrenciesFetch, useMarketsFetch, useWalletsFetch } from '../../hooks';
 
 import s from './QuickExchange.postcss';
 

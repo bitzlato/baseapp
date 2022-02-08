@@ -52,29 +52,27 @@ class CustomInput extends React.Component<Props> {
     } = this.props;
 
     return (
-      <React.Fragment>
-        <div className={cn('custom-input', this.props.className)}>
-          <label className={classNameLabel}>
-            {(labelVisible || inputValue) && (label || defaultLabel)}
-          </label>
-          <FormControl
-            type={type}
-            value={inputValue as string | number}
-            placeholder={placeholder}
-            autoFocus={autoFocus}
-            onFocus={this.props.handleFocusInput}
-            onBlur={this.props.handleFocusInput}
-            onChange={(e) => this.handleChangeValue(e)}
-            readOnly={readOnly as boolean}
-            id={id as string}
-            onClick={handleClick}
-            disabled={isDisabled as boolean}
-            onKeyPress={onKeyPress}
-            autoComplete={autoComplete}
-            name={name}
-          />
-        </div>
-      </React.Fragment>
+      <div className={cn('custom-input', this.props.className)}>
+        <label className={classNameLabel}>
+          {(labelVisible || inputValue) && (label || defaultLabel)}
+        </label>
+        <FormControl
+          type={type}
+          value={inputValue as string | number}
+          placeholder={placeholder}
+          autoFocus={autoFocus}
+          onFocus={this.props.handleFocusInput}
+          onBlur={this.props.handleFocusInput}
+          onChange={(e) => this.handleChangeValue(e)}
+          readOnly={readOnly as boolean}
+          id={id as string}
+          onClick={handleClick}
+          disabled={isDisabled as boolean}
+          onKeyPress={onKeyPress}
+          autoComplete={autoComplete}
+          name={name}
+        />
+      </div>
     );
   }
 

@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { OrderBookState, sendError } from '../../../';
+import { OrderBookState, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { orderBookData, orderBookError, OrderBookFetch } from '../actions';
 

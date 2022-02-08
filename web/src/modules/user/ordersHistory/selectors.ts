@@ -1,4 +1,4 @@
-import { RootState } from '../../';
+import { RootState } from '../..';
 import { OrderCommon } from '../../types';
 
 export const selectOrdersHistory = (state: RootState): OrderCommon[] =>

@@ -128,7 +128,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
   }, [dispatch, showCreatedApiKeyModal, apiKeysModal.action]);
 
   return (
-    <React.Fragment>
+    <>
       <Subheader
         title={intl.formatMessage({ id: 'page.mobile.profile.apiKeys.title' })}
         backTitle={intl.formatMessage({ id: 'page.body.profile.header.account' })}
@@ -145,7 +145,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
         ) : null}
         <div className="pg-mobile-profile-api-keys-screen__list">
           {user.otp && apiKeys.length ? (
-            <React.Fragment>
+            <>
               {apiKeys.map((apiKey, index) => (
                 <ApiKeysItem
                   key={index}
@@ -163,7 +163,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
                 onClickPrevPage={onClickPrevPage}
                 onClickNextPage={onClickNextPage}
               />
-            </React.Fragment>
+            </>
           ) : (
             <span className="no-data">{intl.formatMessage({ id: 'page.noDataToShow' })}</span>
           )}
@@ -175,7 +175,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
         />
         <TwoFactorModal showModal={show2FAModal} handleToggle2FA={handleTriggerAction} />
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

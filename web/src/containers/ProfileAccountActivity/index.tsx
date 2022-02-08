@@ -69,7 +69,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
     const { total, firstElemIndex, lastElemIndex, page, nextPageExists, userActivity } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <Table header={this.getHeaders()} data={this.getActivityData(userActivity)} />
         <Pagination
           firstElemIndex={firstElemIndex}
@@ -80,7 +80,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
           onClickPrevPage={this.onClickPrevPage}
           onClickNextPage={this.onClickNextPage}
         />
-      </React.Fragment>
+      </>
     );
   };
 

@@ -15,7 +15,7 @@ const PasswordStrengthTipComponent: React.FC<PasswordStrengthTipProps> = ({
   translate,
 }) =>
   !(passwordErrorFirstSolved && passwordErrorSecondSolved && passwordErrorThirdSolved) ? (
-    <div className={'pg-password-strength-tip'}>
+    <div className="pg-password-strength-tip">
       <span className="pg-password-strength-tip-title">
         {translate('password.strength.tip.influence')}
       </span>

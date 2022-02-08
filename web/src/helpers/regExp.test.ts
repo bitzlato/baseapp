@@ -1,6 +1,6 @@
-import { precisionRegExp } from './';
+import { precisionRegExp } from '.';
 
-describe('Describe regular expressions helper', () => {
+describe('regular expressions helper', () => {
   it('should match precisionRegExp', () => {
     expect('1').toMatch(precisionRegExp(0));
     expect('1.1').not.toMatch(precisionRegExp(0));

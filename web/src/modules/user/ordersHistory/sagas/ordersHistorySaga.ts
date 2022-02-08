@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { buildQueryString, getOrderAPI } from 'src/helpers';
 import { OrderCommon } from 'src/modules/types';
-import { sendError } from '../../../';
+import { sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { userOrdersHistoryData, userOrdersHistoryError, UserOrdersHistoryFetch } from '../actions';
 
@@ -18,7 +18,10 @@ export function* ordersHistorySaga(action: UserOrdersHistoryFetch) {
       ...(type === 'open' && { state: ['wait'] }),
     };
 
-    const data: OrderCommon[] = yield call(API.get(ordersOptions), `/market/orders?${buildQueryString(params)}`);
+    const data: OrderCommon[] = yield call(
+      API.get(ordersOptions),
+      `/market/orders?${buildQueryString(params)}`,
+    );
     let nextPageExists = false;
 
     if (data.length === limit) {

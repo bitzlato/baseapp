@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Box } from 'src/components/Box';
 import { Label } from 'src/components/Label/Label';
 import { UserActivityDataInterface } from 'src/modules';
-import { getUserAgent, localeDate } from '../../../../helpers';
 import { useT } from 'src/hooks/useT';
+import { getUserAgent, localeDate } from '../../../../helpers';
 
 interface Props {
   item: UserActivityDataInterface;

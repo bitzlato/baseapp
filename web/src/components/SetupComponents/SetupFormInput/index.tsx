@@ -49,7 +49,7 @@ export class SetupFormInput extends React.Component<SetupFormInputProps, SetupFo
     const { showTooltip } = this.state;
 
     return (
-      <React.Fragment>
+      <>
         <div
           className="setup-form-input__input__tooltip"
           onMouseEnter={() => this.handleShowTooltip()}
@@ -58,7 +58,7 @@ export class SetupFormInput extends React.Component<SetupFormInputProps, SetupFo
           <TipIcon />
         </div>
         {showTooltip && <div className="setup-form-input__input__info">{tooltipText}</div>}
-      </React.Fragment>
+      </>
     );
   };
 

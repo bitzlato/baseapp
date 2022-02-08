@@ -610,7 +610,7 @@ describe('Ranger module', () => {
         type: RANGER_USER_ORDER_UPDATE,
         payload: data,
       };
-      xit('should push user order', async () => {
+      it.skip('should push user order', async () => {
         return new Promise((resolve) => {
           store.subscribe(() => {
             const actions = store.getActions();
@@ -682,7 +682,7 @@ describe('Ranger module', () => {
         type: RANGER_USER_ORDER_UPDATE,
         payload: data,
       };
-      xit('should push user order', async () => {
+      it.skip('should push user order', async () => {
         return new Promise((resolve) => {
           store.subscribe(() => {
             const actions = store.getActions();

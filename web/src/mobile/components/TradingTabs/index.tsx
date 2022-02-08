@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
-import { Orders } from '../';
+import { Orders } from '..';
 import { TabPanel } from '../../../components';
 import { selectUserLoggedIn } from '../../../modules';
 import { Charts } from './Charts';

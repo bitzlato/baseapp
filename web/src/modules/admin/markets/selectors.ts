@@ -1,4 +1,4 @@
-import { RootState } from '../../';
+import { RootState } from '../..';
 import { MarketsAdminState } from './reducer';
 
 export const selectMarketsAdminList = (state: RootState): MarketsAdminState['list'] =>

@@ -8,6 +8,8 @@ import { Label } from 'src/components/Label';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { getActualPrice } from 'src/modules/helpers';
 import { IntlProps } from 'src/types';
+import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
+import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { CloseIcon } from '../../assets/images/CloseIcon';
 import { History, Pagination } from '../../components';
 import { localeDate, setTradeColor } from '../../helpers';
@@ -29,8 +31,6 @@ import {
 import { OrderCommon } from '../../modules/types';
 import { getTriggerSign } from '../OpenOrders/helpers';
 import { OrderStatus } from './OrderStatus';
-import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { createMoneyWithoutCcy } from 'src/helpers/money';
 
 interface OrdersProps {
   type: string;
@@ -94,7 +94,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
     const { firstElemIndex, lastElemIndex, pageIndex, nextPageExists } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <History headers={this.renderHeaders()} data={this.retrieveData(list)} />
         <Pagination
           firstElemIndex={firstElemIndex}
@@ -104,7 +104,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
           onClickPrevPage={this.onClickPrevPage}
           onClickNextPage={this.onClickNextPage}
         />
-      </React.Fragment>
+      </>
     );
   };
 
@@ -204,7 +204,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
       />,
       <span key={id} className="split-lines justify-content-end">
         {trigger_price ? (
-          <React.Fragment>
+          <>
             <span>
               {this.props.intl.formatMessage({ id: 'page.body.trade.header.openOrders.lastPrice' })}
             </span>
@@ -212,7 +212,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
             <span style={{ color: setTradeColor(side).color }}>
               {createMoneyWithoutCcy(trigger_price, currentMarket.price_precision).toFormat()}
             </span>
-          </React.Fragment>
+          </>
         ) : (
           '-'
         )}

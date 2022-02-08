@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { alertPush, sendError } from '../../../';
+import { alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { getCsrfToken, getOrderAPI } from '../../../../helpers';
 import { ordersCancelAllData, ordersCancelAllError, OrdersCancelAllFetch } from '../actions';

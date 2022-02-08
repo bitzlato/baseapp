@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { Beneficiary, sendError } from '../../../';
+import { Beneficiary, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { buildQueryString } from '../../../../helpers';
 import { beneficiariesData, beneficiariesError, BeneficiariesFetch } from '../actions';

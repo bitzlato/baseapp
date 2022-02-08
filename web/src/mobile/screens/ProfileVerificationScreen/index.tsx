@@ -9,7 +9,7 @@ export const ProfileVerificationMobileScreen: React.FC = () => {
   const history = useHistory();
 
   return (
-    <React.Fragment>
+    <>
       <Subheader
         title={intl.formatMessage({ id: 'page.body.profile.header.account.profile' })}
         backTitle={intl.formatMessage({ id: 'page.body.profile.header.account' })}
@@ -18,6 +18,6 @@ export const ProfileVerificationMobileScreen: React.FC = () => {
       <div className="cr-mobile-profile-verification">
         <ProfileVerification />
       </div>
-    </React.Fragment>
+    </>
   );
 };

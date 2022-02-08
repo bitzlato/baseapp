@@ -6,8 +6,8 @@ import { useT } from 'src/hooks/useT';
 import { SortIcon } from 'src/components/SortIcon/SortIcon';
 import { MarketName } from 'src/components/MarketName/MarketName';
 
-import s from './MarketSelectorItems.postcss';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
+import s from './MarketSelectorItems.postcss';
 
 interface Props {
   currentMarket?: Market | undefined;
@@ -67,7 +67,8 @@ export const MarketSelectorItems: FC<Props> = ({
     setSort((prevState) => {
       if (headerId !== prevState.sortBy) {
         return { sortBy: headerId, reversed: false };
-      } else if (headerId === prevState.sortBy && !prevState.reversed) {
+      }
+      if (headerId === prevState.sortBy && !prevState.reversed) {
         return { ...prevState, reversed: true };
       }
 
