@@ -31,6 +31,7 @@ import {
   selectFirstElemIndex,
   RootState,
   selectLastElemIndex,
+  selectHistoryType,
 } from '../../modules';
 import { localeDate, setTradesType, truncateMiddle } from '../../helpers';
 import { History, Pagination } from '../../components';
@@ -45,6 +46,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
   const markets = useSelector(selectMarkets);
   const wallets = useSelector(selectWallets) || [];
   const list = useSelector(selectHistory);
+  const historyType = useSelector(selectHistoryType);
   const fetching = useSelector(selectHistoryLoading);
   const page = useSelector(selectCurrentPage);
   const firstElemIndex = useSelector((state: RootState) => selectFirstElemIndex(state, 25));
@@ -205,7 +207,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
     }
   };
 
-  const tableData = list.map((item) => renderTableRow(item));
+  const tableData = type === historyType ? list.map((item) => renderTableRow(item)) : [];
 
   return (
     <div className={`pg-history-elem ${list.length ? '' : 'pg-history-elem-empty'}`}>
