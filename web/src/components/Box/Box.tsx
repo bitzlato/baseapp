@@ -21,6 +21,7 @@ type BoxOwnProps<E = React.ElementType> = {
   spacing?: boolean | '2' | '3' | '4' | '5' | 'sm' | undefined;
   gap?: boolean | '2' | '3' | '4' | '5' | 'sm' | undefined;
   padding?: boolean | '2' | '3' | '4' | '5' | '2X3' | undefined;
+  my?: '4' | '7' | undefined;
   textSize?: 'sm' | 'lg' | 'xl' | undefined;
   textColor?: TextColor | undefined;
   textTr?: 'capitalize' | 'uppercase' | undefined;
@@ -33,7 +34,9 @@ type BoxOwnProps<E = React.ElementType> = {
 type Props<E extends React.ElementType> = BoxOwnProps<E> &
   Omit<React.ComponentProps<E>, keyof BoxOwnProps>;
 
-type Element = <E extends React.ElementType = 'div'>(props: Props<E>) => React.ReactElement | null;
+export type Element<P = {}> = <E extends React.ElementType = 'div'>(
+  props: Props<E> & P,
+) => React.ReactElement | null;
 
 export const Box: Element = React.forwardRef(
   (
@@ -45,6 +48,7 @@ export const Box: Element = React.forwardRef(
       spacing,
       gap,
       padding,
+      my,
       grow,
       flex1,
       align,
@@ -78,6 +82,7 @@ export const Box: Element = React.forwardRef(
       gap && s.gap,
       gap && s[`gap${gap === true ? '' : capitalize(gap)}`],
       padding && s[`padding${padding === true ? '' : capitalize(padding)}`],
+      my && s[`my${my}`],
       textSize && sLabel[`${textSize}Size`],
       textColor && sLabel[`${textColor}Color`],
       textTr && sLabel[`${textTr}Transform`],

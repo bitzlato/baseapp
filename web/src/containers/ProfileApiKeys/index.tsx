@@ -8,6 +8,7 @@ import { IntlProps } from 'web/src/types';
 import { Card } from 'web/src/components/Card/Card';
 import { CodeVerification, CopyableTextField, Pagination, Table } from 'web/src/components';
 import { localeDate } from 'web/src/helpers/localeDate';
+import { Container } from 'web/src/components/Container/Container';
 
 import {
   alertPush,
@@ -114,35 +115,37 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
       </>
     );
     return (
-      <Card className="pg-profile-page__api-keys" size="xlg" header={cardHeader}>
-        {!user.otp && (
-          <p className="pg-profile-page__label pg-profile-page__text-center">
-            {this.t('page.body.profile.apiKeys.noOtp')}
-          </p>
-        )}
+      <Container maxWidth="xl" my="4">
+        <Card className="pg-profile-page__api-keys" header={cardHeader}>
+          {!user.otp && (
+            <p className="pg-profile-page__label pg-profile-page__text-center">
+              {this.t('page.body.profile.apiKeys.noOtp')}
+            </p>
+          )}
 
-        {user.otp && dataLoaded && !apiKeys.length && (
-          <div className="pg-profile-page__label pg-profile-page__text-center">
-            {this.t('page.body.profile.apiKeys.noKeys')}
-          </div>
-        )}
+          {user.otp && dataLoaded && !apiKeys.length && (
+            <div className="pg-profile-page__label pg-profile-page__text-center">
+              {this.t('page.body.profile.apiKeys.noKeys')}
+            </div>
+          )}
 
-        {user.otp && dataLoaded && apiKeys.length > 0 && (
-          <>
-            <Table header={this.getTableHeaders()} data={this.getTableData(apiKeys)} />
-            <Pagination
-              firstElemIndex={firstElemIndex}
-              lastElemIndex={lastElemIndex}
-              page={pageIndex}
-              nextPageExists={nextPageExists}
-              onClickPrevPage={this.onClickPrevPage}
-              onClickNextPage={this.onClickNextPage}
-            />
-          </>
-        )}
+          {user.otp && dataLoaded && apiKeys.length > 0 && (
+            <>
+              <Table header={this.getTableHeaders()} data={this.getTableData(apiKeys)} />
+              <Pagination
+                firstElemIndex={firstElemIndex}
+                lastElemIndex={lastElemIndex}
+                page={pageIndex}
+                nextPageExists={nextPageExists}
+                onClickPrevPage={this.onClickPrevPage}
+                onClickNextPage={this.onClickNextPage}
+              />
+            </>
+          )}
 
-        {modal}
-      </Card>
+          {modal}
+        </Card>
+      </Container>
     );
   }
 

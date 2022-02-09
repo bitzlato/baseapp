@@ -2,377 +2,373 @@
 
 exports[`ProfileScreen test should render 1`] = `
 <div
-  class="container"
+  class="my7"
 >
   <div
-    class="row justifyCenter padding4"
+    class="container xl"
   >
     <div
-      class="cardXlg col grow colSpacing4"
+      class="cardDesktop col bodyBgColor"
     >
       <div
-        class="cardDesktop col bodyBgColor"
+        class="cardHeader padding3 primaryColor"
+      >
+        <h4>
+          Profile
+        </h4>
+      </div>
+      <div
+        class="col colSpacing2 padding3"
       >
         <div
-          class="cardHeader padding3 primaryColor"
-        >
-          <h4>
-            Profile
-          </h4>
-        </div>
-        <div
-          class="col colSpacing2 padding3"
+          class="row"
         >
           <div
-            class="row"
+            class="col-12 col-md-6 mx-0"
           >
             <div
-              class="col-12 col-md-6 mx-0"
+              class="col"
             >
               <div
-                class="col"
+                class="pg-profile-page__box pg-profile-page__left-col__basic"
               >
                 <div
-                  class="pg-profile-page__box pg-profile-page__left-col__basic"
+                  class="pg-profile-page__box-header pg-profile-page__left-col__basic__info-row"
                 >
                   <div
-                    class="pg-profile-page__box-header pg-profile-page__left-col__basic__info-row"
+                    class="pg-profile-page__left-col__basic__info-row__block"
                   >
                     <div
-                      class="pg-profile-page__left-col__basic__info-row__block"
+                      class="pg-profile-page__row pg-profile-page__details-user"
                     >
-                      <div
-                        class="pg-profile-page__row pg-profile-page__details-user"
-                      >
-                        <p />
-                      </div>
-                      <div
-                        class="pg-profile-page__row"
-                      >
-                        <h2>
-                          UID: 
-                        </h2>
-                      </div>
+                      <p />
+                    </div>
+                    <div
+                      class="pg-profile-page__row"
+                    >
+                      <h2>
+                        UID: 
+                      </h2>
                     </div>
                   </div>
-                  <div
-                    class="pg-profile-page__row"
-                  >
-                    <div>
-                      <div
-                        class="pg-profile-page__label"
-                      >
-                        Password
-                      </div>
-                      <div>
-                        ************
-                      </div>
-                    </div>
-                    <button
-                      class="btn-block mt-3 mb-3 btn-lg btn btn-primary w-25 btn btn-primary btn-lg"
-                      type="button"
-                    >
-                      Change
-                    </button>
-                  </div>
-                  <div
-                    class="pg-profile-page__row"
-                  >
-                    <label
+                </div>
+                <div
+                  class="pg-profile-page__row"
+                >
+                  <div>
+                    <div
                       class="pg-profile-page__label"
                     >
-                      <div>
-                        Two-factor authentication
-                      </div>
-                      <span
-                        class="pg-profile-page__label-value__disabled"
-                      >
-                        Disabled
-                      </span>
-                    </label>
-                    <form
-                      class=""
-                    >
-                      <div
-                        class="custom-control custom-switch"
-                      >
-                        <input
-                          class="custom-control-input"
-                          id="2fa-switch"
-                          type="checkbox"
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="2fa-switch"
-                          title=""
-                        />
-                      </div>
-                    </form>
+                      Password
+                    </div>
+                    <div>
+                      ************
+                    </div>
                   </div>
+                  <button
+                    class="btn-block mt-3 mb-3 btn-lg btn btn-primary w-25 btn btn-primary btn-lg"
+                    type="button"
+                  >
+                    Change
+                  </button>
                 </div>
                 <div
-                  class="pg-profile-page__referral"
+                  class="pg-profile-page__row"
                 >
-                  <fieldset
-                    class="pg-copyable-text__section"
+                  <label
+                    class="pg-profile-page__label"
                   >
-                    <legend
-                      class="cr-deposit-crypto__copyable-title"
-                    >
-                      Referral Link
-                    </legend>
-                    <div
-                      class="cr-copyable-text-field pg-copyable-text-field__input"
-                    >
-                      <div
-                        class="input-group"
-                      >
-                        <div
-                          class="custom-input"
-                        >
-                          <label />
-                          <input
-                            class="form-control"
-                            id="referral-id"
-                            placeholder=""
-                            readonly=""
-                            type="text"
-                            value="http://localhost/signup?refid="
-                          />
-                        </div>
-                        <div
-                          class="input-group-append"
-                        >
-                          <button
-                            class="iconButton"
-                            title="Copy"
-                            type="button"
-                          >
-                            <svg
-                              height="24"
-                              viewBox="0 0 20 20"
-                              width="24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"
-                              />
-                              <path
-                                d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
+                    <div>
+                      Two-factor authentication
                     </div>
-                  </fieldset>
+                    <span
+                      class="pg-profile-page__label-value__disabled"
+                    >
+                      Disabled
+                    </span>
+                  </label>
+                  <form
+                    class=""
+                  >
+                    <div
+                      class="custom-control custom-switch"
+                    >
+                      <input
+                        class="custom-control-input"
+                        id="2fa-switch"
+                        type="checkbox"
+                      />
+                      <label
+                        class="custom-control-label"
+                        for="2fa-switch"
+                        title=""
+                      />
+                    </div>
+                  </form>
                 </div>
               </div>
-            </div>
-            <div
-              class="col-12 col-md-6"
-            >
               <div
-                class="pg-profile-page__box pg-profile-page-verification"
+                class="pg-profile-page__referral"
               >
-                <h3
-                  class="pg-profile-page-verification__title"
+                <fieldset
+                  class="pg-copyable-text__section"
                 >
-                  Profile Verification
-                </h3>
+                  <legend
+                    class="cr-deposit-crypto__copyable-title"
+                  >
+                    Referral Link
+                  </legend>
+                  <div
+                    class="cr-copyable-text-field pg-copyable-text-field__input"
+                  >
+                    <div
+                      class="input-group"
+                    >
+                      <div
+                        class="custom-input"
+                      >
+                        <label />
+                        <input
+                          class="form-control"
+                          id="referral-id"
+                          placeholder=""
+                          readonly=""
+                          type="text"
+                          value="http://localhost/signup?refid="
+                        />
+                      </div>
+                      <div
+                        class="input-group-append"
+                      >
+                        <button
+                          class="iconButton"
+                          title="Copy"
+                          type="button"
+                        >
+                          <svg
+                            height="24"
+                            viewBox="0 0 20 20"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"
+                            />
+                            <path
+                              d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-6"
+          >
+            <div
+              class="pg-profile-page__box pg-profile-page-verification"
+            >
+              <h3
+                class="pg-profile-page-verification__title"
+              >
+                Profile Verification
+              </h3>
+              <div
+                class="pg-profile-page-verification__progress-bar"
+              >
                 <div
-                  class="pg-profile-page-verification__progress-bar"
+                  class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--active"
+                >
+                  Level
+                  <span>
+                     1
+                  </span>
+                </div>
+                <div
+                  class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
+                >
+                  Level
+                  <span>
+                     2
+                  </span>
+                </div>
+                <div
+                  class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
+                >
+                  Level
+                  <span>
+                     3
+                  </span>
+                </div>
+                <div
+                  class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
+                >
+                  Level
+                  <span>
+                     4
+                  </span>
+                </div>
+                <div
+                  class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
+                >
+                  Level
+                  <span>
+                     5
+                  </span>
+                </div>
+              </div>
+              <div
+                class="pg-profile-page-verification__step pg-profile-page-verification__step--active"
+              >
+                <div
+                  class="pg-profile-page-verification__step__info"
                 >
                   <div
-                    class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--active"
+                    class="pg-profile-page-verification__step__info__title"
                   >
-                    Level
                     <span>
-                       1
+                      1. 
                     </span>
+                    Email address
                   </div>
                   <div
-                    class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
+                    class="pg-profile-page-verification__step__info__subtitle"
                   >
-                    Level
-                    <span>
-                       2
-                    </span>
-                  </div>
-                  <div
-                    class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
-                  >
-                    Level
-                    <span>
-                       3
-                    </span>
-                  </div>
-                  <div
-                    class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
-                  >
-                    Level
-                    <span>
-                       4
-                    </span>
-                  </div>
-                  <div
-                    class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
-                  >
-                    Level
-                    <span>
-                       5
-                    </span>
+                    Withdrawal allowed
                   </div>
                 </div>
                 <div
-                  class="pg-profile-page-verification__step pg-profile-page-verification__step--active"
+                  class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--active"
+                >
+                  <a
+                    href="/confirm"
+                  >
+                    Verify
+                  </a>
+                </div>
+              </div>
+              <div
+                class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+              >
+                <div
+                  class="pg-profile-page-verification__step__info"
                 >
                   <div
-                    class="pg-profile-page-verification__step__info"
+                    class="pg-profile-page-verification__step__info__title"
                   >
-                    <div
-                      class="pg-profile-page-verification__step__info__title"
-                    >
-                      <span>
-                        1. 
-                      </span>
-                      Email address
-                    </div>
-                    <div
-                      class="pg-profile-page-verification__step__info__subtitle"
-                    >
-                      Withdrawal allowed
-                    </div>
+                    <span>
+                      2. 
+                    </span>
+                    Verify Phone number
                   </div>
                   <div
-                    class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--active"
+                    class="pg-profile-page-verification__step__info__subtitle"
                   >
-                    <a
-                      href="/confirm"
-                    >
-                      Verify
-                    </a>
+                    To allow Deposits and Trades
                   </div>
                 </div>
                 <div
-                  class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+                  class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
+                >
+                  <a
+                    href="/confirm"
+                  >
+                    Verify
+                  </a>
+                </div>
+              </div>
+              <div
+                class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+              >
+                <div
+                  class="pg-profile-page-verification__step__info"
                 >
                   <div
-                    class="pg-profile-page-verification__step__info"
+                    class="pg-profile-page-verification__step__info__title"
                   >
-                    <div
-                      class="pg-profile-page-verification__step__info__title"
-                    >
-                      <span>
-                        2. 
-                      </span>
-                      Verify Phone number
-                    </div>
-                    <div
-                      class="pg-profile-page-verification__step__info__subtitle"
-                    >
-                      To allow Deposits and Trades
-                    </div>
+                    <span>
+                      3. 
+                    </span>
+                    Complete your profile
                   </div>
                   <div
-                    class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
+                    class="pg-profile-page-verification__step__info__subtitle"
                   >
-                    <a
-                      href="/confirm"
-                    >
-                      Verify
-                    </a>
+                     
                   </div>
                 </div>
                 <div
-                  class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+                  class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
+                >
+                  <a
+                    href="/confirm"
+                  >
+                    Verify
+                  </a>
+                </div>
+              </div>
+              <div
+                class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+              >
+                <div
+                  class="pg-profile-page-verification__step__info"
                 >
                   <div
-                    class="pg-profile-page-verification__step__info"
+                    class="pg-profile-page-verification__step__info__title"
                   >
-                    <div
-                      class="pg-profile-page-verification__step__info__title"
-                    >
-                      <span>
-                        3. 
-                      </span>
-                      Complete your profile
-                    </div>
-                    <div
-                      class="pg-profile-page-verification__step__info__subtitle"
-                    >
-                       
-                    </div>
+                    <span>
+                      4. 
+                    </span>
+                    Verify your Identity
                   </div>
                   <div
-                    class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
+                    class="pg-profile-page-verification__step__info__subtitle"
                   >
-                    <a
-                      href="/confirm"
-                    >
-                      Verify
-                    </a>
+                    Increase Withdrawal limit to 10 BTC
                   </div>
                 </div>
                 <div
-                  class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+                  class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
+                >
+                  <a
+                    href="/confirm"
+                  >
+                    Verify
+                  </a>
+                </div>
+              </div>
+              <div
+                class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+              >
+                <div
+                  class="pg-profile-page-verification__step__info"
                 >
                   <div
-                    class="pg-profile-page-verification__step__info"
+                    class="pg-profile-page-verification__step__info__title"
                   >
-                    <div
-                      class="pg-profile-page-verification__step__info__title"
-                    >
-                      <span>
-                        4. 
-                      </span>
-                      Verify your Identity
-                    </div>
-                    <div
-                      class="pg-profile-page-verification__step__info__subtitle"
-                    >
-                      Increase Withdrawal limit to 10 BTC
-                    </div>
+                    <span>
+                      5. 
+                    </span>
+                    Verify Proof of residence
                   </div>
                   <div
-                    class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
+                    class="pg-profile-page-verification__step__info__subtitle"
                   >
-                    <a
-                      href="/confirm"
-                    >
-                      Verify
-                    </a>
+                    Increase Withdrawal limit to 100 BTC
                   </div>
                 </div>
                 <div
-                  class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+                  class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
                 >
-                  <div
-                    class="pg-profile-page-verification__step__info"
+                  <a
+                    href="/confirm"
                   >
-                    <div
-                      class="pg-profile-page-verification__step__info__title"
-                    >
-                      <span>
-                        5. 
-                      </span>
-                      Verify Proof of residence
-                    </div>
-                    <div
-                      class="pg-profile-page-verification__step__info__subtitle"
-                    >
-                      Increase Withdrawal limit to 100 BTC
-                    </div>
-                  </div>
-                  <div
-                    class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
-                  >
-                    <a
-                      href="/confirm"
-                    >
-                      Verify
-                    </a>
-                  </div>
+                    Verify
+                  </a>
                 </div>
               </div>
             </div>
@@ -382,56 +378,48 @@ exports[`ProfileScreen test should render 1`] = `
     </div>
   </div>
   <div
-    class="row justifyCenter padding4"
+    class="container xl my4"
   >
     <div
-      class="cardXlg col grow colSpacing4"
+      class="cardDesktop pg-profile-page__api-keys col bodyBgColor"
     >
       <div
-        class="cardDesktop pg-profile-page__api-keys col bodyBgColor"
+        class="cardHeader padding3 primaryColor"
       >
-        <div
-          class="cardHeader padding3 primaryColor"
+        <h4>
+          My API Keys
+        </h4>
+      </div>
+      <div
+        class="col colSpacing2 padding3"
+      >
+        <p
+          class="pg-profile-page__label pg-profile-page__text-center"
         >
-          <h4>
-            My API Keys
-          </h4>
-        </div>
-        <div
-          class="col colSpacing2 padding3"
-        >
-          <p
-            class="pg-profile-page__label pg-profile-page__text-center"
-          >
-            Please enable Two-factor authentication
-          </p>
-        </div>
+          Please enable Two-factor authentication
+        </p>
       </div>
     </div>
   </div>
   <div
-    class="row justifyCenter padding4"
+    class="container xl my4"
   >
     <div
-      class="cardXlg col grow colSpacing4"
+      class="cardDesktop pg-profile-page__activity col bodyBgColor"
     >
       <div
-        class="cardDesktop pg-profile-page__activity col bodyBgColor"
+        class="cardHeader padding3 primaryColor"
+      >
+        <h4>
+          Account Activity
+        </h4>
+      </div>
+      <div
+        class="col colSpacing2 padding3"
       >
         <div
-          class="cardHeader padding3 primaryColor"
-        >
-          <h4>
-            Account Activity
-          </h4>
-        </div>
-        <div
-          class="col colSpacing2 padding3"
-        >
-          <div
-            class="pg-history-elem pg-history-empty"
-          />
-        </div>
+          class="pg-history-elem pg-history-empty"
+        />
       </div>
     </div>
   </div>

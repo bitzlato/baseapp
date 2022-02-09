@@ -6,6 +6,7 @@ import { Card } from 'src/components/Card/Card';
 import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
 import { loginWithRedirect } from 'src/helpers/auth0';
+import { Container } from 'web/src/components/Container/Container';
 
 export const VerifyEmailModal: React.FC = () => {
   const t = useT();
@@ -13,13 +14,15 @@ export const VerifyEmailModal: React.FC = () => {
   const email = userError?.payload?.email ?? '';
 
   return (
-    <Card size="md" header={<h4>{t('verify.email.header')}</h4>}>
-      <Box as="p" textSize="lg">
-        {t('verify.email.content', { email })}
-      </Box>
-      <Button size="large" variant="primary" onClick={() => loginWithRedirect()}>
-        OK
-      </Button>
-    </Card>
+    <Container maxWidth="md" my="4">
+      <Card header={<h4>{t('verify.email.header')}</h4>}>
+        <Box as="p" textSize="lg">
+          {t('verify.email.content', { email })}
+        </Box>
+        <Button size="large" variant="primary" onClick={() => loginWithRedirect()}>
+          OK
+        </Button>
+      </Card>
+    </Container>
   );
 };

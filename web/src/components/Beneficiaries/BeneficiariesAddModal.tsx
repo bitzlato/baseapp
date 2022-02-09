@@ -15,6 +15,7 @@ import { Blockchain } from 'src/modules/public/blockchains/types';
 import { tradeUrl } from 'src/api/config';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { Card } from 'web/src/components/Card/Card';
+import { Container } from 'web/src/components/Container/Container';
 import { Box } from '../Box/Box';
 import { Button } from '../Button/Button';
 import { TextInput } from '../Input/TextInput';
@@ -175,17 +176,18 @@ const BeneficiariesAddModalComponent: React.FC<Props> = ({ wallet, onCloseModal 
     </MobileModal>
   ) : (
     <div className="cr-modal">
-      <Card
-        size="md"
-        header={
-          <Box row spacing="2" justify="between">
-            <h4>{t('page.body.wallets.beneficiaries.addAddressModal.header')}</h4>
-            <div className="pg-profile-page__close" onClick={handleClickToggleAddAddressModal} />
-          </Box>
-        }
-      >
-        {renderAddAddressModalCryptoBody()}
-      </Card>
+      <Container maxWidth="md">
+        <Card
+          header={
+            <Box row spacing="2" justify="between">
+              <h4>{t('page.body.wallets.beneficiaries.addAddressModal.header')}</h4>
+              <div className="pg-profile-page__close" onClick={handleClickToggleAddAddressModal} />
+            </Box>
+          }
+        >
+          {renderAddAddressModalCryptoBody()}
+        </Card>
+      </Container>
     </div>
   );
 };
