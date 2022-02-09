@@ -22,6 +22,7 @@ import { useFetch } from 'src/hooks/useFetch';
 import { Estimated } from 'src/containers/Wallets/Estimated';
 import { accountUrl } from 'src/api';
 import type { SelectOption } from 'src/components/Select/Select';
+import { Container } from 'web/src/components/Container/Container';
 import { getList } from './helpers';
 import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
@@ -90,95 +91,100 @@ export const WalletsScreen: React.FC = () => {
   const tabValue = getTab(tabs, tab)?.value ?? '';
 
   return (
-    <Card size="lg" outer={<Estimated />}>
-      <Box row align="start">
-        <WalletList
-          className={s.walletsList}
-          walletItems={list}
-          activeIndex={listIndex}
-          onWalletSelectionChange={onListSelected}
-        />
-        <Box flex1 self="stretch" col className={s.walletsCoin}>
-          {item && (
-            <Tabs value={tabValue} onSelectionChange={onTabSelected}>
-              <Box padding="5" col spacing="5" textColor="primary">
-                <Box row spacing="2">
-                  <CryptoCurrencyIcon size="large" currency={item.currency} />
-                  <Box col align="start" textAlign="start">
-                    <span className={walletItemS.title}>
-                      {getCurrencyCodeSymbol(item.currency)}
-                    </span>
-                    <span className={walletItemS.description}>{item.name}</span>
+    <Container maxWidth="lg" my="4">
+      <Box grow col spacing="4">
+        <Estimated />
+        <Card>
+          <Box row align="start">
+            <WalletList
+              className={s.walletsList}
+              walletItems={list}
+              activeIndex={listIndex}
+              onWalletSelectionChange={onListSelected}
+            />
+            <Box flex1 self="stretch" col className={s.walletsCoin}>
+              {item && (
+                <Tabs value={tabValue} onSelectionChange={onTabSelected}>
+                  <Box padding="5" col spacing="5" textColor="primary">
+                    <Box row spacing="2">
+                      <CryptoCurrencyIcon size="large" currency={item.currency} />
+                      <Box col align="start" textAlign="start">
+                        <span className={walletItemS.title}>
+                          {getCurrencyCodeSymbol(item.currency)}
+                        </span>
+                        <span className={walletItemS.description}>{item.name}</span>
+                      </Box>
+                      <Box grow />
+                      <TabList>
+                        {tabs.map((d) => (
+                          <Tab key={d.value} size="large" value={d.value}>
+                            {t(d.label)}
+                          </Tab>
+                        ))}
+                      </TabList>
+                    </Box>
+                    <Box row gap="5" wrap style={{ marginTop: 'calc(var(--gap) * 5 / 2)' }}>
+                      <Balance title={t('P2P Balance')} money={item.balanceP2P} />
+                      <Balance title={t('Exchange Balance')} money={item.balanceMarket} />
+                      <Balance title={t('Locked')} money={item.locked} />
+                    </Box>
+                    <TabPanel value={TabId.deposit}>
+                      {wallet && (
+                        <>
+                          {item.currency === 'BTC' ? (
+                            <InvoiceExplanation
+                              currency={item.currency}
+                              onClick={() => onTabSelected(TabId.transfer)}
+                            />
+                          ) : (
+                            <DepositCrypto wallet={wallet} />
+                          )}
+                          <WalletHistory
+                            label="deposit"
+                            type="deposits"
+                            currency={wallet.currency.code.toLowerCase()}
+                          />
+                        </>
+                      )}
+                    </TabPanel>
+                    <TabPanel value={TabId.withdraw}>
+                      {wallet && (
+                        <>
+                          {item.currency === 'BTC' ? (
+                            <InvoiceExplanation
+                              currency={item.currency}
+                              onClick={() => onTabSelected(TabId.transfer)}
+                            />
+                          ) : (
+                            <Withdraw wallet={wallet} />
+                          )}
+                          <WalletHistory
+                            label="withdraw"
+                            type="withdraws"
+                            currency={wallet.currency.code.toLowerCase()}
+                          />
+                        </>
+                      )}
+                    </TabPanel>
+                    <TabPanel value={TabId.transfer}>
+                      {item.hasTransfer && (
+                        <Transfer
+                          currency={item.balance.currency}
+                          balanceMarket={item.balanceMarket.toString()}
+                          balanceP2P={item.balanceP2P.toString()}
+                          transfers={transfers}
+                          onChangeTransfers={() => setTransfers(transfers + 1)}
+                        />
+                      )}
+                    </TabPanel>
                   </Box>
-                  <Box grow />
-                  <TabList>
-                    {tabs.map((d) => (
-                      <Tab key={d.value} size="large" value={d.value}>
-                        {t(d.label)}
-                      </Tab>
-                    ))}
-                  </TabList>
-                </Box>
-                <Box row gap="5" wrap style={{ marginTop: 'calc(var(--gap) * 5 / 2)' }}>
-                  <Balance title={t('P2P Balance')} money={item.balanceP2P} />
-                  <Balance title={t('Exchange Balance')} money={item.balanceMarket} />
-                  <Balance title={t('Locked')} money={item.locked} />
-                </Box>
-                <TabPanel value={TabId.deposit}>
-                  {wallet && (
-                    <>
-                      {item.currency === 'BTC' ? (
-                        <InvoiceExplanation
-                          currency={item.currency}
-                          onClick={() => onTabSelected(TabId.transfer)}
-                        />
-                      ) : (
-                        <DepositCrypto wallet={wallet} />
-                      )}
-                      <WalletHistory
-                        label="deposit"
-                        type="deposits"
-                        currency={wallet.currency.code.toLowerCase()}
-                      />
-                    </>
-                  )}
-                </TabPanel>
-                <TabPanel value={TabId.withdraw}>
-                  {wallet && (
-                    <>
-                      {item.currency === 'BTC' ? (
-                        <InvoiceExplanation
-                          currency={item.currency}
-                          onClick={() => onTabSelected(TabId.transfer)}
-                        />
-                      ) : (
-                        <Withdraw wallet={wallet} />
-                      )}
-                      <WalletHistory
-                        label="withdraw"
-                        type="withdraws"
-                        currency={wallet.currency.code.toLowerCase()}
-                      />
-                    </>
-                  )}
-                </TabPanel>
-                <TabPanel value={TabId.transfer}>
-                  {item.hasTransfer && (
-                    <Transfer
-                      currency={item.balance.currency}
-                      balanceMarket={item.balanceMarket.toString()}
-                      balanceP2P={item.balanceP2P.toString()}
-                      transfers={transfers}
-                      onChangeTransfers={() => setTransfers(transfers + 1)}
-                    />
-                  )}
-                </TabPanel>
-              </Box>
-            </Tabs>
-          )}
-        </Box>
+                </Tabs>
+              )}
+            </Box>
+          </Box>
+        </Card>
       </Box>
-    </Card>
+    </Container>
   );
 };
 

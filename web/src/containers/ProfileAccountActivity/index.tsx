@@ -19,6 +19,7 @@ import {
   selectUserActivityPageCount,
   UserActivityDataInterface,
 } from 'web/src/modules';
+import { Container } from 'web/src/components/Container/Container';
 
 interface ReduxProps {
   loading: boolean;
@@ -54,14 +55,16 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
       </h4>
     );
     return (
-      <Card className="pg-profile-page__activity" size="xlg" header={cardHeader}>
-        <div className={`pg-history-elem ${userActivity.length ? '' : 'pg-history-empty'}`}>
-          {userActivity.length ? this.renderContent() : null}
-          {!userActivity.length && !loading ? (
-            <p className="pg-history-elem__empty">{emptyMsg}</p>
-          ) : null}
-        </div>
-      </Card>
+      <Container maxWidth="xl" my="4">
+        <Card className="pg-profile-page__activity" header={cardHeader}>
+          <div className={`pg-history-elem ${userActivity.length ? '' : 'pg-history-empty'}`}>
+            {userActivity.length ? this.renderContent() : null}
+            {!userActivity.length && !loading ? (
+              <p className="pg-history-elem__empty">{emptyMsg}</p>
+            ) : null}
+          </div>
+        </Card>
+      </Container>
     );
   }
 

@@ -18,6 +18,7 @@ import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { TradingFee } from 'src/modules/public/tradingFees/types';
 import { setDocumentTitle } from '../../helpers';
 import s from './Fees.postcss';
+import { Container } from 'web/src/components/Container/Container';
 
 export const FeesScreen: React.FC = () => {
   const t = useT();
@@ -80,30 +81,36 @@ export const FeesScreen: React.FC = () => {
           backTitle={t('page.body.profile.header.account')}
           onGoBack={() => history.push('/profile')}
         />
-        <Card>
-          <TradingFees tradingFees={data} />
-        </Card>
-        <Card>
-          <Box col spacing="2">
-            <Box textColor="primary" as="h4">
-              {t('page.fees.table.header')}
+        <Container maxWidth="md" my="4">
+          <Card>
+            <TradingFees tradingFees={data} />
+          </Card>
+        </Container>
+        <Container maxWidth="md" my="4">
+          <Card>
+            <Box col spacing="2">
+              <Box textColor="primary" as="h4">
+                {t('page.fees.table.header')}
+              </Box>
+              <Table tableClassName={s.feesTable} header={header} data={tableData} />
             </Box>
-            <Table tableClassName={s.feesTable} header={header} data={tableData} />
-          </Box>
-        </Card>
+          </Card>
+        </Container>
       </>
     );
   }
 
   return (
-    <Card size="lg" header={<h3>{t('page.body.landing.footer.fees')}</h3>}>
-      <Box col spacing="4">
-        <TradingFees tradingFees={data} />
-        <Box textColor="primary" as="h4">
-          {t('page.fees.table.header')}
+    <Container maxWidth="lg" my="4">
+      <Card header={<h3>{t('page.body.landing.footer.fees')}</h3>}>
+        <Box col spacing="4">
+          <TradingFees tradingFees={data} />
+          <Box textColor="primary" as="h4">
+            {t('page.fees.table.header')}
+          </Box>
+          <Table tableClassName={s.feesTable} header={header} data={tableData} />
         </Box>
-        <Table tableClassName={s.feesTable} header={header} data={tableData} />
-      </Box>
-    </Card>
+      </Card>
+    </Container>
   );
 };
