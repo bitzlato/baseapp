@@ -39,7 +39,7 @@ describe('Beneficiaries Fetch', () => {
   ];
 
   const mockBeneficiaries = () => {
-    mockAxios.onGet(`/account/beneficiaries`).reply(200, fakeBeneficiaries);
+    mockAxios.onGet(`/account/beneficiaries/`).reply(200, fakeBeneficiaries);
   };
 
   const error: CommonError = {

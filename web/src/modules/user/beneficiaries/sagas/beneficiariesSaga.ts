@@ -16,7 +16,7 @@ export function* beneficiariesSaga(action: BeneficiariesFetch) {
     }
     const beneficiaries: Beneficiary[] = yield call(
       API.get(config),
-      `/account/beneficiaries${params}`,
+      `/account/beneficiaries/${params}`,
     );
 
     yield put(beneficiariesData(beneficiaries));
