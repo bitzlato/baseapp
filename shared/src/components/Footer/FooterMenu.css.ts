@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { sprinkles } from 'shared/src/theme/sprinkles.css';
+import { responsiveStyle } from 'shared/src/theme/themeUtils';
 
 export const title = sprinkles({
   color: 'footerTitle',
@@ -33,23 +34,25 @@ export const chevronOpened = style({
   },
 });
 
-export const links = style({
-  display: 'flex',
-  flexDirection: 'column',
-  minWidth: 90,
-  whiteSpace: 'nowrap',
-  opacity: 0,
-  maxHeight: 0,
-  overflow: 'hidden',
-  transition:
-    'opacity 0.3s ease-in-out, max-height 0.3s ease-in-out, margin-bottom 0.3s ease-in-out',
-  '@media': {
-    'screen and (min-width: 768px)': {
+export const links = style([
+  {
+    display: 'flex',
+    flexDirection: 'column',
+    minWidth: 90,
+    whiteSpace: 'nowrap',
+    opacity: 0,
+    maxHeight: 0,
+    overflow: 'hidden',
+    transition:
+      'opacity 0.3s ease-in-out, max-height 0.3s ease-in-out, margin-bottom 0.3s ease-in-out',
+  },
+  responsiveStyle({
+    tablet: {
       opacity: 1,
       maxHeight: '100%',
     },
-  },
-});
+  }),
+]);
 
 export const linksOpened = style([
   sprinkles({
