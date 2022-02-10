@@ -54,7 +54,7 @@ export const WalletHistory: FC<Props> = (props) => {
   );
 
   useEffect(() => {
-    dispatch(fetchHistory({ page: 0, type, limit: 6 }));
+    dispatch(fetchHistory({ currency, page: 0, type, limit: 6 }));
     if (currencies.length === 0) {
       dispatch(currenciesFetch());
     }
@@ -65,7 +65,7 @@ export const WalletHistory: FC<Props> = (props) => {
 
   useEffect(() => {
     dispatch(resetHistory());
-    dispatch(fetchHistory({ page: 0, type, limit: 6 }));
+    dispatch(fetchHistory({ currency, page: 0, type, limit: 6 }));
   }, [dispatch, type, currency, withdrawSuccess]);
 
   useEffect(() => {
@@ -79,11 +79,11 @@ export const WalletHistory: FC<Props> = (props) => {
   ];
 
   const onClickPrevPage = () => {
-    dispatch(fetchHistory({ page: Number(page) - 1, currency, type, limit: 6 }));
+    dispatch(fetchHistory({ currency, page: Number(page) - 1, type, limit: 6 }));
   };
 
   const onClickNextPage = () => {
-    dispatch(fetchHistory({ page: Number(page) + 1, currency, type, limit: 6 }));
+    dispatch(fetchHistory({ currency, page: Number(page) + 1, type, limit: 6 }));
   };
 
   const retrieveData = (list: WalletHistoryList) => {
