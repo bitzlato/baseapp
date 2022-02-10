@@ -18,7 +18,7 @@ export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletIt
       currency: ccy.code,
       icon: wallet.icon_id,
       balance,
-      balanceP2P: createMoney(item?.p2p_balance ?? 0, ccy),
+      balanceP2P: item?.p2p_balance ? createMoney(item.p2p_balance, ccy) : undefined,
       balanceMarket: item?.market_balance ? createMoney(item.market_balance, ccy) : wallet.balance,
       locked: item ? getLocked(ccy, item) : wallet.locked,
       approximate: createMoney(wallet.price, PENCE_CCY).multiply(balance.toString()),

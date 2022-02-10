@@ -5,12 +5,12 @@ import s from './AmountFormat.postcss';
 
 type Renderer = (amountFormatted: string) => ReactElement;
 
-interface Props extends FormatOptions {
+export interface AmountFormatProps extends FormatOptions {
   money: Money;
   children?: Renderer;
 }
 
-export const AmountFormat: FC<Props> = ({ money, children, ...options }: Props) => {
+export const AmountFormat: FC<AmountFormatProps> = ({ money, children, ...options }) => {
   const amountFormatted = money.toFormat(options);
 
   if (children) {

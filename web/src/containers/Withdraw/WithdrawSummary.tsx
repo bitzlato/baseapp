@@ -4,6 +4,7 @@ import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { useT } from 'src/hooks/useT';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { createMoney } from 'src/helpers/money';
+import { NoAmountFormat } from 'web/src/components/Format/NoAmountFormat';
 import { SummaryField } from '../../components';
 import { BlockchainCurrencyMoney, Wallet } from '../../modules';
 
@@ -19,7 +20,7 @@ export const WithdrawSummary: React.FC<Props> = ({ wallet, total, blockchainCurr
   return (
     <Box flex1 col spacing="sm">
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.fee')}>
-        {blockchainCurrency ? <AmountFormat money={blockchainCurrency.withdraw_fee} /> : '-'}
+        <NoAmountFormat money={blockchainCurrency?.withdraw_fee} />
       </SummaryField>
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.total')}>
         <AmountFormat money={createMoney(total || 0, wallet.currency)} />

@@ -5,6 +5,7 @@ import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurr
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { useT } from 'src/hooks/useT';
+import { NoAmountFormat } from 'web/src/components/Format/NoAmountFormat';
 
 interface Props {
   wallet: WalletItemData;
@@ -28,13 +29,13 @@ export const WalletMobileBalance: React.FC<Props> = ({ wallet }) => {
         <Box row spacing justify="between">
           <span>{t('P2P Balance')}</span>
           <span>
-            <AmountFormat money={wallet.balanceP2P} />
+            <NoAmountFormat money={wallet.balanceP2P} />
           </span>
         </Box>
         <Box row spacing justify="between">
           <span>{t('Exchange Balance')}</span>
           <span>
-            <AmountFormat money={wallet.balanceMarket} />
+            <NoAmountFormat money={wallet.balanceMarket} />
           </span>
         </Box>
         <Box row spacing justify="between">

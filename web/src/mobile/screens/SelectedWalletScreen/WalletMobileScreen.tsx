@@ -90,8 +90,8 @@ export const WalletMobileScreen: React.FC = () => {
                 {general.hasTransfer && (
                   <Transfer
                     currency={general.balance.currency}
-                    balanceMarket={general.balanceMarket.toString()}
-                    balanceP2P={general.balanceP2P.toString()}
+                    balanceMarket={general.balanceMarket?.toString() ?? '0'}
+                    balanceP2P={general.balanceP2P?.toString() ?? '0'}
                     transfers={transfers}
                     onChangeTransfers={() => setTransfers(transfers + 1)}
                   />
