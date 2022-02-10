@@ -12,7 +12,7 @@ interface Props {
   mobile?: boolean | undefined;
 }
 
-export const DropdownMenu = forwardRef<HTMLElement, PropsWithChildren<Props>>(
+export const DropdownMenu = forwardRef<HTMLDivElement, PropsWithChildren<Props>>(
   ({ dropdownAlign, dropdownSize, open = false, mobile = false, children }, ref) => {
     const context = useContext(HeaderContext);
     const themeClassName = getThemeClassName(context);
