@@ -25,6 +25,8 @@ import {
   selectUserInfo,
   Wallet,
 } from '../../modules';
+import { createMoney } from 'web/src/helpers/money';
+import { DEFAULT_CURRENCY } from 'web/src/modules/public/currencies/defaults';
 
 interface Props {
   wallet: Wallet;
@@ -55,7 +57,11 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
     (d) => d.blockchain_id === blockchain?.id,
-  );
+  ) ?? {
+    blockchain_id: 0,
+    min_deposit_amount: createMoney(0, DEFAULT_CURRENCY),
+    withdraw_fee: createMoney(0, DEFAULT_CURRENCY),
+  };
 
   const handleCopy = () => {
     dispatch(
@@ -121,7 +127,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
                   depositAddress={depositAddress.address}
                   explorerAddress={blockchain.explorer_address}
                   currency={wallet}
-                  blockchainCurrency={blockchainCurrency!}
+                  blockchainCurrency={blockchainCurrency}
                 />
               ) : null}
               <CopyableTextField
@@ -134,11 +140,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
                 onCopy={handleCopy}
               />
             </Box>
-            <DepositSummary
-              currency={wallet}
-              blockchainCurrency={blockchainCurrency!}
-              showWarning
-            />
+            <DepositSummary currency={wallet} blockchainCurrency={blockchainCurrency} showWarning />
           </>
         )}
       </Box>
