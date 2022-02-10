@@ -3,7 +3,7 @@ import { Box } from './Box';
 import { button, ButtonVariants } from './Button.css';
 
 type ButtonProps<C extends ElementType = 'button'> = NonNullable<ButtonVariants> & {
-  as?: C;
+  as?: C | undefined;
   onClick?: (() => void) | undefined;
 };
 
@@ -14,7 +14,7 @@ type ButtonComponent = <C extends ElementType = 'button'>(
   props: Props<C>,
 ) => ReturnType<FC<Props<C>>>;
 
-export const Button: ButtonComponent = ({
+export const Button = (({
   as = 'button' as const,
   children,
   variant = 'contained',
@@ -24,8 +24,8 @@ export const Button: ButtonComponent = ({
   fullWidth = false,
   onClick,
   ...props
-}) => {
-  let type: string | undefined;
+}: Props<'button'>) => {
+  let type: Props<'button'>['type'] | undefined;
   if (as === 'button' && !('type' in props)) {
     type = 'button';
   }
@@ -42,4 +42,4 @@ export const Button: ButtonComponent = ({
       {children}
     </Box>
   );
-};
+}) as ButtonComponent;

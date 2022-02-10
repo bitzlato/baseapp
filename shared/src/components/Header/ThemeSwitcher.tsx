@@ -22,11 +22,17 @@ export const ThemeSwitcher: FC<Props> = ({ itemInMenu = false }) => {
     onThemeChange(theme === 'light' ? 'dark' : 'light');
   };
 
+  const switcherProps = !itemInMenu
+    ? {
+        as: 'button' as const,
+        type: 'button',
+        onClick: handleThemeChange,
+      }
+    : { as: 'span' as const };
   const switcher = (
     <Box
-      as={!itemInMenu ? 'button' : 'span'}
+      {...switcherProps}
       className={s.themeSwitcher}
-      type={!itemInMenu ? 'button' : undefined}
       bg="primary"
       display="flex"
       alignItems="center"
@@ -38,7 +44,6 @@ export const ThemeSwitcher: FC<Props> = ({ itemInMenu = false }) => {
       w="20x"
       h="9x"
       alignSelf="center"
-      onClick={!itemInMenu ? handleThemeChange : undefined}
     >
       <Box as="span" className={s.sun}>
         <Sun />
