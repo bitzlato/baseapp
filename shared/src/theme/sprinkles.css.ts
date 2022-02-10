@@ -1,4 +1,5 @@
 import { defineProperties, createSprinkles } from '@vanilla-extract/sprinkles';
+import { queries } from 'shared/src/theme/themeUtils';
 import { vars } from './vars.css';
 
 const sizes = {
@@ -30,9 +31,11 @@ const sizes = {
 };
 
 const fontSizes = {
+  caption: 12 as const,
   small: 14 as const,
   medium: 16 as const,
   large: 18 as const,
+  lead: 20 as const,
 };
 
 const lineHeights = {
@@ -56,11 +59,11 @@ const radii = {
 const responsiveProperties = defineProperties({
   conditions: {
     mobile: {},
-    tablet: { '@media': 'screen and (min-width: 768px)' },
-    desktop: { '@media': 'screen and (min-width: 992px)' },
-    desktopXL: { '@media': 'screen and (min-width: 1200px)' },
-    // desktopXXL: { '@media': 'screen and (min-width: 1400px)' },
-    desktopXXXL: { '@media': 'screen and (min-width: 1600px)' },
+    tablet: { '@media': queries.tablet },
+    desktop: { '@media': queries.desktop },
+    desktopXL: { '@media': queries.desktopXL },
+    // desktopXXL: { '@media': queries.desktopXXL },
+    desktopXXXL: { '@media': queries.desktopXXXL },
   },
   defaultCondition: 'mobile',
   responsiveArray: ['mobile', 'tablet', 'desktop', 'desktopXL', /* 'desktopXXL', */ 'desktopXXXL'],
@@ -87,6 +90,7 @@ const responsiveProperties = defineProperties({
     width: sizes,
     height: sizes,
     fontSize: fontSizes,
+    // TODO: move to unresponsiveProperties
     lineHeight: lineHeights,
   },
   shorthands: {
@@ -110,7 +114,7 @@ const responsiveProperties = defineProperties({
   },
 });
 
-const colorProperties = defineProperties({
+const interactiveProperties = defineProperties({
   conditions: {
     default: {},
     hover: { selector: '&:hover, &:focus' },
@@ -137,10 +141,13 @@ const colorProperties = defineProperties({
 
 const unresponsiveProperties = defineProperties({
   properties: {
+    // flex
     alignSelf: ['center'],
     flexWrap: ['wrap', 'nowrap'],
     flexShrink: [0, 1, 2],
     flexGrow: [0, 1, 2],
+
+    // border
     border: ['none'],
     borderWidth: borderWidths,
     borderStyle: ['solid'],
@@ -153,9 +160,8 @@ const unresponsiveProperties = defineProperties({
     borderLeftWidth: borderWidths,
     borderLeftStyle: ['solid'],
     borderRadius: radii,
-    fontWeight: ['400', '600'],
-    textAlign: ['left', 'center'],
-    cursor: ['default', 'pointer', 'not-allowed'],
+
+    // layout
     position: ['absolute', 'relative'],
     top: [0],
     right: [0],
@@ -165,6 +171,19 @@ const unresponsiveProperties = defineProperties({
       '1': 99991,
     },
     overflowY: ['auto'],
+
+    // other
+    cursor: ['default', 'pointer', 'not-allowed'],
+  },
+});
+
+const typographyProperties = defineProperties({
+  properties: {
+    fontFamily: {
+      brand: "'Montserrat', helvetica, sans-serif",
+    },
+    fontWeight: ['400', '600'],
+    textAlign: ['left', 'center'],
     textTransform: ['uppercase'],
     whiteSpace: ['nowrap'],
   },
@@ -172,8 +191,9 @@ const unresponsiveProperties = defineProperties({
 
 export const sprinkles = createSprinkles(
   responsiveProperties,
-  colorProperties,
+  interactiveProperties,
   unresponsiveProperties,
+  typographyProperties,
 );
 
 export type Sprinkles = Parameters<typeof sprinkles>[0];

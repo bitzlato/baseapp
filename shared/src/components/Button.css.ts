@@ -4,12 +4,10 @@ import { sprinkles } from 'shared/src/theme/sprinkles.css';
 export const button = recipe({
   base: [
     sprinkles({
+      fontFamily: 'brand',
       display: 'inline-block',
       fontWeight: '600',
     }),
-    {
-      fontFamily: "'Montserrat', helvetica, sans-serif",
-    },
   ],
 
   variants: {

@@ -1,7 +1,6 @@
 import { forwardRef, ElementType, FC, ComponentProps, PropsWithChildren } from 'react';
 import cn from 'classnames';
 import { OptionalWithUndefined } from 'shared/src/types';
-
 import * as resetStyles from 'shared/src/theme/reset.css';
 import { sprinkles, Sprinkles } from 'shared/src/theme/sprinkles.css';
 
@@ -37,10 +36,10 @@ export const Box = forwardRef<any, Props>(
     return (
       <Component
         className={cn(
-          className,
           resetStyles.base,
           resetStyles.element[Component as keyof typeof resetStyles.element],
           sprinkles(sprinklesProps),
+          className,
         )}
         {...componentProps}
         ref={ref}
