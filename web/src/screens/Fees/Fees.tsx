@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { useFetchCache } from 'src/hooks/useFetchCache';
 import { useAlert } from 'src/hooks/useAlert';
-import { Table } from 'src/components';
+import { CellData, Table } from 'src/components';
 import { currenciesFetch } from 'src/modules/public/currencies/actions';
 import { selectCurrencies } from 'src/modules/public/currencies/selectors';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
@@ -14,11 +14,13 @@ import { Box } from 'src/components/Box';
 import { Card } from 'src/components/Card/Card';
 import { TradingFees } from 'src/containers/Fees/TradingFees';
 import { Subheader } from 'src/mobile/components/Subheader';
-import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { TradingFee } from 'src/modules/public/tradingFees/types';
 import { setDocumentTitle } from '../../helpers';
 import s from './Fees.postcss';
 import { Container } from 'web/src/components/Container/Container';
+import { Blockchain } from 'web/src/modules/public/blockchains/types';
+import { tradeUrl } from 'web/src/api/config';
+import { CurrencyTicker } from 'web/src/components/CurrencyTicker/CurrencyTicker';
 
 export const FeesScreen: React.FC = () => {
   const t = useT();
@@ -35,68 +37,75 @@ export const FeesScreen: React.FC = () => {
 
   const currencies = useSelector(selectCurrencies);
 
-  const { data = [], error } = useFetchCache<TradingFee[]>('/api/v2/peatio/public/trading_fees');
+  const { data = [], error } = useFetchCache<TradingFee[]>(`${tradeUrl()}/public/trading_fees`);
   useAlert(error);
+
+  const { data: blockchains = [] } = useFetchCache<Blockchain[]>(
+    `${tradeUrl()}/public/blockchains`,
+  );
 
   const header = [
     t('page.fees.table.coin'),
     isDesktop && t('page.fees.table.name'),
-    isDesktop && t('page.fees.table.network'),
+    t('page.fees.table.network'),
     t('page.fees.table.deposit_fee'),
     t('page.fees.table.min_deposit'),
     t('page.fees.table.withdraw_fee'),
     t('page.fees.table.min_withdraw'),
   ];
 
-  const tableData = currencies.map((d) => {
-    const ccy = d.id.toUpperCase();
-    const [token, network] = ccy.split('-');
-    return [
-      isDesktop ? (
-        <Box row spacing>
-          <CryptoCurrencyIcon currency={d.id} icon={d.icon_url} iconId={d.icon_id} size="small" />
+  const tableData: CellData[][] = [];
+
+  for (let c of currencies) {
+    for (let bc of c.blockchain_currencies) {
+      const ccy = c.id.toUpperCase();
+      const [token, network] = ccy.split('-');
+      const blockchain = blockchains.find((d) => d.id === bc.blockchain_id);
+      tableData.push([
+        isDesktop ? (
+          <Box row spacing>
+            <CryptoCurrencyIcon currency={c.id} size="small" />
+            <span>{token}</span>
+          </Box>
+        ) : network ? (
+          <CurrencyTicker symbol={ccy} />
+        ) : (
           <span>{token}</span>
-        </Box>
-      ) : (
-        <CurrencyTicker symbol={ccy} />
-      ),
-      isDesktop && d.name,
-      isDesktop && (network || token),
-      d.deposit_fee.isZero() ? (
-        t('page.body.wallets.tabs.deposit.ccy.message.fee.free')
-      ) : (
-        <AmountFormat money={d.deposit_fee} />
-      ),
-      <AmountFormat money={d.min_deposit_amount} />,
-      <AmountFormat money={d.withdraw_fee} />,
-      <AmountFormat money={d.min_withdraw_amount} />,
-    ];
-  });
+        ),
+        isDesktop && c.name,
+        blockchain?.name ?? network ?? token,
+        c.deposit_fee.isZero() ? (
+          t('page.body.wallets.tabs.deposit.ccy.message.fee.free')
+        ) : (
+          <AmountFormat money={c.deposit_fee} />
+        ),
+        <AmountFormat money={bc.min_deposit_amount} />,
+        <AmountFormat money={bc.withdraw_fee} />,
+        <AmountFormat money={c.min_withdraw_amount} />,
+      ]);
+    }
+  }
 
   if (isMobile) {
     return (
-      <>
+      <Box col spacing="sm">
         <Subheader
           title={t('page.mobile.profileLinks.history.fees')}
           backTitle={t('page.body.profile.header.account')}
           onGoBack={() => history.push('/profile')}
         />
-        <Container maxWidth="md" my="4">
-          <Card>
-            <TradingFees tradingFees={data} />
-          </Card>
-        </Container>
-        <Container maxWidth="md" my="4">
-          <Card>
-            <Box col spacing="2">
-              <Box textColor="primary" as="h4">
-                {t('page.fees.table.header')}
-              </Box>
-              <Table tableClassName={s.feesTable} header={header} data={tableData} />
+        <Box bgColor="body" padding="2X3">
+          <TradingFees tradingFees={data} />
+        </Box>
+        <Box bgColor="body" padding="2X3">
+          <Box col spacing="2">
+            <Box textColor="primary" as="h4">
+              {t('page.fees.table.header')}
             </Box>
-          </Card>
-        </Container>
-      </>
+            <Table tableClassName={s.feesTable} header={header} data={tableData} />
+          </Box>
+        </Box>
+      </Box>
     );
   }
 

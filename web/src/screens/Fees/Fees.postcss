@@ -8,20 +8,26 @@
     }
 
     &:last-child {
-      padding-right: 0 !important;
+      padding-right: 0;
       width: initial;
     }
 
     @media (--breakpoint-up-md) {
       &:nth-child(n+4) {
-        text-align: right !important;
+        text-align: right;
       }
     }
 
     @media (--breakpoint-down-md) {
-      &:nth-child(n+2) {
-        text-align: right !important;
+      &:nth-child(n+4) {
+        text-align: right;
       }
+    }
+  }
+
+  @media (--breakpoint-down-md) {
+    th {
+      text-align: center !important;
     }
   }
 }

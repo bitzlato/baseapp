@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router';
 import { Button } from 'src/components/Button/Button';
 import { Box } from 'src/components/Box';
@@ -29,11 +29,10 @@ interface Props {
   wallet: Wallet;
 }
 
-export const WithdrawBody: React.FC<Props> = (props) => {
-  const [amount, setAmount] = React.useState('');
-  const [beneficiary, setBeneficiary] = React.useState(defaultBeneficiary);
-  const [otpCode, setOtpCode] = React.useState('');
-  const [total, setTotal] = React.useState('');
+export const WithdrawBody: FC<Props> = (props) => {
+  const [amount, setAmount] = useState('');
+  const [beneficiary, setBeneficiary] = useState(defaultBeneficiary);
+  const [otpCode, setOtpCode] = useState('');
 
   const t = useT();
   const isMobileDevice = useSelector(selectMobileDeviceState);
@@ -48,24 +47,36 @@ export const WithdrawBody: React.FC<Props> = (props) => {
 
   const { wallet, withdrawDone } = props;
 
+  const blockchainCurrency = wallet.blockchain_currencies.find(
+    (d) => d.blockchain_id === beneficiary.blockchain_id,
+  );
+
   const reset = () => {
     setAmount('');
     setBeneficiary(defaultBeneficiary);
     setOtpCode('');
-    setTotal('');
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     reset();
   }, [wallet.currency.code]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (withdrawDone) {
       reset();
     }
   }, [withdrawDone]);
 
-  const handleCheckButtonDisabled = (total: string, beneficiary: Beneficiary, otpCode: string) => {
+  const total = useMemo(() => {
+    if (blockchainCurrency) {
+      const amountMoney = createMoney(amount, wallet.currency);
+      const totalMoney = amountMoney.subtract(blockchainCurrency.withdraw_fee);
+      return totalMoney.isNegative() ? (0).toFixed(wallet.precision) : totalMoney.toString();
+    }
+    return '';
+  }, [amount, blockchainCurrency]);
+
+  const isButtonDisabled = () => {
     const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
     return Number(total) <= 0 || !beneficiary.id || isPending || !otpCode;
   };
@@ -75,10 +86,6 @@ export const WithdrawBody: React.FC<Props> = (props) => {
   const handleChangeInputAmount = (value: string) => {
     const amount = parseNumeric(value);
     if (amount.match(precisionRegExp(wallet.precision))) {
-      const amountMoney = createMoney(amount, wallet.currency);
-      const totalMoney = amountMoney.subtract(wallet.withdraw_fee);
-      const total = totalMoney.isNegative() ? (0).toFixed(wallet.precision) : totalMoney.toString();
-      setTotal(total);
       setAmount(amount);
     }
   };
@@ -149,13 +156,9 @@ export const WithdrawBody: React.FC<Props> = (props) => {
           )}
         </Box>
         <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2">
-          <WithdrawSummary total={total} wallet={wallet} />
+          <WithdrawSummary total={total} wallet={wallet} blockchainCurrency={blockchainCurrency} />
           <Box flex1 self="end" row justify="end">
-            <Button
-              variant="primary"
-              onClick={handleClick}
-              disabled={handleCheckButtonDisabled(total, beneficiary, otpCode)}
-            >
+            <Button variant="primary" onClick={handleClick} disabled={isButtonDisabled()}>
               {t('page.body.wallets.tabs.withdraw.content.button')}
             </Button>
           </Box>

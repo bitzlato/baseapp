@@ -29,14 +29,12 @@ describe('Saga: currenciesFetchSaga', () => {
       ...defaultCurrencySource,
       id: 'bch',
       name: 'Bitcoin Cash',
-      min_deposit_amount: '0.0000748',
     },
 
     {
       ...defaultCurrencySource,
       id: 'eur',
       name: 'Euro',
-      min_deposit_amount: '0.0000748',
     },
   ];
 

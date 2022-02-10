@@ -53,6 +53,10 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
     { skipRequest: blockchain === null },
   );
 
+  const blockchainCurrency = wallet.blockchain_currencies.find(
+    (d) => d.blockchain_id === blockchain?.id,
+  );
+
   const handleCopy = () => {
     dispatch(
       alertPush({
@@ -117,6 +121,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
                   depositAddress={depositAddress.address}
                   explorerAddress={blockchain.explorer_address}
                   currency={wallet}
+                  blockchainCurrency={blockchainCurrency!}
                 />
               ) : null}
               <CopyableTextField
@@ -129,7 +134,11 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
                 onCopy={handleCopy}
               />
             </Box>
-            <DepositSummary currency={wallet} showWarning />
+            <DepositSummary
+              currency={wallet}
+              blockchainCurrency={blockchainCurrency!}
+              showWarning
+            />
           </>
         )}
       </Box>

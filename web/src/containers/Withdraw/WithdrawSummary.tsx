@@ -5,20 +5,21 @@ import { useT } from 'src/hooks/useT';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { createMoney } from 'src/helpers/money';
 import { SummaryField } from '../../components';
-import { Wallet } from '../../modules';
+import { BlockchainCurrencyMoney, Wallet } from '../../modules';
 
 interface Props {
   wallet: Wallet;
   total: string;
+  blockchainCurrency: BlockchainCurrencyMoney | undefined;
 }
 
-export const WithdrawSummary: React.FC<Props> = ({ wallet, total }) => {
+export const WithdrawSummary: React.FC<Props> = ({ wallet, total, blockchainCurrency }) => {
   const t = useT();
 
   return (
     <Box flex1 col spacing="sm">
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.fee')}>
-        <AmountFormat money={wallet.withdraw_fee} />
+        {blockchainCurrency ? <AmountFormat money={blockchainCurrency.withdraw_fee} /> : '-'}
       </SummaryField>
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.total')}>
         <AmountFormat money={createMoney(total || 0, wallet.currency)} />

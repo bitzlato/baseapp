@@ -3,16 +3,17 @@ import { WarningIcon } from 'src/mobile/assets/images/WarningIcon';
 import { useT } from 'src/hooks/useT';
 import { SummaryField } from 'src/components/SummaryField';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
-import { ApiCurrency } from 'src/modules/public/currencies/types';
+import { ApiCurrency, BlockchainCurrencyMoney } from 'src/modules/public/currencies/types';
 import { Box } from 'src/components/Box';
 import { Label } from 'src/components/Label';
 
 interface Props {
   currency: ApiCurrency;
   showWarning?: boolean;
+  blockchainCurrency: BlockchainCurrencyMoney;
 }
 
-export const DepositSummary: React.FC<Props> = ({ currency, showWarning }) => {
+export const DepositSummary: React.FC<Props> = ({ currency, showWarning, blockchainCurrency }) => {
   const t = useT();
 
   return (
@@ -25,7 +26,7 @@ export const DepositSummary: React.FC<Props> = ({ currency, showWarning }) => {
         )}
       </SummaryField>
       <SummaryField message={t('page.body.wallets.tabs.deposit.ccy.message.minimum')}>
-        <AmountFormat money={currency.min_deposit_amount} />
+        <AmountFormat money={blockchainCurrency.min_deposit_amount} />
       </SummaryField>
       {showWarning && (
         <Box row spacing>
