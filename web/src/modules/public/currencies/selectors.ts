@@ -14,11 +14,14 @@ export const selectCurrencies = (state: RootState): ApiCurrency[] => {
 
     return {
       ...source,
-      deposit_fee: createMoney(source.deposit_fee, moneyCurrency),
-      min_deposit_amount: createMoney(source.min_deposit_amount, moneyCurrency),
-      withdraw_fee: createMoney(source.withdraw_fee, moneyCurrency),
-      min_withdraw_amount: createMoney(source.min_withdraw_amount, moneyCurrency),
       ...moneyCurrency,
+      deposit_fee: createMoney(source.deposit_fee, moneyCurrency),
+      min_withdraw_amount: createMoney(source.min_withdraw_amount, moneyCurrency),
+      blockchain_currencies: source.blockchain_currencies.map((d) => ({
+        blockchain_id: d.blockchain_id,
+        withdraw_fee: createMoney(d.withdraw_fee, moneyCurrency),
+        min_deposit_amount: createMoney(d.min_deposit_amount, moneyCurrency),
+      })),
     };
   });
 };

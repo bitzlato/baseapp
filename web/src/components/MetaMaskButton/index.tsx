@@ -14,13 +14,14 @@ import { useT } from 'src/hooks/useT';
 import { createMoney } from 'src/helpers/money';
 import s from 'src/containers/Withdraw/Withdraw.postcss';
 import { MetaMaskLogo } from '../../assets/images/MetaMaskLogo';
-import { alertPush, ApiCurrency } from '../../modules';
+import { alertPush, ApiCurrency, BlockchainCurrencyMoney } from '../../modules';
 import { CustomInput } from '../CustomInput';
 
 interface Props {
   depositAddress: string;
   explorerAddress: string;
   currency: ApiCurrency;
+  blockchainCurrency: BlockchainCurrencyMoney;
 }
 
 export const MetaMaskButton: FC<Props> = (props) => {
@@ -77,7 +78,9 @@ export const MetaMaskButton: FC<Props> = (props) => {
   const handleChangeAmount = (value: string) => {
     setAmount(value);
     try {
-      setAmountValid(createMoney(value, props.currency).gte(props.currency.min_deposit_amount));
+      setAmountValid(
+        createMoney(value, props.currency).gte(props.blockchainCurrency.min_deposit_amount),
+      );
     } catch (error) {
       setAmountValid(false);
     }
