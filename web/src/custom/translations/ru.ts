@@ -65,7 +65,7 @@ export const ru: LangType = {
   'page.body.trade.toolBar.lowest': 'Наименьшая за 24',
   'page.body.trade.toolBar.lastPrice': 'Последняя цена',
   'page.body.trade.toolBar.selectMarket': 'Выберите рынок',
-  'page.body.trade.toolBar.highest': 'Нивысшая за 24ч',
+  'page.body.trade.toolBar.highest': 'Наивысшая за 24ч',
   'page.body.trade.toolBar.volume': 'Объем за 24ч',
   'page.body.trade.toolBar.change': 'Изменение за 24ч',
 
