@@ -170,8 +170,8 @@ export const WalletsScreen: React.FC = () => {
                       {item.hasTransfer && (
                         <Transfer
                           currency={item.balance.currency}
-                          balanceMarket={item.balanceMarket.toString()}
-                          balanceP2P={item.balanceP2P.toString()}
+                          balanceMarket={item.balanceMarket?.toString() ?? '0'}
+                          balanceP2P={item.balanceP2P?.toString() ?? '0'}
                           transfers={transfers}
                           onChangeTransfers={() => setTransfers(transfers + 1)}
                         />

@@ -12,8 +12,8 @@ export interface WalletItemData {
   name: string;
   currency: string;
   balance: Money;
-  balanceP2P: Money;
-  balanceMarket: Money;
+  balanceP2P: Money | undefined;
+  balanceMarket: Money | undefined;
   approximate: Money;
   locked: Money;
   icon: string;
