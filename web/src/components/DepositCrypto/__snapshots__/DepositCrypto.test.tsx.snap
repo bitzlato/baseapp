@@ -41,7 +41,6 @@ exports[`DepositCrypto should match snapshot 1`] = `
           },
         },
         "blockchain_currencies": Array [],
-        "blockchain_ids": Array [],
         "cc_code": "",
         "code": "",
         "currency": Object {

@@ -16,7 +16,6 @@ const DEFAULT_WALLET: WalletSource = {
   precision: 8,
   icon_id: '',
   blockchain_currencies: [],
-  blockchain_ids: [],
   cc_code: '',
   deposit_enabled: true,
   deposit_fee: '0',
