@@ -155,7 +155,7 @@ const unresponsiveProperties = defineProperties({
     borderRadius: radii,
     fontWeight: ['400', '600'],
     textAlign: ['left', 'center'],
-    cursor: ['default', 'pointer'],
+    cursor: ['default', 'pointer', 'not-allowed'],
     position: ['absolute', 'relative'],
     top: [0],
     right: [0],
