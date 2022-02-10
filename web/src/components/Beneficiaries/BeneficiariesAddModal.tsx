@@ -43,7 +43,9 @@ const BeneficiariesAddModalComponent: React.FC<Props> = ({ wallet, onCloseModal 
 
   const { data = [] } = useFetchCache<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
-  const blockchains = data.filter((d) => wallet.blockchain_ids.includes(d.id));
+  const blockchains = data.filter((d) =>
+    wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id),
+  );
 
   const beneficiariesAddError = useSelector(selectBeneficiariesCreateError);
   const isMobileDevice = useSelector(selectMobileDeviceState);

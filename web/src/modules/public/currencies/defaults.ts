@@ -7,7 +7,6 @@ export const DEFAULT_CURRENCY = createCcy('', DEFAULT_CCY_PRECISION);
 
 export const defaultCurrency: ApiCurrency = {
   blockchain_currencies: [],
-  blockchain_ids: [],
   cc_code: '',
   deposit_enabled: true,
   deposit_fee: createMoney(0, DEFAULT_CURRENCY),
@@ -30,7 +29,6 @@ export const defaultCurrency: ApiCurrency = {
 
 export const defaultCurrencySource: CurrencySource = {
   blockchain_currencies: [],
-  blockchain_ids: [],
   cc_code: '',
   deposit_enabled: true,
   deposit_fee: '0',

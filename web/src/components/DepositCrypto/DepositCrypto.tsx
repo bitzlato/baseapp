@@ -25,8 +25,6 @@ import {
   selectUserInfo,
   Wallet,
 } from '../../modules';
-import { createMoney } from 'web/src/helpers/money';
-import { DEFAULT_CURRENCY } from 'web/src/modules/public/currencies/defaults';
 
 interface Props {
   wallet: Wallet;
@@ -44,7 +42,9 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
 
   const { data = [] } = useFetchCache<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
-  const blockchains = data.filter((d) => wallet.blockchain_ids.includes(d.id));
+  const blockchains = data.filter((d) =>
+    wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id),
+  );
 
   useEffect(() => {
     setBlockchain(blockchains.length === 1 ? blockchains[0]! : null);
@@ -57,11 +57,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
     (d) => d.blockchain_id === blockchain?.id,
-  ) ?? {
-    blockchain_id: 0,
-    min_deposit_amount: createMoney(0, DEFAULT_CURRENCY),
-    withdraw_fee: createMoney(0, DEFAULT_CURRENCY),
-  };
+  );
 
   const handleCopy = () => {
     dispatch(
@@ -107,7 +103,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
           formatOptionLabel={renderSelectItem}
           getOptionValue={(d) => d.key}
         />
-        {blockchain && depositAddress && (
+        {blockchain && depositAddress && blockchainCurrency && (
           <>
             <Box row>
               <div className="cr-deposit-info">
