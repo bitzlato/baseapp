@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { getThemeClassName } from 'shared/src/getThemeClassName';
+import { Text } from 'shared/src/components/Text';
+import { Heading } from 'shared/src/components/Heading';
 import { IconName } from './components/Icon';
 import {
   Header,
@@ -442,7 +444,7 @@ export const Main: FC = () => {
 
   return (
     <div className={getThemeClassName(theme)}>
-      <h1>MARKET:</h1>
+      <Heading level={1}>MARKET:</Heading>
       <Header
         logoLightURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--blue--nav.svg"
         logoDarkURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--white--nav.svg"
@@ -471,7 +473,7 @@ export const Main: FC = () => {
         onLanguageChange={handleLanguageChange}
       />
 
-      <h1>P2P:</h1>
+      <Heading level={1}>P2P:</Heading>
       <Header
         logoLightURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--blue--nav.svg"
         logoDarkURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--white--nav.svg"
@@ -505,7 +507,7 @@ export const Main: FC = () => {
         onLanguageChange={handleLanguageChange}
       />
 
-      <h1>Footer:</h1>
+      <Heading level={1}>Footer:</Heading>
       <Footer
         theme={theme}
         language={language}
@@ -518,7 +520,7 @@ export const Main: FC = () => {
         }}
       />
 
-      <h1>Buttons:</h1>
+      <Heading level={1}>Buttons:</Heading>
       <p>
         <Button size="small">Primary Small</Button>
         <Button>Primary Medium (Default)</Button>
@@ -571,6 +573,43 @@ export const Main: FC = () => {
           Outlined FULL WIDTH
         </Button>
       </p>
+
+      <Heading level={1}>Texts:</Heading>
+      <Text variant="lead">lead. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
+      <Text variant="title" gutterBottom>
+        title. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </Text>
+      <Text variant="label" gutterBottom>
+        label. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </Text>
+      <Text>body. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
+      <Text variant="caption">
+        caption. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </Text>
+
+      <Text variant="h4">h4. Heading</Text>
+      <Text gutterBottom>body. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
+      <Text gutterBottom>body. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
+
+      <Heading level={1}>Heading:</Heading>
+      <Heading level={1} as="div">
+        h1. Heading
+      </Heading>
+      <Heading level={2} as="div">
+        h2. Heading
+      </Heading>
+      <Heading level={3} as="div">
+        h3. Heading
+      </Heading>
+      <Heading level={4} as="div">
+        h4. Heading
+      </Heading>
+      <Heading level={5} as="div">
+        h5. Heading
+      </Heading>
+      <Heading level={6} as="div">
+        h6. Heading
+      </Heading>
     </div>
   );
 };

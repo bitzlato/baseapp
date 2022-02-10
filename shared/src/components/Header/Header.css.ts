@@ -1,7 +1,8 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { globalStyle } from '@vanilla-extract/css';
+import { sprinkles } from 'shared/src/theme/sprinkles.css';
 
-export const header = style({
-  fontFamily: "'Montserrat', helvetica, sans-serif",
+export const header = sprinkles({
+  fontFamily: 'brand',
 });
 
 globalStyle(`${header} svg`, {
