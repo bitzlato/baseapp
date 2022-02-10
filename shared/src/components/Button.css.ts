@@ -2,34 +2,34 @@ import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { sprinkles } from 'shared/src/theme/sprinkles.css';
 
 export const button = recipe({
-  base: sprinkles({
-    display: 'inline-block',
-    fontWeight: '600',
-  }),
+  base: [
+    sprinkles({
+      display: 'inline-block',
+      fontWeight: '600',
+    }),
+    {
+      fontFamily: "'Montserrat', helvetica, sans-serif",
+    },
+  ],
 
   variants: {
+    variant: {
+      contained: '',
+      outlined: sprinkles({
+        borderWidth: '1x',
+        borderStyle: 'solid',
+      }),
+    },
     color: {
       primary: sprinkles({
-        bg: {
-          default: 'btnPrimaryBg',
-          hover: 'btnPrimaryBgHover',
-          active: 'btnPrimaryBgActive',
-        },
         boxShadow: {
           focusVisible: 'btnPrimaryFocus',
         },
-        color: 'btnPrimaryText',
       }),
       secondary: sprinkles({
-        bg: {
-          default: 'btnSecondaryBg',
-          hover: 'btnSecondaryBgHover',
-          active: 'btnSecondaryBgActive',
-        },
         boxShadow: {
           focusVisible: 'btnSecondaryFocus',
         },
-        color: 'btnSecondaryText',
       }),
     },
     size: {
@@ -56,41 +56,142 @@ export const button = recipe({
       }),
     },
     disabled: {
-      true: {},
+      true: '',
+      false: '',
     },
     fullWidth: {
       true: sprinkles({
         w: 'full',
       }),
+      false: '',
     },
   },
 
   compoundVariants: [
     {
       variants: {
+        variant: 'contained',
+        color: 'primary',
+        disabled: false,
+      },
+      style: sprinkles({
+        bg: {
+          default: 'btnPrimaryBg',
+          hover: 'btnPrimaryBgHover',
+          active: 'btnPrimaryBgActive',
+        },
+        color: 'btnPrimaryText',
+      }),
+    },
+    {
+      variants: {
+        variant: 'contained',
         color: 'primary',
         disabled: true,
       },
       style: sprinkles({
         bg: 'btnPrimaryBgDisabled',
         color: 'btnPrimaryTextDisabled',
+        cursor: 'not-allowed',
       }),
     },
     {
       variants: {
+        variant: 'outlined',
+        color: 'primary',
+        disabled: false,
+      },
+      style: sprinkles({
+        borderColor: {
+          default: 'btnPrimaryBg',
+          hover: 'btnPrimaryBgHover',
+          active: 'btnPrimaryBgActive',
+        },
+        color: {
+          default: 'btnPrimaryBg',
+          hover: 'btnPrimaryBgHover',
+          active: 'btnPrimaryBgActive',
+        },
+      }),
+    },
+    {
+      variants: {
+        variant: 'outlined',
+        color: 'primary',
+        disabled: true,
+      },
+      style: sprinkles({
+        borderColor: 'btnPrimaryBgDisabled',
+        color: 'btnPrimaryTextDisabled',
+        cursor: 'not-allowed',
+      }),
+    },
+    {
+      variants: {
+        variant: 'contained',
+        color: 'secondary',
+        disabled: false,
+      },
+      style: sprinkles({
+        bg: {
+          default: 'btnSecondaryBg',
+          hover: 'btnSecondaryBgHover',
+          active: 'btnSecondaryBgActive',
+        },
+        color: 'btnSecondaryText',
+      }),
+    },
+    {
+      variants: {
+        variant: 'contained',
         color: 'secondary',
         disabled: true,
       },
       style: sprinkles({
         bg: 'btnSecondaryBgDisabled',
         color: 'btnSecondaryTextDisabled',
+        cursor: 'not-allowed',
+      }),
+    },
+    {
+      variants: {
+        variant: 'outlined',
+        color: 'secondary',
+        disabled: false,
+      },
+      style: sprinkles({
+        borderColor: {
+          default: 'btnSecondaryBg',
+          hover: 'btnSecondaryBgHover',
+          active: 'btnSecondaryBgActive',
+        },
+        color: {
+          default: 'btnSecondaryBg',
+          hover: 'btnSecondaryBgHover',
+          active: 'btnSecondaryBgActive',
+        },
+      }),
+    },
+    {
+      variants: {
+        variant: 'outlined',
+        color: 'secondary',
+        disabled: true,
+      },
+      style: sprinkles({
+        borderColor: 'btnSecondaryBgDisabled',
+        color: 'btnSecondaryTextDisabled',
+        cursor: 'not-allowed',
       }),
     },
   ],
 
   defaultVariants: {
+    variant: 'contained',
     color: 'primary',
     size: 'medium',
+    disabled: false,
+    fullWidth: false,
   },
 });
 

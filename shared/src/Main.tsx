@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { getThemeClassName } from 'shared/src/getThemeClassName';
 import { IconName } from './components/Icon';
 import {
   Header,
@@ -7,6 +8,7 @@ import {
   USER_STATUS_AUTHORIZED,
 } from './Header';
 import { Footer } from './Footer';
+import { Button } from './components/Button';
 import { Language, Links, Notify, Theme } from './types';
 
 const MARKET_URL = 'https://market.bitzlato.com' as const;
@@ -439,7 +441,7 @@ export const Main: FC = () => {
   }
 
   return (
-    <>
+    <div className={getThemeClassName(theme)}>
       <h1>MARKET:</h1>
       <Header
         logoLightURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--blue--nav.svg"
@@ -515,6 +517,60 @@ export const Main: FC = () => {
           );
         }}
       />
-    </>
+
+      <h1>Buttons:</h1>
+      <p>
+        <Button size="small">Primary Small</Button>
+        <Button>Primary Medium (Default)</Button>
+        <Button size="large">Primary Large</Button>
+        <Button disabled>Primary Disabled</Button>
+      </p>
+      <p>
+        <Button color="secondary" size="small">
+          Secondary Small
+        </Button>
+        <Button color="secondary">Secondary Medium</Button>
+        <Button color="secondary" size="large">
+          Secondary Large
+        </Button>
+        <Button color="secondary" disabled>
+          Secondary Disabled
+        </Button>
+      </p>
+      <p>
+        <Button variant="outlined" size="small">
+          Outlined Primary
+        </Button>
+        <Button variant="outlined">Outlined Primary</Button>
+        <Button variant="outlined" size="large">
+          Outlined Primary
+        </Button>
+        <Button variant="outlined" disabled>
+          Outlined Primary Disabled
+        </Button>
+      </p>
+      <p>
+        <Button variant="outlined" color="secondary" size="small">
+          Outlined Secondary
+        </Button>
+        <Button variant="outlined" color="secondary">
+          Outlined Secondary
+        </Button>
+        <Button variant="outlined" color="secondary" size="large">
+          Outlined Secondary
+        </Button>
+        <Button variant="outlined" color="secondary" disabled>
+          Outlined Secondary Disabled
+        </Button>
+      </p>
+      <p>
+        <Button fullWidth>FULL WIDTH</Button>
+      </p>
+      <p>
+        <Button variant="outlined" fullWidth>
+          Outlined FULL WIDTH
+        </Button>
+      </p>
+    </div>
   );
 };
