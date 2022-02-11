@@ -47,7 +47,7 @@ export const Notifications: FC<Props> = ({ notifications, onAllRead }) => {
                   key={notify.id}
                   as="button"
                   color={notify.read ? 'dropdownItemText' : 'text'}
-                  fontWeight={notify.read ? '400' : '600'}
+                  fontWeight={notify.read ? 'regular' : 'strong'}
                   cursor="pointer"
                   display="flex"
                   flexDirection="column"

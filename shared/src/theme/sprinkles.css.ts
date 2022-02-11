@@ -39,6 +39,7 @@ const fontSizes = {
 };
 
 const lineHeights = {
+  // uses in Button
   small: '16px' as const,
   medium: '20px' as const,
 };
@@ -90,8 +91,6 @@ const responsiveProperties = defineProperties({
     width: sizes,
     height: sizes,
     fontSize: fontSizes,
-    // TODO: move to unresponsiveProperties
-    lineHeight: lineHeights,
   },
   shorthands: {
     p: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
@@ -117,10 +116,7 @@ const responsiveProperties = defineProperties({
 const interactiveProperties = defineProperties({
   conditions: {
     default: {},
-    hover: { selector: '&:hover, &:focus' },
-    focus: { selector: '&:focus' },
-    focusVisible: { selector: '&:focus-visible' },
-    active: { selector: '&:active' },
+    hover: { selector: '&:hover, &:focus-visible' },
   },
   defaultCondition: 'default',
   properties: {
@@ -132,7 +128,6 @@ const interactiveProperties = defineProperties({
     // borderRightColor: vars.colors,
     borderBottomColor: vars.colors,
     // borderLeftColor: vars.colors,
-    boxShadow: vars.boxShadows,
   },
   shorthands: {
     bg: ['backgroundColor'],
@@ -174,6 +169,9 @@ const unresponsiveProperties = defineProperties({
 
     // other
     cursor: ['default', 'pointer', 'not-allowed'],
+    boxShadow: {
+      dropdown: vars.boxShadows.dropdown,
+    },
   },
 });
 
@@ -182,7 +180,11 @@ const typographyProperties = defineProperties({
     fontFamily: {
       brand: "'Montserrat', helvetica, sans-serif",
     },
-    fontWeight: ['400', '600'],
+    fontWeight: {
+      regular: 400,
+      strong: 600,
+    },
+    lineHeight: lineHeights,
     textAlign: ['left', 'center'],
     textTransform: ['uppercase'],
     whiteSpace: ['nowrap'],

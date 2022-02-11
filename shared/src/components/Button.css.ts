@@ -1,12 +1,13 @@
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { sprinkles } from 'shared/src/theme/sprinkles.css';
+import { vars } from 'shared/src/theme/vars.css';
 
 export const button = recipe({
   base: [
     sprinkles({
       fontFamily: 'brand',
       display: 'inline-block',
-      fontWeight: '600',
+      fontWeight: 'strong',
     }),
   ],
 
@@ -19,16 +20,20 @@ export const button = recipe({
       }),
     },
     color: {
-      primary: sprinkles({
-        boxShadow: {
-          focusVisible: 'btnPrimaryFocus',
+      primary: {
+        selectors: {
+          '&:focus': {
+            boxShadow: vars.boxShadows.btnPrimaryFocus,
+          },
         },
-      }),
-      secondary: sprinkles({
-        boxShadow: {
-          focusVisible: 'btnSecondaryFocus',
+      },
+      secondary: {
+        selectors: {
+          '&:focus': {
+            boxShadow: vars.boxShadows.btnSecondaryFocus,
+          },
         },
-      }),
+      },
     },
     size: {
       small: sprinkles({
@@ -72,14 +77,22 @@ export const button = recipe({
         color: 'primary',
         disabled: false,
       },
-      style: sprinkles({
-        bg: {
-          default: 'btnPrimaryBg',
-          hover: 'btnPrimaryBgHover',
-          active: 'btnPrimaryBgActive',
+      style: [
+        sprinkles({
+          bg: {
+            default: 'btnPrimaryBg',
+            hover: 'btnPrimaryBgHover',
+          },
+          color: 'btnPrimaryText',
+        }),
+        {
+          selectors: {
+            '&:active': {
+              backgroundColor: vars.colors.btnPrimaryBgActive,
+            },
+          },
         },
-        color: 'btnPrimaryText',
-      }),
+      ],
     },
     {
       variants: {
@@ -99,18 +112,26 @@ export const button = recipe({
         color: 'primary',
         disabled: false,
       },
-      style: sprinkles({
-        borderColor: {
-          default: 'btnPrimaryBg',
-          hover: 'btnPrimaryBgHover',
-          active: 'btnPrimaryBgActive',
+      style: [
+        sprinkles({
+          borderColor: {
+            default: 'btnPrimaryBg',
+            hover: 'btnPrimaryBgHover',
+          },
+          color: {
+            default: 'btnPrimaryBg',
+            hover: 'btnPrimaryBgHover',
+          },
+        }),
+        {
+          selectors: {
+            '&:active': {
+              borderColor: vars.colors.btnPrimaryBgActive,
+              color: vars.colors.btnPrimaryBgActive,
+            },
+          },
         },
-        color: {
-          default: 'btnPrimaryBg',
-          hover: 'btnPrimaryBgHover',
-          active: 'btnPrimaryBgActive',
-        },
-      }),
+      ],
     },
     {
       variants: {
@@ -130,14 +151,22 @@ export const button = recipe({
         color: 'secondary',
         disabled: false,
       },
-      style: sprinkles({
-        bg: {
-          default: 'btnSecondaryBg',
-          hover: 'btnSecondaryBgHover',
-          active: 'btnSecondaryBgActive',
+      style: [
+        sprinkles({
+          bg: {
+            default: 'btnSecondaryBg',
+            hover: 'btnSecondaryBgHover',
+          },
+          color: 'btnSecondaryText',
+        }),
+        {
+          selectors: {
+            '&:active': {
+              backgroundColor: vars.colors.btnSecondaryBgActive,
+            },
+          },
         },
-        color: 'btnSecondaryText',
-      }),
+      ],
     },
     {
       variants: {
@@ -157,18 +186,26 @@ export const button = recipe({
         color: 'secondary',
         disabled: false,
       },
-      style: sprinkles({
-        borderColor: {
-          default: 'btnSecondaryBg',
-          hover: 'btnSecondaryBgHover',
-          active: 'btnSecondaryBgActive',
+      style: [
+        sprinkles({
+          borderColor: {
+            default: 'btnSecondaryBg',
+            hover: 'btnSecondaryBgHover',
+          },
+          color: {
+            default: 'btnSecondaryBg',
+            hover: 'btnSecondaryBgHover',
+          },
+        }),
+        {
+          selectors: {
+            '&:active': {
+              borderColor: vars.colors.btnSecondaryBgActive,
+              color: vars.colors.btnSecondaryBgActive,
+            },
+          },
         },
-        color: {
-          default: 'btnSecondaryBg',
-          hover: 'btnSecondaryBgHover',
-          active: 'btnSecondaryBgActive',
-        },
-      }),
+      ],
     },
     {
       variants: {

@@ -31,6 +31,6 @@ export const itemActive = style([
   sprinkles({
     color: 'dropdownItemActiveText',
     bg: 'dropdownItemHover',
-    fontWeight: '600',
+    fontWeight: 'strong',
   }),
 ]);
