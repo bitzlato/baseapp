@@ -18,7 +18,13 @@
     "skipLibCheck": true,
     "paths": {
       "shared/Header": ["shared/src/Header"],
-      "shared/Footer": ["shared/src/Footer"]
+      "shared/Footer": ["shared/src/Footer"],
+      "shared/Box": ["shared/src/components/Box"],
+      "shared/Button": ["shared/src/components/Button"],
+      "shared/Heading": ["shared/src/components/Heading"],
+      "shared/Stack": ["shared/src/components/Stack"],
+      "shared/Text": ["shared/src/components/Text"],
+      "shared/getThemeClassName": ["shared/src/getThemeClassName"]
     }
   },
   "exclude": ["./web/build", "./web/public"]

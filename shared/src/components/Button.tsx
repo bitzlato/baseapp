@@ -37,7 +37,7 @@ export const Button = (({
       {...props}
       className={button({ variant, color, size, disabled, fullWidth } as ButtonVariants)}
       disabled={disabled}
-      onClick={disabled ? onClick : undefined}
+      onClick={!disabled ? onClick : undefined}
     >
       {children}
     </Box>

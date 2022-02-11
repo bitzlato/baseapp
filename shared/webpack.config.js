@@ -99,6 +99,12 @@ module.exports = {
       exposes: {
         './Header': './src/Header',
         './Footer': './src/Footer',
+        './Box': './src/components/Box',
+        './Button': './src/components/Button',
+        './Heading': './src/components/Heading',
+        './Stack': './src/components/Stack',
+        './Text': './src/components/Text',
+        './getThemeClassName': './src/getThemeClassName',
       },
       shared: {
         react: {

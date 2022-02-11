@@ -1,15 +1,17 @@
-import { FC, ComponentProps, ReactNode, ElementType } from 'react';
-import cn from 'classnames';
+import { FC, ComponentProps, ElementType, lazy } from 'react';
+import { selectCurrentColorTheme } from 'web/src/modules';
+import { useSelector } from 'react-redux';
 
-import s from './Button.postcss';
+export const ButtonBase = lazy(() =>
+  import('shared/Button').then(({ Button }) => ({ default: Button })),
+);
 
-type ButtonProps<C extends ElementType = 'button'> = {
-  children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'primary-outline' | 'secondary-outline';
-  component?: C;
-  size?: 'small' | 'large';
-  fullWidth?: boolean;
-  revertLightPrimary?: boolean;
+type ButtonBaseProps = ComponentProps<typeof ButtonBase>;
+type ButtonVariant = 'primary' | 'secondary' | 'primary-outline' | 'secondary-outline';
+type ButtonProps<C extends ElementType = 'button'> = Omit<ButtonBaseProps, 'variant' | 'as'> & {
+  variant?: ButtonVariant;
+  component?: C | undefined;
+  revertLightPrimary?: boolean | undefined;
 };
 
 type Props<C extends ElementType = 'button'> = ButtonProps<C> &
@@ -19,39 +21,39 @@ type ButtonComponent = <C extends ElementType = 'button'>(
   props: Props<C>,
 ) => ReturnType<FC<Props<C>>>;
 
+const variantMap: Record<ButtonVariant, ButtonBaseProps> = {
+  primary: {
+    color: 'primary',
+  },
+  secondary: {
+    color: 'secondary',
+  },
+  'primary-outline': {
+    variant: 'outlined',
+    color: 'primary',
+  },
+  'secondary-outline': {
+    variant: 'outlined',
+    color: 'secondary',
+  },
+};
+
+/**
+ * @deprecated Use ButtonBase
+ */
 export const Button: ButtonComponent = ({
-  children,
   variant = 'primary',
   component = 'button' as const,
-  size,
-  fullWidth = false,
-  revertLightPrimary,
-  className,
+  revertLightPrimary = false,
   ...props
 }) => {
-  const Component = component;
-  const disabled =
-    'disabled' in props && typeof props.disabled === 'boolean' ? props.disabled : false;
+  const theme = useSelector(selectCurrentColorTheme);
+  let sharedProps = variantMap[variant];
+  if (revertLightPrimary && theme === 'light') {
+    if (sharedProps.color === 'primary') {
+      sharedProps.color = 'secondary';
+    }
+  }
 
-  return (
-    <Component
-      className={cn(
-        {
-          [s.btn]: true,
-          [s.btnPrimary]: variant === 'primary',
-          [s.btnSecondary]: variant === 'secondary',
-          [s.btnPrimaryOutline]: variant === 'primary-outline',
-          [s.btnSecondaryOutline]: variant === 'secondary-outline',
-          [s.btnRevertLightPrimary]: revertLightPrimary,
-          [s.btnSmall]: size === 'small',
-          [s.btnLarge]: size === 'large',
-          [s.btnDisabled]: disabled,
-        },
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </Component>
-  );
+  return <ButtonBase as={component} {...props} {...sharedProps} />;
 };
