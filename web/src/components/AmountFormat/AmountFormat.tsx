@@ -1,6 +1,8 @@
 import { FC, ReactElement } from 'react';
-
 import { defaultFormatOptions, FormatOptions, Money } from '@bitzlato/money-js';
+import { useSelector } from 'react-redux';
+import { selectCurrentLanguage } from 'web/src/modules';
+import { getFormatOptionsByLanguage } from './getFormatOptionsByLanguage';
 import s from './AmountFormat.postcss';
 
 type Renderer = (amountFormatted: string) => ReactElement;
@@ -11,13 +13,18 @@ export interface AmountFormatProps extends FormatOptions {
 }
 
 export const AmountFormat: FC<AmountFormatProps> = ({ money, children, ...options }) => {
-  const amountFormatted = money.toFormat(options);
+  const language = useSelector(selectCurrentLanguage);
+  const formatOptions = {
+    ...getFormatOptionsByLanguage(language),
+    ...options,
+  };
+  const amountFormatted = money.toFormat(formatOptions);
 
   if (children) {
     return children(amountFormatted);
   }
 
-  const decimalSeparator = options.decimalSeparator ?? defaultFormatOptions.decimalSeparator;
+  const decimalSeparator = formatOptions.decimalSeparator ?? defaultFormatOptions.decimalSeparator;
   const [integer, fractional] = amountFormatted.split(decimalSeparator);
 
   return (
