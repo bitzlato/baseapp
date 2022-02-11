@@ -12,8 +12,11 @@ export const [themeLight, vars] = createTheme({
 
     beta: colors.goldTips,
     primary: colors.hawkesBlue,
+    danger: colors.burntSienna,
+    success: colors.oceanGreen,
     text: colors.mineShaft,
     textHighlighted: colors.goldTips,
+    textMuted: colors.mineShaft50,
     interactive: colors.luckyPoint,
     interactiveHighlighted: colors.luckyPointLighter,
     alert: colors.flamingo,
@@ -72,8 +75,11 @@ export const themeDark = createTheme(vars, {
 
     beta: colors.goldTips,
     primary: colors.mako,
+    danger: colors.burntSienna,
+    success: colors.oceanGreen,
     text: colors.whiteLilac,
     textHighlighted: colors.goldTips,
+    textMuted: colors.whiteLilac50,
     interactive: colors.silverChalice,
     interactiveHighlighted: colors.gray,
     alert: colors.flamingo,

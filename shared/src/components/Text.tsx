@@ -8,7 +8,16 @@ import { text, TextVariants } from './Text.css';
 interface Props
   extends NonNullable<TextVariants>,
     OptionalWithUndefined<
-      Pick<Sprinkles, 'fontFamily' | 'fontWeight' | 'textAlign' | 'textTransform' | 'whiteSpace'>
+      Pick<
+        Sprinkles,
+        | 'fontFamily'
+        | 'fontWeight'
+        | 'textAlign'
+        | 'textTransform'
+        | 'whiteSpace'
+        | 'color'
+        | 'lineHeight'
+      >
     > {
   as?: ElementType | undefined;
   className?: string | undefined;
@@ -34,12 +43,14 @@ export const Text: FC<Props> = ({
   children,
   variant = 'body',
   gutterBottom = false,
+  color = 'text',
   ...props
 }) => {
   return (
     <Box
       as={as ?? variantMapping[variant]}
       className={cn(text({ variant, gutterBottom }), className)}
+      color={color}
       {...props}
     >
       {children}
