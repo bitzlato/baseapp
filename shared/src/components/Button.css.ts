@@ -9,6 +9,9 @@ export const button = recipe({
       display: 'inline-block',
       fontWeight: 'strong',
     }),
+    {
+      minWidth: 'auto',
+    },
   ],
 
   variants: {

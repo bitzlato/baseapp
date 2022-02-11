@@ -1,13 +1,15 @@
 import { createBrowserHistory } from 'history';
 import * as React from 'react';
 import * as ReactGA from 'react-ga';
+import cn from 'classnames';
 import { IntlProvider } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { Router } from 'react-router';
+import { getThemeClassName } from 'shared/getThemeClassName';
 import { gaTrackerKey } from './api';
 import { useSetMobileDevice } from './hooks';
 import * as mobileTranslations from './mobile/translations';
-import { selectCurrentLanguage, selectMobileDeviceState } from './modules';
+import { selectCurrentColorTheme, selectCurrentLanguage, selectMobileDeviceState } from './modules';
 import { languageMap } from './translations';
 import { ErrorBoundary } from './containers/ErrorBoundary/ErrorBoundary';
 import { Language } from './types';
@@ -56,20 +58,22 @@ const getTranslations = (lang: Language, isMobileDevice: boolean) => {
 
 const RenderDeviceContainers = () => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
+  const theme = useSelector(selectCurrentColorTheme);
+  const className = getThemeClassName(theme);
 
   if (!isMobileDevice) {
     return (
-      <>
+      <div className={className}>
         <Header />
         <AlertsContainer />
         <LayoutContainer />
         <FooterContainer />
-      </>
+      </div>
     );
   }
 
   return (
-    <div className="pg-mobile-app">
+    <div className={cn('pg-mobile-app', className)}>
       <MobileHeader />
       <AlertsContainer />
       <LayoutContainer />
