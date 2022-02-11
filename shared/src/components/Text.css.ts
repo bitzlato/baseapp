@@ -48,7 +48,7 @@ export const text = recipe({
       }),
       title: sprinkles({
         fontSize: 'large',
-        fontWeight: '400',
+        fontWeight: 'regular',
       }),
       label: sprinkles({
         fontSize: 'medium',
