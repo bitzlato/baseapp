@@ -251,12 +251,14 @@ export const QuickExchangeContainer: React.FC = () => {
                 formatOptionLabel={renderDropdownItem}
               />
             </Box>
-            <AmountDescription
-              market={market}
-              fromWallet={fromWallet}
-              price={price}
-              fromAmount={fromAmount}
-            />
+            {market && fromWallet && price.request_price && !exchangeFetching && (
+              <AmountDescription
+                market={market}
+                fromWallet={fromWallet}
+                requestPrice={price.request_price}
+                fromAmount={fromAmount}
+              />
+            )}
           </Box>
           <Box row spacing justify="between" wrap>
             <Box row spacing>
