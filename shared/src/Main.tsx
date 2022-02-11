@@ -583,13 +583,17 @@ export const Main: FC = () => {
         label. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       </Text>
       <Text>body. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
-      <Text variant="caption">
+      <Text color="textMuted" variant="caption">
         caption. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       </Text>
 
       <Text variant="h4">h4. Heading</Text>
-      <Text gutterBottom>body. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
-      <Text gutterBottom>body. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Text>
+      <Text color="success" gutterBottom>
+        body. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </Text>
+      <Text color="danger" gutterBottom>
+        body. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </Text>
 
       <Heading level={1}>Heading:</Heading>
       <Heading level={1} as="div">
