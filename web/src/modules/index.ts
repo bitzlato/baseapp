@@ -27,7 +27,6 @@ import { BeneficiariesState, rootBeneficiariesSaga } from './user/beneficiaries'
 import { GeetestCaptchaState, rootGeetestCaptchaSaga } from './user/captcha';
 import { DepositIntentionState, rootDepositIntentionSaga } from './user/deposits';
 import { DocumentationState, rootDocumentationSaga } from './user/documentation';
-import { EmailVerificationState, rootEmailVerificationSaga } from './user/emailVerification';
 import { HistoryState, rootHistorySaga } from './user/history';
 import { InternalTransfersState, rootInternalTransfersSaga } from './user/internalTransfers';
 import { AddressesState, rootSendAddressesSaga } from './user/kyc/addresses';
@@ -64,7 +63,6 @@ export * from './user/auth';
 export * from './user/beneficiaries';
 export * from './user/captcha';
 export * from './user/documentation';
-export * from './user/emailVerification';
 export * from './user/history';
 export * from './user/internalTransfers';
 export * from './user/kyc';
@@ -118,7 +116,6 @@ export interface RootState {
     password: PasswordState;
     phone: PhoneState;
     profile: ProfileState;
-    sendEmailVerification: EmailVerificationState;
     userActivity: UserActivityState;
     wallets: WalletsState;
     withdrawLimit: WithdrawLimitState;
@@ -142,7 +139,6 @@ export function* rootSaga() {
     call(rootBlocklistAccessSaga),
     call(rootCurrenciesSaga),
     call(rootDocumentationSaga),
-    call(rootEmailVerificationSaga),
     call(rootErrorHandlerSaga),
     call(rootGeetestCaptchaSaga),
     call(rootHandleAlertSaga),
