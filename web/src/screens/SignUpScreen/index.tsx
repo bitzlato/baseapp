@@ -112,14 +112,6 @@ class SignUp extends React.Component<Props> {
     document.addEventListener('click', this.handleOutsideClick, false);
   }
 
-  public componentDidUpdate(prev: Props) {
-    const { email } = this.state;
-
-    if (!prev.requireVerification && this.props.requireVerification) {
-      this.props.history.push('/email-verification', { email });
-    }
-  }
-
   public componentWillUnmount() {
     document.removeEventListener('click', this.handleOutsideClick, false);
   }
