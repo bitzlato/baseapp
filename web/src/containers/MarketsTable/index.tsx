@@ -10,9 +10,11 @@ import {
   selectMarketTickers,
   setCurrentMarket,
   selectUserInfo,
+  MarketWithTicker,
+  Ticker,
 } from '../../modules';
 
-const defaultTicker = {
+const defaultTicker: Ticker = {
   amount: '0.0',
   last: '0.0',
   high: '0.0',
@@ -20,6 +22,7 @@ const defaultTicker = {
   low: '0.0',
   price_change_percent: '+0.00%',
   volume: '0.0',
+  avg_price: '0.0',
 };
 
 interface Props {
@@ -85,58 +88,35 @@ const MarketsTableComponent: FC<Props> = (props) => {
       : [];
   }
 
-  const formattedMarkets = currentBidUnitMarkets.length
-    ? currentBidUnitMarkets
-        .map((market) => ({
-          ...market,
-          last: createMoneyWithoutCcy(
-            Number((marketTickers[market.id] || defaultTicker).last),
-            market.amount_precision,
-          ).toFormat(),
-          open: createMoneyWithoutCcy(
-            Number((marketTickers[market.id] || defaultTicker).open),
-            market.price_precision,
-          ).toFormat(),
-          price_change_percent: String(
-            (marketTickers[market.id] || defaultTicker).price_change_percent,
-          ),
-          high: createMoneyWithoutCcy(
-            Number((marketTickers[market.id] || defaultTicker).high),
-            market.amount_precision,
-          ).toFormat(),
-          low: createMoneyWithoutCcy(
-            Number((marketTickers[market.id] || defaultTicker).low),
-            market.amount_precision,
-          ).toFormat(),
-          volume: createMoneyWithoutCcy(
-            Number((marketTickers[market.id] || defaultTicker).volume),
-            market.amount_precision,
-          ).toFormat(),
-        }))
-        .map((market) => ({
-          ...market,
-          change: createMoneyWithoutCcy(
-            (+market.last - +market.open).toFixed(market.price_precision),
-            market.price_precision,
-          ).toFormat(),
-        }))
-    : [];
-
-  const filteredMarkets = formattedMarkets.filter(
-    (market) =>
-      !(
-        market.state &&
-        market.state === 'hidden' &&
-        userData.role !== 'admin' &&
-        userData.role !== 'superadmin'
-      ),
-  );
+  const formattedMarkets: MarketWithTicker[] = currentBidUnitMarkets
+    .filter(
+      (market) =>
+        !(
+          market.state &&
+          market.state === 'hidden' &&
+          userData.role !== 'admin' &&
+          userData.role !== 'superadmin'
+        ),
+    )
+    .map<MarketWithTicker>((market) => {
+      const ticker = marketTickers[market.id] ?? defaultTicker;
+      return {
+        id: market.id,
+        name: market.name,
+        last: createMoneyWithoutCcy(ticker.last, market.amount_precision),
+        open: createMoneyWithoutCcy(ticker.open, market.price_precision),
+        price_change_percent: ticker.price_change_percent,
+        high: createMoneyWithoutCcy(ticker.high, market.amount_precision),
+        low: createMoneyWithoutCcy(ticker.low, market.amount_precision),
+        volume: createMoneyWithoutCcy(ticker.volume, market.amount_precision),
+      };
+    });
 
   return (
     <TickerTable
       currentBidUnit={currentBidUnit}
       currentBidUnitsList={currentBidUnitsList}
-      markets={filteredMarkets}
+      markets={formattedMarkets}
       redirectToTrading={handleRedirectToTrading}
       setCurrentBidUnit={setCurrentBidUnit}
     />

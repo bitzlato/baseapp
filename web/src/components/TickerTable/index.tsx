@@ -2,15 +2,14 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
-import { createCcy, createMoney } from 'src/helpers/money';
-import { Market } from '../../modules';
+import { MarketWithTicker } from '../../modules';
 import { Box } from '../Box/Box';
 import { AmountFormat } from '../AmountFormat/AmountFormat';
 
 interface Props {
   currentBidUnit: string;
   currentBidUnitsList: string[];
-  markets: Market[];
+  markets: MarketWithTicker[];
   redirectToTrading: (key: string) => void;
   setCurrentBidUnit: (key: string) => void;
 }
@@ -24,46 +23,40 @@ export const TickerTable: React.FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const renderItem = React.useCallback(
-    (market, index: number) => {
-      const marketChangeColor = +(market.change || 0) < 0 ? 'ask' : 'bid';
-      const ccy = createCcy('', market.price_precision);
-
-      return (
-        <tr key={index} onClick={() => redirectToTrading(market.id)}>
-          <td className="pg-ticker-table__col--fixed">
-            {market && <MarketName name={market.name} />}
-          </td>
-          <td>
-            <span>
-              <AmountFormat money={createMoney(market.last ?? 0, ccy)} />
-            </span>
-          </td>
-          <td>
-            <Box as="span" textColor={marketChangeColor} className={marketChangeColor}>
-              {market.price_change_percent}
-            </Box>
-          </td>
-          <td>
-            <span>
-              <AmountFormat money={createMoney(market.high ?? 0, ccy)} />
-            </span>
-          </td>
-          <td>
-            <span>
-              <AmountFormat money={createMoney(market.low ?? 0, ccy)} />
-            </span>
-          </td>
-          <td>
-            <span>
-              <AmountFormat money={createMoney(market.volume ?? 0, ccy)} />
-            </span>
-          </td>
-        </tr>
-      );
-    },
-    [redirectToTrading],
-  );
+  const renderItem = (market: MarketWithTicker, index: number) => {
+    return (
+      <tr key={index} onClick={() => redirectToTrading(market.id)}>
+        <td className="pg-ticker-table__col--fixed">
+          {market && <MarketName name={market.name} />}
+        </td>
+        <td>
+          <span>
+            <AmountFormat money={market.last} />
+          </span>
+        </td>
+        <td>
+          <Box as="span" textColor={market.price_change_percent[0] === '-' ? 'ask' : 'bid'}>
+            {market.price_change_percent}
+          </Box>
+        </td>
+        <td>
+          <span>
+            <AmountFormat money={market.high} />
+          </span>
+        </td>
+        <td>
+          <span>
+            <AmountFormat money={market.low} />
+          </span>
+        </td>
+        <td>
+          <span>
+            <AmountFormat money={market.volume} />
+          </span>
+        </td>
+      </tr>
+    );
+  };
 
   return (
     <div className="pg-ticker-table">
