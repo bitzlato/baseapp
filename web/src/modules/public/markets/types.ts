@@ -1,3 +1,5 @@
+import { Money } from '@bitzlato/money-js';
+
 export type MarketId = string;
 
 export interface MarketFilterCustomStepRule {
@@ -29,6 +31,17 @@ export interface Market {
   price_precision: number;
   state?: string;
   filters?: MarketFilter[];
+}
+
+export interface MarketWithTicker {
+  id: MarketId;
+  name: string;
+  last: Money;
+  open: Money;
+  price_change_percent: string;
+  high: Money;
+  low: Money;
+  volume: Money;
 }
 
 export interface Ticker {
