@@ -33,8 +33,8 @@
 
     .pg-ticker-table__col--fixed {
       border-bottom: inherit;
-      padding-left: 0;
       border-right: none;
+      padding-left: 0;
     }
 
     &__table {
@@ -93,6 +93,14 @@
 
       thead > tr > th,
       tbody > tr > td {
+        &:nth-child(2) {
+          min-width: 150px;
+        }
+
+        &:nth-child(3) {
+          min-width: 70px;
+        }
+
         &:nth-child(4),
         &:nth-child(5),
         &:nth-child(6) {
