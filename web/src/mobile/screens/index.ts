@@ -12,6 +12,4 @@ export * from './ProfileChangePassword';
 export * from './ProfileColorTheme';
 export * from './ProfileLanguage';
 export * from './ProfileVerificationScreen';
-export * from './SignInScreen';
-export * from './SignUpScreen';
 export * from './Trading';
