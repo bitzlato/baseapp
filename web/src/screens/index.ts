@@ -7,8 +7,6 @@ export * from './LandingScreen';
 export * from './MagicLinkScreen';
 export * from './OrdersTabScreen';
 export * from './ProfileTwoFactorAuthScreen';
-export * from './SignInScreen';
-export * from './SignUpScreen';
 export * from './TradingScreen';
 export * from './VerificationScreen';
 export * from './RestrictedScreen';
