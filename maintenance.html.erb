@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8"></meta>
+    <title>Временно не доступен</title>
+    <style type="text/css">
+      body { text-align: center; padding: 20px; }
+      @media (min-width: 768px){
+        body{ padding-top: 150px; }
+      }
+      h1 { font-size: 50px; }
+      body { font: 20px Helvetica, sans-serif; color: #333; }
+      article { display: block; text-align: left; max-width: 650px; margin: 0 auto; }
+      a { color: #dc8100; text-decoration: none; }
+      a:hover { color: #333; text-decoration: none; }
+
+    </style>
+  </head>
+  <body>
+    <h1>Сервис временно не доступен</h1>
+
+    <p>Производится <%= reason ? reason : "техобслуживание" %></p>
+
+    <p>Скоро вернемся, а точнее <%= deadline ? deadline : "скоро" %>.</p>
+
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?146"></script>
+
+    <!-- VK Widget -->
+    <div id="vk_community_messages"></div>
+    <script type="text/javascript">
+      var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+      if (w > 800) {
+        VK.Widgets.CommunityMessages("vk_community_messages", 83055199, {
+          expandTimeout:  "1200000",
+          disableExpandChatSound: "1",
+          widgetPosition: "left",
+          tooltipButtonText: "Скажите чем мы можем Вам помочь?"
+        });
+      } else {
+        console.log("Disabled VK widget");
+      };
+    </script>
+  </body>
+</html>
