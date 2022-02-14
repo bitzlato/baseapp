@@ -56,8 +56,8 @@ export const TransferHistory: React.FC<Props> = ({ currency, wallets, transfers 
           : 'secondary';
       return [
         <div title={`#${d.id}`}>{localeDate(d.created_at, 'fullDate')}</div>,
-        <Box textTr="capitalize" textColor={textColor}>
-          {d.public_state}
+        <Box textColor={textColor}>
+          {t(`page.body.wallets.transfers.state.${d.public_state}`)}
         </Box>,
         t(d.source),
         t(d.destination),

@@ -322,6 +322,10 @@ export const en = {
   'page.body.wallets.deposits.addDepositModal.body.invalidAmount': 'Invalid amount',
   'page.body.wallets.deposits.addDepositModal.amount': 'Deposit Amount',
 
+  'page.body.wallets.transfers.state.transfered': 'Transferred',
+  'page.body.wallets.transfers.state.canceled': 'Canceled',
+  'page.body.wallets.transfers.state.processing': 'Processing',
+
   'page.body.openOrders.tab.all': 'All',
   'page.body.openOrders.tab.open': 'Open',
   'page.body.openOrders.header.date': 'Date',

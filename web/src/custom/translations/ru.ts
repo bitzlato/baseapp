@@ -331,6 +331,10 @@ export const ru: LangType = {
   'page.body.wallets.deposits.addDepositModal.body.invalidAmount': 'Недопустимое значение',
   'page.body.wallets.deposits.addDepositModal.amount': 'Сумма пополнения',
 
+  'page.body.wallets.transfers.state.transfered': 'Выполнен',
+  'page.body.wallets.transfers.state.canceled': 'Отменен',
+  'page.body.wallets.transfers.state.processing': 'Обрабатывается',
+
   'page.body.openOrders.tab.all': 'Все',
   'page.body.openOrders.tab.open': 'Открытые',
   'page.body.openOrders.header.date': 'Дата',
