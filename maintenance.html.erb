@@ -22,23 +22,5 @@
     <p>Производится <%= reason ? reason : "техобслуживание" %></p>
 
     <p>Скоро вернемся, а точнее <%= deadline ? deadline : "скоро" %>.</p>
-
-    <script type="text/javascript" src="//vk.com/js/api/openapi.js?146"></script>
-
-    <!-- VK Widget -->
-    <div id="vk_community_messages"></div>
-    <script type="text/javascript">
-      var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-      if (w > 800) {
-        VK.Widgets.CommunityMessages("vk_community_messages", 83055199, {
-          expandTimeout:  "1200000",
-          disableExpandChatSound: "1",
-          widgetPosition: "left",
-          tooltipButtonText: "Скажите чем мы можем Вам помочь?"
-        });
-      } else {
-        console.log("Disabled VK widget");
-      };
-    </script>
   </body>
 </html>
