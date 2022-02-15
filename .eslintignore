@@ -39,8 +39,6 @@ web/src/components/ChangePassword/index.tsx
 web/src/components/CodeVerification/index.tsx
 web/src/components/CombinedOrderBook/index.tsx
 web/src/components/CopyableTextField/index.tsx
-web/src/components/CryptoIcon/CryptoIcon.test.tsx
-web/src/components/CryptoIcon/index.tsx
 web/src/components/CustomInput/index.tsx
 web/src/components/Customization/Images/ImageSettings/index.tsx
 web/src/components/Customization/Images/index.tsx

@@ -21,15 +21,10 @@ exports[`WalletList should render 1`] = `
     <span
       class="icon iconMedium"
     >
-      <span
-        class="cr-crypto-icon"
-      >
-        <img
-          alt="BTC"
-          src="test-file-stub"
-        />
-         
-      </span>
+      <img
+        alt="BTC"
+        src="test-file-stub"
+      />
     </span>
     <div
       class="row grow alignStart justifyBetween"
@@ -84,12 +79,8 @@ exports[`WalletList should render 1`] = `
               </span>
             </span>
              
-            <span
-              class="currency"
-            >
-              <span>
-                USD
-              </span>
+            <span>
+              USD
             </span>
           </span>
         </div>
@@ -103,15 +94,10 @@ exports[`WalletList should render 1`] = `
     <span
       class="icon iconMedium"
     >
-      <span
-        class="cr-crypto-icon"
-      >
-        <img
-          alt="ETH"
-          src="test-file-stub"
-        />
-         
-      </span>
+      <img
+        alt="ETH"
+        src="test-file-stub"
+      />
     </span>
     <div
       class="row grow alignStart justifyBetween"
@@ -166,12 +152,8 @@ exports[`WalletList should render 1`] = `
               </span>
             </span>
              
-            <span
-              class="currency"
-            >
-              <span>
-                USD
-              </span>
+            <span>
+              USD
             </span>
           </span>
         </div>

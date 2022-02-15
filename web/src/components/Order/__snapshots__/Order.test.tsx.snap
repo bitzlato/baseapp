@@ -152,12 +152,8 @@ exports[`Order should match snapshot 1`] = `
                     .00
                   </span>
                 </span>
-                <span
-                  class="currency"
-                >
-                  <span>
-                    BTC
-                  </span>
+                <span>
+                  BTC
                 </span>
               </div>
             </div>
@@ -208,11 +204,9 @@ exports[`Order should match snapshot 1`] = `
                 />
               </div>
               <span
-                class="currency cr-order-input__currency"
+                class="cr-order-input__currency"
               >
-                <span>
-                  ETH
-                </span>
+                ETH
               </span>
             </div>
           </div>
@@ -239,12 +233,8 @@ exports[`Order should match snapshot 1`] = `
                   </span>
                 </span>
                  
-                <span
-                  class="currency"
-                >
-                  <span>
-                    ETH
-                  </span>
+                <span>
+                  ETH
                 </span>
               </span>
             </div>
@@ -308,12 +298,8 @@ exports[`Order should match snapshot 1`] = `
                     </span>
                   </span>
                    
-                  <span
-                    class="currency"
-                  >
-                    <span>
-                      BTC
-                    </span>
+                  <span>
+                    BTC
                   </span>
                 </span>
               </div>
@@ -342,12 +328,8 @@ exports[`Order should match snapshot 1`] = `
                   </span>
                 </span>
                  
-                <span
-                  class="currency"
-                >
-                  <span>
-                    BTC
-                  </span>
+                <span>
+                  BTC
                 </span>
               </span>
             </div>
@@ -363,12 +345,8 @@ exports[`Order should match snapshot 1`] = `
               <span>
                 Buy
               </span>
-              <span
-                class="currency"
-              >
-                <span>
-                  ETH
-                </span>
+              <span>
+                ETH
               </span>
             </button>
           </div>
@@ -524,12 +502,8 @@ exports[`Order should match snapshot 1`] = `
                     .00
                   </span>
                 </span>
-                <span
-                  class="currency"
-                >
-                  <span>
-                    BTC
-                  </span>
+                <span>
+                  BTC
                 </span>
               </div>
             </div>
@@ -580,11 +554,9 @@ exports[`Order should match snapshot 1`] = `
                 />
               </div>
               <span
-                class="currency cr-order-input__currency"
+                class="cr-order-input__currency"
               >
-                <span>
-                  ETH
-                </span>
+                ETH
               </span>
             </div>
           </div>
@@ -611,12 +583,8 @@ exports[`Order should match snapshot 1`] = `
                   </span>
                 </span>
                  
-                <span
-                  class="currency"
-                >
-                  <span>
-                    ETH
-                  </span>
+                <span>
+                  ETH
                 </span>
               </span>
             </div>
@@ -680,12 +648,8 @@ exports[`Order should match snapshot 1`] = `
                     </span>
                   </span>
                    
-                  <span
-                    class="currency"
-                  >
-                    <span>
-                      BTC
-                    </span>
+                  <span>
+                    BTC
                   </span>
                 </span>
               </div>
@@ -714,12 +678,8 @@ exports[`Order should match snapshot 1`] = `
                   </span>
                 </span>
                  
-                <span
-                  class="currency"
-                >
-                  <span>
-                    ETH
-                  </span>
+                <span>
+                  ETH
                 </span>
               </span>
             </div>
@@ -735,12 +695,8 @@ exports[`Order should match snapshot 1`] = `
               <span>
                 Sell
               </span>
-              <span
-                class="currency"
-              >
-                <span>
-                  ETH
-                </span>
+              <span>
+                ETH
               </span>
             </button>
           </div>
