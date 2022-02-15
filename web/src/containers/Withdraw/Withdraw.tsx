@@ -7,7 +7,6 @@ import { useBeneficiariesFetch } from 'src/hooks';
 import { Beneficiary } from 'src/modules/user/beneficiaries';
 import { selectWithdrawSuccess, Wallet, walletsWithdrawCcyFetch } from 'src/modules/user/wallets';
 import { ModalWithdrawConfirmationMobile } from 'src/mobile/components';
-import { Box } from 'src/components/Box/Box';
 import { WithdrawBody } from './WithdrawBody';
 
 interface Props {
@@ -77,10 +76,7 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
   };
 
   return (
-    <Box
-      className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body' : undefined}
-      position="relative"
-    >
+    <div className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body' : undefined}>
       <WithdrawBody
         onClick={toggleConfirmModal}
         withdrawDone={withdrawData.withdrawDone}
@@ -117,6 +113,6 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
           onDismiss={toggleConfirmModal}
         />
       )}
-    </Box>
+    </div>
   );
 };

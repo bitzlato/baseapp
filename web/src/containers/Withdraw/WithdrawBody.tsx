@@ -132,10 +132,12 @@ export const WithdrawBody: FC<Props> = (props) => {
   };
 
   return (
-    <>
-      {renderBlur()}
-      <Box col spacing="3">
+    <Box col spacing="3">
+      <Box position="relative">
         <Beneficiaries wallet={wallet} onChangeValue={setBeneficiary} />
+      </Box>
+      <Box col spacing="3" position="relative">
+        {renderBlur()}
         <BeneficiaryAddress beneficiary={beneficiary} />
         <Box grow row spacing="2">
           <Box
@@ -164,6 +166,6 @@ export const WithdrawBody: FC<Props> = (props) => {
           </Box>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
