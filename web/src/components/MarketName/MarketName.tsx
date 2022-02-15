@@ -10,7 +10,12 @@ export const MarketName: FC<Props> = ({ name }: Props) => {
 
   return (
     <>
-      <CurrencyTicker symbol={from} />/<CurrencyTicker symbol={to} />
+      <CurrencyTicker symbol={from} />
+      {to !== undefined && (
+        <>
+          /<CurrencyTicker symbol={to} />
+        </>
+      )}
     </>
   );
 };
