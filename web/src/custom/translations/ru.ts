@@ -45,7 +45,7 @@ export const ru: LangType = {
     'Please verify your account to start trading',
   'page.body.trade.header.newOrder.locked.minLevel.buttonText': 'Verify Your Account',
   'page.body.trade.header.newOrder.locked.login.text':
-    'Please login to your account to start trading',
+    'Пожалуйста авторизируйтесь, чтобы начать торговлю',
 
   'error.order.create.minAmount': 'Кол-во слишком мало. Минимальное кол-во: {amount} {currency}',
   'error.order.create.minPrice': 'Цена слишком мала. Минимальная цена: {price} {currency}',
@@ -268,12 +268,12 @@ export const ru: LangType = {
 
   'success.deposits.created': 'Создано намерение депонировать',
 
-  'page.body.wallets.beneficiaries.title': 'Withdraw address',
+  'page.body.wallets.beneficiaries.title': 'Адрес вывода',
   'page.body.wallets.beneficiaries.fiat.title': 'Withdrawal details',
-  'page.body.wallets.beneficiaries.dropdown.address': 'Address',
-  'page.body.wallets.beneficiaries.dropdown.select': 'Select',
+  'page.body.wallets.beneficiaries.dropdown.address': 'Адрес',
+  'page.body.wallets.beneficiaries.dropdown.select': 'Выбрать',
   'page.body.wallets.beneficiaries.dropdown.name': 'Название',
-  'page.body.wallets.beneficiaries.dropdown.pending': 'Pending',
+  'page.body.wallets.beneficiaries.dropdown.pending': 'Ожидает подтверждения',
 
   'page.body.wallets.beneficiaries.dropdown.fiat.account': 'Account',
   'page.body.wallets.beneficiaries.dropdown.fiat.bankOfBeneficiary': 'Bank of Beneficiary',
@@ -309,12 +309,12 @@ export const ru: LangType = {
 
   'page.body.wallets.beneficiaries.addAddressModal.body.button': 'Подтвердить',
 
-  'page.body.wallets.beneficiaries.confirmationModal.header': 'Confirm new address',
+  'page.body.wallets.beneficiaries.confirmationModal.header': 'Подтверждение нового адреса',
   'page.body.wallets.beneficiaries.confirmationModal.body.text':
-    'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
-  'page.body.wallets.beneficiaries.confirmationModal.body.confirmationModalCode': 'Pin code',
-  'page.body.wallets.beneficiaries.confirmationModal.body.resendButton': 'Resend pin',
-  'page.body.wallets.beneficiaries.confirmationModal.body.button': 'Confirm',
+    'Вам на почту отправлен пин-код, для подтверждения нового адреса, пожалуйста, укажите его ниже:',
+  'page.body.wallets.beneficiaries.confirmationModal.body.confirmationModalCode': 'Пин-код',
+  'page.body.wallets.beneficiaries.confirmationModal.body.resendButton': 'Выслать повторно',
+  'page.body.wallets.beneficiaries.confirmationModal.body.button': 'Подтвердить',
 
   'page.body.wallets.beneficiaries.tipAddress': 'Address',
   'page.body.wallets.beneficiaries.tipName': 'Name',
