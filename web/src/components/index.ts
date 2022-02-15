@@ -5,7 +5,6 @@ export * from './ChangePassword';
 export * from './CodeVerification';
 export * from './CombinedOrderBook';
 export * from './CopyableTextField';
-export * from './CurrencyInfo';
 export * from './CustomInput';
 export * from './DepositCrypto/DepositCrypto';
 export * from './DepositFiat';

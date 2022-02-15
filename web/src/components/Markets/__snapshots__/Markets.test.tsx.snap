@@ -46,20 +46,16 @@ exports[`Markets should render 1`] = `
             <span
               class="noWrap"
             >
-              <span
-                class="currency"
-              >
-                <span>
-                  ETH
-                </span>
+              <span>
+                ETH
               </span>
-              /
               <span
-                class="currency"
+                class="secondaryColor"
               >
-                <span>
-                  BTC
-                </span>
+                /
+              </span>
+              <span>
+                BTC
               </span>
             </span>
           </td>
@@ -86,20 +82,16 @@ exports[`Markets should render 1`] = `
             <span
               class="noWrap"
             >
-              <span
-                class="currency"
-              >
-                <span>
-                  ETH
-                </span>
+              <span>
+                ETH
               </span>
-              /
               <span
-                class="currency"
+                class="secondaryColor"
               >
-                <span>
-                  LTC
-                </span>
+                /
+              </span>
+              <span>
+                LTC
               </span>
             </span>
           </td>
@@ -126,20 +118,16 @@ exports[`Markets should render 1`] = `
             <span
               class="noWrap"
             >
-              <span
-                class="currency"
-              >
-                <span>
-                  LTC
-                </span>
+              <span>
+                LTC
               </span>
-              /
               <span
-                class="currency"
+                class="secondaryColor"
               >
-                <span>
-                  BTC
-                </span>
+                /
+              </span>
+              <span>
+                BTC
               </span>
             </span>
           </td>

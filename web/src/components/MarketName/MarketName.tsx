@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
+import { Box } from 'web/src/components/Box/Box';
 
 type Props = {
   name: string;
@@ -13,7 +14,10 @@ export const MarketName: FC<Props> = ({ name }: Props) => {
       <CurrencyTicker symbol={from} />
       {to !== undefined && (
         <>
-          /<CurrencyTicker symbol={to} />
+          <Box as="span" textColor="secondary">
+            /
+          </Box>
+          <CurrencyTicker symbol={to} />
         </>
       )}
     </>

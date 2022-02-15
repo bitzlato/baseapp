@@ -1,41 +1,36 @@
+/* eslint-disable global-require */
 import { FC } from 'react';
 import cn from 'classnames';
-import { CryptoIcon } from 'src/components/CryptoIcon';
-import { BlockchainIcon } from 'src/components/BlockchainIcon/BlockchainIcon';
 import { capitalize } from 'src/helpers/capitalize';
 
 import s from './CryptoCurrencyIcon.postcss';
 
+const MAP: Record<string, string> = {
+  avax: require('cryptocurrency-icons/svg/color/avax.svg'),
+  bnb: require('cryptocurrency-icons/svg/color/bnb.svg'),
+  btc: require('cryptocurrency-icons/svg/color/btc.svg'),
+  eth: require('cryptocurrency-icons/svg/color/eth.svg'),
+  ht: require('cryptocurrency-icons/svg/color/ht.svg'),
+  matic: require('cryptocurrency-icons/svg/color/matic.svg'),
+  mcr: require('cryptocurrency-icons/svg/color/mcr.svg'),
+  mdt: require('cryptocurrency-icons/svg/color/mdt.svg'),
+  usdc: require('cryptocurrency-icons/svg/color/usdc.svg'),
+  usdt: require('cryptocurrency-icons/svg/color/usdt.svg'),
+};
+
 interface Props {
-  icon?: string | null | undefined;
   currency: string;
-  iconId?: string | undefined;
   size?: 'small' | 'medium' | 'large' | undefined;
 }
 
-export const CryptoCurrencyIcon: FC<Props> = ({ currency, icon, iconId, size }) => {
-  const className = cn(size && s[`icon${capitalize(size)}`]);
-
-  if (icon) {
-    return (
-      <img
-        alt={currency}
-        className={cn('cr-wallet-item__single__image-icon', className)}
-        src={icon}
-      />
-    );
-  }
-
-  const [cryptoCurrency, protocol] = currency.split('-');
+export const CryptoCurrencyIcon: FC<Props> = ({ currency, size }) => {
+  const code = currency.split('-')[0]!;
+  const className = cn(s.icon, size && s[`icon${capitalize(size)}`]);
+  const src = MAP[code.toLowerCase()] ?? require('cryptocurrency-icons/svg/color/generic.svg');
 
   return (
-    <span className={cn(s.icon, className)}>
-      <CryptoIcon code={iconId ?? cryptoCurrency!} />
-      {protocol && (
-        <span className={s.blockchainIcon}>
-          <BlockchainIcon protocol={protocol} />
-        </span>
-      )}
+    <span className={className}>
+      <img src={src} alt={code.toUpperCase()} />
     </span>
   );
 };

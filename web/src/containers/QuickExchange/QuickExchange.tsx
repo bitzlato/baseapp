@@ -209,11 +209,7 @@ export const QuickExchangeContainer: React.FC = () => {
   const renderDropdownItem = (d: string) => {
     return (
       <Box row spacing>
-        <CryptoCurrencyIcon
-          size="small"
-          icon={getWallet(d, wallets)?.icon_url ?? ''}
-          currency={d}
-        />
+        <CryptoCurrencyIcon size="small" currency={d} />
         <Box textTr="uppercase" as="span">
           {d.split('-')[0]}
         </Box>
