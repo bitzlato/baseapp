@@ -24,7 +24,9 @@
       "shared/Heading": ["shared/src/components/Heading"],
       "shared/Stack": ["shared/src/components/Stack"],
       "shared/Text": ["shared/src/components/Text"],
-      "shared/getThemeClassName": ["shared/src/getThemeClassName"]
+      "shared/getThemeClassName": ["shared/src/getThemeClassName"],
+      "marketDocs/Swagger": ["market-docs/src/Swagger"],
+      "marketDocs/WebSocketApi": ["market-docs/src/WebSocketApi"]
     }
   },
   "exclude": ["./web/build", "./web/public"]

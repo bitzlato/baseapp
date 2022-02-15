@@ -12,6 +12,7 @@ log/
 !.yarn/sdks
 !.yarn/versions
 
+market-docs/build
 shared/build
 web/public/config/env.js
 web/build
