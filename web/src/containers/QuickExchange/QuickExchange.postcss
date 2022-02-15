@@ -1,5 +1,6 @@
 .quickExchangeDropdown {
   flex: 0.5;
+  min-width: 130px;
 }
 
 .quickExchangeAll {
@@ -8,6 +9,11 @@
   border-width: 0;
   color: var(--primary-text-color-level-4);
   padding: 0 var(--gap);
+
+  @media (--breakpoint-down-md) {
+    font-size: 11px;
+    padding: 4px var(--gap);
+  }
 }
 
 .quickExchangeSwap {
@@ -40,12 +46,23 @@
   width: initial;
 
   svg {
+    color: var(--to-profile-button-icon-fill) !important;
     height: 24px;
     width: 24px;
   }
 }
 
 .quickExchangeRefreshPulse {
+  svg {
+    color: rgba(var(--rgb-brand-yellow), 0.7) !important;
+  }
+
+  &:hover, &:focus  {
+    svg {
+      color: rgba(var(--rgb-brand-yellow), 1) !important;
+    }
+  }
+
   animation: pulse-brand-yellow 2s infinite;
 }
 
@@ -76,4 +93,9 @@
   &:hover {
     color: var(--header-nav-item-color-hover);
   }
+}
+
+.quickExchangeWidget {
+  flex: 1;
+  max-width: 550px
 }

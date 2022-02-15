@@ -11,7 +11,7 @@ interface Props {
 
 export const Spoiler: FC<Props> = ({ title, children }) => {
   return (
-    <Accordion>
+    <Accordion className={s.spoiler}>
       <Box row justify="end">
         <ToggleButton eventKey="0" title={title} />
       </Box>

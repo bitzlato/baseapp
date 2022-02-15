@@ -21,7 +21,7 @@ type BoxOwnProps<E = React.ElementType> = {
   spacing?: boolean | '2' | '3' | '4' | '5' | 'sm' | undefined;
   gap?: boolean | '2' | '3' | '4' | '5' | 'sm' | undefined;
   padding?: boolean | '2' | '3' | '4' | '5' | '2X3' | undefined;
-  my?: '4' | '7' | undefined;
+  my?: '2' | '4' | '7' | undefined;
   textSize?: 'sm' | 'lg' | 'xl' | undefined;
   textColor?: TextColor | undefined;
   textTr?: 'capitalize' | 'uppercase' | undefined;

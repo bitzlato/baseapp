@@ -809,6 +809,7 @@ export const en = {
   'page.body.quick.exchange.label.currency': 'Currency',
   'page.body.quick.exchange.sublabel.min_amount': 'Min exchange amount',
   'page.body.quick.exchange.sublabel.balance': 'Available',
+  'page.body.quick.exchange.sublabel.fee': 'Fee',
   'page.body.quick.exchange.rate': 'Rate',
   'page.body.quick.exchange.reverse_rate': 'Reverse rate',
   'page.body.quick.exchange.limit.order': 'Order limit',

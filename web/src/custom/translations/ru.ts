@@ -824,6 +824,7 @@ export const ru: LangType = {
   'page.body.quick.exchange.label.currency': 'Валюта',
   'page.body.quick.exchange.sublabel.min_amount': 'Минимальная сумма обмена',
   'page.body.quick.exchange.sublabel.balance': 'Доступно',
+  'page.body.quick.exchange.sublabel.fee': 'Комиссия',
   'page.body.quick.exchange.rate': 'Курс',
   'page.body.quick.exchange.reverse_rate': 'Обратный курс',
   'page.body.quick.exchange.limit.order': 'Лимит на обмен',
