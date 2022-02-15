@@ -16,7 +16,6 @@ import { Button as BzButton } from 'src/components/Button/Button';
 import { SelectString } from 'src/components/Select/Select';
 import { Card } from 'src/components/Card/Card';
 import { InfoIcon } from 'src/assets/images/InfoIcon';
-import { PriceLimit } from './PriceLimit';
 import { DotsFlashing } from 'src/components/DotsFlashing/DotsFlashing';
 import { RefreshIcon } from 'src/assets/icons/RefreshIcon';
 import { DEFAULT_CCY_PRECISION } from 'src/constants';
@@ -38,10 +37,13 @@ import {
   marketPriceReset,
   selectCurrencies,
   selectUserLoggedIn,
+  selectMobileDeviceState,
 } from '../../modules';
 import { useCurrenciesFetch, useMarketsFetch, useWalletsFetch } from '../../hooks';
 
 import s from './QuickExchange.postcss';
+import { Limits } from './Limits';
+import { Spoiler } from 'web/src/components/Spoiler/Spoiler';
 
 const PERCENTS = [25, 50, 75, 100];
 
@@ -70,6 +72,7 @@ export const QuickExchangeContainer: React.FC = () => {
   const exchangeFetching = useSelector(selectQuickExchangeFetching);
   const currencies = useSelector(selectCurrencies);
   const isLoggedIn = useSelector(selectUserLoggedIn);
+  const isMobileDevice = useSelector(selectMobileDeviceState);
 
   const t = useT();
 
@@ -216,155 +219,146 @@ export const QuickExchangeContainer: React.FC = () => {
       </Box>
     );
   };
-  const noAmount = createMoney(requestVolume, DEFAULT_CURRENCY).isZero();
-  const noMarket = !market && !!fromCurrency && !!toCurrency;
-  const disablePercents = noMarket || !!fromWallet?.balance.isZero();
 
-  const minAmount = market
-    ? createMoney(market.min_amount, market.base_unit === fromCurrency ? fromCcy! : toCcy!)
-    : ZERO_MONEY;
-
-  return (
-    <Container maxWidth="md" my="4">
-      <Card header={<h4>{t('page.body.quick.exchange.header')}</h4>}>
-        <Box col spacing>
-          <Box col spacing="sm">
-            <Box grow row spacing="2">
-              <Box
-                flex1
-                as={NumberInput}
-                label={t('page.body.quick.exchange.label.exchange')}
-                labelVisible
-                value={fromAmount}
-                onChange={handleChangeFrom}
-              />
-              <SelectString
-                className={s.quickExchangeDropdown}
-                options={fromList}
-                value={fromCurrency}
-                onChange={handleSelectFrom}
-                placeholder={t('page.body.quick.exchange.label.currency')}
-                formatOptionLabel={renderDropdownItem}
-              />
-            </Box>
-            {market && fromWallet && price.request_price && !exchangeFetching && (
-              <AmountDescription
-                market={market}
-                fromWallet={fromWallet}
-                requestPrice={price.request_price}
-                fromAmount={fromAmount}
-              />
-            )}
+  const renderQuickExchangeBody = () => {
+    return (
+      <Box row spacing="2" align="stretch" justify="center">
+        {!isMobileDevice && fromCcy ? (
+          <Box col align="start">
+            <Card header={t('page.body.quick.exchange.label.limits')}>
+              <Limits limits={limits} ccy={fromCcy} />
+            </Card>
           </Box>
-          <Box row spacing justify="between" wrap>
-            <Box row spacing>
-              <span>{t('page.body.quick.exchange.sublabel.balance')}:</span>
-              <MoneyFormat
-                money={
-                  fromWallet?.balance ??
-                  createMoney(0, createCcy(fromCurrency, DEFAULT_CCY_PRECISION))
-                }
-              />
-            </Box>
-            <Box row spacing>
-              {PERCENTS.map((v) => (
-                <Button
-                  key={v}
-                  variant="secondary"
-                  disabled={disablePercents}
-                  className={s.quickExchangeAll}
-                  onClick={() => handleUsePercent(v)}
-                >
-                  {v}%
-                </Button>
-              ))}
-            </Box>
-          </Box>
-        </Box>
-        <Button
-          className={s.quickExchangeSwap}
-          onClick={handleRearrange}
-          title={t('page.body.quick.exchange.button.rearrange')}
-        >
-          <SwipeIcon />
-        </Button>
-        <Box grow row spacing="2">
-          <Box
-            flex1
-            as={NumberInput}
-            label={
-              <Box row spacing="sm">
-                <span>{t('page.body.quick.exchange.label.receive')}</span>
-                <OverlayTrigger
-                  placement="top"
-                  delay={{ show: 250, hide: 400 }}
-                  overlay={
-                    <Tooltip id="quick-exchange-price">
-                      {t('page.body.quick.exchange.warning')}
-                    </Tooltip>
-                  }
-                >
-                  <InfoIcon className={s.quickExchangeWarningIcon} />
-                </OverlayTrigger>
-              </Box>
-            }
-            labelVisible
-            value={toAmount}
-            onChange={handleChangeTo}
-          />
-          <SelectString
-            className={s.quickExchangeDropdown}
-            options={toList}
-            value={toCurrency}
-            onChange={handleSelectTo}
-            placeholder={t('page.body.quick.exchange.label.currency')}
-            formatOptionLabel={renderDropdownItem}
-          />
-        </Box>
-        {fromCcy && toCcy && (
+        ) : null}
+        <Card header={<h4>{t('page.body.quick.exchange.header')}</h4>} className={s.quickExchangeWidget}>
           <Box col spacing>
-            <PriceLimit
-              label={t('page.body.quick.exchange.limit.order')}
-              limit={limits.order_limit}
-              ccy={fromCcy}
-              price={fromCcy.price}
+            <Box col spacing="sm">
+              {isMobileDevice && fromCcy ? (
+                <Box col>
+                  <Spoiler title={t('page.body.quick.exchange.label.limits')}>
+                    <Limits limits={limits} ccy={fromCcy} />
+                  </Spoiler>
+                </Box>
+              ) : null}
+              <Box grow row spacing="2">
+                <Box
+                  flex1
+                  as={NumberInput}
+                  label={t('page.body.quick.exchange.label.exchange')}
+                  labelVisible
+                  value={fromAmount}
+                  onChange={handleChangeFrom}
+                />
+                <SelectString
+                  className={s.quickExchangeDropdown}
+                  options={fromList}
+                  value={fromCurrency}
+                  onChange={handleSelectFrom}
+                  placeholder={t('page.body.quick.exchange.label.currency')}
+                  formatOptionLabel={renderDropdownItem}
+                />
+              </Box>
+              {market && fromWallet && price.request_price && !exchangeFetching && (
+                <AmountDescription
+                  market={market}
+                  fromWallet={fromWallet}
+                  requestPrice={price.request_price}
+                  fromAmount={fromAmount}
+                />
+              )}
+            </Box>
+            <Box row spacing justify="between" wrap>
+              <Box row spacing>
+                <span>{t('page.body.quick.exchange.sublabel.balance')}: </span>
+                <MoneyFormat
+                  money={
+                    fromWallet?.balance ??
+                    createMoney(0, createCcy(fromCurrency, DEFAULT_CCY_PRECISION))
+                  }
+                />
+              </Box>
+              <Box row spacing>
+                {PERCENTS.map((v) => (
+                  <Button
+                    key={v}
+                    variant="secondary"
+                    disabled={disablePercents}
+                    className={s.quickExchangeAll}
+                    onClick={() => handleUsePercent(v)}
+                  >
+                    {v}%
+                  </Button>
+                ))}
+              </Box>
+            </Box>
+            <Box row justify="between">
+              <Box flex1 row spacing="2" justify="between">
+                {fromCcy && toCcy && (
+                  <Box col spacing>
+                    <Box row spacing wrap>
+                      <span>{t('page.body.quick.exchange.rate')}: </span>
+                      <MoneyFormat money={createMoney(1, fromCcy)} />
+                      <Box as="span" textColor="primary">
+                        ≈
+                      </Box>
+                      <MoneyFormat money={createMoney(price.request_price, toCcy)} zeroSymbol="?" />
+                    </Box>
+                  </Box>
+                )}
+              </Box>
+              <Button
+                className={s.quickExchangeSwap}
+                onClick={handleRearrange}
+                title={t('page.body.quick.exchange.button.rearrange')}
+              >
+                <SwipeIcon />
+              </Button>
+            </Box>
+          </Box>
+          <Box grow row spacing="2">
+            <Box
+              flex1
+              as={NumberInput}
+              label={
+                <Box row spacing="sm">
+                  <span>{t('page.body.quick.exchange.label.receive')}</span>
+                  <OverlayTrigger
+                    placement="top"
+                    delay={{ show: 250, hide: 400 }}
+                    overlay={
+                      <Tooltip id="quick-exchange-price">
+                        {t('page.body.quick.exchange.warning')}
+                      </Tooltip>
+                    }
+                  >
+                    <InfoIcon className={s.quickExchangeWarningIcon} />
+                  </OverlayTrigger>
+                </Box>
+              }
+              labelVisible
+              value={toAmount}
+              onChange={handleChangeTo}
             />
-            <PriceLimit
-              label={t('page.body.quick.exchange.limit.daily')}
-              limit={limits.daily_limit}
-              ccy={fromCcy}
-              price={fromCcy.price}
+            <SelectString
+              className={s.quickExchangeDropdown}
+              options={toList}
+              value={toCurrency}
+              onChange={handleSelectTo}
+              placeholder={t('page.body.quick.exchange.label.currency')}
+              formatOptionLabel={renderDropdownItem}
             />
-            <PriceLimit
-              label={t('page.body.quick.exchange.limit.weekly')}
-              limit={limits.weekly_limit}
-              ccy={fromCcy}
-              price={fromCcy.price}
-            />
-            <Box row spacing wrap>
+          </Box>
+          <Box col spacing>
+            {minAmount && <Box row spacing wrap>
               <span>{t('page.body.quick.exchange.sublabel.min_amount')}:</span>
               <MoneyFormat money={minAmount} />
+            </Box>}
+            <Box row spacing wrap>
+              <span>{t('page.body.quick.exchange.sublabel.fee')}:</span>
+              <span>0.2%</span>
             </Box>
-            <Box row spacing="2" justify="between">
-              <Box col spacing>
-                <Box row spacing wrap>
-                  <span>{t('page.body.quick.exchange.rate')}:</span>
-                  <MoneyFormat money={createMoney(1, fromCcy)} />
-                  <Box as="span" textColor="primary">
-                    ≈
-                  </Box>
-                  <MoneyFormat money={createMoney(price.request_price, toCcy)} zeroSymbol="?" />
-                </Box>
-                <Box row spacing wrap>
-                  <span>{t('page.body.quick.exchange.reverse_rate')}:</span>
-                  <MoneyFormat money={createMoney(1, toCcy)} />
-                  <Box as="span" textColor="primary">
-                    ≈
-                  </Box>
-                  <MoneyFormat money={createMoney(price.inverse_price, fromCcy)} zeroSymbol="?" />
-                </Box>
-              </Box>
-              <BzButton
+            <Box row spacing="2" justify="end">
+              <Button
                 variant="primary-outline"
                 className={cn(
                   s.quickExchangeRefresh,
@@ -375,31 +369,44 @@ export const QuickExchangeContainer: React.FC = () => {
                 disabled={noAmount || priceFetching}
               >
                 <RefreshIcon />
-              </BzButton>
+              </Button>
             </Box>
           </Box>
-        )}
-        <Box
-          row
-          spacing="2"
-          as={BzButton}
-          size="large"
-          variant="primary"
-          onClick={handleExchange}
-          disabled={noAmount || rateOutOfDate || exchangeFetching}
-        >
-          <span>
-            {noMarket
-              ? t('page.body.quick.exchange.tip.market')
-              : noAmount
-              ? t('page.body.quick.exchange.tip.amount')
-              : rateOutOfDate && !exchangeFetching
-              ? t('page.body.quick.exchange.tip.refresh')
-              : t('page.body.quick.exchange.button.exchange')}
-          </span>
-          {exchangeFetching && <DotsFlashing />}
-        </Box>
-      </Card>
-    </Container>
-  );
+          <Box
+            row
+            spacing="2"
+            as={BzButton}
+            size="large"
+            variant="primary"
+            onClick={handleExchange}
+            disabled={noAmount || rateOutOfDate || exchangeFetching}
+          >
+            <span>
+              {noMarket
+                ? t('page.body.quick.exchange.tip.market')
+                : noAmount
+                  ? t('page.body.quick.exchange.tip.amount')
+                  : rateOutOfDate && !exchangeFetching
+                    ? t('page.body.quick.exchange.tip.refresh')
+                    : t('page.body.quick.exchange.button.exchange')}
+            </span>
+            {exchangeFetching && <DotsFlashing />}
+          </Box>
+        </Card>
+      </Box>
+    );
+  };
+
+  const noAmount = createMoney(requestVolume, DEFAULT_CURRENCY).isZero();
+  const noMarket = !market && !!fromCurrency && !!toCurrency;
+  const disablePercents = noMarket || !!fromWallet?.balance.isZero();
+
+  const minAmount = market && fromCcy && toCcy
+    ? createMoney(market.min_amount, market.base_unit === fromCurrency ? fromCcy! : toCcy!)
+    : ZERO_MONEY;
+
+  return isMobileDevice ? renderQuickExchangeBody() :
+    <Container maxWidth="lg" my="2">
+      {renderQuickExchangeBody()}
+    </Container>;
 };

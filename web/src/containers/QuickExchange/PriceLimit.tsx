@@ -13,7 +13,7 @@ interface Props {
 
 export const PriceLimit: React.FC<Props> = (props) => {
   return (
-    <Box row spacing wrap>
+    <Box row spacing>
       <span>{props.label}:</span>
       <MoneyFormat money={createMoney(props.limit, props.ccy).divide(props.price)} />
       <span>
