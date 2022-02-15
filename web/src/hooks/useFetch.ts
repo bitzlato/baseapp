@@ -1,5 +1,4 @@
 import { useEffect, useReducer } from 'react';
-import { isEqualArrays } from 'src/helpers/isEqualArrays';
 
 export interface FetchResult<T> {
   data: T | undefined;
@@ -36,13 +35,10 @@ export function useFetch<T>(
   );
 
   useEffect(() => {
-    if (!isEqualArrays(deps, state.deps)) {
-      dispatch({ ...INITIAL, deps });
-    }
     if (!options?.skipRequest) {
       const controller: AbortController | undefined = new AbortController();
       (async () => {
-        dispatch({ isLoading: true });
+        dispatch({ isLoading: true, error: undefined, deps });
         try {
           const data = await fetchData(url, { ...options, signal: controller.signal });
           if (!controller.signal.aborted) {
@@ -58,7 +54,7 @@ export function useFetch<T>(
     }
   }, deps);
 
-  return isEqualArrays(deps, state.deps) ? state : INITIAL;
+  return state;
 }
 
 async function fetchData(url: string, options?: RequestInit) {
