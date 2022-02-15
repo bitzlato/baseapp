@@ -6,3 +6,4 @@ export PROXY_HOST=s1.s-www.lgk.one
 
 # development and build env vars
 # export SHARED_URL=http://localhost:3003
+# export MARKET_DOCS_URL=http://localhost:3004

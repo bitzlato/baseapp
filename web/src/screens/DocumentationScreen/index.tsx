@@ -49,12 +49,6 @@ const ApiDoc: FC = () => {
   );
 };
 
-const Swagger = lazy(() =>
-  import(/* webpackChunkName: "swagger" */ './Swagger').then((m) => ({ default: m.Swagger })),
-);
+const Swagger = lazy(() => import('marketDocs/Swagger'));
 
-const WebSocketApi = lazy(() =>
-  import(/* webpackChunkName: "websocket" */ './WebSocketApi').then((m) => ({
-    default: m.WebSocketApi,
-  })),
-);
+const WebSocketApi = lazy(() => import('marketDocs/WebSocketApi'));

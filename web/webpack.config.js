@@ -28,11 +28,18 @@ const extractSemver = (text) => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 
-let sharedURL = isDevelopment ? 'http://localhost:3003' : '/shared'; // production
+let sharedURL = isDevelopment ? 'http://localhost:3003' : '/shared'; // production or staging
 if (process.env.SHARED_URL) {
   sharedURL = process.env.SHARED_URL; // e.g. http://localhost:3003
 } else if (process.env.PROXY_HOST) {
-  sharedURL = `https://${process.env.PROXY_HOST}/shared`; // for stages
+  sharedURL = `https://${process.env.PROXY_HOST}/shared`; // for proxing
+}
+
+let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : '/marketDocs'; // production or staging
+if (process.env.MARKET_DOCS_URL) {
+  marketDocsUrl = process.env.MARKET_DOCS_URL; // e.g. http://localhost:3004
+} else if (process.env.PROXY_HOST) {
+  marketDocsUrl = `https://${process.env.PROXY_HOST}/marketDocs`; // for proxing
 }
 
 /** @type {webpack.WebpackOptionsNormalized} */
@@ -58,10 +65,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     fallback: {
-      stream: require.resolve('stream-browserify'),
-      events: require.resolve('events/'),
       buffer: require.resolve('buffer/'),
-      url: require.resolve('url/'),
+      events: require.resolve('events/'),
     },
   },
 
@@ -259,6 +264,7 @@ module.exports = {
       name: 'baseapp',
       remotes: {
         shared: `shared@${sharedURL}/shared.js`,
+        marketDocs: `marketDocs@${marketDocsUrl}/marketDocs.js`,
       },
       shared: {
         react: { requiredVersion: deps.react, singleton: true },
