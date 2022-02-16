@@ -225,7 +225,7 @@ export const QuickExchangeContainer: React.FC = () => {
       <Box row spacing="2" align="stretch" justify="center">
         {!isMobileDevice && fromCcy ? (
           <Box col align="start">
-            <Card header={t('page.body.quick.exchange.label.limits')}>
+            <Card header={t('page.body.quick.exchange.label.limits')} className={s.quickExchangeLimit}>
               <Limits limits={limits} ccy={fromCcy} />
             </Card>
           </Box>
@@ -267,7 +267,7 @@ export const QuickExchangeContainer: React.FC = () => {
                 />
               )}
             </Box>
-            <Box row spacing justify="between" wrap>
+            <Box row justify="between">
               <Box row spacing>
                 <span>{t('page.body.quick.exchange.sublabel.balance')}: </span>
                 <MoneyFormat
@@ -277,7 +277,7 @@ export const QuickExchangeContainer: React.FC = () => {
                   }
                 />
               </Box>
-              <Box row spacing>
+              <Box row>
                 {PERCENTS.map((v) => (
                   <Button
                     key={v}

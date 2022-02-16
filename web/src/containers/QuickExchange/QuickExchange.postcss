@@ -9,10 +9,12 @@
   border-width: 0;
   color: var(--primary-text-color-level-4);
   padding: 0 var(--gap);
+  margin-left: var(--gap);
 
   @media (--breakpoint-down-md) {
     font-size: 11px;
     padding: 4px var(--gap);
+    margin-left: 4px;
   }
 }
 
@@ -98,4 +100,8 @@
 .quickExchangeWidget {
   flex: 1;
   max-width: 550px
+}
+
+.quickExchangeLimit {
+  min-width: 320px;
 }
