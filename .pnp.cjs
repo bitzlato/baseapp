@@ -3179,20 +3179,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@bugsnag/browser", [
-        ["npm:7.11.0", {
-          "packageLocation": "./.yarn/cache/@bugsnag-browser-npm-7.11.0-c66869d518-ae20ecd0ae.zip/node_modules/@bugsnag/browser/",
+        ["npm:7.16.1", {
+          "packageLocation": "./.yarn/cache/@bugsnag-browser-npm-7.16.1-1e62d24257-e925236281.zip/node_modules/@bugsnag/browser/",
           "packageDependencies": [
-            ["@bugsnag/browser", "npm:7.11.0"],
-            ["@bugsnag/core", "npm:7.11.0"]
+            ["@bugsnag/browser", "npm:7.16.1"],
+            ["@bugsnag/core", "npm:7.16.1"]
           ],
           "linkType": "HARD",
         }]
       ]],
       ["@bugsnag/core", [
-        ["npm:7.11.0", {
-          "packageLocation": "./.yarn/cache/@bugsnag-core-npm-7.11.0-ef2a2b02cd-0074a28801.zip/node_modules/@bugsnag/core/",
+        ["npm:7.16.1", {
+          "packageLocation": "./.yarn/cache/@bugsnag-core-npm-7.16.1-3b09b8aede-53c7803a04.zip/node_modules/@bugsnag/core/",
           "packageDependencies": [
-            ["@bugsnag/core", "npm:7.11.0"],
+            ["@bugsnag/core", "npm:7.16.1"],
             ["@bugsnag/cuid", "npm:3.0.0"],
             ["@bugsnag/safe-json-stringify", "npm:6.0.0"],
             ["error-stack-parser", "npm:2.0.6"],
@@ -3212,22 +3212,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@bugsnag/js", [
-        ["npm:7.11.0", {
-          "packageLocation": "./.yarn/cache/@bugsnag-js-npm-7.11.0-7640785941-dfaf47c287.zip/node_modules/@bugsnag/js/",
+        ["npm:7.16.1", {
+          "packageLocation": "./.yarn/cache/@bugsnag-js-npm-7.16.1-6589988b0c-1a4e03dfa4.zip/node_modules/@bugsnag/js/",
           "packageDependencies": [
-            ["@bugsnag/js", "npm:7.11.0"],
-            ["@bugsnag/browser", "npm:7.11.0"],
-            ["@bugsnag/node", "npm:7.11.0"]
+            ["@bugsnag/js", "npm:7.16.1"],
+            ["@bugsnag/browser", "npm:7.16.1"],
+            ["@bugsnag/node", "npm:7.16.1"]
           ],
           "linkType": "HARD",
         }]
       ]],
       ["@bugsnag/node", [
-        ["npm:7.11.0", {
-          "packageLocation": "./.yarn/cache/@bugsnag-node-npm-7.11.0-21790c4f69-85f5311e05.zip/node_modules/@bugsnag/node/",
+        ["npm:7.16.1", {
+          "packageLocation": "./.yarn/cache/@bugsnag-node-npm-7.16.1-2773c11fd7-68758f634d.zip/node_modules/@bugsnag/node/",
           "packageDependencies": [
-            ["@bugsnag/node", "npm:7.11.0"],
-            ["@bugsnag/core", "npm:7.11.0"],
+            ["@bugsnag/node", "npm:7.16.1"],
+            ["@bugsnag/core", "npm:7.16.1"],
             ["byline", "npm:5.0.0"],
             ["error-stack-parser", "npm:2.0.6"],
             ["iserror", "npm:0.0.2"],
@@ -3238,17 +3238,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@bugsnag/plugin-react", [
-        ["npm:7.11.0", {
-          "packageLocation": "./.yarn/cache/@bugsnag-plugin-react-npm-7.11.0-afae9205ab-e5578bb974.zip/node_modules/@bugsnag/plugin-react/",
+        ["npm:7.16.1", {
+          "packageLocation": "./.yarn/cache/@bugsnag-plugin-react-npm-7.16.1-c0fd0be2ff-9894ed1019.zip/node_modules/@bugsnag/plugin-react/",
           "packageDependencies": [
-            ["@bugsnag/plugin-react", "npm:7.11.0"]
+            ["@bugsnag/plugin-react", "npm:7.16.1"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.11.0", {
-          "packageLocation": "./.yarn/__virtual__/@bugsnag-plugin-react-virtual-b0462ae626/0/cache/@bugsnag-plugin-react-npm-7.11.0-afae9205ab-e5578bb974.zip/node_modules/@bugsnag/plugin-react/",
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.16.1", {
+          "packageLocation": "./.yarn/__virtual__/@bugsnag-plugin-react-virtual-75fd7ba1f7/0/cache/@bugsnag-plugin-react-npm-7.16.1-c0fd0be2ff-9894ed1019.zip/node_modules/@bugsnag/plugin-react/",
           "packageDependencies": [
-            ["@bugsnag/plugin-react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.11.0"],
+            ["@bugsnag/plugin-react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.16.1"],
             ["@bugsnag/core", null],
             ["@types/bugsnag__core", null]
           ],
@@ -26368,8 +26368,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["web", "workspace:web"],
             ["@bitzlato/ethereum-provider", "npm:0.1.1"],
             ["@bitzlato/money-js", "npm:0.0.4"],
-            ["@bugsnag/js", "npm:7.11.0"],
-            ["@bugsnag/plugin-react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.11.0"],
+            ["@bugsnag/js", "npm:7.16.1"],
+            ["@bugsnag/plugin-react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.16.1"],
             ["@capacitor/android", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.4.1"],
             ["@capacitor/cli", "npm:2.4.6"],
             ["@capacitor/core", "npm:2.4.6"],

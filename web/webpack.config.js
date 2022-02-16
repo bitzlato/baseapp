@@ -29,6 +29,7 @@ const extractSemver = (text) => {
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
+const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
 
 let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : '/marketDocs'; // production or staging
 if (process.env.MARKET_DOCS_URL) {
@@ -216,10 +217,12 @@ module.exports = {
       }),
 
     process.env.REACT_APP_BUGSNAG_KEY &&
+      releaseStage === 'production' &&
       new BugsnagSourceMapUploaderPlugin({
         apiKey: process.env.REACT_APP_BUGSNAG_KEY,
         appVersion,
         overwrite: true,
+        publicPath: 'https://market.bitzlato.com/',
       }),
 
     new webpack.EnvironmentPlugin({
@@ -242,7 +245,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/app/template.html',
       hash: true,
-      chunks: ['common', 'bundle', 'styles'],
     }),
 
     new webpack.ProvidePlugin({
