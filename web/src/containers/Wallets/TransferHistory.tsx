@@ -19,9 +19,11 @@ interface Props {
   currency?: Currency | undefined;
   wallets?: Wallet[] | undefined;
   transfers?: number | undefined;
+  className?: string;
+  noDataToDisplay?: React.ReactElement
 }
 
-export const TransferHistory: React.FC<Props> = ({ currency, wallets, transfers }) => {
+export const TransferHistory: React.FC<Props> = ({ currency, wallets, transfers, className, noDataToDisplay }) => {
   const t = useT();
 
   const { data = [], error } = useFetch<TransferRecord[]>(
@@ -66,11 +68,11 @@ export const TransferHistory: React.FC<Props> = ({ currency, wallets, transfers 
     });
 
   if (!tableData.length) {
-    return null;
+    return noDataToDisplay ? noDataToDisplay : null;
   }
 
   return (
-    <Box col>
+    <Box col className={className}>
       {currency ? <h4>{t('Transfer History')}</h4> : null}
       <Table tableClassName={s.transferHistory} header={header} data={tableData} />
     </Box>
