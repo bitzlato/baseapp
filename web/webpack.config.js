@@ -9,10 +9,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
 const { BugsnagSourceMapUploaderPlugin } = require('webpack-bugsnag-plugins');
+const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
 
 const deps = require('./package.json').dependencies;
 
 const BUILD_DIR = path.resolve(__dirname, './build');
+const SVGR_DIR = path.resolve(__dirname, './src/assets/svg');
 const HASH = Math.round(Date.now() / 1000).toString();
 
 const extractSemver = (text) => {
@@ -28,13 +30,6 @@ const extractSemver = (text) => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 
-let sharedURL = isDevelopment ? 'http://localhost:3003' : '/shared'; // production or staging
-if (process.env.SHARED_URL) {
-  sharedURL = process.env.SHARED_URL; // e.g. http://localhost:3003
-} else if (process.env.PROXY_HOST) {
-  sharedURL = `https://${process.env.PROXY_HOST}/shared`; // for proxing
-}
-
 let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : '/marketDocs'; // production or staging
 if (process.env.MARKET_DOCS_URL) {
   marketDocsUrl = process.env.MARKET_DOCS_URL; // e.g. http://localhost:3004
@@ -48,7 +43,7 @@ module.exports = {
 
   bail: !isDevelopment,
 
-  devtool: isDevelopment ? 'eval-cheap-module-source-map' : 'source-map',
+  devtool: isDevelopment ? 'eval-cheap-module-source-map' : 'hidden-source-map',
 
   entry: {
     bundle: './src/index.ts',
@@ -56,10 +51,11 @@ module.exports = {
 
   output: {
     path: BUILD_DIR,
-    filename: isDevelopment ? '[name].js' : '[name].[contenthash].js',
+    filename: !isDevelopment ? '[name].[contenthash].js' : undefined,
     chunkFilename: '[id].[contenthash].js',
     globalObject: 'this',
-    publicPath: '/',
+    publicPath: 'auto',
+    clean: true,
   },
 
   resolve: {
@@ -172,7 +168,15 @@ module.exports = {
       },
 
       {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        include: [SVGR_DIR],
+        use: ['@svgr/webpack'],
+      },
+
+      {
         test: /\.(png|jpg|gif|ttf|eot|woff|woff2|svg)$/,
+        exclude: [SVGR_DIR],
         type: 'asset',
         parser: {
           dataUrlCondition: {
@@ -186,23 +190,6 @@ module.exports = {
   optimization: {
     moduleIds: isDevelopment ? 'named' : 'deterministic',
     chunkIds: isDevelopment ? 'named' : 'deterministic',
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: 'style',
-          test: /\.(css|sass|scss|pcss)$/,
-          chunks: 'all',
-          enforce: true,
-        },
-        common: {
-          name: 'common',
-          chunks: 'initial',
-          minChunks: 2,
-          maxInitialRequests: 5,
-          minSize: 0,
-        },
-      },
-    },
     minimize: !isDevelopment,
     minimizer: !isDevelopment ? [`...`, new CssMinimizerPlugin()] : undefined,
   },
@@ -218,6 +205,8 @@ module.exports = {
       new CopyWebpackPlugin({
         patterns: [{ from: 'public' }],
       }),
+
+    new VanillaExtractPlugin(),
 
     !isDevelopment &&
       new MiniCssExtractPlugin({
@@ -261,10 +250,19 @@ module.exports = {
     }),
 
     new webpack.container.ModuleFederationPlugin({
-      name: 'baseapp',
+      name: 'shared',
+      filename: 'shared.js',
       remotes: {
-        shared: `shared@${sharedURL}/shared.js`,
         marketDocs: `marketDocs@${marketDocsUrl}/marketDocs.js`,
+      },
+      exposes: {
+        './Header': './src/components/shared/Header/Header',
+        './Footer': './src/components/shared/Footer/Footer',
+        './Box': './src/components/ui/Box',
+        './Heading': './src/components/ui/Heading',
+        './Stack': './src/components/ui/Stack',
+        './Text': './src/components/ui/Text',
+        './getThemeClassName': './src/theme/getThemeClassName',
       },
       shared: {
         react: { requiredVersion: deps.react, singleton: true },

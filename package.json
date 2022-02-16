@@ -12,7 +12,7 @@
   "packageManager": "yarn@3.1.1",
   "scripts": {
     "start": "yarn workspace web start",
-    "start:all": "MARKET_DOCS_URL=http://localhost:3004 SHARED_URL=http://localhost:3003 yarn workspaces foreach -pvi --from '{market-docs,shared,web}' run start",
+    "start:all": "MARKET_DOCS_URL=http://localhost:3004 yarn workspaces foreach -pvi --from '{market-docs,web}' run start",
     "build": "yarn workspaces foreach -pvi run build",
     "lint": "yarn lint:es && yarn lint:type",
     "lint:type": "tsc",

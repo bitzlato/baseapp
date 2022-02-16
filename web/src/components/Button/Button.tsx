@@ -1,10 +1,7 @@
-import { FC, ComponentProps, ElementType, lazy } from 'react';
+import { FC, ComponentProps, ElementType } from 'react';
 import { selectCurrentColorTheme } from 'web/src/modules';
 import { useSelector } from 'react-redux';
-
-export const ButtonBase = lazy(() =>
-  import('shared/Button').then(({ Button }) => ({ default: Button })),
-);
+import { Button as ButtonBase } from 'web/src/components/ui/Button';
 
 type ButtonBaseProps = ComponentProps<typeof ButtonBase>;
 type ButtonVariant = 'primary' | 'secondary' | 'primary-outline' | 'secondary-outline';
@@ -39,7 +36,7 @@ const variantMap: Record<ButtonVariant, ButtonBaseProps> = {
 };
 
 /**
- * @deprecated Use ButtonBase
+ * @deprecated Use web/src/components/ui/Button
  */
 export const Button: ButtonComponent = ({
   variant = 'primary',
