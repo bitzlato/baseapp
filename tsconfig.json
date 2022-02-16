@@ -17,14 +17,15 @@
     "noEmit": true,
     "skipLibCheck": true,
     "paths": {
-      "shared/Header": ["shared/src/Header"],
-      "shared/Footer": ["shared/src/Footer"],
-      "shared/Box": ["shared/src/components/Box"],
-      "shared/Button": ["shared/src/components/Button"],
-      "shared/Heading": ["shared/src/components/Heading"],
-      "shared/Stack": ["shared/src/components/Stack"],
-      "shared/Text": ["shared/src/components/Text"],
-      "shared/getThemeClassName": ["shared/src/getThemeClassName"],
+      "shared/Header": ["web/src/components/shared/Header/Header"],
+      "shared/Footer": ["web/src/components/shared/Footer/Footer"],
+      "shared/Box": ["web/src/components/ui/Box"],
+      "shared/Button": ["web/src/components/ui/Button"],
+      "shared/Heading": ["web/src/components/ui/Heading"],
+      "shared/Stack": ["web/src/components/ui/Stack"],
+      "shared/Text": ["web/src/components/ui/Text"],
+      "shared/getThemeClassName": ["web/src/theme/getThemeClassName"],
+      "shared/types": ["web/src/components/shared/sharedTypes"],
       "marketDocs/Swagger": ["market-docs/src/Swagger"],
       "marketDocs/WebSocketApi": ["market-docs/src/WebSocketApi"]
     }

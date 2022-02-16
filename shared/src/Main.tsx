@@ -1,17 +1,17 @@
 import { FC, useEffect, useState } from 'react';
-import { getThemeClassName } from 'shared/src/getThemeClassName';
-import { Text } from 'shared/src/components/Text';
-import { Heading } from 'shared/src/components/Heading';
-import { IconName } from './components/Icon';
+import { getThemeClassName } from 'shared/getThemeClassName';
+import { Text } from 'shared/Text';
+import { Heading } from 'shared/Heading';
 import {
   Header,
   USER_STATUS_NOT_AUTHORIZED,
   USER_STATUS_AUTHORIZATION_REQUIRED,
   USER_STATUS_AUTHORIZED,
-} from './Header';
-import { Footer } from './Footer';
-import { Button } from './components/Button';
-import { Language, Links, Notify, Theme } from './types';
+} from 'shared/Header';
+import { Footer } from 'shared/Footer';
+import { Button } from 'shared/Button';
+import { Links, Notify, IconName } from 'shared/types';
+import { Language, Theme } from 'web/src/types';
 
 const MARKET_URL = 'https://market.bitzlato.com' as const;
 const P2P_URL = 'https://bitzlato.com/en/p2p' as const;
@@ -30,7 +30,7 @@ const languages2 = {
   zh: '汉语',
 };
 
-export const Main: FC = () => {
+const Main: FC = () => {
   const [theme, setTheme] = useState<Theme>('dark');
   const handleThemeChange = (nextTheme: Theme) => {
     setTheme(nextTheme);
@@ -617,3 +617,5 @@ export const Main: FC = () => {
     </div>
   );
 };
+
+export default Main;

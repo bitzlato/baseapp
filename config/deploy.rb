@@ -68,7 +68,7 @@ task :yarn_build do
     within release_path do
       execute :yarn, :rebuild
       execute :yarn, :build
-      execute :cp, "-R shared/build web/build/shared"
+      execute :ln, "-sr web/build/ web/build/shared"
       execute :cp, "-R market-docs/build web/build/marketDocs"
     end
   end

@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { IntlProvider } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { Router } from 'react-router';
-import { getThemeClassName } from 'shared/getThemeClassName';
+import { getThemeClassName } from 'web/src/theme/getThemeClassName';
 import { gaTrackerKey } from './api';
 import { useSetMobileDevice } from './hooks';
 import * as mobileTranslations from './mobile/translations';

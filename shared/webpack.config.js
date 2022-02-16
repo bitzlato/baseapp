@@ -2,9 +2,6 @@ const path = require('path');
 const { ModuleFederationPlugin } = require('webpack').container;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const deps = require('./package.json').dependencies;
 
@@ -62,49 +59,14 @@ module.exports = {
           },
         },
       },
-
-      {
-        test: /\.vanilla\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              url: false,
-            },
-          },
-        ],
-      },
-
-      {
-        test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
-        use: ['@svgr/webpack'],
-      },
     ],
   },
 
-  optimization: {
-    minimizer: [`...`, new CssMinimizerPlugin()],
-  },
-
   plugins: [
-    new VanillaExtractPlugin(),
-    new MiniCssExtractPlugin({
-      ignoreOrder: true,
-    }),
     new ModuleFederationPlugin({
-      name: 'shared',
-      filename: 'shared.js',
-      exposes: {
-        './Header': './src/Header',
-        './Footer': './src/Footer',
-        './Box': './src/components/Box',
-        './Button': './src/components/Button',
-        './Heading': './src/components/Heading',
-        './Stack': './src/components/Stack',
-        './Text': './src/components/Text',
-        './getThemeClassName': './src/getThemeClassName',
+      name: 'sharedDemo',
+      remotes: {
+        shared: `shared@http://localhost:8080/shared.js`,
       },
       shared: {
         react: {
@@ -120,7 +82,6 @@ module.exports = {
     isDevelopment &&
       new HtmlWebpackPlugin({
         template: './public/index.html',
-        chunks: ['main'],
       }),
     isDevelopment &&
       new ReactRefreshWebpackPlugin({

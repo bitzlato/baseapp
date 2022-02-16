@@ -6,7 +6,7 @@ import {
   USER_STATUS_NOT_AUTHORIZED,
   USER_STATUS_AUTHORIZATION_REQUIRED,
   USER_STATUS_AUTHORIZED,
-} from 'shared/Header';
+} from 'web/src/components/shared/Header/Header';
 import {
   changeColorTheme,
   RootState,
@@ -253,8 +253,8 @@ const Header: FC = () => {
       navLinks={navLinks}
       hamburgerLinks={hamburgerLinks}
       t={translate}
-      renderNavLinkComponent={(props: any) => <NavLink {...props} />}
-      renderLinkComponent={(props: any) => <Link {...props} />}
+      renderNavLinkComponent={(props) => <NavLink {...props} />}
+      renderLinkComponent={(props) => <Link {...props} />}
       {...userProps}
       onThemeChange={handleThemeChange}
       onLanguageChange={handleLanguageChange}
