@@ -71,9 +71,11 @@ export const HistoryElement: FC<Props> = ({ type }) => {
 
   if (type === 'transfers') {
     return (
-      <div className="pg-history-elem">
-        <TransferHistory wallets={wallets} />
-      </div>
+      <TransferHistory wallets={wallets} className="pg-history-elem" noDataToDisplay={
+        <div className='pg-history-elem pg-history-elem-empty'>
+          <p className="pg-history-elem__empty">{t('page.noDataToShow')}</p>
+        </div>}
+      />
     );
   }
 
