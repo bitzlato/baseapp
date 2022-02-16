@@ -4070,6 +4070,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-grid-layout@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "@types/react-grid-layout@npm:1.3.1"
+  dependencies:
+    "@types/react": "*"
+  checksum: 24bf6aecbc230d8a3ba301541f8f651214cba296e3f58e1f8a71d6b8f96a603d53ab4c5a2a8afb7b763275ef78c476b97777669b1cc8c608f51fd06b6b1f8218
+  languageName: node
+  linkType: hard
+
 "@types/react-redux@npm:^7.1.20, @types/react-redux@npm:^7.1.22":
   version: 7.1.22
   resolution: "@types/react-redux@npm:7.1.22"
@@ -6482,7 +6491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:2.x, classnames@npm:^2.2.5, classnames@npm:^2.2.6":
+"classnames@npm:^2.2.5, classnames@npm:^2.2.6":
   version: 2.2.6
   resolution: "classnames@npm:2.2.6"
   checksum: 09a4fda780158aa8399079898eabeeca0c48c28641d9e4de140db7412e5e346843039ded1af0152f755afc2cc246ff8c3d6f227bf0dcb004e070b7fa14ec54cc
@@ -6636,6 +6645,13 @@ __metadata:
   dependencies:
     is-regexp: ^2.0.0
   checksum: 3624905a98920ad5c196080f4ea4379fa42b12f3b1d1272d958bb79c194508d2aec85160c25846f0016ca861a064316b213a565cf53b81a513047f89cf877803
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "clsx@npm:1.1.1"
+  checksum: ff052650329773b9b245177305fc4c4dc3129f7b2be84af4f58dc5defa99538c61d4207be7419405a5f8f3d92007c954f4daba5a7b74e563d5de71c28c830063
   languageName: node
   linkType: hard
 
@@ -16788,16 +16804,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-grid-layout@npm:^0.18.3":
-  version: 0.18.3
-  resolution: "react-grid-layout@npm:0.18.3"
+"react-grid-layout@npm:^1.3.3":
+  version: 1.3.3
+  resolution: "react-grid-layout@npm:1.3.3"
   dependencies:
-    classnames: 2.x
+    clsx: ^1.1.1
     lodash.isequal: ^4.0.0
     prop-types: ^15.0.0
     react-draggable: ^4.0.0
-    react-resizable: ^1.9.0
-  checksum: 7353ab61d27457b982e272666c2131174ba401a3768491c8abc52062845d5e02182943d5e4bb19527a270ebb1234c5529d018212405ff9bddd7e8d964c6a74b9
+    react-resizable: ^3.0.4
+  peerDependencies:
+    react: ">= 16.3.0"
+    react-dom: ">= 16.3.0"
+  checksum: 8a1275c5d0d1269d18c0ad1d0b4fb1e462c4ac9e4e3064b809314c073c586329664019f9b04e7c00d99c0c23be3c44992fda9dc78b23035c257ab16f1f957a28
   languageName: node
   linkType: hard
 
@@ -16979,16 +16998,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-resizable@npm:^1.9.0":
-  version: 1.11.0
-  resolution: "react-resizable@npm:1.11.0"
+"react-resizable@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "react-resizable@npm:3.0.4"
   dependencies:
     prop-types: 15.x
     react-draggable: ^4.0.3
   peerDependencies:
-    react: 0.14.x || 15.x || 16.x
-    react-dom: 0.14.x || 15.x || 16.x
-  checksum: 062200a73b65e6827b0d5a95f14445dc8e97f1f7b13a24647dda07de08429b91be57aa204dd22e1d6ad5b1e756dc2c9e8c9c785cceb2bde007c3d928b5faecb0
+    react: ">= 16.3"
+  checksum: cbf86ad04be0f073102489ad25a2ba101779f0f00e580d48e1be73c4057c36a4e8ee8308b020ad3dd91555bb24082ceeef674d5035a38d33a2d43aed192db7fa
   languageName: node
   linkType: hard
 
@@ -20639,6 +20657,7 @@ __metadata:
     "@types/react-color": ^3.0.6
     "@types/react-dom": ^17.0.11
     "@types/react-google-recaptcha": ^2.1.3
+    "@types/react-grid-layout": ^1.3.1
     "@types/react-redux": ^7.1.22
     "@types/react-router": ^5.1.18
     "@types/react-router-dom": ^5.3.3
@@ -20690,7 +20709,7 @@ __metadata:
     react-fade-in: ^0.1.6
     react-ga: ^2.6.0
     react-google-recaptcha: ^1.0.4
-    react-grid-layout: ^0.18.3
+    react-grid-layout: ^1.3.3
     react-intl: ^5.20.9
     react-maskinput: ^1.0.1
     react-perfect-scrollbar: ^1.5.8

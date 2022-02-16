@@ -1,8 +1,9 @@
-import * as React from 'react';
+import { Component, FC, useMemo } from 'react';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { Responsive } from 'react-grid-layout';
 import { IntlProps } from 'src/types';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { incrementalOrderBook } from '../../api';
@@ -37,8 +38,7 @@ import { depthFetch } from '../../modules/public/orderBook';
 import { rangerConnectFetch, RangerConnectFetch } from '../../modules/public/ranger';
 import { RangerState } from '../../modules/public/ranger/reducer';
 import { selectRanger } from '../../modules/public/ranger/selectors';
-
-const { WidthProvider, Responsive } = require('react-grid-layout');
+import { WidthProvider } from './WidthProvider';
 
 const breakpoints = {
   lg: 1200,
@@ -85,10 +85,18 @@ interface StateProps {
 const ReactGridLayout = WidthProvider(Responsive);
 type Props = DispatchProps & ReduxProps & RouteComponentProps & IntlProps;
 
-const TradingWrapper = (props: any) => {
+interface TradingWrapperProps {
+  orderComponentResized: number;
+  orderBookComponentResized: number;
+  layouts: ReactGridLayout.Layouts;
+  handleResize: ReactGridLayout.ItemCallback;
+  handeDrag: ReactGridLayout.ItemCallback;
+}
+
+const TradingWrapper: FC<TradingWrapperProps> = (props) => {
   const { orderComponentResized, orderBookComponentResized, layouts, handleResize, handeDrag } =
     props;
-  const children = React.useMemo(() => {
+  const children = useMemo(() => {
     const data = [
       {
         i: 1,
@@ -130,7 +138,6 @@ const TradingWrapper = (props: any) => {
       draggableHandle=".cr-table-header__content, .pg-trading-screen__tab-panel, .draggable-container"
       rowHeight={14}
       layouts={layouts}
-      onLayoutChange={() => {}}
       margin={[5, 5]}
       onResize={handleResize}
       onDrag={handeDrag}
@@ -140,7 +147,7 @@ const TradingWrapper = (props: any) => {
   );
 };
 
-class Trading extends React.Component<Props, StateProps> {
+class Trading extends Component<Props, StateProps> {
   public readonly state = {
     orderComponentResized: 5,
     orderBookComponentResized: 5,
@@ -241,21 +248,13 @@ class Trading extends React.Component<Props, StateProps> {
     const { rgl } = this.props;
 
     return (
-      <div className="pg-trading-screen">
-        <div className="pg-trading-wrap">
-          <div data-react-toolbox="grid" className="cr-grid">
-            <div className="cr-grid__grid-wrapper">
-              <TradingWrapper
-                layouts={rgl.layouts}
-                orderComponentResized={orderComponentResized}
-                orderBookComponentResized={orderBookComponentResized}
-                handleResize={this.handleResize}
-                handeDrag={this.handeDrag}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      <TradingWrapper
+        layouts={rgl.layouts}
+        orderComponentResized={orderComponentResized}
+        orderBookComponentResized={orderBookComponentResized}
+        handleResize={this.handleResize}
+        handeDrag={this.handeDrag}
+      />
     );
   }
 

@@ -6069,6 +6069,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@types/react-grid-layout", [
+        ["npm:1.3.1", {
+          "packageLocation": "./.yarn/cache/@types-react-grid-layout-npm-1.3.1-70d62e8a14-24bf6aecbc.zip/node_modules/@types/react-grid-layout/",
+          "packageDependencies": [
+            ["@types/react-grid-layout", "npm:1.3.1"],
+            ["@types/react", "npm:17.0.39"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@types/react-redux", [
         ["npm:7.1.22", {
           "packageLocation": "./.yarn/cache/@types-react-redux-npm-7.1.22-e8a8c4cb6c-eef458c0cd.zip/node_modules/@types/react-redux/",
@@ -9404,6 +9414,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["clone-regexp", "npm:2.2.0"],
             ["is-regexp", "npm:2.1.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["clsx", [
+        ["npm:1.1.1", {
+          "packageLocation": "./.yarn/cache/clsx-npm-1.1.1-362bec0598-ff05265032.zip/node_modules/clsx/",
+          "packageDependencies": [
+            ["clsx", "npm:1.1.1"]
           ],
           "linkType": "HARD",
         }]
@@ -21597,16 +21616,35 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:b76bf992cb831e44cef0cb5c2d22f107c3e862837f4ad77342d9393eb852f434649efc10631a1e6cb613ef59bf226cf144d8483978dbbf957c856315012b912c#npm:4.4.3", {
-          "packageLocation": "./.yarn/__virtual__/react-draggable-virtual-a8e3578540/0/cache/react-draggable-npm-4.4.3-3b4a1d595e-94d3d5f0e7.zip/node_modules/react-draggable/",
+        ["virtual:3704628b8e283c0a329fb7eaeaf91dcbd69eff1e8e812a4f5852ffa9cb40e9292b2fb0c7b4d634fabfabb7611f2bf63f069735cda2aef1eabf88d8f0e2af3598#npm:4.4.3", {
+          "packageLocation": "./.yarn/__virtual__/react-draggable-virtual-34ddbe14ff/0/cache/react-draggable-npm-4.4.3-3b4a1d595e-94d3d5f0e7.zip/node_modules/react-draggable/",
           "packageDependencies": [
-            ["react-draggable", "virtual:b76bf992cb831e44cef0cb5c2d22f107c3e862837f4ad77342d9393eb852f434649efc10631a1e6cb613ef59bf226cf144d8483978dbbf957c856315012b912c#npm:4.4.3"],
+            ["react-draggable", "virtual:3704628b8e283c0a329fb7eaeaf91dcbd69eff1e8e812a4f5852ffa9cb40e9292b2fb0c7b4d634fabfabb7611f2bf63f069735cda2aef1eabf88d8f0e2af3598#npm:4.4.3"],
             ["@types/react", "npm:17.0.39"],
             ["@types/react-dom", "npm:17.0.11"],
             ["classnames", "npm:2.2.6"],
             ["prop-types", "npm:15.7.2"],
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:17.0.2"]
+          ],
+          "packagePeers": [
+            "@types/react-dom",
+            "@types/react",
+            "react-dom",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:84c9e94825b8e4a8cbfedacadec674d1241d99ce790805a898cb70f0b7ee9dcfb2a62d97c01dd933419997eefd4a4796f4611e06605cc28cc94fb7f13999f5e6#npm:4.4.3", {
+          "packageLocation": "./.yarn/__virtual__/react-draggable-virtual-a0f79a79a1/0/cache/react-draggable-npm-4.4.3-3b4a1d595e-94d3d5f0e7.zip/node_modules/react-draggable/",
+          "packageDependencies": [
+            ["react-draggable", "virtual:84c9e94825b8e4a8cbfedacadec674d1241d99ce790805a898cb70f0b7ee9dcfb2a62d97c01dd933419997eefd4a4796f4611e06605cc28cc94fb7f13999f5e6#npm:4.4.3"],
+            ["@types/react", "npm:17.0.39"],
+            ["@types/react-dom", null],
+            ["classnames", "npm:2.2.6"],
+            ["prop-types", "npm:15.7.2"],
+            ["react", "npm:17.0.2"],
+            ["react-dom", null]
           ],
           "packagePeers": [
             "@types/react-dom",
@@ -21689,26 +21727,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["react-grid-layout", [
-        ["npm:0.18.3", {
-          "packageLocation": "./.yarn/cache/react-grid-layout-npm-0.18.3-96c12c723b-7353ab61d2.zip/node_modules/react-grid-layout/",
+        ["npm:1.3.3", {
+          "packageLocation": "./.yarn/cache/react-grid-layout-npm-1.3.3-d2123ac8a7-8a1275c5d0.zip/node_modules/react-grid-layout/",
           "packageDependencies": [
-            ["react-grid-layout", "npm:0.18.3"]
+            ["react-grid-layout", "npm:1.3.3"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.18.3", {
-          "packageLocation": "./.yarn/__virtual__/react-grid-layout-virtual-b76bf992cb/0/cache/react-grid-layout-npm-0.18.3-96c12c723b-7353ab61d2.zip/node_modules/react-grid-layout/",
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.3.3", {
+          "packageLocation": "./.yarn/__virtual__/react-grid-layout-virtual-3704628b8e/0/cache/react-grid-layout-npm-1.3.3-d2123ac8a7-8a1275c5d0.zip/node_modules/react-grid-layout/",
           "packageDependencies": [
-            ["react-grid-layout", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.18.3"],
+            ["react-grid-layout", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.3.3"],
             ["@types/react", "npm:17.0.39"],
             ["@types/react-dom", "npm:17.0.11"],
-            ["classnames", "npm:2.2.6"],
+            ["clsx", "npm:1.1.1"],
             ["lodash.isequal", "npm:4.5.0"],
             ["prop-types", "npm:15.7.2"],
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:17.0.2"],
-            ["react-draggable", "virtual:b76bf992cb831e44cef0cb5c2d22f107c3e862837f4ad77342d9393eb852f434649efc10631a1e6cb613ef59bf226cf144d8483978dbbf957c856315012b912c#npm:4.4.3"],
-            ["react-resizable", "virtual:b76bf992cb831e44cef0cb5c2d22f107c3e862837f4ad77342d9393eb852f434649efc10631a1e6cb613ef59bf226cf144d8483978dbbf957c856315012b912c#npm:1.11.0"]
+            ["react-draggable", "virtual:3704628b8e283c0a329fb7eaeaf91dcbd69eff1e8e812a4f5852ffa9cb40e9292b2fb0c7b4d634fabfabb7611f2bf63f069735cda2aef1eabf88d8f0e2af3598#npm:4.4.3"],
+            ["react-resizable", "virtual:3704628b8e283c0a329fb7eaeaf91dcbd69eff1e8e812a4f5852ffa9cb40e9292b2fb0c7b4d634fabfabb7611f2bf63f069735cda2aef1eabf88d8f0e2af3598#npm:3.0.4"]
           ],
           "packagePeers": [
             "@types/react-dom",
@@ -22035,28 +22073,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["react-resizable", [
-        ["npm:1.11.0", {
-          "packageLocation": "./.yarn/cache/react-resizable-npm-1.11.0-16c33aacfe-062200a73b.zip/node_modules/react-resizable/",
+        ["npm:3.0.4", {
+          "packageLocation": "./.yarn/cache/react-resizable-npm-3.0.4-aa39f9db2b-cbf86ad04b.zip/node_modules/react-resizable/",
           "packageDependencies": [
-            ["react-resizable", "npm:1.11.0"]
+            ["react-resizable", "npm:3.0.4"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:b76bf992cb831e44cef0cb5c2d22f107c3e862837f4ad77342d9393eb852f434649efc10631a1e6cb613ef59bf226cf144d8483978dbbf957c856315012b912c#npm:1.11.0", {
-          "packageLocation": "./.yarn/__virtual__/react-resizable-virtual-3813212a1e/0/cache/react-resizable-npm-1.11.0-16c33aacfe-062200a73b.zip/node_modules/react-resizable/",
+        ["virtual:3704628b8e283c0a329fb7eaeaf91dcbd69eff1e8e812a4f5852ffa9cb40e9292b2fb0c7b4d634fabfabb7611f2bf63f069735cda2aef1eabf88d8f0e2af3598#npm:3.0.4", {
+          "packageLocation": "./.yarn/__virtual__/react-resizable-virtual-84c9e94825/0/cache/react-resizable-npm-3.0.4-aa39f9db2b-cbf86ad04b.zip/node_modules/react-resizable/",
           "packageDependencies": [
-            ["react-resizable", "virtual:b76bf992cb831e44cef0cb5c2d22f107c3e862837f4ad77342d9393eb852f434649efc10631a1e6cb613ef59bf226cf144d8483978dbbf957c856315012b912c#npm:1.11.0"],
+            ["react-resizable", "virtual:3704628b8e283c0a329fb7eaeaf91dcbd69eff1e8e812a4f5852ffa9cb40e9292b2fb0c7b4d634fabfabb7611f2bf63f069735cda2aef1eabf88d8f0e2af3598#npm:3.0.4"],
             ["@types/react", "npm:17.0.39"],
-            ["@types/react-dom", "npm:17.0.11"],
             ["prop-types", "npm:15.7.2"],
             ["react", "npm:17.0.2"],
-            ["react-dom", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:17.0.2"],
-            ["react-draggable", "virtual:b76bf992cb831e44cef0cb5c2d22f107c3e862837f4ad77342d9393eb852f434649efc10631a1e6cb613ef59bf226cf144d8483978dbbf957c856315012b912c#npm:4.4.3"]
+            ["react-draggable", "virtual:84c9e94825b8e4a8cbfedacadec674d1241d99ce790805a898cb70f0b7ee9dcfb2a62d97c01dd933419997eefd4a4796f4611e06605cc28cc94fb7f13999f5e6#npm:4.4.3"]
           ],
           "packagePeers": [
-            "@types/react-dom",
             "@types/react",
-            "react-dom",
             "react"
           ],
           "linkType": "HARD",
@@ -26495,6 +26529,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-color", "npm:3.0.6"],
             ["@types/react-dom", "npm:17.0.11"],
             ["@types/react-google-recaptcha", "npm:2.1.3"],
+            ["@types/react-grid-layout", "npm:1.3.1"],
             ["@types/react-redux", "npm:7.1.22"],
             ["@types/react-router", "npm:5.1.18"],
             ["@types/react-router-dom", "npm:5.3.3"],
@@ -26546,7 +26581,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-fade-in", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.1.8"],
             ["react-ga", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.7.0"],
             ["react-google-recaptcha", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.1.0"],
-            ["react-grid-layout", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.18.3"],
+            ["react-grid-layout", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.3.3"],
             ["react-intl", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.20.9"],
             ["react-maskinput", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.0.1"],
             ["react-perfect-scrollbar", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.5.8"],
