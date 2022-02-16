@@ -11,8 +11,8 @@ const bugsnagKey = process.env.REACT_APP_BUGSNAG_KEY;
 if (typeof bugsnagKey === 'string' && bugsnagKey !== '') {
   Bugsnag.start({
     apiKey: bugsnagKey,
-    appVersion: process.env.REACT_APP_BUGSNAG_VERSION as any,
-    releaseStage: process.env.REACT_APP_RELEASE_STAGE as any,
+    appVersion: process.env.REACT_APP_BUGSNAG_VERSION!,
+    releaseStage: process.env.REACT_APP_RELEASE_STAGE!,
     plugins: [new BugsnagPluginReact() as any],
     enabledReleaseStages: ['production', 'staging', 's2', 's3', 's4', 's5', 'sandbox'],
     onError: (event) => {

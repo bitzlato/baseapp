@@ -27,6 +27,7 @@ const extractSemver = (text) => {
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
+const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
 
 let sharedURL = isDevelopment ? 'http://localhost:3003' : '/shared'; // production or staging
 if (process.env.SHARED_URL) {
@@ -48,7 +49,7 @@ module.exports = {
 
   bail: !isDevelopment,
 
-  devtool: isDevelopment ? 'eval-cheap-module-source-map' : 'source-map',
+  devtool: isDevelopment ? 'eval-cheap-module-source-map' : 'hidden-source-map',
 
   entry: {
     bundle: './src/index.ts',
@@ -227,10 +228,12 @@ module.exports = {
       }),
 
     process.env.REACT_APP_BUGSNAG_KEY &&
+      releaseStage === 'production' &&
       new BugsnagSourceMapUploaderPlugin({
         apiKey: process.env.REACT_APP_BUGSNAG_KEY,
         appVersion,
         overwrite: true,
+        publicPath: 'https://market.bitzlato.com/',
       }),
 
     new webpack.EnvironmentPlugin({
@@ -253,7 +256,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/app/template.html',
       hash: true,
-      chunks: ['common', 'bundle', 'styles'],
     }),
 
     new webpack.ProvidePlugin({

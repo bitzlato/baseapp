@@ -1737,25 +1737,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bugsnag/browser@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "@bugsnag/browser@npm:7.11.0"
+"@bugsnag/browser@npm:^7.16.1":
+  version: 7.16.1
+  resolution: "@bugsnag/browser@npm:7.16.1"
   dependencies:
-    "@bugsnag/core": ^7.11.0
-  checksum: ae20ecd0aeef16eedaca4fbcf025403f0c066f947d8cc9dd815e5b414ea68a519506a23267652df1ff7abc81b35facf8d00dc1a7fb4ad83c1dd8589214374967
+    "@bugsnag/core": ^7.16.1
+  checksum: e9252362813107369f8bd5a0a35c9b6cd1d34221b9f1dfcd99279fc3f8846dbf11db893e06fd823f52adefef725736030988a8a4fa1351b2b6e05f4e627b1e9c
   languageName: node
   linkType: hard
 
-"@bugsnag/core@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "@bugsnag/core@npm:7.11.0"
+"@bugsnag/core@npm:^7.16.1":
+  version: 7.16.1
+  resolution: "@bugsnag/core@npm:7.16.1"
   dependencies:
     "@bugsnag/cuid": ^3.0.0
     "@bugsnag/safe-json-stringify": ^6.0.0
     error-stack-parser: ^2.0.3
     iserror: 0.0.2
     stack-generator: ^2.0.3
-  checksum: 0074a288015ffefa08b8125e33c31a4454e46f21a7638807fa49e5656d6294aa38c50e36f4b672c43cf3914c805a8a67d66d3439f5db6c6290de5e76be41b50c
+  checksum: 53c7803a0457fad905aa712105e819ac89162e09bff0b7b78a2b94d236634b6de5771b5c9761e123b9dbcfbb170890f2f20598993f2748733476884e6f18447c
   languageName: node
   linkType: hard
 
@@ -1766,36 +1766,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bugsnag/js@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "@bugsnag/js@npm:7.11.0"
+"@bugsnag/js@npm:^7.16.1":
+  version: 7.16.1
+  resolution: "@bugsnag/js@npm:7.16.1"
   dependencies:
-    "@bugsnag/browser": ^7.11.0
-    "@bugsnag/node": ^7.11.0
-  checksum: dfaf47c2872c30999ef6765cc656b14d52d7c770254585f0a104c0ac4b29e7b4adef8ff0586cf99a72752a521b2d9a4b31e654cca83004ce6dc97eb15a3d343a
+    "@bugsnag/browser": ^7.16.1
+    "@bugsnag/node": ^7.16.1
+  checksum: 1a4e03dfa42a8752e8786935132cd24d3bb65ec8c8284be034d471d51db4c59f66b3663037be1739d2e2896dcc292eee4cf1fbaed666007efed466f734c87e0d
   languageName: node
   linkType: hard
 
-"@bugsnag/node@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "@bugsnag/node@npm:7.11.0"
+"@bugsnag/node@npm:^7.16.1":
+  version: 7.16.1
+  resolution: "@bugsnag/node@npm:7.16.1"
   dependencies:
-    "@bugsnag/core": ^7.11.0
+    "@bugsnag/core": ^7.16.1
     byline: ^5.0.0
     error-stack-parser: ^2.0.2
     iserror: ^0.0.2
     pump: ^3.0.0
     stack-generator: ^2.0.3
-  checksum: 85f5311e0537dd3037fd520c041e37b9c400b65c9808122b8af80442aa8fca504a231b826028936ba71d4e88891d6868d7e46ac260c181a4b04bcbf511cf0272
+  checksum: 68758f634da79a398d70d6730602fd9da739ab4718cae4e564b0705e45b2b1b1262c477b32114534a082211e39cb56d78733d8ea83b3349254853b9262e48ad4
   languageName: node
   linkType: hard
 
-"@bugsnag/plugin-react@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "@bugsnag/plugin-react@npm:7.11.0"
+"@bugsnag/plugin-react@npm:^7.16.1":
+  version: 7.16.1
+  resolution: "@bugsnag/plugin-react@npm:7.16.1"
   peerDependencies:
     "@bugsnag/core": ^7.0.0
-  checksum: e5578bb974afa4d468fe9ddd4f1cb0479ecfdf410d4a119104ec2a7f2fb0cefaca6b0e6b5dd20be982bcd5132bf67d8fa44ab6ab87565b5b7da6eed6638ee82e
+  checksum: 9894ed10193dc46ff9abc5db428bef4f52dcf5248d64f5a60e4b3b39bc6e65e3b66eb7082209484d8b06b1eed571b457dba59204fd6b9399a3f1eca5a6f53518
   languageName: node
   linkType: hard
 
@@ -20631,8 +20631,8 @@ __metadata:
   dependencies:
     "@bitzlato/ethereum-provider": ^0.1.1
     "@bitzlato/money-js": ^0.0.4
-    "@bugsnag/js": ^7.11.0
-    "@bugsnag/plugin-react": ^7.11.0
+    "@bugsnag/js": ^7.16.1
+    "@bugsnag/plugin-react": ^7.16.1
     "@capacitor/android": 2.4.1
     "@capacitor/cli": ^2.4.2
     "@capacitor/core": ^2.4.1
