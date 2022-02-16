@@ -155,7 +155,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
       created_at,
     } = item;
     const currentMarket = this.props.marketsData.find((m) => m.id === market) || {
-      name: market.split('_').join('/').toUpperCase(),
+      name: market,
       price_precision: 0,
       amount_precision: 0,
     };

@@ -32,7 +32,7 @@ const OrdersItemComponent: React.FC<Props> = (props) => {
   };
 
   const currentMarket = (markets.length && markets.find((m) => m.id === order.market)) || {
-    name: '',
+    name: order.market,
     price_precision: 0,
     amount_precision: 0,
   };

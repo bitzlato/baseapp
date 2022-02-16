@@ -94,7 +94,9 @@ export const OpenOrdersComponent: React.FC = () => {
             <Label color="secondary">{localeDate(created_at, 'date')}</Label>
             <span>{localeDate(created_at, 'time')}</span>
           </Box>,
-          <span className="bold">{curMarket?.name && <MarketName name={curMarket?.name} />}</span>,
+          <span className="bold">
+            <MarketName name={curMarket?.name ?? item.market} />
+          </span>,
           <Label color={color}>
             {t(`page.body.trade.header.openOrders.content.side.${side}`)}
           </Label>,

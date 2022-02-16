@@ -172,7 +172,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
       case 'trades': {
         const { id, created_at, side, market, price, amount, total } = item as PrivateTrade;
         const marketToDisplay = markets.find((m) => m.id === market) || {
-          name: '',
+          name: market,
           price_precision: 0,
           amount_precision: 0,
         };

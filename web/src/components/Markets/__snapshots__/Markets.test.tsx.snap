@@ -49,11 +49,7 @@ exports[`Markets should render 1`] = `
               <span>
                 ETH
               </span>
-              <span
-                class="secondaryColor"
-              >
-                /
-              </span>
+              /
               <span>
                 BTC
               </span>
@@ -85,11 +81,7 @@ exports[`Markets should render 1`] = `
               <span>
                 ETH
               </span>
-              <span
-                class="secondaryColor"
-              >
-                /
-              </span>
+              /
               <span>
                 LTC
               </span>
@@ -121,11 +113,7 @@ exports[`Markets should render 1`] = `
               <span>
                 LTC
               </span>
-              <span
-                class="secondaryColor"
-              >
-                /
-              </span>
+              /
               <span>
                 BTC
               </span>
