@@ -1,19 +1,8 @@
+import { Layouts } from 'react-grid-layout';
 import { isDraggableGrid, isResizableGrid } from '../api/config';
 import { customLayouts } from '../custom/helpers/layout';
 
-export interface LayoutGridGeneralInterface {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-  i: string;
-}
-
-export interface LayoutGrid {
-  lg: LayoutGridGeneralInterface[];
-  md: LayoutGridGeneralInterface[];
-  sm: LayoutGridGeneralInterface[];
-}
+export type LayoutGrid = Layouts;
 
 export const getStaticHeight = () => {
   const header = document.getElementsByTagName('header')[0];
@@ -250,7 +239,7 @@ const getLayouts = () => {
 export const layouts = getLayouts();
 
 export const getLayoutFromLS = (key: string): LayoutGrid | undefined => {
-  let obj: Record<string, any> = {};
+  let obj: Record<string, LayoutGrid> = {};
   if (localStorage) {
     try {
       obj = JSON.parse(localStorage.getItem('rgl') || '') || {};
@@ -262,7 +251,7 @@ export const getLayoutFromLS = (key: string): LayoutGrid | undefined => {
   return obj[key];
 };
 
-export const saveLayoutToLS = (key: string, value: any): void => {
+export const saveLayoutToLS = (key: string, value: LayoutGrid): void => {
   if (localStorage) {
     localStorage.setItem('rgl', JSON.stringify({ [key]: value }));
   }

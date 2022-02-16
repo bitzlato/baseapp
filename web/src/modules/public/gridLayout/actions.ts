@@ -2,7 +2,7 @@ import { LayoutGrid } from '../../../helpers/layout';
 import { RESET_LAYOUTS, SAVE_LAYOUTS } from './constants';
 
 interface SaveLayoutsAction {
-  type: string;
+  type: typeof SAVE_LAYOUTS;
   payload: {
     key: string;
     layouts: LayoutGrid;
@@ -10,11 +10,13 @@ interface SaveLayoutsAction {
 }
 
 interface ResetLayoutsAction {
-  type: string;
+  type: typeof RESET_LAYOUTS;
   payload: {
     key: string;
   };
 }
+
+export type LayoutAction = SaveLayoutsAction | ResetLayoutsAction;
 
 export const saveLayouts = (payload: SaveLayoutsAction['payload']): SaveLayoutsAction => ({
   type: SAVE_LAYOUTS,
