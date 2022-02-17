@@ -35,9 +35,9 @@ export const WalletMobileScreen: React.FC = () => {
 
   const tabs = useMemo(() => {
     return TABS.filter((d) => {
-      return d.value !== 'transfer' || general?.hasTransfer;
+      return general?.balanceMarket && (d.value !== 'transfer' || general?.hasTransfer);
     });
-  }, [general?.hasTransfer]);
+  }, [general?.hasTransfer, general?.balanceMarket]);
 
   const tabValue = getTabValue(tabs, tab);
 
@@ -48,57 +48,63 @@ export const WalletMobileScreen: React.FC = () => {
         backTitle={t('page.mobile.wallets.title')}
         onGoBack={() => history.push('/wallets')}
       />
-      {general && wallet && (
+      {general && (
         <>
           <WalletMobileBalance wallet={general} />
-          <Box bgColor="body" padding="2X3" col spacing="2">
-            <Tabs value={tabValue} onSelectionChange={handleTabSelection as any}>
-              <Box grow justify="around" as={TabList}>
-                {tabs.map((d) => (
-                  <Tab key={d.value} value={d.value} size="small">
-                    {t(d.label)}
-                  </Tab>
-                ))}
-              </Box>
-              <TabPanel value="deposit">
-                {general.currency === 'BTC' ? (
-                  <InvoiceExplanation
-                    currency={general.currency}
-                    onClick={() => handleTabSelection('transfer')}
+          {wallet && (
+            <Box bgColor="body" padding="2X3" col spacing="2">
+              <Tabs value={tabValue} onSelectionChange={handleTabSelection as any}>
+                <Box grow justify="around" as={TabList}>
+                  {tabs.map((d) => (
+                    <Tab key={d.value} value={d.value} size="small">
+                      {t(d.label)}
+                    </Tab>
+                  ))}
+                </Box>
+                <TabPanel value="deposit">
+                  {general.currency === 'BTC' ? (
+                    <InvoiceExplanation
+                      currency={general.currency}
+                      onClick={() => handleTabSelection('transfer')}
+                    />
+                  ) : (
+                    <DepositCrypto wallet={wallet} />
+                  )}
+                  <WalletHistory
+                    label="deposit"
+                    type="deposits"
+                    currency={currency.toLowerCase()}
                   />
-                ) : (
-                  <DepositCrypto wallet={wallet} />
-                )}
-                <WalletHistory label="deposit" type="deposits" currency={currency.toLowerCase()} />
-              </TabPanel>
-              <TabPanel value="withdraw">
-                {general.currency === 'BTC' ? (
-                  <InvoiceExplanation
-                    currency={general.currency}
-                    onClick={() => handleTabSelection('transfer')}
+                </TabPanel>
+                <TabPanel value="withdraw">
+                  {general.currency === 'BTC' ? (
+                    <InvoiceExplanation
+                      currency={general.currency}
+                      onClick={() => handleTabSelection('transfer')}
+                    />
+                  ) : (
+                    <Withdraw wallet={wallet} />
+                  )}
+                  <WalletHistory
+                    label="withdraw"
+                    type="withdraws"
+                    currency={currency.toLowerCase()}
                   />
-                ) : (
-                  <Withdraw wallet={wallet} />
-                )}
-                <WalletHistory
-                  label="withdraw"
-                  type="withdraws"
-                  currency={currency.toLowerCase()}
-                />
-              </TabPanel>
-              <TabPanel value="transfer">
-                {general.hasTransfer && (
-                  <Transfer
-                    currency={general.balance.currency}
-                    balanceMarket={general.balanceMarket?.toString() ?? '0'}
-                    balanceP2P={general.balanceP2P?.toString() ?? '0'}
-                    transfers={transfers}
-                    onChangeTransfers={() => setTransfers(transfers + 1)}
-                  />
-                )}
-              </TabPanel>
-            </Tabs>
-          </Box>
+                </TabPanel>
+                <TabPanel value="transfer">
+                  {general.hasTransfer && (
+                    <Transfer
+                      currency={general.balanceTotal.currency}
+                      balanceMarket={general.balanceMarket?.toString() ?? '0'}
+                      balanceP2P={general.balanceP2P?.toString() ?? '0'}
+                      transfers={transfers}
+                      onChangeTransfers={() => setTransfers(transfers + 1)}
+                    />
+                  )}
+                </TabPanel>
+              </Tabs>
+            </Box>
+          )}
         </>
       )}
     </Box>

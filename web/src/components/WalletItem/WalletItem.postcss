@@ -1,15 +1,15 @@
 :root {
-  --wallets-wallet-item-color: rgb(102, 102, 102);
-  --wallets-wallet-item-color-hover: rgb(255, 255, 255);
-  --wallets-wallet-item-bg-hover: rgb(64, 69, 76);
+  --wallets-wallet-item-color: rgb(102 102 102);
+  --wallets-wallet-item-color-hover: rgb(255 255 255);
+  --wallets-wallet-item-bg-hover: rgb(64 69 76);
   --wallets-wallet-item-after-bg-active: rgb(var(--rgb-brand-blue));
 }
 
 :global(.light-mode) {
-  --wallets-wallet-item-color: rgb(153, 153, 153);
-  --wallets-wallet-item-color-hover: rgb(0, 0, 0);
-  --wallets-wallet-item-bg-hover: rgb(240, 243, 249);
-  --wallets-wallet-item-after-bg-active: rgb(91, 142, 229);
+  --wallets-wallet-item-color: rgb(153 153 153);
+  --wallets-wallet-item-color-hover: rgb(0 0 0);
+  --wallets-wallet-item-bg-hover: rgb(240 243 249);
+  --wallets-wallet-item-after-bg-active: rgb(91 142 229);
 }
 
 .item {
@@ -31,7 +31,7 @@
 
     &::after {
       background-color: var(--wallets-wallet-item-after-bg-active);
-      content: '';
+      content: "";
       height: 100%;
       left: 0;
       position: absolute;
@@ -50,5 +50,17 @@
 }
 
 .itemHeader {
-  padding-bottom: calc(var(--gap) / 2);
+  border-bottom: 1px solid var(--wallets-item-border-color);
+  padding-bottom: var(--gap);
+  padding-top: calc(var(--gap) * 2);
+
+  @media (--breakpoint-down-md) {
+    padding-left: calc(var(--gap) * 3 + 36px + var(--gap) * 2);
+    padding-right: calc(var(--gap) * 3);
+  }
+
+  @media (--breakpoint-up-md) {
+    padding-left: calc(var(--gap) * 2 + 36px + var(--gap) * 2);
+    padding-right: calc(var(--gap) * 2);
+  }
 }

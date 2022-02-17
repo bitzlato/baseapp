@@ -11,12 +11,11 @@ import s from './WalletItem.postcss';
 export interface WalletItemData {
   name: string;
   currency: string;
-  balance: Money;
+  balanceTotal: Money;
   balanceP2P: Money | undefined;
   balanceMarket: Money | undefined;
   approximate: Money;
   locked: Money;
-  icon: string;
   hasTransfer: boolean;
   index: number;
 }
@@ -50,7 +49,7 @@ export const WalletItem: FC<Props> = ({ wallet, active, onClick, isMobileDevice 
         </Box>
         <Box col align="end">
           <Box className={s.title} textColor={color}>
-            <AmountFormat money={wallet.balance} />
+            <AmountFormat money={wallet.balanceTotal} />
           </Box>
           {wallet.approximate.isZero() ? null : (
             <Box className={s.description} textColor={color}>

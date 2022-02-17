@@ -84,9 +84,9 @@ export const WalletsScreen: React.FC = () => {
 
   const tabs = useMemo(() => {
     return TABS.filter((d) => {
-      return d.value !== TabId.transfer || item?.hasTransfer;
+      return item?.balanceMarket && (d.value !== TabId.transfer || item?.hasTransfer);
     });
-  }, [item?.hasTransfer]);
+  }, [item?.hasTransfer, item?.balanceMarket]);
 
   const tabValue = getTab(tabs, tab)?.value ?? '';
 
@@ -169,7 +169,7 @@ export const WalletsScreen: React.FC = () => {
                     <TabPanel value={TabId.transfer}>
                       {item.hasTransfer && (
                         <Transfer
-                          currency={item.balance.currency}
+                          currency={item.balanceTotal.currency}
                           balanceMarket={item.balanceMarket?.toString() ?? '0'}
                           balanceP2P={item.balanceP2P?.toString() ?? '0'}
                           transfers={transfers}
