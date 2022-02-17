@@ -7,7 +7,6 @@ import { useT } from 'web/src/hooks/useT';
 import { ProfileApiKeys, ProfileVerification } from 'web/src/containers';
 import { ProfileAccountActivity } from 'web/src/containers/ProfileAccountActivity';
 import { ProfileAuthDetails } from 'web/src/containers/ProfileAuthDetails';
-import { ReferralProgram } from 'web/src/containers/ReferralProgram';
 
 export const ProfileScreen: FC = () => {
   const t = useT();
@@ -21,10 +20,7 @@ export const ProfileScreen: FC = () => {
         <Card header={<h4>{title}</h4>}>
           <div className="row">
             <div className="col-12 col-md-6 mx-0">
-              <Box col>
-                <ProfileAuthDetails />
-                <ReferralProgram />
-              </Box>
+              <ProfileAuthDetails />
             </div>
             <div className="col-12 col-md-6">
               <ProfileVerification />

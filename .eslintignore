@@ -141,7 +141,6 @@ web/src/containers/QuickExchange/helpers.ts
 web/src/containers/RecentTrades/Market.tsx
 web/src/containers/RecentTrades/Yours.tsx
 web/src/containers/RecentTrades/index.tsx
-web/src/containers/ReferralProgram/index.tsx
 web/src/containers/ToolBar/MarketSelector/MarketsList/index.tsx
 web/src/containers/ToolBar/MarketSelector/MarketsTabs/index.tsx
 web/src/containers/ToolBar/MarketSelector/index.tsx
