@@ -7,10 +7,15 @@ import s from './CryptoCurrencyIcon.postcss';
 
 const MAP: Record<string, string> = {
   avax: require('cryptocurrency-icons/svg/color/avax.svg'),
+  bch: require('cryptocurrency-icons/svg/color/bch.svg'),
   bnb: require('cryptocurrency-icons/svg/color/bnb.svg'),
   btc: require('cryptocurrency-icons/svg/color/btc.svg'),
+  dai: require('cryptocurrency-icons/svg/color/dai.svg'),
+  dash: require('cryptocurrency-icons/svg/color/dash.svg'),
+  doge: require('cryptocurrency-icons/svg/color/doge.svg'),
   eth: require('cryptocurrency-icons/svg/color/eth.svg'),
   ht: require('cryptocurrency-icons/svg/color/ht.svg'),
+  ltc: require('cryptocurrency-icons/svg/color/ltc.svg'),
   matic: require('cryptocurrency-icons/svg/color/matic.svg'),
   mcr: require('cryptocurrency-icons/svg/color/mcr.svg'),
   mdt: require('cryptocurrency-icons/svg/color/mdt.svg'),

@@ -23,14 +23,7 @@ export const WalletList: React.FC<WalletListProps> = ({
   return (
     <Box col className={className}>
       {walletItems.length ? (
-        <Box
-          grow
-          row
-          justify="between"
-          textSize="sm"
-          padding={isMobileDevice ? '2X3' : '2'}
-          className={s.itemHeader}
-        >
+        <Box grow row justify="between" textSize="sm" className={s.itemHeader}>
           <span>{t('Coin')}</span>
           <span>{t('Total balance')}</span>
         </Box>

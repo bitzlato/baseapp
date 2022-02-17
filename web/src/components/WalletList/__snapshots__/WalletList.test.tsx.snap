@@ -5,7 +5,7 @@ exports[`WalletList should render 1`] = `
   class="col"
 >
   <div
-    class="itemHeader row grow justifyBetween padding2 smSize"
+    class="itemHeader row grow justifyBetween smSize"
   >
     <span>
       Coin

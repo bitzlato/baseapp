@@ -14,7 +14,7 @@ export interface BlockchainCurrencyMoney {
 
 export interface CurrencySource {
   blockchain_currencies: BlockchainCurrency[];
-  cc_code: string;
+  cc_code: string | null;
   deposit_enabled: boolean;
   deposit_fee: string;
   description: string | null;

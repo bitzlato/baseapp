@@ -12,8 +12,7 @@ const walletItems: WalletItemData[] = [
   {
     name: 'Bitcoin',
     currency: 'BTC',
-    icon: 'BTC',
-    balance: createMoney('1', BTC_CCY),
+    balanceTotal: createMoney('1', BTC_CCY),
     balanceP2P: createMoney('0.5', BTC_CCY),
     balanceMarket: createMoney('0.5', BTC_CCY),
     approximate: createMoney('41000', USD_CCY),
@@ -24,8 +23,7 @@ const walletItems: WalletItemData[] = [
   {
     name: 'Ethereum',
     currency: 'ETH',
-    icon: 'ETH',
-    balance: createMoney('1', ETH_CCY),
+    balanceTotal: createMoney('1', ETH_CCY),
     balanceP2P: createMoney('0.5', ETH_CCY),
     balanceMarket: createMoney('0.5', ETH_CCY),
     approximate: createMoney('41000', USD_CCY),
