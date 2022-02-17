@@ -62,9 +62,16 @@ export const WalletsScreen: React.FC = () => {
     }
   }, [list.length]);
 
-  const replaceHistory = (listIndex: number, tabId?: string) => {
-    const currency = list[listIndex]?.currency.toLowerCase() ?? '';
-    history.replace(`/wallets/${currency}/${tabId}`);
+  const replaceHistory = (index: number, tabId?: string) => {
+    const parts: string[] = [];
+    const currency = list[index]?.currency.toLowerCase();
+    if (currency) {
+      parts.push(currency);
+    }
+    if (tabId) {
+      parts.push(tabId);
+    }
+    history.replace(`/wallets/${parts.join('/')}`);
   };
 
   const onListSelected = (index: number) => {
