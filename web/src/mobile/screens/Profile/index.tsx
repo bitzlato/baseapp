@@ -1,31 +1,17 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { isAuth0 } from 'src/api';
-import { Button } from 'src/components/Button/Button';
 import { useT } from 'src/hooks/useT';
 import { ChevronIcon } from '../../../assets/images/ChevronIcon';
-import { copy, getLanguageName } from '../../../helpers';
-import {
-  alertPush,
-  selectCurrentColorTheme,
-  selectCurrentLanguage,
-  selectUserInfo,
-} from '../../../modules';
+import { getLanguageName } from '../../../helpers';
+import { selectCurrentColorTheme, selectCurrentLanguage, selectUserInfo } from '../../../modules';
 import { ProfileLink, ProfileLinks, UserInfo } from '../../components';
 
 const ProfileMobileScreenComponent: React.FC = () => {
   const t = useT();
-  const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
   const currentLanguage = useSelector(selectCurrentLanguage);
   const currentTheme = useSelector(selectCurrentColorTheme);
-
-  const handleCopyText = () => {
-    copy('referral-link');
-    dispatch(
-      alertPush({ message: ['page.mobile.profileLinks.link.referral.success'], type: 'success' }),
-    );
-  };
 
   const historyLinks: ProfileLink[] = [
     { titleKey: 'page.mobile.profileLinks.history.orders', route: '/orders' },
@@ -97,34 +83,12 @@ const ProfileMobileScreenComponent: React.FC = () => {
     },
   ];
 
-  const additionalLinks = [
-    {
-      titleKey: 'page.mobile.profileLinks.additional.referral',
-      route: '/profile',
-      children: (
-        <>
-          <input
-            type="text"
-            id="referral-link"
-            value={`${window.document.location.origin}/signup?refid=${user.uid}`}
-            readOnly
-            style={{ position: 'fixed', left: -9999 }}
-          />
-          <Button variant="primary" revertLightPrimary onClick={handleCopyText}>
-            {t('page.mobile.profileLinks.link.referral')}
-          </Button>
-        </>
-      ),
-    },
-  ];
-
   return (
     <div className="pg-mobile-profile-screen">
       <UserInfo />
       <ProfileLinks links={historyLinks} />
       <ProfileLinks links={mainLinks} />
       <ProfileLinks links={settingsLinks} />
-      <ProfileLinks links={additionalLinks} />
     </div>
   );
 };

@@ -83,7 +83,6 @@ export const en = {
   'page.mobile.profileLinks.settings.language': 'Language',
   'page.mobile.profileLinks.settings.theme': 'Theme',
 
-  'page.mobile.profileLinks.additional.referral': 'Referral Link',
   'page.mobile.profileLinks.link.referral.success': 'Successfully copied!',
 
   'page.mobile.profileLinks.link.verification': 'Level {level}',

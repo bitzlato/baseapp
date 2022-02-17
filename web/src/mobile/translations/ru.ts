@@ -83,7 +83,6 @@ export const ru = {
   'page.mobile.profileLinks.settings.language': 'Язык',
   'page.mobile.profileLinks.settings.theme': 'Тема',
 
-  'page.mobile.profileLinks.additional.referral': 'Реферальная ссылка',
   'page.mobile.profileLinks.link.referral.success': 'Успешно скопированно!',
 
   'page.mobile.profileLinks.link.verification': 'Уровень {level}',

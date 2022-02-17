@@ -27,142 +27,81 @@ exports[`ProfileScreen test should render 1`] = `
             class="col-12 col-md-6 mx-0"
           >
             <div
-              class="col"
+              class="pg-profile-page__box pg-profile-page__left-col__basic"
             >
               <div
-                class="pg-profile-page__box pg-profile-page__left-col__basic"
+                class="pg-profile-page__box-header pg-profile-page__left-col__basic__info-row"
               >
                 <div
-                  class="pg-profile-page__box-header pg-profile-page__left-col__basic__info-row"
+                  class="pg-profile-page__left-col__basic__info-row__block"
                 >
                   <div
-                    class="pg-profile-page__left-col__basic__info-row__block"
+                    class="pg-profile-page__row pg-profile-page__details-user"
                   >
-                    <div
-                      class="pg-profile-page__row pg-profile-page__details-user"
-                    >
-                      <p />
-                    </div>
-                    <div
-                      class="pg-profile-page__row"
-                    >
-                      <h2>
-                        UID: 
-                      </h2>
-                    </div>
+                    <p />
                   </div>
-                </div>
-                <div
-                  class="pg-profile-page__row"
-                >
-                  <div>
-                    <div
-                      class="pg-profile-page__label"
-                    >
-                      Password
-                    </div>
-                    <div>
-                      ************
-                    </div>
+                  <div
+                    class="pg-profile-page__row"
+                  >
+                    <h2>
+                      UID: 
+                    </h2>
                   </div>
-                  <button
-                    class="btn-block mt-3 mb-3 btn-lg btn btn-primary w-25 btn btn-primary btn-lg"
-                    type="button"
-                  >
-                    Change
-                  </button>
-                </div>
-                <div
-                  class="pg-profile-page__row"
-                >
-                  <label
-                    class="pg-profile-page__label"
-                  >
-                    <div>
-                      Two-factor authentication
-                    </div>
-                    <span
-                      class="pg-profile-page__label-value__disabled"
-                    >
-                      Disabled
-                    </span>
-                  </label>
-                  <form
-                    class=""
-                  >
-                    <div
-                      class="custom-control custom-switch"
-                    >
-                      <input
-                        class="custom-control-input"
-                        id="2fa-switch"
-                        type="checkbox"
-                      />
-                      <label
-                        class="custom-control-label"
-                        for="2fa-switch"
-                        title=""
-                      />
-                    </div>
-                  </form>
                 </div>
               </div>
               <div
-                class="pg-profile-page__referral"
+                class="pg-profile-page__row"
               >
-                <fieldset
-                  class="pg-copyable-text__section"
-                >
-                  <legend
-                    class="cr-deposit-crypto__copyable-title"
-                  >
-                    Referral Link
-                  </legend>
+                <div>
                   <div
-                    class="cr-copyable-text-field pg-copyable-text-field__input"
+                    class="pg-profile-page__label"
                   >
-                    <div
-                      class="input-group"
-                    >
-                      <div
-                        class="custom-input"
-                      >
-                        <label />
-                        <input
-                          class="form-control"
-                          id="referral-id"
-                          placeholder=""
-                          readonly=""
-                          type="text"
-                          value="http://localhost/signup?refid="
-                        />
-                      </div>
-                      <div
-                        class="input-group-append"
-                      >
-                        <button
-                          class="iconButton"
-                          title="Copy"
-                          type="button"
-                        >
-                          <svg
-                            height="24"
-                            viewBox="0 0 20 20"
-                            width="24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"
-                            />
-                            <path
-                              d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
+                    Password
                   </div>
-                </fieldset>
+                  <div>
+                    ************
+                  </div>
+                </div>
+                <button
+                  class="btn-block mt-3 mb-3 btn-lg btn btn-primary w-25 btn btn-primary btn-lg"
+                  type="button"
+                >
+                  Change
+                </button>
+              </div>
+              <div
+                class="pg-profile-page__row"
+              >
+                <label
+                  class="pg-profile-page__label"
+                >
+                  <div>
+                    Two-factor authentication
+                  </div>
+                  <span
+                    class="pg-profile-page__label-value__disabled"
+                  >
+                    Disabled
+                  </span>
+                </label>
+                <form
+                  class=""
+                >
+                  <div
+                    class="custom-control custom-switch"
+                  >
+                    <input
+                      class="custom-control-input"
+                      id="2fa-switch"
+                      type="checkbox"
+                    />
+                    <label
+                      class="custom-control-label"
+                      for="2fa-switch"
+                      title=""
+                    />
+                  </div>
+                </form>
               </div>
             </div>
           </div>
