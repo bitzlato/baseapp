@@ -1,5 +1,6 @@
 # misc
 .envrc
+.idea
 .DS_Store
 
 log/
