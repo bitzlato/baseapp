@@ -55,7 +55,7 @@ module.exports = {
     filename: !isDevelopment ? '[name].[contenthash].js' : undefined,
     chunkFilename: '[id].[contenthash].js',
     globalObject: 'this',
-    publicPath: 'auto',
+    publicPath: '/',
     clean: true,
   },
 
