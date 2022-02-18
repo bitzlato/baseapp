@@ -20,8 +20,3 @@ export function useGeneralWallets(deps: React.DependencyList = []) {
   );
   return useMemo(() => getList(wallets, data), [wallets, data]);
 }
-
-export function useGeneralWallet(currency: string) {
-  currency = currency.toUpperCase();
-  return useGeneralWallets().find((d) => d.currency === currency);
-}

@@ -16,7 +16,7 @@ export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletIt
     const balanceTotal = balance ? getBalance(ccy, balance) : wallet.balance;
     res.push({
       name: wallet.name,
-      currency: currencyId,
+      currency: ccy.code,
       balanceTotal,
       balanceP2P: balance?.p2p_balance ? createMoney(balance.p2p_balance, ccy) : undefined,
       balanceMarket: balance?.market_balance
