@@ -5,7 +5,8 @@ import { capitalize } from 'src/helpers/capitalize';
 
 import s from './CryptoCurrencyIcon.postcss';
 
-const MAP: Record<string, string> = {
+const ICONS: Record<string, string> = {
+  // Currency icons
   avax: require('cryptocurrency-icons/svg/color/avax.svg'),
   bch: require('cryptocurrency-icons/svg/color/bch.svg'),
   bnb: require('cryptocurrency-icons/svg/color/bnb.svg'),
@@ -19,8 +20,17 @@ const MAP: Record<string, string> = {
   matic: require('cryptocurrency-icons/svg/color/matic.svg'),
   mcr: require('cryptocurrency-icons/svg/color/mcr.svg'),
   mdt: require('cryptocurrency-icons/svg/color/mdt.svg'),
+  sol: require('cryptocurrency-icons/svg/color/sol.svg'),
+  trx: require('cryptocurrency-icons/svg/color/trx.svg'),
+  usd: require('cryptocurrency-icons/svg/color/usd.svg'),
   usdc: require('cryptocurrency-icons/svg/color/usdc.svg'),
   usdt: require('cryptocurrency-icons/svg/color/usdt.svg'),
+  // Blockchain icons
+  bsc: require('cryptocurrency-icons/svg/color/bnb.svg'),
+  heco: require('cryptocurrency-icons/svg/color/ht.svg'),
+  polygon: require('cryptocurrency-icons/svg/color/matic.svg'),
+  solana: require('cryptocurrency-icons/svg/color/sol.svg'),
+  tron: require('cryptocurrency-icons/svg/color/trx.svg'),
 };
 
 interface Props {
@@ -30,12 +40,8 @@ interface Props {
 
 export const CryptoCurrencyIcon: FC<Props> = ({ currency, size }) => {
   const code = currency.split('-')[0]!;
-  const className = cn(s.icon, size && s[`icon${capitalize(size)}`]);
-  const src = MAP[code.toLowerCase()] ?? require('cryptocurrency-icons/svg/color/generic.svg');
+  const className = cn(size && s[`icon${capitalize(size)}`]);
+  const src = ICONS[code.toLowerCase()] ?? require('cryptocurrency-icons/svg/color/generic.svg');
 
-  return (
-    <span className={className}>
-      <img src={src} alt={code.toUpperCase()} />
-    </span>
-  );
+  return <img className={className} src={src} alt={code.toUpperCase()} />;
 };
