@@ -18,14 +18,11 @@ exports[`WalletList should render 1`] = `
     class="item itemActive row rowSpacing2 padding2"
     type="button"
   >
-    <span
-      class="icon iconMedium"
-    >
-      <img
-        alt="BTC"
-        src="test-file-stub"
-      />
-    </span>
+    <img
+      alt="BTC"
+      class="iconMedium"
+      src="test-file-stub"
+    />
     <div
       class="row grow alignStart justifyBetween"
     >
@@ -91,14 +88,11 @@ exports[`WalletList should render 1`] = `
     class="item row rowSpacing2 padding2"
     type="button"
   >
-    <span
-      class="icon iconMedium"
-    >
-      <img
-        alt="ETH"
-        src="test-file-stub"
-      />
-    </span>
+    <img
+      alt="ETH"
+      class="iconMedium"
+      src="test-file-stub"
+    />
     <div
       class="row grow alignStart justifyBetween"
     >

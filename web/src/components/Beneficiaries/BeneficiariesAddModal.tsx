@@ -20,7 +20,7 @@ import { Box } from '../Box/Box';
 import { Button } from '../Button/Button';
 import { TextInput } from '../Input/TextInput';
 import { Select } from '../Select/Select';
-import { BlockchainIcon2 } from '../BlockchainIcon/BlockchainIcon2';
+import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
 
 interface Props {
   wallet: Wallet;
@@ -110,7 +110,7 @@ const BeneficiariesAddModalComponent: React.FC<Props> = ({ wallet, onCloseModal 
   const renderSelectItem = (value: Blockchain) => {
     return (
       <Box row spacing>
-        <BlockchainIcon2 value={getCurrencyCodeSymbol(value.key)} />
+        <CryptoCurrencyIcon size="small" currency={getCurrencyCodeSymbol(value.key)} />
         <span>{value.name}</span>
       </Box>
     );

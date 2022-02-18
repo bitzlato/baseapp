@@ -15,7 +15,6 @@ import { tradeUrl } from 'src/api/config';
 import { Blockchain } from 'src/modules/public/blockchains/types';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import s from 'src/containers/Withdraw/BeneficiaryAddress.postcss';
-import { BlockchainIcon2 } from '../BlockchainIcon/BlockchainIcon2';
 import { DepositSummary } from './DepositSummary';
 import {
   alertPush,
@@ -25,6 +24,7 @@ import {
   selectUserInfo,
   Wallet,
 } from '../../modules';
+import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
 
 interface Props {
   wallet: Wallet;
@@ -71,7 +71,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
   const renderSelectItem = (value: Blockchain) => {
     return (
       <Box row spacing>
-        <BlockchainIcon2 value={getCurrencyCodeSymbol(value.key)} />
+        <CryptoCurrencyIcon size="small" currency={getCurrencyCodeSymbol(value.key)} />
         <span>{value.name}</span>
       </Box>
     );
