@@ -29,8 +29,6 @@ interface Props {
 
 const BeneficiariesAddModalComponent: React.FC<Props> = ({ wallet, onCloseModal }) => {
   const [coinAddress, setCoinAddress] = useState('');
-  const [coinAddressValid, setCoinAddressValid] = useState(false);
-  const [coinTestnetAddressValid, setCoinTestnetAddressValid] = useState(false);
   const [coinBeneficiaryName, setCoinBeneficiaryName] = useState('');
   const [coinDescription, setCoinDescription] = useState('');
   const [coinDestinationTag, setCoinDestinationTag] = useState('');
@@ -56,8 +54,6 @@ const BeneficiariesAddModalComponent: React.FC<Props> = ({ wallet, onCloseModal 
     setCoinBeneficiaryName('');
     setCoinDescription('');
     setCoinDestinationTag('');
-    setCoinAddressValid(false);
-    setCoinTestnetAddressValid(false);
   };
 
   const handleClickToggleAddAddressModal = () => {
@@ -96,15 +92,8 @@ const BeneficiariesAddModalComponent: React.FC<Props> = ({ wallet, onCloseModal 
     handleClearModalsInputs();
   };
 
-  const validateCoinAddressFormat = (value: string) => {
-    const address = value.trim();
-    setCoinAddressValid(isValidAddress(address, currency));
-    setCoinTestnetAddressValid(isValidAddress(address, currency, 'testnet'));
-  };
-
   const handleChangeCoinAddress = (value: string) => {
-    setCoinAddress(value);
-    validateCoinAddressFormat(value);
+    setCoinAddress(value.trim());
   };
 
   const renderSelectItem = (value: Blockchain) => {
@@ -117,6 +106,10 @@ const BeneficiariesAddModalComponent: React.FC<Props> = ({ wallet, onCloseModal 
   };
 
   const renderAddAddressModalCryptoBody = (isMobileDevice?: boolean) => {
+    const name = getCurrencyCodeSymbol(blockchain?.key ?? '') || currency;
+    const coinAddressValid = isValidAddress(coinAddress, name);
+    const coinTestnetAddressValid = isValidAddress(coinAddress, name, 'testnet');
+
     const isDisabled =
       !blockchain ||
       !coinAddress ||
