@@ -1,6 +1,7 @@
 import { ru as mobileTranslationsRu } from '../../mobile/translations';
 import { LangType } from '../../translations';
 import { nationalitiesNames } from '../../translations/nationalities';
+import { deeplinkTexts } from "./deeplinks.ru";
 
 export const ru: LangType = {
   'page.header.navbar.signIn': 'Войти',
@@ -1199,6 +1200,9 @@ export const ru: LangType = {
 
   ...nationalitiesNames,
   ...mobileTranslationsRu,
+
+  // deeplink dialogs
+  ...deeplinkTexts,
 
   // finex
   'order.action.not_permitted': 'Action is not permitted',

@@ -19506,6 +19506,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"swr@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "swr@npm:1.2.2"
+  peerDependencies:
+    react: ^16.11.0 || ^17.0.0 || ^18.0.0
+  checksum: 723747c7c263536d8c9ee8b38039462395ba09a7925508f22c8fc940a1ae72e1f05ef678767b2197ce337e170f4812563281bc4b5f9ad7e4eec895cd7139fb8e
+  languageName: node
+  linkType: hard
+
 "symbol-observable@npm:1.0.1":
   version: 1.0.1
   resolution: "symbol-observable@npm:1.0.1"
@@ -20675,6 +20684,7 @@ __metadata:
     src: "link:./src"
     style-loader: ^3.3.0
     swc-loader: ^0.1.15
+    swr: ^1.2.2
     ua-parser-js: ^0.7.19
     uuid: ^8.3.2
     webpack: ^5.69.0

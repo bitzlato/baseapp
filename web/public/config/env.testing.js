@@ -6,6 +6,7 @@ window.env = {
     applogicUrl: '/api/v2/applogic',
     rangerUrl: '/api/v2/ranger',
     accountUrl: '/api/private/v1',
+    accountPublicUrl: '/api/public/v1',
   },
   logoUrl: '',
   logoDarkUrl: '',

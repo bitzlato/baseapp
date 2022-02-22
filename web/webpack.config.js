@@ -300,6 +300,11 @@ module.exports = {
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
               },
+              '/api/public/v1/': {
+                target: `https://${process.env.ACCOUNT_HOST}`,
+                changeOrigin: true,
+                cookieDomainRewrite: 'localhost',
+              },
               '/api': {
                 target: `https://${process.env.PROXY_HOST}`,
                 changeOrigin: true,

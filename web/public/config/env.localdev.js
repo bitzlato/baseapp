@@ -6,6 +6,7 @@ window.env = {
     applogicUrl: 'http://localhost:8080/api/v2/applogic',
     rangerUrl: 'ws://localhost:8080/api/v2/ranger',
     accountUrl: '/api/private/v1',
+    accountPublicUrl: '/api/public/v1',
   },
   auth0: {
     // domain: 'auth.lgk.one',

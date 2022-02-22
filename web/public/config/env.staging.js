@@ -6,6 +6,7 @@ window.env = {
     applogicUrl: 'https://market-s1.bitzlato.com/api/v2/applogic',
     rangerUrl: 'wss://market-s1.bitzlato.com/api/v2/ranger',
     accountUrl: 'https://account.s-www.lgk.one/api/private/v1',
+    accountPublicUrl: 'https://account.s-www.lgk.one/api/public/v1',
   },
   auth0: {
     domain: 'auth.lgk.one',
