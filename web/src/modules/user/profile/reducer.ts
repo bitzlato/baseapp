@@ -12,6 +12,7 @@ import {
   PROFILE_GENERATE_2FA_QRCODE_DATA,
   PROFILE_GENERATE_2FA_QRCODE_ERROR,
   PROFILE_GENERATE_2FA_QRCODE_FETCH,
+  PROFILE_TOGGLE_2FA_SUCCESS,
   PROFILE_RESET_USER,
   PROFILE_TOGGLE_2FA_DATA,
   PROFILE_TOGGLE_2FA_ERROR,
@@ -104,7 +105,10 @@ const passwordChangeReducer = (state: ProfileState['passwordChange'], action: Pr
   }
 };
 
-const twoAuthReducer = (state: ProfileState['twoFactorAuth'], action: ProfileAction) => {
+const twoAuthReducer = (
+  state: ProfileState['twoFactorAuth'],
+  action: ProfileAction,
+): ProfileState['twoFactorAuth'] => {
   switch (action.type) {
     case PROFILE_GENERATE_2FA_QRCODE_FETCH:
       return {
@@ -146,6 +150,11 @@ const twoAuthReducer = (state: ProfileState['twoFactorAuth'], action: ProfileAct
         ...state,
         success: false,
         error: action.error,
+      };
+    case PROFILE_TOGGLE_2FA_SUCCESS:
+      return {
+        ...state,
+        success: false,
       };
     default:
       return state;
@@ -245,6 +254,7 @@ export const profileReducer = (
     case PROFILE_TOGGLE_2FA_FETCH:
     case PROFILE_TOGGLE_2FA_DATA:
     case PROFILE_TOGGLE_2FA_ERROR:
+    case PROFILE_TOGGLE_2FA_SUCCESS:
       const twoFactorAuthState = { ...state.twoFactorAuth };
 
       return {

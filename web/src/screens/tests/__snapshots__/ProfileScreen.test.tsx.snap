@@ -52,26 +52,6 @@ exports[`ProfileScreen test should render 1`] = `
               <div
                 class="pg-profile-page__row"
               >
-                <div>
-                  <div
-                    class="pg-profile-page__label"
-                  >
-                    Password
-                  </div>
-                  <div>
-                    ************
-                  </div>
-                </div>
-                <button
-                  class="btn-block mt-3 mb-3 btn-lg btn btn-primary w-25 btn btn-primary btn-lg"
-                  type="button"
-                >
-                  Change
-                </button>
-              </div>
-              <div
-                class="pg-profile-page__row"
-              >
                 <label
                   class="pg-profile-page__label"
                 >

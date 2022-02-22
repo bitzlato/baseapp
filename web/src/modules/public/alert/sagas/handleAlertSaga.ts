@@ -9,6 +9,7 @@ import {
 import { msAlertDisplayTime } from '../../../../api';
 import { selectUserInfo, User } from '../../../user/profile';
 import { alertData, alertDelete, AlertPush } from '../actions';
+import { ALERT_PUSH } from '../constants';
 
 export function* handleAlertSaga(action: AlertPush) {
   if (action.payload.type === 'error') {
@@ -54,6 +55,16 @@ export function* handleAlertSaga(action: AlertPush) {
         } else {
           yield call(callAlertData, action);
         }
+        break;
+      case 429:
+        yield call(callAlertData, {
+          type: ALERT_PUSH,
+          payload: {
+            type: 'error',
+            code: 429,
+            message: ['error.try_later'],
+          },
+        });
         break;
       case 471:
         yield put(setBlocklistStatus({ status: 'restricted' }));

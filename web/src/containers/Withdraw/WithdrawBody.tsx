@@ -115,8 +115,8 @@ export const WithdrawBody: FC<Props> = (props) => {
         return (
           <Blur
             text={t('page.body.wallets.tabs.withdraw.content.enable2fa')}
-            onClick={() => () => history.push('/profile/2fa', { enable2fa: true })}
             linkText={t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
+            onClick={() => history.push('/profile/2fa')}
           />
         );
       }
@@ -124,7 +124,7 @@ export const WithdrawBody: FC<Props> = (props) => {
         <Blur
           text={t('page.body.wallets.warning.withdraw.2fa')}
           linkText={t('page.body.wallets.warning.withdraw.2fa.button')}
-          onClick={() => history.push('/security/2fa', { enable2fa: true })}
+          onClick={() => history.push('/security/2fa')}
         />
       );
     }

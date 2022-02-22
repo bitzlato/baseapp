@@ -1,38 +1,47 @@
-import * as React from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { TwoFactorModal2 } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { ProfileTwoFactorAuth } from '../../../containers/ProfileTwoFactorAuth';
-import { selectUserInfo, toggle2faFetch } from '../../../modules/user/profile';
+import {
+  selectTwoFactorAuthSuccess,
+  selectUserInfo,
+  toggle2faFetch,
+  toggle2faSuccess,
+} from '../../../modules/user/profile';
 import { ProfileTwoFactorAuthScreen } from '../../../screens/ProfileTwoFactorAuthScreen';
-import { TwoFactorModal } from '../../components';
 import { Subheader } from '../../components/Subheader';
 
-export const ProfileAuthMobileScreen: React.FC = React.memo(() => {
-  const [showModal, setShowModal] = React.useState(false);
+export const ProfileAuthMobileScreen: React.FC = memo(() => {
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const intl = useIntl();
   const user = useSelector(selectUserInfo);
+  const success = useSelector(selectTwoFactorAuthSuccess);
 
-  const handleToggle2FA = (code2FA: string, shouldFetch: boolean) => {
-    if (shouldFetch) {
-      dispatch(
-        toggle2faFetch({
-          code: code2FA,
-          enable: false,
-        }),
-      );
+  useEffect(() => {
+    if (success) {
+      dispatch(toggle2faSuccess());
       history.push('/profile');
     }
-    setShowModal(false);
+  }, [success, dispatch, history]);
+
+  const handleToggle2FA = (code2FA: string) => {
+    dispatch(
+      toggle2faFetch({
+        code: code2FA,
+        enable: false,
+      }),
+    );
   };
 
-  const handleNavigateTo2fa = React.useCallback((enable2fa: boolean) => {
+  const handleNavigateTo2fa = (enable2fa: boolean) => {
     if (!enable2fa) {
       setShowModal((state) => !state);
     }
-  }, []);
+  };
 
   return (
     <>
@@ -48,7 +57,9 @@ export const ProfileAuthMobileScreen: React.FC = React.memo(() => {
           </div>
           {!user.otp ? <ProfileTwoFactorAuthScreen /> : null}
         </div>
-        <TwoFactorModal showModal={showModal} handleToggle2FA={handleToggle2FA} />
+        {showModal ? (
+          <TwoFactorModal2 onClose={() => setShowModal(false)} onSend={handleToggle2FA} />
+        ) : null}
       </div>
     </>
   );

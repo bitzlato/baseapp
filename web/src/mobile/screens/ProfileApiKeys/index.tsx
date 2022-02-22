@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { TwoFactorModal2 } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { Pagination } from '../../../components';
 import { useApiKeysFetch } from '../../../hooks';
 import {
@@ -21,7 +22,7 @@ import {
   selectApiKeysNextPageExists,
 } from '../../../modules/user/apiKeys/selectors';
 import { AddIcon } from '../../assets/images/AddIcon';
-import { ApiKeysItem, CreatedApiKeyModal, Subheader, TwoFactorModal } from '../../components';
+import { ApiKeysItem, CreatedApiKeyModal, Subheader } from '../../components';
 
 const ProfileApiKeysMobileScreenComponent: React.FC = () => {
   const [itemToUpdate, setItemToUpdate] = React.useState<ApiKeyDataInterface | undefined>();
@@ -80,7 +81,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
     }
   };
 
-  const handleTriggerAction = (code2FA: string, shouldFetch: boolean) => {
+  const handleTriggerAction = (code2FA: string, shouldFetch: boolean = true) => {
     switch (currentAction) {
       case 'create':
         handleCreateApiKey(code2FA, shouldFetch);
@@ -173,7 +174,9 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
           closeCreatedApiKeyModal={() => setShowCreatedApiKeyModal(false)}
           apiKey={(apiKeysModal as any).apiKey}
         />
-        <TwoFactorModal showModal={show2FAModal} handleToggle2FA={handleTriggerAction} />
+        {show2FAModal ? (
+          <TwoFactorModal2 onClose={() => setShow2FAModal(false)} onSend={handleTriggerAction} />
+        ) : null}
       </div>
     </>
   );

@@ -10,5 +10,4 @@ export * from './Orders';
 export * from './Profile';
 export * from './Subheader';
 export * from './TradingTabs';
-export * from './TwoFactorModal';
 export * from './WalletsButtons';
