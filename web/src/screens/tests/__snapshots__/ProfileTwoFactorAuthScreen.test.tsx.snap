@@ -160,6 +160,7 @@ exports[`ProfileTwoFactorAuthScreen test should render 1`] = `
       >
         <button
           class="btn btn-primary btn-block btn-lg"
+          disabled=""
           type="button"
         >
           ENABLE

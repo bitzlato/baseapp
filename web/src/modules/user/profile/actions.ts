@@ -11,6 +11,7 @@ import {
   PROFILE_GENERATE_2FA_QRCODE_DATA,
   PROFILE_GENERATE_2FA_QRCODE_ERROR,
   PROFILE_GENERATE_2FA_QRCODE_FETCH,
+  PROFILE_TOGGLE_2FA_SUCCESS,
   PROFILE_RESET_USER,
   PROFILE_TOGGLE_2FA_DATA,
   PROFILE_TOGGLE_2FA_ERROR,
@@ -123,6 +124,10 @@ export interface ChangeUserData {
   };
 }
 
+export interface Toggle2faSuccess {
+  type: typeof PROFILE_TOGGLE_2FA_SUCCESS;
+}
+
 export interface ChangeUserDataError {
   type: typeof PROFILE_CHANGE_USER_ERROR;
   error: CommonError;
@@ -136,6 +141,7 @@ export type ProfileAction =
   | Toggle2FAFetch
   | Toggle2FAData
   | Toggle2FAError
+  | Toggle2faSuccess
   | Generate2faQRFetch
   | Generate2faQRData
   | Generate2faQRError
@@ -172,6 +178,10 @@ export const changePasswordReset = (): ChangePasswordReset => ({
 export const toggle2faFetch = (payload: Toggle2FAFetch['payload']): Toggle2FAFetch => ({
   type: PROFILE_TOGGLE_2FA_FETCH,
   payload,
+});
+
+export const toggle2faSuccess = (): Toggle2faSuccess => ({
+  type: PROFILE_TOGGLE_2FA_SUCCESS,
 });
 
 export const toggle2faData = (): Toggle2FAData => ({

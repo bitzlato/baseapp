@@ -1,8 +1,10 @@
-import classnames from 'classnames';
 import * as React from 'react';
+import cn from 'classnames';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { formatSeconds } from 'web/src/helpers/formatSeconds';
+import { useCountdown } from 'web/src/hooks/useCountdown';
 import { LetterIcon } from '../../assets/images/LetterIcon';
 import { MobileModal } from '../../mobile/components/Modal';
 import {
@@ -11,7 +13,8 @@ import {
   Beneficiary,
   selectMobileDeviceState,
 } from '../../modules';
-import { CustomInput } from '../CustomInput';
+import { Box } from '../Box/Box';
+import { TextInput } from '../Input/TextInput';
 
 interface Props {
   beneficiariesAddData: Beneficiary;
@@ -20,12 +23,13 @@ interface Props {
 
 const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
   const [confirmationModalCode, setConfirmationModalCode] = React.useState('');
-  const [confirmationModalCodeFocused, setConfirmationModalCodeFocused] = React.useState(false);
 
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const isMobileDevice = useSelector(selectMobileDeviceState);
+
+  const { start, countdown } = useCountdown();
 
   const { handleToggleConfirmationModal, beneficiariesAddData } = props;
 
@@ -33,13 +37,8 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
     setConfirmationModalCode(value);
   }, []);
 
-  const handleChangeFieldFocus = React.useCallback(() => {
-    setConfirmationModalCodeFocused((v) => !v);
-  }, []);
-
   const handleClearModalsInputs = React.useCallback(() => {
     setConfirmationModalCode('');
-    setConfirmationModalCodeFocused(false);
   }, []);
 
   const handleClickToggleConfirmationModal = React.useCallback(
@@ -55,71 +54,36 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
 
   const handleSubmitConfirmationModal = React.useCallback(() => {
     if (beneficiariesAddData) {
-      const payload = {
-        pin: confirmationModalCode,
-        id: beneficiariesAddData.id,
-      };
+      dispatch(
+        beneficiariesActivate({
+          pin: confirmationModalCode,
+          id: beneficiariesAddData.id,
+        }),
+      );
 
-      dispatch(beneficiariesActivate(payload));
+      start(30);
     }
-
-    handleClearModalsInputs();
   }, [confirmationModalCode, dispatch, beneficiariesAddData, handleClearModalsInputs]);
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && confirmationModalCode && countdown < 1) {
+      event.preventDefault();
+      handleSubmitConfirmationModal();
+    }
+  };
 
   const handleResendConfirmationCode = React.useCallback(() => {
     if (beneficiariesAddData) {
-      const payload = {
-        id: beneficiariesAddData.id,
-      };
-
-      dispatch(beneficiariesResendPin(payload));
+      dispatch(
+        beneficiariesResendPin({
+          id: beneficiariesAddData.id,
+        }),
+      );
     }
   }, [beneficiariesAddData, dispatch]);
 
-  const renderConfirmationModalBodyItem = React.useCallback(
-    (field: string, optional?: boolean) => {
-      const focusedClass = classnames('cr-email-form__group', {
-        'cr-email-form__group--focused': confirmationModalCodeFocused,
-        'cr-email-form__group--optional': optional,
-      });
-
-      return (
-        <div key={field} className={focusedClass}>
-          <CustomInput
-            type="text"
-            label={formatMessage({
-              id: `page.body.wallets.beneficiaries.confirmationModal.body.${field}`,
-            })}
-            placeholder={
-              confirmationModalCodeFocused
-                ? ''
-                : formatMessage({
-                    id: `page.body.wallets.beneficiaries.confirmationModal.body.${field}`,
-                  })
-            }
-            defaultLabel={field}
-            handleChangeInput={handleChangeFieldValue}
-            inputValue={confirmationModalCode}
-            handleFocusInput={handleChangeFieldFocus}
-            classNameLabel="cr-email-form__label"
-            classNameInput="cr-email-form__input"
-            autoFocus
-            labelVisible={confirmationModalCodeFocused}
-          />
-        </div>
-      );
-    },
-    [
-      confirmationModalCodeFocused,
-      confirmationModalCode,
-      formatMessage,
-      handleChangeFieldFocus,
-      handleChangeFieldValue,
-    ],
-  );
-
   const renderConfirmationModalBody = React.useCallback(() => {
-    const isDisabled = !confirmationModalCode;
+    const isDisabled = !confirmationModalCode || countdown > 0;
 
     return (
       <div className="cr-email-form__form-content">
@@ -129,30 +93,45 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
             {formatMessage({ id: 'page.body.wallets.beneficiaries.confirmationModal.body.text' })}
           </span>
         </div>
-        {renderConfirmationModalBodyItem('confirmationModalCode')}
-        <div className="cr-email-form__button-wrapper cr-email-form__button-wrapper--double">
-          <Button onClick={handleResendConfirmationCode} size="lg" variant="secondary">
-            {formatMessage({
-              id: 'page.body.wallets.beneficiaries.confirmationModal.body.resendButton',
+        <Box col spacing="2">
+          <TextInput
+            label={formatMessage({
+              id: 'page.body.wallets.beneficiaries.confirmationModal.body.confirmationModalCode',
             })}
-          </Button>
-          <Button
-            disabled={isDisabled}
-            onClick={handleSubmitConfirmationModal}
-            size="lg"
-            variant="primary"
-          >
-            {formatMessage({ id: 'page.body.wallets.beneficiaries.confirmationModal.body.button' })}
-          </Button>
-        </div>
+            labelVisible
+            value={confirmationModalCode}
+            onChange={handleChangeFieldValue}
+            onKeyPress={handleKeyPress}
+            autoFocus
+          />
+          <div className="cr-email-form__button-wrapper cr-email-form__button-wrapper--double">
+            <Button onClick={handleResendConfirmationCode} size="lg" variant="secondary">
+              {formatMessage({
+                id: 'page.body.wallets.beneficiaries.confirmationModal.body.resendButton',
+              })}
+            </Button>
+            <Button
+              disabled={isDisabled}
+              onClick={handleSubmitConfirmationModal}
+              size="lg"
+              variant="primary"
+            >
+              {countdown
+                ? formatSeconds(countdown)
+                : formatMessage({
+                    id: 'page.body.wallets.beneficiaries.confirmationModal.body.button',
+                  })}
+            </Button>
+          </div>
+        </Box>
       </div>
     );
   }, [
     confirmationModalCode,
+    countdown,
     formatMessage,
     handleResendConfirmationCode,
     handleSubmitConfirmationModal,
-    renderConfirmationModalBodyItem,
   ]);
 
   const renderConfirmationModalHeader = React.useCallback(() => {
@@ -172,7 +151,7 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
   }, [handleClickToggleConfirmationModal, formatMessage]);
 
   const renderContent = React.useCallback(() => {
-    const className = classnames('beneficiaries-confirmation-modal', {
+    const className = cn('beneficiaries-confirmation-modal', {
       'cr-modal': !isMobileDevice,
     });
 
