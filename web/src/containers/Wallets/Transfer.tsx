@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Button as BootstrapButton } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Currency } from '@bitzlato/money-js';
 import { parseNumeric } from 'src/helpers/parseNumeric';
@@ -19,9 +18,9 @@ import { alertPush } from 'src/modules/public/alert/actions';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
 import { SummaryField } from 'src/components/SummaryField';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
-import sQuickExchange from 'src/containers/QuickExchange/QuickExchange.postcss';
 import s from './Transfer.postcss';
 import { TransferHistory } from './TransferHistory';
+import { PercentageSelect } from '../../components/PercentageSelect/PercentageSelect';
 
 interface Props {
   currency: Currency;
@@ -42,6 +41,7 @@ export const Transfer: React.FC<Props> = ({
   const [to, setTo] = useState<TransferPlace | undefined>();
   const [amount, setAmount] = useState('');
   const [error, setError] = useState<FetchError | undefined>();
+  const [percentValue, setPercentValue] = useState<number>();
 
   const t = useT();
   const isMobileDevice = useSelector(selectMobileDeviceState);
@@ -67,6 +67,7 @@ export const Transfer: React.FC<Props> = ({
 
   const handleChangeAmount = (value: string) => {
     setAmount(parseNumeric(value));
+    setPercentValue(undefined);
   };
 
   const handlerRearrange = () => {
@@ -76,6 +77,7 @@ export const Transfer: React.FC<Props> = ({
 
   const handleUsePercent = (value: number) => {
     handleChangeAmount(available.multiply(value).divide(100).toFormat());
+    setPercentValue(value);
   };
 
   const handleTransfer = async () => {
@@ -165,17 +167,13 @@ export const Transfer: React.FC<Props> = ({
               <MoneyFormat money={available} />
             </Box>
             <Box self="end" row spacing>
-              {PERCENTS.map((v) => (
-                <BootstrapButton
-                  key={v}
-                  disabled={disablePercents}
-                  variant="secondary"
-                  className={sQuickExchange.quickExchangeAll}
-                  onClick={() => handleUsePercent(v)}
-                >
-                  {v}%
-                </BootstrapButton>
-              ))}
+              <PercentageSelect
+                value={percentValue}
+                percents={PERCENTS}
+                mobile={isMobileDevice}
+                onChange={handleUsePercent}
+                disabled={disablePercents}
+              />
             </Box>
           </Box>
         </Box>

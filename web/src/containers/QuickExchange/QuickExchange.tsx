@@ -24,6 +24,9 @@ import { Container } from 'web/src/components/Container/Container';
 import { AmountDescription } from './AmountDescription';
 import { getWallet, getCurrencies, getCurrency } from './helpers';
 import { SwipeIcon } from '../../assets/images/swipe';
+import { Limits } from './Limits';
+import { Spoiler } from 'src/components/Spoiler/Spoiler';
+import { PercentageSelect } from 'src/components/PercentageSelect/PercentageSelect';
 import {
   selectMarkets,
   selectWallets,
@@ -42,8 +45,6 @@ import {
 import { useCurrenciesFetch, useMarketsFetch, useWalletsFetch } from '../../hooks';
 
 import s from './QuickExchange.postcss';
-import { Limits } from './Limits';
-import { Spoiler } from 'web/src/components/Spoiler/Spoiler';
 
 const PERCENTS = [25, 50, 75, 100];
 
@@ -57,6 +58,7 @@ export const QuickExchangeContainer: React.FC = () => {
   const [requestCurrency, setRequestCurrency] = useState('');
   const [requestVolume, setRequestVolume] = useState('');
   const [rateOutOfDate, setRateOutOfDate] = useState(true);
+  const [percentValue, setPercentValue] = useState<number>();
 
   useMarketsFetch();
   useWalletsFetch();
@@ -138,6 +140,7 @@ export const QuickExchangeContainer: React.FC = () => {
     setToAmount('');
     setRequestVolume('');
     setRequestCurrency('');
+    setPercentValue(undefined);
   };
 
   const handleChangeFrom = (value: string) => {
@@ -146,6 +149,7 @@ export const QuickExchangeContainer: React.FC = () => {
     setToAmount('');
     setRequestCurrency(fromCurrency);
     setRequestVolume(value);
+    setPercentValue(undefined);
   };
 
   const handleChangeTo = (value: string) => {
@@ -172,6 +176,8 @@ export const QuickExchangeContainer: React.FC = () => {
       const m = createMoney(balance.toString(), balance.currency);
       handleChangeFrom(m.multiply(value).divide(100).toFormat());
     }
+
+    setPercentValue(value);
   };
 
   const handleRearrange = () => {
@@ -278,17 +284,13 @@ export const QuickExchangeContainer: React.FC = () => {
                 />
               </Box>
               <Box row>
-                {PERCENTS.map((v) => (
-                  <Button
-                    key={v}
-                    variant="secondary"
-                    disabled={disablePercents}
-                    className={s.quickExchangeAll}
-                    onClick={() => handleUsePercent(v)}
-                  >
-                    {v}%
-                  </Button>
-                ))}
+                <PercentageSelect
+                  value={percentValue}
+                  percents={PERCENTS}
+                  mobile={isMobileDevice}
+                  onChange={handleUsePercent}
+                  disabled={disablePercents}
+                />
               </Box>
             </Box>
             <Box row justify="between">
