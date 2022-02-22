@@ -5,7 +5,7 @@ import { RenderLinkComponent, RenderNavLinkComponent } from 'web/src/components/
 import { Box } from 'web/src/components/ui/Box';
 import { Sprinkles } from 'web/src/theme/sprinkles.css';
 import { HeaderContext } from 'web/src/components/shared/Header/HeaderContext';
-import { Portal } from 'web/src/components/shared/Header/Portal';
+import { Portal } from 'web/src/components/ui/Portal';
 import { OptionalWithUndefined } from 'web/src/types';
 import { DropdownMenu } from './DropdownMenu';
 
