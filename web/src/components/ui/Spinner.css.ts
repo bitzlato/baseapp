@@ -10,7 +10,6 @@ export const loader = style({
   borderRadius: '50%',
   width: 32,
   height: 32,
-  margin: '60px auto',
   fontSize: 10,
   position: 'relative',
   textIndent: '-9999em',
