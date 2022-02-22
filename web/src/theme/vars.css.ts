@@ -67,6 +67,9 @@ export const [themeLight, vars] = createTheme({
     footerSocialIcon: colors.indigo,
     footerSocialIconHover: colors.spindle,
 
+    statBg: colors.whiteLilac,
+    statIcon: colors.indigo30,
+
     modal: colors.white,
     modalHeaderBorderBottom: colors.mako10,
 
@@ -136,6 +139,9 @@ export const themeDark = createTheme(vars, {
     footerLinkColorHover: colors.goldTips,
     footerSocialIcon: colors.doveGray,
     footerSocialIconHover: colors.silverChalice,
+
+    statBg: colors.mako,
+    statIcon: colors.white30,
 
     modal: colors.charade,
     modalHeaderBorderBottom: colors.white10,
