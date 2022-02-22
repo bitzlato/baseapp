@@ -17,7 +17,7 @@ const sizes = {
   '7x': 28 as const,
   '8x': 32 as const,
   '9x': 36 as const,
-  // '10x': 40 as const,
+  '10x': 40 as const,
   // '11x': 44 as const,
   // '12x': 48 as const,
   '13x': 52 as const,
@@ -162,15 +162,14 @@ const unresponsiveProperties = defineProperties({
     right: [0],
     bottom: [0],
     left: [0],
-    zIndex: {
-      '1': 99991,
-    },
     overflowY: ['auto'],
+    overflow: ['hidden'],
 
     // other
     cursor: ['default', 'pointer', 'not-allowed'],
     boxShadow: {
       dropdown: vars.boxShadows.dropdown,
+      modal: vars.boxShadows.modal,
     },
   },
 });

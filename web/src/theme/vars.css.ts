@@ -1,9 +1,14 @@
-import { createTheme } from '@vanilla-extract/css';
+import { createGlobalTheme, createTheme } from '@vanilla-extract/css';
 import * as colors from './colors';
+
+export const zIndexVars = createGlobalTheme(':root', {
+  modal: '10001',
+});
 
 export const [themeLight, vars] = createTheme({
   boxShadows: {
     dropdown: `8px 8px 10px ${colors.black10}`,
+    modal: `8px 4px 14px ${colors.black10}`,
     btnPrimaryFocus: `0 7px 11px ${colors.mystic90}`,
     btnSecondaryFocus: `0 7px 11px ${colors.shark19}`,
   },
@@ -51,7 +56,7 @@ export const [themeLight, vars] = createTheme({
     themeSwitcherMoon: colors.luckyPoint,
     spinner01: colors.black20,
     spinner02: colors.black,
-    backdrop: colors.black10,
+    backdrop: colors.black30,
 
     footerBg: colors.luckyPoint,
     footerTitle: colors.spindle,
@@ -61,12 +66,16 @@ export const [themeLight, vars] = createTheme({
     footerLinkColorHover: colors.goldTips,
     footerSocialIcon: colors.indigo,
     footerSocialIconHover: colors.spindle,
+
+    modal: colors.white,
+    modalHeaderBorderBottom: colors.mako10,
   },
 });
 
 export const themeDark = createTheme(vars, {
   boxShadows: {
     dropdown: `8px 8px 10px ${colors.black10}`,
+    modal: `8px 4px 14px ${colors.black10}`,
     btnPrimaryFocus: `0 7px 11px ${colors.mystic15}`,
     btnSecondaryFocus: `0 7px 11px ${colors.mystic15}`,
   },
@@ -114,7 +123,7 @@ export const themeDark = createTheme(vars, {
     themeSwitcherMoon: colors.abbey,
     spinner01: colors.white20,
     spinner02: colors.white,
-    backdrop: colors.black10,
+    backdrop: colors.black30,
 
     footerBg: colors.ebonyClay,
     footerTitle: colors.silverChalice,
@@ -124,5 +133,8 @@ export const themeDark = createTheme(vars, {
     footerLinkColorHover: colors.goldTips,
     footerSocialIcon: colors.doveGray,
     footerSocialIconHover: colors.silverChalice,
+
+    modal: colors.charade,
+    modalHeaderBorderBottom: colors.white10,
   },
 });
