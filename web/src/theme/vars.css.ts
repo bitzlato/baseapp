@@ -69,6 +69,9 @@ export const [themeLight, vars] = createTheme({
 
     modal: colors.white,
     modalHeaderBorderBottom: colors.mako10,
+
+    skeleton: colors.black10,
+    skeletonHighlighted: colors.silver,
   },
 });
 
@@ -136,5 +139,8 @@ export const themeDark = createTheme(vars, {
 
     modal: colors.charade,
     modalHeaderBorderBottom: colors.white10,
+
+    skeleton: colors.black10,
+    skeletonHighlighted: colors.white30,
   },
 });
