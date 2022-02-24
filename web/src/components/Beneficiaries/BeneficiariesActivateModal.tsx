@@ -15,6 +15,7 @@ import {
 } from '../../modules';
 import { Box } from '../Box/Box';
 import { TextInput } from '../Input/TextInput';
+import { isValidCode, PIN_TIMEOUT } from 'web/src/helpers/codeValidation';
 
 interface Props {
   beneficiariesAddData: Beneficiary;
@@ -54,19 +55,18 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
 
   const handleSubmitConfirmationModal = React.useCallback(() => {
     if (beneficiariesAddData) {
+      start(PIN_TIMEOUT);
       dispatch(
         beneficiariesActivate({
           pin: confirmationModalCode,
           id: beneficiariesAddData.id,
         }),
       );
-
-      start(30);
     }
   }, [confirmationModalCode, dispatch, beneficiariesAddData, handleClearModalsInputs]);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && confirmationModalCode && countdown < 1) {
+    if (event.key === 'Enter' && isValidCode(confirmationModalCode) && countdown < 1) {
       event.preventDefault();
       handleSubmitConfirmationModal();
     }
@@ -83,7 +83,7 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
   }, [beneficiariesAddData, dispatch]);
 
   const renderConfirmationModalBody = React.useCallback(() => {
-    const isDisabled = !confirmationModalCode || countdown > 0;
+    const isDisabled = !isValidCode(confirmationModalCode) || countdown > 0;
 
     return (
       <div className="cr-email-form__form-content">

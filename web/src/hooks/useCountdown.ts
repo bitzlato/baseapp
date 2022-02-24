@@ -4,7 +4,7 @@ export function useCountdown() {
   const intervalRef = useRef<number>();
   const [countdown, setCountdown] = useState(0);
 
-  const isEnd = countdown < 1;
+  const isEnd = countdown === 0;
 
   useEffect(() => {
     return () => {
@@ -24,7 +24,7 @@ export function useCountdown() {
     setCountdown(sec);
     window.clearInterval(intervalRef.current);
     intervalRef.current = window.setInterval(() => {
-      setCountdown((d) => d - 1);
+      setCountdown((d) => Math.max(d - 1, 0));
     }, 1000);
   };
 

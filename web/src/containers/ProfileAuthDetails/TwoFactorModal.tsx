@@ -6,6 +6,7 @@ import { useT } from 'web/src/hooks/useT';
 import { Modal2 } from 'web/src/components/Modal/Modal2';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
 import { useCountdown } from 'web/src/hooks/useCountdown';
+import { isValidCode, OTP_TIMEOUT } from 'web/src/helpers/codeValidation';
 
 interface Props {
   onClose: () => void;
@@ -17,12 +18,12 @@ export const TwoFactorModal2: FC<Props> = ({ onClose, onSend }) => {
   const t = useT();
   const { start, countdown } = useCountdown();
 
-  const disabled = !code.match('^[0-9]{6}$') || countdown > 0;
+  const disabled = !isValidCode(code) || countdown > 0;
 
   const handleSend = () => {
     if (!disabled) {
+      start(OTP_TIMEOUT);
       onSend(code);
-      start(5);
     }
   };
 
