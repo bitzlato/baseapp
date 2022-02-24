@@ -1,4 +1,3 @@
-import { Currency, Money } from '@bitzlato/money-js';
 import { WalletItemData } from 'src/components/WalletItem/WalletItem';
 import { createCcy, createMoney, PENCE_CCY } from 'src/helpers/money';
 import { GeneralBalance } from 'src/modules/account/types';
@@ -14,17 +13,18 @@ export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletIt
     const currencyId = getCurrencySymbol(ccy);
     const balance = balances.find((d) => currencyId === d.currency_id);
     const balanceP2P = balance?.p2p_balance ? createMoney(balance.p2p_balance, ccy) : undefined;
-    const balanceMarket = balance?.market_balance
-      ? createMoney(balance.market_balance, ccy)
-      : wallet.balance;
+    const balanceMarket = wallet.balance;
     const balanceTotal = balanceMarket.add(balanceP2P ?? createMoney(0, ccy));
+    const locked = wallet.locked.add(
+      balance?.p2p_hold ? createMoney(balance.p2p_hold, ccy) : createMoney(0, ccy),
+    );
     res.push({
       name: wallet.name,
       currency: ccy.code,
       balanceTotal,
       balanceP2P,
       balanceMarket,
-      locked: balance ? getLocked(ccy, balance) : wallet.locked,
+      locked,
       approximate: createMoney(wallet.price, PENCE_CCY).multiply(balanceTotal.toString()),
       hasTransfer: balance !== undefined && balance.p2p_balance !== null,
       index: i,
@@ -59,26 +59,4 @@ export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletIt
     }
     return a.index - b.index;
   });
-}
-
-function getBalance(ccy: Currency, balance: GeneralBalance): Money {
-  let m = createMoney(0, ccy);
-  if (balance.market_balance !== null) {
-    m = m.add(createMoney(balance.market_balance, ccy));
-  }
-  if (balance.p2p_balance !== null) {
-    m = m.add(createMoney(balance.p2p_balance, ccy));
-  }
-  return m;
-}
-
-function getLocked(ccy: Currency, balance: GeneralBalance): Money {
-  let m = createMoney(0, ccy);
-  if (balance.market_hold !== null) {
-    m = m.add(createMoney(balance.market_hold, ccy));
-  }
-  if (balance.p2p_hold !== null) {
-    m = m.add(createMoney(balance.p2p_hold, ccy));
-  }
-  return m;
 }
