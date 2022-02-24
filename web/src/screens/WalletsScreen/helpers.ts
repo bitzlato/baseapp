@@ -13,15 +13,17 @@ export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletIt
     const ccy = wallet.currency;
     const currencyId = getCurrencySymbol(ccy);
     const balance = balances.find((d) => currencyId === d.currency_id);
-    const balanceTotal = balance ? getBalance(ccy, balance) : wallet.balance;
+    const balanceP2P = balance?.p2p_balance ? createMoney(balance.p2p_balance, ccy) : undefined;
+    const balanceMarket = balance?.market_balance
+      ? createMoney(balance.market_balance, ccy)
+      : wallet.balance;
+    const balanceTotal = balanceMarket.add(balanceP2P ?? createMoney(0, ccy));
     res.push({
       name: wallet.name,
       currency: ccy.code,
       balanceTotal,
-      balanceP2P: balance?.p2p_balance ? createMoney(balance.p2p_balance, ccy) : undefined,
-      balanceMarket: balance?.market_balance
-        ? createMoney(balance.market_balance, ccy)
-        : wallet.balance,
+      balanceP2P,
+      balanceMarket,
       locked: balance ? getLocked(ccy, balance) : wallet.locked,
       approximate: createMoney(wallet.price, PENCE_CCY).multiply(balanceTotal.toString()),
       hasTransfer: balance !== undefined && balance.p2p_balance !== null,
