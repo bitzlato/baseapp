@@ -241,7 +241,7 @@ export const ru: LangType = {
   'page.body.wallets.tabs.withdraw.content.limit24h': 'Лимит на вывод за 24ч',
   'page.body.wallets.tabs.withdraw.content.limit1month': 'Лимит на вывод за 1 месяц',
   'page.body.wallets.tabs.withdraw.content.unlimited': 'Неограниченный',
-  'page.body.wallets.tabs.withdraw.content.button': 'ВЫВЕСТИ',
+  'page.body.wallets.tabs.withdraw.content.button': 'Вывести',
 
   'page.body.wallets.tabs.withdraw.disabled.message': 'Вывод средств был отключен администрацией',
   'page.body.wallets.warning.withdraw.verification':
