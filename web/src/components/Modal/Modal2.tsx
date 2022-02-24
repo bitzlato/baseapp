@@ -12,10 +12,15 @@ import { MobileModal } from 'web/src/mobile/components/Modal';
 interface Props {
   header: string;
   onClose?: () => void;
+  show?: boolean | undefined;
 }
 
 export const Modal2: FC<Props> = (props) => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
+
+  if (!props.show) {
+    return null;
+  }
 
   if (isMobileDevice) {
     return (

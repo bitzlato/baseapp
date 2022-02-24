@@ -2,12 +2,12 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMobileDeviceState } from 'src/modules';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
-import { ModalWithdrawConfirmation, ModalWithdrawSubmit } from 'src/containers';
+import { ModalWithdrawSubmit } from 'src/containers';
 import { useBeneficiariesFetch } from 'src/hooks';
 import { Beneficiary } from 'src/modules/user/beneficiaries';
 import { selectWithdrawSuccess, Wallet, walletsWithdrawCcyFetch } from 'src/modules/user/wallets';
-import { ModalWithdrawConfirmationMobile } from 'src/mobile/components';
 import { WithdrawBody } from './WithdrawBody';
+import { ModalWithdrawConfirmation } from './ModalWithdrawConfirmation';
 
 interface Props {
   wallet: Wallet;
@@ -90,29 +90,15 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
           onSubmit={toggleSubmitModal}
         />
       </div>
-      {isMobileDevice ? (
-        <div className="cr-mobile-wallet-withdraw-body__confirmation">
-          <ModalWithdrawConfirmationMobile
-            show={withdrawData.withdrawConfirmModal}
-            amount={withdrawData.total}
-            currency={currency.code}
-            precision={wallet.precision}
-            rid={getConfirmationAddress()}
-            onSubmit={handleWithdraw}
-            onDismiss={toggleConfirmModal}
-          />
-        </div>
-      ) : (
-        <ModalWithdrawConfirmation
-          show={withdrawData.withdrawConfirmModal}
-          amount={withdrawData.total}
-          currency={currency.code}
-          precision={wallet.precision}
-          rid={getConfirmationAddress()}
-          onSubmit={handleWithdraw}
-          onDismiss={toggleConfirmModal}
-        />
-      )}
+      <ModalWithdrawConfirmation
+        show={withdrawData.withdrawConfirmModal}
+        amount={withdrawData.total}
+        currency={currency.code}
+        precision={wallet.precision}
+        rid={getConfirmationAddress()}
+        onSubmit={handleWithdraw}
+        onDismiss={toggleConfirmModal}
+      />
     </div>
   );
 };

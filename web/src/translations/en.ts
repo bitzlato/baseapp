@@ -234,7 +234,7 @@ export const en = {
   'page.body.wallets.tabs.withdraw.content.limit24h': 'Withdrawal Limit 24h',
   'page.body.wallets.tabs.withdraw.content.limit1month': 'Withdrawal Limit for 1 month',
   'page.body.wallets.tabs.withdraw.content.unlimited': 'Unlimited',
-  'page.body.wallets.tabs.withdraw.content.button': 'WITHDRAW',
+  'page.body.wallets.tabs.withdraw.content.button': 'Withdraw',
   'page.body.wallets.tabs.withdraw.disabled.message': 'Withdraw was disabled by administration',
   'page.body.wallets.warning.withdraw.verification':
     'Withdraws are allowed after passing KYC verification',
