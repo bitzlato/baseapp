@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { translateTransformTags, useBetterT } from '../../hooks/useT';
+import { useSelector } from 'react-redux';
+import { selectUserInfo, selectUserLoggedIn } from '../../modules';
 
 type Props = {
   deeplink: DeepLinkInfoType;
@@ -43,8 +45,8 @@ export const deeplinkTitle = (deeplink: DeepLinkInfoType): string => {
 
 export const DeepLinkInfo: FC<Props> = ({ deeplink, exposeAction }) => {
   const t = useBetterT();
-  // todo: read profile status
-  const isAuthorized = false;
+  const isAuthorized = useSelector(selectUserLoggedIn);
+  const user = useSelector(selectUserInfo);
 
   if (!deeplink) {
     return null;
@@ -52,6 +54,7 @@ export const DeepLinkInfo: FC<Props> = ({ deeplink, exposeAction }) => {
 
   let content = null;
 
+  // voucher
   const renderAsVoucher = () => {
     const payload = deeplink.payload as any;
     const details = {
@@ -61,19 +64,15 @@ export const DeepLinkInfo: FC<Props> = ({ deeplink, exposeAction }) => {
       userLink: '/en/p2p/users/' + payload.user.nickname,
     };
 
-    const info = [
-      t(
-        'deeplink.voucher.info',
-        details,
-        translateTransformTags,
-      ),
-    ];
+    const info = [t('deeplink.voucher.info', details, translateTransformTags)];
 
     if (deeplink.active) {
       if (isAuthorized) {
-        info.push(t('deeplink.profile.current_account', {
-          userName: 'todo-er'
-        }));
+        info.push(
+          t('deeplink.profile.current_account', {
+            userName: user.username || user.email,
+          }),
+        );
         info.push(t('deeplink.voucher.take_action'));
         exposeAction(DeeplinkActionType.AcceptOrCancel);
       } else {
@@ -92,16 +91,29 @@ export const DeepLinkInfo: FC<Props> = ({ deeplink, exposeAction }) => {
     return info.map((v) => <p>{v}</p>);
   };
 
+  // advertisement
+  const renderAsAd = () => {
+    exposeAction(DeeplinkActionType.Dismiss);
+
+    return <></>;
+  };
+
   switch (deeplink.type) {
     case DeeplinkTypes.Voucher:
       content = renderAsVoucher();
+      break;
+    case DeeplinkTypes.Ad:
+      content = renderAsAd();
       break;
   }
 
   return (
     <div>
       {content}
-      <pre>{JSON.stringify(deeplink, null, '  ')}</pre>
+      <pre>
+        Raw data:
+        {JSON.stringify(deeplink, null, '  ')}
+      </pre>
     </div>
   );
 };

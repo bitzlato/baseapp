@@ -6,7 +6,7 @@ export * from './CodeVerification';
 export * from './CombinedOrderBook';
 export * from './CopyableTextField';
 export * from './CustomInput';
-export * from './DeepLinkInfo';
+export * from './DeepLinkInfo/DeepLinkInfo';
 export * from './DepositCrypto/DepositCrypto';
 export * from './DepositFiat';
 export * from './Documentation';

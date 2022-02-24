@@ -11,7 +11,7 @@ export const deeplinkTexts = {
 
   'deeplink.voucher.title': 'Voucher',
   'deeplink.voucher.info':
-    'It is a one-time voucher of cost {totalFiat} ({totalCrypto}) issued by [a href="{userLink}"]{user}[/a]',
+    'It is a one-time voucher of cost {totalFiat} ({totalCrypto}) issued by {user}',
   'deeplink.voucher.take_action': 'Press „Accept” to redeem.',
 
   'deeplink.profile.current_account': `You're signed as {userName}`,
