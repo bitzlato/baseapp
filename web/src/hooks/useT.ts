@@ -30,6 +30,6 @@ export const useBetterT = (): TranslateWithCallbackFn => {
 
 export const translateTransformTags: TranslatePostProcessFn = (message, values) => {
   // todo: extract every [component params]content[/component] and split string into span-s + components
-  console.log(message, values)
+  console.log(message, values);
   return message;
-}
+};

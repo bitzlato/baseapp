@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { translateTransformTags, useBetterT } from '../../hooks/useT';
 import { useSelector } from 'react-redux';
+import { translateTransformTags, useBetterT } from '../../hooks/useT';
 import { selectUserInfo, selectUserLoggedIn } from '../../modules';
 
 type Props = {
@@ -58,10 +58,10 @@ export const DeepLinkInfo: FC<Props> = ({ deeplink, exposeAction }) => {
   const renderAsVoucher = () => {
     const payload = deeplink.payload as any;
     const details = {
-      totalFiat: 'xxx ' + payload.currency,
-      totalCrypto: payload.amount + ' ' + payload.cc_code,
+      totalFiat: `xxx ${payload.currency}`,
+      totalCrypto: `${payload.amount} ${payload.cc_code}`,
       user: payload.user.nickname,
-      userLink: '/en/p2p/users/' + payload.user.nickname,
+      userLink: `/en/p2p/users/${payload.user.nickname}`,
     };
 
     const info = [t('deeplink.voucher.info', details, translateTransformTags)];
@@ -95,7 +95,7 @@ export const DeepLinkInfo: FC<Props> = ({ deeplink, exposeAction }) => {
   const renderAsAd = () => {
     exposeAction(DeeplinkActionType.Dismiss);
 
-    return <></>;
+    return null;
   };
 
   switch (deeplink.type) {
@@ -104,6 +104,8 @@ export const DeepLinkInfo: FC<Props> = ({ deeplink, exposeAction }) => {
       break;
     case DeeplinkTypes.Ad:
       content = renderAsAd();
+      break;
+    default:
       break;
   }
 

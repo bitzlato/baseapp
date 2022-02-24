@@ -1,7 +1,7 @@
 import { en as customTranslations } from '../custom/translations/en';
 import { en as mobileTranslations } from '../mobile/translations/en';
 import { nationalitiesNames } from './nationalities';
-import { deeplinkTexts } from "./deeplinks.en";
+import { deeplinkTexts } from './deeplinks.en';
 
 export const en = {
   'page.header.navbar.signIn': 'Sign In',

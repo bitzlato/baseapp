@@ -1,4 +1,4 @@
-import { deeplinkTexts as base } from './../../../src/translations/deeplinks.en';
+import { deeplinkTexts as base } from '../../translations/deeplinks.en';
 
 export const deeplinkTexts = {
   ...base,

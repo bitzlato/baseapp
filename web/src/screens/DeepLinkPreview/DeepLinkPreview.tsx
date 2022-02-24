@@ -78,7 +78,11 @@ export const DeepLinkPreview: FC = () => {
         );
       case DeeplinkActionType.AcceptOrCancel:
         return (
-          <Box display="flex" justifyContent="space-between" flexDirection={{mobile: 'column', tablet: 'row'}}>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            flexDirection={{ mobile: 'column', tablet: 'row' }}
+          >
             <Button color="primary" variant="outlined" onClick={onDiscard}>
               {t('common.action.discard')}
             </Button>
@@ -102,9 +106,7 @@ export const DeepLinkPreview: FC = () => {
   return (
     <Container maxWidth="md" my="4">
       <Card header={<h4>{t(isLoading ? 'common.loading' : deeplinkTitle(deeplink))}</h4>}>
-        <Box as="p">
-          {renderBody()}
-        </Box>
+        <Box as="p">{renderBody()}</Box>
         {renderActions()}
       </Card>
     </Container>
