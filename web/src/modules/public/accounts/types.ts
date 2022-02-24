@@ -9,7 +9,7 @@ export interface AccountBalanceSource {
 }
 
 export interface DepositAddress {
-  address: string;
+  address: string | null;
   currencies: string[];
   state: string;
 }

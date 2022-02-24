@@ -25,6 +25,7 @@ import {
   Wallet,
 } from '../../modules';
 import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { useFetch } from 'web/src/hooks/useFetch';
 
 interface Props {
   wallet: Wallet;
@@ -39,6 +40,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
   const memberLevels = useSelector(selectMemberLevels);
 
   const [blockchain, setBlockchain] = useState<Blockchain | null>(null);
+  const [retries, setRetries] = useState(0);
 
   const { data = [] } = useFetchCache<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
@@ -50,10 +52,19 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
     setBlockchain(blockchains.length === 1 ? blockchains[0]! : null);
   }, [blockchains.length, wallet.currency.code]);
 
-  const { data: depositAddress } = useFetchCache<DepositAddress>(
+  const { data: depositAddress } = useFetch<DepositAddress>(
     `${tradeUrl()}/account/deposit_address/${blockchain?.id ?? ''}`,
     { skipRequest: blockchain === null },
+    [retries],
   );
+
+  const isNoAddress = depositAddress?.address === null;
+
+  useEffect(() => {
+    if (isNoAddress) {
+      window.setTimeout(() => setRetries((d) => d + 1), 2000);
+    }
+  }, [isNoAddress]);
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
     (d) => d.blockchain_id === blockchain?.id,
@@ -103,7 +114,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
           formatOptionLabel={renderSelectItem}
           getOptionValue={(d) => d.key}
         />
-        {blockchain && depositAddress && blockchainCurrency && (
+        {blockchain && depositAddress?.address && blockchainCurrency && (
           <>
             <Box row>
               <div className="cr-deposit-info">
