@@ -1,10 +1,10 @@
 import { FC, useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router';
-import { Button } from 'src/components/Button/Button';
+import { Button } from 'web/src/components/ui/Button';
 import { Box } from 'src/components/Box';
 import { createMoney } from 'src/helpers/money';
 import { NumberInput } from 'src/components/Input/NumberInput';
-import { parseInteger, parseNumeric } from 'src/helpers/parseNumeric';
+import { parseNumeric } from 'src/helpers/parseNumeric';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 import { useT } from 'src/hooks/useT';
 import { useSelector } from 'react-redux';
@@ -22,6 +22,9 @@ import {
 } from '../../modules';
 import { precisionRegExp } from '../../helpers';
 import { Beneficiaries, Blur } from '../../components';
+import { useCountdown } from 'web/src/hooks/useCountdown';
+import { isValidCode, OTP_TIMEOUT } from 'web/src/helpers/codeValidation';
+import { formatSeconds } from 'web/src/helpers/formatSeconds';
 
 interface Props {
   onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
@@ -39,6 +42,8 @@ export const WithdrawBody: FC<Props> = (props) => {
   const user = useSelector(selectUserInfo);
   const history = useHistory();
   const memberLevels = useSelector(selectMemberLevels);
+
+  const { countdown, start } = useCountdown();
 
   const twoFactorAuthRequired = user.level > 1 || (user.level === 1 && user.otp);
 
@@ -78,20 +83,21 @@ export const WithdrawBody: FC<Props> = (props) => {
 
   const isButtonDisabled = () => {
     const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
-    return Number(total) <= 0 || !beneficiary.id || isPending || !otpCode;
+    return (
+      Number(total) <= 0 || !beneficiary.id || isPending || !isValidCode(otpCode) || countdown > 0
+    );
   };
 
-  const handleClick = () => props.onClick(amount, total, beneficiary, otpCode);
+  const handleClick = () => {
+    start(OTP_TIMEOUT);
+    props.onClick(amount, total, beneficiary, otpCode);
+  };
 
   const handleChangeInputAmount = (value: string) => {
     const amount = parseNumeric(value);
     if (amount.match(precisionRegExp(wallet.precision))) {
       setAmount(amount);
     }
-  };
-
-  const handleChangeOtpCode = (otpCode: string) => {
-    setOtpCode(parseInteger(otpCode));
   };
 
   const renderBlur = () => {
@@ -152,7 +158,7 @@ export const WithdrawBody: FC<Props> = (props) => {
               flex1
               as={NumberInput}
               value={otpCode}
-              onChange={handleChangeOtpCode}
+              onChange={setOtpCode}
               label={t('page.body.wallets.tabs.withdraw.content.code2fa')}
             />
           )}
@@ -160,8 +166,10 @@ export const WithdrawBody: FC<Props> = (props) => {
         <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2">
           <WithdrawSummary total={total} wallet={wallet} blockchainCurrency={blockchainCurrency} />
           <Box flex1 self="end" row justify="end">
-            <Button variant="primary" onClick={handleClick} disabled={isButtonDisabled()}>
-              {t('page.body.wallets.tabs.withdraw.content.button')}
+            <Button color="primary" onClick={handleClick} disabled={isButtonDisabled()}>
+              {countdown > 0
+                ? formatSeconds(countdown)
+                : t('page.body.wallets.tabs.withdraw.content.button')}
             </Button>
           </Box>
         </Box>

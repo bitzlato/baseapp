@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { isValidCode, OTP_TIMEOUT } from 'web/src/helpers/codeValidation';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
 import { useCountdown } from 'web/src/hooks/useCountdown';
 import { useDocumentTitle } from 'web/src/hooks/useDocumentTitle';
@@ -56,12 +57,12 @@ export const ProfileTwoFactorAuthScreen: FC = () => {
     );
   };
 
-  const disabled = user.otp || !code || countdown > 0;
+  const disabled = user.otp || !isValidCode(code) || countdown > 0;
 
   const handleEnable2fa = () => {
     if (!disabled) {
+      start(OTP_TIMEOUT);
       dispatch(toggle2faFetch({ code: code, enable: true }));
-      start(5);
     }
   };
 
