@@ -10,7 +10,6 @@ export * from './LegalDocuments';
 export * from './MarketDepth';
 export * from './Markets';
 export * from './MarketsTable';
-export * from './ModalWithdrawSubmit';
 export * from './NavBar';
 export * from './OpenOrders';
 export * from './Order';
