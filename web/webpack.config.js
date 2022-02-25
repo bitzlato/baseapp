@@ -300,6 +300,13 @@ module.exports = {
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
               },
+              '/api/p2p': process.env.P2P_HOST
+                ? {
+                    target: `https://${process.env.P2P_HOST}`,
+                    changeOrigin: true,
+                    cookieDomainRewrite: 'localhost',
+                  }
+                : undefined,
               '/api': {
                 target: `https://${process.env.PROXY_HOST}`,
                 changeOrigin: true,
