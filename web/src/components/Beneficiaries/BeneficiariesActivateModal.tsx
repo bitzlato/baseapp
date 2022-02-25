@@ -23,7 +23,7 @@ interface Props {
 }
 
 const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
-  const [confirmationModalCode, setConfirmationModalCode] = React.useState('');
+  const [code, setCode] = React.useState('');
 
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -35,11 +35,11 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
   const { handleToggleConfirmationModal, beneficiariesAddData } = props;
 
   const handleChangeFieldValue = React.useCallback((value: string) => {
-    setConfirmationModalCode(value);
+    setCode(value);
   }, []);
 
   const handleClearModalsInputs = React.useCallback(() => {
-    setConfirmationModalCode('');
+    setCode('');
   }, []);
 
   const handleClickToggleConfirmationModal = React.useCallback(
@@ -58,15 +58,16 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
       start(PIN_TIMEOUT);
       dispatch(
         beneficiariesActivate({
-          pin: confirmationModalCode,
+          pin: code,
           id: beneficiariesAddData.id,
         }),
       );
+      setCode('');
     }
-  }, [confirmationModalCode, dispatch, beneficiariesAddData, handleClearModalsInputs]);
+  }, [code, dispatch, beneficiariesAddData, handleClearModalsInputs]);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && isValidCode(confirmationModalCode) && countdown < 1) {
+    if (event.key === 'Enter' && isValidCode(code) && countdown < 1) {
       event.preventDefault();
       handleSubmitConfirmationModal();
     }
@@ -83,7 +84,7 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
   }, [beneficiariesAddData, dispatch]);
 
   const renderConfirmationModalBody = React.useCallback(() => {
-    const isDisabled = !isValidCode(confirmationModalCode) || countdown > 0;
+    const isDisabled = !isValidCode(code) || countdown > 0;
 
     return (
       <div className="cr-email-form__form-content">
@@ -99,7 +100,7 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
               id: 'page.body.wallets.beneficiaries.confirmationModal.body.confirmationModalCode',
             })}
             labelVisible
-            value={confirmationModalCode}
+            value={code}
             onChange={handleChangeFieldValue}
             onKeyPress={handleKeyPress}
             autoFocus
@@ -126,13 +127,7 @@ const BeneficiariesActivateModalComponent: React.FC<Props> = (props: Props) => {
         </Box>
       </div>
     );
-  }, [
-    confirmationModalCode,
-    countdown,
-    formatMessage,
-    handleResendConfirmationCode,
-    handleSubmitConfirmationModal,
-  ]);
+  }, [code, countdown, formatMessage, handleResendConfirmationCode, handleSubmitConfirmationModal]);
 
   const renderConfirmationModalHeader = React.useCallback(() => {
     return (

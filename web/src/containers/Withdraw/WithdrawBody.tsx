@@ -91,6 +91,7 @@ export const WithdrawBody: FC<Props> = (props) => {
   const handleClick = () => {
     start(OTP_TIMEOUT);
     props.onClick(amount, total, beneficiary, otpCode);
+    setOtpCode('');
   };
 
   const handleChangeInputAmount = (value: string) => {

@@ -62,7 +62,8 @@ export const ProfileTwoFactorAuthScreen: FC = () => {
   const handleEnable2fa = () => {
     if (!disabled) {
       start(OTP_TIMEOUT);
-      dispatch(toggle2faFetch({ code: code, enable: true }));
+      dispatch(toggle2faFetch({ code, enable: true }));
+      setCode('');
     }
   };
 

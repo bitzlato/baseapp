@@ -25,6 +25,7 @@ export const TwoFactorModal: FC<Props> = ({ onClose, onSend, buttonText }) => {
     if (!disabled) {
       start(OTP_TIMEOUT);
       onSend(code);
+      setCode('');
     }
   };
 
