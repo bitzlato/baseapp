@@ -28,7 +28,7 @@ export function* apiKeyUpdateSaga(action: ApiKeyUpdateFetch) {
     );
     yield put(apiKeyUpdate(updatedApiKey));
     yield put(alertPush({ message: ['success.api_keys.updated'], type: 'success' }));
-    yield put(apiKeys2FAModal({ active: false }));
+    yield put(apiKeys2FAModal({ action: undefined }));
   } catch (error) {
     yield put(
       sendError({

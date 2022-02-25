@@ -16,9 +16,8 @@ import {
 } from './constants';
 
 export interface ApiKeyStateModal {
-  active: boolean;
-  action?: 'getKeys' | 'createKey' | 'createSuccess' | 'updateKey' | 'deleteKey';
-  apiKey?: ApiKeyDataInterface;
+  action?: 'createKey' | 'createSuccess' | 'updateKey' | 'deleteKey' | undefined;
+  apiKey?: ApiKeyDataInterface | undefined;
 }
 
 export interface ApiKeysState {
@@ -33,9 +32,7 @@ export interface ApiKeysState {
 export const initialApiKeysState: ApiKeysState = {
   apiKeys: [],
   dataLoaded: false,
-  modal: {
-    active: false,
-  },
+  modal: {},
   pageIndex: 0,
   nextPageExists: false,
 };

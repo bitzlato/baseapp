@@ -96,11 +96,11 @@ export const ProfileApiKeys: React.FC = () => {
   };
 
   const handlCloseModal = () => {
-    dispatch(apiKeys2FAModal({ active: false }));
+    dispatch(apiKeys2FAModal({ action: undefined }));
   };
 
   const handleCreateKeyClick = () => {
-    dispatch(apiKeys2FAModal({ active: true, action: 'createKey' }));
+    dispatch(apiKeys2FAModal({ action: 'createKey' }));
   };
 
   const handleCreateKey = (totp_code: string) => {
@@ -108,7 +108,7 @@ export const ProfileApiKeys: React.FC = () => {
   };
 
   const handleToggleStateKeyClick = (apiKey: ApiKeyDataInterface) => () => {
-    dispatch(apiKeys2FAModal({ active: true, action: 'updateKey', apiKey }));
+    dispatch(apiKeys2FAModal({ action: 'updateKey', apiKey }));
   };
 
   const handleUpdateKey = (totp_code: string) => {
@@ -121,7 +121,7 @@ export const ProfileApiKeys: React.FC = () => {
   };
 
   const handleDeleteKeyClick = (apiKey: ApiKeyDataInterface) => {
-    dispatch(apiKeys2FAModal({ active: true, action: 'deleteKey', apiKey }));
+    dispatch(apiKeys2FAModal({ action: 'deleteKey', apiKey }));
   };
 
   const handleDeleteKey = (totp_code: string) => {
