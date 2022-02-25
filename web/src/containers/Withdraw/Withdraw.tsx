@@ -2,12 +2,17 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMobileDeviceState } from 'src/modules';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
-import { ModalWithdrawSubmit } from 'src/containers';
 import { useBeneficiariesFetch } from 'src/hooks';
 import { Beneficiary } from 'src/modules/user/beneficiaries';
 import { selectWithdrawSuccess, Wallet, walletsWithdrawCcyFetch } from 'src/modules/user/wallets';
 import { WithdrawBody } from './WithdrawBody';
 import { ModalWithdrawConfirmation } from './ModalWithdrawConfirmation';
+import { useCountdown } from 'web/src/hooks/useCountdown';
+import { OTP_TIMEOUT } from 'web/src/helpers/codeValidation';
+import { Modal2 } from 'web/src/components/Modal/Modal2';
+import { Button } from 'web/src/components/ui/Button';
+import { useT } from 'web/src/hooks/useT';
+import { Box } from 'web/src/components/Box/Box';
 
 interface Props {
   wallet: Wallet;
@@ -27,6 +32,10 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
   const dispatch = useDispatch();
   const withdrawSuccess = useSelector(selectWithdrawSuccess);
   const isMobileDevice = useSelector(selectMobileDeviceState);
+
+  const t = useT();
+
+  const { countdown, start } = useCountdown();
 
   const { currency } = wallet;
 
@@ -73,6 +82,7 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
     };
     dispatch(walletsWithdrawCcyFetch(withdrawRequest));
     toggleConfirmModal();
+    start(OTP_TIMEOUT);
   };
 
   return (
@@ -81,15 +91,18 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
         onClick={toggleConfirmModal}
         withdrawDone={withdrawData.withdrawDone}
         wallet={wallet}
+        countdown={countdown}
       />
-      <div className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body__submit' : undefined}>
-        <ModalWithdrawSubmit
-          isMobileDevice={isMobileDevice}
-          show={withdrawSubmitModal}
-          currency={currency.code}
-          onSubmit={toggleSubmitModal}
-        />
-      </div>
+      {withdrawSubmitModal ? (
+        <Modal2 show header={t('page.modal.withdraw.success')} onClose={toggleSubmitModal}>
+          <Box as="span" textAlign="center">
+            {t('page.modal.withdraw.success.message.content')}
+          </Box>
+          <Button onClick={toggleSubmitModal} color="primary">
+            {t('page.modal.withdraw.success.button')}
+          </Button>
+        </Modal2>
+      ) : null}
       {withdrawData.withdrawConfirmModal ? (
         <ModalWithdrawConfirmation
           show={withdrawData.withdrawConfirmModal}

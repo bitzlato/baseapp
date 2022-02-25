@@ -22,14 +22,14 @@ import {
 } from '../../modules';
 import { precisionRegExp } from '../../helpers';
 import { Beneficiaries, Blur } from '../../components';
-import { useCountdown } from 'web/src/hooks/useCountdown';
-import { isValidCode, OTP_TIMEOUT } from 'web/src/helpers/codeValidation';
+import { isValidCode } from 'web/src/helpers/codeValidation';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
 
 interface Props {
   onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
   withdrawDone: boolean;
   wallet: Wallet;
+  countdown: number;
 }
 
 export const WithdrawBody: FC<Props> = (props) => {
@@ -43,14 +43,12 @@ export const WithdrawBody: FC<Props> = (props) => {
   const history = useHistory();
   const memberLevels = useSelector(selectMemberLevels);
 
-  const { countdown, start } = useCountdown();
-
   const twoFactorAuthRequired = user.level > 1 || (user.level === 1 && user.otp);
 
   const { data = [] } = useFetchCache<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
   const blockchain = data.find((d) => d.id === beneficiary.blockchain_id);
 
-  const { wallet, withdrawDone } = props;
+  const { wallet, withdrawDone, countdown } = props;
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
     (d) => d.blockchain_id === beneficiary.blockchain_id,
@@ -89,7 +87,6 @@ export const WithdrawBody: FC<Props> = (props) => {
   };
 
   const handleClick = () => {
-    start(OTP_TIMEOUT);
     props.onClick(amount, total, beneficiary, otpCode);
     setOtpCode('');
   };
