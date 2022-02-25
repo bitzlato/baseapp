@@ -11,9 +11,10 @@ import { isValidCode, OTP_TIMEOUT } from 'web/src/helpers/codeValidation';
 interface Props {
   onClose: () => void;
   onSend: (code: string) => void;
+  buttonText?: string | undefined;
 }
 
-export const TwoFactorModal2: FC<Props> = ({ onClose, onSend }) => {
+export const TwoFactorModal: FC<Props> = ({ onClose, onSend, buttonText }) => {
   const [code, setCode] = useState('');
   const t = useT();
   const { start, countdown } = useCountdown();
@@ -35,7 +36,7 @@ export const TwoFactorModal2: FC<Props> = ({ onClose, onSend }) => {
   };
 
   return (
-    <Modal2 header={t('2FA Verification')} onClose={onClose}>
+    <Modal2 header={t('2FA Verification')} onClose={onClose} show>
       <Box col spacing="3">
         <TextInput
           label={t('2FA code')}
@@ -46,7 +47,7 @@ export const TwoFactorModal2: FC<Props> = ({ onClose, onSend }) => {
           autoFocus
         />
         <Button disabled={disabled} onClick={handleSend}>
-          {countdown > 0 ? formatSeconds(countdown) : t('Send')}
+          {countdown > 0 ? formatSeconds(countdown) : buttonText ?? t('Send')}
         </Button>
       </Box>
     </Modal2>

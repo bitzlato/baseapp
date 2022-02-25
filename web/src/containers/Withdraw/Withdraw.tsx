@@ -90,15 +90,17 @@ export const Withdraw: React.FC<Props> = ({ wallet }) => {
           onSubmit={toggleSubmitModal}
         />
       </div>
-      <ModalWithdrawConfirmation
-        show={withdrawData.withdrawConfirmModal}
-        amount={withdrawData.total}
-        currency={currency.code}
-        precision={wallet.precision}
-        rid={getConfirmationAddress()}
-        onSubmit={handleWithdraw}
-        onDismiss={toggleConfirmModal}
-      />
+      {withdrawData.withdrawConfirmModal ? (
+        <ModalWithdrawConfirmation
+          show={withdrawData.withdrawConfirmModal}
+          amount={withdrawData.total}
+          currency={currency.code}
+          precision={wallet.precision}
+          rid={getConfirmationAddress()}
+          onSubmit={handleWithdraw}
+          onDismiss={toggleConfirmModal}
+        />
+      ) : null}
     </div>
   );
 };

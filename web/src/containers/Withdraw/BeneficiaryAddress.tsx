@@ -5,9 +5,6 @@ import { Beneficiary } from 'src/modules/user/beneficiaries';
 import { alertPush } from 'src/modules/public/alert/actions';
 import { useT } from 'src/hooks/useT';
 
-import { Box } from 'src/components/Box';
-import s from './BeneficiaryAddress.postcss';
-
 interface Props {
   beneficiary: Beneficiary;
 }
@@ -35,14 +32,11 @@ export const BeneficiaryAddress: FC<Props> = ({
   };
 
   return (
-    <Box col>
-      <CopyableTextField
-        className={s.field}
-        fieldId="withdraw_address"
-        value={address}
-        label={t('your_address')}
-        onCopy={handleCopy}
-      />
-    </Box>
+    <CopyableTextField
+      fieldId="withdraw_address"
+      value={address}
+      label={t('your_address')}
+      onCopy={handleCopy}
+    />
   );
 };

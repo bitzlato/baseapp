@@ -305,9 +305,13 @@ exports[`ProfileScreen test should render 1`] = `
       <div
         class="cardHeader padding3 primaryColor"
       >
-        <h4>
-          My API Keys
-        </h4>
+        <div
+          class="row justifyBetween"
+        >
+          <h4>
+            My API Keys
+          </h4>
+        </div>
       </div>
       <div
         class="col colSpacing2 padding3"

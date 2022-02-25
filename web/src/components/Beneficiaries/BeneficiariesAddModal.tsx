@@ -117,6 +117,7 @@ const BeneficiariesAddModalComponent: React.FC<Props> = ({ wallet, onCloseModal 
     <Modal2
       header={t('page.body.wallets.beneficiaries.addAddressModal.header')}
       onClose={onCloseModal}
+      show
     >
       <Box col spacing="3">
         <Select

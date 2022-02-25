@@ -4,9 +4,10 @@ import { Card } from 'web/src/components/Card/Card';
 import { Container } from 'web/src/components/Container/Container';
 import { useDocumentTitle } from 'web/src/hooks/useDocumentTitle';
 import { useT } from 'web/src/hooks/useT';
-import { ProfileApiKeys, ProfileVerification } from 'web/src/containers';
+import { ProfileVerification } from 'web/src/containers';
 import { ProfileAccountActivity } from 'web/src/containers/ProfileAccountActivity';
 import { ProfileAuthDetails } from 'web/src/containers/ProfileAuthDetails';
+import { ProfileApiKeys } from 'web/src/containers/ProfileApiKeys';
 
 export const ProfileScreen: FC = () => {
   const t = useT();

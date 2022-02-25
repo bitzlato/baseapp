@@ -14,7 +14,6 @@ import { useFetchCache } from 'src/hooks/useFetchCache';
 import { tradeUrl } from 'src/api/config';
 import { Blockchain } from 'src/modules/public/blockchains/types';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
-import s from 'src/containers/Withdraw/BeneficiaryAddress.postcss';
 import { DepositSummary } from './DepositSummary';
 import {
   alertPush,
@@ -138,7 +137,6 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
                 />
               ) : null}
               <CopyableTextField
-                className={s.field}
                 value={
                   depositAddress?.address ?? t('page.body.wallets.tabs.deposit.ccy.message.pending')
                 }

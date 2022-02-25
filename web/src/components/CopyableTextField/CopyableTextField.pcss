@@ -2,7 +2,7 @@
   align-items: center;
   background: var(--input-background-color);
   background: inherit;
-  border: none;
+  border: 1px solid var(--input-border-color);
   border-radius: var(--border-radius);
   display: flex;
   flex-grow: 1;
@@ -43,5 +43,16 @@
     color: var(--input-text-color);
     outline: none;
     width: 100%;
+  }
+
+  .input-group {
+    label {
+      color: var(--secondary-contrast-cta-color);
+      margin-top: -12px !important;
+    }
+
+    .custom-input {
+      flex-grow: 1;
+    }
   }
 }
