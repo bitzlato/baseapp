@@ -1203,7 +1203,7 @@ export const en = {
   'Create gift': 'Create gift',
   'Deposit.noun': 'Deposit',
   'Enter 2FA code from the app': 'Enter 2FA code from the app',
-  'error.try_later': 'Plese try later',
+  'error.try_later': 'Please try later',
   'Estimated value': 'Estimated value',
   'Exchange Balance': 'Exchange Balance',
   'P2P Balance': 'P2P Balance',
