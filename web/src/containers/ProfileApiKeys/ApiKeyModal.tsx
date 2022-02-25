@@ -29,38 +29,40 @@ export const ApiKeyModal: FC<Props> = (props) => {
       header={t('page.body.profile.apiKeys.modal.created_header')}
       onClose={props.onClose}
     >
-      <CopyableTextField
-        fieldId="access-key-id"
-        value={props.kid}
-        label={t('page.body.profile.apiKeys.modal.access_key')}
-        onCopy={() => handleCopy('access')}
-      />
-      <Box textColor="warning">
-        <Box row>
-          <WarningIcon />
-          <span>{t('page.body.profile.apiKeys.modal.secret_key')}</span>
+      <Box col spacing>
+        <CopyableTextField
+          fieldId="access-key-id"
+          value={props.kid}
+          label={t('page.body.profile.apiKeys.modal.access_key')}
+          onCopy={() => handleCopy('access')}
+        />
+        <Box textColor="warning">
+          <Box row>
+            <WarningIcon />
+            <span>{t('page.body.profile.apiKeys.modal.secret_key')}</span>
+          </Box>
+          <p>
+            {t('page.body.profile.apiKeys.modal.secret_key_info')}
+            <span> {t('page.body.profile.apiKeys.modal.secret_key_store')}</span>
+          </p>
         </Box>
-        <p>
-          {t('page.body.profile.apiKeys.modal.secret_key_info')}
-          <span> {t('page.body.profile.apiKeys.modal.secret_key_store')}</span>
-        </p>
-      </Box>
-      <CopyableTextField
-        fieldId="secret_key-id"
-        value={props.secret}
-        label={t('page.body.profile.apiKeys.modal.secret_key')}
-        onCopy={() => handleCopy('secret')}
-      />
-      <Box as="p" textColor="secondary">
-        <Box as="span" bold>
-          {t('page.body.profile.apiKeys.modal.note')}
+        <CopyableTextField
+          fieldId="secret_key-id"
+          value={props.secret}
+          label={t('page.body.profile.apiKeys.modal.secret_key')}
+          onCopy={() => handleCopy('secret')}
+        />
+        <Box as="p" textColor="secondary">
+          <Box as="span" bold>
+            {t('page.body.profile.apiKeys.modal.note')}
+          </Box>
+          <br />
+          {t('page.body.profile.apiKeys.modal.note_content')}
         </Box>
-        <br />
-        {t('page.body.profile.apiKeys.modal.note_content')}
+        <Button onClick={props.onClose} color="primary">
+          {t('OK')}
+        </Button>
       </Box>
-      <Button onClick={props.onClose} color="primary">
-        {t('OK')}
-      </Button>
     </Modal2>
   );
 };
