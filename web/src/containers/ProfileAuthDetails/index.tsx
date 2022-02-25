@@ -6,7 +6,7 @@ import { ProfileTwoFactorAuth } from '..';
 import { isUsernameEnabled } from '../../api';
 import { selectUserInfo } from '../../modules';
 import { toggle2faFetch, selectTwoFactorAuthSuccess } from '../../modules/user/profile';
-import { TwoFactorModal2 } from './TwoFactorModal';
+import { TwoFactorModal } from './TwoFactorModal';
 
 export const ProfileAuthDetails: FC = () => {
   const [show2FAModal, setShow2FAModal] = useState(false);
@@ -60,7 +60,7 @@ export const ProfileAuthDetails: FC = () => {
         <ProfileTwoFactorAuth is2faEnabled={user.otp} navigateTo2fa={handleNavigateTo2fa} />
       </div>
       {show2FAModal && (
-        <TwoFactorModal2 onClose={() => setShow2FAModal(false)} onSend={handleDisable2FA} />
+        <TwoFactorModal onClose={() => setShow2FAModal(false)} onSend={handleDisable2FA} />
       )}
     </div>
   );

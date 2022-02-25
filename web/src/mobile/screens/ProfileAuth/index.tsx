@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { TwoFactorModal2 } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
+import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { ProfileTwoFactorAuth } from '../../../containers/ProfileTwoFactorAuth';
 import {
   selectTwoFactorAuthSuccess,
@@ -58,7 +58,7 @@ export const ProfileAuthMobileScreen: React.FC = memo(() => {
           {!user.otp ? <ProfileTwoFactorAuthScreen /> : null}
         </div>
         {showModal ? (
-          <TwoFactorModal2 onClose={() => setShowModal(false)} onSend={handleToggle2FA} />
+          <TwoFactorModal onClose={() => setShowModal(false)} onSend={handleToggle2FA} />
         ) : null}
       </div>
     </>

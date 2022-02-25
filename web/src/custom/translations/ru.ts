@@ -1248,6 +1248,7 @@ export const ru: LangType = {
   Locked: 'Заблокировано',
   market: 'Биржа',
   Network: 'Сеть',
+  OK: 'OK',
   p2p_deposit_withdraw:
     'В настоящее время ввод и вывод BTC осуществляются с помощью кошельков P2P, пожалуйста, {transfer} активы в/из кошелька P2P.',
   p2p_transfer: 'переведите',

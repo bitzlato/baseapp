@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { TwoFactorModal2 } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
+import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { Pagination } from '../../../components';
 import { useApiKeysFetch } from '../../../hooks';
 import {
@@ -22,7 +22,8 @@ import {
   selectApiKeysNextPageExists,
 } from '../../../modules/user/apiKeys/selectors';
 import { AddIcon } from '../../assets/images/AddIcon';
-import { ApiKeysItem, CreatedApiKeyModal, Subheader } from '../../components';
+import { ApiKeysItem, Subheader } from '../../components';
+import { ApiKeyModal } from 'web/src/containers/ProfileApiKeys/ApiKeyModal';
 
 const ProfileApiKeysMobileScreenComponent: React.FC = () => {
   const [itemToUpdate, setItemToUpdate] = React.useState<ApiKeyDataInterface | undefined>();
@@ -169,13 +170,15 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
             <span className="no-data">{intl.formatMessage({ id: 'page.noDataToShow' })}</span>
           )}
         </div>
-        <CreatedApiKeyModal
-          showModal={showCreatedApiKeyModal}
-          closeCreatedApiKeyModal={() => setShowCreatedApiKeyModal(false)}
-          apiKey={(apiKeysModal as any).apiKey}
-        />
+        {showCreatedApiKeyModal ? (
+          <ApiKeyModal
+            onClose={() => setShowCreatedApiKeyModal(false)}
+            kid={apiKeysModal.apiKey?.kid ?? ''}
+            secret={apiKeysModal.apiKey?.secret ?? ''}
+          />
+        ) : null}
         {show2FAModal ? (
-          <TwoFactorModal2 onClose={() => setShow2FAModal(false)} onSend={handleTriggerAction} />
+          <TwoFactorModal onClose={() => setShow2FAModal(false)} onSend={handleTriggerAction} />
         ) : null}
       </div>
     </>

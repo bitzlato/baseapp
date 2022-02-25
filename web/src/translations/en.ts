@@ -1228,6 +1228,7 @@ export const en = {
   Locked: 'Locked',
   market: 'Exchange',
   Network: 'Network',
+  OK: 'OK',
   p2p_deposit_withdraw:
     'Currently, BTC deposits and withdrawals are done by P2P wallets, please {transfer} assets from/to P2P wallet.',
   p2p_transfer: 'transfer',

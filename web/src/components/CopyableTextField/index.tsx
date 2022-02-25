@@ -3,8 +3,8 @@ import * as React from 'react';
 import { InputGroup } from 'react-bootstrap';
 import { CopyIcon } from 'src/assets/icons/CopyIcon';
 import { useT } from 'src/hooks/useT';
-import { CustomInput } from '..';
-import { copy } from '../../helpers';
+import { CustomInput } from '../CustomInput';
+import { copy } from 'web/src/helpers/copy';
 import { IconButton } from '../IconButton/IconButton';
 
 export interface CopyableTextFieldProps {

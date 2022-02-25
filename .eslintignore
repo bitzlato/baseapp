@@ -37,7 +37,6 @@ web/src/components/BlockchainIcon/BlockchainIcon2.tsx
 web/src/components/Button/Button.tsx
 web/src/components/Captcha/index.tsx
 web/src/components/ChangePassword/index.tsx
-web/src/components/CodeVerification/index.tsx
 web/src/components/CombinedOrderBook/index.tsx
 web/src/components/CopyableTextField/index.tsx
 web/src/components/CustomInput/index.tsx
