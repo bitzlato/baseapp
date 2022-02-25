@@ -146,6 +146,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
           </div>
           <SelectString
             className="pg-confirm__content-documents__row__content-number-dropdown"
+            isSearchable={false}
             options={this.data}
             onChange={onSelect}
             placeholder={this.translate('page.body.kyc.documentsType.placeholder')}

@@ -127,6 +127,7 @@ export const Transfer: React.FC<Props> = ({
           <Box
             flex1
             as={SelectString}
+            isSearchable={false}
             options={DROPS}
             value={from as any}
             onChange={handleSetFrom as any}
@@ -144,6 +145,7 @@ export const Transfer: React.FC<Props> = ({
           <Box
             flex1
             as={SelectString}
+            isSearchable={false}
             options={DROPS}
             value={to as any}
             onChange={handleSetTo as any}

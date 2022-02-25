@@ -141,6 +141,7 @@ export const InternalTransferComponent = () => {
           />
           <SelectString
             className="pg-confirm__content-address__row__content-number-dropdown"
+            isSearchable={false}
             options={walletsList}
             onChange={(value) => setCurrency(value!)}
             placeholder="Currency"
