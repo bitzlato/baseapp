@@ -53,18 +53,4 @@ describe('Api Keys reducers', () => {
       ).apiKeys,
     ).toEqual(expectedState.apiKeys);
   });
-
-  it('should handle API_KEYS_2FA_MODAL', () => {
-    const payload: actions.ApiKeys2FAModal['payload'] = { active: false };
-    const expectedState = { ...initialApiKeysState, modal: { active: false } };
-    expect(
-      apiKeysReducer(
-        {
-          ...initialApiKeysState,
-          modal: { active: true },
-        },
-        actions.apiKeys2FAModal(payload),
-      ).modal,
-    ).toEqual(expectedState.modal);
-  });
 });

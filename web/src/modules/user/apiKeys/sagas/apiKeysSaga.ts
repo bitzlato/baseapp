@@ -33,7 +33,7 @@ export function* apiKeysSaga(action: ApiKeysFetch) {
       }
     }
     yield put(apiKeysData({ apiKeys, pageIndex, nextPageExists }));
-    yield put(apiKeys2FAModal({ active: false }));
+    yield put(apiKeys2FAModal({ action: undefined }));
   } catch (error) {
     yield put(
       sendError({

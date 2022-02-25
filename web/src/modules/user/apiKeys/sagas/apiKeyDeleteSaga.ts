@@ -20,7 +20,7 @@ export function* apiKeyDeleteSaga(action: ApiKeyDeleteFetch) {
     );
     yield put(apiKeyDelete({ kid }));
     yield put(alertPush({ message: ['success.api_keys.deleted'], type: 'success' }));
-    yield put(apiKeys2FAModal({ active: false }));
+    yield put(apiKeys2FAModal({ action: undefined }));
   } catch (error) {
     yield put(
       sendError({
