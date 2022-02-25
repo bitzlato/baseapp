@@ -34,7 +34,7 @@ export const Modal2: FC<Props> = (props) => {
 
   return (
     <div className="cr-modal">
-      <Container maxWidth="md">
+      <Container maxWidth="sm">
         <Card
           header={
             <Box row spacing="2" justify="between">
