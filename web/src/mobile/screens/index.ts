@@ -11,4 +11,6 @@ export * from './ProfileAuth';
 export * from './ProfileChangePassword';
 export * from './ProfileColorTheme';
 export * from './ProfileLanguage';
+export * from './SignInScreen';
+export * from './SignUpScreen';
 export * from './Trading';
