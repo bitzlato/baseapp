@@ -11,10 +11,6 @@ import { Container } from '../../components/Container/Container';
 import { useT } from '../../hooks/useT';
 import { loginWithRedirect } from '../../helpers/auth0';
 
-// localhost samples: voucher: http://localhost:8080/deeplinks/c_2fc37b33410cb6e483fc690f16cc3bdf
-// ad on: http://localhost:8080/deeplinks/a_13cbR
-// ad off: http://localhost:8080/deeplinks/a_13cbS
-
 // todo: move swr config to top-level
 const swrConfig: SWRConfiguration = {
   refreshInterval: 0,
@@ -63,36 +59,41 @@ export const DeepLinkPreview: FC = () => {
   };
 
   const onDismiss = () => {
-    alert('Fine');
+    alert('Navigate to root');
   };
 
   const onAccept = () => {
-    fetch(`${p2pEndpoint()}/deeplink`, {
+    fetch(`${p2pEndpoint()}/deeplink/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         code: deeplinkId,
-        //url: null,
-        //
       }),
     })
       .then((response) => {
-
-        debugger;
-
-        if (response.ok) {
-          setActionResult({ success: true, payload: response });
-        } else {
-          setActionResult({
-            success: false,
-            payload: {
-              code: response,
-            },
+        response
+          .json()
+          .then((body) => {
+            setActionResult({
+              status: response.status,
+              payload: {
+                code: body.code || '',
+                message: body.message || '',
+              },
+            });
+          })
+          .catch((e) => {
+            throw e;
           });
-        }
       })
       .catch((error) => {
-        setActionResult({ success: false, payload: error });
+        setActionResult({
+          status: 500,
+          payload: {
+            code: 'NetworkError',
+            error: error,
+          },
+        });
       });
   };
 
@@ -124,7 +125,7 @@ export const DeepLinkPreview: FC = () => {
       case DeeplinkActionType.Dismiss:
       default:
         return (
-          <Button size="large" color="primary" onClick={onDismiss}>
+          <Button color="primary" onClick={onDismiss}>
             OK
           </Button>
         );

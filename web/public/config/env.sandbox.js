@@ -7,6 +7,7 @@ window.env = {
     rangerUrl: 'wss://market-sandbox.bitzlato.com/api/v2/ranger',
     accountUrl: 'https://account.s-www.lgk.one/api/private/v1',
     accountPublicUrl: 'https://account.s-www.lgk.one/api/public/v1',
+    p2pEndpoint: 'https://s-www.lgk.one/api/p2p',
   },
   auth0: {
     domain: 'auth.bitzlato.bz',

@@ -305,9 +305,8 @@ module.exports = {
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
               },
-              '/p2p/': {
-                // hardcoded for now
-                target: `https://s-www.lgk.one`,
+              '/api/p2p/': {
+                target: `${process.env.P2P_HOST}` || `https://s-www.lgk.one`,
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
               },

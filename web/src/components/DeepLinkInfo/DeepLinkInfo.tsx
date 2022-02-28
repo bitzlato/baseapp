@@ -2,9 +2,10 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { translateTransformTags, useBetterT } from '../../hooks/useT';
 import { selectUserInfo, selectUserLoggedIn } from '../../modules';
+import { sprinkles } from '../../theme/sprinkles.css';
 
 type Props = {
-  actionResult: (result: DeepLinkActionResultType) => void;
+  actionResult: DeepLinkActionResultType;
   deeplink: DeepLinkInfoType;
   exposeAction: (action: DeeplinkActionType) => void;
 };
@@ -30,8 +31,8 @@ export type DeepLinkInfoType = {
 };
 
 export type DeepLinkActionResultType = {
-  success: boolean;
-  payload: any;
+  status?: number;
+  payload?: any;
 };
 
 export const deeplinkTitle = (deeplink: DeepLinkInfoType): string => {
@@ -53,6 +54,7 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
   const t = useBetterT();
   const isAuthorized = useSelector(selectUserLoggedIn);
   const user = useSelector(selectUserInfo);
+  const isLocalDev = false;
 
   if (!deeplink) {
     return null;
@@ -70,32 +72,55 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
       userLink: `/en/p2p/users/${payload.user.nickname}`,
     };
 
-    if (actionResult && actionResult.success) {
-      debugger;
-    }
+    const info = [
+      <div
+        className={sprinkles({
+          pb: '3x',
+          fontSize: 'medium',
+        })}
+      >
+        {t('deeplink.voucher.info', details, translateTransformTags)}
+      </div>,
+    ];
 
-    const info = [t('deeplink.voucher.info', details, translateTransformTags)];
+    if (actionResult && actionResult.status) {
+      // action took
+      if (actionResult.status === 200) {
+        // cashed!
+        info.push(<h3>{t('deeplink.voucher.cashed')}</h3>);
+      } else {
+        info.push(<h3>{t('deeplink.voucher.cash_failed')}</h3>);
+        if (actionResult.payload && actionResult.payload.code) {
+          info.push(t(`deeplink.server.${actionResult.payload.code}`));
+        }
+      }
 
-    if (deeplink.active) {
-      if (isAuthorized) {
-        info.push(
-          t('deeplink.profile.current_account', {
-            userName: user.username || user.email,
-          }),
-        );
-        info.push(t('deeplink.voucher.take_action'));
-        exposeAction(DeeplinkActionType.AcceptOrCancel);
-      } else {
-        info.push(t('deeplink.profile.need_auth'));
-        exposeAction(DeeplinkActionType.LoginRequired);
-      }
-    } else {
-      if (payload.cashed_at) {
-        info.push(t('deeplink.voucher.cashed'));
-      } else {
-        info.push(t('deeplink.voucher.expired'));
-      }
+      // set dismiss button and exit
       exposeAction(DeeplinkActionType.Dismiss);
+      return info.map((v) => <div>{v}</div>);
+    } else {
+      // action pending
+      if (deeplink.active) {
+        if (isAuthorized) {
+          info.push(
+            t('deeplink.profile.current_account', {
+              userName: user.username || user.email,
+            }),
+          );
+          info.push(t('deeplink.voucher.take_action'));
+          exposeAction(DeeplinkActionType.AcceptOrCancel);
+        } else {
+          info.push(t('deeplink.profile.need_auth'));
+          exposeAction(DeeplinkActionType.LoginRequired);
+        }
+      } else {
+        if (payload.cashed_at) {
+          info.push(t('deeplink.voucher.cashed'));
+        } else {
+          info.push(t('deeplink.voucher.expired'));
+        }
+        exposeAction(DeeplinkActionType.Dismiss);
+      }
     }
 
     return info.map((v) => <p>{v}</p>);
@@ -122,12 +147,10 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
   return (
     <div>
       {content}
-      <pre>
-        Raw data:
-        {JSON.stringify(deeplink, null, '  ')}
-      </pre>
-      {actionResult && (
+      {isLocalDev && (
         <pre>
+          Raw data:
+          {JSON.stringify(deeplink, null, '  ')}
           ActionResult:
           {JSON.stringify(actionResult, null, '  ')}
         </pre>

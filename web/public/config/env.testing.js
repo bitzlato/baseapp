@@ -7,6 +7,7 @@ window.env = {
     rangerUrl: '/api/v2/ranger',
     accountUrl: '/api/private/v1',
     accountPublicUrl: '/api/public/v1',
+    p2pEndpoint: '/api/p2p',
   },
   logoUrl: '',
   logoDarkUrl: '',
