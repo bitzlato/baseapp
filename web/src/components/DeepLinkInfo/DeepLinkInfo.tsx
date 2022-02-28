@@ -4,6 +4,7 @@ import { translateTransformTags, useBetterT } from '../../hooks/useT';
 import { selectUserInfo, selectUserLoggedIn } from '../../modules';
 
 type Props = {
+  actionResult: (result: DeepLinkActionResultType) => void;
   deeplink: DeepLinkInfoType;
   exposeAction: (action: DeeplinkActionType) => void;
 };
@@ -28,6 +29,11 @@ export type DeepLinkInfoType = {
   type?: DeeplinkTypes;
 };
 
+export type DeepLinkActionResultType = {
+  success: boolean;
+  payload: any;
+};
+
 export const deeplinkTitle = (deeplink: DeepLinkInfoType): string => {
   if (!deeplink || !deeplink.type) {
     return 'deeplink.cant_load';
@@ -43,7 +49,7 @@ export const deeplinkTitle = (deeplink: DeepLinkInfoType): string => {
   }
 };
 
-export const DeepLinkInfo: FC<Props> = ({ deeplink, exposeAction }) => {
+export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }) => {
   const t = useBetterT();
   const isAuthorized = useSelector(selectUserLoggedIn);
   const user = useSelector(selectUserInfo);
@@ -63,6 +69,10 @@ export const DeepLinkInfo: FC<Props> = ({ deeplink, exposeAction }) => {
       user: payload.user.nickname,
       userLink: `/en/p2p/users/${payload.user.nickname}`,
     };
+
+    if (actionResult && actionResult.success) {
+      debugger;
+    }
 
     const info = [t('deeplink.voucher.info', details, translateTransformTags)];
 
@@ -116,6 +126,12 @@ export const DeepLinkInfo: FC<Props> = ({ deeplink, exposeAction }) => {
         Raw data:
         {JSON.stringify(deeplink, null, '  ')}
       </pre>
+      {actionResult && (
+        <pre>
+          ActionResult:
+          {JSON.stringify(actionResult, null, '  ')}
+        </pre>
+      )}
     </div>
   );
 };

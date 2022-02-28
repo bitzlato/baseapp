@@ -10,6 +10,7 @@ declare global {
       finexUrl: string;
       accountUrl: string;
       accountPublicUrl: string;
+      p2pEndpoint: string;
     };
     auth0?: {
       domain: string;

@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import useSWR, { SWRConfiguration } from 'swr';
 import { Spinner } from 'react-bootstrap';
 import { DeeplinkActionType, DeepLinkInfo, deeplinkTitle } from '../../components';
-import { accountPublicUrl } from '../../api';
+import { accountPublicUrl, p2pEndpoint } from '../../api';
 import { Card } from '../../components/Card/Card';
 import { Box } from '../../components/ui/Box';
 import { Button } from '../../components/ui/Button';
@@ -41,6 +41,7 @@ export const DeepLinkPreview: FC = () => {
   const { id: deeplinkId } = useParams<{ id: string }>();
 
   const [formAction, setFormAction] = useState(DeeplinkActionType.NoAction);
+  const [actionResult, setActionResult] = useState({});
   const { deeplink, isLoading, isError } = useDeeplinkInfo(deeplinkId);
 
   const renderBody = () => {
@@ -52,7 +53,9 @@ export const DeepLinkPreview: FC = () => {
       return <pre>Error: {JSON.stringify(isError)}</pre>;
     }
 
-    return <DeepLinkInfo deeplink={deeplink} exposeAction={setFormAction} />;
+    return (
+      <DeepLinkInfo actionResult={actionResult} deeplink={deeplink} exposeAction={setFormAction} />
+    );
   };
 
   const onDiscard = () => {
@@ -64,8 +67,33 @@ export const DeepLinkPreview: FC = () => {
   };
 
   const onAccept = () => {
-    // todo: make request to private api
-    alert('Nice!');
+    fetch(`${p2pEndpoint()}/deeplink`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        code: deeplinkId,
+        //url: null,
+        //
+      }),
+    })
+      .then((response) => {
+
+        debugger;
+
+        if (response.ok) {
+          setActionResult({ success: true, payload: response });
+        } else {
+          setActionResult({
+            success: false,
+            payload: {
+              code: response,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        setActionResult({ success: false, payload: error });
+      });
   };
 
   const renderActions = () => {

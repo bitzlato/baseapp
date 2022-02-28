@@ -305,6 +305,12 @@ module.exports = {
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
               },
+              '/p2p/': {
+                // hardcoded for now
+                target: `https://s-www.lgk.one`,
+                changeOrigin: true,
+                cookieDomainRewrite: 'localhost',
+              },
               '/api': {
                 target: `https://${process.env.PROXY_HOST}`,
                 changeOrigin: true,
