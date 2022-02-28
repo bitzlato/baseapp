@@ -10,7 +10,7 @@ import { FeesScreen } from 'src/screens/Fees/Fees';
 import type { IntlProps } from 'src/types';
 import { WalletsScreen } from 'src/screens/WalletsScreen/WalletsScreen';
 import { loginWithRedirect } from 'src/helpers/auth0';
-import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
+// import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
 import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
 import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
 import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
@@ -38,6 +38,8 @@ import {
   ProfileLanguageMobileScreen,
   ProfileMobileScreen,
   ProfileThemeMobileScreen,
+  SignInMobileScreen,
+  SignUpMobileScreen,
   TradingScreenMobile,
 } from '../../mobile/screens';
 import {
@@ -73,6 +75,8 @@ import {
   VerificationScreen,
   QuickExchange,
   LandingScreen,
+  SignInScreen,
+  SignUpScreen,
 } from '../../screens';
 import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuthScreen/ProfileTwoFactorAuthScreen';
 import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSettingsMobileScreen/ProfileSettingsMobileScreen';
@@ -296,8 +300,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       return (
         <div className={mobileCls}>
           <Switch>
-            <PublicRoute path="/signin" component={SignInAuth0} />
-            <PublicRoute path="/signup" component={SignInAuth0} />
+            <PublicRoute path="/signin" component={SignInMobileScreen} />
+            <PublicRoute path="/signup" component={SignUpMobileScreen} />
             <PublicRoute
               loading={userLoading}
               isLogged={isLoggedIn}
@@ -408,8 +412,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       <div className={desktopCls}>
         <Switch>
           <Route path="/magic-link" component={MagicLink as any} />
-          <PublicRoute path="/signin" component={SignInAuth0} />
-          <PublicRoute path="/signup" component={SignInAuth0} />
+          <PublicRoute path="/signin" component={SignInScreen} />
+          <PublicRoute path="/signup" component={SignUpScreen} />
           <PublicRoute
             loading={userLoading}
             isLogged={isLoggedIn}
