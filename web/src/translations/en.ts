@@ -511,6 +511,7 @@ export const en = {
   'page.body.profile.content.action.logout': 'Logout',
   'page.body.profile.content.action.request2fa': 'Request QR code for 2FA',
   'page.body.profile.content.action.enable2fa': 'Enable 2FA',
+  'page.body.profile.content.action.disable2fa': 'Disable 2FA',
   'page.body.profile.content.action.login.2fa': 'Login with 2FA',
   'page.body.profile.content.action.requestPasswordReset': 'Request password reset',
   'page.body.profile.content.action.passwordReset': 'Password reset',

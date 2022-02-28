@@ -260,11 +260,11 @@ export const ru: LangType = {
     'Вам нужно активировать 2FA, чтобы получить возможность выводить Ваши валюты!',
   'page.body.wallets.tabs.withdraw.content.enable2faButton': 'Активировать 2FA',
 
-  'success.beneficiaries.created': 'Beneficiaries: successfully created',
-  'success.beneficiaries.activated': 'Beneficiaries: successfully activated',
-  'success.beneficiaries.deleted': 'Beneficiaries: successfully deleted',
-  'success.beneficiaries.resent_pin': 'Beneficiaries: pin resent',
-  'error.beneficiaries.max10.addresses': 'You can register up to 10 withdrawal addresses',
+  'success.beneficiaries.created': 'Получатель успешно создан',
+  'success.beneficiaries.activated': 'Получатель успешно активирован',
+  'success.beneficiaries.deleted': 'Получатель успешно удалён',
+  'success.beneficiaries.resent_pin': 'Пин-код отправлен повторно',
+  'error.beneficiaries.max10.addresses': 'Вы можете создать до 10 адресов для списания',
 
   'success.deposits.created': 'Создано намерение депонировать',
 
@@ -523,6 +523,7 @@ export const ru: LangType = {
   'page.body.profile.content.action.logout': 'Выход',
   'page.body.profile.content.action.request2fa': 'Запрошен QR-код для 2FA',
   'page.body.profile.content.action.enable2fa': 'Активация 2FA',
+  'page.body.profile.content.action.disable2fa': 'Отключение 2FA',
   'page.body.profile.content.action.login.2fa': 'Вход в систему с 2FA',
   'page.body.profile.content.action.requestPasswordReset': 'Запрос на сброс пароля',
   'page.body.profile.content.action.passwordReset': 'Сброс пароля',
@@ -1056,9 +1057,10 @@ export const ru: LangType = {
   'account.withdraw.invalid_otp': 'Неверный 2FA',
   'account.withdraw.disabled_api': 'Снятие API отключено',
 
-  'account.beneficiary.invalid_pin': 'Invalid beneficiary activation pin',
-  'account.beneficiary.cant_resend_within_1_minute': "Can't resend activation pin within 1 minute",
-  'account.beneficiary.duplicate_address': 'Beneficiary address already exists',
+  'account.beneficiary.invalid_pin': 'Неверный код активации',
+  'account.beneficiary.cant_resend_within_1_minute':
+    'Нельзя повторно отправить код активации в течение 1 минуты',
+  'account.beneficiary.duplicate_address': 'Адрес списания уже добавлен',
   'account.beneficiary.failed_to_create': 'Невозможно добавить получателя: неверный адрес',
 
   'market.market.doesnt_exist': 'Рынок не существует',
