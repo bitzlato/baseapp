@@ -3,8 +3,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { captchaType, captchaLogin } from '../../api';
-import { Captcha, SignInComponent, TwoFactorAuth } from '../../components';
+import { Captcha, SignInComponent } from '../../components';
 import {
   EMAIL_REGEX,
   ERROR_EMPTY_PASSWORD,
@@ -13,7 +14,6 @@ import {
 } from '../../helpers';
 import { useReduxSelector } from '../../hooks';
 import {
-  selectMobileDeviceState,
   selectSignInRequire2FA,
   selectUserFetching,
   selectUserLoggedIn,
@@ -39,7 +39,6 @@ export const SignInScreen: React.FC = () => {
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordFocused, setPasswordFocused] = useState(false);
-  const [otpCode, setOtpCode] = useState('');
 
   const isLoggedIn = useReduxSelector(selectUserLoggedIn);
   const loading = useReduxSelector(selectUserFetching);
@@ -48,7 +47,6 @@ export const SignInScreen: React.FC = () => {
   const reCaptchaSuccess = useReduxSelector(selectRecaptchaSuccess);
   const geetestCaptchaSuccess = useReduxSelector(selectGeetestCaptchaSuccess);
   const captcha_response = useReduxSelector(selectCaptchaResponse);
-  const isMobileDevice = useReduxSelector(selectMobileDeviceState);
 
   useEffect(() => {
     setDocumentTitle('Sign In');
@@ -77,10 +75,6 @@ export const SignInScreen: React.FC = () => {
     setPasswordError('');
   }, []);
 
-  const handleChangeOtpCode = useCallback((value: string) => {
-    setOtpCode(value);
-  }, []);
-
   const handleSignIn = useCallback(() => {
     dispatch(
       signIn({
@@ -91,18 +85,16 @@ export const SignInScreen: React.FC = () => {
     );
   }, [dispatch, email, password, captcha_response, captchaType()]);
 
-  const handle2FASignIn = useCallback(() => {
-    if (otpCode) {
-      dispatch(
-        signIn({
-          email,
-          password,
-          otp_code: otpCode,
-          ...(captchaType() !== 'none' && captchaLogin() && { captcha_response }),
-        }),
-      );
-    }
-  }, [dispatch, otpCode, email, password, captchaType(), captchaLogin()]);
+  const handle2FASignIn = (otp_code: string) => {
+    dispatch(
+      signIn({
+        email,
+        password,
+        otp_code,
+        ...(captchaType() !== 'none' && captchaLogin() && { captcha_response }),
+      }),
+    );
+  };
 
   const handleSignUp = useCallback(() => {
     history.push('/signup');
@@ -152,7 +144,6 @@ export const SignInScreen: React.FC = () => {
   }, []);
 
   const handleClose = useCallback(() => {
-    setOtpCode('');
     dispatch(signInRequire2FA({ require2fa: false }));
   }, [dispatch]);
 
@@ -165,16 +156,10 @@ export const SignInScreen: React.FC = () => {
     <div className="pg-sign-in-screen">
       <div className={cx('pg-sign-in-screen__container', { loading })}>
         {require2FA ? (
-          <TwoFactorAuth
-            isMobile={isMobileDevice}
-            isLoading={loading}
-            onSubmit={handle2FASignIn}
-            title={formatMessage({ id: 'page.password2fa' })}
-            buttonLabel={formatMessage({ id: 'page.header.signIn' })}
-            message={formatMessage({ id: 'page.password2fa.message' })}
-            otpCode={otpCode}
-            handleOtpCodeChange={handleChangeOtpCode}
-            handleClose2fa={handleClose}
+          <TwoFactorModal
+            onClose={handleClose}
+            onSend={handle2FASignIn}
+            buttonText={formatMessage({ id: 'page.header.signIn' })}
           />
         ) : (
           <SignInComponent

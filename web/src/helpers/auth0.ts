@@ -20,6 +20,8 @@ export async function loginWithRedirect() {
       nonce: getRandomString(16),
     };
     window.location.assign(`https://${auth0.domain}/authorize?${buildQueryString(params)}`);
+  } else {
+    window.location.href = '/signin';
   }
 }
 

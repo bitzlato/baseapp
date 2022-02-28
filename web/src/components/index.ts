@@ -35,7 +35,6 @@ export * from './Table';
 export * from './TabPanel';
 export * from './TickerTable';
 export * from './Tooltip';
-export * from './TwoFactorAuth';
 export * from './UploadFile';
 export * from './WalletList';
 export * from './Info';
