@@ -1,17 +1,16 @@
+import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-export const ProfileTwoFactorAuth = (props: any) => {
-  const { is2faEnabled = false } = props;
-  const className = is2faEnabled
+interface Props {
+  checked: boolean;
+  toggle2fa: () => void;
+}
+
+export const ProfileTwoFactorAuth: FC<Props> = ({ checked, toggle2fa }) => {
+  const className = checked
     ? 'pg-profile-page__label-value__enabled'
     : 'pg-profile-page__label-value__disabled';
-
-  const handleToggle2fa = () => {
-    if (props.navigateTo2fa) {
-      props.navigateTo2fa(!is2faEnabled);
-    }
-  };
 
   return (
     <>
@@ -20,7 +19,7 @@ export const ProfileTwoFactorAuth = (props: any) => {
           <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication" />
         </div>
         <span className={className}>
-          {is2faEnabled ? (
+          {checked ? (
             <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.message.enable" />
           ) : (
             <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.message.disable" />
@@ -28,13 +27,7 @@ export const ProfileTwoFactorAuth = (props: any) => {
         </span>
       </label>
       <Form>
-        <Form.Check
-          type="switch"
-          id="2fa-switch"
-          label=""
-          onChange={handleToggle2fa}
-          checked={is2faEnabled}
-        />
+        <Form.Check type="switch" id="2fa-switch" label="" onChange={toggle2fa} checked={checked} />
       </Form>
     </>
   );

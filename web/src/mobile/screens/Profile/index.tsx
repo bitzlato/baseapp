@@ -34,9 +34,6 @@ const ProfileMobileScreenComponent: React.FC = () => {
     {
       titleKey: 'page.mobile.profileLinks.main.2fa',
       route: '/profile/2fa',
-      state: {
-        enable2fa: !user.otp,
-      },
       children: (
         <>
           {user.otp ? (

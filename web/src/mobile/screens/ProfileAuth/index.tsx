@@ -13,14 +13,17 @@ import {
   toggle2faSuccess,
 } from 'web/src/modules/user/profile';
 import { ProfileTwoFactorAuth } from 'web/src/containers/ProfileTwoFactorAuth';
+import { useT } from 'web/src/hooks/useT';
 
 export const ProfileAuthMobileScreen: React.FC = memo(() => {
-  const [showModal, setShowModal] = useState(false);
+  const [showCode, setShowCode] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const intl = useIntl();
   const user = useSelector(selectUserInfo);
   const success = useSelector(selectTwoFactorAuthSuccess);
+
+  const t = useT();
 
   useEffect(() => {
     if (success) {
@@ -38,9 +41,9 @@ export const ProfileAuthMobileScreen: React.FC = memo(() => {
     );
   };
 
-  const handleNavigateTo2fa = (enable2fa: boolean) => {
-    if (!enable2fa) {
-      setShowModal((state) => !state);
+  const handleNavigateTo2fa = () => {
+    if (user.otp) {
+      setShowCode(true);
     }
   };
 
@@ -54,7 +57,7 @@ export const ProfileAuthMobileScreen: React.FC = memo(() => {
       <div className="cr-mobile-profile-auth">
         <div className="cr-mobile-profile-auth__enable">
           <div className="cr-mobile-profile-auth__enable-label">
-            <ProfileTwoFactorAuth is2faEnabled={user.otp} navigateTo2fa={handleNavigateTo2fa} />
+            <ProfileTwoFactorAuth checked={user.otp} toggle2fa={handleNavigateTo2fa} />
           </div>
         </div>
       </div>
@@ -63,8 +66,12 @@ export const ProfileAuthMobileScreen: React.FC = memo(() => {
           <ProfileTwoFactorAuthScreen />
         </Box>
       ) : null}
-      {showModal ? (
-        <TwoFactorModal onClose={() => setShowModal(false)} onSend={handleToggle2FA} />
+      {showCode ? (
+        <TwoFactorModal
+          onClose={() => setShowCode(false)}
+          onSend={handleToggle2FA}
+          buttonText={t('page.body.profile.header.account.content.twoFactorAuthentication.disable')}
+        />
       ) : null}
     </Box>
   );
