@@ -2,16 +2,17 @@ import { memo, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { Box } from 'web/src/components/Box/Box';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
-import { ProfileTwoFactorAuth } from '../../../containers/ProfileTwoFactorAuth';
+import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuthScreen/ProfileTwoFactorAuthScreen';
+import { Subheader } from 'web/src/mobile/components/Subheader';
 import {
   selectTwoFactorAuthSuccess,
   selectUserInfo,
   toggle2faFetch,
   toggle2faSuccess,
-} from '../../../modules/user/profile';
-import { ProfileTwoFactorAuthScreen } from '../../../screens/ProfileTwoFactorAuthScreen';
-import { Subheader } from '../../components/Subheader';
+} from 'web/src/modules/user/profile';
+import { ProfileTwoFactorAuth } from 'web/src/containers/ProfileTwoFactorAuth';
 
 export const ProfileAuthMobileScreen: React.FC = memo(() => {
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +45,7 @@ export const ProfileAuthMobileScreen: React.FC = memo(() => {
   };
 
   return (
-    <>
+    <Box col spacing="sm">
       <Subheader
         title={intl.formatMessage({ id: 'page.profile.kyc.title' })}
         backTitle={intl.formatMessage({ id: 'page.body.profile.header.account' })}
@@ -55,12 +56,16 @@ export const ProfileAuthMobileScreen: React.FC = memo(() => {
           <div className="cr-mobile-profile-auth__enable-label">
             <ProfileTwoFactorAuth is2faEnabled={user.otp} navigateTo2fa={handleNavigateTo2fa} />
           </div>
-          {!user.otp ? <ProfileTwoFactorAuthScreen /> : null}
         </div>
-        {showModal ? (
-          <TwoFactorModal onClose={() => setShowModal(false)} onSend={handleToggle2FA} />
-        ) : null}
       </div>
-    </>
+      {!user.otp ? (
+        <Box bgColor="body" padding="2X3" col spacing="2">
+          <ProfileTwoFactorAuthScreen />
+        </Box>
+      ) : null}
+      {showModal ? (
+        <TwoFactorModal onClose={() => setShowModal(false)} onSend={handleToggle2FA} />
+      ) : null}
+    </Box>
   );
 });
