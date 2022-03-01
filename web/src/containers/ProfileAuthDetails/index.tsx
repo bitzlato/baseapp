@@ -29,11 +29,11 @@ export const ProfileAuthDetails: FC = () => {
     dispatch(toggle2faFetch({ code, enable: false }));
   };
 
-  const handleNavigateTo2fa = (enable2fa: boolean) => {
-    if (enable2fa) {
-      history.push('/security/2fa', { enable2fa });
+  const toggle2fa = () => {
+    if (user.otp) {
+      setShow2FAModal(true);
     } else {
-      setShow2FAModal(!show2FAModal);
+      history.push('/profile/2fa');
     }
   };
 
@@ -57,10 +57,14 @@ export const ProfileAuthDetails: FC = () => {
         </div>
       </div>
       <div className="pg-profile-page__row">
-        <ProfileTwoFactorAuth is2faEnabled={user.otp} navigateTo2fa={handleNavigateTo2fa} />
+        <ProfileTwoFactorAuth checked={user.otp} toggle2fa={toggle2fa} />
       </div>
       {show2FAModal && (
-        <TwoFactorModal onClose={() => setShow2FAModal(false)} onSend={handleDisable2FA} />
+        <TwoFactorModal
+          onClose={() => setShow2FAModal(false)}
+          onSend={handleDisable2FA}
+          buttonText={t('page.body.profile.header.account.content.twoFactorAuthentication.disable')}
+        />
       )}
     </div>
   );

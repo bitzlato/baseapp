@@ -247,8 +247,6 @@ export const ru: LangType = {
   'page.body.wallets.warning.withdraw.verification':
     'Withdraws are allowed after passing KYC verification',
   'page.body.wallets.warning.withdraw.verification.button': 'Verify Your Account',
-  'page.body.wallets.warning.withdraw.2fa': 'Withdraws are allowed after enabling 2FA',
-  'page.body.wallets.warning.withdraw.2fa.button': 'Enable 2FA',
 
   'page.body.wallets.tabs.withdraw.modal.confirmation': 'Подтверждение',
   'page.body.wallets.tabs.withdraw.modal.message1': 'Вы получите ',
@@ -453,9 +451,8 @@ export const ru: LangType = {
   'page.body.profile.header.account.content.twoFactorAuthentication.message.mfa': 'MFA код',
   'page.body.profile.header.account.content.twoFactorAuthentication.message.4':
     'Введите 2FA код с приложения',
-  'page.body.profile.header.account.content.twoFactorAuthentication.subHeader': '2FA код',
-  'page.body.profile.header.account.content.twoFactorAuthentication.enable': 'ВКЛЮЧИТЬ',
-  'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'ОТКЛЮЧИТЬ 2FA',
+  'page.body.profile.header.account.content.twoFactorAuthentication.enable': 'Включить',
+  'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'Отключить 2FA',
   'page.body.profile.header.account.content.twoFactorAuthentication.modalBody':
     'Пожалуйста, обратитесь с администратором, чтобы отключить 2FA',
   'page.body.profile.header.account.content.twoFactorAuthentication.modalHeader':

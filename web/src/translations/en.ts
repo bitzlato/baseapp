@@ -239,8 +239,6 @@ export const en = {
   'page.body.wallets.warning.withdraw.verification':
     'Withdraws are allowed after passing KYC verification',
   'page.body.wallets.warning.withdraw.verification.button': 'Verify Your Account',
-  'page.body.wallets.warning.withdraw.2fa': 'Withdraws are allowed after enabling 2FA',
-  'page.body.wallets.warning.withdraw.2fa.button': 'Enable 2FA',
 
   'page.body.wallets.tabs.withdraw.modal.confirmation': 'Confirmation',
   'page.body.wallets.tabs.withdraw.modal.message1': 'You will receive ',
@@ -441,9 +439,8 @@ export const en = {
   'page.body.profile.header.account.content.twoFactorAuthentication.message.mfa': 'MFA code',
   'page.body.profile.header.account.content.twoFactorAuthentication.message.4':
     'Enter 2fa code from the app',
-  'page.body.profile.header.account.content.twoFactorAuthentication.subHeader': '2FA code',
-  'page.body.profile.header.account.content.twoFactorAuthentication.enable': 'ENABLE',
-  'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'DISABLE 2FA',
+  'page.body.profile.header.account.content.twoFactorAuthentication.enable': 'Enable',
+  'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'Disable 2FA',
   'page.body.profile.header.account.content.twoFactorAuthentication.modalBody':
     'Please сontact administrator to disable',
   'page.body.profile.header.account.content.twoFactorAuthentication.modalHeader':

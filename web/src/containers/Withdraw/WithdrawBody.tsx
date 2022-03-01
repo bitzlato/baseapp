@@ -115,20 +115,11 @@ export const WithdrawBody: FC<Props> = (props) => {
       );
     }
     if (!user.otp) {
-      if (isMobileDevice) {
-        return (
-          <Blur
-            text={t('page.body.wallets.tabs.withdraw.content.enable2fa')}
-            linkText={t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
-            onClick={() => history.push('/profile/2fa')}
-          />
-        );
-      }
       return (
         <Blur
-          text={t('page.body.wallets.warning.withdraw.2fa')}
-          linkText={t('page.body.wallets.warning.withdraw.2fa.button')}
-          onClick={() => history.push('/security/2fa')}
+          text={t('page.body.wallets.tabs.withdraw.content.enable2fa')}
+          linkText={t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
+          onClick={() => history.push('/profile/2fa')}
         />
       );
     }

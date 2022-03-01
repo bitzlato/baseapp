@@ -39,7 +39,7 @@ export const ProfileTwoFactorAuthScreen: FC = () => {
   const user = useSelector(selectUserInfo);
   const barcode = useSelector(selectTwoFactorAuthBarcode);
   const qrUrl = useSelector(selectTwoFactorAuthQR);
-  const success = useSelector(selectTwoFactorAuthSuccess);
+  const success = useSelector(selectTwoFactorAuthSuccess) ?? false;
   const isMobileDevice = useSelector(selectMobileDeviceState);
 
   const t = useT();
@@ -119,15 +119,13 @@ export const ProfileTwoFactorAuthScreen: FC = () => {
             <span>
               {t('page.body.profile.header.account.content.twoFactorAuthentication.message.2')}
             </span>
-            {barcode.length > 0 && (
-              <Box
-                self="center"
-                as="img"
-                alt=""
-                className={s.twoFaQr}
-                src={`data:image/png;base64,${barcode}`}
-              />
-            )}
+            <Box
+              self="center"
+              className={s.twoFaQr}
+              as="img"
+              alt=""
+              src={`data:image/png;base64,${barcode}`}
+            />
             <CopyableTextField
               fieldId="secret-2fa"
               label={t(

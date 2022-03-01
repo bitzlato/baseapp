@@ -455,6 +455,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           <PrivateRoute
             loading={userLoading}
             isLogged={isLoggedIn}
+            path="/profile/2fa"
+            component={ProfileTwoFactorAuthScreen}
+          />
+          <PrivateRoute
+            loading={userLoading}
+            isLogged={isLoggedIn}
             path="/profile"
             component={ProfileScreen}
           />
@@ -464,12 +470,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path={['/wallets/:currency?/:tab?', '/wallets']}
             component={WalletsScreen}
           />
-          <PrivateRoute
-            loading={userLoading}
-            isLogged={isLoggedIn}
-            path="/security/2fa"
-            component={ProfileTwoFactorAuthScreen}
-          />
+
           <PrivateRoute
             loading={userLoading}
             isLogged={isLoggedIn}
