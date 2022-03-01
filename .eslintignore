@@ -552,7 +552,6 @@ web/src/screens/History/index.tsx
 web/src/screens/MagicLinkScreen/index.tsx
 web/src/screens/MaintenanceScreen/index.tsx
 web/src/screens/OrdersTabScreen/index.tsx
-web/src/screens/ProfileTwoFactorAuthScreen/index.tsx
 web/src/screens/RestrictedScreen/index.tsx
 web/src/screens/SetupScreen/index.tsx
 web/src/screens/SignInScreen/index.tsx

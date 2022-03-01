@@ -69,13 +69,13 @@ import {
   MagicLink,
   MaintenanceScreen,
   OrdersTabScreen,
-  ProfileTwoFactorAuthScreen,
   RestrictedScreen,
   TradingScreen,
   VerificationScreen,
   QuickExchange,
   LandingScreen,
 } from '../../screens';
+import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuthScreen/ProfileTwoFactorAuthScreen';
 
 interface ReduxProps {
   colorTheme: string;

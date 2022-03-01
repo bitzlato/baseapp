@@ -6,7 +6,6 @@ export * from './History';
 export * from './LandingScreen';
 export * from './MagicLinkScreen';
 export * from './OrdersTabScreen';
-export * from './ProfileTwoFactorAuthScreen';
 export * from './TradingScreen';
 export * from './VerificationScreen';
 export * from './RestrictedScreen';
