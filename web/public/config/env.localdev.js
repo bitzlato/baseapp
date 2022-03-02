@@ -9,8 +9,8 @@ window.env = {
     p2pUrl: '/api/p2p',
   },
   auth0: {
-    domain: 'auth.lgk.one',
-    client_id: 'OL926gD0Zha6h80uJx4TVhJLMKrJemjb',
+    domain: window.AUTH0_DOMAIN ?? 'auth.lgk.one',
+    client_id: window.AUTH0_CLIENT_ID ?? 'OL926gD0Zha6h80uJx4TVhJLMKrJemjb',
     // domain: 'auth.bitzlato.bz',
     // client_id: 'sW5Er9tgeD9T8XuklzCX_FcNX0ETttJK',
     redirect_uri: 'http://localhost:8080/wallets',

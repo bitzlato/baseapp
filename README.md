@@ -55,6 +55,8 @@ yarn start:all
 | `HOST`            | Указаный хост будет использовать dev server                         |
 | `PORT`            | Указаный порт будет использовать dev server                         |
 | `MARKET_DOCS_URL` | Указывает на то, где находится `docs.js`                            |
+| `AUTH0_DOMAIN`    | Домен сервера auth0                                                 |
+| `AUTH0_CLIENT_ID` | Идентификатор клиента auth0                                         |
 
 ## Сборка проекта
 

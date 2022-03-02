@@ -233,6 +233,8 @@ module.exports = {
       REACT_APP_BUGSNAG_VERSION: appVersion,
       REACT_APP_RELEASE_STAGE: 'development',
       REACT_APP_GIT_SHA: null,
+      AUTH0_DOMAIN: null,
+      AUTH0_CLIENT_ID: null,
     }),
 
     new webpack.IgnorePlugin({
