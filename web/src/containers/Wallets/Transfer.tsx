@@ -22,6 +22,7 @@ import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import sQuickExchange from 'src/containers/QuickExchange/QuickExchange.postcss';
 import s from './Transfer.postcss';
 import { TransferHistory } from './TransferHistory';
+import { getCurrencySymbol } from 'web/src/helpers/getCurrencySymbol';
 
 interface Props {
   currency: Currency;
@@ -83,7 +84,7 @@ export const Transfer: React.FC<Props> = ({
       const data: TransferPost = {
         source: from,
         destination: to,
-        currency_id: currency.code,
+        currency_id: getCurrencySymbol(currency),
         amount,
         description: 'Transfer by market web-client',
       };
