@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { rootSaga, sendError } from '../../..';
+import { rootSaga, sendError, User } from '../../..';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
 import { CommonError } from '../../../types';
 import { userData, userError, userFetch } from '../actions';
@@ -27,7 +27,7 @@ describe('Module: User', () => {
     message: ['Server error'],
   };
 
-  const fakeUser = {
+  const fakeUser: User = {
     username: 'johnny1337',
     email: 'admin@barong.io',
     uid: 'ID26C901376F',
@@ -41,6 +41,39 @@ describe('Module: User', () => {
     phone: [],
     created_at: '',
     updated_at: '',
+    bitzlato_user: {
+      id: 14716789,
+      nickname: 'nickname',
+      email_verified: true,
+      '2fa_enabled': false,
+      email: 'email@gmail.com',
+      user_profile: {
+        id: 2608888,
+        user_id: 14716789,
+        lang: 'ru',
+        lang_web: 'en',
+        currency: 'USD',
+        cryptocurrency: 'BTC',
+        rating: '0.0',
+        verified: false,
+        timezone: 'Europe/Kirov',
+        safe_mode_enabled: true,
+        public_name: null,
+        generated_name: 'OddKraig',
+        avatar: {
+          original: '',
+          thumbnail: '',
+        },
+      },
+      user_setting: {
+        id: 123123,
+        save_requisites: true,
+        new_referral: 'off',
+        user_message: 'off',
+        comission_return: 'off',
+        dividends_received: 'off',
+      },
+    },
   };
 
   const mockUser = () => {

@@ -38,7 +38,6 @@ import {
   ProfileLanguageMobileScreen,
   ProfileMobileScreen,
   ProfileThemeMobileScreen,
-  ProfileVerificationMobileScreen,
   TradingScreenMobile,
 } from '../../mobile/screens';
 import {
@@ -76,6 +75,7 @@ import {
   LandingScreen,
 } from '../../screens';
 import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuthScreen/ProfileTwoFactorAuthScreen';
+import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSettingsMobileScreen/ProfileSettingsMobileScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -343,6 +343,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}
+              path="/profile/settings"
+              component={ProfileSettingsMobileScreen}
+            />
+            <PrivateRoute
+              loading={userLoading}
+              isLogged={isLoggedIn}
               path="/profile/account-activity"
               component={ProfileAccountActivityMobileScreen}
             />
@@ -372,12 +378,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                 component={ProfileChangePasswordMobileScreen}
               />
             )}
-            <PrivateRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/profile/verification"
-              component={ProfileVerificationMobileScreen}
-            />
             <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}

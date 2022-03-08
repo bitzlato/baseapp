@@ -5,7 +5,7 @@ import { rootSaga, sendError } from '../../..';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
 import { changeLanguage } from '../../../public/i18n';
 import { CommonError } from '../../../types';
-import { userData } from '../../profile';
+import { User, userData } from '../../profile';
 import { signIn, signInError, signInRequire2FA } from '../actions';
 
 describe('SignIn saga', () => {
@@ -26,7 +26,7 @@ describe('SignIn saga', () => {
 
   const fakeCredentials = { email: 'john.barong@gmail.com', password: '123123' };
 
-  const fakeUser = {
+  const fakeUser: User = {
     username: 'johnny1337',
     email: 'admin@barong.io',
     uid: 'ID26C901376F',
@@ -41,6 +41,39 @@ describe('SignIn saga', () => {
     phone: [],
     created_at: '',
     updated_at: '',
+    bitzlato_user: {
+      id: 14716789,
+      nickname: 'nickname',
+      email_verified: true,
+      '2fa_enabled': false,
+      email: 'email@gmail.com',
+      user_profile: {
+        id: 2608888,
+        user_id: 14716789,
+        lang: 'ru',
+        lang_web: 'en',
+        currency: 'USD',
+        cryptocurrency: 'BTC',
+        rating: '0.0',
+        verified: false,
+        timezone: 'Europe/Kirov',
+        safe_mode_enabled: true,
+        public_name: null,
+        generated_name: 'OddKraig',
+        avatar: {
+          original: '',
+          thumbnail: '',
+        },
+      },
+      user_setting: {
+        id: 123123,
+        save_requisites: true,
+        new_referral: 'off',
+        user_message: 'off',
+        comission_return: 'off',
+        dividends_received: 'off',
+      },
+    },
   };
 
   const mockSignIn = () => {
