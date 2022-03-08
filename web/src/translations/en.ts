@@ -1236,4 +1236,64 @@ export const en = {
   Status: 'Status',
   To: 'To',
   Wallets: 'Wallets',
+  Close: 'Close',
+  Cancel: 'Cancel',
+  Yes: 'Yes',
+  No: 'No',
+  Right: 'Right',
+  Settings: 'Settings',
+  'Default currency': 'Default currency',
+  General: 'General',
+  Security: 'Security',
+  Notifications: 'Notifications',
+  'Safe Mode': 'Safe Mode',
+  Timezone: 'Timezone',
+  Rating: 'Rating',
+  Comments: 'Comments',
+  'Transactions made': 'Transactions made',
+  'Show all': 'Show all',
+
+  'safemode.title': 'Disable safe mode',
+  'safemode.begin':
+    '🔒 To continue, you need to pass a safety knowledge test when working with the service.\nThis operation is a one-time and does not take much time!',
+  'safemode.error': 'Oops! This is a mistake that can cost you a loss of funds. Try again.',
+  'safemode.success': 'Congratulations! Now you can create checks and disable safe mode',
+  'safemode.start_test': 'Start test',
+  'safemode.question1':
+    "You have started the transaction, but your counterpart offers to conduct the transaction through the service operator, in manual mode. It's so much faster and easier, and the course is better.\nAre there operators/support agents in the service that conduct transactions?",
+  'safemode.question2':
+    'A support agent contacted you and asks you to give him the phone number and SMS code.\nDo I need to report this information?',
+  'safemode.question3':
+    'Transfer of funds under the transaction by check is not a violation and will not lead to loss of funds due to possible fraud?',
+  'safemode.next_question': 'Next question',
+  'safemode.check_is_gift': 'Cheque - is gift',
+
+  'notification_setting.off': 'Disabled',
+  'notification_setting.on': 'Enabled',
+  'notification_setting.silent': 'Silent',
+  'notification_setting.no-nighttime': 'Do not receive at night',
+  'notification_setting.silent,no-nighttime': 'Do not receive at night and Silent',
+
+  'settings.save_requisites': 'Save payment details',
+  'settings.notifications_help': 'Night time is from 11PM to 9AM according to your local time.',
+  'settings.new_referral': 'New referrals',
+  'settings.new_referral_help':
+    'Notifications of new referrals after the user has registered in the service by your referral link.',
+  'settings.dividends_received': 'Referral Payments',
+  'settings.dividends_received_help': 'Payout notifications after the user has completed a trade.',
+  'settings.comission_return': 'Free trades',
+  'settings.comission_return_help':
+    'Notification that your trade was free and the commission has returned to the balance.',
+  'settings.user_message': 'Service messages',
+  'settings.user_message_help':
+    'Very rare, but sometimes Bitzlato sends important messages to users, but we value the comfort of users more, so you can change the settings for receiving such messages.',
+  'settings.safe_mode_help':
+    'When safe mode is enabled, only trusted traders are available to you.',
+
+  'profile.verification_link_1': 'If the link did not open automatically,',
+  'profile.verification_link_2': 'click here',
+  'profile.verification_no': 'Verification not passed',
+  'profile.verification_goto': 'Verify',
+  'profile.verification_yes': 'Verification passed',
+  'profile.deals_stat': 'trades for',
 };
