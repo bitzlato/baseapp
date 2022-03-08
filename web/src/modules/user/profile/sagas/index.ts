@@ -5,6 +5,7 @@ import {
   PROFILE_GENERATE_2FA_QRCODE_FETCH,
   PROFILE_TOGGLE_2FA_FETCH,
   PROFILE_USER_FETCH,
+  PROFILE_USER_REFETCH,
 } from '../constants';
 import { changePasswordSaga } from './changePasswordSaga';
 import { changeUserDataSaga } from './changeUserDataSaga';
@@ -18,4 +19,5 @@ export function* rootProfileSaga() {
   yield takeEvery(PROFILE_GENERATE_2FA_QRCODE_FETCH, generate2faQRSaga);
   yield takeEvery(PROFILE_TOGGLE_2FA_FETCH, toggle2faSaga);
   yield takeLeading(PROFILE_USER_FETCH, userSaga);
+  yield takeLeading(PROFILE_USER_REFETCH, userSaga);
 }

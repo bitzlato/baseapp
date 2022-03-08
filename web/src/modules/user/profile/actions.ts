@@ -20,6 +20,7 @@ import {
   PROFILE_USER_DATA,
   PROFILE_USER_ERROR,
   PROFILE_USER_FETCH,
+  PROFILE_USER_REFETCH,
 } from './constants';
 import { User } from './types';
 
@@ -81,6 +82,10 @@ export interface Generate2faQRError {
 
 export interface UserFetch {
   type: typeof PROFILE_USER_FETCH;
+}
+
+export interface UserRefetch {
+  type: typeof PROFILE_USER_REFETCH;
 }
 
 export interface UserInfo {
@@ -209,6 +214,10 @@ export const generate2faQRError = (error: CommonError): Generate2faQRError => ({
 
 export const userFetch = (): UserFetch => ({
   type: PROFILE_USER_FETCH,
+});
+
+export const userRefetch = (): UserRefetch => ({
+  type: PROFILE_USER_REFETCH,
 });
 
 export const userData = (payload: UserInfo['payload']): UserInfo => ({

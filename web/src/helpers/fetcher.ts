@@ -24,6 +24,11 @@ export const fetcher = async (input: RequestInfo, init: RequestInit) => {
       throw error;
     }
 
+    // json parse syntax error
+    if (error instanceof SyntaxError) {
+      throw new FetcherError(['Server error'], 500, {});
+    }
+
     throw new FetcherError([(error as Error).toString()], 500, {});
   }
 };

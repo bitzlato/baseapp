@@ -29,7 +29,7 @@ export const useFetcher = ((...args: Parameters<SWRHook>) => {
           type: 'error',
           code: swr.error.code,
           message: swr.error.messages,
-          payload: Object.keys(swr.error.payload) ? swr.error.payload : undefined,
+          payload: swr.error.payload,
         }),
       );
     }
