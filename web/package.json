@@ -59,8 +59,10 @@
     "regenerator-runtime": "^0.13.9",
     "src": "link:./src",
     "swr": "^1.2.2",
+    "timezones.json": "^1.6.1",
     "transition-hook": "^1.5.1",
     "ua-parser-js": "^0.7.19",
+    "use-mutation": "^2.2.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
