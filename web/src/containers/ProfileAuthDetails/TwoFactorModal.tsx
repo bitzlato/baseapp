@@ -1,4 +1,4 @@
-import { FC, useState, KeyboardEvent } from 'react';
+import { FC, useState, KeyboardEvent, ReactNode } from 'react';
 import { Box } from 'web/src/components/Box/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { TextInput } from 'web/src/components/Input/TextInput';
@@ -12,9 +12,10 @@ interface Props {
   onClose: () => void;
   onSend: (code: string) => void;
   buttonText?: string | undefined;
+  text?: ReactNode | undefined;
 }
 
-export const TwoFactorModal: FC<Props> = ({ onClose, onSend, buttonText }) => {
+export const TwoFactorModal: FC<Props> = ({ onClose, onSend, buttonText, text }) => {
   const [code, setCode] = useState('');
   const t = useT();
   const { start, countdown } = useCountdown();
@@ -39,12 +40,14 @@ export const TwoFactorModal: FC<Props> = ({ onClose, onSend, buttonText }) => {
   return (
     <Modal2 header={t('2FA Verification')} onClose={onClose} show>
       <Box col spacing="3">
+        {text}
         <TextInput
           label={t('2FA code')}
-          placeholder={t('Enter 2FA code from the app')}
+          placeholder={!text ? t('Enter 2FA code from the app') : undefined}
           value={code}
           onChange={setCode}
           onKeyPress={handleKeyPress}
+          maxlength={6}
           autoFocus
         />
         <Button disabled={disabled} onClick={handleSend}>

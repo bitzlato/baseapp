@@ -23,13 +23,13 @@ import { accountUrl } from 'src/api';
 import { Container } from 'web/src/components/Container/Container';
 import { Gift } from 'web/src/containers/Gift/Gift';
 import { DEFAULT_WALLET_ITEM } from 'web/src/components/WalletItem/defaults';
+import { useFetch } from 'web/src/hooks/data/useFetch';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
+import { isPendingUser } from 'web/src/modules/user/profile/selectors';
 import { getList } from './helpers';
 import { TabId, useWalletTab } from './useWalletTab';
 import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
-import { useFetch } from 'web/src/hooks/data/useFetch';
-import { fetchWithCreds } from 'web/src/helpers/fetch';
-import { isPendingUser } from 'web/src/modules/user/profile/selectors';
 
 import s from './WalletsScreen.postcss';
 
@@ -134,10 +134,7 @@ export const WalletsScreen: React.FC = () => {
                       <>
                         <TabPanel value={TabId.deposit}>
                           {general.currency === 'BTC' ? (
-                            <InvoiceExplanation
-                              currency={general.currency}
-                              onClick={() => onTabSelected(TabId.transfer)}
-                            />
+                            <InvoiceExplanation currency={general.currency} />
                           ) : (
                             <DepositCrypto wallet={wallet} />
                           )}
@@ -149,10 +146,7 @@ export const WalletsScreen: React.FC = () => {
                         </TabPanel>
                         <TabPanel value={TabId.withdraw}>
                           {general.currency === 'BTC' ? (
-                            <InvoiceExplanation
-                              currency={general.currency}
-                              onClick={() => onTabSelected(TabId.transfer)}
-                            />
+                            <InvoiceExplanation currency={general.currency} />
                           ) : (
                             <Withdraw wallet={wallet} />
                           )}
