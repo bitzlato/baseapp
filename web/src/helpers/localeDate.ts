@@ -1,18 +1,21 @@
 import moment from 'moment-timezone';
 import { getTimezone } from './timezone';
 
-export const localeDate = (date: moment.MomentInput, format: string, timezone = getTimezone()) => {
-  const getFormat = (type: string) => {
-    return {
-      fullDate: 'DD-MM-YYYY HH:mm:ss',
-      shortDate: 'DD-MM-YYYY HH:mm',
-      time: 'HH:mm:ss',
-      date: 'DD-MM-YYYY',
-    }[type];
-  };
-  const formatDisplay = getFormat(format);
-  const isUnix = typeof date === 'number';
-  const momentObj = isUnix ? moment.unix(date) : moment(date);
+const FORMATS = {
+  fullDate: 'DD-MM-YYYY HH:mm:ss',
+  shortDate: 'DD-MM-YYYY HH:mm',
+  time: 'HH:mm:ss',
+  date: 'DD-MM-YYYY',
+};
 
+type FormatType = 'fullDate' | 'shortDate' | 'time' | 'date';
+
+export const localeDate = (
+  date: moment.MomentInput,
+  format: FormatType,
+  timezone = getTimezone(),
+) => {
+  const formatDisplay = FORMATS[format];
+  const momentObj = moment(date);
   return momentObj.tz(timezone).format(formatDisplay);
 };
