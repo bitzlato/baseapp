@@ -24,7 +24,10 @@ export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletIt
         : wallet.balance,
       locked: balance ? getLocked(ccy, balance) : wallet.locked,
       approximate: createMoney(wallet.price, PENCE_CCY).multiply(balanceTotal.toString()),
+      hasDepositWithdraw: true,
       hasTransfer: balance !== undefined && balance.p2p_balance !== null,
+      // hasGift: balance !== undefined,
+      hasGift: false,
       index: i,
     });
   }
@@ -44,7 +47,9 @@ export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletIt
           balanceMarket: undefined,
           locked: createMoney(balance.p2p_hold, createCcy(currencyId, 8)),
           approximate: createMoney(0, PENCE_CCY),
+          hasDepositWithdraw: false,
           hasTransfer: false,
+          hasGift: true,
           index: wallets.length + i,
         });
       }

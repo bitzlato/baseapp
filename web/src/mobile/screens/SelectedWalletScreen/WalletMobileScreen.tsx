@@ -1,10 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { Subheader } from 'src/mobile/components';
 import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
-import { SelectOption } from 'src/components/Select/Select';
 import { useGeneralWallets } from 'src/hooks/useGeneralWallets';
 import { Tab, TabList, TabPanel, Tabs } from 'src/components/Tabs';
 import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
@@ -14,10 +13,12 @@ import { Transfer } from 'src/containers/Wallets/Transfer';
 import { selectWallet } from 'src/modules/user/wallets/selectors';
 import { InvoiceExplanation } from 'src/screens/WalletsScreen/InvoiceExplanation';
 import { WalletMobileBalance } from './WalletMobileBalance';
+import { TabId, useWalletTab } from 'web/src/screens/WalletsScreen/useWalletTab';
+import { Gift } from 'web/src/containers/Gift/Gift';
+import { DEFAULT_WALLET_ITEM } from 'web/src/components/WalletItem/defaults';
 
 export const WalletMobileScreen: React.FC = () => {
   const params = useParams<UrlParams>();
-  const [tab, setTab] = useState(params.tab ?? 'deposit');
   const currency = params.currency?.toUpperCase() ?? '';
   const history = useHistory();
   const t = useT();
@@ -30,15 +31,9 @@ export const WalletMobileScreen: React.FC = () => {
     history.replace(`/wallets/${currency.toLowerCase()}/${value}`);
   };
 
-  const general = generals.find((d) => d.currency === currency);
+  const general = generals.find((d) => d.currency === currency) ?? DEFAULT_WALLET_ITEM;
 
-  const tabs = useMemo(() => {
-    return TABS.filter((d) => {
-      return general?.balanceMarket && (d.value !== 'transfer' || general?.hasTransfer);
-    });
-  }, [general?.hasTransfer, general?.balanceMarket]);
-
-  const tabValue = getTabValue(tabs, tab);
+  const { tabs, tab, setTab } = useWalletTab(params.tab, general);
 
   return (
     <Box col spacing="sm">
@@ -52,7 +47,7 @@ export const WalletMobileScreen: React.FC = () => {
           <WalletMobileBalance wallet={general} />
           {wallet && (
             <Box bgColor="body" padding="2X3" col spacing="2">
-              <Tabs value={tabValue} onSelectionChange={handleTabSelection as any}>
+              <Tabs value={tab} onSelectionChange={handleTabSelection as any}>
                 <Box grow justify="around" as={TabList}>
                   {tabs.map((d) => (
                     <Tab key={d.value} value={d.value} size="small">
@@ -64,7 +59,7 @@ export const WalletMobileScreen: React.FC = () => {
                   {general.currency === 'BTC' ? (
                     <InvoiceExplanation
                       currency={general.currency}
-                      onClick={() => handleTabSelection('transfer')}
+                      onClick={() => handleTabSelection(TabId.transfer)}
                     />
                   ) : (
                     <DepositCrypto wallet={wallet} />
@@ -79,7 +74,7 @@ export const WalletMobileScreen: React.FC = () => {
                   {general.currency === 'BTC' ? (
                     <InvoiceExplanation
                       currency={general.currency}
-                      onClick={() => handleTabSelection('transfer')}
+                      onClick={() => handleTabSelection(TabId.transfer)}
                     />
                   ) : (
                     <Withdraw wallet={wallet} />
@@ -99,6 +94,14 @@ export const WalletMobileScreen: React.FC = () => {
                     />
                   )}
                 </TabPanel>
+                <TabPanel value={TabId.gift}>
+                  {general.balanceP2P && (
+                    <Gift
+                      currency={general.balanceTotal.currency}
+                      balanceP2P={general.balanceP2P}
+                    />
+                  )}
+                </TabPanel>
               </Tabs>
             </Box>
           )}
@@ -111,17 +114,4 @@ export const WalletMobileScreen: React.FC = () => {
 interface UrlParams {
   currency?: string;
   tab?: string;
-}
-
-type TabId = 'deposit' | 'withdraw' | 'transfer';
-
-const TABS: SelectOption<TabId>[] = [
-  { value: 'deposit', label: 'Deposit.noun' },
-  { value: 'withdraw', label: 'Withdraw.noun' },
-  { value: 'transfer', label: 'Transfer.noun' },
-];
-
-function getTabValue(tabs: SelectOption<TabId>[], value?: string): TabId {
-  value = value?.toLowerCase();
-  return tabs.find((d) => d.value === value)?.value ?? 'deposit';
 }

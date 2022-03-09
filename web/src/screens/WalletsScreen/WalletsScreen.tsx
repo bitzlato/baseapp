@@ -20,9 +20,11 @@ import { useHistory, useParams } from 'react-router';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { Estimated } from 'src/containers/Wallets/Estimated';
 import { accountUrl } from 'src/api';
-import type { SelectOption } from 'src/components/Select/Select';
 import { Container } from 'web/src/components/Container/Container';
+import { Gift } from 'web/src/containers/Gift/Gift';
+import { DEFAULT_WALLET_ITEM } from 'web/src/components/WalletItem/defaults';
 import { getList } from './helpers';
+import { TabId, useWalletTab } from './useWalletTab';
 import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
 import { useFetch } from 'web/src/hooks/data/useFetch';
@@ -37,7 +39,6 @@ export const WalletsScreen: React.FC = () => {
   const wallets = useSelector(selectWallets);
   const isPending = useSelector(isPendingUser);
   const [listIndex, setListIndex] = useState(0);
-  const [tab, setTab] = useState(params.tab);
 
   const t = useT();
   useWalletsFetch();
@@ -61,6 +62,7 @@ export const WalletsScreen: React.FC = () => {
     if (index !== -1) {
       setListIndex(index);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list.length]);
 
   const replaceHistory = (index: number, tabId?: string) => {
@@ -75,28 +77,20 @@ export const WalletsScreen: React.FC = () => {
     history.replace(`/wallets/${parts.join('/')}`);
   };
 
+  const general = list[listIndex] ?? DEFAULT_WALLET_ITEM;
+  const wallet = wallets.find((d) => d.currency.code === general?.currency);
+
+  const { tabs, tab, setTab } = useWalletTab(params.tab, general);
+
   const onListSelected = (index: number) => {
     setListIndex(index);
-    const tabn = getTab(tabs, tab)?.value;
-    setTab(tabn);
-    replaceHistory(index, tabn);
+    replaceHistory(index, setTab(tab));
   };
 
   const onTabSelected = (value: string) => {
     setTab(value);
     replaceHistory(listIndex, value);
   };
-
-  const item = list[listIndex];
-  const wallet = wallets.find((d) => d.currency.code === item?.currency);
-
-  const tabs = useMemo(() => {
-    return TABS.filter((d) => {
-      return item?.balanceMarket && (d.value !== TabId.transfer || item?.hasTransfer);
-    });
-  }, [item?.hasTransfer, item?.balanceMarket]);
-
-  const tabValue = getTab(tabs, tab)?.value ?? '';
 
   return (
     <Container maxWidth="lg" my="4">
@@ -111,16 +105,16 @@ export const WalletsScreen: React.FC = () => {
               onWalletSelectionChange={onListSelected}
             />
             <Box flex="1" self="stretch" col className={s.walletsCoin}>
-              {item && (
-                <Tabs value={tabValue} onSelectionChange={onTabSelected}>
+              {general && (
+                <Tabs value={tab} onSelectionChange={onTabSelected}>
                   <Box padding="5" col spacing="5" textColor="primary">
                     <Box row spacing="2">
-                      <CryptoCurrencyIcon size="large" currency={item.currency} />
+                      <CryptoCurrencyIcon size="large" currency={general.currency} />
                       <Box col align="start" textAlign="start">
                         <span className={walletItemS.title}>
-                          {getCurrencyCodeSymbol(item.currency)}
+                          {getCurrencyCodeSymbol(general.currency)}
                         </span>
-                        <span className={walletItemS.description}>{item.name}</span>
+                        <span className={walletItemS.description}>{general.name}</span>
                       </Box>
                       <Box grow />
                       <TabList>
@@ -132,16 +126,16 @@ export const WalletsScreen: React.FC = () => {
                       </TabList>
                     </Box>
                     <Box row gap="5" wrap style={{ marginTop: 'calc(var(--gap) * 5 / 2)' }}>
-                      <Balance title={t('P2P Balance')} money={item.balanceP2P} />
-                      <Balance title={t('Exchange Balance')} money={item.balanceMarket} />
-                      <Balance title={t('Locked')} money={item.locked} />
+                      <Balance title={t('P2P Balance')} money={general.balanceP2P} />
+                      <Balance title={t('Exchange Balance')} money={general.balanceMarket} />
+                      <Balance title={t('Locked')} money={general.locked} />
                     </Box>
-                    <TabPanel value={TabId.deposit}>
-                      {wallet && (
-                        <>
-                          {item.currency === 'BTC' ? (
+                    {wallet && (
+                      <>
+                        <TabPanel value={TabId.deposit}>
+                          {general.currency === 'BTC' ? (
                             <InvoiceExplanation
-                              currency={item.currency}
+                              currency={general.currency}
                               onClick={() => onTabSelected(TabId.transfer)}
                             />
                           ) : (
@@ -152,15 +146,11 @@ export const WalletsScreen: React.FC = () => {
                             type="deposits"
                             currency={wallet.currency.code.toLowerCase()}
                           />
-                        </>
-                      )}
-                    </TabPanel>
-                    <TabPanel value={TabId.withdraw}>
-                      {wallet && (
-                        <>
-                          {item.currency === 'BTC' ? (
+                        </TabPanel>
+                        <TabPanel value={TabId.withdraw}>
+                          {general.currency === 'BTC' ? (
                             <InvoiceExplanation
-                              currency={item.currency}
+                              currency={general.currency}
                               onClick={() => onTabSelected(TabId.transfer)}
                             />
                           ) : (
@@ -171,15 +161,23 @@ export const WalletsScreen: React.FC = () => {
                             type="withdraws"
                             currency={wallet.currency.code.toLowerCase()}
                           />
-                        </>
+                        </TabPanel>
+                      </>
+                    )}
+                    <TabPanel value={TabId.transfer}>
+                      {general.hasTransfer && (
+                        <Transfer
+                          currency={general.balanceTotal.currency}
+                          balanceMarket={general.balanceMarket?.toString() ?? '0'}
+                          balanceP2P={general.balanceP2P?.toString() ?? '0'}
+                        />
                       )}
                     </TabPanel>
-                    <TabPanel value={TabId.transfer}>
-                      {item.hasTransfer && (
-                        <Transfer
-                          currency={item.balanceTotal.currency}
-                          balanceMarket={item.balanceMarket?.toString() ?? '0'}
-                          balanceP2P={item.balanceP2P?.toString() ?? '0'}
+                    <TabPanel value={TabId.gift}>
+                      {general.balanceP2P && (
+                        <Gift
+                          currency={general.balanceTotal.currency}
+                          balanceP2P={general.balanceP2P}
                         />
                       )}
                     </TabPanel>
@@ -197,21 +195,4 @@ export const WalletsScreen: React.FC = () => {
 interface UrlParams {
   currency?: string;
   tab?: string;
-}
-
-const enum TabId {
-  deposit = 'deposit',
-  withdraw = 'withdraw',
-  transfer = 'transfer',
-}
-
-const TABS: SelectOption[] = [
-  { value: TabId.deposit, label: 'Deposit.noun' },
-  { value: TabId.withdraw, label: 'Withdraw.noun' },
-  { value: TabId.transfer, label: 'Transfer.noun' },
-];
-
-function getTab(tabs: SelectOption[], value?: string) {
-  value = value?.toLowerCase();
-  return tabs.find((d) => d.value === value) ?? tabs[0];
 }
