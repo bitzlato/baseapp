@@ -249,7 +249,7 @@ export const QuickExchangeContainer: React.FC = () => {
               ) : null}
               <Box grow row spacing="2">
                 <Box
-                  flex1
+                  flex="1"
                   as={NumberInput}
                   label={t('page.body.quick.exchange.label.exchange')}
                   labelVisible
@@ -300,7 +300,7 @@ export const QuickExchangeContainer: React.FC = () => {
               </Box>
             </Box>
             <Box row justify="between">
-              <Box flex1 row spacing="2" justify="between">
+              <Box flex="1" row spacing="2" justify="between">
                 {fromCcy && toCcy && (
                   <Box col spacing>
                     <Box row spacing wrap>
@@ -325,7 +325,7 @@ export const QuickExchangeContainer: React.FC = () => {
           </Box>
           <Box grow row spacing="2">
             <Box
-              flex1
+              flex="1"
               as={NumberInput}
               label={
                 <Box row spacing="sm">

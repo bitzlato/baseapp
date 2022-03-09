@@ -136,7 +136,7 @@ export const WithdrawBody: FC<Props> = (props) => {
         <BeneficiaryAddress beneficiary={beneficiary} />
         <Box grow row spacing="2">
           <Box
-            flex1
+            flex="1"
             as={NumberInput}
             value={amount}
             onChange={handleChangeInputAmount}
@@ -144,7 +144,7 @@ export const WithdrawBody: FC<Props> = (props) => {
           />
           {twoFactorAuthRequired && (
             <Box
-              flex1
+              flex="1"
               as={NumberInput}
               value={otpCode}
               onChange={setOtpCode}
@@ -154,7 +154,7 @@ export const WithdrawBody: FC<Props> = (props) => {
         </Box>
         <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2">
           <WithdrawSummary total={total} wallet={wallet} blockchainCurrency={blockchainCurrency} />
-          <Box flex1 self="end" row justify="end">
+          <Box flex="1" self="end" row justify="end">
             <Button color="primary" onClick={handleClick} disabled={isButtonDisabled()}>
               {countdown > 0
                 ? formatSeconds(countdown)

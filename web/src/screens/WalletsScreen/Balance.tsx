@@ -11,7 +11,7 @@ interface BalanceProps {
 
 export const Balance: React.FC<BalanceProps> = (props) => {
   return (
-    <Box flex1 padding="3" col justify="between" className={s.balance}>
+    <Box flex="1" padding="3" col justify="between" className={s.balance}>
       <Box textSize="lg">{props.title}</Box>
       <Box style={{ fontSize: 30 }}>
         <NoAmountFormat money={props.money} />

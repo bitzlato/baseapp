@@ -18,7 +18,7 @@ export const WithdrawSummary: React.FC<Props> = ({ wallet, total, blockchainCurr
   const t = useT();
 
   return (
-    <Box flex1 col spacing="sm">
+    <Box flex="1" col spacing="sm">
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.fee')}>
         <NoAmountFormat money={blockchainCurrency?.withdraw_fee} />
       </SummaryField>
