@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { CloseIcon } from 'web/src/assets/images/CloseIcon';
 import { Box } from 'web/src/components/Box/Box';
@@ -10,7 +10,7 @@ import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/s
 import { MobileModal } from 'web/src/mobile/components/Modal';
 
 interface Props {
-  header: string;
+  header: ReactNode;
   onClose?: () => void;
   show: boolean | undefined;
 }

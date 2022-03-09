@@ -560,6 +560,5 @@ web/src/screens/TradingScreen/index.tsx
 web/src/screens/VerificationScreen/index.tsx
 web/src/screens/WalletsScreen/Balance.tsx
 web/src/screens/WalletsScreen/InvoiceExplanation.tsx
-web/src/screens/WalletsScreen/WalletsScreen.tsx
 web/src/screens/WalletsScreen/helpers.ts
 web/src/translations/index.ts

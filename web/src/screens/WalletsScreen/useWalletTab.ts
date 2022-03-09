@@ -21,8 +21,8 @@ function findTabByValue(tabs: SelectOption[], value?: string): SelectOption {
   return tabs.find((d) => d.value === valueLower) ?? tabs[0]!;
 }
 
-export function useWalletTab(initialTab: string | undefined, general: WalletItemData) {
-  const [tabState, setTabState] = useState(initialTab);
+export function useWalletTab(queryTab: string | undefined, general: WalletItemData) {
+  const [tabState, setTabState] = useState(queryTab);
 
   const tabs = useMemo(() => {
     return TABS.filter((d) => {
@@ -41,7 +41,7 @@ export function useWalletTab(initialTab: string | undefined, general: WalletItem
     return newValue;
   };
 
-  const tab = findTabByValue(tabs, tabState)?.value;
+  const tab = findTabByValue(tabs, queryTab ?? tabState)?.value;
 
   return { tabs, tab, setTab };
 }

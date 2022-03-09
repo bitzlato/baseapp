@@ -1,0 +1,20 @@
+.giftHistory {
+  text-align: left;
+
+  th,
+  td {
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0 !important;
+      text-align: right;
+      width: initial;
+    }
+
+    &:nth-child(2) > * {
+      max-width: 100px !important;
+    }
+  }
+}

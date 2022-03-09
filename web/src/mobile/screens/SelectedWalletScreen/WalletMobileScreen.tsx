@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { Subheader } from 'src/mobile/components';
@@ -57,10 +56,7 @@ export const WalletMobileScreen: React.FC = () => {
                 </Box>
                 <TabPanel value="deposit">
                   {general.currency === 'BTC' ? (
-                    <InvoiceExplanation
-                      currency={general.currency}
-                      onClick={() => handleTabSelection(TabId.transfer)}
-                    />
+                    <InvoiceExplanation currency={general.currency} />
                   ) : (
                     <DepositCrypto wallet={wallet} />
                   )}
@@ -72,10 +68,7 @@ export const WalletMobileScreen: React.FC = () => {
                 </TabPanel>
                 <TabPanel value="withdraw">
                   {general.currency === 'BTC' ? (
-                    <InvoiceExplanation
-                      currency={general.currency}
-                      onClick={() => handleTabSelection(TabId.transfer)}
-                    />
+                    <InvoiceExplanation currency={general.currency} />
                   ) : (
                     <Withdraw wallet={wallet} />
                   )}

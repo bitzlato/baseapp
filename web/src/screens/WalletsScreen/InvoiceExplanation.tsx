@@ -5,7 +5,6 @@ import { useT } from 'src/hooks/useT';
 import s from 'src/containers/QuickExchange/QuickExchange.postcss';
 
 interface Props {
-  onClick: () => void;
   currency: string;
 }
 export const InvoiceExplanation: React.FC<Props> = (props) => {
@@ -14,11 +13,7 @@ export const InvoiceExplanation: React.FC<Props> = (props) => {
     <Box textColor="primary">
       {t('p2p_deposit_withdraw', {
         transfer: (
-          <Link
-            to={`/wallets/${props.currency.toLowerCase()}/transfer`}
-            onClick={() => props.onClick()}
-            className={s.link}
-          >
+          <Link to={`/wallets/${props.currency.toLowerCase()}/transfer`} className={s.link}>
             {t('p2p_transfer')}
           </Link>
         ),
