@@ -47,7 +47,7 @@ module.exports = {
   devtool: isDevelopment ? 'eval-cheap-module-source-map' : 'hidden-source-map',
 
   entry: {
-    bundle: './src/index.ts',
+    bundle: ['./src/publicPath.ts', './src/index.ts'],
   },
 
   output: {
@@ -55,7 +55,7 @@ module.exports = {
     filename: !isDevelopment ? '[name].[contenthash].js' : undefined,
     chunkFilename: '[id].[contenthash].js',
     globalObject: 'this',
-    publicPath: '/',
+    publicPath: 'auto',
     clean: true,
   },
 
@@ -226,6 +226,7 @@ module.exports = {
       }),
 
     new webpack.EnvironmentPlugin({
+      ASSET_PATH: '/',
       MOCK: false,
       BUILD_EXPIRE: null,
       HASH,
@@ -247,6 +248,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/app/template.html',
       hash: true,
+      publicPath: '/',
     }),
 
     new webpack.ProvidePlugin({
