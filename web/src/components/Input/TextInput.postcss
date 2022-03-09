@@ -3,13 +3,13 @@
   flex-direction: column;
   position: relative;
 
-  & > input {
+  & > input,
+  & > textarea {
     background: var(--body-background-color);
     border-color: var(--input-border-color);
     border-radius: var(--border-radius);
     color: var(--input-text-color);
     font-variant-numeric: tabular-nums;
-    height: var(--control-height);
 
     &:focus {
       background: var(--input-background-color-active) !important;
@@ -21,6 +21,14 @@
     &::placeholder {
       color: var(--input-placeholder-color);
     }
+  }
+
+  & > input {
+    height: var(--control-height);
+  }
+
+  & > textarea {
+    padding: 0.75rem;
   }
 
   & > label {
@@ -38,12 +46,12 @@
 .textInputNumber {
   & > input::-webkit-outer-spin-button,
   & > input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    appearance: none;
     margin: 0;
   }
 
-  & > input[type='number'] {
-    -moz-appearance: textfield;
+  & > input[type="number"] {
+    appearance: textfield;
   }
 }
 
