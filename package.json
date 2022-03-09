@@ -21,6 +21,9 @@
     "test": "jest"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
     "@swc/core": "^1.2.140",
     "@swc/jest": "^0.2.17",
     "@testing-library/jest-dom": "^5.16.1",
@@ -32,7 +35,9 @@
     "@types/testing-library__jest-dom": "^5",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
+    "@vanilla-extract/babel-plugin": "^1.1.4",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
+    "babel-jest": "^27.5.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
@@ -61,6 +66,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
+    "@vanilla-extract/css": "^1.6.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
