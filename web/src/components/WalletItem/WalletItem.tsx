@@ -16,7 +16,9 @@ export interface WalletItemData {
   balanceMarket: Money | undefined;
   approximate: Money;
   locked: Money;
+  hasDepositWithdraw: boolean;
   hasTransfer: boolean;
+  hasGift: boolean;
   index: number;
 }
 

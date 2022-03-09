@@ -17,7 +17,9 @@ const walletItems: WalletItemData[] = [
     balanceMarket: createMoney('0.5', BTC_CCY),
     approximate: createMoney('41000', USD_CCY),
     locked: createMoney('1', BTC_CCY),
+    hasDepositWithdraw: true,
     hasTransfer: true,
+    hasGift: true,
     index: 0,
   },
   {
@@ -28,7 +30,9 @@ const walletItems: WalletItemData[] = [
     balanceMarket: createMoney('0.5', ETH_CCY),
     approximate: createMoney('41000', USD_CCY),
     locked: createMoney('1', ETH_CCY),
+    hasDepositWithdraw: true,
     hasTransfer: true,
+    hasGift: true,
     index: 1,
   },
 ];
