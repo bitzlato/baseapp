@@ -110,7 +110,7 @@ export const WalletsScreen: React.FC = () => {
               activeIndex={listIndex}
               onWalletSelectionChange={onListSelected}
             />
-            <Box flex1 self="stretch" col className={s.walletsCoin}>
+            <Box flex="1" self="stretch" col className={s.walletsCoin}>
               {item && (
                 <Tabs value={tabValue} onSelectionChange={onTabSelected}>
                   <Box padding="5" col spacing="5" textColor="primary">

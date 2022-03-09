@@ -121,7 +121,7 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
       <Box col spacing="3">
         <Box grow row spacing>
           <Box
-            flex1
+            flex="1"
             as={SelectString}
             isSearchable={false}
             options={DROPS}
@@ -139,7 +139,7 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
             <SwipeIcon />
           </IconButton>
           <Box
-            flex1
+            flex="1"
             as={SelectString}
             isSearchable={false}
             options={DROPS}
@@ -181,7 +181,7 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
           <SummaryField message={t('Transfer Fee')}>
             <span>{t('Free')}</span>
           </SummaryField>
-          <Box flex1 self="end" row justify="end">
+          <Box flex="1" self="end" row justify="end">
             <Button variant="primary" onClick={handleTransfer} disabled={disableTransfer}>
               {t('Transfer.verb')}
             </Button>
