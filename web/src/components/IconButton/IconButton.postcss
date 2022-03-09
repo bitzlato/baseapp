@@ -1,4 +1,4 @@
-.icon-button {
+.iconButton {
   background-color: transparent;
   border: 1px solid transparent;
   border-radius: var(--border-radius);
@@ -10,8 +10,8 @@
     color: var(--primary-text-color);
   }
 
-  & > svg {
-    fill: currentColor;
+  &:not(&NoFill) > svg {
+    fill: currentcolor;
   }
 
   &:disabled {
