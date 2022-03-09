@@ -5,7 +5,7 @@ exports[`ProfileScreen test should render 1`] = `
   class="my7"
 >
   <div
-    class="container xl"
+    class="container xl my4"
   >
     <div
       class="cardDesktop col bodyBgColor"
@@ -21,274 +21,1000 @@ exports[`ProfileScreen test should render 1`] = `
         class="col colSpacing2 padding3"
       >
         <div
-          class="row"
+          class="reset_base__1sfgjt80 sprinkles_marginBottom_9x_mobile__w76aifge"
+        >
+          <h4
+            class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_h4__1qy84opa Text_text_gutterBottom_true__1qy84opi"
+          >
+            OddKraig
+          </h4>
+          <div
+            class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aifff"
+          >
+            <h6
+              class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsb Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_title__1qy84ope Text__1qy84op2 sprinkles_fontSize_large_mobile__w76aifrn sprinkles_fontWeight_regular__w76aif19l Text_text_gutterBottom_false__1qy84opj "
+            />
+          </div>
+          <h6
+            class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsb Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_title__1qy84ope Text__1qy84op2 sprinkles_fontSize_large_mobile__w76aifrn sprinkles_fontWeight_regular__w76aif19l Text_text_gutterBottom_false__1qy84opj "
+          >
+            UID: 
+          </h6>
+        </div>
+        <div
+          class="reset_base__1sfgjt80 Profile_stats__crp8vk0"
         >
           <div
-            class="col-12 col-md-6 mx-0"
+            class="Profile_stat__crp8vk1"
           >
             <div
-              class="pg-profile-page__box pg-profile-page__left-col__basic"
+              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif87 sprinkles_paddingRight_4x_mobile__w76aifap sprinkles_paddingTop_5x_mobile__w76aif3c sprinkles_paddingBottom_5x_mobile__w76aif5u sprinkles_backgroundColor_statBg_default__w76aifz5 sprinkles_borderRadius_1x__w76aif194 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifp sprinkles_justifyContent_space-between_mobile__w76aif1j Stat_stat__z1d39u0"
             >
+              <span
+                class="reset_base__1sfgjt80 sprinkles_color_danger_default__w76aifs3 sprinkles_textAlign_center__w76aif19q sprinkles_fontWeight_strong__w76aif19m Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+              >
+                Verification not passed
+              </span>
+              <button
+                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19k sprinkles_display_inline-block_mobile__w76aiff sprinkles_fontWeight_strong__w76aif19m Button_button_variant_contained__9n3otyj  Button_button_color_danger__9n3otyn Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif87 sprinkles_paddingRight_4x_mobile__w76aifap sprinkles_paddingTop_2x_mobile__w76aif2x sprinkles_paddingBottom_2x_mobile__w76aif5f sprinkles_fontSize_medium_mobile__w76aifri sprinkles_lineHeight_medium__w76aif19o sprinkles_borderRadius_1x__w76aif194 Button_button_disabled_false__9n3otys  Button_button_fullWidth_true__9n3otyt Button__9n3oty5 sprinkles_width_full_mobile__w76aifmi Button_button_compound_8__9n3otyz Button__9n3otye sprinkles_backgroundColor_btnDangerBg_default__w76aifxx sprinkles_backgroundColor_btnDangerBgHover_hover__w76aify0 sprinkles_color_btnDangerText_default__w76aifu3"
+                type="button"
+              >
+                Verify
+              </button>
+            </div>
+          </div>
+          <div
+            class="Profile_stat__crp8vk1"
+          >
+            <div
+              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif87 sprinkles_paddingRight_4x_mobile__w76aifap sprinkles_paddingTop_5x_mobile__w76aif3c sprinkles_paddingBottom_5x_mobile__w76aif5u sprinkles_backgroundColor_statBg_default__w76aifz5 sprinkles_borderRadius_1x__w76aif194 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifp sprinkles_justifyContent_space-between_mobile__w76aif1j Stat_stat__z1d39u0"
+            >
+              <span
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+              >
+                Rating
+              </span>
+              <span
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
+              >
+                0.0
+              </span>
+            </div>
+          </div>
+          <div
+            class="Profile_stat__crp8vk1"
+          >
+            <div
+              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif87 sprinkles_paddingRight_4x_mobile__w76aifap sprinkles_paddingTop_5x_mobile__w76aif3c sprinkles_paddingBottom_5x_mobile__w76aif5u sprinkles_backgroundColor_statBg_default__w76aifz5 sprinkles_borderRadius_1x__w76aif194 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifp sprinkles_justifyContent_space-between_mobile__w76aif1j Stat_stat__z1d39u0"
+            >
+              <span
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+              >
+                Comments
+              </span>
               <div
-                class="pg-profile-page__box-header pg-profile-page__left-col__basic__info-row"
+                class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5"
               >
                 <div
-                  class="pg-profile-page__left-col__basic__info-row__block"
+                  class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_marginRight_5x_mobile__w76aifku"
                 >
                   <div
-                    class="pg-profile-page__row pg-profile-page__details-user"
+                    class="reset_base__1sfgjt80 sprinkles_marginRight_2x_mobile__w76aifkf sprinkles_color_statIcon_default__w76aifv5 sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif1y"
                   >
-                    <p />
+                    <test-file-stub />
                   </div>
                   <div
-                    class="pg-profile-page__row"
+                    class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
                   >
-                    <h2>
-                      UID: 
-                    </h2>
+                    <span
+                      aria-busy="true"
+                      aria-live="polite"
+                    >
+                      <span
+                        class="reset_base__1sfgjt80 sprinkles_width_10x_mobile__w76aifo1 sprinkles_borderRadius_1x__w76aif194 Skeleton_skeleton__1ugc7791"
+                      >
+                        ‌
+                      </span>
+                      <br />
+                    </span>
                   </div>
                 </div>
-              </div>
-              <div
-                class="pg-profile-page__row"
-              >
-                <label
-                  class="pg-profile-page__label"
-                >
-                  <div>
-                    Two-factor authentication
-                  </div>
-                  <span
-                    class="pg-profile-page__label-value__disabled"
-                  >
-                    Disabled
-                  </span>
-                </label>
-                <form
-                  class=""
+                <div
+                  class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5"
                 >
                   <div
-                    class="custom-control custom-switch"
+                    class="reset_base__1sfgjt80 sprinkles_marginRight_2x_mobile__w76aifkf sprinkles_color_statIcon_default__w76aifv5 sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif1y"
                   >
-                    <input
-                      class="custom-control-input"
-                      id="2fa-switch"
-                      type="checkbox"
-                    />
-                    <label
-                      class="custom-control-label"
-                      for="2fa-switch"
-                      title=""
-                    />
+                    <test-file-stub />
                   </div>
-                </form>
+                  <div
+                    class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
+                  >
+                    <span
+                      aria-busy="true"
+                      aria-live="polite"
+                    >
+                      <span
+                        class="reset_base__1sfgjt80 sprinkles_width_10x_mobile__w76aifo1 sprinkles_borderRadius_1x__w76aif194 Skeleton_skeleton__1ugc7791"
+                      >
+                        ‌
+                      </span>
+                      <br />
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <div
-            class="col-12 col-md-6"
+            class="Profile_stat__crp8vk1"
           >
             <div
-              class="pg-profile-page__box pg-profile-page-verification"
+              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif87 sprinkles_paddingRight_4x_mobile__w76aifap sprinkles_paddingTop_5x_mobile__w76aif3c sprinkles_paddingBottom_5x_mobile__w76aif5u sprinkles_backgroundColor_statBg_default__w76aifz5 sprinkles_borderRadius_1x__w76aif194 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifp sprinkles_justifyContent_space-between_mobile__w76aif1j Stat_stat__z1d39u0"
             >
-              <h3
-                class="pg-profile-page-verification__title"
+              <span
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
               >
-                Profile Verification
-              </h3>
+                Transactions made
+              </span>
+              <span
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
+              >
+                <span
+                  aria-busy="true"
+                  aria-live="polite"
+                >
+                  <span
+                    class="reset_base__1sfgjt80 sprinkles_width_full_mobile__w76aifmi sprinkles_borderRadius_1x__w76aif194 Skeleton_skeleton__1ugc7791"
+                  >
+                    ‌
+                  </span>
+                  <br />
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="container xl my4"
+  >
+    <div
+      class="cardDesktop col bodyBgColor"
+    >
+      <div
+        class="cardHeader padding3 primaryColor"
+      >
+        <h4>
+          Settings
+        </h4>
+      </div>
+      <div
+        class="col colSpacing2 padding3"
+      >
+        <div
+          class="reset_base__1sfgjt80 sprinkles_paddingLeft_5x_mobile__w76aif8c sprinkles_paddingRight_5x_mobile__w76aifau sprinkles_paddingTop_8x_mobile__w76aif3r sprinkles_paddingBottom_8x_mobile__w76aif69 sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1j sprinkles_borderBottomWidth_1x__w76aif18w sprinkles_borderBottomStyle_solid__w76aif18y sprinkles_borderBottomColor_modalHeaderBorderBottom_default__w76aif17j ProfileSettings_block__8rz5n50"
+        >
+          <div
+            class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aiffz ProfileSettings_label__8rz5n51"
+          >
+            <span
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 sprinkles_fontWeight_strong__w76aif19m Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+            >
+              General
+            </span>
+          </div>
+          <div
+            class="ProfileSettings_controls__8rz5n52"
+          >
+            <div
+              class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifp"
+            >
               <div
-                class="pg-profile-page-verification__progress-bar"
+                class="reset_base__1sfgjt80 sprinkles_marginBottom_8x_mobile__w76aifg9"
               >
                 <div
-                  class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--active"
+                  class="BaseCurrencyField__125rjhq0 sprinkles_width_full_mobile__w76aifmi positionRelative"
                 >
-                  Level
-                  <span>
-                     1
-                  </span>
-                </div>
-                <div
-                  class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
-                >
-                  Level
-                  <span>
-                     2
-                  </span>
-                </div>
-                <div
-                  class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
-                >
-                  Level
-                  <span>
-                     3
-                  </span>
-                </div>
-                <div
-                  class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
-                >
-                  Level
-                  <span>
-                     4
-                  </span>
-                </div>
-                <div
-                  class="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked"
-                >
-                  Level
-                  <span>
-                     5
-                  </span>
+                  <div
+                    class="reactSelect css-b62m3t-container"
+                  >
+                    <span
+                      class="css-1f43avz-a11yText-A11yText"
+                      id="react-select-2-live-region"
+                    />
+                    <span
+                      aria-atomic="false"
+                      aria-live="polite"
+                      aria-relevant="additions text"
+                      class="css-1f43avz-a11yText-A11yText"
+                    />
+                    <div
+                      class="reactSelect__control css-1s2u09g-control"
+                    >
+                      <div
+                        class="reactSelect__value-container css-319lph-ValueContainer"
+                      >
+                        <div
+                          class="reactSelect__placeholder css-14el2xx-placeholder"
+                          id="react-select-2-placeholder"
+                        >
+                          Default currency
+                        </div>
+                        <div
+                          class="reactSelect__input-container css-6j8wv5-Input"
+                          data-value=""
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            aria-controls="react-select-2-listbox"
+                            aria-describedby="react-select-2-placeholder"
+                            aria-expanded="false"
+                            aria-haspopup="true"
+                            aria-owns="react-select-2-listbox"
+                            autocapitalize="none"
+                            autocomplete="off"
+                            autocorrect="off"
+                            class="reactSelect__input"
+                            id="react-select-2-input"
+                            role="combobox"
+                            spellcheck="false"
+                            style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                            tabindex="0"
+                            type="text"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                      <div
+                        class="reactSelect__indicators css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="reactSelect__indicator reactSelect__loading-indicator css-at12u2-loadingIndicator"
+                        >
+                          <span
+                            class="css-1xtdfmb-LoadingDot"
+                          />
+                          <span
+                            class="css-zoievk-LoadingDot"
+                          />
+                          <span
+                            class="css-x748d8-LoadingDot"
+                          />
+                        </div>
+                        <span
+                          class="reactSelect__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class="reactSelect__indicator reactSelect__dropdown-indicator css-tlfecz-indicatorContainer"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="css-tj5bde-Svg"
+                            focusable="false"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            width="20"
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
-                class="pg-profile-page-verification__step pg-profile-page-verification__step--active"
+                class="reset_base__1sfgjt80 sprinkles_marginBottom_8x_mobile__w76aifg9"
               >
                 <div
-                  class="pg-profile-page-verification__step__info"
+                  class="BaseCurrencyField__125rjhq0 sprinkles_width_full_mobile__w76aifmi positionRelative"
                 >
                   <div
-                    class="pg-profile-page-verification__step__info__title"
+                    class="reactSelect css-b62m3t-container"
                   >
-                    <span>
-                      1. 
-                    </span>
-                    Email address
+                    <span
+                      class="css-1f43avz-a11yText-A11yText"
+                      id="react-select-3-live-region"
+                    />
+                    <span
+                      aria-atomic="false"
+                      aria-live="polite"
+                      aria-relevant="additions text"
+                      class="css-1f43avz-a11yText-A11yText"
+                    />
+                    <div
+                      class="reactSelect__control css-1s2u09g-control"
+                    >
+                      <div
+                        class="reactSelect__value-container css-319lph-ValueContainer"
+                      >
+                        <div
+                          class="reactSelect__placeholder css-14el2xx-placeholder"
+                          id="react-select-3-placeholder"
+                        >
+                          Timezone
+                        </div>
+                        <div
+                          class="reactSelect__input-container css-6j8wv5-Input"
+                          data-value=""
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            aria-controls="react-select-3-listbox"
+                            aria-describedby="react-select-3-placeholder"
+                            aria-expanded="false"
+                            aria-haspopup="true"
+                            aria-owns="react-select-3-listbox"
+                            autocapitalize="none"
+                            autocomplete="off"
+                            autocorrect="off"
+                            class="reactSelect__input"
+                            id="react-select-3-input"
+                            role="combobox"
+                            spellcheck="false"
+                            style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                            tabindex="0"
+                            type="text"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                      <div
+                        class="reactSelect__indicators css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="reactSelect__indicator reactSelect__loading-indicator css-at12u2-loadingIndicator"
+                        >
+                          <span
+                            class="css-1xtdfmb-LoadingDot"
+                          />
+                          <span
+                            class="css-zoievk-LoadingDot"
+                          />
+                          <span
+                            class="css-x748d8-LoadingDot"
+                          />
+                        </div>
+                        <span
+                          class="reactSelect__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class="reactSelect__indicator reactSelect__dropdown-indicator css-tlfecz-indicatorContainer"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="css-tj5bde-Svg"
+                            focusable="false"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            width="20"
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    class="pg-profile-page-verification__step__info__subtitle"
-                  >
-                    Withdrawal allowed
-                  </div>
-                </div>
-                <div
-                  class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--active"
-                >
-                  <a
-                    href="/confirm"
-                  >
-                    Verify
-                  </a>
                 </div>
               </div>
               <div
-                class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+                class="reset_base__1sfgjt80"
               >
                 <div
-                  class="pg-profile-page-verification__step__info"
+                  class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1j sprinkles_alignItems_center_mobile__w76aif1y"
                 >
                   <div
-                    class="pg-profile-page-verification__step__info__title"
+                    class="reset_base__1sfgjt80 sprinkles_marginRight_4x_mobile__w76aifkp"
                   >
-                    <span>
-                      2. 
+                    <label
+                      class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aifff sprinkles_display_block_mobile__w76aifa"
+                      for="save_requisites"
+                    >
+                      <span
+                        class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                      >
+                        Save payment details
+                      </span>
+                    </label>
+                  </div>
+                  <label
+                    class="Switch_switcher_base__nhrqeb1 Switch_switcherBase__nhrqeb0"
+                    for="save_requisites"
+                  >
+                    <input
+                      class="Switch_input__nhrqeb3"
+                      id="save_requisites"
+                      role="switch"
+                      type="checkbox"
+                      value="1"
+                    />
+                    <span
+                      class="Switch_track_checked__nhrqeb6 Switch_trackBase__nhrqeb4"
+                    >
+                      <span
+                        class="Switch_thumb_checked__nhrqeb9 Switch_thumbBase__nhrqeb7"
+                      />
                     </span>
-                    Verify Phone number
-                  </div>
-                  <div
-                    class="pg-profile-page-verification__step__info__subtitle"
-                  >
-                    To allow Deposits and Trades
-                  </div>
+                  </label>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="reset_base__1sfgjt80 sprinkles_paddingLeft_5x_mobile__w76aif8c sprinkles_paddingRight_5x_mobile__w76aifau sprinkles_paddingTop_8x_mobile__w76aif3r sprinkles_paddingBottom_8x_mobile__w76aif69 sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1j sprinkles_borderBottomWidth_1x__w76aif18w sprinkles_borderBottomStyle_solid__w76aif18y sprinkles_borderBottomColor_modalHeaderBorderBottom_default__w76aif17j ProfileSettings_block__8rz5n50"
+        >
+          <div
+            class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aiffz ProfileSettings_label__8rz5n51"
+          >
+            <span
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 sprinkles_fontWeight_strong__w76aif19m Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+            >
+              Security
+            </span>
+          </div>
+          <div
+            class="ProfileSettings_controls__8rz5n52"
+          >
+            <div
+              class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifp"
+            >
+              <div
+                class="reset_base__1sfgjt80 sprinkles_marginBottom_8x_mobile__w76aifg9"
+              >
                 <div
-                  class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
+                  class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1j sprinkles_alignItems_center_mobile__w76aif1y"
                 >
-                  <a
-                    href="/confirm"
+                  <div
+                    class="reset_base__1sfgjt80 sprinkles_marginRight_4x_mobile__w76aifkp"
                   >
-                    Verify
-                  </a>
+                    <label
+                      class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aifff sprinkles_display_block_mobile__w76aifa"
+                      for="2fa"
+                    >
+                      <span
+                        class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                      >
+                        Two-factor authentication
+                      </span>
+                    </label>
+                    <span
+                      class="reset_base__1sfgjt80 sprinkles_color_danger_default__w76aifs3 sprinkles_fontWeight_strong__w76aif19m Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                    >
+                      Disabled
+                    </span>
+                  </div>
+                  <label
+                    class="Switch_switcher_base__nhrqeb1 Switch_switcherBase__nhrqeb0"
+                    for="2fa"
+                  >
+                    <input
+                      class="Switch_input__nhrqeb3"
+                      id="2fa"
+                      role="switch"
+                      type="checkbox"
+                      value="0"
+                    />
+                    <span
+                      class="Switch_track_base__nhrqeb5 Switch_trackBase__nhrqeb4"
+                    >
+                      <span
+                        class="Switch_thumb_base__nhrqeb8 Switch_thumbBase__nhrqeb7"
+                      />
+                    </span>
+                  </label>
                 </div>
               </div>
               <div
-                class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+                class="reset_base__1sfgjt80"
               >
                 <div
-                  class="pg-profile-page-verification__step__info"
+                  class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1j sprinkles_alignItems_center_mobile__w76aif1y"
                 >
                   <div
-                    class="pg-profile-page-verification__step__info__title"
+                    class="reset_base__1sfgjt80 sprinkles_marginRight_4x_mobile__w76aifkp"
                   >
-                    <span>
-                      3. 
+                    <label
+                      class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aifff sprinkles_display_block_mobile__w76aifa"
+                      for="safe_mode_enabled"
+                    >
+                      <span
+                        class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                      >
+                        Safe Mode
+                      </span>
+                    </label>
+                    <span
+                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsb Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                    >
+                      When safe mode is enabled, only trusted traders are available to you.
                     </span>
-                    Complete your profile
                   </div>
-                  <div
-                    class="pg-profile-page-verification__step__info__subtitle"
+                  <label
+                    class="Switch_switcher_base__nhrqeb1 Switch_switcherBase__nhrqeb0"
+                    for="safe_mode_enabled"
                   >
-                     
-                  </div>
-                </div>
-                <div
-                  class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
-                >
-                  <a
-                    href="/confirm"
-                  >
-                    Verify
-                  </a>
+                    <input
+                      class="Switch_input__nhrqeb3"
+                      id="safe_mode_enabled"
+                      role="switch"
+                      type="checkbox"
+                      value="1"
+                    />
+                    <span
+                      class="Switch_track_checked__nhrqeb6 Switch_trackBase__nhrqeb4"
+                    >
+                      <span
+                        class="Switch_thumb_checked__nhrqeb9 Switch_thumbBase__nhrqeb7"
+                      />
+                    </span>
+                  </label>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="reset_base__1sfgjt80 sprinkles_paddingLeft_5x_mobile__w76aif8c sprinkles_paddingRight_5x_mobile__w76aifau sprinkles_paddingTop_8x_mobile__w76aif3r sprinkles_paddingBottom_8x_mobile__w76aif69 sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1j sprinkles_borderBottomColor_modalHeaderBorderBottom_default__w76aif17j ProfileSettings_block__8rz5n50"
+        >
+          <div
+            class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aiffz ProfileSettings_label__8rz5n51"
+          >
+            <p
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 sprinkles_fontWeight_strong__w76aif19m Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+            >
+              Notifications
+            </p>
+            <p
+              class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsb Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+            >
+              Night time is from 11PM to 9AM according to your local time.
+            </p>
+          </div>
+          <div
+            class="ProfileSettings_controls__8rz5n52"
+          >
+            <div
+              class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifp"
+            >
               <div
-                class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+                class="reset_base__1sfgjt80 sprinkles_marginBottom_8x_mobile__w76aifg9"
               >
-                <div
-                  class="pg-profile-page-verification__step__info"
+                <label
+                  class="reset_base__1sfgjt80 sprinkles_display_block_mobile__w76aifa"
                 >
                   <div
-                    class="pg-profile-page-verification__step__info__title"
+                    class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aifff"
                   >
-                    <span>
-                      4. 
+                    <span
+                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                    >
+                      New referrals
                     </span>
-                    Verify your Identity
                   </div>
                   <div
-                    class="pg-profile-page-verification__step__info__subtitle"
+                    class="reset_base__1sfgjt80 sprinkles_marginBottom_4x_mobile__w76aiffp"
                   >
-                    Increase Withdrawal limit to 10 BTC
+                    <span
+                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsb Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                    >
+                      Notifications of new referrals after the user has registered in the service by your referral link.
+                    </span>
                   </div>
-                </div>
-                <div
-                  class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
-                >
-                  <a
-                    href="/confirm"
+                  <div
+                    class="BaseCurrencyField__125rjhq0 sprinkles_width_full_mobile__w76aifmi positionRelative"
                   >
-                    Verify
-                  </a>
-                </div>
+                    <label
+                      class="reactSelectLabel ellipsis"
+                    />
+                    <div
+                      class="reactSelect css-b62m3t-container"
+                    >
+                      <span
+                        class="css-1f43avz-a11yText-A11yText"
+                        id="react-select-4-live-region"
+                      />
+                      <span
+                        aria-atomic="false"
+                        aria-live="polite"
+                        aria-relevant="additions text"
+                        class="css-1f43avz-a11yText-A11yText"
+                      />
+                      <div
+                        class="reactSelect__control css-1s2u09g-control"
+                      >
+                        <div
+                          class="reactSelect__value-container reactSelect__value-container--has-value css-319lph-ValueContainer"
+                        >
+                          <div
+                            class="reactSelect__single-value css-qc6sy-singleValue"
+                          >
+                            Disabled
+                          </div>
+                          <div
+                            class="reactSelect__input-container css-6j8wv5-Input"
+                            data-value=""
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-controls="react-select-4-listbox"
+                              aria-expanded="false"
+                              aria-haspopup="true"
+                              aria-owns="react-select-4-listbox"
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              class="reactSelect__input"
+                              id="react-select-4-input"
+                              role="combobox"
+                              spellcheck="false"
+                              style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                        <div
+                          class="reactSelect__indicators css-1hb7zxy-IndicatorsContainer"
+                        >
+                          <span
+                            class="reactSelect__indicator-separator css-1okebmr-indicatorSeparator"
+                          />
+                          <div
+                            aria-hidden="true"
+                            class="reactSelect__indicator reactSelect__dropdown-indicator css-tlfecz-indicatorContainer"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="css-tj5bde-Svg"
+                              focusable="false"
+                              height="20"
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </label>
               </div>
               <div
-                class="pg-profile-page-verification__step pg-profile-page-verification__step--blocked"
+                class="reset_base__1sfgjt80 sprinkles_marginBottom_8x_mobile__w76aifg9"
               >
-                <div
-                  class="pg-profile-page-verification__step__info"
+                <label
+                  class="reset_base__1sfgjt80 sprinkles_display_block_mobile__w76aifa"
                 >
                   <div
-                    class="pg-profile-page-verification__step__info__title"
+                    class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aifff"
                   >
-                    <span>
-                      5. 
+                    <span
+                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                    >
+                      Referral Payments
                     </span>
-                    Verify Proof of residence
                   </div>
                   <div
-                    class="pg-profile-page-verification__step__info__subtitle"
+                    class="reset_base__1sfgjt80 sprinkles_marginBottom_4x_mobile__w76aiffp"
                   >
-                    Increase Withdrawal limit to 100 BTC
+                    <span
+                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsb Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                    >
+                      Payout notifications after the user has completed a trade.
+                    </span>
                   </div>
-                </div>
-                <div
-                  class="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked"
-                >
-                  <a
-                    href="/confirm"
+                  <div
+                    class="BaseCurrencyField__125rjhq0 sprinkles_width_full_mobile__w76aifmi positionRelative"
                   >
-                    Verify
-                  </a>
-                </div>
+                    <label
+                      class="reactSelectLabel ellipsis"
+                    />
+                    <div
+                      class="reactSelect css-b62m3t-container"
+                    >
+                      <span
+                        class="css-1f43avz-a11yText-A11yText"
+                        id="react-select-5-live-region"
+                      />
+                      <span
+                        aria-atomic="false"
+                        aria-live="polite"
+                        aria-relevant="additions text"
+                        class="css-1f43avz-a11yText-A11yText"
+                      />
+                      <div
+                        class="reactSelect__control css-1s2u09g-control"
+                      >
+                        <div
+                          class="reactSelect__value-container reactSelect__value-container--has-value css-319lph-ValueContainer"
+                        >
+                          <div
+                            class="reactSelect__single-value css-qc6sy-singleValue"
+                          >
+                            Disabled
+                          </div>
+                          <div
+                            class="reactSelect__input-container css-6j8wv5-Input"
+                            data-value=""
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-controls="react-select-5-listbox"
+                              aria-expanded="false"
+                              aria-haspopup="true"
+                              aria-owns="react-select-5-listbox"
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              class="reactSelect__input"
+                              id="react-select-5-input"
+                              role="combobox"
+                              spellcheck="false"
+                              style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                        <div
+                          class="reactSelect__indicators css-1hb7zxy-IndicatorsContainer"
+                        >
+                          <span
+                            class="reactSelect__indicator-separator css-1okebmr-indicatorSeparator"
+                          />
+                          <div
+                            aria-hidden="true"
+                            class="reactSelect__indicator reactSelect__dropdown-indicator css-tlfecz-indicatorContainer"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="css-tj5bde-Svg"
+                              focusable="false"
+                              height="20"
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <div
+                class="reset_base__1sfgjt80 sprinkles_marginBottom_8x_mobile__w76aifg9"
+              >
+                <label
+                  class="reset_base__1sfgjt80 sprinkles_display_block_mobile__w76aifa"
+                >
+                  <div
+                    class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aifff"
+                  >
+                    <span
+                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                    >
+                      Free trades
+                    </span>
+                  </div>
+                  <div
+                    class="reset_base__1sfgjt80 sprinkles_marginBottom_4x_mobile__w76aiffp"
+                  >
+                    <span
+                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsb Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                    >
+                      Notification that your trade was free and the commission has returned to the balance.
+                    </span>
+                  </div>
+                  <div
+                    class="BaseCurrencyField__125rjhq0 sprinkles_width_full_mobile__w76aifmi positionRelative"
+                  >
+                    <label
+                      class="reactSelectLabel ellipsis"
+                    />
+                    <div
+                      class="reactSelect css-b62m3t-container"
+                    >
+                      <span
+                        class="css-1f43avz-a11yText-A11yText"
+                        id="react-select-6-live-region"
+                      />
+                      <span
+                        aria-atomic="false"
+                        aria-live="polite"
+                        aria-relevant="additions text"
+                        class="css-1f43avz-a11yText-A11yText"
+                      />
+                      <div
+                        class="reactSelect__control css-1s2u09g-control"
+                      >
+                        <div
+                          class="reactSelect__value-container reactSelect__value-container--has-value css-319lph-ValueContainer"
+                        >
+                          <div
+                            class="reactSelect__single-value css-qc6sy-singleValue"
+                          >
+                            Disabled
+                          </div>
+                          <div
+                            class="reactSelect__input-container css-6j8wv5-Input"
+                            data-value=""
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-controls="react-select-6-listbox"
+                              aria-expanded="false"
+                              aria-haspopup="true"
+                              aria-owns="react-select-6-listbox"
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              class="reactSelect__input"
+                              id="react-select-6-input"
+                              role="combobox"
+                              spellcheck="false"
+                              style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                        <div
+                          class="reactSelect__indicators css-1hb7zxy-IndicatorsContainer"
+                        >
+                          <span
+                            class="reactSelect__indicator-separator css-1okebmr-indicatorSeparator"
+                          />
+                          <div
+                            aria-hidden="true"
+                            class="reactSelect__indicator reactSelect__dropdown-indicator css-tlfecz-indicatorContainer"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="css-tj5bde-Svg"
+                              focusable="false"
+                              height="20"
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <div
+                class="reset_base__1sfgjt80"
+              >
+                <label
+                  class="reset_base__1sfgjt80 sprinkles_display_block_mobile__w76aifa"
+                >
+                  <div
+                    class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aifff"
+                  >
+                    <span
+                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                    >
+                      Service messages
+                    </span>
+                  </div>
+                  <div
+                    class="reset_base__1sfgjt80 sprinkles_marginBottom_4x_mobile__w76aiffp"
+                  >
+                    <span
+                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsb Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+                    >
+                      Very rare, but sometimes Bitzlato sends important messages to users, but we value the comfort of users more, so you can change the settings for receiving such messages.
+                    </span>
+                  </div>
+                  <div
+                    class="BaseCurrencyField__125rjhq0 sprinkles_width_full_mobile__w76aifmi positionRelative"
+                  >
+                    <label
+                      class="reactSelectLabel ellipsis"
+                    />
+                    <div
+                      class="reactSelect css-b62m3t-container"
+                    >
+                      <span
+                        class="css-1f43avz-a11yText-A11yText"
+                        id="react-select-7-live-region"
+                      />
+                      <span
+                        aria-atomic="false"
+                        aria-live="polite"
+                        aria-relevant="additions text"
+                        class="css-1f43avz-a11yText-A11yText"
+                      />
+                      <div
+                        class="reactSelect__control css-1s2u09g-control"
+                      >
+                        <div
+                          class="reactSelect__value-container reactSelect__value-container--has-value css-319lph-ValueContainer"
+                        >
+                          <div
+                            class="reactSelect__single-value css-qc6sy-singleValue"
+                          >
+                            Disabled
+                          </div>
+                          <div
+                            class="reactSelect__input-container css-6j8wv5-Input"
+                            data-value=""
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-controls="react-select-7-listbox"
+                              aria-expanded="false"
+                              aria-haspopup="true"
+                              aria-owns="react-select-7-listbox"
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              class="reactSelect__input"
+                              id="react-select-7-input"
+                              role="combobox"
+                              spellcheck="false"
+                              style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                        <div
+                          class="reactSelect__indicators css-1hb7zxy-IndicatorsContainer"
+                        >
+                          <span
+                            class="reactSelect__indicator-separator css-1okebmr-indicatorSeparator"
+                          />
+                          <div
+                            aria-hidden="true"
+                            class="reactSelect__indicator reactSelect__dropdown-indicator css-tlfecz-indicatorContainer"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="css-tj5bde-Svg"
+                              focusable="false"
+                              height="20"
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </label>
               </div>
             </div>
           </div>
