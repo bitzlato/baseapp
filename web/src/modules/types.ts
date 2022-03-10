@@ -67,3 +67,22 @@ export interface CoreState {
 export interface ClientState {
   coreData: CoreState;
 }
+
+export interface SessionsMeClaims {
+  nickname: string;
+  name: string;
+  picture: string;
+  updated_at: string;
+  email: string;
+  email_verified: boolean;
+  iss: string;
+  sub: string;
+  aud: string;
+  iat: number;
+  exp: number;
+  nonce: string;
+}
+export interface SessionsMe {
+  auth_sub: string;
+  claims: SessionsMeClaims;
+}
