@@ -13,6 +13,7 @@ import ThumbDown from 'web/src/assets/svg/ThumbDown.svg';
 import { useTradeStats } from 'web/src/hooks/data/useFetchTradeStatistics';
 import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
+import { useFetchSessionsMe } from 'web/src/hooks/data/useFetchSessionsMe';
 import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
@@ -23,6 +24,7 @@ export const Profile: FC = () => {
   const user = useSelector(selectUserInfo);
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const swr = useTradeStats();
+  const { data: sessionsMe } = useFetchSessionsMe();
 
   if (swr.error) {
     return null; // TODO: Add throw and error boundary screen
@@ -40,8 +42,8 @@ export const Profile: FC = () => {
             {user.email}
           </Text>
         </Box>
-        <Text variant={isMobileDevice ? 'label' : 'title'} color="textMuted">
-          UID: {user.uid}
+        <Text variant="label" color="textMuted">
+          UID: {user.uid} {sessionsMe && `(${sessionsMe.auth_sub})`}
         </Text>
       </Box>
       <Box className={s.stats} mb={isMobileDevice ? '8x' : undefined}>
