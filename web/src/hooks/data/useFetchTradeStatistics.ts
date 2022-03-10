@@ -6,7 +6,11 @@ import { TradeStat, TradeStatistics, TradeStats } from 'web/src/modules/user/pro
 import { useFetcher, FetcherResponse } from './useFetcher';
 
 export const useFetchTradeStatistics = () => {
-  return useFetcher<TradeStatistics>(`${accountUrl()}/user/trade_statistics`, fetcher);
+  return useFetcher<TradeStatistics>(`${accountUrl()}/user/trade_statistics`, (url) =>
+    fetcher(url, {
+      credentials: 'include',
+    }),
+  );
 };
 
 export const useTradeStats = (): FetcherResponse<TradeStats> => {

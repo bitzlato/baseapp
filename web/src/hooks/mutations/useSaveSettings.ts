@@ -20,6 +20,7 @@ const saveSettings = async (params: {
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
+    credentials: 'include',
   });
 
   return res;

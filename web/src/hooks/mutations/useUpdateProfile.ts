@@ -18,6 +18,7 @@ const updateProfile = async (params: UpdateProfileInput) => {
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
+    credentials: 'include',
   });
 
   return response;
