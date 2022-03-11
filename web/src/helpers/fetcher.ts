@@ -32,3 +32,7 @@ export const fetcher = async (input: RequestInfo, init: RequestInit) => {
     throw new FetcherError([(error as Error).toString()], 500, {});
   }
 };
+
+export const fetchWithCreds = (input: RequestInfo, init: RequestInit) => {
+  return fetcher(input, { ...init, credentials: 'include' });
+};
