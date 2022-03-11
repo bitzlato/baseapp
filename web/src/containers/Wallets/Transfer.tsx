@@ -12,8 +12,6 @@ import { SwipeIcon } from 'src/assets/images/swipe';
 import { IconButton } from 'src/components/IconButton/IconButton';
 import { TransferPlace, TransferPost } from 'src/modules/account/types';
 import { createMoney } from 'src/helpers/money';
-import { FetchError, postData } from 'src/hooks/useFetch';
-import { useAlert } from 'src/hooks/useAlert';
 import { accountUrl } from 'src/api/config';
 import { alertPush } from 'src/modules/public/alert/actions';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
@@ -23,32 +21,26 @@ import sQuickExchange from 'src/containers/QuickExchange/QuickExchange.postcss';
 import s from './Transfer.postcss';
 import { TransferHistory } from './TransferHistory';
 import { getCurrencySymbol } from 'web/src/helpers/getCurrencySymbol';
+import { useSWRConfig } from 'swr';
+import { fetchWithCreds } from 'web/src/helpers/fetcher';
+import { alertFetchError } from 'web/src/helpers/alertFetchError';
 
 interface Props {
   currency: Currency;
   balanceMarket: string;
   balanceP2P: string;
-  transfers?: number;
-  onChangeTransfers?: () => void;
 }
 
-export const Transfer: React.FC<Props> = ({
-  currency,
-  balanceMarket,
-  balanceP2P,
-  transfers,
-  onChangeTransfers,
-}) => {
+export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P }) => {
   const [from, setFrom] = useState<TransferPlace | undefined>();
   const [to, setTo] = useState<TransferPlace | undefined>();
   const [amount, setAmount] = useState('');
-  const [error, setError] = useState<FetchError | undefined>();
 
   const t = useT();
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const dispatch = useDispatch();
 
-  useAlert(error);
+  const { mutate } = useSWRConfig();
 
   useEffect(() => {
     setFrom(undefined);
@@ -89,19 +81,22 @@ export const Transfer: React.FC<Props> = ({
         description: 'Transfer by market web-client',
       };
       try {
-        await postData(`${accountUrl()}/transfers`, data, { credentials: 'include' });
+        await fetchWithCreds(`${accountUrl()}/transfers`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
 
         setFrom(undefined);
         setTo(undefined);
         setAmount('');
 
-        setError(undefined);
-
-        onChangeTransfers?.();
+        mutate(`${accountUrl()}/balances`);
+        mutate(`${accountUrl()}/transfers`);
 
         dispatch(alertPush({ message: ['Transfer was successfully created'], type: 'success' }));
       } catch (e) {
-        setError(e as FetchError);
+        alertFetchError(dispatch, e);
       }
     }
   };
@@ -193,7 +188,7 @@ export const Transfer: React.FC<Props> = ({
           </Box>
         </Box>
       </Box>
-      <TransferHistory currency={currency} transfers={transfers} />
+      <TransferHistory currency={currency} />
     </>
   );
 };

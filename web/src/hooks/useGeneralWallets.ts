@@ -4,19 +4,17 @@ import { accountUrl } from 'src/api/config';
 import { GeneralBalance } from 'src/modules/account/types';
 import { selectWallets } from 'src/modules/user/wallets/selectors';
 import { getList } from 'src/screens/WalletsScreen/helpers';
-import { useFetch } from './useFetch';
+import { fetchWithCreds } from '../helpers/fetcher';
+import { useFetcher } from './data/useFetcher';
 import { useWalletsFetch } from './useWalletsFetch';
 
-export function useGeneralWallets(deps: React.DependencyList = []) {
+export function useGeneralWallets() {
   useWalletsFetch();
   const wallets = useSelector(selectWallets) || [];
-  const { data = [] } = useFetch<GeneralBalance[]>(
-    `${accountUrl()}/balances`,
-    {
-      skipRequest: process.env.REACT_APP_RELEASE_STAGE === 'sandbox',
-      credentials: 'include',
-    },
-    deps,
+  const shouldFetch = process.env.REACT_APP_RELEASE_STAGE !== 'sandbox';
+  const { data = [] } = useFetcher<GeneralBalance[]>(
+    shouldFetch ? `${accountUrl()}/balances` : null,
+    fetchWithCreds,
   );
   return useMemo(() => getList(wallets, data), [wallets, data]);
 }

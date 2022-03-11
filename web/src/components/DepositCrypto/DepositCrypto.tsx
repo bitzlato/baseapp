@@ -10,7 +10,6 @@ import { Select } from 'src/components/Select/Select';
 import { MetaMaskButton } from 'src/components/MetaMaskButton';
 import { QRCode } from 'src/components/QRCode';
 import { Blur } from 'src/components/Blur';
-import { useFetchCache } from 'src/hooks/useFetchCache';
 import { tradeUrl } from 'src/api/config';
 import { Blockchain } from 'src/modules/public/blockchains/types';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
@@ -24,7 +23,8 @@ import {
   Wallet,
 } from '../../modules';
 import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
-import { useFetch } from 'web/src/hooks/useFetch';
+import { useFetcher } from 'web/src/hooks/data/useFetcher';
+import { fetcher, fetchWithCreds } from 'web/src/helpers/fetcher';
 
 interface Props {
   wallet: Wallet;
@@ -39,11 +39,10 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
   const memberLevels = useSelector(selectMemberLevels);
 
   const [blockchain, setBlockchain] = useState<Blockchain | null>(null);
-  const [retries, setRetries] = useState(0);
 
-  const { data = [] } = useFetchCache<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const blockchainsResponse = useFetcher<Blockchain[]>(`${tradeUrl()}/public/blockchains`, fetcher);
 
-  const blockchains = data.filter((d) =>
+  const blockchains = (blockchainsResponse.data ?? []).filter((d) =>
     wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id),
   );
 
@@ -51,17 +50,17 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
     setBlockchain(blockchains.length === 1 ? blockchains[0]! : null);
   }, [blockchains.length, wallet.currency.code]);
 
-  const { data: depositAddress } = useFetch<DepositAddress>(
-    `${tradeUrl()}/account/deposit_address/${blockchain?.id ?? ''}`,
-    { skipRequest: blockchain === null },
-    [retries],
+  const depositResponse = useFetcher<DepositAddress>(
+    blockchain?.id ? `${tradeUrl()}/account/deposit_address/${blockchain?.id}` : null,
+    fetchWithCreds,
   );
 
+  const depositAddress = depositResponse.data;
   const isNoAddress = depositAddress?.address === null;
 
   useEffect(() => {
     if (isNoAddress) {
-      window.setTimeout(() => setRetries((d) => d + 1), 2000);
+      window.setTimeout(() => depositResponse.mutate(), 2000);
     }
   }, [isNoAddress]);
 

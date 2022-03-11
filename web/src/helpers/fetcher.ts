@@ -36,3 +36,11 @@ export const fetcher = async (input: RequestInfo, init: RequestInit) => {
 export const fetchWithCreds = (input: RequestInfo, init: RequestInit) => {
   return fetcher(input, { ...init, credentials: 'include' });
 };
+
+export const fetchRaw = async (input: RequestInfo, init: RequestInit) => {
+  try {
+    return await fetch(input, init);
+  } catch (error) {
+    throw new FetcherError([(error as Error).toString()], 500, {});
+  }
+};

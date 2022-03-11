@@ -7,19 +7,22 @@ import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { TotalBalance, TotalBalances } from 'src/modules/account/types';
 import { BTC_CCY, createMoney, USD_CCY } from 'src/helpers/money';
 import { accountUrl } from 'src/api/config';
-import { useFetch } from 'src/hooks/useFetch';
 import { useSelector } from 'react-redux';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
 import s from './Estimated.postcss';
+import { useFetcher } from 'web/src/hooks/data/useFetcher';
+import { fetchWithCreds } from 'web/src/helpers/fetcher';
 
 export const Estimated: React.FC = () => {
   const t = useT();
   const isMobileDevice = useSelector(selectMobileDeviceState);
 
-  const { data = DEFAULT_TOTAL } = useFetch<TotalBalances>(`${accountUrl()}/balances/total`, {
-    skipRequest: process.env.REACT_APP_RELEASE_STAGE === 'sandbox',
-    credentials: 'include',
-  });
+  const shouldFetch = process.env.REACT_APP_RELEASE_STAGE !== 'sandbox';
+
+  const { data = DEFAULT_TOTAL } = useFetcher<TotalBalances>(
+    shouldFetch ? `${accountUrl()}/balances/total` : null,
+    fetchWithCreds,
+  );
 
   const m1 = getBalance(data.total, USD_CCY);
   const m2 = getBalance(data.total, BTC_CCY);

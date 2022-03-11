@@ -18,7 +18,6 @@ import { WalletHistory } from 'src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { useHistory, useParams } from 'react-router';
 import { Transfer } from 'src/containers/Wallets/Transfer';
-import { useFetch } from 'src/hooks/useFetch';
 import { Estimated } from 'src/containers/Wallets/Estimated';
 import { accountUrl } from 'src/api';
 import type { SelectOption } from 'src/components/Select/Select';
@@ -26,8 +25,10 @@ import { Container } from 'web/src/components/Container/Container';
 import { getList } from './helpers';
 import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
+import { useFetcher } from 'web/src/hooks/data/useFetcher';
 
 import s from './WalletsScreen.postcss';
+import { fetchWithCreds } from 'web/src/helpers/fetcher';
 
 export const WalletsScreen: React.FC = () => {
   const params = useParams<UrlParams>();
@@ -35,24 +36,22 @@ export const WalletsScreen: React.FC = () => {
   const wallets = useSelector(selectWallets);
   const [listIndex, setListIndex] = useState(0);
   const [tab, setTab] = useState(params.tab);
-  const [transfers, setTransfers] = useState(0);
 
   const t = useT();
   useWalletsFetch();
   useDocumentTitle('Wallets');
 
-  const skipRequest = process.env.REACT_APP_RELEASE_STAGE === 'sandbox';
+  const shouldFetch = process.env.REACT_APP_RELEASE_STAGE !== 'sandbox';
 
-  const { data: balances = [] } = useFetch<GeneralBalance[]>(
-    `${accountUrl()}/balances`,
-    {
-      skipRequest,
-      credentials: 'include',
-    },
-    [transfers],
+  const balanceResponse = useFetcher<GeneralBalance[]>(
+    shouldFetch ? `${accountUrl()}/balances` : null,
+    fetchWithCreds,
   );
 
-  const list = useMemo(() => getList(wallets, balances), [wallets, balances]);
+  const list = useMemo(
+    () => getList(wallets, balanceResponse.data ?? []),
+    [wallets, balanceResponse.data],
+  );
 
   useEffect(() => {
     const currency = params.currency?.toUpperCase();
@@ -179,8 +178,6 @@ export const WalletsScreen: React.FC = () => {
                           currency={item.balanceTotal.currency}
                           balanceMarket={item.balanceMarket?.toString() ?? '0'}
                           balanceP2P={item.balanceP2P?.toString() ?? '0'}
-                          transfers={transfers}
-                          onChangeTransfers={() => setTransfers(transfers + 1)}
                         />
                       )}
                     </TabPanel>

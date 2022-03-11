@@ -6,7 +6,6 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import { Provider } from 'react-redux';
 
 import { App } from './App';
-import { FetchCacheProvider } from './hooks/useFetchCache';
 import './index.pcss';
 import { rootSaga } from './modules';
 import { rangerSagas } from './modules/public/ranger';
@@ -31,9 +30,7 @@ rangerMiddleware.run(rangerSagas);
 
 ReactDOM.render(
   <Provider store={store}>
-    <FetchCacheProvider value={new Map()}>
-      <App />
-    </FetchCacheProvider>
+    <App />
   </Provider>,
   document.getElementById('root') as HTMLElement,
 );
