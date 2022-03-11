@@ -188,7 +188,9 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
           </Box>
         </Box>
       </Box>
-      <TransferHistory currency={currency} />
+      <Box col>
+        <TransferHistory currency={currency} size="small" />
+      </Box>
     </>
   );
 };
