@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Spinner } from 'web/src/components/ui/Spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { DepositStatus } from 'src/components/History/DepositStatus';
 import { getBlockchainLink } from 'src/helpers/getBlockchainLink';
@@ -68,17 +68,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
   }, [dispatch, currencies.length]);
 
   if (type === 'transfers') {
-    return (
-      <TransferHistory
-        wallets={wallets}
-        className="pg-history-elem"
-        noDataToDisplay={
-          <div className="pg-history-elem pg-history-elem-empty">
-            <p className="pg-history-elem__empty">{t('page.noDataToShow')}</p>
-          </div>
-        }
-      />
-    );
+    return <TransferHistory wallets={wallets} className="pg-history-elem" />;
   }
 
   const onClickPrevPage = () => {
@@ -217,7 +207,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
     <div className={`pg-history-elem ${list.length ? '' : 'pg-history-elem-empty'}`}>
       {fetching && (
         <div className="text-center">
-          <Spinner animation="border" variant="primary" />
+          <Spinner />
         </div>
       )}
       {list.length ? (

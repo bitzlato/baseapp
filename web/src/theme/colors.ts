@@ -3,6 +3,7 @@ export const mako = 'rgb(64, 69, 76)';
 export const mako10 = 'rgb(64, 69, 76, 0.1)';
 export const mako80 = 'rgb(64, 69, 76, 0.8)';
 export const silverChalice = 'rgb(151, 151, 151)';
+export const grayBlue = 'rgb(119, 127, 147)';
 export const goldTips = 'rgb(238, 190, 19)';
 export const goldTips10 = 'rgba(238, 190, 19, 0.1)';
 export const goldTips25 = 'rgba(238, 190, 19, 0.25)';
