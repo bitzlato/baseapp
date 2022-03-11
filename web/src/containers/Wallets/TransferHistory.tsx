@@ -76,9 +76,9 @@ export const TransferHistory: React.FC<Props> = ({ currency, wallets, className,
     );
   }
   return (
-    <>
+    <div className={className}>
       {currency ? <h4>{t('Transfer History')}</h4> : null}
       <Table tableClassName={s.transferHistory} header={header} data={tableData} />
-    </>
+    </div>
   );
 };
