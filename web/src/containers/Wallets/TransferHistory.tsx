@@ -1,11 +1,9 @@
 import { useMemo } from 'react';
 import { Currency } from '@bitzlato/money-js';
 import { useT } from 'src/hooks/useT';
-import { useAlert } from 'src/hooks/useAlert';
 import { Table } from 'src/components';
 import { Box } from 'src/components/Box';
 import { TransferRecord } from 'src/modules/account/types';
-import { useFetch } from 'src/hooks/useFetch';
 import { createMoney } from 'src/helpers/money';
 import { localeDate } from 'src/helpers/localeDate';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
@@ -14,34 +12,35 @@ import { Wallet } from 'src/modules/user/wallets/types';
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { TextColor } from 'src/components/Box/Box';
 import s from './TransferHistory.postcss';
+import { useFetcher } from 'web/src/hooks/data/useFetcher';
+import { fetchWithCreds } from 'web/src/helpers/fetcher';
 
 interface Props {
   currency?: Currency | undefined;
   wallets?: Wallet[] | undefined;
-  transfers?: number | undefined;
   className?: string;
-  noDataToDisplay?: React.ReactElement
+  noDataToDisplay?: React.ReactElement;
 }
 
-export const TransferHistory: React.FC<Props> = ({ currency, wallets, transfers, className, noDataToDisplay }) => {
+export const TransferHistory: React.FC<Props> = ({
+  currency,
+  wallets,
+  className,
+  noDataToDisplay,
+}) => {
   const t = useT();
 
-  const { data = [], error } = useFetch<TransferRecord[]>(
+  const transfersResponse = useFetcher<TransferRecord[]>(
     `${accountUrl()}/transfers`,
-    {
-      credentials: 'include',
-    },
-    [transfers],
+    fetchWithCreds,
   );
-
-  useAlert(error);
 
   const header = useMemo(
     () => [t('Date'), t('Status'), t('Transfer from'), t('Transfer to'), t('Amount')],
     [],
   );
 
-  const tableData = data
+  const tableData = (transfersResponse.data ?? [])
     .filter((d) => (currency ? d.currency_id === currency.code : true))
     .map((d) => {
       const money = createMoney(
@@ -58,9 +57,7 @@ export const TransferHistory: React.FC<Props> = ({ currency, wallets, transfers,
           : 'secondary';
       return [
         <div title={`#${d.id}`}>{localeDate(d.created_at, 'fullDate')}</div>,
-        <Box textColor={textColor}>
-          {t(`page.body.wallets.transfers.state.${d.public_state}`)}
-        </Box>,
+        <Box textColor={textColor}>{t(`page.body.wallets.transfers.state.${d.public_state}`)}</Box>,
         t(d.source),
         t(d.destination),
         <MoneyFormat money={money} />,

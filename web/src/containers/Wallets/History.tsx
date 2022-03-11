@@ -5,7 +5,6 @@ import { FC, useEffect } from 'react';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { useT } from 'web/src/hooks/useT';
-import { useFetchCache } from 'web/src/hooks/useFetchCache';
 import { Blockchain } from 'web/src/modules/public/blockchains/types';
 import { tradeUrl } from 'web/src/api/config';
 import { DEFAULT_BLOCKCHAIN } from 'web/src/modules/public/blockchains/defaults';
@@ -29,6 +28,8 @@ import {
 } from '../../modules';
 import { localeDate, sortByDateDesc } from '../../helpers';
 import { History, Pagination } from '../../components';
+import { useFetcher } from 'web/src/hooks/data/useFetcher';
+import { fetcher } from 'web/src/helpers/fetcher';
 
 interface Props {
   label: string;
@@ -49,8 +50,9 @@ export const WalletHistory: FC<Props> = (props) => {
   const withdrawSuccess = useSelector(selectWithdrawSuccess);
   const t = useT();
 
-  const { data: blockchains = [] } = useFetchCache<Blockchain[]>(
+  const { data: blockchains = [] } = useFetcher<Blockchain[]>(
     `${tradeUrl()}/public/blockchains`,
+    fetcher,
   );
 
   useEffect(() => {

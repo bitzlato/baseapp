@@ -8,7 +8,6 @@ import {
   selectBeneficiariesCreateError,
   Wallet,
 } from 'src/modules';
-import { useFetchCache } from 'src/hooks/useFetchCache';
 import { Blockchain } from 'src/modules/public/blockchains/types';
 import { tradeUrl } from 'src/api/config';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
@@ -18,6 +17,8 @@ import { TextInput } from '../Input/TextInput';
 import { Select } from '../Select/Select';
 import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Modal2 } from '../Modal/Modal2';
+import { useFetcher } from 'web/src/hooks/data/useFetcher';
+import { fetcher } from 'web/src/helpers/fetcher';
 
 interface Props {
   wallet: Wallet;
@@ -36,7 +37,7 @@ const BeneficiariesAddModalComponent: React.FC<Props> = ({ wallet, onCloseModal 
   const t = useT();
   const dispatch = useDispatch();
 
-  const { data = [] } = useFetchCache<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const { data = [] } = useFetcher<Blockchain[]>(`${tradeUrl()}/public/blockchains`, fetcher);
 
   const blockchains = data.filter((d) =>
     wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id),

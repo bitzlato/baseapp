@@ -8,7 +8,6 @@ import { parseNumeric } from 'src/helpers/parseNumeric';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 import { useT } from 'src/hooks/useT';
 import { useSelector } from 'react-redux';
-import { useFetchCache } from 'src/hooks/useFetchCache';
 import { Blockchain } from 'src/modules/public/blockchains/types';
 import { tradeUrl } from 'src/api/config';
 import { BeneficiaryAddress } from './BeneficiaryAddress';
@@ -24,6 +23,8 @@ import { precisionRegExp } from '../../helpers';
 import { Beneficiaries, Blur } from '../../components';
 import { isValidCode } from 'web/src/helpers/codeValidation';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
+import { useFetcher } from 'web/src/hooks/data/useFetcher';
+import { fetcher } from 'web/src/helpers/fetcher';
 
 interface Props {
   onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
@@ -45,7 +46,7 @@ export const WithdrawBody: FC<Props> = (props) => {
 
   const twoFactorAuthRequired = user.level > 1 || (user.level === 1 && user.otp);
 
-  const { data = [] } = useFetchCache<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const { data = [] } = useFetcher<Blockchain[]>(`${tradeUrl()}/public/blockchains`, fetcher);
   const blockchain = data.find((d) => d.id === beneficiary.blockchain_id);
 
   const { wallet, withdrawDone, countdown } = props;
