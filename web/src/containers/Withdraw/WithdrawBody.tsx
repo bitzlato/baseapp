@@ -23,8 +23,7 @@ import { precisionRegExp } from '../../helpers';
 import { Beneficiaries, Blur } from '../../components';
 import { isValidCode } from 'web/src/helpers/codeValidation';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
-import { useFetcher } from 'web/src/hooks/data/useFetcher';
-import { fetcher } from 'web/src/helpers/fetcher';
+import { useFetch } from 'web/src/hooks/data/useFetch';
 
 interface Props {
   onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
@@ -46,7 +45,7 @@ export const WithdrawBody: FC<Props> = (props) => {
 
   const twoFactorAuthRequired = user.level > 1 || (user.level === 1 && user.otp);
 
-  const { data = [] } = useFetcher<Blockchain[]>(`${tradeUrl()}/public/blockchains`, fetcher);
+  const { data = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
   const blockchain = data.find((d) => d.id === beneficiary.blockchain_id);
 
   const { wallet, withdrawDone, countdown } = props;

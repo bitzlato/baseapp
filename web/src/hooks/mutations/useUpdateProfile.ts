@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
-import { fetcher, FetcherError } from 'web/src/helpers/fetcher';
+import { fetchJson, FetchError } from 'web/src/helpers/fetch';
 import { alertPush } from 'web/src/modules/public/alert/actions';
 import { userRefetch } from 'web/src/modules/user/profile/actions';
 
@@ -12,7 +12,7 @@ interface UpdateProfileInput {
   passSafetyWizard?: boolean;
 }
 const updateProfile = async (params: UpdateProfileInput) => {
-  const response = await fetcher(`${p2pUrl()}/profile/`, {
+  const response = await fetchJson(`${p2pUrl()}/profile/`, {
     method: 'PUT',
     body: JSON.stringify(params),
     headers: {
@@ -35,7 +35,7 @@ export const useUpdateProfile = ({
       dispatch(userRefetch());
     },
     onFailure: ({ error }) => {
-      if (error instanceof FetcherError) {
+      if (error instanceof FetchError) {
         if (error.code === 471 && error.payload.code === 'SafetyWizardRequired') {
           onDisableSafeMode?.();
         } else {

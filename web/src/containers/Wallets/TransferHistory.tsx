@@ -12,8 +12,8 @@ import { Wallet } from 'src/modules/user/wallets/types';
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { TextColor } from 'src/components/Box/Box';
 import s from './TransferHistory.postcss';
-import { useFetcher } from 'web/src/hooks/data/useFetcher';
-import { fetchWithCreds } from 'web/src/helpers/fetcher';
+import { useFetch } from 'web/src/hooks/data/useFetch';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
 
 interface Props {
   currency?: Currency | undefined;
@@ -30,10 +30,7 @@ export const TransferHistory: React.FC<Props> = ({
 }) => {
   const t = useT();
 
-  const transfersResponse = useFetcher<TransferRecord[]>(
-    `${accountUrl()}/transfers`,
-    fetchWithCreds,
-  );
+  const transfersResponse = useFetch<TransferRecord[]>(`${accountUrl()}/transfers`, fetchWithCreds);
 
   const header = useMemo(
     () => [t('Date'), t('Status'), t('Transfer from'), t('Transfer to'), t('Amount')],

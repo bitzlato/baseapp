@@ -22,7 +22,7 @@ import s from './Transfer.postcss';
 import { TransferHistory } from './TransferHistory';
 import { getCurrencySymbol } from 'web/src/helpers/getCurrencySymbol';
 import { useSWRConfig } from 'swr';
-import { fetchWithCreds } from 'web/src/helpers/fetcher';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
 
 interface Props {

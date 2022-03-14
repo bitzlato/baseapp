@@ -1,19 +1,15 @@
 import { Money } from '@bitzlato/money-js';
 import { useMemo } from 'react';
 import { accountUrl } from 'web/src/api';
-import { fetcher } from 'web/src/helpers/fetcher';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { TradeStat, TradeStatistics, TradeStats } from 'web/src/modules/user/profile/types';
-import { useFetcher, FetcherResponse } from './useFetcher';
+import { useFetch, FetchResponse } from './useFetch';
 
 export const useFetchTradeStatistics = () => {
-  return useFetcher<TradeStatistics>(`${accountUrl()}/user/trade_statistics`, (url) =>
-    fetcher(url, {
-      credentials: 'include',
-    }),
-  );
+  return useFetch<TradeStatistics>(`${accountUrl()}/user/trade_statistics`, fetchWithCreds);
 };
 
-export const useTradeStats = (): FetcherResponse<TradeStats> => {
+export const useTradeStats = (): FetchResponse<TradeStats> => {
   const { data, error } = useFetchTradeStatistics();
 
   const tradeStats = useMemo((): TradeStats | undefined => {

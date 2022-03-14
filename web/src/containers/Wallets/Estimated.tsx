@@ -10,8 +10,8 @@ import { accountUrl } from 'src/api/config';
 import { useSelector } from 'react-redux';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
 import s from './Estimated.postcss';
-import { useFetcher } from 'web/src/hooks/data/useFetcher';
-import { fetchWithCreds } from 'web/src/helpers/fetcher';
+import { useFetch } from 'web/src/hooks/data/useFetch';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
 
 export const Estimated: React.FC = () => {
   const t = useT();
@@ -19,7 +19,7 @@ export const Estimated: React.FC = () => {
 
   const shouldFetch = process.env.REACT_APP_RELEASE_STAGE !== 'sandbox';
 
-  const { data = DEFAULT_TOTAL } = useFetcher<TotalBalances>(
+  const { data = DEFAULT_TOTAL } = useFetch<TotalBalances>(
     shouldFetch ? `${accountUrl()}/balances/total` : null,
     fetchWithCreds,
   );

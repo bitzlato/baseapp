@@ -23,8 +23,8 @@ import {
   Wallet,
 } from '../../modules';
 import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
-import { useFetcher } from 'web/src/hooks/data/useFetcher';
-import { fetcher, fetchWithCreds } from 'web/src/helpers/fetcher';
+import { useFetch } from 'web/src/hooks/data/useFetch';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
 
 interface Props {
   wallet: Wallet;
@@ -40,7 +40,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
 
   const [blockchain, setBlockchain] = useState<Blockchain | null>(null);
 
-  const blockchainsResponse = useFetcher<Blockchain[]>(`${tradeUrl()}/public/blockchains`, fetcher);
+  const blockchainsResponse = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
   const blockchains = (blockchainsResponse.data ?? []).filter((d) =>
     wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id),
@@ -50,7 +50,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
     setBlockchain(blockchains.length === 1 ? blockchains[0]! : null);
   }, [blockchains.length, wallet.currency.code]);
 
-  const depositResponse = useFetcher<DepositAddress>(
+  const depositResponse = useFetch<DepositAddress>(
     blockchain?.id ? `${tradeUrl()}/account/deposit_address/${blockchain?.id}` : null,
     fetchWithCreds,
   );

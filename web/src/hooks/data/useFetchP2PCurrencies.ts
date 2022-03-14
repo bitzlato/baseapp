@@ -1,14 +1,13 @@
 import { useMemo } from 'react';
 import { p2pUrl } from 'web/src/api/config';
-import { fetcher } from 'web/src/helpers/fetcher';
 import { P2PCurrencies, P2PCurrencyOption } from 'web/src/modules/public/currencies/types';
-import { useFetcher, FetcherResponse } from './useFetcher';
+import { useFetch, FetchResponse } from './useFetch';
 
 export const useFetchP2PCurrencies = () => {
-  return useFetcher<P2PCurrencies>(`${p2pUrl()}/public/refs/currencies`, fetcher);
+  return useFetch<P2PCurrencies>(`${p2pUrl()}/public/refs/currencies`);
 };
 
-export const useP2PCurrencyOptions = (): FetcherResponse<P2PCurrencyOption[]> => {
+export const useP2PCurrencyOptions = (): FetchResponse<P2PCurrencyOption[]> => {
   const { data, error } = useFetchP2PCurrencies();
 
   const options = useMemo((): P2PCurrencyOption[] | undefined => {

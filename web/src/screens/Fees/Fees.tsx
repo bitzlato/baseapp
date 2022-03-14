@@ -19,8 +19,7 @@ import { Container } from 'web/src/components/Container/Container';
 import { Blockchain } from 'web/src/modules/public/blockchains/types';
 import { tradeUrl } from 'web/src/api/config';
 import { CurrencyTicker } from 'web/src/components/CurrencyTicker/CurrencyTicker';
-import { useFetcher } from 'web/src/hooks/data/useFetcher';
-import { fetcher } from 'web/src/helpers/fetcher';
+import { useFetch } from 'web/src/hooks/data/useFetch';
 
 export const FeesScreen: React.FC = () => {
   const t = useT();
@@ -37,12 +36,9 @@ export const FeesScreen: React.FC = () => {
 
   const currencies = useSelector(selectCurrencies);
 
-  const { data = [] } = useFetcher<TradingFee[]>(`${tradeUrl()}/public/trading_fees`, fetcher);
+  const { data = [] } = useFetch<TradingFee[]>(`${tradeUrl()}/public/trading_fees`);
 
-  const { data: blockchains = [] } = useFetcher<Blockchain[]>(
-    `${tradeUrl()}/public/blockchains`,
-    fetcher,
-  );
+  const { data: blockchains = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
   const header = [
     t('page.fees.table.coin'),
