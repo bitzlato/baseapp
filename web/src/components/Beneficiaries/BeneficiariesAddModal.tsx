@@ -17,8 +17,7 @@ import { TextInput } from '../Input/TextInput';
 import { Select } from '../Select/Select';
 import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Modal2 } from '../Modal/Modal2';
-import { useFetcher } from 'web/src/hooks/data/useFetcher';
-import { fetcher } from 'web/src/helpers/fetcher';
+import { useFetch } from 'web/src/hooks/data/useFetch';
 
 interface Props {
   wallet: Wallet;
@@ -37,7 +36,7 @@ const BeneficiariesAddModalComponent: React.FC<Props> = ({ wallet, onCloseModal 
   const t = useT();
   const dispatch = useDispatch();
 
-  const { data = [] } = useFetcher<Blockchain[]>(`${tradeUrl()}/public/blockchains`, fetcher);
+  const { data = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
   const blockchains = data.filter((d) =>
     wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id),

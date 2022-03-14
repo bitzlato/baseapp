@@ -25,10 +25,10 @@ import { Container } from 'web/src/components/Container/Container';
 import { getList } from './helpers';
 import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
-import { useFetcher } from 'web/src/hooks/data/useFetcher';
+import { useFetch } from 'web/src/hooks/data/useFetch';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
 
 import s from './WalletsScreen.postcss';
-import { fetchWithCreds } from 'web/src/helpers/fetcher';
 
 export const WalletsScreen: React.FC = () => {
   const params = useParams<UrlParams>();
@@ -43,7 +43,7 @@ export const WalletsScreen: React.FC = () => {
 
   const shouldFetch = process.env.REACT_APP_RELEASE_STAGE !== 'sandbox';
 
-  const balanceResponse = useFetcher<GeneralBalance[]>(
+  const balanceResponse = useFetch<GeneralBalance[]>(
     shouldFetch ? `${accountUrl()}/balances` : null,
     fetchWithCreds,
   );

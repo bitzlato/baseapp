@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux';
 import { alertPush } from '../modules/public/alert/actions';
-import { FetcherError } from './fetcher';
+import { FetchError } from './fetch';
 
 export function alertFetchError(dispatch: Dispatch, error: unknown) {
-  if (error instanceof FetcherError) {
+  if (error instanceof FetchError) {
     dispatch(
       alertPush({
         type: 'error',

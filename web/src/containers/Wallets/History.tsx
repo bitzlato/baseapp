@@ -28,8 +28,7 @@ import {
 } from '../../modules';
 import { localeDate, sortByDateDesc } from '../../helpers';
 import { History, Pagination } from '../../components';
-import { useFetcher } from 'web/src/hooks/data/useFetcher';
-import { fetcher } from 'web/src/helpers/fetcher';
+import { useFetch } from 'web/src/hooks/data/useFetch';
 
 interface Props {
   label: string;
@@ -50,10 +49,7 @@ export const WalletHistory: FC<Props> = (props) => {
   const withdrawSuccess = useSelector(selectWithdrawSuccess);
   const t = useT();
 
-  const { data: blockchains = [] } = useFetcher<Blockchain[]>(
-    `${tradeUrl()}/public/blockchains`,
-    fetcher,
-  );
+  const { data: blockchains = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
   useEffect(() => {
     dispatch(fetchHistory({ currency, page: 0, type, limit: 6 }));

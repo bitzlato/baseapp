@@ -34,8 +34,7 @@ import {
 } from '../../modules';
 import { localeDate, setTradesType, truncateMiddle } from '../../helpers';
 import { History, Pagination } from '../../components';
-import { useFetcher } from 'web/src/hooks/data/useFetcher';
-import { fetcher } from 'web/src/helpers/fetcher';
+import { useFetch } from 'web/src/hooks/data/useFetch';
 
 interface Props {
   type: string;
@@ -55,10 +54,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
   const nextPageExists = useSelector(selectNextPageExists);
   const t = useT();
 
-  const { data: blockchains = [] } = useFetcher<Blockchain[]>(
-    `${tradeUrl()}/public/blockchains`,
-    fetcher,
-  );
+  const { data: blockchains = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
   useEffect(() => {
     dispatch(fetchHistory({ page: 0, type, limit: 25 }));
