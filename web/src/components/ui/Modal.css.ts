@@ -55,7 +55,7 @@ const modalBase = style({
 
 const modalMaxWidths = {
   md: 448,
-  // lg: 512,
+  lg: 512,
   // xl: 576,
 } as const;
 

@@ -42,6 +42,24 @@ exports[`ProfileScreen test should render 1`] = `
           </span>
         </div>
         <div
+          class="reset_base__1sfgjt80 sprinkles_marginBottom_9x_mobile__w76aifge"
+        >
+          <div
+            class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5"
+          >
+            <div
+              class="reset_base__1sfgjt80"
+            >
+              <button
+                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19k sprinkles_display_inline-block_mobile__w76aiff sprinkles_fontWeight_strong__w76aif19m Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif87 sprinkles_paddingRight_4x_mobile__w76aifap sprinkles_paddingTop_2x_mobile__w76aif2x sprinkles_paddingBottom_2x_mobile__w76aif5f sprinkles_fontSize_medium_mobile__w76aifri sprinkles_lineHeight_medium__w76aif19o sprinkles_borderRadius_1x__w76aif194 Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxl sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxo sprinkles_color_btnSecondaryText_default__w76aiftr"
+                type="button"
+              >
+                Referral Links
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
           class="reset_base__1sfgjt80 Profile_stats__crp8vk0"
         >
           <div

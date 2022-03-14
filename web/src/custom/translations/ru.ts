@@ -1273,6 +1273,7 @@ export const ru: LangType = {
   Comments: 'Отзывы',
   'Transactions made': 'Сделок совершено',
   'Show all': 'Показать все',
+  'Referral Links': 'Реферальные ссылки',
 
   'safemode.title': 'Выключение безопасного режима',
   'safemode.begin':
