@@ -111,3 +111,7 @@ end
 # Added rails.
 # rake has its own dotenv requirement in Rakefile
 set :dotenv_hook_commands, %w{yarn rails ruby}
+
+set :maintenance_dirname, -> { "#{current_path}/public" }
+set :maintenance_template_path, File.expand_path('maintenance.html.erb')
+set :maintenance_roles, %w{app}

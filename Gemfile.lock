@@ -21,6 +21,8 @@ GEM
       capistrano (>= 3.5.0, < 4.0.0)
     capistrano-dotenv-tasks (0.1.5)
       capistrano (~> 3.0)
+    capistrano-maintenance (1.2.1)
+      capistrano (>= 3.0)
     capistrano-nvm (0.0.7)
       capistrano (~> 3.1)
     capistrano-shell (0.2.0)
@@ -50,6 +52,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-dotenv
   capistrano-dotenv-tasks
+  capistrano-maintenance
   capistrano-nvm
   capistrano-shell
   capistrano-tasks!

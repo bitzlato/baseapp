@@ -24,3 +24,4 @@ install_plugin Capistrano::My
 require 'capistrano/slackistrano' # My Custom Message
 require 'capistrano/sentry' if Gem.loaded_specs.key?('capistrano-sentry')
 require 'bugsnag-capistrano' if Gem.loaded_specs.key?('bugsnag-capistrano')
+require 'capistrano/maintenance'
