@@ -112,3 +112,9 @@ export interface TradeStat {
   totalDeals: number;
   totalMoney: Money;
 }
+
+export interface ReferralLink {
+  target: 'p2p' | 'market';
+  type: string;
+  url: string;
+}

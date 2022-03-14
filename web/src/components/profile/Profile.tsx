@@ -17,6 +17,7 @@ import { useFetchSessionsMe } from 'web/src/hooks/data/useFetchSessionsMe';
 import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
+import { ProfileReferalLinks } from './ProfileReferralLinks';
 
 export const Profile: FC = () => {
   const t = useT();
@@ -45,6 +46,11 @@ export const Profile: FC = () => {
         <Text variant="label" color="textMuted">
           UID: {user.uid} {sessionsMe && `(${sessionsMe.auth_sub})`}
         </Text>
+      </Box>
+      <Box mb="9x">
+        <Stack marginRight="5x">
+          <ProfileReferalLinks />
+        </Stack>
       </Box>
       <Box className={s.stats} mb={isMobileDevice ? '8x' : undefined}>
         <div className={s.stat}>

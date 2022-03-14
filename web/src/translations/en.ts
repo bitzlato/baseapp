@@ -1252,6 +1252,7 @@ export const en = {
   Comments: 'Comments',
   'Transactions made': 'Transactions made',
   'Show all': 'Show all',
+  'Referral Links': 'Referral Links',
 
   'safemode.title': 'Disable safe mode',
   'safemode.begin':
