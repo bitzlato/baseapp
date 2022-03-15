@@ -27,6 +27,7 @@ import { toggleColorTheme } from '../../helpers';
 import {
   ChangeForgottenPasswordMobileScreen,
   ConfirmMobileScreen,
+  EmailVerificationMobileScreen,
   ForgotPasswordMobileScreen,
   LandingScreenMobile,
   OrdersMobileScreen,
@@ -63,6 +64,7 @@ import {
   ChangeForgottenPasswordScreen,
   ConfirmScreen,
   DocumentationScreen,
+  EmailVerificationScreen,
   ForgotPasswordScreen,
   HistoryScreen,
   InternalTransfer,
@@ -234,6 +236,14 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       }
     }
 
+    // if (
+    //   !this.props.user.email &&
+    //   nextProps.user.email &&
+    //   !this.props.location.pathname.includes('/setup')
+    // ) {
+    //   this.props.userFetch();
+    // }
+
     if (!this.props.isLoggedIn && nextProps.isLoggedIn && !this.props.user.email) {
       this.initInterval();
       this.check();
@@ -321,6 +331,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               isLogged={isLoggedIn}
               path="/accounts/confirmation"
               component={VerificationScreen}
+            />
+            <PublicRoute
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path="/email-verification"
+              component={EmailVerificationMobileScreen}
             />
             <PrivateRoute
               loading={userLoading}
@@ -435,6 +451,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             isLogged={isLoggedIn}
             path="/accounts/password_reset"
             component={ChangeForgottenPasswordScreen}
+          />
+          <PublicRoute
+            loading={userLoading}
+            isLogged={isLoggedIn}
+            path="/email-verification"
+            component={EmailVerificationScreen}
           />
           <Route path="/docs" component={DocumentationScreen as any} />
           <Route path="/fees" component={FeesScreen as any} />

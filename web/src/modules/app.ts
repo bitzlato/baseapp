@@ -19,6 +19,7 @@ import { beneficiariesReducer } from './user/beneficiaries';
 import { getGeetestCaptchaReducer } from './user/captcha';
 import { depositIntentionReducer } from './user/deposits';
 import { documentationReducer } from './user/documentation';
+import { sendEmailVerificationReducer } from './user/emailVerification';
 import { historyReducer } from './user/history';
 import { internalTransfersReducer } from './user/internalTransfers';
 import {
@@ -75,6 +76,7 @@ export const userReducer = combineReducers({
   ordersHistory: ordersHistoryReducer,
   password: passwordReducer,
   profile: profileReducer,
+  sendEmailVerification: sendEmailVerificationReducer,
   userActivity: userActivityReducer,
   wallets: walletsReducer,
   withdrawLimit: withdrawLimitReducer,
