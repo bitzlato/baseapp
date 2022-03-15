@@ -21,7 +21,7 @@ export async function loginWithRedirect() {
     };
     window.location.assign(`https://${auth0.domain}/authorize?${buildQueryString(params)}`);
   } else {
-    window.location.href = '/signin';
+    window.location.href = '/signinb';
   }
 }
 

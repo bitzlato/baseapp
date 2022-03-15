@@ -165,7 +165,7 @@ const SignIn: React.FC<SignInProps> = ({
         <span>
           {formatMessage({ id: 'page.header.signIN.noAccountYet' })}
           <span
-            onClick={() => history.push('/signup')}
+            onClick={() => history.push('/signupb')}
             className="pg-sign-in-screen__register-button"
           >
             {formatMessage({ id: 'page.body.landing.header.button3' })}
