@@ -913,6 +913,7 @@ export const en = {
   'identity.session.missing_otp': 'The account has enabled 2FA but OTP code is missing',
   'identity.session.invalid_otp': 'OTP code is invalid',
   'identity.session.auth0.email_not_verified': 'Your email is not verified',
+  'identity.session.email_not_verified': 'Your email is not verified',
 
   'username.taken': 'This username is already taken',
   'first_name.invalid': 'First name is invalid',
