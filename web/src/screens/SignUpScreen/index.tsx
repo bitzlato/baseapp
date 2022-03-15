@@ -348,7 +348,7 @@ class SignUp extends React.Component<Props> {
   };
 
   private handleSignIn = () => {
-    this.props.history.push('/signin');
+    this.props.history.push('/signinb');
   };
 
   private handleSignUp = () => {
@@ -397,7 +397,7 @@ class SignUp extends React.Component<Props> {
 
   private closeModal = () => {
     this.setState({ showModal: false });
-    this.props.history.push('/signin');
+    this.props.history.push('/signinb');
   };
 
   private extractRefID = (url: string) => new URLSearchParams(url).get('refid');
