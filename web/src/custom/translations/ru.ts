@@ -924,6 +924,7 @@ export const ru: LangType = {
   'identity.session.missing_otp': 'Отсутствует код 2FA',
   'identity.session.invalid_otp': 'Код 2FA недействителен',
   'identity.session.auth0.email_not_verified': 'Почтовый адрес не подтвержден',
+  'identity.session.email_not_verified': 'Почтовый адрес не подтвержден',
 
   'username.taken': 'Никнейм уже используется',
   'first_name.invalid': 'Имя неверное',
