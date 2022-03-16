@@ -261,10 +261,7 @@ const SignUpFormComponent: React.FC<SignUpFormProps> = ({
       <div className="pg-sign-up-screen__login">
         <span>
           {formatMessage({ id: 'page.header.signUp.alreadyRegistered' })}
-          <span
-            onClick={() => history.push('/signinb')}
-            className="pg-sign-up-screen__login-button"
-          >
+          <span onClick={() => history.push('/signin')} className="pg-sign-up-screen__login-button">
             {formatMessage({ id: 'page.mobile.header.signIn' })}
           </span>
         </span>

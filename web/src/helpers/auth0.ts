@@ -7,7 +7,7 @@ import { clearHash, parseHash } from './hash';
 /**
  * https://auth0.com/docs/authorization/protocols/protocol-oauth2
  */
-export async function loginWithRedirect() {
+export async function loginAuth0() {
   const auth0 = auth0Config();
   if (auth0) {
     const params = {
@@ -21,7 +21,7 @@ export async function loginWithRedirect() {
     };
     window.location.assign(`https://${auth0.domain}/authorize?${buildQueryString(params)}`);
   } else {
-    window.location.href = '/signinb';
+    window.location.href = '/signin';
   }
 }
 

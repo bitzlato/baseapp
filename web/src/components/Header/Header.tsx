@@ -1,5 +1,6 @@
 import { ComponentProps, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import {
   Header as SharedHeader,
@@ -19,7 +20,6 @@ import {
   selectUserFetching,
   logoutFetch,
 } from 'src/modules';
-import { loginWithRedirect } from 'src/helpers/auth0';
 import { MarketSelector } from 'src/containers/MarketSelector/MarketSelector';
 import { HeaderToolbar } from 'src/containers/HeaderToolbar/HeaderToolbar';
 import { useT } from 'src/hooks/useT';
@@ -43,6 +43,7 @@ const Header: FC = () => {
   const colorTheme = useSelector(selectCurrentColorTheme);
   const isUserFetching = useSelector(selectUserFetching);
   const { pathname } = useLocation();
+  const history = useHistory();
   const isTradingPage = pathname.includes('/trading');
 
   const handleLanguageChange = (code: string) => {
@@ -75,8 +76,8 @@ const Header: FC = () => {
   } else if (!isLoggedIn) {
     userProps = {
       status: USER_STATUS_AUTHORIZATION_REQUIRED,
-      onSignInClick: loginWithRedirect,
-      onSignUpClick: loginWithRedirect,
+      onSignInClick: () => history.push('/signin'),
+      onSignUpClick: () => history.push('/signup'),
     };
   } else {
     userProps = {

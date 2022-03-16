@@ -59,7 +59,7 @@ export const DropdownItem: FC<Props> = (props) => {
   const handleClick = () => {
     if ('onClick' in props) {
       const { onClick } = props;
-      onClick();
+      onClick?.();
     }
     closeMenu();
   };
