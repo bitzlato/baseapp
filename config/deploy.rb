@@ -69,6 +69,7 @@ task :yarn_build do
       execute :yarn, :rebuild
       execute :yarn, :build
       execute :ln, "-sr web/build/ web/build/shared"
+      execute :ln, "-sr web/build/ web/build/basestatic"
       execute :cp, "-R market-docs/build web/build/marketDocs"
     end
   end
