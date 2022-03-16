@@ -42,9 +42,7 @@ export const TwoFactorAuthSwitcher: FC<Props> = ({ value }) => {
         helpText={
           <Text variant="label" color={value ? 'success' : 'danger'} fontWeight="strong">
             {value
-              ? t(
-                  'page.body.profile.header.account.content.twoFactorAuthentication.message.enabled',
-                )
+              ? t('page.body.profile.header.account.content.twoFactorAuthentication.message.enable')
               : t(
                   'page.body.profile.header.account.content.twoFactorAuthentication.message.disable',
                 )}
