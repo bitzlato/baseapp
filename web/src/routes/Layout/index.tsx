@@ -9,7 +9,7 @@ import { compose } from 'redux';
 import { FeesScreen } from 'src/screens/Fees/Fees';
 import type { IntlProps } from 'src/types';
 import { WalletsScreen } from 'src/screens/WalletsScreen/WalletsScreen';
-import { loginWithRedirect } from 'src/helpers/auth0';
+import { loginAuth0 } from 'src/helpers/auth0';
 import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
 import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
 import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
@@ -310,10 +310,10 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       return (
         <div className={mobileCls}>
           <Switch>
-            <PublicRoute path="/signin" component={SignInAuth0} />
-            <PublicRoute path="/signup" component={SignInAuth0} />
-            <PublicRoute path="/signinb" component={SignInMobileScreen} />
-            <PublicRoute path="/signupb" component={SignUpMobileScreen} />
+            <PublicRoute path="/signin0" component={SignInAuth0} />
+            <PublicRoute path="/signup0" component={SignInAuth0} />
+            <PublicRoute path="/signin" component={SignInMobileScreen} />
+            <PublicRoute path="/signup" component={SignUpMobileScreen} />
             <PublicRoute
               loading={userLoading}
               isLogged={isLoggedIn}
@@ -430,10 +430,10 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       <div className={desktopCls}>
         <Switch>
           <Route path="/magic-link" component={MagicLink as any} />
-          <PublicRoute path="/signin" component={SignInAuth0} />
-          <PublicRoute path="/signup" component={SignInAuth0} />
-          <PublicRoute path="/signinb" component={SignInScreen} />
-          <PublicRoute path="/signupb" component={SignUpScreen} />
+          <PublicRoute path="/signin0" component={SignInAuth0} />
+          <PublicRoute path="/signup0" component={SignInAuth0} />
+          <PublicRoute path="/signin" component={SignInScreen} />
+          <PublicRoute path="/signup" component={SignUpScreen} />
           <PublicRoute
             loading={userLoading}
             isLogged={isLoggedIn}
@@ -566,7 +566,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
 
   private handleSubmitExpSessionModal = () => {
     this.handleChangeExpSessionModalState();
-    loginWithRedirect();
+    loginAuth0();
   };
 
   private handleRenderExpiredSessionModal = () => (

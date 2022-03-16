@@ -104,7 +104,7 @@ export const SignInScreen: React.FC = () => {
   };
 
   const handleSignUp = useCallback(() => {
-    history.push('/signupb');
+    history.push('/signup');
   }, [history]);
 
   const forgotPassword = useCallback(() => {
