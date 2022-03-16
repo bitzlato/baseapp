@@ -26,6 +26,7 @@ import {
   selectGeetestCaptchaSuccess,
   selectCaptchaResponse,
   resetCaptchaState,
+  selectSignUpRequireVerification,
 } from '../../modules';
 
 export const SignInScreen: React.FC = () => {
@@ -43,7 +44,7 @@ export const SignInScreen: React.FC = () => {
   const isLoggedIn = useReduxSelector(selectUserLoggedIn);
   const loading = useReduxSelector(selectUserFetching);
   const require2FA = useReduxSelector(selectSignInRequire2FA);
-  const requireEmailVerification = useReduxSelector((x) => x.user.auth.requireVerification);
+  const requireEmailVerification = useReduxSelector(selectSignUpRequireVerification);
   const errorSignIn = useReduxSelector(selectSignInError);
   const reCaptchaSuccess = useReduxSelector(selectRecaptchaSuccess);
   const geetestCaptchaSuccess = useReduxSelector(selectGeetestCaptchaSuccess);

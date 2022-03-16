@@ -21,7 +21,9 @@ export function* signInSaga(action: SignInFetch) {
 
     if (user.state === 'pending') {
       yield put(signUpRequireVerification({ requireVerification: true }));
-    } else {
+    }
+
+    {
       if (user.data && JSON.parse(user.data).language) {
         yield put(changeLanguage(JSON.parse(user.data).language));
       }

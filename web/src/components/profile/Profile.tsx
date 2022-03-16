@@ -27,7 +27,7 @@ export const Profile: FC = () => {
   const swr = useTradeStats();
   const { data: sessionsMe } = useFetchSessionsMe();
 
-  if (swr.error) {
+  if (swr.error || user.bitzlato_user === null) {
     return null; // TODO: Add throw and error boundary screen
   }
 

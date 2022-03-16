@@ -63,6 +63,10 @@ export const ProfileSettings: FC = () => {
     [saveSettings],
   );
 
+  if (user.bitzlato_user === null) {
+    return null;
+  }
+
   const body = (
     <Card header={!isMobileDevice ? <h4>{t('Settings')}</h4> : undefined}>
       <Box
