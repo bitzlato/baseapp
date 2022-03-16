@@ -95,7 +95,7 @@ export const ProfileSettings: FC = () => {
             <SwitchField
               id="save_requisites"
               label={t('settings.save_requisites')}
-              defaultValue={user.bitzlato_user.user_setting.save_requisites}
+              defaultValue={user.bitzlato_user.user_setting?.save_requisites}
               onChange={handleChangeSaveRequisites}
             />
           </Stack>
@@ -146,28 +146,28 @@ export const ProfileSettings: FC = () => {
             <NotificationSettingField
               label={t('settings.new_referral')}
               helpText={t('settings.new_referral_help')}
-              defaultValue={user.bitzlato_user.user_setting.new_referral}
+              defaultValue={user.bitzlato_user.user_setting?.new_referral}
               onChange={changeNotificationSettingHandles.newReferral}
             />
 
             <NotificationSettingField
               label={t('settings.dividends_received')}
               helpText={t('settings.dividends_received_help')}
-              defaultValue={user.bitzlato_user.user_setting.dividends_received}
+              defaultValue={user.bitzlato_user.user_setting?.dividends_received}
               onChange={changeNotificationSettingHandles.dividendsReceived}
             />
 
             <NotificationSettingField
               label={t('settings.comission_return')}
               helpText={t('settings.comission_return_help')}
-              defaultValue={user.bitzlato_user.user_setting.comission_return}
+              defaultValue={user.bitzlato_user.user_setting?.comission_return}
               onChange={changeNotificationSettingHandles.comissionReturn}
             />
 
             <NotificationSettingField
               label={t('settings.user_message')}
               helpText={t('settings.user_message_help')}
-              defaultValue={user.bitzlato_user.user_setting.user_message}
+              defaultValue={user.bitzlato_user.user_setting?.user_message}
               onChange={changeNotificationSettingHandles.userMessage}
             />
           </Stack>

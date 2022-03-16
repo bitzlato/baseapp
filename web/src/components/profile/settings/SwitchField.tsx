@@ -4,7 +4,7 @@ import { Box } from 'web/src/components/ui/Box';
 import { Switch } from 'web/src/components/form/Switch';
 
 interface Props {
-  defaultValue?: boolean;
+  defaultValue?: boolean | undefined;
   id: string;
   label: string;
   helpText?: ReactNode | undefined;

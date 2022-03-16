@@ -62,7 +62,7 @@ export interface BitzlatoUser {
     user_message?: NotificationSettingStatus | null | undefined;
     comission_return?: NotificationSettingStatus | null | undefined;
     dividends_received?: NotificationSettingStatus | null | undefined;
-  };
+  } | null;
 }
 
 export interface User {
