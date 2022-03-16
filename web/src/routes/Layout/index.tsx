@@ -58,6 +58,7 @@ import {
   walletsReset,
   AbilitiesInterface,
   selectAbilities,
+  selectVerifyEmailAuth0,
   selectVerifyEmail,
 } from '../../modules';
 import {
@@ -82,6 +83,7 @@ import {
 import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuthScreen/ProfileTwoFactorAuthScreen';
 import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSettingsMobileScreen/ProfileSettingsMobileScreen';
 import { SignInAuth0 } from 'web/src/screens/SignInScreen/SignInAuth0';
+import { EmailVerificationModal } from 'web/src/screens/EmailVerification/EmailVerificationModal';
 
 interface ReduxProps {
   colorTheme: string;
@@ -92,6 +94,7 @@ interface ReduxProps {
   userLoading?: boolean | undefined;
   platformAccessStatus: string;
   abilities: AbilitiesInterface;
+  verifyEmailAuth0: boolean;
   verifyEmail: boolean;
 }
 
@@ -288,7 +291,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       return renderLoader();
     }
 
-    if (this.props.verifyEmail) {
+    if (this.props.verifyEmailAuth0) {
       return (
         <div className={isMobileDevice ? mobileCls : desktopCls}>
           <VerifyEmailModal />
@@ -422,6 +425,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           </Switch>
           {isLoggedIn && <WalletsFetch />}
           {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
+          {this.props.verifyEmail && <EmailVerificationModal />}
         </div>
       );
     }
@@ -514,6 +518,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         </Switch>
         {isLoggedIn && <WalletsFetch />}
         {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
+        {this.props.verifyEmail && <EmailVerificationModal />}
       </div>
     );
   }
@@ -594,6 +599,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state): Red
   userLoading: selectUserFetching(state),
   platformAccessStatus: selectPlatformAccessStatus(state),
   abilities: selectAbilities(state),
+  verifyEmailAuth0: selectVerifyEmailAuth0(state),
   verifyEmail: selectVerifyEmail(state),
 });
 

@@ -13,12 +13,11 @@ export const selectTwoFactorAuthBarcode = (state: RootState): string =>
 export const selectTwoFactorAuthSuccess = (state: RootState): boolean | undefined =>
   state.user.profile.twoFactorAuth.success;
 
-export const selectUserLoggedIn = (state: RootState): boolean => {
-  const {
-    user: { profile },
-  } = state;
+export const selectUserState = (state: RootState): string => state.user.profile.userData.user.state;
 
-  return !profile.userData.isFetching && profile.userData.user.state === 'active';
+export const selectUserLoggedIn = (state: RootState): boolean => {
+  // return !profile.userData.isFetching && profile.userData.user.state === 'active';
+  return !selectUserFetching(state) && selectUserState(state) !== '';
 };
 
 export const selectUserInfo = (state: RootState): User => state.user.profile.userData.user;
@@ -29,7 +28,11 @@ export const selectUserFetching = (state: RootState): boolean =>
 export const selectUserDataChange = (state: RootState): boolean | undefined =>
   state.user.profile.userData.success;
 
+// TODO: check email_verified=false
 export const selectVerifyEmail = (state: RootState): boolean =>
+  selectUserState(state) === 'pending';
+
+export const selectVerifyEmailAuth0 = (state: RootState): boolean =>
   state.user.profile.userData.verifyEmail;
 
 export const selectUserDataError = (state: RootState) => state.user.profile.userData.error;

@@ -81,7 +81,7 @@ export interface User {
   phone: Phone[];
   created_at: string;
   updated_at: string;
-  bitzlato_user: BitzlatoUser;
+  bitzlato_user: BitzlatoUser | null;
 }
 
 export interface TradeStatistics {
