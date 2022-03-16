@@ -8,10 +8,10 @@
     <% if (process.env.REACT_APP_GIT_SHA) { %>
     <meta name="ui-version" content="<%= process.env.REACT_APP_GIT_SHA %>" />
     <% } %>
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="<%= process.env.ASSET_PATH %>favicon.ico" sizes="any" />
+    <link rel="icon" href="<%= process.env.ASSET_PATH %>favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="<%= process.env.ASSET_PATH %>apple-touch-icon.png" />
+    <link rel="manifest" href="<%= process.env.ASSET_PATH %>manifest.json" />
     <title>Bitzlato</title>
     <% if (process.env.REACT_APP_RELEASE_STAGE === 'production') { %>
     <script>
@@ -62,7 +62,7 @@
         window.AUTH0_CLIENT_ID = <%= JSON.stringify(process.env.AUTH0_CLIENT_ID) %>;
       })();
     </script>
-    <script src="/config/env.js?<%= process.env.HASH %>"></script>
+    <script src="<%= process.env.ASSET_PATH %>config/env.js?<%= process.env.HASH %>"></script>
     <% } %>
     <noscript> You need to enable JavaScript to run this app. </noscript>
     <div id="root"></div>
