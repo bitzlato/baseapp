@@ -118,3 +118,7 @@ export interface ReferralLink {
   type: string;
   url: string;
 }
+
+export interface GenerateMergeTokenResponse {
+  token: string;
+}

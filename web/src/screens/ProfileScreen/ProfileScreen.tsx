@@ -6,6 +6,7 @@ import { ProfileApiKeys } from 'web/src/containers';
 import { ProfileAccountActivity } from 'web/src/containers/ProfileAccountActivity';
 import { Profile } from 'web/src/components/profile/Profile';
 import { ProfileSettings } from 'web/src/components/profile/settings/ProfileSettings';
+import { MergeWithTelegram } from 'web/src/components/profile/mergeWithTelegram/MergeWithTelegram';
 
 export const ProfileScreen: FC = () => {
   const t = useT();
@@ -16,6 +17,7 @@ export const ProfileScreen: FC = () => {
   return (
     <Box my="7">
       <Profile />
+      <MergeWithTelegram />
       <ProfileSettings />
       <ProfileApiKeys />
       <ProfileAccountActivity />

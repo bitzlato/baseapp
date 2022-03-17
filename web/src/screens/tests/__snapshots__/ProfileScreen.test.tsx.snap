@@ -206,6 +206,91 @@ exports[`ProfileScreen test should render 1`] = `
         class="cardHeader padding3 primaryColor"
       >
         <h4>
+          Merging
+        </h4>
+      </div>
+      <div
+        class="col colSpacing2 padding3"
+      >
+        <div
+          class="MergeWithTelegram_row__jc2h8d0"
+        >
+          <div
+            class="MergeWithTelegram_column__jc2h8d1"
+          >
+            <div
+              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif87 sprinkles_paddingRight_4x_mobile__w76aifap sprinkles_paddingTop_7x_mobile__w76aif3m sprinkles_paddingBottom_7x_mobile__w76aif64 sprinkles_backgroundColor_statBg_default__w76aifz5 sprinkles_borderRadius_1x__w76aif194 sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif1y sprinkles_justifyContent_space-between_mobile__w76aif1j"
+            >
+              <div
+                class="reset_base__1sfgjt80 sprinkles_marginRight_4x_mobile__w76aifkp sprinkles_flexShrink_0__w76aif18c sprinkles_color_text_default__w76aifs7"
+              >
+                <test-file-stub
+                  height="60px"
+                  width="60px"
+                />
+              </div>
+              <span
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+              >
+                Merge Web-account with Telegram-account Bitzlato
+              </span>
+              <div
+                class="reset_base__1sfgjt80 sprinkles_marginLeft_4x_mobile__w76aifi7 sprinkles_flexShrink_0__w76aif18c"
+              >
+                <button
+                  class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19k sprinkles_display_inline-block_mobile__w76aiff sprinkles_fontWeight_strong__w76aif19m Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif87 sprinkles_paddingRight_4x_mobile__w76aifap sprinkles_paddingTop_2x_mobile__w76aif2x sprinkles_paddingBottom_2x_mobile__w76aif5f sprinkles_fontSize_medium_mobile__w76aifri sprinkles_lineHeight_medium__w76aif19o sprinkles_borderRadius_1x__w76aif194 Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxl sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxo sprinkles_color_btnSecondaryText_default__w76aiftr"
+                  type="button"
+                >
+                  Get the code
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="MergeWithTelegram_column__jc2h8d1"
+          >
+            <div
+              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif87 sprinkles_paddingRight_4x_mobile__w76aifap sprinkles_paddingTop_7x_mobile__w76aif3m sprinkles_paddingBottom_7x_mobile__w76aif64 sprinkles_backgroundColor_statBg_default__w76aifz5 sprinkles_borderRadius_1x__w76aif194 sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif1y sprinkles_justifyContent_space-between_mobile__w76aif1j"
+            >
+              <div
+                class="reset_base__1sfgjt80 sprinkles_marginRight_4x_mobile__w76aifkp sprinkles_flexShrink_0__w76aif18c sprinkles_color_text_default__w76aifs7"
+              >
+                <test-file-stub
+                  height="60px"
+                  width="60px"
+                />
+              </div>
+              <span
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+              >
+                Merge Telegram-account with Web-account Bitzlato
+              </span>
+              <div
+                class="reset_base__1sfgjt80 sprinkles_marginLeft_4x_mobile__w76aifi7 sprinkles_flexShrink_0__w76aif18c"
+              >
+                <button
+                  class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19k sprinkles_display_inline-block_mobile__w76aiff sprinkles_fontWeight_strong__w76aif19m Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif87 sprinkles_paddingRight_4x_mobile__w76aifap sprinkles_paddingTop_2x_mobile__w76aif2x sprinkles_paddingBottom_2x_mobile__w76aif5f sprinkles_fontSize_medium_mobile__w76aifri sprinkles_lineHeight_medium__w76aif19o sprinkles_borderRadius_1x__w76aif194 Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxl sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxo sprinkles_color_btnSecondaryText_default__w76aiftr"
+                  type="button"
+                >
+                  Enter the code
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="container xl my4"
+  >
+    <div
+      class="cardDesktop col bodyBgColor"
+    >
+      <div
+        class="cardHeader padding3 primaryColor"
+      >
+        <h4>
           Settings
         </h4>
       </div>

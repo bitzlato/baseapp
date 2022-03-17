@@ -1253,6 +1253,10 @@ export const en = {
   'Transactions made': 'Transactions made',
   'Show all': 'Show all',
   'Referral Links': 'Referral Links',
+  'Error!': 'Error!',
+  'Unknown Error': 'Unknown Error',
+  'Enter code': 'Enter code',
+  Token: 'Token',
 
   'safemode.title': 'Disable safe mode',
   'safemode.begin':
@@ -1297,4 +1301,29 @@ export const en = {
   'profile.verification_goto': 'Verify',
   'profile.verification_yes': 'Verification passed',
   'profile.deals_stat': 'trades for',
+
+  'merge.title': 'Merging',
+  'merge.web_with_telegram': 'Merge Web-account with Telegram-account Bitzlato',
+  'merge.telegram_with_web': 'Merge Telegram-account with Web-account Bitzlato',
+  'merge.web_get_code': 'Get the code',
+  'merge.web_enter_code': 'Enter the code',
+  'merge.web_title': 'Web Merge',
+  'merge.telegram_title': 'Telegram Merge',
+  'merge.web_start_text':
+    'You will receive a special code, which you should paste in the telegram bot in the section "Merge WEB account" -> "Enter the code", after you answer the security question',
+  'merge.telegram_start_text':
+    'Enter a special code taken in bot in the section "Merge WEB account"> "Get the code", after you answer the security question',
+  'merge.answer_question': 'Answer the question',
+  'merge.web_security_question':
+    '⚠️ Any support agent, security team will not ask you for this code. Any third party should never get this code from you. By showing the code to merge accounts to someone or by publishing it somewhere you understand that you run the risk of losing your funds.{br}{br}❓Do you agree that you can’t pass the merge code to anyone, even real support agents?',
+  'merge.telegram_security_question':
+    '⚠️ Any support agent, security service agent will not give you a code. Any third party who asks you to enter the code received from him is a scammer. By entering the code for merging accounts that you received from someone or took anywhere except bitzlato.com/p2p in the section "My Account" - "Telegram" you will lose your money.{br}{br}❓Do you agree that you can’t get the verification code from anyone, even from real support agents, but only personally in your bitzlato.com/p2p account in the "My Account" - "Telegram" section?',
+  'merge.web_test_failed': 'In this case, we can not show you the code for the merge!',
+  'merge.telegram_test_failed':
+    'Wrong! No one should receive this code, even the support service and anyone who asks you.\n\nRemember this rule and try again.',
+  'merge.error': '{error}. Please try again.',
+  'merge.enter_token': 'To merge accounts, enter the code received in the telegram bot:',
+  'merge.token_send': 'Merge',
+  'merge.merged':
+    'You have already attached your profile to telegram-account. Now you can trade both on web bitzlato.com and in telegram-bot!',
 };
