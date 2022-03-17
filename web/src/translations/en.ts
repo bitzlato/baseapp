@@ -1265,6 +1265,16 @@ export const en = {
   'Referral Links': 'Referral Links',
   'Switch account': 'Switch account',
   "It's you": "It's you",
+  Freeze: 'Block',
+  'Freeze Account': 'Block account',
+  'Freeze Info':
+    '❗️ Are you sure you want to <strong>block</strong> your account? Unlocking can only be ' +
+    'carried out through the support of the service and ' +
+    '<strong>subject to verification</strong>!{br}{br}' +
+    '⚠️ Blocking the account will <strong>cancel</strong> all financial withdrawal operations ' +
+    '(if the transaction has not yet gone online) and the ability to conduct new financial ' +
+    'operations <strong>will be suspended</strong>!',
+  'Freeze Completed': 'Your account has been blocked.{br}{br}To restore, contact support.',
 
   'safemode.title': 'Disable safe mode',
   'safemode.begin':

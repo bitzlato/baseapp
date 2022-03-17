@@ -123,7 +123,6 @@ export const ProfileSettings: FC = () => {
         <div className={s.controls}>
           <Stack direction="column" marginBottom="8x">
             <TwoFactorAuthSwitcher value={user.otp} />
-
             <SafeModeSwitcher value={user.bitzlato_user.user_profile.safe_mode_enabled} />
           </Stack>
         </div>

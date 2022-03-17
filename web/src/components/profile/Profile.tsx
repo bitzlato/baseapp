@@ -20,6 +20,7 @@ import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
 import { ProfileReferalLinks } from './ProfileReferralLinks';
 import { ProfileSwitchAccount } from './ProfileSwitchAccount';
+import { FreezeAccount } from './FreezeAccount';
 
 export const Profile: FC = () => {
   const t = useT();
@@ -64,6 +65,9 @@ export const Profile: FC = () => {
             currentSubject={sessionsMe?.auth_sub}
           />
           <ProfileReferalLinks />
+          {user.bitzlato_user && (
+            <FreezeAccount isSelfFrozen={user.bitzlato_user?.user_profile.self_frozen} />
+          )}
         </Stack>
       </Box>
       <Box className={s.stats} mb={isMobileDevice ? '8x' : undefined}>
