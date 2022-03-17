@@ -28,6 +28,10 @@ const ProfileMobileScreenComponent: React.FC = () => {
 
   const mainLinks = [
     {
+      titleKey: 'merge.title',
+      route: '/profile/telegram',
+    },
+    {
       titleKey: 'Settings',
       route: '/profile/settings',
     },

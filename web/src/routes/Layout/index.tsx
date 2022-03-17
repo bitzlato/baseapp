@@ -97,6 +97,7 @@ import { ActiveGiftsScreen } from 'web/src/screens/GiftsScreen/ActiveGiftsScreen
 import { HistoryGiftsScreen } from 'web/src/screens/GiftsScreen/HistoryGiftsScreen';
 import { UserAdScreen } from 'web/src/screens/p2p/UserAdScreen';
 import { WalletsStatScreen } from 'web/src/screens/WalletsStat/WalletsStat';
+import { ProfileTelegramMobileScreen } from 'web/src/mobile/screens/ProfileTelegramMobileScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -541,6 +542,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}
+              path={['/profile/telegram', '/:lang/profile/telegram']}
+              component={ProfileTelegramMobileScreen}
+            />
+            <PrivateRoute
+              loading={userLoading}
+              isLogged={isLoggedIn}
               path="/profile"
               component={ProfileMobileScreen}
             />
@@ -618,7 +625,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           <PrivateRoute
             loading={userLoading}
             isLogged={isLoggedIn}
-            path="/profile"
+            path={['/profile', '/profile/telegram', '/:lang/profile/telegram']}
             component={ProfileScreen}
           />
           <PrivateRoute

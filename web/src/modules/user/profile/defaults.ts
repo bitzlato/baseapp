@@ -27,6 +27,8 @@ export const DEFAULT_TEST_BITZLATO_USER: BitzlatoUser = {
       thumbnail: '',
     },
     suspicious: false,
+    merged: false,
+    telegram: null,
   },
   user_setting: {
     id: 123123,

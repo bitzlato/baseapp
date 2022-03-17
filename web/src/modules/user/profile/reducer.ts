@@ -89,6 +89,8 @@ export const defaultUser: User = {
         thumbnail: '',
       },
       suspicious: false,
+      merged: false,
+      telegram: null,
     },
     user_setting: {
       id: 0,

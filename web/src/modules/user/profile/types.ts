@@ -64,6 +64,8 @@ export interface BitzlatoUser {
       thumbnail: string;
     };
     suspicious: boolean;
+    merged: boolean;
+    telegram?: string | null | undefined; // json in string
   };
   user_setting: {
     id: number;
@@ -151,4 +153,8 @@ export interface P2PReport {
 
 export interface ConfirmCodeParams {
   pin_code: string;
+}
+
+export interface GenerateMergeTokenResponse {
+  token: string;
 }
