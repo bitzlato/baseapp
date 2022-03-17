@@ -5,7 +5,7 @@ window.env = {
     finexUrl: 'https://b-www.lgk.one/api/v2/finex',
     applogicUrl: 'https://b-www.lgk.one/api/v2/applogic',
     rangerUrl: 'wss://b-www.lgk.one/api/v2/ranger',
-    accountUrl: 'https://account.s-www.lgk.one/api/private/v1',
+    accountUrl: 'https://account.b-www.lgk.one/api/private/v1',
   },
   auth0: {
     domain: 'auth.lgk.one',
