@@ -185,7 +185,7 @@ const Header: FC = () => {
       {
         key: 'telegram',
         type: 'external',
-        to: `/${language}/profile/telegram`,
+        to: '/profile/telegram',
         icon: 'telegram',
         children: t('Telegram'),
       },

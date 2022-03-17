@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 interface Props {
   show: boolean;
-  onSend: () => Promise<void>;
+  onSend: () => Promise<void> | void;
   onClose: () => void;
 }
 
