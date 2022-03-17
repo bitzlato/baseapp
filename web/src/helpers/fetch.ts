@@ -8,7 +8,10 @@ export class FetchError extends Error {
 export const fetchJson = async (input: RequestInfo, init: RequestInit) => {
   try {
     const res = await fetch(input, init);
-    const json = await res.json();
+
+    const contentlength = res.headers.get('content-length');
+    const json = contentlength === '0' ? undefined : await res.json();
+
     if (!res.ok) {
       const { errors, error, ...rest } = json ?? {};
       if (Array.isArray(errors) && typeof errors[0] === 'string') {

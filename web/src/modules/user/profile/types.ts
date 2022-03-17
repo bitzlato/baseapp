@@ -47,6 +47,7 @@ export interface BitzlatoUser {
     verified: boolean;
     timezone?: string | null | undefined;
     safe_mode_enabled: boolean;
+    self_frozen: boolean;
     public_name?: string | null | undefined;
     generated_name: string;
     avatar: {

@@ -54,6 +54,7 @@ describe('Profile reducer', () => {
           verified: false,
           timezone: 'Europe/Kirov',
           safe_mode_enabled: true,
+          self_frozen: false,
           public_name: null,
           generated_name: 'OddKraig',
           avatar: {
