@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import useSWR, { SWRConfiguration } from 'swr';
 import { Spinner } from 'react-bootstrap';
 import { DeeplinkActionType, DeepLinkInfo, deeplinkTitle } from '../../components';
-import { accountPublicUrl, p2pEndpoint } from '../../api';
+import { accountPublicUrl, p2pUrl } from '../../api';
 import { Card } from '../../components/Card/Card';
 import { Box } from '../../components/ui/Box';
 import { Button } from '../../components/ui/Button';
@@ -63,7 +63,7 @@ export const DeepLinkPreview: FC = () => {
   };
 
   const onAccept = () => {
-    fetch(`${p2pEndpoint()}/deeplink/`, {
+    fetch(`${p2pUrl()}/deeplink/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

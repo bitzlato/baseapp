@@ -304,6 +304,11 @@ module.exports = {
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
               },
+              '/api/public/v1/': {
+                target: `https://${process.env.ACCOUNT_HOST}`,
+                changeOrigin: true,
+                cookieDomainRewrite: 'localhost',
+              },
               '/api/p2p': process.env.P2P_HOST
                 ? {
                     target: `https://${process.env.P2P_HOST}`,
@@ -311,11 +316,6 @@ module.exports = {
                     cookieDomainRewrite: 'localhost',
                   }
                 : undefined,
-              '/api/public/v1/': {
-                target: `https://${process.env.ACCOUNT_HOST}`,
-                changeOrigin: true,
-                cookieDomainRewrite: 'localhost',
-              },
               '/api': {
                 target: `https://${process.env.PROXY_HOST}`,
                 changeOrigin: true,

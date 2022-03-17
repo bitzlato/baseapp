@@ -50,7 +50,7 @@ export const deeplinkTitle = (deeplink: DeepLinkInfoType): string => {
   }
 };
 
-export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }) => {
+export const DeepLinkInfo: FC<Props> = ({actionResult, deeplink, exposeAction}) => {
   const t = useBetterT();
   const isAuthorized = useSelector(selectUserLoggedIn);
   const user = useSelector(selectUserInfo);
@@ -66,7 +66,7 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
   const renderAsVoucher = () => {
     const payload = deeplink.payload as any;
     const details = {
-      totalFiat: `xxx ${payload.currency}`,
+      totalFiat: payload.converted_amount && `(${payload.converted_amount} ${payload.currency})`,
       totalCrypto: `${payload.amount} ${payload.cc_code}`,
       user: payload.user.nickname,
       userLink: `/en/p2p/users/${payload.user.nickname}`,
@@ -76,7 +76,6 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
       <div
         className={sprinkles({
           pb: '3x',
-          fontSize: 'medium',
         })}
       >
         {t('deeplink.voucher.info', details, translateTransformTags)}
@@ -87,9 +86,9 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
       // action took
       if (actionResult.status === 200) {
         // cashed!
-        info.push(<h3>{t('deeplink.voucher.cashed')}</h3>);
+        info.push(<h3 className={sprinkles({color: 'success'})}>{t('deeplink.voucher.just_cached')}</h3>);
       } else {
-        info.push(<h3>{t('deeplink.voucher.cash_failed')}</h3>);
+        info.push(<h3 className={sprinkles({color: 'danger'})}>{t('deeplink.voucher.cash_failed')}</h3>);
         if (actionResult.payload && actionResult.payload.code) {
           info.push(t(`deeplink.server.${actionResult.payload.code}`));
         }
@@ -115,7 +114,7 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
         }
       } else {
         if (payload.cashed_at) {
-          info.push(t('deeplink.voucher.cashed'));
+          info.push(<p className={sprinkles({color: 'danger'})}>{t('deeplink.voucher.cashed')}</p>);
         } else {
           info.push(t('deeplink.voucher.expired'));
         }
@@ -145,7 +144,9 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
   }
 
   return (
-    <div>
+    <div className={sprinkles({
+      fontSize: 'medium',
+    })}>
       {content}
       {isLocalDev && (
         <pre>
