@@ -45,6 +45,17 @@ interface CustomActiveDotProps {
   fill: string;
 }
 
+interface CustomAxisTickProps {
+  index: number;
+  x: number;
+  y: number;
+  payload: {
+    value: string;
+  };
+  stroke?: string;
+  fill?: string;
+}
+
 export interface MarketDepthsProps {
   /**
    * Additional class name for styling. By default element receives `cr-market-depths`
@@ -215,6 +226,18 @@ const CustomTooltip = (props: CustomToolTipProps) => {
   return null;
 };
 
+const CustomAxisTick: React.FC<CustomAxisTickProps> = ({ index, x, y, fill, payload }) => {
+  const dy = index % 2 ? 8 : 20;
+
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text x={0} y={0} dy={dy} textAnchor="middle" font-size="smaller" fill={fill}>
+        {payload.value}
+      </text>
+    </g>
+  );
+};
+
 /**
  * Component to display MarketDepths component.
  * It gives a visualization of demand or supply of a particular stock or commodity or a cryptocurrency.
@@ -253,7 +276,7 @@ export class MarketDepths extends React.PureComponent<MarketDepthsProps> {
     return (
       <div className={cx}>
         <ResponsiveContainer width="100%" height={settings.height as string}>
-          <AreaChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
+          <AreaChart data={data} margin={{ top: 20, right: 60, left: 0, bottom: 20 }}>
             {this.defineGradient(colorSettings, gradientHide)}
             {hideCartesianGrid ? null : (
               <CartesianGrid
@@ -266,6 +289,7 @@ export class MarketDepths extends React.PureComponent<MarketDepthsProps> {
               dataKey={settings.dataKeyX || 'ask'}
               interval={intervalX || 'preserveStartEnd'}
               stroke={colorSettings.strokeAxisColor}
+              tick={CustomAxisTick}
             />
             <YAxis
               orientation={orientation || 'left'}

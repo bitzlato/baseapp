@@ -38,7 +38,6 @@ import {
   ProfileLanguageMobileScreen,
   ProfileMobileScreen,
   ProfileThemeMobileScreen,
-  ProfileVerificationMobileScreen,
   TradingScreenMobile,
 } from '../../mobile/screens';
 import {
@@ -70,13 +69,14 @@ import {
   MagicLink,
   MaintenanceScreen,
   OrdersTabScreen,
-  ProfileTwoFactorAuthScreen,
   RestrictedScreen,
   TradingScreen,
   VerificationScreen,
   QuickExchange,
   LandingScreen,
 } from '../../screens';
+import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuthScreen/ProfileTwoFactorAuthScreen';
+import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSettingsMobileScreen/ProfileSettingsMobileScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -354,6 +354,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}
+              path="/profile/settings"
+              component={ProfileSettingsMobileScreen}
+            />
+            <PrivateRoute
+              loading={userLoading}
+              isLogged={isLoggedIn}
               path="/profile/account-activity"
               component={ProfileAccountActivityMobileScreen}
             />
@@ -383,12 +389,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                 component={ProfileChangePasswordMobileScreen}
               />
             )}
-            <PrivateRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/profile/verification"
-              component={ProfileVerificationMobileScreen}
-            />
             <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}
@@ -461,6 +461,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           <PrivateRoute
             loading={userLoading}
             isLogged={isLoggedIn}
+            path="/profile/2fa"
+            component={ProfileTwoFactorAuthScreen}
+          />
+          <PrivateRoute
+            loading={userLoading}
+            isLogged={isLoggedIn}
             path="/profile"
             component={ProfileScreen}
           />
@@ -470,12 +476,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path={['/wallets/:currency?/:tab?', '/wallets']}
             component={WalletsScreen}
           />
-          <PrivateRoute
-            loading={userLoading}
-            isLogged={isLoggedIn}
-            path="/security/2fa"
-            component={ProfileTwoFactorAuthScreen}
-          />
+
           <PrivateRoute
             loading={userLoading}
             isLogged={isLoggedIn}

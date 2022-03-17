@@ -1,14 +1,13 @@
 import { FC, useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router';
-import { Button } from 'src/components/Button/Button';
+import { Button } from 'web/src/components/ui/Button';
 import { Box } from 'src/components/Box';
 import { createMoney } from 'src/helpers/money';
 import { NumberInput } from 'src/components/Input/NumberInput';
-import { parseInteger, parseNumeric } from 'src/helpers/parseNumeric';
+import { parseNumeric } from 'src/helpers/parseNumeric';
 import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
 import { useT } from 'src/hooks/useT';
 import { useSelector } from 'react-redux';
-import { useFetchCache } from 'src/hooks/useFetchCache';
 import { Blockchain } from 'src/modules/public/blockchains/types';
 import { tradeUrl } from 'src/api/config';
 import { BeneficiaryAddress } from './BeneficiaryAddress';
@@ -22,11 +21,15 @@ import {
 } from '../../modules';
 import { precisionRegExp } from '../../helpers';
 import { Beneficiaries, Blur } from '../../components';
+import { isValidCode } from 'web/src/helpers/codeValidation';
+import { formatSeconds } from 'web/src/helpers/formatSeconds';
+import { useFetch } from 'web/src/hooks/data/useFetch';
 
 interface Props {
   onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
   withdrawDone: boolean;
   wallet: Wallet;
+  countdown: number;
 }
 
 export const WithdrawBody: FC<Props> = (props) => {
@@ -42,10 +45,10 @@ export const WithdrawBody: FC<Props> = (props) => {
 
   const twoFactorAuthRequired = user.level > 1 || (user.level === 1 && user.otp);
 
-  const { data = [] } = useFetchCache<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const { data = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
   const blockchain = data.find((d) => d.id === beneficiary.blockchain_id);
 
-  const { wallet, withdrawDone } = props;
+  const { wallet, withdrawDone, countdown } = props;
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
     (d) => d.blockchain_id === beneficiary.blockchain_id,
@@ -78,20 +81,21 @@ export const WithdrawBody: FC<Props> = (props) => {
 
   const isButtonDisabled = () => {
     const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
-    return Number(total) <= 0 || !beneficiary.id || isPending || !otpCode;
+    return (
+      Number(total) <= 0 || !beneficiary.id || isPending || !isValidCode(otpCode) || countdown > 0
+    );
   };
 
-  const handleClick = () => props.onClick(amount, total, beneficiary, otpCode);
+  const handleClick = () => {
+    props.onClick(amount, total, beneficiary, otpCode);
+    setOtpCode('');
+  };
 
   const handleChangeInputAmount = (value: string) => {
     const amount = parseNumeric(value);
     if (amount.match(precisionRegExp(wallet.precision))) {
       setAmount(amount);
     }
-  };
-
-  const handleChangeOtpCode = (otpCode: string) => {
-    setOtpCode(parseInteger(otpCode));
   };
 
   const renderBlur = () => {
@@ -111,20 +115,11 @@ export const WithdrawBody: FC<Props> = (props) => {
       );
     }
     if (!user.otp) {
-      if (isMobileDevice) {
-        return (
-          <Blur
-            text={t('page.body.wallets.tabs.withdraw.content.enable2fa')}
-            onClick={() => () => history.push('/profile/2fa', { enable2fa: true })}
-            linkText={t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
-          />
-        );
-      }
       return (
         <Blur
-          text={t('page.body.wallets.warning.withdraw.2fa')}
-          linkText={t('page.body.wallets.warning.withdraw.2fa.button')}
-          onClick={() => history.push('/security/2fa', { enable2fa: true })}
+          text={t('page.body.wallets.tabs.withdraw.content.enable2fa')}
+          linkText={t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
+          onClick={() => history.push('/profile/2fa')}
         />
       );
     }
@@ -152,7 +147,7 @@ export const WithdrawBody: FC<Props> = (props) => {
               flex1
               as={NumberInput}
               value={otpCode}
-              onChange={handleChangeOtpCode}
+              onChange={setOtpCode}
               label={t('page.body.wallets.tabs.withdraw.content.code2fa')}
             />
           )}
@@ -160,8 +155,10 @@ export const WithdrawBody: FC<Props> = (props) => {
         <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2">
           <WithdrawSummary total={total} wallet={wallet} blockchainCurrency={blockchainCurrency} />
           <Box flex1 self="end" row justify="end">
-            <Button variant="primary" onClick={handleClick} disabled={isButtonDisabled()}>
-              {t('page.body.wallets.tabs.withdraw.content.button')}
+            <Button color="primary" onClick={handleClick} disabled={isButtonDisabled()}>
+              {countdown > 0
+                ? formatSeconds(countdown)
+                : t('page.body.wallets.tabs.withdraw.content.button')}
             </Button>
           </Box>
         </Box>

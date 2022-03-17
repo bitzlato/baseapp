@@ -2,10 +2,11 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { isAuth0 } from 'src/api';
 import { useT } from 'src/hooks/useT';
+import { Profile } from 'web/src/components/profile/Profile';
 import { ChevronIcon } from '../../../assets/images/ChevronIcon';
 import { getLanguageName } from '../../../helpers';
 import { selectCurrentColorTheme, selectCurrentLanguage, selectUserInfo } from '../../../modules';
-import { ProfileLink, ProfileLinks, UserInfo } from '../../components';
+import { ProfileLink, ProfileLinks } from '../../components';
 
 const ProfileMobileScreenComponent: React.FC = () => {
   const t = useT();
@@ -20,23 +21,12 @@ const ProfileMobileScreenComponent: React.FC = () => {
 
   const mainLinks = [
     {
-      titleKey: 'page.mobile.profileLinks.main.verification',
-      route: '/profile/verification',
-      children: (
-        <>
-          <span className="color-accent">
-            {t('page.mobile.profileLinks.link.verification', { level: user.level })}
-          </span>
-          <ChevronIcon />
-        </>
-      ),
+      titleKey: 'Settings',
+      route: '/profile/settings',
     },
     {
       titleKey: 'page.mobile.profileLinks.main.2fa',
       route: '/profile/2fa',
-      state: {
-        enable2fa: !user.otp,
-      },
       children: (
         <>
           {user.otp ? (
@@ -85,7 +75,7 @@ const ProfileMobileScreenComponent: React.FC = () => {
 
   return (
     <div className="pg-mobile-profile-screen">
-      <UserInfo />
+      <Profile />
       <ProfileLinks links={historyLinks} />
       <ProfileLinks links={mainLinks} />
       <ProfileLinks links={settingsLinks} />

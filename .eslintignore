@@ -37,7 +37,6 @@ web/src/components/BlockchainIcon/BlockchainIcon2.tsx
 web/src/components/Button/Button.tsx
 web/src/components/Captcha/index.tsx
 web/src/components/ChangePassword/index.tsx
-web/src/components/CodeVerification/index.tsx
 web/src/components/CombinedOrderBook/index.tsx
 web/src/components/CopyableTextField/index.tsx
 web/src/components/CustomInput/index.tsx
@@ -123,7 +122,6 @@ web/src/containers/MarketSelector/MarketSelectorSearchInput/MarketSelectorSearch
 web/src/containers/MarketSelector/MarketSelectorTabs/MarketSelectorTabsDropdown.tsx
 web/src/containers/Markets/index.tsx
 web/src/containers/MarketsTable/index.tsx
-web/src/containers/ModalWithdrawConfirmation/index.tsx
 web/src/containers/ModalWithdrawSubmit/index.tsx
 web/src/containers/OpenOrders/helpers.ts
 web/src/containers/OpenOrders/index.tsx
@@ -206,7 +204,6 @@ web/src/mobile/components/CreatedApiKeyModal/index.tsx
 web/src/mobile/components/CurrentMarketInfo/index.tsx
 web/src/mobile/components/Header/index.tsx
 web/src/mobile/components/Modal/index.tsx
-web/src/mobile/components/ModalWithdrawConfirmation/index.tsx
 web/src/mobile/components/OpenOrders/index.tsx
 web/src/mobile/components/OrderButtons/index.tsx
 web/src/mobile/components/OrderInput/index.tsx
@@ -555,7 +552,6 @@ web/src/screens/History/index.tsx
 web/src/screens/MagicLinkScreen/index.tsx
 web/src/screens/MaintenanceScreen/index.tsx
 web/src/screens/OrdersTabScreen/index.tsx
-web/src/screens/ProfileTwoFactorAuthScreen/index.tsx
 web/src/screens/RestrictedScreen/index.tsx
 web/src/screens/SetupScreen/index.tsx
 web/src/screens/SignInScreen/index.tsx

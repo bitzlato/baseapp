@@ -1,6 +1,10 @@
 # development environment variables
 export ACCOUNT_HOST=account.s-www.lgk.one
 export PROXY_HOST=s1.s-www.lgk.one
+export P2P_HOST=s-www.lgk.one
+export AUTH0_DOMAIN="auth.lgk.one"
+export AUTH0_CLIENT_ID="OL926gD0Zha6h80uJx4TVhJLMKrJemjb"
+
 # export HOST=localhost
 # export PORT=8080
 

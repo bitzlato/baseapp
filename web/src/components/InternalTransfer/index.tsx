@@ -71,9 +71,9 @@ export const InternalTransferComponent = () => {
 
   const translate = useCallback((id: string) => formatMessage({ id }), [formatMessage]);
 
-  const handleNavigateTo2fa = useCallback((enable2fa: boolean) => {
-    history.push('/security/2fa', { enable2fa });
-  }, []);
+  const handleNavigateTo2fa = () => {
+    history.push('/profile/2fa');
+  };
 
   const handleResetState = () => {
     setShow(false);
@@ -141,6 +141,7 @@ export const InternalTransferComponent = () => {
           />
           <SelectString
             className="pg-confirm__content-address__row__content-number-dropdown"
+            isSearchable={false}
             options={walletsList}
             onChange={(value) => setCurrency(value!)}
             placeholder="Currency"
@@ -179,10 +180,7 @@ export const InternalTransferComponent = () => {
       {!user.otp && (
         <div className="cr-internal-transfer--require-otp">
           {translate('page.body.internal.transfer.please.enable.2fa')}
-          <div
-            onClick={() => handleNavigateTo2fa(true)}
-            className="cr-internal-transfer--require-otp-link"
-          >
+          <div onClick={handleNavigateTo2fa} className="cr-internal-transfer--require-otp-link">
             {translate('page.body.internal.transfer.enable')}
           </div>
         </div>

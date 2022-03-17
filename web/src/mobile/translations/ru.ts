@@ -121,7 +121,4 @@ export const ru = {
   'page.mobile.twoFactorModal.title': '2FA Verification',
   'page.mobile.twoFactorModal.subtitle': 'Enter 2fa code from the app',
   'page.mobile.twoFactorModal.send': 'Отправить',
-
-  'page.mobile.createdApiKeyModal.title': 'Created',
-  'page.mobile.createdApiKeyModal.confirm': 'confirm',
 };

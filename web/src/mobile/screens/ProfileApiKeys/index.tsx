@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { Pagination } from '../../../components';
 import { useApiKeysFetch } from '../../../hooks';
 import {
@@ -9,6 +10,7 @@ import {
   ApiKeyDataInterface,
   apiKeyDeleteFetch,
   apiKeys2FAModal,
+  ApiKeyStateModal,
   apiKeyUpdateFetch,
   RootState,
   selectUserInfo,
@@ -21,19 +23,16 @@ import {
   selectApiKeysNextPageExists,
 } from '../../../modules/user/apiKeys/selectors';
 import { AddIcon } from '../../assets/images/AddIcon';
-import { ApiKeysItem, CreatedApiKeyModal, Subheader, TwoFactorModal } from '../../components';
+import { ApiKeysItem, Subheader } from '../../components';
+import { ApiKeyModal } from 'web/src/containers/ProfileApiKeys/ApiKeyModal';
 
 const ProfileApiKeysMobileScreenComponent: React.FC = () => {
-  const [itemToUpdate, setItemToUpdate] = React.useState<ApiKeyDataInterface | undefined>();
   const [currentPageIndex, setPageIndex] = React.useState(0);
-  const [currentAction, setCurrentAction] = React.useState('');
-  const [show2FAModal, setShow2FAModal] = React.useState(false);
-  const [showCreatedApiKeyModal, setShowCreatedApiKeyModal] = React.useState(false);
   const dispatch = useDispatch();
   const intl = useIntl();
   const history = useHistory();
   const apiKeys = useSelector(selectApiKeys);
-  const apiKeysModal = useSelector(selectApiKeysModal) || { action: '' };
+  const apiKeysModal = useSelector(selectApiKeysModal);
   const user = useSelector(selectUserInfo);
   const firstElemIndex = useSelector((state: RootState) => selectApiKeysFirstElemIndex(state, 4));
   const lastElemIndex = useSelector((state: RootState) => selectApiKeysLastElemIndex(state, 4));
@@ -48,84 +47,45 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
     setPageIndex(currentPageIndex + 1);
   };
 
-  const handleCreateApiKey = (code2FA: string, shouldFetch: boolean) => {
-    if (shouldFetch) {
-      const payload = {
-        totp_code: code2FA,
-      };
-      dispatch(apiKeyCreateFetch(payload));
-    }
+  const handlCloseModal = () => {
+    dispatch(apiKeys2FAModal({ action: undefined }));
   };
 
-  const handleUpdateApiKey = (code2FA: string, shouldFetch: boolean) => {
-    if (shouldFetch && itemToUpdate) {
-      const payload = {
-        totp_code: code2FA,
-        apiKey: {
-          ...itemToUpdate,
-          state: itemToUpdate.state === 'active' ? 'disabled' : 'active',
-        },
-      };
-      dispatch(apiKeyUpdateFetch(payload));
-    }
-  };
+  const handleTriggerAction = (totp_code: string) => {
+    switch (apiKeysModal.action) {
+      case 'createKey':
+        dispatch(apiKeyCreateFetch({ totp_code }));
+        break;
 
-  const handleDeleteApiKey = (code2FA: string, shouldFetch: boolean) => {
-    if (shouldFetch && itemToUpdate) {
-      const payload = {
-        totp_code: code2FA,
-        kid: itemToUpdate.kid,
-      };
-      dispatch(apiKeyDeleteFetch(payload));
-    }
-  };
+      case 'updateKey':
+        dispatch(
+          apiKeyUpdateFetch({
+            totp_code,
+            apiKey: {
+              ...apiKeysModal.apiKey!,
+              state: apiKeysModal.apiKey?.state === 'active' ? 'disabled' : 'active',
+            },
+          }),
+        );
+        break;
 
-  const handleTriggerAction = (code2FA: string, shouldFetch: boolean) => {
-    switch (currentAction) {
-      case 'create':
-        handleCreateApiKey(code2FA, shouldFetch);
-        break;
-      case 'update':
-        handleUpdateApiKey(code2FA, shouldFetch);
-        break;
-      case 'delete':
-        handleDeleteApiKey(code2FA, shouldFetch);
-        break;
-      default:
-        break;
-    }
-
-    setShow2FAModal(false);
-    setItemToUpdate(undefined);
-    setCurrentAction('');
-  };
-
-  const handleSetApiKeyProcess = (actionToSet: string, item?: ApiKeyDataInterface) => {
-    setShow2FAModal((state) => !state);
-
-    switch (actionToSet) {
-      case 'create':
-        setCurrentAction('create');
-        break;
-      case 'update':
-        setItemToUpdate(item);
-        setCurrentAction('update');
-        break;
-      case 'delete':
-        setItemToUpdate(item);
-        setCurrentAction('delete');
-        break;
-      default:
+      case 'deleteKey':
+        dispatch(
+          apiKeyDeleteFetch({
+            totp_code,
+            kid: apiKeysModal.apiKey?.kid ?? '',
+          }),
+        );
         break;
     }
   };
 
-  React.useEffect(() => {
-    if (apiKeysModal.action === 'createSuccess' && !showCreatedApiKeyModal) {
-      setShowCreatedApiKeyModal(true);
-      dispatch(apiKeys2FAModal({ active: false }));
-    }
-  }, [dispatch, showCreatedApiKeyModal, apiKeysModal.action]);
+  const handleSetApiKeyProcess = (
+    action: ApiKeyStateModal['action'],
+    apiKey?: ApiKeyDataInterface,
+  ) => {
+    dispatch(apiKeys2FAModal({ action, apiKey }));
+  };
 
   return (
     <>
@@ -138,7 +98,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
         {user.otp ? (
           <div
             className="pg-mobile-profile-api-keys-screen__create"
-            onClick={() => handleSetApiKeyProcess('create')}
+            onClick={() => handleSetApiKeyProcess('createKey')}
           >
             <AddIcon />
           </div>
@@ -151,8 +111,8 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
                   key={index}
                   index={index}
                   item={apiKey}
-                  handleUpdateKey={(item) => handleSetApiKeyProcess('update', item)}
-                  handleDeleteKey={(item) => handleSetApiKeyProcess('delete', item)}
+                  handleUpdateKey={(item) => handleSetApiKeyProcess('updateKey', item)}
+                  handleDeleteKey={(item) => handleSetApiKeyProcess('deleteKey', item)}
                 />
               ))}
               <Pagination
@@ -168,12 +128,15 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
             <span className="no-data">{intl.formatMessage({ id: 'page.noDataToShow' })}</span>
           )}
         </div>
-        <CreatedApiKeyModal
-          showModal={showCreatedApiKeyModal}
-          closeCreatedApiKeyModal={() => setShowCreatedApiKeyModal(false)}
-          apiKey={(apiKeysModal as any).apiKey}
-        />
-        <TwoFactorModal showModal={show2FAModal} handleToggle2FA={handleTriggerAction} />
+        {apiKeysModal.action === 'createSuccess' ? (
+          <ApiKeyModal
+            onClose={handlCloseModal}
+            kid={apiKeysModal.apiKey?.kid ?? ''}
+            secret={apiKeysModal.apiKey?.secret ?? ''}
+          />
+        ) : apiKeysModal.action ? (
+          <TwoFactorModal onClose={handlCloseModal} onSend={handleTriggerAction} />
+        ) : null}
       </div>
     </>
   );

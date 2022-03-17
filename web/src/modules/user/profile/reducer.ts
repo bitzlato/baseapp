@@ -12,6 +12,7 @@ import {
   PROFILE_GENERATE_2FA_QRCODE_DATA,
   PROFILE_GENERATE_2FA_QRCODE_ERROR,
   PROFILE_GENERATE_2FA_QRCODE_FETCH,
+  PROFILE_TOGGLE_2FA_SUCCESS,
   PROFILE_RESET_USER,
   PROFILE_TOGGLE_2FA_DATA,
   PROFILE_TOGGLE_2FA_ERROR,
@@ -43,7 +44,7 @@ export interface ProfileState {
   };
 }
 
-export const defaultUser = {
+export const defaultUser: User = {
   username: '',
   email: '',
   level: 0,
@@ -57,6 +58,39 @@ export const defaultUser = {
   phone: [],
   created_at: '',
   updated_at: '',
+  bitzlato_user: {
+    id: 14716789,
+    nickname: 'nickname',
+    email_verified: true,
+    '2fa_enabled': false,
+    email: 'email@gmail.com',
+    user_profile: {
+      id: 2608888,
+      user_id: 14716789,
+      lang: 'ru',
+      lang_web: 'en',
+      currency: 'USD',
+      cryptocurrency: 'BTC',
+      rating: '0.0',
+      verified: false,
+      timezone: 'Europe/Kirov',
+      safe_mode_enabled: true,
+      public_name: null,
+      generated_name: 'OddKraig',
+      avatar: {
+        original: '',
+        thumbnail: '',
+      },
+    },
+    user_setting: {
+      id: 123123,
+      save_requisites: true,
+      new_referral: 'off',
+      user_message: 'off',
+      comission_return: 'off',
+      dividends_received: 'off',
+    },
+  },
 };
 
 export const initialStateProfile: ProfileState = {
@@ -104,7 +138,10 @@ const passwordChangeReducer = (state: ProfileState['passwordChange'], action: Pr
   }
 };
 
-const twoAuthReducer = (state: ProfileState['twoFactorAuth'], action: ProfileAction) => {
+const twoAuthReducer = (
+  state: ProfileState['twoFactorAuth'],
+  action: ProfileAction,
+): ProfileState['twoFactorAuth'] => {
   switch (action.type) {
     case PROFILE_GENERATE_2FA_QRCODE_FETCH:
       return {
@@ -146,6 +183,11 @@ const twoAuthReducer = (state: ProfileState['twoFactorAuth'], action: ProfileAct
         ...state,
         success: false,
         error: action.error,
+      };
+    case PROFILE_TOGGLE_2FA_SUCCESS:
+      return {
+        ...state,
+        success: false,
       };
     default:
       return state;
@@ -245,6 +287,7 @@ export const profileReducer = (
     case PROFILE_TOGGLE_2FA_FETCH:
     case PROFILE_TOGGLE_2FA_DATA:
     case PROFILE_TOGGLE_2FA_ERROR:
+    case PROFILE_TOGGLE_2FA_SUCCESS:
       const twoFactorAuthState = { ...state.twoFactorAuth };
 
       return {

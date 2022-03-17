@@ -40,3 +40,16 @@ export interface ApiCurrency
   min_withdraw_amount: Money;
   blockchain_currencies: BlockchainCurrencyMoney[];
 }
+
+export interface P2PCurrency {
+  name: string;
+  code: string;
+  sign: string;
+}
+
+export type P2PCurrencies = P2PCurrency[];
+
+export interface P2PCurrencyOption {
+  value: string;
+  label: string;
+}

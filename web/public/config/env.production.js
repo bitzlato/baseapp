@@ -6,8 +6,7 @@ window.env = {
     applogicUrl: 'https://market.bitzlato.com/api/v2/applogic',
     rangerUrl: 'wss://market.bitzlato.com/api/v2/ranger',
     accountUrl: 'https://account.bitzlato.com/api/private/v1',
-    accountPublicUrl: 'https://account.bitzlato.com/api/public/v1',
-    p2pEndpoint: 'https://bitzlato.com/api/p2p',
+    p2pUrl: 'https://bitzlato.com/api/p2p',
   },
   auth0: {
     domain: 'auth.bitzlato.bz',

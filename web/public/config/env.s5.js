@@ -6,7 +6,7 @@ window.env = {
     applogicUrl: 'https://s5.s-www.lgk.one/api/v2/applogic',
     rangerUrl: 'wss://s5.s-www.lgk.one/api/v2/ranger',
     accountUrl: 'https://account.s-www.lgk.one/api/private/v1',
-    p2pEndpoint: 'https://s-www.lgk.one/api/p2p',
+    p2pUrl: 'https://s-www.lgk.one/api/p2p',
   },
   auth0: {
     domain: 'auth.lgk.one',

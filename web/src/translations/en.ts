@@ -235,13 +235,11 @@ export const en = {
   'page.body.wallets.tabs.withdraw.content.limit24h': 'Withdrawal Limit 24h',
   'page.body.wallets.tabs.withdraw.content.limit1month': 'Withdrawal Limit for 1 month',
   'page.body.wallets.tabs.withdraw.content.unlimited': 'Unlimited',
-  'page.body.wallets.tabs.withdraw.content.button': 'WITHDRAW',
+  'page.body.wallets.tabs.withdraw.content.button': 'Withdraw',
   'page.body.wallets.tabs.withdraw.disabled.message': 'Withdraw was disabled by administration',
   'page.body.wallets.warning.withdraw.verification':
     'Withdraws are allowed after passing KYC verification',
   'page.body.wallets.warning.withdraw.verification.button': 'Verify Your Account',
-  'page.body.wallets.warning.withdraw.2fa': 'Withdraws are allowed after enabling 2FA',
-  'page.body.wallets.warning.withdraw.2fa.button': 'Enable 2FA',
 
   'page.body.wallets.tabs.withdraw.modal.confirmation': 'Confirmation',
   'page.body.wallets.tabs.withdraw.modal.message1': 'You will receive ',
@@ -442,9 +440,8 @@ export const en = {
   'page.body.profile.header.account.content.twoFactorAuthentication.message.mfa': 'MFA code',
   'page.body.profile.header.account.content.twoFactorAuthentication.message.4':
     'Enter 2fa code from the app',
-  'page.body.profile.header.account.content.twoFactorAuthentication.subHeader': '2FA code',
-  'page.body.profile.header.account.content.twoFactorAuthentication.enable': 'ENABLE',
-  'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'DISABLE 2FA',
+  'page.body.profile.header.account.content.twoFactorAuthentication.enable': 'Enable',
+  'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'Disable 2FA',
   'page.body.profile.header.account.content.twoFactorAuthentication.modalBody':
     'Please сontact administrator to disable',
   'page.body.profile.header.account.content.twoFactorAuthentication.modalHeader':
@@ -512,6 +509,7 @@ export const en = {
   'page.body.profile.content.action.logout': 'Logout',
   'page.body.profile.content.action.request2fa': 'Request QR code for 2FA',
   'page.body.profile.content.action.enable2fa': 'Enable 2FA',
+  'page.body.profile.content.action.disable2fa': 'Disable 2FA',
   'page.body.profile.content.action.login.2fa': 'Login with 2FA',
   'page.body.profile.content.action.requestPasswordReset': 'Request password reset',
   'page.body.profile.content.action.passwordReset': 'Password reset',
@@ -1202,11 +1200,14 @@ export const en = {
   'page.fees.table.withdraw_fee': 'Withdrawal fee',
   your_address: 'Your address',
 
+  '2FA code': '2FA code',
+  '2FA Verification': '2FA Verification',
   'Create gift': 'Create gift',
   'Deposit.noun': 'Deposit',
+  'Enter 2FA code from the app': 'Enter 2FA code from the app',
+  'error.try_later': 'Please try later',
   'Estimated value': 'Estimated value',
   'Exchange Balance': 'Exchange Balance',
-  Network: 'Network',
   'P2P Balance': 'P2P Balance',
   'Select network': 'Select network',
   'Total balance': 'Total balance',
@@ -1228,12 +1229,76 @@ export const en = {
   is_transaction_price_too_high: 'The withdrawal was disabled due to the high price of transaction',
   Locked: 'Locked',
   market: 'Exchange',
+  Network: 'Network',
+  OK: 'OK',
   p2p_deposit_withdraw:
     'Currently, BTC deposits and withdrawals are done by P2P wallets, please {transfer} assets from/to P2P wallet.',
   p2p_transfer: 'transfer',
   p2p: 'P2P',
   Rearrange: 'Rearrange',
+  Send: 'Send',
   Status: 'Status',
   To: 'To',
   Wallets: 'Wallets',
+  Close: 'Close',
+  Cancel: 'Cancel',
+  Yes: 'Yes',
+  No: 'No',
+  Right: 'Right',
+  Settings: 'Settings',
+  'Default currency': 'Default currency',
+  General: 'General',
+  Security: 'Security',
+  Notifications: 'Notifications',
+  'Safe Mode': 'Safe Mode',
+  Timezone: 'Timezone',
+  Rating: 'Rating',
+  Comments: 'Comments',
+  'Transactions made': 'Transactions made',
+  'Show all': 'Show all',
+  'Referral Links': 'Referral Links',
+
+  'safemode.title': 'Disable safe mode',
+  'safemode.begin':
+    '🔒 To continue, you need to pass a safety knowledge test when working with the service.\nThis operation is a one-time and does not take much time!',
+  'safemode.error': 'Oops! This is a mistake that can cost you a loss of funds. Try again.',
+  'safemode.success': 'Congratulations! Now you can create checks and disable safe mode',
+  'safemode.start_test': 'Start test',
+  'safemode.question1':
+    "You have started the transaction, but your counterpart offers to conduct the transaction through the service operator, in manual mode. It's so much faster and easier, and the course is better.\nAre there operators/support agents in the service that conduct transactions?",
+  'safemode.question2':
+    'A support agent contacted you and asks you to give him the phone number and SMS code.\nDo I need to report this information?',
+  'safemode.question3':
+    'Transfer of funds under the transaction by check is not a violation and will not lead to loss of funds due to possible fraud?',
+  'safemode.next_question': 'Next question',
+  'safemode.check_is_gift': 'Cheque - is gift',
+
+  'notification_setting.off': 'Disabled',
+  'notification_setting.on': 'Enabled',
+  'notification_setting.silent': 'Silent',
+  'notification_setting.no-nighttime': 'Do not receive at night',
+  'notification_setting.silent,no-nighttime': 'Do not receive at night and Silent',
+
+  'settings.save_requisites': 'Save payment details',
+  'settings.notifications_help': 'Night time is from 11PM to 9AM according to your local time.',
+  'settings.new_referral': 'New referrals',
+  'settings.new_referral_help':
+    'Notifications of new referrals after the user has registered in the service by your referral link.',
+  'settings.dividends_received': 'Referral Payments',
+  'settings.dividends_received_help': 'Payout notifications after the user has completed a trade.',
+  'settings.comission_return': 'Free trades',
+  'settings.comission_return_help':
+    'Notification that your trade was free and the commission has returned to the balance.',
+  'settings.user_message': 'Service messages',
+  'settings.user_message_help':
+    'Very rare, but sometimes Bitzlato sends important messages to users, but we value the comfort of users more, so you can change the settings for receiving such messages.',
+  'settings.safe_mode_help':
+    'When safe mode is enabled, only trusted traders are available to you.',
+
+  'profile.verification_link_1': 'If the link did not open automatically,',
+  'profile.verification_link_2': 'click here',
+  'profile.verification_no': 'Verification not passed',
+  'profile.verification_goto': 'Verify',
+  'profile.verification_yes': 'Verification passed',
+  'profile.deals_stat': 'trades for',
 };

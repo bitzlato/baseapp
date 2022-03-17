@@ -1,7 +1,7 @@
 import { CommonError } from '../../types';
 import * as actions from './actions';
 import { initialStateProfile, profileReducer } from './reducer';
-import { UserProfile } from './types';
+import { User, UserProfile } from './types';
 
 describe('Profile reducer', () => {
   const fakeProfiles: UserProfile[] = [
@@ -20,7 +20,7 @@ describe('Profile reducer', () => {
     },
   ];
 
-  const userData = {
+  const userData: { user: User } = {
     user: {
       username: 'johnny1337',
       email: 'admin@barong.io',
@@ -37,6 +37,39 @@ describe('Profile reducer', () => {
       phone: [],
       created_at: '',
       updated_at: '',
+      bitzlato_user: {
+        id: 14716789,
+        nickname: 'nickname',
+        email_verified: true,
+        '2fa_enabled': false,
+        email: 'email@gmail.com',
+        user_profile: {
+          id: 2608888,
+          user_id: 14716789,
+          lang: 'ru',
+          lang_web: 'en',
+          currency: 'USD',
+          cryptocurrency: 'BTC',
+          rating: '0.0',
+          verified: false,
+          timezone: 'Europe/Kirov',
+          safe_mode_enabled: true,
+          public_name: null,
+          generated_name: 'OddKraig',
+          avatar: {
+            original: '',
+            thumbnail: '',
+          },
+        },
+        user_setting: {
+          id: 123123,
+          save_requisites: true,
+          new_referral: 'off',
+          user_message: 'off',
+          comission_return: 'off',
+          dividends_received: 'off',
+        },
+      },
     },
   };
 

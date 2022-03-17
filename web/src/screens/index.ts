@@ -9,7 +9,6 @@ export * from './LandingScreen';
 export * from './MagicLinkScreen';
 export * from './MaintenanceScreen';
 export * from './OrdersTabScreen';
-export * from './ProfileTwoFactorAuthScreen';
 export * from './RestrictedScreen';
 export * from './QuickExchange';
 export * from './TradingScreen';

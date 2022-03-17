@@ -17,6 +17,7 @@ export const defaultConfig: Config = {
     finexUrl: `${hostUrl}/api/v2/finex`,
     accountUrl: '',
     accountPublicUrl: '',
+    p2pUrl: '',
   },
   finex: false,
   withCredentials: false,
@@ -73,8 +74,8 @@ export const applogicUrl = () => Cryptobase.config.api.applogicUrl;
 export const rangerUrl = () => Cryptobase.config.api.rangerUrl;
 export const finexUrl = () => Cryptobase.config.api.finexUrl || tradeUrl();
 export const accountUrl = () => Cryptobase.config.api.accountUrl;
+export const p2pUrl = () => Cryptobase.config.api.p2pUrl;
 export const accountPublicUrl = () => Cryptobase.config.api.accountPublicUrl;
-export const p2pEndpoint = () => Cryptobase.config.api.p2pEndpoint;
 export const withCredentials = () => convertToBoolean(Cryptobase.config.withCredentials);
 export const incrementalOrderBook = () => convertToBoolean(Cryptobase.config.incrementalOrderBook);
 export const isResizableGrid = () => convertToBoolean(Cryptobase.config.isResizable);
