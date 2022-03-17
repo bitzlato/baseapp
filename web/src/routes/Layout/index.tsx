@@ -9,7 +9,6 @@ import { compose } from 'redux';
 import { FeesScreen } from 'src/screens/Fees/Fees';
 import type { IntlProps } from 'src/types';
 import { WalletsScreen } from 'src/screens/WalletsScreen/WalletsScreen';
-import { loginAuth0 } from 'src/helpers/auth0';
 import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
 import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
 import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
@@ -571,7 +570,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
 
   private handleSubmitExpSessionModal = () => {
     this.handleChangeExpSessionModalState();
-    loginAuth0();
+    this.props.history.replace('/signin');
   };
 
   private handleRenderExpiredSessionModal = () => (
