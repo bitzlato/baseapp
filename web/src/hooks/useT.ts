@@ -11,25 +11,5 @@ export type TranslateWithCallbackFn = (
 export const useT = (): TranslateFn => {
   const { formatMessage } = useIntl();
 
-  return (id, values) => formatMessage({ id }, values);
-};
-
-export const useBetterT = (): TranslateWithCallbackFn => {
-  const { formatMessage } = useIntl();
-
-  return (id, values, callback) => {
-    const message = formatMessage({ id, defaultMessage: id }, values);
-
-    if (callback) {
-      return callback(message, values);
-    }
-
-    return message;
-  };
-};
-
-export const translateTransformTags: TranslatePostProcessFn = (message, values) => {
-  // todo: extract every [component params]content[/component] and split string into span-s + components
-  console.log(message, values);
-  return message;
+  return (id, values) => formatMessage({ id, defaultMessage: id }, values);
 };

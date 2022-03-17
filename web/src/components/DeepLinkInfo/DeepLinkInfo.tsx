@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { translateTransformTags, useBetterT } from '../../hooks/useT';
+import { useT } from '../../hooks/useT';
 import { selectUserInfo, selectUserLoggedIn } from '../../modules';
 import { sprinkles } from '../../theme/sprinkles.css';
 
@@ -50,8 +50,8 @@ export const deeplinkTitle = (deeplink: DeepLinkInfoType): string => {
   }
 };
 
-export const DeepLinkInfo: FC<Props> = ({actionResult, deeplink, exposeAction}) => {
-  const t = useBetterT();
+export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }) => {
+  const t = useT();
   const isAuthorized = useSelector(selectUserLoggedIn);
   const user = useSelector(selectUserInfo);
   const isLocalDev = false;
@@ -70,6 +70,7 @@ export const DeepLinkInfo: FC<Props> = ({actionResult, deeplink, exposeAction}) 
       totalCrypto: `${payload.amount} ${payload.cc_code}`,
       user: payload.user.nickname,
       userLink: `/en/p2p/users/${payload.user.nickname}`,
+      comment: payload.comment,
     };
 
     const info = [
@@ -78,7 +79,8 @@ export const DeepLinkInfo: FC<Props> = ({actionResult, deeplink, exposeAction}) 
           pb: '3x',
         })}
       >
-        {t('deeplink.voucher.info', details, translateTransformTags)}
+        <p>{t('deeplink.voucher.info', details)}</p>
+        {details.comment && <p>{t('deeplink.voucher.comment', details)}</p>}
       </div>,
     ];
 
@@ -86,43 +88,56 @@ export const DeepLinkInfo: FC<Props> = ({actionResult, deeplink, exposeAction}) 
       // action took
       if (actionResult.status === 200) {
         // cashed!
-        info.push(<h3 className={sprinkles({color: 'success'})}>{t('deeplink.voucher.just_cached')}</h3>);
+        info.push(
+          <h3 className={sprinkles({ color: 'success' })}>{t('deeplink.voucher.just_cashed')}</h3>,
+        );
       } else {
-        info.push(<h3 className={sprinkles({color: 'danger'})}>{t('deeplink.voucher.cash_failed')}</h3>);
+        info.push(
+          <h3 className={sprinkles({ color: 'danger' })}>{t('deeplink.voucher.cash_failed')}</h3>,
+        );
         if (actionResult.payload && actionResult.payload.code) {
-          info.push(t(`deeplink.server.${actionResult.payload.code}`));
+          info.push(<p>{t(`deeplink.server.${actionResult.payload.code}`)}</p>);
         }
       }
 
-      // set dismiss button and exit
+      // set dismiss button
       exposeAction(DeeplinkActionType.Dismiss);
-      return info.map((v) => <div>{v}</div>);
     } else {
       // action pending
+      // eslint-disable-next-line no-lonely-if
       if (deeplink.active) {
         if (isAuthorized) {
           info.push(
-            t('deeplink.profile.current_account', {
-              userName: user.username || user.email,
-            }),
+            <p>
+              {t('deeplink.profile.current_account', {
+                userName: user.username || user.email,
+              })}
+            </p>,
+            <p>{t('deeplink.voucher.take_action')}</p>,
           );
-          info.push(t('deeplink.voucher.take_action'));
           exposeAction(DeeplinkActionType.AcceptOrCancel);
         } else {
-          info.push(t('deeplink.profile.need_auth'));
+          info.push(<p>{t('deeplink.profile.need_auth')}</p>);
           exposeAction(DeeplinkActionType.LoginRequired);
         }
       } else {
         if (payload.cashed_at) {
-          info.push(<p className={sprinkles({color: 'danger'})}>{t('deeplink.voucher.cashed')}</p>);
+          info.push(
+            <p className={sprinkles({ color: 'danger' })}>
+              {t('deeplink.voucher.cashed', { cashed_at: payload.cashed_at })}
+            </p>,
+          );
         } else {
-          info.push(t('deeplink.voucher.expired'));
+          info.push(<p>{t('deeplink.voucher.expired')}</p>);
         }
         exposeAction(DeeplinkActionType.Dismiss);
       }
     }
 
-    return info.map((v) => <p>{v}</p>);
+    return info.map((v, i) => {
+      // eslint-disable-next-line react/no-array-index-key
+      return <Fragment key={i}>{v}</Fragment>;
+    });
   };
 
   // advertisement
@@ -144,9 +159,11 @@ export const DeepLinkInfo: FC<Props> = ({actionResult, deeplink, exposeAction}) 
   }
 
   return (
-    <div className={sprinkles({
-      fontSize: 'medium',
-    })}>
+    <div
+      className={sprinkles({
+        fontSize: 'medium',
+      })}
+    >
       {content}
       {isLocalDev && (
         <pre>

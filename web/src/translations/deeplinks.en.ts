@@ -12,15 +12,15 @@ export const deeplinkTexts = {
   'deeplink.voucher.title': 'Voucher',
   'deeplink.voucher.info':
     'It is a one-time voucher of cost {totalCrypto} {totalFiat} issued by {user}.',
+  'deeplink.voucher.comment': 'Comment: “{comment}”.',
   'deeplink.voucher.take_action': 'Press „Accept” to redeem.',
   'deeplink.voucher.expired': 'This voucher is expired.',
-  'deeplink.voucher.cashed': 'This voucher had already cashed.',
+  'deeplink.voucher.cashed': 'This voucher had already cashed at {cashed_at}.',
 
   'deeplink.voucher.just_cashed': 'Amount successfully transferred to your account.',
   'deeplink.voucher.cash_failed': 'Unable to cash this voucher.',
   // voucher error codes
   'deeplink.server.InsufficientFunds': 'Voucher holder does not have sufficient funds now.',
-
 
   'deeplink.profile.current_account': `You're signed as {userName}`,
   'deeplink.profile.need_auth': 'Please sign with valid profile to take an action.',

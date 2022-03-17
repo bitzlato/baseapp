@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router';
 import useSWR, { SWRConfiguration } from 'swr';
 import { Spinner } from 'react-bootstrap';
@@ -32,7 +32,7 @@ const useDeeplinkInfo = (deeplinkId: string) => {
   };
 };
 
-export const DeepLinkPreview: FC = () => {
+export const DeepLinkPreview: () => JSX.Element = () => {
   const t = useT();
   const { id: deeplinkId } = useParams<{ id: string }>();
 
@@ -91,7 +91,7 @@ export const DeepLinkPreview: FC = () => {
           status: 500,
           payload: {
             code: 'NetworkError',
-            error: error,
+            error,
           },
         });
       });
@@ -135,7 +135,7 @@ export const DeepLinkPreview: FC = () => {
   return (
     <Container maxWidth="md" my="4">
       <Card header={<h4>{t(isLoading ? 'common.loading' : deeplinkTitle(deeplink))}</h4>}>
-        <Box as="p">{renderBody()}</Box>
+        <Box as="div">{renderBody()}</Box>
         {renderActions()}
       </Card>
     </Container>
