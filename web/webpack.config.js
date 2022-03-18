@@ -47,7 +47,7 @@ module.exports = {
   devtool: isDevelopment ? 'eval-cheap-module-source-map' : 'hidden-source-map',
 
   entry: {
-    bundle: './src/index.ts',
+    bundle: ['./src/publicPath.ts', './src/index.ts'],
   },
 
   output: {
@@ -55,7 +55,7 @@ module.exports = {
     filename: !isDevelopment ? '[name].[contenthash].js' : undefined,
     chunkFilename: '[id].[contenthash].js',
     globalObject: 'this',
-    publicPath: '/',
+    publicPath: 'auto',
     clean: true,
   },
 
@@ -226,6 +226,7 @@ module.exports = {
       }),
 
     new webpack.EnvironmentPlugin({
+      ASSET_PATH: '/',
       MOCK: false,
       BUILD_EXPIRE: null,
       HASH,
@@ -233,6 +234,8 @@ module.exports = {
       REACT_APP_BUGSNAG_VERSION: appVersion,
       REACT_APP_RELEASE_STAGE: 'development',
       REACT_APP_GIT_SHA: null,
+      AUTH0_DOMAIN: null,
+      AUTH0_CLIENT_ID: null,
     }),
 
     new webpack.IgnorePlugin({
@@ -245,6 +248,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/app/template.html',
       hash: true,
+      publicPath: '/',
     }),
 
     new webpack.ProvidePlugin({
@@ -300,6 +304,13 @@ module.exports = {
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
               },
+              '/api/p2p': process.env.P2P_HOST
+                ? {
+                    target: `https://${process.env.P2P_HOST}`,
+                    changeOrigin: true,
+                    cookieDomainRewrite: 'localhost',
+                  }
+                : undefined,
               '/api': {
                 target: `https://${process.env.PROXY_HOST}`,
                 changeOrigin: true,

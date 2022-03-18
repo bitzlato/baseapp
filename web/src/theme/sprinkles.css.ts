@@ -1,34 +1,6 @@
 import { defineProperties, createSprinkles } from '@vanilla-extract/sprinkles';
 import { queries } from 'web/src/theme/themeUtils';
-import { vars } from './vars.css';
-
-const sizes = {
-  auto: 'auto' as const,
-  full: '100%' as const,
-  '0': 0 as const,
-  // '0.5x': 2 as const,
-  '1x': 4 as const,
-  '1.5x': 6 as const,
-  '2x': 8 as const,
-  '3x': 12 as const,
-  '4x': 16 as const,
-  '5x': 20 as const,
-  '6x': 24 as const,
-  '7x': 28 as const,
-  '8x': 32 as const,
-  '9x': 36 as const,
-  // '10x': 40 as const,
-  // '11x': 44 as const,
-  // '12x': 48 as const,
-  '13x': 52 as const,
-  '14x': 56 as const,
-  // '15x': 60 as const,
-  // '16x': 64 as const,
-  // '17x': 68 as const,
-  '18x': 72 as const,
-  // '19x': 76 as const,
-  '20x': 80 as const,
-};
+import { vars, sizeVars, radiiVars } from './vars.css';
 
 const fontSizes = {
   caption: 12 as const,
@@ -48,13 +20,6 @@ const borderWidths = {
   '0': 0 as const,
   '1x': 1 as const,
   '2x': 2 as const,
-};
-
-const radii = {
-  '0': 0 as const,
-  '1x': 4 as const,
-  '2x': 8 as const,
-  circle: '50%' as const,
 };
 
 const responsiveProperties = defineProperties({
@@ -80,16 +45,16 @@ const responsiveProperties = defineProperties({
       'space-between',
     ],
     alignItems: ['stretch', 'flex-start', 'center', 'flex-end'],
-    paddingTop: sizes,
-    paddingBottom: sizes,
-    paddingLeft: sizes,
-    paddingRight: sizes,
-    marginTop: sizes,
-    marginBottom: sizes,
-    marginLeft: sizes,
-    marginRight: sizes,
-    width: sizes,
-    height: sizes,
+    paddingTop: sizeVars,
+    paddingBottom: sizeVars,
+    paddingLeft: sizeVars,
+    paddingRight: sizeVars,
+    marginTop: sizeVars,
+    marginBottom: sizeVars,
+    marginLeft: sizeVars,
+    marginRight: sizeVars,
+    width: sizeVars,
+    height: sizeVars,
     fontSize: fontSizes,
   },
   shorthands: {
@@ -154,7 +119,7 @@ const unresponsiveProperties = defineProperties({
     borderBottomStyle: ['solid'],
     borderLeftWidth: borderWidths,
     borderLeftStyle: ['solid'],
-    borderRadius: radii,
+    borderRadius: radiiVars,
 
     // layout
     position: ['absolute', 'relative'],
@@ -162,15 +127,14 @@ const unresponsiveProperties = defineProperties({
     right: [0],
     bottom: [0],
     left: [0],
-    zIndex: {
-      '1': 99991,
-    },
     overflowY: ['auto'],
+    overflow: ['hidden'],
 
     // other
     cursor: ['default', 'pointer', 'not-allowed'],
     boxShadow: {
       dropdown: vars.boxShadows.dropdown,
+      modal: vars.boxShadows.modal,
     },
   },
 });

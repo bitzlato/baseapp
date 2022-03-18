@@ -26,7 +26,7 @@ export function* apiKeyCreateSaga(action: ApiKeyCreateFetch) {
     );
     yield put(apiKeyCreate(apiKey));
     yield put(alertPush({ message: ['success.api_keys.created'], type: 'success' }));
-    yield put(apiKeys2FAModal({ active: true, action: 'createSuccess', apiKey }));
+    yield put(apiKeys2FAModal({ action: 'createSuccess', apiKey }));
   } catch (error) {
     yield put(
       sendError({

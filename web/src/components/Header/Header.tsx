@@ -23,7 +23,7 @@ import { loginWithRedirect } from 'src/helpers/auth0';
 import { MarketSelector } from 'src/containers/MarketSelector/MarketSelector';
 import { HeaderToolbar } from 'src/containers/HeaderToolbar/HeaderToolbar';
 import { useT } from 'src/hooks/useT';
-import { getLinkToP2P } from 'src/containers/Header/HeaderNavigation/getLinkToP2P';
+import { getLinkToP2P } from 'web/src/components/Header/getLinkToP2P';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 

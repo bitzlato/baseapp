@@ -177,7 +177,7 @@ exports[`CryptoIcon should render 1`] = `
         Object {
           "bottom": 20,
           "left": 0,
-          "right": 30,
+          "right": 60,
           "top": 20,
         }
       }
@@ -276,6 +276,7 @@ exports[`CryptoIcon should render 1`] = `
         reversed={false}
         scale="auto"
         stroke=""
+        tick={[Function]}
         tickCount={5}
         type="category"
         width={0}

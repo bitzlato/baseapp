@@ -141,6 +141,7 @@ export const TabPanel: React.FC<TabPanelProps> = ({
       const options = dropdownLabels();
       return (
         <SelectString
+          isSearchable={false}
           options={options}
           defaultValue={options[0]}
           size="small"

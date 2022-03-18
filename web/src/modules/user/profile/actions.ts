@@ -11,6 +11,7 @@ import {
   PROFILE_GENERATE_2FA_QRCODE_DATA,
   PROFILE_GENERATE_2FA_QRCODE_ERROR,
   PROFILE_GENERATE_2FA_QRCODE_FETCH,
+  PROFILE_TOGGLE_2FA_SUCCESS,
   PROFILE_RESET_USER,
   PROFILE_TOGGLE_2FA_DATA,
   PROFILE_TOGGLE_2FA_ERROR,
@@ -19,6 +20,7 @@ import {
   PROFILE_USER_DATA,
   PROFILE_USER_ERROR,
   PROFILE_USER_FETCH,
+  PROFILE_USER_REFETCH,
 } from './constants';
 import { User } from './types';
 
@@ -82,6 +84,10 @@ export interface UserFetch {
   type: typeof PROFILE_USER_FETCH;
 }
 
+export interface UserRefetch {
+  type: typeof PROFILE_USER_REFETCH;
+}
+
 export interface UserInfo {
   type: typeof PROFILE_USER_DATA;
   payload: {
@@ -123,6 +129,10 @@ export interface ChangeUserData {
   };
 }
 
+export interface Toggle2faSuccess {
+  type: typeof PROFILE_TOGGLE_2FA_SUCCESS;
+}
+
 export interface ChangeUserDataError {
   type: typeof PROFILE_CHANGE_USER_ERROR;
   error: CommonError;
@@ -136,6 +146,7 @@ export type ProfileAction =
   | Toggle2FAFetch
   | Toggle2FAData
   | Toggle2FAError
+  | Toggle2faSuccess
   | Generate2faQRFetch
   | Generate2faQRData
   | Generate2faQRError
@@ -174,6 +185,10 @@ export const toggle2faFetch = (payload: Toggle2FAFetch['payload']): Toggle2FAFet
   payload,
 });
 
+export const toggle2faSuccess = (): Toggle2faSuccess => ({
+  type: PROFILE_TOGGLE_2FA_SUCCESS,
+});
+
 export const toggle2faData = (): Toggle2FAData => ({
   type: PROFILE_TOGGLE_2FA_DATA,
 });
@@ -199,6 +214,10 @@ export const generate2faQRError = (error: CommonError): Generate2faQRError => ({
 
 export const userFetch = (): UserFetch => ({
   type: PROFILE_USER_FETCH,
+});
+
+export const userRefetch = (): UserRefetch => ({
+  type: PROFILE_USER_REFETCH,
 });
 
 export const userData = (payload: UserInfo['payload']): UserInfo => ({

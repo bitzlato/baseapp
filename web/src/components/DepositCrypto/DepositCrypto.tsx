@@ -10,11 +10,9 @@ import { Select } from 'src/components/Select/Select';
 import { MetaMaskButton } from 'src/components/MetaMaskButton';
 import { QRCode } from 'src/components/QRCode';
 import { Blur } from 'src/components/Blur';
-import { useFetchCache } from 'src/hooks/useFetchCache';
 import { tradeUrl } from 'src/api/config';
 import { Blockchain } from 'src/modules/public/blockchains/types';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
-import s from 'src/containers/Withdraw/BeneficiaryAddress.postcss';
 import { DepositSummary } from './DepositSummary';
 import {
   alertPush,
@@ -25,6 +23,8 @@ import {
   Wallet,
 } from '../../modules';
 import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { useFetch } from 'web/src/hooks/data/useFetch';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
 
 interface Props {
   wallet: Wallet;
@@ -40,9 +40,9 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
 
   const [blockchain, setBlockchain] = useState<Blockchain | null>(null);
 
-  const { data = [] } = useFetchCache<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const blockchainsResponse = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
-  const blockchains = data.filter((d) =>
+  const blockchains = (blockchainsResponse.data ?? []).filter((d) =>
     wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id),
   );
 
@@ -50,10 +50,19 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
     setBlockchain(blockchains.length === 1 ? blockchains[0]! : null);
   }, [blockchains.length, wallet.currency.code]);
 
-  const { data: depositAddress } = useFetchCache<DepositAddress>(
-    `${tradeUrl()}/account/deposit_address/${blockchain?.id ?? ''}`,
-    { skipRequest: blockchain === null },
+  const depositResponse = useFetch<DepositAddress>(
+    blockchain?.id ? `${tradeUrl()}/account/deposit_address/${blockchain?.id}` : null,
+    fetchWithCreds,
   );
+
+  const depositAddress = depositResponse.data;
+  const isNoAddress = depositAddress?.address === null;
+
+  useEffect(() => {
+    if (isNoAddress) {
+      window.setTimeout(() => depositResponse.mutate(), 2000);
+    }
+  }, [isNoAddress]);
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
     (d) => d.blockchain_id === blockchain?.id,
@@ -103,7 +112,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
           formatOptionLabel={renderSelectItem}
           getOptionValue={(d) => d.key}
         />
-        {blockchain && depositAddress && blockchainCurrency && (
+        {blockchain && depositAddress?.address && blockchainCurrency && (
           <>
             <Box row>
               <div className="cr-deposit-info">
@@ -127,7 +136,6 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
                 />
               ) : null}
               <CopyableTextField
-                className={s.field}
                 value={
                   depositAddress?.address ?? t('page.body.wallets.tabs.deposit.ccy.message.pending')
                 }

@@ -241,14 +241,12 @@ export const ru: LangType = {
   'page.body.wallets.tabs.withdraw.content.limit24h': 'Лимит на вывод за 24ч',
   'page.body.wallets.tabs.withdraw.content.limit1month': 'Лимит на вывод за 1 месяц',
   'page.body.wallets.tabs.withdraw.content.unlimited': 'Неограниченный',
-  'page.body.wallets.tabs.withdraw.content.button': 'ВЫВЕСТИ',
+  'page.body.wallets.tabs.withdraw.content.button': 'Вывести',
 
   'page.body.wallets.tabs.withdraw.disabled.message': 'Вывод средств был отключен администрацией',
   'page.body.wallets.warning.withdraw.verification':
     'Withdraws are allowed after passing KYC verification',
   'page.body.wallets.warning.withdraw.verification.button': 'Verify Your Account',
-  'page.body.wallets.warning.withdraw.2fa': 'Withdraws are allowed after enabling 2FA',
-  'page.body.wallets.warning.withdraw.2fa.button': 'Enable 2FA',
 
   'page.body.wallets.tabs.withdraw.modal.confirmation': 'Подтверждение',
   'page.body.wallets.tabs.withdraw.modal.message1': 'Вы получите ',
@@ -260,11 +258,11 @@ export const ru: LangType = {
     'Вам нужно активировать 2FA, чтобы получить возможность выводить Ваши валюты!',
   'page.body.wallets.tabs.withdraw.content.enable2faButton': 'Активировать 2FA',
 
-  'success.beneficiaries.created': 'Beneficiaries: successfully created',
-  'success.beneficiaries.activated': 'Beneficiaries: successfully activated',
-  'success.beneficiaries.deleted': 'Beneficiaries: successfully deleted',
-  'success.beneficiaries.resent_pin': 'Beneficiaries: pin resent',
-  'error.beneficiaries.max10.addresses': 'You can register up to 10 withdrawal addresses',
+  'success.beneficiaries.created': 'Получатель успешно создан',
+  'success.beneficiaries.activated': 'Получатель успешно активирован',
+  'success.beneficiaries.deleted': 'Получатель успешно удалён',
+  'success.beneficiaries.resent_pin': 'Пин-код отправлен повторно',
+  'error.beneficiaries.max10.addresses': 'Вы можете создать до 10 адресов для списания',
 
   'success.deposits.created': 'Создано намерение депонировать',
 
@@ -453,9 +451,8 @@ export const ru: LangType = {
   'page.body.profile.header.account.content.twoFactorAuthentication.message.mfa': 'MFA код',
   'page.body.profile.header.account.content.twoFactorAuthentication.message.4':
     'Введите 2FA код с приложения',
-  'page.body.profile.header.account.content.twoFactorAuthentication.subHeader': '2FA код',
-  'page.body.profile.header.account.content.twoFactorAuthentication.enable': 'ВКЛЮЧИТЬ',
-  'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'ОТКЛЮЧИТЬ 2FA',
+  'page.body.profile.header.account.content.twoFactorAuthentication.enable': 'Включить',
+  'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'Отключить 2FA',
   'page.body.profile.header.account.content.twoFactorAuthentication.modalBody':
     'Пожалуйста, обратитесь с администратором, чтобы отключить 2FA',
   'page.body.profile.header.account.content.twoFactorAuthentication.modalHeader':
@@ -523,6 +520,7 @@ export const ru: LangType = {
   'page.body.profile.content.action.logout': 'Выход',
   'page.body.profile.content.action.request2fa': 'Запрошен QR-код для 2FA',
   'page.body.profile.content.action.enable2fa': 'Активация 2FA',
+  'page.body.profile.content.action.disable2fa': 'Отключение 2FA',
   'page.body.profile.content.action.login.2fa': 'Вход в систему с 2FA',
   'page.body.profile.content.action.requestPasswordReset': 'Запрос на сброс пароля',
   'page.body.profile.content.action.passwordReset': 'Сброс пароля',
@@ -1056,9 +1054,10 @@ export const ru: LangType = {
   'account.withdraw.invalid_otp': 'Неверный 2FA',
   'account.withdraw.disabled_api': 'Снятие API отключено',
 
-  'account.beneficiary.invalid_pin': 'Invalid beneficiary activation pin',
-  'account.beneficiary.cant_resend_within_1_minute': "Can't resend activation pin within 1 minute",
-  'account.beneficiary.duplicate_address': 'Beneficiary address already exists',
+  'account.beneficiary.invalid_pin': 'Неверный код активации',
+  'account.beneficiary.cant_resend_within_1_minute':
+    'Нельзя повторно отправить код активации в течение 1 минуты',
+  'account.beneficiary.duplicate_address': 'Адрес списания уже добавлен',
   'account.beneficiary.failed_to_create': 'Невозможно добавить получателя: неверный адрес',
 
   'market.market.doesnt_exist': 'Рынок не существует',
@@ -1218,11 +1217,14 @@ export const ru: LangType = {
   'page.fees.table.withdraw_fee': 'Комиссия за вывод',
   your_address: 'Ваш адрес',
 
+  '2FA code': 'Код 2FA',
+  '2FA Verification': '2FA верификация',
   'Create gift': 'Выписать чек',
   'Deposit.noun': 'Ввод',
+  'Enter 2FA code from the app': 'Введите 2FA код из приложения',
+  'error.try_later': 'Пожалуйста, попробуйте позже',
   'Estimated value': 'Оценочная стоимость',
   'Exchange Balance': 'Биржевой баланс',
-  Network: 'Сеть',
   'P2P Balance': 'Баланс P2P',
   'Select network': 'Выберите сеть',
   'Total balance': 'Общий баланс',
@@ -1244,12 +1246,77 @@ export const ru: LangType = {
   is_transaction_price_too_high: 'Вывод был отключен из-за высокой цены транзакции',
   Locked: 'Заблокировано',
   market: 'Биржа',
+  Network: 'Сеть',
+  OK: 'OK',
   p2p_deposit_withdraw:
     'В настоящее время ввод и вывод BTC осуществляются с помощью кошельков P2P, пожалуйста, {transfer} активы в/из кошелька P2P.',
   p2p_transfer: 'переведите',
   p2p: 'P2P',
   Rearrange: 'Переставить',
+  Send: 'Отправить',
   Status: 'Статус',
   To: 'В',
   Wallets: 'Кошельки',
+  Close: 'Закрыть',
+  Cancel: 'Отмена',
+  Yes: 'Да',
+  No: 'Нет',
+  Right: 'Верно',
+  Settings: 'Настройки',
+  'Default currency': 'Основная валюта',
+  General: 'Общий',
+  Security: 'Безопасность',
+  Notifications: 'Уведомления',
+  'Safe Mode': 'Безопасный режим',
+  Timezone: 'Часовой пояс',
+  Rating: 'Рейтинг',
+  Comments: 'Отзывы',
+  'Transactions made': 'Сделок совершено',
+  'Show all': 'Показать все',
+  'Referral Links': 'Реферальные ссылки',
+
+  'safemode.title': 'Выключение безопасного режима',
+  'safemode.begin':
+    '🔒 Для продолжения Вам необходимо пройти тест на знание безопасности при работе с сервисом.\nЭта операция разовая и не займет много времени!',
+  'safemode.error': 'Упс! Это ошибка, которая может стоит Вам потери средств. Попробуйте сначала.',
+  'safemode.success': 'Поздравляем! Теперь вы можете создавать чеки и отключать безопасный режим',
+  'safemode.start_test': 'Начать тест',
+  'safemode.question1':
+    'Вы начали сделку, но ваш контрагент предлагает провести сделку через оператора сервиса, в ручном режиме. Ведь так быстрее и проще, и вообще курс лучше.\nСуществуют ли в сервисе операторы/агенты поддержки которые проводят сделки?',
+  'safemode.question2':
+    'С Вами связался агент поддержки и просит сообщить ему номер телефона и код из смс.\nНужно ли сообщать данную информацию?',
+  'safemode.question3':
+    'Передача средств по сделке с помощью чеков не является нарушением и не приведет к потере денежных средств из-за возможного мошенничества?',
+  'safemode.next_question': 'Следующий вопрос',
+  'safemode.check_is_gift': 'Чек - это подарок',
+
+  'notification_setting.off': 'Выключено',
+  'notification_setting.on': 'Включено',
+  'notification_setting.silent': 'Тихо',
+  'notification_setting.no-nighttime': 'Выключить ночью',
+  'notification_setting.silent,no-nighttime': 'Выключить ночью и тихо',
+
+  'settings.save_requisites': 'Сохранять реквизиты',
+  'settings.notifications_help': 'Ночное время — это с 23 до 9 по вашему локальному времени',
+  'settings.new_referral': 'Новые рефералы',
+  'settings.new_referral_help':
+    'Уведомления о новых рефералах после того как пользователь зарегистрировался в сервисе по вашей реферальной ссылке.',
+  'settings.dividends_received': 'Реферальные выплаты',
+  'settings.dividends_received_help':
+    'Уведомления о выплатах после того как пользователь провел сделку.',
+  'settings.comission_return': 'Бесплатные сделки',
+  'settings.comission_return_help':
+    'Уведомление о том, что ваша сделка прошла бесплатно и комиссия вернулась на баланс.',
+  'settings.user_message': 'Сервисные рассылки',
+  'settings.user_message_help':
+    'Bitzlato очень редко, но рассылает сообщения с важнейшей информацией по пользователям, но комфорт пользователей мы ценим больше, поэтому вы можете изменить настройки получения таких сообщений.',
+  'settings.safe_mode_help':
+    'При включенном безопасном режиме Вам доступны заявки только доверенных трейдеров.',
+
+  'profile.verification_link_1': 'Если ссылка не открылась автоматически,',
+  'profile.verification_link_2': 'нажмите сюда',
+  'profile.verification_no': 'Верификация не пройдена',
+  'profile.verification_goto': 'Пройти верификацию',
+  'profile.verification_yes': 'Верификация пройдена',
+  'profile.deals_stat': 'сделок на сумму',
 };

@@ -251,6 +251,7 @@ export const QuickExchangeContainer: React.FC = () => {
                 />
                 <SelectString
                   className={s.quickExchangeDropdown}
+                  isSearchable={false}
                   options={fromList}
                   value={fromCurrency}
                   onChange={handleSelectFrom}
@@ -341,6 +342,7 @@ export const QuickExchangeContainer: React.FC = () => {
             />
             <SelectString
               className={s.quickExchangeDropdown}
+              isSearchable={false}
               options={toList}
               value={toCurrency}
               onChange={handleSelectTo}

@@ -1,4 +1,4 @@
-import { ApiKeys2FAModal, ApiKeysState, RootState } from '../..';
+import { ApiKeysState, ApiKeyStateModal, RootState } from '../..';
 
 export const selectApiKeys = (state: RootState): ApiKeysState['apiKeys'] =>
   state.user.apiKeys.apiKeys;
@@ -6,8 +6,7 @@ export const selectApiKeys = (state: RootState): ApiKeysState['apiKeys'] =>
 export const selectApiKeysDataLoaded = (state: RootState): ApiKeysState['dataLoaded'] =>
   state.user.apiKeys.dataLoaded;
 
-export const selectApiKeysModal = (state: RootState): ApiKeys2FAModal['payload'] =>
-  state.user.apiKeys.modal;
+export const selectApiKeysModal = (state: RootState): ApiKeyStateModal => state.user.apiKeys.modal;
 
 export const selectApiKeysPageIndex = (state: RootState): number => state.user.apiKeys.pageIndex;
 

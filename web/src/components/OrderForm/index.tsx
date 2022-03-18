@@ -378,6 +378,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
           self="stretch"
           as={SelectString}
           size="small"
+          isSearchable={false}
           options={orderTypes}
           value={orderType}
           onChange={handleOrderTypeChange as any}

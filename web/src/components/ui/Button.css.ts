@@ -37,6 +37,13 @@ export const button = recipe({
           },
         },
       },
+      danger: {
+        selectors: {
+          '&:focus': {
+            boxShadow: vars.boxShadows.btnSecondaryFocus,
+          },
+        },
+      },
     },
     size: {
       small: sprinkles({
@@ -219,6 +226,80 @@ export const button = recipe({
       style: sprinkles({
         borderColor: 'btnSecondaryBgDisabled',
         color: 'btnSecondaryTextDisabled',
+        cursor: 'not-allowed',
+      }),
+    },
+    {
+      variants: {
+        variant: 'contained',
+        color: 'danger',
+        disabled: false,
+      },
+      style: [
+        sprinkles({
+          bg: {
+            default: 'btnDangerBg',
+            hover: 'btnDangerBgHover',
+          },
+          color: 'btnDangerText',
+        }),
+        {
+          selectors: {
+            '&:active': {
+              backgroundColor: vars.colors.btnDangerBgActive,
+            },
+          },
+        },
+      ],
+    },
+    {
+      variants: {
+        variant: 'contained',
+        color: 'danger',
+        disabled: true,
+      },
+      style: sprinkles({
+        bg: 'btnDangerBgDisabled',
+        color: 'btnDangerTextDisabled',
+        cursor: 'not-allowed',
+      }),
+    },
+    {
+      variants: {
+        variant: 'outlined',
+        color: 'danger',
+        disabled: false,
+      },
+      style: [
+        sprinkles({
+          borderColor: {
+            default: 'btnDangerBg',
+            hover: 'btnDangerBgHover',
+          },
+          color: {
+            default: 'btnDangerBg',
+            hover: 'btnDangerBgHover',
+          },
+        }),
+        {
+          selectors: {
+            '&:active': {
+              borderColor: vars.colors.btnDangerBgActive,
+              color: vars.colors.btnDangerBgActive,
+            },
+          },
+        },
+      ],
+    },
+    {
+      variants: {
+        variant: 'outlined',
+        color: 'danger',
+        disabled: true,
+      },
+      style: sprinkles({
+        borderColor: 'btnDangerBgDisabled',
+        color: 'btnDangerTextDisabled',
         cursor: 'not-allowed',
       }),
     },

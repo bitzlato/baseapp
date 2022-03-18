@@ -61,7 +61,7 @@ describe('Api Keys actions', () => {
   });
 
   it('should check apiKeys2FAModal action creator', () => {
-    const payload = { active: true };
+    const payload = {};
     const expectedAction = { type: API_KEYS_2FA_MODAL, payload };
     expect(actions.apiKeys2FAModal(payload)).toEqual(expectedAction);
   });

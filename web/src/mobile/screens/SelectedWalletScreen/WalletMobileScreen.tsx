@@ -22,9 +22,8 @@ export const WalletMobileScreen: React.FC = () => {
   const history = useHistory();
   const t = useT();
   const wallet = useSelector(selectWallet(currency));
-  const [transfers, setTransfers] = useState(0);
 
-  const generals = useGeneralWallets([transfers]);
+  const generals = useGeneralWallets();
 
   const handleTabSelection = (value: TabId) => {
     setTab(value);
@@ -97,8 +96,6 @@ export const WalletMobileScreen: React.FC = () => {
                       currency={general.balanceTotal.currency}
                       balanceMarket={general.balanceMarket?.toString() ?? '0'}
                       balanceP2P={general.balanceP2P?.toString() ?? '0'}
-                      transfers={transfers}
-                      onChangeTransfers={() => setTransfers(transfers + 1)}
                     />
                   )}
                 </TabPanel>

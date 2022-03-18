@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
-import { useFetchCache } from 'src/hooks/useFetchCache';
-import { useAlert } from 'src/hooks/useAlert';
 import { CellData, Table } from 'src/components';
 import { currenciesFetch } from 'src/modules/public/currencies/actions';
 import { selectCurrencies } from 'src/modules/public/currencies/selectors';
@@ -21,6 +19,7 @@ import { Container } from 'web/src/components/Container/Container';
 import { Blockchain } from 'web/src/modules/public/blockchains/types';
 import { tradeUrl } from 'web/src/api/config';
 import { CurrencyTicker } from 'web/src/components/CurrencyTicker/CurrencyTicker';
+import { useFetch } from 'web/src/hooks/data/useFetch';
 
 export const FeesScreen: React.FC = () => {
   const t = useT();
@@ -37,12 +36,9 @@ export const FeesScreen: React.FC = () => {
 
   const currencies = useSelector(selectCurrencies);
 
-  const { data = [], error } = useFetchCache<TradingFee[]>(`${tradeUrl()}/public/trading_fees`);
-  useAlert(error);
+  const { data = [] } = useFetch<TradingFee[]>(`${tradeUrl()}/public/trading_fees`);
 
-  const { data: blockchains = [] } = useFetchCache<Blockchain[]>(
-    `${tradeUrl()}/public/blockchains`,
-  );
+  const { data: blockchains = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
   const header = [
     t('page.fees.table.coin'),

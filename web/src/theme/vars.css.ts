@@ -1,9 +1,53 @@
-import { createTheme } from '@vanilla-extract/css';
+import { createGlobalTheme, createTheme } from '@vanilla-extract/css';
 import * as colors from './colors';
+
+export const zIndexVars = createGlobalTheme(':root', {
+  modal: '10001',
+});
+
+export const sizeVars = createGlobalTheme(':root', {
+  auto: 'auto' as const,
+  full: '100%' as const,
+  '0': '0px' as const,
+  // '0.5x': '2px' as const,
+  '1x': '4px' as const,
+  '1.5x': '6px' as const,
+  '2x': '8px' as const,
+  '3x': '12px' as const,
+  '4x': '16px' as const,
+  '5x': '20px' as const,
+  '6x': '24px' as const,
+  '7x': '28px' as const,
+  '8x': '32px' as const,
+  '9x': '36px' as const,
+  '10x': '40px' as const,
+  // '11x': '44px' as const,
+  // '12x': '48px' as const,
+  '13x': '52px' as const,
+  '14x': '56px' as const,
+  // '15x': '60px' as const,
+  // '16x': '64px' as const,
+  // '17x': '68px' as const,
+  '18x': '72px' as const,
+  // '19x': '76px' as const,
+  '20x': '80px' as const,
+});
+
+export const radiiVars = createGlobalTheme(':root', {
+  '0': '0px' as const,
+  '1x': '4px' as const,
+  '2x': '8px' as const,
+  circle: '9999px' as const,
+});
+
+export const transitionDurationVars = createGlobalTheme(':root', {
+  base: '0.3s',
+});
 
 export const [themeLight, vars] = createTheme({
   boxShadows: {
     dropdown: `8px 8px 10px ${colors.black10}`,
+    modal: `8px 4px 14px ${colors.black10}`,
     btnPrimaryFocus: `0 7px 11px ${colors.mystic90}`,
     btnSecondaryFocus: `0 7px 11px ${colors.shark19}`,
   },
@@ -44,6 +88,12 @@ export const [themeLight, vars] = createTheme({
     btnSecondaryBgDisabled: colors.mystic,
     btnSecondaryText: colors.catskillWhite,
     btnSecondaryTextDisabled: colors.manatee,
+    btnDangerBg: colors.burntSienna,
+    btnDangerBgHover: colors.salmon,
+    btnDangerBgActive: colors.flamingo,
+    btnDangerBgDisabled: colors.mystic,
+    btnDangerText: colors.catskillWhite,
+    btnDangerTextDisabled: colors.manatee,
     themeSwitcherBorder: colors.selago,
     themeSwitcherBorderHover: colors.luckyPoint,
     themeSwitcherSun: colors.white,
@@ -51,7 +101,7 @@ export const [themeLight, vars] = createTheme({
     themeSwitcherMoon: colors.luckyPoint,
     spinner01: colors.black20,
     spinner02: colors.black,
-    backdrop: colors.black10,
+    backdrop: colors.black30,
 
     footerBg: colors.luckyPoint,
     footerTitle: colors.spindle,
@@ -61,12 +111,34 @@ export const [themeLight, vars] = createTheme({
     footerLinkColorHover: colors.goldTips,
     footerSocialIcon: colors.indigo,
     footerSocialIconHover: colors.spindle,
+
+    statBg: colors.whiteLilac,
+    statIcon: colors.indigo30,
+
+    modal: colors.white,
+    modalHeaderBorderBottom: colors.mako10,
+
+    skeleton: colors.black10,
+    skeletonHighlighted: colors.silver,
+
+    switcherTrack: colors.mako10,
+    switcherTrackShadow: colors.mako10,
+    switcherTrackChecked: colors.goldTips25,
+    switcherTrackShadowChecked: colors.goldTips10,
+    switcherThumb: colors.mako80,
+    switcherThumbChecked: colors.goldTips,
+
+    radio: colors.mako,
+    radioShadow: colors.mako10,
+    radioChecked: colors.goldTips,
+    radioShadowChecked: colors.goldTips10,
   },
 });
 
 export const themeDark = createTheme(vars, {
   boxShadows: {
     dropdown: `8px 8px 10px ${colors.black10}`,
+    modal: `8px 4px 14px ${colors.black10}`,
     btnPrimaryFocus: `0 7px 11px ${colors.mystic15}`,
     btnSecondaryFocus: `0 7px 11px ${colors.mystic15}`,
   },
@@ -107,6 +179,12 @@ export const themeDark = createTheme(vars, {
     btnSecondaryBgDisabled: colors.mystic,
     btnSecondaryText: colors.catskillWhite,
     btnSecondaryTextDisabled: colors.manatee,
+    btnDangerBg: colors.burntSienna,
+    btnDangerBgHover: colors.salmon,
+    btnDangerBgActive: colors.flamingo,
+    btnDangerBgDisabled: colors.mystic,
+    btnDangerText: colors.catskillWhite,
+    btnDangerTextDisabled: colors.manatee,
     themeSwitcherBorder: colors.abbey,
     themeSwitcherBorderHover: colors.silverChalice,
     themeSwitcherSun: colors.silver,
@@ -114,7 +192,7 @@ export const themeDark = createTheme(vars, {
     themeSwitcherMoon: colors.abbey,
     spinner01: colors.white20,
     spinner02: colors.white,
-    backdrop: colors.black10,
+    backdrop: colors.black30,
 
     footerBg: colors.ebonyClay,
     footerTitle: colors.silverChalice,
@@ -124,5 +202,26 @@ export const themeDark = createTheme(vars, {
     footerLinkColorHover: colors.goldTips,
     footerSocialIcon: colors.doveGray,
     footerSocialIconHover: colors.silverChalice,
+
+    statBg: colors.mako,
+    statIcon: colors.white30,
+
+    modal: colors.charade,
+    modalHeaderBorderBottom: colors.white10,
+
+    skeleton: colors.black10,
+    skeletonHighlighted: colors.white30,
+
+    switcherTrack: colors.white10,
+    switcherTrackShadow: colors.white10,
+    switcherTrackChecked: colors.goldTips25,
+    switcherTrackShadowChecked: colors.goldTips10,
+    switcherThumb: colors.white80,
+    switcherThumbChecked: colors.goldTips,
+
+    radio: colors.white,
+    radioShadow: colors.white10,
+    radioChecked: colors.goldTips,
+    radioShadowChecked: colors.goldTips10,
   },
 });
