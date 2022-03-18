@@ -83,6 +83,7 @@ import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuth
 import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSettingsMobileScreen/ProfileSettingsMobileScreen';
 import { SignInAuth0 } from 'web/src/screens/SignInScreen/SignInAuth0';
 import { EmailVerificationModal } from 'web/src/screens/EmailVerification/EmailVerificationModal';
+import { getSearchParam, setLocation } from 'web/src/helpers/url';
 
 interface ReduxProps {
   colorTheme: string;
@@ -259,7 +260,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       this.props.walletsReset();
 
       if (!this.props.location.pathname.includes('/trading')) {
-        this.props.history.push('/trading/');
+        setLocation(getSearchParam('back') ?? '/trading/', this.props.history);
       }
     }
   }

@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
+import { getSearchParam, setLocation } from 'web/src/helpers/url';
 import { captchaType, captchaLogin } from '../../api';
 import { Captcha, SignInComponent } from '../../components';
 import {
@@ -68,7 +69,7 @@ export const SignInScreen: React.FC = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      history.push('/wallets');
+      setLocation(getSearchParam('back') ?? ' /wallets', history);
     }
   }, [isLoggedIn, history]);
 
