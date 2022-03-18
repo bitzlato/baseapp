@@ -18,10 +18,10 @@ export type FetchResponse<Data, Error = unknown> =
       error: Error;
     };
 
-export const useFetch = <Data>(
+export const useFetch = <Data = any, Error = any>(
   key: Key,
-  fetcher: BareFetcher<Data> = fetchJson,
-  config: SWRConfiguration | undefined = undefined,
+  fetcher: BareFetcher<Data> | null = fetchJson,
+  config?: SWRConfiguration<Data, Error, BareFetcher<Data>> | undefined,
 ) => {
   const dispatch = useDispatch();
   const swr = useSWR(key, fetcher, config);
