@@ -14,6 +14,7 @@ import { useTradeStats } from 'web/src/hooks/data/useFetchTradeStatistics';
 import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
 import { useFetchSessionsMe } from 'web/src/hooks/data/useFetchSessionsMe';
+import { parseAmount } from 'web/src/helpers/parseAmount';
 import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
@@ -66,7 +67,14 @@ export const Profile: FC = () => {
             <div className={s.stat}>
               <Stat>
                 <StatLabel>{t('Rating')}</StatLabel>
-                <StatValue>{user.bitzlato_user.user_profile.rating ?? <Skeleton />}</StatValue>
+                <Text
+                  as="div"
+                  variant="h3"
+                  textOverflow="ellipsis"
+                  title={user.bitzlato_user.user_profile.rating}
+                >
+                  {parseAmount(user.bitzlato_user.user_profile.rating, 4)}
+                </Text>
               </Stat>
             </div>
             <div className={s.stat}>
@@ -118,7 +126,7 @@ export const Profile: FC = () => {
           <Box display="flex" justifyContent="space-between">
             <Text variant="label">{t('Rating')}</Text>
             <Text variant="label" fontWeight="strong">
-              {user.bitzlato_user.user_profile.rating ?? <Skeleton />}
+              {parseAmount(user.bitzlato_user.user_profile.rating, 4)}
             </Text>
           </Box>
           <Box display="flex" justifyContent="space-between">

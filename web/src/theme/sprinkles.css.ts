@@ -152,6 +152,13 @@ const typographyProperties = defineProperties({
     textAlign: ['left', 'center'],
     textTransform: ['uppercase'],
     whiteSpace: ['nowrap'],
+    textOverflow: {
+      ellipsis: {
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+      },
+    },
   },
 });
 
