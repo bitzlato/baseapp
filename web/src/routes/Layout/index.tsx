@@ -403,7 +403,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             />
             <Route exact path="/trading/:market?" component={TradingScreenMobile as any} />
             {showLanding() && <Route exact path="/" component={LandingScreenMobile as any} />}
-            { commonRoutes }
+            {commonRoutes}
           </Switch>
           {isLoggedIn && <WalletsFetch />}
           {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}

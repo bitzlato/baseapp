@@ -1,8 +1,10 @@
 import { FC, Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { useT } from '../../hooks/useT';
-import { selectUserInfo, selectUserLoggedIn } from '../../modules';
-import { sprinkles } from '../../theme/sprinkles.css';
+import { useT } from 'web/src/hooks/useT';
+import { selectUserInfo, selectUserLoggedIn } from 'web/src/modules';
+import { sprinkles } from 'web/src/theme/sprinkles.css';
+import { Box } from 'web/src/components/Box';
+import { Text } from 'web/src/components/ui/Text';
 
 type Props = {
   actionResult: DeepLinkActionResultType;
@@ -68,20 +70,20 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
     const details = {
       totalFiat: payload.converted_amount && `(${payload.converted_amount} ${payload.currency})`,
       totalCrypto: `${payload.amount} ${payload.cc_code}`,
-      user: payload.user.nickname,
-      userLink: `/en/p2p/users/${payload.user.nickname}`,
+      // todo: resolve real permalink to user profile
+      user: (
+        <a href={`#/p2p/users/${payload.user.nickname}`} target="_blank" rel="noreferrer">
+          {payload.user.nickname}
+        </a>
+      ),
       comment: payload.comment,
     };
 
     const info = [
-      <div
-        className={sprinkles({
-          pb: '3x',
-        })}
-      >
+      <Box pb="3x">
         <p>{t('deeplink.voucher.info', details)}</p>
         {details.comment && <p>{t('deeplink.voucher.comment', details)}</p>}
-      </div>,
+      </Box>,
     ];
 
     if (actionResult && actionResult.status) {
@@ -89,11 +91,15 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
       if (actionResult.status === 200) {
         // cashed!
         info.push(
-          <h3 className={sprinkles({ color: 'success' })}>{t('deeplink.voucher.just_cashed')}</h3>,
+          <Text variant="h3" color="success">
+            {t('deeplink.voucher.just_cashed')}
+          </Text>,
         );
       } else {
         info.push(
-          <h3 className={sprinkles({ color: 'danger' })}>{t('deeplink.voucher.cash_failed')}</h3>,
+          <Text variant="h4" color="danger">
+            {t('deeplink.voucher.cash_failed')}
+          </Text>,
         );
         if (actionResult.payload && actionResult.payload.code) {
           info.push(<p>{t(`deeplink.server.${actionResult.payload.code}`)}</p>);
@@ -159,11 +165,7 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
   }
 
   return (
-    <div
-      className={sprinkles({
-        fontSize: 'medium',
-      })}
-    >
+    <Box fontSize="medium">
       {content}
       {isLocalDev && (
         <pre>
@@ -173,6 +175,6 @@ export const DeepLinkInfo: FC<Props> = ({ actionResult, deeplink, exposeAction }
           {JSON.stringify(actionResult, null, '  ')}
         </pre>
       )}
-    </div>
+    </Box>
   );
 };
