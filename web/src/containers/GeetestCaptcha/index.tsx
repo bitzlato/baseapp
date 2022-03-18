@@ -52,12 +52,12 @@ class GeetestCaptchaComponent extends React.Component<Props> {
         {
           gt: geetestCaptchaKeys.gt,
           challenge: geetestCaptchaKeys.challenge,
-          offline: 0,
-          new_captcha: false,
+          offline: false,
+          new_captcha: true,
           product: 'popup',
           width: '100%',
-          lang,
           https: true,
+          lang,
         },
         this.captchaComingHandler,
       );
@@ -104,7 +104,6 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (
   geetestCaptchaKeys: selectCaptchaKeys(state),
 });
 
-export const GeetestCaptcha = connect(
-  mapStateToProps,
-  mapDispatchProps,
-)(GeetestCaptchaComponent as any);
+export const GeetestCaptcha = connect(mapStateToProps, mapDispatchProps, null, {
+  forwardRef: true,
+})(GeetestCaptchaComponent as any);

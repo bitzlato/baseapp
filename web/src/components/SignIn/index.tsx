@@ -105,11 +105,13 @@ const SignIn: React.FC<SignInProps> = ({
     [handleChangeFocusField],
   );
 
-  const isButtonDisabled = React.useMemo(
-    () =>
-      !!(captchaLogin() && captchaType !== 'none' && !(reCaptchaSuccess || geetestCaptchaSuccess)),
-    [reCaptchaSuccess, geetestCaptchaSuccess],
-  );
+  const isButtonDisabled = React.useMemo(() => {
+    return !!(
+      captchaLogin() &&
+      captchaType !== 'none' &&
+      !(reCaptchaSuccess || geetestCaptchaSuccess)
+    );
+  }, [reCaptchaSuccess, geetestCaptchaSuccess]);
 
   const handleSubmitForm = React.useCallback(() => {
     refreshError();

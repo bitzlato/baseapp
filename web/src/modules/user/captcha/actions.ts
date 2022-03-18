@@ -13,6 +13,7 @@ import {
 export interface GeetestCaptchaKeys {
   gt: string;
   challenge: string;
+  success?: boolean;
 }
 
 export interface GeetestCaptchaData {

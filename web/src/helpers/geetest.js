@@ -1,4 +1,5 @@
 /* eslint-disable */
+// "v0.4.8 Geetest Inc.";
 var document = window.document;
 var Math = window.Math;
 var head = document.getElementsByTagName('head')[0];
@@ -74,9 +75,39 @@ var isObject = function (value) {
 var isFunction = function (value) {
   return typeof value === 'function';
 };
+var MOBILE = /Mobi/i.test(navigator.userAgent);
+var pt = MOBILE ? 3 : 0;
 
 var callbacks = {};
 var status = {};
+
+var nowDate = function () {
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+
+  if (month >= 1 && month <= 9) {
+    month = '0' + month;
+  }
+  if (day >= 0 && day <= 9) {
+    day = '0' + day;
+  }
+  if (hours >= 0 && hours <= 9) {
+    hours = '0' + hours;
+  }
+  if (minutes >= 0 && minutes <= 9) {
+    minutes = '0' + minutes;
+  }
+  if (seconds >= 0 && seconds <= 9) {
+    seconds = '0' + seconds;
+  }
+  var currentdate = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+  return currentdate;
+};
 
 var random = function () {
   return parseInt(Math.random() * 10000) + new Date().valueOf();
@@ -86,6 +117,11 @@ var loadScript = function (url, cb) {
   var script = document.createElement('script');
   script.charset = 'UTF-8';
   script.async = true;
+
+  // 对geetest的静态资源添加 crossOrigin
+  if (/static\.geetest\.com/g.test(url)) {
+    script.crossOrigin = 'anonymous';
+  }
 
   script.onerror = function () {
     cb(true);
@@ -107,6 +143,8 @@ var loadScript = function (url, cb) {
 };
 
 var normalizeDomain = function (domain) {
+  // special domain: uems.sysu.edu.cn/jwxt/geetest/
+  // return domain.replace(/^https?:\/\/|\/.*$/g, ''); uems.sysu.edu.cn
   return domain.replace(/^https?:\/\/|\/$/g, ''); // uems.sysu.edu.cn/jwxt/geetest
 };
 var normalizePath = function (path) {
@@ -142,13 +180,19 @@ var makeURL = function (protocol, domain, path, query) {
   return url;
 };
 
-var load = function (protocol, domains, path, query, cb) {
+var load = function (config, send, protocol, domains, path, query, cb) {
   var tryRequest = function (at) {
     var url = makeURL(protocol, domains[at], path, query);
     loadScript(url, function (err) {
       if (err) {
         if (at >= domains.length - 1) {
           cb(true);
+          // report gettype error
+          if (send) {
+            config.error_code = 508;
+            var url = protocol + domains[at] + path;
+            reportError(config, url);
+          }
         } else {
           tryRequest(at + 1);
         }
@@ -186,6 +230,8 @@ var jsonp = function (domains, path, config, callback) {
     } catch (e) {}
   };
   load(
+    config,
+    true,
     config.protocol,
     domains,
     path,
@@ -198,6 +244,25 @@ var jsonp = function (domains, path, config, callback) {
         callback(config._get_fallback_config());
       }
     },
+  );
+};
+
+var reportError = function (config, url) {
+  load(
+    config,
+    false,
+    config.protocol,
+    ['monitor.geetest.com'],
+    '/monitor/send',
+    {
+      time: nowDate(),
+      captcha_id: config.gt,
+      challenge: config.challenge,
+      pt: pt,
+      exception_url: url,
+      error_code: config.error_code,
+    },
+    function (err) {},
   );
 };
 
@@ -221,7 +286,7 @@ if (detect()) {
   status.slide = 'loaded';
 }
 
-function initGeetest(userConfig, callback) {
+window.initGeetest = function (userConfig, callback) {
   var config = new Config(userConfig);
 
   if (userConfig.https) {
@@ -230,13 +295,21 @@ function initGeetest(userConfig, callback) {
     config.protocol = window.location.protocol + '//';
   }
 
-  // for KYC
+  // for KFC
   if (
     userConfig.gt === '050cffef4ae57b5d5e529fea9540b0d1' ||
     userConfig.gt === '3bd38408ae4af923ed36e13819b14d42'
   ) {
     config.apiserver = 'yumchina.geetest.com/'; // for old js
     config.api_server = 'yumchina.geetest.com';
+  }
+
+  if (userConfig.gt) {
+    window.GeeGT = userConfig.gt;
+  }
+
+  if (userConfig.challenge) {
+    window.GeeChallenge = userConfig.challenge;
   }
 
   if (isObject(userConfig.getType)) {
@@ -257,6 +330,8 @@ function initGeetest(userConfig, callback) {
       callbacks[type].push(init);
 
       load(
+        config,
+        true,
         config.protocol,
         newConfig.static_servers || newConfig.domains,
         newConfig[type] || newConfig.path,
@@ -286,6 +361,6 @@ function initGeetest(userConfig, callback) {
       callbacks[type].push(init);
     }
   });
-}
+};
 
 module.exports = initGeetest;

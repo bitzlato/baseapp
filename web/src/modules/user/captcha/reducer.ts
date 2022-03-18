@@ -16,7 +16,7 @@ export interface GeetestCaptchaState {
   getKeysSuccess: boolean;
   error?: CommonError;
   keys?: GeetestCaptchaKeys;
-  captcha_response?: string | GeetestCaptchaResponse;
+  captcha_response?: string | GeetestCaptchaResponse | undefined;
   reCaptchaSuccess: boolean;
   geetestCaptchaSuccess: boolean;
   shouldGeetestReset: boolean;
@@ -31,7 +31,10 @@ const initialState: GeetestCaptchaState = {
   shouldGeetestReset: false,
 };
 
-export const getGeetestCaptchaReducer = (state = initialState, action: GeetestCaptchaAction) => {
+export const getGeetestCaptchaReducer = (
+  state = initialState,
+  action: GeetestCaptchaAction,
+): GeetestCaptchaState => {
   switch (action.type) {
     case GET_GEETEST_CAPTCHA_DATA:
       return {

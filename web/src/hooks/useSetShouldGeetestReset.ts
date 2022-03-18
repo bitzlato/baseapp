@@ -11,7 +11,7 @@ export const useSetShouldGeetestReset = (
 
   React.useEffect(() => {
     if (error || success) {
-      if (geetestCaptchaRef) {
+      if (geetestCaptchaRef.current) {
         dispatch(setShouldGeetestReset({ shouldGeetestReset: true }));
       }
     }

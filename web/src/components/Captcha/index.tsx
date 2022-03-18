@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, memo, useEffect, useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useDispatch, useSelector } from 'react-redux';
 import { captchaId, captchaType } from '../../api/config';
@@ -11,14 +11,19 @@ import {
   setRecaptchaSuccess,
 } from '../../modules';
 
-export const CaptchaComponent = (props: any) => {
+interface Props {
+  success: boolean;
+  error: boolean;
+}
+
+export const CaptchaComponent: FC<Props> = (props) => {
   const dispatch = useDispatch();
   const shouldGeetestReset = useSelector(selectShouldGeetestReset);
 
-  const reCaptchaRef = React.useRef(null);
-  const geetestCaptchaRef = React.useRef(null);
+  const reCaptchaRef = useRef(null);
+  const geetestCaptchaRef = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (props.error || props.success) {
       if (reCaptchaRef.current) {
         (reCaptchaRef.current as ReCAPTCHA).reset();
@@ -33,6 +38,7 @@ export const CaptchaComponent = (props: any) => {
   };
 
   const handleGeetestCaptchaChange = (value?: GeetestCaptchaResponse) => {
+    console.log('handleGeetestCaptchaChange', value);
     dispatch(setGeetestCaptchaSuccess({ captcha_response: value }));
   };
 
@@ -67,4 +73,4 @@ export const CaptchaComponent = (props: any) => {
   return renderCaptcha();
 };
 
-export const Captcha = React.memo(CaptchaComponent);
+export const Captcha = memo(CaptchaComponent);

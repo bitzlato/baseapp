@@ -73,11 +73,11 @@ export const SignInScreen: React.FC = () => {
     }
   }, [isLoggedIn, history]);
 
-  useEffect(() => {
-    if (captchaType() !== 'none' && captchaLogin() && errorSignIn && !require2FA) {
-      dispatch(resetCaptchaState());
-    }
-  }, [errorSignIn, captchaType(), captchaLogin()]);
+  // useEffect(() => {
+  //   if (captchaType() !== 'none' && captchaLogin() && errorSignIn && !require2FA) {
+  //     dispatch(resetCaptchaState());
+  //   }
+  // }, [errorSignIn, captchaType(), captchaLogin()]);
 
   const refreshError = useCallback(() => {
     setEmailError('');
@@ -157,7 +157,7 @@ export const SignInScreen: React.FC = () => {
   }, [dispatch]);
 
   const renderCaptcha = useMemo(
-    () => <Captcha error={errorSignIn || emailError} />,
+    () => <Captcha error={!!(errorSignIn || emailError)} success />,
     [errorSignIn, emailError],
   );
 
