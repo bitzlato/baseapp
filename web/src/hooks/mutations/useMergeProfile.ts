@@ -2,33 +2,25 @@ import { useDispatch } from 'react-redux';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
-import { fetchJson } from 'web/src/helpers/fetch';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { userRefetch } from 'web/src/modules/user/profile/actions';
 
-const saveSettings = async (params: {
-  saveRequisites?: boolean;
-  notifications?: {
-    newReferral?: string;
-    dividendsReceived?: string;
-    comissionReturn?: string;
-    userMessage?: string;
-  };
-}) => {
-  const res = await fetchJson(`${p2pUrl()}/settings`, {
+const mergeProfile = async (token: string) => {
+  const response = await fetchWithCreds(`${p2pUrl()}/profile/merge`, {
     method: 'POST',
-    body: JSON.stringify(params),
+    body: JSON.stringify({ token }),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
+      'x-code-no2fa': 'true', // TODO: use p2p 2FA
     },
-    credentials: 'include',
   });
 
-  return res;
+  return response;
 };
 
-export const useSaveSettings = () => {
+export const useMergeProfile = () => {
   const dispatch = useDispatch();
-  const [mutate] = useMutation(saveSettings, {
+  return useMutation(mergeProfile, {
     onSuccess: () => {
       dispatch(userRefetch());
     },
@@ -36,6 +28,4 @@ export const useSaveSettings = () => {
       alertFetchError(dispatch, error);
     },
   });
-
-  return mutate;
 };
