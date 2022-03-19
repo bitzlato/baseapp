@@ -105,6 +105,9 @@ export const Footer: FC<Props> = ({ theme, language, renderMarketLink }) => {
             <Box as="a" className={s.link} href={getBitzlatoLink(language, 'blog')}>
               {t('Blog')}
             </Box>
+            <Box as="a" className={s.link} href={getBitzlatoLink(language, 'wallets_stat/')}>
+              {t('Wallets statistic')}
+            </Box>
             {renderMarketLink({
               key: 'api',
               className: s.link,
