@@ -65,6 +65,12 @@ export interface BitzlatoUser {
   } | null;
 }
 
+export interface AuthSubject {
+  subject: string;
+  email: string;
+  profile_name: string;
+}
+
 export interface User {
   username?: string;
   email: string;
@@ -82,6 +88,8 @@ export interface User {
   created_at: string;
   updated_at: string;
   bitzlato_user: BitzlatoUser | null;
+  default_auth_subject?: string | null | undefined;
+  available_auth_subjects: ReadonlyArray<AuthSubject>;
 }
 
 export interface TradeStatistics {

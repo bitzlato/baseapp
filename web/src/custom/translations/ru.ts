@@ -1280,6 +1280,8 @@ export const ru: LangType = {
   'Transactions made': 'Сделок совершено',
   'Show all': 'Показать все',
   'Referral Links': 'Реферальные ссылки',
+  'Switch account': 'Переключить аккаунт',
+  "It's you": 'Это вы',
 
   'safemode.title': 'Выключение безопасного режима',
   'safemode.begin':

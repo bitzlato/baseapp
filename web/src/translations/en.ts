@@ -1259,6 +1259,8 @@ export const en = {
   'Transactions made': 'Transactions made',
   'Show all': 'Show all',
   'Referral Links': 'Referral Links',
+  'Switch account': 'Switch account',
+  "It's you": "It's you",
 
   'safemode.title': 'Disable safe mode',
   'safemode.begin':

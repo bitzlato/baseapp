@@ -19,6 +19,7 @@ import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
 import { ProfileReferalLinks } from './ProfileReferralLinks';
+import { ProfileSwitchAccount } from './ProfileSwitchAccount';
 
 export const Profile: FC = () => {
   const t = useT();
@@ -36,7 +37,7 @@ export const Profile: FC = () => {
 
   const body = (
     <Card header={!isMobileDevice ? <h4>{title}</h4> : undefined}>
-      <Box mb={isMobileDevice ? '4x' : '9x'}>
+      <Box mb={isMobileDevice ? '4x' : '7x'}>
         {bitzlatoUser && (
           <Text variant="h4" gutterBottom>
             {bitzlatoUser.user_profile.public_name ?? bitzlatoUser.user_profile.generated_name}
@@ -52,8 +53,16 @@ export const Profile: FC = () => {
           UID: {user.uid} {sessionsMe && `(${sessionsMe.auth_sub})`}
         </Text>
       </Box>
-      <Box mb="9x">
-        <Stack marginRight="5x">
+      <Box mb="7x">
+        <Stack
+          direction={{ mobile: 'column', tablet: 'row' }}
+          marginBottom={{ mobile: '3x', tablet: '0' }}
+          marginRight={{ mobile: '0', tablet: '3x' }}
+        >
+          <ProfileSwitchAccount
+            authSubjects={user.available_auth_subjects}
+            currentSubject={sessionsMe?.auth_sub}
+          />
           <ProfileReferalLinks />
         </Stack>
       </Box>
