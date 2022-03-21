@@ -2,7 +2,7 @@ import { call, put, select } from 'redux-saga/effects';
 import {
   AccountBalanceSource,
   CurrencySource,
-  selectVerifyEmail,
+  isPendingUser,
   sendError,
   WalletSource,
 } from '../../..';
@@ -15,8 +15,8 @@ const OPTIONS: RequestOptions = {
 
 export function* walletsSaga() {
   try {
-    const verifyEmail: boolean = yield select(selectVerifyEmail);
-    if (verifyEmail) {
+    const isPending: boolean = yield select(isPendingUser);
+    if (isPending) {
       return;
     }
 
