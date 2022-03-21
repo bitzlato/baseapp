@@ -2,8 +2,9 @@
 
 set :stage, :production
 set :user, 'baseapp'
-set :public_url, 'https://market.bitzlato.bz/'
-set :build_domain, 'market.bitzlato.bz'
+set :public_url, 'https://bitzlato.com/'
+set :build_domain, 'bitzlato.com'
+set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}_shared" }
 
 server ENV.fetch( 'PRODUCTION_SERVER' ),
        user: fetch(:user),
