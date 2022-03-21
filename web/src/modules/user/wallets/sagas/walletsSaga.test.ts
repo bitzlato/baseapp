@@ -1,10 +1,10 @@
 import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { AccountBalanceSource, rootSaga, sendError, WalletSource } from '../../..';
-import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
-import { CommonError } from '../../../types';
-import { walletsData, walletsError, walletsFetch } from '../actions';
+import { AccountBalanceSource, rootSaga, /*sendError, */ WalletSource } from '../../..';
+import { /*mockNetworkError, */ setupMockAxios, setupMockStore } from '../../../../helpers/jest';
+// import { CommonError } from '../../../types';
+import { walletsData, /*walletsError, */ walletsFetch } from '../actions';
 
 describe('Module: Wallets', () => {
   let store: MockStoreEnhanced;
@@ -22,10 +22,10 @@ describe('Module: Wallets', () => {
     mockAxios.reset();
   });
 
-  const error: CommonError = {
-    code: 500,
-    message: ['Server error'],
-  };
+  // const error: CommonError = {
+  //   code: 500,
+  //   message: ['Server error'],
+  // };
 
   const fakeAccounts: AccountBalanceSource[] = [
     {
@@ -231,16 +231,16 @@ describe('Module: Wallets', () => {
   };
 
   const expectedActionsFetch = [walletsFetch(), walletsData(fakeWallets)];
-  const expectedActionsError = [
-    walletsFetch(),
-    sendError({
-      error,
-      processingType: 'alert',
-      extraOptions: {
-        actionError: walletsError,
-      },
-    }),
-  ];
+  // const expectedActionsError = [
+  //   walletsFetch(),
+  //   sendError({
+  //     error,
+  //     processingType: 'alert',
+  //     extraOptions: {
+  //       actionError: walletsError,
+  //     },
+  //   }),
+  // ];
 
   it.skip('should fetch wallets in success flow', async () => {
     mockWallets();
