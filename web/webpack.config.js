@@ -30,7 +30,7 @@ const extractSemver = (text) => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
-const ASSET_PATH = releaseStage === 'production_shared' ? '/basestatic/' : '/';
+const ASSET_PATH = releaseStage === 'production' ? '/basestatic/' : '/';
 
 let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : `${ASSET_PATH}/marketDocs`; // production or staging
 if (process.env.MARKET_DOCS_URL) {
