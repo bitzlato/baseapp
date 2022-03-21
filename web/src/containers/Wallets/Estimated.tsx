@@ -12,12 +12,14 @@ import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selec
 import s from './Estimated.postcss';
 import { useFetch } from 'web/src/hooks/data/useFetch';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
+import { isPendingUser } from 'web/src/modules/user/profile/selectors';
 
 export const Estimated: React.FC = () => {
   const t = useT();
   const isMobileDevice = useSelector(selectMobileDeviceState);
+  const isPending = useSelector(isPendingUser);
 
-  const shouldFetch = process.env.REACT_APP_RELEASE_STAGE !== 'sandbox';
+  const shouldFetch = process.env.REACT_APP_RELEASE_STAGE !== 'sandbox' && !isPending;
 
   const { data = DEFAULT_TOTAL } = useFetch<TotalBalances>(
     shouldFetch ? `${accountUrl()}/balances/total` : null,
