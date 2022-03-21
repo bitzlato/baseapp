@@ -57,7 +57,7 @@ export const EmailVerificationModal: FC = () => {
   return (
     <Modal2 show header={t('page.header.signUp.modal.header')} onClose={() => setShow(false)}>
       <Box col spacing="3">
-        <span>{t('page.header.signUp.modal.body')}</span>
+        <span>{t('page.header.signUp.modal.body2', { email: <b>{user.email}</b> })}</span>
         <Captcha error={error} success={success} />
         <Button onClick={handleClick} disabled={disableButton}>
           {t('page.resendConfirmation')}
