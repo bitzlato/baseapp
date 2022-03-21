@@ -1,5 +1,11 @@
-import { call, put } from 'redux-saga/effects';
-import { AccountBalanceSource, CurrencySource, sendError, WalletSource } from '../../..';
+import { call, put, select } from 'redux-saga/effects';
+import {
+  AccountBalanceSource,
+  CurrencySource,
+  selectVerifyEmail,
+  sendError,
+  WalletSource,
+} from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { walletsData, walletsError } from '../actions';
 
@@ -9,6 +15,11 @@ const OPTIONS: RequestOptions = {
 
 export function* walletsSaga() {
   try {
+    const verifyEmail: boolean = yield select(selectVerifyEmail);
+    if (verifyEmail) {
+      return;
+    }
+
     const accounts: AccountBalanceSource[] = yield call(API.get(OPTIONS), '/account/balances');
     const currencies: CurrencySource[] = yield call(API.get(OPTIONS), '/public/currencies');
 
