@@ -158,7 +158,7 @@ const PublicRoute: React.FunctionComponent<any> = ({
     return renderLoader();
   }
 
-  if (isLogged && rest.path !== '/setup') {
+  if (isLogged && rest.path !== '/setup' && rest.path !== '/accounts/confirmation') {
     return (
       <Route {...rest}>
         <Redirect to="/wallets" />
