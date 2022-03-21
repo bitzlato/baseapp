@@ -28,17 +28,21 @@ export const Profile: FC = () => {
   const swr = useTradeStats();
   const { data: sessionsMe } = useFetchSessionsMe();
 
-  if (swr.error || user.bitzlato_user === null) {
+  if (swr.error) {
     return null; // TODO: Add throw and error boundary screen
   }
+
+  const { bitzlato_user: bitzlatoUser } = user;
 
   const body = (
     <Card header={!isMobileDevice ? <h4>{title}</h4> : undefined}>
       <Box mb={isMobileDevice ? '4x' : '9x'}>
-        <Text variant="h4" gutterBottom>
-          {user.bitzlato_user.user_profile.public_name ??
-            user.bitzlato_user.user_profile.generated_name}
-        </Text>
+        {bitzlatoUser && (
+          <Text variant="h4" gutterBottom>
+            {bitzlatoUser.user_profile.public_name ?? bitzlatoUser.user_profile.generated_name}
+          </Text>
+        )}
+
         <Box mb="2x">
           <Text variant={isMobileDevice ? 'label' : 'title'} color="textMuted">
             {user.email}
@@ -57,8 +61,8 @@ export const Profile: FC = () => {
         <div className={s.stat}>
           <Stat>
             <ProfileVerification
-              status={user.bitzlato_user.user_profile.verified}
-              id={user.bitzlato_user.id}
+              status={bitzlatoUser?.user_profile.verified ?? false}
+              id={bitzlatoUser?.id}
             />
           </Stat>
         </div>
@@ -71,9 +75,9 @@ export const Profile: FC = () => {
                   as="div"
                   variant="h3"
                   textOverflow="ellipsis"
-                  title={user.bitzlato_user.user_profile.rating}
+                  title={bitzlatoUser?.user_profile.rating}
                 >
-                  {parseAmount(user.bitzlato_user.user_profile.rating, 4)}
+                  {bitzlatoUser ? parseAmount(bitzlatoUser.user_profile.rating, 4) : '-'}
                 </Text>
               </Stat>
             </div>
@@ -126,7 +130,7 @@ export const Profile: FC = () => {
           <Box display="flex" justifyContent="space-between">
             <Text variant="label">{t('Rating')}</Text>
             <Text variant="label" fontWeight="strong">
-              {parseAmount(user.bitzlato_user.user_profile.rating, 4)}
+              {bitzlatoUser ? parseAmount(bitzlatoUser.user_profile.rating, 4) : '-'}
             </Text>
           </Box>
           <Box display="flex" justifyContent="space-between">
