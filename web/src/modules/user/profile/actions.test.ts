@@ -64,6 +64,8 @@ describe('Profile actions', () => {
               dividends_received: 'off',
             },
           },
+          default_auth_subject: null,
+          available_auth_subjects: [],
         },
       };
       const expectedAction = { type: 'profile/GET_USER_DATA', payload };
@@ -203,6 +205,8 @@ describe('Profile actions', () => {
               dividends_received: 'off',
             },
           },
+          default_auth_subject: null,
+          available_auth_subjects: [],
         },
       };
       const expectedAction = { type: 'profile/CHANGE_USER_FETCH', payload };
@@ -260,6 +264,8 @@ describe('Profile actions', () => {
               dividends_received: 'off',
             },
           },
+          default_auth_subject: null,
+          available_auth_subjects: [],
         },
       };
       const expectedAction = { type: 'profile/CHANGE_USER_DATA', payload };

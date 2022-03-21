@@ -91,6 +91,8 @@ export const defaultUser: User = {
       dividends_received: 'off',
     },
   },
+  default_auth_subject: null,
+  available_auth_subjects: [],
 };
 
 export const initialStateProfile: ProfileState = {
