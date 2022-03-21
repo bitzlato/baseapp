@@ -247,7 +247,7 @@ const Header: FC = () => {
     <SharedHeader
       logoLightURL={window.env.logoUrl}
       logoDarkURL={window.env.logoDarkUrl}
-      toMainPage="/"
+      toMainPage={p2pURL}
       theme={colorTheme}
       language={currentCode}
       languages={languages}
