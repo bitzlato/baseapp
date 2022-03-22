@@ -68,6 +68,7 @@ export const Notifications: FC<Props> = ({ notifications, onAllRead }) => {
                   width="full"
                   fontSize="small"
                   textAlign="left"
+                  wordBreak="break-word"
                   onClick={handleClick}
                 >
                   <Box as="span" color="text">

@@ -151,6 +151,7 @@ const typographyProperties = defineProperties({
     lineHeight: lineHeights,
     textAlign: ['left', 'center'],
     textTransform: ['uppercase'],
+    wordBreak: ['break-word'],
     whiteSpace: ['nowrap'],
     textOverflow: {
       ellipsis: {
