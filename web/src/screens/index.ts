@@ -1,5 +1,6 @@
 export * from './ChangeForgottenPasswordScreen';
 export * from './ConfirmScreen';
+export * from './DeepLinkPreview';
 export * from './DocumentationScreen';
 export * from './EmailVerification';
 export * from './ForgotPassword';

@@ -6,6 +6,7 @@ export const deeplinkTexts = {
   'common.action.sign_in_up': 'Войти или создать учетную запись',
   'common.action.discard': 'Отказаться',
   'common.action.accept': 'Принять',
+  'common.action.accepting': 'Приём...',
 
   'deeplink.not_supported': 'Неподдерживаемая ссылка',
   'deeplink.cant_load':
@@ -19,7 +20,7 @@ export const deeplinkTexts = {
   'deeplink.voucher.expired': 'Срок действия ваучера истек.',
   'deeplink.voucher.cashed': 'Ваучер погашен в {cashed_at}.',
 
-  'deeplink.voucher.just_cashed': 'Сумма успешно зачислена в ваш кошелек.',
+  'deeplink.voucher.just_cashed': 'Ваучер зачислен на ваш кошелек.',
   'deeplink.voucher.cash_failed': 'Не удалось погасить ваучер.',
 
   'deeplink.profile.current_account': `Вы авторизованы как {userName}`,

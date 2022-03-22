@@ -3,6 +3,7 @@ export const deeplinkTexts = {
   'common.action.sign_in_up': 'Login or create account',
   'common.action.discard': 'Discard',
   'common.action.accept': 'Accept',
+  'common.action.accepting': 'Accepting...',
 
   'deeplink.not_supported': 'Magic Link',
   'deeplink.cant_load': 'Unable to load info: link is invalid or expired.',
@@ -21,6 +22,7 @@ export const deeplinkTexts = {
   'deeplink.voucher.cash_failed': 'Unable to cash this voucher.',
   // voucher error codes
   'deeplink.server.InsufficientFunds': 'Voucher holder does not have sufficient funds now.',
+  'deeplink.server.OutdatedVoucher': 'Voucher is outdated.',
 
   'deeplink.profile.current_account': `You're signed as {userName}`,
   'deeplink.profile.need_auth': 'Please sign with valid profile to take an action.',
