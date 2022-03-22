@@ -331,7 +331,8 @@ const Main: FC = () => {
   const notifications: Notify[] = [
     {
       id: '1',
-      message: 'Вы получили 0.01234567 BTC (999 999,99 RUB) от ThinJohnTheThree!',
+      message:
+        'Ваш вывод на адрес ASASASASASAsadasdasdas3434324234 на сумму $cryptocurrency $crypto, включая комиссию $commission $crypto, отменен. Монеты зачислены на баланс вашего кошелька, повторите попытку вывода в случае необходимости!',
       date: '19 янв. 2022 г., 16:16',
       read: false,
       onClick: handleNotifyClick,
