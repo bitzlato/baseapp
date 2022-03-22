@@ -17,10 +17,12 @@ interface Props
         | 'whiteSpace'
         | 'color'
         | 'lineHeight'
+        | 'textOverflow'
       >
     > {
   as?: ElementType | undefined;
   className?: string | undefined;
+  title?: string | undefined;
 }
 
 const variantMapping: Record<NonNullable<Props['variant']>, keyof JSX.IntrinsicElements> = {

@@ -62,7 +62,13 @@ export interface BitzlatoUser {
     user_message?: NotificationSettingStatus | null | undefined;
     comission_return?: NotificationSettingStatus | null | undefined;
     dividends_received?: NotificationSettingStatus | null | undefined;
-  };
+  } | null;
+}
+
+export interface AuthSubject {
+  subject: string;
+  email: string;
+  profile_name: string;
 }
 
 export interface User {
@@ -81,7 +87,9 @@ export interface User {
   phone: Phone[];
   created_at: string;
   updated_at: string;
-  bitzlato_user: BitzlatoUser;
+  bitzlato_user: BitzlatoUser | null;
+  default_auth_subject?: string | null | undefined;
+  available_auth_subjects: ReadonlyArray<AuthSubject>;
 }
 
 export interface TradeStatistics {

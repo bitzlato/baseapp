@@ -7,7 +7,6 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { IntlProps } from 'src/types';
 import { isWsApiEnabled } from 'src/api/config';
 import { BZ_ORDER_TYPES, isMarket, isTriggerByPrice } from 'src/helpers/order';
-import { loginWithRedirect } from 'src/helpers/auth0';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { TRIGGER_BUY_PRICE_MULT } from '../../constants';
 import { Order, OrderProps, LockedComponent } from '../../components';
@@ -155,7 +154,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
         <LockedComponent
           text={this.translate('page.body.trade.header.newOrder.locked.login.text')}
           buttonText={this.translate('page.header.navbar.signIn')}
-          onClick={loginWithRedirect}
+          link="/signin"
         />
       );
     }

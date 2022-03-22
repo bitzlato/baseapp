@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { useHistory } from 'react-router';
 import cn from 'classnames';
 import { useT } from 'src/hooks/useT';
 import { quickExchangeLimitsFetch } from 'src/modules/public/quickExchangePublic/actions';
@@ -19,7 +20,6 @@ import { InfoIcon } from 'src/assets/images/InfoIcon';
 import { DotsFlashing } from 'src/components/DotsFlashing/DotsFlashing';
 import { RefreshIcon } from 'src/assets/icons/RefreshIcon';
 import { DEFAULT_CCY_PRECISION } from 'src/constants';
-import { loginWithRedirect } from 'src/helpers/auth0';
 import { Container } from 'web/src/components/Container/Container';
 import { AmountDescription } from './AmountDescription';
 import { getWallet, getCurrencies, getCurrency } from './helpers';
@@ -73,6 +73,7 @@ export const QuickExchangeContainer: React.FC = () => {
   const currencies = useSelector(selectCurrencies);
   const isLoggedIn = useSelector(selectUserLoggedIn);
   const isMobileDevice = useSelector(selectMobileDeviceState);
+  const history = useHistory();
 
   const t = useT();
 
@@ -195,7 +196,7 @@ export const QuickExchangeContainer: React.FC = () => {
 
   const handleExchange = () => {
     if (!isLoggedIn) {
-      loginWithRedirect();
+      history.push('/signin');
     } else {
       dispatch(
         createQuickExchangeFetch({
@@ -225,12 +226,18 @@ export const QuickExchangeContainer: React.FC = () => {
       <Box row spacing="2" align="stretch" justify="center">
         {!isMobileDevice && fromCcy ? (
           <Box col align="start">
-            <Card header={t('page.body.quick.exchange.label.limits')} className={s.quickExchangeLimit}>
+            <Card
+              header={t('page.body.quick.exchange.label.limits')}
+              className={s.quickExchangeLimit}
+            >
               <Limits limits={limits} ccy={fromCcy} />
             </Card>
           </Box>
         ) : null}
-        <Card header={<h4>{t('page.body.quick.exchange.header')}</h4>} className={s.quickExchangeWidget}>
+        <Card
+          header={<h4>{t('page.body.quick.exchange.header')}</h4>}
+          className={s.quickExchangeWidget}
+        >
           <Box col spacing>
             <Box col spacing="sm">
               {isMobileDevice && fromCcy ? (
@@ -351,10 +358,12 @@ export const QuickExchangeContainer: React.FC = () => {
             />
           </Box>
           <Box col spacing>
-            {minAmount && <Box row spacing wrap>
-              <span>{t('page.body.quick.exchange.sublabel.min_amount')}:</span>
-              <MoneyFormat money={minAmount} />
-            </Box>}
+            {minAmount && (
+              <Box row spacing wrap>
+                <span>{t('page.body.quick.exchange.sublabel.min_amount')}:</span>
+                <MoneyFormat money={minAmount} />
+              </Box>
+            )}
             <Box row spacing wrap>
               <span>{t('page.body.quick.exchange.sublabel.fee')}:</span>
               <span>0.2%</span>
@@ -387,10 +396,10 @@ export const QuickExchangeContainer: React.FC = () => {
               {noMarket
                 ? t('page.body.quick.exchange.tip.market')
                 : noAmount
-                  ? t('page.body.quick.exchange.tip.amount')
-                  : rateOutOfDate && !exchangeFetching
-                    ? t('page.body.quick.exchange.tip.refresh')
-                    : t('page.body.quick.exchange.button.exchange')}
+                ? t('page.body.quick.exchange.tip.amount')
+                : rateOutOfDate && !exchangeFetching
+                ? t('page.body.quick.exchange.tip.refresh')
+                : t('page.body.quick.exchange.button.exchange')}
             </span>
             {exchangeFetching && <DotsFlashing />}
           </Box>
@@ -403,12 +412,16 @@ export const QuickExchangeContainer: React.FC = () => {
   const noMarket = !market && !!fromCurrency && !!toCurrency;
   const disablePercents = noMarket || !!fromWallet?.balance.isZero();
 
-  const minAmount = market && fromCcy && toCcy
-    ? createMoney(market.min_amount, market.base_unit === fromCurrency ? fromCcy! : toCcy!)
-    : ZERO_MONEY;
+  const minAmount =
+    market && fromCcy && toCcy
+      ? createMoney(market.min_amount, market.base_unit === fromCurrency ? fromCcy! : toCcy!)
+      : ZERO_MONEY;
 
-  return isMobileDevice ? renderQuickExchangeBody() :
+  return isMobileDevice ? (
+    renderQuickExchangeBody()
+  ) : (
     <Container maxWidth="lg" my="2">
       {renderQuickExchangeBody()}
-    </Container>;
+    </Container>
+  );
 };

@@ -7,7 +7,7 @@ import { useT } from 'web/src/hooks/useT';
 
 interface ProfileVerificationProps {
   status: boolean;
-  id: number;
+  id?: number | undefined;
 }
 
 export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, id }) => {
@@ -48,7 +48,9 @@ export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, id }
   }
 
   const handleClick = () => {
-    setBusy(true);
+    if (id !== undefined) {
+      setBusy(true);
+    }
   };
 
   return !status ? (
@@ -56,7 +58,7 @@ export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, id }
       <Text variant="label" color="danger" textAlign="center" fontWeight="strong">
         {t('profile.verification_no')}
       </Text>
-      <Button color="danger" fullWidth onClick={handleClick}>
+      <Button color="danger" fullWidth disabled={id === undefined} onClick={handleClick}>
         {t('profile.verification_goto')}
       </Button>
     </>

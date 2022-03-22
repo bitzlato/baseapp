@@ -696,6 +696,11 @@ export const en = {
     'email in your inbox with further ' +
     'instruction. If you cannot find the email, ' +
     'please check your spam folder',
+  'page.header.signUp.modal.body2':
+    'To complete registration, check for an ' +
+    'email in your inbox {email} with further ' +
+    'instruction. If you cannot find the email, ' +
+    'please check your spam folder',
   'page.header.signUp.modal.footer': 'OK',
   'page.header.signUp.strength.password': 'Password Strength',
   'page.header.signUp.password.too.weak': 'TOO WEAK',
@@ -914,6 +919,7 @@ export const en = {
   'identity.session.missing_otp': 'The account has enabled 2FA but OTP code is missing',
   'identity.session.invalid_otp': 'OTP code is invalid',
   'identity.session.auth0.email_not_verified': 'Your email is not verified',
+  'identity.session.email_not_verified': 'Your email is not verified',
 
   'username.taken': 'This username is already taken',
   'first_name.invalid': 'First name is invalid',
@@ -1257,6 +1263,8 @@ export const en = {
   'Transactions made': 'Transactions made',
   'Show all': 'Show all',
   'Referral Links': 'Referral Links',
+  'Switch account': 'Switch account',
+  "It's you": "It's you",
 
   'safemode.title': 'Disable safe mode',
   'safemode.begin':

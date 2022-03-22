@@ -709,6 +709,11 @@ export const ru: LangType = {
     ' почтовом ящике электронное письмо с дальнейшими инструкциями. ' +
     'Если вы не можете найти адрес электронной почты, проверьте свою' +
     ' электронную почту со спамом.',
+  'page.header.signUp.modal.body2':
+    'Чтобы завершить регистрацию, найдите в своем' +
+    ' почтовом ящике {email} электронное письмо с дальнейшими инструкциями. ' +
+    'Если вы не можете найти адрес электронной почты, проверьте свою' +
+    ' электронную почту со спамом.',
   'page.header.signUp.modal.footer': 'OK',
   'page.header.signUp.strength.password': 'Password Strength',
   'page.header.signUp.password.too.weak': 'Too weak',
@@ -925,6 +930,7 @@ export const ru: LangType = {
   'identity.session.missing_otp': 'Отсутствует код 2FA',
   'identity.session.invalid_otp': 'Код 2FA недействителен',
   'identity.session.auth0.email_not_verified': 'Почтовый адрес не подтвержден',
+  'identity.session.email_not_verified': 'Почтовый адрес не подтвержден',
 
   'username.taken': 'Никнейм уже используется',
   'first_name.invalid': 'Имя неверное',
@@ -1278,6 +1284,8 @@ export const ru: LangType = {
   'Transactions made': 'Сделок совершено',
   'Show all': 'Показать все',
   'Referral Links': 'Реферальные ссылки',
+  'Switch account': 'Переключить аккаунт',
+  "It's you": 'Это вы',
 
   'safemode.title': 'Выключение безопасного режима',
   'safemode.begin':

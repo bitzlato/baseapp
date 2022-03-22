@@ -27,6 +27,7 @@ import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
 import { useFetch } from 'web/src/hooks/data/useFetch';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
+import { isPendingUser } from 'web/src/modules/user/profile/selectors';
 
 import s from './WalletsScreen.postcss';
 
@@ -34,6 +35,7 @@ export const WalletsScreen: React.FC = () => {
   const params = useParams<UrlParams>();
   const history = useHistory();
   const wallets = useSelector(selectWallets);
+  const isPending = useSelector(isPendingUser);
   const [listIndex, setListIndex] = useState(0);
   const [tab, setTab] = useState(params.tab);
 
@@ -41,7 +43,7 @@ export const WalletsScreen: React.FC = () => {
   useWalletsFetch();
   useDocumentTitle('Wallets');
 
-  const shouldFetch = process.env.REACT_APP_RELEASE_STAGE !== 'sandbox';
+  const shouldFetch = process.env.REACT_APP_RELEASE_STAGE !== 'sandbox' && !isPending;
 
   const balanceResponse = useFetch<GeneralBalance[]>(
     shouldFetch ? `${accountUrl()}/balances` : null,

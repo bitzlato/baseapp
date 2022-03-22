@@ -9,8 +9,6 @@ import { compose } from 'redux';
 import { FeesScreen } from 'src/screens/Fees/Fees';
 import type { IntlProps } from 'src/types';
 import { WalletsScreen } from 'src/screens/WalletsScreen/WalletsScreen';
-import { loginWithRedirect } from 'src/helpers/auth0';
-import { SignInAuth0 } from 'src/screens/SignInScreen/SignInAuth0';
 import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
 import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
 import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
@@ -28,6 +26,7 @@ import { toggleColorTheme } from '../../helpers';
 import {
   ChangeForgottenPasswordMobileScreen,
   ConfirmMobileScreen,
+  EmailVerificationMobileScreen,
   ForgotPasswordMobileScreen,
   LandingScreenMobile,
   OrdersMobileScreen,
@@ -38,6 +37,8 @@ import {
   ProfileLanguageMobileScreen,
   ProfileMobileScreen,
   ProfileThemeMobileScreen,
+  SignInMobileScreen,
+  SignUpMobileScreen,
   TradingScreenMobile,
 } from '../../mobile/screens';
 import {
@@ -56,6 +57,7 @@ import {
   walletsReset,
   AbilitiesInterface,
   selectAbilities,
+  selectVerifyEmailAuth0,
   selectVerifyEmail,
 } from '../../modules';
 import {
@@ -63,6 +65,7 @@ import {
   ConfirmScreen,
   DeepLinkPreview,
   DocumentationScreen,
+  EmailVerificationScreen,
   ForgotPasswordScreen,
   HistoryScreen,
   InternalTransfer,
@@ -74,9 +77,14 @@ import {
   VerificationScreen,
   QuickExchange,
   LandingScreen,
+  SignInScreen,
+  SignUpScreen,
 } from '../../screens';
 import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuthScreen/ProfileTwoFactorAuthScreen';
 import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSettingsMobileScreen/ProfileSettingsMobileScreen';
+import { SignInAuth0 } from 'web/src/screens/SignInScreen/SignInAuth0';
+import { EmailVerificationModal } from 'web/src/screens/EmailVerification/EmailVerificationModal';
+import { getSearchParam, setLocation } from 'web/src/helpers/url';
 
 interface ReduxProps {
   colorTheme: string;
@@ -87,6 +95,7 @@ interface ReduxProps {
   userLoading?: boolean | undefined;
   platformAccessStatus: string;
   abilities: AbilitiesInterface;
+  verifyEmailAuth0: boolean;
   verifyEmail: boolean;
 }
 
@@ -150,7 +159,7 @@ const PublicRoute: React.FunctionComponent<any> = ({
     return renderLoader();
   }
 
-  if (isLogged && rest.path !== '/setup') {
+  if (isLogged && rest.path !== '/setup' && rest.path !== '/accounts/confirmation') {
     return (
       <Route {...rest}>
         <Redirect to="/wallets" />
@@ -231,6 +240,14 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       }
     }
 
+    // if (
+    //   !this.props.user.email &&
+    //   nextProps.user.email &&
+    //   !this.props.location.pathname.includes('/setup')
+    // ) {
+    //   this.props.userFetch();
+    // }
+
     if (!this.props.isLoggedIn && nextProps.isLoggedIn && !this.props.user.email) {
       this.initInterval();
       this.check();
@@ -244,7 +261,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       this.props.walletsReset();
 
       if (!this.props.location.pathname.includes('/trading')) {
-        this.props.history.push('/trading/');
+        setLocation(getSearchParam('back') ?? '/trading/', this.props.history);
       }
     }
   }
@@ -275,7 +292,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       return renderLoader();
     }
 
-    if (this.props.verifyEmail) {
+    if (this.props.verifyEmailAuth0) {
       return (
         <div className={isMobileDevice ? mobileCls : desktopCls}>
           <VerifyEmailModal />
@@ -307,8 +324,10 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       return (
         <div className={mobileCls}>
           <Switch>
-            <PublicRoute path="/signin" component={SignInAuth0} />
-            <PublicRoute path="/signup" component={SignInAuth0} />
+            <PublicRoute path="/signin0" component={SignInAuth0} />
+            <PublicRoute path="/signup0" component={SignInAuth0} />
+            <PublicRoute path="/signin" component={SignInMobileScreen} />
+            <PublicRoute path="/signup" component={SignUpMobileScreen} />
             <PublicRoute
               loading={userLoading}
               isLogged={isLoggedIn}
@@ -326,6 +345,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               isLogged={isLoggedIn}
               path="/accounts/confirmation"
               component={VerificationScreen}
+            />
+            <PublicRoute
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path="/email-verification"
+              component={EmailVerificationMobileScreen}
             />
             <PrivateRoute
               loading={userLoading}
@@ -407,6 +432,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           </Switch>
           {isLoggedIn && <WalletsFetch />}
           {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
+          {this.props.verifyEmail && <EmailVerificationModal />}
         </div>
       );
     }
@@ -415,8 +441,10 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       <div className={desktopCls}>
         <Switch>
           <Route path="/magic-link" component={MagicLink as any} />
-          <PublicRoute path="/signin" component={SignInAuth0} />
-          <PublicRoute path="/signup" component={SignInAuth0} />
+          <PublicRoute path="/signin0" component={SignInAuth0} />
+          <PublicRoute path="/signup0" component={SignInAuth0} />
+          <PublicRoute path="/signin" component={SignInScreen} />
+          <PublicRoute path="/signup" component={SignUpScreen} />
           <PublicRoute
             loading={userLoading}
             isLogged={isLoggedIn}
@@ -434,6 +462,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             isLogged={isLoggedIn}
             path="/accounts/password_reset"
             component={ChangeForgottenPasswordScreen}
+          />
+          <PublicRoute
+            loading={userLoading}
+            isLogged={isLoggedIn}
+            path="/email-verification"
+            component={EmailVerificationScreen}
           />
           <Route path="/docs" component={DocumentationScreen as any} />
           <Route path="/restriction" component={RestrictedScreen as any} />
@@ -487,6 +521,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         </Switch>
         {isLoggedIn && <WalletsFetch />}
         {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
+        {this.props.verifyEmail && <EmailVerificationModal />}
       </div>
     );
   }
@@ -539,7 +574,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
 
   private handleSubmitExpSessionModal = () => {
     this.handleChangeExpSessionModalState();
-    loginWithRedirect();
+    this.props.history.replace('/signin');
   };
 
   private handleRenderExpiredSessionModal = () => (
@@ -567,6 +602,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state): Red
   userLoading: selectUserFetching(state),
   platformAccessStatus: selectPlatformAccessStatus(state),
   abilities: selectAbilities(state),
+  verifyEmailAuth0: selectVerifyEmailAuth0(state),
   verifyEmail: selectVerifyEmail(state),
 });
 

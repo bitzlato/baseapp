@@ -7,7 +7,7 @@ import {
   userReset,
 } from '../../..';
 import { msAlertDisplayTime } from '../../../../api';
-import { selectUserInfo, User } from '../../../user/profile';
+import { selectUserInfo, isPendingUser, User } from '../../../user/profile';
 import { alertData, alertDelete, AlertPush } from '../actions';
 import { ALERT_PUSH } from '../constants';
 
@@ -17,6 +17,11 @@ export function* handleAlertSaga(action: AlertPush) {
       case 401:
         if (action.payload.message.indexOf('identity.session.auth0.email_not_verified') > -1) {
           return;
+        }
+
+        const isPending: boolean = yield select(isPendingUser);
+        if (isPending) {
+          break;
         }
 
         if (

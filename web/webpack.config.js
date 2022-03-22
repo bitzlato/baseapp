@@ -30,8 +30,9 @@ const extractSemver = (text) => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
+const ASSET_PATH = releaseStage === 'production' ? '/basestatic/' : '/';
 
-let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : '/marketDocs'; // production or staging
+let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : `${ASSET_PATH}/marketDocs`; // production or staging
 if (process.env.MARKET_DOCS_URL) {
   marketDocsUrl = process.env.MARKET_DOCS_URL; // e.g. http://localhost:3004
 } else if (process.env.PROXY_HOST) {
@@ -226,7 +227,7 @@ module.exports = {
       }),
 
     new webpack.EnvironmentPlugin({
-      ASSET_PATH: '/',
+      ASSET_PATH,
       MOCK: false,
       BUILD_EXPIRE: null,
       HASH,
@@ -248,7 +249,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/app/template.html',
       hash: true,
-      publicPath: '/',
+      publicPath: ASSET_PATH,
     }),
 
     new webpack.ProvidePlugin({

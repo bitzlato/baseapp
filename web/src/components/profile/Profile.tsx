@@ -14,10 +14,12 @@ import { useTradeStats } from 'web/src/hooks/data/useFetchTradeStatistics';
 import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
 import { useFetchSessionsMe } from 'web/src/hooks/data/useFetchSessionsMe';
+import { parseAmount } from 'web/src/helpers/parseAmount';
 import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
 import { ProfileReferalLinks } from './ProfileReferralLinks';
+import { ProfileSwitchAccount } from './ProfileSwitchAccount';
 
 export const Profile: FC = () => {
   const t = useT();
@@ -31,13 +33,17 @@ export const Profile: FC = () => {
     return null; // TODO: Add throw and error boundary screen
   }
 
+  const { bitzlato_user: bitzlatoUser } = user;
+
   const body = (
     <Card header={!isMobileDevice ? <h4>{title}</h4> : undefined}>
-      <Box mb={isMobileDevice ? '4x' : '9x'}>
-        <Text variant="h4" gutterBottom>
-          {user.bitzlato_user.user_profile.public_name ??
-            user.bitzlato_user.user_profile.generated_name}
-        </Text>
+      <Box mb={isMobileDevice ? '4x' : '7x'}>
+        {bitzlatoUser && (
+          <Text variant="h4" gutterBottom>
+            {bitzlatoUser.user_profile.public_name ?? bitzlatoUser.user_profile.generated_name}
+          </Text>
+        )}
+
         <Box mb="2x">
           <Text variant={isMobileDevice ? 'label' : 'title'} color="textMuted">
             {user.email}
@@ -47,8 +53,16 @@ export const Profile: FC = () => {
           UID: {user.uid} {sessionsMe && `(${sessionsMe.auth_sub})`}
         </Text>
       </Box>
-      <Box mb="9x">
-        <Stack marginRight="5x">
+      <Box mb="7x">
+        <Stack
+          direction={{ mobile: 'column', tablet: 'row' }}
+          marginBottom={{ mobile: '3x', tablet: '0' }}
+          marginRight={{ mobile: '0', tablet: '3x' }}
+        >
+          <ProfileSwitchAccount
+            authSubjects={user.available_auth_subjects}
+            currentSubject={sessionsMe?.auth_sub}
+          />
           <ProfileReferalLinks />
         </Stack>
       </Box>
@@ -56,8 +70,8 @@ export const Profile: FC = () => {
         <div className={s.stat}>
           <Stat>
             <ProfileVerification
-              status={user.bitzlato_user.user_profile.verified}
-              id={user.bitzlato_user.id}
+              status={bitzlatoUser?.user_profile.verified ?? false}
+              id={bitzlatoUser?.id}
             />
           </Stat>
         </div>
@@ -66,7 +80,14 @@ export const Profile: FC = () => {
             <div className={s.stat}>
               <Stat>
                 <StatLabel>{t('Rating')}</StatLabel>
-                <StatValue>{user.bitzlato_user.user_profile.rating ?? <Skeleton />}</StatValue>
+                <Text
+                  as="div"
+                  variant="h3"
+                  textOverflow="ellipsis"
+                  title={bitzlatoUser?.user_profile.rating}
+                >
+                  {bitzlatoUser ? parseAmount(bitzlatoUser.user_profile.rating, 4) : '-'}
+                </Text>
               </Stat>
             </div>
             <div className={s.stat}>
@@ -118,7 +139,7 @@ export const Profile: FC = () => {
           <Box display="flex" justifyContent="space-between">
             <Text variant="label">{t('Rating')}</Text>
             <Text variant="label" fontWeight="strong">
-              {user.bitzlato_user.user_profile.rating ?? <Skeleton />}
+              {bitzlatoUser ? parseAmount(bitzlatoUser.user_profile.rating, 4) : '-'}
             </Text>
           </Box>
           <Box display="flex" justifyContent="space-between">

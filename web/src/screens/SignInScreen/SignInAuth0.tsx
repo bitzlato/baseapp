@@ -1,7 +1,7 @@
 import React from 'react';
-import { loginWithRedirect } from 'src/helpers/auth0';
+import { loginAuth0 } from 'src/helpers/auth0';
 
 export const SignInAuth0: React.FC = () => {
-  loginWithRedirect();
+  loginAuth0();
   return null;
 };

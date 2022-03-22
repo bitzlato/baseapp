@@ -21,7 +21,7 @@ exports[`ProfileScreen test should render 1`] = `
         class="col colSpacing2 padding3"
       >
         <div
-          class="reset_base__1sfgjt80 sprinkles_marginBottom_9x_mobile__w76aifge"
+          class="reset_base__1sfgjt80 sprinkles_marginBottom_7x_mobile__w76aifg4"
         >
           <h4
             class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_h4__1qy84opa Text_text_gutterBottom_true__1qy84opi"
@@ -42,11 +42,14 @@ exports[`ProfileScreen test should render 1`] = `
           </span>
         </div>
         <div
-          class="reset_base__1sfgjt80 sprinkles_marginBottom_9x_mobile__w76aifge"
+          class="reset_base__1sfgjt80 sprinkles_marginBottom_7x_mobile__w76aifg4"
         >
           <div
-            class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5"
+            class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifp sprinkles_flexDirection_row_tablet__w76aifl"
           >
+            <div
+              class="reset_base__1sfgjt80 sprinkles_marginBottom_3x_mobile__w76aiffk sprinkles_marginBottom_0_tablet__w76aifer sprinkles_marginRight_0_mobile__w76aifjq sprinkles_marginRight_3x_tablet__w76aifkl"
+            />
             <div
               class="reset_base__1sfgjt80"
             >
@@ -92,11 +95,12 @@ exports[`ProfileScreen test should render 1`] = `
               >
                 Rating
               </span>
-              <span
-                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
+              <div
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 sprinkles_textOverflow_ellipsis__w76aif19t Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
+                title="0.0"
               >
                 0.0
-              </span>
+              </div>
             </div>
           </div>
           <div

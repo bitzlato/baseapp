@@ -74,6 +74,8 @@ describe('Module: User', () => {
         dividends_received: 'off',
       },
     },
+    default_auth_subject: null,
+    available_auth_subjects: [],
   };
 
   const mockUser = () => {

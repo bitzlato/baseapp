@@ -5,7 +5,7 @@ import { Button } from 'src/components/Button/Button';
 import { Card } from 'src/components/Card/Card';
 import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
-import { loginWithRedirect } from 'src/helpers/auth0';
+import { loginAuth0 } from 'src/helpers/auth0';
 import { Container } from 'web/src/components/Container/Container';
 
 export const VerifyEmailModal: React.FC = () => {
@@ -19,7 +19,7 @@ export const VerifyEmailModal: React.FC = () => {
         <Box as="p" textSize="lg">
           {t('verify.email.content', { email })}
         </Box>
-        <Button size="large" variant="primary" onClick={() => loginWithRedirect()}>
+        <Button size="large" variant="primary" onClick={() => loginAuth0()}>
           OK
         </Button>
       </Card>
