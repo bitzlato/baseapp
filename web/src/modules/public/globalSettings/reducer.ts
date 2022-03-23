@@ -1,3 +1,4 @@
+import { getThemeFromStorage, setThemeInStorage } from 'web/src/helpers/storageTheme';
 import {
   CHANGE_COLOR_THEME,
   TOGGLE_CHART_REBUILD,
@@ -18,7 +19,7 @@ export interface ColorThemeState {
   applyWindowEnvsTrigger: boolean;
 }
 
-const currentColorTheme = (localStorage.getItem('colorTheme') as Theme) || 'dark';
+const currentColorTheme = getThemeFromStorage() ?? 'dark';
 
 export const initialChangeColorThemeState: ColorThemeState = {
   color: currentColorTheme,
@@ -32,7 +33,7 @@ export const initialChangeColorThemeState: ColorThemeState = {
 export const changeColorThemeReducer = (state = initialChangeColorThemeState, action: any) => {
   switch (action.type) {
     case CHANGE_COLOR_THEME:
-      localStorage.setItem('colorTheme', action.payload);
+      setThemeInStorage(action.payload);
 
       return {
         ...state,
