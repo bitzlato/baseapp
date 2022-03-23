@@ -7,10 +7,10 @@ import { useT } from 'web/src/hooks/useT';
 
 interface ProfileVerificationProps {
   status: boolean;
-  id?: number | undefined;
+  url: string;
 }
 
-export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, id }) => {
+export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, url }) => {
   const t = useT();
   const [busy, setBusy] = useState(false);
 
@@ -36,7 +36,7 @@ export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, id }
         <Box
           as="a"
           id="verificationLink"
-          href={`https://check.changebot.org/#!/id_${id}`}
+          href={url}
           color={{ default: 'textHighlighted', hover: 'textHighlighted' }}
           fontWeight="strong"
           textDecoration={{ hover: 'underline' }}
@@ -48,9 +48,7 @@ export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, id }
   }
 
   const handleClick = () => {
-    if (id !== undefined) {
-      setBusy(true);
-    }
+    setBusy(true);
   };
 
   return !status ? (
@@ -58,7 +56,7 @@ export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, id }
       <Text variant="label" color="danger" textAlign="center" fontWeight="strong">
         {t('profile.verification_no')}
       </Text>
-      <Button color="danger" fullWidth disabled={id === undefined} onClick={handleClick}>
+      <Button color="danger" fullWidth onClick={handleClick}>
         {t('profile.verification_goto')}
       </Button>
     </>

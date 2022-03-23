@@ -90,6 +90,7 @@ export interface User {
   bitzlato_user: BitzlatoUser | null;
   default_auth_subject?: string | null | undefined;
   available_auth_subjects: ReadonlyArray<AuthSubject>;
+  kyc_verification_url: string;
 }
 
 export interface TradeStatistics {

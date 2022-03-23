@@ -93,6 +93,7 @@ export const defaultUser: User = {
   },
   default_auth_subject: null,
   available_auth_subjects: [],
+  kyc_verification_url: '',
 };
 
 export const initialStateProfile: ProfileState = {
