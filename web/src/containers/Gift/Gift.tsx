@@ -310,7 +310,12 @@ export const Gift: FC<Props> = (props) => {
             <span>
               {user.bitzlato_user
                 ? t('Enter 2FA code from the app for', {
-                    name: <b>{`${user.bitzlato_user.user_profile.generated_name}@Bitzlato.com`}</b>,
+                    name: (
+                      <strong>{`${
+                        user.bitzlato_user.user_profile.public_name ??
+                        user.bitzlato_user.user_profile.generated_name
+                      }@Bitzlato.com`}</strong>
+                    ),
                   })
                 : undefined}
             </span>
