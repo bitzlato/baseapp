@@ -24,6 +24,9 @@ import { MarketSelector } from 'src/containers/MarketSelector/MarketSelector';
 import { HeaderToolbar } from 'src/containers/HeaderToolbar/HeaderToolbar';
 import { useT } from 'src/hooks/useT';
 import { getLinkToP2P } from 'web/src/components/Header/getLinkToP2P';
+import { Navigation } from 'web/src/components/shared/Header/Navigation';
+import { RenderLinkComponent, RenderNavLinkComponent } from 'web/src/components/shared/sharedTypes';
+import { Box } from 'web/src/components/ui/Box';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
@@ -87,6 +90,14 @@ const Header: FC = () => {
   }
 
   const p2pURL = getLinkToP2P(currentCode);
+  const p2p: Links = [
+    {
+      key: 'p2p',
+      type: 'external',
+      to: p2pURL,
+      children: t('page.header.navbar.toP2P'),
+    },
+  ];
   const navLinks = [
     {
       key: 'quick-exchange',
@@ -124,12 +135,7 @@ const Header: FC = () => {
           children: t('page.header.navbar.history'),
         }
       : undefined,
-    {
-      key: 'p2p',
-      type: 'external',
-      to: p2pURL,
-      children: t('page.header.navbar.toP2P'),
-    },
+    ...p2p,
   ].filter(Boolean) as Links;
 
   const hamburgerLinks = [
@@ -243,6 +249,9 @@ const Header: FC = () => {
     }
   };
 
+  const renderLinkComponent: RenderLinkComponent = (props) => <Link {...props} />;
+  const renderNavLinkComponent: RenderNavLinkComponent = (props) => <NavLink {...props} />;
+
   return (
     <SharedHeader
       logoLightURL={window.env.logoUrl}
@@ -254,14 +263,17 @@ const Header: FC = () => {
       navLinks={navLinks}
       hamburgerLinks={hamburgerLinks}
       t={translate}
-      renderNavLinkComponent={(props) => <NavLink {...props} />}
-      renderLinkComponent={(props) => <Link {...props} />}
+      renderLinkComponent={renderLinkComponent}
+      renderNavLinkComponent={renderNavLinkComponent}
       {...userProps}
       onThemeChange={handleThemeChange}
       onLanguageChange={handleLanguageChange}
     >
       {isTradingPage && (
         <>
+          <Box mr="6x">
+            <Navigation navLinks={p2p} renderNavLinkComponent={renderNavLinkComponent} />
+          </Box>
           <MarketSelector />
           <HeaderToolbar />
         </>
