@@ -4220,12 +4220,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-google-recaptcha@npm:^2.1.3":
-  version: 2.1.3
-  resolution: "@types/react-google-recaptcha@npm:2.1.3"
+"@types/react-google-recaptcha@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "@types/react-google-recaptcha@npm:2.1.5"
   dependencies:
     "@types/react": "*"
-  checksum: b322326e3614035392b760ebbf546a4a23abda7fe5e4c357512ff914bce8dac524fde3ce3f532602e09d215bd2352928c06328b4a817767f43dc0c762ecb5b86
+  checksum: 8d0fa9e2ad8b3f135c423a196f7007650dc06bceeab3edf73176699189527f1befeefcf9c4289d9e3f1feb427d0034ca218331afa7e874d9e92ff81105a0a4ca
   languageName: node
   linkType: hard
 
@@ -16955,7 +16955,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-async-script@npm:^1.0.0":
+"react-async-script@npm:^1.1.1":
   version: 1.2.0
   resolution: "react-async-script@npm:1.2.0"
   dependencies:
@@ -17127,15 +17127,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-google-recaptcha@npm:^1.0.4":
-  version: 1.1.0
-  resolution: "react-google-recaptcha@npm:1.1.0"
+"react-google-recaptcha@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "react-google-recaptcha@npm:2.1.0"
   dependencies:
     prop-types: ^15.5.0
-    react-async-script: ^1.0.0
+    react-async-script: ^1.1.1
   peerDependencies:
     react: ">=16.4.1"
-  checksum: 65846f015d92b7ae38d62224636501ccd46aabdd2c5e49cae824c44a7b795ec2afffb69708810a6dbf66af05703efe8e28e5ccc961373447413e5e52c6613521
+  checksum: f4f4d248eb95ebfab8db73199e3ca402acf7abec873c616c12fd113c635657df6d844890ef7e7dfe4cb2563302e910dbce54d44404af93863336786dd29e8efa
   languageName: node
   linkType: hard
 
@@ -21087,7 +21087,7 @@ __metadata:
     "@types/react": ^17.0.39
     "@types/react-color": ^3.0.6
     "@types/react-dom": ^17.0.11
-    "@types/react-google-recaptcha": ^2.1.3
+    "@types/react-google-recaptcha": ^2.1.5
     "@types/react-grid-layout": ^1.3.1
     "@types/react-redux": ^7.1.22
     "@types/react-router": ^5.1.18
@@ -21144,7 +21144,7 @@ __metadata:
     react-fade-in: ^0.1.6
     react-focus-on: ^3.5.4
     react-ga: ^2.6.0
-    react-google-recaptcha: ^1.0.4
+    react-google-recaptcha: ^2.1.0
     react-grid-layout: ^1.3.3
     react-intl: ^5.20.9
     react-maskinput: ^1.0.1
