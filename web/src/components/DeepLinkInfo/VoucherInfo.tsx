@@ -1,11 +1,12 @@
 import { FC, ReactElement, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import useMutation from 'use-mutation';
 import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { Text } from 'web/src/components/ui/Text';
-import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api';
-import { fetchJson } from 'web/src/helpers/fetch';
+import { FetchError, fetchJson } from 'web/src/helpers/fetch';
 import { useT } from 'web/src/hooks/useT';
 import { selectUserInfo, selectUserLoggedIn } from 'web/src/modules';
 import { DeepLinkInfoType, DeeplinkPayloadVoucher } from './types';
@@ -22,7 +23,7 @@ interface ActivationResult {
   message?: string;
 }
 
-const activateVoucher: (voucherCode: string) => ActivationResult = async (voucherCode) => {
+const activateVoucher = async (voucherCode: string): Promise<ActivationResult> => {
   try {
     const json = await fetchJson(`${p2pUrl()}/deeplink/`, {
       method: 'POST',
@@ -36,13 +37,13 @@ const activateVoucher: (voucherCode: string) => ActivationResult = async (vouche
       code: json.code || '',
       message: json.message || '',
     };
-  } catch (error) {
-    // todo: refactor to Error + payload
-    throw {
+  } catch (error: FetchError) {
+    const payload = {
       statusCode: error.payload.statusCode || error.code || 500,
       code: error.payload.code || 'ServerError',
       message: error.payload.message || error.message,
     };
+    throw new FetchError(payload.message, payload.statusCode, payload);
   }
 };
 
@@ -50,6 +51,7 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
   const t = useT();
   const isAuthorized = useSelector(selectUserLoggedIn);
   const user = useSelector(selectUserInfo);
+  const history = useHistory();
   const { payload } = deeplink;
 
   // gather variables that can be used in informational messages
@@ -70,7 +72,7 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
   const [activationResult, setActivationResult] = useState({
     done: false,
     success: false,
-    message: null,
+    message: null as ReactElement,
   });
 
   const [activate] = useMutation(activateVoucher, {
@@ -91,8 +93,8 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
         ),
       });
     },
-    onFailure(params: { error: Error | ActivationResult }): Promise<void> | void {
-      const errorCode = 'code' in params.error ? params.error.code : null;
+    onFailure(params: { error: Error | { payload: ActivationResult } }): Promise<void> | void {
+      const errorCode = 'payload' in params.error ? params.error.payload.code : null;
       setActivationResult({
         done: true,
         success: false,
@@ -108,7 +110,7 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
     },
   });
 
-  let infoMessage: ReactElement;
+  let infoMessage: ReactElement | null = null;
   let isAuthRequired = false;
   let canTakeAction = false;
 
@@ -143,23 +145,24 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
     }
   }
 
+  // accepting: call mutation
   const onAccept = useCallback(() => {
     activate(deeplink.code);
   }, [activate, deeplink]);
 
+  // auth/signup with redirect back here
   const goAuth = () => {
-    // todo: navigate to auth with redirect back
-    alert('Taking into auth');
+    history.push(`/signin?back=${window.location.pathname}`);
   };
 
+  // passive action: decline voucher
   const onDiscard = () => {
-    // todo: passive action, same as onDismiss
-    alert('Well ok');
+    history.push('/wallets');
   };
 
+  // action after voucher redeem performed
   const onDismiss = () => {
-    // todo: passive action with exit/close – "go to wallet"?
-    alert('Navigate to root');
+    history.push('/wallets');
   };
 
   const actionButtons = () => {
@@ -204,7 +207,7 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
         justifyContent="space-between"
         flexDirection={{ mobile: 'column', tablet: 'row' }}
       >
-        {actionButtons}
+        {actionButtons()}
       </Box>
     </Box>
   );

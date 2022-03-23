@@ -1,28 +1,7 @@
 import { FC } from 'react';
-import { accountPublicUrl } from 'web/src/api';
-import { fetchJson } from 'web/src/helpers/fetch';
-import { useFetch } from 'web/src/hooks/data/useFetch';
 import { AdInfo } from './AdInfo';
 import { DeepLinkInfoType, DeeplinkTypes } from './types';
 import { VoucherInfo } from './VoucherInfo';
-
-export const useDeeplinkInfo = (deeplinkId: string) => {
-  const { data, error, isValidating } = useFetch(
-    `${accountPublicUrl()}/deeplinks/${deeplinkId}`,
-    fetchJson,
-    {
-      refreshInterval: 0,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    },
-  );
-
-  return {
-    deeplink: data,
-    isLoading: isValidating,
-    isError: error,
-  };
-};
 
 export const deeplinkTitle = (deeplink: DeepLinkInfoType): string => {
   if (!deeplink || !deeplink.type) {
