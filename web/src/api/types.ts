@@ -9,6 +9,7 @@ declare global {
       rangerUrl: string;
       finexUrl: string;
       accountUrl: string;
+      accountPublicUrl: string;
       p2pUrl: string;
     };
     auth0?: {

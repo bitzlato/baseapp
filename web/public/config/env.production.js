@@ -6,6 +6,7 @@ window.env = {
     applogicUrl: 'https://bitzlato.com/api/v2/applogic',
     rangerUrl: 'wss://bitzlato.com/api/v2/ranger',
     accountUrl: 'https://bitzlato.com/api/whaler/private/v1',
+    accountPublicUrl: 'https://bitzlato.com/api/whaler/public/v1',
     p2pUrl: 'https://bitzlato.com/api2/p2p',
   },
   auth0: {

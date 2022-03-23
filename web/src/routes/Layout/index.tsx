@@ -63,6 +63,7 @@ import {
 import {
   ChangeForgottenPasswordScreen,
   ConfirmScreen,
+  DeepLinkPreview,
   DocumentationScreen,
   EmailVerificationScreen,
   ForgotPasswordScreen,
@@ -309,6 +310,16 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       );
     }
 
+    const commonRoutes = [
+      <Route key="exchange" path="/quick-exchange" component={QuickExchange as any} />,
+      <Route key="fees" path="/fees" component={FeesScreen as any} />,
+      <Route key="deeplink" exact path="/deeplinks/:id?" component={DeepLinkPreview} />,
+      // and default fallback
+      <Route key="catchall" path="**">
+        <Redirect to="/trading/" />
+      </Route>,
+    ];
+
     if (isMobileDevice) {
       return (
         <div className={mobileCls}>
@@ -417,11 +428,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             />
             <Route exact path="/trading/:market?" component={TradingScreenMobile as any} />
             {showLanding() && <Route exact path="/" component={LandingScreenMobile as any} />}
-            <Route path="/quick-exchange" component={QuickExchange as any} />
-            <Route path="/fees" component={FeesScreen as any} />
-            <Route path="**">
-              <Redirect to="/trading/" />
-            </Route>
+            {commonRoutes}
           </Switch>
           {isLoggedIn && <WalletsFetch />}
           {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
@@ -463,7 +470,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             component={EmailVerificationScreen}
           />
           <Route path="/docs" component={DocumentationScreen as any} />
-          <Route path="/fees" component={FeesScreen as any} />
           <Route path="/restriction" component={RestrictedScreen as any} />
           <Route path="/maintenance" component={MaintenanceScreen as any} />
           <Route exact path="/trading/:market?" component={TradingScreen as any} />
@@ -511,10 +517,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/internal-transfer"
             component={InternalTransfer}
           />
-          <Route path="/quick-exchange" component={QuickExchange as any} />
-          <Route path="**">
-            <Redirect to="/trading/" />
-          </Route>
+          { commonRoutes }
         </Switch>
         {isLoggedIn && <WalletsFetch />}
         {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
