@@ -1,12 +1,15 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { Box } from 'web/src/components/ui/Box';
 import { Stack } from 'web/src/components/ui/Stack';
-import { HeaderContext } from './HeaderContext';
+import { Links, RenderNavLinkComponent } from 'web/src/components/shared/sharedTypes';
 import * as s from './Navigation.css';
 
-export const Navigation: FC = () => {
-  const { navLinks, renderNavLinkComponent } = useContext(HeaderContext);
+interface Props {
+  renderNavLinkComponent: RenderNavLinkComponent;
+  navLinks: Links;
+}
 
+export const Navigation: FC<Props> = ({ navLinks, renderNavLinkComponent }) => {
   return (
     <Box
       display={{

@@ -1,3 +1,4 @@
+import { getThemeFromStorage } from 'web/src/helpers/storageTheme';
 import * as actions from './actions';
 import { changeColorThemeReducer, initialChangeColorThemeState } from './reducer';
 
@@ -14,7 +15,7 @@ describe('Change color theme reducer', () => {
     expect(
       changeColorThemeReducer(initialChangeColorThemeState, actions.changeColorTheme('light')),
     ).toEqual(expectedState);
-    expect(localStorage.getItem('colorTheme')).toEqual('light');
+    expect(getThemeFromStorage()).toEqual('light');
     expectedState = {
       color: 'dark',
       chartRebuild: false,
@@ -26,6 +27,6 @@ describe('Change color theme reducer', () => {
     expect(
       changeColorThemeReducer(initialChangeColorThemeState, actions.changeColorTheme('dark')),
     ).toEqual(expectedState);
-    expect(localStorage.getItem('colorTheme')).toEqual('dark');
+    expect(getThemeFromStorage()).toEqual('dark');
   });
 });

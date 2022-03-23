@@ -6,6 +6,7 @@ import { GeetestCaptcha } from '../../containers';
 import { useSetShouldGeetestReset } from '../../hooks';
 import {
   GeetestCaptchaResponse,
+  selectCurrentColorTheme,
   selectShouldGeetestReset,
   setGeetestCaptchaSuccess,
   setRecaptchaSuccess,
@@ -14,17 +15,16 @@ import {
 export const CaptchaComponent = (props: any) => {
   const dispatch = useDispatch();
   const shouldGeetestReset = useSelector(selectShouldGeetestReset);
+  const theme = useSelector(selectCurrentColorTheme);
 
-  const reCaptchaRef = React.useRef(null);
+  const reCaptchaRef = React.useRef<ReCAPTCHA>(null);
   const geetestCaptchaRef = React.useRef(null);
 
   React.useEffect(() => {
     if (props.error || props.success) {
-      if (reCaptchaRef.current) {
-        (reCaptchaRef.current as ReCAPTCHA).reset();
-      }
+      reCaptchaRef.current?.reset();
     }
-  }, [props.error, props.success, reCaptchaRef]);
+  }, [props.error, props.success, reCaptchaRef.current]);
 
   useSetShouldGeetestReset(props.error, props.success, geetestCaptchaRef);
 
@@ -42,9 +42,12 @@ export const CaptchaComponent = (props: any) => {
         const sitekey = captchaId();
         return (
           <div className="pg-captcha--recaptcha">
-            {sitekey && (
-              <ReCAPTCHA ref={reCaptchaRef} sitekey={sitekey} onChange={handleRecaptchaChange} />
-            )}
+            <ReCAPTCHA
+              ref={reCaptchaRef}
+              sitekey={sitekey}
+              onChange={handleRecaptchaChange}
+              theme={theme}
+            />
           </div>
         );
       }
