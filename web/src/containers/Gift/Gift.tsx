@@ -3,6 +3,7 @@
 import { FC, useEffect, useState, KeyboardEvent, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Button as BootstrapButton } from 'react-bootstrap';
 import { Currency, Money } from '@bitzlato/money-js';
 import { parseNumeric } from 'src/helpers/parseNumeric';
 import { useT } from 'src/hooks/useT';
@@ -81,6 +82,7 @@ export const Gift: FC<Props> = (props) => {
   const data = vouchersResponse.data ?? [];
   const money = createMoney(amount, props.balanceP2P.currency);
   const disableCreate = money.isZero() || money.greaterThan(props.balanceP2P);
+  const disablePercents = props.balanceP2P.isZero();
 
   const getCcy = (code: string) => {
     return wallets.find((w) => code === w.currency.code) ?? DEFAULT_CURRENCY;
@@ -97,6 +99,10 @@ export const Gift: FC<Props> = (props) => {
 
   const handleChangeAmount = (value: string) => {
     setAmount(parseNumeric(value));
+  };
+
+  const handleUsePercent = (value: number) => {
+    handleChangeAmount(props.balanceP2P.multiply(value).divide(100).toFormat());
   };
 
   const handleCreateGift = async (code: string | undefined) => {
@@ -236,24 +242,45 @@ export const Gift: FC<Props> = (props) => {
             ),
           })}
         </span>
-        <Box row spacing="3">
-          <Box
-            flex="golden"
-            as={NumberInput}
-            label={t('Amount')}
-            value={amount}
-            onChange={handleChangeAmount}
-            onKeyPress={handleKeyPress}
-          />
-          <Box
-            flex="1"
-            as={SelectString}
-            options={[ccCode]}
-            value={giftCurrency ?? ccCode}
-            onChange={setGiftCurrency}
-            placeholder={t('page.body.quick.exchange.label.currency')}
-            formatOptionLabel={renderItem}
-          />
+        <Box col spacing>
+          <Box row spacing="3">
+            <Box
+              flex="golden"
+              as={NumberInput}
+              label={t('Amount')}
+              value={amount}
+              onChange={handleChangeAmount}
+              onKeyPress={handleKeyPress}
+            />
+            <Box
+              flex="1"
+              as={SelectString}
+              options={[ccCode]}
+              value={giftCurrency ?? ccCode}
+              onChange={setGiftCurrency}
+              placeholder={t('page.body.quick.exchange.label.currency')}
+              formatOptionLabel={renderItem}
+            />
+          </Box>
+          <Box row spacing justify="between" wrap>
+            <Box row spacing textColor="secondary">
+              <span>{t('page.body.quick.exchange.sublabel.balance')}:</span>
+              <MoneyFormat money={props.balanceP2P} />
+            </Box>
+            <Box self="end" row spacing>
+              {PERCENTS.map((v) => (
+                <BootstrapButton
+                  key={v}
+                  disabled={disablePercents}
+                  variant="secondary"
+                  className={sq.quickExchangeAll}
+                  onClick={() => handleUsePercent(v)}
+                >
+                  {v}%
+                </BootstrapButton>
+              ))}
+            </Box>
+          </Box>
         </Box>
         <Box row justify="end">
           <Button
@@ -352,3 +379,5 @@ const None: FC = () => {
     </Box>
   );
 };
+
+const PERCENTS = [25, 50, 75, 100];
