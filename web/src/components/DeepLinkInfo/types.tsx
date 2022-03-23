@@ -20,7 +20,21 @@ export interface DeeplinkPayloadVoucher {
   currency: string;
   user: {
     nickname: string;
+    profile_name: string;
   };
 }
 
-export interface DeeplinkPayloadAd {}
+export interface DeeplinkPayloadAd {
+  cc_code: string;
+  deleted_at?: string;
+  details?: string;
+  liquidity_limit: boolean;
+  max_amount?: string;
+  min_amount?: string;
+  rate_value?: string;
+  ratepercent?: string;
+  status: string;
+  terms: string;
+  type: 'buying' | 'selling';
+  verified_only: false;
+}

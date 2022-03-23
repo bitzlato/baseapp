@@ -1,10 +1,8 @@
 import { FC } from 'react';
-import { DeepLinkInfoType, DeeplinkPayloadAd } from './types';
+import { DeepLinkInfoType } from './types';
 
 interface Props {
-  deeplink: DeepLinkInfoType & {
-    payload: DeeplinkPayloadAd;
-  };
+  deeplink: DeepLinkInfoType;
 }
 
 export const AdInfo: FC<Props> = () => {

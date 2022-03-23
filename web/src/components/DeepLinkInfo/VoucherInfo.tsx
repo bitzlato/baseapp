@@ -1,4 +1,4 @@
-import { FC, ReactElement, useCallback, useState } from 'react';
+import { FC, ReactNode, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import useMutation from 'use-mutation';
@@ -8,13 +8,16 @@ import { Text } from 'web/src/components/ui/Text';
 import { p2pUrl } from 'web/src/api';
 import { FetchError, fetchJson } from 'web/src/helpers/fetch';
 import { useT } from 'web/src/hooks/useT';
-import { selectUserInfo, selectUserLoggedIn } from 'web/src/modules';
+import {
+  RootState,
+  selectCurrentLanguage,
+  selectUserInfo,
+  selectUserLoggedIn,
+} from 'web/src/modules';
 import { DeepLinkInfoType, DeeplinkPayloadVoucher } from './types';
 
 interface Props {
-  deeplink: DeepLinkInfoType & {
-    payload: DeeplinkPayloadVoucher;
-  };
+  deeplink: DeepLinkInfoType;
 }
 
 interface ActivationResult {
@@ -37,7 +40,8 @@ const activateVoucher = async (voucherCode: string): Promise<ActivationResult> =
       code: json.code || '',
       message: json.message || '',
     };
-  } catch (error: FetchError) {
+  } catch (e) {
+    const error = e as FetchError;
     const payload = {
       statusCode: error.payload.statusCode || error.code || 500,
       code: error.payload.code || 'ServerError',
@@ -49,18 +53,24 @@ const activateVoucher = async (voucherCode: string): Promise<ActivationResult> =
 
 export const VoucherInfo: FC<Props> = ({ deeplink }) => {
   const t = useT();
-  const isAuthorized = useSelector(selectUserLoggedIn);
-  const user = useSelector(selectUserInfo);
+  const { currentLanguageCode, isAuthorized, user } = useSelector((state: RootState) => ({
+    currentLanguageCode: selectCurrentLanguage(state),
+    isAuthorized: selectUserLoggedIn(state),
+    user: selectUserInfo(state),
+  }));
   const history = useHistory();
-  const { payload } = deeplink;
+  const payload = deeplink.payload as DeeplinkPayloadVoucher;
 
   // gather variables that can be used in informational messages
   const details = {
     totalFiat: payload.converted_amount && `(${payload.converted_amount} ${payload.currency})`,
     totalCrypto: `${payload.amount} ${payload.cc_code}`,
-    // todo: resolve real permalink to user profile
     user: (
-      <a href={`#/p2p/users/${payload.user.nickname}`} target="_blank" rel="noreferrer">
+      <a
+        href={`/${currentLanguageCode}/p2p/users/${payload.user.profile_name}`}
+        target="_blank"
+        rel="noreferrer"
+      >
         {payload.user.nickname}
       </a>
     ),
@@ -69,10 +79,14 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
 
   // activation process
   const [isActivating, setIsActivating] = useState(false);
-  const [activationResult, setActivationResult] = useState({
+  const [activationResult, setActivationResult] = useState<{
+    done: boolean;
+    success: boolean;
+    message: ReactNode;
+  }>({
     done: false,
     success: false,
-    message: null as ReactElement,
+    message: null,
   });
 
   const [activate] = useMutation(activateVoucher, {
@@ -110,7 +124,7 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
     },
   });
 
-  let infoMessage: ReactElement | null = null;
+  let infoMessage: ReactNode = null;
   let isAuthRequired = false;
   let canTakeAction = false;
 

@@ -18,7 +18,7 @@ export const DeepLinkPreview: FC = () => {
           <Text variant="h4">{t(isLoading ? 'common.loading' : deeplinkTitle(deeplink))}</Text>
         }
       >
-        {isLoading && <Spinner animation="grow" />}
+        {isLoading && <Spinner />}
         {!isLoading && !isError && <DeepLinkInfo deeplink={deeplink} />}
       </Card>
     </Container>
