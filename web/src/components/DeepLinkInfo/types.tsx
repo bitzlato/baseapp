@@ -19,7 +19,6 @@ export interface DeeplinkPayloadVoucher {
   converted_amount: string;
   currency: string;
   user: {
-    nickname: string;
     profile_name: string;
   };
 }

@@ -5,7 +5,7 @@ import { VoucherInfo } from './VoucherInfo';
 
 export const deeplinkTitle = (deeplink: DeepLinkInfoType): string => {
   if (!deeplink || !deeplink.type) {
-    return 'deeplink.cant_load';
+    return 'deeplink.cant_load.title';
   }
 
   switch (deeplink.type) {

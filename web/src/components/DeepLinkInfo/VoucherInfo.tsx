@@ -71,7 +71,7 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
         target="_blank"
         rel="noreferrer"
       >
-        {payload.user.nickname}
+        {payload.user.profile_name}
       </a>
     ),
     comment: payload.comment,

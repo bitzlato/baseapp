@@ -6,7 +6,8 @@ export const deeplinkTexts = {
   'common.action.accepting': 'Accepting...',
 
   'deeplink.not_supported': 'Magic Link',
-  'deeplink.cant_load': 'Unable to load info: link is invalid or expired.',
+  'deeplink.cant_load.title': 'Unable to load info',
+  'deeplink.cant_load.text': 'Link is invalid or expired.',
 
   'deeplink.ad.title': 'Sell offer',
 

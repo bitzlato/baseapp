@@ -9,8 +9,8 @@ export const deeplinkTexts = {
   'common.action.accepting': 'Приём...',
 
   'deeplink.not_supported': 'Неподдерживаемая ссылка',
-  'deeplink.cant_load':
-    'Не удалось считать информацию: ссылка недействительна или срок объявления истек.',
+  'deeplink.cant_load.title': 'Не удалось считать информацию',
+  'deeplink.cant_load.text': 'Ссылка недействительна или срок объявления истек.',
 
   'deeplink.voucher.title': 'Ваучер',
   'deeplink.voucher.info':

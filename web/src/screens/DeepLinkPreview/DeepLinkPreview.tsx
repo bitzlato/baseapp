@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { useParams } from 'react-router';
 import { Card, Container, DeepLinkInfo, deeplinkTitle } from 'web/src/components';
-import { Spinner, Text } from 'web/src/components/ui';
 import { useT } from 'web/src/hooks/useT';
 import { useDeepLinkInfo } from 'web/src/hooks/data/useDeepLinkInfo';
+import { Spinner } from 'web/src/components/ui/Spinner';
+import { Text } from 'web/src/components/ui/Text';
 
 export const DeepLinkPreview: FC = () => {
   const t = useT();
@@ -19,7 +20,10 @@ export const DeepLinkPreview: FC = () => {
         }
       >
         {isLoading && <Spinner />}
-        {!isLoading && !isError && <DeepLinkInfo deeplink={deeplink} />}
+        {(!isLoading && (isError || !deeplink))
+          ? <Text>{t('deeplink.cant_load.text')}</Text>
+          : <DeepLinkInfo deeplink={deeplink} />
+        }
       </Card>
     </Container>
   );
