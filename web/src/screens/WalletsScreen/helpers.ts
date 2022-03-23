@@ -3,10 +3,12 @@ import { WalletItemData } from 'src/components/WalletItem/WalletItem';
 import { createCcy, createMoney, PENCE_CCY } from 'src/helpers/money';
 import { GeneralBalance } from 'src/modules/account/types';
 import { Wallet } from 'src/modules/user/wallets/types';
+import { showGift } from 'web/src/api/config';
 import { getCurrencySymbol } from 'web/src/helpers/getCurrencySymbol';
 
 export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletItemData[] {
   const res: WalletItemData[] = [];
+  const isShowGift = showGift();
 
   for (let i = 0; i < wallets.length; i++) {
     const wallet = wallets[i]!;
@@ -26,7 +28,7 @@ export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletIt
       approximate: createMoney(wallet.price, PENCE_CCY).multiply(balanceTotal.toString()),
       hasDepositWithdraw: true,
       hasTransfer: balance !== undefined && balance.p2p_balance !== null,
-      hasGift: balance !== undefined,
+      hasGift: isShowGift && balance !== undefined,
       index: i,
     });
   }
@@ -48,7 +50,7 @@ export function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletIt
           approximate: createMoney(0, PENCE_CCY),
           hasDepositWithdraw: false,
           hasTransfer: false,
-          hasGift: true,
+          hasGift: isShowGift,
           index: wallets.length + i,
         });
       }

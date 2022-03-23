@@ -56,6 +56,7 @@ declare global {
     valuationSecondaryCurrency: string;
     valuationSecondaryCurrencyName: string;
     internalTransfer?: string | boolean;
+    gift?: string | boolean;
   }
 
   interface Window {
