@@ -71,7 +71,7 @@ export const Profile: FC = () => {
           <Stat>
             <ProfileVerification
               status={bitzlatoUser?.user_profile.verified ?? false}
-              id={bitzlatoUser?.id}
+              url={user.kyc_verification_url}
             />
           </Stat>
         </div>

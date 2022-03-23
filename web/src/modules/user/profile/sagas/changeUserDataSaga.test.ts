@@ -77,6 +77,7 @@ describe('Module: Change user info', () => {
     },
     default_auth_subject: null,
     available_auth_subjects: [],
+    kyc_verification_url: '',
   };
 
   const mockchangeUserData = () => {
