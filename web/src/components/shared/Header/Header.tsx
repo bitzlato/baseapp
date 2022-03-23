@@ -17,7 +17,7 @@ import { HeaderContext, HeaderContextValue } from './HeaderContext';
 type Props = HeaderContextValue;
 
 export const Header: FC<Props> = (props) => {
-  const { children, theme } = props;
+  const { children, theme, navLinks, renderNavLinkComponent } = props;
   const themeClassName = theme === 'light' ? themeLight : themeDark;
 
   return (
@@ -33,7 +33,9 @@ export const Header: FC<Props> = (props) => {
         <HamburgerMenu />
         <Logo />
 
-        {children || <Navigation />}
+        {children || (
+          <Navigation navLinks={navLinks} renderNavLinkComponent={renderNavLinkComponent} />
+        )}
 
         <UserPanel
           responsiveMode={children !== undefined && children !== null && children !== false}
