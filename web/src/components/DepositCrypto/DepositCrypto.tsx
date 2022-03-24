@@ -31,6 +31,8 @@ interface Props {
 }
 
 export const DepositCrypto: FC<Props> = ({ wallet }) => {
+  const currency = wallet.currency.code;
+
   const t = useT();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -48,7 +50,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
 
   useEffect(() => {
     setBlockchain(blockchains.length === 1 ? blockchains[0]! : null);
-  }, [blockchains.length, wallet.currency.code]);
+  }, [blockchains.length, currency]);
 
   const depositResponse = useFetch<DepositAddress>(
     blockchain?.id ? `${tradeUrl()}/account/deposit_address/${blockchain?.id}` : null,
@@ -57,6 +59,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
 
   const depositAddress = depositResponse.data;
   const isNoAddress = depositAddress?.address === null;
+  const isUSDXe = blockchain?.name === 'Avalanche' && (currency === 'USDT' || currency === 'USDC');
 
   useEffect(() => {
     if (isNoAddress) {
@@ -82,12 +85,13 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
       <Box row spacing>
         <CryptoCurrencyIcon size="small" currency={getCurrencyCodeSymbol(value.key)} />
         <span>{value.name}</span>
+        {isUSDXe ? <span> {`(${currency}.e)`}</span> : null}
       </Box>
     );
   };
 
   const showMetamask =
-    wallet.currency.code === 'ETH' &&
+    currency === 'ETH' &&
     (!isMobileDevice || isMetaMaskInstalled()) &&
     depositAddress !== undefined;
 
@@ -144,7 +148,11 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
                 onCopy={handleCopy}
               />
             </Box>
-            <DepositSummary currency={wallet} blockchainCurrency={blockchainCurrency} showWarning />
+            <DepositSummary
+              wallet={wallet}
+              blockchainCurrency={blockchainCurrency}
+              isUSDXe={isUSDXe}
+            />
           </>
         )}
       </Box>
