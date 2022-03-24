@@ -5,7 +5,7 @@ exports[`SignInScreen should render 1`] = `
   class="pg-sign-in-screen"
 >
   <div
-    class="pg-sign-in-screen__container loading"
+    class="pg-sign-in-screen__container"
   >
     <form>
       <div
