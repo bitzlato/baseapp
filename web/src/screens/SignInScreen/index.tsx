@@ -1,9 +1,7 @@
-import cx from 'classnames';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { getSearchParam, setLocation } from 'web/src/helpers/url';
 import { captchaType, captchaLogin } from '../../api';
 import { Captcha, SignInComponent } from '../../components';
@@ -20,7 +18,6 @@ import {
   selectUserLoggedIn,
   signIn,
   signInError,
-  signInRequire2FA,
   signUpRequireVerification,
   selectSignInError,
   selectRecaptchaSuccess,
@@ -28,6 +25,7 @@ import {
   selectCaptchaResponse,
   resetCaptchaState,
   selectSignUpRequireVerification,
+  selectSignInLoading,
 } from '../../modules';
 
 export const SignInScreen: React.FC = () => {
@@ -50,6 +48,7 @@ export const SignInScreen: React.FC = () => {
   const reCaptchaSuccess = useReduxSelector(selectRecaptchaSuccess);
   const geetestCaptchaSuccess = useReduxSelector(selectGeetestCaptchaSuccess);
   const captcha_response = useReduxSelector(selectCaptchaResponse);
+  const signInLoading = useReduxSelector(selectSignInLoading);
 
   useEffect(() => {
     setDocumentTitle('Sign In');
@@ -84,22 +83,12 @@ export const SignInScreen: React.FC = () => {
     setPasswordError('');
   }, []);
 
-  const handleSignIn = useCallback(() => {
+  const handleSignIn = (otp_code: string) => {
     dispatch(
       signIn({
         email,
         password,
-        ...(captchaType() !== 'none' && captchaLogin() && { captcha_response }),
-      }),
-    );
-  }, [dispatch, email, password, captcha_response, captchaType()]);
-
-  const handle2FASignIn = (otp_code: string) => {
-    dispatch(
-      signIn({
-        email,
-        password,
-        otp_code,
+        ...(otp_code && { otp_code }),
         ...(captchaType() !== 'none' && captchaLogin() && { captcha_response }),
       }),
     );
@@ -152,57 +141,42 @@ export const SignInScreen: React.FC = () => {
     setPassword(value);
   }, []);
 
-  const handleClose = useCallback(() => {
-    dispatch(signInRequire2FA({ require2fa: false }));
-  }, [dispatch]);
-
-  const renderCaptcha = useMemo(
-    () => <Captcha error={errorSignIn || emailError} />,
-    [errorSignIn, emailError],
-  );
-
   return (
     <div className="pg-sign-in-screen">
-      <div className={cx('pg-sign-in-screen__container', { loading })}>
-        {require2FA ? (
-          <TwoFactorModal
-            onClose={handleClose}
-            onSend={handle2FASignIn}
-            buttonText={formatMessage({ id: 'page.header.signIn' })}
-          />
-        ) : (
-          <SignInComponent
-            email={email}
-            emailError={emailError}
-            emailFocused={emailFocused}
-            emailPlaceholder={formatMessage({ id: 'page.header.signIn.email' })}
-            password={password}
-            passwordError={passwordError}
-            passwordFocused={passwordFocused}
-            passwordPlaceholder={formatMessage({ id: 'page.header.signIn.password' })}
-            labelSignIn={formatMessage({ id: 'page.header.signIn' })}
-            labelSignUp={formatMessage({ id: 'page.header.signUp' })}
-            emailLabel={formatMessage({ id: 'page.header.signIn.email' })}
-            passwordLabel={formatMessage({ id: 'page.header.signIn.password' })}
-            receiveConfirmationLabel={formatMessage({
-              id: 'page.header.signIn.receiveConfirmation',
-            })}
-            forgotPasswordLabel={formatMessage({ id: 'page.header.signIn.forgotPassword' })}
-            isLoading={loading}
-            onForgotPassword={forgotPassword}
-            onSignUp={handleSignUp}
-            onSignIn={handleSignIn}
-            handleChangeFocusField={handleFieldFocus}
-            isFormValid={validateForm}
-            refreshError={refreshError}
-            changeEmail={handleChangeEmailValue}
-            changePassword={handleChangePasswordValue}
-            renderCaptcha={renderCaptcha}
-            reCaptchaSuccess={reCaptchaSuccess}
-            geetestCaptchaSuccess={geetestCaptchaSuccess}
-            captcha_response={captcha_response}
-          />
-        )}
+      <div className="pg-sign-in-screen__container">
+        <SignInComponent
+          email={email}
+          emailError={emailError}
+          errorSignIn={errorSignIn}
+          emailFocused={emailFocused}
+          emailPlaceholder={formatMessage({ id: 'page.header.signIn.email' })}
+          password={password}
+          passwordError={passwordError}
+          passwordFocused={passwordFocused}
+          passwordPlaceholder={formatMessage({ id: 'page.header.signIn.password' })}
+          labelSignIn={formatMessage({ id: 'page.header.signIn' })}
+          labelSignUp={formatMessage({ id: 'page.header.signUp' })}
+          emailLabel={formatMessage({ id: 'page.header.signIn.email' })}
+          passwordLabel={formatMessage({ id: 'page.header.signIn.password' })}
+          receiveConfirmationLabel={formatMessage({
+            id: 'page.header.signIn.receiveConfirmation',
+          })}
+          forgotPasswordLabel={formatMessage({ id: 'page.header.signIn.forgotPassword' })}
+          isLoading={loading || signInLoading}
+          onForgotPassword={forgotPassword}
+          onSignUp={handleSignUp}
+          onSignIn={handleSignIn}
+          handleChangeFocusField={handleFieldFocus}
+          isFormValid={validateForm}
+          refreshError={refreshError}
+          changeEmail={handleChangeEmailValue}
+          changePassword={handleChangePasswordValue}
+          renderCaptcha={<Captcha error={errorSignIn || require2FA || emailError} />}
+          reCaptchaSuccess={reCaptchaSuccess}
+          geetestCaptchaSuccess={geetestCaptchaSuccess}
+          captcha_response={captcha_response}
+          show2fa={require2FA}
+        />
       </div>
     </div>
   );

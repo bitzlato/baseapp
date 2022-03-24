@@ -1,7 +1,7 @@
 import { ru as mobileTranslationsRu } from '../../mobile/translations';
 import { LangType } from '../../translations';
 import { nationalitiesNames } from '../../translations/nationalities';
-import { deeplinkTexts } from "./deeplinks.ru";
+import { deeplinkTexts } from './deeplinks.ru';
 
 export const ru: LangType = {
   'page.header.navbar.signIn': 'Войти',
@@ -924,6 +924,7 @@ export const ru: LangType = {
   'identity.session.invalid': 'Неверный сеанс',
   'identity.captcha.required': 'требуется captcha_response',
   'identity.captcha.mandatory_fields': 'Обязательные поля должны быть заполнены',
+  'identity.captcha.verification_failed': 'Ошибка верификации капчи',
   'identity.session.not_active': 'Ваш аккаунт не активен',
   'identity.session.banned': 'Ваш аккаунт заблокирован',
   'identity.session.invalid_params': 'Неправильный адрес электронной почты или пароль',

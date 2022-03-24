@@ -1,14 +1,17 @@
 import cr from 'classnames';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { isValidCode } from 'web/src/helpers/codeValidation';
+import { CommonError } from 'web/src/modules/types';
 import { CustomInput } from '..';
 import { captchaLogin } from '../../api';
 import { EMAIL_REGEX } from '../../helpers';
 import { GeetestCaptchaResponse } from '../../modules';
 import { selectMobileDeviceState } from '../../modules/public/globalSettings';
+import { TextInput } from '../Input/TextInput';
 
 export interface SignInProps {
   labelSignIn?: string | undefined;
@@ -22,11 +25,12 @@ export interface SignInProps {
   onForgotPassword: (email?: string) => void;
   onConfirmationResend?: (email?: string) => void;
   onSignUp: () => void;
-  onSignIn: () => void;
+  onSignIn: (otp_code: string) => void;
   className?: string | undefined;
   image?: string | undefined;
   email: string;
   emailError: string;
+  errorSignIn?: CommonError | undefined;
   password: string;
   passwordError: string;
   emailFocused: boolean;
@@ -43,11 +47,13 @@ export interface SignInProps {
   reCaptchaSuccess?: boolean | undefined;
   geetestCaptchaSuccess?: boolean | undefined;
   captcha_response?: string | GeetestCaptchaResponse | undefined;
+  show2fa?: boolean | undefined;
 }
 
 const SignIn: React.FC<SignInProps> = ({
   email,
   emailError,
+  errorSignIn,
   emailPlaceholder,
   password,
   passwordError,
@@ -73,16 +79,24 @@ const SignIn: React.FC<SignInProps> = ({
   geetestCaptchaSuccess,
   reCaptchaSuccess,
   renderCaptcha,
+  show2fa,
 }) => {
+  const [code, setCode] = useState('');
+
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const history = useHistory();
   const { formatMessage } = useIntl();
 
-  const isValidForm = React.useCallback(() => {
-    const isEmailValid = email.match(EMAIL_REGEX);
+  useEffect(() => {
+    if (errorSignIn) {
+      setCode('');
+    }
+  }, [errorSignIn]);
 
-    return email && isEmailValid && password;
-  }, [email, password]);
+  const isValidForm = () => {
+    const isEmailValid = email.match(EMAIL_REGEX);
+    return email && isEmailValid && password && (!show2fa || isValidCode(code));
+  };
 
   const handleChangeEmail = React.useCallback(
     (value: string) => {
@@ -105,45 +119,39 @@ const SignIn: React.FC<SignInProps> = ({
     [handleChangeFocusField],
   );
 
-  const isButtonDisabled = React.useMemo(
+  const isSuccessCaptcha = React.useMemo(
     () =>
       !!(captchaLogin() && captchaType !== 'none' && !(reCaptchaSuccess || geetestCaptchaSuccess)),
     [reCaptchaSuccess, geetestCaptchaSuccess],
   );
 
-  const handleSubmitForm = React.useCallback(() => {
+  const handleSubmitForm = () => {
     refreshError();
-    onSignIn();
-  }, [onSignIn, refreshError]);
+    onSignIn(code);
+  };
 
   const handleValidateForm = React.useCallback(() => {
     isFormValid();
   }, [isFormValid]);
 
-  const handleClick = React.useCallback(
-    (e?: MouseEvent) => {
-      if (e) {
-        e.preventDefault();
-      }
-      if (!isValidForm()) {
-        handleValidateForm();
-      } else {
-        handleSubmitForm();
-      }
-    },
-    [handleSubmitForm, handleValidateForm, isValidForm],
-  );
+  const handleClick = (e?: MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
+    if (!isValidForm()) {
+      handleValidateForm();
+    } else {
+      handleSubmitForm();
+    }
+  };
 
-  const handleEnterPress = React.useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
+  const handleEnterPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
 
-        handleClick();
-      }
-    },
-    [handleClick],
-  );
+      handleClick();
+    }
+  };
 
   const renderForgotButton = React.useMemo(
     () => (
@@ -241,12 +249,23 @@ const SignIn: React.FC<SignInProps> = ({
             {passwordError && <div className="cr-sign-in-form__error">{passwordError}</div>}
           </div>
           {captchaLogin() && renderCaptcha}
+          {show2fa ? (
+            <TextInput
+              className="cr-sign-in-form__group"
+              label={formatMessage({ id: '2FA code' })}
+              placeholder={formatMessage({ id: 'Enter 2FA code from the app' })}
+              value={code}
+              onChange={setCode}
+              autoFocus
+              maxlength="6"
+            />
+          ) : null}
           {isMobileDevice && renderForgotButton}
           <div className="cr-sign-in-form__button-wrapper">
             <Button
               block
               type="button"
-              disabled={isLoading || !email.match(EMAIL_REGEX) || !password || isButtonDisabled}
+              disabled={isLoading || !isValidForm() || isSuccessCaptcha}
               onClick={handleClick as any}
               size="lg"
               variant="primary"
