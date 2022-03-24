@@ -24,6 +24,7 @@ import { Beneficiaries, Blur } from '../../components';
 import { isValidCode } from 'web/src/helpers/codeValidation';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
 import { useFetch } from 'web/src/hooks/data/useFetch';
+import { WarningIcon } from 'web/src/mobile/assets/images/WarningIcon';
 
 interface Props {
   onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
@@ -46,9 +47,11 @@ export const WithdrawBody: FC<Props> = (props) => {
   const twoFactorAuthRequired = user.level > 1 || (user.level === 1 && user.otp);
 
   const { data = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
-  const blockchain = data.find((d) => d.id === beneficiary.blockchain_id);
 
   const { wallet, withdrawDone, countdown } = props;
+  const blockchain = data.find((d) => d.id === beneficiary.blockchain_id);
+  const currency = wallet.currency.code;
+  const isUSDXe = blockchain?.name === 'Avalanche' && (currency === 'USDT' || currency === 'USDC');
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
     (d) => d.blockchain_id === beneficiary.blockchain_id,
@@ -62,7 +65,7 @@ export const WithdrawBody: FC<Props> = (props) => {
 
   useEffect(() => {
     reset();
-  }, [wallet.currency.code]);
+  }, [currency]);
 
   useEffect(() => {
     if (withdrawDone) {
@@ -126,6 +129,29 @@ export const WithdrawBody: FC<Props> = (props) => {
     return null;
   };
 
+  const summary = (
+    <WithdrawSummary total={total} wallet={wallet} blockchainCurrency={blockchainCurrency} />
+  );
+
+  const button = (
+    <Box flex="1" self="end" row justify="end">
+      <Button color="primary" onClick={handleClick} disabled={isButtonDisabled()}>
+        {countdown > 0
+          ? formatSeconds(countdown)
+          : t('page.body.wallets.tabs.withdraw.content.button')}
+      </Button>
+    </Box>
+  );
+
+  const warning = isUSDXe ? (
+    <Box row spacing>
+      <WarningIcon />
+      <Box textColor="warning" textSize="lg">
+        {t('withdraw.usdx.e', { currency: <strong>{`${wallet.currency.code}.e`}</strong> })}
+      </Box>
+    </Box>
+  ) : null;
+
   return (
     <Box col spacing="3">
       <Box position="relative">
@@ -152,16 +178,21 @@ export const WithdrawBody: FC<Props> = (props) => {
             />
           )}
         </Box>
-        <Box grow row={!isMobileDevice} col={isMobileDevice} spacing="2">
-          <WithdrawSummary total={total} wallet={wallet} blockchainCurrency={blockchainCurrency} />
-          <Box flex="1" self="end" row justify="end">
-            <Button color="primary" onClick={handleClick} disabled={isButtonDisabled()}>
-              {countdown > 0
-                ? formatSeconds(countdown)
-                : t('page.body.wallets.tabs.withdraw.content.button')}
-            </Button>
+        {isMobileDevice ? (
+          <Box col spacing="2">
+            {summary}
+            {warning}
+            {button}
           </Box>
-        </Box>
+        ) : (
+          <>
+            <Box row spacing="2">
+              {summary}
+              {button}
+            </Box>
+            {warning}
+          </>
+        )}
       </Box>
     </Box>
   );

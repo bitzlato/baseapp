@@ -1338,4 +1338,9 @@ export const en = {
   Created: 'Created',
   More: 'More',
   'Send an email again': 'Send an email again',
+
+  'deposit.usdx.e':
+    'Only deposits of {currency} tokens are accepted, be careful when sending funds!',
+  'withdraw.usdx.e':
+    'Only {currency} tokens are withdrawn. Please make sure that the token format matches.',
 };
