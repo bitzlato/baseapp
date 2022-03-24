@@ -83,9 +83,6 @@ export const Footer: FC<Props> = ({ theme, language, renderMarketLink }) => {
             <Box as="a" className={s.link} href={getProductLink(language, 'exchange')}>
               {t('Exchange')}
             </Box>
-            <Box as="a" className={s.link} href={getProductLink(language, 'payment-gateway')}>
-              {t('Payment Gateway')}
-            </Box>
             <Box as="a" className={s.link} href={getProductLink(language, 'cryptoloan')}>
               {t('Crypto Loan')}
             </Box>
