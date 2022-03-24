@@ -32,6 +32,9 @@ const faqLinks: Record<string, string> = {
 
 export const getBitzlatoLink = (locale: string, section: string) => {
   switch (section) {
+    case 'wallets_stat/':
+      return `https://bitzlato.com/${locale}/${section}`;
+
     case 'faq':
       return faqLinks[locale] ?? faqLinks.en;
 
