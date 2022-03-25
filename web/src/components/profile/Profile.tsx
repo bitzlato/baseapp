@@ -14,7 +14,7 @@ import { useTradeStats } from 'web/src/hooks/data/useFetchTradeStatistics';
 import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
 import { useFetchSessionsMe } from 'web/src/hooks/data/useFetchSessionsMe';
-import { parseAmount } from 'web/src/helpers/parseAmount';
+import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
@@ -23,7 +23,7 @@ import { ProfileSwitchAccount } from './ProfileSwitchAccount';
 import { FreezeAccount } from './FreezeAccount';
 
 const formatRating = (rating: string) =>
-  parseAmount(rating, {
+  parseNumeric(rating, {
     maxFractionDigits: 4,
     allowNegativeNumeric: true,
   });

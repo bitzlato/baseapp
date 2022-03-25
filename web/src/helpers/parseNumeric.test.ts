@@ -54,4 +54,14 @@ describe('parseNumeric', () => {
     );
     expect(parseNumeric('-1', { trimRightDot: true, allowNegativeNumeric: false })).toEqual('1');
   });
+
+  test('should parse numeric with limited fractional digits', () => {
+    expect(parseNumeric('', { maxFractionDigits: 2 })).toEqual('');
+    expect(parseNumeric('0', { maxFractionDigits: 2 })).toEqual('0');
+    expect(parseNumeric('99', { maxFractionDigits: 2 })).toEqual('99');
+    expect(parseNumeric('99.1234', { maxFractionDigits: 2 })).toEqual('99.12');
+    expect(parseNumeric('99.1234', { maxFractionDigits: 0 })).toEqual('99');
+    expect(parseNumeric('99.1234', { maxFractionDigits: 5 })).toEqual('99.1234');
+    expect(parseNumeric('99.123456789', { maxFractionDigits: 8 })).toEqual('99.12345678');
+  });
 });
