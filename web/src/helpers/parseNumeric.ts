@@ -1,28 +1,20 @@
-/**
- * https://github.com/bitzlato/p2p-mobile/blob/develop/src/utils/parse/parseNumeric.ts
- */
-
 const NOT_NUMBERS_REGEXP = /[^\d.]/g;
 
 export type Options = {
-  allowNegativeNumeric: boolean;
-  onlyInteger: boolean;
-  trimRightDot: boolean;
+  allowNegativeNumeric?: boolean | undefined;
+  onlyInteger?: boolean | undefined;
+  trimRightDot?: boolean | undefined;
+  maxFractionDigits?: number | undefined;
 };
 
-const defaultOptions: Options = {
-  allowNegativeNumeric: false,
-  onlyInteger: false,
-  trimRightDot: false,
-};
-
-const parsePositiveNumeric = (value: string, onlyInteger: boolean = false): string => {
+const parsePositiveNumeric = (value: string, options: Options = {}): string => {
+  const { onlyInteger = false, maxFractionDigits } = options;
   const numeric = value.replace(/,/g, '.').replace(NOT_NUMBERS_REGEXP, '');
   if (numeric === '') {
     return '';
   }
 
-  if (onlyInteger) {
+  if (onlyInteger || maxFractionDigits === 0) {
     const arr = numeric.split('.') as [string, ...string[]];
     return arr.length > 1 ? arr.slice(0, -1).join('') : arr[0];
   }
@@ -38,13 +30,23 @@ const parsePositiveNumeric = (value: string, onlyInteger: boolean = false): stri
     integer = `${integer}${other.slice(0, -1).join('')}`;
   }
 
+  if (maxFractionDigits) {
+    if (typeof integer === 'string' && maxFractionDigits === 0) {
+      return integer;
+    }
+
+    if (typeof fractional === 'string' && fractional.length > maxFractionDigits) {
+      fractional = fractional.slice(0, maxFractionDigits);
+    }
+  }
+
   return `${integer === '' ? '0' : integer}${
     typeof fractional === 'string' ? `.${fractional}` : ''
   }`;
 };
 
 export const parseNumeric = (value: string, options: Partial<Options> = {}): string => {
-  const { allowNegativeNumeric, onlyInteger, trimRightDot } = { ...defaultOptions, ...options };
+  const { allowNegativeNumeric = false, trimRightDot = false } = options;
 
   if (value === '') {
     return '';
@@ -59,7 +61,7 @@ export const parseNumeric = (value: string, options: Partial<Options> = {}): str
     isNegative = true;
   }
 
-  const positiveNumber = parsePositiveNumeric(value, onlyInteger);
+  const positiveNumber = parsePositiveNumeric(value, options);
 
   return `${isNegative ? '-' : ''}${
     trimRightDot && positiveNumber[positiveNumber.length - 1] === '.'
