@@ -22,6 +22,12 @@ import { ProfileReferalLinks } from './ProfileReferralLinks';
 import { ProfileSwitchAccount } from './ProfileSwitchAccount';
 import { FreezeAccount } from './FreezeAccount';
 
+const formatRating = (rating: string) =>
+  parseAmount(rating, {
+    maxFractionDigits: 4,
+    allowNegativeNumeric: true,
+  });
+
 export const Profile: FC = () => {
   const t = useT();
   const title = t('page.body.profile.header.account');
@@ -90,7 +96,7 @@ export const Profile: FC = () => {
                   textOverflow="ellipsis"
                   title={bitzlatoUser?.user_profile.rating}
                 >
-                  {bitzlatoUser ? parseAmount(bitzlatoUser.user_profile.rating, 4) : '-'}
+                  {bitzlatoUser ? formatRating(bitzlatoUser.user_profile.rating) : '-'}
                 </Text>
               </Stat>
             </div>
@@ -143,7 +149,7 @@ export const Profile: FC = () => {
           <Box display="flex" justifyContent="space-between">
             <Text variant="label">{t('Rating')}</Text>
             <Text variant="label" fontWeight="strong">
-              {bitzlatoUser ? parseAmount(bitzlatoUser.user_profile.rating, 4) : '-'}
+              {bitzlatoUser ? formatRating(bitzlatoUser.user_profile.rating) : '-'}
             </Text>
           </Box>
           <Box display="flex" justifyContent="space-between">

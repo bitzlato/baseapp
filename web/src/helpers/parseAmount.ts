@@ -1,7 +1,12 @@
-import { parseNumeric } from './parseNumeric';
+import { parseNumeric, Options as ParseNumericOptions } from './parseNumeric';
 
-export const parseAmount = (amount: string, maxFractionDigits: number): string => {
-  const numeric = parseNumeric(amount);
+interface ParseAmountOptions extends Partial<ParseNumericOptions> {
+  maxFractionDigits: number;
+}
+
+export const parseAmount = (amount: string, options: ParseAmountOptions): string => {
+  const { maxFractionDigits, ...parseNumericOptions } = options;
+  const numeric = parseNumeric(amount, parseNumericOptions);
   const [integer, fractional] = numeric.split('.');
   if (typeof integer === 'string' && maxFractionDigits === 0) {
     return integer;

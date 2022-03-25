@@ -4,7 +4,7 @@
 
 const NOT_NUMBERS_REGEXP = /[^\d.]/g;
 
-type Options = {
+export type Options = {
   allowNegativeNumeric: boolean;
   onlyInteger: boolean;
   trimRightDot: boolean;
