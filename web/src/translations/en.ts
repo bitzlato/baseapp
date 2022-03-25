@@ -1323,7 +1323,7 @@ export const en = {
   'profile.deals_stat': 'trades for',
 
   'Cashed by': 'Cashed by',
-  'Check for': 'Check for {money}',
+  'Gift for': 'Gift for {money}',
   'gift.check_spam': 'Be sure to check your "Spam" folder if you have not received your email',
   'gift.confirmation_email': 'A confirmation email has been sent to {email}',
   'gift.copy_link': 'You can copy the link to the gift',

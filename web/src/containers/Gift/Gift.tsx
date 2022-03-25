@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button as BootstrapButton } from 'react-bootstrap';
 import { Currency, Money } from '@bitzlato/money-js';
+import { useSWRConfig } from 'swr';
 import { parseNumeric } from 'src/helpers/parseNumeric';
 import { useT } from 'src/hooks/useT';
 import { Box } from 'web/src/components/Box/Box';
@@ -34,7 +35,7 @@ import { alertPush } from 'web/src/modules/public/alert/actions';
 import { TextInput } from 'web/src/components/Input/TextInput';
 import { sliceString } from 'web/src/helpers/sliceString';
 import { useFetch } from 'web/src/hooks/data/useFetch';
-import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
+import { FetchError, fetchRaw, fetchWithCreds } from 'web/src/helpers/fetch';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
@@ -63,6 +64,8 @@ export const Gift: FC<Props> = (props) => {
   const wallets = useSelector(selectWallets);
   const user = useSelector(selectUserInfo);
 
+  const { mutate } = useSWRConfig();
+
   const cashed = tab === 'Cashed';
 
   const vouchersResponse = useFetch<AccountVoucher[]>(
@@ -80,8 +83,10 @@ export const Gift: FC<Props> = (props) => {
   }, [ccCode]);
 
   const data = vouchersResponse.data ?? [];
-  const money = createMoney(amount, props.balanceP2P.currency);
-  const disableCreate = money.isZero() || money.greaterThan(props.balanceP2P);
+  const available = createMoney(amount, props.balanceP2P.currency);
+  const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
+  const isFiat = giftCurrency === userCurrency;
+  const disableCreate = available.isZero() || (!isFiat && available.greaterThan(props.balanceP2P));
   const disablePercents = props.balanceP2P.isZero();
 
   const getCcy = (code: string) => {
@@ -90,15 +95,19 @@ export const Gift: FC<Props> = (props) => {
 
   const handleDelete = async (value: AccountVoucher) => {
     try {
-      await fetchWithCreds(`${p2pUrl()}/vouchers/${value.deep_link_code}`, { method: 'DELETE' });
+      await fetchRaw(`${p2pUrl()}/vouchers/${value.deep_link_code}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      vouchersResponse.mutate();
+      mutate(`${accountUrl()}/balances`);
     } catch (error) {
       alertFetchError(dispatch, error);
     }
-    vouchersResponse.mutate();
   };
 
   const handleChangeAmount = (value: string) => {
-    setAmount(parseNumeric(value));
+    setAmount(parseNumeric(value, { maxFractionDigits: 8 }));
   };
 
   const handleUsePercent = (value: number) => {
@@ -110,8 +119,8 @@ export const Gift: FC<Props> = (props) => {
       const params: P2VoucherPostParams = {
         amount,
         cryptocurrency: ccCode,
-        currency: 'USD',
-        method: 'crypto',
+        currency: userCurrency,
+        method: isFiat ? 'fiat' : 'crypto',
       };
       try {
         const r: P2PConfirmation = await fetchWithCreds(`${p2pUrl()}/vouchers/`, {
@@ -122,6 +131,8 @@ export const Gift: FC<Props> = (props) => {
           },
           body: JSON.stringify(params),
         });
+        vouchersResponse.mutate();
+        setShow2fa(false);
         setEmail(r.email);
       } catch (error) {
         if (error instanceof FetchError) {
@@ -132,7 +143,6 @@ export const Gift: FC<Props> = (props) => {
           }
         }
       }
-      vouchersResponse.mutate();
     }
   };
 
@@ -154,11 +164,11 @@ export const Gift: FC<Props> = (props) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ comment }),
         });
+        vouchersResponse.mutate();
         dispatch(alertPush({ message: ['Successfully changed'], type: 'success' }));
       } catch (error) {
         alertFetchError(dispatch, error);
       }
-      vouchersResponse.mutate();
     }
     setGift(undefined);
   };
@@ -189,6 +199,8 @@ export const Gift: FC<Props> = (props) => {
     );
   };
 
+  const options = useMemo(() => [ccCode, userCurrency], [ccCode, userCurrency]);
+
   const header = useMemo(
     () => [
       '',
@@ -217,11 +229,11 @@ export const Gift: FC<Props> = (props) => {
       <Box col>
         <MoneyFormat money={createMoney(d.amount, getCcy(d.cc_code))} />
         <Box textSize="sm" textColor="secondary">
-          ≈ <MoneyFormat money={createMoney(d.amount, USD_CCY)} />
+          ≈ <MoneyFormat money={createMoney(d.converted_amount, USD_CCY)} />
         </Box>
       </Box>,
-      cashed ? d.cashed_by?.nickname ?? <None /> : undefined,
-      d.comment ? sliceString(d.comment, 40) : <None />,
+      cashed ? d.cashed_by?.profile_name ?? <None /> : undefined,
+      d.comment ? sliceString(d.comment, 30) : <None />,
       cashed ? undefined : (
         <IconButton title={t('Close')} onClick={() => handleDelete(d)}>
           <CloseIcon />
@@ -255,7 +267,7 @@ export const Gift: FC<Props> = (props) => {
             <Box
               flex="1"
               as={SelectString}
-              options={[ccCode]}
+              options={options}
               value={giftCurrency ?? ccCode}
               onChange={setGiftCurrency}
               placeholder={t('page.body.quick.exchange.label.currency')}
@@ -338,7 +350,7 @@ export const Gift: FC<Props> = (props) => {
           show
           header={
             <span>
-              {t('Check for', {
+              {t('Gift for', {
                 money: <MoneyFormat money={createMoney(gift.amount, getCcy(gift.cc_code))} />,
               })}
             </span>
