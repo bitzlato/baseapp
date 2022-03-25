@@ -18,6 +18,7 @@ export interface AccountVoucher {
 interface AccountUser {
   id: string;
   nickname: string;
+  profile_name: string;
 }
 
 export interface P2PVouchers {
@@ -34,7 +35,7 @@ export interface P2VoucherPostParams {
   amount: string;
   cryptocurrency: string;
   currency: string;
-  method: 'crypto';
+  method: 'crypto' | 'fiat';
 }
 
 export interface P2PVoucher {

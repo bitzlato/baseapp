@@ -47,7 +47,7 @@ export const TwoFactorModal: FC<Props> = ({ onClose, onSend, buttonText, text })
           value={code}
           onChange={setCode}
           onKeyPress={handleKeyPress}
-          maxlength={6}
+          maxLength={6}
           autoFocus
         />
         <Button disabled={disabled} onClick={handleSend}>

@@ -1345,7 +1345,7 @@ export const ru: LangType = {
   'profile.deals_stat': 'сделок на сумму',
 
   'Cashed by': 'Обналичен',
-  'Check for': 'Чек на сумму {money}',
+  'Gift for': 'Чек на сумму {money}',
   'gift.check_spam': 'Обязательно проверьте папку "Спам", если не получили письмо',
   'gift.confirmation_email': 'На {email} отправлено письмо для подтверждения',
   'gift.copy_link': 'Вы можете скопировать ссылку на чек',
