@@ -62,6 +62,7 @@
     "timezones.json": "^1.6.1",
     "transition-hook": "^1.5.1",
     "ua-parser-js": "^0.7.19",
+    "use-debounce": "^7.0.1",
     "use-mutation": "^2.2.1",
     "uuid": "^8.3.2"
   },

@@ -20818,6 +20818,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"use-debounce@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "use-debounce@npm:7.0.1"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: c5c1c34ccef6c11fe25fecef983a07f5a7260fce77b58f0f648f6ae08693a22a9077b5362b96154896e9ea756e6aaea303eb44550a293456cecb6f15cf87d73b
+  languageName: node
+  linkType: hard
+
 "use-mutation@npm:^2.2.1":
   version: 2.2.1
   resolution: "use-mutation@npm:2.2.1"
@@ -21168,6 +21177,7 @@ __metadata:
     timezones.json: ^1.6.1
     transition-hook: ^1.5.1
     ua-parser-js: ^0.7.19
+    use-debounce: ^7.0.1
     use-mutation: ^2.2.1
     uuid: ^8.3.2
     webpack: ^5.69.0

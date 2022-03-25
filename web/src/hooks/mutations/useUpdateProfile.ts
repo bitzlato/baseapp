@@ -10,6 +10,7 @@ interface UpdateProfileInput {
   timezone?: string;
   safeModeEnabled?: boolean;
   passSafetyWizard?: boolean;
+  publicName?: string;
 }
 const updateProfile = async (params: UpdateProfileInput) => {
   const response = await fetchJson(`${p2pUrl()}/profile/`, {

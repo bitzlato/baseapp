@@ -21,6 +21,7 @@ import { ProfileVerification } from './ProfileVerification';
 import { ProfileReferalLinks } from './ProfileReferralLinks';
 import { ProfileSwitchAccount } from './ProfileSwitchAccount';
 import { FreezeAccount } from './FreezeAccount';
+import { ChangePublicName } from './ChangePublicName';
 
 const formatRating = (rating: string) =>
   parseNumeric(rating, {
@@ -46,9 +47,12 @@ export const Profile: FC = () => {
     <Card header={!isMobileDevice ? <h4>{title}</h4> : undefined}>
       <Box mb={isMobileDevice ? '4x' : '7x'}>
         {bitzlatoUser && (
-          <Text variant="h4" gutterBottom>
-            {bitzlatoUser.user_profile.public_name ?? bitzlatoUser.user_profile.generated_name}
-          </Text>
+          <Box display="flex" alignItems="center" pb="2x">
+            <Text variant="h4" className={s.publicName}>
+              {bitzlatoUser.user_profile.public_name ?? bitzlatoUser.user_profile.generated_name}
+            </Text>
+            {bitzlatoUser?.user_profile.public_name === null && <ChangePublicName />}
+          </Box>
         )}
 
         <Box mb="2x">
