@@ -59,7 +59,6 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
 
   const depositAddress = depositResponse.data;
   const isNoAddress = depositAddress?.address === null;
-  const isUSDXe = blockchain?.name === 'Avalanche' && (currency === 'USDT' || currency === 'USDC');
 
   useEffect(() => {
     if (isNoAddress) {
@@ -85,7 +84,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
       <Box row spacing>
         <CryptoCurrencyIcon size="small" currency={getCurrencyCodeSymbol(value.key)} />
         <span>{value.name}</span>
-        {isUSDXe ? <span> {`(${currency}.e)`}</span> : null}
+        {isUSDXe(value.name, currency) ? <span> {`(${currency}.e)`}</span> : null}
       </Box>
     );
   };
@@ -151,7 +150,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
             <DepositSummary
               wallet={wallet}
               blockchainCurrency={blockchainCurrency}
-              isUSDXe={isUSDXe}
+              isUSDXe={isUSDXe(blockchain.name, currency)}
             />
           </>
         )}
@@ -159,3 +158,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
     </Box>
   );
 };
+
+function isUSDXe(blockchainName: string, currency: string): boolean {
+  return blockchainName === 'Avalanche' && (currency === 'USDT' || currency === 'USDC');
+}
