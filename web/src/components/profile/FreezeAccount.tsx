@@ -32,6 +32,7 @@ export const FreezeAccount: FC<Props> = ({ isSelfFrozen }) => {
       <Modal size="lg" show={open} onClose={handleClose}>
         <ModalHeader>{t('Freeze Account')}</ModalHeader>
         <Box
+          display="flex"
           fontSize="medium"
           mx="6x"
           py="4x"

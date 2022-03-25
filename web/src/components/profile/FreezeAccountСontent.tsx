@@ -27,7 +27,7 @@ export const FreezeAccountContent: FC<Props> = ({ status }) => {
 
   if (status === 'success') {
     return (
-      <>
+      <div>
         <p>
           {t('Freeze Completed', {
             br: <br />,
@@ -39,16 +39,16 @@ export const FreezeAccountContent: FC<Props> = ({ status }) => {
             {supportLink}
           </a>
         </p>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div>
       {t('Freeze Info', {
         br: <br />,
         strong,
       })}
-    </>
+    </div>
   );
 };
