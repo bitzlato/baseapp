@@ -28117,6 +28117,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["use-debounce", [
+        ["npm:7.0.1", {
+          "packageLocation": "./.yarn/cache/use-debounce-npm-7.0.1-17cbf0764b-c5c1c34cce.zip/node_modules/use-debounce/",
+          "packageDependencies": [
+            ["use-debounce", "npm:7.0.1"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.0.1", {
+          "packageLocation": "./.yarn/__virtual__/use-debounce-virtual-cdac15ed95/0/cache/use-debounce-npm-7.0.1-17cbf0764b-c5c1c34cce.zip/node_modules/use-debounce/",
+          "packageDependencies": [
+            ["use-debounce", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.0.1"],
+            ["@types/react", "npm:17.0.39"],
+            ["react", "npm:17.0.2"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["use-mutation", [
         ["npm:2.2.1", {
           "packageLocation": "./.yarn/cache/use-mutation-npm-2.2.1-e0abd256bb-09f79d0ea0.zip/node_modules/use-mutation/",
@@ -28511,6 +28533,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["timezones.json", "npm:1.6.1"],
             ["transition-hook", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.5.1"],
             ["ua-parser-js", "npm:0.7.23"],
+            ["use-debounce", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.0.1"],
             ["use-mutation", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.2.1"],
             ["uuid", "npm:8.3.2"],
             ["webpack", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.69.0"],

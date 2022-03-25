@@ -25,3 +25,7 @@ export const stat = style([
     },
   }),
 ]);
+
+export const publicName = style({
+  marginRight: '8px',
+});

@@ -9,8 +9,8 @@ export const fetchJson = async (input: RequestInfo, init: RequestInit) => {
   try {
     const res = await fetch(input, init);
 
-    const contentlength = res.headers.get('content-length');
-    const json = contentlength === '0' ? undefined : await res.json();
+    const contentLength = res.headers.get('content-length');
+    const json = contentLength === '0' ? undefined : await res.json();
 
     if (!res.ok) {
       const { errors, error, ...rest } = json ?? {};

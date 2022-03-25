@@ -1277,7 +1277,14 @@ export const en = {
     '(if the transaction has not yet gone online) and the ability to conduct new financial ' +
     'operations <strong>will be suspended</strong>!',
   'Freeze Completed': 'Your account has been blocked.{br}{br}To restore, contact support.',
-
+  'Public name title': '👤 Enter public name',
+  'Public name': 'Public name',
+  'Public name length error': 'Length of public name should be less than 15 symbols',
+  'Public name format error': 'Not corrected format of public name',
+  'Public name check error': 'Invalid public name',
+  'Public name irreversable':
+    'This action is irreversible. You will not be able to change it in future!',
+  'Public name help': 'Alphanumeric and no more that 15 characters',
   'safemode.title': 'Disable safe mode',
   'safemode.begin':
     '🔒 To continue, you need to pass a safety knowledge test when working with the service.\nThis operation is a one-time and does not take much time!',

@@ -23,11 +23,21 @@ exports[`ProfileScreen test should render 1`] = `
         <div
           class="reset_base__1sfgjt80 sprinkles_marginBottom_7x_mobile__w76aifg4"
         >
-          <h4
-            class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_h4__1qy84opa Text_text_gutterBottom_true__1qy84opi"
+          <div
+            class="reset_base__1sfgjt80 sprinkles_paddingBottom_2x_mobile__w76aif5f sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif1y"
           >
-            OddKraig
-          </h4>
+            <h4
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifs7 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19k Text_text_variant_h4__1qy84opa Text_text_gutterBottom_false__1qy84opj  Profile_publicName__crp8vk2"
+            >
+              OddKraig
+            </h4>
+            <button
+              class="iconButton"
+              type="button"
+            >
+              <test-file-stub />
+            </button>
+          </div>
           <div
             class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aifff"
           >
