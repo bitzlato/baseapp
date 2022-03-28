@@ -171,7 +171,7 @@ export const SignInScreen: React.FC = () => {
           refreshError={refreshError}
           changeEmail={handleChangeEmailValue}
           changePassword={handleChangePasswordValue}
-          renderCaptcha={<Captcha error={errorSignIn || require2FA || emailError} />}
+          renderCaptcha={<Captcha error={errorSignIn || emailError} />}
           reCaptchaSuccess={reCaptchaSuccess}
           geetestCaptchaSuccess={geetestCaptchaSuccess}
           captcha_response={captcha_response}
