@@ -13,7 +13,7 @@ import { SelectString } from 'web/src/components/Select/Select';
 import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { Button } from 'web/src/components/ui/Button';
-import { createMoney, USD_CCY } from 'web/src/helpers/money';
+import { createCcy, createMoney } from 'web/src/helpers/money';
 import { getCurrencySymbol } from 'web/src/helpers/getCurrencySymbol';
 import { accountUrl, p2pUrl } from 'web/src/api/config';
 import {
@@ -39,6 +39,7 @@ import { FetchError, fetchRaw, fetchWithCreds } from 'web/src/helpers/fetch';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
+import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import sq from 'src/containers/QuickExchange/QuickExchange.postcss';
 import s from './Gift.postcss';
 
@@ -78,16 +79,35 @@ export const Gift: FC<Props> = (props) => {
     fetchWithCreds,
   );
 
+  const rateResponse = useFetchRate(ccCode, user.bitzlato_user?.user_profile.currency);
+
   useEffect(() => {
+    setAmount('');
     setGiftCurrency(ccCode);
   }, [ccCode]);
 
   const data = vouchersResponse.data ?? [];
-  const available = createMoney(amount, props.balanceP2P.currency);
   const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
   const isFiat = giftCurrency === userCurrency;
-  const disableCreate = available.isZero() || (!isFiat && available.greaterThan(props.balanceP2P));
+  const fiatCcy = createCcy(userCurrency, FIAT_PRECISION);
+  const ccy = isFiat ? fiatCcy : props.balanceP2P.currency;
+  const amountMoney = createMoney(amount, ccy);
+  const rate = rateResponse.data?.rate ?? 0;
+  const availableFiat = props.balanceP2P.convert(rate, fiatCcy);
+  const available = isFiat ? availableFiat : props.balanceP2P;
+  const lessThan1 = isFiat && amountMoney.lessThan(createMoney(1, amountMoney.currency));
+  const greaterThanAvailable = amountMoney.greaterThan(available);
+  const disableCreate = amountMoney.isZero() || greaterThanAvailable || lessThan1;
   const disablePercents = props.balanceP2P.isZero();
+
+  let errorText: string | undefined;
+  if (!available.isZero()) {
+    if (isFiat && lessThan1) {
+      errorText = t('Could not be less than 1');
+    } else if (greaterThanAvailable) {
+      errorText = t('Balance is insufficient');
+    }
+  }
 
   const getCcy = (code: string) => {
     return wallets.find((w) => code === w.currency.code) ?? DEFAULT_CURRENCY;
@@ -111,7 +131,7 @@ export const Gift: FC<Props> = (props) => {
   };
 
   const handleUsePercent = (value: number) => {
-    handleChangeAmount(props.balanceP2P.multiply(value).divide(100).toFormat());
+    handleChangeAmount(available.multiply(value).divide(100).toFormat());
   };
 
   const handleCreateGift = async (code: string | undefined) => {
@@ -229,7 +249,10 @@ export const Gift: FC<Props> = (props) => {
       <Box col>
         <MoneyFormat money={createMoney(d.amount, getCcy(d.cc_code))} />
         <Box textSize="sm" textColor="secondary">
-          ≈ <MoneyFormat money={createMoney(d.converted_amount, USD_CCY)} />
+          ≈{' '}
+          <MoneyFormat
+            money={createMoney(d.converted_amount, createCcy(d.currency, FIAT_PRECISION))}
+          />
         </Box>
       </Box>,
       cashed ? d.cashed_by?.profile_name ?? <None /> : undefined,
@@ -255,7 +278,33 @@ export const Gift: FC<Props> = (props) => {
           })}
         </span>
         <Box col spacing>
-          <Box row spacing="3">
+          {available.isZero() ? null : (
+            <Box row spacing justify="between" wrap>
+              <Box row spacing align="end">
+                <Box as="span" textColor="secondary">
+                  {t('page.body.quick.exchange.sublabel.balance')}:
+                </Box>
+                <MoneyFormat money={props.balanceP2P} />
+                <Box as="span" textSize="sm" textColor="secondary">
+                  <span>(</span>≈ <MoneyFormat money={availableFiat} textColor="secondary" />)
+                </Box>
+              </Box>
+              <Box self="end" row spacing>
+                {PERCENTS.map((v) => (
+                  <BootstrapButton
+                    key={v}
+                    disabled={disablePercents}
+                    variant="secondary"
+                    className={sq.quickExchangeAll}
+                    onClick={() => handleUsePercent(v)}
+                  >
+                    {v}%
+                  </BootstrapButton>
+                ))}
+              </Box>
+            </Box>
+          )}
+          <Box row spacing="3" align="start">
             <Box
               flex="golden"
               as={NumberInput}
@@ -263,6 +312,7 @@ export const Gift: FC<Props> = (props) => {
               value={amount}
               onChange={handleChangeAmount}
               onKeyPress={handleKeyPress}
+              error={errorText}
             />
             <Box
               flex="1"
@@ -274,25 +324,15 @@ export const Gift: FC<Props> = (props) => {
               formatOptionLabel={renderItem}
             />
           </Box>
-          <Box row spacing justify="between" wrap>
-            <Box row spacing textColor="secondary">
-              <span>{t('page.body.quick.exchange.sublabel.balance')}:</span>
-              <MoneyFormat money={props.balanceP2P} />
+          {isFiat && rate !== 0 ? (
+            <Box as="span" textSize="sm" textColor="secondary">
+              ≈{' '}
+              <MoneyFormat
+                money={amountMoney.convert(1 / rate, props.balanceP2P.currency)}
+                textColor="secondary"
+              />
             </Box>
-            <Box self="end" row spacing>
-              {PERCENTS.map((v) => (
-                <BootstrapButton
-                  key={v}
-                  disabled={disablePercents}
-                  variant="secondary"
-                  className={sq.quickExchangeAll}
-                  onClick={() => handleUsePercent(v)}
-                >
-                  {v}%
-                </BootstrapButton>
-              ))}
-            </Box>
-          </Box>
+          ) : null}
         </Box>
         <Box row justify="end">
           <Button
@@ -398,3 +438,4 @@ const None: FC = () => {
 };
 
 const PERCENTS = [25, 50, 75, 100];
+const FIAT_PRECISION = 2;

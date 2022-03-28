@@ -18,7 +18,7 @@ export const fetchJson = async (input: RequestInfo, init: RequestInit) => {
         throw new FetchError(errors, res.status, rest);
       }
 
-      throw new FetchError(error ? [error] : ['Server error'], res.status, rest);
+      throw new FetchError([error ?? rest.message ?? 'Server error'], res.status, rest);
     }
 
     return json;

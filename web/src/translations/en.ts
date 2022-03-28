@@ -1345,6 +1345,8 @@ export const en = {
   Created: 'Created',
   More: 'More',
   'Send an email again': 'Send an email again',
+  'Balance is insufficient': 'Balance is insufficient',
+  'Could not be less than 1': 'Could not be less than 1',
 
   'deposit.usdx.e':
     'Only deposits of {currency} tokens are accepted, be careful when sending funds!',
