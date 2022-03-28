@@ -1360,6 +1360,8 @@ export const ru: LangType = {
   Created: 'Созданные',
   More: 'Дополнительно',
   'Send an email again': 'Отправить письмо еще раз',
+  'Balance is insufficient': 'Недостаточно средств',
+  'Could not be less than 1': 'Сумма не может быть меньше 1',
 
   'deposit.usdx.e':
     'Принимаются только депозиты токенов {currency}, будьте внимательны при отправке средств!',

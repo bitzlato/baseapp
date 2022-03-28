@@ -128,3 +128,10 @@ export interface ReferralLink {
   type: string;
   url: string;
 }
+
+export interface CurrencyRate {
+  description: string;
+  url: string;
+  id: number;
+  rate: number;
+}
