@@ -8,6 +8,7 @@ import {
   GeetestCaptchaResponse,
   selectCurrentColorTheme,
   selectShouldGeetestReset,
+  selectSignInRequire2FA,
   setGeetestCaptchaSuccess,
   setRecaptchaSuccess,
 } from '../../modules';
@@ -16,6 +17,7 @@ export const CaptchaComponent = (props: any) => {
   const dispatch = useDispatch();
   const shouldGeetestReset = useSelector(selectShouldGeetestReset);
   const theme = useSelector(selectCurrentColorTheme);
+  const require2FA = useSelector(selectSignInRequire2FA);
 
   const reCaptchaRef = React.useRef<ReCAPTCHA>(null);
   const geetestCaptchaRef = React.useRef(null);
@@ -25,6 +27,12 @@ export const CaptchaComponent = (props: any) => {
       reCaptchaRef.current?.reset();
     }
   }, [props.error, props.success, reCaptchaRef.current]);
+
+  React.useEffect(() => {
+    if (require2FA) {
+      reCaptchaRef.current?.reset();
+    }
+  }, [require2FA]);
 
   useSetShouldGeetestReset(props.error, props.success, geetestCaptchaRef);
 
