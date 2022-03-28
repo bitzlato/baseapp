@@ -36,7 +36,7 @@ window.env = {
     // 'document',
     // 'address',
   ],
-  captchaLogin: false,
+  captchaLogin: true,
   captcha_type: 'recaptcha',
   captcha_id: '6Lf2OO8eAAAAAKi4GmsrEOw-uUiprDgTxBf3ALNZ',
   usernameEnabled: false,
