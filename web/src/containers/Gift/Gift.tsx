@@ -22,7 +22,6 @@ import {
   P2VoucherPostParams,
 } from 'web/src/modules/account/voucher-types';
 import { selectWallets } from 'web/src/modules/user/wallets/selectors';
-import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { localeDate } from 'web/src/helpers/localeDate';
 import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
 import { IconButton } from 'web/src/components/IconButton/IconButton';
@@ -34,13 +33,13 @@ import { CloseIcon } from 'web/src/assets/images/CloseIcon';
 import { alertPush } from 'web/src/modules/public/alert/actions';
 import { TextInput } from 'web/src/components/Input/TextInput';
 import { sliceString } from 'web/src/helpers/sliceString';
-import { useFetch } from 'web/src/hooks/data/useFetch';
 import { FetchError, fetchRaw, fetchWithCreds } from 'web/src/helpers/fetch';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import sq from 'src/containers/QuickExchange/QuickExchange.postcss';
+import { useFetchVouchers } from 'web/src/hooks/data/useFetchVouchers';
 import s from './Gift.postcss';
 
 interface Props {
@@ -69,15 +68,15 @@ export const Gift: FC<Props> = (props) => {
 
   const cashed = tab === 'Cashed';
 
-  const vouchersResponse = useFetch<AccountVoucher[]>(
-    `${accountUrl()}/vouchers?${buildQueryString({
-      currency: ccCode,
-      cashed,
-      page: 0,
-      items: 10,
-    })}`,
-    fetchWithCreds,
-  );
+  const vouchersResponse = useFetchVouchers(ccCode, cashed, 0, 10);
+
+  const lastVoucherResponse = useFetchVouchers(ccCode, false, 0, 1);
+  const lastVoucher = lastVoucherResponse.data?.[0]?.deep_link_code;
+  useEffect(() => {
+    if (lastVoucher) {
+      setEmail(undefined);
+    }
+  }, [lastVoucher]);
 
   const rateResponse = useFetchRate(ccCode, user.bitzlato_user?.user_profile.currency);
 
