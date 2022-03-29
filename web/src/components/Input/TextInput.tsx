@@ -14,6 +14,7 @@ export interface TextInputProps
   error?: ReactNode;
   autoFocus?: boolean;
   className?: string | undefined;
+  noResize?: boolean;
 }
 
 export const TextInput: FC<TextInputProps> = ({
@@ -24,10 +25,11 @@ export const TextInput: FC<TextInputProps> = ({
   inputClassName,
   labelVisible,
   error,
+  noResize,
   ...rest
 }) => {
   return (
-    <div className={cn(s.textInput, className)}>
+    <div className={cn(s.textInput, noResize && s.textInputNoResize, className)}>
       <Box ellipsis as="label">
         {(labelVisible || rest.value) && label}
       </Box>

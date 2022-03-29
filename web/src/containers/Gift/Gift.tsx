@@ -325,7 +325,7 @@ export const Gift: FC<Props> = (props) => {
           </Box>
         </Box>
         <Box row align="start">
-          {isFiat && rate !== 0 ? (
+          {isFiat && rate !== 0 && amount ? (
             <Box as="span" textSize="sm" textColor="secondary">
               ≈{' '}
               <MoneyFormat
@@ -400,11 +400,13 @@ export const Gift: FC<Props> = (props) => {
           <Box col spacing="5">
             <TextInput
               as="textarea"
-              rows="3"
               label={t('Comment')}
               labelVisible
               value={comment}
               onChange={setComment}
+              rows="5"
+              maxLength="200"
+              noResize
             />
             <Box col spacing="2">
               <span>{t('gift.copy_link')}</span>
