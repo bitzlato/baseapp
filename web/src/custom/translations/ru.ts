@@ -1288,6 +1288,11 @@ export const ru: LangType = {
   'Referral Links': 'Реферальные ссылки',
   'Switch account': 'Переключить аккаунт',
   "It's you": 'Это вы',
+  'Password reset email sent': 'Запрос на смену пароля успешно отправлен',
+  'Password reset request': 'Запрос на смену пароля',
+  'Password reset info': 'Для установки нового пароля и продолжения работы, пожалуйста, нажмите кнопку ниже и мы отправим ссылку для смены пароля на вашу электронную почту.',
+  'Password reset': 'Отправить запрос',
+  'Password change': 'Сменить пароль',
   Freeze: 'Заблокировать',
   'Freeze Account': 'Блокировка аккаунта',
   'Freeze Info':

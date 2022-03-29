@@ -1267,6 +1267,12 @@ export const en = {
   'Referral Links': 'Referral Links',
   'Switch account': 'Switch account',
   "It's you": "It's you",
+  'Password reset email sent': 'Password reset email sent',
+  'Password reset request': 'Password reset request',
+  'Password reset info':
+    'Please press button for send request of password reset. We will send to you email with link of password reset.',
+  'Password reset': 'Password reset',
+  'Password change': 'Change password',
   Freeze: 'Block',
   'Freeze Account': 'Block account',
   'Freeze Info':
