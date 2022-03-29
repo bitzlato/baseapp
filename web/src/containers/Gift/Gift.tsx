@@ -100,7 +100,7 @@ export const Gift: FC<Props> = (props) => {
   const disablePercents = props.balanceP2P.isZero();
 
   let errorText: string | undefined;
-  if (!available.isZero()) {
+  if (!available.isZero() && amount) {
     if (isFiat && lessThan1) {
       errorText = t('Could not be less than 1');
     } else if (greaterThanAvailable) {
@@ -276,7 +276,7 @@ export const Gift: FC<Props> = (props) => {
             ),
           })}
         </span>
-        <Box col spacing>
+        <Box col spacing="2">
           {available.isZero() ? null : (
             <Box row spacing justify="between" wrap>
               <Box row spacing align="end">
@@ -323,6 +323,8 @@ export const Gift: FC<Props> = (props) => {
               formatOptionLabel={renderItem}
             />
           </Box>
+        </Box>
+        <Box row align="start">
           {isFiat && rate !== 0 ? (
             <Box as="span" textSize="sm" textColor="secondary">
               ≈{' '}
@@ -332,8 +334,7 @@ export const Gift: FC<Props> = (props) => {
               />
             </Box>
           ) : null}
-        </Box>
-        <Box row justify="end">
+          <Box grow />
           <Button
             color="primary"
             onClick={() => handleCreateGift(undefined)}
