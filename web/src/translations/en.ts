@@ -911,7 +911,7 @@ export const en = {
   'identity.user.utilized_token': 'JWT has already been used',
   'identity.session.invalid_login_params': 'Invalid Email or Password',
   'identity.session.invalid': 'Invalid Session',
-  'identity.captcha.required': 'captcha_response is required',
+  'identity.captcha.required': 'Need to pass captcha',
   'identity.captcha.mandatory_fields': 'Mandatory fields must be filled in',
   'identity.captcha.verification_failed': 'Captcha verification failed',
   'identity.session.not_active': 'Your account is not active',

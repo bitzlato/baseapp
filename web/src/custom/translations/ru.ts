@@ -922,7 +922,7 @@ export const ru: LangType = {
   'identity.user.utilized_token': 'JWT уже был использован',
   'identity.session.invalid_login_params': 'Неправильный адрес электронной почты или пароль',
   'identity.session.invalid': 'Неверный сеанс',
-  'identity.captcha.required': 'требуется captcha_response',
+  'identity.captcha.required': 'Необходимо пройти капчу',
   'identity.captcha.mandatory_fields': 'Обязательные поля должны быть заполнены',
   'identity.captcha.verification_failed': 'Ошибка верификации капчи',
   'identity.session.not_active': 'Ваш аккаунт не активен',
