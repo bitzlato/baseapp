@@ -1,10 +1,11 @@
-import { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useT } from 'web/src/hooks/useT';
 import { toggle2faFetch } from 'web/src/modules/user/profile/actions';
 import { Text } from 'web/src/components/ui/Text';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
+import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { SwitchField } from './SwitchField';
 
 interface Props {
@@ -15,22 +16,29 @@ export const TwoFactorAuthSwitcher: FC<Props> = ({ value }) => {
   const t = useT();
   const dispatch = useDispatch();
   const history = useHistory();
-  const [showDisableModal, setShowDisableModal] = useState(false);
+  const [show2fa, setShow2fa] = useState(false);
+  const user = useSelector(selectUserInfo);
+
+  useEffect(() => {
+    if (!user.otp) {
+      setShow2fa(false);
+    }
+  }, [user.otp]);
 
   const handleChange = (enable2fa: boolean) => {
     if (enable2fa) {
       history.push('/profile/2fa');
       window.scroll({ top: 0 });
     } else {
-      setShowDisableModal(true);
+      setShow2fa(true);
     }
   };
 
-  const handleCloseDisableModal = () => {
-    setShowDisableModal(false);
+  const handleClose = () => {
+    setShow2fa(false);
   };
 
-  const handleSendDisableModal = (code: string) => {
+  const handleSend = (code: string) => {
     dispatch(toggle2faFetch({ code, enable: false }));
   };
 
@@ -51,11 +59,11 @@ export const TwoFactorAuthSwitcher: FC<Props> = ({ value }) => {
         value={value}
         onChange={handleChange}
       />
-      {showDisableModal && (
+      {show2fa && (
         <TwoFactorModal
           buttonText={t('page.body.profile.header.account.content.twoFactorAuthentication.disable')}
-          onClose={handleCloseDisableModal}
-          onSend={handleSendDisableModal}
+          onClose={handleClose}
+          onSend={handleSend}
         />
       )}
     </>
