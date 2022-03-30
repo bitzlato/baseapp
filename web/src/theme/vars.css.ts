@@ -3,6 +3,7 @@ import * as colors from './colors';
 
 export const zIndexVars = createGlobalTheme(':root', {
   modal: '10001',
+  modalInner: '10002',
 });
 
 export const sizeVars = createGlobalTheme(':root', {
