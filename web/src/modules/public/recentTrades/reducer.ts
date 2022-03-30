@@ -55,7 +55,13 @@ export const recentTradesReducer = (state = initialState, action: RecentTradesAc
   switch (action.type) {
     case RECENT_TRADES_DATA: {
       return {
-        list: sliceArray(action.payload, defaultStorageLimit()),
+        list: sliceArray(action.payload, defaultStorageLimit()).map((item: PublicTrade) => ({
+          ...item,
+          created_at:
+            typeof item.created_at === 'number'
+              ? new Date(item.created_at * 1000).toISOString()
+              : item.created_at,
+        })),
         loading: false,
         lastTrade: extendTradeWithPriceChange(action.payload?.[0], action.payload?.[1]),
       };
