@@ -5,7 +5,10 @@ import { FetchError } from './fetch';
 
 export function alertFetchError(dispatch: Dispatch, error: unknown) {
   if (error instanceof FetchError) {
-    if (error.code === 403 && error.payload.message === 'Not allowed: all') {
+    if (
+      (error.code === 403 && error.payload.message === 'Not allowed: all') ||
+      (error.code === 500 && error.messages.includes('user can not make orders'))
+    ) {
       dispatch(toggleNeedVerification({ needVerification: true }));
     } else {
       dispatch(
