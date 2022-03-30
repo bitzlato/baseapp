@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useT, strong } from 'web/src/hooks/useT';
 import { Box } from 'web/src/components/ui/Box';
-import { getBitzlatoLink } from 'web/src/components/shared/Footer/Footer';
+import { getBitzlatoLink } from 'web/src/helpers/links';
 import { selectCurrentLanguage } from 'web/src/modules';
 import { useSelector } from 'react-redux';
 import { Spinner } from 'web/src/components/ui/Spinner';

@@ -18,6 +18,7 @@ export const PROFILE_USER_DATA = 'profile/GET_USER_DATA';
 export const PROFILE_USER_ERROR = 'profile/GET_USER_ERROR';
 export const PROFILE_USER_ACTIVITY = 'profile/GET_USER_ACTIVITY';
 export const PROFILE_RESET_USER = 'profile/RESET_USER';
+export const PROFILE_TOGGLE_NEED_VERIFICATION = 'profile/TOGGLE_NEED_VERIFICATION';
 
 export const PROFILE_CHANGE_USER_LEVEL = 'profile/CHANGE_USER_LEVEL';
 

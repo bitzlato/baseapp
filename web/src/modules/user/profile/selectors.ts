@@ -37,3 +37,6 @@ export const selectVerifyEmailAuth0 = (state: RootState): boolean =>
   state.user.profile.userData.verifyEmail;
 
 export const selectUserDataError = (state: RootState) => state.user.profile.userData.error;
+
+export const selectUserNeedVerification = (state: RootState) =>
+  state.user.profile.userData.needVerification;
