@@ -11,6 +11,7 @@ import TelegramIcon from 'web/src/assets/svg/TelegramIcon.svg';
 import TwitterIcon from 'web/src/assets/svg/TwitterIcon.svg';
 import YoutubeIcon from 'web/src/assets/svg/YoutubeIcon.svg';
 import { Language, Theme } from 'web/src/types';
+import { getBitzlatoLink } from 'web/src/helpers/links';
 import * as s from './Footer.css';
 import { FooterMenu } from './FooterMenu';
 
@@ -22,24 +23,6 @@ export const getProductLink = (locale: string, product: Product) => {
 
     default:
       return `https://bitzlato.com/${locale}/${product}`;
-  }
-};
-
-const faqLinks: Record<string, string> = {
-  en: 'https://bitzlato.com/faq_category/exchange-en/',
-  ru: 'https://bitzlato.com/ru/faq_category/exchange-en-2/',
-};
-
-export const getBitzlatoLink = (locale: string, section: string) => {
-  switch (section) {
-    case 'wallets_stat/':
-      return `https://bitzlato.com/${locale}/${section}`;
-
-    case 'faq':
-      return faqLinks[locale] ?? faqLinks.en;
-
-    default:
-      return `https://bitzlato.com/${locale === 'en' ? '' : `${locale}/`}${section}`;
   }
 };
 

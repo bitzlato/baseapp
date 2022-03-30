@@ -1352,4 +1352,13 @@ export const en = {
     'Only deposits of {currency} tokens are accepted, be careful when sending funds!',
   'withdraw.usdx.e':
     'Only {currency} tokens are withdrawn. Please make sure that the token format matches.',
+
+  'verification.pass': 'Pass verification',
+  'verification.oops': '😔 Oops!',
+  'verification.info':
+    'Financial transactions on your account are temporarily unavailable.{br}' +
+    'If you are a new user, you need to pass verification.{br}' +
+    'If you have been registered for a long time, then your account may have been blocked for' +
+    'violating the terms of service.',
+  'verification.support': '🤖 Support:',
 };

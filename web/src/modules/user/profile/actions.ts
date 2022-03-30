@@ -21,6 +21,7 @@ import {
   PROFILE_USER_ERROR,
   PROFILE_USER_FETCH,
   PROFILE_USER_REFETCH,
+  PROFILE_TOGGLE_NEED_VERIFICATION,
 } from './constants';
 import { User } from './types';
 
@@ -138,6 +139,13 @@ export interface ChangeUserDataError {
   error: CommonError;
 }
 
+export interface ToggleNeedVerification {
+  type: typeof PROFILE_TOGGLE_NEED_VERIFICATION;
+  payload: {
+    needVerification: boolean;
+  };
+}
+
 export type ProfileAction =
   | ChangePasswordFetch
   | ChangePasswordData
@@ -158,7 +166,8 @@ export type ProfileAction =
   | ToggleUser2fa
   | ChangeUserDataFetch
   | ChangeUserData
-  | ChangeUserDataError;
+  | ChangeUserDataError
+  | ToggleNeedVerification;
 
 export const changePasswordFetch = (
   payload: ChangePasswordFetch['payload'],
@@ -258,4 +267,11 @@ export const changeUserData = (payload: ChangeUserData['payload']): ChangeUserDa
 export const changeUserDataError = (error: CommonError): ChangeUserDataError => ({
   type: PROFILE_CHANGE_USER_ERROR,
   error,
+});
+
+export const toggleNeedVerification = (
+  payload: ToggleNeedVerification['payload'],
+): ToggleNeedVerification => ({
+  type: PROFILE_TOGGLE_NEED_VERIFICATION,
+  payload,
 });
