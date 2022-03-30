@@ -11,6 +11,7 @@ declare global {
       accountUrl: string;
       accountPublicUrl: string;
       p2pUrl: string;
+      p2pAuthUrl: string;
     };
     auth0?: {
       domain: string;
