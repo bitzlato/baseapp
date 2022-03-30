@@ -1,5 +1,5 @@
-export const copy = (id: string | HTMLInputElement) => {
-  const copyText: HTMLInputElement | null =
+export const copy = (id: string | HTMLInputElement | HTMLTextAreaElement) => {
+  const copyText: HTMLInputElement | HTMLTextAreaElement | null =
     typeof id === 'string' ? document.querySelector(`#${id}`) : id;
 
   if (copyText) {

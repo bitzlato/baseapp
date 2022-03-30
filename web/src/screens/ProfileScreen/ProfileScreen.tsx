@@ -6,6 +6,7 @@ import { ProfileApiKeys } from 'web/src/containers';
 import { ProfileAccountActivity } from 'web/src/containers/ProfileAccountActivity';
 import { Profile } from 'web/src/components/profile/Profile';
 import { ProfileSettings } from 'web/src/components/profile/settings/ProfileSettings';
+import { P2PApiKeys } from 'web/src/components/profile/apiKeys/P2PApiKeys';
 
 export const ProfileScreen: FC = () => {
   const t = useT();
@@ -17,6 +18,7 @@ export const ProfileScreen: FC = () => {
     <Box my="7">
       <Profile />
       <ProfileSettings />
+      <P2PApiKeys />
       <ProfileApiKeys />
       <ProfileAccountActivity />
     </Box>

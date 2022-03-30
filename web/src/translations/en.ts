@@ -1267,6 +1267,37 @@ export const en = {
   'Referral Links': 'Referral Links',
   'Switch account': 'Switch account',
   "It's you": "It's you",
+  'Create API key': 'Create API key',
+  'Key name': 'Key name',
+  Active: 'Active',
+  Inactive: 'Inactive',
+  Read: 'Read',
+  Trade: 'Trade',
+  Transfer: 'Transfer',
+  'Private key': 'Private key',
+  'Public key': 'Public key',
+  'P2P API Keys': 'P2P API Keys',
+  Authorities: 'Authorities',
+  Enable: 'Enable',
+  Disable: 'Disable',
+
+  'p2p.apiKeys.descr':
+    'Creating an API private key provides access to trading and other services on Bitzlato via a third-party site or application. View <link>API documentation</link>",',
+  'p2p.apiKeys.warning':
+    'Attention! If you transfer the key to third parties (and even support the service or the security service), then you provide access to your account!',
+  'p2p.apiKeys.active_tooltip':
+    'The key will be active after creation and can be used immediately if you put this check mark',
+  'p2p.apiKeys.read_tooltip': 'The authority to read data in the account',
+  'p2p.apiKeys.trade_tooltip': 'The authority to trade',
+  'p2p.apiKeys.transfer_tooltip': 'The authority to input/withdraw',
+  'p2p.apiKeys.gen_new': 'Generate new key',
+  'p2p.apiKeys.enter_key_name': 'Enter a key name',
+  'p2p.apiKeys.copy_key': "Copy and save this key, after window closing you can't longer get it.",
+  'p2p.apiKeys.send': 'Send public key',
+  'p2p.apiKeys.send_desc':
+    "Send public key to server to save it there. If you already have a key, it will be removed after saving the new one. While key is not sent you can't authorise with it",
+  'p2p.apiKeys.sended': 'Public key sent to server!',
+
   Freeze: 'Block',
   'Freeze Account': 'Block account',
   'Freeze Info':
