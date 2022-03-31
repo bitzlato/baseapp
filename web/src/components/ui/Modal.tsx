@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { useTransition } from 'transition-hook';
@@ -9,6 +9,7 @@ import CrossIcon from 'web/src/assets/svg/CrossIcon.svg';
 import { Box } from './Box';
 import { Portal } from './Portal';
 import { Text } from './Text';
+import { Spinner } from './Spinner';
 import * as s from './Modal.css';
 
 interface ModalProps {
@@ -80,11 +81,46 @@ export const ModalHeader: FC = ({ children }) => (
   </Box>
 );
 
-export const ModalBody: FC = ({ children }) => (
-  <Box fontSize="medium" px="6x">
-    {children}
-  </Box>
-);
+interface ModalBodyProps {
+  loading?: boolean | undefined;
+}
+
+export const ModalBody: FC<ModalBodyProps> = ({ children, loading = false }) => {
+  let spinner: ReactNode;
+  if (loading) {
+    if (children) {
+      spinner = (
+        <Box
+          bg="modal"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          position="absolute"
+          top={0}
+          left={0}
+          bottom={0}
+          right={0}
+          zIndex="modalInner"
+        >
+          <Spinner />
+        </Box>
+      );
+    } else {
+      spinner = (
+        <Box display="flex" justifyContent="center" py="6x">
+          <Spinner />
+        </Box>
+      );
+    }
+  }
+
+  return (
+    <Box fontSize="medium" px="6x" position={loading && children ? 'relative' : undefined}>
+      {children}
+      {spinner}
+    </Box>
+  );
+};
 
 export const ModalFooter: FC = ({ children }) => (
   <Box display="flex" alignItems="center" justifyContent="flex-end" px="6x" py="4x">

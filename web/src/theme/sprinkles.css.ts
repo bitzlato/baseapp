@@ -1,6 +1,6 @@
 import { defineProperties, createSprinkles } from '@vanilla-extract/sprinkles';
 import { queries } from 'web/src/theme/themeUtils';
-import { vars, sizeVars, radiiVars } from './vars.css';
+import { vars, sizeVars, radiiVars, zIndexVars } from './vars.css';
 
 const fontSizes = {
   caption: 12 as const,
@@ -34,7 +34,7 @@ const responsiveProperties = defineProperties({
   defaultCondition: 'mobile',
   responsiveArray: ['mobile', 'tablet', 'desktop', 'desktopXL', /* 'desktopXXL', */ 'desktopXXXL'],
   properties: {
-    display: ['none', 'flex', 'block', /* 'inline', 'flex-inline', */ 'inline-block'],
+    display: ['none', 'flex', 'block', /* 'inline', */ 'inline-flex', 'inline-block'],
     flexDirection: ['row', 'column'],
     justifyContent: [
       'stretch',
@@ -129,6 +129,7 @@ const unresponsiveProperties = defineProperties({
     left: [0],
     overflowY: ['auto'],
     overflow: ['hidden'],
+    zIndex: zIndexVars,
 
     // other
     cursor: ['default', 'pointer', 'not-allowed'],

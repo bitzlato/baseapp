@@ -59,6 +59,7 @@ import {
   selectAbilities,
   selectVerifyEmailAuth0,
   selectVerifyEmail,
+  selectUserNeedVerification,
 } from '../../modules';
 import {
   ChangeForgottenPasswordScreen,
@@ -85,6 +86,7 @@ import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSetti
 import { SignInAuth0 } from 'web/src/screens/SignInScreen/SignInAuth0';
 import { EmailVerificationModal } from 'web/src/screens/EmailVerification/EmailVerificationModal';
 import { getSearchParam, setLocation } from 'web/src/helpers/url';
+import { NeedVerificationModal } from 'web/src/containers/NeedVerificationModal/NeedVerificationModal';
 
 interface ReduxProps {
   colorTheme: string;
@@ -97,6 +99,7 @@ interface ReduxProps {
   abilities: AbilitiesInterface;
   verifyEmailAuth0: boolean;
   verifyEmail: boolean;
+  needVerification: boolean;
 }
 
 interface DispatchProps {
@@ -433,6 +436,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           {isLoggedIn && <WalletsFetch />}
           {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
           {this.props.verifyEmail && <EmailVerificationModal />}
+          {this.props.needVerification && <NeedVerificationModal />}
         </div>
       );
     }
@@ -517,11 +521,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/internal-transfer"
             component={InternalTransfer}
           />
-          { commonRoutes }
+          {commonRoutes}
         </Switch>
         {isLoggedIn && <WalletsFetch />}
         {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
         {this.props.verifyEmail && <EmailVerificationModal />}
+        {this.props.needVerification && <NeedVerificationModal />}
       </div>
     );
   }
@@ -604,6 +609,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state): Red
   abilities: selectAbilities(state),
   verifyEmailAuth0: selectVerifyEmailAuth0(state),
   verifyEmail: selectVerifyEmail(state),
+  needVerification: selectUserNeedVerification(state),
 });
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch): DispatchProps => ({

@@ -8,6 +8,7 @@ window.env = {
     accountUrl: 'https://bitzlato.com/api/whaler/private/v1',
     accountPublicUrl: 'https://bitzlato.com/api/whaler/public/v1',
     p2pUrl: 'https://bitzlato.com/api2/p2p',
+    p2pAuthUrl: 'https://bitzlato.com/api2/auth',
   },
   auth0: {
     domain: 'auth.bitzlato.bz',

@@ -18,6 +18,7 @@ export const defaultConfig: Config = {
     accountUrl: '',
     accountPublicUrl: '',
     p2pUrl: '',
+    p2pAuthUrl: '',
   },
   finex: false,
   withCredentials: false,
@@ -76,6 +77,7 @@ export const rangerUrl = () => Cryptobase.config.api.rangerUrl;
 export const finexUrl = () => Cryptobase.config.api.finexUrl || tradeUrl();
 export const accountUrl = () => Cryptobase.config.api.accountUrl;
 export const p2pUrl = () => Cryptobase.config.api.p2pUrl;
+export const p2pAuthUrl = () => Cryptobase.config.api.p2pAuthUrl;
 export const accountPublicUrl = () => Cryptobase.config.api.accountPublicUrl;
 export const withCredentials = () => convertToBoolean(Cryptobase.config.withCredentials);
 export const incrementalOrderBook = () => convertToBoolean(Cryptobase.config.incrementalOrderBook);

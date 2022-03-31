@@ -21,6 +21,7 @@ import {
   PROFILE_USER_DATA,
   PROFILE_USER_ERROR,
   PROFILE_USER_FETCH,
+  PROFILE_TOGGLE_NEED_VERIFICATION,
 } from './constants';
 import { User } from './types';
 
@@ -41,6 +42,7 @@ export interface ProfileState {
     isFetching: boolean;
     success?: boolean;
     verifyEmail: boolean;
+    needVerification: boolean;
   };
 }
 
@@ -109,6 +111,7 @@ export const initialStateProfile: ProfileState = {
     user: defaultUser,
     isFetching: true,
     verifyEmail: false,
+    needVerification: false,
   },
 };
 
@@ -264,6 +267,11 @@ const userReducer = (
         ...state,
         success: false,
       };
+    case PROFILE_TOGGLE_NEED_VERIFICATION:
+      return {
+        ...state,
+        needVerification: action.payload.needVerification,
+      };
     default:
       return state;
   }
@@ -308,6 +316,7 @@ export const profileReducer = (
     case PROFILE_CHANGE_USER_FETCH:
     case PROFILE_CHANGE_USER_DATA:
     case PROFILE_CHANGE_USER_ERROR:
+    case PROFILE_TOGGLE_NEED_VERIFICATION:
       const userState = { ...state.userData };
 
       return {
