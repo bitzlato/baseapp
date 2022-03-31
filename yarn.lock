@@ -3028,6 +3028,45 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pmmmwh/react-refresh-webpack-plugin@git+https://github.com/rajzik/react-refresh-webpack-plugin.git#5ca99e83ec143116968bcccc71487c14593b20b7":
+  version: 0.5.5
+  resolution: "@pmmmwh/react-refresh-webpack-plugin@https://github.com/rajzik/react-refresh-webpack-plugin.git#commit=5ca99e83ec143116968bcccc71487c14593b20b7"
+  dependencies:
+    ansi-html-community: ^0.0.8
+    common-path-prefix: ^3.0.0
+    core-js-pure: ^3.8.1
+    error-stack-parser: ^2.0.6
+    find-up: ^5.0.0
+    html-entities: ^2.1.0
+    loader-utils: ^2.0.0
+    schema-utils: ^3.0.0
+    source-map: ^0.7.3
+  peerDependencies:
+    "@types/webpack": 4.x || 5.x
+    react-refresh: ">=0.12.0 <1.0.0"
+    sockjs-client: ^1.4.0
+    type-fest: ">=0.17.0 <3.0.0"
+    webpack: ">=4.43.0 <6.0.0"
+    webpack-dev-server: 3.x || 4.x
+    webpack-hot-middleware: 2.x
+    webpack-plugin-serve: 0.x || 1.x
+  peerDependenciesMeta:
+    "@types/webpack":
+      optional: true
+    sockjs-client:
+      optional: true
+    type-fest:
+      optional: true
+    webpack-dev-server:
+      optional: true
+    webpack-hot-middleware:
+      optional: true
+    webpack-plugin-serve:
+      optional: true
+  checksum: 9dd0886835fef3ba89f98fe597ef0e550b7ab47a54d2e6e186dee214f522f00eeb5263e2715035437f39d31ee622f6ac7625e40be1823967b5e935c298e248e0
+  languageName: node
+  linkType: hard
+
 "@pmmmwh/react-refresh-webpack-plugin@npm:^0.5.4":
   version: 0.5.4
   resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.5.4"
@@ -8525,6 +8564,16 @@ __metadata:
     graceful-fs: ^4.2.4
     tapable: ^2.2.0
   checksum: 06435f52670229eb7fd8d92ea2d988a275f9a1b8c08b9023ba45767c6ed844bc87aa9c9c7e6d044eef99ad73fc3b066b78101163696e5c53121909e5bf8efe8b
+  languageName: node
+  linkType: hard
+
+"enhanced-resolve@npm:^5.9.2":
+  version: 5.9.2
+  resolution: "enhanced-resolve@npm:5.9.2"
+  dependencies:
+    graceful-fs: ^4.2.4
+    tapable: ^2.2.0
+  checksum: 792b7a01abb4ee4433b658c71f92d5948675938e0c03cad1732abe843b87395f15cb880ace4f819f78ead94163278283afc79b8be63c0eddca8ab45f7d8c515d
   languageName: node
   linkType: hard
 
@@ -17401,6 +17450,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-refresh@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "react-refresh@npm:0.12.0"
+  checksum: 046522ed9e26c2846afb734303d9461a825a96f863ea373b9296a90e7112e1602bdf5954d8b48193e763f3ff0108f2e4c00e42f0e3d45382bb9d38dc87348867
+  languageName: node
+  linkType: hard
+
 "react-remove-scroll-bar@npm:^2.1.0":
   version: 2.2.0
   resolution: "react-remove-scroll-bar@npm:2.2.0"
@@ -21148,6 +21204,7 @@ __metadata:
     "@formatjs/intl-relativetimeformat": ^7.0.0
     "@ionic/cli": ^6.11.11
     "@metamask/onboarding": ^1.0.1
+    "@pmmmwh/react-refresh-webpack-plugin": "git+https://github.com/rajzik/react-refresh-webpack-plugin.git#5ca99e83ec143116968bcccc71487c14593b20b7"
     "@statoscope/webpack-plugin": ^5.14.1
     "@svgr/webpack": ^6.2.1
     "@swc/core": ^1.2.140
@@ -21229,6 +21286,7 @@ __metadata:
     react-maskinput: ^1.0.1
     react-perfect-scrollbar: ^1.5.8
     react-redux: ^7.2.1
+    react-refresh: ^0.12.0
     react-router: ^5.1.2
     react-router-dom: ^5.1.2
     react-scroll: ^1.8.1
@@ -21250,7 +21308,7 @@ __metadata:
     use-debounce: ^7.0.1
     use-mutation: ^2.2.1
     uuid: ^8.3.2
-    webpack: ^5.69.0
+    webpack: ^5.70.0
     webpack-bugsnag-plugins: ^1.8.0
     webpack-cli: ^4.9.2
     webpack-dev-server: ^4.7.4
@@ -21480,6 +21538,43 @@ __metadata:
   bin:
     webpack: bin/webpack.js
   checksum: 0b0fc2ffcb926fc7506ec56901ae9a69f1ae969a6afc63395a3ed56f938d385c1d16d1dea39fd56dbb9362189c05da49174219904e5a337040aed5a46080e926
+  languageName: node
+  linkType: hard
+
+"webpack@npm:^5.70.0":
+  version: 5.70.0
+  resolution: "webpack@npm:5.70.0"
+  dependencies:
+    "@types/eslint-scope": ^3.7.3
+    "@types/estree": ^0.0.51
+    "@webassemblyjs/ast": 1.11.1
+    "@webassemblyjs/wasm-edit": 1.11.1
+    "@webassemblyjs/wasm-parser": 1.11.1
+    acorn: ^8.4.1
+    acorn-import-assertions: ^1.7.6
+    browserslist: ^4.14.5
+    chrome-trace-event: ^1.0.2
+    enhanced-resolve: ^5.9.2
+    es-module-lexer: ^0.9.0
+    eslint-scope: 5.1.1
+    events: ^3.2.0
+    glob-to-regexp: ^0.4.1
+    graceful-fs: ^4.2.9
+    json-parse-better-errors: ^1.0.2
+    loader-runner: ^4.2.0
+    mime-types: ^2.1.27
+    neo-async: ^2.6.2
+    schema-utils: ^3.1.0
+    tapable: ^2.1.1
+    terser-webpack-plugin: ^5.1.3
+    watchpack: ^2.3.1
+    webpack-sources: ^3.2.3
+  peerDependenciesMeta:
+    webpack-cli:
+      optional: true
+  bin:
+    webpack: bin/webpack.js
+  checksum: 00439884a9cdd5305aed3ce93735635785a15c5464a6d2cfce87e17727a07585de02420913e82aa85ddd2ae7322175d2cfda6ac0878a17f061cb605e6a7db57a
   languageName: node
   linkType: hard
 
