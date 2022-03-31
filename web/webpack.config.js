@@ -10,6 +10,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
 const { BugsnagSourceMapUploaderPlugin } = require('webpack-bugsnag-plugins');
 const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const deps = require('./package.json').dependencies;
 
@@ -190,6 +191,7 @@ module.exports = {
   },
 
   optimization: {
+    runtimeChunk: "single",
     moduleIds: isDevelopment ? 'named' : 'deterministic',
     chunkIds: isDevelopment ? 'named' : 'deterministic',
     minimize: !isDevelopment,
@@ -238,6 +240,9 @@ module.exports = {
       AUTH0_DOMAIN: null,
       AUTH0_CLIENT_ID: null,
     }),
+
+    isDevelopment &&
+      new ReactRefreshPlugin(),
 
     new webpack.IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
