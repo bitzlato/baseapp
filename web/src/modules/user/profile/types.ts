@@ -54,6 +54,7 @@ export interface BitzlatoUser {
       original: string;
       thumbnail: string;
     };
+    suspicious: boolean;
   };
   user_setting: {
     id: number;
