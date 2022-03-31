@@ -63,6 +63,6 @@ export const modal = styleVariants(modalMaxWidths, (maxWidth) => [modalBase, { m
 
 export const cross = style({
   position: 'absolute',
-  top: 0,
-  right: 0,
+  top: 8,
+  right: 8,
 });

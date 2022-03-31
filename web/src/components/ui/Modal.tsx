@@ -52,16 +52,12 @@ export const Modal: FC<ModalProps> = ({ children, show = false, size = 'md', onC
               <Box
                 as="button"
                 type="button"
-                position="absolute"
-                top={0}
-                right={0}
+                className={s.cross}
                 color={{
                   default: 'text',
                   hover: 'textHighlighted',
                 }}
-                px="4x"
-                pt="5x"
-                pb="4x"
+                p="4x"
                 onClick={handleClose}
               >
                 <CrossIcon width="16px" height="16px" />
@@ -76,7 +72,7 @@ export const Modal: FC<ModalProps> = ({ children, show = false, size = 'md', onC
 };
 
 export const ModalHeader: FC = ({ children }) => (
-  <Box px="6x" py="4x">
+  <Box px="6x" pt="5x" pb="4x">
     <Text variant="title">{children}</Text>
   </Box>
 );
@@ -123,7 +119,7 @@ export const ModalBody: FC<ModalBodyProps> = ({ children, loading = false }) => 
 };
 
 export const ModalFooter: FC = ({ children }) => (
-  <Box display="flex" alignItems="center" justifyContent="flex-end" px="6x" py="4x">
+  <Box display="flex" alignItems="center" justifyContent="flex-end" px="6x" pt="4x" pb="6x">
     {children}
   </Box>
 );
