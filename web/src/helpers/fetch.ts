@@ -18,9 +18,9 @@ export const fetchJson = async (input: RequestInfo, init: RequestInit) => {
         const item = errors[0];
         if (typeof item === 'string') {
           throw new FetchError(errors, res.status, rest);
-        } else if (typeof item?.details === 'string') {
+        } else if (typeof item?.detail === 'string') {
           throw new FetchError(
-            errors.map((d) => d.details),
+            errors.map((d) => d.detail),
             res.status,
             rest,
           );
