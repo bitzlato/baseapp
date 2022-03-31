@@ -33,7 +33,7 @@ export const useSaveSettings = () => {
       dispatch(userRefetch());
     },
     onFailure: ({ error }) => {
-      alertFetchError(dispatch, error.code);
+      alertFetchError(dispatch, error);
     },
   });
 

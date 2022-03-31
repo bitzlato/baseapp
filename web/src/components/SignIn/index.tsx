@@ -257,7 +257,7 @@ const SignIn: React.FC<SignInProps> = ({
               value={code}
               onChange={setCode}
               autoFocus
-              maxlength="6"
+              maxLength={6}
             />
           ) : null}
           {isMobileDevice && renderForgotButton}

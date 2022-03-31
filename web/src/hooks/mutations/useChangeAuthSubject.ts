@@ -24,7 +24,7 @@ export const useChangeAuthSubject = () => {
       window.location.reload();
     },
     onFailure: ({ error }) => {
-      alertFetchError(dispatch, error.code);
+      alertFetchError(dispatch, error);
     },
   });
 
