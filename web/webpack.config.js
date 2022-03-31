@@ -191,7 +191,7 @@ module.exports = {
   },
 
   optimization: {
-    runtimeChunk: "single",
+    runtimeChunk: 'single',
     moduleIds: isDevelopment ? 'named' : 'deterministic',
     chunkIds: isDevelopment ? 'named' : 'deterministic',
     minimize: !isDevelopment,
@@ -241,8 +241,7 @@ module.exports = {
       AUTH0_CLIENT_ID: null,
     }),
 
-    isDevelopment &&
-      new ReactRefreshPlugin(),
+    isDevelopment && new ReactRefreshPlugin(),
 
     new webpack.IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
@@ -301,6 +300,7 @@ module.exports = {
                   proxyReq.removeHeader('origin');
                   proxyReq.setHeader('origin', `https://${process.env.PROXY_HOST}`);
                   socket.on('error', (error) => {
+                    // eslint-disable-next-line no-console
                     console.error(error);
                   });
                 },

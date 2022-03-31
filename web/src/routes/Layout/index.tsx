@@ -65,6 +65,7 @@ import {
   ChangeForgottenPasswordScreen,
   ConfirmScreen,
   DeepLinkPreview,
+  DocumentationScreen,
   EmailVerificationScreen,
   ForgotPasswordScreen,
   HistoryScreen,
@@ -472,6 +473,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/email-verification"
             component={EmailVerificationScreen}
           />
+          <Route path="/docs" component={DocumentationScreen as any} />
           <Route path="/restriction" component={RestrictedScreen as any} />
           <Route path="/maintenance" component={MaintenanceScreen as any} />
           <Route exact path="/trading/:market?" component={TradingScreen as any} />
