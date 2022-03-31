@@ -65,6 +65,7 @@ describe('Module: User', () => {
           original: '',
           thumbnail: '',
         },
+        suspicious: false,
       },
       user_setting: {
         id: 123123,

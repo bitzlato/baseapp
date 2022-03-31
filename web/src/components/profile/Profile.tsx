@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import ThumbUp from 'web/src/assets/svg/ThumbUp.svg';
 import ThumbDown from 'web/src/assets/svg/ThumbDown.svg';
+import WarningCircleIcon from 'web/src/assets/svg/WarningCircleIcon.svg';
 import { useTradeStats } from 'web/src/hooks/data/useFetchTradeStatistics';
 import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
@@ -88,10 +89,21 @@ export const Profile: FC = () => {
       <Box className={s.stats} mb={isMobileDevice ? '8x' : undefined}>
         <div className={s.stat}>
           <Stat>
-            <ProfileVerification
-              status={bitzlatoUser?.user_profile.verified ?? false}
-              url={user.kyc_verification_url}
-            />
+            {!bitzlatoUser?.user_profile.suspicious ? (
+              <ProfileVerification
+                status={bitzlatoUser?.user_profile.verified ?? false}
+                url={user.kyc_verification_url}
+              />
+            ) : (
+              <>
+                <Box display="flex" justifyContent="center" mb="6x">
+                  <WarningCircleIcon />
+                </Box>
+                <Text variant="label" color="warning" fontWeight="strong" textAlign="center">
+                  {t('profile.verification_suspicious')}
+                </Text>
+              </>
+            )}
           </Stat>
         </div>
         {!isMobileDevice && (

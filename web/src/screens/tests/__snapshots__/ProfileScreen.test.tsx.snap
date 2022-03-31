@@ -27,7 +27,7 @@ exports[`ProfileScreen test should render 1`] = `
             class="reset_base__1sfgjt80 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif23"
           >
             <h4
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_h4__1qy84opa Text_text_gutterBottom_false__1qy84opj  Profile_publicName__crp8vk2"
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_h4__1qy84opa Text_text_gutterBottom_false__1qy84opj  Profile_publicName__crp8vk2"
             >
               OddKraig
             </h4>
@@ -42,11 +42,11 @@ exports[`ProfileScreen test should render 1`] = `
             class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aiffk"
           >
             <h6
-              class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsg Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_title__1qy84ope Text__1qy84op2 sprinkles_fontSize_large_mobile__w76aifrs sprinkles_fontWeight_regular__w76aif19s Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_title__1qy84ope Text__1qy84op2 sprinkles_fontSize_large_mobile__w76aifrs sprinkles_fontWeight_regular__w76aif1a0 Text_text_gutterBottom_false__1qy84opj "
             />
           </div>
           <span
-            class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsg Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+            class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
           >
             UID:  
           </span>
@@ -61,7 +61,7 @@ exports[`ProfileScreen test should render 1`] = `
               class="reset_base__1sfgjt80 sprinkles_marginBottom_3x_mobile__w76aiffp sprinkles_marginBottom_0_tablet__w76aifew sprinkles_marginRight_0_mobile__w76aifjv sprinkles_marginRight_3x_tablet__w76aifkq"
             >
               <button
-                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19r sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif19t Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif19v sprinkles_borderRadius_1x__w76aif199 Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxq sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxt sprinkles_color_btnSecondaryText_default__w76aiftw"
+                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19z sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif1a1 Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif1a3 sprinkles_borderRadius_1x__w76aif19h Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxu sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxx sprinkles_color_btnSecondaryText_default__w76aifty"
                 type="button"
               >
                 Referral Links
@@ -71,7 +71,7 @@ exports[`ProfileScreen test should render 1`] = `
               class="reset_base__1sfgjt80 sprinkles_marginBottom_3x_mobile__w76aiffp sprinkles_marginBottom_0_tablet__w76aifew sprinkles_marginRight_0_mobile__w76aifjv sprinkles_marginRight_3x_tablet__w76aifkq"
             >
               <button
-                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19r sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif19t Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif19v sprinkles_borderRadius_1x__w76aif199 Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxq sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxt sprinkles_color_btnSecondaryText_default__w76aiftw"
+                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19z sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif1a1 Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif1a3 sprinkles_borderRadius_1x__w76aif19h Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxu sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxx sprinkles_color_btnSecondaryText_default__w76aifty"
                 type="button"
               >
                 Change password
@@ -81,7 +81,7 @@ exports[`ProfileScreen test should render 1`] = `
               class="reset_base__1sfgjt80"
             >
               <button
-                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19r sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif19t Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif19v sprinkles_borderRadius_1x__w76aif199 Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxq sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxt sprinkles_color_btnSecondaryText_default__w76aiftw"
+                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19z sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif1a1 Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif1a3 sprinkles_borderRadius_1x__w76aif19h Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxu sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxx sprinkles_color_btnSecondaryText_default__w76aifty"
                 type="button"
               >
                 Block account
@@ -96,15 +96,15 @@ exports[`ProfileScreen test should render 1`] = `
             class="Profile_stat__crp8vk1"
           >
             <div
-              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_5x_mobile__w76aif3h sprinkles_paddingBottom_5x_mobile__w76aif5z sprinkles_backgroundColor_statBg_default__w76aifza sprinkles_borderRadius_1x__w76aif199 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifu sprinkles_justifyContent_space-between_mobile__w76aif1o Stat_stat__z1d39u0"
+              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_5x_mobile__w76aif3h sprinkles_paddingBottom_5x_mobile__w76aif5z sprinkles_backgroundColor_statBg_default__w76aifze sprinkles_borderRadius_1x__w76aif19h sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifu sprinkles_justifyContent_space-between_mobile__w76aif1o Stat_stat__z1d39u0"
             >
               <span
-                class="reset_base__1sfgjt80 sprinkles_color_danger_default__w76aifs8 sprinkles_textAlign_center__w76aif19x sprinkles_fontWeight_strong__w76aif19t Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                class="reset_base__1sfgjt80 sprinkles_color_danger_default__w76aifs8 sprinkles_textAlign_center__w76aif1a5 sprinkles_fontWeight_strong__w76aif1a1 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
               >
                 Verification not passed
               </span>
               <button
-                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19r sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif19t Button_button_variant_contained__9n3otyj  Button_button_color_danger__9n3otyn Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif19v sprinkles_borderRadius_1x__w76aif199 Button_button_disabled_false__9n3otys  Button_button_fullWidth_true__9n3otyt Button__9n3oty5 sprinkles_width_full_mobile__w76aifmn Button_button_compound_8__9n3otyz Button__9n3otye sprinkles_backgroundColor_btnDangerBg_default__w76aify2 sprinkles_backgroundColor_btnDangerBgHover_hover__w76aify5 sprinkles_color_btnDangerText_default__w76aifu8"
+                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19z sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif1a1 Button_button_variant_contained__9n3otyj  Button_button_color_danger__9n3otyn Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif1a3 sprinkles_borderRadius_1x__w76aif19h Button_button_disabled_false__9n3otys  Button_button_fullWidth_true__9n3otyt Button__9n3oty5 sprinkles_width_full_mobile__w76aifmn Button_button_compound_8__9n3otyz Button__9n3otye sprinkles_backgroundColor_btnDangerBg_default__w76aify6 sprinkles_backgroundColor_btnDangerBgHover_hover__w76aify9 sprinkles_color_btnDangerText_default__w76aifua"
                 type="button"
               >
                 Verify
@@ -115,15 +115,15 @@ exports[`ProfileScreen test should render 1`] = `
             class="Profile_stat__crp8vk1"
           >
             <div
-              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_5x_mobile__w76aif3h sprinkles_paddingBottom_5x_mobile__w76aif5z sprinkles_backgroundColor_statBg_default__w76aifza sprinkles_borderRadius_1x__w76aif199 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifu sprinkles_justifyContent_space-between_mobile__w76aif1o Stat_stat__z1d39u0"
+              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_5x_mobile__w76aif3h sprinkles_paddingBottom_5x_mobile__w76aif5z sprinkles_backgroundColor_statBg_default__w76aifze sprinkles_borderRadius_1x__w76aif19h sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifu sprinkles_justifyContent_space-between_mobile__w76aif1o Stat_stat__z1d39u0"
             >
               <span
-                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
               >
                 Rating
               </span>
               <div
-                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc sprinkles_textOverflow_ellipsis__w76aif1a1 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse sprinkles_textOverflow_ellipsis__w76aif1a9 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
                 title="0.0"
               >
                 0.0
@@ -134,10 +134,10 @@ exports[`ProfileScreen test should render 1`] = `
             class="Profile_stat__crp8vk1"
           >
             <div
-              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_5x_mobile__w76aif3h sprinkles_paddingBottom_5x_mobile__w76aif5z sprinkles_backgroundColor_statBg_default__w76aifza sprinkles_borderRadius_1x__w76aif199 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifu sprinkles_justifyContent_space-between_mobile__w76aif1o Stat_stat__z1d39u0"
+              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_5x_mobile__w76aif3h sprinkles_paddingBottom_5x_mobile__w76aif5z sprinkles_backgroundColor_statBg_default__w76aifze sprinkles_borderRadius_1x__w76aif19h sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifu sprinkles_justifyContent_space-between_mobile__w76aif1o Stat_stat__z1d39u0"
             >
               <span
-                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
               >
                 Comments
               </span>
@@ -148,19 +148,19 @@ exports[`ProfileScreen test should render 1`] = `
                   class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_marginRight_5x_mobile__w76aifkz"
                 >
                   <div
-                    class="reset_base__1sfgjt80 sprinkles_marginRight_2x_mobile__w76aifkk sprinkles_color_statIcon_default__w76aifva sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif23"
+                    class="reset_base__1sfgjt80 sprinkles_marginRight_2x_mobile__w76aifkk sprinkles_color_statIcon_default__w76aifvc sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif23"
                   >
                     <test-file-stub />
                   </div>
                   <div
-                    class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
+                    class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
                   >
                     <span
                       aria-busy="true"
                       aria-live="polite"
                     >
                       <span
-                        class="reset_base__1sfgjt80 sprinkles_width_10x_mobile__w76aifo6 sprinkles_borderRadius_1x__w76aif199 Skeleton_skeleton__1ugc7791"
+                        class="reset_base__1sfgjt80 sprinkles_width_10x_mobile__w76aifo6 sprinkles_borderRadius_1x__w76aif19h Skeleton_skeleton__1ugc7791"
                       >
                         ‌
                       </span>
@@ -172,19 +172,19 @@ exports[`ProfileScreen test should render 1`] = `
                   class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5"
                 >
                   <div
-                    class="reset_base__1sfgjt80 sprinkles_marginRight_2x_mobile__w76aifkk sprinkles_color_statIcon_default__w76aifva sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif23"
+                    class="reset_base__1sfgjt80 sprinkles_marginRight_2x_mobile__w76aifkk sprinkles_color_statIcon_default__w76aifvc sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif23"
                   >
                     <test-file-stub />
                   </div>
                   <div
-                    class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
+                    class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
                   >
                     <span
                       aria-busy="true"
                       aria-live="polite"
                     >
                       <span
-                        class="reset_base__1sfgjt80 sprinkles_width_10x_mobile__w76aifo6 sprinkles_borderRadius_1x__w76aif199 Skeleton_skeleton__1ugc7791"
+                        class="reset_base__1sfgjt80 sprinkles_width_10x_mobile__w76aifo6 sprinkles_borderRadius_1x__w76aif19h Skeleton_skeleton__1ugc7791"
                       >
                         ‌
                       </span>
@@ -199,22 +199,22 @@ exports[`ProfileScreen test should render 1`] = `
             class="Profile_stat__crp8vk1"
           >
             <div
-              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_5x_mobile__w76aif3h sprinkles_paddingBottom_5x_mobile__w76aif5z sprinkles_backgroundColor_statBg_default__w76aifza sprinkles_borderRadius_1x__w76aif199 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifu sprinkles_justifyContent_space-between_mobile__w76aif1o Stat_stat__z1d39u0"
+              class="reset_base__1sfgjt80 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_5x_mobile__w76aif3h sprinkles_paddingBottom_5x_mobile__w76aif5z sprinkles_backgroundColor_statBg_default__w76aifze sprinkles_borderRadius_1x__w76aif19h sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_column_mobile__w76aifu sprinkles_justifyContent_space-between_mobile__w76aif1o Stat_stat__z1d39u0"
             >
               <span
-                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
               >
                 Deals completed
               </span>
               <span
-                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "
               >
                 <span
                   aria-busy="true"
                   aria-live="polite"
                 >
                   <span
-                    class="reset_base__1sfgjt80 sprinkles_width_full_mobile__w76aifmn sprinkles_borderRadius_1x__w76aif199 Skeleton_skeleton__1ugc7791"
+                    class="reset_base__1sfgjt80 sprinkles_width_full_mobile__w76aifmn sprinkles_borderRadius_1x__w76aif19h Skeleton_skeleton__1ugc7791"
                   >
                     ‌
                   </span>
@@ -244,13 +244,13 @@ exports[`ProfileScreen test should render 1`] = `
         class="col colSpacing2 padding3"
       >
         <div
-          class="reset_base__1sfgjt80 sprinkles_paddingLeft_5x_mobile__w76aif8h sprinkles_paddingRight_5x_mobile__w76aifaz sprinkles_paddingTop_8x_mobile__w76aif3w sprinkles_paddingBottom_8x_mobile__w76aif6e sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1o sprinkles_borderBottomWidth_1x__w76aif191 sprinkles_borderBottomStyle_solid__w76aif193 sprinkles_borderBottomColor_modalHeaderBorderBottom_default__w76aif17o ProfileSettings_block__8rz5n50"
+          class="reset_base__1sfgjt80 sprinkles_paddingLeft_5x_mobile__w76aif8h sprinkles_paddingRight_5x_mobile__w76aifaz sprinkles_paddingTop_8x_mobile__w76aif3w sprinkles_paddingBottom_8x_mobile__w76aif6e sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1o sprinkles_borderBottomWidth_1x__w76aif199 sprinkles_borderBottomStyle_solid__w76aif19b sprinkles_borderBottomColor_modalHeaderBorderBottom_default__w76aif17w ProfileSettings_block__8rz5n50"
         >
           <div
             class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aifg4 ProfileSettings_label__8rz5n51"
           >
             <span
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc sprinkles_fontWeight_strong__w76aif19t Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse sprinkles_fontWeight_strong__w76aif1a1 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
             >
               General
             </span>
@@ -471,7 +471,7 @@ exports[`ProfileScreen test should render 1`] = `
                       for="save_requisites"
                     >
                       <span
-                        class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                        class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                       >
                         Save payment details
                       </span>
@@ -502,13 +502,13 @@ exports[`ProfileScreen test should render 1`] = `
           </div>
         </div>
         <div
-          class="reset_base__1sfgjt80 sprinkles_paddingLeft_5x_mobile__w76aif8h sprinkles_paddingRight_5x_mobile__w76aifaz sprinkles_paddingTop_8x_mobile__w76aif3w sprinkles_paddingBottom_8x_mobile__w76aif6e sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1o sprinkles_borderBottomWidth_1x__w76aif191 sprinkles_borderBottomStyle_solid__w76aif193 sprinkles_borderBottomColor_modalHeaderBorderBottom_default__w76aif17o ProfileSettings_block__8rz5n50"
+          class="reset_base__1sfgjt80 sprinkles_paddingLeft_5x_mobile__w76aif8h sprinkles_paddingRight_5x_mobile__w76aifaz sprinkles_paddingTop_8x_mobile__w76aif3w sprinkles_paddingBottom_8x_mobile__w76aif6e sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1o sprinkles_borderBottomWidth_1x__w76aif199 sprinkles_borderBottomStyle_solid__w76aif19b sprinkles_borderBottomColor_modalHeaderBorderBottom_default__w76aif17w ProfileSettings_block__8rz5n50"
         >
           <div
             class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aifg4 ProfileSettings_label__8rz5n51"
           >
             <span
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc sprinkles_fontWeight_strong__w76aif19t Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse sprinkles_fontWeight_strong__w76aif1a1 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
             >
               Security
             </span>
@@ -533,13 +533,13 @@ exports[`ProfileScreen test should render 1`] = `
                       for="2fa"
                     >
                       <span
-                        class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                        class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                       >
                         Two-factor authentication
                       </span>
                     </label>
                     <span
-                      class="reset_base__1sfgjt80 sprinkles_color_danger_default__w76aifs8 sprinkles_fontWeight_strong__w76aif19t Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                      class="reset_base__1sfgjt80 sprinkles_color_danger_default__w76aifs8 sprinkles_fontWeight_strong__w76aif1a1 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                     >
                       Disabled
                     </span>
@@ -579,13 +579,13 @@ exports[`ProfileScreen test should render 1`] = `
                       for="safe_mode_enabled"
                     >
                       <span
-                        class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                        class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                       >
                         Safe Mode
                       </span>
                     </label>
                     <span
-                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsg Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                     >
                       When safe mode is enabled, only trusted traders are available to you.
                     </span>
@@ -615,18 +615,18 @@ exports[`ProfileScreen test should render 1`] = `
           </div>
         </div>
         <div
-          class="reset_base__1sfgjt80 sprinkles_paddingLeft_5x_mobile__w76aif8h sprinkles_paddingRight_5x_mobile__w76aifaz sprinkles_paddingTop_8x_mobile__w76aif3w sprinkles_paddingBottom_8x_mobile__w76aif6e sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1o sprinkles_borderBottomColor_modalHeaderBorderBottom_default__w76aif17o ProfileSettings_block__8rz5n50"
+          class="reset_base__1sfgjt80 sprinkles_paddingLeft_5x_mobile__w76aif8h sprinkles_paddingRight_5x_mobile__w76aifaz sprinkles_paddingTop_8x_mobile__w76aif3w sprinkles_paddingBottom_8x_mobile__w76aif6e sprinkles_display_flex_mobile__w76aif5 sprinkles_justifyContent_space-between_mobile__w76aif1o sprinkles_borderBottomColor_modalHeaderBorderBottom_default__w76aif17w ProfileSettings_block__8rz5n50"
         >
           <div
             class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aifg4 ProfileSettings_label__8rz5n51"
           >
             <p
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc sprinkles_fontWeight_strong__w76aif19t Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse sprinkles_fontWeight_strong__w76aif1a1 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
             >
               Notifications
             </p>
             <p
-              class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsg Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
             >
               Night time is from 11PM to 9AM according to your local time.
             </p>
@@ -647,7 +647,7 @@ exports[`ProfileScreen test should render 1`] = `
                     class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aiffk"
                   >
                     <span
-                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                     >
                       New referrals
                     </span>
@@ -656,7 +656,7 @@ exports[`ProfileScreen test should render 1`] = `
                     class="reset_base__1sfgjt80 sprinkles_marginBottom_4x_mobile__w76aiffu"
                   >
                     <span
-                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsg Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                     >
                       Notifications of new referrals after the user has registered in the service by your referral link.
                     </span>
@@ -754,7 +754,7 @@ exports[`ProfileScreen test should render 1`] = `
                     class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aiffk"
                   >
                     <span
-                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                     >
                       Referral Payments
                     </span>
@@ -763,7 +763,7 @@ exports[`ProfileScreen test should render 1`] = `
                     class="reset_base__1sfgjt80 sprinkles_marginBottom_4x_mobile__w76aiffu"
                   >
                     <span
-                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsg Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                     >
                       Payout notifications after the user has completed a trade.
                     </span>
@@ -861,7 +861,7 @@ exports[`ProfileScreen test should render 1`] = `
                     class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aiffk"
                   >
                     <span
-                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                     >
                       Free trades
                     </span>
@@ -870,7 +870,7 @@ exports[`ProfileScreen test should render 1`] = `
                     class="reset_base__1sfgjt80 sprinkles_marginBottom_4x_mobile__w76aiffu"
                   >
                     <span
-                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsg Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                     >
                       Notification that your trade was free and the commission has returned to the balance.
                     </span>
@@ -968,7 +968,7 @@ exports[`ProfileScreen test should render 1`] = `
                     class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aiffk"
                   >
                     <span
-                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                      class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                     >
                       Service messages
                     </span>
@@ -977,7 +977,7 @@ exports[`ProfileScreen test should render 1`] = `
                     class="reset_base__1sfgjt80 sprinkles_marginBottom_4x_mobile__w76aiffu"
                   >
                     <span
-                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsg Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+                      class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
                     >
                       Very rare, but sometimes Bitzlato sends important messages to users, but we value the comfort of users more, so you can change the settings for receiving such messages.
                     </span>
@@ -1098,7 +1098,7 @@ exports[`ProfileScreen test should render 1`] = `
           class="reset_base__1sfgjt80 sprinkles_marginTop_4x_mobile__w76aifdc"
         >
           <button
-            class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19r sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif19t Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif19v sprinkles_borderRadius_1x__w76aif199 Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxq sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxt sprinkles_color_btnSecondaryText_default__w76aiftw"
+            class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19z sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif1a1 Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif1a3 sprinkles_borderRadius_1x__w76aif19h Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxu sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxx sprinkles_color_btnSecondaryText_default__w76aifty"
             type="button"
           >
             Create API key

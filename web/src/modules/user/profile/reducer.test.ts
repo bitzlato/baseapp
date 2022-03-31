@@ -61,6 +61,7 @@ describe('Profile reducer', () => {
             original: '',
             thumbnail: '',
           },
+          suspicious: false,
         },
         user_setting: {
           id: 123123,

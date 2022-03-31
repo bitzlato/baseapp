@@ -55,6 +55,7 @@ describe('Profile actions', () => {
                 original: '',
                 thumbnail: '',
               },
+              suspicious: false,
             },
             user_setting: {
               id: 123123,
@@ -198,6 +199,7 @@ describe('Profile actions', () => {
                 original: '',
                 thumbnail: '',
               },
+              suspicious: false,
             },
             user_setting: {
               id: 123123,
@@ -259,6 +261,7 @@ describe('Profile actions', () => {
                 original: '',
                 thumbnail: '',
               },
+              suspicious: false,
             },
             user_setting: {
               id: 123123,
