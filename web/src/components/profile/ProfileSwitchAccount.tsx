@@ -67,10 +67,6 @@ export const ProfileSwitchAccount: FC<Props> = ({ authSubjects, currentSubject }
     setOpen((prev) => !prev);
   };
 
-  if (authSubjects.length < 2) {
-    return null;
-  }
-
   return (
     <Box ref={elementRef} position="relative">
       <Button color="secondary" onClick={handleClick}>

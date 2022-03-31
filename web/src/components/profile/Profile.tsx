@@ -70,10 +70,13 @@ export const Profile: FC = () => {
           marginBottom={{ mobile: '3x', tablet: '0' }}
           marginRight={{ mobile: '0', tablet: '3x' }}
         >
-          <ProfileSwitchAccount
-            authSubjects={user.available_auth_subjects}
-            currentSubject={sessionsMe?.auth_sub}
-          />
+          {user.available_auth_subjects.length >= 2 && (
+            <ProfileSwitchAccount
+              authSubjects={user.available_auth_subjects}
+              currentSubject={sessionsMe?.auth_sub}
+            />
+          )}
+
           <ProfileReferalLinks />
           {user.bitzlato_user && (
             <FreezeAccount isSelfFrozen={user.bitzlato_user?.user_profile.self_frozen} />
