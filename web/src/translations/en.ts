@@ -900,6 +900,7 @@ export const en = {
   'resource.document.empty_doc_expire': 'Expiration Date is invalid',
   'password.requirements': 'Password does not meet the minimum requirements',
   'password.password.password_strength': 'Password is too weak',
+  'password.weak': 'Password is too weak',
 
   'email.taken': 'Email already have been taken',
 
@@ -1267,11 +1268,6 @@ export const en = {
   'Referral Links': 'Referral Links',
   'Switch account': 'Switch account',
   "It's you": "It's you",
-  'Password reset email sent': 'Password reset email sent',
-  'Password reset request': 'Password reset request',
-  'Password reset info':
-    'Please press button for send request of password reset. We will send to you email with link of password reset.',
-  'Password reset': 'Password reset',
   'Password change': 'Change password',
   'Create API key': 'Create API key',
   'Key name': 'Key name',

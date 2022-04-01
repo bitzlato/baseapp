@@ -79,7 +79,7 @@ export const Profile: FC = () => {
           )}
 
           <ProfileReferalLinks />
-          {user.bitzlato_user && <ChangePassword email={user.bitzlato_user.email} />}
+          <ChangePassword />
           {user.bitzlato_user && (
             <FreezeAccount isSelfFrozen={user.bitzlato_user.user_profile.self_frozen} />
           )}
