@@ -21,6 +21,7 @@ type BoxOwnProps<E = React.ElementType> = {
   spacing?: boolean | '2' | '3' | '4' | '5' | 'sm' | undefined;
   gap?: boolean | '2' | '3' | '4' | '5' | 'sm' | undefined;
   padding?: boolean | '2' | '3' | '4' | '5' | '2X3' | undefined;
+  margin?: '0' | undefined;
   my?: '2' | '4' | '7' | undefined;
   textSize?: 'sm' | 'lg' | 'xl' | undefined;
   textColor?: TextColor | undefined;
@@ -48,6 +49,7 @@ export const Box: Element = React.forwardRef(
       spacing,
       gap,
       padding,
+      margin,
       my,
       grow,
       flex,
@@ -82,6 +84,7 @@ export const Box: Element = React.forwardRef(
       gap && s.gap,
       gap && s[`gap${gap === true ? '' : capitalize(gap)}`],
       padding && s[`padding${padding === true ? '' : capitalize(padding)}`],
+      margin && s[`margin${margin}`],
       my && s[`my${my}`],
       textSize && sLabel[`${textSize}Size`],
       textColor && sLabel[`${textColor}Color`],

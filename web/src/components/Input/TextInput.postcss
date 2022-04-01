@@ -21,6 +21,14 @@
     &::placeholder {
       color: var(--input-placeholder-color);
     }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      caret-color: var(--input-text-color);
+      -webkit-text-fill-color: var(--input-text-color);
+      transition: background-color 5000s ease-in-out 0s;
+    }
   }
 
   & > input {
@@ -39,7 +47,7 @@
     padding: 0 calc(var(--gap) * 0.7);
     position: absolute;
     top: 0 !important;
-    z-index: 5000;
+    z-index: calc(var(--z-index-dropdown) - 1);
   }
 }
 
