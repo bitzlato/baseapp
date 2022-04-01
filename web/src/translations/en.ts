@@ -1301,6 +1301,15 @@ export const en = {
   'p2p.apiKeys.send_desc':
     "Send public key to server to save it there. If you already have a key, it will be removed after saving the new one. While key is not sent you can't authorise with it",
   'p2p.apiKeys.sended': 'Public key sent to server!',
+
+  'page_profile.button.select_avatar': 'Select avatar',
+  'page_profile.button.upload_avatar': 'Set avatar',
+  'page_profile.modal.info':
+    'You can set user avatar. But, take into consideration, avatars with adversting content will be restricted of service functionality. You can use only PNG, JPEG, JPG',
+  'page_profile.modal.format_error': 'Only png, jpg, jpeg',
+  'page_profile.button.set_avatar': 'Set avatar',
+  'page_profile.modal.title': 'Set avatar',
+
   Freeze: 'Block',
   'Freeze Account': 'Block account',
   'Freeze Info':

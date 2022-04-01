@@ -25,6 +25,8 @@ import { ProfileSwitchAccount } from './ProfileSwitchAccount';
 import { FreezeAccount } from './FreezeAccount';
 import { ChangePublicName } from './ChangePublicName';
 import { ChangePassword } from './ChangePassword';
+import { ChangeUserAvatar } from './ChangeUserAvatar';
+import { UserAvatar } from './UserAvatar';
 
 const formatRating = (rating: string) =>
   parseNumeric(rating, {
@@ -51,18 +53,20 @@ export const Profile: FC = () => {
       <Box
         display="flex"
         flexDirection={isMobileDevice ? 'column' : 'row'}
-        mb={isMobileDevice ? '4x' : '7x'}
+        mb={isMobileDevice ? '6x' : '0'}
       >
-        <Box flexGrow={1} mr={isMobileDevice ? '0' : '4x'} mb={isMobileDevice ? '4x' : '0'}>
+        <Box mr="6x" mb="6x">
+          <UserAvatar image={bitzlatoUser?.user_profile.avatar.original || ''} />
+        </Box>
+        <Box mb="6x">
           {bitzlatoUser && (
-            <Box display="flex" alignItems="center" pb="2x">
+            <Box display="flex" alignItems="center">
               <Text variant="h4" className={s.publicName}>
                 {bitzlatoUser.user_profile.public_name ?? bitzlatoUser.user_profile.generated_name}
               </Text>
               {bitzlatoUser?.user_profile.public_name === null && <ChangePublicName />}
             </Box>
           )}
-
           <Box mb="2x">
             <Text variant={isMobileDevice ? 'label' : 'title'} color="textMuted">
               {user.email}
@@ -72,7 +76,6 @@ export const Profile: FC = () => {
             UID: {user.uid} {sessionsMe && `(${sessionsMe.auth_sub})`}
           </Text>
         </Box>
-
         <Text>
           {user.account_statements_url && (
             <Box
@@ -110,6 +113,9 @@ export const Profile: FC = () => {
           <ChangePassword />
           {user.bitzlato_user && (
             <FreezeAccount isSelfFrozen={user.bitzlato_user.user_profile.self_frozen} />
+          )}
+          {user.bitzlato_user && (
+            <ChangeUserAvatar image={bitzlatoUser?.user_profile.avatar.original || ''} />
           )}
         </Stack>
       </Box>

@@ -1323,6 +1323,15 @@ export const ru: LangType = {
   'p2p.apiKeys.send_desc':
     'Отправьте публичный ключ на сервер чтобы сохранить его там. Если у вас уже есть ключ, после сохранения нового он будет удалён. Пока ключ не отправлен им нельзя будет авторизоваться.',
   'p2p.apiKeys.sended': 'Публичный ключ отправлен на сервер!',
+
+  'page_profile.button.select_avatar': 'Выбрать аватар',
+  'page_profile.button.upload_avatar': 'Установить аватар',
+  'page_profile.modal.info':
+    'Вы можете установить аватар пользователя. Учтите, что аватары с рекламной информацией запрещены, а аккаунты с такими аватарами могут быть ограничены от использования сервиса.Доступные форматы: PNG, JPEG, JPG',
+  'page_profile.modal.format_error': 'Только png, jpg, jpeg',
+  'page_profile.button.set_avatar': 'Установить Аватар',
+  'page_profile.modal.title': 'Установить Аватар',
+
   Freeze: 'Заблокировать',
   'Freeze Account': 'Блокировка аккаунта',
   'Freeze Info':
