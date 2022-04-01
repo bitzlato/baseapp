@@ -11,9 +11,11 @@ const fontSizes = {
 };
 
 const lineHeights = {
-  // uses in Button
+  // used in Button
   small: '16px' as const,
   medium: '20px' as const,
+  // used in text
+  oneHalf: '1.5' as const,
 };
 
 const borderWidths = {
@@ -35,7 +37,7 @@ const responsiveProperties = defineProperties({
   responsiveArray: ['mobile', 'tablet', 'desktop', 'desktopXL', /* 'desktopXXL', */ 'desktopXXXL'],
   properties: {
     display: ['none', 'flex', 'block', /* 'inline', */ 'inline-flex', 'inline-block'],
-    flexDirection: ['row', 'column'],
+    flexDirection: ['row', 'column', 'row-reverse', 'column-reverse'],
     justifyContent: [
       'stretch',
       'flex-start',

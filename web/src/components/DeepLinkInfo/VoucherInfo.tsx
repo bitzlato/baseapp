@@ -4,13 +4,14 @@ import { useHistory } from 'react-router';
 import useMutation from 'use-mutation';
 import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
-import { Text } from 'web/src/components/ui/Text';
+import { Spinner } from 'web/src/components/ui/Spinner';
 import { p2pUrl } from 'web/src/api';
 import { FetchError, fetchJson } from 'web/src/helpers/fetch';
 import { useT } from 'web/src/hooks/useT';
 import {
   RootState,
   selectCurrentLanguage,
+  selectUserFetching,
   selectUserInfo,
   selectUserLoggedIn,
 } from 'web/src/modules';
@@ -51,20 +52,33 @@ const activateVoucher = async (voucherCode: string): Promise<ActivationResult> =
   }
 };
 
+const InfoBubble = ({ children }: { children: ReactNode }) => {
+  return (
+    <Box px="4x" py="3x" my="3x" borderRadius="2x" bg="infoBg">
+      {children}
+    </Box>
+  );
+};
+
 export const VoucherInfo: FC<Props> = ({ deeplink }) => {
   const t = useT();
-  const { currentLanguageCode, isAuthorized, user } = useSelector((state: RootState) => ({
-    currentLanguageCode: selectCurrentLanguage(state),
-    isAuthorized: selectUserLoggedIn(state),
-    user: selectUserInfo(state),
-  }));
+  const { currentLanguageCode, isAuthorized, isCheckingAuth, user } = useSelector(
+    (state: RootState) => ({
+      currentLanguageCode: selectCurrentLanguage(state),
+      isCheckingAuth: selectUserFetching(state),
+      isAuthorized: selectUserLoggedIn(state),
+      user: selectUserInfo(state),
+    }),
+  );
   const history = useHistory();
   const payload = deeplink.payload as DeeplinkPayloadVoucher;
 
   // gather variables that can be used in informational messages
   const details = {
-    totalFiat: payload.converted_amount && `(${payload.converted_amount} ${payload.currency})`,
-    totalCrypto: `${payload.amount} ${payload.cc_code}`,
+    totalCrypto: <b>{`${payload.amount} ${payload.cc_code}`}</b>,
+    totalFiat: payload.converted_amount && (
+      <b>{`(${payload.converted_amount} ${payload.currency})`}</b>
+    ),
     user: (
       <a
         href={`/${currentLanguageCode}/p2p/users/${payload.user.profile_name}`}
@@ -101,9 +115,11 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
         done: true,
         success: true,
         message: (
-          <Text variant="h3" color="success">
-            {t('deeplink.voucher.just_cashed')}
-          </Text>
+          <InfoBubble>
+            <Box fontSize="large" color="success">
+              {t('deeplink.voucher.just_cashed')}
+            </Box>
+          </InfoBubble>
         ),
       });
     },
@@ -113,12 +129,12 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
         done: true,
         success: false,
         message: (
-          <>
-            <Text variant="h4" color="danger">
+          <InfoBubble>
+            <Box fontSize="large" color="danger">
               {t('deeplink.voucher.cash_failed')}
-            </Text>
-            {errorCode && <Text>{t(`deeplink.server.${errorCode}`)}</Text>}
-          </>
+            </Box>
+            {errorCode && <Box>{t(`deeplink.server.${errorCode}`)}</Box>}
+          </InfoBubble>
         ),
       });
     },
@@ -140,22 +156,29 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
         canTakeAction = true;
 
         infoMessage = (
-          <>
-            <p>
-              {t('deeplink.profile.current_account', {
-                userName: user.username || user.email,
-              })}
-            </p>
-            <p>{t('deeplink.voucher.take_action')}</p>
-          </>
+          <Box
+            display="flex"
+            my="4x"
+            justifyContent="space-between"
+            alignItems="center"
+            fontSize="caption"
+            color="textMuted"
+          >
+            <span>{t('deeplink.profile.current_account_label')}</span>
+            <span>{user.username || user.email}</span>
+          </Box>
         );
       }
     } else if (payload.cashed_at) {
       infoMessage = (
-        <Text color="danger">{t('deeplink.voucher.cashed', { cashed_at: payload.cashed_at })}</Text>
+        <Box pt="4x" px="2x" textAlign="center" color="danger">
+          {t('deeplink.voucher.cashed', {
+            cashed_at: new Date(payload.cashed_at).toLocaleString(),
+          })}
+        </Box>
       );
     } else {
-      infoMessage = <Text>{t('deeplink.voucher.expired')}</Text>;
+      infoMessage = <Box>{t('deeplink.voucher.expired')}</Box>;
     }
   }
 
@@ -174,12 +197,15 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
     history.push('/wallets');
   };
 
-  // action after voucher redeem performed
-  const onDismiss = () => {
-    history.push('/wallets');
-  };
-
   const actionButtons = () => {
+    if (!canTakeAction) {
+      return null;
+    }
+
+    if (isCheckingAuth) {
+      return <Spinner />;
+    }
+
     if (isAuthRequired) {
       return (
         <Button color="primary" onClick={goAuth}>
@@ -188,20 +214,25 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
       );
     }
 
-    if (!canTakeAction) {
-      return (
-        <Button color="primary" onClick={onDismiss}>
-          OK
-        </Button>
-      );
-    }
-
     return (
       <>
-        <Button disabled={isActivating} color="primary" variant="outlined" onClick={onDiscard}>
+        <Button
+          disabled={isActivating}
+          onClick={onDiscard}
+          color="secondary"
+          variant="outlined"
+          fullWidth
+        >
           {t('common.action.discard')}
         </Button>
-        <Button disabled={isActivating} color="primary" variant="contained" onClick={onAccept}>
+        <Box w="4x" h="4x" flexShrink={0} />
+        <Button
+          disabled={isActivating}
+          onClick={onAccept}
+          color="secondary"
+          variant="contained"
+          fullWidth
+        >
           {isActivating ? t('common.action.accepting') : t('common.action.accept')}
         </Button>
       </>
@@ -209,17 +240,25 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
   };
 
   return (
-    <Box>
+    <Box display="flex" flexDirection="column" justifyContent="space-between">
       <Box pb="3x">
-        <p>{t('deeplink.voucher.info', details)}</p>
-        {details.comment && <p>{t('deeplink.voucher.comment', details)}</p>}
+        <Box lineHeight="oneHalf">{t('deeplink.voucher.info', details)}</Box>
+        {details.comment && (
+          <InfoBubble>
+            <Box color="textMuted" fontSize="caption" mb="2x">
+              {t('deeplink.voucher.comment_label')}
+            </Box>
+            <Box>{details.comment}</Box>
+          </InfoBubble>
+        )}
         {infoMessage}
       </Box>
 
       <Box
         display="flex"
-        justifyContent="space-between"
-        flexDirection={{ mobile: 'column', tablet: 'row' }}
+        alignItems="center"
+        justifyContent="flex-end"
+        flexDirection={{ mobile: 'column-reverse', tablet: 'row' }}
       >
         {actionButtons()}
       </Box>
