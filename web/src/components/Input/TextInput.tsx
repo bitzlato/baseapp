@@ -34,8 +34,8 @@ export const TextInput: FC<TextInputProps> = ({
         {(labelVisible || rest.value) && label}
       </Box>
       <FormControl
-        {...rest}
         type="text"
+        {...rest}
         className={inputClassName as string}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder ?? (!labelVisible ? label?.toString() : undefined)}

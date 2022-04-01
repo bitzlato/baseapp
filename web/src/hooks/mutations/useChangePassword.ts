@@ -5,13 +5,14 @@ import { FetchError, fetchJson } from 'web/src/helpers/fetch';
 import { alertPush } from 'web/src/modules/public/alert/actions';
 
 interface ChangePasswordInput {
-  email: string;
-  captcha_response?: string;
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
 }
 
 const changePassword = async (params: ChangePasswordInput) => {
-  const res = await fetchJson(`${authUrl()}/identity/users/password/generate_code`, {
-    method: 'POST',
+  const res = await fetchJson(`${authUrl()}/resource/users/password`, {
+    method: 'PUT',
     body: JSON.stringify(params),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
@@ -23,21 +24,15 @@ const changePassword = async (params: ChangePasswordInput) => {
 };
 
 export const useChangePassword = ({
-  onRequestSuccess,
+  onSuccess,
 }: {
-  onRequestSuccess?: (() => void) | undefined;
+  onSuccess?: (() => void) | undefined;
 } = {}) => {
   const dispatch = useDispatch();
-  return useMutation<ChangePasswordInput, any, unknown>(changePassword, {
-    onSuccess: () => {
-      dispatch(
-        alertPush({
-          type: 'success',
-          message: ['Password reset email sent'],
-        }),
-      );
 
-      onRequestSuccess?.();
+  return useMutation(changePassword, {
+    onSuccess: () => {
+      onSuccess?.();
     },
 
     onFailure: ({ error }) => {

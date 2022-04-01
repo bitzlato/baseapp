@@ -911,6 +911,7 @@ export const ru: LangType = {
   'resource.document.empty_doc_expire': 'Срок действия недействителен',
   'password.requirements': 'Пароль не соответствует минимальным требованиям',
   'password.password.password_strength': 'Пароль слишком слабый',
+  'password.weak': 'Пароль слишком слабый',
 
   'email.taken': 'Почта уже зарегистрирована',
 
@@ -1288,10 +1289,6 @@ export const ru: LangType = {
   'Referral Links': 'Реферальные ссылки',
   'Switch account': 'Переключить аккаунт',
   "It's you": 'Это вы',
-  'Password reset email sent': 'Запрос на смену пароля успешно отправлен',
-  'Password reset request': 'Запрос на смену пароля',
-  'Password reset info': 'Для установки нового пароля и продолжения работы, пожалуйста, нажмите кнопку ниже и мы отправим ссылку для смены пароля на вашу электронную почту.',
-  'Password reset': 'Отправить запрос',
   'Password change': 'Сменить пароль',
   'Create API key': 'Создать API ключ',
   'Key name': 'Имя ключа',
