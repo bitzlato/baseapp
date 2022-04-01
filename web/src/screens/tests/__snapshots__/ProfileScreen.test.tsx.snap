@@ -21,13 +21,22 @@ exports[`ProfileScreen test should render 1`] = `
         class="col colSpacing2 padding3"
       >
         <div
-          class="reset_base__1sfgjt80 sprinkles_marginBottom_7x_mobile__w76aifgj sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_row_mobile__w76aifp"
+          class="reset_base__1sfgjt80 sprinkles_marginBottom_0_mobile__w76aiff5 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_row_mobile__w76aifp"
         >
           <div
-            class="reset_base__1sfgjt80 sprinkles_marginBottom_0_mobile__w76aiff5 sprinkles_marginRight_4x_mobile__w76aifl4 sprinkles_flexGrow_1__w76aif19b"
+            class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aifge sprinkles_marginRight_6x_mobile__w76aifle"
           >
             <div
-              class="reset_base__1sfgjt80 sprinkles_paddingBottom_2x_mobile__w76aif5u sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif2d"
+              class="reset_base__1sfgjt80 sprinkles_position_relative__w76aif1a3 sprinkles_borderRadius_2x__w76aif1a0 sprinkles_borderWidth_1x__w76aif19f sprinkles_borderColor_modalHeaderBorderBottom_default__w76aif148 sprinkles_borderStyle_solid__w76aif19h UserAvatar_avatarBox__i0zn6a0"
+            >
+              <test-file-stub />
+            </div>
+          </div>
+          <div
+            class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aifge"
+          >
+            <div
+              class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif2d"
             >
               <h4
                 class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifso Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1ah Text_text_variant_h4__1qy84opa Text_text_gutterBottom_false__1qy84opj  Profile_publicName__crp8vk2"
@@ -85,13 +94,23 @@ exports[`ProfileScreen test should render 1`] = `
               </button>
             </div>
             <div
-              class="reset_base__1sfgjt80"
+              class="reset_base__1sfgjt80 sprinkles_marginBottom_3x_mobile__w76aiffz sprinkles_marginBottom_0_tablet__w76aiff6 sprinkles_marginRight_0_mobile__w76aifk5 sprinkles_marginRight_3x_tablet__w76aifl0"
             >
               <button
                 class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif1ah sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif1aj Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8m sprinkles_paddingRight_4x_mobile__w76aifb4 sprinkles_paddingTop_2x_mobile__w76aif3c sprinkles_paddingBottom_2x_mobile__w76aif5u sprinkles_fontSize_medium_mobile__w76aifrx sprinkles_lineHeight_medium__w76aif1al sprinkles_borderRadius_1x__w76aif19z Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aify6 sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aify9 sprinkles_color_btnSecondaryText_default__w76aifu8"
                 type="button"
               >
                 Block account
+              </button>
+            </div>
+            <div
+              class="reset_base__1sfgjt80"
+            >
+              <button
+                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif1ah sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif1aj Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8m sprinkles_paddingRight_4x_mobile__w76aifb4 sprinkles_paddingTop_2x_mobile__w76aif3c sprinkles_paddingBottom_2x_mobile__w76aif5u sprinkles_fontSize_medium_mobile__w76aifrx sprinkles_lineHeight_medium__w76aif1al sprinkles_borderRadius_1x__w76aif19z Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aify6 sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aify9 sprinkles_color_btnSecondaryText_default__w76aifu8"
+                type="button"
+              >
+                Set avatar
               </button>
             </div>
           </div>
