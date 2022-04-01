@@ -123,7 +123,7 @@ export const ru: LangType = {
   /* Landing */
   'page.body.landing.header.button1': 'profile',
   'page.body.landing.header.button2': 'log in',
-  'page.body.landing.header.button3': 'register',
+  'page.body.landing.header.button3': 'Зарегистрироваться',
 
   'page.body.landing.marketInfo.title.text1': 'Welcome',
   'page.body.landing.marketInfo.title.text2': 'Торгуйте криптовалютой легко',
@@ -1303,6 +1303,8 @@ export const ru: LangType = {
   Authorities: 'Доступы',
   Enable: 'Включить',
   Disable: 'Выключить',
+  Loading: 'Загрузка',
+
   'p2p.apiKeys.descr':
     'Создание приватного API ключа позволяет получить доступ к торговле и другим сервисам Bitzlato через сторонние сайты или приложения. Ознакомится с <link>документацией</link>',
   'p2p.apiKeys.warning':

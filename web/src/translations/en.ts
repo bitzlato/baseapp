@@ -124,7 +124,7 @@ export const en = {
   /* Landing */
   'page.body.landing.header.button1': 'profile',
   'page.body.landing.header.button2': 'log in',
-  'page.body.landing.header.button3': 'register',
+  'page.body.landing.header.button3': 'Register',
 
   'page.body.landing.marketInfo.title.text1': 'Welcome',
   'page.body.landing.marketInfo.title.text2': 'Trade cryptocurrency easily',
@@ -1282,6 +1282,8 @@ export const en = {
   Authorities: 'Authorities',
   Enable: 'Enable',
   Disable: 'Disable',
+  Loading: 'Loading',
+
   'p2p.apiKeys.descr':
     'Creating an API private key provides access to trading and other services on Bitzlato via a third-party site or application. View <link>API documentation</link>",',
   'p2p.apiKeys.warning':
