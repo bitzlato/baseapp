@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { IntlProps } from 'src/types';
 import { isUsernameEnabled } from '../../api';
-import { captchaType } from '../../api/config';
+import { captchaType, showReferal } from '../../api/config';
 import { Captcha, Modal, SignUpForm } from '../../components';
 import {
   EMAIL_REGEX,
@@ -99,14 +99,16 @@ class SignUp extends React.Component<Props> {
 
   public componentDidMount() {
     setDocumentTitle('Sign Up');
-    const localReferralCode = localStorage.getItem('referralCode');
-    const refId = this.extractRefID(this.props.location.search);
-    const referralCode = refId || localReferralCode || '';
-    this.setState({
-      refId: referralCode,
-    });
-    if (refId && refId !== localReferralCode) {
-      localStorage.setItem('referralCode', referralCode);
+    if (showReferal()) {
+      const localReferralCode = localStorage.getItem('referralCode');
+      const refId = this.extractRefID(this.props.location.search);
+      const referralCode = refId || localReferralCode || '';
+      this.setState({
+        refId: referralCode,
+      });
+      if (refId && refId !== localReferralCode) {
+        localStorage.setItem('referralCode', referralCode);
+      }
     }
 
     document.addEventListener('click', this.handleOutsideClick, false);

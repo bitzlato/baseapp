@@ -127,3 +127,4 @@ export const valuationSecondaryCurrencyName = (): string =>
   Cryptobase.config.valuationSecondaryCurrencyName;
 export const showInternalTransfer = () => convertToBoolean(Cryptobase.config.internalTransfer);
 export const showGift = () => convertToBoolean(Cryptobase.config.gift);
+export const showReferal = () => convertToBoolean(Cryptobase.config.referal);
