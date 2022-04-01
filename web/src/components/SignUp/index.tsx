@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { CustomInput, PasswordStrengthMeter } from '..';
 import { isUsernameEnabled } from '../../api';
-import { captchaType, passwordMinEntropy } from '../../api/config';
+import { captchaType, passwordMinEntropy, showReferal } from '../../api/config';
 import {
   EMAIL_REGEX,
   ERROR_LONG_USERNAME,
@@ -362,25 +362,27 @@ const SignUpFormComponent: React.FC<SignUpFormProps> = ({
             />
             {confirmationError && <div className="cr-sign-up-form__error">{confirmationError}</div>}
           </div>
-          <div
-            className={cr('cr-sign-up-form__group', {
-              'cr-sign-up-form__group--focused': refIdFocused,
-            })}
-          >
-            <CustomInput
-              type="text"
-              label={referalCodeLabel || 'Referral code'}
-              placeholder={refIdFocused ? '' : referalCodeLabel || 'Referral code'}
-              defaultLabel="Referral code"
-              handleChangeInput={handleChangeRefId}
-              inputValue={refId}
-              handleFocusInput={handleFocusRefId}
-              classNameLabel="cr-sign-up-form__label"
-              classNameInput="cr-sign-up-form__input"
-              autoFocus={false}
-              labelVisible={refIdFocused}
-            />
-          </div>
+          {showReferal() ? (
+            <div
+              className={cr('cr-sign-up-form__group', {
+                'cr-sign-up-form__group--focused': refIdFocused,
+              })}
+            >
+              <CustomInput
+                type="text"
+                label={referalCodeLabel || 'Referral code'}
+                placeholder={refIdFocused ? '' : referalCodeLabel || 'Referral code'}
+                defaultLabel="Referral code"
+                handleChangeInput={handleChangeRefId}
+                inputValue={refId}
+                handleFocusInput={handleFocusRefId}
+                classNameLabel="cr-sign-up-form__label"
+                classNameInput="cr-sign-up-form__input"
+                autoFocus={false}
+                labelVisible={refIdFocused}
+              />
+            </div>
+          ) : null}
           <Form className="cr-sign-up-form__group" onClick={clickCheckBox}>
             <Form.Check
               type="checkbox"

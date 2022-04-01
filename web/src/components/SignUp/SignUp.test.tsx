@@ -67,10 +67,10 @@ describe('SignUp component', () => {
   it('should render logo block', () => {
     let wrapper = setup().render();
     const firstState = wrapper.find('.cr-sign-up-form__form-content').children();
-    expect(firstState).toHaveLength(6);
+    expect(firstState).toHaveLength(5);
     wrapper = setup({ image: 'image' }).render();
     const secondState = wrapper.find('.cr-sign-up-form__form-content').children();
-    expect(secondState).toHaveLength(7);
+    expect(secondState).toHaveLength(6);
   });
 
   it('should render captcha block', () => {

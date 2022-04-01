@@ -89,23 +89,6 @@ exports[`SignUpScreen should render 1`] = `
             </div>
           </div>
           <div
-            class="cr-sign-up-form__group"
-          >
-            <div
-              class="custom-input"
-            >
-              <label
-                class="cr-sign-up-form__label"
-              />
-              <input
-                class="form-control"
-                placeholder="Referral Code"
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-          <div
             class="custom-control custom-checkbox"
           >
             <input
