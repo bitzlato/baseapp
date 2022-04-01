@@ -68,6 +68,16 @@ exports[`ProfileScreen test should render 1`] = `
               </button>
             </div>
             <div
+              class="reset_base__1sfgjt80 sprinkles_marginBottom_3x_mobile__w76aiffp sprinkles_marginBottom_0_tablet__w76aifew sprinkles_marginRight_0_mobile__w76aifjv sprinkles_marginRight_3x_tablet__w76aifkq"
+            >
+              <button
+                class="reset_base__1sfgjt80 reset_button__1sfgjt81 Button_button__9n3otyi Button__9n3oty0 sprinkles_fontFamily_brand__w76aif19r sprinkles_display_inline-block_mobile__w76aifk sprinkles_fontWeight_strong__w76aif19t Button_button_variant_contained__9n3otyj  Button_button_color_secondary__9n3otym Button_button_size_medium__9n3otyp Button__9n3oty3 sprinkles_paddingLeft_4x_mobile__w76aif8c sprinkles_paddingRight_4x_mobile__w76aifau sprinkles_paddingTop_2x_mobile__w76aif32 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_fontSize_medium_mobile__w76aifrn sprinkles_lineHeight_medium__w76aif19v sprinkles_borderRadius_1x__w76aif199 Button_button_disabled_false__9n3otys  Button_button_fullWidth_false__9n3otyu  Button_button_compound_4__9n3otyx Button__9n3otya sprinkles_backgroundColor_btnSecondaryBg_default__w76aifxq sprinkles_backgroundColor_btnSecondaryBgHover_hover__w76aifxt sprinkles_color_btnSecondaryText_default__w76aiftw"
+                type="button"
+              >
+                Change password
+              </button>
+            </div>
+            <div
               class="reset_base__1sfgjt80"
             >
               <button

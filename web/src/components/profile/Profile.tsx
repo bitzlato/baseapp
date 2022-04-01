@@ -22,6 +22,7 @@ import { ProfileReferalLinks } from './ProfileReferralLinks';
 import { ProfileSwitchAccount } from './ProfileSwitchAccount';
 import { FreezeAccount } from './FreezeAccount';
 import { ChangePublicName } from './ChangePublicName';
+import { ChangePassword } from './ChangePassword';
 
 const formatRating = (rating: string) =>
   parseNumeric(rating, {
@@ -78,8 +79,9 @@ export const Profile: FC = () => {
           )}
 
           <ProfileReferalLinks />
+          {user.bitzlato_user && <ChangePassword email={user.bitzlato_user.email} />}
           {user.bitzlato_user && (
-            <FreezeAccount isSelfFrozen={user.bitzlato_user?.user_profile.self_frozen} />
+            <FreezeAccount isSelfFrozen={user.bitzlato_user.user_profile.self_frozen} />
           )}
         </Stack>
       </Box>

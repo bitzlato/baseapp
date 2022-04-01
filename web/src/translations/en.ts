@@ -1267,6 +1267,12 @@ export const en = {
   'Referral Links': 'Referral Links',
   'Switch account': 'Switch account',
   "It's you": "It's you",
+  'Password reset email sent': 'Password reset email sent',
+  'Password reset request': 'Password reset request',
+  'Password reset info':
+    'Please press button for send request of password reset. We will send to you email with link of password reset.',
+  'Password reset': 'Password reset',
+  'Password change': 'Change password',
   'Create API key': 'Create API key',
   'Key name': 'Key name',
   Active: 'Active',
@@ -1280,7 +1286,6 @@ export const en = {
   Authorities: 'Authorities',
   Enable: 'Enable',
   Disable: 'Disable',
-
   'p2p.apiKeys.descr':
     'Creating an API private key provides access to trading and other services on Bitzlato via a third-party site or application. View <link>API documentation</link>",',
   'p2p.apiKeys.warning':
@@ -1297,7 +1302,6 @@ export const en = {
   'p2p.apiKeys.send_desc':
     "Send public key to server to save it there. If you already have a key, it will be removed after saving the new one. While key is not sent you can't authorise with it",
   'p2p.apiKeys.sended': 'Public key sent to server!',
-
   Freeze: 'Block',
   'Freeze Account': 'Block account',
   'Freeze Info':
