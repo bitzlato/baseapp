@@ -36,7 +36,6 @@ web/src/components/BlockchainIcon/BlockchainIcon.tsx
 web/src/components/BlockchainIcon/BlockchainIcon2.tsx
 web/src/components/Button/Button.tsx
 web/src/components/Captcha/index.tsx
-web/src/components/ChangePassword/index.tsx
 web/src/components/CombinedOrderBook/index.tsx
 web/src/components/CopyableTextField/index.tsx
 web/src/components/CustomInput/index.tsx
@@ -100,7 +99,6 @@ web/src/components/UploadFile/index.tsx
 web/src/components/index.ts
 web/src/containers/Alerts/index.tsx
 web/src/containers/CanCan/index.tsx
-web/src/containers/ChangePassword/index.tsx
 web/src/containers/Charts/index.tsx
 web/src/containers/Confirm/Address/index.tsx
 web/src/containers/Confirm/Documents/index.tsx
@@ -542,7 +540,6 @@ web/src/modules/user/withdrawLimit/sagas/withdrawLimitSaga.test.ts
 web/src/modules/user/withdrawLimit/sagas/withdrawLimitSaga.ts
 web/src/modules/user/withdrawLimit/selectors.ts
 web/src/routes/Layout/index.tsx
-web/src/screens/ChangeForgottenPasswordScreen/index.tsx
 web/src/screens/ConfirmScreen/index.tsx
 web/src/screens/DocumentationScreen/index.tsx
 web/src/screens/EmailVerification/index.tsx
