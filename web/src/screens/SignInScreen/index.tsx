@@ -73,7 +73,7 @@ export const SignInScreen: React.FC = () => {
   }, [isLoggedIn, history]);
 
   useEffect(() => {
-    if (captchaType() !== 'none' && captchaLogin() && errorSignIn && !require2FA) {
+    if (captchaType() !== 'none' && captchaLogin() && errorSignIn?.code) {
       dispatch(resetCaptchaState());
     }
   }, [errorSignIn, captchaType(), captchaLogin()]);
