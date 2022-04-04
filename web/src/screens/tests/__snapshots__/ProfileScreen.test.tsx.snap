@@ -204,7 +204,7 @@ exports[`ProfileScreen test should render 1`] = `
               <span
                 class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
               >
-                Transactions made
+                Deals completed
               </span>
               <span
                 class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifsc Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19r Text_text_variant_h3__1qy84op9 Text_text_gutterBottom_false__1qy84opj "

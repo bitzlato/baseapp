@@ -1263,7 +1263,7 @@ export const en = {
   Timezone: 'Timezone',
   Rating: 'Rating',
   Comments: 'Comments',
-  'Transactions made': 'Transactions made',
+  'Deals completed': 'Deals completed',
   'Show all': 'Show all',
   'Referral Links': 'Referral Links',
   'Switch account': 'Switch account',
