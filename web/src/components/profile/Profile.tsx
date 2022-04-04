@@ -135,7 +135,7 @@ export const Profile: FC = () => {
             </div>
             <div className={s.stat}>
               <Stat>
-                <StatLabel>{t('Transactions made')}</StatLabel>
+                <StatLabel>{t('Deals completed')}</StatLabel>
                 {swr.data ? (
                   <Box display="flex" justifyContent="space-between" alignItems="flex-end">
                     <Text variant="h3" as="div">
@@ -184,7 +184,7 @@ export const Profile: FC = () => {
             </Stack>
           </Box>
           <Box display="flex" justifyContent="space-between">
-            <Text variant="label">{t('Transactions made')}</Text>
+            <Text variant="label">{t('Deals completed')}</Text>
             {swr.data ? (
               <Text variant="label" fontWeight="strong">
                 {swr.data.totalDeals}

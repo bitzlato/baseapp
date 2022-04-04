@@ -15,7 +15,7 @@ export const ProfileDealsStats: FC = () => {
   const { data: tradeStats } = useTradeStats();
   const [open, setOpen] = useState(false);
 
-  if (!tradeStats) {
+  if (!tradeStats || tradeStats.totalDeals === 0) {
     return null;
   }
 
@@ -55,7 +55,7 @@ export const ProfileDealsStats: FC = () => {
         {t('Show all')}
       </Box>
       <Modal show={open} onClose={handleClick}>
-        <ModalHeader>{t('Transactions made')}</ModalHeader>
+        <ModalHeader>{t('Deals completed')}</ModalHeader>
         <Box
           mb="6x"
           pb="6x"

@@ -1284,7 +1284,7 @@ export const ru: LangType = {
   Timezone: 'Часовой пояс',
   Rating: 'Рейтинг',
   Comments: 'Отзывы',
-  'Transactions made': 'Сделок совершено',
+  'Deals completed': 'Сделок совершено',
   'Show all': 'Показать все',
   'Referral Links': 'Реферальные ссылки',
   'Switch account': 'Переключить аккаунт',
