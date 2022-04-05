@@ -35,9 +35,10 @@ import {
   setDocumentTitle,
 } from 'web/src/helpers';
 import { captchaType, captchaLogin, passwordMinEntropy, showReferal } from 'web/src/api';
-import s from 'web/src/components/SignIn/SignInComponent.postcss';
 import { PasswordStrengthMeter } from 'web/src/components/PasswordStrengthMeter';
 import { Checkbox } from 'web/src/components/form/Checkbox';
+import { PasswordInput } from 'web/src/components/Input/PasswordInput';
+import s from 'web/src/containers/SignIn/SignIn.postcss';
 
 export const SignUp: FC = () => {
   const dispatch = useDispatch();
@@ -244,8 +245,7 @@ export const SignUp: FC = () => {
           autoFocus
         />
         <Box col>
-          <TextInput
-            type="password"
+          <PasswordInput
             label={t('page.header.signUp.password')}
             labelVisible
             value={password}
@@ -267,8 +267,7 @@ export const SignUp: FC = () => {
             />
           ) : null}
         </Box>
-        <TextInput
-          type="password"
+        <PasswordInput
           label={t('page.header.signUp.confirmPassword')}
           labelVisible
           value={confirmPassword}

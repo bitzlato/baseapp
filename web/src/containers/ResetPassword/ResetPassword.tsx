@@ -1,7 +1,6 @@
 import { useState, KeyboardEvent, FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { TextInput } from 'web/src/components/Input/TextInput';
 import { Box } from 'web/src/components/Box/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { useT } from 'web/src/hooks/useT';
@@ -22,6 +21,7 @@ import { changeForgotPasswordFetch } from 'web/src/modules/user/password/actions
 import { getSearchParam } from 'web/src/helpers/url';
 import { changeLanguage } from 'web/src/modules/public/i18n/actions';
 import { selectChangeForgotPasswordSuccess } from 'web/src/modules/user/password/selectors';
+import { PasswordInput } from 'web/src/components/Input/PasswordInput';
 
 export const ResetPassword: FC = () => {
   const [newPassword, setNewPassword] = useState('');
@@ -125,8 +125,7 @@ export const ResetPassword: FC = () => {
           </IconButton>
         </Box>
         <Box col>
-          <TextInput
-            type="password"
+          <PasswordInput
             autocomplete="new-password"
             label={t('page.body.profile.header.account.content.password.new')}
             labelVisible
@@ -149,8 +148,7 @@ export const ResetPassword: FC = () => {
             />
           ) : null}
         </Box>
-        <TextInput
-          type="password"
+        <PasswordInput
           autocomplete="new-password"
           label={t('page.body.profile.header.account.content.password.conf')}
           labelVisible

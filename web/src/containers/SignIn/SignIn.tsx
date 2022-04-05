@@ -33,6 +33,7 @@ import {
   setDocumentTitle,
 } from 'web/src/helpers';
 import { captchaType, captchaLogin } from 'web/src/api';
+import { PasswordInput } from 'web/src/components/Input/PasswordInput';
 import s from './SignIn.postcss';
 
 export const SignIn: FC = () => {
@@ -174,8 +175,7 @@ export const SignIn: FC = () => {
           autoFocus
           error={emailError}
         />
-        <TextInput
-          type="password"
+        <PasswordInput
           label={t('page.header.signIn.password')}
           labelVisible
           onChange={setPassword}
