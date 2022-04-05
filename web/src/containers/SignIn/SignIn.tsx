@@ -196,7 +196,7 @@ export const SignIn: FC = () => {
         <Button disabled={isLoading || !isValidForm() || isButtonDisabled()} onClick={handleClick}>
           {isLoading ? `${t('Loading')}...` : t('page.header.signIn')}
         </Button>
-        <Box self="center" as={Link} to="/forgot_password">
+        <Box self="center" as={Link} to={{ pathname: '/forgot_password', state: { email } }}>
           {t('page.header.signIn.forgotPassword')}
         </Box>
       </Box>

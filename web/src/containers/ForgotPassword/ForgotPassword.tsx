@@ -23,10 +23,10 @@ import { IconButton } from 'web/src/components/IconButton/IconButton';
 
 export const ForgotPassword: FC = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = useHistory<{ email?: string }>();
   const t = useT();
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(history.location.state.email ?? '');
   const [emailError, setEmailError] = useState('');
 
   const success = useSelector(selectForgotPasswordSuccess);
