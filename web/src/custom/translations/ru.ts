@@ -715,12 +715,12 @@ export const ru: LangType = {
     'Если вы не можете найти адрес электронной почты, проверьте свою' +
     ' электронную почту со спамом.',
   'page.header.signUp.modal.footer': 'OK',
-  'page.header.signUp.strength.password': 'Password Strength',
-  'page.header.signUp.password.too.weak': 'Too weak',
-  'page.header.signUp.password.weak': 'Weak',
-  'page.header.signUp.password.good': 'Good',
-  'page.header.signUp.password.strong': 'Strong',
-  'page.header.signUp.password.very.strong': 'Very strong',
+  'page.header.signUp.strength.password': 'Надежность пароля',
+  'page.header.signUp.password.too.weak': 'Слишком слабый',
+  'page.header.signUp.password.weak': 'Слабый',
+  'page.header.signUp.password.good': 'Хороший',
+  'page.header.signUp.password.strong': 'Сильный',
+  'page.header.signUp.password.very.strong': 'Очень сильный',
   'page.resendConfirmation': 'Отправить подтверждение снова',
   'page.forgotPassword': 'Забыли пароль',
   'page.forgotPassword.message': 'Введите адрес электронной почты, чтобы сбросить пароль',
@@ -1137,10 +1137,10 @@ export const ru: LangType = {
 
   'server.internal_error': 'Внутренняя ошибка сервера',
 
-  'password.strength.tip.influence': 'What influence on password strength',
-  'password.strength.tip.number.characters': 'At least 8 characters',
-  'password.strength.tip.letter': 'At least One upper case and lower case letter',
-  'password.strength.tip.digit': 'At least One digit',
+  'password.strength.tip.influence': 'Что влияет на надежность вашего пароля',
+  'password.strength.tip.number.characters': 'Не менее 8 символов',
+  'password.strength.tip.letter': 'По крайней мере, одна заглавная и строчная буква',
+  'password.strength.tip.digit': 'По крайней мере, одна цифра',
 
   // metamask
   'metamask.success.connected': '[MetaMask] Аккаунт подключен',
