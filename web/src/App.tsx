@@ -13,6 +13,7 @@ import { selectCurrentColorTheme, selectCurrentLanguage, selectMobileDeviceState
 import { languageMap } from './translations';
 import { ErrorBoundary } from './containers/ErrorBoundary/ErrorBoundary';
 import { Language } from './types';
+import { lazyRetry } from './helpers/lazyRetry';
 
 const gaKey = gaTrackerKey();
 const browserHistory = createBrowserHistory();
@@ -26,22 +27,22 @@ if (gaKey) {
 }
 
 /* Mobile components */
-const MobileHeader = React.lazy(() =>
+const MobileHeader = lazyRetry(() =>
   import('./mobile/components/Header').then(({ Header }) => ({ default: Header })),
 );
-const MobileFooter = React.lazy(() =>
+const MobileFooter = lazyRetry(() =>
   import('./mobile/components/Footer').then(({ Footer }) => ({ default: Footer })),
 );
 
 /* Desktop components */
-const AlertsContainer = React.lazy(() =>
+const AlertsContainer = lazyRetry(() =>
   import('./containers/Alerts').then(({ Alerts }) => ({ default: Alerts })),
 );
-const Header = React.lazy(() => import('./components/Header/Header'));
-const LayoutContainer = React.lazy(() =>
+const Header = lazyRetry(() => import('./components/Header/Header'));
+const LayoutContainer = lazyRetry(() =>
   import('./routes').then(({ Layout }) => ({ default: Layout })),
 );
-const FooterContainer = React.lazy(() =>
+const FooterContainer = lazyRetry(() =>
   import('./containers/Footer/Footer').then(({ Footer }) => ({ default: Footer })),
 );
 

@@ -1,5 +1,6 @@
-import { FC, Suspense, lazy } from 'react';
+import { FC, Suspense } from 'react';
 import { Tabs, TabList, Tab, TabPanel } from 'src/components/Tabs';
+import { lazyRetry } from 'web/src/helpers/lazyRetry';
 
 import { DocumentationEndpoints, DocumentationHeader, DocumentationModels } from '../../components';
 import { useDocumentationFetch } from '../../hooks';
@@ -49,6 +50,6 @@ const ApiDoc: FC = () => {
   );
 };
 
-const Swagger = lazy(() => import('marketDocs/Swagger'));
+const Swagger = lazyRetry(() => import('marketDocs/Swagger'));
 
-const WebSocketApi = lazy(() => import('marketDocs/WebSocketApi'));
+const WebSocketApi = lazyRetry(() => import('marketDocs/WebSocketApi'));
