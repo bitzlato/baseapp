@@ -59,7 +59,7 @@ export const Gift: FC<Props> = (props) => {
   const [gift, setGift] = useState<AccountVoucher | undefined>();
   const [comment, setComment] = useState('');
   const [show2fa, setShow2fa] = useState(false);
-  const [showSafeModeWizard, setShowSafeModeWizard] = useState(true);
+  const [showSafeModeWizard, setShowSafeModeWizard] = useState(false);
 
   const t = useT();
   const dispatch = useDispatch();
