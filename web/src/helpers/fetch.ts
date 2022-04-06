@@ -5,7 +5,7 @@ export class FetchError extends Error {
   }
 }
 
-export const fetchJson = async (input: RequestInfo, init: RequestInit) => {
+export const fetchJson = async (input: RequestInfo, init?: RequestInit) => {
   try {
     const res = await fetch(input, init);
 
@@ -45,11 +45,11 @@ export const fetchJson = async (input: RequestInfo, init: RequestInit) => {
   }
 };
 
-export const fetchWithCreds = (input: RequestInfo, init: RequestInit) => {
+export const fetchWithCreds = (input: RequestInfo, init?: RequestInit) => {
   return fetchJson(input, { ...init, credentials: 'include' });
 };
 
-export const fetchRaw = async (input: RequestInfo, init: RequestInit) => {
+export const fetchRaw = async (input: RequestInfo, init?: RequestInit) => {
   try {
     return await fetch(input, init);
   } catch (error) {

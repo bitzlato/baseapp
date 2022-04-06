@@ -185,7 +185,6 @@ web/src/helpers/toggleColorTheme.ts
 web/src/helpers/validateBeneficiaryAddress.ts
 web/src/hooks/useBeneficiariesFetch.ts
 web/src/hooks/useFetch.ts
-web/src/hooks/useGeneralWallets.ts
 web/src/hooks/useOpenOrdersFetch.ts
 web/src/mobile/assets/images/AddIcon.tsx
 web/src/mobile/assets/images/CheckIcon.tsx
