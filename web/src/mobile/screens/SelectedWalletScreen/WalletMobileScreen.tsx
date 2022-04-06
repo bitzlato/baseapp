@@ -1,4 +1,5 @@
 import { useHistory, useParams } from 'react-router';
+import { Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Subheader } from 'src/mobile/components';
 import { Box } from 'src/components/Box/Box';
@@ -33,6 +34,14 @@ export const WalletMobileScreen: React.FC = () => {
   const general = generals.find((d) => d.currency === currency) ?? DEFAULT_WALLET_ITEM;
 
   const { tabs, tab, setTab } = useWalletTab(params.tab, general);
+
+  if (generals.length === 0) {
+    return (
+      <div className="pg-loader-container">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
 
   return (
     <Box col spacing="sm">

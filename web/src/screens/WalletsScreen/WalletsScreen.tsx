@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
 import { Card } from 'src/components/Card/Card';
 import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
@@ -75,6 +76,14 @@ export const WalletsScreen: React.FC = () => {
     setTab(value);
     replaceHistory(listIndex, value);
   };
+
+  if (list.length === 0) {
+    return (
+      <div className="pg-loader-container">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
 
   return (
     <Container maxWidth="lg" my="4">
