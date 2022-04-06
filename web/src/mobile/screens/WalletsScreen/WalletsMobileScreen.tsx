@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { Box } from 'src/components/Box';
 import { WalletList } from 'src/components/WalletList';
@@ -11,6 +12,14 @@ export const WalletsMobileScreen: React.FC = () => {
   const history = useHistory();
 
   const list = useGeneralWallets();
+
+  if (list.length === 0) {
+    return (
+      <div className="pg-loader-container">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
 
   const handleSelection = (i: number) => {
     history.push(`/wallets/${list[i]!.currency.toLowerCase()}`);
