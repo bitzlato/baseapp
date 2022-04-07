@@ -10,9 +10,9 @@ export interface TextInputProps
   placeholder?: string | undefined;
   onChange: (value: string) => void;
   inputClassName?: string;
-  labelVisible?: boolean;
+  labelVisible?: boolean | undefined;
   error?: ReactNode;
-  autoFocus?: boolean;
+  autoFocus?: boolean | undefined;
   className?: string | undefined;
   noResize?: boolean;
 }

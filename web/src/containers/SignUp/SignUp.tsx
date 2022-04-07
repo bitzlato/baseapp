@@ -17,8 +17,6 @@ import {
   selectCaptchaResponse,
   resetCaptchaState,
   selectSignUpRequireVerification,
-  selectCurrentPasswordEntropy,
-  entropyPasswordFetch,
   selectSignUpError,
   signUp,
   selectCurrentLanguage,
@@ -28,17 +26,14 @@ import {
   ERROR_INVALID_EMAIL,
   ERROR_INVALID_PASSWORD,
   ERROR_PASSWORD_CONFIRMATION,
-  passwordErrorFirstSolution,
-  passwordErrorSecondSolution,
-  passwordErrorThirdSolution,
   PASSWORD_REGEX,
   setDocumentTitle,
 } from 'web/src/helpers';
-import { captchaType, captchaLogin, passwordMinEntropy, showReferal } from 'web/src/api';
-import { PasswordStrengthMeter } from 'web/src/components/PasswordStrengthMeter';
+import { captchaType, captchaLogin, showReferal } from 'web/src/api';
 import { Checkbox } from 'web/src/components/form/Checkbox';
 import { PasswordInput } from 'web/src/components/Input/PasswordInput';
 import s from 'web/src/containers/SignIn/SignIn.postcss';
+import { PasswordWithMeter } from 'web/src/containers/PasswordWithMeter/PasswordWithMeter';
 
 export const SignUp: FC = () => {
   const dispatch = useDispatch();
@@ -51,11 +46,6 @@ export const SignUp: FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmationError, setConfirmationError] = useState('');
-  const [typingTimeout, setTypingTimeout] = useState(0);
-  const [passwordErrorFirstSolved, setPasswordErrorFirstSolved] = useState(false);
-  const [passwordErrorSecondSolved, setPasswordErrorSecondSolved] = useState(false);
-  const [passwordErrorThirdSolved, setPasswordErrorThirdSolved] = useState(false);
-  const [passwordPopUp, setPasswordPopUp] = useState(false);
   const [referalCode, setReferalCode] = useState('');
   const [hasConfirmed, setHasConfirmed] = useState(false);
 
@@ -66,7 +56,6 @@ export const SignUp: FC = () => {
   const reCaptchaSuccess = useSelector(selectRecaptchaSuccess);
   const geetestCaptchaSuccess = useSelector(selectGeetestCaptchaSuccess);
   const captchaResponse = useShallowSelector(selectCaptchaResponse);
-  const currentPasswordEntropy = useSelector(selectCurrentPasswordEntropy);
   const currentLanguage = useSelector(selectCurrentLanguage);
 
   useEffect(() => {
@@ -187,37 +176,6 @@ export const SignUp: FC = () => {
     }
   };
 
-  const handleChangePassword = (value: string) => {
-    if (passwordErrorFirstSolution(value) && !passwordErrorFirstSolved) {
-      setPasswordErrorFirstSolved(true);
-    } else if (!passwordErrorFirstSolution(value) && passwordErrorFirstSolved) {
-      setPasswordErrorFirstSolved(false);
-    }
-
-    if (passwordErrorSecondSolution(value) && !passwordErrorSecondSolved) {
-      setPasswordErrorSecondSolved(true);
-    } else if (!passwordErrorSecondSolution(value) && passwordErrorSecondSolved) {
-      setPasswordErrorSecondSolved(false);
-    }
-
-    if (passwordErrorThirdSolution(value) && !passwordErrorThirdSolved) {
-      setPasswordErrorThirdSolved(true);
-    } else if (!passwordErrorThirdSolution(value) && passwordErrorThirdSolved) {
-      setPasswordErrorThirdSolved(false);
-    }
-
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
-    }
-
-    setPassword(value);
-    setTypingTimeout(
-      window.setTimeout(() => {
-        dispatch(entropyPasswordFetch({ password: value }));
-      }, 500),
-    );
-  };
-
   const handleChangeCheckbox = () => {
     setHasConfirmed(!hasConfirmed);
   };
@@ -237,6 +195,7 @@ export const SignUp: FC = () => {
         </Tabs>
         <TextInput
           type="email"
+          autoComplete="false"
           label={t('page.header.signUp.email')}
           labelVisible
           value={email}
@@ -244,29 +203,13 @@ export const SignUp: FC = () => {
           error={emailError}
           autoFocus
         />
-        <Box col>
-          <PasswordInput
-            label={t('page.header.signUp.password')}
-            labelVisible
-            value={password}
-            onChange={handleChangePassword}
-            onFocus={() => setPasswordPopUp(true)}
-            onBlur={() => setPasswordPopUp(false)}
-            error={passwordError}
-          />
-          {password ? (
-            <PasswordStrengthMeter
-              minPasswordEntropy={passwordMinEntropy()}
-              currentPasswordEntropy={currentPasswordEntropy}
-              passwordExist={password !== ''}
-              passwordErrorFirstSolved={passwordErrorFirstSolved}
-              passwordErrorSecondSolved={passwordErrorSecondSolved}
-              passwordErrorThirdSolved={passwordErrorThirdSolved}
-              passwordPopUp={passwordPopUp}
-              translate={t}
-            />
-          ) : null}
-        </Box>
+        <PasswordWithMeter
+          label={t('page.header.signUp.password')}
+          labelVisible
+          value={password}
+          onChange={setPassword}
+          error={passwordError}
+        />
         <PasswordInput
           label={t('page.header.signUp.confirmPassword')}
           labelVisible
