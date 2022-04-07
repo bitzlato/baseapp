@@ -7,9 +7,10 @@ import { Text } from 'web/src/components/ui/Text';
 import { Stack } from 'web/src/components/ui/Stack';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { useChangePassword } from 'web/src/hooks/mutations/useChangePassword';
-import { TextInput } from 'web/src/components/Input/TextInput';
+import { PasswordInput } from 'web/src/components/Input/PasswordInput';
 import { AutoFocusInside } from 'react-focus-on';
 import SuccessCircle from 'web/src/assets/svg/SuccessCircle.svg';
+import { PasswordWithMeter } from 'web/src/containers/PasswordWithMeter/PasswordWithMeter';
 
 interface FormState {
   oldPassword: string;
@@ -143,14 +144,12 @@ export const ChangePassword: FC = () => {
           <form onSubmit={handleSubmit}>
             <ModalBody>
               <Box mt="3x">
-                <Stack direction="column" marginBottom="3x">
+                <Stack direction="column" marginBottom="5x">
                   <AutoFocusInside>
                     <Box
-                      as={TextInput}
-                      type="password"
                       fontSize="caption"
-                      display="flex"
-                      pb="2x"
+                      as={PasswordInput}
+                      autoComplete="current-password"
                       label={t('page.body.profile.header.account.content.password.old')}
                       value={form.oldPassword}
                       error={form.errors?.oldPassword}
@@ -159,11 +158,8 @@ export const ChangePassword: FC = () => {
                   </AutoFocusInside>
 
                   <Box
-                    as={TextInput}
-                    type="password"
                     fontSize="caption"
-                    display="flex"
-                    pb="2x"
+                    as={PasswordWithMeter}
                     label={t('page.body.profile.header.account.content.password.new')}
                     value={form.newPassword}
                     error={form.errors?.newPassword}
@@ -171,11 +167,9 @@ export const ChangePassword: FC = () => {
                   />
 
                   <Box
-                    as={TextInput}
-                    type="password"
                     fontSize="caption"
-                    display="flex"
-                    pb="2x"
+                    as={PasswordInput}
+                    autoComplete="new-password"
                     label={t('page.body.profile.header.account.content.password.conf')}
                     value={form.confirmNewPassword}
                     error={form.errors?.confirmNewPassword}
