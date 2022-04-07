@@ -11,13 +11,28 @@ interface Props {
 }
 
 export const MoneyFormat: React.FC<Props> = ({ money, zeroSymbol, ...props }) => {
+  const amount = (
+    <Box as="span" textColor={'textColor' in props ? props.textColor : 'primary'}>
+      {zeroSymbol !== undefined && money.isZero() ? zeroSymbol : <AmountFormat money={money} />}
+    </Box>
+  );
+
+  const ticker = <CurrencyTicker symbol={money.currency.code} />;
+
   return (
     <Box as="span">
-      <Box as="span" textColor={'textColor' in props ? props.textColor : 'primary'}>
-        {zeroSymbol !== undefined && money.isZero() ? zeroSymbol : <AmountFormat money={money} />}
-      </Box>
-      &nbsp;
-      <CurrencyTicker symbol={money.currency.code} />
+      {money.currency.code.length > 1 ? (
+        <>
+          {amount}
+          &nbsp;
+          {ticker}
+        </>
+      ) : (
+        <>
+          {ticker}
+          {amount}
+        </>
+      )}
     </Box>
   );
 };
