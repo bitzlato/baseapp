@@ -124,7 +124,7 @@ export const en = {
   /* Landing */
   'page.body.landing.header.button1': 'profile',
   'page.body.landing.header.button2': 'log in',
-  'page.body.landing.header.button3': 'register',
+  'page.body.landing.header.button3': 'Register',
 
   'page.body.landing.marketInfo.title.text1': 'Welcome',
   'page.body.landing.marketInfo.title.text2': 'Trade cryptocurrency easily',
@@ -900,6 +900,7 @@ export const en = {
   'resource.document.empty_doc_expire': 'Expiration Date is invalid',
   'password.requirements': 'Password does not meet the minimum requirements',
   'password.password.password_strength': 'Password is too weak',
+  'password.weak': 'Password is too weak',
 
   'email.taken': 'Email already have been taken',
 
@@ -1262,16 +1263,11 @@ export const en = {
   Timezone: 'Timezone',
   Rating: 'Rating',
   Comments: 'Comments',
-  'Transactions made': 'Transactions made',
+  'Deals completed': 'Deals completed',
   'Show all': 'Show all',
   'Referral Links': 'Referral Links',
   'Switch account': 'Switch account',
   "It's you": "It's you",
-  'Password reset email sent': 'Password reset email sent',
-  'Password reset request': 'Password reset request',
-  'Password reset info':
-    'Please press button for send request of password reset. We will send to you email with link of password reset.',
-  'Password reset': 'Password reset',
   'Password change': 'Change password',
   'Create API key': 'Create API key',
   'Key name': 'Key name',
@@ -1286,6 +1282,8 @@ export const en = {
   Authorities: 'Authorities',
   Enable: 'Enable',
   Disable: 'Disable',
+  Loading: 'Loading',
+
   'p2p.apiKeys.descr':
     'Creating an API private key provides access to trading and other services on Bitzlato via a third-party site or application. View <link>API documentation</link>",',
   'p2p.apiKeys.warning':
@@ -1362,6 +1360,7 @@ export const en = {
   'profile.verification_no': 'Verification not passed',
   'profile.verification_goto': 'Verify',
   'profile.verification_yes': 'Verification passed',
+  'profile.verification_suspicious': 'Suspicious verification status',
   'profile.deals_stat': 'trades for',
 
   'Cashed by': 'Cashed by',

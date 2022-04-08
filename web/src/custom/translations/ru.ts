@@ -123,7 +123,7 @@ export const ru: LangType = {
   /* Landing */
   'page.body.landing.header.button1': 'profile',
   'page.body.landing.header.button2': 'log in',
-  'page.body.landing.header.button3': 'register',
+  'page.body.landing.header.button3': 'Зарегистрироваться',
 
   'page.body.landing.marketInfo.title.text1': 'Welcome',
   'page.body.landing.marketInfo.title.text2': 'Торгуйте криптовалютой легко',
@@ -715,12 +715,12 @@ export const ru: LangType = {
     'Если вы не можете найти адрес электронной почты, проверьте свою' +
     ' электронную почту со спамом.',
   'page.header.signUp.modal.footer': 'OK',
-  'page.header.signUp.strength.password': 'Password Strength',
-  'page.header.signUp.password.too.weak': 'Too weak',
-  'page.header.signUp.password.weak': 'Weak',
-  'page.header.signUp.password.good': 'Good',
-  'page.header.signUp.password.strong': 'Strong',
-  'page.header.signUp.password.very.strong': 'Very strong',
+  'page.header.signUp.strength.password': 'Надежность пароля',
+  'page.header.signUp.password.too.weak': 'Слишком слабый',
+  'page.header.signUp.password.weak': 'Слабый',
+  'page.header.signUp.password.good': 'Хороший',
+  'page.header.signUp.password.strong': 'Сильный',
+  'page.header.signUp.password.very.strong': 'Очень сильный',
   'page.resendConfirmation': 'Отправить подтверждение снова',
   'page.forgotPassword': 'Забыли пароль',
   'page.forgotPassword.message': 'Введите адрес электронной почты, чтобы сбросить пароль',
@@ -911,6 +911,7 @@ export const ru: LangType = {
   'resource.document.empty_doc_expire': 'Срок действия недействителен',
   'password.requirements': 'Пароль не соответствует минимальным требованиям',
   'password.password.password_strength': 'Пароль слишком слабый',
+  'password.weak': 'Пароль слишком слабый',
 
   'email.taken': 'Почта уже зарегистрирована',
 
@@ -1136,10 +1137,10 @@ export const ru: LangType = {
 
   'server.internal_error': 'Внутренняя ошибка сервера',
 
-  'password.strength.tip.influence': 'What influence on password strength',
-  'password.strength.tip.number.characters': 'At least 8 characters',
-  'password.strength.tip.letter': 'At least One upper case and lower case letter',
-  'password.strength.tip.digit': 'At least One digit',
+  'password.strength.tip.influence': 'Что влияет на надежность вашего пароля',
+  'password.strength.tip.number.characters': 'Не менее 8 символов',
+  'password.strength.tip.letter': 'По крайней мере, одна заглавная и строчная буква',
+  'password.strength.tip.digit': 'По крайней мере, одна цифра',
 
   // metamask
   'metamask.success.connected': '[MetaMask] Аккаунт подключен',
@@ -1283,15 +1284,11 @@ export const ru: LangType = {
   Timezone: 'Часовой пояс',
   Rating: 'Рейтинг',
   Comments: 'Отзывы',
-  'Transactions made': 'Сделок совершено',
+  'Deals completed': 'Сделок совершено',
   'Show all': 'Показать все',
   'Referral Links': 'Реферальные ссылки',
   'Switch account': 'Переключить аккаунт',
   "It's you": 'Это вы',
-  'Password reset email sent': 'Запрос на смену пароля успешно отправлен',
-  'Password reset request': 'Запрос на смену пароля',
-  'Password reset info': 'Для установки нового пароля и продолжения работы, пожалуйста, нажмите кнопку ниже и мы отправим ссылку для смены пароля на вашу электронную почту.',
-  'Password reset': 'Отправить запрос',
   'Password change': 'Сменить пароль',
   'Create API key': 'Создать API ключ',
   'Key name': 'Имя ключа',
@@ -1306,6 +1303,8 @@ export const ru: LangType = {
   Authorities: 'Доступы',
   Enable: 'Включить',
   Disable: 'Выключить',
+  Loading: 'Загрузка',
+
   'p2p.apiKeys.descr':
     'Создание приватного API ключа позволяет получить доступ к торговле и другим сервисам Bitzlato через сторонние сайты или приложения. Ознакомится с <link>документацией</link>',
   'p2p.apiKeys.warning':
@@ -1384,6 +1383,7 @@ export const ru: LangType = {
   'profile.verification_no': 'Верификация не пройдена',
   'profile.verification_goto': 'Пройти верификацию',
   'profile.verification_yes': 'Верификация пройдена',
+  'profile.verification_suspicious': 'Подозрительный статус верификации',
   'profile.deals_stat': 'сделок на сумму',
 
   'Cashed by': 'Обналичен',

@@ -65,6 +65,7 @@ describe('SignIn saga', () => {
           original: '',
           thumbnail: '',
         },
+        suspicious: false,
       },
       user_setting: {
         id: 123123,

@@ -10,6 +10,7 @@ export const saffron = 'rgb(244, 205, 63)';
 export const goldenGrass = 'rgb(215, 174, 30)';
 export const lightningYellow = 'rgb(255, 206, 32)';
 export const galliano = 'rgb(233, 184, 13)';
+export const bamboo = 'rgb(220, 102, 0)';
 export const whiteLilac = 'rgb(240, 243, 249)';
 export const whiteLilac50 = 'rgb(240, 243, 249, 0.5)';
 export const gray = 'rgb(128, 128, 128)';

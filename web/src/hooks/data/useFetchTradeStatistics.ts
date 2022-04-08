@@ -21,15 +21,22 @@ export const useTradeStats = (): FetchResponse<TradeStats> => {
       totalDeals: data.total_deals_count,
       totalPositiveFeedbacksCount: data.total_positive_feedbacks_count,
       totalNegativeFeedbacksCount: data.total_negative_feedbacks_count,
-      stats: data.trade_statistics.map(
-        (tradeStatistics): TradeStat => ({
-          totalDeals: tradeStatistics.total_count,
-          totalMoney: Money.fromDecimal(tradeStatistics.total_amount, {
-            code: tradeStatistics.cc_code,
-            minorUnit: 8,
-          }),
-        }),
-      ),
+      stats: data.trade_statistics
+        .reduce((acc: TradeStat[], tradeStatistics): TradeStat[] => {
+          const totalDeals = tradeStatistics.success_deals;
+          if (totalDeals > 0) {
+            acc.push({
+              totalDeals,
+              totalMoney: Money.fromDecimal(tradeStatistics.total_amount, {
+                code: tradeStatistics.cc_code,
+                minorUnit: 8,
+              }),
+            });
+          }
+
+          return acc;
+        }, [])
+        .sort((a, b) => b.totalDeals - a.totalDeals),
     };
   }, [data]);
 

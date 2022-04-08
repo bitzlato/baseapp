@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { isAuth0 } from 'src/api';
 import { useT } from 'src/hooks/useT';
 import { Profile } from 'web/src/components/profile/Profile';
 import { ChevronIcon } from '../../../assets/images/ChevronIcon';
@@ -38,12 +37,6 @@ const ProfileMobileScreenComponent: React.FC = () => {
         </>
       ),
     },
-    !isAuth0()
-      ? {
-          titleKey: 'page.mobile.profileLinks.main.changePassword',
-          route: '/profile/change-password',
-        }
-      : null,
     { titleKey: 'page.mobile.profileLinks.main.activity', route: '/profile/account-activity' },
     { titleKey: 'page.mobile.profileLinks.main.apiKeys', route: '/profile/api-keys' },
   ].filter(Boolean) as ProfileLink[];

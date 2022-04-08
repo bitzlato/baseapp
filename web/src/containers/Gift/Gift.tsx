@@ -38,8 +38,9 @@ import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
-import sq from 'src/containers/QuickExchange/QuickExchange.postcss';
 import { useFetchVouchers } from 'web/src/hooks/data/useFetchVouchers';
+import { SafeModeWizardModal } from 'web/src/components/profile/settings/SafeModeWizardModal';
+import sq from 'src/containers/QuickExchange/QuickExchange.postcss';
 import s from './Gift.postcss';
 
 interface Props {
@@ -58,6 +59,7 @@ export const Gift: FC<Props> = (props) => {
   const [gift, setGift] = useState<AccountVoucher | undefined>();
   const [comment, setComment] = useState('');
   const [show2fa, setShow2fa] = useState(false);
+  const [showSafeModeWizard, setShowSafeModeWizard] = useState(false);
 
   const t = useT();
   const dispatch = useDispatch();
@@ -155,8 +157,11 @@ export const Gift: FC<Props> = (props) => {
         setEmail(r.email);
       } catch (error) {
         if (error instanceof FetchError) {
+          // code is not used because wrong 2FA comes with same value - MfaRequired
           if (error.code === 478 && error.payload.message === '2FA Token Required') {
             setShow2fa(true);
+          } else if (error.code === 471 && error.payload.code === 'SafetyWizardRequired') {
+            setShowSafeModeWizard(true);
           } else {
             alertFetchError(dispatch, error);
           }
@@ -427,6 +432,7 @@ export const Gift: FC<Props> = (props) => {
           </Box>
         </Modal2>
       ) : null}
+      <SafeModeWizardModal show={showSafeModeWizard} onClose={() => setShowSafeModeWizard(false)} />
     </>
   );
 };

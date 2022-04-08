@@ -13,32 +13,21 @@ import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
 import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
 import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
 import { ProfileScreen } from 'web/src/screens/ProfileScreen/ProfileScreen';
-import {
-  isAuth0,
-  minutesUntilAutoLogout,
-  sessionCheckInterval,
-  showLanding,
-  wizardStep,
-} from '../../api';
+import { minutesUntilAutoLogout, sessionCheckInterval, showLanding, wizardStep } from '../../api';
 import { ExpiredSessionModal } from '../../components';
 import { WalletsFetch } from '../../containers';
 import { toggleColorTheme } from '../../helpers';
 import {
-  ChangeForgottenPasswordMobileScreen,
   ConfirmMobileScreen,
   EmailVerificationMobileScreen,
-  ForgotPasswordMobileScreen,
   LandingScreenMobile,
   OrdersMobileScreen,
   ProfileAccountActivityMobileScreen,
   ProfileApiKeysMobileScreen,
   ProfileAuthMobileScreen,
-  ProfileChangePasswordMobileScreen,
   ProfileLanguageMobileScreen,
   ProfileMobileScreen,
   ProfileThemeMobileScreen,
-  SignInMobileScreen,
-  SignUpMobileScreen,
   TradingScreenMobile,
 } from '../../mobile/screens';
 import {
@@ -62,12 +51,10 @@ import {
   selectUserNeedVerification,
 } from '../../modules';
 import {
-  ChangeForgottenPasswordScreen,
   ConfirmScreen,
   DeepLinkPreview,
   DocumentationScreen,
   EmailVerificationScreen,
-  ForgotPasswordScreen,
   HistoryScreen,
   InternalTransfer,
   MagicLink,
@@ -78,8 +65,6 @@ import {
   VerificationScreen,
   QuickExchange,
   LandingScreen,
-  SignInScreen,
-  SignUpScreen,
 } from '../../screens';
 import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuthScreen/ProfileTwoFactorAuthScreen';
 import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSettingsMobileScreen/ProfileSettingsMobileScreen';
@@ -87,6 +72,14 @@ import { SignInAuth0 } from 'web/src/screens/SignInScreen/SignInAuth0';
 import { EmailVerificationModal } from 'web/src/screens/EmailVerification/EmailVerificationModal';
 import { getSearchParam, setLocation } from 'web/src/helpers/url';
 import { NeedVerificationModal } from 'web/src/containers/NeedVerificationModal/NeedVerificationModal';
+import { SignInScreen } from 'web/src/screens/SignInScreen/SignInScreen';
+import { SignInMobileScreen } from 'web/src/mobile/screens/SignInScreen/SignInMobileScreen';
+import { SignUpScreen } from 'web/src/screens/SignUpScreen/SignUpScreen';
+import { SignUpMobileScreen } from 'web/src/mobile/screens/SignUpScreen/SignUpMobileScreen';
+import { ForgotPasswordMobileScreen } from 'web/src/mobile/screens/ForgotPassword/ForgotPasswordMobileScreen';
+import { ForgotPasswordScreen } from 'web/src/screens/ForgotPassword/ForgotPasswordScreen';
+import { ResetPasswordMobileScreen } from 'web/src/mobile/screens/ResetPassword/ResetPasswordMobileScreen';
+import { ResetPasswordScreen } from 'web/src/screens/ResetPassword/ResetPasswordScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -341,7 +334,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               loading={userLoading}
               isLogged={isLoggedIn}
               path="/accounts/password_reset"
-              component={ChangeForgottenPasswordMobileScreen}
+              component={ResetPasswordMobileScreen}
             />
             <PublicRoute
               loading={userLoading}
@@ -409,14 +402,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               path="/profile/2fa"
               component={ProfileAuthMobileScreen}
             />
-            {!isAuth0() && (
-              <PrivateRoute
-                loading={userLoading}
-                isLogged={isLoggedIn}
-                path="/profile/change-password"
-                component={ProfileChangePasswordMobileScreen}
-              />
-            )}
             <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}
@@ -465,7 +450,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             loading={userLoading}
             isLogged={isLoggedIn}
             path="/accounts/password_reset"
-            component={ChangeForgottenPasswordScreen}
+            component={ResetPasswordScreen}
           />
           <PublicRoute
             loading={userLoading}

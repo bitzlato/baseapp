@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
 import { Card } from 'src/components/Card/Card';
 import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
@@ -13,20 +14,15 @@ import { Tabs } from 'src/components/Tabs/Tabs';
 import { Tab, TabList, TabPanel } from 'src/components/Tabs';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
-import { GeneralBalance } from 'src/modules/account/types';
 import { WalletHistory } from 'src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { useHistory, useParams } from 'react-router';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { Estimated } from 'src/containers/Wallets/Estimated';
-import { accountUrl } from 'src/api';
 import { Container } from 'web/src/components/Container/Container';
 import { Gift } from 'web/src/containers/Gift/Gift';
 import { DEFAULT_WALLET_ITEM } from 'web/src/components/WalletItem/defaults';
-import { useFetch } from 'web/src/hooks/data/useFetch';
-import { fetchWithCreds } from 'web/src/helpers/fetch';
-import { isPendingUser } from 'web/src/modules/user/profile/selectors';
-import { getList } from './helpers';
+import { useGeneralWallets } from 'web/src/hooks/useGeneralWallets';
 import { TabId, useWalletTab } from './useWalletTab';
 import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
@@ -37,24 +33,13 @@ export const WalletsScreen: React.FC = () => {
   const params = useParams<UrlParams>();
   const history = useHistory();
   const wallets = useSelector(selectWallets);
-  const isPending = useSelector(isPendingUser);
   const [listIndex, setListIndex] = useState(0);
 
   const t = useT();
   useWalletsFetch();
   useDocumentTitle('Wallets');
 
-  const shouldFetch = process.env.REACT_APP_RELEASE_STAGE !== 'sandbox' && !isPending;
-
-  const balanceResponse = useFetch<GeneralBalance[]>(
-    shouldFetch ? `${accountUrl()}/balances` : null,
-    fetchWithCreds,
-  );
-
-  const list = useMemo(
-    () => getList(wallets, balanceResponse.data ?? []),
-    [wallets, balanceResponse.data],
-  );
+  const list = useGeneralWallets();
 
   useEffect(() => {
     const currency = params.currency?.toUpperCase();
@@ -91,6 +76,14 @@ export const WalletsScreen: React.FC = () => {
     setTab(value);
     replaceHistory(listIndex, value);
   };
+
+  if (list.length === 0) {
+    return (
+      <div className="pg-loader-container">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
 
   return (
     <Container maxWidth="lg" my="4">

@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import ThumbUp from 'web/src/assets/svg/ThumbUp.svg';
 import ThumbDown from 'web/src/assets/svg/ThumbDown.svg';
+import WarningCircleIcon from 'web/src/assets/svg/WarningCircleIcon.svg';
 import { useTradeStats } from 'web/src/hooks/data/useFetchTradeStatistics';
 import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
@@ -79,7 +80,7 @@ export const Profile: FC = () => {
           )}
 
           <ProfileReferalLinks />
-          {user.bitzlato_user && <ChangePassword email={user.bitzlato_user.email} />}
+          <ChangePassword />
           {user.bitzlato_user && (
             <FreezeAccount isSelfFrozen={user.bitzlato_user.user_profile.self_frozen} />
           )}
@@ -88,10 +89,21 @@ export const Profile: FC = () => {
       <Box className={s.stats} mb={isMobileDevice ? '8x' : undefined}>
         <div className={s.stat}>
           <Stat>
-            <ProfileVerification
-              status={bitzlatoUser?.user_profile.verified ?? false}
-              url={user.kyc_verification_url}
-            />
+            {!bitzlatoUser?.user_profile.suspicious ? (
+              <ProfileVerification
+                status={bitzlatoUser?.user_profile.verified ?? false}
+                url={user.kyc_verification_url}
+              />
+            ) : (
+              <>
+                <Box display="flex" justifyContent="center" mb="6x">
+                  <WarningCircleIcon />
+                </Box>
+                <Text variant="label" color="warning" fontWeight="strong" textAlign="center">
+                  {t('profile.verification_suspicious')}
+                </Text>
+              </>
+            )}
           </Stat>
         </div>
         {!isMobileDevice && (
@@ -135,7 +147,7 @@ export const Profile: FC = () => {
             </div>
             <div className={s.stat}>
               <Stat>
-                <StatLabel>{t('Transactions made')}</StatLabel>
+                <StatLabel>{t('Deals completed')}</StatLabel>
                 {swr.data ? (
                   <Box display="flex" justifyContent="space-between" alignItems="flex-end">
                     <Text variant="h3" as="div">
@@ -184,7 +196,7 @@ export const Profile: FC = () => {
             </Stack>
           </Box>
           <Box display="flex" justifyContent="space-between">
-            <Text variant="label">{t('Transactions made')}</Text>
+            <Text variant="label">{t('Deals completed')}</Text>
             {swr.data ? (
               <Text variant="label" fontWeight="strong">
                 {swr.data.totalDeals}

@@ -1,14 +1,16 @@
 import * as React from 'react';
+import {
+  passwordErrorFirstSolution,
+  passwordErrorSecondSolution,
+  passwordErrorThirdSolution,
+} from 'web/src/helpers/passwordValidation';
 import { passwordEntropyStep } from '../../api';
 import { PasswordStrengthTip } from '../PasswordStrengthTip';
 
 export interface PasswordStrengthMeterProps {
   currentPasswordEntropy: number;
   minPasswordEntropy: number;
-  passwordExist: boolean;
-  passwordErrorFirstSolved: boolean;
-  passwordErrorSecondSolved: boolean;
-  passwordErrorThirdSolved: boolean;
+  password: string;
   passwordPopUp: boolean;
   translate: (id: string) => string;
 }
@@ -22,34 +24,6 @@ const renderPasswordStrengthMeter = (passwordStrengthMeterLength: number) => (
     />
   </div>
 );
-
-const renderPasswordStrengthTip = (
-  props: PasswordStrengthMeterProps,
-  passwordStrengthMeterLength: number,
-) =>
-  props.passwordPopUp ? (
-    <div className="pg-password-pop-up">
-      <div className="pg-password-pop-up__strength">
-        <div className="pg-password-pop-up__strength-title">
-          {props.translate('page.header.signUp.strength.password')}
-        </div>
-        <div
-          className={`pg-password-pop-up__strength-status ${passwordStrengthClassName(
-            passwordStrengthMeterLength,
-          )}`}
-        >
-          {passwordStrengthStatus(passwordStrengthMeterLength, props.translate)}
-        </div>
-      </div>
-      <PasswordStrengthTip
-        passwordErrorFirstSolved={props.passwordErrorFirstSolved}
-        passwordErrorSecondSolved={props.passwordErrorSecondSolved}
-        passwordErrorThirdSolved={props.passwordErrorThirdSolved}
-        passwordPopUp={props.passwordPopUp}
-        translate={props.translate}
-      />
-    </div>
-  ) : null;
 
 const passwordStrengthClassName = (passwordStrengthMeterLength: number) => {
   switch (passwordStrengthMeterLength) {
@@ -86,16 +60,15 @@ const passwordStrengthStatus = (passwordStrengthMeterLength: number, translate: 
 };
 
 const PasswordStrengthMeterComponent: React.FC<PasswordStrengthMeterProps> = (props) => {
-  const {
-    passwordErrorSecondSolved,
-    passwordErrorFirstSolved,
-    passwordErrorThirdSolved,
-    minPasswordEntropy,
-    currentPasswordEntropy,
-    passwordExist,
-  } = props;
+  const { minPasswordEntropy, currentPasswordEntropy, password } = props;
 
-  const passwordComplite =
+  const isEmptyPassword = password === '';
+
+  const passwordErrorFirstSolved = passwordErrorFirstSolution(password) !== null;
+  const passwordErrorSecondSolved = passwordErrorSecondSolution(password) !== null;
+  const passwordErrorThirdSolved = passwordErrorThirdSolution(password) !== null;
+
+  const passwordComplete =
     passwordErrorSecondSolved && passwordErrorFirstSolved && passwordErrorThirdSolved;
   const AVG_PASSWORD_ENTROPY = minPasswordEntropy + passwordEntropyStep();
   const STRONG_PASSWORD_ENTROPY = minPasswordEntropy + passwordEntropyStep() * 2;
@@ -113,7 +86,7 @@ const PasswordStrengthMeterComponent: React.FC<PasswordStrengthMeterProps> = (pr
     passwordStrengthMeterLength = 1;
   }
 
-  if (passwordComplite) {
+  if (passwordComplete) {
     if (
       currentPasswordEntropy >= minPasswordEntropy &&
       currentPasswordEntropy < AVG_PASSWORD_ENTROPY
@@ -135,8 +108,30 @@ const PasswordStrengthMeterComponent: React.FC<PasswordStrengthMeterProps> = (pr
 
   return (
     <div className="pg-password-strength">
-      {passwordExist ? renderPasswordStrengthMeter(passwordStrengthMeterLength) : null}
-      {renderPasswordStrengthTip(props, passwordStrengthMeterLength)}
+      {!isEmptyPassword ? renderPasswordStrengthMeter(passwordStrengthMeterLength) : null}
+      {props.passwordPopUp && !passwordComplete && !isEmptyPassword ? (
+        <div className="pg-password-pop-up">
+          <div className="pg-password-pop-up__strength">
+            <div className="pg-password-pop-up__strength-title">
+              {props.translate('page.header.signUp.strength.password')}
+            </div>
+            <div
+              className={`pg-password-pop-up__strength-status ${passwordStrengthClassName(
+                passwordStrengthMeterLength,
+              )}`}
+            >
+              {passwordStrengthStatus(passwordStrengthMeterLength, props.translate)}
+            </div>
+          </div>
+          <PasswordStrengthTip
+            passwordErrorFirstSolved={passwordErrorFirstSolved}
+            passwordErrorSecondSolved={passwordErrorSecondSolved}
+            passwordErrorThirdSolved={passwordErrorThirdSolved}
+            passwordPopUp={props.passwordPopUp}
+            translate={props.translate}
+          />
+        </div>
+      ) : null}
     </div>
   );
 };
