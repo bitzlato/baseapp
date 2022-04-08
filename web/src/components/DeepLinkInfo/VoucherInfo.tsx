@@ -210,13 +210,7 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
       return (
         <>
           {botLink && (
-            <Button
-              as="a"
-              href={botLink.url}
-              color="secondary"
-              variant="outlined"
-              fullWidth
-            >
+            <Button as="a" href={botLink.url} color="secondary" variant="outlined" fullWidth>
               {botLink.label}
             </Button>
           )}
