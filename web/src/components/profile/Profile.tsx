@@ -16,6 +16,7 @@ import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
 import { useFetchSessionsMe } from 'web/src/hooks/data/useFetchSessionsMe';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
+import ReportIcon from 'web/src/assets/svg/ReportIcon.svg';
 import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
@@ -47,23 +48,49 @@ export const Profile: FC = () => {
 
   const body = (
     <Card header={!isMobileDevice ? <h4>{title}</h4> : undefined}>
-      <Box mb={isMobileDevice ? '4x' : '7x'}>
-        {bitzlatoUser && (
-          <Box display="flex" alignItems="center" pb="2x">
-            <Text variant="h4" className={s.publicName}>
-              {bitzlatoUser.user_profile.public_name ?? bitzlatoUser.user_profile.generated_name}
-            </Text>
-            {bitzlatoUser?.user_profile.public_name === null && <ChangePublicName />}
-          </Box>
-        )}
+      <Box
+        display="flex"
+        flexDirection={isMobileDevice ? 'column' : 'row'}
+        mb={isMobileDevice ? '4x' : '7x'}
+      >
+        <Box flexGrow={1} mr={isMobileDevice ? '0' : '4x'} mb={isMobileDevice ? '4x' : '0'}>
+          {bitzlatoUser && (
+            <Box display="flex" alignItems="center" pb="2x">
+              <Text variant="h4" className={s.publicName}>
+                {bitzlatoUser.user_profile.public_name ?? bitzlatoUser.user_profile.generated_name}
+              </Text>
+              {bitzlatoUser?.user_profile.public_name === null && <ChangePublicName />}
+            </Box>
+          )}
 
-        <Box mb="2x">
-          <Text variant={isMobileDevice ? 'label' : 'title'} color="textMuted">
-            {user.email}
+          <Box mb="2x">
+            <Text variant={isMobileDevice ? 'label' : 'title'} color="textMuted">
+              {user.email}
+            </Text>
+          </Box>
+          <Text variant="label" color="textMuted">
+            UID: {user.uid} {sessionsMe && `(${sessionsMe.auth_sub})`}
           </Text>
         </Box>
-        <Text variant="label" color="textMuted">
-          UID: {user.uid} {sessionsMe && `(${sessionsMe.auth_sub})`}
+
+        <Text>
+          {user.account_statements_url && (
+            <Box
+              as="a"
+              href={user.account_statements_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              display="flex"
+              alignItems="center"
+              color={{ default: 'text', hover: 'textHighlighted' }}
+              textDecoration={{ hover: 'none' }}
+            >
+              <Box mr="2x">
+                <ReportIcon />
+              </Box>
+              {t('Statement of transactions')}
+            </Box>
+          )}
         </Text>
       </Box>
       <Box mb="7x">

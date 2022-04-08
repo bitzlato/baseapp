@@ -21,35 +21,42 @@ exports[`ProfileScreen test should render 1`] = `
         class="col colSpacing2 padding3"
       >
         <div
-          class="reset_base__1sfgjt80 sprinkles_marginBottom_7x_mobile__w76aifg9"
+          class="reset_base__1sfgjt80 sprinkles_marginBottom_7x_mobile__w76aifg9 sprinkles_display_flex_mobile__w76aif5 sprinkles_flexDirection_row_mobile__w76aifp"
         >
           <div
-            class="reset_base__1sfgjt80 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif23"
+            class="reset_base__1sfgjt80 sprinkles_marginBottom_0_mobile__w76aifev sprinkles_marginRight_4x_mobile__w76aifku sprinkles_flexGrow_1__w76aif18t"
           >
-            <h4
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_h4__1qy84opa Text_text_gutterBottom_false__1qy84opj  Profile_publicName__crp8vk2"
+            <div
+              class="reset_base__1sfgjt80 sprinkles_paddingBottom_2x_mobile__w76aif5k sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif23"
             >
-              OddKraig
-            </h4>
-            <button
-              class="iconButton"
-              type="button"
+              <h4
+                class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_h4__1qy84opa Text_text_gutterBottom_false__1qy84opj  Profile_publicName__crp8vk2"
+              >
+                OddKraig
+              </h4>
+              <button
+                class="iconButton"
+                type="button"
+              >
+                <test-file-stub />
+              </button>
+            </div>
+            <div
+              class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aiffk"
             >
-              <test-file-stub />
-            </button>
+              <h6
+                class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_title__1qy84ope Text__1qy84op2 sprinkles_fontSize_large_mobile__w76aifrs sprinkles_fontWeight_regular__w76aif1a0 Text_text_gutterBottom_false__1qy84opj "
+              />
+            </div>
+            <span
+              class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
+            >
+              UID:  
+            </span>
           </div>
-          <div
-            class="reset_base__1sfgjt80 sprinkles_marginBottom_2x_mobile__w76aiffk"
-          >
-            <h6
-              class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_title__1qy84ope Text__1qy84op2 sprinkles_fontSize_large_mobile__w76aifrs sprinkles_fontWeight_regular__w76aif1a0 Text_text_gutterBottom_false__1qy84opj "
-            />
-          </div>
-          <span
-            class="reset_base__1sfgjt80 sprinkles_color_textMuted_default__w76aifsi Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_label__1qy84opf Text__1qy84op3 sprinkles_fontSize_medium_mobile__w76aifrn Text_text_gutterBottom_false__1qy84opj "
-          >
-            UID:  
-          </span>
+          <p
+            class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifse Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif19z Text_text_variant_body__1qy84opg Text__1qy84op4 sprinkles_fontSize_small_mobile__w76aifri Text_text_gutterBottom_false__1qy84opj "
+          />
         </div>
         <div
           class="reset_base__1sfgjt80 sprinkles_marginBottom_7x_mobile__w76aifg9"
