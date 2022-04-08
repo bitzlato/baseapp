@@ -14,18 +14,11 @@ import * as s from './Modal.css';
 
 interface ModalProps {
   show: boolean;
-  persistent?: boolean;
   size?: keyof typeof s.modal;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
-export const Modal: FC<ModalProps> = ({
-  children,
-  show = false,
-  size = 'md',
-  persistent = false,
-  onClose,
-}) => {
+export const Modal: FC<ModalProps> = ({ children, show = false, size = 'md', onClose }) => {
   const { stage, shouldMount } = useTransition(show, s.MODAL_TRANSITION_TIMEOUT);
   const theme = useSelector(selectCurrentColorTheme);
 
@@ -34,12 +27,8 @@ export const Modal: FC<ModalProps> = ({
   }
 
   const handleClose = () => {
-    if (persistent) {
-      // noop, close persistent by code
-      return;
-    }
     if (stage === 'enter') {
-      onClose?.();
+      onClose();
     }
   };
 
@@ -60,21 +49,19 @@ export const Modal: FC<ModalProps> = ({
               overflow="hidden"
               width="full"
             >
-              {!persistent && (
-                <Box
-                  as="button"
-                  type="button"
-                  className={s.cross}
-                  color={{
-                    default: 'text',
-                    hover: 'textHighlighted',
-                  }}
-                  p="4x"
-                  onClick={handleClose}
-                >
-                  <CrossIcon width="16px" height="16px" />
-                </Box>
-              )}
+              <Box
+                as="button"
+                type="button"
+                className={s.cross}
+                color={{
+                  default: 'text',
+                  hover: 'textHighlighted',
+                }}
+                p="4x"
+                onClick={handleClose}
+              >
+                <CrossIcon width="16px" height="16px" />
+              </Box>
               {children}
             </Box>
           </Box>

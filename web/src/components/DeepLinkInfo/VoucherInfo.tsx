@@ -197,12 +197,6 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
     history.push('/wallets');
   };
 
-  const openExternalLink = (url: string) => {
-    requestAnimationFrame(() => {
-      window.location.href = url;
-    });
-  };
-
   const spacer = <Box w="4x" h="4x" flexShrink={0} />;
 
   const actionButtons = () => {
@@ -217,7 +211,8 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
         <>
           {botLink && (
             <Button
-              onClick={() => openExternalLink(botLink.url)}
+              as="a"
+              href={botLink.url}
               color="secondary"
               variant="outlined"
               fullWidth
