@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { useParams } from 'react-router';
 import { DeepLinkInfo, deeplinkTitle } from 'web/src/components';
-import { useT } from 'web/src/hooks/useT';
-import { Modal, ModalHeader } from 'web/src/components/ui/Modal';
 import { Box } from 'web/src/components/ui/Box';
-import { useDeepLinkInfo } from 'web/src/hooks/data/useDeepLinkInfo';
+import { Card } from 'web/src/components/Card/Card';
+import { Container } from 'web/src/components/Container/Container';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { Text } from 'web/src/components/ui/Text';
+import { useT } from 'web/src/hooks/useT';
+import { useDeepLinkInfo } from 'web/src/hooks/data/useDeepLinkInfo';
 
 export const DeepLinkPreview: FC = () => {
   const t = useT();
@@ -24,19 +25,16 @@ export const DeepLinkPreview: FC = () => {
   }
 
   return (
-    <Modal size="lg" show persistent>
-      <ModalHeader>{t(isLoading ? 'common.loading' : deeplinkTitle(deeplink))}</ModalHeader>
-      <Box
-        display="flex"
-        fontSize="medium"
-        mx="6x"
-        py="4x"
-        borderTopWidth="1x"
-        borderColor="modalHeaderBorderBottom"
-        borderTopStyle="solid"
+    <Container maxWidth="sm" my="4">
+      <Card
+        header={
+          <Text variant="title">{t(isLoading ? 'common.loading' : deeplinkTitle(deeplink))}</Text>
+        }
       >
-        {body}
-      </Box>
-    </Modal>
+        <Box display="flex" fontSize="medium">
+          {body}
+        </Box>
+      </Card>
+    </Container>
   );
 };

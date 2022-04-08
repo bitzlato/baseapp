@@ -1,3 +1,5 @@
+import { AccountVoucher } from 'web/src/modules/account/voucher-types';
+
 export enum DeeplinkTypes {
   Ad = 'ad',
   Voucher = 'voucher',
@@ -11,17 +13,7 @@ export type DeepLinkInfoType = {
   type?: DeeplinkTypes;
 };
 
-export interface DeeplinkPayloadVoucher {
-  amount: string;
-  cashed_at?: string;
-  cc_code: string;
-  comment?: string;
-  converted_amount: string;
-  currency: string;
-  user: {
-    profile_name: string;
-  };
-}
+export interface DeeplinkPayloadVoucher extends AccountVoucher {}
 
 export interface DeeplinkPayloadAd {
   cc_code: string;

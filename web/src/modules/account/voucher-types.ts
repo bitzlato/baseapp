@@ -55,6 +55,7 @@ interface P2PCurrency {
 }
 
 interface P2PVoucherLink {
+  label: string;
   type: string;
   url: string;
 }

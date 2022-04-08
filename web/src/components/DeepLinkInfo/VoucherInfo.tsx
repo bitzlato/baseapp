@@ -75,9 +75,9 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
 
   // gather variables that can be used in informational messages
   const details = {
-    totalCrypto: <b>{`${payload.amount} ${payload.cc_code}`}</b>,
+    totalCrypto: <strong>{`${payload.amount} ${payload.cc_code}`}</strong>,
     totalFiat: payload.converted_amount && (
-      <b>{`(${payload.converted_amount} ${payload.currency})`}</b>
+      <strong>{`(${payload.converted_amount} ${payload.currency})`}</strong>
     ),
     user: (
       <a
@@ -197,21 +197,44 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
     history.push('/wallets');
   };
 
-  const actionButtons = () => {
-    if (!canTakeAction) {
-      return null;
-    }
+  const openExternalLink = (url: string) => {
+    requestAnimationFrame(() => {
+      window.location.href = url;
+    });
+  };
 
+  const spacer = <Box w="4x" h="4x" flexShrink={0} />;
+
+  const actionButtons = () => {
     if (isCheckingAuth) {
       return <Spinner />;
     }
 
     if (isAuthRequired) {
+      const botLink = payload.links?.find((link) => link.type === 'telegram');
+
       return (
-        <Button color="primary" onClick={goAuth}>
-          {t('common.action.sign_in_up')}
-        </Button>
+        <>
+          {botLink && (
+            <Button
+              onClick={() => openExternalLink(botLink.url)}
+              color="secondary"
+              variant="outlined"
+              fullWidth
+            >
+              {botLink.label}
+            </Button>
+          )}
+          {spacer}
+          <Button color="primary" fullWidth onClick={goAuth}>
+            {t('common.action.sign_in_up')}
+          </Button>
+        </>
       );
+    }
+
+    if (!canTakeAction) {
+      return null;
     }
 
     return (
@@ -225,7 +248,7 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
         >
           {t('common.action.discard')}
         </Button>
-        <Box w="4x" h="4x" flexShrink={0} />
+        {spacer}
         <Button
           disabled={isActivating}
           onClick={onAccept}
