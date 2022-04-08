@@ -75,6 +75,7 @@ describe('Profile reducer', () => {
       default_auth_subject: null,
       available_auth_subjects: [],
       kyc_verification_url: '',
+      account_statements_url: '',
     },
   };
 

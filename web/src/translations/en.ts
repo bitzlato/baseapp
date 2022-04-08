@@ -1283,6 +1283,7 @@ export const en = {
   Enable: 'Enable',
   Disable: 'Disable',
   Loading: 'Loading',
+  'Account Statement': 'Account Statement',
 
   'p2p.apiKeys.descr':
     'Creating an API private key provides access to trading and other services on Bitzlato via a third-party site or application. View <link>API documentation</link>",',
