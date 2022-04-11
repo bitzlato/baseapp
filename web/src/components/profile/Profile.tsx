@@ -88,7 +88,7 @@ export const Profile: FC = () => {
               <Box mr="2x">
                 <ReportIcon />
               </Box>
-              {t('Statement of transactions')}
+              {t('Account Statement')}
             </Box>
           )}
         </Text>
