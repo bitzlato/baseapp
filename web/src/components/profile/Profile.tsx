@@ -77,7 +77,7 @@ export const Profile: FC = () => {
           </Text>
         </Box>
         <Text>
-          {user.account_statements_url && (
+          {/* user.account_statements_url && (
             <Box
               as="a"
               href={user.account_statements_url}
@@ -93,7 +93,7 @@ export const Profile: FC = () => {
               </Box>
               {t('Account Statement')}
             </Box>
-          )}
+          ) */}
         </Text>
       </Box>
       <Box mb="7x">
