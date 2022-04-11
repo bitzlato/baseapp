@@ -15,14 +15,13 @@ export const deeplinkTexts = {
   'deeplink.voucher.title': 'Ваучер',
   'deeplink.voucher.info':
     'Единовременный ваучер на сумму {totalCrypto} {totalFiat}, выписан пользователем {user}.',
-  'deeplink.voucher.comment': 'Комментарий: “{comment}”.',
-  'deeplink.voucher.take_action': 'Нажмите „Принять” для погашения.',
+  'deeplink.voucher.comment_label': 'Комментарий',
   'deeplink.voucher.expired': 'Срок действия ваучера истек.',
   'deeplink.voucher.cashed': 'Ваучер погашен в {cashed_at}.',
 
   'deeplink.voucher.just_cashed': 'Ваучер зачислен на ваш кошелек.',
   'deeplink.voucher.cash_failed': 'Не удалось погасить ваучер.',
 
-  'deeplink.profile.current_account': `Вы авторизованы как {userName}`,
+  'deeplink.profile.current_account_label': `Авторизация аккаунта`,
   'deeplink.profile.need_auth': 'Войдите в свою учетную запись для погашения.',
 };

@@ -1,16 +1,26 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { Card, Container, DeepLinkInfo, deeplinkTitle } from 'web/src/components';
-import { useT } from 'web/src/hooks/useT';
-import { useDeepLinkInfo } from 'web/src/hooks/data/useDeepLinkInfo';
+import { DeepLinkInfo, deeplinkTitle } from 'web/src/components';
+import { Box } from 'web/src/components/ui/Box';
+import { Card } from 'web/src/components/Card/Card';
+import { Container } from 'web/src/components/Container/Container';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { Text } from 'web/src/components/ui/Text';
+import { useT } from 'web/src/hooks/useT';
+import { useDeepLinkInfo } from 'web/src/hooks/data/useDeepLinkInfo';
+import { setDocumentTitle } from 'web/src/helpers';
 
 export const DeepLinkPreview: FC = () => {
   const t = useT();
   const { id: deeplinkId } = useParams<{ id: string }>();
 
   const { deeplink, isLoading, isError } = useDeepLinkInfo(deeplinkId);
+
+  useEffect(() => {
+    if (deeplink && deeplink.code) {
+      setDocumentTitle(`${t(deeplinkTitle(deeplink))} x${deeplink.code.slice(-4).toUpperCase()}`);
+    }
+  }, [deeplink, t]);
 
   let body;
   if (isLoading) {
@@ -22,13 +32,15 @@ export const DeepLinkPreview: FC = () => {
   }
 
   return (
-    <Container maxWidth="md" my="4">
+    <Container maxWidth="sm" my="4">
       <Card
         header={
-          <Text variant="h4">{t(isLoading ? 'common.loading' : deeplinkTitle(deeplink))}</Text>
+          <Text variant="title">{t(isLoading ? 'common.loading' : deeplinkTitle(deeplink))}</Text>
         }
       >
-        {body}
+        <Box display="flex" fontSize="medium">
+          {body}
+        </Box>
       </Card>
     </Container>
   );
