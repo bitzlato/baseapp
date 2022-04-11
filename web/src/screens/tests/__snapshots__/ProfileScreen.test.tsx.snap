@@ -33,7 +33,7 @@ exports[`ProfileScreen test should render 1`] = `
             </div>
           </div>
           <div
-            class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aifge"
+            class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aifge sprinkles_flexGrow_1__w76aif19b"
           >
             <div
               class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif2d"
