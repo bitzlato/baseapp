@@ -1244,6 +1244,7 @@ export const en = {
     'Currently, BTC deposits and withdrawals are done by P2P wallets, please {transfer} assets from/to P2P wallet.',
   p2p_transfer: 'transfer',
   p2p: 'P2P',
+  Rate: 'Rate',
   Rearrange: 'Rearrange',
   Send: 'Send',
   Status: 'Status',
@@ -1396,4 +1397,7 @@ export const en = {
     'If you have been registered for a long time, then your account may have been blocked for' +
     'violating the terms of service.',
   'verification.support': '🤖 Support:',
+
+  'rate.select':
+    'Choose rate source for pair {pair}. Please note that changes will be applied to your dynamic price orders.',
 };

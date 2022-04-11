@@ -30,21 +30,21 @@ exports[`WalletList should render 1`] = `
         class="col alignStart textAlignStart"
       >
         <div
-          class="title"
+          class="titleSize"
         >
           BTC
         </div>
-        <span
-          class="description"
+        <div
+          class="descriptionSize"
         >
           Bitcoin
-        </span>
+        </div>
       </div>
       <div
         class="col alignEnd"
       >
         <div
-          class="title"
+          class="titleSize"
         >
           1
           <span
@@ -54,7 +54,7 @@ exports[`WalletList should render 1`] = `
           </span>
         </div>
         <div
-          class="description"
+          class="descriptionSize"
         >
           <span
             class="secondaryColor"
@@ -100,21 +100,21 @@ exports[`WalletList should render 1`] = `
         class="col alignStart textAlignStart"
       >
         <div
-          class="title"
+          class="titleSize"
         >
           ETH
         </div>
-        <span
-          class="description"
+        <div
+          class="descriptionSize"
         >
           Ethereum
-        </span>
+        </div>
       </div>
       <div
         class="col alignEnd"
       >
         <div
-          class="title"
+          class="titleSize"
         >
           1
           <span
@@ -124,7 +124,7 @@ exports[`WalletList should render 1`] = `
           </span>
         </div>
         <div
-          class="description"
+          class="descriptionSize"
         >
           <span
             class="secondaryColor"

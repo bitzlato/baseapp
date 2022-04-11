@@ -5,7 +5,7 @@ export const getFormatOptionsByLanguage = (language: Language): FormatOptions =>
   switch (language) {
     case 'ru':
       return {
-        groupSeparator: ' ',
+        groupSeparator: '\u00A0',
         decimalSeparator: ',',
       };
 
