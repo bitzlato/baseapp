@@ -50,64 +50,49 @@ export const WalletMobileScreen: React.FC = () => {
         backTitle={t('page.mobile.wallets.title')}
         onGoBack={() => history.push('/wallets')}
       />
-      {general && (
-        <>
-          <WalletMobileBalance wallet={general} />
-          {wallet && (
-            <Box bgColor="body" padding="2X3" col spacing="2">
-              <Tabs value={tab} onSelectionChange={handleTabSelection as any}>
-                <Box grow justify="around" as={TabList}>
-                  {tabs.map((d) => (
-                    <Tab key={d.value} value={d.value} size="small">
-                      {t(d.label)}
-                    </Tab>
-                  ))}
-                </Box>
-                <TabPanel value="deposit">
-                  {general.currency === 'BTC' ? (
-                    <InvoiceExplanation currency={general.currency} />
-                  ) : (
-                    <DepositCrypto wallet={wallet} />
-                  )}
-                  <WalletHistory
-                    label="deposit"
-                    type="deposits"
-                    currency={currency.toLowerCase()}
-                  />
-                </TabPanel>
-                <TabPanel value="withdraw">
-                  {general.currency === 'BTC' ? (
-                    <InvoiceExplanation currency={general.currency} />
-                  ) : (
-                    <Withdraw wallet={wallet} />
-                  )}
-                  <WalletHistory
-                    label="withdraw"
-                    type="withdraws"
-                    currency={currency.toLowerCase()}
-                  />
-                </TabPanel>
-                <TabPanel value="transfer">
-                  {general.hasTransfer && (
-                    <Transfer
-                      currency={general.balanceTotal.currency}
-                      balanceMarket={general.balanceMarket?.toString() ?? '0'}
-                      balanceP2P={general.balanceP2P?.toString() ?? '0'}
-                    />
-                  )}
-                </TabPanel>
-                <TabPanel value={TabId.gift}>
-                  {general.balanceP2P && (
-                    <Gift
-                      currency={general.balanceTotal.currency}
-                      balanceP2P={general.balanceP2P}
-                    />
-                  )}
-                </TabPanel>
-              </Tabs>
+      <WalletMobileBalance wallet={general} />
+      {wallet && (
+        <Box bgColor="body" padding="2X3" col spacing="2">
+          <Tabs value={tab} onSelectionChange={handleTabSelection as any}>
+            <Box grow justify="around" as={TabList}>
+              {tabs.map((d) => (
+                <Tab key={d.value} value={d.value} size="small">
+                  {t(d.label)}
+                </Tab>
+              ))}
             </Box>
-          )}
-        </>
+            <TabPanel value="deposit">
+              {general.currency === 'BTC' ? (
+                <InvoiceExplanation currency={general.currency} />
+              ) : (
+                <DepositCrypto wallet={wallet} />
+              )}
+              <WalletHistory label="deposit" type="deposits" currency={currency.toLowerCase()} />
+            </TabPanel>
+            <TabPanel value="withdraw">
+              {general.currency === 'BTC' ? (
+                <InvoiceExplanation currency={general.currency} />
+              ) : (
+                <Withdraw wallet={wallet} />
+              )}
+              <WalletHistory label="withdraw" type="withdraws" currency={currency.toLowerCase()} />
+            </TabPanel>
+            <TabPanel value="transfer">
+              {general.hasTransfer && (
+                <Transfer
+                  currency={general.balanceTotal.currency}
+                  balanceMarket={general.balanceMarket?.toString() ?? '0'}
+                  balanceP2P={general.balanceP2P?.toString() ?? '0'}
+                />
+              )}
+            </TabPanel>
+            <TabPanel value={TabId.gift}>
+              {general.balanceP2P && (
+                <Gift currency={general.balanceTotal.currency} balanceP2P={general.balanceP2P} />
+              )}
+            </TabPanel>
+          </Tabs>
+        </Box>
       )}
     </Box>
   );
