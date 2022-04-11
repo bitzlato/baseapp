@@ -422,7 +422,7 @@ export const Gift: FC<Props> = (props) => {
                   variant="outlined"
                   onClick={() => copyToClip(l.url)}
                 >
-                  {l.label}
+                  {l.type}
                 </Button>
               ))}
             </Box>
