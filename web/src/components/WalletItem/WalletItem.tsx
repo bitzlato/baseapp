@@ -44,17 +44,17 @@ export const WalletItem: FC<Props> = ({ wallet, active, onClick, isMobileDevice 
       <CryptoCurrencyIcon size="medium" currency={wallet.currency} />
       <Box grow row align="start" justify="between">
         <Box col align="start" textAlign="start">
-          <Box textColor={color} className={s.title}>
+          <Box textColor={color} textSize="title">
             {getCurrencyCodeSymbol(wallet.currency)}
           </Box>
-          <span className={s.description}>{wallet.name}</span>
+          <Box textSize="description">{wallet.name}</Box>
         </Box>
         <Box col align="end">
-          <Box className={s.title} textColor={color}>
+          <Box textSize="title" textColor={color}>
             <AmountFormat money={wallet.balanceTotal} />
           </Box>
           {wallet.approximate.isZero() ? null : (
-            <Box className={s.description} textColor={color}>
+            <Box textSize="description" textColor={color}>
               <Box as="span" textColor="secondary">
                 &asymp;
               </Box>

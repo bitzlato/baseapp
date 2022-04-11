@@ -104,10 +104,12 @@ export const WalletsScreen: React.FC = () => {
                     <Box row spacing="2">
                       <CryptoCurrencyIcon size="large" currency={general.currency} />
                       <Box col align="start" textAlign="start">
-                        <span className={walletItemS.title}>
+                        <Box as="span" textSize="title">
                           {getCurrencyCodeSymbol(general.currency)}
-                        </span>
-                        <span className={walletItemS.description}>{general.name}</span>
+                        </Box>
+                        <Box as="span" textSize="description">
+                          {general.name}
+                        </Box>
                       </Box>
                       <Box grow />
                       <TabList>

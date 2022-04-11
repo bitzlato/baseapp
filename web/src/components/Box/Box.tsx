@@ -23,7 +23,7 @@ type BoxOwnProps<E = React.ElementType> = {
   padding?: boolean | '2' | '3' | '4' | '5' | '2X3' | undefined;
   margin?: '0' | undefined;
   my?: '2' | '4' | '7' | undefined;
-  textSize?: 'sm' | 'lg' | 'xl' | undefined;
+  textSize?: 'sm' | 'lg' | 'xl' | 'title' | 'description' | 'default' | undefined;
   textColor?: TextColor | undefined;
   textTr?: 'capitalize' | 'uppercase' | undefined;
   textAlign?: 'start' | 'center' | 'end' | undefined;
