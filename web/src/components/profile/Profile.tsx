@@ -58,7 +58,7 @@ export const Profile: FC = () => {
         <Box mr="6x" mb="6x">
           <UserAvatar image={bitzlatoUser?.user_profile.avatar.original || ''} />
         </Box>
-        <Box mb="6x">
+        <Box flexGrow={1} mb="6x">
           {bitzlatoUser && (
             <Box display="flex" alignItems="center">
               <Text variant="h4" className={s.publicName}>
