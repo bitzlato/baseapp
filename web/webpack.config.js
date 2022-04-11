@@ -32,6 +32,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
 const ASSET_PATH = releaseStage === 'production' ? '/basestatic/' : '/';
+const PRODUCTION_PUBLIC_PATH = `https://bitzlato.com${ASSET_PATH}`;
 
 let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : `${ASSET_PATH}/marketDocs`; // production or staging
 if (process.env.MARKET_DOCS_URL) {
@@ -225,7 +226,7 @@ module.exports = {
         apiKey: process.env.REACT_APP_BUGSNAG_KEY,
         appVersion,
         overwrite: true,
-        publicPath: 'https://market.bitzlato.com/',
+        publicPath: PRODUCTION_PUBLIC_PATH,
       }),
 
     new webpack.EnvironmentPlugin({

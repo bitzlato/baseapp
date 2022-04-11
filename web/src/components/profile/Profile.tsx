@@ -16,7 +16,7 @@ import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
 import { useFetchSessionsMe } from 'web/src/hooks/data/useFetchSessionsMe';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
-import ReportIcon from 'web/src/assets/svg/ReportIcon.svg';
+// import ReportIcon from 'web/src/assets/svg/ReportIcon.svg';
 import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
