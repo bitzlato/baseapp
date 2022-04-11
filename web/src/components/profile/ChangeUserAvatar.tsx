@@ -68,10 +68,8 @@ export const ChangeUserAvatar: FC<ChangeUserAvatarProps> = ({ image }) => {
           borderTopStyle="solid"
           flexDirection="row"
         >
-          <Box display="flex" mr="6x">
-            <UserAvatar image={imageSrc} isLoading={data.status === 'running'} />
-          </Box>
-          <Box display="flex" flexDirection="column" flexGrow={1}>
+          <UserAvatar image={imageSrc} isLoading={data.status === 'running'} />
+          <Box display="flex" flexDirection="column" ml="6x" flexGrow={1}>
             {t('page_profile.modal.info')}
             {errorMessage && <span className={s.errorMessage}>{errorMessage}</span>}
           </Box>
