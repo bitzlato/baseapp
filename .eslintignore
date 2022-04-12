@@ -55,7 +55,6 @@ web/src/components/Documentation/Models/Item/index.tsx
 web/src/components/Documentation/Models/index.tsx
 web/src/components/Documentation/index.ts
 web/src/components/EmailForm/index.tsx
-web/src/components/ExpiredSessionModal/index.tsx
 web/src/components/FilterInput/index.tsx
 web/src/components/History/index.tsx
 web/src/components/Input/NumberInput.tsx

@@ -14,7 +14,6 @@ import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/Wall
 import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
 import { ProfileScreen } from 'web/src/screens/ProfileScreen/ProfileScreen';
 import { minutesUntilAutoLogout, sessionCheckInterval, showLanding, wizardStep } from '../../api';
-import { ExpiredSessionModal } from '../../components';
 import { WalletsFetch } from '../../containers';
 import { toggleColorTheme } from '../../helpers';
 import {
@@ -80,6 +79,7 @@ import { ForgotPasswordMobileScreen } from 'web/src/mobile/screens/ForgotPasswor
 import { ForgotPasswordScreen } from 'web/src/screens/ForgotPassword/ForgotPasswordScreen';
 import { ResetPasswordMobileScreen } from 'web/src/mobile/screens/ResetPassword/ResetPasswordMobileScreen';
 import { ResetPasswordScreen } from 'web/src/screens/ResetPassword/ResetPasswordScreen';
+import { ExpiredSessionModal } from 'web/src/components/ExpiredSessionModal/ExpiredSessionModal';
 
 interface ReduxProps {
   colorTheme: string;
@@ -419,7 +419,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             {commonRoutes}
           </Switch>
           {isLoggedIn && <WalletsFetch />}
-          {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
+          {isShownExpSessionModal && (
+            <ExpiredSessionModal
+              onClose={this.handleChangeExpSessionModalState}
+              onSubmit={this.handleSubmitExpSessionModal}
+            />
+          )}
           {this.props.verifyEmail && <EmailVerificationModal />}
           {this.props.needVerification && <NeedVerificationModal />}
         </div>
@@ -509,7 +514,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           {commonRoutes}
         </Switch>
         {isLoggedIn && <WalletsFetch />}
-        {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
+        {isShownExpSessionModal && (
+          <ExpiredSessionModal
+            onClose={this.handleChangeExpSessionModalState}
+            onSubmit={this.handleSubmitExpSessionModal}
+          />
+        )}
         {this.props.verifyEmail && <EmailVerificationModal />}
         {this.props.needVerification && <NeedVerificationModal />}
       </div>
@@ -566,15 +576,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     this.handleChangeExpSessionModalState();
     this.props.history.replace('/signin');
   };
-
-  private handleRenderExpiredSessionModal = () => (
-    <ExpiredSessionModal
-      title={this.translate('page.modal.expired.title')}
-      buttonLabel={this.translate('page.modal.expired.submit')}
-      handleChangeExpSessionModalState={this.handleChangeExpSessionModalState}
-      handleSubmitExpSessionModal={this.handleSubmitExpSessionModal}
-    />
-  );
 
   private handleChangeExpSessionModalState = () => {
     this.setState({
