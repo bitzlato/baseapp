@@ -10,7 +10,6 @@ export * from './DeepLinkInfo/DeepLinkInfo';
 export * from './DepositCrypto/DepositCrypto';
 export * from './DepositFiat';
 export * from './Documentation';
-export * from './ExpiredSessionModal';
 export * from './FilterInput';
 export * from './GridItem';
 export * from './History';
