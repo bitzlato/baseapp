@@ -33,7 +33,7 @@ import { CloseIcon } from 'web/src/assets/images/CloseIcon';
 import { alertPush } from 'web/src/modules/public/alert/actions';
 import { TextInput } from 'web/src/components/Input/TextInput';
 import { sliceString } from 'web/src/helpers/sliceString';
-import { FetchError, fetchRaw, fetchWithCreds } from 'web/src/helpers/fetch';
+import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
@@ -116,9 +116,8 @@ export const Gift: FC<Props> = (props) => {
 
   const handleDelete = async (value: AccountVoucher) => {
     try {
-      await fetchRaw(`${p2pUrl()}/vouchers/${value.deep_link_code}`, {
+      await fetchWithCreds(`${p2pUrl()}/vouchers/${value.deep_link_code}`, {
         method: 'DELETE',
-        credentials: 'include',
       });
       vouchersResponse.mutate();
       mutate(`${accountUrl()}/balances`);
