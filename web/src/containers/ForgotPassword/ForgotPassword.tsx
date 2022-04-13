@@ -26,7 +26,7 @@ export const ForgotPassword: FC = () => {
   const history = useHistory<{ email?: string }>();
   const t = useT();
 
-  const [email, setEmail] = useState(history.location.state.email ?? '');
+  const [email, setEmail] = useState(history.location.state?.email ?? '');
   const [emailError, setEmailError] = useState('');
 
   const success = useSelector(selectForgotPasswordSuccess);
