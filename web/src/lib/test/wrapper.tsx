@@ -8,6 +8,7 @@ import { createBrowserHistory } from 'history';
 
 import { rootReducer } from 'src/modules';
 import { languageMap } from 'src/translations';
+import { AppContextProvider } from 'web/src/components/app/AppContextProvider';
 
 const browserHistory = createBrowserHistory();
 const store = createStore(rootReducer);
@@ -18,7 +19,9 @@ export const TestComponentWrapper: React.FC = ({ children }) => {
   return (
     <Router history={browserHistory}>
       <IntlProvider {...{ locale }} defaultLocale={locale} messages={languageMap[locale]}>
-        <Provider store={store}>{children}</Provider>
+        <Provider store={store}>
+          <AppContextProvider>{children}</AppContextProvider>
+        </Provider>
       </IntlProvider>
     </Router>
   );
