@@ -1,11 +1,10 @@
 import { FC, ReactNode } from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
 import { useTransition } from 'transition-hook';
 import { FocusOn } from 'react-focus-on';
-import { selectCurrentColorTheme } from 'web/src/modules';
 import { getThemeClassName } from 'web/src/theme/getThemeClassName';
 import CrossIcon from 'web/src/assets/svg/CrossIcon.svg';
+import { useTheme } from 'web/src/components/app/AppContext';
 import { Box } from './Box';
 import { Portal } from './Portal';
 import { Text } from './Text';
@@ -20,7 +19,7 @@ interface ModalProps {
 
 export const Modal: FC<ModalProps> = ({ children, show = false, size = 'md', onClose }) => {
   const { stage, shouldMount } = useTransition(show, s.MODAL_TRANSITION_TIMEOUT);
-  const theme = useSelector(selectCurrentColorTheme);
+  const theme = useTheme();
 
   if (!shouldMount) {
     return null;

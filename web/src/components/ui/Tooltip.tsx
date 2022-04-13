@@ -14,8 +14,7 @@ import { Portal } from 'web/src/components/ui/Portal';
 import { Box } from 'web/src/components/ui/Box';
 import { useTransition } from 'transition-hook';
 import { getThemeClassName } from 'web/src/theme/getThemeClassName';
-import { selectCurrentColorTheme } from 'web/src/modules/public/globalSettings/selectors';
-import { useSelector } from 'react-redux';
+import { useTheme } from 'web/src/components/app/AppContext';
 import * as s from './Tooltip.css';
 
 type Placement = 'top' | 'bottom';
@@ -64,7 +63,7 @@ const calculatePosition = (trigger: DOMRect, tooltip: DOMRect, placement: Placem
 };
 
 export const Tooltip: FC<Props> = ({ children, placement = 'bottom', label }) => {
-  const theme = useSelector(selectCurrentColorTheme);
+  const theme = useTheme();
   const [visible, setVisible] = useState(false);
   const [position, setPosition] = useState<Position | undefined>(undefined);
   const triggerRef = useRef<HTMLElement>(null);
