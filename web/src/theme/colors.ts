@@ -57,3 +57,4 @@ export const burntSienna = 'rgb(232, 94, 89)';
 export const salmon = 'rgb(255, 124, 119)';
 export const oceanGreen = 'rgb(79, 172, 132)';
 export const charade = 'rgb(44, 49, 58)';
+export const milanoRed = 'rgb(11, 18, 24)';

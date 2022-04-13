@@ -1,9 +1,18 @@
 import { createGlobalTheme, createTheme } from '@vanilla-extract/css';
 import * as colors from './colors';
 
+export const fontSizeVars = createGlobalTheme(':root', {
+  caption: '12px' as const,
+  small: '14px' as const,
+  medium: '16px' as const,
+  large: '18px' as const,
+  lead: '20px' as const,
+});
+
 export const zIndexVars = createGlobalTheme(':root', {
   modal: '10001',
   modalInner: '10002',
+  tooltip: '10010',
 });
 
 export const sizeVars = createGlobalTheme(':root', {
@@ -135,6 +144,9 @@ export const [themeLight, vars] = createTheme({
     radioShadow: colors.mako10,
     radioChecked: colors.goldTips,
     radioShadowChecked: colors.goldTips10,
+
+    tooltip: colors.milanoRed,
+    tooltipText: colors.white,
   },
 });
 
@@ -228,5 +240,8 @@ export const themeDark = createTheme(vars, {
     radioShadow: colors.white10,
     radioChecked: colors.goldTips,
     radioShadowChecked: colors.goldTips10,
+
+    tooltip: colors.milanoRed,
+    tooltipText: colors.white,
   },
 });
