@@ -1,14 +1,6 @@
 import { defineProperties, createSprinkles } from '@vanilla-extract/sprinkles';
 import { queries } from 'web/src/theme/themeUtils';
-import { vars, sizeVars, radiiVars, zIndexVars } from './vars.css';
-
-const fontSizes = {
-  caption: 12 as const,
-  small: 14 as const,
-  medium: 16 as const,
-  large: 18 as const,
-  lead: 20 as const,
-};
+import { vars, sizeVars, radiiVars, zIndexVars, fontSizeVars } from './vars.css';
 
 const lineHeights = {
   // used in Button
@@ -57,7 +49,7 @@ const responsiveProperties = defineProperties({
     marginRight: sizeVars,
     width: sizeVars,
     height: sizeVars,
-    fontSize: fontSizes,
+    fontSize: fontSizeVars,
   },
   shorthands: {
     p: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
