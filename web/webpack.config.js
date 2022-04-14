@@ -292,6 +292,20 @@ module.exports = {
         hot: true,
         proxy: process.env.PROXY_HOST
           ? {
+              '/wss': {
+                target: `wss://${process.env.PROXY_WSS_HOST}`,
+                changeOrigin: true,
+                ws: true,
+                onProxyReqWs: (proxyReq, _, socket) => {
+                  proxyReq.removeHeader('origin');
+                  proxyReq.setHeader('origin', `https://${process.env.PROXY_WSS_HOST}`);
+
+                  socket.on('error', (error) => {
+                    // eslint-disable-next-line no-console
+                    console.error(error);
+                  });
+                },
+              },
               '/api/v2/ranger': {
                 target: `wss://${process.env.PROXY_HOST}`,
                 changeOrigin: true,

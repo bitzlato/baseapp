@@ -17,6 +17,104 @@ export const en = {
   'page.header.navbar.profile': 'Profile',
   'page.header.navbar.logout': 'Logout',
 
+  'notifications.readall': 'Read all',
+  'notifications.empty': 'No notifications',
+
+  'notifications.modal.header': 'Alert!',
+  'notifications.No notifications': 'No notifications',
+  'notifications.Remove All': 'Mark everything as read',
+  'notifications.Telegram and web accounts have been merged':
+    '✅ Telegram account has been attached to your user account.',
+  'notifications.adminMessage': 'Admin message',
+  'notifications.adsActivatedMessage': '✅ Your ads have been activated',
+  'notifications.adsPausedMessage':
+    'One of adverts for sell was disabled due to the amount on the balance being less than the minimum limit in the advert',
+  'notifications.adsPausedMessage_maxAllowedMarkup':
+    'One of adverts was disabled due to a rate lower than {maxAllowedMarkup}% of the exchange rate',
+  'notifications.adsPausedMessage_minBalanceAllowed':
+    'Your purchase adverts {currency} disabled due to lack of minimal balance {minBalance} {cryptocurrency}',
+
+  'notifications.checkCashed': '{recipient} cashed the gift on {amount} {cryptocurrency}.',
+  'notifications.comissionReturn':
+    '🤩🤩🤩 Trade #{tradeId} was free, we returned to you {amount} {cryptocurrency}',
+  'notifications.disputeAvailablePurchase': 'You can now open the dispute',
+  'notifications.disputeAvailableSelling': 'Now the buyer can open the dispute',
+  'notifications.disputeAvailableTenMinutes': 'You have 10 minutes left to open a dispute',
+  'notifications.disputeFail': '😞 You have lost dispute for trade #{tradeId}.',
+  'notifications.disputeSuccess':
+    '✌ You have win the dispute for trade #{tradeId} and received {amount} {cryptocurrency}.',
+  'notifications.dividendsReceived':
+    'You have received {cryptocurrencyamount} {cryptocurrencycode} referral fees 🤝',
+  'notifications.freeze': 'Your account if frozen till {expire, LL}',
+  'notifications.freezeReason':
+    'Freeze reason "{reason}". Operation types "{type}". Release date {expire, LL}',
+  'notifications.freezeTypeall': 'all',
+  'notifications.freezeTypeexchange_orders': 'exchange orders',
+  'notifications.freezeTypetrades': 'p2p trade',
+  'notifications.freezeTypevouchers': 'vouchers',
+  'notifications.freezeTypewithdraw': 'withdrawal',
+  'notifications.inactivityRatingDecline':
+    'Unfortunately, your rating has dropped because you do not respond to ads too often!',
+  'notifications.invoicePaid':
+    '✅ Your payment successfully processed to the {merchantName} by invoice {invoiceId}',
+  'notifications.invoicePaidToMerchant':
+    '🔥 {userName} have paid {amount} {cryptocurrency} by invoice {invoiceId}',
+  'notifications.merchantPaid':
+    'You received a payout from {merchantName} {amount} {cryptocurrency}',
+  'notifications.moneyReceived':
+    'You have received {cryptocurrencyamount} {cryptocurrencycode} ({currencyamount} {currencycode}) from {donor}!',
+  'notifications.mute': 'Your ads have been removed from display for {duration} hours.',
+  'notifications.muteReason':
+    'Your ads have been removed from display for {duration} hours. Most likely, you have violated the conditions of ads. When the time limit expires, the ads will become active again.',
+  'notifications.newAdminMessage': 'New admin message',
+  'notifications.newChatMessage': 'New message from user {publicName}',
+  'notifications.newMessage': 'New message',
+  'notifications.newReferral': 'You have new referral {publicName}',
+  'notifications.newTradeMessage': 'New message in trade #{tradeId}',
+  'notifications.notificationsCount': '{count} notifications',
+  'notifications.payment-processed': '🚀 Withdraw {amount} {cryptocurrency} successful',
+  'notifications.tipsReceived':
+    '🔥 You have received {cryptocurrencyamount} {cryptocurrencycode} #{tradeId} trade tip!',
+  'notifications.tradeExpired': 'Trade #{tradeId} will be automatically cancelled',
+  'notifications.tradeExtendWaitingTime':
+    'Trade #{tradeId}: User added {time} minutes to discuss the deal!',
+  'notifications.tradePause':
+    'Oops! It seems you are not here now and you are missing deals. We have suspended your ads until you return.',
+  'notifications.tradeStatusChanged': 'Trade status has been changed #{tradeId}',
+  'notifications.tradeStatusChangedCancel': 'Trade #{tradeId} cancelled',
+  'notifications.tradeStatusChangedConfirmPayment':
+    'You have recieved TICKER AMOUNT. Trade #{tradeId}',
+  'notifications.tradeStatusChangedCreated': 'New trade! Id #{tradeId}',
+  'notifications.tradeStatusChangedPayment': 'Check funds receive. Trade #{tradeId}',
+  'notifications.tradeWillExpire':
+    'Trade #{tradeId} will be automatically cancelled {time, fromNow}',
+  'notifications.unFreeze': 'Your account has been unfrozen',
+  'notifications.unFreezeReason': 'Reason "{reason}". Operations "{type}".',
+  'notifications.verification-confirmed': '✅ Your verification request has been confirmed',
+  'notifications.verificationReset':
+    '❌ Dear customer! Your verification is no longer valid. Please go through the verification procedure again',
+  'notifications.verification-rejected': '❌ Your verification request has been rejected',
+  'notifications.verification-rejected-ext': '❌ Your verification request has been rejected',
+  'notifications.wallet-balance-loaded':
+    '🔥 Your wallet deposited for {amount} {cryptocurrency}.\n\nTransaction: {txid}',
+  'notifications.wallet-balance-loaded-dust':
+    '🔥 Your wallet deposited for {amount} {cryptocurrency}\n\nTransaction: {txid} \n\n ⚠️ The amount of the deposit is less than {minAcceptableDeposit} {cryptocurrency}, therefore this transaction will not be credited to your balance, no compensation is provided for this action',
+  'notifications.webAccountsMerged': 'Accounts with the same email have been merged',
+  'notifications.withdrawVoucherExpireFirst':
+    "⚠️ You have {count} voucher for a free withdrawal which burns out in 3 days.\n\n🔥 It's time to use them and not lose the chance of free withdrawal!",
+  'notifications.withdrawVoucherExpireSecond':
+    "⚠️ You have {count} voucher for a free withdrawal which burns out in 1 day.\n\n🔥 It's time to use them and not lose the chance of free withdrawal!",
+  'notifications.withdrawVoucherReceived': '  You received {count} vouchers for a free withdrawal!',
+  'notifications.withdrawVoucherReceived1': '  You received {count} voucher for a free withdrawal!',
+  'notifications.withdrawVoucherReceived234':
+    '  You received {count} vouchers for a free withdrawal!',
+  'notifications.user24hInactivityMessage':
+    'You are not active in the service for more than 24 hours, in this regard, we have suspended the display of your ads until you return',
+  'notifications.walletAddressDropped':
+    '✅ Your {cryptocurrency} wallet address has been successfully reset!',
+  'notifications.withdrawCanceled':
+    'Your withdrawal to the address {address} for the amount of {amount} {cryptocurrency}, including the fee {fee} {cryptocurrency} is canceled. \nCoins are credited to your wallet, try again if necessary!',
+
   'page.sidebar.group.text': 'Fee Group:',
   'page.sidebar.group.value': 'Base',
 

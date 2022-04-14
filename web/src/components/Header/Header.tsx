@@ -1,4 +1,4 @@
-import { ComponentProps, FC } from 'react';
+import { ComponentProps, FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link, NavLink, useLocation } from 'react-router-dom';
@@ -26,6 +26,13 @@ import { getLinkToP2P } from 'web/src/components/Header/getLinkToP2P';
 import { Navigation } from 'web/src/components/shared/Header/Navigation';
 import { RenderLinkComponent, RenderNavLinkComponent } from 'web/src/components/shared/sharedTypes';
 import { Box } from 'web/src/components/ui/Box';
+import { localeDate } from 'web/src/helpers';
+import { useMarkNotificationAsRead } from 'web/src/hooks/mutations/useMarkNotificationAsRead';
+import { Notification } from 'web/src/lib/socket/types';
+import { NotificationModalNotification } from 'web/src/containers/NotificationModal/types';
+import { useFetchP2PNotifications } from 'web/src/hooks/data/useFetchP2PNotifications';
+import { NotificationModal } from 'web/src/containers/NotificationModal/NotificationModal';
+import { notificationInfo } from './notificationInfo';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
@@ -34,7 +41,14 @@ const languages = {
   ru: 'Русский',
 };
 
+const strIncludesStrings = (str: string, substr: string[]): boolean => {
+  return substr.some((s) => str.includes(s));
+};
+
 const Header: FC = () => {
+  const [nofiticationModalProps, setNofiticationModalProps] = useState<
+    NotificationModalNotification | undefined
+  >();
   const t = useT();
   const dispatch = useDispatch();
   const currentCode = useSelector(selectCurrentLanguage);
@@ -45,6 +59,21 @@ const Header: FC = () => {
   const { pathname } = useLocation();
   const history = useHistory();
   const isTradingPage = pathname.includes('/trading');
+
+  const fetchNotificationRes = useFetchP2PNotifications();
+  const notifications: Notification[] = fetchNotificationRes.data || [];
+
+  const [markNotificationAsReadP2P] = useMarkNotificationAsRead();
+
+  const handleMarkAllNotificationAsRead = () =>
+    notifications.forEach((n) => {
+      if (!n.read) {
+        markNotificationAsReadP2P(n.id);
+      }
+    });
+
+  const handleMarkNotificationAsRead = (notificationId: number) =>
+    markNotificationAsReadP2P(notificationId);
 
   const handleLanguageChange = (code: string) => {
     if (isLoggedIn) {
@@ -70,6 +99,8 @@ const Header: FC = () => {
   const handleThemeChange = () =>
     dispatch(changeColorTheme(colorTheme === 'light' ? 'dark' : 'light'));
 
+  const closeNotificationModal = () => setNofiticationModalProps(undefined);
+
   let userProps;
   if (isUserFetching) {
     userProps = { status: USER_STATUS_NOT_AUTHORIZED };
@@ -83,6 +114,36 @@ const Header: FC = () => {
     userProps = {
       status: USER_STATUS_AUTHORIZED,
       onLogoutClick: () => dispatch(logoutFetch()),
+      notifications: notifications.map((notification) => {
+        const notify: NotificationModalNotification = notificationInfo(notification, {
+          translate: t,
+          lang: currentCode,
+        }) as NotificationModalNotification;
+        const handleNotifyClick = () => {
+          handleMarkNotificationAsRead(notification.id);
+
+          if (notify.alert) {
+            setNofiticationModalProps(notify);
+          }
+
+          if (notify.link) {
+            if (strIncludesStrings(notify.link, ['/p2p', '/merch'])) {
+              window.location.assign(notify.link);
+            } else {
+              history.push(notify.link);
+            }
+          }
+        };
+
+        return {
+          id: notification.id.toString(),
+          message: notify.text,
+          date: localeDate(notify.createdAt, 'fullDate'),
+          read: notification.read,
+          onClick: handleNotifyClick,
+        };
+      }),
+      onAllRead: handleMarkAllNotificationAsRead,
     };
   }
 
@@ -235,6 +296,12 @@ const Header: FC = () => {
       case 'profile':
         return t('page.header.navbar.profile');
 
+      case 'all_read':
+        return t('notifications.readall');
+
+      case 'notifications_empty':
+        return t('notifications.empty');
+
       case 'logout':
         return t('page.body.profile.content.action.logout');
 
@@ -250,32 +317,40 @@ const Header: FC = () => {
   const renderNavLinkComponent: RenderNavLinkComponent = (props) => <NavLink {...props} />;
 
   return (
-    <SharedHeader
-      logoLightURL={window.env.logoUrl}
-      logoDarkURL={window.env.logoDarkUrl}
-      toMainPage={p2pURL}
-      theme={colorTheme}
-      language={currentCode}
-      languages={languages}
-      navLinks={navLinks}
-      hamburgerLinks={hamburgerLinks}
-      t={translate}
-      renderLinkComponent={renderLinkComponent}
-      renderNavLinkComponent={renderNavLinkComponent}
-      {...userProps}
-      onThemeChange={handleThemeChange}
-      onLanguageChange={handleLanguageChange}
-    >
-      {isTradingPage && (
-        <>
-          <Box mr="6x">
-            <Navigation navLinks={p2p} renderNavLinkComponent={renderNavLinkComponent} />
-          </Box>
-          <MarketSelector />
-          <HeaderToolbar />
-        </>
+    <>
+      {nofiticationModalProps && (
+        <NotificationModal
+          notification={nofiticationModalProps}
+          handleClose={closeNotificationModal}
+        />
       )}
-    </SharedHeader>
+      <SharedHeader
+        logoLightURL={window.env.logoUrl}
+        logoDarkURL={window.env.logoDarkUrl}
+        toMainPage={p2pURL}
+        theme={colorTheme}
+        language={currentCode}
+        languages={languages}
+        navLinks={navLinks}
+        hamburgerLinks={hamburgerLinks}
+        t={translate}
+        renderLinkComponent={renderLinkComponent}
+        renderNavLinkComponent={renderNavLinkComponent}
+        {...userProps}
+        onThemeChange={handleThemeChange}
+        onLanguageChange={handleLanguageChange}
+      >
+        {isTradingPage && (
+          <>
+            <Box mr="6x">
+              <Navigation navLinks={p2p} renderNavLinkComponent={renderNavLinkComponent} />
+            </Box>
+            <MarketSelector />
+            <HeaderToolbar />
+          </>
+        )}
+      </SharedHeader>
+    </>
   );
 };
 
