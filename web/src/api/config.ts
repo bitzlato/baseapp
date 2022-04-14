@@ -19,6 +19,7 @@ export const defaultConfig: Config = {
     accountPublicUrl: '',
     p2pUrl: '',
     p2pAuthUrl: '',
+    notificatorUrl: '',
   },
   finex: false,
   withCredentials: false,
@@ -128,3 +129,4 @@ export const valuationSecondaryCurrencyName = (): string =>
 export const showInternalTransfer = () => convertToBoolean(Cryptobase.config.internalTransfer);
 export const showGift = () => convertToBoolean(Cryptobase.config.gift);
 export const showReferal = () => convertToBoolean(Cryptobase.config.referal);
+export const notificatorUrl = () => Cryptobase.config.api.notificatorUrl;
