@@ -4,12 +4,20 @@ import s from './IconButton.postcss';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   noFill?: boolean;
+  size?: 'small' | undefined;
+  color?: 'primary' | undefined;
 }
 
-export const IconButton: React.FC<Props> = ({ className, noFill, ...props }) => {
+export const IconButton: React.FC<Props> = ({ className, noFill, size, color, ...props }) => {
   return (
     <button
-      className={cn(s.iconButton, noFill && s.iconButtonNoFill, className)}
+      className={cn(
+        s.iconButton,
+        noFill && s.iconButtonNoFill,
+        size === 'small' && s.iconButtonSmall,
+        color === 'primary' && s.iconButtonPrimary,
+        className,
+      )}
       type="button"
       {...props}
     />

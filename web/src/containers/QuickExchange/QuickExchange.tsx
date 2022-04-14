@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button as BsButton, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import cn from 'classnames';
 import { useT } from 'src/hooks/useT';
@@ -13,7 +13,7 @@ import { parseNumeric } from 'src/helpers/parseNumeric';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
-import { Button as BzButton } from 'src/components/Button/Button';
+import { Button } from 'src/components/ui/Button';
 import { SelectString } from 'src/components/Select/Select';
 import { Card } from 'src/components/Card/Card';
 import { InfoIcon } from 'src/assets/images/InfoIcon';
@@ -44,6 +44,7 @@ import { useCurrenciesFetch, useMarketsFetch, useWalletsFetch } from '../../hook
 import s from './QuickExchange.postcss';
 import { Limits } from './Limits';
 import { Spoiler } from 'web/src/components/Spoiler/Spoiler';
+import { IconButton } from 'web/src/components/IconButton/IconButton';
 
 const PERCENTS = [25, 50, 75, 100];
 
@@ -287,7 +288,7 @@ export const QuickExchangeContainer: React.FC = () => {
               </Box>
               <Box row>
                 {PERCENTS.map((v) => (
-                  <Button
+                  <BsButton
                     key={v}
                     variant="secondary"
                     disabled={disablePercents}
@@ -295,7 +296,7 @@ export const QuickExchangeContainer: React.FC = () => {
                     onClick={() => handleUsePercent(v)}
                   >
                     {v}%
-                  </Button>
+                  </BsButton>
                 ))}
               </Box>
             </Box>
@@ -314,13 +315,15 @@ export const QuickExchangeContainer: React.FC = () => {
                   </Box>
                 )}
               </Box>
-              <Button
-                className={s.quickExchangeSwap}
-                onClick={handleRearrange}
-                title={t('page.body.quick.exchange.button.rearrange')}
-              >
-                <SwipeIcon />
-              </Button>
+              <Box flex="half" row justify="center">
+                <IconButton
+                  size="small"
+                  onClick={handleRearrange}
+                  title={t('page.body.quick.exchange.button.rearrange')}
+                >
+                  <SwipeIcon />
+                </IconButton>
+              </Box>
             </Box>
           </Box>
           <Box grow row spacing="2">
@@ -369,26 +372,21 @@ export const QuickExchangeContainer: React.FC = () => {
               <span>0.2%</span>
             </Box>
             <Box row spacing="2" justify="end">
-              <Button
-                variant="primary-outline"
-                className={cn(
-                  s.quickExchangeRefresh,
-                  !noAmount && rateOutOfDate && s.quickExchangeRefreshPulse,
-                )}
+              <IconButton
+                color="primary"
+                className={cn(!noAmount && rateOutOfDate && s.quickExchangeRefreshPulse)}
                 title={t('page.body.quick.exchange.button.refresh')}
                 onClick={handleRefresh}
                 disabled={noAmount || priceFetching}
               >
                 <RefreshIcon />
-              </Button>
+              </IconButton>
             </Box>
           </Box>
           <Box
             row
             spacing="2"
-            as={BzButton}
-            size="large"
-            variant="primary"
+            as={Button}
             onClick={handleExchange}
             disabled={noAmount || rateOutOfDate || exchangeFetching}
           >

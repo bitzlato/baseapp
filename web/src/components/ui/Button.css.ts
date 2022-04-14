@@ -6,7 +6,9 @@ export const button = recipe({
   base: [
     sprinkles({
       fontFamily: 'brand',
-      display: 'inline-block',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       fontWeight: 'strong',
     }),
     {
@@ -55,7 +57,7 @@ export const button = recipe({
       }),
       medium: sprinkles({
         fontSize: 'medium',
-        lineHeight: 'medium',
+        minHeight: 'medium',
         px: '4x',
         py: '2x',
         borderRadius: '1x',

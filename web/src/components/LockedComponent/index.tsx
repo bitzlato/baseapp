@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
 import { Box } from '../Box';
 import { Label } from '../Label';
-import { Button } from '../Button/Button';
+import { Button } from '../ui/Button';
 
 interface Props {
   text: string;
@@ -24,18 +24,18 @@ export const LockedComponent: React.FC<Props> = ({ text, link, buttonText, onCli
       </Label>
       {link ? (
         <Button
-          component={Link}
+          as={Link}
           to={link}
-          variant={isMobileDevice ? 'primary-outline' : 'primary'}
-          revertLightPrimary={isMobileDevice}
+          color={isMobileDevice ? 'secondary' : 'primary'}
+          variant={isMobileDevice ? 'outlined' : 'contained'}
         >
           {buttonText}
         </Button>
       ) : (
         <Button
-          variant={isMobileDevice ? 'primary-outline' : 'primary'}
-          revertLightPrimary={isMobileDevice}
           onClick={onClick}
+          color={isMobileDevice ? 'secondary' : 'primary'}
+          variant={isMobileDevice ? 'outlined' : 'contained'}
         >
           {buttonText}
         </Button>
