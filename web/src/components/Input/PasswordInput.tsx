@@ -4,7 +4,7 @@ import { IconButton } from 'web/src/components/IconButton/IconButton';
 import EyeIcon from 'web/src/assets/svg/EyeIcon.svg';
 import EyeOffIcon from 'web/src/assets/svg/EyeOffIcon.svg';
 import { TextInput, TextInputProps } from './TextInput';
-import s from './MoneyInput.postcss';
+import s from './PasswordInput.postcss';
 
 export const PasswordInput: FC<TextInputProps> = ({ className, type, ...rest }) => {
   const [isPassword, setIsPassword] = useState(true);
@@ -15,9 +15,13 @@ export const PasswordInput: FC<TextInputProps> = ({ className, type, ...rest }) 
 
   return (
     <Box position="relative" className={className}>
-      <TextInput className={s.moneyInputNumber} type={isPassword ? 'password' : 'text'} {...rest} />
+      <TextInput
+        className={s.passwordInputNumber}
+        type={isPassword ? 'password' : 'text'}
+        {...rest}
+      />
       <IconButton
-        className={s.moneyInputCurrency}
+        className={s.passwordInputCurrency}
         onClick={handleToggle}
         aria-label="toggle password visibility"
         noFill

@@ -1,10 +1,14 @@
 .iconButton {
+  align-items: center;
   background-color: transparent;
   border: 1px solid transparent;
   border-radius: var(--border-radius);
   color: var(--icons);
+  display: flex;
+  height: var(--control-size);
+  justify-content: center;
   outline-color: var(--input-border-color-active);
-  padding: var(--gap);
+  width: var(--control-size);
 
   &:hover:not(:disabled) {
     color: var(--primary-text-color);
@@ -17,5 +21,18 @@
   &:disabled {
     cursor: not-allowed;
     opacity: 0.48;
+  }
+}
+
+.iconButtonSmall {
+  height: var(--control-size-small);
+  width: var(--control-size-small);
+}
+
+.iconButtonPrimary {
+  color: var(--button-primary-cta-background-color);
+
+  &:hover:not(:disabled) {
+    color: var(--button-primary-cta-background-color-hover);
   }
 }

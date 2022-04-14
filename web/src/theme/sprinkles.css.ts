@@ -10,6 +10,12 @@ const lineHeights = {
   oneHalf: '1.5' as const,
 };
 
+const minHeights = {
+  // small: sizeVars['8x'],
+  medium: sizeVars['11x'],
+  // large: sizeVars['13x'],
+};
+
 const borderWidths = {
   '0': 0 as const,
   '1x': 1 as const,
@@ -144,6 +150,7 @@ const typographyProperties = defineProperties({
       strong: 600,
     },
     lineHeight: lineHeights,
+    minHeight: minHeights,
     textAlign: ['left', 'center'],
     textTransform: ['uppercase'],
     wordBreak: ['break-word'],

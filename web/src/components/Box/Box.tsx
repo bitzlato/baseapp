@@ -12,7 +12,7 @@ type BoxOwnProps<E = React.ElementType> = {
   row?: boolean | undefined;
   col?: boolean | undefined;
   grow?: boolean | undefined;
-  flex?: '1' | 'golden' | undefined;
+  flex?: '1' | 'golden' | 'half' | undefined;
   wrap?: boolean | undefined;
   position?: 'relative' | 'absolute' | undefined;
   justify?: 'end' | 'center' | 'between' | 'around' | undefined;

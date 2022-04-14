@@ -143,7 +143,7 @@ export const TabPanel: React.FC<TabPanelProps> = ({
         <SelectString
           isSearchable={false}
           options={options}
-          defaultValue={options[0]}
+          value={options[0]!}
           size="small"
           onChange={handleOrderTypeChange}
         />
