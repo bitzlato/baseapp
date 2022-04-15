@@ -10,13 +10,14 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/u
 import { AutoFocusInside } from 'react-focus-on';
 
 interface Props {
-  onClose: () => void;
-  onSend: (code: string) => void;
   buttonText?: string | undefined;
   text?: ReactNode | undefined;
+  show?: boolean | undefined;
+  onSend: (code: string) => void;
+  onClose: () => void;
 }
 
-export const TwoFactorModal: FC<Props> = ({ onClose, onSend, buttonText, text }) => {
+export const TwoFactorModal: FC<Props> = ({ buttonText, text, show = true, onSend, onClose }) => {
   const [code, setCode] = useState('');
   const t = useT();
   const { start, countdown } = useCountdown();
@@ -39,7 +40,7 @@ export const TwoFactorModal: FC<Props> = ({ onClose, onSend, buttonText, text })
   };
 
   return (
-    <Modal onClose={onClose} show>
+    <Modal show={show} onClose={onClose}>
       <ModalHeader>{t('2FA Verification')}</ModalHeader>
       <ModalBody>
         <Box col spacing="3">
