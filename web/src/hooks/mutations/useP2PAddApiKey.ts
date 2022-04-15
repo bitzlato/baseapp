@@ -4,22 +4,27 @@ import { p2pAuthUrl } from 'web/src/api/config';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { FetchError, fetchJson } from 'web/src/helpers/fetch';
 
-const P2PAddApiKey = async ({
-  params,
-  twoFACode,
-}: {
-  params: {
-    active: boolean;
-    authorities: {
-      canRead: boolean;
-      canTrade: boolean;
-      canTransfer: boolean;
-    };
-    key: string;
-    name: string;
+export type ApiKeysParams = {
+  active: boolean;
+  authorities: {
+    canRead: boolean;
+    canTrade: boolean;
+    canTransfer: boolean;
   };
+  key: string;
+  name: string;
+};
+
+type Input = {
+  params: ApiKeysParams;
   twoFACode?: string | null | undefined;
-}) => {
+};
+
+type Data = {
+  email: string;
+};
+
+const P2PAddApiKey = async ({ params, twoFACode }: Input) => {
   const res = await fetchJson(`${p2pAuthUrl()}/keys/`, {
     method: 'POST',
     body: JSON.stringify(params),
@@ -34,30 +39,14 @@ const P2PAddApiKey = async ({
   return res;
 };
 
-export const useP2PAddApiKey = ({
-  onSuccess,
-  onNo2FAUserApprove,
-  on2FACodeRequest,
-}: {
-  onSuccess: (email?: string) => void;
-  onNo2FAUserApprove: () => void;
-  on2FACodeRequest: () => void;
-}) => {
+export const useP2PAddApiKey = () => {
   const dispatch = useDispatch();
 
-  return useMutation(P2PAddApiKey, {
-    onSuccess: ({ data }) => {
-      onSuccess(data.email);
-    },
+  return useMutation<Input, Data>(P2PAddApiKey, {
+    throwOnFailure: true,
     onFailure: ({ error }) => {
       if (error instanceof FetchError) {
-        if (error.payload.code === 'NoTwoFaUserApprove') {
-          onNo2FAUserApprove();
-        } else if (error.code === 478 && error.payload.message === '2FA Token Required') {
-          on2FACodeRequest();
-        } else {
-          alertFetchError(dispatch, error);
-        }
+        alertFetchError(dispatch, error);
       }
     },
   });

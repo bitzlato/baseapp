@@ -148,6 +148,8 @@ export const [themeLight, vars] = createTheme({
 
     tooltip: colors.milanoRed,
     tooltipText: colors.white,
+
+    cardHeaderBorderBottom: colors.waikawaGray24,
   },
 });
 
@@ -245,5 +247,7 @@ export const themeDark = createTheme(vars, {
 
     tooltip: colors.milanoRed,
     tooltipText: colors.white,
+
+    cardHeaderBorderBottom: colors.white24,
   },
 });

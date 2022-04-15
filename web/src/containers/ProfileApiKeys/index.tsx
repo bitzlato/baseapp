@@ -1,11 +1,8 @@
 import { useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card } from 'web/src/components/Card/Card';
 import { Pagination, Table } from 'web/src/components';
 import { localeDate } from 'web/src/helpers/localeDate';
-import { Container } from 'web/src/components/Container/Container';
-
 import {
   apiKeyCreateFetch,
   ApiKeyDataInterface,
@@ -27,7 +24,7 @@ import {
 } from '../../modules/user/apiKeys/selectors';
 import { useT } from 'web/src/hooks/useT';
 import { TwoFactorModal } from '../ProfileAuthDetails/TwoFactorModal';
-import { Box } from 'web/src/components/Box/Box';
+import { Button } from 'web/src/components/ui/Button';
 import { ApiKeyModal } from './ApiKeyModal';
 
 export const ProfileApiKeys: React.FC = () => {
@@ -140,76 +137,68 @@ export const ProfileApiKeys: React.FC = () => {
   const action = modal.action;
 
   return (
-    <Container maxWidth="xl" my="4">
-      <Card
-        className="pg-profile-page__api-keys"
-        header={
-          <Box row justify="between">
-            <h4>{t('page.body.profile.apiKeys.header')}</h4>
-            {user.otp && dataLoaded && (
-              <span className="pg-profile-page__pull-right" onClick={handleCreateKeyClick}>
-                {t('page.body.profile.apiKeys.header.create')}
-              </span>
-            )}
-          </Box>
-        }
-      >
-        {!user.otp && (
-          <p className="pg-profile-page__label pg-profile-page__text-center">
-            {t('page.body.profile.apiKeys.noOtp')}
-          </p>
-        )}
+    <div className="pg-profile-page__api-keys">
+      {!user.otp && (
+        <p className="pg-profile-page__label pg-profile-page__text-center">
+          {t('page.body.profile.apiKeys.noOtp')}
+        </p>
+      )}
 
-        {user.otp &&
-          dataLoaded &&
-          (!apiKeys.length ? (
-            <div className="pg-profile-page__label pg-profile-page__text-center">
-              {t('page.body.profile.apiKeys.noKeys')}
-            </div>
-          ) : (
-            <>
-              <Table header={getTableHeaders()} data={getTableData(apiKeys)} />
-              <Pagination
-                firstElemIndex={firstElemIndex}
-                lastElemIndex={lastElemIndex}
-                page={pageIndex}
-                nextPageExists={nextPageExists}
-                onClickPrevPage={onClickPrevPage}
-                onClickNextPage={onClickNextPage}
-              />
-            </>
-          ))}
+      {user.otp &&
+        dataLoaded &&
+        (!apiKeys.length ? (
+          <div className="pg-profile-page__label pg-profile-page__text-center">
+            {t('page.body.profile.apiKeys.noKeys')}
+          </div>
+        ) : (
+          <>
+            <Table header={getTableHeaders()} data={getTableData(apiKeys)} />
+            <Pagination
+              firstElemIndex={firstElemIndex}
+              lastElemIndex={lastElemIndex}
+              page={pageIndex}
+              nextPageExists={nextPageExists}
+              onClickPrevPage={onClickPrevPage}
+              onClickNextPage={onClickNextPage}
+            />
+          </>
+        ))}
 
-        {action === 'createKey' ? (
-          <TwoFactorModal
-            onClose={handlCloseModal}
-            onSend={handleCreateKey}
-            buttonText={t('page.body.profile.apiKeys.modal.btn.create')}
-          />
-        ) : action === 'createSuccess' ? (
-          <ApiKeyModal
-            onClose={handlCloseModal}
-            kid={modal.apiKey?.kid ?? ''}
-            secret={modal.apiKey?.secret ?? ''}
-          />
-        ) : action === 'updateKey' ? (
-          <TwoFactorModal
-            onClose={handlCloseModal}
-            onSend={handleUpdateKey}
-            buttonText={
-              isApiKeyActive
-                ? t('page.body.profile.apiKeys.modal.btn.disabled')
-                : t('page.body.profile.apiKeys.modal.btn.activate')
-            }
-          />
-        ) : action === 'deleteKey' ? (
-          <TwoFactorModal
-            onClose={handlCloseModal}
-            onSend={handleDeleteKey}
-            buttonText={t('page.body.profile.apiKeys.modal.btn.delete')}
-          />
-        ) : null}
-      </Card>
-    </Container>
+      {action === 'createKey' ? (
+        <TwoFactorModal
+          onClose={handlCloseModal}
+          onSend={handleCreateKey}
+          buttonText={t('page.body.profile.apiKeys.modal.btn.create')}
+        />
+      ) : action === 'createSuccess' ? (
+        <ApiKeyModal
+          onClose={handlCloseModal}
+          kid={modal.apiKey?.kid ?? ''}
+          secret={modal.apiKey?.secret ?? ''}
+        />
+      ) : action === 'updateKey' ? (
+        <TwoFactorModal
+          onClose={handlCloseModal}
+          onSend={handleUpdateKey}
+          buttonText={
+            isApiKeyActive
+              ? t('page.body.profile.apiKeys.modal.btn.disabled')
+              : t('page.body.profile.apiKeys.modal.btn.activate')
+          }
+        />
+      ) : action === 'deleteKey' ? (
+        <TwoFactorModal
+          onClose={handlCloseModal}
+          onSend={handleDeleteKey}
+          buttonText={t('page.body.profile.apiKeys.modal.btn.delete')}
+        />
+      ) : null}
+
+      {user.otp && dataLoaded && (
+        <Button color="secondary" onClick={handleCreateKeyClick}>
+          {t('Create API key')}
+        </Button>
+      )}
+    </div>
   );
 };

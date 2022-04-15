@@ -83,7 +83,7 @@ export const ChangePublicName: FC = () => {
             display="flex"
             pb="2x"
             as={TextInput}
-            label={t('Public Name')}
+            label={t('Public name')}
             value={publicName}
             onChange={handleInputChange}
             error={errorMessage && <span>{errorMessage}</span>}

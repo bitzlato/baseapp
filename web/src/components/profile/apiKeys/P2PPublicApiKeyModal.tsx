@@ -1,13 +1,11 @@
-import { FC, useRef, useState } from 'react';
+import { FC, useState } from 'react';
 import { Button } from 'web/src/components/ui/Button';
 import { useT } from 'web/src/hooks/useT';
 import { Modal, ModalFooter, ModalHeader, ModalBody } from 'web/src/components/ui/Modal';
 import { Box } from 'web/src/components/ui/Box';
 import { IconButton } from 'web/src/components/IconButton/IconButton';
-import { CopyIcon } from 'src/assets/icons/CopyIcon';
-import { copy } from 'web/src/helpers/copy';
 import CopyLinealIcon from 'web/src/assets/svg/CopyLinealIcon.svg';
-import * as s from './P2PPublicApiKeyModal.css';
+import { CopyField } from 'web/src/components/ui/CopyField';
 
 interface Props {
   publicKey: string;
@@ -15,16 +13,10 @@ interface Props {
 
 export const P2PPublicApiKeyModal: FC<Props> = ({ publicKey }) => {
   const t = useT();
-  const publicRef = useRef<HTMLTextAreaElement>(null);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleClickCopy = () => {
-    if (publicRef.current) {
-      copy(publicRef.current);
-    }
-  };
 
   return (
     <>
@@ -35,24 +27,9 @@ export const P2PPublicApiKeyModal: FC<Props> = ({ publicKey }) => {
         {t('page.body.profile.apiKeys.modal.btn.show')}
       </Box>
       <Modal size="lg" show={open} onClose={handleClose}>
-        <ModalHeader>{t('Public Key')}</ModalHeader>
+        <ModalHeader>{t('Public key')}</ModalHeader>
         <ModalBody>
-          <Box display="flex" alignItems="center">
-            <Box flexGrow={1}>
-              <Box
-                ref={publicRef}
-                as="textarea"
-                className={s.textareaKey}
-                color="text"
-                fontSize="small"
-                value={publicKey}
-                readOnly
-              />
-            </Box>
-            <IconButton onClick={handleClickCopy} title={t('page.body.profile.content.copyLink')}>
-              <CopyIcon />
-            </IconButton>
-          </Box>
+          <CopyField value={publicKey} multiline />
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={handleClose}>

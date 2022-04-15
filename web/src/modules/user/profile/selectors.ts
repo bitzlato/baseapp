@@ -40,3 +40,5 @@ export const selectUserDataError = (state: RootState) => state.user.profile.user
 
 export const selectUserNeedVerification = (state: RootState) =>
   state.user.profile.userData.needVerification;
+
+export const selectOtpEnabled = (state: RootState): boolean => selectUserInfo(state).otp;
