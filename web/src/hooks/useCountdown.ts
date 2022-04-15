@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function useCountdown() {
   const intervalRef = useRef<number>();
@@ -28,5 +28,11 @@ export function useCountdown() {
     }, 1000);
   };
 
-  return { start, countdown };
+  const reset = useCallback(() => {
+    window.clearInterval(intervalRef.current);
+    setCountdown(0);
+    intervalRef.current = undefined;
+  }, []);
+
+  return { start, countdown, reset };
 }
