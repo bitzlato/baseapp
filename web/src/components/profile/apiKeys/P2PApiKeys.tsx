@@ -1,32 +1,26 @@
-import { FC, ReactNode, useState } from 'react';
-import { Button } from 'web/src/components/ui/Button';
+import { FC, ReactNode } from 'react';
 import { Text } from 'web/src/components/ui/Text';
 import { Box } from 'web/src/components/ui/Box';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { useFetchP2PApiKeys } from 'web/src/hooks/data/useFetchP2PApiKeys';
 import { useT } from 'web/src/hooks/useT';
-import { Container } from 'web/src/components/Container/Container';
-import { Card } from 'web/src/components/Card/Card';
 import { Table } from 'web/src/components/Table';
-import { IconButton } from 'web/src/components/IconButton/IconButton';
-import CrossSmallIcon from 'web/src/assets/svg/CrossIcon.svg';
-import { useP2PDeleteApiKey } from 'web/src/hooks/mutations/useP2PDeleteApiKey';
-import { P2PCreateApiKeyModal } from './P2PCreateApiKeyModal';
+import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
+import { useSelector } from 'react-redux';
 import { P2PPublicApiKeyModal } from './P2PPublicApiKeyModal';
 import { P2PApiKeyActiveSwither } from './P2PApiKeyActiveSwither';
+import { P2PCreateApiKey } from './P2PCreateApiKey';
+import { P2PRenameApiKey } from './P2PRenameApiKey';
+import { P2PDeleteApiKey } from './P2PDeleteApiKey';
 
 export const P2PApiKeys: FC = () => {
   const t = useT();
+  const user = useSelector(selectUserInfo);
   const { data, error } = useFetchP2PApiKeys();
-  const [deleteApiKey] = useP2PDeleteApiKey();
-  const [open, setOpen] = useState(false);
 
   if (error) {
     return null; // TODO: Add throw and error boundary screen
   }
-
-  const handleClick = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   let body: ReactNode;
   if (data === undefined) {
@@ -35,6 +29,8 @@ export const P2PApiKeys: FC = () => {
         <Spinner />
       </Box>
     );
+  } else if (data.length === 0) {
+    body = <Text textAlign="center">{t('page.body.profile.apiKeys.noKeys')}</Text>;
   } else {
     const tableHeader = [
       t('page.body.profile.apiKeys.table.header.kid'),
@@ -48,7 +44,7 @@ export const P2PApiKeys: FC = () => {
       item.kid,
       item.name,
       <P2PApiKeyActiveSwither apiKey={item} />,
-      <Text color={item.active ? 'success' : 'danger'}>
+      <Text color={item.active ? 'success' : 'danger'} variant="caption">
         {item.active ? t('Active') : t('Inactive')}
       </Text>,
       [
@@ -60,19 +56,12 @@ export const P2PApiKeys: FC = () => {
         .join(', ') || '-',
       <Box display="inline-flex">
         <Box mr="2x">
+          <P2PRenameApiKey apiKey={item} />
+        </Box>
+        <Box mr="2x">
           <P2PPublicApiKeyModal publicKey={JSON.stringify(item.key)} />
         </Box>
-        <Box
-          as={IconButton}
-          display="flex"
-          alignItems="center"
-          onClick={() => deleteApiKey(item.kid)}
-        >
-          <Box as="span" mr="2x">
-            <CrossSmallIcon width="16" height="16" />
-          </Box>
-          {t('page.body.profile.apiKeys.modal.btn.delete')}
-        </Box>
+        <P2PDeleteApiKey apiKey={item} />
       </Box>,
     ]);
 
@@ -80,18 +69,20 @@ export const P2PApiKeys: FC = () => {
   }
 
   return (
-    <Container maxWidth="xl" my="4">
-      {/* TODO: remove use className="pg-profile-page__api-keys" */}
-      <Card className="pg-profile-page__api-keys" header={<h4>{t('P2P API Keys')}</h4>}>
-        {body}
+    <div className="pg-profile-page__api-keys">
+      {body}
 
-        <Box mt="4x">
-          <Button color="secondary" onClick={handleClick}>
-            {t('Create API key')}
-          </Button>
-          {open && <P2PCreateApiKeyModal onClose={handleClose} />}
+      <Box display="flex" alignItems="center" mt="4x">
+        <Box mr="4x">
+          <P2PCreateApiKey keysCount={data?.length ?? 0} />
         </Box>
-      </Card>
-    </Container>
+
+        {user.bitzlato_user && (
+          <Text>
+            P2P User ID: <strong>{user.bitzlato_user.id}</strong>
+          </Text>
+        )}
+      </Box>
+    </div>
   );
 };

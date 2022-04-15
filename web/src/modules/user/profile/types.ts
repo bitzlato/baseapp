@@ -35,6 +35,9 @@ export interface BitzlatoUser {
   email_verified: boolean;
   uid?: string | null | undefined;
   email: string;
+  /**
+   * @deprecated
+   */
   '2fa_enabled': boolean;
   user_profile: {
     id: number;

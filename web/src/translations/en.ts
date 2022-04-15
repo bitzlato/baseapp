@@ -460,7 +460,6 @@ export const en = {
   'page.body.profile.header.referralProgram': 'Referral Link',
   'page.body.profile.content.copyLink': 'Copy',
 
-  'page.body.profile.apiKeys.header': 'My API Keys',
   'page.body.profile.apiKeys.header.create': 'Create new',
 
   'page.body.profile.apiKeys.noOtp': 'Please enable Two-factor authentication',
@@ -1280,11 +1279,14 @@ export const en = {
   'Private key': 'Private key',
   'Public key': 'Public key',
   'P2P API Keys': 'P2P API Keys',
+  'Exchange API Keys': 'Exchange API Keys',
   Authorities: 'Authorities',
   Enable: 'Enable',
   Disable: 'Disable',
   Loading: 'Loading',
   'Account Statement': 'Account Statement',
+  Change: 'Change',
+  Rename: 'Rename',
 
   'p2p.apiKeys.descr':
     'Creating an API private key provides access to trading and other services on Bitzlato via a third-party site or application. View <link>API documentation</link>",',
@@ -1302,6 +1304,7 @@ export const en = {
   'p2p.apiKeys.send_desc':
     "Send public key to server to save it there. If you already have a key, it will be removed after saving the new one. While key is not sent you can't authorise with it",
   'p2p.apiKeys.sended': 'Public key sent to server!',
+  'p2p.apiKeys.delete_irreversible': 'This action is irreversible',
 
   'page_profile.button.select_avatar': 'Select avatar',
   'page_profile.button.upload_avatar': 'Set avatar',
@@ -1409,4 +1412,9 @@ export const en = {
 
   'rate.select':
     'Choose rate source for pair {pair}. Please note that changes will be applied to your dynamic price orders.',
+
+  'proposal_otp.body':
+    'You use a significant amount of funds on Bitzlato platform. Until you have 2FA activated, you are at risk zone.{br}{br}We strongly recommend to set up 2FA to protect your account!',
+  'proposal_otp.yes': "Let's do it!",
+  'proposal_otp.no': 'Later',
 };

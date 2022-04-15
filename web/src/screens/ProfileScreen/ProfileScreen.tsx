@@ -2,11 +2,10 @@ import { FC } from 'react';
 import { Box } from 'web/src/components/Box/Box';
 import { useDocumentTitle } from 'web/src/hooks/useDocumentTitle';
 import { useT } from 'web/src/hooks/useT';
-import { ProfileApiKeys } from 'web/src/containers';
 import { ProfileAccountActivity } from 'web/src/containers/ProfileAccountActivity';
 import { Profile } from 'web/src/components/profile/Profile';
 import { ProfileSettings } from 'web/src/components/profile/settings/ProfileSettings';
-import { P2PApiKeys } from 'web/src/components/profile/apiKeys/P2PApiKeys';
+import { ApiKeys } from 'web/src/components/profile/ApiKeys';
 
 export const ProfileScreen: FC = () => {
   const t = useT();
@@ -18,8 +17,7 @@ export const ProfileScreen: FC = () => {
     <Box my="7">
       <Profile />
       <ProfileSettings />
-      <P2PApiKeys />
-      <ProfileApiKeys />
+      <ApiKeys />
       <ProfileAccountActivity />
     </Box>
   );

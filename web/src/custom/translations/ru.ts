@@ -472,7 +472,6 @@ export const ru: LangType = {
   'page.body.profile.header.referralProgram': 'Реферальная программа',
   'page.body.profile.content.copyLink': 'Скопировать',
 
-  'page.body.profile.apiKeys.header': 'Мои API ключи',
   'page.body.profile.apiKeys.header.create': 'Создать',
 
   'page.body.profile.apiKeys.noOtp': 'Пожалуйста, включите двухфакторную аутентификацию',
@@ -1301,11 +1300,14 @@ export const ru: LangType = {
   'Private key': 'Секретный ключ',
   'Public key': 'Публичный ключ',
   'P2P API Keys': 'P2P API Ключи',
+  'Exchange API Keys': 'Биржевые API Ключи',
   Authorities: 'Доступы',
   Enable: 'Включить',
   Disable: 'Выключить',
   Loading: 'Загрузка',
   'Account Statement': 'Авторизованная выписка',
+  Change: 'Изменить',
+  Rename: 'Переименовать',
 
   'p2p.apiKeys.descr':
     'Создание приватного API ключа позволяет получить доступ к торговле и другим сервисам Bitzlato через сторонние сайты или приложения. Ознакомится с <link>документацией</link>',
@@ -1324,14 +1326,15 @@ export const ru: LangType = {
   'p2p.apiKeys.send_desc':
     'Отправьте публичный ключ на сервер чтобы сохранить его там. Если у вас уже есть ключ, после сохранения нового он будет удалён. Пока ключ не отправлен им нельзя будет авторизоваться.',
   'p2p.apiKeys.sended': 'Публичный ключ отправлен на сервер!',
+  'p2p.apiKeys.delete_irreversible': 'Это действие необратимо',
 
   'page_profile.button.select_avatar': 'Выбрать аватар',
   'page_profile.button.upload_avatar': 'Установить аватар',
   'page_profile.modal.info':
     'Вы можете установить аватар пользователя. Учтите, что аватары с рекламной информацией запрещены, а аккаунты с такими аватарами могут быть ограничены от использования сервиса.Доступные форматы: PNG, JPEG, JPG',
   'page_profile.modal.format_error': 'Только png, jpg, jpeg',
-  'page_profile.button.set_avatar': 'Установить Аватар',
-  'page_profile.modal.title': 'Установить Аватар',
+  'page_profile.button.set_avatar': 'Установить аватар',
+  'page_profile.modal.title': 'Установить аватар',
 
   Freeze: 'Заблокировать',
   'Freeze Account': 'Блокировка аккаунта',
@@ -1431,4 +1434,9 @@ export const ru: LangType = {
 
   'rate.select':
     'Выберите источник актуального курса для пары {pair}. Учтите, что изменения будут применены к вашим объявлениям с плавающей ценой.',
+
+  'proposal_otp.body':
+    'Вы используете значительную сумму средств при работе с платформой. Пока у вас не установлена 2FA, вы находитесь в зоне риска.{br}{br}Настоятельно рекомендуем установить 2FA для защиты своего аккаунта!',
+  'proposal_otp.yes': 'Установить',
+  'proposal_otp.no': 'Позже',
 };
