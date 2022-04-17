@@ -6,6 +6,7 @@ import { ProfileAccountActivity } from 'web/src/containers/ProfileAccountActivit
 import { Profile } from 'web/src/components/profile/Profile';
 import { ProfileSettings } from 'web/src/components/profile/settings/ProfileSettings';
 import { ApiKeys } from 'web/src/components/profile/ApiKeys';
+import { Reports } from 'web/src/components/profile/reports/Reports';
 
 export const ProfileScreen: FC = () => {
   const t = useT();
@@ -17,6 +18,7 @@ export const ProfileScreen: FC = () => {
     <Box my="7">
       <Profile />
       <ProfileSettings />
+      <Reports />
       <ApiKeys />
       <ProfileAccountActivity />
     </Box>

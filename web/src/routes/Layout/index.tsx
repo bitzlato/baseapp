@@ -80,6 +80,10 @@ import { ForgotPasswordScreen } from 'web/src/screens/ForgotPassword/ForgotPassw
 import { ResetPasswordMobileScreen } from 'web/src/mobile/screens/ResetPassword/ResetPasswordMobileScreen';
 import { ResetPasswordScreen } from 'web/src/screens/ResetPassword/ResetPasswordScreen';
 import { ExpiredSessionModal } from 'web/src/components/ExpiredSessionModal/ExpiredSessionModal';
+import {
+  ReportDownloadScreen,
+  ReportsMobileScreen,
+} from 'web/src/screens/ReportsScreen/ReportsScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -310,6 +314,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       <Route key="exchange" path="/quick-exchange" component={QuickExchange as any} />,
       <Route key="fees" path="/fees" component={FeesScreen as any} />,
       <Route key="deeplink" exact path="/deeplinks/:id?" component={DeepLinkPreview} />,
+      <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
       // and default fallback
       <Route key="catchall" path="**">
         <Redirect to="/trading/" />
@@ -414,6 +419,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               path="/profile"
               component={ProfileMobileScreen}
             />
+            <PrivateRoute
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path="/reports"
+              component={ReportsMobileScreen}
+            />
             <Route exact path="/trading/:market?" component={TradingScreenMobile as any} />
             {showLanding() && <Route exact path="/" component={LandingScreenMobile as any} />}
             {commonRoutes}
@@ -496,6 +507,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             loading={userLoading}
             isLogged={isLoggedIn}
             path="/profile"
+            component={ProfileScreen}
+          />
+          <PrivateRoute
+            loading={userLoading}
+            isLogged={isLoggedIn}
+            path="/reports"
             component={ProfileScreen}
           />
           <PrivateRoute
