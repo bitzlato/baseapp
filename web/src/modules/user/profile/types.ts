@@ -133,3 +133,9 @@ export interface ReferralLink {
   type: string;
   url: string;
 }
+
+export interface P2PReport {
+  code: number;
+  description: string;
+  format: string;
+}

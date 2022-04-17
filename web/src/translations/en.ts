@@ -1287,6 +1287,7 @@ export const en = {
   'Account Statement': 'Account Statement',
   Change: 'Change',
   Rename: 'Rename',
+  Reports: 'Reports',
 
   'p2p.apiKeys.descr':
     'Creating an API private key provides access to trading and other services on Bitzlato via a third-party site or application. View <link>API documentation</link>",',
