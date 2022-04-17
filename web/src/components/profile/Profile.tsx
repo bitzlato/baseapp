@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import ThumbUp from 'web/src/assets/svg/ThumbUp.svg';
 import ThumbDown from 'web/src/assets/svg/ThumbDown.svg';
-import WarningCircleIcon from 'web/src/assets/svg/WarningCircleIcon.svg';
 import { useTradeStats } from 'web/src/hooks/data/useFetchTradeStatistics';
 import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
@@ -27,6 +26,7 @@ import { ChangePublicName } from './ChangePublicName';
 import { ChangePassword } from './ChangePassword';
 import { ChangeUserAvatar } from './ChangeUserAvatar';
 import { UserAvatar } from './UserAvatar';
+import { UserSuspicious } from './UserSuspicious';
 
 const formatRating = (rating: string) =>
   parseNumeric(rating, {
@@ -55,16 +55,21 @@ export const Profile: FC = () => {
         flexDirection={isMobileDevice ? 'column' : 'row'}
         mb={isMobileDevice ? '6x' : '0'}
       >
-        <Box mr="6x" mb="6x">
-          <UserAvatar image={bitzlatoUser?.user_profile.avatar.original || ''} />
-        </Box>
+        {!isMobileDevice && (
+          <Box mr="6x" mb="6x">
+            <UserAvatar image={bitzlatoUser?.user_profile.avatar.original || ''} />
+          </Box>
+        )}
         <Box flexGrow={1} mb="6x">
           {bitzlatoUser && (
-            <Box display="flex" alignItems="center">
+            <Box display="flex" alignItems="center" flexWrap="wrap">
               <Text variant="h4" className={s.publicName}>
                 {bitzlatoUser.user_profile.public_name ?? bitzlatoUser.user_profile.generated_name}
               </Text>
+
               {bitzlatoUser?.user_profile.public_name === null && <ChangePublicName />}
+
+              {bitzlatoUser?.user_profile.suspicious && <UserSuspicious />}
             </Box>
           )}
           <Box mb="2x">
@@ -122,21 +127,10 @@ export const Profile: FC = () => {
       <Box className={s.stats} mb={isMobileDevice ? '8x' : undefined}>
         <div className={s.stat}>
           <Stat>
-            {!bitzlatoUser?.user_profile.suspicious ? (
-              <ProfileVerification
-                status={bitzlatoUser?.user_profile.verified ?? false}
-                url={user.kyc_verification_url}
-              />
-            ) : (
-              <>
-                <Box display="flex" justifyContent="center" mb="6x">
-                  <WarningCircleIcon />
-                </Box>
-                <Text variant="label" color="warning" fontWeight="strong" textAlign="center">
-                  {t('profile.verification_suspicious')}
-                </Text>
-              </>
-            )}
+            <ProfileVerification
+              status={bitzlatoUser?.user_profile.verified ?? false}
+              url={user.kyc_verification_url}
+            />
           </Stat>
         </div>
         {!isMobileDevice && (

@@ -1375,7 +1375,8 @@ export const en = {
   'profile.verification_no': 'Verification not passed',
   'profile.verification_goto': 'Verify',
   'profile.verification_yes': 'Verification passed',
-  'profile.verification_suspicious': 'Suspicious verification status',
+  'profile.suspicious': 'Suspicious',
+  'profile.suspicious_desc': 'Your account has been assigned Suspicious',
   'profile.deals_stat': 'trades for',
 
   'Cashed by': 'Cashed by',
