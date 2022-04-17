@@ -1397,7 +1397,8 @@ export const ru: LangType = {
   'profile.verification_no': 'Верификация не пройдена',
   'profile.verification_goto': 'Пройти верификацию',
   'profile.verification_yes': 'Верификация пройдена',
-  'profile.verification_suspicious': 'Подозрительный статус верификации',
+  'profile.suspicious': 'Подозрительный ',
+  'profile.suspicious_desc': 'Вашему аккаунту присвоен статус Подозрительный',
   'profile.deals_stat': 'сделок на сумму',
 
   'Cashed by': 'Обналичен',
