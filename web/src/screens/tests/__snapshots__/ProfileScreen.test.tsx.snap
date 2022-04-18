@@ -36,7 +36,7 @@ exports[`ProfileScreen test should render 1`] = `
             class="reset_base__1sfgjt80 sprinkles_marginBottom_6x_mobile__w76aifh3 sprinkles_flexGrow_1__w76aif1bt"
           >
             <div
-              class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif2d sprinkles_flexWrap_wrap__w76aif1bf"
+              class="reset_base__1sfgjt80 sprinkles_display_flex_mobile__w76aif5 sprinkles_alignItems_center_mobile__w76aif2d sprinkles_flexWrap_wrap__w76aif1bn"
             >
               <h4
                 class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifu4 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1d0 Text_text_variant_h4__1qy84opa Text_text_gutterBottom_false__1qy84opj  Profile_publicName__crp8vk2"
