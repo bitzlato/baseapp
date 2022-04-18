@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useT } from 'src/hooks/useT';
+import { useT } from 'web/src/hooks/useT';
 import { Profile } from 'web/src/components/profile/Profile';
-import { ChevronIcon } from '../../../assets/images/ChevronIcon';
-import { getLanguageName } from '../../../helpers';
+import { ChevronIcon } from 'web/src/assets/images/ChevronIcon';
+import { getLanguageName } from 'web/src/helpers';
 import {
   logoutFetch,
   selectCurrentColorTheme,
   selectCurrentLanguage,
   selectUserInfo,
-} from '../../../modules';
-import { ProfileLink, ProfileLinks } from '../../components';
+} from 'web/src/modules';
+import { ProfileLink, ProfileLinks } from 'web/src/mobile/components';
 import { Box } from 'web/src/components/ui/Box';
 
 const ProfileMobileScreenComponent: React.FC = () => {
