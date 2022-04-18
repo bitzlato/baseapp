@@ -41,7 +41,7 @@ export const Ads: FC<Props> = (p) => {
   const isSell = p.type === 'selling';
 
   return (
-    <Box backgroundColor="dropdown">
+    <Box>
       <Box display="flex" alignItems="center" justifyContent="space-between" height="20x" px="4x">
         <Text color="secondary" className={col1}>
           {t('Traider')}

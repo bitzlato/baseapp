@@ -8,6 +8,6 @@ type Props = {
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | undefined;
 };
 
-export const Container: Element<Props> = ({ className, maxWidth = 'md', ...props }) => {
-  return <Box {...props} className={cn(s.container, s[maxWidth], className)} />;
+export const Container: Element<Props> = ({ className, maxWidth, ...props }) => {
+  return <Box {...props} className={cn(s.container, maxWidth && s[maxWidth], className)} />;
 };
