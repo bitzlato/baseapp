@@ -19,7 +19,8 @@ interface ReportLinkProps {
   report: P2PReport;
 }
 
-export const ReportLink: FC<ReportLinkProps> = ({ report: { code, description, format } }) => {
+export const ReportLink: FC<ReportLinkProps> = ({ report: { code, format } }) => {
+  const t = useT();
   const [download, setDownload] = useState<Boolean>(false);
 
   const handleClick = (event: MouseEvent) => {
@@ -33,7 +34,6 @@ export const ReportLink: FC<ReportLinkProps> = ({ report: { code, description, f
 
   return (
     <Box
-      key={code}
       as="a"
       href={`/reports/${code}`}
       display="flex"
@@ -49,7 +49,7 @@ export const ReportLink: FC<ReportLinkProps> = ({ report: { code, description, f
       onClick={handleClick}
     >
       <Text variant="title" fontWeight="strong">
-        {description}.{format}
+        {t(`reports.report_${code}`)}.{format}
       </Text>
       <DownloadIcon />
 
@@ -77,7 +77,7 @@ export const Reports: FC = () => {
       ) : (
         <Box className={s.body} display="flex" flexDirection="column">
           {reports.map((report) => (
-            <ReportLink report={report} />
+            <ReportLink key={report.code} report={report} />
           ))}
         </Box>
       )}

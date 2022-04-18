@@ -1419,4 +1419,11 @@ export const en = {
     'You use a significant amount of funds on Bitzlato platform. Until you have 2FA activated, you are at risk zone.{br}{br}We strongly recommend to set up 2FA to protect your account!',
   'proposal_otp.yes': "Let's do it!",
   'proposal_otp.no': 'Later',
+
+  'reports.report_100': 'Statement of cash flows',
+  'reports.report_101': 'Exchange history',
+  'reports.report_102': 'Checks history',
+  'reports.report_103': 'Wallet history',
+  'reports.report_104': 'Affiliate System',
+  'reports.report_105': 'General financial report',
 };
