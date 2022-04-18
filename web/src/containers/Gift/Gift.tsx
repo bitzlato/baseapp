@@ -41,6 +41,7 @@ import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { useFetchVouchers } from 'web/src/hooks/data/useFetchVouchers';
 import { SafeModeWizardModal } from 'web/src/components/profile/settings/SafeModeWizardModal';
 import sq from 'src/containers/QuickExchange/QuickExchange.postcss';
+import { ProposalToEnableOTP } from 'web/src/components/profile/ProposalToEnableOTP';
 import s from './Gift.postcss';
 
 interface Props {
@@ -60,6 +61,7 @@ export const Gift: FC<Props> = (props) => {
   const [comment, setComment] = useState('');
   const [show2fa, setShow2fa] = useState(false);
   const [showSafeModeWizard, setShowSafeModeWizard] = useState(false);
+  const [show2faProposal, setShow2faProposal] = useState(false);
 
   const t = useT();
   const dispatch = useDispatch();
@@ -134,7 +136,7 @@ export const Gift: FC<Props> = (props) => {
     handleChangeAmount(available.multiply(value).divide(100).toFormat());
   };
 
-  const handleCreateGift = async (code: string | undefined) => {
+  const handleCreateGift = async (code: string | undefined | null) => {
     if (!disableCreate) {
       const params: P2VoucherPostParams = {
         amount,
@@ -147,7 +149,8 @@ export const Gift: FC<Props> = (props) => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            ...(code && { 'x-code-2fa': code }),
+            ...(code && { 'X-Code-2FA': code }),
+            ...(code === null && { 'X-Code-NO2FA': 'true' }),
           },
           body: JSON.stringify(params),
         });
@@ -161,6 +164,8 @@ export const Gift: FC<Props> = (props) => {
             setShow2fa(true);
           } else if (error.code === 471 && error.payload.code === 'SafetyWizardRequired') {
             setShowSafeModeWizard(true);
+          } else if (error.code === 409 && error.payload.code === 'NoTwoFaUserApprove') {
+            setShow2faProposal(true);
           } else {
             alertFetchError(dispatch, error);
           }
@@ -172,6 +177,11 @@ export const Gift: FC<Props> = (props) => {
   const handleSend2fa = (code: string) => {
     setCode2fa(code);
     handleCreateGift(code);
+  };
+
+  const handleSendWithout2fa = () => {
+    setShow2faProposal(false);
+    return handleCreateGift(null);
   };
 
   const handleClickOptions = (value: AccountVoucher) => {
@@ -432,6 +442,11 @@ export const Gift: FC<Props> = (props) => {
         </Modal2>
       ) : null}
       <SafeModeWizardModal show={showSafeModeWizard} onClose={() => setShowSafeModeWizard(false)} />
+      <ProposalToEnableOTP
+        show={show2faProposal}
+        onClose={() => setShow2faProposal(false)}
+        onSend={handleSendWithout2fa}
+      />
     </>
   );
 };
