@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 export const dropdown = style({
   fontFamily: "'Montserrat', helvetica, sans-serif",
+  fontSize: 16,
   position: 'absolute',
   top: '84%',
   left: 0,

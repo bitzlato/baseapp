@@ -34,13 +34,19 @@ const HeaderComponent: React.FC = () => {
         ) : (
           <>
             <Button
-              onClick={() => history.push('/signin')}
+              size="small"
               variant="primary-outline"
               revertLightPrimary
+              onClick={() => history.push('/signin')}
             >
               {t('page.header.navbar.signIn')}
             </Button>
-            <Button onClick={() => history.push('/signup')} variant="primary" revertLightPrimary>
+            <Button
+              size="small"
+              variant="primary"
+              revertLightPrimary
+              onClick={() => history.push('/signup')}
+            >
               {t('page.header.signUp')}
             </Button>
           </>

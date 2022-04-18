@@ -7,13 +7,14 @@ const lineHeights = {
   small: '16px' as const,
   medium: '20px' as const,
   // used in text
+  base: '1.3' as const,
   oneHalf: '1.5' as const,
 };
 
 const minHeights = {
-  // small: sizeVars['8x'],
-  medium: sizeVars['11x'],
-  // large: sizeVars['13x'],
+  '9x': sizeVars['9x'],
+  '11x': sizeVars['11x'],
+  '12x': sizeVars['12x'],
 };
 
 const borderWidths = {

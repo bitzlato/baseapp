@@ -10,6 +10,7 @@ export const button = recipe({
       alignItems: 'center',
       justifyContent: 'center',
       fontWeight: 'strong',
+      lineHeight: 'base',
     }),
     {
       minWidth: 'auto',
@@ -49,24 +50,21 @@ export const button = recipe({
     },
     size: {
       small: sprinkles({
-        fontSize: 'small',
-        lineHeight: 'small',
-        px: '2x',
-        py: '1.5x',
+        fontSize: 'medium',
+        minHeight: '9x',
+        px: '4x',
         borderRadius: '1x',
       }),
       medium: sprinkles({
         fontSize: 'medium',
-        minHeight: 'medium',
+        minHeight: '11x',
         px: '4x',
-        py: '2x',
         borderRadius: '1x',
       }),
       large: sprinkles({
         fontSize: 'large',
-        lineHeight: 'medium',
+        minHeight: '12x',
         px: '8x',
-        py: '4x',
         borderRadius: '2x',
       }),
     },

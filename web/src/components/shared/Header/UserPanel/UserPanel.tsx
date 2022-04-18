@@ -51,7 +51,9 @@ export const UserPanel: FC<Props> = ({ responsiveMode = false }) => {
             mr={enableMobileMenu ? ['0', '5x'] : '5x'}
             alignSelf="center"
           >
-            <Button onClick={userContext.onSignInClick}>{t('signIn')}</Button>
+            <Button size="small" onClick={userContext.onSignInClick}>
+              {t('signIn')}
+            </Button>
           </Box>
           <Box
             className={responsiveMode ? s.canBeHidden : undefined}
@@ -60,7 +62,7 @@ export const UserPanel: FC<Props> = ({ responsiveMode = false }) => {
             alignSelf="center"
           >
             {/* signup ID is needed for GA event */}
-            <Button id="signup" color="secondary" onClick={userContext.onSignUpClick}>
+            <Button id="signup" color="secondary" size="small" onClick={userContext.onSignUpClick}>
               {t('signUp')}
             </Button>
           </Box>

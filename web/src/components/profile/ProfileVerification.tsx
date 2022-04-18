@@ -56,7 +56,7 @@ export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, url 
       <Text variant="label" color="danger" textAlign="center" fontWeight="strong">
         {t('profile.verification_no')}
       </Text>
-      <Button color="danger" fullWidth onClick={handleClick}>
+      <Button color="primary" fullWidth onClick={handleClick}>
         {t('profile.verification_goto')}
       </Button>
     </>

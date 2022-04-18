@@ -4,7 +4,7 @@ import * as colors from './colors';
 export const fontSizeVars = createGlobalTheme(':root', {
   caption: '12px' as const,
   small: '14px' as const,
-  medium: '16px' as const,
+  medium: '15px' as const,
   large: '18px' as const,
   lead: '20px' as const,
 });
@@ -32,7 +32,7 @@ export const sizeVars = createGlobalTheme(':root', {
   '9x': '36px' as const,
   '10x': '40px' as const,
   '11x': '44px' as const,
-  // '12x': '48px' as const,
+  '12x': '48px' as const,
   '13x': '52px' as const,
   '14x': '56px' as const,
   // '15x': '60px' as const,
