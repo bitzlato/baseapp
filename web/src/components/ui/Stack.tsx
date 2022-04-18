@@ -3,6 +3,7 @@ import { Sprinkles } from 'web/src/theme/sprinkles.css';
 import { Box } from './Box';
 
 interface Props {
+  className?: string | undefined;
   children: ReactNode;
   display?: Sprinkles['display'] | undefined;
   direction?: Sprinkles['flexDirection'] | undefined;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const Stack: FC<Props> = ({
+  className,
   children,
   display,
   direction,
@@ -25,6 +27,7 @@ export const Stack: FC<Props> = ({
 
   return (
     <Box
+      className={className}
       display="flex"
       flexDirection={direction}
       alignItems={alignItems}
