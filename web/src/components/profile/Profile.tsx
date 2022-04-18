@@ -15,7 +15,6 @@ import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
 import { useFetchSessionsMe } from 'web/src/hooks/data/useFetchSessionsMe';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
-// import ReportIcon from 'web/src/assets/svg/ReportIcon.svg';
 import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
@@ -60,7 +59,7 @@ export const Profile: FC = () => {
             <UserAvatar image={bitzlatoUser?.user_profile.avatar.original || ''} />
           </Box>
         )}
-        <Box flexGrow={1} mb="6x">
+        <Box flexGrow={1}>
           {bitzlatoUser && (
             <Box display="flex" alignItems="center" flexWrap="wrap">
               <Text variant="h4" className={s.publicName}>
@@ -81,25 +80,6 @@ export const Profile: FC = () => {
             UID: {user.uid} {sessionsMe && `(${sessionsMe.auth_sub})`}
           </Text>
         </Box>
-        <Text>
-          {/* user.account_statements_url && (
-            <Box
-              as="a"
-              href={user.account_statements_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              display="flex"
-              alignItems="center"
-              color={{ default: 'text', hover: 'textHighlighted' }}
-              textDecoration={{ hover: 'none' }}
-            >
-              <Box mr="2x">
-                <ReportIcon />
-              </Box>
-              {t('Account Statement')}
-            </Box>
-          ) */}
-        </Text>
       </Box>
       <Box mb="7x">
         <Stack

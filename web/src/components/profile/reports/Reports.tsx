@@ -1,4 +1,4 @@
-import { FC, useState, MouseEvent } from 'react';
+import { FC, useState, MouseEvent, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { useFetchP2PReports } from 'web/src/hooks/data/useFetchP2PReports';
 import { useT } from 'web/src/hooks/useT';
@@ -11,22 +11,32 @@ import { Container } from 'web/src/components/Container/Container';
 import DownloadIcon from 'web/src/assets/svg/DownloadIcon.svg';
 import { useHistory } from 'react-router-dom';
 import { Subheader } from 'web/src/mobile/components/Subheader';
-import { P2PReport } from 'web/src/modules/user/profile/types';
+import LinkIcon from 'web/src/assets/svg/LinkIcon.svg';
+import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import * as s from './Reports.css';
 import { ReportDownload } from './ReportDownload';
 
 interface ReportLinkProps {
-  report: P2PReport;
+  name: string;
+  reportCode?: number | undefined;
+  url?: string | undefined;
+  icon?: ReactNode | undefined;
 }
 
-export const ReportLink: FC<ReportLinkProps> = ({ report: { code, format } }) => {
-  const t = useT();
+export const ReportLink: FC<ReportLinkProps> = ({
+  name,
+  reportCode,
+  url,
+  icon = <DownloadIcon />,
+}) => {
   const [download, setDownload] = useState<Boolean>(false);
 
   const handleClick = (event: MouseEvent) => {
-    event.preventDefault();
+    if (reportCode) {
+      event.preventDefault();
 
-    setDownload(true);
+      setDownload(true);
+    }
   };
   const handleDownloded = () => {
     setDownload(false);
@@ -35,7 +45,6 @@ export const ReportLink: FC<ReportLinkProps> = ({ report: { code, format } }) =>
   return (
     <Box
       as="a"
-      href={`/reports/${code}`}
       display="flex"
       alignItems="center"
       justifyContent="space-between"
@@ -47,13 +56,18 @@ export const ReportLink: FC<ReportLinkProps> = ({ report: { code, format } }) =>
       borderBottomStyle="solid"
       borderBottomColor="cardHeaderBorderBottom"
       onClick={handleClick}
+      {...(url
+        ? { href: url, target: '_blank', rel: 'noopener noreferrer' }
+        : { href: `/reports/${reportCode}` })}
     >
       <Text variant="title" fontWeight="strong">
-        {t(`reports.report_${code}`)}.{format}
+        {name}
       </Text>
-      <DownloadIcon />
+      {icon}
 
-      {download && <ReportDownload code={code} silent onDownloded={handleDownloded} />}
+      {download && reportCode && (
+        <ReportDownload code={reportCode} silent onDownloded={handleDownloded} />
+      )}
     </Box>
   );
 };
@@ -62,6 +76,7 @@ export const Reports: FC = () => {
   const t = useT();
   const history = useHistory();
   const isMobileDevice = useSelector(selectMobileDeviceState);
+  const user = useSelector(selectUserInfo);
   const { data: reports, error } = useFetchP2PReports();
 
   if (error) {
@@ -76,8 +91,17 @@ export const Reports: FC = () => {
         </Box>
       ) : (
         <Box className={s.body} display="flex" flexDirection="column">
+          <ReportLink
+            name={t('Account Statement')}
+            url={user.account_statements_url}
+            icon={<LinkIcon />}
+          />
           {reports.map((report) => (
-            <ReportLink key={report.code} report={report} />
+            <ReportLink
+              key={report.code}
+              name={`${t(`reports.report_${report.code}`)}.${report.format}`}
+              reportCode={report.code}
+            />
           ))}
         </Box>
       )}

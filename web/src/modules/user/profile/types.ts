@@ -96,7 +96,7 @@ export interface User {
   default_auth_subject?: string | null | undefined;
   available_auth_subjects: ReadonlyArray<AuthSubject>;
   kyc_verification_url: string;
-  account_statements_url?: string | null | undefined;
+  account_statements_url: string;
 }
 
 export interface TradeStatistics {
