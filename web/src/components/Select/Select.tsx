@@ -26,7 +26,7 @@ export const Select = <T extends Object>({ label, className, size, ...rest }: Se
   );
 };
 
-interface SelectStringProps<T extends string, U>
+interface SelectStringProps<T extends string | number, U>
   extends Omit<
     SelectProps<U>,
     'value' | 'onChange' | 'options' | 'itemRenderer' | 'defaultValue' | 'formatOptionLabel'
@@ -38,7 +38,7 @@ interface SelectStringProps<T extends string, U>
   formatOptionLabel?: (value: T) => ReactNode;
 }
 
-export const SelectString = <T extends string>({
+export const SelectString = <T extends string | number>({
   options,
   onChange,
   formatOptionLabel,
@@ -50,7 +50,7 @@ export const SelectString = <T extends string>({
     <Select<SelectOption<T>>
       {...rest}
       options={options.map(toOption)}
-      value={value ? toOption(value) : null}
+      value={value != null ? toOption(value) : null}
       defaultValue={defaultValue ? toOption(defaultValue) : undefined!}
       onChange={(d) => onChange(d ? d.value : null)}
       formatOptionLabel={formatOptionLabel ? (d, _) => formatOptionLabel(d.value) : undefined!}
@@ -59,15 +59,15 @@ export const SelectString = <T extends string>({
   );
 };
 
-export interface SelectOption<T extends string = string> {
+export interface SelectOption<T extends string | number = string> {
   value: T;
   label: string;
 }
 
-function toOption<T extends string>(value: T): SelectOption<T> {
-  return { value, label: value };
+function toOption<T extends string | number>(value: T): SelectOption<T> {
+  return { value, label: value.toString() };
 }
 
-function toValue<T extends string>(option: SelectOption<T>): string {
-  return option.value;
+function toValue<T extends string | number>(option: SelectOption<T>): string {
+  return option.value.toString();
 }

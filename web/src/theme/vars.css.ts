@@ -46,6 +46,7 @@ export const sizeVars = createGlobalTheme(':root', {
 export const radiiVars = createGlobalTheme(':root', {
   '0': '0px' as const,
   '1x': '4px' as const,
+  '1.5x': '6px' as const,
   '2x': '8px' as const,
   circle: '9999px' as const,
 });
@@ -152,6 +153,8 @@ export const [themeLight, vars] = createTheme({
     cardHeaderBorderBottom: colors.waikawaGray24,
 
     reportBgHover: colors.whiteLilac,
+
+    adBg: colors.whiteLilac,
   },
 });
 
@@ -253,5 +256,7 @@ export const themeDark = createTheme(vars, {
     cardHeaderBorderBottom: colors.white24,
 
     reportBgHover: colors.white10,
+
+    adBg: colors.white05,
   },
 });

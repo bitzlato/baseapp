@@ -1,8 +1,9 @@
 import { createContext, useContext } from 'react';
-import { Theme } from 'web/src/types';
+import { Language, Theme } from 'web/src/types';
 
 interface AppContextValue {
   theme: Theme;
+  lang: Language;
 }
 
 export const AppContext = createContext(null as any as AppContextValue);

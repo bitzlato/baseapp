@@ -26,6 +26,7 @@ export const indigo30 = 'rgba(72, 91, 193, 0.3)';
 export const indigoLight = 'rgb(88, 107, 209)';
 export const governorBay = 'rgb(49, 69, 176)';
 export const white = 'rgb(255, 255, 255)';
+export const white05 = 'rgba(255, 255, 255, 0.05)';
 export const white10 = 'rgba(255, 255, 255, 0.1)';
 export const white20 = 'rgba(255, 255, 255, 0.2)';
 export const white24 = 'rgba(255, 255, 255, 0.24)';
