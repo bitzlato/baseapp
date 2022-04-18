@@ -1,15 +1,22 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { Profile } from 'web/src/components/profile/Profile';
 import { ChevronIcon } from '../../../assets/images/ChevronIcon';
 import { getLanguageName } from '../../../helpers';
-import { selectCurrentColorTheme, selectCurrentLanguage, selectUserInfo } from '../../../modules';
+import {
+  logoutFetch,
+  selectCurrentColorTheme,
+  selectCurrentLanguage,
+  selectUserInfo,
+} from '../../../modules';
 import { ProfileLink, ProfileLinks } from '../../components';
+import { Box } from 'web/src/components/ui/Box';
 
 const ProfileMobileScreenComponent: React.FC = () => {
   const t = useT();
   const user = useSelector(selectUserInfo);
+  const dispatch = useDispatch();
   const currentLanguage = useSelector(selectCurrentLanguage);
   const currentTheme = useSelector(selectCurrentColorTheme);
 
@@ -67,12 +74,28 @@ const ProfileMobileScreenComponent: React.FC = () => {
     },
   ];
 
+  const handleLogout = () => dispatch(logoutFetch());
+
   return (
     <div className="pg-mobile-profile-screen">
       <Profile />
       <ProfileLinks links={historyLinks} />
       <ProfileLinks links={mainLinks} />
       <ProfileLinks links={settingsLinks} />
+
+      <div className="pg-mobile-profile-links">
+        <Box
+          as="button"
+          type="button"
+          width="full"
+          height="15x"
+          fontWeight="strong"
+          color="textHighlighted"
+          onClick={handleLogout}
+        >
+          {t('page.mobile.userInfo.logout.button')}
+        </Box>
+      </div>
     </div>
   );
 };
