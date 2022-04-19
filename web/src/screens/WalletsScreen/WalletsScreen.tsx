@@ -22,6 +22,7 @@ import { Gift } from 'web/src/containers/Gift/Gift';
 import { useGeneralWallets } from 'web/src/hooks/useGeneralWallets';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
+import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { TabId, useWalletTab } from './useWalletTab';
 import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
@@ -57,7 +58,11 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
   const cryptoCurrency = getCurrencyCodeSymbol(general.currency);
   const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
 
-  const { tabs, tab, setTab } = useWalletTab(params.tab, general);
+  const rateResponse = useFetchRate(
+    cryptoCurrency,
+    general.balanceP2P !== undefined ? userCurrency : undefined,
+  );
+  const { tabs, tab, setTab } = useWalletTab(params.tab, general, rateResponse.data ?? null);
 
   const replaceHistory = (index: number, tabId?: string) => {
     const parts: string[] = [];
@@ -108,11 +113,6 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                         </Box>
                       </Box>
                     </Box>
-                    <Rate
-                      cryptoCurrency={cryptoCurrency}
-                      fiatCurrency={userCurrency}
-                      fetchRate={general.balanceP2P !== undefined}
-                    />
                     <TabList>
                       {tabs.map((d) => (
                         <Tab key={d.value} size="large" value={d.value}>
@@ -170,6 +170,13 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                         balanceP2P={general.balanceP2P}
                       />
                     )}
+                  </TabPanel>
+                  <TabPanel value={TabId.rate}>
+                    <Rate
+                      cryptoCurrency={cryptoCurrency}
+                      fiatCurrency={userCurrency}
+                      fetchRate={general.balanceP2P !== undefined}
+                    />
                   </TabPanel>
                 </Box>
               </Tabs>

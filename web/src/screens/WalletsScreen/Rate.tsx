@@ -1,14 +1,12 @@
 /* eslint-disable react/destructuring-assignment */
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Box } from 'src/components/Box/Box';
+import { Text } from 'web/src/components/ui/Text';
 import { useT } from 'src/hooks/useT';
 import { Select } from 'web/src/components/Select/Select';
 import { createCcy, createMoney } from 'web/src/helpers/money';
 import { useChangeRate, useFetchRate, useFetchRateSources } from 'web/src/hooks/data/useFetchRate';
 import { CurrencyRate } from 'web/src/modules/p2p/rate-types';
 import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
-import { InfoIcon } from 'web/src/assets/images/InfoIcon';
-import sqe from 'src/containers/QuickExchange/QuickExchange.postcss';
 
 function getSourceId(source: CurrencyRate): string {
   return source.id.toString();
@@ -57,32 +55,22 @@ export const Rate: React.FC<Props> = (p) => {
   };
 
   return source ? (
-    <Select
-      options={sources}
-      value={source}
-      onChange={handleChangeSource}
-      placeholder={
-        <span>
-          <span>{t('Rate')}</span>
-          &nbsp;
-          <OverlayTrigger
-            placement="top"
-            delay={{ show: 250, hide: 400 }}
-            overlay={
-              <Tooltip id="quick-exchange-price">
-                {t('rate.select', {
-                  pair: `${p.cryptoCurrency}/${p.fiatCurrency}`,
-                })}
-              </Tooltip>
-            }
-          >
-            <InfoIcon className={sqe.quickExchangeWarningIcon} />
-          </OverlayTrigger>
-        </span>
-      }
-      formatOptionLabel={renderSelectItem}
-      getOptionValue={getSourceId}
-      menuPortalTarget={document.body}
-    />
+    <Box col gap="4">
+      <Text variant="body">
+        {t('rate.select', {
+          pair: `${p.cryptoCurrency}/${p.fiatCurrency}`,
+        })}
+      </Text>
+
+      <Select
+        options={sources}
+        value={source}
+        onChange={handleChangeSource}
+        placeholder={<span>{t('Rate')}</span>}
+        formatOptionLabel={renderSelectItem}
+        getOptionValue={getSourceId}
+        menuPortalTarget={document.body}
+      />
+    </Box>
   ) : null;
 };
