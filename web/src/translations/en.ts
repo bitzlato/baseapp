@@ -1413,7 +1413,7 @@ export const en = {
   'verification.support': '🤖 Support:',
 
   'rate.select':
-    'Choose rate source for pair {pair}. Please note that changes will be applied to your dynamic price orders.',
+    'Choose a rate source for the {pair}.{br}The rate source will be used in your adverts for P2P trading, with a dynamic rate.',
 
   'proposal_otp.body':
     'You use a significant amount of funds on Bitzlato platform. Until you have 2FA activated, you are at risk zone.{br}{br}We strongly recommend to set up 2FA to protect your account!',

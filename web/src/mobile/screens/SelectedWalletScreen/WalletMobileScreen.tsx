@@ -33,7 +33,7 @@ export const WalletMobileScreen: React.FC = () => {
 
   const general = generals.find((d) => d.currency === currency) ?? DEFAULT_WALLET_ITEM;
 
-  const { tabs, tab, setTab } = useWalletTab(params.tab, general);
+  const { tabs, tab, setTab } = useWalletTab(params.tab, general, null);
 
   if (generals.length === 0) {
     return (
