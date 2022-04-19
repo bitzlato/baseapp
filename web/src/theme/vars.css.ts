@@ -35,7 +35,7 @@ export const sizeVars = createGlobalTheme(':root', {
   '12x': '48px' as const,
   '13x': '52px' as const,
   '14x': '56px' as const,
-  // '15x': '60px' as const,
+  '15x': '60px' as const,
   // '16x': '64px' as const,
   // '17x': '68px' as const,
   '18x': '72px' as const,
