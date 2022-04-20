@@ -16,6 +16,9 @@ import { WalletMobileBalance } from './WalletMobileBalance';
 import { TabId, useWalletTab } from 'web/src/screens/WalletsScreen/useWalletTab';
 import { Gift } from 'web/src/containers/Gift/Gift';
 import { DEFAULT_WALLET_ITEM } from 'web/src/components/WalletItem/defaults';
+import { Rate } from 'web/src/screens/WalletsScreen/Rate';
+import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
+import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 
 export const WalletMobileScreen: React.FC = () => {
   const params = useParams<UrlParams>();
@@ -23,17 +26,24 @@ export const WalletMobileScreen: React.FC = () => {
   const history = useHistory();
   const t = useT();
   const wallet = useSelector(selectWallet(currency));
+  const user = useSelector(selectUserInfo);
 
   const generals = useGeneralWallets();
+
+  const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
+  const general = generals.find((d) => d.currency === currency) ?? DEFAULT_WALLET_ITEM;
 
   const handleTabSelection = (value: TabId) => {
     setTab(value);
     history.replace(`/wallets/${currency.toLowerCase()}/${value}`);
   };
 
-  const general = generals.find((d) => d.currency === currency) ?? DEFAULT_WALLET_ITEM;
-
-  const { tabs, tab, setTab } = useWalletTab(params.tab, general, null);
+  const rateResponse = useFetchRate(
+    currency,
+    general.balanceP2P !== undefined ? userCurrency : undefined,
+  );
+  const hasRate = rateResponse.data !== undefined;
+  const { tabs, tab, setTab } = useWalletTab(params.tab, general, hasRate);
 
   if (generals.length === 0) {
     return (
@@ -55,9 +65,14 @@ export const WalletMobileScreen: React.FC = () => {
         <Box bgColor="body" padding="2X3" col spacing="2">
           <Tabs value={tab} onSelectionChange={handleTabSelection as any}>
             <Box grow justify="around" as={TabList}>
-              {tabs.map((d) => (
-                <Tab key={d.value} value={d.value} size="small">
-                  {t(d.label)}
+              {tabs.map((tabItem) => (
+                <Tab
+                  key={tabItem.value}
+                  value={tabItem.value}
+                  disabled={tabItem.disabled}
+                  size="small"
+                >
+                  {t(tabItem.label)}
                 </Tab>
               ))}
             </Box>
@@ -90,6 +105,13 @@ export const WalletMobileScreen: React.FC = () => {
               {general.balanceP2P && (
                 <Gift currency={general.balanceTotal.currency} balanceP2P={general.balanceP2P} />
               )}
+            </TabPanel>
+            <TabPanel value={TabId.rate}>
+              <Rate
+                cryptoCurrency={currency}
+                fiatCurrency={userCurrency}
+                fetchRate={general.balanceP2P !== undefined}
+              />
             </TabPanel>
           </Tabs>
         </Box>

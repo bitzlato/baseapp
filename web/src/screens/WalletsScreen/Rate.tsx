@@ -1,4 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
+import { useSelector } from 'react-redux';
 import { Box } from 'src/components/Box/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { useT } from 'src/hooks/useT';
@@ -7,6 +8,7 @@ import { createCcy, createMoney } from 'web/src/helpers/money';
 import { useChangeRate, useFetchRate, useFetchRateSources } from 'web/src/hooks/data/useFetchRate';
 import { CurrencyRate } from 'web/src/modules/p2p/rate-types';
 import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
+import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
 
 function getSourceId(source: CurrencyRate): string {
   return source.id.toString();
@@ -20,6 +22,7 @@ interface Props {
 
 export const Rate: React.FC<Props> = (p) => {
   const t = useT();
+  const isMobileDevice = useSelector(selectMobileDeviceState);
 
   const rateResponse = useFetchRate(p.cryptoCurrency, p.fetchRate ? p.fiatCurrency : undefined);
   const rateSourcesResponse = useFetchRateSources(
@@ -54,23 +57,36 @@ export const Rate: React.FC<Props> = (p) => {
     );
   };
 
-  return source ? (
-    <Box col gap="4">
-      <Text variant="body">
-        {t('rate.select', {
-          pair: `${p.cryptoCurrency}/${p.fiatCurrency}`,
-        })}
-      </Text>
+  const renderContent = () => {
+    return source ? (
+      <>
+        <Text variant="body">
+          {t('rate.select', {
+            pair: `${p.cryptoCurrency}/${p.fiatCurrency}`,
+            br: <br />,
+          })}
+        </Text>
 
-      <Select
-        options={sources}
-        value={source}
-        onChange={handleChangeSource}
-        placeholder={<span>{t('Rate')}</span>}
-        formatOptionLabel={renderSelectItem}
-        getOptionValue={getSourceId}
-        menuPortalTarget={document.body}
-      />
+        <Select
+          options={sources}
+          value={source}
+          onChange={handleChangeSource}
+          placeholder={t('Rate')}
+          formatOptionLabel={renderSelectItem}
+          getOptionValue={getSourceId}
+          menuPortalTarget={document.body}
+        />
+      </>
+    ) : null;
+  };
+
+  return isMobileDevice ? (
+    <Box col spacing="3">
+      {renderContent()}
     </Box>
-  ) : null;
+  ) : (
+    <Box col gap="4">
+      {renderContent()}
+    </Box>
+  );
 };

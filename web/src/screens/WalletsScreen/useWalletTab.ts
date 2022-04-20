@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import { SelectOption } from 'web/src/components/Select/Select';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
-import { CurrencyRate } from 'web/src/modules/p2p/rate-types';
 
 export const enum TabId {
   deposit = 'deposit',
@@ -11,7 +10,9 @@ export const enum TabId {
   rate = 'rate',
 }
 
-const TABS: SelectOption[] = [
+export type TabOption = SelectOption & { disabled?: boolean };
+
+const TABS: TabOption[] = [
   { value: TabId.deposit, label: 'Deposit.noun' },
   { value: TabId.withdraw, label: 'Withdraw.noun' },
   { value: TabId.transfer, label: 'Transfer.noun' },
@@ -19,7 +20,7 @@ const TABS: SelectOption[] = [
   { value: TabId.rate, label: 'Rate' },
 ];
 
-function findTabByValue(tabs: SelectOption[], value?: string): SelectOption {
+function findTabByValue(tabs: TabOption[], value?: string): TabOption {
   const valueLower = value?.toLowerCase();
   return tabs.find((d) => d.value === valueLower) ?? tabs[0]!;
 }
@@ -27,27 +28,27 @@ function findTabByValue(tabs: SelectOption[], value?: string): SelectOption {
 export function useWalletTab(
   queryTab: string | undefined,
   general: WalletItemData,
-  rate: CurrencyRate | null,
+  hasRate: boolean,
 ) {
   const [tabState, setTabState] = useState(queryTab);
 
   const tabs = useMemo(() => {
-    return TABS.filter((d) => {
-      switch (d.value) {
+    return TABS.map((tabItem) => {
+      switch (tabItem.value) {
         case TabId.transfer:
-          return general.hasTransfer;
+          return { ...tabItem, disabled: !general.hasTransfer };
 
         case TabId.gift:
-          return general.hasGift;
+          return { ...tabItem, disabled: !general.hasGift };
 
         case TabId.rate:
-          return rate;
+          return { ...tabItem, disabled: !hasRate };
 
         default:
-          return general.hasDepositWithdraw;
+          return { ...tabItem, disabled: !general.hasDepositWithdraw };
       }
     });
-  }, [general.hasDepositWithdraw, general.hasTransfer, general.hasGift, rate]);
+  }, [general.hasDepositWithdraw, general.hasTransfer, general.hasGift, hasRate]);
 
   const setTab = (value: string | undefined): string | undefined => {
     const newValue = findTabByValue(tabs, value)?.value;

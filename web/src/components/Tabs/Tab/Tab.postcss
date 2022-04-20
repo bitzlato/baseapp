@@ -16,13 +16,17 @@
   color: var(--market-selector-tab-color);
   font-weight: bold;
 
-  &:hover {
+  &:not([disabled]):hover {
     color: var(--market-selector-tab-color-active);
   }
 
-  &.tabActive {
+  &:not([disabled]).tabActive {
     border-color: var(--market-selector-tab-border-active);
     color: var(--market-selector-tab-color-active);
+  }
+
+  &[disabled] {
+    opacity: 0.2;
   }
 }
 
