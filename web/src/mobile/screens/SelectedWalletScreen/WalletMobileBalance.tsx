@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { WalletItemData } from 'src/components/WalletItem/WalletItem';
 import { Box } from 'src/components/Box/Box';
 import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
@@ -7,8 +6,6 @@ import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { useT } from 'src/hooks/useT';
 import { NoAmountFormat } from 'web/src/components/Format/NoAmountFormat';
-import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
-import { Rate } from 'web/src/screens/WalletsScreen/Rate';
 
 interface Props {
   wallet: WalletItemData;
@@ -16,10 +13,8 @@ interface Props {
 
 export const WalletMobileBalance: React.FC<Props> = ({ wallet }) => {
   const t = useT();
-  const user = useSelector(selectUserInfo);
 
   const cryptoCurrency = getCurrencyCodeSymbol(wallet.currency);
-  const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
 
   return (
     <Box bgColor="body" padding="2X3" col spacing="2">
@@ -54,11 +49,6 @@ export const WalletMobileBalance: React.FC<Props> = ({ wallet }) => {
               </span>
             </Box>
           </Box>
-          <Rate
-            cryptoCurrency={cryptoCurrency}
-            fiatCurrency={userCurrency}
-            fetchRate={wallet.balanceP2P !== undefined}
-          />
         </Box>
       </Box>
     </Box>

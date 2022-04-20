@@ -62,7 +62,8 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
     cryptoCurrency,
     general.balanceP2P !== undefined ? userCurrency : undefined,
   );
-  const { tabs, tab, setTab } = useWalletTab(params.tab, general, rateResponse.data ?? null);
+  const hasRate = rateResponse.data !== undefined;
+  const { tabs, tab, setTab } = useWalletTab(params.tab, general, hasRate);
 
   const replaceHistory = (index: number, tabId?: string) => {
     const parts: string[] = [];
@@ -114,9 +115,14 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                       </Box>
                     </Box>
                     <TabList>
-                      {tabs.map((d) => (
-                        <Tab key={d.value} size="large" value={d.value}>
-                          {t(d.label)}
+                      {tabs.map((tabItem) => (
+                        <Tab
+                          key={tabItem.value}
+                          size="large"
+                          value={tabItem.value}
+                          disabled={tabItem.disabled}
+                        >
+                          {t(tabItem.label)}
                         </Tab>
                       ))}
                     </TabList>
