@@ -1216,7 +1216,10 @@ export const en = {
   'error.try_later': 'Please try later',
   'Estimated value': 'Estimated value',
   'Exchange Balance': 'Exchange Balance',
+  'Exchange Wallet': 'Exchange Wallet',
+  'Generate address': 'Generate address',
   'P2P Balance': 'P2P Balance',
+  'P2P Wallet': 'P2P Wallet',
   'Select network': 'Select network',
   'Total balance': 'Total balance',
   'Transfer Fee': 'Transfer Fee',
@@ -1402,6 +1405,8 @@ export const en = {
     'Only deposits of {currency} tokens are accepted, be careful when sending funds!',
   'withdraw.usdx.e':
     'Only {currency} tokens are withdrawn. Please make sure that the token format matches.',
+  'deposit.erc20warning': 'Funds are accepted only through the ERC-20 network',
+  'deposit.erc20MDTWarning': 'Accepted only ERC-20 MonolithosDAO Tokens (MDT)',
 
   'verification.pass': 'Pass verification',
   'verification.oops': '😔 Oops!',

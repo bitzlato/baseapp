@@ -1,6 +1,6 @@
 export const PG_TITLE_PREFIX = 'Bitzlato';
 
-export const DEFAULT_CCY_PRECISION = 4;
+export const DEFAULT_CCY_PRECISION = 8;
 export const DEFAULT_TRADING_VIEW_INTERVAL = '15';
 
 export const PASSWORD_ENTROPY_STEP = 6;
