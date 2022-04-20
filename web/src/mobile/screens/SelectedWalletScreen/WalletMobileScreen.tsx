@@ -7,7 +7,7 @@ import { useT } from 'src/hooks/useT';
 import { useGeneralWallets } from 'src/hooks/useGeneralWallets';
 import { Tab, TabList, TabPanel, Tabs } from 'src/components/Tabs';
 import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
-import { WalletHistory } from 'src/containers/Wallets/History';
+import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { selectWallet } from 'src/modules/user/wallets/selectors';
@@ -82,7 +82,7 @@ export const WalletMobileScreen: React.FC = () => {
             <TabPanel value="deposit">
               {!isBtc && <DepositCrypto wallet={wallet} />}
               {hasP2P && <DepositP2P currency={currency} />}
-              <WalletHistory label="deposit" type="deposits" currency={currency.toLowerCase()} />
+              <WalletHistory type="deposits" general={general} />
             </TabPanel>
             <TabPanel value="withdraw">
               {general.currency === 'BTC' ? (
@@ -90,7 +90,7 @@ export const WalletMobileScreen: React.FC = () => {
               ) : (
                 <Withdraw wallet={wallet} />
               )}
-              <WalletHistory label="withdraw" type="withdraws" currency={currency.toLowerCase()} />
+              <WalletHistory type="withdraws" general={general} />
             </TabPanel>
             <TabPanel value="transfer">
               {general.hasTransfer && (

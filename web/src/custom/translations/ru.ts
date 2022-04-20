@@ -1251,6 +1251,7 @@ export const ru: LangType = {
   'Transfer.noun': 'Перевод',
   'Transfer.verb': 'Перевести',
   'Withdraw.noun': 'Вывод',
+  Address: 'Адрес',
   Amount: 'Сумма',
   Coin: 'Валюта',
   Currency: 'Валюта',
@@ -1454,4 +1455,15 @@ export const ru: LangType = {
   'reports.report_103': 'Выписка по кошельку',
   'reports.report_104': 'Реферальная программа',
   'reports.report_105': 'Общий финансовый отчет',
+
+  'P2P Deposits': 'P2P депозиты',
+  'P2P Withdrawals': 'P2P выводы',
+  'Exchange Deposits': 'Биржевые депозиты',
+  'Exchange Withdrawals': 'Биржевые выводы',
+  'Edit comment': 'Редактировать комментарий',
+  'Deposit History': 'История депозитов',
+  'Withdrawal History': 'История выводов',
+  Exchange: 'Биржа',
+  P2P: 'P2P',
+  of: 'из',
 };

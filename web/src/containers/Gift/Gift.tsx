@@ -41,6 +41,7 @@ import { SafeModeWizardModal } from 'web/src/components/profile/settings/SafeMod
 import sq from 'src/containers/QuickExchange/QuickExchange.postcss';
 import { ProposalToEnableOTP } from 'web/src/components/profile/ProposalToEnableOTP';
 import { AMOUNT_PERCENTS, FIAT_PRECISION } from 'web/src/constants';
+import { None } from 'web/src/components/None';
 import s from './Gift.postcss';
 
 interface Props {
@@ -246,6 +247,7 @@ export const Gift: FC<Props> = (props) => {
       <Button
         size="small"
         variant="outlined"
+        color="secondary"
         title={`${t('More')}...`}
         onClick={() => handleClickOptions(d)}
       >
@@ -443,13 +445,5 @@ export const Gift: FC<Props> = (props) => {
         onSend={handleSendWithout2fa}
       />
     </>
-  );
-};
-
-const None: FC = () => {
-  return (
-    <Box as="span" textColor="secondary">
-      -
-    </Box>
   );
 };
