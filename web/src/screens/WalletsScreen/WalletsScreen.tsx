@@ -13,7 +13,7 @@ import { Tab, TabList, TabPanel } from 'src/components/Tabs';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
 import { DepositP2P } from 'web/src/components/DepositCrypto/DepositP2P';
-import { WalletHistory } from 'src/containers/Wallets/History';
+import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { useHistory, useParams } from 'react-router';
 import { Transfer } from 'src/containers/Wallets/Transfer';
@@ -140,11 +140,7 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                       <TabPanel value={TabId.deposit}>
                         {!isBtc && <DepositCrypto wallet={wallet} />}
                         {hasP2P && <DepositP2P currency={cryptoCurrency} />}
-                        <WalletHistory
-                          label="deposit"
-                          type="deposits"
-                          currency={wallet.currency.code.toLowerCase()}
-                        />
+                        <WalletHistory type="deposits" general={general} />
                       </TabPanel>
                       <TabPanel value={TabId.withdraw}>
                         {general.currency === 'BTC' ? (
@@ -152,11 +148,7 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                         ) : (
                           <Withdraw wallet={wallet} />
                         )}
-                        <WalletHistory
-                          label="withdraw"
-                          type="withdraws"
-                          currency={wallet.currency.code.toLowerCase()}
-                        />
+                        <WalletHistory type="withdraws" general={general} />
                       </TabPanel>
                     </>
                   )}

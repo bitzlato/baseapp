@@ -1230,6 +1230,7 @@ export const en = {
   'Transfer.noun': 'Transfer',
   'Transfer.verb': 'Transfer',
   'Withdraw.noun': 'Withdraw',
+  Address: 'Address',
   Amount: 'Amount',
   Coin: 'Coin',
   Currency: 'Currency',
@@ -1431,4 +1432,15 @@ export const en = {
   'reports.report_103': 'Wallet history',
   'reports.report_104': 'Affiliate System',
   'reports.report_105': 'General financial report',
+
+  'P2P Deposits': 'P2P Deposits',
+  'P2P Withdrawals': 'P2P Withdrawals',
+  'Exchange Deposits': 'Exchange Deposits',
+  'Exchange Withdrawals': 'Exchange Withdrawals',
+  'Edit comment': 'Edit comment',
+  'Deposit History': 'Deposit History',
+  'Withdrawal History': 'Withdrawal History',
+  Exchange: 'Exchange',
+  P2P: 'P2P',
+  of: 'of',
 };

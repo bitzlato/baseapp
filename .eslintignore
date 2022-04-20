@@ -146,7 +146,6 @@ web/src/containers/ToolBar/index.tsx
 web/src/containers/TradingChart/api.ts
 web/src/containers/TradingChart/index.tsx
 web/src/containers/Wallets/Estimated.tsx
-web/src/containers/Wallets/History.tsx
 web/src/containers/Wallets/Transfer.tsx
 web/src/containers/Wallets/TransferHistory.tsx
 web/src/containers/WalletsFetch/index.tsx
