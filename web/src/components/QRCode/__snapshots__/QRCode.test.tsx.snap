@@ -2,7 +2,7 @@
 
 exports[`QRCode renders correctly 1`] = `
 <div
-  class="qr-code"
+  class="QRCode_qrCode__12i44j30"
 >
   <svg
     height="118"

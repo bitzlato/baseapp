@@ -31,7 +31,7 @@ interface Props {
 }
 
 export const DepositCrypto: FC<Props> = ({ wallet }) => {
-  const currency = wallet.currency.code;
+  const currency = getCurrencyCodeSymbol(wallet.currency.code);
 
   const t = useT();
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
   }, [blockchains.length, currency]);
 
   const depositResponse = useFetch<DepositAddress>(
-    blockchain?.id ? `${tradeUrl()}/account/deposit_address/${blockchain?.id}` : null,
+    blockchain?.id ? `${tradeUrl()}/account/deposit_address/${blockchain.id}` : null,
     fetchWithCreds,
   );
 
@@ -95,65 +95,62 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
     depositAddress !== undefined;
 
   return (
-    <Box position="relative">
-      {!wallet?.deposit_enabled ? (
-        <Blur text={t('page.body.wallets.tabs.deposit.disabled.message')} />
-      ) : user.level < (memberLevels?.deposit.minimum_level ?? 0) ? (
-        <Blur
-          text={t('page.body.wallets.warning.deposit.verification')}
-          onClick={() => history.push('/confirm')}
-          linkText={t('page.body.wallets.warning.deposit.verification.button')}
-        />
-      ) : null}
-      <Box col spacing="3" className="cr-deposit-crypto">
-        <Select
-          options={blockchains}
-          value={blockchain}
-          onChange={setBlockchain}
-          placeholder={t('Select network')}
-          label={t('Network')}
-          formatOptionLabel={renderSelectItem}
-          getOptionValue={(d) => d.key}
-        />
-        {blockchain && depositAddress?.address && blockchainCurrency && (
-          <>
-            <Box row spacing="2">
-              <div className="cr-deposit-info">
-                {t('page.body.wallets.tabs.deposit.ccy.message.submit', {
-                  confirmations: blockchain.min_confirmations,
-                })}
-              </div>
-              {depositAddress && (
-                <div className="d-none d-md-block qr-code-wrapper">
-                  <QRCode dimensions={118} data={depositAddress.address} />
-                </div>
-              )}
-            </Box>
-            <Box row spacing="2">
-              {showMetamask ? (
-                <MetaMaskButton
-                  depositAddress={depositAddress.address}
-                  explorerAddress={blockchain.explorer_address}
-                  currency={wallet}
-                  blockchainCurrency={blockchainCurrency}
+    <Box col spacing="2">
+      <h4>{t('Exchange Wallet')}</h4>
+      <Box position="relative">
+        {!wallet?.deposit_enabled ? (
+          <Blur text={t('page.body.wallets.tabs.deposit.disabled.message')} />
+        ) : user.level < (memberLevels?.deposit.minimum_level ?? 0) ? (
+          <Blur
+            text={t('page.body.wallets.warning.deposit.verification')}
+            onClick={() => history.push('/confirm')}
+            linkText={t('page.body.wallets.warning.deposit.verification.button')}
+          />
+        ) : null}
+        <Box col spacing="2">
+          <Select
+            options={blockchains}
+            value={blockchain}
+            onChange={setBlockchain}
+            placeholder={t('Select network')}
+            label={t('Network')}
+            formatOptionLabel={renderSelectItem}
+            getOptionValue={(d) => d.key}
+          />
+          {blockchain && depositAddress?.address && blockchainCurrency && (
+            <>
+              <Box row spacing="2">
+                <span>
+                  {t('page.body.wallets.tabs.deposit.ccy.message.submit', {
+                    confirmations: blockchain.min_confirmations,
+                  })}
+                </span>
+                <QRCode dimensions={118} data={depositAddress.address} />
+              </Box>
+              <Box row spacing="2">
+                {showMetamask ? (
+                  <MetaMaskButton
+                    depositAddress={depositAddress.address}
+                    explorerAddress={blockchain.explorer_address}
+                    currency={wallet}
+                    blockchainCurrency={blockchainCurrency}
+                  />
+                ) : null}
+                <CopyableTextField
+                  value={depositAddress.address}
+                  fieldId="copy_deposit_1"
+                  label={t('page.body.wallets.tabs.deposit.ccy.message.address')}
+                  onCopy={handleCopy}
                 />
-              ) : null}
-              <CopyableTextField
-                value={
-                  depositAddress?.address ?? t('page.body.wallets.tabs.deposit.ccy.message.pending')
-                }
-                fieldId={depositAddress?.address ? 'copy_deposit_1' : 'copy_deposit_2'}
-                label={t('page.body.wallets.tabs.deposit.ccy.message.address')}
-                onCopy={handleCopy}
+              </Box>
+              <DepositSummary
+                wallet={wallet}
+                blockchainCurrency={blockchainCurrency}
+                isUSDXe={isUSDXe(blockchain.name, currency)}
               />
-            </Box>
-            <DepositSummary
-              wallet={wallet}
-              blockchainCurrency={blockchainCurrency}
-              isUSDXe={isUSDXe(blockchain.name, currency)}
-            />
-          </>
-        )}
+            </>
+          )}
+        </Box>
       </Box>
     </Box>
   );

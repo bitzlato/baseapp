@@ -44,6 +44,9 @@ export function useWalletTab(
         case TabId.rate:
           return { ...tabItem, disabled: !hasRate };
 
+        case TabId.deposit:
+          return { ...tabItem, disabled: false };
+
         default:
           return { ...tabItem, disabled: !general.hasDepositWithdraw };
       }

@@ -19,6 +19,7 @@ import { DEFAULT_WALLET_ITEM } from 'web/src/components/WalletItem/defaults';
 import { Rate } from 'web/src/screens/WalletsScreen/Rate';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
+import { DepositP2P } from 'web/src/components/DepositCrypto/DepositP2P';
 
 export const WalletMobileScreen: React.FC = () => {
   const params = useParams<UrlParams>();
@@ -32,6 +33,8 @@ export const WalletMobileScreen: React.FC = () => {
 
   const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
   const general = generals.find((d) => d.currency === currency) ?? DEFAULT_WALLET_ITEM;
+  const hasP2P = !!general.balanceP2P;
+  const isBtc = currency === 'BTC';
 
   const handleTabSelection = (value: TabId) => {
     setTab(value);
@@ -77,11 +80,8 @@ export const WalletMobileScreen: React.FC = () => {
               ))}
             </Box>
             <TabPanel value="deposit">
-              {general.currency === 'BTC' ? (
-                <InvoiceExplanation currency={general.currency} />
-              ) : (
-                <DepositCrypto wallet={wallet} />
-              )}
+              {!isBtc && <DepositCrypto wallet={wallet} />}
+              {hasP2P && <DepositP2P currency={currency} />}
               <WalletHistory label="deposit" type="deposits" currency={currency.toLowerCase()} />
             </TabPanel>
             <TabPanel value="withdraw">

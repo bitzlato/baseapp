@@ -12,6 +12,7 @@ import { Tabs } from 'src/components/Tabs/Tabs';
 import { Tab, TabList, TabPanel } from 'src/components/Tabs';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
+import { DepositP2P } from 'web/src/components/DepositCrypto/DepositP2P';
 import { WalletHistory } from 'src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { useHistory, useParams } from 'react-router';
@@ -57,6 +58,8 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
   const wallet = wallets.find((d) => d.currency.code === general?.currency);
   const cryptoCurrency = getCurrencyCodeSymbol(general.currency);
   const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
+  const hasP2P = !!general.balanceP2P;
+  const isBtc = cryptoCurrency === 'BTC';
 
   const rateResponse = useFetchRate(
     cryptoCurrency,
@@ -135,11 +138,8 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                   {wallet && (
                     <>
                       <TabPanel value={TabId.deposit}>
-                        {general.currency === 'BTC' ? (
-                          <InvoiceExplanation currency={general.currency} />
-                        ) : (
-                          <DepositCrypto wallet={wallet} />
-                        )}
+                        {!isBtc && <DepositCrypto wallet={wallet} />}
+                        {hasP2P && <DepositP2P currency={cryptoCurrency} />}
                         <WalletHistory
                           label="deposit"
                           type="deposits"
