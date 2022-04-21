@@ -1,4 +1,5 @@
 import { call, put } from 'redux-saga/effects';
+import { StorageKeys } from 'web/src/helpers/storageKeys';
 import { sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { changeLanguage } from '../../../public/i18n';
@@ -29,7 +30,7 @@ export function* signInSaga(action: SignInFetch) {
       }
       yield put(userData({ user }));
 
-      localStorage.setItem('csrfToken', user.csrf_token as any);
+      localStorage.setItem(StorageKeys.csrfToken, user.csrf_token as any);
       yield put(signInRequire2FA({ require2fa: user.otp }));
     }
     yield put(signInData());

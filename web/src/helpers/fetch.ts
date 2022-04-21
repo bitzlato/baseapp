@@ -1,3 +1,5 @@
+import { getCsrfToken } from 'web/src/helpers/getCsrfToken';
+
 export class FetchError extends Error {
   constructor(public messages: string[], public code: number, public payload: Record<string, any>) {
     super(messages[0]);
@@ -5,9 +7,26 @@ export class FetchError extends Error {
   }
 }
 
+function createRequestWithCSRF(init?: RequestInit): RequestInit | undefined {
+  const csrfToken = getCsrfToken();
+  if (csrfToken) {
+    return {
+      ...init,
+      headers: {
+        ...init?.headers,
+        'X-CSRF-Token': csrfToken,
+      },
+    };
+  }
+
+  return init;
+}
+
 export const fetchJson = async (input: RequestInfo, init?: RequestInit) => {
   try {
-    const res = await fetch(input, init);
+    const options = init?.method ? createRequestWithCSRF(init) : init;
+
+    const res = await fetch(input, options);
 
     const contentLength = res.headers.get('content-length');
     const json = contentLength === '0' ? undefined : await res.json();
