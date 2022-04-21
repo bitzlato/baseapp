@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { CommonError } from 'src/modules/types';
+import { getCsrfToken } from 'web/src/helpers/getCsrfToken';
 import { applogicUrl, authUrl, finexUrl, tradeUrl, withCredentials } from './config';
 
 export type HTTPMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
@@ -39,9 +40,11 @@ const buildRequest = (request: Request, configData: RequestOptions) => {
   const api = getAPI();
 
   const contentType = body instanceof FormData ? 'multipart/form-data' : 'application/json';
+  const csrfToken = method !== 'get' ? getCsrfToken() : undefined;
 
   const defaultHeaders = {
     'content-type': contentType,
+    ...(csrfToken && { 'X-CSRF-Token': csrfToken }),
   };
 
   const apiUrl = api[apiVersion];

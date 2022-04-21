@@ -1,4 +1,5 @@
 import { call, put } from 'redux-saga/effects';
+import { StorageKeys } from 'web/src/helpers/storageKeys';
 import { sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { User, userData } from '../../profile';
@@ -24,7 +25,7 @@ export function* signUpSaga(action: SignUpFetch) {
     }
 
     if (data.csrf_token) {
-      localStorage.setItem('csrfToken', data.csrf_token);
+      localStorage.setItem(StorageKeys.csrfToken, data.csrf_token);
 
       if (action.callbackAction) {
         const { scope, key, value, component } = action.callbackAction;
