@@ -9,7 +9,6 @@ export const DEFAULT_WALLET_ITEM: WalletItemData = {
   balanceMarket: ZERO_PENCE,
   approximate: ZERO_PENCE,
   locked: ZERO_PENCE,
-  hasDepositWithdraw: false,
   hasTransfer: false,
   hasGift: false,
   index: -1,
