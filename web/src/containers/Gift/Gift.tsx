@@ -21,11 +21,9 @@ import {
   P2PConfirmation,
   P2VoucherPostParams,
 } from 'web/src/modules/account/voucher-types';
-import { selectWallets } from 'web/src/modules/user/wallets/selectors';
 import { localeDate } from 'web/src/helpers/localeDate';
 import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
 import { IconButton } from 'web/src/components/IconButton/IconButton';
-import { DEFAULT_CURRENCY } from 'web/src/modules/public/currencies/defaults';
 import { Tab, TabList, Tabs } from 'web/src/components/Tabs';
 import { Table } from 'web/src/components/Table';
 import { Modal2 } from 'web/src/components/Modal/Modal2';
@@ -42,6 +40,7 @@ import { useFetchVouchers } from 'web/src/hooks/data/useFetchVouchers';
 import { SafeModeWizardModal } from 'web/src/components/profile/settings/SafeModeWizardModal';
 import sq from 'src/containers/QuickExchange/QuickExchange.postcss';
 import { ProposalToEnableOTP } from 'web/src/components/profile/ProposalToEnableOTP';
+import { AMOUNT_PERCENTS, FIAT_PRECISION } from 'web/src/constants';
 import s from './Gift.postcss';
 
 interface Props {
@@ -65,7 +64,6 @@ export const Gift: FC<Props> = (props) => {
 
   const t = useT();
   const dispatch = useDispatch();
-  const wallets = useSelector(selectWallets);
   const user = useSelector(selectUserInfo);
 
   const { mutate } = useSWRConfig();
@@ -93,7 +91,8 @@ export const Gift: FC<Props> = (props) => {
   const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
   const isFiat = giftCurrency === userCurrency;
   const fiatCcy = createCcy(userCurrency, FIAT_PRECISION);
-  const ccy = isFiat ? fiatCcy : props.balanceP2P.currency;
+  const cryptoCcy = props.balanceP2P.currency;
+  const ccy = isFiat ? fiatCcy : cryptoCcy;
   const amountMoney = createMoney(amount, ccy);
   const rate = rateResponse.data?.rate ?? 0;
   const availableFiat = props.balanceP2P.convert(rate, fiatCcy);
@@ -111,10 +110,6 @@ export const Gift: FC<Props> = (props) => {
       errorText = t('Balance is insufficient');
     }
   }
-
-  const getCcy = (code: string) => {
-    return wallets.find((w) => code === w.currency.code) ?? DEFAULT_CURRENCY;
-  };
 
   const handleDelete = async (value: AccountVoucher) => {
     try {
@@ -260,7 +255,7 @@ export const Gift: FC<Props> = (props) => {
         {localeDate(d.created_at, 'fullDate')}
       </Box>,
       <Box col>
-        <MoneyFormat money={createMoney(d.amount, getCcy(d.cc_code))} />
+        <MoneyFormat money={createMoney(d.amount, cryptoCcy)} />
         <Box textSize="sm" textColor="secondary">
           ≈{' '}
           <MoneyFormat
@@ -303,7 +298,7 @@ export const Gift: FC<Props> = (props) => {
                 </Box>
               </Box>
               <Box self="end" row spacing>
-                {PERCENTS.map((v) => (
+                {AMOUNT_PERCENTS.map((v) => (
                   <BootstrapButton
                     key={v}
                     disabled={disablePercents}
@@ -405,7 +400,7 @@ export const Gift: FC<Props> = (props) => {
           header={
             <span>
               {t('Gift for', {
-                money: <MoneyFormat money={createMoney(gift.amount, getCcy(gift.cc_code))} />,
+                money: <MoneyFormat money={createMoney(gift.amount, cryptoCcy)} />,
               })}
             </span>
           }
@@ -458,6 +453,3 @@ const None: FC = () => {
     </Box>
   );
 };
-
-const PERCENTS = [25, 50, 75, 100];
-const FIAT_PRECISION = 2;
