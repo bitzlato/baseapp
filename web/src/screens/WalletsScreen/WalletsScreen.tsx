@@ -140,16 +140,15 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                     {hasP2P && <DepositP2P currency={cryptoCurrency} />}
                     <WalletHistory type="deposits" general={general} />
                   </TabPanel>
-                  {wallet && (
-                    <TabPanel value={TabId.withdraw}>
-                      {general.currency === 'BTC' ? (
+                  <TabPanel value={TabId.withdraw}>
+                    {wallet &&
+                      (general.currency === 'BTC' ? (
                         <InvoiceExplanation currency={general.currency} />
                       ) : (
                         <Withdraw wallet={wallet} />
-                      )}
-                      <WalletHistory type="withdraws" general={general} />
-                    </TabPanel>
-                  )}
+                      ))}
+                    <WalletHistory type="withdraws" general={general} />
+                  </TabPanel>
                   <TabPanel value={TabId.transfer}>
                     {general.hasTransfer && (
                       <Transfer

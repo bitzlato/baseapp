@@ -44,14 +44,11 @@ export function useWalletTab(
         case TabId.rate:
           return { ...tabItem, disabled: !hasRate };
 
-        case TabId.deposit:
-          return { ...tabItem, disabled: false };
-
         default:
-          return { ...tabItem, disabled: !general.hasDepositWithdraw };
+          return { ...tabItem, disabled: false };
       }
     });
-  }, [general.hasDepositWithdraw, general.hasTransfer, general.hasGift, hasRate]);
+  }, [general.hasTransfer, general.hasGift, hasRate]);
 
   const setTab = (value: string | undefined): string | undefined => {
     const newValue = findTabByValue(tabs, value)?.value;
