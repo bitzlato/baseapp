@@ -135,22 +135,20 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                     <Balance title={t('Exchange Balance')} money={general.balanceMarket} />
                     <Balance title={t('Locked')} money={general.locked} />
                   </Box>
+                  <TabPanel value={TabId.deposit}>
+                    {!isBtc && wallet && <DepositCrypto wallet={wallet} />}
+                    {hasP2P && <DepositP2P currency={cryptoCurrency} />}
+                    <WalletHistory type="deposits" general={general} />
+                  </TabPanel>
                   {wallet && (
-                    <>
-                      <TabPanel value={TabId.deposit}>
-                        {!isBtc && <DepositCrypto wallet={wallet} />}
-                        {hasP2P && <DepositP2P currency={cryptoCurrency} />}
-                        <WalletHistory type="deposits" general={general} />
-                      </TabPanel>
-                      <TabPanel value={TabId.withdraw}>
-                        {general.currency === 'BTC' ? (
-                          <InvoiceExplanation currency={general.currency} />
-                        ) : (
-                          <Withdraw wallet={wallet} />
-                        )}
-                        <WalletHistory type="withdraws" general={general} />
-                      </TabPanel>
-                    </>
+                    <TabPanel value={TabId.withdraw}>
+                      {general.currency === 'BTC' ? (
+                        <InvoiceExplanation currency={general.currency} />
+                      ) : (
+                        <Withdraw wallet={wallet} />
+                      )}
+                      <WalletHistory type="withdraws" general={general} />
+                    </TabPanel>
                   )}
                   <TabPanel value={TabId.transfer}>
                     {general.hasTransfer && (
