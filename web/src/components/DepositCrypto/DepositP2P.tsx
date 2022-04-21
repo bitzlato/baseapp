@@ -54,7 +54,7 @@ export const DepositP2P: FC<Props> = ({ currency }) => {
         </Button>
       ) : (
         <>
-          <Box row spacing="2">
+          <Box row spacing="2" justify="between">
             <span>
               {t('page.body.wallets.tabs.deposit.ccy.message.submit', {
                 confirmations: '3 - 5',

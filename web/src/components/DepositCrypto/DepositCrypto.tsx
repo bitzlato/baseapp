@@ -119,7 +119,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
           />
           {blockchain && depositAddress?.address && blockchainCurrency && (
             <>
-              <Box row spacing="2">
+              <Box row spacing="2" justify="between">
                 <span>
                   {t('page.body.wallets.tabs.deposit.ccy.message.submit', {
                     confirmations: blockchain.min_confirmations,
