@@ -180,11 +180,19 @@ export const WalletHistory: FC<Props> = ({ type, general }) => {
 
   const [tab, setTab] = useState(hasP2P ? 'p2p' : 'exchange');
 
+  const validTab = useMemo(() => {
+    const tabs = [
+      { value: 'p2p', enable: hasP2P },
+      { value: 'exchange', enable: hasExchange },
+    ].filter((d) => d.enable);
+    return (tabs.find((d) => d.value === tab) ?? tabs[0])!.value;
+  }, [hasP2P, hasExchange, tab]);
+
   const t = useT();
 
   return (
     <Box col spacing="2">
-      <Tabs value={tab} onSelectionChange={setTab}>
+      <Tabs value={validTab} onSelectionChange={setTab}>
         <Box row gap="2" wrap>
           <Box as="h4" margin="0">
             {isDeposit ? t('Deposit History') : t('Withdrawal History')}
