@@ -2,7 +2,8 @@ import React from 'react';
 import cn from 'classnames';
 import { capitalize } from 'src/helpers/capitalize';
 import s from './Box.postcss';
-import sLabel from '../Label/Label.postcss';
+// import sLabel from '../Label/Label.postcss';
+import * as sLabel from './Label.css';
 
 export type TextColor = 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask';
 

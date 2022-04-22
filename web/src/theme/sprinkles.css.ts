@@ -153,7 +153,7 @@ const typographyProperties = defineProperties({
     lineHeight: lineHeights,
     minHeight: minHeights,
     textAlign: ['left', 'center'],
-    textTransform: ['uppercase'],
+    textTransform: ['uppercase', 'capitalize'],
     wordBreak: ['break-word'],
     whiteSpace: ['nowrap'],
     textOverflow: {

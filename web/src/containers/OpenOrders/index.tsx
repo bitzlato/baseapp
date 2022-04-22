@@ -8,7 +8,7 @@ import { useOpenOrdersFetch } from 'src/hooks';
 import { useT } from 'src/hooks/useT';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { Box } from 'src/components/Box';
-import { Label } from 'src/components/Label';
+import { Text } from 'web/src/components/ui/Text';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { createMoney } from 'src/helpers/money';
@@ -60,7 +60,7 @@ export const OpenOrdersComponent: React.FC = () => {
     (data: OrderCommon[]) => {
       if (!data.length) {
         return [
-          [[''], [''], [''], [''], <Label color="secondary">{t('page.noDataToShow')}</Label>, ['']],
+          [[''], [''], [''], [''], <Text color="secondary">{t('page.noDataToShow')}</Text>, ['']],
         ];
       }
 
@@ -85,27 +85,25 @@ export const OpenOrdersComponent: React.FC = () => {
           curMarket?.quote_unit ?? '',
           curMarket?.amount_precision || 0,
         );
-        const color = side === 'buy' ? 'bid' : 'ask';
+        const color = side === 'buy' ? 'bids' : 'asks';
         const actualPrice = getActualPrice(item);
         const total = createMoney(origin_volume, amountCurrency).multiply(actualPrice);
 
         return [
           <Box col textSize="sm">
-            <Label color="secondary">{localeDate(created_at, 'date')}</Label>
+            <Text color="secondary">{localeDate(created_at, 'date')}</Text>
             <span>{localeDate(created_at, 'time')}</span>
           </Box>,
           <span className="bold">
             <MarketName name={curMarket?.name ?? item.market} />
           </span>,
-          <Label color={color}>
-            {t(`page.body.trade.header.openOrders.content.side.${side}`)}
-          </Label>,
+          <Text color={color}>{t(`page.body.trade.header.openOrders.content.side.${side}`)}</Text>,
           <span>
             {ord_type ? t(`page.body.trade.header.openOrders.content.type.${ord_type}`) : '-'}
           </span>,
-          <Label color={color}>
+          <Text color={color}>
             <AmountFormat money={createMoney(actualPrice, priceCurrency)} />
-          </Label>,
+          </Text>,
           <AmountFormat money={createMoney(origin_volume, amountCurrency)} />,
           <MoneyFormat money={total} />,
           <span>
@@ -114,17 +112,17 @@ export const OpenOrdersComponent: React.FC = () => {
                 <span>{t('page.body.trade.header.openOrders.lastPrice')}</span>
                 &nbsp;
                 {getTriggerSign(ord_type ?? '', side)}&nbsp;
-                <Label color={color}>
+                <Text color={color}>
                   <AmountFormat money={createMoney(trigger_price, priceCurrency)} />
-                </Label>
+                </Text>
               </>
             ) : (
               '-'
             )}
           </span>,
-          <Label color={color}>
+          <Text color={color}>
             <AmountFormat money={filled} />%
-          </Label>,
+          </Text>,
           <CloseIcon className="close" onClick={() => handleCancel(item)} />,
         ];
       });
@@ -168,7 +166,7 @@ export const OpenOrdersComponent: React.FC = () => {
                 id="hideOtherPairs"
                 checked={hideOtherPairs}
                 readOnly
-                label={t('page.body.trade.header.openOrders.hideOtherPairs')}
+                Text={t('page.body.trade.header.openOrders.hideOtherPairs')}
               />
             </Form>
           </Box>

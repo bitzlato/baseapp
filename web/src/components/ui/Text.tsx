@@ -12,6 +12,7 @@ interface Props
         Sprinkles,
         | 'fontFamily'
         | 'fontWeight'
+        | 'fontSize'
         | 'textAlign'
         | 'textTransform'
         | 'whiteSpace'

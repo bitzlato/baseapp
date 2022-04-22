@@ -61,3 +61,6 @@ export const oceanGreen = 'rgb(79, 172, 132)';
 export const charade = 'rgb(44, 49, 58)';
 export const milanoRed = 'rgb(11, 18, 24)';
 export const waikawaGray24 = 'rgba(91, 100, 136, 0.24)';
+export const green = 'rgb(1, 191, 118)';
+export const milanoGreen = 'rgb(12, 178, 113)';
+export const carnation = 'rgb(248, 72, 95)';

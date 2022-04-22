@@ -1,5 +1,5 @@
 import React from 'react';
-import { Label } from 'src/components/Label/Label';
+import { Text } from 'web/src/components/ui/Text';
 import { useT } from 'src/hooks/useT';
 import { OrderStatusType } from 'src/modules/types';
 
@@ -12,22 +12,22 @@ export const OrderStatus: React.FC<Props> = ({ value }) => {
 
   switch (value) {
     case 'done':
-      return <Label color="success">{t('page.body.openOrders.content.status.done')}</Label>;
+      return <Text color="success">{t('page.body.openOrders.content.status.done')}</Text>;
 
     case 'cancel':
-      return <Label color="secondary">{t('page.body.openOrders.content.status.cancel')}</Label>;
+      return <Text color="secondary">{t('page.body.openOrders.content.status.cancel')}</Text>;
 
     case 'wait':
-      return <Label color="warning">{t('page.body.openOrders.content.status.wait')}</Label>;
+      return <Text color="warning">{t('page.body.openOrders.content.status.wait')}</Text>;
 
     case 'reject':
-      return <Label color="failed">{t('page.body.openOrders.content.status.reject')}</Label>;
+      return <Text color="danger">{t('page.body.openOrders.content.status.reject')}</Text>;
 
     default:
       return (
-        <Label color="secondary" tr="capitalize">
+        <Text color="secondary" textTransform="capitalize">
           {value}
-        </Label>
+        </Text>
       );
   }
 };

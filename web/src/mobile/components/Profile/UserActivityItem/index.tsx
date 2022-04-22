@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box } from 'src/components/Box';
-import { Label } from 'src/components/Label/Label';
+import { Text } from 'web/src/components/ui/Text';
 import { UserActivityDataInterface } from 'src/modules';
 import { useT } from 'src/hooks/useT';
 import { getUserAgent, localeDate } from '../../../../helpers';
@@ -41,32 +41,32 @@ const UserActivityItemComponent: React.FC<Props> = ({ item }) => {
   return (
     <Box col spacing className="pg-mobile-profile-account-activity-screen__item">
       <Box row spacing="2" justify="between">
-        <Label color="primary">{userAgent}</Label>
-        <Label color="primary">{itemDate}</Label>
-        <Label>{itemTime}</Label>
+        <Text color="primary">{userAgent}</Text>
+        <Text color="primary">{itemDate}</Text>
+        <Text color="secondary">{itemTime}</Text>
       </Box>
       <Box row spacing="2" justify="between">
         <Box col>
-          <Label>{t('page.mobile.profile.accountActivity.action')}</Label>
-          <Label color="primary">{resultOfUserAction}</Label>
+          <Text>{t('page.mobile.profile.accountActivity.action')}</Text>
+          <Text color="primary">{resultOfUserAction}</Text>
         </Box>
         <Box col>
-          <Label>{t('page.mobile.profile.accountActivity.ip')}</Label>
-          <Label color="primary">{item.user_ip}</Label>
+          <Text>{t('page.mobile.profile.accountActivity.ip')}</Text>
+          <Text color="primary">{item.user_ip}</Text>
         </Box>
         <Box col>
-          <Label>{t('page.mobile.profile.accountActivity.result')}</Label>
-          <Label
+          <Text>{t('page.mobile.profile.accountActivity.result')}</Text>
+          <Text
             color={
               result === 'succeed'
                 ? 'success'
                 : result === 'failed' || result === 'denied'
-                ? 'failed'
+                ? 'danger'
                 : undefined
             }
           >
             {result}
-          </Label>
+          </Text>
         </Box>
       </Box>
     </Box>

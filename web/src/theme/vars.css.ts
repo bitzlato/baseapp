@@ -152,6 +152,9 @@ export const [themeLight, vars] = createTheme({
     cardHeaderBorderBottom: colors.waikawaGray24,
 
     reportBgHover: colors.whiteLilac,
+
+    bids: colors.green,
+    asks: colors.carnation,
   },
 });
 
@@ -253,5 +256,8 @@ export const themeDark = createTheme(vars, {
     cardHeaderBorderBottom: colors.white24,
 
     reportBgHover: colors.white10,
+
+    bids: colors.milanoGreen,
+    asks: colors.carnation,
   },
 });

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useT } from 'src/hooks/useT';
-import { Label } from '../Label';
+import { Text } from 'web/src/components/ui/Text';
 
 interface Props {
   confirmations: number;
@@ -10,9 +10,9 @@ interface Props {
 export const ConfirmingStatus: FC<Props> = ({ confirmations, minConfirmations }) => {
   const t = useT();
   return (
-    <Label color="warning">
+    <Text color="warning">
       {t('page.body.history.deposit.content.status.confirming')}{' '}
       {`${confirmations}/${minConfirmations}`}
-    </Label>
+    </Text>
   );
 };

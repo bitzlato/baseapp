@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { LockedIcon } from 'src/assets/images/LockedIcon';
 import { useSelector } from 'react-redux';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
+import { Text } from 'web/src/components/ui/Text';
 import { Box } from '../Box';
-import { Label } from '../Label';
 import { Button } from '../ui/Button';
+import { lockedWidth } from './LockedComponent.css';
 
 interface Props {
   text: string;
@@ -19,9 +20,9 @@ export const LockedComponent: React.FC<Props> = ({ text, link, buttonText, onCli
   return (
     <Box padding="3" col spacing="2" align="center">
       <LockedIcon />
-      <Label size="lg" center style={{ maxWidth: 180 }}>
+      <Text className={lockedWidth} fontSize="large" textAlign="center">
         {text}
-      </Label>
+      </Text>
       {link ? (
         <Button
           as={Link}

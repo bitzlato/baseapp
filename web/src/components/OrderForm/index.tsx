@@ -7,7 +7,7 @@ import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selec
 import { getTriggerSign } from 'src/containers/OpenOrders/helpers';
 import { CurrencyTicker } from 'src/components/CurrencyTicker/CurrencyTicker';
 import { Box } from 'src/components/Box/Box';
-import { Label } from 'src/components/Label/Label';
+import { Text } from 'web/src/components/ui/Text';
 import { isLimit, isMarket, isTrigger, isTriggerByPrice } from 'src/helpers/order';
 import { createCcy, createMoney } from 'src/helpers/money';
 import { StorageKeys } from 'src/helpers/storageKeys';
@@ -442,7 +442,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
         <Box self="stretch" row justify="between" wrap textSize="lg">
           <label>{t('page.body.trade.header.newOrder.content.total')}</label>
           <Box row spacing="sm">
-            {isMarket(orderType) ? <Label color="secondary">&asymp;</Label> : null}
+            {isMarket(orderType) ? <Text color="secondary">&asymp;</Text> : null}
             <MoneyFormat money={createMoney(total, bidCcy)} />
           </Box>
         </Box>
