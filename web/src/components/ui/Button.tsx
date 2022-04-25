@@ -33,6 +33,7 @@ export const Button = forwardRef(
       variant = 'contained',
       color = 'primary',
       size = 'medium',
+      active = false,
       disabled = false,
       fullWidth = false,
       onClick,
@@ -51,7 +52,7 @@ export const Button = forwardRef(
         ref={ref}
         type={type}
         {...props}
-        className={button({ variant, color, size, disabled, fullWidth } as ButtonVariants)}
+        className={button({ variant, color, size, active, disabled, fullWidth } as ButtonVariants)}
         disabled={disabled}
         onClick={!disabled ? onClick : undefined}
       >
