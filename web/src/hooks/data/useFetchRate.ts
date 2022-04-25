@@ -4,7 +4,7 @@ import { p2pUrl } from 'web/src/api/config';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
-import { CurrencyRate, RateSourcesParams } from 'web/src/modules/p2p/rate-types';
+import { CurrencyRate, RateSourcesParams } from 'web/src/modules/p2p/rate.types';
 import { useFetch } from './useFetch';
 
 export const useFetchRate = (cryptoCurrency: string, fiatCurrency: string | undefined) => {

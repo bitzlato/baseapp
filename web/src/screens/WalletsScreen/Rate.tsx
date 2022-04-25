@@ -5,7 +5,7 @@ import { useT } from 'src/hooks/useT';
 import { Select } from 'web/src/components/Select/Select';
 import { createCcy, createMoney } from 'web/src/helpers/money';
 import { useChangeRate, useFetchRate, useFetchRateSources } from 'web/src/hooks/data/useFetchRate';
-import { CurrencyRate } from 'web/src/modules/p2p/rate-types';
+import { CurrencyRate } from 'web/src/modules/p2p/rate.types';
 import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
 import { InfoIcon } from 'web/src/assets/images/InfoIcon';
 import sqe from 'src/containers/QuickExchange/QuickExchange.postcss';

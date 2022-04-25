@@ -4,5 +4,5 @@ import { filter } from './Filter.css';
 interface Props {}
 
 export const Filter: FC<Props> = () => {
-  return <div className={filter} />;
+  return <div className={filter}>Filter</div>;
 };

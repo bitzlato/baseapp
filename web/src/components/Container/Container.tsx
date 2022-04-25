@@ -5,7 +5,7 @@ import s from './Container.postcss';
 
 type Props = {
   className?: string | undefined;
-  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | undefined;
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'fullhd' | undefined;
 };
 
 export const Container: Element<Props> = ({ className, maxWidth, ...props }) => {
