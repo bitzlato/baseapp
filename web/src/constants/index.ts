@@ -1,7 +1,8 @@
 export const PG_TITLE_PREFIX = 'Bitzlato';
 
-export const DEFAULT_CCY_PRECISION = 4;
+export const DEFAULT_CCY_PRECISION = 8;
 export const DEFAULT_TRADING_VIEW_INTERVAL = '15';
+export const FIAT_PRECISION = 2;
 
 export const PASSWORD_ENTROPY_STEP = 6;
 
@@ -10,6 +11,7 @@ export const DEFAULT_KYC_STEPS = ['email', 'phone', 'profile', 'document', 'addr
 export const DEFAULT_MARKET_HEADERS = ['Pair', 'Price', '24h Change'];
 
 export const AMOUNT_PERCENTAGE_ARRAY = [0.25, 0.5, 0.75, 1];
+export const AMOUNT_PERCENTS = [25, 50, 75, 100];
 
 export const DEFAULT_TABLE_PAGE_LIMIT = 25;
 export const HOST_URL =

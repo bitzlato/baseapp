@@ -10,7 +10,6 @@ import {
 } from 'web/src/components/shared/Header/Header';
 import {
   changeColorTheme,
-  RootState,
   selectCurrentColorTheme,
   selectCurrentLanguage,
   selectUserInfo,
@@ -38,11 +37,9 @@ const languages = {
 const Header: FC = () => {
   const t = useT();
   const dispatch = useDispatch();
-  const { currentCode, isLoggedIn, user } = useSelector((state: RootState) => ({
-    currentCode: selectCurrentLanguage(state),
-    isLoggedIn: selectUserLoggedIn(state),
-    user: selectUserInfo(state),
-  }));
+  const currentCode = useSelector(selectCurrentLanguage);
+  const isLoggedIn = useSelector(selectUserLoggedIn);
+  const user = useSelector(selectUserInfo);
   const colorTheme = useSelector(selectCurrentColorTheme);
   const isUserFetching = useSelector(selectUserFetching);
   const { pathname } = useLocation();

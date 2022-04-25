@@ -7,7 +7,7 @@ import { useT } from 'src/hooks/useT';
 import { useGeneralWallets } from 'src/hooks/useGeneralWallets';
 import { Tab, TabList, TabPanel, Tabs } from 'src/components/Tabs';
 import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
-import { WalletHistory } from 'src/containers/Wallets/History';
+import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { selectWallet } from 'src/modules/user/wallets/selectors';
@@ -16,6 +16,10 @@ import { WalletMobileBalance } from './WalletMobileBalance';
 import { TabId, useWalletTab } from 'web/src/screens/WalletsScreen/useWalletTab';
 import { Gift } from 'web/src/containers/Gift/Gift';
 import { DEFAULT_WALLET_ITEM } from 'web/src/components/WalletItem/defaults';
+import { Rate } from 'web/src/screens/WalletsScreen/Rate';
+import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
+import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
+import { DepositP2P } from 'web/src/components/DepositCrypto/DepositP2P';
 
 export const WalletMobileScreen: React.FC = () => {
   const params = useParams<UrlParams>();
@@ -23,17 +27,26 @@ export const WalletMobileScreen: React.FC = () => {
   const history = useHistory();
   const t = useT();
   const wallet = useSelector(selectWallet(currency));
+  const user = useSelector(selectUserInfo);
 
   const generals = useGeneralWallets();
+
+  const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
+  const general = generals.find((d) => d.currency === currency) ?? DEFAULT_WALLET_ITEM;
+  const hasP2P = !!general.balanceP2P;
+  const isBtc = currency === 'BTC';
 
   const handleTabSelection = (value: TabId) => {
     setTab(value);
     history.replace(`/wallets/${currency.toLowerCase()}/${value}`);
   };
 
-  const general = generals.find((d) => d.currency === currency) ?? DEFAULT_WALLET_ITEM;
-
-  const { tabs, tab, setTab } = useWalletTab(params.tab, general);
+  const rateResponse = useFetchRate(
+    currency,
+    general.balanceP2P !== undefined ? userCurrency : undefined,
+  );
+  const hasRate = rateResponse.data !== undefined;
+  const { tabs, tab, setTab } = useWalletTab(params.tab, general, hasRate);
 
   if (generals.length === 0) {
     return (
@@ -51,49 +64,57 @@ export const WalletMobileScreen: React.FC = () => {
         onGoBack={() => history.push('/wallets')}
       />
       <WalletMobileBalance wallet={general} />
-      {wallet && (
-        <Box bgColor="body" padding="2X3" col spacing="2">
-          <Tabs value={tab} onSelectionChange={handleTabSelection as any}>
-            <Box grow justify="around" as={TabList}>
-              {tabs.map((d) => (
-                <Tab key={d.value} value={d.value} size="small">
-                  {t(d.label)}
-                </Tab>
-              ))}
-            </Box>
-            <TabPanel value="deposit">
-              {general.currency === 'BTC' ? (
-                <InvoiceExplanation currency={general.currency} />
-              ) : (
-                <DepositCrypto wallet={wallet} />
-              )}
-              <WalletHistory label="deposit" type="deposits" currency={currency.toLowerCase()} />
-            </TabPanel>
-            <TabPanel value="withdraw">
-              {general.currency === 'BTC' ? (
+      <Box bgColor="body" padding="2X3" col spacing="2">
+        <Tabs value={tab} onSelectionChange={handleTabSelection as any}>
+          <Box grow justify="around" as={TabList}>
+            {tabs.map((tabItem) => (
+              <Tab
+                key={tabItem.value}
+                value={tabItem.value}
+                disabled={tabItem.disabled}
+                size="small"
+              >
+                {t(tabItem.label)}
+              </Tab>
+            ))}
+          </Box>
+          <TabPanel value="deposit">
+            {!isBtc && wallet && <DepositCrypto wallet={wallet} />}
+            {hasP2P && <DepositP2P currency={currency} />}
+            <WalletHistory type="deposits" general={general} />
+          </TabPanel>
+          <TabPanel value="withdraw">
+            {wallet &&
+              (general.currency === 'BTC' ? (
                 <InvoiceExplanation currency={general.currency} />
               ) : (
                 <Withdraw wallet={wallet} />
-              )}
-              <WalletHistory label="withdraw" type="withdraws" currency={currency.toLowerCase()} />
-            </TabPanel>
-            <TabPanel value="transfer">
-              {general.hasTransfer && (
-                <Transfer
-                  currency={general.balanceTotal.currency}
-                  balanceMarket={general.balanceMarket?.toString() ?? '0'}
-                  balanceP2P={general.balanceP2P?.toString() ?? '0'}
-                />
-              )}
-            </TabPanel>
-            <TabPanel value={TabId.gift}>
-              {general.balanceP2P && (
-                <Gift currency={general.balanceTotal.currency} balanceP2P={general.balanceP2P} />
-              )}
-            </TabPanel>
-          </Tabs>
-        </Box>
-      )}
+              ))}
+            <WalletHistory type="withdraws" general={general} />
+          </TabPanel>
+          <TabPanel value="transfer">
+            {general.hasTransfer && (
+              <Transfer
+                currency={general.balanceTotal.currency}
+                balanceMarket={general.balanceMarket?.toString() ?? '0'}
+                balanceP2P={general.balanceP2P?.toString() ?? '0'}
+              />
+            )}
+          </TabPanel>
+          <TabPanel value={TabId.gift}>
+            {general.balanceP2P && (
+              <Gift currency={general.balanceTotal.currency} balanceP2P={general.balanceP2P} />
+            )}
+          </TabPanel>
+          <TabPanel value={TabId.rate}>
+            <Rate
+              cryptoCurrency={currency}
+              fiatCurrency={userCurrency}
+              fetchRate={general.balanceP2P !== undefined}
+            />
+          </TabPanel>
+        </Tabs>
+      </Box>
     </Box>
   );
 };

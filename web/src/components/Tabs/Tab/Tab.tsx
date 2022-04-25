@@ -9,6 +9,7 @@ interface Props {
   children: ReactNode;
   className?: string | undefined;
   size?: 'small' | 'medium' | 'large' | undefined;
+  disabled?: boolean | undefined;
   value: string;
 }
 
@@ -17,10 +18,12 @@ export const Tab: FC<Props> = ({
   children,
   className,
   size = 'medium',
+  disabled = false,
   value,
 }: Props) => {
   const { currentTab, setCurrentTab } = useContext(TabsContext);
   const isActive = currentTab === value;
+
   const handleClick = () => setCurrentTab(value);
 
   return (
@@ -37,6 +40,7 @@ export const Tab: FC<Props> = ({
         isActive && activeClassName,
       )}
       type="button"
+      disabled={disabled}
       onClick={handleClick}
     >
       {children}

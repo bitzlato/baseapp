@@ -7,33 +7,48 @@ export const enum TabId {
   withdraw = 'withdraw',
   transfer = 'transfer',
   gift = 'gift',
+  rate = 'rate',
 }
 
-const TABS: SelectOption[] = [
+export type TabOption = SelectOption & { disabled?: boolean };
+
+const TABS: TabOption[] = [
   { value: TabId.deposit, label: 'Deposit.noun' },
   { value: TabId.withdraw, label: 'Withdraw.noun' },
   { value: TabId.transfer, label: 'Transfer.noun' },
   { value: TabId.gift, label: 'Gifts' },
+  { value: TabId.rate, label: 'Rate' },
 ];
 
-function findTabByValue(tabs: SelectOption[], value?: string): SelectOption {
+function findTabByValue(tabs: TabOption[], value?: string): TabOption {
   const valueLower = value?.toLowerCase();
   return tabs.find((d) => d.value === valueLower) ?? tabs[0]!;
 }
 
-export function useWalletTab(queryTab: string | undefined, general: WalletItemData) {
+export function useWalletTab(
+  queryTab: string | undefined,
+  general: WalletItemData,
+  hasRate: boolean,
+) {
   const [tabState, setTabState] = useState(queryTab);
 
   const tabs = useMemo(() => {
-    return TABS.filter((d) => {
-      // eslint-disable-next-line no-nested-ternary
-      return d.value === TabId.transfer
-        ? general.hasTransfer
-        : d.value === TabId.gift
-        ? general.hasGift
-        : general.hasDepositWithdraw;
+    return TABS.map((tabItem) => {
+      switch (tabItem.value) {
+        case TabId.transfer:
+          return { ...tabItem, disabled: !general.hasTransfer };
+
+        case TabId.gift:
+          return { ...tabItem, disabled: !general.hasGift };
+
+        case TabId.rate:
+          return { ...tabItem, disabled: !hasRate };
+
+        default:
+          return { ...tabItem, disabled: false };
+      }
     });
-  }, [general.hasDepositWithdraw, general.hasTransfer, general.hasGift]);
+  }, [general.hasTransfer, general.hasGift, hasRate]);
 
   const setTab = (value: string | undefined): string | undefined => {
     const newValue = findTabByValue(tabs, value)?.value;

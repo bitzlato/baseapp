@@ -2,3 +2,17 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+@media screen and (max-width: 768px) {
+  .tabList {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 6px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .tabList::-webkit-scrollbar {
+    height: 2px;
+  }
+}

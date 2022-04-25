@@ -12,7 +12,8 @@ import { Tabs } from 'src/components/Tabs/Tabs';
 import { Tab, TabList, TabPanel } from 'src/components/Tabs';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
-import { WalletHistory } from 'src/containers/Wallets/History';
+import { DepositP2P } from 'web/src/components/DepositCrypto/DepositP2P';
+import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { useHistory, useParams } from 'react-router';
 import { Transfer } from 'src/containers/Wallets/Transfer';
@@ -22,6 +23,7 @@ import { Gift } from 'web/src/containers/Gift/Gift';
 import { useGeneralWallets } from 'web/src/hooks/useGeneralWallets';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
+import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { TabId, useWalletTab } from './useWalletTab';
 import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
@@ -56,8 +58,15 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
   const wallet = wallets.find((d) => d.currency.code === general?.currency);
   const cryptoCurrency = getCurrencyCodeSymbol(general.currency);
   const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
+  const hasP2P = !!general.balanceP2P;
+  const isBtc = cryptoCurrency === 'BTC';
 
-  const { tabs, tab, setTab } = useWalletTab(params.tab, general);
+  const rateResponse = useFetchRate(
+    cryptoCurrency,
+    general.balanceP2P !== undefined ? userCurrency : undefined,
+  );
+  const hasRate = rateResponse.data !== undefined;
+  const { tabs, tab, setTab } = useWalletTab(params.tab, general, hasRate);
 
   const replaceHistory = (index: number, tabId?: string) => {
     const parts: string[] = [];
@@ -108,15 +117,15 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                         </Box>
                       </Box>
                     </Box>
-                    <Rate
-                      cryptoCurrency={cryptoCurrency}
-                      fiatCurrency={userCurrency}
-                      fetchRate={general.balanceP2P !== undefined}
-                    />
                     <TabList>
-                      {tabs.map((d) => (
-                        <Tab key={d.value} size="large" value={d.value}>
-                          {t(d.label)}
+                      {tabs.map((tabItem) => (
+                        <Tab
+                          key={tabItem.value}
+                          size="large"
+                          value={tabItem.value}
+                          disabled={tabItem.disabled}
+                        >
+                          {t(tabItem.label)}
                         </Tab>
                       ))}
                     </TabList>
@@ -126,34 +135,20 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                     <Balance title={t('Exchange Balance')} money={general.balanceMarket} />
                     <Balance title={t('Locked')} money={general.locked} />
                   </Box>
-                  {wallet && (
-                    <>
-                      <TabPanel value={TabId.deposit}>
-                        {general.currency === 'BTC' ? (
-                          <InvoiceExplanation currency={general.currency} />
-                        ) : (
-                          <DepositCrypto wallet={wallet} />
-                        )}
-                        <WalletHistory
-                          label="deposit"
-                          type="deposits"
-                          currency={wallet.currency.code.toLowerCase()}
-                        />
-                      </TabPanel>
-                      <TabPanel value={TabId.withdraw}>
-                        {general.currency === 'BTC' ? (
-                          <InvoiceExplanation currency={general.currency} />
-                        ) : (
-                          <Withdraw wallet={wallet} />
-                        )}
-                        <WalletHistory
-                          label="withdraw"
-                          type="withdraws"
-                          currency={wallet.currency.code.toLowerCase()}
-                        />
-                      </TabPanel>
-                    </>
-                  )}
+                  <TabPanel value={TabId.deposit}>
+                    {!isBtc && wallet && <DepositCrypto wallet={wallet} />}
+                    {hasP2P && <DepositP2P currency={cryptoCurrency} />}
+                    <WalletHistory type="deposits" general={general} />
+                  </TabPanel>
+                  <TabPanel value={TabId.withdraw}>
+                    {wallet &&
+                      (general.currency === 'BTC' ? (
+                        <InvoiceExplanation currency={general.currency} />
+                      ) : (
+                        <Withdraw wallet={wallet} />
+                      ))}
+                    <WalletHistory type="withdraws" general={general} />
+                  </TabPanel>
                   <TabPanel value={TabId.transfer}>
                     {general.hasTransfer && (
                       <Transfer
@@ -170,6 +165,13 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                         balanceP2P={general.balanceP2P}
                       />
                     )}
+                  </TabPanel>
+                  <TabPanel value={TabId.rate}>
+                    <Rate
+                      cryptoCurrency={cryptoCurrency}
+                      fiatCurrency={userCurrency}
+                      fetchRate={general.balanceP2P !== undefined}
+                    />
                   </TabPanel>
                 </Box>
               </Tabs>

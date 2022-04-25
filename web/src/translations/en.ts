@@ -1216,7 +1216,10 @@ export const en = {
   'error.try_later': 'Please try later',
   'Estimated value': 'Estimated value',
   'Exchange Balance': 'Exchange Balance',
+  'Exchange Wallet': 'Exchange Wallet',
+  'Generate address': 'Generate address',
   'P2P Balance': 'P2P Balance',
+  'P2P Wallet': 'P2P Wallet',
   'Select network': 'Select network',
   'Total balance': 'Total balance',
   'Transfer Fee': 'Transfer Fee',
@@ -1227,6 +1230,7 @@ export const en = {
   'Transfer.noun': 'Transfer',
   'Transfer.verb': 'Transfer',
   'Withdraw.noun': 'Withdraw',
+  Address: 'Address',
   Amount: 'Amount',
   Coin: 'Coin',
   Currency: 'Currency',
@@ -1406,6 +1410,8 @@ export const en = {
     'Only deposits of {currency} tokens are accepted, be careful when sending funds!',
   'withdraw.usdx.e':
     'Only {currency} tokens are withdrawn. Please make sure that the token format matches.',
+  'deposit.erc20warning': 'Funds are accepted only through the ERC-20 network',
+  'deposit.erc20MDTWarning': 'Accepted only ERC-20 MonolithosDAO Tokens (MDT)',
 
   'verification.pass': 'Pass verification',
   'verification.oops': '😔 Oops!',
@@ -1417,7 +1423,7 @@ export const en = {
   'verification.support': '🤖 Support:',
 
   'rate.select':
-    'Choose rate source for pair {pair}. Please note that changes will be applied to your dynamic price orders.',
+    'Choose a rate source for the {pair}.{br}The rate source will be used in your adverts for P2P trading, with a dynamic rate.',
 
   'proposal_otp.body':
     'You use a significant amount of funds on Bitzlato platform. Until you have 2FA activated, you are at risk zone.{br}{br}We strongly recommend to set up 2FA to protect your account!',
@@ -1430,4 +1436,15 @@ export const en = {
   'reports.report_103': 'Wallet history',
   'reports.report_104': 'Affiliate System',
   'reports.report_105': 'General financial report',
+
+  'P2P Deposits': 'P2P Deposits',
+  'P2P Withdrawals': 'P2P Withdrawals',
+  'Exchange Deposits': 'Exchange Deposits',
+  'Exchange Withdrawals': 'Exchange Withdrawals',
+  'Edit comment': 'Edit comment',
+  'Deposit History': 'Deposit History',
+  'Withdrawal History': 'Withdrawal History',
+  Exchange: 'Exchange',
+  P2P: 'P2P',
+  of: 'of',
 };
