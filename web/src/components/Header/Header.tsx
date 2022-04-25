@@ -10,7 +10,6 @@ import {
 } from 'web/src/components/shared/Header/Header';
 import {
   changeColorTheme,
-  RootState,
   selectCurrentColorTheme,
   selectCurrentLanguage,
   selectUserInfo,
