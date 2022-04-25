@@ -88,7 +88,7 @@ export const Board: FC<Props> = () => {
             p="6x"
             borderRadius="1.5x"
             marginRight="6x"
-            style={{ width: '20%' }}
+            style={{ width: '20%', minWidth: '380px' }}
           >
             <Filter
               initialValues={initialValues}
