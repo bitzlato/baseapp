@@ -1221,6 +1221,8 @@ export const en = {
   'P2P Balance': 'P2P Balance',
   'P2P Wallet': 'P2P Wallet',
   'Select network': 'Select network',
+  'Select wallet': 'Select wallet',
+  'Show QR code': 'Show QR code',
   'Total balance': 'Total balance',
   'Transfer Fee': 'Transfer Fee',
   'Transfer from': 'Transfer from',
@@ -1408,6 +1410,7 @@ export const en = {
     'Only {currency} tokens are withdrawn. Please make sure that the token format matches.',
   'deposit.erc20warning': 'Funds are accepted only through the ERC-20 network',
   'deposit.erc20MDTWarning': 'Accepted only ERC-20 MonolithosDAO Tokens (MDT)',
+  'deposit.contract': 'Accepting funds from contract addresses may take a long time',
 
   'verification.pass': 'Pass verification',
   'verification.oops': '😔 Oops!',

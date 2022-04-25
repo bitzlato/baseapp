@@ -6,7 +6,7 @@ import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
 import { useGeneralWallets } from 'src/hooks/useGeneralWallets';
 import { Tab, TabList, TabPanel, Tabs } from 'src/components/Tabs';
-import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
+import { DepositExchange } from 'web/src/components/DepositCrypto/DepositExchange';
 import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { Transfer } from 'src/containers/Wallets/Transfer';
@@ -20,6 +20,7 @@ import { Rate } from 'web/src/screens/WalletsScreen/Rate';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { DepositP2P } from 'web/src/components/DepositCrypto/DepositP2P';
+import { DepositWarning } from 'web/src/components/DepositCrypto/DepositWarning';
 
 export const WalletMobileScreen: React.FC = () => {
   const params = useParams<UrlParams>();
@@ -35,6 +36,7 @@ export const WalletMobileScreen: React.FC = () => {
   const general = generals.find((d) => d.currency === currency) ?? DEFAULT_WALLET_ITEM;
   const hasP2P = !!general.balanceP2P;
   const isBtc = currency === 'BTC';
+  const hasExchangeDeposit = !isBtc && wallet;
 
   const handleTabSelection = (value: TabId) => {
     setTab(value);
@@ -79,8 +81,9 @@ export const WalletMobileScreen: React.FC = () => {
             ))}
           </Box>
           <TabPanel value="deposit">
-            {!isBtc && wallet && <DepositCrypto wallet={wallet} />}
+            {hasExchangeDeposit && <DepositExchange wallet={wallet} />}
             {hasP2P && <DepositP2P currency={currency} />}
+            {(hasExchangeDeposit || hasP2P) && <DepositWarning />}
             <WalletHistory type="deposits" general={general} />
           </TabPanel>
           <TabPanel value="withdraw">
