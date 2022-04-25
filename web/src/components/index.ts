@@ -7,7 +7,7 @@ export * from './Container/Container';
 export * from './CopyableTextField';
 export * from './CustomInput';
 export * from './DeepLinkInfo/DeepLinkInfo';
-export * from './DepositCrypto/DepositCrypto';
+export * from './DepositCrypto/DepositExchange';
 export * from './DepositFiat';
 export * from './Documentation';
 export * from './FilterInput';

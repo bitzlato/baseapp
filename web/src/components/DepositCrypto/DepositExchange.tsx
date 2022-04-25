@@ -1,21 +1,20 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { isMetaMaskInstalled } from '@bitzlato/ethereum-provider';
 
 import { useT } from 'src/hooks/useT';
 import { Box } from 'src/components/Box';
-import { CopyableTextField } from 'src/components/CopyableTextField';
 import { Select } from 'src/components/Select/Select';
 import { MetaMaskButton } from 'src/components/MetaMaskButton';
-import { QRCode } from 'src/components/QRCode';
 import { Blur } from 'src/components/Blur';
 import { tradeUrl } from 'src/api/config';
 import { Blockchain } from 'src/modules/public/blockchains/types';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
+import { useFetch } from 'web/src/hooks/data/useFetch';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { DepositSummary } from './DepositSummary';
 import {
-  alertPush,
   DepositAddress,
   selectMemberLevels,
   selectMobileDeviceState,
@@ -23,18 +22,20 @@ import {
   Wallet,
 } from '../../modules';
 import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
-import { useFetch } from 'web/src/hooks/data/useFetch';
-import { fetchWithCreds } from 'web/src/helpers/fetch';
+import { WalletAddress } from '../WalletAddress/WalletAddress';
+
+function isUSDXe(blockchainName: string, currency: string): boolean {
+  return blockchainName === 'Avalanche' && (currency === 'USDT' || currency === 'USDC');
+}
 
 interface Props {
   wallet: Wallet;
 }
 
-export const DepositCrypto: FC<Props> = ({ wallet }) => {
+export const DepositExchange: FC<Props> = ({ wallet }) => {
   const currency = getCurrencyCodeSymbol(wallet.currency.code);
 
   const t = useT();
-  const dispatch = useDispatch();
   const history = useHistory();
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const user = useSelector(selectUserInfo);
@@ -50,6 +51,7 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
 
   useEffect(() => {
     setBlockchain(blockchains.length === 1 ? blockchains[0]! : null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blockchains.length, currency]);
 
   const depositResponse = useFetch<DepositAddress>(
@@ -64,20 +66,12 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
     if (isNoAddress) {
       window.setTimeout(() => depositResponse.mutate(), 2000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNoAddress]);
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
     (d) => d.blockchain_id === blockchain?.id,
   );
-
-  const handleCopy = () => {
-    dispatch(
-      alertPush({
-        type: 'success',
-        message: ['page.body.wallets.tabs.deposit.ccy.message.success'],
-      }),
-    );
-  };
 
   const renderSelectItem = (value: Blockchain) => {
     return (
@@ -94,19 +88,24 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
     (!isMobileDevice || isMetaMaskInstalled()) &&
     depositAddress !== undefined;
 
+  let blur: ReactNode;
+  if (!wallet?.deposit_enabled) {
+    blur = <Blur text={t('page.body.wallets.tabs.deposit.disabled.message')} />;
+  } else if (user.level < (memberLevels?.deposit.minimum_level ?? 0)) {
+    blur = (
+      <Blur
+        text={t('page.body.wallets.warning.deposit.verification')}
+        onClick={() => history.push('/confirm')}
+        linkText={t('page.body.wallets.warning.deposit.verification.button')}
+      />
+    );
+  }
+
   return (
     <Box col spacing="2">
       <h4>{t('Exchange Wallet')}</h4>
       <Box position="relative">
-        {!wallet?.deposit_enabled ? (
-          <Blur text={t('page.body.wallets.tabs.deposit.disabled.message')} />
-        ) : user.level < (memberLevels?.deposit.minimum_level ?? 0) ? (
-          <Blur
-            text={t('page.body.wallets.warning.deposit.verification')}
-            onClick={() => history.push('/confirm')}
-            linkText={t('page.body.wallets.warning.deposit.verification.button')}
-          />
-        ) : null}
+        {blur}
         <Box col spacing="2">
           <Select
             options={blockchains}
@@ -119,29 +118,29 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
           />
           {blockchain && depositAddress?.address && blockchainCurrency && (
             <>
-              <Box row spacing="2" justify="between">
+              <Box col spacing="3">
                 <span>
                   {t('page.body.wallets.tabs.deposit.ccy.message.submit', {
                     confirmations: blockchain.min_confirmations,
                   })}
                 </span>
-                <QRCode dimensions={118} data={depositAddress.address} />
-              </Box>
-              <Box row spacing="2">
-                {showMetamask ? (
-                  <MetaMaskButton
-                    depositAddress={depositAddress.address}
-                    explorerAddress={blockchain.explorer_address}
-                    currency={wallet}
-                    blockchainCurrency={blockchainCurrency}
+                <Box row spacing="2">
+                  {showMetamask ? (
+                    <MetaMaskButton
+                      depositAddress={depositAddress.address}
+                      explorerAddress={blockchain.explorer_address}
+                      currency={wallet}
+                      blockchainCurrency={blockchainCurrency}
+                    />
+                  ) : null}
+                  <Box
+                    grow
+                    as={WalletAddress}
+                    value={depositAddress.address}
+                    fieldId="copy_deposit_exchange"
+                    label={t('page.body.wallets.tabs.deposit.ccy.message.address')}
                   />
-                ) : null}
-                <CopyableTextField
-                  value={depositAddress.address}
-                  fieldId="copy_deposit_1"
-                  label={t('page.body.wallets.tabs.deposit.ccy.message.address')}
-                  onCopy={handleCopy}
-                />
+                </Box>
               </Box>
               <DepositSummary
                 wallet={wallet}
@@ -155,7 +154,3 @@ export const DepositCrypto: FC<Props> = ({ wallet }) => {
     </Box>
   );
 };
-
-function isUSDXe(blockchainName: string, currency: string): boolean {
-  return blockchainName === 'Avalanche' && (currency === 'USDT' || currency === 'USDC');
-}

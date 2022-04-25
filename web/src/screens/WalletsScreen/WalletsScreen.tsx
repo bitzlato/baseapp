@@ -11,7 +11,7 @@ import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurr
 import { Tabs } from 'src/components/Tabs/Tabs';
 import { Tab, TabList, TabPanel } from 'src/components/Tabs';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
-import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
+import { DepositExchange } from 'web/src/components/DepositCrypto/DepositExchange';
 import { DepositP2P } from 'web/src/components/DepositCrypto/DepositP2P';
 import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
@@ -24,6 +24,7 @@ import { useGeneralWallets } from 'web/src/hooks/useGeneralWallets';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
+import { DepositWarning } from 'web/src/components/DepositCrypto/DepositWarning';
 import { TabId, useWalletTab } from './useWalletTab';
 import { Balance } from './Balance';
 import { InvoiceExplanation } from './InvoiceExplanation';
@@ -60,6 +61,7 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
   const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
   const hasP2P = !!general.balanceP2P;
   const isBtc = cryptoCurrency === 'BTC';
+  const hasExchangeDeposit = !isBtc && wallet;
 
   const rateResponse = useFetchRate(
     cryptoCurrency,
@@ -136,8 +138,9 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                     <Balance title={t('Locked')} money={general.locked} />
                   </Box>
                   <TabPanel value={TabId.deposit}>
-                    {!isBtc && wallet && <DepositCrypto wallet={wallet} />}
+                    {hasExchangeDeposit && <DepositExchange wallet={wallet} />}
                     {hasP2P && <DepositP2P currency={cryptoCurrency} />}
+                    {(hasExchangeDeposit || hasP2P) && <DepositWarning />}
                     <WalletHistory type="deposits" general={general} />
                   </TabPanel>
                   <TabPanel value={TabId.withdraw}>
