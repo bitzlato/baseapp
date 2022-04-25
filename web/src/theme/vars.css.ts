@@ -59,8 +59,8 @@ export const [themeLight, vars] = createTheme({
   boxShadows: {
     dropdown: `8px 8px 10px ${colors.black10}`,
     modal: `8px 4px 14px ${colors.black10}`,
-    btnPrimaryFocus: `0 7px 11px ${colors.mystic90}`,
-    btnSecondaryFocus: `0 7px 11px ${colors.shark19}`,
+    btnPrimaryFocus: `0px 0px 0px 3px ${colors.mystic90}`,
+    btnSecondaryFocus: `0px 0px 0px 3px ${colors.shark19}`,
   },
   colors: {
     transparent: colors.transparent,
@@ -89,24 +89,42 @@ export const [themeLight, vars] = createTheme({
     dropdownItemIcon: colors.cornflowerBlue,
     dropdownItemHoverIcon: colors.indigo,
     dropdownItemActiveIcon: colors.indigo,
+
     btnPrimaryBg: colors.goldTips,
+    btnPrimaryBg10: colors.goldTips10,
+    btnPrimaryBg20: colors.goldTips20,
     btnPrimaryBgHover: colors.lightningYellow,
     btnPrimaryBgActive: colors.galliano,
     btnPrimaryBgDisabled: colors.mystic,
     btnPrimaryText: colors.catskillWhite,
     btnPrimaryTextDisabled: colors.manatee,
+
     btnSecondaryBg: colors.indigo,
+    btnSecondaryBg10: colors.indigo10,
+    btnSecondaryBg20: colors.indigo20,
     btnSecondaryBgHover: colors.indigoLight,
     btnSecondaryBgActive: colors.governorBay,
     btnSecondaryBgDisabled: colors.mystic,
     btnSecondaryText: colors.catskillWhite,
     btnSecondaryTextDisabled: colors.manatee,
+
     btnDangerBg: colors.burntSienna,
+    btnDangerBg10: colors.burntSienna10,
+    btnDangerBg20: colors.burntSienna20,
     btnDangerBgHover: colors.salmon,
     btnDangerBgActive: colors.flamingo,
     btnDangerBgDisabled: colors.mystic,
     btnDangerText: colors.catskillWhite,
     btnDangerTextDisabled: colors.manatee,
+
+    btnClarifiedBg: colors.hawkesBlue,
+    btnClarifiedBgHover: colors.spindle,
+    btnClarifiedBgActive: colors.indigo,
+    btnClarifiedBgDisabled: colors.mystic,
+    btnClarifiedText: colors.indigo,
+    btnClarifiedTextActive: colors.white,
+    btnClarifiedTextDisabled: colors.manatee,
+
     themeSwitcherBorder: colors.selago,
     themeSwitcherBorderHover: colors.luckyPoint,
     themeSwitcherSun: colors.white,
@@ -155,6 +173,11 @@ export const [themeLight, vars] = createTheme({
     reportBgHover: colors.whiteLilac,
 
     adBg: colors.whiteLilac,
+    adTableHeader: colors.ebonyClay50,
+    adTrader: colors.indigo,
+
+    onlineStatusWaiting: colors.sweetCorn,
+    onlineStatusInactive: colors.botticelli,
   },
 });
 
@@ -162,8 +185,8 @@ export const themeDark = createTheme(vars, {
   boxShadows: {
     dropdown: `8px 8px 10px ${colors.black10}`,
     modal: `8px 4px 14px ${colors.black10}`,
-    btnPrimaryFocus: `0 7px 11px ${colors.mystic15}`,
-    btnSecondaryFocus: `0 7px 11px ${colors.mystic15}`,
+    btnPrimaryFocus: `0px 0px 0px 3px ${colors.mystic15}`,
+    btnSecondaryFocus: `0px 0px 0px 3px ${colors.mystic15}`,
   },
   colors: {
     transparent: colors.transparent,
@@ -192,24 +215,42 @@ export const themeDark = createTheme(vars, {
     dropdownItemIcon: colors.doveGray,
     dropdownItemHoverIcon: colors.white,
     dropdownItemActiveIcon: colors.spindle,
+
     btnPrimaryBg: colors.goldTips,
+    btnPrimaryBg10: colors.goldTips10,
+    btnPrimaryBg20: colors.goldTips20,
     btnPrimaryBgHover: colors.saffron,
     btnPrimaryBgActive: colors.goldenGrass,
     btnPrimaryBgDisabled: colors.mystic,
     btnPrimaryText: colors.catskillWhite,
     btnPrimaryTextDisabled: colors.manatee,
+
     btnSecondaryBg: colors.cornflowerBlueLighter,
+    btnSecondaryBg10: colors.cornflowerBlueLighter10,
+    btnSecondaryBg20: colors.cornflowerBlueLighter20,
     btnSecondaryBgHover: colors.anakiwa,
     btnSecondaryBgActive: colors.cornflowerBlueDarken,
     btnSecondaryBgDisabled: colors.mystic,
     btnSecondaryText: colors.catskillWhite,
     btnSecondaryTextDisabled: colors.manatee,
+
     btnDangerBg: colors.burntSienna,
+    btnDangerBg10: colors.burntSienna10,
+    btnDangerBg20: colors.burntSienna20,
     btnDangerBgHover: colors.salmon,
     btnDangerBgActive: colors.flamingo,
     btnDangerBgDisabled: colors.mystic,
     btnDangerText: colors.catskillWhite,
     btnDangerTextDisabled: colors.manatee,
+
+    btnClarifiedBg: colors.white10,
+    btnClarifiedBgHover: colors.white20,
+    btnClarifiedBgActive: colors.indigo,
+    btnClarifiedBgDisabled: colors.mystic,
+    btnClarifiedText: colors.white,
+    btnClarifiedTextActive: colors.white,
+    btnClarifiedTextDisabled: colors.manatee,
+
     themeSwitcherBorder: colors.abbey,
     themeSwitcherBorderHover: colors.silverChalice,
     themeSwitcherSun: colors.silver,
@@ -258,5 +299,10 @@ export const themeDark = createTheme(vars, {
     reportBgHover: colors.white10,
 
     adBg: colors.white05,
+    adTableHeader: colors.white50,
+    adTrader: colors.malibu,
+
+    onlineStatusWaiting: colors.sweetCorn,
+    onlineStatusInactive: colors.botticelli,
   },
 });
