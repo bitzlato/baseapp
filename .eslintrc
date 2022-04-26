@@ -27,11 +27,15 @@
         "react/function-component-definition": [
           "error",
           { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }
-        ], // override Airbnb rule
+        ],
+
+        // override Airbnb rule
         "react/jsx-props-no-spreading": "off", // override Airbnb rule
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off", // Disabled for React 17
         "react/require-default-props": "off", // override Airbnb rule
+        "no-nested-ternary": "off",
+        "@typescript-eslint/no-use-before-define": "off",
 
         // typescript
         "@typescript-eslint/no-explicit-any": "warn"
