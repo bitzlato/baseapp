@@ -26,13 +26,14 @@ export const Board: FC<Props> = () => {
   const t = useT();
   const { getFiatCurrency } = useFiatCurrencies();
   const { lang } = useAppContext();
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(ADS_PER_PAGE);
   const [isOwnerActive, setIsOwnerActive] = useState(false);
   const fiatCode = 'RUB';
   const cryptoCode = 'BTC';
   const { data, error, isValidating, mutate } = useAds({
-    limit: ADS_PER_PAGE,
-    skip: page * ADS_PER_PAGE,
+    limit: perPage,
+    skip: 0 * perPage,
     lang,
     type: 'selling',
     currency: 'RUB',
@@ -46,9 +47,8 @@ export const Board: FC<Props> = () => {
     return null;
   }
 
-  const handleChangePage = (value: number) => {
-    setPage(value);
-  };
+  const handleChangePage = (value: number) => setPage(value);
+  const handleChangePerPage = (value: number) => setPerPage(value);
   const handleChangeIsOwnerActive = () => setIsOwnerActive((prev) => !prev);
   const handleRefresh = () => mutate();
 
@@ -104,7 +104,14 @@ export const Board: FC<Props> = () => {
               onRefresh={handleRefresh}
             />
             {data && !isValidating && (
-              <Pagination total={data.total} limit={ADS_PER_PAGE} onChange={handleChangePage} />
+              <Pagination
+                page={page}
+                total={data.total}
+                perPage={perPage}
+                onChange={handleChangePage}
+                onChangePerPage={handleChangePerPage}
+              />
+              // data.total
             )}
           </Box>
         </Box>

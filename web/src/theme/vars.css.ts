@@ -178,6 +178,10 @@ export const [themeLight, vars] = createTheme({
 
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
+
+    paginationItemBgHover: colors.white05,
+    paginationItemBgActive: colors.white10,
+    paginationItemTextDisabled: colors.white30,
   },
 });
 
@@ -304,5 +308,9 @@ export const themeDark = createTheme(vars, {
 
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
+
+    paginationItemBgHover: colors.white05,
+    paginationItemBgActive: colors.white10,
+    paginationItemTextDisabled: colors.white30,
   },
 });
