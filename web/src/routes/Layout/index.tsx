@@ -4,7 +4,7 @@ import { Spinner } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, RouteComponentProps, RouterProps, Switch } from 'react-router';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect, useLocation, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { FeesScreen } from 'src/screens/Fees/Fees';
 import type { IntlProps } from 'src/types';
@@ -132,6 +132,8 @@ const PrivateRoute: React.FunctionComponent<any> = ({
   isLogged,
   ...rest
 }) => {
+  const { pathname } = useLocation();
+
   if (loading) {
     return renderLoader();
   }
@@ -143,7 +145,7 @@ const PrivateRoute: React.FunctionComponent<any> = ({
 
   return (
     <Route {...rest}>
-      <Redirect to="/signin" />
+      <Redirect to={`/signin${pathname ? `?back=${pathname}` : ''}`} />
     </Route>
   );
 };
