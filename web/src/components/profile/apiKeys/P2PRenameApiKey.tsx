@@ -7,7 +7,6 @@ import { P2PApiKey } from 'web/src/modules/user/apiKeys/types';
 import { TextInput } from 'web/src/components/Input/TextInput';
 import { useP2PUpdateApiKey } from 'web/src/hooks/mutations/useP2PUpdateApiKey';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
-import { IconButton } from 'web/src/components/IconButton/IconButton';
 import EditIcon from 'web/src/assets/svg/EditIcon.svg';
 import { AutoFocusInside } from 'react-focus-on';
 import { useSelector } from 'react-redux';
@@ -98,10 +97,10 @@ export const P2PRenameApiKey: FC<Props> = ({ apiKey }) => {
 
   return (
     <>
-      <Box
-        as={IconButton}
-        display="flex"
-        alignItems="center"
+      <Button
+        variant="text"
+        color="clarified"
+        size="small"
         disabled={!otpEnabled}
         onClick={handleClickRename}
       >
@@ -109,7 +108,7 @@ export const P2PRenameApiKey: FC<Props> = ({ apiKey }) => {
           <EditIcon width="16" height="16" />
         </Box>
         {t('Rename')}
-      </Box>
+      </Button>
       <Modal show={step === 'rename'} onClose={handleClose}>
         <ModalHeader>{t('Rename')}</ModalHeader>
         <RenameForm apiKey={apiKey} onSubmit={handleSubmit} onClose={handleClose} />
