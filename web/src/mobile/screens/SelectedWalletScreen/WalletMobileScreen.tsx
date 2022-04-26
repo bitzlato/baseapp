@@ -11,7 +11,6 @@ import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { selectWallet } from 'src/modules/user/wallets/selectors';
-import { InvoiceExplanation } from 'src/screens/WalletsScreen/InvoiceExplanation';
 import { WalletMobileBalance } from './WalletMobileBalance';
 import { TabId, useWalletTab } from 'web/src/screens/WalletsScreen/useWalletTab';
 import { Gift } from 'web/src/containers/Gift/Gift';
@@ -84,12 +83,7 @@ export const WalletMobileScreen: React.FC = () => {
             <WalletHistory type="deposits" general={general} />
           </TabPanel>
           <TabPanel value="withdraw">
-            {wallet &&
-              (general.currency === 'BTC' ? (
-                <InvoiceExplanation currency={general.currency} />
-              ) : (
-                <Withdraw wallet={wallet} />
-              ))}
+            <Withdraw currency={general.balanceTotal.currency} wallet={wallet} />
             <WalletHistory type="withdraws" general={general} />
           </TabPanel>
           <TabPanel value="transfer">

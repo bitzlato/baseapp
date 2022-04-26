@@ -236,6 +236,16 @@ export const en = {
   'page.body.wallets.tabs.withdraw.content.limit1month': 'Withdrawal Limit for 1 month',
   'page.body.wallets.tabs.withdraw.content.unlimited': 'Unlimited',
   'page.body.wallets.tabs.withdraw.content.button': 'Withdraw',
+
+  'withdraw.from_balance': 'Withdrawal from balance',
+  'withdraw.use_voucher': 'Use a voucher',
+  'withdraw.use_voucher_notice': 'With a voucher you can withdraw money without a fee',
+  'withdraw.active_vouchers': 'Active vouchers',
+  'withdraw.available_balance': 'Available for withdrawal',
+  'withdraw.will_deducted': 'will be deducted from the balance',
+  'Should be more than': 'Should be more than {value}',
+  Dynamic: 'Dynamic',
+
   'page.body.wallets.tabs.withdraw.disabled.message': 'Withdraw was disabled by administration',
   'page.body.wallets.warning.withdraw.verification':
     'Withdraws are allowed after passing KYC verification',
