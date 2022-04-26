@@ -21,11 +21,11 @@ export interface TotalBalances {
   spot: TotalBalance[];
 }
 
-export type TransferPlace = 'p2p' | 'market';
+export type WalletType = 'p2p' | 'market';
 
 export interface TransferPost {
-  source: TransferPlace;
-  destination: TransferPlace;
+  source: WalletType;
+  destination: WalletType;
   currency_id: string;
   amount: string;
   description: string;
@@ -38,8 +38,8 @@ export interface TransferRecord {
   currency_id: string;
   user_id: number;
   amount: string;
-  source: TransferPlace;
-  destination: TransferPlace;
+  source: WalletType;
+  destination: WalletType;
   peatio_member_uid: string;
   receiving_state: string;
   sending_state: string;

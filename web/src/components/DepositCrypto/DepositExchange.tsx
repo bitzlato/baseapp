@@ -102,54 +102,51 @@ export const DepositExchange: FC<Props> = ({ wallet }) => {
   }
 
   return (
-    <Box col spacing="2">
-      <h4>{t('Exchange Wallet')}</h4>
-      <Box position="relative">
-        {blur}
-        <Box col spacing="2">
-          <Select
-            options={blockchains}
-            value={blockchain}
-            onChange={setBlockchain}
-            placeholder={t('Select network')}
-            label={t('Network')}
-            formatOptionLabel={renderSelectItem}
-            getOptionValue={(d) => d.key}
-          />
-          {blockchain && depositAddress?.address && blockchainCurrency && (
-            <>
-              <Box col spacing="3">
-                <span>
-                  {t('page.body.wallets.tabs.deposit.ccy.message.submit', {
-                    confirmations: blockchain.min_confirmations,
-                  })}
-                </span>
-                <Box row spacing="2">
-                  {showMetamask ? (
-                    <MetaMaskButton
-                      depositAddress={depositAddress.address}
-                      explorerAddress={blockchain.explorer_address}
-                      currency={wallet}
-                      blockchainCurrency={blockchainCurrency}
-                    />
-                  ) : null}
-                  <Box
-                    grow
-                    as={WalletAddress}
-                    value={depositAddress.address}
-                    fieldId="copy_deposit_exchange"
-                    label={t('page.body.wallets.tabs.deposit.ccy.message.address')}
+    <Box position="relative">
+      {blur}
+      <Box col spacing="2">
+        <Select
+          options={blockchains}
+          value={blockchain}
+          onChange={setBlockchain}
+          placeholder={t('Select network')}
+          label={t('Network')}
+          formatOptionLabel={renderSelectItem}
+          getOptionValue={(d) => d.key}
+        />
+        {blockchain && depositAddress?.address && blockchainCurrency && (
+          <>
+            <Box col spacing="3">
+              <span>
+                {t('page.body.wallets.tabs.deposit.ccy.message.submit', {
+                  confirmations: blockchain.min_confirmations,
+                })}
+              </span>
+              <Box row spacing="2">
+                {showMetamask ? (
+                  <MetaMaskButton
+                    depositAddress={depositAddress.address}
+                    explorerAddress={blockchain.explorer_address}
+                    currency={wallet}
+                    blockchainCurrency={blockchainCurrency}
                   />
-                </Box>
+                ) : null}
+                <Box
+                  grow
+                  as={WalletAddress}
+                  value={depositAddress.address}
+                  fieldId="copy_deposit_exchange"
+                  label={t('page.body.wallets.tabs.deposit.ccy.message.address')}
+                />
               </Box>
-              <DepositSummary
-                wallet={wallet}
-                blockchainCurrency={blockchainCurrency}
-                isUSDXe={isUSDXe(blockchain.name, currency)}
-              />
-            </>
-          )}
-        </Box>
+            </Box>
+            <DepositSummary
+              wallet={wallet}
+              blockchainCurrency={blockchainCurrency}
+              isUSDXe={isUSDXe(blockchain.name, currency)}
+            />
+          </>
+        )}
       </Box>
     </Box>
   );

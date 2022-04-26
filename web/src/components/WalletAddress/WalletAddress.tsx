@@ -58,7 +58,7 @@ export const WalletAddress: FC<Props> = ({
       <div className={walletAddressButtons}>
         <Tooltip label={<QRCode dimensions={118} data={value} />} placement="top">
           <div>
-            <IconButton noFill onClick={handleShowQR} disabled={disabled} title={t('Show QR-code')}>
+            <IconButton noFill onClick={handleShowQR} disabled={disabled} title={t('Show QR code')}>
               <QRIcon />
             </IconButton>
           </div>
