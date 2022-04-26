@@ -244,6 +244,15 @@ export const ru: LangType = {
   'page.body.wallets.tabs.withdraw.content.unlimited': 'Неограниченный',
   'page.body.wallets.tabs.withdraw.content.button': 'Вывести',
 
+  'withdraw.from_balance': 'Вывод с баланса',
+  'withdraw.use_voucher': 'Используйте ваучер',
+  'withdraw.use_voucher_notice': 'С помощью ваучера вы можете снять деньги без комиссии',
+  'withdraw.active_vouchers': 'Активные ваучеры',
+  'withdraw.available_balance': 'Доступно для вывода',
+  'withdraw.will_deducted': 'будет списана с остатка',
+  'Should be more than': 'Должно быть больше {value}',
+  Dynamic: 'Динамическая',
+
   'page.body.wallets.tabs.withdraw.disabled.message': 'Вывод средств был отключен администрацией',
   'page.body.wallets.warning.withdraw.verification':
     'Withdraws are allowed after passing KYC verification',

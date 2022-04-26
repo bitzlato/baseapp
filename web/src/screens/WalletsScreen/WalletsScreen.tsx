@@ -25,7 +25,6 @@ import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { Deposit } from 'web/src/components/DepositCrypto/Deposit';
 import { TabId, useWalletTab } from './useWalletTab';
 import { Balance } from './Balance';
-import { InvoiceExplanation } from './InvoiceExplanation';
 import { Rate } from './Rate';
 
 import s from './WalletsScreen.postcss';
@@ -136,12 +135,7 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                     <Deposit general={general} wallet={wallet} />
                   </TabPanel>
                   <TabPanel value={TabId.withdraw}>
-                    {wallet &&
-                      (general.currency === 'BTC' ? (
-                        <InvoiceExplanation currency={general.currency} />
-                      ) : (
-                        <Withdraw wallet={wallet} />
-                      ))}
+                    <Withdraw currency={general.balanceTotal.currency} wallet={wallet} />
                     <WalletHistory type="withdraws" general={general} />
                   </TabPanel>
                   <TabPanel value={TabId.transfer}>
