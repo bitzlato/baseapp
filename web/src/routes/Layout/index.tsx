@@ -315,7 +315,14 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     const commonRoutes = [
       <Route key="exchange" path="/quick-exchange" component={QuickExchange as any} />,
       <Route key="fees" path="/fees" component={FeesScreen as any} />,
-      <Route key="deeplink" exact path="/deeplinks/:id?" component={DeepLinkPreview} />,
+      <PrivateRoute
+        key="deeplink"
+        exact
+        path="/deeplinks/:id?"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        component={DeepLinkPreview}
+      />,
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
       // and default fallback
       <Route key="catchall" path="**">
