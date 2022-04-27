@@ -12,6 +12,7 @@ import { alertPush, Deposit, Withdraw } from 'web/src/modules';
 import { localeDate, sliceString, sortByDateDesc, truncateMiddle } from 'web/src/helpers';
 import { History } from 'web/src/components';
 import { useFetch } from 'web/src/hooks/data/useFetch';
+import { Tab, TabList, TabPanel, Tabs } from 'web/src/components/Tabs';
 import { Box } from 'web/src/components/Box/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
@@ -172,22 +173,55 @@ const P2PHistory: FC<Props> = ({ type, general }) => {
   );
 };
 
+const TABS: WalletType[] = ['p2p', 'market'];
+
 interface WalletHistoryProps extends Props {
-  walletType: WalletType;
+  defaultTab?: WalletType | undefined;
 }
 
-export const WalletHistory: FC<WalletHistoryProps> = ({ type, general, walletType }) => {
+export const WalletHistory: FC<WalletHistoryProps> = ({ type, general, defaultTab }) => {
   const isDeposit = type === 'deposits';
+  const hasP2P = !!general.balanceP2P;
+  const hasExchange = !!general.balanceMarket;
+
+  const [tab, setTab] = useState<WalletType>('p2p');
+
+  const validTab = useMemo(() => {
+    if (defaultTab !== undefined) {
+      return defaultTab;
+    }
+    const tabs = TABS.filter((d) => (d === 'market' && hasExchange) || (d === 'p2p' && hasP2P));
+    return tabs.find((d) => d === tab) ?? tabs[0] ?? 'p2p';
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [general.currency, tab]);
 
   const t = useT();
 
   return (
     <Box col spacing="2">
-      <Box as="h4" margin="0">
-        {isDeposit ? t('Deposit History') : t('Withdrawal History')}
-      </Box>
-      {walletType === 'p2p' && <P2PHistory type={type} general={general} />}
-      {walletType === 'market' && <ExchangeHistory type={type} general={general} />}
+      <Tabs value={validTab} onSelectionChange={setTab as any}>
+        <Box row gap="2" wrap>
+          <Box as="h4" margin="0">
+            {isDeposit ? t('Deposit History') : t('Withdrawal History')}
+          </Box>
+          {!defaultTab && (
+            <TabList>
+              <Tab value="p2p" disabled={!hasP2P}>
+                {t('P2P')}
+              </Tab>
+              <Tab value="market" disabled={!hasExchange}>
+                {t('Exchange')}
+              </Tab>
+            </TabList>
+          )}
+        </Box>
+        <TabPanel value="p2p">
+          <P2PHistory type={type} general={general} />
+        </TabPanel>
+        <TabPanel value="market">
+          <ExchangeHistory type={type} general={general} />
+        </TabPanel>
+      </Tabs>
     </Box>
   );
 };

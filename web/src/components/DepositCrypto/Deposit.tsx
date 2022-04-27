@@ -52,7 +52,7 @@ export const Deposit: FC<Props> = ({ general, wallet }) => {
       {walletType && (
         <>
           <DepositWarning />
-          <WalletHistory walletType={walletType} type="deposits" general={general} />
+          <WalletHistory defaultTab={walletType} type="deposits" general={general} />
         </>
       )}
     </Box>
