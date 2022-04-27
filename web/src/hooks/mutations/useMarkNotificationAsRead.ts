@@ -24,7 +24,7 @@ export const useMarkNotificationAsRead = (options: Options<number, any, any> = {
   return useMutation(markNotificationAsRead, {
     ...options,
     onSuccess: () => {
-      mutate(`${p2pUrl}/notifications/`);
+      mutate(`${p2pUrl()}/notifications/`);
     },
     onFailure: (params) => {
       const { error } = params;
