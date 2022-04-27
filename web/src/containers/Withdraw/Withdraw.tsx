@@ -24,8 +24,9 @@ import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
 import { WalletType } from 'web/src/modules/account/types';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
+import { InvoiceExplanation } from 'web/src/screens/WalletsScreen/InvoiceExplanation';
 
-const WALLET_TYPES: WalletType[] = ['p2p', 'market'];
+const WALLET_TYPES: WalletType[] = [/*'p2p',*/ 'market'];
 
 interface Props {
   general: WalletItemData;
@@ -159,17 +160,21 @@ export const Withdraw: FC<Props> = ({ general, wallet }) => {
     <>
       <div className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body' : undefined}>
         <Box position="relative" spacing="3">
-          <Box
-            flex="1"
-            as={SelectString}
-            isSearchable={false}
-            options={availableWalletTypes}
-            value={walletType}
-            onChange={setWalletType as any}
-            placeholder={t('withdraw.from_balance')}
-            label={t('withdraw.from_balance')}
-            formatOptionLabel={renderDropItem}
-          />
+          {availableWalletTypes.length > 0 && (
+            <Box
+              flex="1"
+              as={SelectString}
+              isSearchable={false}
+              options={availableWalletTypes}
+              value={walletType}
+              onChange={setWalletType as any}
+              placeholder={t('withdraw.from_balance')}
+              label={t('withdraw.from_balance')}
+              formatOptionLabel={renderDropItem}
+            />
+          )}
+
+          {isBTC && <InvoiceExplanation currency="BTC" />}
 
           {isP2P && (
             <WithdrawP2P
@@ -214,9 +219,7 @@ export const Withdraw: FC<Props> = ({ general, wallet }) => {
         ) : null}
       </div>
 
-      {walletType ? (
-        <WalletHistory defaultTab={walletType} type="withdraws" general={general} />
-      ) : null}
+      <WalletHistory defaultTab={walletType ?? undefined} type="withdraws" general={general} />
     </>
   );
 };
