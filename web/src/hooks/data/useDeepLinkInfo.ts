@@ -1,10 +1,10 @@
-import { accountPublicUrl } from 'web/src/api';
+import { accountUrl } from 'web/src/api';
 import { fetchJson } from 'web/src/helpers/fetch';
 import { useFetch } from './useFetch';
 
 export const useDeepLinkInfo = (deeplinkId: string) => {
   const { data, error, isValidating } = useFetch(
-    `${accountPublicUrl()}/deeplinks/${deeplinkId}`,
+    `${accountUrl()}/deeplinks/${deeplinkId}`,
     fetchJson,
     {
       refreshInterval: 0,
