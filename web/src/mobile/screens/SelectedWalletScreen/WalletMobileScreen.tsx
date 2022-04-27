@@ -6,7 +6,6 @@ import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
 import { useGeneralWallets } from 'src/hooks/useGeneralWallets';
 import { Tab, TabList, TabPanel, Tabs } from 'src/components/Tabs';
-import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { selectWallet } from 'src/modules/user/wallets/selectors';
@@ -78,8 +77,7 @@ export const WalletMobileScreen: React.FC = () => {
             <Deposit general={general} wallet={wallet} />
           </TabPanel>
           <TabPanel value="withdraw">
-            <Withdraw currency={general.balanceTotal.currency} wallet={wallet} />
-            <WalletHistory type="withdraws" general={general} />
+            <Withdraw general={general} wallet={wallet} />
           </TabPanel>
           <TabPanel value="transfer">
             {general.hasTransfer && (
