@@ -15,7 +15,7 @@ export async function handleWebsocketMessage(
     data,
   };
 
-  mutate(`${p2pUrl}/notifications/`, async (cachedNotifications: Notification[]) => {
+  mutate(`${p2pUrl()}/notifications/`, async (cachedNotifications: Notification[]) => {
     return [newNotification, ...cachedNotifications];
   });
 }

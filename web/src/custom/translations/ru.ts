@@ -27,12 +27,8 @@ export const ru: LangType = {
     '✅ Телеграм-аккаунт прикреплен к вашей учетной записи.',
   'notifications.adminMessage': 'Сообщение от администрации',
   'notifications.adsActivatedMessage': '✅ Ваши объявления активированы',
-  'notifications.adsPausedMessage':
-    'Одно из объявлений на продажу отключено из-за суммы на балансе меньше, чем минимальный лимит в объявлении',
-  'notifications.adsPausedMessage_maxAllowedMarkup':
-    'Одно из ваших объявлений отключено из-за курса ниже, чем {maxAllowedMarkup}% от биржевого',
-  'notifications.adsPausedMessage_minBalanceAllowed':
-    'Ваши объявления на покупку {currency} недоступны пользователям из-за отсутствия минимального баланса {minBalance} {cryptocurrency}',
+  'notifications.adsPausedMessage_legacy':
+    'Ваши объявления недоступны пользователям из-за отсутствия минимального баланса',
   'notifications.checkCashed':
     '{recipient} обналичил чек на {amount} {cryptocurrency}.',
   'notifications.comissionReturn':
@@ -46,7 +42,7 @@ export const ru: LangType = {
   'notifications.disputeSuccess':
     '✌ Вы победили в споре сделки {tradeId} и получили {amount} {cryptocurrency}.',
   'notifications.dividendsReceived':
-    'Вы получили {cryptocurrency.amount} {cryptocurrency.code} вознаграждения от реферала 🤝',
+    'Вы получили {cryptocurrencyamount} {cryptocurrencycode} вознаграждения от реферала 🤝',
   'notifications.freeze': 'Ваш аккаут заморожен до {expire, LL}',
   'notifications.freezeReason':
     'Причина заморозки "{reason}". Типы запрещенных операций "{type}". Дата окончания {expire, LL}',
@@ -64,7 +60,7 @@ export const ru: LangType = {
   'notifications.merchantPaid':
     'Вы получили выплату {amount} {cryptocurrency} от {merchantName}',
   'notifications.moneyReceived':
-    'Вы получили {cryptocurrency.amount} {cryptocurrency.code} ({currency.amount} {currency.code}) от {donor}!',
+    'Вы получили {cryptocurrencyamount} {cryptocurrencycode} ({currencyamount} {currencycode}) от {donor}!',
   'notifications.mute': 'Ваши объявления сняты с показа на {duration} ч.',
   'notifications.muteReason':
     'Ваши объявления сняты с показа на {duration} ч. Вероятнее всего, Вы нарушили условия размещения объявлений. По истечению срока ограничения объявления станут активны.',
@@ -77,7 +73,7 @@ export const ru: LangType = {
   'notifications.payment-processed':
     '🚀 Отправка {amount} {cryptocurrency} осуществлена',
   'notifications.tipsReceived':
-    '🔥 Вы получили {cryptocurrency.amount} {cryptocurrency.code} чаевых по сделке #{tradeId}!',
+    '🔥 Вы получили {cryptocurrencyamount} {cryptocurrencycode} чаевых по сделке #{tradeId}!',
   'notifications.tradeExpired': 'Сделка #{tradeId} будет автоматически отменена',
   'notifications.tradeExtendWaitingTime':
     'Сделка #{tradeId}: Пользователь добавил {time} минут на обсуждение сделки!',

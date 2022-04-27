@@ -1,13 +1,9 @@
 import { TranslateFn } from 'web/src/hooks/useT';
-import { AdsPausedMessage, Notification } from 'web/src/lib/socket/types';
+import { Notification } from 'web/src/lib/socket/types';
 import { NotificationModalNotification } from 'web/src/containers/NotificationModal/types';
 import { Money } from '@bitzlato/money-js';
 import { getFormatOptionsByLanguage } from 'web/src/components/AmountFormat/getFormatOptionsByLanguage';
 import { Language } from 'web/src/types';
-
-function calculationPercent(value: number): number {
-  return (value + 100) * 100 - 100 * 100;
-}
 
 const PROFILE_URL = '/profile';
 const WALLETS_URL = '/wallets';
@@ -312,22 +308,7 @@ export function notificationInfo(
         createdAt,
       };
     case 'adsPausedMessage': {
-      const adsPausedMessage: AdsPausedMessage = item.data;
-
-      let text = t('adsPausedMessage');
-
-      if (adsPausedMessage.maxAllowedMarkup && !adsPausedMessage.minBalanceAllowed) {
-        const maxAllowedMarkup = calculationPercent(adsPausedMessage.maxAllowedMarkup);
-        text = t('adsPausedMessage_maxAllowedMarkup', { maxAllowedMarkup });
-      }
-
-      if (adsPausedMessage.minBalanceAllowed) {
-        text = t('adsPausedMessage_minBalanceAllowed', {
-          minBalance: adsPausedMessage.minBalanceAllowed,
-          cryptocurrency: adsPausedMessage.cryptoCurrency,
-          currency: adsPausedMessage.fiatCurrency,
-        });
-      }
+      const text = t('adsPausedMessage_legacy');
 
       return {
         text,
