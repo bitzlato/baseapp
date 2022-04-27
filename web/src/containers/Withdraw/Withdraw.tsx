@@ -215,7 +215,7 @@ export const Withdraw: FC<Props> = ({ general, wallet }) => {
       </div>
 
       {walletType ? (
-        <WalletHistory defaultTab={walletType} type="deposits" general={general} />
+        <WalletHistory defaultTab={walletType} type="withdraws" general={general} />
       ) : null}
     </>
   );
