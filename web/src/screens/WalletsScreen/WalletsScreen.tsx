@@ -11,7 +11,6 @@ import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurr
 import { Tabs } from 'src/components/Tabs/Tabs';
 import { Tab, TabList, TabPanel } from 'src/components/Tabs';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
-import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { useHistory, useParams } from 'react-router';
 import { Transfer } from 'src/containers/Wallets/Transfer';
@@ -135,8 +134,7 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                     <Deposit general={general} wallet={wallet} />
                   </TabPanel>
                   <TabPanel value={TabId.withdraw}>
-                    <Withdraw currency={general.balanceTotal.currency} wallet={wallet} />
-                    <WalletHistory type="withdraws" general={general} />
+                    <Withdraw general={general} wallet={wallet} />
                   </TabPanel>
                   <TabPanel value={TabId.transfer}>
                     {general.hasTransfer && (

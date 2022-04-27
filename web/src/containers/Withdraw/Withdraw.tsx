@@ -1,7 +1,6 @@
 import { FC, useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMobileDeviceState } from 'web/src/modules';
-import { Currency } from '@bitzlato/money-js';
 import { defaultBeneficiary } from 'web/src/modules/user/beneficiaries/defaults';
 import { Beneficiary } from 'web/src/modules/user/beneficiaries';
 import {
@@ -21,19 +20,22 @@ import { Box } from 'web/src/components/Box/Box';
 import { useP2PWithdrawal } from 'web/src/hooks/mutations/useP2PWithdrawal';
 import { SelectString } from 'web/src/components/Select/Select';
 import { P2PWithdrawalParams } from 'web/src/modules/p2p/withdrawal';
+import { WalletHistory } from 'web/src/containers/Wallets/History';
+import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
+import { WalletType } from 'web/src/modules/account/types';
+import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 
-const WALLET_TYPES = ['p2p', 'market'];
+const WALLET_TYPES: WalletType[] = ['p2p', 'market'];
 
 interface Props {
-  currency: Currency;
+  general: WalletItemData;
   wallet: Wallet | undefined;
 }
 
-export const Withdraw: FC<Props> = ({ currency, wallet }) => {
+export const Withdraw: FC<Props> = ({ general, wallet }) => {
   const t = useT();
   const dispatch = useDispatch();
 
-  const [walletType, setWalletType] = useState('');
   const [withdrawSubmitModal, setWithdrawSubmitModal] = useState(false);
   const [withdrawData, setWithdrawData] = useState({
     amount: '',
@@ -53,27 +55,28 @@ export const Withdraw: FC<Props> = ({ currency, wallet }) => {
 
   const { countdown, start } = useCountdown();
 
+  const currency = general.balanceTotal.currency;
   const isBTC = currency.code === 'BTC';
-  const isP2P = walletType === 'p2p';
-  const isMarket = walletType === 'market';
+  const hasP2P = general.balanceP2P !== undefined;
+  const hasMarket = !isBTC && wallet !== undefined;
 
   const availableWalletTypes = useMemo(() => {
-    if (isBTC) {
-      return WALLET_TYPES.filter((type) => type === 'p2p');
-    }
+    return WALLET_TYPES.filter((type) => {
+      switch (type) {
+        case 'p2p':
+          return hasP2P;
+        case 'market':
+          return hasMarket;
+      }
+    });
+  }, [hasP2P, hasMarket]);
 
-    if (!wallet) {
-      return WALLET_TYPES.filter((type) => type !== 'market');
-    }
-
-    return WALLET_TYPES;
-  }, [isBTC, wallet]);
-
-  useEffect(() => {
-    if (!availableWalletTypes.includes(walletType)) {
-      setWalletType('');
-    }
-  }, [availableWalletTypes, walletType]);
+  const [walletType, setWalletType] = useStateWithDeps<WalletType | null>(
+    () => (availableWalletTypes.length === 1 ? availableWalletTypes[0]! : null),
+    [availableWalletTypes],
+  );
+  const isP2P = walletType === 'p2p';
+  const isMarket = walletType === 'market';
 
   useEffect(() => {
     if (withdrawSuccess) {
@@ -153,61 +156,67 @@ export const Withdraw: FC<Props> = ({ currency, wallet }) => {
   };
 
   return (
-    <div className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body' : undefined}>
-      <Box position="relative" spacing="3">
-        <Box
-          flex="1"
-          as={SelectString}
-          isSearchable={false}
-          options={availableWalletTypes}
-          value={walletType}
-          onChange={setWalletType as any}
-          placeholder={t('withdraw.from_balance')}
-          label={t('withdraw.from_balance')}
-          formatOptionLabel={renderDropItem}
-        />
-
-        {isP2P && (
-          <WithdrawP2P
-            currency={currency}
-            withdrawDone={withdrawData.withdrawDone}
-            countdown={countdown}
-            onSubmit={toggleConfirmModal}
+    <>
+      <div className={isMobileDevice ? 'cr-mobile-wallet-withdraw-body' : undefined}>
+        <Box position="relative" spacing="3">
+          <Box
+            flex="1"
+            as={SelectString}
+            isSearchable={false}
+            options={availableWalletTypes}
+            value={walletType}
+            onChange={setWalletType as any}
+            placeholder={t('withdraw.from_balance')}
+            label={t('withdraw.from_balance')}
+            formatOptionLabel={renderDropItem}
           />
-        )}
 
-        {wallet && isMarket && (
-          <WithdrawMarket
-            wallet={wallet}
-            withdrawDone={withdrawData.withdrawDone}
-            countdown={countdown}
-            onSubmit={toggleConfirmModal}
+          {isP2P && (
+            <WithdrawP2P
+              currency={currency}
+              withdrawDone={withdrawData.withdrawDone}
+              countdown={countdown}
+              onSubmit={toggleConfirmModal}
+            />
+          )}
+
+          {wallet && isMarket && (
+            <WithdrawMarket
+              wallet={wallet}
+              withdrawDone={withdrawData.withdrawDone}
+              countdown={countdown}
+              onSubmit={toggleConfirmModal}
+            />
+          )}
+        </Box>
+
+        {withdrawSubmitModal ? (
+          <Modal2 show header={t('page.modal.withdraw.success')} onClose={toggleSubmitModal}>
+            <Box as="span" textAlign="center">
+              {t('page.modal.withdraw.success.message.content')}
+            </Box>
+            <Button onClick={toggleSubmitModal} color="primary">
+              {t('page.modal.withdraw.success.button')}
+            </Button>
+          </Modal2>
+        ) : null}
+
+        {withdrawData.withdrawConfirmModal ? (
+          <ModalWithdrawConfirmation
+            show={withdrawData.withdrawConfirmModal}
+            amount={withdrawData.total}
+            currency={currency.code}
+            precision={currency.minorUnit}
+            rid={withdrawalAddress}
+            onSubmit={handleWithdraw}
+            onDismiss={toggleConfirmModal}
           />
-        )}
-      </Box>
+        ) : null}
+      </div>
 
-      {withdrawSubmitModal ? (
-        <Modal2 show header={t('page.modal.withdraw.success')} onClose={toggleSubmitModal}>
-          <Box as="span" textAlign="center">
-            {t('page.modal.withdraw.success.message.content')}
-          </Box>
-          <Button onClick={toggleSubmitModal} color="primary">
-            {t('page.modal.withdraw.success.button')}
-          </Button>
-        </Modal2>
+      {walletType ? (
+        <WalletHistory defaultTab={walletType} type="deposits" general={general} />
       ) : null}
-
-      {withdrawData.withdrawConfirmModal ? (
-        <ModalWithdrawConfirmation
-          show={withdrawData.withdrawConfirmModal}
-          amount={withdrawData.total}
-          currency={currency.code}
-          precision={currency.minorUnit}
-          rid={withdrawalAddress}
-          onSubmit={handleWithdraw}
-          onDismiss={toggleConfirmModal}
-        />
-      ) : null}
-    </div>
+    </>
   );
 };
