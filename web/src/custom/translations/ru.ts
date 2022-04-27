@@ -1505,6 +1505,17 @@ export const ru: LangType = {
   'profile.suspicious_desc': 'Вашему аккаунту присвоен статус Подозрительный',
   'profile.deals_stat': 'сделок на сумму',
 
+  'show all': 'Показать все',
+  'trader.block.transactionVolume': 'Объём сделок',
+  'trader.block.profileTrader': 'Профиль трейдера',
+  'trader.block.online': 'В сети',
+  'trader.block.offline': 'Не в сети',
+  'trader.block.rating': 'Рейтинг',
+  'trader.block.reputation': 'Репутация',
+  'trader.block.tabInfo': 'Информация',
+  'trader.block.tabChat': 'чат',
+  'trader.block.tabNotes': 'Заметки',
+
   'Cashed by': 'Обналичен',
   'Gift for': 'Чек на сумму {money}',
   'gift.check_spam': 'Обязательно проверьте папку "Спам", если не получили письмо',

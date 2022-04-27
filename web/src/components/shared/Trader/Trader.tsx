@@ -5,8 +5,8 @@ import { Container } from 'web/src/components/Container/Container';
 import { Box } from 'web/src/components/ui/Box';
 import { Pagination } from 'web/src/components/ui/Pagination';
 import { useUserAds } from 'web/src/hooks/data/useUserAds';
-import { useSharedT } from 'web/src/components/shared/Adapter';
 import { TraderAds } from 'web/src/components/shared/TraderAds/TraderAds';
+import { TraderInfo } from 'web/src/components/traderInfo/TraderInfo';
 
 interface UrlParams {
   name: string;
@@ -15,8 +15,6 @@ interface UrlParams {
 export const Trader: FC = () => {
   const { lang } = useAppContext();
   const params = useParams<UrlParams>();
-  const t = useSharedT();
-
   const { data = [], error, isValidating } = useUserAds({ publicName: params.name, lang });
 
   if (error) {
@@ -25,15 +23,15 @@ export const Trader: FC = () => {
 
   return (
     <Container maxWidth="fullhd">
-      <Box display="flex" p="8x">
+      <Box display="flex" p="8x" height="full">
         <Box
+          display="flex"
           backgroundColor="dropdown"
-          p="6x"
           borderRadius="1.5x"
           marginRight="6x"
           style={{ width: '20%', minWidth: '380px' }}
         >
-          {t('Trader profile')}
+          <TraderInfo publicName={params.name} />
         </Box>
         <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
           <TraderAds data={data} isLoading={isValidating} />

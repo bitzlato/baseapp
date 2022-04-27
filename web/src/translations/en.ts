@@ -1488,6 +1488,17 @@ export const en = {
   'profile.suspicious_desc': 'Your account has been assigned Suspicious',
   'profile.deals_stat': 'trades for',
 
+  'show all': 'Show all',
+  'trader.block.transactionVolume': 'Transaction volume',
+  'trader.block.profileTrader': 'Trader profile',
+  'trader.block.online': 'Online',
+  'trader.block.offline': 'Offline',
+  'trader.block.rating': 'Rating',
+  'trader.block.reputation': 'Reputation',
+  'trader.block.tabInfo': 'Information',
+  'trader.block.tabChat': 'Chat',
+  'trader.block.tabNotes': 'Notes',
+
   'Cashed by': 'Cashed by',
   'Gift for': 'Gift for {money}',
   'gift.check_spam': 'Be sure to check your "Spam" folder if you have not received your email',

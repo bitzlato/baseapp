@@ -145,6 +145,21 @@ export const [themeLight, vars] = createTheme({
     spinner02: colors.black,
     backdrop: colors.black30,
 
+    traderBg: colors.white,
+    traderFadeBg: colors.white,
+    traderBgHover: colors.waikawaGray24,
+    traderBorder: colors.waikawaGray24,
+    traderBlocked: colors.mandy,
+    traderFavorited: colors.oceanGreen,
+    traderBlockedBgHover: colors.mandy90,
+    traderFavoritedBgHover: colors.oceanGreen90,
+
+    notesBg: colors.waikawaGray10,
+    chatToMsgBg: colors.waikawaGray10,
+    chatToMsgText: colors.mineShaft,
+    chatFromMsgBg: colors.indigo,
+    chatFromMsgText: colors.white,
+
     footerBg: colors.luckyPoint,
     footerTitle: colors.spindle,
     footerBorder: colors.sapphire,
@@ -317,6 +332,21 @@ export const themeDark = createTheme(vars, {
     spinner01: colors.white20,
     spinner02: colors.white,
     backdrop: colors.black30,
+
+    traderBg: colors.white05,
+    traderFadeBg: colors.shark,
+    traderBgHover: colors.white10,
+    traderBorder: colors.white05,
+    traderBlocked: colors.mandy,
+    traderFavorited: colors.oceanGreen,
+    traderBlockedBgHover: colors.mandy90,
+    traderFavoritedBgHover: colors.oceanGreen90,
+
+    notesBg: colors.white05,
+    chatToMsgBg: colors.white05,
+    chatToMsgText: colors.white,
+    chatFromMsgBg: colors.indigo,
+    chatFromMsgText: colors.white,
 
     footerBg: colors.ebonyClay,
     footerTitle: colors.silverChalice,
