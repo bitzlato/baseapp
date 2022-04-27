@@ -4,7 +4,7 @@ import s from './IconButton.postcss';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   noFill?: boolean;
-  size?: 'small' | undefined;
+  size?: 'small' | 'icon' | undefined;
   color?: 'primary' | undefined;
 }
 

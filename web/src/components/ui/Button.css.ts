@@ -80,6 +80,15 @@ export const button = recipe({
         px: '8x',
         borderRadius: '2x',
       }),
+      icon: sprinkles({
+        fontSize: 'small',
+        lineHeight: 'small',
+        px: '2x',
+        py: '2x',
+        borderRadius: '1x',
+        width: '9x',
+        height: '9x',
+      }),
     },
     active: {
       true: '',
@@ -143,7 +152,6 @@ export const button = recipe({
         },
       }),
     },
-
     {
       variants: {
         variant: 'contained',
@@ -800,7 +808,6 @@ export const button = recipe({
         },
       ],
     },
-
     {
       variants: {
         variant: 'text',

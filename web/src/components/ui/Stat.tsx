@@ -15,6 +15,7 @@ export const Stat: FC = ({ children }) => (
     justifyContent="space-between"
     px="4x"
     py="5x"
+    flexGrow={1}
   >
     {children}
   </Box>

@@ -86,3 +86,12 @@ export interface SessionsMe {
   auth_sub: string;
   claims: SessionsMeClaims;
 }
+
+export interface DealStat {
+  cryptocurrency: string,
+  totalCount: number,
+  totalAmount: string,
+  successDeals: number,
+  canceledDeals: number,
+  defeatInDisputes: number,
+}
