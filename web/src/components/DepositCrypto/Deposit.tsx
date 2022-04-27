@@ -12,7 +12,7 @@ import { DepositP2P } from './DepositP2P';
 import { WalletItemData } from '../WalletItem/WalletItem';
 import { DepositWarning } from './DepositWarning';
 
-const OPTIONS: WalletType[] = ['market', 'p2p'];
+const OPTIONS: WalletType[] = ['p2p', 'market'];
 
 interface Props {
   general: WalletItemData;
@@ -22,16 +22,15 @@ interface Props {
 export const Deposit: FC<Props> = ({ general, wallet }) => {
   const cryptoCurrency = getCurrencyCodeSymbol(general.currency);
   const isBtc = cryptoCurrency === 'BTC';
-  const hasP2P = !!general.balanceP2P;
-  const hasMarket = !isBtc && !!wallet;
+  const hasP2P = general.balanceP2P !== undefined;
+  const hasMarket = !isBtc && wallet !== undefined;
 
   const options = useMemo(
     () => OPTIONS.filter((d) => (d === 'market' && hasMarket) || (d === 'p2p' && hasP2P)),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [cryptoCurrency],
+    [hasMarket, hasP2P],
   );
 
-  const [account, setAccount] = useStateWithDeps<WalletType | null>(
+  const [walletType, setWalletType] = useStateWithDeps<WalletType | null>(
     () => (options.length === 1 ? options[0]! : null),
     [options],
   );
@@ -43,17 +42,17 @@ export const Deposit: FC<Props> = ({ general, wallet }) => {
       <SelectString
         isSearchable={false}
         options={options}
-        value={account}
-        onChange={setAccount}
+        value={walletType}
+        onChange={setWalletType}
         placeholder={t('Select wallet')}
         formatOptionLabel={(d) => t(d)}
       />
-      {account === 'market' && <DepositExchange wallet={wallet!} />}
-      {account === 'p2p' && <DepositP2P currency={cryptoCurrency} />}
-      {account && (
+      {walletType === 'market' && <DepositExchange wallet={wallet!} />}
+      {walletType === 'p2p' && <DepositP2P currency={cryptoCurrency} />}
+      {walletType && (
         <>
           <DepositWarning />
-          <WalletHistory defaultTab={account} type="deposits" general={general} />
+          <WalletHistory defaultTab={walletType} type="deposits" general={general} />
         </>
       )}
     </Box>
