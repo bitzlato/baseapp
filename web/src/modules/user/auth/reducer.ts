@@ -16,13 +16,11 @@ import {
   AUTH_SIGN_UP_FETCH,
   AUTH_SIGN_UP_REQUIRE_VERIFICATION,
   AUTH_VERIFICATION_FETCH,
-  AUTH_VERIFICATION_SUCCESS,
 } from './constants';
 
 export interface AuthState {
   require2FA?: boolean;
   requireVerification?: boolean;
-  emailVerified?: boolean;
   logoutError?: CommonError;
   authError?: CommonError;
   signUpError?: CommonError;
@@ -35,14 +33,13 @@ export interface AuthState {
 export const initialStateAuth: AuthState = {
   require2FA: false,
   requireVerification: false,
-  emailVerified: false,
   current_password_entropy: 0,
   signInLoading: false,
   signUpLoading: false,
   signUpSuccess: false,
 };
 
-export const authReducer = (state = initialStateAuth, action: AuthAction) => {
+export const authReducer = (state = initialStateAuth, action: AuthAction): AuthState => {
   switch (action.type) {
     case AUTH_SIGN_IN_REQUIRE_2FA:
       return {
@@ -61,9 +58,7 @@ export const authReducer = (state = initialStateAuth, action: AuthAction) => {
         requireVerification: action.payload.requireVerification,
       };
     case AUTH_VERIFICATION_FETCH:
-      return { ...state, emailVerified: false };
-    case AUTH_VERIFICATION_SUCCESS:
-      return { ...state, emailVerified: true };
+      return { ...state };
     case AUTH_SIGN_IN_FETCH:
       return { ...state, signInLoading: true };
     case AUTH_SIGN_IN_DATA:

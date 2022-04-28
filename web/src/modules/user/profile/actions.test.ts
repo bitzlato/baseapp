@@ -70,6 +70,7 @@ describe('Profile actions', () => {
           available_auth_subjects: [],
           kyc_verification_url: '',
           account_statements_url: '',
+          email_verified: true,
         },
       };
       const expectedAction = { type: 'profile/GET_USER_DATA', payload };
@@ -215,6 +216,7 @@ describe('Profile actions', () => {
           available_auth_subjects: [],
           kyc_verification_url: '',
           account_statements_url: '',
+          email_verified: true,
         },
       };
       const expectedAction = { type: 'profile/CHANGE_USER_FETCH', payload };
@@ -278,6 +280,7 @@ describe('Profile actions', () => {
           available_auth_subjects: [],
           kyc_verification_url: '',
           account_statements_url: '',
+          email_verified: true,
         },
       };
       const expectedAction = { type: 'profile/CHANGE_USER_DATA', payload };

@@ -18,7 +18,6 @@ import { WalletsFetch } from '../../containers';
 import { toggleColorTheme } from '../../helpers';
 import {
   ConfirmMobileScreen,
-  EmailVerificationMobileScreen,
   LandingScreenMobile,
   OrdersMobileScreen,
   ProfileAccountActivityMobileScreen,
@@ -53,7 +52,6 @@ import {
   ConfirmScreen,
   DeepLinkPreview,
   DocumentationScreen,
-  EmailVerificationScreen,
   HistoryScreen,
   InternalTransfer,
   MagicLink,
@@ -61,7 +59,6 @@ import {
   OrdersTabScreen,
   RestrictedScreen,
   TradingScreen,
-  VerificationScreen,
   QuickExchange,
   LandingScreen,
 } from '../../screens';
@@ -84,6 +81,7 @@ import {
   ReportDownloadScreen,
   ReportsMobileScreen,
 } from 'web/src/screens/ReportsScreen/ReportsScreen';
+import { VerificationScreen } from 'web/src/screens/VerificationScreen/VerificationScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -356,12 +354,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               path="/accounts/confirmation"
               component={VerificationScreen}
             />
-            <PublicRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/email-verification"
-              component={EmailVerificationMobileScreen}
-            />
             <PrivateRoute
               loading={userLoading}
               isLogged={isLoggedIn}
@@ -476,12 +468,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             isLogged={isLoggedIn}
             path="/accounts/password_reset"
             component={ResetPasswordScreen}
-          />
-          <PublicRoute
-            loading={userLoading}
-            isLogged={isLoggedIn}
-            path="/email-verification"
-            component={EmailVerificationScreen}
           />
           <Route path="/docs" component={DocumentationScreen as any} />
           <Route path="/restriction" component={RestrictedScreen as any} />

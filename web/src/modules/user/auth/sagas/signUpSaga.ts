@@ -3,7 +3,7 @@ import { StorageKeys } from 'web/src/helpers/storageKeys';
 import { sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { User, userData } from '../../profile';
-import { signUpData, signUpError, SignUpFetch, signUpRequireVerification } from '../actions';
+import { signUpData, signUpError, SignUpFetch } from '../actions';
 
 const signUpConfig: RequestOptions = {
   apiVersion: 'barong',
@@ -19,10 +19,6 @@ const configUpdateOptions = (csrfToken?: string): RequestOptions => {
 export function* signUpSaga(action: SignUpFetch) {
   try {
     const data: User = yield call(API.post(signUpConfig), '/identity/users', action.payload);
-
-    if (data.state === 'pending') {
-      yield put(signUpRequireVerification({ requireVerification: true }));
-    }
 
     if (data.csrf_token) {
       localStorage.setItem(StorageKeys.csrfToken, data.csrf_token);

@@ -16,10 +16,10 @@ import {
   selectGeetestCaptchaSuccess,
   selectCaptchaResponse,
   resetCaptchaState,
-  selectSignUpRequireVerification,
   selectSignUpError,
   signUp,
   selectCurrentLanguage,
+  selectVerifyEmail,
 } from 'web/src/modules';
 import {
   EMAIL_REGEX,
@@ -51,7 +51,7 @@ export const SignUp: FC = () => {
 
   const isLoggedIn = useSelector(selectUserLoggedIn);
   const require2FA = useSelector(selectSignInRequire2FA);
-  const requireEmailVerification = useSelector(selectSignUpRequireVerification);
+  const requireEmailVerification = useSelector(selectVerifyEmail);
   const signUpError = useShallowSelector(selectSignUpError);
   const reCaptchaSuccess = useSelector(selectRecaptchaSuccess);
   const geetestCaptchaSuccess = useSelector(selectGeetestCaptchaSuccess);
@@ -78,7 +78,7 @@ export const SignUp: FC = () => {
 
   useEffect(() => {
     if (requireEmailVerification) {
-      history.push('/email-verification', { email });
+      history.push('/trading');
     }
   }, [requireEmailVerification, history, email]);
 
