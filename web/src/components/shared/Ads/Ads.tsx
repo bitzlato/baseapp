@@ -4,7 +4,7 @@ import { Advert } from 'web/src/modules/p2p/ad.types';
 import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { Stack } from 'web/src/components/ui/Stack';
-import { FiatFormat } from 'web/src/components/money/FiatFormat';
+import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import TrustIcon from 'web/src/assets/svg/TrustIcon.svg';
 import RefreshIcon from 'web/src/assets/svg/RefreshIcon.svg';
@@ -68,11 +68,11 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
         </Box>
         <Box className={s.columns.medium}>{ad.paymethod.name}</Box>
         <Box className={s.columns.medium}>
-          <FiatFormat money={ad.rate} cryptoCurrency={ad.cryptoCurrency} />
+          <P2PFiatFormat money={ad.rate} cryptoCurrency={ad.cryptoCurrency} />
         </Box>
         <Box className={s.columns.small}>
-          <FiatFormat money={ad.limitCurrency.min} cryptoCurrency={ad.cryptoCurrency} /> —{' '}
-          <FiatFormat money={ad.limitCurrency.max} cryptoCurrency={ad.cryptoCurrency} />
+          <P2PFiatFormat money={ad.limitCurrency.min} cryptoCurrency={ad.cryptoCurrency} /> —{' '}
+          <P2PFiatFormat money={ad.limitCurrency.max} cryptoCurrency={ad.cryptoCurrency} />
         </Box>
         <Box className={s.columns.large} display="flex" justifyContent="flex-end">
           <Box pr="4x">
