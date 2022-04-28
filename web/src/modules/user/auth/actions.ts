@@ -16,7 +16,6 @@ import {
   AUTH_SIGN_UP_REQUIRE_VERIFICATION,
   AUTH_TEST_STATE,
   AUTH_VERIFICATION_FETCH,
-  AUTH_VERIFICATION_SUCCESS,
 } from './constants';
 
 export interface GeetestCaptchaResponse {
@@ -113,10 +112,6 @@ export interface VerificationFetch {
   };
 }
 
-export interface VerificationSuccess {
-  type: typeof AUTH_VERIFICATION_SUCCESS;
-}
-
 export interface LogoutFetch {
   type: typeof AUTH_LOGOUT_FETCH;
 }
@@ -144,7 +139,6 @@ export type AuthAction =
   | SignUpError
   | SignUpRequireVerification
   | VerificationFetch
-  | VerificationSuccess
   | LogoutFailed
   | LogoutFetch
   | TestAuthState
@@ -219,10 +213,6 @@ export const signUpRequireVerification = (
 export const verificationFetch = (payload: VerificationFetch['payload']): VerificationFetch => ({
   type: AUTH_VERIFICATION_FETCH,
   payload,
-});
-
-export const verificationSuccess = (): VerificationSuccess => ({
-  type: AUTH_VERIFICATION_SUCCESS,
 });
 
 export const logoutFetch = (): LogoutFetch => ({

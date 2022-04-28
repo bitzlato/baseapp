@@ -2,8 +2,8 @@ import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from 'web/src/components/Box/Box';
 import { Button } from 'web/src/components/ui/Button';
-import { Modal2 } from 'web/src/components/Modal/Modal2';
 import { useT } from 'web/src/hooks/useT';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { captchaType } from '../../api/config';
 import { Captcha } from '../../components';
 import {
@@ -55,14 +55,19 @@ export const EmailVerificationModal: FC = () => {
     (captchaType() === 'geetest' && !geetestCaptchaSuccess);
 
   return (
-    <Modal2 show header={t('page.header.signUp.modal.header')} onClose={() => setShow(false)}>
-      <Box col spacing="3">
-        <span>{t('page.header.signUp.modal.body2', { email: <b>{user.email}</b> })}</span>
-        <Captcha error={error} success={success} />
+    <Modal show onClose={() => setShow(false)}>
+      <ModalHeader>{t('page.header.signUp.modal.header')}</ModalHeader>
+      <ModalBody>
+        <Box col spacing="3">
+          <span>{t('page.header.signUp.modal.body2', { email: <b>{user.email}</b> })}</span>
+          <Captcha error={error} success={success} />
+        </Box>
+      </ModalBody>
+      <ModalFooter>
         <Button onClick={handleClick} disabled={disableButton}>
           {t('page.resendConfirmation')}
         </Button>
-      </Box>
-    </Modal2>
+      </ModalFooter>
+    </Modal>
   );
 };

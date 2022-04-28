@@ -1,5 +1,4 @@
 export * from './ConfirmScreen';
-export * from './EmailVerificationScreen';
 export * from './Landing';
 export * from './Orders';
 export * from './Profile';

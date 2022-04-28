@@ -97,6 +97,7 @@ export interface User {
   available_auth_subjects: ReadonlyArray<AuthSubject>;
   kyc_verification_url: string;
   account_statements_url: string;
+  email_verified: boolean;
 }
 
 export interface TradeStatistics {

@@ -30,8 +30,8 @@ export const selectUserDataChange = (state: RootState): boolean | undefined =>
 
 export const isPendingUser = (state: RootState): boolean => selectUserState(state) === 'pending';
 
-// TODO: check email_verified=false
-export const selectVerifyEmail = (state: RootState): boolean => isPendingUser(state);
+export const selectVerifyEmail = (state: RootState): boolean =>
+  !state.user.profile.userData.user.email_verified;
 
 export const selectVerifyEmailAuth0 = (state: RootState): boolean =>
   state.user.profile.userData.verifyEmail;
