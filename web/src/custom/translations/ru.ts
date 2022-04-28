@@ -346,7 +346,13 @@ export const ru: LangType = {
   'withdraw.active_vouchers': 'Активные ваучеры',
   'withdraw.available_balance': 'Доступно для вывода',
   'withdraw.will_deducted': 'будет списана с остатка',
+  'withdraw.is_disabled':
+    '⚠️ Вывод криптовалюты недоступен на данный момент. Наши специалисты уже занимаются решением вопроса.',
   'Should be more than': 'Должно быть больше {value}',
+  'withdraw.confirmation': 'Вы уверены что хотите отправить {money} на {address} ?',
+  'withdraw.irreversible': 'Учтите, что все транзакции являются необратимыми!',
+  'withdraw.confirm': 'Подтвердить вывод',
+  Error: 'Ошибка',
   Dynamic: 'Динамическая',
 
   'page.body.wallets.tabs.withdraw.disabled.message': 'Вывод средств был отключен администрацией',

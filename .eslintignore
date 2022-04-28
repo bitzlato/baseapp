@@ -119,7 +119,6 @@ web/src/containers/MarketSelector/MarketSelectorSearchInput/MarketSelectorSearch
 web/src/containers/MarketSelector/MarketSelectorTabs/MarketSelectorTabsDropdown.tsx
 web/src/containers/Markets/index.tsx
 web/src/containers/MarketsTable/index.tsx
-web/src/containers/ModalWithdrawSubmit/index.tsx
 web/src/containers/OpenOrders/helpers.ts
 web/src/containers/OpenOrders/index.tsx
 web/src/containers/Order/index.tsx
@@ -149,8 +148,6 @@ web/src/containers/Wallets/Estimated.tsx
 web/src/containers/Wallets/Transfer.tsx
 web/src/containers/Wallets/TransferHistory.tsx
 web/src/containers/WalletsFetch/index.tsx
-web/src/containers/Withdraw/Withdraw.tsx
-web/src/containers/Withdraw/WithdrawBody.tsx
 web/src/containers/index.ts
 web/src/custom/translations/index.ts
 web/src/custom/translations/ru.ts

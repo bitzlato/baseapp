@@ -3,8 +3,17 @@ import { useSWRConfig } from 'swr';
 import { p2pUrl } from 'web/src/api/config';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
-import { P2PCurrency, P2PGenerateParams, P2PWallet } from 'web/src/modules/p2p/wallet-types';
+import {
+  P2PCurrency,
+  P2PGenerateParams,
+  P2PWallet,
+  P2PWalletStat,
+} from 'web/src/modules/p2p/wallet-types';
 import { useFetch } from './useFetch';
+
+export function useFetchP2PWalletStat() {
+  return useFetch<P2PWalletStat[]>(`${p2pUrl()}/public/wallet/stat`, fetchWithCreds);
+}
 
 export function useFetchP2PWallet(cryptoCurrency: string) {
   return useFetch<P2PWallet>(`${p2pUrl()}/wallets/${cryptoCurrency}`, fetchWithCreds);

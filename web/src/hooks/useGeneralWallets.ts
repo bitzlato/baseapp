@@ -1,17 +1,18 @@
 import { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Currency, Money } from '@bitzlato/money-js';
-import { accountUrl, p2pUrl, showGift } from 'src/api/config';
-import { GeneralBalance } from 'src/modules/account/types';
-import { selectWallets } from 'src/modules/user/wallets/selectors';
-import { WalletItemData } from 'src/components/WalletItem/WalletItem';
-import { createCcy, createMoney, PENCE_CCY } from 'src/helpers/money';
-import { Wallet } from 'src/modules/user/wallets/types';
+import { accountUrl, p2pUrl, showGift } from 'web/src/api/config';
+import { GeneralBalance } from 'web/src/modules/account/types';
+import { selectWallets } from 'web/src/modules/user/wallets/selectors';
+import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
+import { createCcy, createMoney, PENCE_CCY } from 'web/src/helpers/money';
+import { Wallet } from 'web/src/modules/user/wallets/types';
 import { getCurrencySymbol } from 'web/src/helpers/getCurrencySymbol';
-import { fetchWithCreds } from '../helpers/fetch';
-import { isPendingUser } from '../modules/user/profile/selectors';
-import { useFetch } from './data/useFetch';
-import { useWalletsFetch } from './useWalletsFetch';
+import { useFetchP2PWalletStat } from 'web/src/hooks/data/useFetchP2PWallets';
+import { fetchWithCreds } from 'web/src/helpers/fetch';
+import { isPendingUser } from 'web/src/modules/user/profile/selectors';
+import { useFetch } from 'web/src/hooks/data/useFetch';
+import { useWalletsFetch } from 'web/src/hooks/useWalletsFetch';
 
 function getBalance(ccy: Currency, balance: GeneralBalance): Money {
   let m = createMoney(0, ccy);
@@ -93,6 +94,7 @@ function getList(wallets: Wallet[], balances: GeneralBalance[]): WalletItemData[
 }
 
 export function useGeneralWallets() {
+  useFetchP2PWalletStat();
   useWalletsFetch();
   const wallets = useSelector(selectWallets);
   const isPending = useSelector(isPendingUser);

@@ -12,6 +12,7 @@ import {
   WALLETS_FETCH,
   WALLETS_RESET,
   WALLETS_WITHDRAW_CCY_DATA,
+  WALLETS_WITHDRAW_CCY_DATA_VIEWED,
   WALLETS_WITHDRAW_CCY_ERROR,
   WALLETS_WITHDRAW_CCY_FETCH,
 } from './constants';
@@ -74,6 +75,10 @@ export interface WalletsWithdrawCcyData {
   type: typeof WALLETS_WITHDRAW_CCY_DATA;
 }
 
+export interface WalletsWithdrawCcyDataViewed {
+  type: typeof WALLETS_WITHDRAW_CCY_DATA_VIEWED;
+}
+
 export interface WalletsWithdrawCcyError {
   type: typeof WALLETS_WITHDRAW_CCY_ERROR;
   error: CommonError;
@@ -95,6 +100,7 @@ export type WalletsAction =
   | WalletsAddressError
   | WalletsWithdrawCcyFetch
   | WalletsWithdrawCcyData
+  | WalletsWithdrawCcyDataViewed
   | WalletsWithdrawCcyError
   | WalletsReset
   | SetMobileWalletUi;
@@ -154,6 +160,11 @@ export const walletsWithdrawCcyFetch = (
 export const walletsWithdrawCcyData = (): WalletsWithdrawCcyData => ({
   type: WALLETS_WITHDRAW_CCY_DATA,
 });
+
+export const walletsWithdrawCcyDataViewed = (): WalletsWithdrawCcyDataViewed => ({
+  type: WALLETS_WITHDRAW_CCY_DATA_VIEWED,
+});
+
 
 export const walletsWithdrawCcyError = (error: CommonError): WalletsWithdrawCcyError => ({
   type: WALLETS_WITHDRAW_CCY_ERROR,

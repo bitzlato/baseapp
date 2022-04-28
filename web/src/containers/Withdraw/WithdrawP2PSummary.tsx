@@ -10,11 +10,11 @@ import { P2PWithdrawInfo } from 'web/src/modules/p2p/withdrawal';
 
 interface Props {
   currency: Currency;
-  total: string;
+  amount: string;
   info: P2PWithdrawInfo | undefined;
 }
 
-export const WithdrawP2PSummary: FC<Props> = ({ currency, total, info }) => {
+export const WithdrawP2PSummary: FC<Props> = ({ currency, amount, info }) => {
   const t = useT();
 
   const displayFee = useMemo(() => {
@@ -33,9 +33,9 @@ export const WithdrawP2PSummary: FC<Props> = ({ currency, total, info }) => {
     return {
       available: createMoney(info.available, currency),
       minValue: createMoney(info.min, currency),
-      total: createMoney(total || 0, currency),
+      amount: createMoney(amount, currency),
     };
-  }, [currency, info, total]);
+  }, [currency, info, amount]);
 
   const isDynamicFee = displayFee === 'dynamic';
 
@@ -49,7 +49,7 @@ export const WithdrawP2PSummary: FC<Props> = ({ currency, total, info }) => {
         {isDynamicFee ? t('Dynamic') : <NoAmountFormat money={displayFee} />}
       </SummaryField>
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.total')}>
-        {summaryInfo ? <AmountFormat money={summaryInfo.total} /> : null}
+        {summaryInfo ? <AmountFormat money={summaryInfo.amount} /> : null}
       </SummaryField>
       <SummaryField message={t('page.body.wallets.tabs.withdraw.content.min')}>
         {summaryInfo ? <AmountFormat money={summaryInfo.minValue} /> : null}

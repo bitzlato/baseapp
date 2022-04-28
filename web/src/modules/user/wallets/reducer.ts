@@ -13,6 +13,7 @@ import {
   WALLETS_FETCH,
   WALLETS_RESET,
   WALLETS_WITHDRAW_CCY_DATA,
+  WALLETS_WITHDRAW_CCY_DATA_VIEWED,
   WALLETS_WITHDRAW_CCY_ERROR,
   WALLETS_WITHDRAW_CCY_FETCH,
 } from './constants';
@@ -143,6 +144,11 @@ const walletsListReducer = (
         loading: false,
         withdrawSuccess: true,
       };
+    case WALLETS_WITHDRAW_CCY_DATA_VIEWED:
+      return {
+        ...state,
+        withdrawSuccess: false,
+      };
     case WALLETS_ADDRESS_DATA_WS: {
       // if (action.payload.currencies.includes(state.selectedWalletCurrency)) {
       //     return {
@@ -195,6 +201,7 @@ export const walletsReducer = (
     case WALLETS_ADDRESS_ERROR:
     case WALLETS_WITHDRAW_CCY_FETCH:
     case WALLETS_WITHDRAW_CCY_DATA:
+    case WALLETS_WITHDRAW_CCY_DATA_VIEWED:
     case SET_MOBILE_WALLET_UI:
     case WALLETS_WITHDRAW_CCY_ERROR:
       const walletsListState = { ...state.wallets };

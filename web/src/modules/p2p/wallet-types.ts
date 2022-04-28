@@ -1,3 +1,18 @@
+export interface P2PWalletStat {
+  code: string;
+  depositEnabled: boolean;
+  fee: number;
+  inputHour: number;
+  minAcceptableDeposit: string;
+  minFee: number;
+  minWithdrawal: string;
+  paymentsError: number;
+  paymentsHour: number;
+  paymentsQueue: number;
+  unconfirmed: number;
+  withdrawEnabled: boolean;
+}
+
 export interface P2PWallet {
   cryptocurrency: string;
   balance: string;

@@ -1,21 +1,19 @@
-import { useDispatch } from 'react-redux';
+import { useSWRConfig } from 'swr';
 import useMutation from 'use-mutation';
-import { p2pUrl } from 'web/src/api/config';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
-import { alertPush } from 'web/src/modules/public/alert/actions';
-import { FetchError, fetchJson } from 'web/src/helpers/fetch';
+import { accountUrl, p2pUrl } from 'web/src/api/config';
+import { fetchJson } from 'web/src/helpers/fetch';
 import { P2PWithdrawalParams } from 'web/src/modules/p2p/withdrawal';
 
 type Input = {
   params: P2PWithdrawalParams;
   cryptocurrency: string;
-  twoFACode?: string | null;
+  twoFACode: string | null | undefined;
 };
 
 const P2PWithdrawal = async ({ cryptocurrency, params, twoFACode }: Input) => {
   return fetchJson(`${p2pUrl()}/wallets/${cryptocurrency}/withdrawal`, {
     method: 'POST',
-    body: JSON.stringify({ makeWithdraw: params }),
+    body: JSON.stringify(params),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
       ...(twoFACode && { 'X-Code-2FA': twoFACode }),
@@ -26,17 +24,12 @@ const P2PWithdrawal = async ({ cryptocurrency, params, twoFACode }: Input) => {
 };
 
 export const useP2PWithdrawal = () => {
-  const dispatch = useDispatch();
+  const { mutate } = useSWRConfig();
 
   return useMutation(P2PWithdrawal, {
     throwOnFailure: true,
     onSuccess: () => {
-      dispatch(alertPush({ message: ['success.withdraw.action'], type: 'success' }));
-    },
-    onFailure: ({ error }) => {
-      if (error instanceof FetchError) {
-        alertFetchError(dispatch, error);
-      }
+      mutate(`${accountUrl()}/balances`);
     },
   });
 };
