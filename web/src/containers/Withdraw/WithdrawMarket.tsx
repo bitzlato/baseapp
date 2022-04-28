@@ -1,208 +1,122 @@
 import { FC, useState, useEffect, useMemo } from 'react';
-import { useHistory } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'web/src/components/ui/Button';
 import { Box } from 'web/src/components/Box';
-import { createMoney } from 'web/src/helpers/money';
-import { NumberInput } from 'web/src/components/Input/NumberInput';
-import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { defaultBeneficiary } from 'web/src/modules/user/beneficiaries/defaults';
 import { useT } from 'web/src/hooks/useT';
-import { Blockchain } from 'web/src/modules/public/blockchains/types';
-import { tradeUrl } from 'web/src/api/config';
-import { BeneficiaryAddress } from 'web/src/containers/Withdraw/BeneficiaryAddress';
-import { WithdrawSummary } from 'web/src/containers/Withdraw/WithdrawSummary';
+import { Wallet } from 'web/src/modules';
 import {
-  Beneficiary,
-  selectMemberLevels,
-  selectMobileDeviceState,
-  selectUserInfo,
-  Wallet,
-} from 'web/src/modules';
-import { precisionRegExp } from 'web/src/helpers';
-import { Beneficiaries, Blur } from 'web/src/components';
-import { isValidCode } from 'web/src/helpers/codeValidation';
-import { formatSeconds } from 'web/src/helpers/formatSeconds';
-import { useFetch } from 'web/src/hooks/data/useFetch';
-import { WarningIcon } from 'web/src/mobile/assets/images/WarningIcon';
-import { useBeneficiariesFetch } from 'web/src/hooks';
+  selectWithdrawSuccess,
+  walletsWithdrawCcyDataViewed,
+  walletsWithdrawCcyFetch,
+} from 'web/src/modules/user/wallets';
+import { OTP_TIMEOUT } from 'web/src/helpers/codeValidation';
+import { Modal2 } from 'web/src/components/Modal/Modal2';
+import { ModalWithdrawConfirmation } from 'web/src/containers/Withdraw/ModalWithdrawConfirmation';
+import { useCountdown } from 'web/src/hooks/useCountdown';
+import { WithdrawMarketFormValues } from 'web/src/containers/Withdraw/types';
+import { WithdrawMarketForm } from 'web/src/containers/Withdraw/WithdrawMarketForm';
 
 interface Props {
   wallet: Wallet;
-  withdrawDone: boolean;
-  countdown: number;
-  onSubmit: (data: {
-    amount: string;
-    total: string;
-    beneficiary: Beneficiary;
-    otpCode: string;
-  }) => void;
 }
 
-export const WithdrawMarket: FC<Props> = ({ wallet, withdrawDone, countdown, onSubmit }) => {
-  const [amount, setAmount] = useState('');
-  const [beneficiary, setBeneficiary] = useState(defaultBeneficiary);
-  const [otpCode, setOtpCode] = useState('');
+const defaultValue: WithdrawMarketFormValues = {
+  amount: '',
+  beneficiary: defaultBeneficiary,
+  otpCode: '',
+  total: '',
+};
 
+export const WithdrawMarket: FC<Props> = ({ wallet }) => {
   const t = useT();
-  const isMobileDevice = useSelector(selectMobileDeviceState);
-  const user = useSelector(selectUserInfo);
-  const history = useHistory();
-  const memberLevels = useSelector(selectMemberLevels);
+  const dispatch = useDispatch();
+  const { countdown, start } = useCountdown();
 
-  const twoFactorAuthRequired = user.level > 1 || (user.level === 1 && user.otp);
-  const currency = wallet.currency.code;
+  const [withdrawData, setWithdrawData] = useState(defaultValue);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [withdrawSubmitModal, setWithdrawSubmitModal] = useState(false);
+  const [withdrawDone, setWithdrawDone] = useState(false);
 
-  useBeneficiariesFetch({ currency_id: currency.toLowerCase() });
-  const { data = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const withdrawSuccess = useSelector(selectWithdrawSuccess);
 
-  const blockchain = data.find((d) => d.id === beneficiary.blockchain_id);
-  const isUSDXe = blockchain?.name === 'Avalanche' && (currency === 'USDT' || currency === 'USDC');
-
-  const blockchainCurrency = wallet.blockchain_currencies.find(
-    (d) => d.blockchain_id === beneficiary.blockchain_id,
+  const withdrawalAddress = useMemo(
+    () => (withdrawData.beneficiary.data ? (withdrawData.beneficiary.data.address as string) : ''),
+    [withdrawData],
   );
-
-  const reset = () => {
-    setAmount('');
-    setBeneficiary(defaultBeneficiary);
-    setOtpCode('');
-  };
 
   useEffect(() => {
-    reset();
-  }, [currency]);
-
-  useEffect(() => {
-    if (withdrawDone) {
-      reset();
+    if (withdrawSuccess) {
+      setWithdrawSubmitModal(true);
+      setWithdrawDone(true);
+      dispatch(walletsWithdrawCcyDataViewed());
     }
-  }, [withdrawDone]);
+  }, [dispatch, withdrawSuccess]);
 
-  const total = useMemo(() => {
-    if (blockchainCurrency) {
-      const fee = blockchainCurrency?.withdraw_fee;
-      const amountMoney = createMoney(amount, wallet.currency);
-      const totalMoney = amountMoney.subtract(fee);
-      return totalMoney.isNegative() ? (0).toFixed(wallet.precision) : totalMoney.toString();
-    }
-
-    return '';
-  }, [amount, blockchainCurrency, wallet]);
-
-  const isButtonDisabled = () => {
-    const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
-    return (
-      Number(total) <= 0 || !beneficiary.id || isPending || !isValidCode(otpCode) || countdown > 0
-    );
+  const handleCloseWithdrawConfirmModal = () => {
+    setShowConfirmModal(false);
   };
 
-  const handleClick = () => {
-    onSubmit({ amount, total, beneficiary, otpCode });
-    setOtpCode('');
+  const handleCloseWithdrawSubmitModal = () => {
+    setWithdrawSubmitModal(false);
   };
 
-  const handleChangeInputAmount = (value: string) => {
-    const amountValue = parseNumeric(value);
-    if (amountValue.match(precisionRegExp(wallet.precision))) {
-      setAmount(amountValue);
-    }
+  const handleWithdraw = async () => {
+    const withdrawRequest = {
+      amount: withdrawData.amount,
+      currency: wallet.currency.code.toLowerCase(),
+      otp: withdrawData.otpCode,
+      beneficiary_id: String(withdrawData.beneficiary.id),
+    };
+
+    dispatch(walletsWithdrawCcyFetch(withdrawRequest));
+
+    setWithdrawData(defaultValue);
+    setShowConfirmModal(false);
+    start(OTP_TIMEOUT);
   };
 
-  const renderBlur = () => {
-    if (blockchain?.is_transaction_price_too_high) {
-      return <Blur text={t('is_transaction_price_too_high')} />;
-    }
-    if (!wallet.withdrawal_enabled) {
-      return <Blur text={t('page.body.wallets.tabs.withdraw.disabled.message')} />;
-    }
-    if (user.level < (memberLevels?.withdraw.minimum_level ?? 0)) {
-      return (
-        <Blur
-          text={t('page.body.wallets.warning.withdraw.verification')}
-          onClick={() => history.push('/confirm')}
-          linkText={t('page.body.wallets.warning.withdraw.verification.button')}
-        />
-      );
-    }
-    if (!user.otp) {
-      return (
-        <Blur
-          text={t('page.body.wallets.tabs.withdraw.content.enable2fa')}
-          linkText={t('page.body.wallets.tabs.withdraw.content.enable2faButton')}
-          onClick={() => history.push('/profile/2fa')}
-        />
-      );
-    }
-    return null;
+  const handleSubmit = (data: WithdrawMarketFormValues) => {
+    setWithdrawDone(false);
+    setWithdrawData(data);
+    setShowConfirmModal(true);
   };
-
-  const summary = (
-    <WithdrawSummary total={total} wallet={wallet} blockchainCurrency={blockchainCurrency} />
-  );
-
-  const button = (
-    <Box flex="1" self="end" row justify="end">
-      <Button color="primary" onClick={handleClick} disabled={isButtonDisabled()}>
-        {countdown > 0
-          ? formatSeconds(countdown)
-          : t('page.body.wallets.tabs.withdraw.content.button')}
-      </Button>
-    </Box>
-  );
-
-  const warning = isUSDXe ? (
-    <Box row spacing>
-      <WarningIcon />
-      <Box textColor="warning" textSize="lg">
-        {t('withdraw.usdx.e', { currency: <strong>{`${currency}.e`}</strong> })}
-      </Box>
-    </Box>
-  ) : null;
 
   return (
-    <Box col spacing="3">
-      <Box position="relative">
-        <Beneficiaries wallet={wallet} onChangeValue={setBeneficiary} />
-      </Box>
-      <Box col spacing="3" position="relative">
-        {renderBlur()}
-        <BeneficiaryAddress beneficiary={beneficiary} />
-        <Box grow row spacing="2">
-          <Box
-            flex="1"
-            as={NumberInput}
-            value={amount}
-            onChange={handleChangeInputAmount}
-            label={t('page.body.wallets.tabs.withdraw.content.amount')}
-          />
-          {twoFactorAuthRequired && (
-            <Box
-              flex="1"
-              as={NumberInput}
-              value={otpCode}
-              onChange={setOtpCode}
-              label={t('page.body.wallets.tabs.withdraw.content.code2fa')}
-            />
-          )}
-        </Box>
+    <>
+      <WithdrawMarketForm
+        wallet={wallet}
+        countdown={countdown}
+        withdrawDone={withdrawDone}
+        onSubmit={handleSubmit}
+      />
 
-        {isMobileDevice ? (
-          <Box col spacing="2">
-            {summary}
-            {warning}
-            {button}
+      {withdrawSubmitModal ? (
+        <Modal2
+          show
+          header={t('page.modal.withdraw.success')}
+          onClose={handleCloseWithdrawSubmitModal}
+        >
+          <Box as="span" textAlign="center">
+            {t('page.modal.withdraw.success.message.content')}
           </Box>
-        ) : (
-          <>
-            <Box row spacing="2">
-              {summary}
-              {button}
-            </Box>
-            {warning}
-          </>
-        )}
-      </Box>
-    </Box>
+          <Button onClick={handleCloseWithdrawSubmitModal} color="primary">
+            {t('page.modal.withdraw.success.button')}
+          </Button>
+        </Modal2>
+      ) : null}
+
+      {showConfirmModal ? (
+        <ModalWithdrawConfirmation
+          show={showConfirmModal}
+          amount={withdrawData.total}
+          currency={wallet.currency.code}
+          precision={wallet.currency.minorUnit}
+          rid={withdrawalAddress}
+          onSubmit={handleWithdraw}
+          onDismiss={handleCloseWithdrawConfirmModal}
+        />
+      ) : null}
+    </>
   );
 };

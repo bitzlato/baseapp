@@ -336,7 +336,13 @@ export const en = {
   'withdraw.active_vouchers': 'Active vouchers',
   'withdraw.available_balance': 'Available for withdrawal',
   'withdraw.will_deducted': 'will be deducted from the balance',
+  'withdraw.is_disabled':
+    '⚠️ Withdrawal is not available at the moment. Our tech team are already dealing with the issue.',
   'Should be more than': 'Should be more than {value}',
+  'withdraw.confirmation': 'Are you sure you want to withdraw {money} to {address} ?',
+  'withdraw.irreversible': 'All transactions are irreversible!',
+  'withdraw.confirm': 'Confirm the withdrawal',
+  Error: 'Error',
   Dynamic: 'Dynamic',
 
   'page.body.wallets.tabs.withdraw.disabled.message': 'Withdraw was disabled by administration',

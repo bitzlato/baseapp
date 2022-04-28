@@ -16,5 +16,6 @@ export type P2PWithdrawInfo = {
 export type P2PWithdrawalParams = {
   address: string;
   amount: string;
+  standart?: boolean;
   voucher?: boolean;
 };
