@@ -17,8 +17,12 @@ export const ru: LangType = {
   'page.header.navbar.profile': 'Профиль',
   'page.header.navbar.logout': 'Выйти',
 
+  'notifications.title': 'Уведомления',
   'notifications.readall': 'Прочитать все',
   'notifications.empty': 'Уведомлений нет',
+
+  'notifications.unread': 'Непрочитанное',
+  'notifications.read': 'Прочтено',
 
   'notifications.modal.header': 'Внимание!',
   'notifications.No notifications': 'Нет уведомлений',

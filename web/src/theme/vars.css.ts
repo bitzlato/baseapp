@@ -10,6 +10,7 @@ export const fontSizeVars = createGlobalTheme(':root', {
 });
 
 export const zIndexVars = createGlobalTheme(':root', {
+  drawer: '10000',
   modal: '10001',
   modalInner: '10002',
   tooltip: '10010',
@@ -78,6 +79,12 @@ export const [themeLight, vars] = createTheme({
     interactive: colors.luckyPoint,
     interactiveHighlighted: colors.luckyPointLighter,
     alert: colors.flamingo,
+
+    drawer: colors.white,
+    drawerItem: colors.whiteLilac,
+    drawerItemHover: colors.hawkesBlue,
+    drawerItemDivider: colors.white,
+
     dropdown: colors.white,
     dropdownBorder: colors.selago,
     dropdownItem: colors.transparent,
@@ -190,6 +197,10 @@ export const [themeLight, vars] = createTheme({
 
     bids: colors.green,
     asks: colors.carnation,
+
+    notificationUnread: colors.burntSienna,
+    notificationRead: colors.white50,
+    notificationTime: colors.white50,
   },
 });
 
@@ -216,6 +227,12 @@ export const themeDark = createTheme(vars, {
     interactive: colors.silverChalice,
     interactiveHighlighted: colors.gray,
     alert: colors.flamingo,
+
+    drawer: colors.ebonyClay,
+    drawerItem: colors.white05,
+    drawerItemHover: colors.mako,
+    drawerItemDivider: colors.white10,
+
     dropdown: colors.ebonyClay,
     dropdownBorder: colors.transparent,
     dropdownItem: colors.transparent,
@@ -328,5 +345,9 @@ export const themeDark = createTheme(vars, {
 
     bids: colors.milanoGreen,
     asks: colors.carnation,
+
+    notificationUnread: colors.burntSienna,
+    notificationRead: colors.white50,
+    notificationTime: colors.white50,
   },
 });

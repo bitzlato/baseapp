@@ -1,11 +1,13 @@
-import { FC, useCallback, useContext } from 'react';
+import React, { FC, useCallback, useContext } from 'react';
 import { Notify } from 'web/src/components/shared/sharedTypes';
 import { Box } from 'web/src/components/ui/Box';
 import { HeaderContext } from 'web/src/components/shared/Header/HeaderContext';
-import { Button } from 'web/src/components/ui/Button';
-import { Dropdown, RenderMenuFn } from 'web/src/components/shared/Header/Dropdown/Dropdown';
+import { RenderMenuFn } from 'web/src/components/shared/Header/Dropdown/Dropdown';
 import NotificationsIcon from 'web/src/assets/svg/NotificationsIcon.svg';
+import ReadAllIcon from 'web/src/assets/svg/ReadAllIcon.svg';
+import OutlinedCrossIcon from 'web/src/assets/svg/OutlinedCrossIcon.svg';
 import * as s from './Notifications.css';
+import Drawer from '../Drawer/Drawer';
 
 interface Props {
   notifications: Notify[];
@@ -28,73 +30,119 @@ export const Notifications: FC<Props> = ({ notifications, onAllRead }) => {
 
   const renderMenu: RenderMenuFn = useCallback(
     ({ closeMenu }) => (
-      <>
-        <Box m="4x">
-          <Button color="secondary" fullWidth onClick={onAllRead}>
-            {t('all_read')}
-          </Button>
-        </Box>
-        <Box className={s.items}>
-          {notifications.length > 0 ? (
-            notifications.map((notify) => {
-              const handleClick = () => {
+      <Box className={s.items}>
+        {notifications.length > 0 ? (
+          <>
+            <Box mt="4x" display="flex" justifyContent="space-between">
+              <Box as="span" color="text">
+                {t('notificationsTitle')}
+              </Box>
+              <Box display="flex" justifyContent="flex-end" alignItems="center">
+                <Box as="button" mx="1x" onClick={onAllRead}>
+                  <ReadAllIcon />
+                </Box>
+
+                <Box as="button" mx="1x" color="text" onClick={closeMenu}>
+                  <OutlinedCrossIcon />
+                </Box>
+              </Box>
+            </Box>
+
+            <Box borderStyle="solid" borderWidth="1x" width="full" my="2x" bg="drawerItemDivider" />
+
+            {notifications.map((notify, index) => {
+              const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+                event.stopPropagation();
+
                 closeMenu();
                 notify.onClick?.();
               };
 
+              const showDate = () => {
+                if (index > 0 && notifications[index - 1]!.date === notify.date) {
+                  return false;
+                }
+
+                return true;
+              };
+
               return (
-                <Box
-                  key={notify.id}
-                  as="button"
-                  color={notify.read ? 'dropdownItemText' : 'text'}
-                  fontWeight={notify.read ? 'regular' : 'strong'}
-                  cursor="pointer"
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="flex-start"
-                  px="4x"
-                  py="2x"
-                  borderBottomWidth="2x"
-                  borderBottomStyle="solid"
-                  borderBottomColor="dropdownItemBorderBottom"
-                  textDecoration={{
-                    default: 'none',
-                    hover: 'none',
-                  }}
-                  bg={{
-                    default: 'dropdownItem',
-                    hover: 'dropdownItemHover',
-                  }}
-                  width="full"
-                  fontSize="small"
-                  textAlign="left"
-                  wordBreak="break-word"
-                  onClick={handleClick}
-                >
-                  <Box as="span" color="text">
-                    {notify.date}
+                <React.Fragment key={notify.id}>
+                  {showDate() && (
+                    <Box mt="8x" mb="2x">
+                      <Box as="span" color="text">
+                        {notify.date}
+                      </Box>
+                    </Box>
+                  )}
+
+                  <Box
+                    as="button"
+                    color={notify.read ? 'dropdownItemText' : 'text'}
+                    cursor="pointer"
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="flex-start"
+                    px="4x"
+                    py="2x"
+                    my="4x"
+                    textDecoration={{
+                      default: 'none',
+                      hover: 'none',
+                    }}
+                    bg={{
+                      default: 'drawerItem',
+                      hover: 'dropdownItemHover',
+                    }}
+                    width="full"
+                    fontSize="small"
+                    textAlign="left"
+                    wordBreak="break-word"
+                    onClick={handleClick}
+                    borderRadius="2x"
+                  >
+                    <Box
+                      display="flex"
+                      width="full"
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      <Box
+                        as="span"
+                        color={notify.read ? 'notificationRead' : 'notificationUnread'}
+                      >
+                        {notify.read ? t('notificationRead') : t('notificationUnread')}
+                      </Box>
+                      <Box as="span" color="notificationTime">
+                        {notify.time}
+                      </Box>
+                    </Box>
+
+                    <Box
+                      borderStyle="solid"
+                      borderWidth="1x"
+                      width="full"
+                      my="2x"
+                      bg="drawerItemDivider"
+                    />
+
+                    <Box as="span" color="text">
+                      {notify.message}
+                    </Box>
                   </Box>
-                  <Box as="span">{notify.message}</Box>
-                </Box>
+                </React.Fragment>
               );
-            })
-          ) : (
-            <Box m="4x" textAlign="center" color="text">
-              {t('notifications_empty')}
-            </Box>
-          )}
-        </Box>
-      </>
+            })}
+          </>
+        ) : (
+          <Box m="4x" textAlign="center" color="text">
+            {t('notifications_empty')}
+          </Box>
+        )}
+      </Box>
     ),
     [notifications, onAllRead, t],
   );
 
-  return (
-    <Dropdown
-      dropdownAlign="right"
-      renderButton={renderButton}
-      renderMenu={renderMenu}
-      height="full"
-    />
-  );
+  return <Drawer renderButton={renderButton} renderMenu={renderMenu} />;
 };

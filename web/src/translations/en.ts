@@ -17,8 +17,12 @@ export const en = {
   'page.header.navbar.profile': 'Profile',
   'page.header.navbar.logout': 'Logout',
 
+  'notifications.title': 'Notifications',
   'notifications.readall': 'Read all',
   'notifications.empty': 'No notifications',
+
+  'notifications.unread': 'Unread',
+  'notifications.read': 'Read',
 
   'notifications.modal.header': 'Alert!',
   'notifications.No notifications': 'No notifications',
