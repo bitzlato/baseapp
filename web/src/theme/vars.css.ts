@@ -46,6 +46,7 @@ export const sizeVars = createGlobalTheme(':root', {
 export const radiiVars = createGlobalTheme(':root', {
   '0': '0px' as const,
   '1x': '4px' as const,
+  '1.5x': '6px' as const,
   '2x': '8px' as const,
   circle: '9999px' as const,
 });
@@ -58,6 +59,7 @@ export const [themeLight, vars] = createTheme({
   boxShadows: {
     dropdown: `8px 8px 10px ${colors.black10}`,
     modal: `8px 4px 14px ${colors.black10}`,
+    control: `0px 0px 0px 3px ${colors.mystic90}`,
     btnPrimaryFocus: `0px 0px 0px 3px ${colors.mystic90}`,
     btnSecondaryFocus: `0px 0px 0px 3px ${colors.shark19}`,
   },
@@ -177,6 +179,10 @@ export const [themeLight, vars] = createTheme({
 
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
+
+    variantSwitcherBorder: colors.ebonyClay15,
+    variantSwitcherItemBgActive: colors.goldTips,
+    variantSwitcherItemTextActive: colors.ebonyClay,
   },
 });
 
@@ -184,6 +190,7 @@ export const themeDark = createTheme(vars, {
   boxShadows: {
     dropdown: `8px 8px 10px ${colors.black10}`,
     modal: `8px 4px 14px ${colors.black10}`,
+    control: `0px 0px 0px 3px ${colors.mystic15}`,
     btnPrimaryFocus: `0px 0px 0px 3px ${colors.mystic15}`,
     btnSecondaryFocus: `0px 0px 0px 3px ${colors.mystic15}`,
   },
@@ -303,5 +310,9 @@ export const themeDark = createTheme(vars, {
 
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
+
+    variantSwitcherBorder: colors.white10,
+    variantSwitcherItemBgActive: colors.goldTips,
+    variantSwitcherItemTextActive: colors.ebonyClay,
   },
 });
