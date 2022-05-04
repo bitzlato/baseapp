@@ -30,10 +30,12 @@ export const AmountFormat: FC<AmountFormatProps> = ({ money, children, ...option
   return (
     <>
       {integer}
-      <span className={s.fractional}>
-        {decimalSeparator}
-        {fractional}
-      </span>
+      {fractional && (
+        <span className={s.fractional}>
+          {decimalSeparator}
+          {fractional}
+        </span>
+      )}
     </>
   );
 };

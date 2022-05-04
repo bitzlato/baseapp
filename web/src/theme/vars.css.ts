@@ -183,6 +183,10 @@ export const [themeLight, vars] = createTheme({
     variantSwitcherBorder: colors.ebonyClay15,
     variantSwitcherItemBgActive: colors.goldTips,
     variantSwitcherItemTextActive: colors.ebonyClay,
+
+    paginationItemBgHover: colors.white05,
+    paginationItemBgActive: colors.white10,
+    paginationItemTextDisabled: colors.white30,
   },
 });
 
@@ -314,5 +318,9 @@ export const themeDark = createTheme(vars, {
     variantSwitcherBorder: colors.white10,
     variantSwitcherItemBgActive: colors.goldTips,
     variantSwitcherItemTextActive: colors.ebonyClay,
+
+    paginationItemBgHover: colors.white05,
+    paginationItemBgActive: colors.white10,
+    paginationItemTextDisabled: colors.white30,
   },
 });

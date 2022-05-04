@@ -29,15 +29,12 @@ export const ru: LangType = {
   'notifications.adsActivatedMessage': '✅ Ваши объявления активированы',
   'notifications.adsPausedMessage_legacy':
     'Ваши объявления недоступны пользователям из-за отсутствия минимального баланса',
-  'notifications.checkCashed':
-    '{recipient} обналичил чек на {amount} {cryptocurrency}.',
+  'notifications.checkCashed': '{recipient} обналичил чек на {amount} {cryptocurrency}.',
   'notifications.comissionReturn':
     '🤩🤩🤩 Сделка #{tradeId} прошла бесплатно, вы сэкономили {amount} {cryptocurrency}',
   'notifications.disputeAvailablePurchase': 'Вы получили возможность открыть спор',
-  'notifications.disputeAvailableSelling':
-    'Покупатель получил возможность открыть спор',
-  'notifications.disputeAvailableTenMinutes':
-    'У вас осталось 10 минут на открытие спора',
+  'notifications.disputeAvailableSelling': 'Покупатель получил возможность открыть спор',
+  'notifications.disputeAvailableTenMinutes': 'У вас осталось 10 минут на открытие спора',
   'notifications.disputeFail': '😞 Вы проиграли в споре сделки {tradeId}.',
   'notifications.disputeSuccess':
     '✌ Вы победили в споре сделки {tradeId} и получили {amount} {cryptocurrency}.',
@@ -53,12 +50,10 @@ export const ru: LangType = {
   'notifications.freezeTypewithdraw': 'вывод',
   'notifications.inactivityRatingDecline':
     'К сожалению, ваш рейтинг понизился, так как вы не откликаетесь на объявления слишком часто!',
-  'notifications.invoicePaid':
-    '✅ Вы успешно оплатили {merchantName} счет {invoiceId}',
+  'notifications.invoicePaid': '✅ Вы успешно оплатили {merchantName} счет {invoiceId}',
   'notifications.invoicePaidToMerchant':
     '🔥 Оплата по счету {invoiceId} от {userName} {amount} {cryptocurrency}',
-  'notifications.merchantPaid':
-    'Вы получили выплату {amount} {cryptocurrency} от {merchantName}',
+  'notifications.merchantPaid': 'Вы получили выплату {amount} {cryptocurrency} от {merchantName}',
   'notifications.moneyReceived':
     'Вы получили {cryptocurrencyamount} {cryptocurrencycode} ({currencyamount} {currencycode}) от {donor}!',
   'notifications.mute': 'Ваши объявления сняты с показа на {duration} ч.',
@@ -70,8 +65,7 @@ export const ru: LangType = {
   'notifications.newReferral': 'У Вас новый реферал {publicName}',
   'notifications.newTradeMessage': 'Новое сообщение в сделке #{tradeId}',
   'notifications.notificationsCount': '{count} уведомлений',
-  'notifications.payment-processed':
-    '🚀 Отправка {amount} {cryptocurrency} осуществлена',
+  'notifications.payment-processed': '🚀 Отправка {amount} {cryptocurrency} осуществлена',
   'notifications.tipsReceived':
     '🔥 Вы получили {cryptocurrencyamount} {cryptocurrencycode} чаевых по сделке #{tradeId}!',
   'notifications.tradeExpired': 'Сделка #{tradeId} будет автоматически отменена',
@@ -81,17 +75,12 @@ export const ru: LangType = {
     'Упс! Кажется Вас сейчас нет на месте и Вы пропускаете сделки. Мы приостановили показ ваших объявлений до тех пор, пока Вы не вернетесь.',
   'notifications.tradeStatusChanged': 'Изменился статус сделки #{tradeId}',
   'notifications.tradeStatusChangedCancel': 'Сделка #{tradeId} отменена',
-  'notifications.tradeStatusChangedConfirmPayment':
-    'Вы получили ТИКЕР КРИПТА. Сделка #{tradeId}',
-  'notifications.tradeStatusChangedCreated':
-    'Новое предложение! Сделка НОМЕР #{tradeId}',
-  'notifications.tradeStatusChangedPayment':
-    'Проверьте поступление средств. Сделка #{tradeId}',
-  'notifications.tradeWillExpire':
-    'Сделка #{tradeId} будет автоматически отменена {time, fromNow}',
+  'notifications.tradeStatusChangedConfirmPayment': 'Вы получили ТИКЕР КРИПТА. Сделка #{tradeId}',
+  'notifications.tradeStatusChangedCreated': 'Новое предложение! Сделка НОМЕР #{tradeId}',
+  'notifications.tradeStatusChangedPayment': 'Проверьте поступление средств. Сделка #{tradeId}',
+  'notifications.tradeWillExpire': 'Сделка #{tradeId} будет автоматически отменена {time, fromNow}',
   'notifications.unFreeze': 'Ваш аккаунт разморожен',
-  'notifications.unFreezeReason':
-    'Причина разморозки "{reason}". Типы операций "{type}".',
+  'notifications.unFreezeReason': 'Причина разморозки "{reason}". Типы операций "{type}".',
   'notifications.verification-confirmed': '✅ Ваша заявку на верификацию подтверждена',
   'notifications.verificationReset':
     '❌ Уважаемый клиент! Ваша верификация больше недействительна. Пожалуйста, пройдите заново процедуру верификации',
@@ -106,12 +95,9 @@ export const ru: LangType = {
     '⚠️ У вас есть {count} ваучер(а) на бесплатный вывод который(е) сгорают через 3 дня.\n\n🔥 Самое время ими воспользоваться и не потерять шанс бесплатного вывода монет!',
   'notifications.withdrawVoucherExpireSecond':
     '⚠️ У вас есть {count} ваучер(а) на бесплатный вывод который(е) сгорают через 1 день.\n\n🔥 Самое время ими воспользоваться и не потерять шанс бесплатного вывода монет!',
-  'notifications.withdrawVoucherReceived':
-    '  Вы получили {count} ваучеров на бесплатный вывод!',
-  'notifications.withdrawVoucherReceived1':
-    '  Вы получили {count} ваучер на бесплатный вывод!',
-  'notifications.withdrawVoucherReceived234':
-    '  Вы получили {count} ваучера на бесплатный вывод!',
+  'notifications.withdrawVoucherReceived': '  Вы получили {count} ваучеров на бесплатный вывод!',
+  'notifications.withdrawVoucherReceived1': '  Вы получили {count} ваучер на бесплатный вывод!',
+  'notifications.withdrawVoucherReceived234': '  Вы получили {count} ваучера на бесплатный вывод!',
   'notifications.user24hInactivityMessage':
     'Вы не активны в сервисе более 24 часов, в связи с этим, мы приостановили показ ваших объявлений до тех пор, пока Вы не вернетесь',
   'notifications.walletAddressDropped':
@@ -1426,6 +1412,10 @@ export const ru: LangType = {
   Change: 'Изменить',
   Rename: 'Переименовать',
   Reports: 'Отчёты',
+  'AD Board': 'Доска объявлений',
+  'My adverts': 'Мои Объявления',
+  'My trades': 'Сделки',
+  'Active users': 'Активные пользователи',
 
   'p2p.apiKeys.descr':
     'Создание приватного API ключа позволяет получить доступ к торговле и другим сервисам Bitzlato через сторонние сайты или приложения. Ознакомится с <link>документацией</link>',
