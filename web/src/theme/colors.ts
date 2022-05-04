@@ -17,6 +17,7 @@ export const whiteLilac = 'rgb(240, 243, 249)';
 export const whiteLilac50 = 'rgb(240, 243, 249, 0.5)';
 export const gray = 'rgb(128, 128, 128)';
 export const ebonyClay = 'rgb(38, 45, 55)';
+export const ebonyClay15 = 'rgb(38, 45, 55, 0.15)';
 export const ebonyClay50 = 'rgb(38, 45, 55, 0.5)';
 export const bunker = 'rgb(19, 23, 28)';
 export const abbey = 'rgb(83, 85, 89)';
