@@ -5,9 +5,9 @@ import s from './Container.postcss';
 
 type Props = {
   className?: string | undefined;
-  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | undefined;
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'fullhd' | undefined;
 };
 
-export const Container: Element<Props> = ({ className, maxWidth = 'md', ...props }) => {
-  return <Box {...props} className={cn(s.container, s[maxWidth], className)} />;
+export const Container: Element<Props> = ({ className, maxWidth, ...props }) => {
+  return <Box {...props} className={cn(s.container, maxWidth && s[maxWidth], className)} />;
 };
