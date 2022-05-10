@@ -1,4 +1,4 @@
-import { FC, useState, useMemo } from 'react';
+import { FC, useState, useMemo, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCountdown } from 'web/src/hooks/useCountdown';
 import { useT } from 'web/src/hooks/useT';
@@ -21,6 +21,8 @@ import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { WithdrawP2PFormValues } from 'web/src/containers/Withdraw/types';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
+import { useFetchP2PTransactions } from 'web/src/hooks/data/useFetchP2PTransactions';
+import { P2PTransaction } from 'web/src/modules/p2p/types';
 
 interface Props {
   currencyCode: string;
@@ -48,8 +50,33 @@ export const WithdrawP2P: FC<Props> = ({ currencyCode }) => {
   const [showWithdrawDisabled, setShowWithdrawDisabled] = useState(false);
   const [withdrawDone, setWithdrawDone] = useState(false);
   const [showSafeModeWizard, setShowSafeModeWizard] = useState(false);
+  const lastWithdrawId = useRef<P2PTransaction['id']>();
 
   const [p2pWithdrawalMutate] = useP2PWithdrawal();
+  const withdrawalHistory = useFetchP2PTransactions(
+    {
+      cryptocurrency: ccy.code,
+      sortKey: 'created',
+      sortValue: 'desc',
+      limit: 1,
+      skip: 0,
+      type: 'withdrawal',
+    },
+    { refreshInterval: email === null ? 0 : 5000 },
+  );
+
+  useEffect(() => {
+    if (lastWithdrawId.current !== undefined) {
+      if (withdrawalHistory.data?.data[0]?.id !== lastWithdrawId.current) {
+        setEmail(null);
+        setWithdrawDone(true);
+      }
+    }
+
+    if (lastWithdrawId.current === undefined && withdrawalHistory.data?.data[0]) {
+      lastWithdrawId.current = withdrawalHistory.data.data[0].id;
+    }
+  }, [withdrawalHistory.data]);
 
   const withdrawP2P = async (params: P2PWithdrawalParams, code: string | null | undefined) => {
     try {
@@ -58,6 +85,8 @@ export const WithdrawP2P: FC<Props> = ({ currencyCode }) => {
         cryptocurrency: currencyCode,
         twoFACode: code,
       });
+
+      withdrawalHistory.mutate();
 
       setShow2fa(false);
 
