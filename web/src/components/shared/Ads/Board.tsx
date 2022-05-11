@@ -52,7 +52,7 @@ export const Board: FC<Props> = () => {
   const handleRefresh = () => mutate();
 
   return (
-    <Adapter>
+    <Adapter Link={Link}>
       <Container maxWidth="fullhd">
         <Box display="flex" justifyContent="space-between" mt="8x" px="8x">
           <Stack marginRight="4x">

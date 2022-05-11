@@ -36,9 +36,11 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
       <AdsTableHeaderColumn size="medium">{t('Traider')}</AdsTableHeaderColumn>
       <AdsTableHeaderColumn size="medium">{t('Payment method')}</AdsTableHeaderColumn>
       <AdsTableHeaderColumn size="medium">
-        {t('Rate', { fiat: fiatSign, crypto: cryptoSign })}
+        {t('RateWithSymbol', { fiat: fiatSign, crypto: cryptoSign })}
       </AdsTableHeaderColumn>
-      <AdsTableHeaderColumn size="small">{t('Limits', { fiat: fiatSign })}</AdsTableHeaderColumn>
+      <AdsTableHeaderColumn size="small">
+        {t('LimitsWithSymbol', { fiat: fiatSign })}
+      </AdsTableHeaderColumn>
       <AdsTableHeaderColumn size="large" display="flex" justifyContent="flex-end">
         <Button variant="text" color="clarified" size="small" onClick={onRefresh}>
           <Box as={RefreshIcon} display="block" mr="2x" />
