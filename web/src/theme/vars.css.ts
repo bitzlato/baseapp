@@ -199,8 +199,11 @@ export const [themeLight, vars] = createTheme({
     asks: colors.carnation,
 
     notificationUnread: colors.burntSienna,
-    notificationRead: colors.white50,
-    notificationTime: colors.white50,
+    notificationRead: colors.ebonyClay70,
+    notificationTime: colors.ebonyClay70,
+
+    btnDrawer: colors.ebonyClay,
+    btnDrawerHover: colors.ebonyClay15,
   },
 });
 
@@ -349,5 +352,8 @@ export const themeDark = createTheme(vars, {
     notificationUnread: colors.burntSienna,
     notificationRead: colors.white50,
     notificationTime: colors.white50,
+
+    btnDrawer: colors.white,
+    btnDrawerHover: colors.white50,
   },
 });
