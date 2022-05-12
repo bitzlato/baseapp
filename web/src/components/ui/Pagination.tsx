@@ -102,9 +102,9 @@ export const Pagination: FC<Props> = memo(
     return (
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <SelectString
-          value={perPage}
-          options={perPageOptions}
-          onChange={handleChangePerPage}
+          value={perPage as any}
+          options={perPageOptions as any}
+          onChange={handleChangePerPage as any}
           maxMenuHeight={200}
         />
         <Box display="flex" alignItems="center">

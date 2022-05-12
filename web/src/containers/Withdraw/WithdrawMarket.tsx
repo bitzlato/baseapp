@@ -1,39 +1,45 @@
 import { FC, useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router';
-import { Button } from 'web/src/components/ui/Button';
-import { Box } from 'src/components/Box';
-import { createMoney } from 'src/helpers/money';
-import { NumberInput } from 'src/components/Input/NumberInput';
-import { parseNumeric } from 'src/helpers/parseNumeric';
-import { defaultBeneficiary } from 'src/modules/user/beneficiaries/defaults';
-import { useT } from 'src/hooks/useT';
 import { useSelector } from 'react-redux';
-import { Blockchain } from 'src/modules/public/blockchains/types';
-import { tradeUrl } from 'src/api/config';
-import { BeneficiaryAddress } from './BeneficiaryAddress';
-import { WithdrawSummary } from './WithdrawSummary';
+import { Button } from 'web/src/components/ui/Button';
+import { Box } from 'web/src/components/Box';
+import { createMoney } from 'web/src/helpers/money';
+import { NumberInput } from 'web/src/components/Input/NumberInput';
+import { parseNumeric } from 'web/src/helpers/parseNumeric';
+import { defaultBeneficiary } from 'web/src/modules/user/beneficiaries/defaults';
+import { useT } from 'web/src/hooks/useT';
+import { Blockchain } from 'web/src/modules/public/blockchains/types';
+import { tradeUrl } from 'web/src/api/config';
+import { BeneficiaryAddress } from 'web/src/containers/Withdraw/BeneficiaryAddress';
+import { WithdrawSummary } from 'web/src/containers/Withdraw/WithdrawSummary';
 import {
   Beneficiary,
   selectMemberLevels,
   selectMobileDeviceState,
   selectUserInfo,
   Wallet,
-} from '../../modules';
-import { precisionRegExp } from '../../helpers';
-import { Beneficiaries, Blur } from '../../components';
+} from 'web/src/modules';
+import { precisionRegExp } from 'web/src/helpers';
+import { Beneficiaries, Blur } from 'web/src/components';
 import { isValidCode } from 'web/src/helpers/codeValidation';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
 import { useFetch } from 'web/src/hooks/data/useFetch';
 import { WarningIcon } from 'web/src/mobile/assets/images/WarningIcon';
+import { useBeneficiariesFetch } from 'web/src/hooks';
 
 interface Props {
-  onClick: (amount: string, total: string, beneficiary: Beneficiary, otpCode: string) => void;
-  withdrawDone: boolean;
   wallet: Wallet;
+  withdrawDone: boolean;
   countdown: number;
+  onSubmit: (data: {
+    amount: string;
+    total: string;
+    beneficiary: Beneficiary;
+    otpCode: string;
+  }) => void;
 }
 
-export const WithdrawBody: FC<Props> = (props) => {
+export const WithdrawMarket: FC<Props> = ({ wallet, withdrawDone, countdown, onSubmit }) => {
   const [amount, setAmount] = useState('');
   const [beneficiary, setBeneficiary] = useState(defaultBeneficiary);
   const [otpCode, setOtpCode] = useState('');
@@ -45,12 +51,12 @@ export const WithdrawBody: FC<Props> = (props) => {
   const memberLevels = useSelector(selectMemberLevels);
 
   const twoFactorAuthRequired = user.level > 1 || (user.level === 1 && user.otp);
+  const currency = wallet.currency.code;
 
+  useBeneficiariesFetch({ currency_id: currency.toLowerCase() });
   const { data = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
 
-  const { wallet, withdrawDone, countdown } = props;
   const blockchain = data.find((d) => d.id === beneficiary.blockchain_id);
-  const currency = wallet.currency.code;
   const isUSDXe = blockchain?.name === 'Avalanche' && (currency === 'USDT' || currency === 'USDC');
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
@@ -75,12 +81,14 @@ export const WithdrawBody: FC<Props> = (props) => {
 
   const total = useMemo(() => {
     if (blockchainCurrency) {
+      const fee = blockchainCurrency?.withdraw_fee;
       const amountMoney = createMoney(amount, wallet.currency);
-      const totalMoney = amountMoney.subtract(blockchainCurrency.withdraw_fee);
+      const totalMoney = amountMoney.subtract(fee);
       return totalMoney.isNegative() ? (0).toFixed(wallet.precision) : totalMoney.toString();
     }
+
     return '';
-  }, [amount, blockchainCurrency]);
+  }, [amount, blockchainCurrency, wallet]);
 
   const isButtonDisabled = () => {
     const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
@@ -90,14 +98,14 @@ export const WithdrawBody: FC<Props> = (props) => {
   };
 
   const handleClick = () => {
-    props.onClick(amount, total, beneficiary, otpCode);
+    onSubmit({ amount, total, beneficiary, otpCode });
     setOtpCode('');
   };
 
   const handleChangeInputAmount = (value: string) => {
-    const amount = parseNumeric(value);
-    if (amount.match(precisionRegExp(wallet.precision))) {
-      setAmount(amount);
+    const amountValue = parseNumeric(value);
+    if (amountValue.match(precisionRegExp(wallet.precision))) {
+      setAmount(amountValue);
     }
   };
 
@@ -147,7 +155,7 @@ export const WithdrawBody: FC<Props> = (props) => {
     <Box row spacing>
       <WarningIcon />
       <Box textColor="warning" textSize="lg">
-        {t('withdraw.usdx.e', { currency: <strong>{`${wallet.currency.code}.e`}</strong> })}
+        {t('withdraw.usdx.e', { currency: <strong>{`${currency}.e`}</strong> })}
       </Box>
     </Box>
   ) : null;
@@ -178,6 +186,7 @@ export const WithdrawBody: FC<Props> = (props) => {
             />
           )}
         </Box>
+
         {isMobileDevice ? (
           <Box col spacing="2">
             {summary}

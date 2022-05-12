@@ -551,7 +551,6 @@ web/src/screens/SetupScreen/index.tsx
 web/src/screens/SignInScreen/index.tsx
 web/src/screens/SignUpScreen/index.tsx
 web/src/screens/TradingScreen/index.tsx
-web/src/screens/VerificationScreen/index.tsx
 web/src/screens/WalletsScreen/Balance.tsx
 web/src/screens/WalletsScreen/InvoiceExplanation.tsx
 web/src/screens/WalletsScreen/helpers.ts

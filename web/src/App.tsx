@@ -14,6 +14,7 @@ import { languageMap } from './translations';
 import { ErrorBoundary } from './containers/ErrorBoundary/ErrorBoundary';
 import { Language } from './types';
 import { lazyRetry } from './helpers/lazyRetry';
+import { useNotificator } from './hooks/useNotificator';
 
 const gaKey = gaTrackerKey();
 const browserHistory = createBrowserHistory();
@@ -26,10 +27,9 @@ if (gaKey) {
   });
 }
 
+const Header = lazyRetry(() => import('./components/Header/Header'));
+
 /* Mobile components */
-const MobileHeader = lazyRetry(() =>
-  import('./mobile/components/Header').then(({ Header }) => ({ default: Header })),
-);
 const MobileFooter = lazyRetry(() =>
   import('./mobile/components/Footer').then(({ Footer }) => ({ default: Footer })),
 );
@@ -38,7 +38,6 @@ const MobileFooter = lazyRetry(() =>
 const AlertsContainer = lazyRetry(() =>
   import('./containers/Alerts').then(({ Alerts }) => ({ default: Alerts })),
 );
-const Header = lazyRetry(() => import('./components/Header/Header'));
 const LayoutContainer = lazyRetry(() =>
   import('./routes').then(({ Layout }) => ({ default: Layout })),
 );
@@ -75,7 +74,7 @@ const RenderDeviceContainers = () => {
 
   return (
     <div className={cn('pg-mobile-app', className)}>
-      <MobileHeader />
+      <Header />
       <AlertsContainer />
       <LayoutContainer />
       <MobileFooter />
@@ -85,6 +84,8 @@ const RenderDeviceContainers = () => {
 
 export const App = () => {
   useSetMobileDevice();
+  useNotificator();
+
   const lang = useSelector(selectCurrentLanguage);
   const isMobileDevice = useSelector(selectMobileDeviceState);
 

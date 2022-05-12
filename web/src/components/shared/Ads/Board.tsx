@@ -14,10 +14,9 @@ import { useT } from 'web/src/hooks/useT';
 import { HelpIcon } from 'web/src/components/ui/HelpIcon';
 import { Switch } from 'web/src/components/form/Switch';
 import { Ads } from './Ads';
-import { Filter } from './Filter';
+import { Filter, FilterValues } from './Filter';
 
 interface Props {}
-interface FilterValues {}
 
 const ADS_PER_PAGE = 15;
 const initialValues = {}; // TODO: get from sorage or use default values
@@ -53,7 +52,7 @@ export const Board: FC<Props> = () => {
   const handleRefresh = () => mutate();
 
   return (
-    <Adapter>
+    <Adapter Link={Link}>
       <Container maxWidth="fullhd">
         <Box display="flex" justifyContent="space-between" mt="8x" px="8x">
           <Stack marginRight="4x">
@@ -88,7 +87,7 @@ export const Board: FC<Props> = () => {
             p="6x"
             borderRadius="1.5x"
             marginRight="6x"
-            style={{ width: '20%', minWidth: '380px' }}
+            style={{ width: '20%' }}
           >
             <Filter
               initialValues={initialValues}
@@ -111,7 +110,6 @@ export const Board: FC<Props> = () => {
                 onChange={handleChangePage}
                 onChangePerPage={handleChangePerPage}
               />
-              // data.total
             )}
           </Box>
         </Box>

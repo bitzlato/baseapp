@@ -11,9 +11,6 @@ import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurr
 import { Tabs } from 'src/components/Tabs/Tabs';
 import { Tab, TabList, TabPanel } from 'src/components/Tabs';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
-import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
-import { DepositP2P } from 'web/src/components/DepositCrypto/DepositP2P';
-import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { useHistory, useParams } from 'react-router';
 import { Transfer } from 'src/containers/Wallets/Transfer';
@@ -24,9 +21,9 @@ import { useGeneralWallets } from 'web/src/hooks/useGeneralWallets';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
+import { Deposit } from 'web/src/components/DepositCrypto/Deposit';
 import { TabId, useWalletTab } from './useWalletTab';
 import { Balance } from './Balance';
-import { InvoiceExplanation } from './InvoiceExplanation';
 import { Rate } from './Rate';
 
 import s from './WalletsScreen.postcss';
@@ -58,8 +55,6 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
   const wallet = wallets.find((d) => d.currency.code === general?.currency);
   const cryptoCurrency = getCurrencyCodeSymbol(general.currency);
   const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
-  const hasP2P = !!general.balanceP2P;
-  const isBtc = cryptoCurrency === 'BTC';
 
   const rateResponse = useFetchRate(
     cryptoCurrency,
@@ -136,18 +131,10 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
                     <Balance title={t('Locked')} money={general.locked} />
                   </Box>
                   <TabPanel value={TabId.deposit}>
-                    {!isBtc && wallet && <DepositCrypto wallet={wallet} />}
-                    {hasP2P && <DepositP2P currency={cryptoCurrency} />}
-                    <WalletHistory type="deposits" general={general} />
+                    <Deposit general={general} wallet={wallet} />
                   </TabPanel>
                   <TabPanel value={TabId.withdraw}>
-                    {wallet &&
-                      (general.currency === 'BTC' ? (
-                        <InvoiceExplanation currency={general.currency} />
-                      ) : (
-                        <Withdraw wallet={wallet} />
-                      ))}
-                    <WalletHistory type="withdraws" general={general} />
+                    <Withdraw general={general} wallet={wallet} />
                   </TabPanel>
                   <TabPanel value={TabId.transfer}>
                     {general.hasTransfer && (

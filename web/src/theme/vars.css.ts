@@ -10,6 +10,7 @@ export const fontSizeVars = createGlobalTheme(':root', {
 });
 
 export const zIndexVars = createGlobalTheme(':root', {
+  drawer: '10000',
   modal: '10001',
   modalInner: '10002',
   tooltip: '10010',
@@ -59,6 +60,7 @@ export const [themeLight, vars] = createTheme({
   boxShadows: {
     dropdown: `8px 8px 10px ${colors.black10}`,
     modal: `8px 4px 14px ${colors.black10}`,
+    control: `0px 0px 0px 3px ${colors.mystic90}`,
     btnPrimaryFocus: `0px 0px 0px 3px ${colors.mystic90}`,
     btnSecondaryFocus: `0px 0px 0px 3px ${colors.shark19}`,
   },
@@ -77,6 +79,12 @@ export const [themeLight, vars] = createTheme({
     interactive: colors.luckyPoint,
     interactiveHighlighted: colors.luckyPointLighter,
     alert: colors.flamingo,
+
+    drawer: colors.white,
+    drawerItem: colors.whiteLilac,
+    drawerItemHover: colors.hawkesBlue,
+    drawerItemDivider: colors.white,
+
     dropdown: colors.white,
     dropdownBorder: colors.selago,
     dropdownItem: colors.transparent,
@@ -179,9 +187,20 @@ export const [themeLight, vars] = createTheme({
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
 
+    variantSwitcherBorder: colors.ebonyClay15,
+    variantSwitcherItemBgActive: colors.goldTips,
+    variantSwitcherItemTextActive: colors.ebonyClay,
+
     paginationItemBgHover: colors.white05,
     paginationItemBgActive: colors.white10,
     paginationItemTextDisabled: colors.white30,
+
+    bids: colors.green,
+    asks: colors.carnation,
+
+    notificationUnread: colors.burntSienna,
+    notificationRead: colors.white50,
+    notificationTime: colors.white50,
   },
 });
 
@@ -189,6 +208,7 @@ export const themeDark = createTheme(vars, {
   boxShadows: {
     dropdown: `8px 8px 10px ${colors.black10}`,
     modal: `8px 4px 14px ${colors.black10}`,
+    control: `0px 0px 0px 3px ${colors.mystic15}`,
     btnPrimaryFocus: `0px 0px 0px 3px ${colors.mystic15}`,
     btnSecondaryFocus: `0px 0px 0px 3px ${colors.mystic15}`,
   },
@@ -207,6 +227,12 @@ export const themeDark = createTheme(vars, {
     interactive: colors.silverChalice,
     interactiveHighlighted: colors.gray,
     alert: colors.flamingo,
+
+    drawer: colors.ebonyClay,
+    drawerItem: colors.white05,
+    drawerItemHover: colors.mako,
+    drawerItemDivider: colors.white10,
+
     dropdown: colors.ebonyClay,
     dropdownBorder: colors.transparent,
     dropdownItem: colors.transparent,
@@ -309,8 +335,19 @@ export const themeDark = createTheme(vars, {
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
 
+    variantSwitcherBorder: colors.white10,
+    variantSwitcherItemBgActive: colors.goldTips,
+    variantSwitcherItemTextActive: colors.ebonyClay,
+
     paginationItemBgHover: colors.white05,
     paginationItemBgActive: colors.white10,
     paginationItemTextDisabled: colors.white30,
+
+    bids: colors.milanoGreen,
+    asks: colors.carnation,
+
+    notificationUnread: colors.burntSienna,
+    notificationRead: colors.white50,
+    notificationTime: colors.white50,
   },
 });

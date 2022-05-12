@@ -28,11 +28,17 @@ import { Pagination } from 'web/src/components/Pagination/Pagination';
 import { TextInput } from 'web/src/components/Input/TextInput';
 import { P2PTransaction } from 'web/src/modules/p2p/types';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
-
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
+import { WalletType } from 'web/src/modules/account/types';
+
 import s from './TransferHistory.postcss';
 
 const LIMIT = 6;
+
+interface Props {
+  type: 'deposits' | 'withdraws';
+  general: WalletItemData;
+}
 
 export const ExchangeHistory: FC<Props> = ({ type, general }) => {
   const ccy = general.balanceTotal.currency;
@@ -52,8 +58,7 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
   const data = resp.data?.data ?? [];
   const total = resp.data?.total ?? 0;
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const headers = useMemo(() => [t('Date'), t('Status'), t('Amount')], []);
+  const headers = useMemo(() => [t('Date'), t('Status'), t('Amount')], [t]);
 
   const tableData = data
     .sort((a, b) => sortByDateDesc(a.created_at, b.created_at))
@@ -168,48 +173,52 @@ const P2PHistory: FC<Props> = ({ type, general }) => {
   );
 };
 
-interface Props {
-  type: 'deposits' | 'withdraws';
-  general: WalletItemData;
+const TABS: WalletType[] = ['p2p', 'market'];
+
+interface WalletHistoryProps extends Props {
+  defaultTab?: WalletType | undefined;
 }
 
-export const WalletHistory: FC<Props> = ({ type, general }) => {
+export const WalletHistory: FC<WalletHistoryProps> = ({ type, general, defaultTab }) => {
   const isDeposit = type === 'deposits';
   const hasP2P = !!general.balanceP2P;
   const hasExchange = !!general.balanceMarket;
 
-  const [tab, setTab] = useState(hasP2P ? 'p2p' : 'exchange');
+  const [tab, setTab] = useState<WalletType>('p2p');
 
   const validTab = useMemo(() => {
-    const tabs = [
-      { value: 'p2p', enable: hasP2P },
-      { value: 'exchange', enable: hasExchange },
-    ].filter((d) => d.enable);
-    return (tabs.find((d) => d.value === tab) ?? tabs[0])!.value;
-  }, [hasP2P, hasExchange, tab]);
+    if (defaultTab !== undefined) {
+      return defaultTab;
+    }
+    const tabs = TABS.filter((d) => (d === 'market' && hasExchange) || (d === 'p2p' && hasP2P));
+    return tabs.find((d) => d === tab) ?? tabs[0] ?? 'p2p';
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [general.currency, tab]);
 
   const t = useT();
 
   return (
     <Box col spacing="2">
-      <Tabs value={validTab} onSelectionChange={setTab}>
+      <Tabs value={validTab} onSelectionChange={setTab as any}>
         <Box row gap="2" wrap>
           <Box as="h4" margin="0">
             {isDeposit ? t('Deposit History') : t('Withdrawal History')}
           </Box>
-          <TabList>
-            <Tab value="p2p" disabled={!hasP2P}>
-              {t('P2P')}
-            </Tab>
-            <Tab value="exchange" disabled={!hasExchange}>
-              {t('Exchange')}
-            </Tab>
-          </TabList>
+          {!defaultTab && (
+            <TabList>
+              <Tab value="p2p" disabled={!hasP2P}>
+                {t('P2P')}
+              </Tab>
+              <Tab value="market" disabled={!hasExchange}>
+                {t('Exchange')}
+              </Tab>
+            </TabList>
+          )}
         </Box>
         <TabPanel value="p2p">
           <P2PHistory type={type} general={general} />
         </TabPanel>
-        <TabPanel value="exchange">
+        <TabPanel value="market">
           <ExchangeHistory type={type} general={general} />
         </TabPanel>
       </Tabs>

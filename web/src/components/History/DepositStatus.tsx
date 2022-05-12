@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { Deposit } from 'src/modules/user/history/types';
 import { useT } from 'src/hooks/useT';
 import { join } from 'src/helpers/join';
+import { Text } from 'web/src/components/ui/Text';
 import { ExternalLink } from './ExternalLink';
 import { ConfirmingStatus } from './ConfirmingStatus';
-import { Label } from '../Label/Label';
 
 interface Props {
   item: Deposit;
@@ -16,50 +16,48 @@ export const DepositStatus: FC<Props> = ({ item, minConfirmations }) => {
 
   switch (item.state) {
     case 'dispatched':
-      return (
-        <Label color="success">{t('page.body.history.deposit.content.status.confirmed')}</Label>
-      );
+      return <Text color="success">{t('page.body.history.deposit.content.status.confirmed')}</Text>;
 
     case 'errored':
       return (
-        <Label color="failed">
+        <Text color="danger">
           {item.public_message || t('page.body.history.deposit.content.status.errored')}
-        </Label>
+        </Text>
       );
 
     case 'skipped':
-      return <Label color="failed">{t('page.body.history.deposit.content.status.skipped')}</Label>;
+      return <Text color="danger">{t('page.body.history.deposit.content.status.skipped')}</Text>;
 
     case 'rejected':
-      return <Label color="failed">{t('page.body.history.deposit.content.status.canceled')}</Label>;
+      return <Text color="danger">{t('page.body.history.deposit.content.status.canceled')}</Text>;
 
     case 'canceled':
-      return <Label color="failed">{t('page.body.history.deposit.content.status.canceled')}</Label>;
+      return <Text color="danger">{t('page.body.history.deposit.content.status.canceled')}</Text>;
 
     case 'submitted':
       return (
-        <Label color="warning">{t('page.body.history.deposit.content.status.confirming')}</Label>
+        <Text color="warning">{t('page.body.history.deposit.content.status.confirming')}</Text>
       );
 
     case 'invoiced':
       return item.transfer_links ? (
         <>
-          <Label key="label" color="warning">
+          <Text key="Text" color="warning">
             {t('page.body.history.deposit.content.status.wait_payment')}{' '}
-          </Label>
+          </Text>
           {join(
             item.transfer_links.map((d) => (
               <ExternalLink key={d.title} href={d.url}>
                 {d.title}
               </ExternalLink>
             )),
-            <Label key="sep" color="secondary">
+            <Text key="sep" color="secondary">
               <span> / </span>
-            </Label>,
+            </Text>,
           )}
         </>
       ) : (
-        <Label color="warning">{t('page.body.wallets.table.invoiced')}</Label>
+        <Text color="warning">{t('page.body.wallets.table.invoiced')}</Text>
       );
 
     case 'accepted':
@@ -68,15 +66,13 @@ export const DepositStatus: FC<Props> = ({ item, minConfirmations }) => {
       );
 
     case 'refunding':
-      return (
-        <Label color="warning">{t('page.body.history.deposit.content.status.refunding')}</Label>
-      );
+      return <Text color="warning">{t('page.body.history.deposit.content.status.refunding')}</Text>;
 
     default:
       return (
-        <Label color="secondary" tr="capitalize">
+        <Text color="secondary" textTransform="capitalize">
           {item.state}
-        </Label>
+        </Text>
       );
   }
 };

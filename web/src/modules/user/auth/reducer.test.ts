@@ -69,20 +69,10 @@ describe('Auth reducer', () => {
 
     const expectedState = {
       ...initialStateAuth,
-      emailVerified: false,
     };
 
     expect(authReducer(initialStateAuth, actions.verificationFetch(payload))).toEqual(
       expectedState,
     );
-  });
-
-  it('should handle VERIFICATION_SUCCESS', () => {
-    const expectedState = {
-      ...initialStateAuth,
-      emailVerified: true,
-    };
-
-    expect(authReducer(initialStateAuth, actions.verificationSuccess())).toEqual(expectedState);
   });
 });

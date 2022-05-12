@@ -4,7 +4,7 @@ import { Spinner } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, RouteComponentProps, RouterProps, Switch } from 'react-router';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect, useLocation, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { FeesScreen } from 'src/screens/Fees/Fees';
 import type { IntlProps } from 'src/types';
@@ -18,7 +18,6 @@ import { WalletsFetch } from '../../containers';
 import { toggleColorTheme } from '../../helpers';
 import {
   ConfirmMobileScreen,
-  EmailVerificationMobileScreen,
   LandingScreenMobile,
   OrdersMobileScreen,
   ProfileAccountActivityMobileScreen,
@@ -53,7 +52,6 @@ import {
   ConfirmScreen,
   DeepLinkPreview,
   DocumentationScreen,
-  EmailVerificationScreen,
   HistoryScreen,
   InternalTransfer,
   MagicLink,
@@ -61,7 +59,6 @@ import {
   OrdersTabScreen,
   RestrictedScreen,
   TradingScreen,
-  VerificationScreen,
   QuickExchange,
   LandingScreen,
 } from '../../screens';
@@ -84,6 +81,7 @@ import {
   ReportDownloadScreen,
   ReportsMobileScreen,
 } from 'web/src/screens/ReportsScreen/ReportsScreen';
+import { VerificationScreen } from 'web/src/screens/VerificationScreen/VerificationScreen';
 import { BoardScreen } from 'web/src/screens/BoardScreen';
 
 interface ReduxProps {
@@ -133,6 +131,8 @@ const PrivateRoute: React.FunctionComponent<any> = ({
   isLogged,
   ...rest
 }) => {
+  const { pathname } = useLocation();
+
   if (loading) {
     return renderLoader();
   }
@@ -144,7 +144,7 @@ const PrivateRoute: React.FunctionComponent<any> = ({
 
   return (
     <Route {...rest}>
-      <Redirect to="/signin" />
+      <Redirect to={`/signin${pathname ? `?back=${pathname}` : ''}`} />
     </Route>
   );
 };
@@ -314,7 +314,14 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     const commonRoutes = [
       <Route key="exchange" path="/quick-exchange" component={QuickExchange as any} />,
       <Route key="fees" path="/fees" component={FeesScreen as any} />,
-      <Route key="deeplink" exact path="/deeplinks/:id?" component={DeepLinkPreview} />,
+      <PrivateRoute
+        key="deeplink"
+        exact
+        path="/deeplinks/:id?"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        component={DeepLinkPreview}
+      />,
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
       // and default fallback
       <Route key="catchall" path="**">
@@ -347,12 +354,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               isLogged={isLoggedIn}
               path="/accounts/confirmation"
               component={VerificationScreen}
-            />
-            <PublicRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/email-verification"
-              component={EmailVerificationMobileScreen}
             />
             <PrivateRoute
               loading={userLoading}
@@ -468,12 +469,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             isLogged={isLoggedIn}
             path="/accounts/password_reset"
             component={ResetPasswordScreen}
-          />
-          <PublicRoute
-            loading={userLoading}
-            isLogged={isLoggedIn}
-            path="/email-verification"
-            component={EmailVerificationScreen}
           />
           <Route path="/docs" component={DocumentationScreen as any} />
           <Route path="/restriction" component={RestrictedScreen as any} />

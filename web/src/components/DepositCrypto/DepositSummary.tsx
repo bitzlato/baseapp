@@ -30,12 +30,6 @@ export const DepositSummary: React.FC<Props> = ({ wallet, blockchainCurrency, is
           <AmountFormat money={blockchainCurrency.min_deposit_amount} />
         </SummaryField>
       </Box>
-      <Box row spacing>
-        <WarningIcon />
-        <Box textColor="warning" textSize="lg">
-          {t('page.body.wallets.tabs.deposit.ccy.message.warning')}
-        </Box>
-      </Box>
       {isUSDXe ? (
         <Box row spacing>
           <WarningIcon />

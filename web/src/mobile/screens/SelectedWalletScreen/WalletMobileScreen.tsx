@@ -6,12 +6,9 @@ import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
 import { useGeneralWallets } from 'src/hooks/useGeneralWallets';
 import { Tab, TabList, TabPanel, Tabs } from 'src/components/Tabs';
-import { DepositCrypto } from 'src/components/DepositCrypto/DepositCrypto';
-import { WalletHistory } from 'web/src/containers/Wallets/History';
 import { Withdraw } from 'src/containers/Withdraw/Withdraw';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { selectWallet } from 'src/modules/user/wallets/selectors';
-import { InvoiceExplanation } from 'src/screens/WalletsScreen/InvoiceExplanation';
 import { WalletMobileBalance } from './WalletMobileBalance';
 import { TabId, useWalletTab } from 'web/src/screens/WalletsScreen/useWalletTab';
 import { Gift } from 'web/src/containers/Gift/Gift';
@@ -19,7 +16,7 @@ import { DEFAULT_WALLET_ITEM } from 'web/src/components/WalletItem/defaults';
 import { Rate } from 'web/src/screens/WalletsScreen/Rate';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
-import { DepositP2P } from 'web/src/components/DepositCrypto/DepositP2P';
+import { Deposit } from 'web/src/components/DepositCrypto/Deposit';
 
 export const WalletMobileScreen: React.FC = () => {
   const params = useParams<UrlParams>();
@@ -33,8 +30,6 @@ export const WalletMobileScreen: React.FC = () => {
 
   const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
   const general = generals.find((d) => d.currency === currency) ?? DEFAULT_WALLET_ITEM;
-  const hasP2P = !!general.balanceP2P;
-  const isBtc = currency === 'BTC';
 
   const handleTabSelection = (value: TabId) => {
     setTab(value);
@@ -79,18 +74,10 @@ export const WalletMobileScreen: React.FC = () => {
             ))}
           </Box>
           <TabPanel value="deposit">
-            {!isBtc && wallet && <DepositCrypto wallet={wallet} />}
-            {hasP2P && <DepositP2P currency={currency} />}
-            <WalletHistory type="deposits" general={general} />
+            <Deposit general={general} wallet={wallet} />
           </TabPanel>
           <TabPanel value="withdraw">
-            {wallet &&
-              (general.currency === 'BTC' ? (
-                <InvoiceExplanation currency={general.currency} />
-              ) : (
-                <Withdraw wallet={wallet} />
-              ))}
-            <WalletHistory type="withdraws" general={general} />
+            <Withdraw general={general} wallet={wallet} />
           </TabPanel>
           <TabPanel value="transfer">
             {general.hasTransfer && (

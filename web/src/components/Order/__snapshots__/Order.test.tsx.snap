@@ -270,11 +270,11 @@ exports[`Order should match snapshot 1`] = `
               <div
                 class="row rowSpacingSm"
               >
-                <span
-                  class="secondaryColor"
+                <p
+                  class="reset_base__1sfgjt80 sprinkles_color_secondary_default__w76aifwu Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1n6 Text_text_variant_body__1qy84opg Text__1qy84op4 sprinkles_fontSize_small_mobile__w76aifvy Text_text_gutterBottom_false__1qy84opj "
                 >
                   ≈
-                </span>
+                </p>
                 <span
                   class=""
                 >
@@ -611,11 +611,11 @@ exports[`Order should match snapshot 1`] = `
               <div
                 class="row rowSpacingSm"
               >
-                <span
-                  class="secondaryColor"
+                <p
+                  class="reset_base__1sfgjt80 sprinkles_color_secondary_default__w76aifwu Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1n6 Text_text_variant_body__1qy84opg Text__1qy84op4 sprinkles_fontSize_small_mobile__w76aifvy Text_text_gutterBottom_false__1qy84opj "
                 >
                   ≈
-                </span>
+                </p>
                 <span
                   class=""
                 >

@@ -17,6 +17,98 @@ export const ru: LangType = {
   'page.header.navbar.profile': 'Профиль',
   'page.header.navbar.logout': 'Выйти',
 
+  'notifications.title': 'Уведомления',
+  'notifications.readall': 'Прочитать все',
+  'notifications.empty': 'Уведомлений нет',
+
+  'notifications.unread': 'Непрочитанное',
+  'notifications.read': 'Прочтено',
+
+  'notifications.modal.header': 'Внимание!',
+  'notifications.No notifications': 'Нет уведомлений',
+  'notifications.Remove All': 'Пометить всё как прочитанное',
+  'notifications.Telegram and web accounts have been merged':
+    '✅ Телеграм-аккаунт прикреплен к вашей учетной записи.',
+  'notifications.adminMessage': 'Сообщение от администрации',
+  'notifications.adsActivatedMessage': '✅ Ваши объявления активированы',
+  'notifications.adsPausedMessage_legacy':
+    'Ваши объявления недоступны пользователям из-за отсутствия минимального баланса',
+  'notifications.checkCashed': '{recipient} обналичил чек на {amount} {cryptocurrency}.',
+  'notifications.comissionReturn':
+    '🤩🤩🤩 Сделка #{tradeId} прошла бесплатно, вы сэкономили {amount} {cryptocurrency}',
+  'notifications.disputeAvailablePurchase': 'Вы получили возможность открыть спор',
+  'notifications.disputeAvailableSelling': 'Покупатель получил возможность открыть спор',
+  'notifications.disputeAvailableTenMinutes': 'У вас осталось 10 минут на открытие спора',
+  'notifications.disputeFail': '😞 Вы проиграли в споре сделки {tradeId}.',
+  'notifications.disputeSuccess':
+    '✌ Вы победили в споре сделки {tradeId} и получили {amount} {cryptocurrency}.',
+  'notifications.dividendsReceived':
+    'Вы получили {cryptocurrencyamount} {cryptocurrencycode} вознаграждения от реферала 🤝',
+  'notifications.freeze': 'Ваш аккаут заморожен до {expire, LL}',
+  'notifications.freezeReason':
+    'Причина заморозки "{reason}". Типы запрещенных операций "{type}". Дата окончания {expire, LL}',
+  'notifications.freezeTypeall': 'все',
+  'notifications.freezeTypeexchange_orders': 'торги на бирже',
+  'notifications.freezeTypetrades': 'p2p торги',
+  'notifications.freezeTypevouchers': 'создание ваучеров',
+  'notifications.freezeTypewithdraw': 'вывод',
+  'notifications.inactivityRatingDecline':
+    'К сожалению, ваш рейтинг понизился, так как вы не откликаетесь на объявления слишком часто!',
+  'notifications.invoicePaid': '✅ Вы успешно оплатили {merchantName} счет {invoiceId}',
+  'notifications.invoicePaidToMerchant':
+    '🔥 Оплата по счету {invoiceId} от {userName} {amount} {cryptocurrency}',
+  'notifications.merchantPaid': 'Вы получили выплату {amount} {cryptocurrency} от {merchantName}',
+  'notifications.moneyReceived':
+    'Вы получили {cryptocurrencyamount} {cryptocurrencycode} ({currencyamount} {currencycode}) от {donor}!',
+  'notifications.mute': 'Ваши объявления сняты с показа на {duration} ч.',
+  'notifications.muteReason':
+    'Ваши объявления сняты с показа на {duration} ч. Вероятнее всего, Вы нарушили условия размещения объявлений. По истечению срока ограничения объявления станут активны.',
+  'notifications.newAdminMessage': 'Новое сообщение от администрации',
+  'notifications.newChatMessage': 'Новое сообщение от пользователя {publicName}',
+  'notifications.newMessage': 'Новое сообщение',
+  'notifications.newReferral': 'У Вас новый реферал {publicName}',
+  'notifications.newTradeMessage': 'Новое сообщение в сделке #{tradeId}',
+  'notifications.notificationsCount': '{count} уведомлений',
+  'notifications.payment-processed': '🚀 Отправка {amount} {cryptocurrency} осуществлена',
+  'notifications.tipsReceived':
+    '🔥 Вы получили {cryptocurrencyamount} {cryptocurrencycode} чаевых по сделке #{tradeId}!',
+  'notifications.tradeExpired': 'Сделка #{tradeId} будет автоматически отменена',
+  'notifications.tradeExtendWaitingTime':
+    'Сделка #{tradeId}: Пользователь добавил {time} минут на обсуждение сделки!',
+  'notifications.tradePause':
+    'Упс! Кажется Вас сейчас нет на месте и Вы пропускаете сделки. Мы приостановили показ ваших объявлений до тех пор, пока Вы не вернетесь.',
+  'notifications.tradeStatusChanged': 'Изменился статус сделки #{tradeId}',
+  'notifications.tradeStatusChangedCancel': 'Сделка #{tradeId} отменена',
+  'notifications.tradeStatusChangedConfirmPayment': 'Вы получили ТИКЕР КРИПТА. Сделка #{tradeId}',
+  'notifications.tradeStatusChangedCreated': 'Новое предложение! Сделка НОМЕР #{tradeId}',
+  'notifications.tradeStatusChangedPayment': 'Проверьте поступление средств. Сделка #{tradeId}',
+  'notifications.tradeWillExpire': 'Сделка #{tradeId} будет автоматически отменена {time, fromNow}',
+  'notifications.unFreeze': 'Ваш аккаунт разморожен',
+  'notifications.unFreezeReason': 'Причина разморозки "{reason}". Типы операций "{type}".',
+  'notifications.verification-confirmed': '✅ Ваша заявку на верификацию подтверждена',
+  'notifications.verificationReset':
+    '❌ Уважаемый клиент! Ваша верификация больше недействительна. Пожалуйста, пройдите заново процедуру верификации',
+  'notifications.verification-rejected': '❌ Ваша заявка на верификацию отклонена',
+  'notifications.verification-rejected-ext': '❌ Ваша заявка на верификацию отклонена',
+  'notifications.wallet-balance-loaded':
+    '🔥 Ваш кошелек пополнен на {amount} {cryptocurrency}.\n\nТранзакция: {txid}',
+  'notifications.wallet-balance-loaded-dust':
+    '🔥 Ваш кошелек пополнен на {amount} {cryptocurrency}\n\nТранзакция: {txid} \n\n ⚠️ Сумма ввода менее {minAcceptableDeposit} {cryptocurrency}, в связи с этим данная транзакция не будет зачислена на ваш баланс, возмещение по данной транзакции не предусмотрено',
+  'notifications.webAccountsMerged': 'Аккаунты с одинаковыми email были объединены',
+  'notifications.withdrawVoucherExpireFirst':
+    '⚠️ У вас есть {count} ваучер(а) на бесплатный вывод который(е) сгорают через 3 дня.\n\n🔥 Самое время ими воспользоваться и не потерять шанс бесплатного вывода монет!',
+  'notifications.withdrawVoucherExpireSecond':
+    '⚠️ У вас есть {count} ваучер(а) на бесплатный вывод который(е) сгорают через 1 день.\n\n🔥 Самое время ими воспользоваться и не потерять шанс бесплатного вывода монет!',
+  'notifications.withdrawVoucherReceived': '  Вы получили {count} ваучеров на бесплатный вывод!',
+  'notifications.withdrawVoucherReceived1': '  Вы получили {count} ваучер на бесплатный вывод!',
+  'notifications.withdrawVoucherReceived234': '  Вы получили {count} ваучера на бесплатный вывод!',
+  'notifications.user24hInactivityMessage':
+    'Вы не активны в сервисе более 24 часов, в связи с этим, мы приостановили показ ваших объявлений до тех пор, пока Вы не вернетесь',
+  'notifications.walletAddressDropped':
+    '✅ Адрес Вашего {cryptocurrency} кошелька успешно сброшен!',
+  'notifications.withdrawCanceled':
+    'Ваш вывод на адрес {address} на сумму {amount} {cryptocurrency}, включая комиссию {fee} {cryptocurrency}, отменен.\nМонеты зачислены на баланс вашего кошелька, повторите попытку вывода в случае необходимости!',
+
   'page.sidebar.group.text': 'Fee Group:',
   'page.sidebar.group.value': 'Base',
 
@@ -243,6 +335,15 @@ export const ru: LangType = {
   'page.body.wallets.tabs.withdraw.content.limit1month': 'Лимит на вывод за 1 месяц',
   'page.body.wallets.tabs.withdraw.content.unlimited': 'Неограниченный',
   'page.body.wallets.tabs.withdraw.content.button': 'Вывести',
+
+  'withdraw.from_balance': 'Вывод с баланса',
+  'withdraw.use_voucher': 'Используйте ваучер',
+  'withdraw.use_voucher_notice': 'С помощью ваучера вы можете снять деньги без комиссии',
+  'withdraw.active_vouchers': 'Активные ваучеры',
+  'withdraw.available_balance': 'Доступно для вывода',
+  'withdraw.will_deducted': 'будет списана с остатка',
+  'Should be more than': 'Должно быть больше {value}',
+  Dynamic: 'Динамическая',
 
   'page.body.wallets.tabs.withdraw.disabled.message': 'Вывод средств был отключен администрацией',
   'page.body.wallets.warning.withdraw.verification':
@@ -1242,6 +1343,8 @@ export const ru: LangType = {
   'P2P Balance': 'Баланс P2P',
   'P2P Wallet': 'P2P кошелек',
   'Select network': 'Выберите сеть',
+  'Select wallet': 'Выберите кошелек',
+  'Show QR code': 'Показать QR код',
   'Total balance': 'Общий баланс',
   'Transfer Fee': 'Комиссия перевода',
   'Transfer from': 'Перевод из',
@@ -1436,6 +1539,7 @@ export const ru: LangType = {
   'deposit.erc20warning': 'Средства принимаются только по сети ERC-20',
   'deposit.erc20MDTWarning':
     'Средства принимаются только в виде ERC-20 токенов MonolithosDAO Token (MDT)',
+  'deposit.contract': 'Прием средств с контрактных адресов может занять длительное время',
 
   'verification.pass': 'Пройдите верификацию',
   'verification.oops': '😔 Упс!',

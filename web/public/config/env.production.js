@@ -9,6 +9,7 @@ window.env = {
     accountPublicUrl: 'https://bitzlato.com/api/whaler/public/v1',
     p2pUrl: 'https://bitzlato.com/api2/p2p',
     p2pAuthUrl: 'https://bitzlato.com/api2/auth',
+    notificatorUrl: 'wss://bitzlato.com/wssb'
   },
   auth0: {
     domain: 'auth.bitzlato.bz',

@@ -1,4 +1,4 @@
-import { ComponentProps, FC } from 'react';
+import { useMemo, ComponentProps, FC, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link, NavLink, useLocation } from 'react-router-dom';
@@ -18,6 +18,7 @@ import {
   changeLanguage,
   selectUserFetching,
   logoutFetch,
+  selectMobileDeviceState,
 } from 'src/modules';
 import { MarketSelector } from 'src/containers/MarketSelector/MarketSelector';
 import { HeaderToolbar } from 'src/containers/HeaderToolbar/HeaderToolbar';
@@ -26,6 +27,14 @@ import { getLinkToP2P } from 'web/src/components/Header/getLinkToP2P';
 import { Navigation } from 'web/src/components/shared/Header/Navigation';
 import { RenderLinkComponent, RenderNavLinkComponent } from 'web/src/components/shared/sharedTypes';
 import { Box } from 'web/src/components/ui/Box';
+import { isToday, isYesterday, localeDate } from 'web/src/helpers';
+import { useMarkNotificationAsRead } from 'web/src/hooks/mutations/useMarkNotificationAsRead';
+import { Notification } from 'web/src/lib/socket/types';
+import { NotificationModalNotification } from 'web/src/containers/NotificationModal/types';
+import { useFetchP2PNotifications } from 'web/src/hooks/data/useFetchP2PNotifications';
+import { NotificationModal } from 'web/src/containers/NotificationModal/NotificationModal';
+import { Header as MobileHeader } from 'src/mobile/components/Header';
+import { notificationInfo } from './notificationInfo';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
@@ -34,7 +43,15 @@ const languages = {
   ru: 'Русский',
 };
 
+const strIncludesStrings = (str: string, substr: string[]): boolean => {
+  return substr.some((s) => str.includes(s));
+};
+
 const Header: FC = () => {
+  const [nofiticationModalProps, setNofiticationModalProps] = useState<
+    NotificationModalNotification | undefined
+  >();
+  const isMobileDevice = useSelector(selectMobileDeviceState);
   const t = useT();
   const dispatch = useDispatch();
   const currentCode = useSelector(selectCurrentLanguage);
@@ -45,6 +62,67 @@ const Header: FC = () => {
   const { pathname } = useLocation();
   const history = useHistory();
   const isTradingPage = pathname.includes('/trading');
+
+  const translate = useCallback(
+    (key: string) => {
+      switch (key) {
+        case 'signIn':
+          return t('page.header.navbar.signIn');
+
+        case 'signUp':
+          return t('page.header.signUp');
+
+        case 'profile':
+          return t('page.header.navbar.profile');
+
+        case 'all_read':
+          return t('notifications.readall');
+
+        case 'notifications_empty':
+          return t('notifications.empty');
+
+        case 'logout':
+          return t('page.body.profile.content.action.logout');
+
+        case 'theme':
+          return t('page.mobile.profileLinks.settings.theme');
+
+        case 'notificationsTitle':
+          return t('notifications.title');
+
+        case 'today':
+          return t('today');
+
+        case 'yesterday':
+          return t('yesterday');
+
+        case 'notificationUnread':
+          return t('notifications.unread');
+
+        case 'notificationRead':
+          return t('notifications.read');
+
+        default:
+          throw new Error(`translate: Key '${key}' not found`);
+      }
+    },
+    [t],
+  );
+
+  const fetchNotificationRes = useFetchP2PNotifications();
+  const notifications: Notification[] = fetchNotificationRes.data || [];
+
+  const [markNotificationAsReadP2P] = useMarkNotificationAsRead();
+
+  const handleMarkAllNotificationAsRead = () =>
+    notifications.forEach((n) => {
+      if (!n.read) {
+        markNotificationAsReadP2P(n.id);
+      }
+    });
+
+  const handleMarkNotificationAsRead = (notificationId: number) =>
+    markNotificationAsReadP2P(notificationId);
 
   const handleLanguageChange = (code: string) => {
     if (isLoggedIn) {
@@ -70,6 +148,8 @@ const Header: FC = () => {
   const handleThemeChange = () =>
     dispatch(changeColorTheme(colorTheme === 'light' ? 'dark' : 'light'));
 
+  const closeNotificationModal = () => setNofiticationModalProps(undefined);
+
   let userProps;
   if (isUserFetching) {
     userProps = { status: USER_STATUS_NOT_AUTHORIZED };
@@ -83,18 +163,64 @@ const Header: FC = () => {
     userProps = {
       status: USER_STATUS_AUTHORIZED,
       onLogoutClick: () => dispatch(logoutFetch()),
+      notifications: notifications.map((notification) => {
+        const notify: NotificationModalNotification = notificationInfo(notification, {
+          translate: t,
+          lang: currentCode,
+        }) as NotificationModalNotification;
+        const handleNotifyClick = () => {
+          handleMarkNotificationAsRead(notification.id);
+
+          if (notify.alert) {
+            setNofiticationModalProps(notify);
+          }
+
+          if (notify.link) {
+            if (strIncludesStrings(notify.link, ['/p2p', '/merch'])) {
+              window.location.assign(notify.link);
+            } else {
+              history.push(notify.link);
+            }
+          }
+        };
+
+        const calculateDate = () => {
+          if (isToday(notify.createdAt!)) {
+            return translate('today');
+          }
+
+          if (isYesterday(notify.createdAt!)) {
+            return translate('yesterday');
+          }
+
+          return localeDate(notify.createdAt, 'veryShortDate', currentCode);
+        };
+
+        return {
+          id: notification.id.toString(),
+          message: notify.text,
+          time: localeDate(notify.createdAt, 'time'),
+          date: calculateDate(),
+          read: notification.read,
+          onClick: handleNotifyClick,
+        };
+      }),
+      onAllRead: handleMarkAllNotificationAsRead,
     };
   }
 
   const p2pURL = getLinkToP2P(currentCode);
-  const p2p: Links = [
-    {
-      key: 'p2p',
-      type: 'external',
-      to: p2pURL,
-      children: t('page.header.navbar.toP2P'),
-    },
-  ];
+  const p2p: Links = useMemo(
+    () => [
+      {
+        key: 'p2p',
+        type: 'external',
+        to: p2pURL,
+        children: t('page.header.navbar.toP2P'),
+      },
+    ],
+    [p2pURL, t],
+  );
   const navLinks = [
     {
       key: 'quick-exchange',
@@ -224,58 +350,64 @@ const Header: FC = () => {
     },
   ].filter(Boolean) as Links;
 
-  const translate = (key: string) => {
-    switch (key) {
-      case 'signIn':
-        return t('page.header.navbar.signIn');
-
-      case 'signUp':
-        return t('page.header.signUp');
-
-      case 'profile':
-        return t('page.header.navbar.profile');
-
-      case 'logout':
-        return t('page.body.profile.content.action.logout');
-
-      case 'theme':
-        return t('page.mobile.profileLinks.settings.theme');
-
-      default:
-        throw new Error(`translate: Key '${key}' not found`);
-    }
-  };
-
   const renderLinkComponent: RenderLinkComponent = (props) => <Link {...props} />;
   const renderNavLinkComponent: RenderNavLinkComponent = (props) => <NavLink {...props} />;
 
+  const HeaderWrapper = useCallback(
+    ({ chilren, ...props }) =>
+      isMobileDevice ? (
+        <MobileHeader {...props} />
+      ) : (
+        <SharedHeader {...props}>
+          {isTradingPage && (
+            <>
+              <Box mr="6x">
+                <Navigation navLinks={p2p} renderNavLinkComponent={renderNavLinkComponent} />
+              </Box>
+              <MarketSelector />
+              <HeaderToolbar />
+            </>
+          )}
+        </SharedHeader>
+      ),
+    [isMobileDevice, isTradingPage, p2p],
+  );
+
   return (
-    <SharedHeader
-      logoLightURL={window.env.logoUrl}
-      logoDarkURL={window.env.logoDarkUrl}
-      toMainPage={p2pURL}
-      theme={colorTheme}
-      language={currentCode}
-      languages={languages}
-      navLinks={navLinks}
-      hamburgerLinks={hamburgerLinks}
-      t={translate}
-      renderLinkComponent={renderLinkComponent}
-      renderNavLinkComponent={renderNavLinkComponent}
-      {...userProps}
-      onThemeChange={handleThemeChange}
-      onLanguageChange={handleLanguageChange}
-    >
-      {isTradingPage && (
-        <>
-          <Box mr="6x">
-            <Navigation navLinks={p2p} renderNavLinkComponent={renderNavLinkComponent} />
-          </Box>
-          <MarketSelector />
-          <HeaderToolbar />
-        </>
+    <>
+      {nofiticationModalProps && (
+        <NotificationModal
+          notification={nofiticationModalProps}
+          handleClose={closeNotificationModal}
+        />
       )}
-    </SharedHeader>
+      <HeaderWrapper
+        logoLightURL={window.env.logoUrl}
+        logoDarkURL={window.env.logoDarkUrl}
+        toMainPage={p2pURL}
+        theme={colorTheme}
+        language={currentCode}
+        languages={languages}
+        navLinks={navLinks}
+        hamburgerLinks={hamburgerLinks}
+        t={translate}
+        renderLinkComponent={renderLinkComponent}
+        renderNavLinkComponent={renderNavLinkComponent}
+        {...userProps}
+        onThemeChange={handleThemeChange}
+        onLanguageChange={handleLanguageChange}
+      >
+        {isTradingPage && (
+          <>
+            <Box mr="6x">
+              <Navigation navLinks={p2p} renderNavLinkComponent={renderNavLinkComponent} />
+            </Box>
+            <MarketSelector />
+            <HeaderToolbar />
+          </>
+        )}
+      </HeaderWrapper>
+    </>
   );
 };
 

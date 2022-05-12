@@ -34,7 +34,7 @@ interface Props {
   onChangeValue: (beneficiary: Beneficiary) => void;
 }
 
-const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
+const BeneficiariesComponent: React.FC<Props> = ({ wallet, onChangeValue }: Props) => {
   const [currentWithdrawalBeneficiary, setWithdrawalBeneficiary] =
     React.useState(defaultBeneficiary);
   const [isOpenAddressModal, setAddressModalState] = React.useState(false);
@@ -43,9 +43,8 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
   const [isOpenTip, setTipState] = React.useState(false);
   const [isOpenDropdown, setDropdownState] = React.useState(false);
 
-  const { onChangeValue } = props;
-  const { type } = props.wallet;
-  const currency = props.wallet.currency.code;
+  const { type } = wallet;
+  const currency = wallet.currency.code;
 
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -157,6 +156,8 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
 
     if (filteredByState.length >= 1 && filteredByState[0]) {
       handleSetCurrentAddress(filteredByState[0]);
+    } else {
+      handleSetCurrentAddress(defaultBeneficiary);
     }
   }, []);
 
@@ -462,10 +463,7 @@ const BeneficiariesComponent: React.FC<Props> = (props: Props) => {
 
   const renderBeneficiariesAddModal = React.useMemo(() => {
     return (
-      <BeneficiariesAddModal
-        wallet={props.wallet}
-        onCloseModal={() => setAddressModalState(false)}
-      />
+      <BeneficiariesAddModal wallet={wallet} onCloseModal={() => setAddressModalState(false)} />
     );
   }, [currency, type]);
 

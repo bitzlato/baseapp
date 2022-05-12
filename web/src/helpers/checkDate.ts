@@ -24,3 +24,21 @@ const months = {
 export const monthNameToNumber = (month: string) => {
   return months[month as keyof typeof months];
 };
+
+type Timestamp = number;
+
+export function isToday(date: Timestamp): boolean {
+  const today = new Date().setHours(0, 0, 0, 0);
+  const thatDay = new Date(date).setHours(0, 0, 0, 0);
+
+  return today === thatDay;
+}
+
+export function isYesterday(date: Timestamp): boolean {
+  const today = new Date();
+  const yesterdayTimestamp = today.setDate(today.getDate() - 1);
+  const yesterday = new Date(yesterdayTimestamp).setHours(0, 0, 0, 0);
+  const thatDay = new Date(date).setHours(0, 0, 0, 0);
+
+  return yesterday === thatDay;
+}

@@ -1,8 +1,7 @@
 import { p2pUrl } from 'web/src/api/config';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
-import { AdvertSource, AdvertParams, Advert } from 'web/src/modules/p2p/ad.types';
-import { P2PList } from 'web/src/modules/p2p/p2p.types';
+import { AdvertSource, AdvertParams, Advert, P2PList } from 'web/src/modules/p2p/types';
 import { useCryptoCurrencies } from 'web/src/hooks/useCryptoCurrencies';
 import { Money } from '@bitzlato/money-js';
 import { useFetch } from './useFetch';

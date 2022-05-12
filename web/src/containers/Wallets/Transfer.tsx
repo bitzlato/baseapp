@@ -10,7 +10,7 @@ import { MoneyInput } from 'src/components/Input/MoneyInput';
 import { useT } from 'src/hooks/useT';
 import { SwipeIcon } from 'src/assets/images/swipe';
 import { IconButton } from 'src/components/IconButton/IconButton';
-import { TransferPlace, TransferPost } from 'src/modules/account/types';
+import { WalletType, TransferPost } from 'src/modules/account/types';
 import { createMoney } from 'src/helpers/money';
 import { accountUrl } from 'src/api/config';
 import { alertPush } from 'src/modules/public/alert/actions';
@@ -32,8 +32,8 @@ interface Props {
 }
 
 export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P }) => {
-  const [from, setFrom] = useState<TransferPlace | undefined>();
-  const [to, setTo] = useState<TransferPlace | undefined>();
+  const [from, setFrom] = useState<WalletType | undefined>();
+  const [to, setTo] = useState<WalletType | undefined>();
   const [amount, setAmount] = useState('');
 
   const t = useT();
@@ -48,12 +48,12 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
     setAmount('');
   }, [currency.code]);
 
-  const handleSetFrom = (value: TransferPlace) => {
+  const handleSetFrom = (value: WalletType) => {
     setFrom(value);
     setTo(value === 'market' ? DROPS[0] : DROPS[1]);
   };
 
-  const handleSetTo = (value: TransferPlace) => {
+  const handleSetTo = (value: WalletType) => {
     setTo(value);
     setFrom(value === 'market' ? DROPS[0] : DROPS[1]);
   };
@@ -101,7 +101,7 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
     }
   };
 
-  const renderDropItem = (d: TransferPlace) => {
+  const renderDropItem = (d: WalletType) => {
     return t(d);
   };
 
@@ -195,5 +195,5 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
   );
 };
 
-const DROPS: TransferPlace[] = ['p2p', 'market'];
+const DROPS: WalletType[] = ['p2p', 'market'];
 const PERCENTS = [25, 50, 75, 100];

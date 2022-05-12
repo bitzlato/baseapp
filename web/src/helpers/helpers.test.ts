@@ -125,21 +125,21 @@ describe('Helpers', () => {
 
   // localeDate.ts
   it('Should return correct locale date', () => {
-    expect(helpers.localeDate('2018-11-29T16:54:46+01:00', 'fullDate', 'Europe/Kiev')).toBe(
+    expect(helpers.localeDate('2018-11-29T16:54:46+01:00', 'fullDate', 'en', 'Europe/Kiev')).toBe(
       '29-11-2018 17:54:46',
     );
-    expect(helpers.localeDate('2018-11-12T16:55:12-01:00', 'fullDate', 'Europe/Kiev')).toBe(
+    expect(helpers.localeDate('2018-11-12T16:55:12-01:00', 'fullDate', 'en', 'Europe/Kiev')).toBe(
       '12-11-2018 19:55:12',
     );
-    expect(helpers.localeDate('2018-11-29T16:54:46+01:00', 'shortDate', 'Europe/Kiev')).toBe(
+    expect(helpers.localeDate('2018-11-29T16:54:46+01:00', 'shortDate', 'en', 'Europe/Kiev')).toBe(
       '29-11-2018 17:54',
     );
-    expect(helpers.localeDate('2018-11-12T16:55:12-01:00', 'shortDate', 'Europe/Kiev')).toBe(
+    expect(helpers.localeDate('2018-11-12T16:55:12-01:00', 'shortDate', 'en', 'Europe/Kiev')).toBe(
       '12-11-2018 19:55',
     );
-    expect(helpers.localeDate('2018-11-29T16:54:46+01:00', 'time', 'Europe/Kiev')).toBe('17:54:46');
-    expect(helpers.localeDate('2018-11-12T16:55:12-01:00', 'time', 'Europe/Kiev')).toBe('19:55:12');
-    expect(helpers.localeDate(1646465777309, 'fullDate', 'Europe/Kiev')).toBe(
+    expect(helpers.localeDate('2018-11-29T16:54:46+01:00', 'time', 'en', 'Europe/Kiev')).toBe('17:54:46');
+    expect(helpers.localeDate('2018-11-12T16:55:12-01:00', 'time', 'en', 'Europe/Kiev')).toBe('19:55:12');
+    expect(helpers.localeDate(1646465777309, 'fullDate', 'en', 'Europe/Kiev')).toBe(
       '05-03-2022 09:36:17',
     );
   });

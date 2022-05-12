@@ -47,12 +47,7 @@ export const Rate: React.FC<Props> = (p) => {
     return (
       <Box row spacing justify="between">
         <span>{value.description}</span>
-        <span>
-          (
-          <span>
-            <MoneyFormat money={createMoney(value.rate, userCcy)} />)
-          </span>
-        </span>
+        <MoneyFormat money={createMoney(value.rate, userCcy)} />
       </Box>
     );
   };
