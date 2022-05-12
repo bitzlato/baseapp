@@ -187,6 +187,9 @@ export const [themeLight, vars] = createTheme({
     paginationItemBgHover: colors.white05,
     paginationItemBgActive: colors.white10,
     paginationItemTextDisabled: colors.white30,
+
+    bids: colors.green,
+    asks: colors.carnation,
   },
 });
 
@@ -322,5 +325,8 @@ export const themeDark = createTheme(vars, {
     paginationItemBgHover: colors.white05,
     paginationItemBgActive: colors.white10,
     paginationItemTextDisabled: colors.white30,
+
+    bids: colors.milanoGreen,
+    asks: colors.carnation,
   },
 });

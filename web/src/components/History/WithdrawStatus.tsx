@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Withdraw } from 'src/modules/user/history/types';
 import { useT } from 'src/hooks/useT';
-import { Label } from '../Label';
+import { Text } from 'web/src/components/ui/Text';
 import { ConfirmingStatus } from './ConfirmingStatus';
 
 interface Props {
@@ -18,7 +18,7 @@ export const WithdrawStatus: FC<Props> = ({ item, minConfirmations }) => {
     case 'processing':
     case 'transfering':
       return (
-        <Label color="warning">{t('page.body.history.withdraw.content.status.processing')}</Label>
+        <Text color="warning">{t('page.body.history.withdraw.content.status.processing')}</Text>
       );
 
     case 'confirming':
@@ -27,29 +27,27 @@ export const WithdrawStatus: FC<Props> = ({ item, minConfirmations }) => {
       );
 
     case 'succeed':
-      return (
-        <Label color="success">{t('page.body.history.withdraw.content.status.succeed')}</Label>
-      );
+      return <Text color="success">{t('page.body.history.withdraw.content.status.succeed')}</Text>;
 
     case 'skipped':
     case 'failed':
     case 'errored':
       return (
-        <Label color="failed">
+        <Text color="danger">
           {item.public_message || t(`page.body.history.withdraw.content.status.${item.state}`)}
-        </Label>
+        </Text>
       );
 
     case 'under_review':
       return (
-        <Label color="warning">{t('page.body.history.withdraw.content.status.under_review')}</Label>
+        <Text color="warning">{t('page.body.history.withdraw.content.status.under_review')}</Text>
       );
 
     default:
       return (
-        <Label color="secondary" tr="capitalize">
+        <Text color="secondary" textTransform="capitalize">
           {item.state}
-        </Label>
+        </Text>
       );
   }
 };

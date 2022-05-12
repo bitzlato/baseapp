@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { FIXED_VOL_PRECISION } from 'src/constants';
 import { OrderCommon } from 'src/modules/types';
 import { MarketName } from 'src/components/MarketName/MarketName';
-import { Label } from 'src/components/Label/Label';
+import { Text } from 'web/src/components/ui/Text';
 import { Box } from 'src/components/Box';
 import { getActualPrice } from 'src/modules/helpers';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
@@ -50,13 +50,13 @@ const OrdersItemComponent: React.FC<Props> = (props) => {
       <div className="pg-mobile-orders-item__row">
         <Box row spacing>
           <span style={{ color: setTradeColor(order.side).color }}>{orderType}</span>
-          <Label color="primary">
+          <Text>
             <MarketName name={marketName} />
-          </Label>
+          </Text>
         </Box>
         <Box row spacing>
           <span>{orderDate}</span>
-          <Label color="primary">{orderTime}</Label>
+          <Text>{orderTime}</Text>
         </Box>
       </div>
       <div className="pg-mobile-orders-item__row">
