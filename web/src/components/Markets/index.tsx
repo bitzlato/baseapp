@@ -5,7 +5,7 @@ import { hasDuplicates } from '../../helpers';
 import { FilterInput } from '../FilterInput';
 import { CellData, Table } from '../Table';
 import { MarketName } from '../MarketName/MarketName';
-import { Label } from '../Label/Label';
+import { Text } from 'web/src/components/ui/Text';
 
 export interface MarketsProps {
   /**
@@ -134,16 +134,16 @@ export const Markets = (props: MarketsProps) => {
     switch (col) {
       case 0:
         return (
-          <Label noWrap>
+          <Text variant="caption" whiteSpace="nowrap">
             <MarketName name={data as string} />
-          </Label>
+          </Text>
         );
       case 1:
         const s = data as string;
         return (
-          <Label ellipsis title={s}>
+          <Text variant="caption" textOverflow="ellipsis" title={s}>
             {s}
-          </Label>
+          </Text>
         );
 
       default:

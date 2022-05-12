@@ -4,7 +4,7 @@ import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { compose } from 'redux';
 import { Box } from 'src/components/Box';
-import { Label } from 'src/components/Label';
+import { Text } from 'web/src/components/ui/Text';
 import { MarketName } from 'src/components/MarketName/MarketName';
 import { getActualPrice } from 'src/modules/helpers';
 import { IntlProps } from 'src/types';
@@ -170,8 +170,8 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState> {
 
     return [
       <Box col spacing>
-        <Label color="secondary">{localeDate(date, 'date')}</Label>
-        <Label>{localeDate(date, 'time')}</Label>
+        <Text color="secondary">{localeDate(date, 'date')}</Text>
+        <Text>{localeDate(date, 'time')}</Text>
       </Box>,
       <MarketName name={currentMarket.name} />,
       <span style={{ color: setTradeColor(side).color }} key={id}>
