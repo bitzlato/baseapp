@@ -44,7 +44,7 @@ exports[`Markets should render 1`] = `
         >
           <td>
             <p
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_whiteSpace_nowrap__w76aif1nm Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1n6 Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_whiteSpace_nowrap__w76aif1o2 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1nm Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
             >
               <span>
                 ETH
@@ -57,7 +57,7 @@ exports[`Markets should render 1`] = `
           </td>
           <td>
             <p
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_textOverflow_ellipsis__w76aif1nn Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1n6 Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_textOverflow_ellipsis__w76aif1o3 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1nm Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
               title="0.223100"
             >
               0.223100
@@ -76,7 +76,7 @@ exports[`Markets should render 1`] = `
         >
           <td>
             <p
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_whiteSpace_nowrap__w76aif1nm Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1n6 Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_whiteSpace_nowrap__w76aif1o2 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1nm Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
             >
               <span>
                 ETH
@@ -89,7 +89,7 @@ exports[`Markets should render 1`] = `
           </td>
           <td>
             <p
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_textOverflow_ellipsis__w76aif1nn Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1n6 Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_textOverflow_ellipsis__w76aif1o3 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1nm Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
               title="0.223100"
             >
               0.223100
@@ -108,7 +108,7 @@ exports[`Markets should render 1`] = `
         >
           <td>
             <p
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_whiteSpace_nowrap__w76aif1nm Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1n6 Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_whiteSpace_nowrap__w76aif1o2 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1nm Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
             >
               <span>
                 LTC
@@ -121,7 +121,7 @@ exports[`Markets should render 1`] = `
           </td>
           <td>
             <p
-              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_textOverflow_ellipsis__w76aif1nn Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1n6 Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
+              class="reset_base__1sfgjt80 sprinkles_color_text_default__w76aifww sprinkles_textOverflow_ellipsis__w76aif1o3 Text_text__1qy84op6 Text__1qy84op0 sprinkles_fontFamily_brand__w76aif1nm Text_text_variant_caption__1qy84oph Text__1qy84op5 sprinkles_fontSize_caption_mobile__w76aifvt Text_text_gutterBottom_false__1qy84opj "
               title="0.223100"
             >
               0.223100
