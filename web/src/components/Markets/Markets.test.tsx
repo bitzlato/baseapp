@@ -1,4 +1,4 @@
-import { shallow, ShallowWrapper } from 'enzyme';
+import { shallow } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test';
 import { Markets, MarketsProps } from '.';
 
@@ -22,21 +22,6 @@ const setup = (props?: Partial<MarketsProps>) =>
   );
 
 describe('Markets', () => {
-  let wrapper: ShallowWrapper;
-
-  beforeEach(() => {
-    wrapper = setup();
-  });
-
-  it('should render', () => {
-    expect(wrapper.render()).toMatchSnapshot();
-  });
-
-  it('should render empty data', () => {
-    wrapper = setup({ data: [] });
-    expect(wrapper.render()).toMatchSnapshot();
-  });
-
   it('should set selected market in props', () => {
     const keyIndex = 0;
     const selectedKey = 'ETH/LTC';
