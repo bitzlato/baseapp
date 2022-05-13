@@ -140,3 +140,7 @@ export interface P2PReport {
   description: string;
   format: string;
 }
+
+export interface ConfirmCodeParams {
+  pin_code: string;
+}
