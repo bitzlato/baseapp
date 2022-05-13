@@ -11,6 +11,7 @@ interface Props
       Pick<
         Sprinkles,
         | 'fontFamily'
+        | 'fontSize'
         | 'fontWeight'
         | 'fontSize'
         | 'textAlign'
