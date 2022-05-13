@@ -801,7 +801,7 @@ export const en = {
   'page.header.signUp.referalCode': 'Referral Code',
   'page.header.signUp.agree': 'I have read and agree to the {terms}',
   'page.header.signUp.terms': 'Terms of Use',
-  'page.header.signUp.modal.header': 'VERIFY YOUR EMAIL ADDRESS',
+  'page.header.signUp.modal.header': 'Verify your email address',
   'page.header.signUp.modal.body':
     'To complete registration, check for an ' +
     'email in your inbox with further ' +
@@ -1109,6 +1109,7 @@ export const en = {
   'resource.user.empty_new_password': 'New password is missing or empty',
   'resource.user.missing_confirm_password': 'Confirm password is missing',
   'resource.user.empty_confirm_password': 'Confirm password is missing or empty',
+  'resource.user.invalid_pin_code': 'Invalid pin code',
 
   'resource.profile.missing_first_name': 'First name is missing',
   'resource.profile.missing_last_name': 'Last name is missing',
@@ -1564,4 +1565,8 @@ export const en = {
   of: 'of',
   today: 'Today',
   yesterday: 'Yesterday',
+
+  'Email verification code': 'Email verification code',
+  Confirm: 'Confirm',
+  'Resend code': 'Resend code',
 };

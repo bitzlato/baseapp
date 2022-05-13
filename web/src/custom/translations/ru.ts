@@ -808,7 +808,7 @@ export const ru: LangType = {
   'page.header.signUp.referalCode': 'Промо-код',
   'page.header.signUp.agree': 'Я прочитал и принимаю {terms}',
   'page.header.signUp.terms': 'Условия использования',
-  'page.header.signUp.modal.header': 'ПРОВЕРЬТЕ СВОЙ АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ',
+  'page.header.signUp.modal.header': 'Проверьте свой адрес электронной почты',
   'page.header.signUp.modal.body':
     'Чтобы завершить регистрацию, найдите в своем' +
     ' почтовом ящике электронное письмо с дальнейшими инструкциями. ' +
@@ -1114,6 +1114,7 @@ export const ru: LangType = {
   'resource.user.empty_new_password': 'Новый пароль отсутствует',
   'resource.user.missing_confirm_password': 'Подтверждение пароля отсутствует',
   'resource.user.empty_confirm_password': 'Подтверждение пароля отсутствует',
+  'resource.user.invalid_pin_code': 'Неверный пин-код',
 
   'resource.profile.missing_first_name': 'Имя отсутствует',
   'resource.profile.missing_last_name': 'Фамилия отсутствует',
@@ -1581,4 +1582,8 @@ export const ru: LangType = {
   of: 'из',
   today: 'Сегодня',
   yesterday: 'Вчера',
+
+  'Email verification code': 'Код подтверждения',
+  Confirm: 'Подтвердить',
+  'Resend code': 'Выслать повторно',
 };
