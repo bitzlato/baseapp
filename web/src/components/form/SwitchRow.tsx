@@ -12,15 +12,14 @@ interface Props {
   onChange: (nextValue: boolean) => void;
 }
 
-export const SwitchRow: FC<Props> = (
-  {
-    defaultValue = false,
-    id,
-    label,
-    helpText,
-    value,
-    onChange,
-  }) => {
+export const SwitchRow: FC<Props> = ({
+  defaultValue = false,
+  id,
+  label,
+  helpText,
+  value,
+  onChange,
+}) => {
   const isControlled = value !== undefined;
   const prevValue = useRef(defaultValue);
   const [on, setOn] = useState(defaultValue);
@@ -50,7 +49,6 @@ export const SwitchRow: FC<Props> = (
 
   return (
     <Box>
-
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box mr="4x">
           <Box as="label" htmlFor={id} display="block" mb="2x">
@@ -60,7 +58,6 @@ export const SwitchRow: FC<Props> = (
         </Box>
       </Box>
       {help}
-
     </Box>
   );
 };

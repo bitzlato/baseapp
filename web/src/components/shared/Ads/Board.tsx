@@ -50,6 +50,9 @@ export const Board: FC<Props> = () => {
   const handleChangePerPage = (value: number) => setPerPage(value);
   const handleChangeIsOwnerActive = () => setIsOwnerActive((prev) => !prev);
   const handleRefresh = () => mutate();
+  const handleChangeFilter = (filter: FilterValues) => {
+    console.log('Filter values inside Board', filter);
+  };
 
   return (
     <Adapter Link={Link}>
@@ -89,10 +92,7 @@ export const Board: FC<Props> = () => {
             marginRight="6x"
             style={{ width: '20%', minWidth: '380px' }}
           >
-            <Filter
-              initialValues={initialValues}
-              onChange={(filterValues: FilterValues) => console.log(filterValues)}
-            />
+            <Filter initialValues={initialValues as FilterValues} onChange={handleChangeFilter} />
           </Box>
           <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
             <Ads
