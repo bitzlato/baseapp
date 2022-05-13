@@ -54,7 +54,6 @@ export const AddressNotebookMarket: FC<Props> = ({ wallet, onChangeValue }: Prop
     [data, wallet.blockchain_currencies],
   );
 
-  /*    selectors    */
   const beneficiaries = useSelector(selectBeneficiaries);
   const beneficiariesLoading = useSelector(selectBeneficiariesFetchLoading);
   const beneficiariesAddData = useSelector(selectBeneficiariesCreate);
@@ -63,7 +62,6 @@ export const AddressNotebookMarket: FC<Props> = ({ wallet, onChangeValue }: Prop
   const beneficiariesDeleteSuccess = useSelector(selectBeneficiariesDeleteSuccess);
   const memberLevels = useSelector(selectMemberLevels);
   const userData = useSelector(selectUserInfo);
-  /*    ---------    */
 
   const handleSetCurrentAddress = useCallback(
     (item: Beneficiary) => {
@@ -86,22 +84,19 @@ export const AddressNotebookMarket: FC<Props> = ({ wallet, onChangeValue }: Prop
     [],
   );
 
-  const handleSetCurrentAddressOnUpdate = useCallback(
-    (beneficiariesList: Beneficiary[]) => {
-      let filteredByState = handleFilterByState(beneficiariesList, 'active');
+  const handleSetCurrentAddressOnUpdate = (beneficiariesList: Beneficiary[]) => {
+    let filteredByState = handleFilterByState(beneficiariesList, 'active');
 
-      if (!filteredByState.length) {
-        filteredByState = handleFilterByState(beneficiariesList, 'pending');
-      }
+    if (!filteredByState.length) {
+      filteredByState = handleFilterByState(beneficiariesList, 'pending');
+    }
 
-      if (filteredByState.length >= 1 && filteredByState[0]) {
-        handleSetCurrentAddress(filteredByState[0]);
-      } else {
-        handleSetCurrentAddress(defaultBeneficiary);
-      }
-    },
-    [handleSetCurrentAddress, handleFilterByState],
-  );
+    if (filteredByState.length >= 1 && filteredByState[0]) {
+      handleSetCurrentAddress(filteredByState[0]);
+    } else {
+      handleSetCurrentAddress(defaultBeneficiary);
+    }
+  };
 
   useEffect(() => {
     if (!memberLevels) {
@@ -120,21 +115,21 @@ export const AddressNotebookMarket: FC<Props> = ({ wallet, onChangeValue }: Prop
     if (beneficiaries) {
       handleSetCurrentAddressOnUpdate(beneficiaries);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [beneficiaries]);
 
+  useEffect(() => {
     if (beneficiariesAddSuccess) {
       setAddressModalState(false);
       setConfirmationModalState(true);
     }
+  }, [beneficiariesAddSuccess]);
 
+  useEffect(() => {
     if (beneficiariesActivateSuccess) {
       setConfirmationModalState(false);
     }
-  }, [
-    handleSetCurrentAddressOnUpdate,
-    beneficiaries,
-    beneficiariesAddSuccess,
-    beneficiariesActivateSuccess,
-  ]);
+  }, [beneficiariesActivateSuccess]);
 
   const beneficiariesAsAddresses = useMemo(
     () =>
@@ -187,7 +182,7 @@ export const AddressNotebookMarket: FC<Props> = ({ wallet, onChangeValue }: Prop
       <AddressNotebook
         inputReadonly
         addresses={beneficiariesAsAddresses}
-        isLoading={beneficiariesLoading}
+        isLoading={beneficiariesLoading && beneficiariesAsAddresses.length === 0}
         selectedAddress={selectedBeneficiaryAsAddress}
         inputAddress={selectedBeneficiary.data.address}
         preventClickOuside={isOpenAddressModal || isOpenConfirmationModal || isOpenFailModal}
