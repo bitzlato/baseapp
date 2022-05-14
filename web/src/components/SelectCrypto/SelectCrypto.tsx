@@ -1,8 +1,10 @@
 import { FC, useEffect, useState } from 'react';
+import { Stack } from 'web/src/components/ui/Stack';
 import { Box } from 'web/src/components/ui/Box';
 import { useGeneralWallets } from '../../hooks/useGeneralWallets';
 import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { Select } from '../Select/Select';
+import { SelectPicker } from 'web/src/components/ui/SelectPicker';
 import { WalletItemData } from '../WalletItem/WalletItem';
 
 interface Props {
@@ -22,34 +24,55 @@ const renderCryptoListItem = (d: WalletItemData) => {
   );
 };
 
+const renderCryptoValue = (d: WalletItemData) => {
+  return (
+    <Box display="flex" flexDirection="row">
+      <CryptoCurrencyIcon size="small" currency={d.currency} />
+      <Box as="span">{d.name}</Box>
+    </Box>
+  );
+};
+
 export const SelectCrypto: FC<Props> = ({
   label, value, onChange,
   defaultCurrencyCode,
 }) => {
   const cryptoList: WalletItemData[] = useGeneralWallets();
 
-  const [defaultValue, setDefaultValue] = useState<WalletItemData | null>(null)
+  const [defaultValue, setDefaultValue] = useState<WalletItemData | null>(null);
 
   useEffect(() => {
-    if (cryptoList.length && defaultCurrencyCode){
+    if (cryptoList.length && defaultCurrencyCode) {
       const c = cryptoList.find((item) => item.currency === defaultCurrencyCode);
       if (c) {
         setDefaultValue(c);
       }
     }
-  }, [cryptoList, defaultCurrencyCode, setDefaultValue])
+  }, [cryptoList, defaultCurrencyCode, setDefaultValue]);
 
   return (
-    <Select<WalletItemData>
-      isSearchable
-      options={cryptoList}
-      placeholder={label}
-      value={value || defaultValue}
-      getOptionValue={(v) => v.currency}
-      onChange={(v) => {
-        onChange(v as WalletItemData)
-      }}
-      formatOptionLabel={renderCryptoListItem}
-    />
-  )
-}
+    <Stack direction="column" marginBottom="5x">
+      <Select<WalletItemData>
+        isSearchable
+        options={cryptoList}
+        placeholder={label}
+        value={value || defaultValue}
+        getOptionValue={(v) => v.currency}
+        onChange={(v) => {
+          onChange(v as WalletItemData);
+        }}
+        formatOptionLabel={renderCryptoListItem}
+      />
+      <SelectPicker<WalletItemData>
+        label={label}
+        options={cryptoList}
+        value={value || defaultValue}
+        onChange={onChange}
+        itemLabel={(v) => `${v.currency} ${v.name}`}
+        itemRender={renderCryptoListItem}
+        itemValue={(v) => v.currency}
+        valueRender={renderCryptoValue}
+      />
+    </Stack>
+  );
+};
