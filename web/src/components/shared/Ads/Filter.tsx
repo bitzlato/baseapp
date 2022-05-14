@@ -1,17 +1,16 @@
 import { useEffect, useMemo, useState, VFC } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { Stack } from 'web/src/components/ui/Stack';
 import { SwitchRow } from 'web/src/components/form/SwitchRow';
-import { Box } from 'web/src/components/ui/Box';
-import { useGeneralWallets } from 'web/src/hooks/useGeneralWallets';
-import { AdvertType } from 'web/src/modules/p2p/types';
-import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { Select } from 'web/src/components/Select/Select';
+import { Stack } from 'web/src/components/ui/Stack';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
+import { AdvertType } from 'web/src/modules/p2p/types';
+import { parseNumeric } from '../../../helpers/parseNumeric';
 import { useFiatCurrencies } from '../../../hooks/data/useFetchP2PCurrencies';
 import { MoneyCurrency } from '../../../types';
+import { SelectCrypto } from '../../SelectCrypto/SelectCrypto';
 
 import * as s from './Filter.css';
 
@@ -41,19 +40,14 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
   // todo: добавить строки в переводы
   const t = (v: string) => v;
 
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<string>('');
   const [advertType, setAdvertType] = useState(initialValues.type || 'purchase');
   const [withOnline, setWithOnline] = useState(initialValues.isOwnerActive || false);
   const [withTrusted, setWithTrusted] = useState(initialValues.isOwnerTrusted || false);
   const [withVerified, setWithVerified] = useState(initialValues.isOwnerVerificated || false);
   const [fiatCurrency, setFiatCurrency] = useState<MoneyCurrency | null>(null);
   const [cryptoCurrency, setCryptoCurrency] = useState<WalletItemData | null>(null);
-  const [cryptoCurrencyCode, setCryptoCurrencyCode] = useState<string | null>(
-    initialValues.cryptocurrency,
-  );
   const [paymethod, setPaymethod] = useState<PaymethodType | null>(null);
-
-  const cryptoList: WalletItemData[] = useGeneralWallets();
 
   const { fiatCurrencies } = useFiatCurrencies();
   const fiatCurrenciesArray: MoneyCurrency[] = useMemo(() => {
@@ -68,9 +62,9 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
 
   const applyFilter = () => {
     const payload: FilterValues = {
-      amount,
-      currency: fiatCurrency?.code || 'RUB',
-      cryptocurrency: cryptoCurrency?.currency || '',
+      amount: parseInt(parseNumeric(amount)),
+      currency: fiatCurrency?.code || initialValues.currency || 'RUB',
+      cryptocurrency: cryptoCurrency?.currency || initialValues.cryptocurrency || 'BTC',
       isOwnerActive: withOnline,
       isOwnerTrusted: withTrusted,
       isOwnerVerificated: withVerified,
@@ -90,7 +84,7 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
     applyFilterAutomatically();
   }, [
     amount,
-    cryptoCurrencyCode,
+    cryptoCurrency,
     fiatCurrency,
     withOnline,
     withTrusted,
@@ -98,16 +92,6 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
     paymethod,
     advertType,
   ]);
-
-  const renderCryptoListItem = (d: WalletItemData) => {
-    // todo: show current balance
-    return (
-      <Box>
-        <CryptoCurrencyIcon size="small" currency={d.currency} />
-        <Box as="span">{d.name}</Box>
-      </Box>
-    );
-  };
 
   return (
     <div className={s.filter}>
@@ -129,26 +113,17 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
           onChange={(v) => setAdvertType(v as AdvertType)}
         />
 
-        <Select<WalletItemData>
-          isSearchable
-          options={cryptoList}
-          placeholder={t('Криптовалюта')}
+        <SelectCrypto
+          label={t('Криптовалюта')}
+          defaultCurrencyCode={initialValues.cryptocurrency || 'BTC'}
           value={cryptoCurrency}
-          getOptionValue={(v) => v.currency}
-          onChange={(v) => {
-            setCryptoCurrency(v);
-            setCryptoCurrencyCode(v?.currency || null);
-          }}
-          formatOptionLabel={renderCryptoListItem}
+          onChange={setCryptoCurrency}
         />
 
-        <Box
-          flex="1"
-          as={NumberInput}
+        <NumberInput
           label={t('Сумма')}
-          labelVisible
           value={amount}
-          onChange={(v: string) => setAmount(parseFloat(v))}
+          onChange={setAmount}
         />
 
         <Select<MoneyCurrency>
@@ -158,7 +133,7 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
           value={fiatCurrency}
           getOptionValue={(v) => v.code}
           getOptionLabel={(v) => v.name}
-          onChange={(v) => setFiatCurrency(v)}
+          onChange={setFiatCurrency}
         />
 
         <Select<PaymethodType>
@@ -168,7 +143,7 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
           value={paymethod}
           getOptionValue={(v) => v.id.toString()}
           getOptionLabel={(v) => v.name}
-          onChange={(v) => setPaymethod(v)}
+          onChange={setPaymethod}
         />
 
         <SwitchRow
