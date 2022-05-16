@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
@@ -12,32 +12,37 @@ import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useT } from 'web/src/hooks/useT';
 import { parseMappedHash, setMappedHash } from '../../../helpers/hash';
 import { Ads } from './Ads';
-import { DEFAULT_ACTION_TYPE, DEFAULT_CRYPTO_CODE, DEFAULT_FIAT_CODE, Filter, FilterValues } from './Filter';
+import {
+  DEFAULT_ACTION_TYPE,
+  DEFAULT_CRYPTO_CODE,
+  DEFAULT_FIAT_CODE,
+  Filter,
+  FilterValues,
+} from './Filter';
 
-interface Props {
-}
+interface Props {}
 
 const mapForHash = {
-  amount: 'amount',
   type: 'type',
   currency: 'c',
   cryptocurrency: 'cc',
   paymethod: 'method',
-  isOwnerActive: (v: any) => ({
+  isOwnerActive: (v: never) => ({
     key: 'active',
-    toHash: () => Boolean(v) ? 1 : undefined,
-    fromHash: (x: any) => Boolean(+x),
+    toHash: () => (v ? 1 : undefined),
+    fromHash: (x: never) => Boolean(+x),
   }),
-  isOwnerTrusted: (v: any) => ({
+  isOwnerTrusted: (v: never) => ({
     key: 'trusted',
-    toHash: () => Boolean(v) ? 1 : undefined,
-    fromHash: (x: any) => Boolean(+x),
+    toHash: () => (v ? 1 : undefined),
+    fromHash: (x: never) => Boolean(+x),
   }),
-  isOwnerVerificated: (v: any) => ({
+  isOwnerVerificated: (v: never) => ({
     key: 'verif',
-    toHash: () => Boolean(v) ? 1 : undefined,
-    fromHash: (x: any) => Boolean(+x),
+    toHash: () => (v ? 1 : undefined),
+    fromHash: (x: never) => Boolean(+x),
   }),
+  amount: 'amount',
 };
 
 const ADS_PER_PAGE = 15;
@@ -61,7 +66,7 @@ export const Board: FC<Props> = () => {
       isOwnerVerificated: false,
       paymethod: undefined,
       // override with values from hash store
-      ...initial
+      ...initial,
     };
   });
 
@@ -72,22 +77,23 @@ export const Board: FC<Props> = () => {
     ...filterValues,
   });
 
-  if (error) {
-    return null;
-  }
-
   const handleChangePage = (value: number) => setPage(value);
   const handleChangePerPage = (value: number) => setPerPage(value);
   const handleRefresh = () => mutate();
-  const handleChangeFilter = (filter: FilterValues) => {
+  const handleChangeFilter = useCallback((filter: FilterValues) => {
     setFilterValues(filter);
     setMappedHash(filter, mapForHash);
-  };
+  }, []);
 
   const cryptoSign = filterValues.cryptocurrency;
-  const fiatSign = useMemo(() => {
-    return getFiatCurrency(filterValues.currency).sign;
+  const [fiatSign, setFiatSign] = useState('');
+  useEffect(() => {
+    setFiatSign(getFiatCurrency(filterValues.currency).sign);
   }, [getFiatCurrency, filterValues]);
+
+  if (error) {
+    return null;
+  }
 
   return (
     <Adapter Link={Link}>

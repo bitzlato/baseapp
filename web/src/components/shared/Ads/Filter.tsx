@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState, VFC } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
+import { useCallback, useEffect, useMemo, useState, VFC } from 'react';
+import { InputGroup } from 'react-bootstrap';
+import { useDebounce } from 'use-debounce';
 import { SwitchRow } from 'web/src/components/form/SwitchRow';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { Select } from 'web/src/components/Select/Select';
@@ -41,12 +42,16 @@ interface PaymethodType {
   name: string;
 }
 
-export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
+export const Filter: VFC<Props> = ({ initialValues: initialValuesReactive, onChange }) => {
   // заглушка для useT
   // todo: добавить строки в переводы
   const t = (v: string) => v;
 
-  const [amount, setAmount] = useState<string>('');
+  // freeze values
+  const [initialValues] = useState(initialValuesReactive);
+
+  const [amountRaw, setAmount] = useState<string>('');
+  const [amount] = useDebounce<string>(amountRaw, FILTER_INPUT_DEBOUNCE);
   const [advertType, setAdvertType] = useState(initialValues.type || DEFAULT_ACTION_TYPE);
   const [withOnline, setWithOnline] = useState(initialValues.isOwnerActive || false);
   const [withTrusted, setWithTrusted] = useState(initialValues.isOwnerTrusted || false);
@@ -57,13 +62,13 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
 
   const { fiatCurrencies } = useFiatCurrencies();
   const fiatCurrenciesArray: MoneyCurrency[] = useMemo(() => {
-    if (fiatCurrencies && initialValues.currency in fiatCurrencies){
+    if (fiatCurrencies && initialValues.currency in fiatCurrencies) {
       // set resolved fiat currency
-      setFiatCurrency(fiatCurrencies[initialValues.currency] || null)
+      setFiatCurrency(fiatCurrencies[initialValues.currency] || null);
     }
     // use currencies as plain array
     return Object.values(fiatCurrencies);
-  }, [fiatCurrencies]);
+  }, [fiatCurrencies, initialValues]);
 
   // fetch from api, ref: https://github.com/bitzlato/p2p-ssr/blob/develop/src/app/store/actions/adverts.ts#L209
   const paymethodsList: PaymethodType[] = [
@@ -71,11 +76,13 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
     { id: 8802, name: 'Система Быстрых Платежей' },
   ];
 
-  const applyFilter = () => {
+  const applyFilter = useCallback(() => {
+    console.log('apply filter call');
     const payload: FilterValues = {
       amount: amount ? parseInt(parseNumeric(amount), 10) : undefined,
-      currency: fiatCurrency?.code || initialValues.currency || DEFAULT_FIAT_CODE,
-      cryptocurrency: cryptoCurrency?.currency || initialValues.cryptocurrency || DEFAULT_CRYPTO_CODE,
+      currency: fiatCurrency?.code || DEFAULT_FIAT_CODE,
+      cryptocurrency:
+        cryptoCurrency?.currency || initialValues.cryptocurrency || DEFAULT_CRYPTO_CODE,
       isOwnerActive: withOnline,
       isOwnerTrusted: withTrusted,
       isOwnerVerificated: withVerified,
@@ -84,16 +91,10 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
     };
 
     onChange?.(payload);
-  };
-
-  const applyFilterDebounced = useDebouncedCallback(() => {
-    applyFilter();
-  }, FILTER_INPUT_DEBOUNCE);
-
-  // toggle apply on dependency change
-  useEffect(() => {
-    applyFilter();
   }, [
+    onChange,
+    initialValues.cryptocurrency,
+    amount,
     cryptoCurrency,
     fiatCurrency,
     withOnline,
@@ -103,11 +104,10 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
     advertType,
   ]);
 
-  // debounce on input
+  // toggle apply on dependency changes
   useEffect(() => {
-    applyFilterDebounced()
-  }, [amount])
-
+    applyFilter();
+  }, [applyFilter]);
 
   return (
     <div className={s.filter}>
@@ -136,7 +136,27 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
           onChange={setCryptoCurrency}
         />
 
-        <NumberInput label={t('Сумма')} value={amount} onChange={setAmount} />
+        <NumberInput
+          inputGroupWrapper={(control) => {
+            return (
+              <InputGroup className="mb-3">
+                {control}
+
+                <Select<MoneyCurrency>
+                  isSearchable
+                  options={fiatCurrenciesArray}
+                  value={fiatCurrency}
+                  getOptionValue={(v) => v.code}
+                  getOptionLabel={(v) => v.code}
+                  onChange={setFiatCurrency}
+                />
+              </InputGroup>
+            );
+          }}
+          label={t('Сумма')}
+          value={amountRaw}
+          onChange={setAmount}
+        />
 
         <Select<MoneyCurrency>
           isSearchable

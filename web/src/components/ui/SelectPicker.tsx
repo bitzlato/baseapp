@@ -72,10 +72,7 @@ export const SelectPicker = <T extends Object>({
 
   return (
     <Box position="relative">
-      <Box
-        className={s.control}
-        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-      >
+      <Box className={s.control} onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
         <div className={s.label}>{(label || value) && label}</div>
         <div className={s.value}>{value && valueRender(value)}</div>
         <ChevronIcon className={cn(s.chevron, { [s.chevronRotated]: isDropdownOpen })} />

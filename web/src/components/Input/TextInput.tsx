@@ -15,6 +15,7 @@ export interface TextInputProps
   autoFocus?: boolean | undefined;
   className?: string | undefined;
   noResize?: boolean;
+  inputGroupWrapper?: (control: ReactNode) => ReactNode;
 }
 
 export const TextInput: FC<TextInputProps> = ({
@@ -26,20 +27,25 @@ export const TextInput: FC<TextInputProps> = ({
   labelVisible,
   error,
   noResize,
+  inputGroupWrapper,
   ...rest
 }) => {
+  const control = (
+    <FormControl
+      type="text"
+      {...rest}
+      className={inputClassName as string}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder ?? (!labelVisible ? label?.toString() : undefined)}
+    />
+  );
+
   return (
     <div className={cn(s.textInput, noResize && s.textInputNoResize, className)}>
       <Box ellipsis as="label">
         {(labelVisible || rest.value) && label}
       </Box>
-      <FormControl
-        type="text"
-        {...rest}
-        className={inputClassName as string}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder ?? (!labelVisible ? label?.toString() : undefined)}
-      />
+      {inputGroupWrapper ? inputGroupWrapper(control) : control}
       {error && <p className={s.textInputError}>{error}</p>}
     </div>
   );
