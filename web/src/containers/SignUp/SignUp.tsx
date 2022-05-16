@@ -34,6 +34,7 @@ import { Checkbox } from 'web/src/components/form/Checkbox';
 import { PasswordInput } from 'web/src/components/Input/PasswordInput';
 import s from 'web/src/containers/SignIn/SignIn.postcss';
 import { PasswordWithMeter } from 'web/src/containers/PasswordWithMeter/PasswordWithMeter';
+import { ExternalLink } from 'web/src/components/History/ExternalLink';
 
 export const SignUp: FC = () => {
   const dispatch = useDispatch();
@@ -226,7 +227,13 @@ export const SignUp: FC = () => {
           />
         ) : null}
         <Checkbox name="terms" checked={hasConfirmed} onChange={handleChangeCheckbox}>
-          {t('page.header.signUp.terms')}
+          {t('page.header.signUp.agree', {
+            terms: (
+              <ExternalLink href="https://bitzlato.com/terms-of-service-bitzlato/">
+                {t('page.header.signUp.terms')}
+              </ExternalLink>
+            ),
+          })}
         </Checkbox>
         {captchaLogin() && <Captcha error={signUpError || confirmationError || emailError} />}
         <Button disabled={isButtonDisabled()} onClick={handleClick}>
