@@ -67,7 +67,6 @@ export function setMappedHash(values: Record<string, any>, map: Record<string, s
 
 
   if (window.location.hash !== newHash) {
-    console.info('setting hash', newHash)
     window.history.replaceState(undefined, '', newHash)
   }
 }

@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useMemo, useState, VFC } from 'react';
-import { InputGroup } from 'react-bootstrap';
-import { useDebounce } from 'use-debounce';
+import { useDebounce, useDebouncedCallback } from 'use-debounce';
+import { useAppContext } from 'web/src/components/app/AppContext';
 import { SwitchRow } from 'web/src/components/form/SwitchRow';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { Select } from 'web/src/components/Select/Select';
+import { SelectCrypto } from 'web/src/components/SelectCrypto/SelectCrypto';
 import { Stack } from 'web/src/components/ui/Stack';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
-import { AdvertType } from 'web/src/modules/p2p/types';
-import { parseNumeric } from '../../../helpers/parseNumeric';
-import { useFiatCurrencies } from '../../../hooks/data/useFetchP2PCurrencies';
-import { MoneyCurrency } from '../../../types';
-import { SelectCrypto } from '../../SelectCrypto/SelectCrypto';
+import { parseNumeric } from 'web/src/helpers/parseNumeric';
+import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
+import { usePaymethods } from 'web/src/hooks/data/useFetchPaymethods';
+import { AdvertType, PaymethodInfo } from 'web/src/modules/p2p/types';
+import { MoneyCurrency } from 'web/src/types';
 
 import * as s from './Filter.css';
 
@@ -37,15 +38,11 @@ interface Props {
   onChange?: (newValues: FilterValues) => void;
 }
 
-interface PaymethodType {
-  id: number;
-  name: string;
-}
-
 export const Filter: VFC<Props> = ({ initialValues: initialValuesReactive, onChange }) => {
   // заглушка для useT
   // todo: добавить строки в переводы
   const t = (v: string) => v;
+  const { lang } = useAppContext();
 
   // freeze values
   const [initialValues] = useState(initialValuesReactive);
@@ -58,7 +55,7 @@ export const Filter: VFC<Props> = ({ initialValues: initialValuesReactive, onCha
   const [withVerified, setWithVerified] = useState(initialValues.isOwnerVerificated || false);
   const [fiatCurrency, setFiatCurrency] = useState<MoneyCurrency | null>(null);
   const [cryptoCurrency, setCryptoCurrency] = useState<WalletItemData | null>(null);
-  const [paymethod, setPaymethod] = useState<PaymethodType | null>(null);
+  const [paymethod, setPaymethod] = useState<PaymethodInfo | null>(null);
 
   const { fiatCurrencies } = useFiatCurrencies();
   const fiatCurrenciesArray: MoneyCurrency[] = useMemo(() => {
@@ -71,13 +68,22 @@ export const Filter: VFC<Props> = ({ initialValues: initialValuesReactive, onCha
   }, [fiatCurrencies, initialValues]);
 
   // fetch from api, ref: https://github.com/bitzlato/p2p-ssr/blob/develop/src/app/store/actions/adverts.ts#L209
-  const paymethodsList: PaymethodType[] = [
-    { id: 444, name: 'QIWI' },
-    { id: 8802, name: 'Система Быстрых Платежей' },
-  ];
+  const paymethodsList: PaymethodInfo[] = usePaymethods({
+    lang,
+    type: advertType,
+    currency: fiatCurrency?.code || DEFAULT_FIAT_CODE,
+    cryptocurrency: cryptoCurrency?.currency || initialValues.cryptocurrency || DEFAULT_CRYPTO_CODE,
+    isOwnerActive: withOnline,
+    isOwnerTrusted: withTrusted,
+    isOwnerVerificated: withVerified,
+  });
 
-  const applyFilter = useCallback(() => {
-    console.log('apply filter call');
+  // reset paymethod on currency or type change
+  useEffect(() => {
+    setPaymethod(null);
+  }, [cryptoCurrency, fiatCurrency, advertType]);
+
+  const applyFilterImmediately = useCallback(() => {
     const payload: FilterValues = {
       amount: amount ? parseInt(parseNumeric(amount), 10) : undefined,
       currency: fiatCurrency?.code || DEFAULT_FIAT_CODE,
@@ -104,10 +110,16 @@ export const Filter: VFC<Props> = ({ initialValues: initialValuesReactive, onCha
     advertType,
   ]);
 
+  // make callback debounced to make sure that changes
+  // like payment method reset was applied
+  const applyFilter = useDebouncedCallback(() => {
+    applyFilterImmediately();
+  }, 100);
+
   // toggle apply on dependency changes
   useEffect(() => {
     applyFilter();
-  }, [applyFilter]);
+  }, [applyFilter, applyFilterImmediately]);
 
   return (
     <div className={s.filter}>
@@ -136,27 +148,7 @@ export const Filter: VFC<Props> = ({ initialValues: initialValuesReactive, onCha
           onChange={setCryptoCurrency}
         />
 
-        <NumberInput
-          inputGroupWrapper={(control) => {
-            return (
-              <InputGroup className="mb-3">
-                {control}
-
-                <Select<MoneyCurrency>
-                  isSearchable
-                  options={fiatCurrenciesArray}
-                  value={fiatCurrency}
-                  getOptionValue={(v) => v.code}
-                  getOptionLabel={(v) => v.code}
-                  onChange={setFiatCurrency}
-                />
-              </InputGroup>
-            );
-          }}
-          label={t('Сумма')}
-          value={amountRaw}
-          onChange={setAmount}
-        />
+        <NumberInput label={t('Сумма')} value={amountRaw} onChange={setAmount} />
 
         <Select<MoneyCurrency>
           isSearchable
@@ -168,13 +160,13 @@ export const Filter: VFC<Props> = ({ initialValues: initialValuesReactive, onCha
           onChange={setFiatCurrency}
         />
 
-        <Select<PaymethodType>
+        <Select<PaymethodInfo>
           isSearchable
           options={paymethodsList}
           placeholder={t('Способ оплаты')}
           value={paymethod}
           getOptionValue={(v) => v.id.toString()}
-          getOptionLabel={(v) => v.name}
+          getOptionLabel={(v) => `${v.description} (${v.count})`}
           onChange={setPaymethod}
         />
 

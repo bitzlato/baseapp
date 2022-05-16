@@ -75,6 +75,23 @@ export interface Paymethod {
   name: string;
 }
 
+export interface PaymethodInfo {
+  id: number;
+  count: number;
+  description: string;
+  rate: number;
+}
+
+export interface PaymethodInfoRequest {
+  type: AdvertType;
+  currency: string;
+  cryptocurrency: string;
+  isOwnerVerificated: boolean;
+  isOwnerTrusted: boolean;
+  isOwnerActive: boolean;
+  lang: string;
+}
+
 export interface AdvertSource {
   available: boolean;
   cryptocurrency: string;
