@@ -60,6 +60,7 @@ export type Notify = {
   id: string;
   message: string;
   date: ReactNode;
+  time: ReactNode;
   read: boolean;
   onClick?: (() => void) | undefined;
 };

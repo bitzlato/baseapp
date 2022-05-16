@@ -13,5 +13,36 @@
   "About us": "О нас",
   "Reviews": "Отзывы о платформе",
   "Fees": "Комиссия",
-  "Legal documents": "Документы"
+  "Legal documents": "Документы",
+
+  "Traider": "Трейдер",
+  "Payment method": "Способ оплаты",
+  "RateWithSymbol": "Курс, {fiat}/{crypto}",
+  "Rate": "Курс",
+  "LimitsWithSymbol": "Лимиты, {fiat}",
+  "Limits": "Лимиты",
+  "Cryptocurrency": "Криптовалюта",
+  "Currency": "Валюта",
+  "Sell": "Продать",
+  "Buy": "Купить",
+  "of": "из",
+  "Go to first": "Перейти в начало",
+  "Go to previous": "Перейти назад",
+  "Go to next": "Перейти вперед",
+  "Go to last": "Перейти в конец",
+  "Only active": "Только активные",
+  "Buying": "На покупку",
+  "Selling": "На продажу",
+  "All": "Все",
+
+  "Last Online": "Последняя активность",
+  "Online": "В сети",
+  "Offline": "Не в сети",
+  "Was recently": "Был недавно",
+  "Unavailable": "Недоступен",
+
+  "Trusted user": "Доверенный пользователь",
+  "Refresh": "Обновить",
+  "ad.empty": "Сейчас нет ни одного объявления по заданным параметрам. Будьте первым!",
+  "Create advert": "Создать объявление"
 }

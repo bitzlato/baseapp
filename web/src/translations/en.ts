@@ -17,8 +17,12 @@ export const en = {
   'page.header.navbar.profile': 'Profile',
   'page.header.navbar.logout': 'Logout',
 
+  'notifications.title': 'Notifications',
   'notifications.readall': 'Read all',
   'notifications.empty': 'No notifications',
+
+  'notifications.unread': 'Unread',
+  'notifications.read': 'Read',
 
   'notifications.modal.header': 'Alert!',
   'notifications.No notifications': 'No notifications',
@@ -27,8 +31,12 @@ export const en = {
     '✅ Telegram account has been attached to your user account.',
   'notifications.adminMessage': 'Admin message',
   'notifications.adsActivatedMessage': '✅ Your ads have been activated',
-  'notifications.adsPausedMessage_legacy':
-    'Your ads are inaccessible to users due to the lack of a minimum balance',
+  'notifications.adsPausedMessage':
+    'One of adverts for sell was disabled due to the amount on the balance being less than the minimum limit in the advert',
+  'notifications.adsPausedMessage_maxAllowedMarkup':
+    'One of adverts was disabled due to a rate lower than {maxAllowedMarkup}% of the exchange rate',
+  'notifications.adsPausedMessage_minBalanceAllowed':
+    'Your purchase adverts {currency} disabled due to lack of minimal balance {minBalance} {cryptocurrency}',
   'notifications.checkCashed': '{recipient} cashed the gift on {amount} {cryptocurrency}.',
   'notifications.comissionReturn':
     '🤩🤩🤩 Trade #{tradeId} was free, we returned to you {amount} {cryptocurrency}',
@@ -791,7 +799,8 @@ export const en = {
   'page.header.signUp.confirmPassword': 'Confirm Password',
   'page.header.signUp.confirmPassword.message.error': "Passwords don't match",
   'page.header.signUp.referalCode': 'Referral Code',
-  'page.header.signUp.terms': 'I have read and agree to the Terms of Service',
+  'page.header.signUp.agree': 'I have read and agree to the {terms}',
+  'page.header.signUp.terms': 'Terms of Use',
   'page.header.signUp.modal.header': 'VERIFY YOUR EMAIL ADDRESS',
   'page.header.signUp.modal.body':
     'To complete registration, check for an ' +
@@ -1397,6 +1406,10 @@ export const en = {
   Change: 'Change',
   Rename: 'Rename',
   Reports: 'Reports',
+  'AD Board': 'AD Board',
+  'My adverts': 'My adverts',
+  'My trades': 'My trades',
+  'Active users': 'Active users',
 
   'p2p.apiKeys.descr':
     'Creating an API private key provides access to trading and other services on Bitzlato via a third-party site or application. View <link>API documentation</link>",',
@@ -1549,4 +1562,6 @@ export const en = {
   Exchange: 'Exchange',
   P2P: 'P2P',
   of: 'of',
+  today: 'Today',
+  yesterday: 'Yesterday',
 };

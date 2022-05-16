@@ -82,6 +82,7 @@ import {
   ReportsMobileScreen,
 } from 'web/src/screens/ReportsScreen/ReportsScreen';
 import { VerificationScreen } from 'web/src/screens/VerificationScreen/VerificationScreen';
+import { BoardScreen } from 'web/src/screens/BoardScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -516,13 +517,20 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path={['/wallets/:currency?/:tab?', '/wallets']}
             component={WalletsScreen}
           />
-
           <PrivateRoute
             loading={userLoading}
             isLogged={isLoggedIn}
             path="/internal-transfer"
             component={InternalTransfer}
           />
+          {process.env.REACT_APP_RELEASE_STAGE === 'development' ? (
+            <PrivateRoute
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path="/board"
+              component={BoardScreen}
+            />
+          ) : null}
           {commonRoutes}
         </Switch>
         {isLoggedIn && <WalletsFetch />}

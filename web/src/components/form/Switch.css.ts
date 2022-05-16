@@ -6,6 +6,7 @@ export const switcherBase = style({
   display: 'inline-block',
   verticalAlign: 'middle',
   lineHeight: 0,
+  margin: 0,
 });
 
 export const switcher = styleVariants({

@@ -19,4 +19,5 @@ export const unread = style({
 
 export const items = style({
   overflowY: 'auto',
+  padding: '0 16px',
 });

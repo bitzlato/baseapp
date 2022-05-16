@@ -2,7 +2,6 @@ import React from 'react';
 import cn from 'classnames';
 import { capitalize } from 'src/helpers/capitalize';
 import s from './Box.postcss';
-import sLabel from '../Label/Label.postcss';
 
 export type TextColor = 'primary' | 'secondary' | 'warning' | 'success' | 'failed' | 'bid' | 'ask';
 
@@ -86,13 +85,13 @@ export const Box: Element = React.forwardRef(
       padding && s[`padding${padding === true ? '' : capitalize(padding)}`],
       margin && s[`margin${margin}`],
       my && s[`my${my}`],
-      textSize && sLabel[`${textSize}Size`],
-      textColor && sLabel[`${textColor}Color`],
-      textTr && sLabel[`${textTr}Transform`],
+      textSize && s[`${textSize}Size`],
+      textColor && s[`${textColor}Color`],
+      textTr && s[`${textTr}Transform`],
       textAlign && s[`textAlign${capitalize(textAlign)}`],
       bgColor && s[`${bgColor}BgColor`],
-      ellipsis && sLabel.ellipsis,
-      bold && sLabel.bold,
+      ellipsis && s.ellipsis,
+      bold && s.bold,
     );
     return React.createElement(as, { ...props, ref, className: boxClassName });
   },

@@ -1,4 +1,4 @@
-import { ComponentProps, FC, useState } from 'react';
+import { useMemo, ComponentProps, FC, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link, NavLink, useLocation } from 'react-router-dom';
@@ -18,6 +18,7 @@ import {
   changeLanguage,
   selectUserFetching,
   logoutFetch,
+  selectMobileDeviceState,
 } from 'src/modules';
 import { MarketSelector } from 'src/containers/MarketSelector/MarketSelector';
 import { HeaderToolbar } from 'src/containers/HeaderToolbar/HeaderToolbar';
@@ -26,12 +27,13 @@ import { getLinkToP2P } from 'web/src/components/Header/getLinkToP2P';
 import { Navigation } from 'web/src/components/shared/Header/Navigation';
 import { RenderLinkComponent, RenderNavLinkComponent } from 'web/src/components/shared/sharedTypes';
 import { Box } from 'web/src/components/ui/Box';
-import { localeDate } from 'web/src/helpers';
+import { isToday, isYesterday, localeDate } from 'web/src/helpers';
 import { useMarkNotificationAsRead } from 'web/src/hooks/mutations/useMarkNotificationAsRead';
 import { Notification } from 'web/src/lib/socket/types';
 import { NotificationModalNotification } from 'web/src/containers/NotificationModal/types';
 import { useFetchP2PNotifications } from 'web/src/hooks/data/useFetchP2PNotifications';
 import { NotificationModal } from 'web/src/containers/NotificationModal/NotificationModal';
+import { Header as MobileHeader } from 'src/mobile/components/Header';
 import { notificationInfo } from './notificationInfo';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
@@ -49,6 +51,7 @@ const Header: FC = () => {
   const [nofiticationModalProps, setNofiticationModalProps] = useState<
     NotificationModalNotification | undefined
   >();
+  const isMobileDevice = useSelector(selectMobileDeviceState);
   const t = useT();
   const dispatch = useDispatch();
   const currentCode = useSelector(selectCurrentLanguage);
@@ -59,6 +62,52 @@ const Header: FC = () => {
   const { pathname } = useLocation();
   const history = useHistory();
   const isTradingPage = pathname.includes('/trading');
+
+  const translate = useCallback(
+    (key: string) => {
+      switch (key) {
+        case 'signIn':
+          return t('page.header.navbar.signIn');
+
+        case 'signUp':
+          return t('page.header.signUp');
+
+        case 'profile':
+          return t('page.header.navbar.profile');
+
+        case 'all_read':
+          return t('notifications.readall');
+
+        case 'notifications_empty':
+          return t('notifications.empty');
+
+        case 'logout':
+          return t('page.body.profile.content.action.logout');
+
+        case 'theme':
+          return t('page.mobile.profileLinks.settings.theme');
+
+        case 'notificationsTitle':
+          return t('notifications.title');
+
+        case 'today':
+          return t('today');
+
+        case 'yesterday':
+          return t('yesterday');
+
+        case 'notificationUnread':
+          return t('notifications.unread');
+
+        case 'notificationRead':
+          return t('notifications.read');
+
+        default:
+          throw new Error(`translate: Key '${key}' not found`);
+      }
+    },
+    [t],
+  );
 
   const fetchNotificationRes = useFetchP2PNotifications();
   const notifications: Notification[] = fetchNotificationRes.data || [];
@@ -135,10 +184,23 @@ const Header: FC = () => {
           }
         };
 
+        const calculateDate = () => {
+          if (isToday(notify.createdAt!)) {
+            return translate('today');
+          }
+
+          if (isYesterday(notify.createdAt!)) {
+            return translate('yesterday');
+          }
+
+          return localeDate(notify.createdAt, 'veryShortDate', currentCode);
+        };
+
         return {
           id: notification.id.toString(),
           message: notify.text,
-          date: localeDate(notify.createdAt, 'fullDate'),
+          time: localeDate(notify.createdAt, 'time'),
+          date: calculateDate(),
           read: notification.read,
           onClick: handleNotifyClick,
         };
@@ -148,14 +210,17 @@ const Header: FC = () => {
   }
 
   const p2pURL = getLinkToP2P(currentCode);
-  const p2p: Links = [
-    {
-      key: 'p2p',
-      type: 'external',
-      to: p2pURL,
-      children: t('page.header.navbar.toP2P'),
-    },
-  ];
+  const p2p: Links = useMemo(
+    () => [
+      {
+        key: 'p2p',
+        type: 'external',
+        to: p2pURL,
+        children: t('page.header.navbar.toP2P'),
+      },
+    ],
+    [p2pURL, t],
+  );
   const navLinks = [
     {
       key: 'quick-exchange',
@@ -285,36 +350,28 @@ const Header: FC = () => {
     },
   ].filter(Boolean) as Links;
 
-  const translate = (key: string) => {
-    switch (key) {
-      case 'signIn':
-        return t('page.header.navbar.signIn');
-
-      case 'signUp':
-        return t('page.header.signUp');
-
-      case 'profile':
-        return t('page.header.navbar.profile');
-
-      case 'all_read':
-        return t('notifications.readall');
-
-      case 'notifications_empty':
-        return t('notifications.empty');
-
-      case 'logout':
-        return t('page.body.profile.content.action.logout');
-
-      case 'theme':
-        return t('page.mobile.profileLinks.settings.theme');
-
-      default:
-        throw new Error(`translate: Key '${key}' not found`);
-    }
-  };
-
   const renderLinkComponent: RenderLinkComponent = (props) => <Link {...props} />;
   const renderNavLinkComponent: RenderNavLinkComponent = (props) => <NavLink {...props} />;
+
+  const HeaderWrapper = useCallback(
+    ({ chilren, ...props }) =>
+      isMobileDevice ? (
+        <MobileHeader {...props} />
+      ) : (
+        <SharedHeader {...props}>
+          {isTradingPage && (
+            <>
+              <Box mr="6x">
+                <Navigation navLinks={p2p} renderNavLinkComponent={renderNavLinkComponent} />
+              </Box>
+              <MarketSelector />
+              <HeaderToolbar />
+            </>
+          )}
+        </SharedHeader>
+      ),
+    [isMobileDevice, isTradingPage, p2p],
+  );
 
   return (
     <>
@@ -324,7 +381,7 @@ const Header: FC = () => {
           handleClose={closeNotificationModal}
         />
       )}
-      <SharedHeader
+      <HeaderWrapper
         logoLightURL={window.env.logoUrl}
         logoDarkURL={window.env.logoDarkUrl}
         toMainPage={p2pURL}
@@ -349,7 +406,7 @@ const Header: FC = () => {
             <HeaderToolbar />
           </>
         )}
-      </SharedHeader>
+      </HeaderWrapper>
     </>
   );
 };

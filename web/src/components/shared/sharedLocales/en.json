@@ -1,3 +1,10 @@
 {
-  "copyright": "Bitzlato © All rights reserved."
+  "copyright": "Bitzlato © All rights reserved.",
+
+  "RateWithSymbol": "Rate, {fiat}/{crypto}",
+  "Rate": "Rate",
+  "LimitsWithSymbol": "Limits, {fiat}",
+  "Limits": "Limits",
+
+  "ad.empty": "There are currently no ads for the parameters you specified. Be the first!"
 }
