@@ -62,7 +62,7 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
 
   const applyFilter = () => {
     const payload: FilterValues = {
-      amount: parseInt(parseNumeric(amount)),
+      amount: parseInt(parseNumeric(amount), 10),
       currency: fiatCurrency?.code || initialValues.currency || 'RUB',
       cryptocurrency: cryptoCurrency?.currency || initialValues.cryptocurrency || 'BTC',
       isOwnerActive: withOnline,
@@ -83,6 +83,7 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
   useEffect(() => {
     applyFilterAutomatically();
   }, [
+    applyFilterAutomatically,
     amount,
     cryptoCurrency,
     fiatCurrency,
@@ -120,11 +121,7 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
           onChange={setCryptoCurrency}
         />
 
-        <NumberInput
-          label={t('Сумма')}
-          value={amount}
-          onChange={setAmount}
-        />
+        <NumberInput label={t('Сумма')} value={amount} onChange={setAmount} />
 
         <Select<MoneyCurrency>
           isSearchable
