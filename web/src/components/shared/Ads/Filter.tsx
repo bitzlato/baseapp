@@ -14,15 +14,21 @@ import { SelectCrypto } from '../../SelectCrypto/SelectCrypto';
 
 import * as s from './Filter.css';
 
+export const DEFAULT_ACTION_TYPE = 'selling';
+export const DEFAULT_FIAT_CODE = 'RUB';
+export const DEFAULT_CRYPTO_CODE = 'BTC';
+
+const FILTER_INPUT_DEBOUNCE = 1500;
+
 export interface FilterValues {
-  amount: number;
   type: AdvertType;
   currency: string;
   cryptocurrency: string;
   isOwnerVerificated: boolean;
   isOwnerTrusted: boolean;
   isOwnerActive: boolean;
-  paymethod: number;
+  paymethod: number | undefined;
+  amount: number | undefined;
 }
 
 interface Props {
@@ -41,7 +47,7 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
   const t = (v: string) => v;
 
   const [amount, setAmount] = useState<string>('');
-  const [advertType, setAdvertType] = useState(initialValues.type || 'purchase');
+  const [advertType, setAdvertType] = useState(initialValues.type || DEFAULT_ACTION_TYPE);
   const [withOnline, setWithOnline] = useState(initialValues.isOwnerActive || false);
   const [withTrusted, setWithTrusted] = useState(initialValues.isOwnerTrusted || false);
   const [withVerified, setWithVerified] = useState(initialValues.isOwnerVerificated || false);
@@ -51,6 +57,11 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
 
   const { fiatCurrencies } = useFiatCurrencies();
   const fiatCurrenciesArray: MoneyCurrency[] = useMemo(() => {
+    if (fiatCurrencies && initialValues.currency in fiatCurrencies){
+      // set resolved fiat currency
+      setFiatCurrency(fiatCurrencies[initialValues.currency] || null)
+    }
+    // use currencies as plain array
     return Object.values(fiatCurrencies);
   }, [fiatCurrencies]);
 
@@ -62,29 +73,27 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
 
   const applyFilter = () => {
     const payload: FilterValues = {
-      amount: parseInt(parseNumeric(amount), 10),
-      currency: fiatCurrency?.code || initialValues.currency || 'RUB',
-      cryptocurrency: cryptoCurrency?.currency || initialValues.cryptocurrency || 'BTC',
+      amount: amount ? parseInt(parseNumeric(amount), 10) : undefined,
+      currency: fiatCurrency?.code || initialValues.currency || DEFAULT_FIAT_CODE,
+      cryptocurrency: cryptoCurrency?.currency || initialValues.cryptocurrency || DEFAULT_CRYPTO_CODE,
       isOwnerActive: withOnline,
       isOwnerTrusted: withTrusted,
       isOwnerVerificated: withVerified,
-      paymethod: paymethod?.id || 0,
+      paymethod: paymethod?.id || undefined,
       type: advertType,
     };
 
     onChange?.(payload);
   };
 
-  const applyFilterAutomatically = useDebouncedCallback(() => {
+  const applyFilterDebounced = useDebouncedCallback(() => {
     applyFilter();
-  }, 1000);
+  }, FILTER_INPUT_DEBOUNCE);
 
   // toggle apply on dependency change
   useEffect(() => {
-    applyFilterAutomatically();
+    applyFilter();
   }, [
-    applyFilterAutomatically,
-    amount,
     cryptoCurrency,
     fiatCurrency,
     withOnline,
@@ -93,6 +102,12 @@ export const Filter: VFC<Props> = ({ initialValues, onChange }) => {
     paymethod,
     advertType,
   ]);
+
+  // debounce on input
+  useEffect(() => {
+    applyFilterDebounced()
+  }, [amount])
+
 
   return (
     <div className={s.filter}>

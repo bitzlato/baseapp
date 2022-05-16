@@ -1,25 +1,46 @@
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box } from 'web/src/components/ui/Box';
-import { useAds } from 'web/src/hooks/data/useFetchAds';
-import { Container } from 'web/src/components/Container/Container';
-import { Pagination } from 'web/src/components/ui/Pagination';
-import { Adapter } from 'web/src/components/shared/Adapter';
 import { useAppContext } from 'web/src/components/app/AppContext';
-import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
-import { Stack } from 'web/src/components/ui/Stack';
+import { Container } from 'web/src/components/Container/Container';
+import { Adapter } from 'web/src/components/shared/Adapter';
+import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
-import { Text } from 'web/src/components/ui/Text';
+import { Pagination } from 'web/src/components/ui/Pagination';
+import { Stack } from 'web/src/components/ui/Stack';
+import { useAds } from 'web/src/hooks/data/useFetchAds';
+import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useT } from 'web/src/hooks/useT';
-import { HelpIcon } from 'web/src/components/ui/HelpIcon';
-import { Switch } from 'web/src/components/form/Switch';
+import { parseMappedHash, setMappedHash } from '../../../helpers/hash';
 import { Ads } from './Ads';
-import { Filter, FilterValues } from './Filter';
+import { DEFAULT_ACTION_TYPE, DEFAULT_CRYPTO_CODE, DEFAULT_FIAT_CODE, Filter, FilterValues } from './Filter';
 
-interface Props {}
+interface Props {
+}
+
+const mapForHash = {
+  amount: 'amount',
+  type: 'type',
+  currency: 'c',
+  cryptocurrency: 'cc',
+  paymethod: 'method',
+  isOwnerActive: (v: any) => ({
+    key: 'active',
+    toHash: () => Boolean(v) ? 1 : undefined,
+    fromHash: (x: any) => Boolean(+x),
+  }),
+  isOwnerTrusted: (v: any) => ({
+    key: 'trusted',
+    toHash: () => Boolean(v) ? 1 : undefined,
+    fromHash: (x: any) => Boolean(+x),
+  }),
+  isOwnerVerificated: (v: any) => ({
+    key: 'verif',
+    toHash: () => Boolean(v) ? 1 : undefined,
+    fromHash: (x: any) => Boolean(+x),
+  }),
+};
 
 const ADS_PER_PAGE = 15;
-const initialValues = {}; // TODO: get from sorage or use default values
 
 export const Board: FC<Props> = () => {
   const t = useT();
@@ -27,19 +48,28 @@ export const Board: FC<Props> = () => {
   const { lang } = useAppContext();
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(ADS_PER_PAGE);
-  const [isOwnerActive, setIsOwnerActive] = useState(false);
-  const fiatCode = 'RUB';
-  const cryptoCode = 'BTC';
+  const [filterValues, setFilterValues] = useState<FilterValues>(() => {
+    const initial = parseMappedHash(mapForHash);
+
+    return {
+      amount: undefined,
+      type: DEFAULT_ACTION_TYPE,
+      currency: DEFAULT_FIAT_CODE,
+      cryptocurrency: DEFAULT_CRYPTO_CODE,
+      isOwnerActive: false,
+      isOwnerTrusted: false,
+      isOwnerVerificated: false,
+      paymethod: undefined,
+      // override with values from hash store
+      ...initial
+    };
+  });
+
   const { data, error, isValidating, mutate } = useAds({
     limit: perPage,
-    skip: 0 * perPage,
+    skip: (page - 1) * perPage,
     lang,
-    type: 'selling',
-    currency: 'RUB',
-    cryptocurrency: 'BTC',
-    isOwnerVerificated: false,
-    isOwnerTrusted: false,
-    isOwnerActive,
+    ...filterValues,
   });
 
   if (error) {
@@ -48,11 +78,16 @@ export const Board: FC<Props> = () => {
 
   const handleChangePage = (value: number) => setPage(value);
   const handleChangePerPage = (value: number) => setPerPage(value);
-  const handleChangeIsOwnerActive = () => setIsOwnerActive((prev) => !prev);
   const handleRefresh = () => mutate();
   const handleChangeFilter = (filter: FilterValues) => {
-    console.log('Filter values inside Board', filter);
+    setFilterValues(filter);
+    setMappedHash(filter, mapForHash);
   };
+
+  const cryptoSign = filterValues.cryptocurrency;
+  const fiatSign = useMemo(() => {
+    return getFiatCurrency(filterValues.currency).sign;
+  }, [getFiatCurrency, filterValues]);
 
   return (
     <Adapter Link={Link}>
@@ -69,20 +104,6 @@ export const Board: FC<Props> = () => {
               {t('My trades')}
             </Button>
           </Stack>
-
-          <Stack marginRight="4x" alignItems="center">
-            <Text>
-              <Box as="label" htmlFor="only_active_users" mr="2x">
-                {t('Active users')}
-              </Box>
-              <HelpIcon>{t('Active users')}</HelpIcon>
-            </Text>
-            <Switch
-              id="only_active_users"
-              checked={isOwnerActive}
-              onChange={handleChangeIsOwnerActive}
-            />
-          </Stack>
         </Box>
         <Box display="flex" p="8x">
           <Box
@@ -92,13 +113,13 @@ export const Board: FC<Props> = () => {
             marginRight="6x"
             style={{ width: '20%', minWidth: '380px' }}
           >
-            <Filter initialValues={initialValues as FilterValues} onChange={handleChangeFilter} />
+            <Filter initialValues={filterValues} onChange={handleChangeFilter} />
           </Box>
           <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
             <Ads
               data={data?.data}
-              fiatSign={getFiatCurrency(fiatCode).sign}
-              cryptoSign={cryptoCode}
+              fiatSign={fiatSign}
+              cryptoSign={cryptoSign}
               isLoading={isValidating}
               onRefresh={handleRefresh}
             />
