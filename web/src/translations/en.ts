@@ -1561,4 +1561,6 @@ export const en = {
   Exchange: 'Exchange',
   P2P: 'P2P',
   of: 'of',
+  today: 'Today',
+  yesterday: 'Yesterday',
 };

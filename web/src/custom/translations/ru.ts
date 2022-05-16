@@ -1578,4 +1578,6 @@ export const ru: LangType = {
   Exchange: 'Биржа',
   P2P: 'P2P',
   of: 'из',
+  today: 'Сегодня',
+  yesterday: 'Вчера',
 };
