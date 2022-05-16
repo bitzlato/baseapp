@@ -1,4 +1,8 @@
 window.env = {
+  routes: {
+    profile: '/profile',
+    wallets: '/wallets',
+  },
   api: {
     authUrl: 'https://b-www.lgk.one/api/v2/barong',
     tradeUrl: 'https://b-www.lgk.one/api/v2/peatio',

@@ -5,9 +5,9 @@ export function getSearchParam(key: string, search?: string): string | null {
 }
 
 export function setLocation(path: string, history?: RouterProps['history']) {
-  if (path.includes('p2p')) {
+  if (path.includes('p2p') || !history) {
     window.location.href = path;
-  } else if (history) {
+  } else {
     history.push(path);
   }
 }
