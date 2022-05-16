@@ -7,6 +7,8 @@ export const fontSizeVars = createGlobalTheme(':root', {
   medium: '15px' as const,
   large: '18px' as const,
   lead: '20px' as const,
+  lead24: '24px' as const,
+  lead30: '30px' as const,
 });
 
 export const zIndexVars = createGlobalTheme(':root', {
@@ -183,6 +185,7 @@ export const [themeLight, vars] = createTheme({
     adBg: colors.whiteLilac,
     adTableHeader: colors.ebonyClay50,
     adTrader: colors.indigo,
+    adTrade: colors.indigo,
 
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
@@ -199,8 +202,11 @@ export const [themeLight, vars] = createTheme({
     asks: colors.carnation,
 
     notificationUnread: colors.burntSienna,
-    notificationRead: colors.white50,
-    notificationTime: colors.white50,
+    notificationRead: colors.ebonyClay70,
+    notificationTime: colors.ebonyClay70,
+
+    btnDrawer: colors.ebonyClay,
+    btnDrawerHover: colors.ebonyClay15,
   },
 });
 
@@ -331,6 +337,7 @@ export const themeDark = createTheme(vars, {
     adBg: colors.white05,
     adTableHeader: colors.white50,
     adTrader: colors.malibu,
+    adTrade: colors.indigo,
 
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
@@ -349,5 +356,8 @@ export const themeDark = createTheme(vars, {
     notificationUnread: colors.burntSienna,
     notificationRead: colors.white50,
     notificationTime: colors.white50,
+
+    btnDrawer: colors.white,
+    btnDrawerHover: colors.white50,
   },
 });

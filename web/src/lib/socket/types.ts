@@ -270,3 +270,11 @@ export type Notification = {
   read: boolean;
   createdAt?: number;
 };
+
+export type AdsPausedMessage = {
+  createdAt: number;
+  maxAllowedMarkup: null | number;
+  minBalanceAllowed: null | number;
+  fiatCurrency: string;
+  cryptoCurrency: string;
+};

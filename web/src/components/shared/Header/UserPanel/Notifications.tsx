@@ -6,6 +6,7 @@ import { RenderMenuFn } from 'web/src/components/shared/Header/Dropdown/Dropdown
 import NotificationsIcon from 'web/src/assets/svg/NotificationsIcon.svg';
 import ReadAllIcon from 'web/src/assets/svg/ReadAllIcon.svg';
 import OutlinedCrossIcon from 'web/src/assets/svg/OutlinedCrossIcon.svg';
+import { sprinkles } from 'web/src/theme/sprinkles.css';
 import * as s from './Notifications.css';
 import Drawer from '../Drawer/Drawer';
 
@@ -39,11 +40,21 @@ export const Notifications: FC<Props> = ({ notifications, onAllRead }) => {
               </Box>
               <Box display="flex" justifyContent="flex-end" alignItems="center">
                 <Box as="button" mx="1x" onClick={onAllRead}>
-                  <ReadAllIcon />
+                  <ReadAllIcon
+                    className={sprinkles({
+                      color: { default: 'btnDrawer', hover: 'btnDrawerHover' },
+                      alignSelf: 'center',
+                    })}
+                  />
                 </Box>
 
                 <Box as="button" mx="1x" color="text" onClick={closeMenu}>
-                  <OutlinedCrossIcon />
+                  <OutlinedCrossIcon
+                    className={sprinkles({
+                      color: { default: 'btnDrawer', hover: 'btnDrawerHover' },
+                      alignSelf: 'center',
+                    })}
+                  />
                 </Box>
               </Box>
             </Box>

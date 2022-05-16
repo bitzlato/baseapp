@@ -111,6 +111,7 @@ const unresponsiveProperties = defineProperties({
     flexWrap: ['wrap', 'nowrap'],
     flexShrink: [0, 1, 2],
     flexGrow: [0, 1, 2],
+    flex: [0, 1, 1.618],
 
     // border
     border: ['none'],
@@ -160,7 +161,7 @@ const typographyProperties = defineProperties({
     textAlign: ['left', 'center'],
     textTransform: ['uppercase', 'capitalize'],
     wordBreak: ['break-word'],
-    whiteSpace: ['nowrap'],
+    whiteSpace: ['nowrap', 'pre-line'],
     textOverflow: {
       ellipsis: {
         textOverflow: 'ellipsis',

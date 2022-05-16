@@ -1,5 +1,5 @@
 import { Button } from 'react-bootstrap';
-import { mount, shallow, ShallowWrapper } from 'enzyme';
+import { mount } from 'enzyme';
 import { TestComponentWrapper } from 'src/lib/test/wrapper';
 import { DEFAULT_ORDER_TYPES } from 'src/helpers/order';
 import { Order, OrderComponentProps } from '.';
@@ -23,24 +23,7 @@ const defaultProps: OrderComponentProps = {
   minAmount: '0',
 };
 
-const setup = (props: Partial<OrderComponentProps> = {}) =>
-  shallow(
-    <TestComponentWrapper>
-      <Order {...{ ...defaultProps, ...props }} />
-    </TestComponentWrapper>,
-  );
-
 describe('Order', () => {
-  let wrapper: ShallowWrapper;
-
-  beforeEach(() => {
-    wrapper = setup();
-  });
-
-  it('should match snapshot', () => {
-    expect(wrapper.render()).toMatchSnapshot();
-  });
-
   it('button should be disabled', () => {
     // tslint:disable: no-shadowed-variable
     const wrapper = mount(
