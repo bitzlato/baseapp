@@ -110,7 +110,8 @@ const unresponsiveProperties = defineProperties({
     alignSelf: ['center'],
     flexWrap: ['wrap', 'nowrap'],
     flexShrink: [0, 1, 2],
-    flexGrow: [0, 1, 2],
+
+    flexGrow: [0, 0.5, 1, 2],
     flex: [0, 1, 1.618],
 
     // border

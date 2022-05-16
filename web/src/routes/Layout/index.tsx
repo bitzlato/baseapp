@@ -84,6 +84,7 @@ import {
 import { VerificationScreen } from 'web/src/screens/VerificationScreen/VerificationScreen';
 import { BoardScreen } from 'web/src/screens/p2p/BoardScreen';
 import { AdScreen } from 'web/src/screens/p2p/AdScreen';
+import { SignedOpConfirmScreen } from 'web/src/screens/SignedOpConfirmScreen/SignedOpConfirmScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -352,6 +353,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       return (
         <div className={mobileCls}>
           <Switch>
+            <PublicRoute path="/signed-ops/confirm" component={SignedOpConfirmScreen} />
             <PublicRoute path="/signin0" component={SignInAuth0} />
             <PublicRoute path="/signup0" component={SignInAuth0} />
             <PublicRoute path="/signin" component={SignInMobileScreen} />
@@ -467,6 +469,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       <div className={desktopCls}>
         <Switch>
           <Route path="/magic-link" component={MagicLink as any} />
+          <PublicRoute path="/signed-ops/confirm" component={SignedOpConfirmScreen} />
           <PublicRoute path="/signin0" component={SignInAuth0} />
           <PublicRoute path="/signup0" component={SignInAuth0} />
           <PublicRoute path="/signin" component={SignInScreen} />

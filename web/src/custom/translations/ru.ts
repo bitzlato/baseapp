@@ -1586,4 +1586,22 @@ export const ru: LangType = {
   'Email verification code': 'Код подтверждения',
   Confirm: 'Подтвердить',
   'Resend code': 'Выслать повторно',
+
+  'signed.command.TwoFA.Cancel': 'Двухфакторная аутентификация успешно отключена',
+  'signed.command.Withdraw.Submit': 'Вывод подтвержден!',
+  'signed.command.Voucher.Create': 'Чек успешно создан!',
+  'signed.command.ApiKey.Create-usr': 'API ключ успешно создан!',
+  'signed.command.ApiKey.Create-mob': 'Мобильное устройство привязано',
+  'signed.error.TokenIsExpired': 'Требуется токен',
+  'signed.error.TokenIsNotFound': 'Токен не найден',
+  'signed.error.MalformedToken': 'Неправильный токен',
+  'signed.error.NotAllowed': 'Запрещено',
+  'signed.error.Failed': 'Ошибка',
+  'signed.error.title': 'Произошла ошибка',
+  'signed.error.subtitle': 'Попробуйте повторить операцию или обратитесь в службу поддержки',
+  'signed.error.auth': 'Для выполнения операции, пожалуйста, войдите в систему',
+
+  'Try again': 'Повторить',
+  Forward: 'Далее',
+  Login: 'Войти',
 };

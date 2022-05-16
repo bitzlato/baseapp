@@ -75,9 +75,9 @@ export const SignIn: FC = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      setLocation(getSearchParam('back') ?? ' /wallets', history);
+      setLocation(getSearchParam('back') ?? ' /wallets');
     }
-  }, [isLoggedIn, history]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (captchaType() !== 'none' && captchaLogin() && errorSignIn && !require2FA) {

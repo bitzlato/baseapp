@@ -1569,4 +1569,22 @@ export const en = {
   'Email verification code': 'Email verification code',
   Confirm: 'Confirm',
   'Resend code': 'Resend code',
+
+  'signed.command.TwoFA.Cancel': 'Two-factor authentication successfully disabled',
+  'signed.command.Withdraw.Submit': 'Withdrawal successfully confirmed!',
+  'signed.command.Voucher.Create': 'Voucher has been successfully created!',
+  'signed.command.ApiKey.Create-usr': 'API key successfully created!',
+  'signed.command.ApiKey.Create-mob': 'Your mobile device is linked',
+  'signed.error.TokenIsExpired': 'Token is required',
+  'signed.error.TokenIsNotFound': 'Token is not found',
+  'signed.error.MalformedToken': 'Token is wrong',
+  'signed.error.NotAllowed': 'Forbidden',
+  'signed.error.Failed': 'Error',
+  'signed.error.title': 'The operation is failed',
+  'signed.error.subtitle': 'Please try again or contact support',
+  'signed.error.auth': 'Please login to complete the operation',
+
+  'Try again': 'Try again',
+  Forward: 'Forward',
+  Login: 'Login',
 };
