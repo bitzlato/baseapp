@@ -94,6 +94,30 @@ export interface AdvertSource {
   unactiveReason: null;
 }
 
+export interface AdvertSingleSource {
+  available: boolean;
+  cryptocurrency: string;
+  deepLinkCode: string;
+  details: null;
+  id: number;
+  limitCryptocurrency: AdvertLimit;
+  limitCurrency: AdvertLimit;
+  owner: string;
+  paymethod: number;
+  position: null;
+  rate: string;
+  status: 'active';
+  terms: string;
+  type: AdvertType;
+  unactiveReason: 'not_enough_funds';
+}
+
+export interface PaymethodFull {
+  currency: string;
+  description: string;
+  id: number;
+}
+
 export interface Advert
   extends Omit<
     AdvertSource,

@@ -54,47 +54,53 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
     <AdsTable header={header} isLoading={isLoading}>
       {data && data.length > 0 && (
         <AdsTableBody>
-          {data.map((ad) => (
-            <AdsTableRow key={ad.id}>
-              <AdsTableColumn size="medium">
-                <Box pl="4x">
-                  <Box display="flex" mb="2x" alignItems="center">
-                    {/* TODO: Link */}
-                    <Box
-                      as={Link}
-                      to="/board"
-                      color={{ default: 'adTrader', hover: 'adTrader' }}
-                      display="block"
-                      mr="2x"
-                      textOverflow="ellipsis"
-                    >
-                      {ad.owner}
+          {data.map((ad) => {
+            const isBuy = ad.type === 'selling';
+            return (
+              <AdsTableRow key={ad.id}>
+                <AdsTableColumn size="medium">
+                  <Box pl="4x">
+                    <Box display="flex" mb="2x" alignItems="center">
+                      {/* TODO: Link */}
+                      <Box
+                        as={Link}
+                        to="/board"
+                        color={{ default: 'adTrader', hover: 'adTrader' }}
+                        display="block"
+                        mr="2x"
+                        textOverflow="ellipsis"
+                      >
+                        {ad.owner}
+                      </Box>
+                      <Tooltip label={t('Trusted user')} placement="top">
+                        <div>
+                          <Box as={TrustIcon} display="block" />
+                        </div>
+                      </Tooltip>
                     </Box>
-                    <Tooltip label={t('Trusted user')} placement="top">
-                      <div>
-                        <Box as={TrustIcon} display="block" />
-                      </div>
-                    </Tooltip>
-                  </Box>
 
-                  <OnlineStatusByLastActivity lastActivity={ad.ownerLastActivity} />
-                </Box>
-              </AdsTableColumn>
-              <AdsTableColumn size="medium">{ad.paymethod.name}</AdsTableColumn>
-              <AdsTableColumn size="medium">
-                <P2PFiatFormat money={ad.rate} cryptoCurrency={ad.cryptoCurrency} />
-              </AdsTableColumn>
-              <AdsTableColumn size="small">
-                <P2PFiatFormat money={ad.limitCurrency.min} cryptoCurrency={ad.cryptoCurrency} /> —{' '}
-                <P2PFiatFormat money={ad.limitCurrency.max} cryptoCurrency={ad.cryptoCurrency} />
-              </AdsTableColumn>
-              <AdsTableColumn size="large" display="flex" justifyContent="flex-end">
-                <Box pr="4x">
-                  <Button>{ad.type === 'selling' ? t('Sell') : t('Buy')}</Button>
-                </Box>
-              </AdsTableColumn>
-            </AdsTableRow>
-          ))}
+                    <OnlineStatusByLastActivity lastActivity={ad.ownerLastActivity} />
+                  </Box>
+                </AdsTableColumn>
+                <AdsTableColumn size="medium">{ad.paymethod.name}</AdsTableColumn>
+                <AdsTableColumn size="medium">
+                  <P2PFiatFormat money={ad.rate} cryptoCurrency={ad.cryptoCurrency} />
+                </AdsTableColumn>
+                <AdsTableColumn size="small">
+                  <P2PFiatFormat money={ad.limitCurrency.min} cryptoCurrency={ad.cryptoCurrency} />{' '}
+                  —{' '}
+                  <P2PFiatFormat money={ad.limitCurrency.max} cryptoCurrency={ad.cryptoCurrency} />
+                </AdsTableColumn>
+                <AdsTableColumn size="large" display="flex" justifyContent="flex-end">
+                  <Box pr="4x">
+                    <Button as={Link} to={`/${isBuy ? 'buy' : 'sell'}/${ad.id}`}>
+                      {isBuy ? t('Buy') : t('Sell')}
+                    </Button>
+                  </Box>
+                </AdsTableColumn>
+              </AdsTableRow>
+            );
+          })}
         </AdsTableBody>
       )}
     </AdsTable>

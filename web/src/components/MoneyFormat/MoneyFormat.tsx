@@ -15,7 +15,7 @@ export const MoneyFormat: React.FC<MoneyFormatProps> = ({
   ...rest
 }) => {
   const amount = (
-    <Box as="span" textColor={textColor ?? 'primary'}>
+    <Box as="span" textColor={textColor}>
       {zeroSymbol !== undefined && money.isZero() ? (
         zeroSymbol
       ) : (

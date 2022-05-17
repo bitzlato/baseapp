@@ -6,5 +6,8 @@
   "LimitsWithSymbol": "Limits, {fiat}",
   "Limits": "Limits",
 
-  "ad.empty": "There are currently no ads for the parameters you specified. Be the first!"
+  "ad.empty": "There are currently no ads for the parameters you specified. Be the first!",
+  "ad.trade.info": "During the trade cryptocurrency will be held on the trader account. After the payment trader marks deal as finished and release the funds. This protects both the buyer and the seller.",
+  "ad.buy": "Buy {cryptocurrency} for {currency} from user {username} via {paymethod}",
+  "ad.sell": "Sell {cryptocurrency} for {currency} to {username} via {paymethod}"
 }

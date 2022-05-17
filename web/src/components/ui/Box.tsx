@@ -9,7 +9,7 @@ type SprinklesKeys = keyof Sprinkles;
 export type BoxProps<C extends ElementType = 'div'> = OptionalWithUndefined<Sprinkles> & {
   as?: C | undefined;
   className?: string | undefined;
-  gap?: '3x' | '4x' | '6x' | '8x' | undefined;
+  gap?: '2x' | '3x' | '4x' | '6x' | '8x' | undefined;
 };
 
 type Props<C extends ElementType = 'div'> = BoxProps<C> & Omit<ComponentProps<C>, keyof BoxProps>;

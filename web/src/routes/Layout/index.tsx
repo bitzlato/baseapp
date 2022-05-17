@@ -82,7 +82,8 @@ import {
   ReportsMobileScreen,
 } from 'web/src/screens/ReportsScreen/ReportsScreen';
 import { VerificationScreen } from 'web/src/screens/VerificationScreen/VerificationScreen';
-import { BoardScreen } from 'web/src/screens/BoardScreen';
+import { BoardScreen } from 'web/src/screens/p2p/BoardScreen';
+import { AdScreen } from 'web/src/screens/p2p/AdScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -323,6 +324,24 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         component={DeepLinkPreview}
       />,
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
+      ...(process.env.REACT_APP_RELEASE_STAGE === 'development'
+        ? [
+            <PrivateRoute
+              key="BoardScreen"
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path="/board"
+              component={BoardScreen}
+            />,
+            <PrivateRoute
+              key="AdScreen"
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path={['/buy/:id', '/sell/:id']}
+              component={AdScreen}
+            />,
+          ]
+        : []),
       // and default fallback
       <Route key="catchall" path="**">
         <Redirect to="/trading/" />
@@ -523,14 +542,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/internal-transfer"
             component={InternalTransfer}
           />
-          {process.env.REACT_APP_RELEASE_STAGE === 'development' ? (
-            <PrivateRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/board"
-              component={BoardScreen}
-            />
-          ) : null}
           {commonRoutes}
         </Switch>
         {isLoggedIn && <WalletsFetch />}
