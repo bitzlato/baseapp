@@ -207,6 +207,9 @@ export const [themeLight, vars] = createTheme({
 
     btnDrawer: colors.ebonyClay,
     btnDrawerHover: colors.ebonyClay15,
+
+    adHeaderText: colors.white,
+    adHeaderLabel: colors.white50,
   },
 });
 
@@ -359,5 +362,8 @@ export const themeDark = createTheme(vars, {
 
     btnDrawer: colors.white,
     btnDrawerHover: colors.white50,
+
+    adHeaderText: colors.white,
+    adHeaderLabel: colors.white50,
   },
 });

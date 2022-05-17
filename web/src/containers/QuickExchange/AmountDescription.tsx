@@ -49,7 +49,7 @@ export const AmountDescription: React.FC<AmountDescriptionProps> = ({
     return (
       <Box as="span" textColor="failed">
         {t('page.body.quick.exchange.less_than_min_amount', {
-          value: <MoneyFormat money={minAmount} textColor={undefined} />,
+          value: <MoneyFormat money={minAmount} />,
         })}
       </Box>
     );

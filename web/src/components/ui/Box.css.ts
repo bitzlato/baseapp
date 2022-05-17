@@ -1,6 +1,11 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { sizeVars } from 'web/src/theme/vars.css';
 
+export const rowGap2x = style({});
+globalStyle(`${rowGap2x} > *:not(:first-child)`, {
+  marginLeft: sizeVars['2x'],
+});
+
 export const rowGap3x = style({});
 globalStyle(`${rowGap3x} > *:not(:first-child)`, {
   marginLeft: sizeVars['3x'],
@@ -19,6 +24,11 @@ globalStyle(`${rowGap6x} > *:not(:first-child)`, {
 export const rowGap8x = style({});
 globalStyle(`${rowGap8x} > *:not(:first-child)`, {
   marginLeft: sizeVars['8x'],
+});
+
+export const colGap2x = style({});
+globalStyle(`${colGap2x} > *:not(:first-child)`, {
+  marginTop: sizeVars['2x'],
 });
 
 export const colGap3x = style({});
