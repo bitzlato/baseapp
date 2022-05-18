@@ -80,6 +80,7 @@ export const VariantSwitcher: FC<Props> = ({ name, target, variants, value, onCh
     >
       {variants.map((variant) => (
         <VariantSwitcherItem
+          key={variant.value}
           name={name}
           target={target}
           variant={variant}

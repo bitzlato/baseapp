@@ -10,7 +10,7 @@ export function useFetchP2PWallet(cryptoCurrency: string) {
   return useFetch<P2PWallet>(`${p2pUrl()}/wallets/${cryptoCurrency}`, fetchWithCreds);
 }
 
-export function useFetchP2PCurrencies() {
+export function useFetchP2PCryptoCurrencies() {
   return useFetch<P2PCurrency[]>(`${p2pUrl()}/public/refs/cryptocurrencies`, fetchWithCreds);
 }
 
