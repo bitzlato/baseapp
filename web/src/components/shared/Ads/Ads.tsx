@@ -33,7 +33,7 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
 
   const header = (
     <AdsTableHeader>
-      <AdsTableHeaderColumn size="medium">{t('Traider')}</AdsTableHeaderColumn>
+      <AdsTableHeaderColumn size="medium">{t('Trader')}</AdsTableHeaderColumn>
       <AdsTableHeaderColumn size="medium">{t('Payment method')}</AdsTableHeaderColumn>
       <AdsTableHeaderColumn size="medium">
         {t('RateWithSymbol', { fiat: fiatSign, crypto: cryptoSign })}
@@ -61,10 +61,9 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
                 <AdsTableColumn size="medium">
                   <Box pl="4x">
                     <Box display="flex" mb="2x" alignItems="center">
-                      {/* TODO: Link */}
                       <Box
                         as={Link}
-                        to="/board"
+                        to={`/trader/${ad.owner}`}
                         color={{ default: 'adTrader', hover: 'adTrader' }}
                         display="block"
                         mr="2x"

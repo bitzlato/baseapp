@@ -15,7 +15,8 @@
   "Fees": "Комиссия",
   "Legal documents": "Документы",
 
-  "Traider": "Трейдер",
+  "Trader": "Трейдер",
+  "Trader profile": "Профиль трейдера",
   "Payment method": "Способ оплаты",
   "RateWithSymbol": "Курс, {fiat}/{crypto}",
   "Rate": "Курс",

@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { TraderAdvert } from 'web/src/hooks/data/useUserAds';
 import {
   AdsTable,
@@ -18,8 +19,6 @@ import { Text } from 'web/src/components/ui/Text';
 import { HelpIcon } from 'web/src/components/ui/HelpIcon';
 import { Switch } from 'web/src/components/form/Switch';
 import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
-
-// import * as s from './TraderAds.css';
 
 interface Props {
   data: TraderAdvert[];
@@ -101,30 +100,44 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
       <AdsTable header={header} isLoading={isLoading}>
         {list && list.length > 0 && (
           <AdsTableBody>
-            {list.map((ad) => (
-              <AdsTableRow key={ad.id}>
-                <AdsTableColumn size="medium">
-                  <Box pl="9x">{ad.cryptoCurrency.code}</Box>
-                </AdsTableColumn>
-                <AdsTableColumn size="medium">{ad.currency.code}</AdsTableColumn>
-                <AdsTableColumn size="medium">{ad.paymethod.description}</AdsTableColumn>
-                <AdsTableColumn size="medium">
-                  <P2PFiatFormat money={ad.rate} cryptoCurrency={ad.cryptoCurrency} />
-                </AdsTableColumn>
-                <AdsTableColumn size="small">
-                  <P2PFiatFormat money={ad.limitCurrency.min} cryptoCurrency={ad.cryptoCurrency} />{' '}
-                  —{' '}
-                  <P2PFiatFormat money={ad.limitCurrency.max} cryptoCurrency={ad.cryptoCurrency} />
-                </AdsTableColumn>
-                <AdsTableColumn size="small" display="flex" justifyContent="flex-end">
-                  <Box pr="4x">
-                    <Button disabled={!ad.available}>
-                      {ad.type === 'selling' ? t('Sell') : t('Buy')}
-                    </Button>
-                  </Box>
-                </AdsTableColumn>
-              </AdsTableRow>
-            ))}
+            {list.map((ad) => {
+              const isBuy = ad.type === 'purchase';
+              const actionLabel = isBuy ? t('Buy') : t('Sell');
+              return (
+                <AdsTableRow key={ad.id}>
+                  <AdsTableColumn size="medium">
+                    <Box pl="9x">{ad.cryptoCurrency.code}</Box>
+                  </AdsTableColumn>
+                  <AdsTableColumn size="medium">{ad.currency.code}</AdsTableColumn>
+                  <AdsTableColumn size="medium">{ad.paymethod.description}</AdsTableColumn>
+                  <AdsTableColumn size="medium">
+                    <P2PFiatFormat money={ad.rate} cryptoCurrency={ad.cryptoCurrency} />
+                  </AdsTableColumn>
+                  <AdsTableColumn size="small">
+                    <P2PFiatFormat
+                      money={ad.limitCurrency.min}
+                      cryptoCurrency={ad.cryptoCurrency}
+                    />{' '}
+                    —{' '}
+                    <P2PFiatFormat
+                      money={ad.limitCurrency.max}
+                      cryptoCurrency={ad.cryptoCurrency}
+                    />
+                  </AdsTableColumn>
+                  <AdsTableColumn size="small" display="flex" justifyContent="flex-end">
+                    <Box pr="4x">
+                      {ad.available ? (
+                        <Button as={Link} to={`/${isBuy ? 'buy' : 'sell'}/${ad.id}`}>
+                          {actionLabel}
+                        </Button>
+                      ) : (
+                        <Button disabled>{actionLabel}</Button>
+                      )}
+                    </Box>
+                  </AdsTableColumn>
+                </AdsTableRow>
+              );
+            })}
           </AdsTableBody>
         )}
       </AdsTable>
