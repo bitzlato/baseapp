@@ -60,7 +60,7 @@ export const transitionDurationVars = createGlobalTheme(':root', {
 
 export const [themeLight, vars] = createTheme({
   boxShadows: {
-    dropdown: `8px 8px 10px ${colors.black10}`,
+    dropdown: `5px 4px 13px ${colors.black15}`,
     modal: `8px 4px 14px ${colors.black10}`,
     control: `0px 0px 0px 3px ${colors.mystic90}`,
     btnPrimaryFocus: `0px 0px 0px 3px ${colors.mystic90}`,
@@ -210,12 +210,20 @@ export const [themeLight, vars] = createTheme({
 
     adHeaderText: colors.white,
     adHeaderLabel: colors.white50,
+
+    selectButtonBg: colors.ebonyClay10,
+    selectButtonText: colors.ebonyClay,
+    selectSearchInputPlaceholder: colors.ebonyClay30,
+    selectDropdownBg: colors.white,
+    selectDropdownDelimeter: colors.ebonyClay15,
+    selectDropdownItemHoverBg: colors.whiteLilac,
+    selectDropdownItemSelectedBg: colors.goldTips25,
   },
 });
 
 export const themeDark = createTheme(vars, {
   boxShadows: {
-    dropdown: `8px 8px 10px ${colors.black10}`,
+    dropdown: `5px 4px 13px ${colors.black15}`,
     modal: `8px 4px 14px ${colors.black10}`,
     control: `0px 0px 0px 3px ${colors.mystic15}`,
     btnPrimaryFocus: `0px 0px 0px 3px ${colors.mystic15}`,
@@ -365,5 +373,13 @@ export const themeDark = createTheme(vars, {
 
     adHeaderText: colors.white,
     adHeaderLabel: colors.white50,
+
+    selectButtonBg: colors.white10,
+    selectButtonText: colors.white,
+    selectSearchInputPlaceholder: colors.white50,
+    selectDropdownBg: colors.milanoRed,
+    selectDropdownDelimeter: colors.white10,
+    selectDropdownItemHoverBg: colors.white05,
+    selectDropdownItemSelectedBg: colors.indigo,
   },
 });
