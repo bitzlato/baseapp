@@ -2,7 +2,6 @@ import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
-import { Adapter } from 'web/src/components/shared/Adapter';
 import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { Pagination } from 'web/src/components/ui/Pagination';
@@ -61,51 +60,49 @@ export const Board: FC = () => {
   }
 
   return (
-    <Adapter Link={Link}>
-      <Container maxWidth="fullhd">
-        <Box display="flex" justifyContent="space-between" mt="8x" px="8x">
-          <Stack marginRight="4x">
-            <Button as={Link} to="/" color="clarified" active>
-              {t('AD Board')}
-            </Button>
-            <Button as={Link} to="/" color="clarified">
-              {t('My adverts')}
-            </Button>
-            <Button as={Link} to="/" color="clarified">
-              {t('My trades')}
-            </Button>
-          </Stack>
+    <Container maxWidth="fullhd">
+      <Box display="flex" justifyContent="space-between" mt="8x" px="8x">
+        <Stack marginRight="4x">
+          <Button as={Link} to="/" color="clarified" active>
+            {t('AD Board')}
+          </Button>
+          <Button as={Link} to="/" color="clarified">
+            {t('My adverts')}
+          </Button>
+          <Button as={Link} to="/" color="clarified">
+            {t('My trades')}
+          </Button>
+        </Stack>
+      </Box>
+      <Box display="flex" p="8x">
+        <Box
+          backgroundColor="dropdown"
+          p="6x"
+          borderRadius="1.5x"
+          marginRight="6x"
+          style={{ width: '20%', minWidth: '380px' }}
+        >
+          <Filter params={filter} onChange={handleChangeFilter} />
         </Box>
-        <Box display="flex" p="8x">
-          <Box
-            backgroundColor="dropdown"
-            p="6x"
-            borderRadius="1.5x"
-            marginRight="6x"
-            style={{ width: '20%', minWidth: '380px' }}
-          >
-            <Filter params={filter} onChange={handleChangeFilter} />
-          </Box>
-          <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
-            <Ads
-              data={data?.data}
-              fiatSign={getFiatCurrency(filter.currency).sign}
-              cryptoSign={filter.cryptocurrency}
-              isLoading={isValidating}
-              onRefresh={handleRefresh}
+        <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
+          <Ads
+            data={data?.data}
+            fiatSign={getFiatCurrency(filter.currency).sign}
+            cryptoSign={filter.cryptocurrency}
+            isLoading={isValidating}
+            onRefresh={handleRefresh}
+          />
+          {data && !isValidating && (
+            <Pagination
+              page={filter.skip / filter.limit + 1}
+              total={data.total}
+              perPage={filter.limit}
+              onChange={handleChangePage}
+              onChangePerPage={handleChangePerPage}
             />
-            {data && !isValidating && (
-              <Pagination
-                page={filter.skip / filter.limit + 1}
-                total={data.total}
-                perPage={filter.limit}
-                onChange={handleChangePage}
-                onChangePerPage={handleChangePerPage}
-              />
-            )}
-          </Box>
+          )}
         </Box>
-      </Container>
-    </Adapter>
+      </Box>
+    </Container>
   );
 };

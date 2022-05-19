@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { Adapter } from 'web/src/components/shared/Adapter';
 import { lazyRetry } from 'web/src/helpers/lazyRetry';
 
-const Board = lazyRetry(() =>
-  import('web/src/components/shared/Ads/Board').then((m) => ({ default: m.Board })),
+const Trader = lazyRetry(() =>
+  import('web/src/components/shared/Trader/Trader').then((m) => ({ default: m.Trader })),
 );
 
-export const BoardScreen: FC = () => (
+export const TraderScreen: FC = () => (
   <Suspense fallback>
     <Adapter Link={Link}>
-      <Board />
+      <Trader />
     </Adapter>
   </Suspense>
 );
