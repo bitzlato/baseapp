@@ -1,6 +1,5 @@
 import { useMemo, useState, FC } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { Select } from 'web/src/components/Select/Select';
 import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
@@ -9,13 +8,14 @@ import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/useFetchP2PWallets';
 import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
 import { AdvertParams, AdvertType, PaymethodInfo } from 'web/src/modules/p2p/types';
-import { MoneyCurrency } from 'web/src/types';
 import { P2PCurrency } from 'web/src/modules/p2p/wallet-types';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { getCurrencyCodeSymbol } from 'web/src/helpers/getCurrencySymbol';
 import { SwitchField } from 'web/src/components/profile/settings/SwitchField';
 import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { useSharedT } from 'web/src/components/shared/Adapter';
+import { MoneyCurrency } from 'web/src/types';
+import { InputAmountWithCurrency } from 'web/src/components/shared/Ads/InputAmountWithCurrency';
 
 const INPUT_DEBOUNCE = 500;
 const EMPTY_ARR: unknown[] = [];
@@ -49,7 +49,7 @@ export const Filter: FC<Props> = ({ params, onChange }) => {
 
   const { fiatCurrencies } = useFiatCurrencies();
   const fiats = useMemo(() => Object.values(fiatCurrencies), [fiatCurrencies]);
-  const fiatCurrencyV = useMemo(() => {
+  const selectedFiatCurrency = useMemo(() => {
     return fiats.find((d) => d.code === params.currency) ?? null;
   }, [fiats, params.currency]);
 
@@ -127,24 +127,15 @@ export const Filter: FC<Props> = ({ params, onChange }) => {
             formatOptionLabel={renderDropdownItem}
             onChange={(v) => onChange({ cryptocurrency: v!.code, paymethod: undefined })}
           />
-          <Box display="flex" gap="2x">
-            <Box
-              flexGrow={1}
-              as={NumberInput}
-              label={t('Amount')}
-              value={amount}
-              onChange={handleChangeAmount}
-            />
-            <Select<MoneyCurrency>
-              isSearchable
-              options={fiats}
-              placeholder={t('Currency')}
-              value={fiatCurrencyV}
-              getOptionValue={(v) => v.code}
-              getOptionLabel={(v) => v.name}
-              onChange={(v) => onChange({ currency: v!.code, paymethod: undefined })}
-            />
-          </Box>
+          <InputAmountWithCurrency
+            amount={amount}
+            currencyList={fiats}
+            selectedCurrency={selectedFiatCurrency}
+            onChangeAmount={handleChangeAmount}
+            onChangeCurrency={(v: MoneyCurrency) =>
+              onChange({ currency: v.code, paymethod: undefined })
+            }
+          />
           <Select<PaymethodInfo>
             isSearchable
             options={paymethods}

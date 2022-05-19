@@ -1604,4 +1604,6 @@ export const ru: LangType = {
   'Try again': 'Повторить',
   Forward: 'Далее',
   Login: 'Войти',
+  'Nothing found': 'Ничего не найдено',
+  Search: 'Поиск',
 };

@@ -1587,4 +1587,6 @@ export const en = {
   'Try again': 'Try again',
   Forward: 'Forward',
   Login: 'Login',
+  'Nothing found': 'Nothing found',
+  Search: 'Search',
 };
