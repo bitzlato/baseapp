@@ -106,7 +106,7 @@ export const SignedOpConfirmScreen: FC = () => {
 
       if (command === ISignedOpCommand.API_KEY_CREATED) {
         const { aud = 'usr' } = result;
-        const i18Key = command + aud; // 'ApiKey.Create-usr' or 'ApiKey.Create-mob'
+        const i18Key = `${command}-${aud}`; // 'ApiKey.Create-usr' or 'ApiKey.Create-mob'
         memoized.message = t(`signed.command.${i18Key}`);
       }
 
