@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { Box } from 'src/components/Box';
 import {
-  useFetchP2PCurrencies,
+  useFetchP2PCryptoCurrencies,
   useFetchP2PWallet,
   useGenerateP2PAddress,
 } from 'web/src/hooks/data/useFetchP2PWallets';
@@ -24,7 +24,7 @@ export const DepositP2P: FC<Props> = ({ currency }) => {
   const t = useT();
   const dispatch = useDispatch();
 
-  const currenciesResp = useFetchP2PCurrencies();
+  const currenciesResp = useFetchP2PCryptoCurrencies();
   const walletResp = useFetchP2PWallet(currency);
   const generateAddress = useGenerateP2PAddress();
 

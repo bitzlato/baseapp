@@ -62,6 +62,7 @@ export interface AdvertParams {
   isOwnerActive: boolean;
   paymethod?: number | undefined;
   lang: string;
+  amount?: string | undefined;
 }
 
 export interface AdvertLimit {
@@ -73,6 +74,23 @@ export interface AdvertLimit {
 export interface Paymethod {
   id: number;
   name: string;
+}
+
+export interface PaymethodInfo {
+  id: number;
+  count: number;
+  description: string;
+  rate: number;
+}
+
+export interface PaymethodsParams {
+  type: AdvertType;
+  currency: string;
+  cryptocurrency: string;
+  isOwnerVerificated: boolean;
+  isOwnerTrusted: boolean;
+  isOwnerActive: boolean;
+  lang: string;
 }
 
 export interface AdvertSource {

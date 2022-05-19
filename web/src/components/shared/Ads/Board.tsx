@@ -1,55 +1,75 @@
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box } from 'web/src/components/ui/Box';
-import { useAds } from 'web/src/hooks/data/useFetchAds';
-import { Container } from 'web/src/components/Container/Container';
-import { Pagination } from 'web/src/components/ui/Pagination';
-import { Adapter } from 'web/src/components/shared/Adapter';
 import { useAppContext } from 'web/src/components/app/AppContext';
-import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
-import { Stack } from 'web/src/components/ui/Stack';
+import { Container } from 'web/src/components/Container/Container';
+import { Adapter } from 'web/src/components/shared/Adapter';
+import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
-import { Text } from 'web/src/components/ui/Text';
+import { Pagination } from 'web/src/components/ui/Pagination';
+import { Stack } from 'web/src/components/ui/Stack';
+import { UrlParams, getUrlSearchParams, setUrlSearchParams } from 'web/src/helpers/urlSearch';
+import { useAds } from 'web/src/hooks/data/useFetchAds';
+import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useT } from 'web/src/hooks/useT';
-import { HelpIcon } from 'web/src/components/ui/HelpIcon';
-import { Switch } from 'web/src/components/form/Switch';
+import { AdvertParams } from 'web/src/modules/p2p/types';
 import { Ads } from './Ads';
-import { Filter, FilterValues } from './Filter';
+import { Filter } from './Filter';
 
-interface Props {}
+export const URL_PARAMS: UrlParams<Omit<AdvertParams, 'lang'>> = {
+  type: { name: 'type', set: (v) => v, get: (v) => v },
+  currency: { name: 'c', set: (v) => v, get: (v) => v },
+  cryptocurrency: { name: 'cc', set: (v) => v, get: (v) => v },
+  amount: { name: 'amount', set: (v) => v, get: (v) => v },
+  paymethod: { name: 'method', set: (v) => `${v}`, get: (v) => Number(v) },
+  skip: { name: 'skip', set: (v) => `${v}`, get: (v) => Number(v) },
+  limit: { name: 'limit', set: (v) => `${v}`, get: (v) => Number(v) },
+  isOwnerActive: { name: 'active', set: (v) => `${v}`, get: (v) => Boolean(v) },
+  isOwnerTrusted: { name: 'trusted', set: (v) => `${v}`, get: (v) => Boolean(v) },
+  isOwnerVerificated: { name: 'verif', set: (v) => `${v}`, get: (v) => Boolean(v) },
+};
 
-const ADS_PER_PAGE = 15;
-const initialValues = {}; // TODO: get from sorage or use default values
+const DEFAULT_FILTER: Omit<AdvertParams, 'lang'> = {
+  limit: 15,
+  skip: 0,
+  type: 'purchase',
+  currency: 'RUB',
+  cryptocurrency: 'BTC',
+  isOwnerVerificated: false,
+  isOwnerTrusted: false,
+  isOwnerActive: false,
+};
 
-export const Board: FC<Props> = () => {
+export const Board: FC = () => {
   const t = useT();
   const { getFiatCurrency } = useFiatCurrencies();
   const { lang } = useAppContext();
-  const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(ADS_PER_PAGE);
-  const [isOwnerActive, setIsOwnerActive] = useState(false);
-  const fiatCode = 'RUB';
-  const cryptoCode = 'BTC';
-  const { data, error, isValidating, mutate } = useAds({
-    limit: perPage,
-    skip: 0 * perPage,
+
+  const [filter, setFilter] = useState<AdvertParams>(() => ({
     lang,
-    type: 'selling',
-    currency: 'RUB',
-    cryptocurrency: 'BTC',
-    isOwnerVerificated: false,
-    isOwnerTrusted: false,
-    isOwnerActive,
-  });
+    ...DEFAULT_FILTER,
+    ...getUrlSearchParams(URL_PARAMS),
+  }));
+
+  const { data, error, isValidating, mutate } = useAds(filter);
+
+  const handleChangeFilter = (upd: Partial<AdvertParams>) => {
+    setFilter((prev) => ({ ...prev, ...upd }));
+    setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
+  };
+
+  const handleChangePage = (value: number) => {
+    handleChangeFilter({ skip: (value - 1) * filter.limit });
+  };
+
+  const handleChangePerPage = (value: number) => {
+    handleChangeFilter({ limit: value, skip: 0 });
+  };
+
+  const handleRefresh = () => mutate();
 
   if (error) {
     return null;
   }
-
-  const handleChangePage = (value: number) => setPage(value);
-  const handleChangePerPage = (value: number) => setPerPage(value);
-  const handleChangeIsOwnerActive = () => setIsOwnerActive((prev) => !prev);
-  const handleRefresh = () => mutate();
 
   return (
     <Adapter Link={Link}>
@@ -66,20 +86,6 @@ export const Board: FC<Props> = () => {
               {t('My trades')}
             </Button>
           </Stack>
-
-          <Stack marginRight="4x" alignItems="center">
-            <Text>
-              <Box as="label" htmlFor="only_active_users" mr="2x">
-                {t('Active users')}
-              </Box>
-              <HelpIcon>{t('Active users')}</HelpIcon>
-            </Text>
-            <Switch
-              id="only_active_users"
-              checked={isOwnerActive}
-              onChange={handleChangeIsOwnerActive}
-            />
-          </Stack>
         </Box>
         <Box display="flex" p="8x">
           <Box
@@ -87,26 +93,23 @@ export const Board: FC<Props> = () => {
             p="6x"
             borderRadius="1.5x"
             marginRight="6x"
-            style={{ width: '20%' }}
+            style={{ width: '20%', minWidth: '380px' }}
           >
-            <Filter
-              initialValues={initialValues}
-              onChange={(filterValues: FilterValues) => console.log(filterValues)}
-            />
+            <Filter params={filter} onChange={handleChangeFilter} />
           </Box>
           <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
             <Ads
               data={data?.data}
-              fiatSign={getFiatCurrency(fiatCode).sign}
-              cryptoSign={cryptoCode}
+              fiatSign={getFiatCurrency(filter.currency).sign}
+              cryptoSign={filter.cryptocurrency}
               isLoading={isValidating}
               onRefresh={handleRefresh}
             />
             {data && !isValidating && (
               <Pagination
-                page={page}
+                page={filter.skip / filter.limit + 1}
                 total={data.total}
-                perPage={perPage}
+                perPage={filter.limit}
                 onChange={handleChangePage}
                 onChangePerPage={handleChangePerPage}
               />
