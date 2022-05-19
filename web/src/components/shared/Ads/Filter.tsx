@@ -16,44 +16,44 @@ import { SwitchField } from 'web/src/components/profile/settings/SwitchField';
 import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 
-const FILTER_INPUT_DEBOUNCE = 500;
+const INPUT_DEBOUNCE = 500;
 const EMPTY_ARR: unknown[] = [];
 
 interface Props {
-  values: AdvertParams;
+  params: AdvertParams;
   onChange: (v: Partial<AdvertParams>) => void;
 }
 
-export const Filter: FC<Props> = ({ values, onChange }) => {
+export const Filter: FC<Props> = ({ params, onChange }) => {
   const t = useSharedT();
 
-  const [amount, setAmount] = useState<string>(values.amount ?? '');
+  const [amount, setAmount] = useState<string>(params.amount ?? '');
 
   const { data: cryptoCurrencies = [] } = useFetchP2PCryptoCurrencies();
   const cryptoCurrencyV = useMemo(() => {
-    return cryptoCurrencies.find((d) => d.code === values.cryptocurrency) ?? null;
-  }, [cryptoCurrencies, values.cryptocurrency]);
+    return cryptoCurrencies.find((d) => d.code === params.cryptocurrency) ?? null;
+  }, [cryptoCurrencies, params.cryptocurrency]);
 
   const { fiatCurrencies } = useFiatCurrencies();
   const fiats = useMemo(() => Object.values(fiatCurrencies), [fiatCurrencies]);
   const fiatCurrencyV = useMemo(() => {
-    return fiats.find((d) => d.code === values.currency) ?? null;
-  }, [fiats, values.currency]);
+    return fiats.find((d) => d.code === params.currency) ?? null;
+  }, [fiats, params.currency]);
 
   const paymethodsResp = useFetchPaymethods({
-    lang: values.lang,
-    type: values.type,
-    currency: values.currency,
-    cryptocurrency: values.cryptocurrency,
-    isOwnerActive: values.isOwnerActive,
-    isOwnerTrusted: values.isOwnerTrusted,
-    isOwnerVerificated: values.isOwnerVerificated,
+    lang: params.lang,
+    type: params.type,
+    currency: params.currency,
+    cryptocurrency: params.cryptocurrency,
+    isOwnerActive: params.isOwnerActive,
+    isOwnerTrusted: params.isOwnerTrusted,
+    isOwnerVerificated: params.isOwnerVerificated,
   });
 
   const paymethods = paymethodsResp.data?.data ?? (EMPTY_ARR as PaymethodInfo[]);
   const paymethodV = useMemo(() => {
-    return paymethods.find((d) => d.id === values.paymethod) ?? null;
-  }, [paymethods, values.paymethod]);
+    return paymethods.find((d) => d.id === params.paymethod) ?? null;
+  }, [paymethods, params.paymethod]);
 
   const variants = useMemo(
     () => [
@@ -71,7 +71,7 @@ export const Filter: FC<Props> = ({ values, onChange }) => {
 
   const changeAmountDebounced = useDebouncedCallback((d: string) => {
     onChange({ amount: d || undefined });
-  }, FILTER_INPUT_DEBOUNCE);
+  }, INPUT_DEBOUNCE);
 
   const handleChangeAmount = (d: string) => {
     const nvalue = parseNumeric(d);
@@ -94,8 +94,8 @@ export const Filter: FC<Props> = ({ values, onChange }) => {
         name="advertType"
         target="form"
         variants={variants}
-        value={values.type}
-        onChange={(v) => onChange({ type: v as AdvertType })}
+        value={params.type}
+        onChange={(v) => onChange({ type: v as AdvertType, paymethod: undefined, skip: 0 })}
       />
       <Box display="flex" flexDirection="column" gap="4x">
         <Select<P2PCurrency>
@@ -140,21 +140,21 @@ export const Filter: FC<Props> = ({ values, onChange }) => {
         id="filter.with_verified"
         label={t('Verified users')}
         helpText={t('ad.verified.info')}
-        value={values.isOwnerVerificated}
+        value={params.isOwnerVerificated}
         onChange={(v) => onChange({ isOwnerVerificated: v })}
       />
       <SwitchField
         id="filter.with_trusted"
         label={t('Trusted users')}
         helpText={t('ad.trusted.info')}
-        value={values.isOwnerTrusted}
+        value={params.isOwnerTrusted}
         onChange={(v) => onChange({ isOwnerTrusted: v })}
       />
       <SwitchField
         id="filter.with_online"
         label={t('Active users')}
         helpText={t('ad.active.info')}
-        value={values.isOwnerActive}
+        value={params.isOwnerActive}
         onChange={(v) => onChange({ isOwnerActive: v })}
       />
     </Box>
