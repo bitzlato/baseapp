@@ -1,4 +1,4 @@
-import { FC, useReducer } from 'react';
+import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
@@ -14,10 +14,6 @@ import { useT } from 'web/src/hooks/useT';
 import { AdvertParams } from 'web/src/modules/p2p/types';
 import { Ads } from './Ads';
 import { Filter } from './Filter';
-
-function reducer(params: AdvertParams, upd: Partial<AdvertParams>): AdvertParams {
-  return { ...params, ...upd };
-}
 
 export const URL_PARAMS: UrlParams<Omit<AdvertParams, 'lang'>> = {
   type: { name: 'type', set: (v) => v, get: (v) => v },
@@ -48,7 +44,7 @@ export const Board: FC = () => {
   const { getFiatCurrency } = useFiatCurrencies();
   const { lang } = useAppContext();
 
-  const [filter, setFilter] = useReducer(reducer, undefined as void, () => ({
+  const [filter, setFilter] = useState<AdvertParams>(() => ({
     lang,
     ...DEFAULT_FILTER,
     ...getUrlSearchParams(URL_PARAMS),
@@ -57,7 +53,7 @@ export const Board: FC = () => {
   const { data, error, isValidating, mutate } = useAds(filter);
 
   const handleChangeFilter = (upd: Partial<AdvertParams>) => {
-    setFilter(upd);
+    setFilter((prev) => ({ ...prev, ...upd }));
     setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
   };
 
