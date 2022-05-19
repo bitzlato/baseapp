@@ -3,6 +3,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { Select } from 'web/src/components/Select/Select';
 import { Box } from 'web/src/components/ui/Box';
+import { Button } from 'web/src/components/ui/Button';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/useFetchP2PWallets';
@@ -18,6 +19,18 @@ import { useSharedT } from 'web/src/components/shared/Adapter';
 
 const INPUT_DEBOUNCE = 500;
 const EMPTY_ARR: unknown[] = [];
+
+export const DEFAULT_FILTER: Omit<AdvertParams, 'lang'> = {
+  limit: 15,
+  skip: 0,
+  type: 'purchase',
+  currency: 'RUB',
+  cryptocurrency: 'BTC',
+  isOwnerVerificated: false,
+  isOwnerTrusted: false,
+  isOwnerActive: false,
+  amount: undefined,
+};
 
 interface Props {
   params: AdvertParams;
@@ -79,6 +92,11 @@ export const Filter: FC<Props> = ({ params, onChange }) => {
     changeAmountDebounced(nvalue);
   };
 
+  const handleClickReset = () => {
+    setAmount('');
+    onChange(DEFAULT_FILTER);
+  };
+
   const renderDropdownItem = (d: P2PCurrency) => {
     return (
       <Box display="flex" alignItems="center" gap="2x">
@@ -89,74 +107,79 @@ export const Filter: FC<Props> = ({ params, onChange }) => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" gap="6x">
-      <VariantSwitcher
-        name="advertType"
-        target="form"
-        variants={variants}
-        value={params.type}
-        onChange={(v) => onChange({ type: v as AdvertType, paymethod: undefined, skip: 0 })}
-      />
-      <Box display="flex" flexDirection="column" gap="4x">
-        <Select<P2PCurrency>
-          isSearchable
-          options={cryptoCurrencies}
-          placeholder={t('Cryptocurrency')}
-          value={cryptoCurrencyV}
-          getOptionValue={(v) => v.code}
-          getOptionLabel={(v) => v.code}
-          formatOptionLabel={renderDropdownItem}
-          onChange={(v) => onChange({ cryptocurrency: v!.code, paymethod: undefined })}
+    <Box display="flex" flexDirection="column" gap="8x">
+      <Box display="flex" flexDirection="column" gap="6x">
+        <VariantSwitcher
+          name="advertType"
+          target="form"
+          variants={variants}
+          value={params.type}
+          onChange={(v) => onChange({ type: v as AdvertType, paymethod: undefined, skip: 0 })}
         />
-        <Box display="flex" gap="2x">
-          <Box
-            flexGrow={1}
-            as={NumberInput}
-            label={t('Amount')}
-            value={amount}
-            onChange={handleChangeAmount}
-          />
-          <Select<MoneyCurrency>
+        <Box display="flex" flexDirection="column" gap="4x">
+          <Select<P2PCurrency>
             isSearchable
-            options={fiats}
-            placeholder={t('Currency')}
-            value={fiatCurrencyV}
+            options={cryptoCurrencies}
+            placeholder={t('Cryptocurrency')}
+            value={cryptoCurrencyV}
             getOptionValue={(v) => v.code}
-            getOptionLabel={(v) => v.name}
-            onChange={(v) => onChange({ currency: v!.code, paymethod: undefined })}
+            getOptionLabel={(v) => v.code}
+            formatOptionLabel={renderDropdownItem}
+            onChange={(v) => onChange({ cryptocurrency: v!.code, paymethod: undefined })}
+          />
+          <Box display="flex" gap="2x">
+            <Box
+              flexGrow={1}
+              as={NumberInput}
+              label={t('Amount')}
+              value={amount}
+              onChange={handleChangeAmount}
+            />
+            <Select<MoneyCurrency>
+              isSearchable
+              options={fiats}
+              placeholder={t('Currency')}
+              value={fiatCurrencyV}
+              getOptionValue={(v) => v.code}
+              getOptionLabel={(v) => v.name}
+              onChange={(v) => onChange({ currency: v!.code, paymethod: undefined })}
+            />
+          </Box>
+          <Select<PaymethodInfo>
+            isSearchable
+            options={paymethods}
+            placeholder={t('Payment method')}
+            value={paymethodV}
+            getOptionValue={(v) => v.id.toString()}
+            getOptionLabel={(v) => v.description}
+            onChange={(v) => onChange({ paymethod: v!.id })}
           />
         </Box>
-        <Select<PaymethodInfo>
-          isSearchable
-          options={paymethods}
-          placeholder={t('Payment method')}
-          value={paymethodV}
-          getOptionValue={(v) => v.id.toString()}
-          getOptionLabel={(v) => v.description}
-          onChange={(v) => onChange({ paymethod: v!.id })}
+        <SwitchField
+          id="filter.with_verified"
+          label={t('Verified users')}
+          helpText={t('ad.verified.info')}
+          value={params.isOwnerVerificated}
+          onChange={(v) => onChange({ isOwnerVerificated: v })}
+        />
+        <SwitchField
+          id="filter.with_trusted"
+          label={t('Trusted users')}
+          helpText={t('ad.trusted.info')}
+          value={params.isOwnerTrusted}
+          onChange={(v) => onChange({ isOwnerTrusted: v })}
+        />
+        <SwitchField
+          id="filter.with_online"
+          label={t('Active users')}
+          helpText={t('ad.active.info')}
+          value={params.isOwnerActive}
+          onChange={(v) => onChange({ isOwnerActive: v })}
         />
       </Box>
-      <SwitchField
-        id="filter.with_verified"
-        label={t('Verified users')}
-        helpText={t('ad.verified.info')}
-        value={params.isOwnerVerificated}
-        onChange={(v) => onChange({ isOwnerVerificated: v })}
-      />
-      <SwitchField
-        id="filter.with_trusted"
-        label={t('Trusted users')}
-        helpText={t('ad.trusted.info')}
-        value={params.isOwnerTrusted}
-        onChange={(v) => onChange({ isOwnerTrusted: v })}
-      />
-      <SwitchField
-        id="filter.with_online"
-        label={t('Active users')}
-        helpText={t('ad.active.info')}
-        value={params.isOwnerActive}
-        onChange={(v) => onChange({ isOwnerActive: v })}
-      />
+      <Button variant="outlined" color="secondary" onClick={handleClickReset}>
+        {t('Reset')}
+      </Button>
     </Box>
   );
 };

@@ -13,7 +13,7 @@ import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useT } from 'web/src/hooks/useT';
 import { AdvertParams } from 'web/src/modules/p2p/types';
 import { Ads } from './Ads';
-import { Filter } from './Filter';
+import { DEFAULT_FILTER, Filter } from './Filter';
 
 export const URL_PARAMS: UrlParams<Omit<AdvertParams, 'lang'>> = {
   type: { name: 'type', set: (v) => v, get: (v) => v },
@@ -26,17 +26,6 @@ export const URL_PARAMS: UrlParams<Omit<AdvertParams, 'lang'>> = {
   isOwnerActive: { name: 'active', set: (v) => `${v}`, get: (v) => Boolean(v) },
   isOwnerTrusted: { name: 'trusted', set: (v) => `${v}`, get: (v) => Boolean(v) },
   isOwnerVerificated: { name: 'verif', set: (v) => `${v}`, get: (v) => Boolean(v) },
-};
-
-const DEFAULT_FILTER: Omit<AdvertParams, 'lang'> = {
-  limit: 15,
-  skip: 0,
-  type: 'purchase',
-  currency: 'RUB',
-  cryptocurrency: 'BTC',
-  isOwnerVerificated: false,
-  isOwnerTrusted: false,
-  isOwnerActive: false,
 };
 
 export const Board: FC = () => {
