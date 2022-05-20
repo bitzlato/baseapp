@@ -12,7 +12,7 @@ import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useT } from 'web/src/hooks/useT';
 import { AdvertParams } from 'web/src/modules/p2p/types';
 import { Ads } from './Ads';
-import { DEFAULT_FILTER, Filter } from './Filter';
+import { DEFAULT_FILTER, Filter, FilterMobile } from './Filter';
 
 export const URL_PARAMS: UrlParams<Omit<AdvertParams, 'lang'>> = {
   type: { name: 'type', set: (v) => v, get: (v) => v },
@@ -30,23 +30,23 @@ export const URL_PARAMS: UrlParams<Omit<AdvertParams, 'lang'>> = {
 export const Board: FC = () => {
   const t = useT();
   const { getFiatCurrency } = useFiatCurrencies();
-  const { lang } = useAppContext();
+  const { lang, isMobileDevice } = useAppContext();
 
-  const [filter, setFilter] = useState<AdvertParams>(() => ({
+  const [filterParams, setFilterParams] = useState<AdvertParams>(() => ({
     lang,
     ...DEFAULT_FILTER,
     ...getUrlSearchParams(URL_PARAMS),
   }));
 
-  const { data, error, isValidating, mutate } = useAds(filter);
+  const { data, error, isValidating, mutate } = useAds(filterParams);
 
   const handleChangeFilter = (upd: Partial<AdvertParams>) => {
-    setFilter((prev) => ({ ...prev, ...upd }));
+    setFilterParams((prev) => ({ ...prev, ...upd }));
     setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
   };
 
   const handleChangePage = (value: number) => {
-    handleChangeFilter({ skip: (value - 1) * filter.limit });
+    handleChangeFilter({ skip: (value - 1) * filterParams.limit });
   };
 
   const handleChangePerPage = (value: number) => {
@@ -59,20 +59,50 @@ export const Board: FC = () => {
     return null;
   }
 
+  const navs = (
+    <Stack marginRight="4x">
+      <Button as={Link} to="/" color="clarified" active>
+        {t('AD Board')}
+      </Button>
+      <Button as={Link} to="/" color="clarified">
+        {t('My adverts')}
+      </Button>
+      <Button as={Link} to="/" color="clarified">
+        {t('My trades')}
+      </Button>
+    </Stack>
+  );
+
+  const ads = (
+    <Ads
+      data={data?.data}
+      fiatSign={getFiatCurrency(filterParams.currency).sign}
+      cryptoSign={filterParams.cryptocurrency}
+      isLoading={isValidating}
+      onRefresh={handleRefresh}
+    />
+  );
+
+  if (isMobileDevice) {
+    return (
+      <Box display="flex" flexDirection="column">
+        <Box m="5x" display="flex" flexDirection="column" gap="6x">
+          {navs}
+          <Box display="flex" flexDirection="column" gap="4x">
+            <FilterMobile params={filterParams} onChange={handleChangeFilter} />
+          </Box>
+        </Box>
+        <Box p="5x" backgroundColor="dropdown">
+          {ads}
+        </Box>
+      </Box>
+    );
+  }
+
   return (
     <Container maxWidth="fullhd">
-      <Box display="flex" justifyContent="space-between" mt="8x" px="8x">
-        <Stack marginRight="4x">
-          <Button as={Link} to="/" color="clarified" active>
-            {t('AD Board')}
-          </Button>
-          <Button as={Link} to="/" color="clarified">
-            {t('My adverts')}
-          </Button>
-          <Button as={Link} to="/" color="clarified">
-            {t('My trades')}
-          </Button>
-        </Stack>
+      <Box display="flex" mt="8x" px="8x">
+        {navs}
       </Box>
       <Box display="flex" p="8x">
         <Box
@@ -82,21 +112,15 @@ export const Board: FC = () => {
           marginRight="6x"
           style={{ width: '20%', minWidth: '380px' }}
         >
-          <Filter params={filter} onChange={handleChangeFilter} />
+          <Filter params={filterParams} onChange={handleChangeFilter} />
         </Box>
         <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
-          <Ads
-            data={data?.data}
-            fiatSign={getFiatCurrency(filter.currency).sign}
-            cryptoSign={filter.cryptocurrency}
-            isLoading={isValidating}
-            onRefresh={handleRefresh}
-          />
+          {ads}
           {data && !isValidating && (
             <Pagination
-              page={filter.skip / filter.limit + 1}
+              page={filterParams.skip / filterParams.limit + 1}
               total={data.total}
-              perPage={filter.limit}
+              perPage={filterParams.limit}
               onChange={handleChangePage}
               onChangePerPage={handleChangePerPage}
             />

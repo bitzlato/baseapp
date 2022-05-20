@@ -14,8 +14,10 @@ import { getCurrencyCodeSymbol } from 'web/src/helpers/getCurrencySymbol';
 import { SwitchField } from 'web/src/components/profile/settings/SwitchField';
 import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { useSharedT } from 'web/src/components/shared/Adapter';
-import { MoneyCurrency } from 'web/src/types';
 import { InputAmountWithCurrency } from 'web/src/components/shared/Ads/InputAmountWithCurrency';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
+import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
+import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 
 const INPUT_DEBOUNCE = 500;
 const EMPTY_ARR: unknown[] = [];
@@ -24,23 +26,49 @@ export const DEFAULT_FILTER: Omit<AdvertParams, 'lang'> = {
   limit: 15,
   skip: 0,
   type: 'purchase',
+  // TODO: get user default currency or from locale
   currency: 'RUB',
   cryptocurrency: 'BTC',
   isOwnerVerificated: false,
   isOwnerTrusted: false,
   isOwnerActive: false,
   amount: undefined,
+  paymethod: undefined,
 };
+
+const { type, ...RESET_FILTER } = DEFAULT_FILTER;
 
 interface Props {
   params: AdvertParams;
   onChange: (v: Partial<AdvertParams>) => void;
 }
 
-export const Filter: FC<Props> = ({ params, onChange }) => {
+const FilterBuySell: FC<Props> = ({ params, onChange }) => {
   const t = useSharedT();
 
-  const [amount, setAmount] = useState<string>(params.amount ?? '');
+  const variants = useMemo(
+    () => [
+      { value: 'purchase', label: t('Buy') },
+      { value: 'selling', label: t('Sell') },
+    ],
+    [t],
+  );
+
+  return (
+    <VariantSwitcher
+      name="advertType"
+      target="form"
+      variants={variants}
+      value={params.type}
+      onChange={(v) => onChange({ type: v as AdvertType, paymethod: undefined, skip: 0 })}
+    />
+  );
+};
+
+const FilterControls: FC<Props> = ({ params, onChange }) => {
+  const t = useSharedT();
+
+  const [amount, setAmount] = useStateWithDeps(() => params.amount ?? '', [params.amount]);
 
   const { data: cryptoCurrencies = [] } = useFetchP2PCryptoCurrencies();
   const cryptoCurrencyV = useMemo(() => {
@@ -68,20 +96,6 @@ export const Filter: FC<Props> = ({ params, onChange }) => {
     return paymethods.find((d) => d.id === params.paymethod) ?? null;
   }, [paymethods, params.paymethod]);
 
-  const variants = useMemo(
-    () => [
-      {
-        value: 'purchase',
-        label: t('Buy'),
-      },
-      {
-        value: 'selling',
-        label: t('Sell'),
-      },
-    ],
-    [t],
-  );
-
   const changeAmountDebounced = useDebouncedCallback((d: string) => {
     onChange({ amount: d || undefined });
   }, INPUT_DEBOUNCE);
@@ -90,11 +104,6 @@ export const Filter: FC<Props> = ({ params, onChange }) => {
     const nvalue = parseNumeric(d);
     setAmount(nvalue);
     changeAmountDebounced(nvalue);
-  };
-
-  const handleClickReset = () => {
-    setAmount('');
-    onChange(DEFAULT_FILTER);
   };
 
   const renderDropdownItem = (d: P2PCurrency) => {
@@ -107,70 +116,133 @@ export const Filter: FC<Props> = ({ params, onChange }) => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" gap="8x">
-      <Box display="flex" flexDirection="column" gap="6x">
-        <VariantSwitcher
-          name="advertType"
-          target="form"
-          variants={variants}
-          value={params.type}
-          onChange={(v) => onChange({ type: v as AdvertType, paymethod: undefined, skip: 0 })}
+    <>
+      <Box display="flex" flexDirection="column" gap="4x">
+        <Select<P2PCurrency>
+          isSearchable
+          options={cryptoCurrencies}
+          placeholder={t('Cryptocurrency')}
+          value={cryptoCurrencyV}
+          getOptionValue={(v) => v.code}
+          getOptionLabel={(v) => v.code}
+          formatOptionLabel={renderDropdownItem}
+          onChange={(v) => onChange({ cryptocurrency: v!.code, paymethod: undefined })}
         />
-        <Box display="flex" flexDirection="column" gap="4x">
-          <Select<P2PCurrency>
-            isSearchable
-            options={cryptoCurrencies}
-            placeholder={t('Cryptocurrency')}
-            value={cryptoCurrencyV}
-            getOptionValue={(v) => v.code}
-            getOptionLabel={(v) => v.code}
-            formatOptionLabel={renderDropdownItem}
-            onChange={(v) => onChange({ cryptocurrency: v!.code, paymethod: undefined })}
-          />
-          <InputAmountWithCurrency
-            amount={amount}
-            currencyList={fiats}
-            selectedCurrency={selectedFiatCurrency}
-            onChangeAmount={handleChangeAmount}
-            onChangeCurrency={(v: MoneyCurrency) =>
-              onChange({ currency: v.code, paymethod: undefined })
-            }
-          />
-          <Select<PaymethodInfo>
-            isSearchable
-            options={paymethods}
-            placeholder={t('Payment method')}
-            value={paymethodV}
-            getOptionValue={(v) => v.id.toString()}
-            getOptionLabel={(v) => v.description}
-            onChange={(v) => onChange({ paymethod: v!.id })}
-          />
-        </Box>
-        <SwitchField
-          id="filter.with_verified"
-          label={t('Verified users')}
-          helpText={t('ad.verified.info')}
-          value={params.isOwnerVerificated}
-          onChange={(v) => onChange({ isOwnerVerificated: v })}
+        <InputAmountWithCurrency
+          amount={amount}
+          currencyList={fiats}
+          selectedCurrency={selectedFiatCurrency}
+          onChangeAmount={handleChangeAmount}
+          onChangeCurrency={(v) => onChange({ currency: v.code, paymethod: undefined })}
         />
-        <SwitchField
-          id="filter.with_trusted"
-          label={t('Trusted users')}
-          helpText={t('ad.trusted.info')}
-          value={params.isOwnerTrusted}
-          onChange={(v) => onChange({ isOwnerTrusted: v })}
-        />
-        <SwitchField
-          id="filter.with_online"
-          label={t('Active users')}
-          helpText={t('ad.active.info')}
-          value={params.isOwnerActive}
-          onChange={(v) => onChange({ isOwnerActive: v })}
+        <Select<PaymethodInfo>
+          isSearchable
+          options={paymethods}
+          placeholder={t('Payment method')}
+          value={paymethodV}
+          getOptionValue={(v) => v.id.toString()}
+          getOptionLabel={(v) => v.description}
+          onChange={(v) => onChange({ paymethod: v!.id })}
         />
       </Box>
-      <Button variant="outlined" color="secondary" onClick={handleClickReset}>
+      <SwitchField
+        id="filter.with_verified"
+        label={t('Verified users')}
+        helpText={t('ad.verified.info')}
+        value={params.isOwnerVerificated}
+        onChange={(v) => onChange({ isOwnerVerificated: v })}
+      />
+      <SwitchField
+        id="filter.with_trusted"
+        label={t('Trusted users')}
+        helpText={t('ad.trusted.info')}
+        value={params.isOwnerTrusted}
+        onChange={(v) => onChange({ isOwnerTrusted: v })}
+      />
+      <SwitchField
+        id="filter.with_online"
+        label={t('Active users')}
+        helpText={t('ad.active.info')}
+        value={params.isOwnerActive}
+        onChange={(v) => onChange({ isOwnerActive: v })}
+      />
+    </>
+  );
+};
+
+export const Filter: FC<Props> = ({ params, onChange }) => {
+  const t = useSharedT();
+
+  return (
+    <Box display="flex" flexDirection="column" gap="8x">
+      <Box display="flex" flexDirection="column" gap="6x">
+        <FilterBuySell params={params} onChange={onChange} />
+        <FilterControls params={params} onChange={onChange} />
+      </Box>
+      <Button variant="outlined" color="secondary" onClick={() => onChange(RESET_FILTER)}>
         {t('Reset')}
       </Button>
     </Box>
+  );
+};
+
+export const FilterMobile: FC<Props> = ({ params, onChange }) => {
+  const t = useSharedT();
+
+  const [show, setShow] = useState(false);
+  const [localParams, setLocalParams] = useState<AdvertParams>(() => ({ ...params }));
+
+  const updateParams = (v: Partial<AdvertParams>) => {
+    setLocalParams((prev) => ({ ...prev, ...v }));
+  };
+
+  const toggleModal = () => setShow(!show);
+
+  const handleClickReset = () => {
+    updateParams(RESET_FILTER);
+    onChange(RESET_FILTER);
+    toggleModal();
+  };
+
+  const handleClickApply = () => {
+    onChange(localParams);
+    toggleModal();
+  };
+
+  const handleClickCancel = () => {
+    setLocalParams(params);
+    toggleModal();
+  };
+
+  return (
+    <>
+      <Box display="flex" gap="4x">
+        <FilterBuySell params={params} onChange={onChange} />
+        <Button onClick={toggleModal}>
+          <FilterIcon />
+        </Button>
+      </Box>
+      <Modal show={show} onClose={handleClickCancel}>
+        <ModalHeader>{t('Filter')}</ModalHeader>
+        <ModalBody>
+          <Box display="flex" flexDirection="column" gap="6x">
+            <FilterControls params={localParams} onChange={updateParams} />
+          </Box>
+        </ModalBody>
+        <ModalFooter>
+          <Box flexGrow={1} display="flex" flexDirection="column" gap="4x">
+            <Button variant="text" color="secondary" onClick={handleClickReset}>
+              {t('Reset')}
+            </Button>
+            <Button color="secondary" onClick={handleClickApply}>
+              {t('Apply')}
+            </Button>
+            <Button variant="outlined" color="secondary" onClick={handleClickCancel}>
+              {t('Cancel')}
+            </Button>
+          </Box>
+        </ModalFooter>
+      </Modal>
+    </>
   );
 };

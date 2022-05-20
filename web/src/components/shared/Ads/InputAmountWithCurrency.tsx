@@ -93,7 +93,7 @@ export const InputAmountWithCurrency = ({
               ))
             ) : (
               <Box py="20x" textAlign="center">
-                {t('nothing found')}
+                {t('Nothing found')}
               </Box>
             )}
           </Box>
