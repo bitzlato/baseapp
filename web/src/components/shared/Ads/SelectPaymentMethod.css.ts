@@ -3,8 +3,14 @@ import { sprinkles } from 'web/src/theme/sprinkles.css';
 
 export const input = style([
   {
-    paddingRight: '85px',
-    backgroundColor: 'transparent !important',
+    paddingRight: '40px',
+    cursor: 'pointer',
+    userSelect: 'none',
+    selectors: {
+      '&[readonly], &:disabled': {
+        backgroundColor: 'transparent',
+      },
+    },
   },
   sprinkles({
     textOverflow: 'ellipsis',

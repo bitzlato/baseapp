@@ -8,7 +8,7 @@ import * as s from './Dropdown.css';
 
 interface Props {
   renderButton?: (props: { open: boolean; onClick: () => void }) => ReactNode;
-  renderContent: () => ReactNode;
+  renderContent: (props: { onClose: () => void }) => ReactNode;
 }
 
 export const Dropdown = ({ renderButton, renderContent }: Props) => {
@@ -28,12 +28,16 @@ export const Dropdown = ({ renderButton, renderContent }: Props) => {
     setOpen((current) => !current);
   }, []);
 
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, []);
+
   return (
     <Box position="relative" ref={elementRef}>
       {renderButton ? (
         renderButton({ open, onClick: handleDropdownToggle })
       ) : (
-        <Box as="button" onClick={handleDropdownToggle}>
+        <Box as="button" type="button" onClick={handleDropdownToggle}>
           <DropdownChevron open={open} />
         </Box>
       )}
@@ -47,7 +51,7 @@ export const Dropdown = ({ renderButton, renderContent }: Props) => {
         fontSize="medium"
         boxShadow="dropdown"
       >
-        {renderContent()}
+        {open ? renderContent({ onClose: handleClose }) : null}
       </Box>
     </Box>
   );
