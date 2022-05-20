@@ -13,7 +13,7 @@ window.env = {
     accountPublicUrl: '/api/public/v1',
     p2pUrl: '/api/p2p',
     p2pAuthUrl: '/api/auth',
-    notificatorUrl: 'ws://localhost:8080/wss'
+    notificatorUrl: 'ws://localhost:8080/wss',
   },
   auth0: {
     domain: window.AUTH0_DOMAIN ?? 'auth.lgk.one',
