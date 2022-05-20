@@ -1,4 +1,8 @@
 window.env = {
+  routes: {
+    profile: '/profile',
+    wallets: '/wallets',
+  },
   api: {
     authUrl: 'https://bitzlato.com/api/v2/barong',
     tradeUrl: 'https://bitzlato.com/api/v2/peatio',

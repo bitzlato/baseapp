@@ -2,6 +2,10 @@ import { Language } from 'src/types';
 
 declare global {
   interface Config {
+    routes: {
+      profile: string;
+      wallets: string;
+    };
     api: {
       authUrl: string;
       tradeUrl: string;

@@ -1,4 +1,8 @@
 window.env = {
+  routes: {
+    profile: '/profile',
+    wallets: '/wallets',
+  },
   api: {
     authUrl: 'http://localhost:9002/api/v2/barong',
     tradeUrl: 'http://localhost:9002/api/v2/peatio',

@@ -1,4 +1,6 @@
 import { FC, Suspense } from 'react';
+import { Link } from 'react-router-dom';
+import { Adapter } from 'web/src/components/shared/Adapter';
 import { lazyRetry } from 'web/src/helpers/lazyRetry';
 
 const Board = lazyRetry(() =>
@@ -7,6 +9,8 @@ const Board = lazyRetry(() =>
 
 export const BoardScreen: FC = () => (
   <Suspense fallback>
-    <Board />
+    <Adapter Link={Link}>
+      <Board />
+    </Adapter>
   </Suspense>
 );

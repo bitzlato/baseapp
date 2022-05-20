@@ -9,6 +9,10 @@ const rangerHostUrl =
     : `${protocolSSL}${window.location.hostname}`;
 
 export const defaultConfig: Config = {
+  routes: {
+    profile: '/profile',
+    wallets: '/wallets',
+  },
   api: {
     authUrl: `${hostUrl}/api/v2/barong`,
     tradeUrl: `${hostUrl}/api/v2/peatio`,
@@ -130,3 +134,5 @@ export const showInternalTransfer = () => convertToBoolean(Cryptobase.config.int
 export const showGift = () => convertToBoolean(Cryptobase.config.gift);
 export const showReferal = () => convertToBoolean(Cryptobase.config.referal);
 export const notificatorUrl = () => Cryptobase.config.api.notificatorUrl;
+export const p2pRoutesProfile = () => Cryptobase.config.routes.profile;
+export const p2pRoutesWallets = () => Cryptobase.config.routes.wallets;

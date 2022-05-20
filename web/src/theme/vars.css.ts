@@ -7,6 +7,8 @@ export const fontSizeVars = createGlobalTheme(':root', {
   medium: '15px' as const,
   large: '18px' as const,
   lead: '20px' as const,
+  lead24: '24px' as const,
+  lead30: '30px' as const,
 });
 
 export const zIndexVars = createGlobalTheme(':root', {
@@ -58,7 +60,7 @@ export const transitionDurationVars = createGlobalTheme(':root', {
 
 export const [themeLight, vars] = createTheme({
   boxShadows: {
-    dropdown: `8px 8px 10px ${colors.black10}`,
+    dropdown: `5px 4px 13px ${colors.black15}`,
     modal: `8px 4px 14px ${colors.black10}`,
     control: `0px 0px 0px 3px ${colors.mystic90}`,
     btnPrimaryFocus: `0px 0px 0px 3px ${colors.mystic90}`,
@@ -183,6 +185,7 @@ export const [themeLight, vars] = createTheme({
     adBg: colors.whiteLilac,
     adTableHeader: colors.ebonyClay50,
     adTrader: colors.indigo,
+    adTrade: colors.indigo,
 
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
@@ -204,12 +207,23 @@ export const [themeLight, vars] = createTheme({
 
     btnDrawer: colors.ebonyClay,
     btnDrawerHover: colors.ebonyClay15,
+
+    adHeaderText: colors.white,
+    adHeaderLabel: colors.white50,
+
+    selectButtonBg: colors.ebonyClay10,
+    selectButtonText: colors.ebonyClay,
+    selectSearchInputPlaceholder: colors.ebonyClay30,
+    selectDropdownBg: colors.white,
+    selectDropdownDelimeter: colors.ebonyClay15,
+    selectDropdownItemHoverBg: colors.whiteLilac,
+    selectDropdownItemSelectedBg: colors.goldTips25,
   },
 });
 
 export const themeDark = createTheme(vars, {
   boxShadows: {
-    dropdown: `8px 8px 10px ${colors.black10}`,
+    dropdown: `5px 4px 13px ${colors.black15}`,
     modal: `8px 4px 14px ${colors.black10}`,
     control: `0px 0px 0px 3px ${colors.mystic15}`,
     btnPrimaryFocus: `0px 0px 0px 3px ${colors.mystic15}`,
@@ -334,6 +348,7 @@ export const themeDark = createTheme(vars, {
     adBg: colors.white05,
     adTableHeader: colors.white50,
     adTrader: colors.malibu,
+    adTrade: colors.indigo,
 
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
@@ -355,5 +370,16 @@ export const themeDark = createTheme(vars, {
 
     btnDrawer: colors.white,
     btnDrawerHover: colors.white50,
+
+    adHeaderText: colors.white,
+    adHeaderLabel: colors.white50,
+
+    selectButtonBg: colors.white10,
+    selectButtonText: colors.white,
+    selectSearchInputPlaceholder: colors.white50,
+    selectDropdownBg: colors.milanoRed,
+    selectDropdownDelimeter: colors.white10,
+    selectDropdownItemHoverBg: colors.white05,
+    selectDropdownItemSelectedBg: colors.indigo,
   },
 });

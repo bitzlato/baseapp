@@ -1,19 +1,26 @@
 import * as React from 'react';
-import { Money } from '@bitzlato/money-js';
 import { CurrencyTicker } from '../CurrencyTicker/CurrencyTicker';
-import { AmountFormat } from '../AmountFormat/AmountFormat';
+import { AmountFormat, AmountFormatProps } from '../AmountFormat/AmountFormat';
 import { Box, TextColor } from '../Box/Box';
 
-interface Props {
-  money: Money;
+export interface MoneyFormatProps extends AmountFormatProps {
   zeroSymbol?: string | undefined;
   textColor?: TextColor | undefined;
 }
 
-export const MoneyFormat: React.FC<Props> = ({ money, zeroSymbol, ...props }) => {
+export const MoneyFormat: React.FC<MoneyFormatProps> = ({
+  money,
+  zeroSymbol,
+  textColor,
+  ...rest
+}) => {
   const amount = (
-    <Box as="span" textColor={'textColor' in props ? props.textColor : 'primary'}>
-      {zeroSymbol !== undefined && money.isZero() ? zeroSymbol : <AmountFormat money={money} />}
+    <Box as="span" textColor={textColor}>
+      {zeroSymbol !== undefined && money.isZero() ? (
+        zeroSymbol
+      ) : (
+        <AmountFormat money={money} {...rest} />
+      )}
     </Box>
   );
 

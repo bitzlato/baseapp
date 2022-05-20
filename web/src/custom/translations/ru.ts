@@ -808,7 +808,7 @@ export const ru: LangType = {
   'page.header.signUp.referalCode': 'Промо-код',
   'page.header.signUp.agree': 'Я прочитал и принимаю {terms}',
   'page.header.signUp.terms': 'Условия использования',
-  'page.header.signUp.modal.header': 'ПРОВЕРЬТЕ СВОЙ АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ',
+  'page.header.signUp.modal.header': 'Проверьте свой адрес электронной почты',
   'page.header.signUp.modal.body':
     'Чтобы завершить регистрацию, найдите в своем' +
     ' почтовом ящике электронное письмо с дальнейшими инструкциями. ' +
@@ -1114,6 +1114,7 @@ export const ru: LangType = {
   'resource.user.empty_new_password': 'Новый пароль отсутствует',
   'resource.user.missing_confirm_password': 'Подтверждение пароля отсутствует',
   'resource.user.empty_confirm_password': 'Подтверждение пароля отсутствует',
+  'resource.user.invalid_pin_code': 'Неверный пин-код',
 
   'resource.profile.missing_first_name': 'Имя отсутствует',
   'resource.profile.missing_last_name': 'Фамилия отсутствует',
@@ -1581,4 +1582,28 @@ export const ru: LangType = {
   of: 'из',
   today: 'Сегодня',
   yesterday: 'Вчера',
+
+  'Email verification code': 'Код подтверждения',
+  Confirm: 'Подтвердить',
+  'Resend code': 'Выслать повторно',
+
+  'signed.command.TwoFA.Cancel': 'Двухфакторная аутентификация успешно отключена',
+  'signed.command.Withdraw.Submit': 'Вывод подтвержден!',
+  'signed.command.Voucher.Create': 'Чек успешно создан!',
+  'signed.command.ApiKey.Create-usr': 'API ключ успешно создан!',
+  'signed.command.ApiKey.Create-mob': 'Мобильное устройство привязано',
+  'signed.error.TokenIsExpired': 'Требуется токен',
+  'signed.error.TokenIsNotFound': 'Токен не найден',
+  'signed.error.MalformedToken': 'Неправильный токен',
+  'signed.error.NotAllowed': 'Запрещено',
+  'signed.error.Failed': 'Ошибка',
+  'signed.error.title': 'Произошла ошибка',
+  'signed.error.subtitle': 'Попробуйте повторить операцию или обратитесь в службу поддержки',
+  'signed.error.auth': 'Для выполнения операции, пожалуйста, войдите в систему',
+
+  'Try again': 'Повторить',
+  Forward: 'Далее',
+  Login: 'Войти',
+  'Nothing found': 'Ничего не найдено',
+  Search: 'Поиск',
 };

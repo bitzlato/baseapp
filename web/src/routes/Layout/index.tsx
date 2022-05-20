@@ -82,7 +82,10 @@ import {
   ReportsMobileScreen,
 } from 'web/src/screens/ReportsScreen/ReportsScreen';
 import { VerificationScreen } from 'web/src/screens/VerificationScreen/VerificationScreen';
-import { BoardScreen } from 'web/src/screens/BoardScreen';
+import { SignedOpConfirmScreen } from 'web/src/screens/SignedOpConfirmScreen/SignedOpConfirmScreen';
+import { BoardScreen } from 'web/src/screens/p2p/BoardScreen';
+import { AdScreen } from 'web/src/screens/p2p/AdScreen';
+import { TraderScreen } from 'web/src/screens/p2p/TraderScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -323,6 +326,31 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         component={DeepLinkPreview}
       />,
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
+      ...(process.env.REACT_APP_RELEASE_STAGE === 'development'
+        ? [
+            <PrivateRoute
+              key="BoardScreen"
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path="/board"
+              component={BoardScreen}
+            />,
+            <PrivateRoute
+              key="AdScreen"
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path={['/buy/:id', '/sell/:id']}
+              component={AdScreen}
+            />,
+            <PrivateRoute
+              key="TraderScreen"
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path="/trader/:name"
+              component={TraderScreen}
+            />,
+          ]
+        : []),
       // and default fallback
       <Route key="catchall" path="**">
         <Redirect to="/trading/" />
@@ -333,6 +361,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       return (
         <div className={mobileCls}>
           <Switch>
+            <PublicRoute path="/signed-ops/confirm" component={SignedOpConfirmScreen} />
             <PublicRoute path="/signin0" component={SignInAuth0} />
             <PublicRoute path="/signup0" component={SignInAuth0} />
             <PublicRoute path="/signin" component={SignInMobileScreen} />
@@ -448,6 +477,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       <div className={desktopCls}>
         <Switch>
           <Route path="/magic-link" component={MagicLink as any} />
+          <PublicRoute path="/signed-ops/confirm" component={SignedOpConfirmScreen} />
           <PublicRoute path="/signin0" component={SignInAuth0} />
           <PublicRoute path="/signup0" component={SignInAuth0} />
           <PublicRoute path="/signin" component={SignInScreen} />
@@ -523,14 +553,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/internal-transfer"
             component={InternalTransfer}
           />
-          {process.env.REACT_APP_RELEASE_STAGE === 'development' ? (
-            <PrivateRoute
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/board"
-              component={BoardScreen}
-            />
-          ) : null}
           {commonRoutes}
         </Switch>
         {isLoggedIn && <WalletsFetch />}

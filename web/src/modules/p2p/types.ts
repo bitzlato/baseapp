@@ -62,6 +62,7 @@ export interface AdvertParams {
   isOwnerActive: boolean;
   paymethod?: number | undefined;
   lang: string;
+  amount?: string | undefined;
 }
 
 export interface AdvertLimit {
@@ -73,6 +74,23 @@ export interface AdvertLimit {
 export interface Paymethod {
   id: number;
   name: string;
+}
+
+export interface PaymethodInfo {
+  id: number;
+  count: number;
+  description: string;
+  rate: number;
+}
+
+export interface PaymethodsParams {
+  type: AdvertType;
+  currency: string;
+  cryptocurrency: string;
+  isOwnerVerificated: boolean;
+  isOwnerTrusted: boolean;
+  isOwnerActive: boolean;
+  lang: string;
 }
 
 export interface AdvertSource {
@@ -92,6 +110,30 @@ export interface AdvertSource {
   safeMode: boolean;
   type: AdvertType;
   unactiveReason: null;
+}
+
+export interface AdvertSingleSource {
+  available: boolean;
+  cryptocurrency: string;
+  deepLinkCode: string;
+  details: null;
+  id: number;
+  limitCryptocurrency: AdvertLimit;
+  limitCurrency: AdvertLimit;
+  owner: string;
+  paymethod: number;
+  position: null;
+  rate: string;
+  status: 'active';
+  terms: string;
+  type: AdvertType;
+  unactiveReason: 'not_enough_funds';
+}
+
+export interface PaymethodFull {
+  currency: string;
+  description: string;
+  id: number;
 }
 
 export interface Advert
