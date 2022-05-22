@@ -20,7 +20,7 @@ export const dropdown = style({
   transform: 'translateY(-5%)',
   transition: 'transform 0.3s ease, opacity 0.3s ease',
   width: '100%',
-  height: '284px',
+  maxHeight: '284px',
   zIndex: 10000,
 });
 

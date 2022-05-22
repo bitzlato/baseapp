@@ -5,7 +5,7 @@ import * as s from './SearchInput.css';
 
 interface Props {
   value: string;
-  placeholder?: string;
+  placeholder?: string | undefined;
   onChange: (value: string) => void;
 }
 
@@ -17,7 +17,6 @@ export const SearchInput = ({ value, placeholder, onChange }: Props) => {
   return (
     <Box position="relative">
       <Box
-        autoFocus
         as="input"
         type="text"
         placeholder={placeholder}

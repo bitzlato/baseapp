@@ -112,19 +112,18 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
           value={selectedCryptoCurrency}
           onChange={(v) => onChange({ cryptocurrency: v!.code, paymethod: undefined })}
         />
-        <InputAmountWithCurrency
+        {/*<InputAmountWithCurrency
           amount={amount}
           currencyList={fiats}
           selectedCurrency={selectedFiatCurrency}
           onChangeAmount={handleChangeAmount}
           onChangeCurrency={(v) => onChange({ currency: v.code, paymethod: undefined })}
         />
-
         <SelectPaymentMethod
           options={paymethods}
           value={selectedPaymethod}
           onChange={(v) => onChange({ paymethod: v!.id })}
-        />
+        />*/}
       </Box>
 
       <SwitchField
