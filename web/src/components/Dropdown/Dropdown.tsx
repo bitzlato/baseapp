@@ -3,11 +3,10 @@ import cn from 'classnames';
 import { Box } from 'web/src/components/ui/Box';
 import { useOnClickOutside } from 'web/src/hooks/useOnClickOutside';
 import { useEscapeKeyDown } from 'web/src/hooks/useEscapeKeyDown';
-import { DropdownChevron } from './DropdownChevron';
 import * as s from './Dropdown.css';
 
 interface Props {
-  renderButton?: (props: { open: boolean; onClick: () => void }) => ReactNode;
+  renderButton: (props: { open: boolean; onClick: () => void }) => ReactNode;
   renderContent: (props: { onClose: () => void }) => ReactNode;
 }
 
@@ -34,13 +33,7 @@ export const Dropdown = ({ renderButton, renderContent }: Props) => {
 
   return (
     <Box position="relative" ref={elementRef}>
-      {renderButton ? (
-        renderButton({ open, onClick: handleDropdownToggle })
-      ) : (
-        <Box as="button" type="button" onClick={handleDropdownToggle}>
-          <DropdownChevron open={open} />
-        </Box>
-      )}
+      {renderButton({ open, onClick: handleDropdownToggle })}
 
       <Box
         className={cn(s.dropdown, open && s.dropdownOpened)}

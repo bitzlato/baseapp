@@ -211,6 +211,8 @@ export const [themeLight, vars] = createTheme({
     adHeaderText: colors.white,
     adHeaderLabel: colors.white50,
 
+    selectInputBorder: colors.ebonyClay15,
+    selectInputPlaceholder: colors.ebonyClay,
     selectButtonBg: colors.ebonyClay10,
     selectButtonText: colors.ebonyClay,
     selectSearchInputPlaceholder: colors.ebonyClay30,
@@ -374,6 +376,8 @@ export const themeDark = createTheme(vars, {
     adHeaderText: colors.white,
     adHeaderLabel: colors.white50,
 
+    selectInputBorder: colors.white10,
+    selectInputPlaceholder: colors.white50,
     selectButtonBg: colors.white10,
     selectButtonText: colors.white,
     selectSearchInputPlaceholder: colors.white50,
