@@ -4,7 +4,7 @@ import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { MoneyCurrency } from 'web/src/types';
-import { SearchInput } from 'web/src/components/shared/Ads/SearchInput';
+import { SearchInput } from 'web/src/components/SelectCustom/SearchInput';
 import { Dropdown, DropdownItem, DropdownChevron } from 'web/src/components/Dropdown';
 import * as s from './InputAmountWithCurrency.css';
 

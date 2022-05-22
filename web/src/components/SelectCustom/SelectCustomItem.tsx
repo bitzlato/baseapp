@@ -6,7 +6,7 @@ interface Props {
   onClick: () => void;
 }
 
-export const DropdownItem: FC<Props> = ({ children, isSelected = false, onClick }) => {
+export const SelectCustomItem: FC<Props> = ({ children, isSelected = false, onClick }) => {
   return (
     <Box
       as="button"

@@ -1,8 +1,9 @@
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { Box } from 'web/src/components/ui/Box';
-import { Dropdown, DropdownItem, DropdownChevron } from 'web/src/components/Dropdown';
+import { Dropdown } from 'web/src/components/Dropdown/Dropdown';
 import { TextInput } from 'web/src/components/Input/TextInput';
 import { PaymethodInfo } from 'web/src/modules/p2p/types';
+import { SelectCustomItem } from 'web/src/components/SelectCustom/SelectCustomItem';
 import * as s from './SelectPaymentMethod.css';
 
 interface Props {
@@ -27,7 +28,7 @@ export const SelectPaymentMethod = ({ options, value, onChange }: Props) => {
           />
           <Box className={s.inputRightControls}>
             <Box as="button" type="button" pl="2x" pr="3x" py="1.5x" color="selectButtonText">
-              <DropdownChevron open={open} />
+              ≥
             </Box>
           </Box>
         </Box>
@@ -36,7 +37,7 @@ export const SelectPaymentMethod = ({ options, value, onChange }: Props) => {
         <Box flexGrow={1} pt="2x" overflowY="auto">
           {options.length > 0 ? (
             options?.map((option) => (
-              <DropdownItem
+              <SelectCustomItem
                 key={option.id}
                 isSelected={option.id === value?.id}
                 onClick={() => {
@@ -45,7 +46,7 @@ export const SelectPaymentMethod = ({ options, value, onChange }: Props) => {
                 }}
               >
                 {option.description}
-              </DropdownItem>
+              </SelectCustomItem>
             ))
           ) : (
             <Box
