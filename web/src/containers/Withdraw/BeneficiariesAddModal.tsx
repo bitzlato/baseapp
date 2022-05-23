@@ -59,7 +59,8 @@ const BeneficiariesAddModalComponent: FC<Props> = ({
 
   useEffect(() => {
     setBlockchain(blockchains.length === 1 ? blockchains[0]! : null);
-  }, [blockchains, currencyCode]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blockchains.length, currencyCode]);
 
   const handleChangeAddress = (value: string) => {
     setAddress(value.trim());
