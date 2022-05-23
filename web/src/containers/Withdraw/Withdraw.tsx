@@ -70,7 +70,9 @@ export const Withdraw: FC<Props> = ({ general, wallet }) => {
         {wallet && isMarket && <WithdrawMarket wallet={wallet} />}
       </Box>
 
-      <WalletHistory defaultTab={walletType ?? undefined} type="withdraws" general={general} />
+      {walletType ? (
+        <WalletHistory defaultTab={walletType} type="withdraws" general={general} />
+      ) : null}
     </>
   );
 };
