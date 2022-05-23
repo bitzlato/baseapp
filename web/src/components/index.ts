@@ -1,4 +1,3 @@
-export * from './Beneficiaries';
 export * from './Blur';
 export * from './Captcha';
 export * from './Card/Card';

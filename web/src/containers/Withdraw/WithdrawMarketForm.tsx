@@ -10,7 +10,6 @@ import { defaultBeneficiary } from 'web/src/modules/user/beneficiaries/defaults'
 import { useT } from 'web/src/hooks/useT';
 import { Blockchain } from 'web/src/modules/public/blockchains/types';
 import { tradeUrl } from 'web/src/api/config';
-import { BeneficiaryAddress } from 'web/src/containers/Withdraw/BeneficiaryAddress';
 import { WithdrawSummary } from 'web/src/containers/Withdraw/WithdrawSummary';
 import {
   selectMemberLevels,
@@ -19,13 +18,14 @@ import {
   Wallet,
 } from 'web/src/modules';
 import { precisionRegExp } from 'web/src/helpers';
-import { Beneficiaries, Blur } from 'web/src/components';
+import { Blur } from 'web/src/components';
 import { isValidCode } from 'web/src/helpers/codeValidation';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
 import { useFetch } from 'web/src/hooks/data/useFetch';
 import { WarningIcon } from 'web/src/mobile/assets/images/WarningIcon';
 import { useBeneficiariesFetch } from 'web/src/hooks';
 import { WithdrawMarketFormValues } from 'web/src/containers/Withdraw/types';
+import { AddressNotebookMarket } from 'web/src/containers/Withdraw/AddressNotebookMarket';
 
 interface Props {
   wallet: Wallet;
@@ -160,11 +160,10 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
   return (
     <Box col spacing="3">
       <Box position="relative">
-        <Beneficiaries wallet={wallet} onChangeValue={setBeneficiary} />
+        <AddressNotebookMarket wallet={wallet} onChangeValue={setBeneficiary} />
       </Box>
       <Box col spacing="3" position="relative">
         {renderBlur()}
-        <BeneficiaryAddress beneficiary={beneficiary} />
         <Box grow row spacing="2">
           <Box
             flex="1"

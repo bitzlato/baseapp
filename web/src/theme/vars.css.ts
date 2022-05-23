@@ -44,6 +44,7 @@ export const sizeVars = createGlobalTheme(':root', {
   '18x': '72px' as const,
   // '19x': '76px' as const,
   '20x': '80px' as const,
+  '25x': '100px' as const,
 });
 
 export const radiiVars = createGlobalTheme(':root', {
@@ -218,6 +219,16 @@ export const [themeLight, vars] = createTheme({
     selectDropdownDelimeter: colors.ebonyClay15,
     selectDropdownItemHoverBg: colors.whiteLilac,
     selectDropdownItemSelectedBg: colors.goldTips25,
+    selectColor: colors.grayBlue36,
+
+    addressDropdownAddText: colors.indigo,
+    addressDropdownAddHoverBg: colors.goldTips25,
+    addressDropdownBg: colors.white,
+    addressDropdownHoverBg: colors.goldTips25,
+    addressDropdownSelectedBg: colors.goldTips,
+    addressDropdownDelimeter: colors.ebonyClay15,
+    addressHintIcon: colors.ebonyClay30,
+    addressHintText: colors.whiteLilac,
   },
 });
 
@@ -381,5 +392,15 @@ export const themeDark = createTheme(vars, {
     selectDropdownDelimeter: colors.white10,
     selectDropdownItemHoverBg: colors.white05,
     selectDropdownItemSelectedBg: colors.indigo,
+    selectColor: colors.silverChalice36,
+
+    addressDropdownAddText: colors.goldTips,
+    addressDropdownAddHoverBg: colors.white05,
+    addressDropdownBg: colors.milanoRed,
+    addressDropdownHoverBg: colors.white05,
+    addressDropdownSelectedBg: colors.indigo,
+    addressDropdownDelimeter: colors.white10,
+    addressHintIcon: colors.white50,
+    addressHintText: colors.whiteLilac,
   },
 });

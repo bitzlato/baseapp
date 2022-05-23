@@ -7,15 +7,15 @@ import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
 
 interface Props {
+  show: boolean;
   handleToggleFailModal: () => void;
-  isMobileDevice?: boolean;
 }
 
-const BeneficiariesFailAddModalComponent: FC<Props> = ({ handleToggleFailModal }: Props) => {
+const BeneficiariesFailAddModalComponent: FC<Props> = ({ show, handleToggleFailModal }: Props) => {
   const t = useT();
 
   return (
-    <Modal size="lg" show onClose={handleToggleFailModal}>
+    <Modal size="lg" show={show} onClose={handleToggleFailModal}>
       <ModalHeader>{t('page.body.wallets.beneficiaries.failAddModal.header')}</ModalHeader>
       <Box
         fontSize="medium"
@@ -25,9 +25,7 @@ const BeneficiariesFailAddModalComponent: FC<Props> = ({ handleToggleFailModal }
         borderColor="modalHeaderBorderBottom"
         borderTopStyle="solid"
       >
-        <Text>
-          {t('page.body.wallets.beneficiaries.failAddModal.content')}
-        </Text>
+        <Text>{t('page.body.wallets.beneficiaries.failAddModal.content')}</Text>
         <Box mt="6x">
           <Link to="/confirm">
             <Button color="primary" fullWidth>

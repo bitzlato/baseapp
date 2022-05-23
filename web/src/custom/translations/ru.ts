@@ -354,6 +354,9 @@ export const ru: LangType = {
   'withdraw.confirm': 'Подтвердить вывод',
   Error: 'Ошибка',
   Dynamic: 'Динамическая',
+  'withdraw.addresses_empty': 'У вас нет адресов{br}для вывода',
+  'withdraw.addresses_add': 'Добавить адрес вывода',
+  Delete: 'Удалить',
 
   'page.body.wallets.tabs.withdraw.disabled.message': 'Вывод средств был отключен администрацией',
   'page.body.wallets.warning.withdraw.verification':
@@ -379,20 +382,8 @@ export const ru: LangType = {
   'success.deposits.created': 'Создано намерение депонировать',
 
   'page.body.wallets.beneficiaries.title': 'Адрес вывода',
-  'page.body.wallets.beneficiaries.fiat.title': 'Withdrawal details',
-  'page.body.wallets.beneficiaries.dropdown.address': 'Адрес',
-  'page.body.wallets.beneficiaries.dropdown.select': 'Выбрать',
-  'page.body.wallets.beneficiaries.dropdown.name': 'Название',
   'page.body.wallets.beneficiaries.dropdown.pending': 'Ожидает подтверждения',
 
-  'page.body.wallets.beneficiaries.dropdown.fiat.account': 'Account',
-  'page.body.wallets.beneficiaries.dropdown.fiat.bankOfBeneficiary': 'Bank of Beneficiary',
-  'page.body.wallets.beneficiaries.dropdown.fiat.beneficiary': 'Beneficiary',
-  'page.body.wallets.beneficiaries.dropdown.fiat.description': 'Description',
-  'page.body.wallets.beneficiaries.dropdown.fiat.name': 'Name',
-  'page.body.wallets.beneficiaries.dropdown.fiat.fullName': 'Full Name',
-
-  'page.body.wallets.beneficiaries.addAddress': 'Добавить адрес',
   'page.body.wallets.beneficiaries.addAddressModal.header': 'Добавить новый кошелек для вывода',
 
   'page.body.wallets.beneficiaries.addAddressModal.body.coinAddress': 'Адрес кошелька',
@@ -406,17 +397,6 @@ export const ru: LangType = {
   'page.body.wallets.beneficiaries.addAddressModal.body.coinDestinationTag':
     'Destination Tag (optional)',
 
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatName': 'Beneficiary Name',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatFullName': 'Full Name',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatAccountNumber': 'Account Number',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatBankName': 'Bank Name',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatBankSwiftCode':
-    'Bank Swift Code (optional)',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatIntermediaryBankName':
-    'Intermediary Bank Name (optional)',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatIntermediaryBankSwiftCode':
-    'Intermediary Bank Swift Code (optional)',
-
   'page.body.wallets.beneficiaries.addAddressModal.body.button': 'Подтвердить',
 
   'page.body.wallets.beneficiaries.confirmationModal.header': 'Подтверждение нового адреса',
@@ -425,10 +405,6 @@ export const ru: LangType = {
   'page.body.wallets.beneficiaries.confirmationModal.body.confirmationModalCode': 'Пин-код',
   'page.body.wallets.beneficiaries.confirmationModal.body.resendButton': 'Выслать повторно',
   'page.body.wallets.beneficiaries.confirmationModal.body.button': 'Подтвердить',
-
-  'page.body.wallets.beneficiaries.tipAddress': 'Address',
-  'page.body.wallets.beneficiaries.tipName': 'Name',
-  'page.body.wallets.beneficiaries.tipDescription': 'Note',
 
   'page.body.wallets.beneficiaries.failAddModal.header': 'Warning',
   'page.body.wallets.beneficiaries.failAddModal.content':
@@ -1059,6 +1035,8 @@ export const ru: LangType = {
   'country.blank': 'Страна отсутствует',
   'postcode.blank': 'Почтовый индекс отсутствует',
   'country.must have alpha2 or alpha3 format': 'Страна должна быть в буквенном формате',
+  'address.added': 'Адрес добавлен',
+  'address.deleted': 'Адрес удален',
 
   'totp.error': 'Код 2FA неверен',
 
@@ -1367,6 +1345,8 @@ export const ru: LangType = {
   'Transfer.verb': 'Перевести',
   'Withdraw.noun': 'Вывод',
   Address: 'Адрес',
+  Name: 'Название',
+  Note: 'Примечание',
   Amount: 'Сумма',
   Coin: 'Валюта',
   Currency: 'Валюта',

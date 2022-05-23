@@ -18,11 +18,13 @@ import { Button } from 'web/src/components/ui/Button';
 import { Modal, ModalHeader } from 'web/src/components/ui/Modal';
 
 interface Props {
+  show: boolean;
   beneficiariesAddData: Beneficiary;
   handleToggleConfirmationModal: () => void;
 }
 
 const BeneficiariesActivateModalComponent: FC<Props> = ({
+  show,
   handleToggleConfirmationModal,
   beneficiariesAddData,
 }: Props) => {
@@ -65,7 +67,7 @@ const BeneficiariesActivateModalComponent: FC<Props> = ({
       );
       setCode('');
     }
-  }, [code, dispatch, beneficiariesAddData, handleClearModalsInputs]);
+  }, [start, code, dispatch, beneficiariesAddData]);
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && isValidCode(code) && countdown < 1) {
@@ -87,7 +89,7 @@ const BeneficiariesActivateModalComponent: FC<Props> = ({
   const isDisabled = !isValidCode(code) || countdown > 0;
 
   return (
-    <Modal size="lg" show onClose={handleClickToggleConfirmationModal(true)}>
+    <Modal size="lg" show={show} onClose={handleClickToggleConfirmationModal(true)}>
       <ModalHeader>{t('page.body.wallets.beneficiaries.confirmationModal.header')}</ModalHeader>
       <Box
         fontSize="medium"
