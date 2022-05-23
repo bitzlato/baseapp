@@ -352,6 +352,9 @@ export const en = {
   'withdraw.confirm': 'Confirm the withdrawal',
   Error: 'Error',
   Dynamic: 'Dynamic',
+  'withdraw.addresses_empty': 'You have no addresses{br}for the withdrawal',
+  'withdraw.addresses_add': 'Add a withdrawal address',
+  Delete: 'Delete',
 
   'page.body.wallets.tabs.withdraw.disabled.message': 'Withdraw was disabled by administration',
   'page.body.wallets.warning.withdraw.verification':
@@ -376,20 +379,8 @@ export const en = {
   'success.deposits.created': 'Deposit intention: successfully created',
 
   'page.body.wallets.beneficiaries.title': 'Withdraw address',
-  'page.body.wallets.beneficiaries.fiat.title': 'Withdrawal details',
-  'page.body.wallets.beneficiaries.dropdown.address': 'Address',
-  'page.body.wallets.beneficiaries.dropdown.select': 'Select',
-  'page.body.wallets.beneficiaries.dropdown.name': 'Name',
   'page.body.wallets.beneficiaries.dropdown.pending': 'Pending',
 
-  'page.body.wallets.beneficiaries.dropdown.fiat.account': 'Account',
-  'page.body.wallets.beneficiaries.dropdown.fiat.bankOfBeneficiary': 'Bank of Beneficiary',
-  'page.body.wallets.beneficiaries.dropdown.fiat.beneficiary': 'Beneficiary',
-  'page.body.wallets.beneficiaries.dropdown.fiat.description': 'Description',
-  'page.body.wallets.beneficiaries.dropdown.fiat.name': 'Name',
-  'page.body.wallets.beneficiaries.dropdown.fiat.fullName': 'Full Name',
-
-  'page.body.wallets.beneficiaries.addAddress': 'Add Address',
   'page.body.wallets.beneficiaries.addAddressModal.header': 'Add new withdrawal address',
 
   'page.body.wallets.beneficiaries.addAddressModal.body.coinAddress': 'Blockchain Address',
@@ -403,17 +394,6 @@ export const en = {
   'page.body.wallets.beneficiaries.addAddressModal.body.coinDestinationTag':
     'Destination Tag (optional)',
 
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatName': 'Beneficiary Name',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatFullName': 'Full Name',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatAccountNumber': 'Account Number',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatBankName': 'Bank Name',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatBankSwiftCode':
-    'Bank Swift Code (optional)',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatIntermediaryBankName':
-    'Intermediary Bank Name (optional)',
-  'page.body.wallets.beneficiaries.addAddressModal.body.fiatIntermediaryBankSwiftCode':
-    'Intermediary Bank Swift Code (optional)',
-
   'page.body.wallets.beneficiaries.addAddressModal.body.button': 'Submit for confirmation',
 
   'page.body.wallets.beneficiaries.confirmationModal.header': 'Confirm new address',
@@ -422,10 +402,6 @@ export const en = {
   'page.body.wallets.beneficiaries.confirmationModal.body.confirmationModalCode': 'Pin code',
   'page.body.wallets.beneficiaries.confirmationModal.body.resendButton': 'Resend pin',
   'page.body.wallets.beneficiaries.confirmationModal.body.button': 'Confirm',
-
-  'page.body.wallets.beneficiaries.tipAddress': 'Address',
-  'page.body.wallets.beneficiaries.tipName': 'Name',
-  'page.body.wallets.beneficiaries.tipDescription': 'Note',
 
   'page.body.wallets.beneficiaries.failAddModal.header': 'Warning',
   'page.body.wallets.beneficiaries.failAddModal.content':
@@ -1054,6 +1030,8 @@ export const en = {
   'country.blank': 'Country is missing or empty',
   'postcode.blank': 'Postcode.blank is missing or empty',
   'country.must have alpha2 or alpha3 format': 'Country must have alpha2 or alpha3 format',
+  'address.added': 'Address added',
+  'address.deleted': 'Address deleted',
 
   'totp.error': 'OTP code is invalid',
 
@@ -1352,6 +1330,8 @@ export const en = {
   'Transfer.verb': 'Transfer',
   'Withdraw.noun': 'Withdraw',
   Address: 'Address',
+  Name: 'Name',
+  Note: 'Note',
   Amount: 'Amount',
   Coin: 'Coin',
   Currency: 'Currency',

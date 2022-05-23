@@ -20,6 +20,7 @@ import { AmountFormat } from 'web/src/components/AmountFormat/AmountFormat';
 import { isValidAddress } from 'web/src/helpers/validateBeneficiaryAddress';
 import { useFetchP2PWalletStat } from 'web/src/hooks/data/useFetchP2PWallets';
 import { WithdrawP2PFormValues } from 'web/src/containers/Withdraw/types';
+import { AddressNotebookP2P } from 'web/src/containers/Withdraw/AddressNotebookP2P';
 
 interface Props {
   currency: Currency;
@@ -65,19 +66,21 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
     }
   }, [withdrawDone]);
 
-  const validateAddress = () => {
-    if (!address) {
-      setAddressError(null);
+  const validateAddress = (value: string) => {
+    setAddressError(null);
+
+    if (!value) {
+      setAddressError('');
       return;
     }
 
-    const valid = isValidAddress(address, currency.code);
-    const validTestnet = isValidAddress(address, currency.code, 'testnet');
+    const valid = isValidAddress(value, currency.code);
+    const validTestnet = isValidAddress(value, currency.code, 'testnet');
     setAddressError(valid || validTestnet ? null : t('address.invalid'));
   };
 
   useEffect(() => {
-    validateAddress();
+    validateAddress(address);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address, currency.code]);
 
@@ -123,8 +126,8 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
     );
   };
 
-  const handleSubmit = () => {
-    onSubmit({ amount, address, voucher });
+  const handleAddressChange = (value: string) => {
+    setAddress(value);
   };
 
   const handleChangeInputAmount = (value: string) => {
@@ -132,6 +135,10 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
     if (amountValue.match(precisionRegExp(currency.minorUnit))) {
       setAmount(amountValue);
     }
+  };
+
+  const handleSubmit = () => {
+    onSubmit({ amount, address, voucher });
   };
 
   const renderBlur = () => {
@@ -149,13 +156,11 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
   return (
     <Box col spacing="3">
       {renderBlur()}
-      <Box
-        flex="1"
-        as={NumberInput}
-        value={address}
-        onChange={setAddress}
-        label={t('page.body.wallets.beneficiaries.title')}
+      <AddressNotebookP2P
+        currencyCode={currency.code}
+        inputAddress={address}
         error={addressError}
+        onChange={handleAddressChange}
       />
       <Box grow row spacing="2" align="start">
         <Box

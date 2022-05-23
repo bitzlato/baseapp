@@ -28,10 +28,6 @@ web/src/assets/images/SearchFieldCloseIcon.tsx
 web/src/assets/images/kyc/CrossIcon.tsx
 web/src/assets/images/sidebar/LogoutIcon.tsx
 web/src/assets/images/sidebar/ProfileIcon.tsx
-web/src/components/Beneficiaries/BeneficiariesActivateModal.tsx
-web/src/components/Beneficiaries/BeneficiariesAddModal.tsx
-web/src/components/Beneficiaries/BeneficiariesFailAddModal.tsx
-web/src/components/Beneficiaries/index.tsx
 web/src/components/BlockchainIcon/BlockchainIcon.tsx
 web/src/components/BlockchainIcon/BlockchainIcon2.tsx
 web/src/components/Button/Button.tsx
