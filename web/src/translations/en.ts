@@ -1093,7 +1093,7 @@ export const en = {
   'resource.user.empty_new_password': 'New password is missing or empty',
   'resource.user.missing_confirm_password': 'Confirm password is missing',
   'resource.user.empty_confirm_password': 'Confirm password is missing or empty',
-  'resource.user.invalid_pin_code': 'Invalid pin code',
+  'resource.user.invalid_pin_code': 'Invalid confirmation code',
 
   'resource.profile.missing_first_name': 'First name is missing',
   'resource.profile.missing_last_name': 'Last name is missing',
@@ -1575,4 +1575,14 @@ export const en = {
   Login: 'Login',
   'Nothing found': 'Nothing found',
   Search: 'Search',
+
+  'Confirm your email': 'Confirm your email',
+  'verification.email.code':
+    'Enter the confirmation code sent to {email} or follow the link in the email',
+  'Confirmation code': 'Confirmation code',
+  'Invalid code': 'Invalid code',
+  'verification.email.resend':
+    'If you did not receive the email, check your spam folder or request to resend email',
+  'Resend email': 'Resend email',
+  'The email has been sent': 'The email has been sent',
 };

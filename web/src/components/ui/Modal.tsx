@@ -70,11 +70,22 @@ export const Modal: FC<ModalProps> = ({ children, show = false, size = 'md', onC
   );
 };
 
-export const ModalHeader: FC = ({ children }) => (
-  <Box px="6x" pt="5x" pb="4x">
-    <Text variant="title">{children}</Text>
-  </Box>
-);
+interface HeaderProps {
+  center?: boolean | undefined;
+}
+
+export const ModalHeader: FC<HeaderProps> = ({ center, children }) =>
+  center ? (
+    <Box px="6x" pt="14x" pb="4x">
+      <Text variant="lead" fontWeight="strong" textAlign="center">
+        {children}
+      </Text>
+    </Box>
+  ) : (
+    <Box px="6x" pt="5x" pb="4x">
+      <Text variant="title">{children}</Text>
+    </Box>
+  );
 
 interface ModalBodyProps {
   loading?: boolean | undefined;
