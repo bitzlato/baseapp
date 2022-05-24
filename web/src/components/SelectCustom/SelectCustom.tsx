@@ -17,6 +17,7 @@ interface Props<Option> {
   options: Options<Option>;
   value?: Option | null;
   placeholder?: string;
+  placeholderFloat?: boolean;
   withSearch?: boolean;
   searchFunction?: (searchText: string, optionValue: string, option: Option) => boolean;
   searchPlaceholder?: string;
@@ -43,7 +44,7 @@ function getOptionValueBuiltin<Option>(option: Option): string {
   return (option as { value?: unknown }).value as string;
 }
 
-function searchFunctionBuiltin(optionValue: string, searchText: string) {
+function searchFunctionBuiltin(searchText: string, optionValue: string) {
   return optionValue.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
 }
 
@@ -51,6 +52,7 @@ export const SelectCustom = <Option,>({
   options,
   value = null,
   placeholder,
+  placeholderFloat = false,
   withSearch = false,
   searchFunction = searchFunctionBuiltin,
   searchPlaceholder,
@@ -94,7 +96,7 @@ export const SelectCustom = <Option,>({
       isSelected: isOptionSelectedInner(option, value),
     }));
 
-    if (!withSearch) {
+    if (!withSearch || searchText.length === 0) {
       return formatted;
     }
 
@@ -126,6 +128,8 @@ export const SelectCustom = <Option,>({
   };
 
   const renderButton = ({ open, onClick }: { open: boolean; onClick: () => void }) => {
+    const showPlaceholder = selectedValue ? placeholderFloat : true;
+
     if (renderCustomButton) {
       return renderCustomButton({ selectedValue, placeholder, open, onClick });
     }
@@ -148,15 +152,19 @@ export const SelectCustom = <Option,>({
         textAlign="left"
         onClick={onClick}
       >
-        {selectedValue ? (
-          <Box width="full" color="text">
-            {renderSelectedOptionLabel(selectedValue)}
-          </Box>
-        ) : (
-          <Box width="full" color="selectInputPlaceholder">
-            {placeholder}
-          </Box>
-        )}
+        <Box display="flex" flexDirection="column" alignItems="center" width="full">
+          {showPlaceholder ? (
+            <Box width="full" color="selectInputPlaceholder" fontSize="caption">
+              {placeholder}
+            </Box>
+          ) : null}
+          {selectedValue ? (
+            <Box width="full" color="text" fontSize="caption">
+              {renderSelectedOptionLabel(selectedValue)}
+            </Box>
+          ) : null}
+        </Box>
+
         <Box color="selectButtonText">
           <SelectCustomChevron open={open} />
         </Box>
@@ -180,6 +188,7 @@ export const SelectCustom = <Option,>({
           />
         </Box>
       ) : null}
+
       <Box flexGrow={1} overflowY="auto">
         {formattedOptions.length > 0 ? (
           formattedOptions.map((option) => (
@@ -196,7 +205,7 @@ export const SelectCustom = <Option,>({
             </SelectCustomItem>
           ))
         ) : (
-          <Box display="flex" justifyContent="center" alignItems="center" color="text" px="10x">
+          <Box display="flex" justifyContent="center" alignItems="center" color="text" py="20x">
             {noOptionsMessage}
           </Box>
         )}
