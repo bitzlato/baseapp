@@ -13,7 +13,7 @@ interface CommonOption<Option> {
 
 export type Options<Option> = readonly Option[];
 
-interface Props<Option> {
+export interface SelectCustomProps<Option> {
   options: Options<Option>;
   value?: Option | null;
   placeholder?: string;
@@ -22,8 +22,8 @@ interface Props<Option> {
   searchFunction?: (searchText: string, optionValue: string, option: Option) => boolean;
   searchPlaceholder?: string;
   noOptionsMessage?: string;
-  renderOption?: (option: Option) => ReactNode;
-  renderLabel?: (option: Option) => ReactNode;
+  renderOption?: ((option: Option) => ReactNode) | undefined;
+  renderLabel?: ((option: Option) => ReactNode) | undefined;
   renderCustomButton?: (props: {
     selectedValue: Option | null;
     placeholder?: string | undefined;
@@ -64,7 +64,7 @@ export const SelectCustom = <Option,>({
   getOptionLabel = getOptionLabelBuiltin,
   isOptionSelected,
   onChange,
-}: Props<Option>) => {
+}: SelectCustomProps<Option>) => {
   const [selectedValue, setSelectedValue] = useState(value);
   const [searchText, setSearchText] = useState('');
 
