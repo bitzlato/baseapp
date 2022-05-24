@@ -2,36 +2,44 @@ import { useSharedT } from 'web/src/components/shared/Adapter';
 import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
-import { MoneyCurrency } from 'web/src/types';
-import { SelectCustom } from 'web/src/components/SelectCustom/SelectCustom';
+import { SelectCustom, SelectCustomProps } from 'web/src/components/SelectCustom/SelectCustom';
 import { SelectCustomChevron } from 'web/src/components/SelectCustom/SelectCustomChevron';
 import * as s from './InputAmountWithCurrency.css';
 
-interface Props {
-  amount: string;
-  currencyList: MoneyCurrency[];
-  selectedCurrency: MoneyCurrency | null;
-  onChangeAmount: (value: string) => void;
-  onChangeCurrency: (value: MoneyCurrency) => void;
+interface CommonOption {
+  code: string;
+  name: string;
 }
 
-const searchFunction = (searchText: string, _optionValue: string, option: MoneyCurrency) => {
+interface Props<Option extends CommonOption> {
+  label: string;
+  amount: string;
+  currencyList: Option[];
+  selectedCurrency: Option | null;
+  renderOption?: SelectCustomProps<Option>['renderOption'];
+  onChangeAmount: (value: string) => void;
+  onChangeCurrency: (value: Option) => void;
+}
+
+const searchFunction = (searchText: string, _optionValue: string, option: CommonOption) => {
   return (
     option.code.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
     option.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
   );
 };
 
-const getOptionValue = (option: MoneyCurrency) => option.code;
-const getOptionLabel = (option: MoneyCurrency) => `${option.code} (${option.name})`;
+const getOptionValue = (option: CommonOption) => option.code;
+const getOptionLabel = (option: CommonOption) => `${option.code} (${option.name})`;
 
-export const InputAmountWithCurrency = ({
+export const InputAmountWithCurrency = <Option extends CommonOption>({
+  label,
   amount,
   currencyList,
   selectedCurrency,
+  renderOption,
   onChangeAmount,
   onChangeCurrency,
-}: Props) => {
+}: Props<Option>) => {
   const t = useSharedT();
 
   const renderCustomButton = ({ open, onClick }: { open: boolean; onClick: () => void }) => (
@@ -40,7 +48,7 @@ export const InputAmountWithCurrency = ({
         flexGrow={1}
         inputClassName={s.input}
         as={NumberInput}
-        label={t('Amount')}
+        label={label}
         value={amount}
         onChange={onChangeAmount}
       />
@@ -56,6 +64,7 @@ export const InputAmountWithCurrency = ({
           pr="1.5x"
           py="1.5x"
           mr="1.5x"
+          minWidth="18x"
           borderRadius="1x"
           bg="selectButtonBg"
           color="selectButtonText"
@@ -75,13 +84,14 @@ export const InputAmountWithCurrency = ({
       withSearch
       options={currencyList}
       value={selectedCurrency}
-      onChange={onChangeCurrency}
       searchFunction={searchFunction}
       searchPlaceholder={t('Search')}
       noOptionsMessage={t('Nothing found')}
       getOptionValue={getOptionValue}
       getOptionLabel={getOptionLabel}
       renderCustomButton={renderCustomButton}
+      renderOption={renderOption}
+      onChange={onChangeCurrency}
     />
   );
 };

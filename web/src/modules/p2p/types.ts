@@ -63,6 +63,7 @@ export interface AdvertParams {
   paymethod?: number | undefined;
   lang: string;
   amount?: string | undefined;
+  amountType?: 'cryptocurrency' | 'currency' | undefined;
 }
 
 export interface AdvertLimit {

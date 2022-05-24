@@ -1,6 +1,7 @@
-import { useMemo, useState, FC } from 'react';
+import { useMemo, useState, FC, useCallback } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { Box } from 'web/src/components/ui/Box';
+import { Text } from 'web/src/components/ui/Text';
 import { Button } from 'web/src/components/ui/Button';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
@@ -11,7 +12,8 @@ import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { SwitchField } from 'web/src/components/profile/settings/SwitchField';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { InputAmountWithCurrency } from 'web/src/components/shared/Ads/InputAmountWithCurrency';
-import { SelectCurrency } from 'web/src/components/shared/Ads/SelectCurrency';
+import { P2PCurrency } from 'web/src/modules/p2p/wallet-types';
+import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { SelectPaymentMethod } from 'web/src/components/shared/Ads/SelectPaymentMethod';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
@@ -66,7 +68,14 @@ const FilterBuySell: FC<Props> = ({ params, onChange }) => {
 const FilterControls: FC<Props> = ({ params, onChange }) => {
   const t = useSharedT();
 
-  const [amount, setAmount] = useStateWithDeps(() => params.amount ?? '', [params.amount]);
+  const [amount, setAmount] = useStateWithDeps(
+    () => (params.amountType === 'currency' ? params.amount ?? '' : ''),
+    [params.amount],
+  );
+  const [amountCrypto, setAmountCrypto] = useStateWithDeps(
+    () => (params.amountType === 'cryptocurrency' ? params.amount ?? '' : ''),
+    [params.amount],
+  );
 
   const { data: cryptoCurrencies = [] } = useFetchP2PCryptoCurrencies();
   const selectedCryptoCurrency = useMemo(() => {
@@ -94,25 +103,72 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     return paymethods.find((d) => d.id === params.paymethod) ?? null;
   }, [paymethods, params.paymethod]);
 
-  const changeAmountDebounced = useDebouncedCallback((d: string) => {
-    onChange({ amount: d || undefined });
-  }, INPUT_DEBOUNCE);
+  const changeAmountDebounced = useDebouncedCallback(
+    (value: string, amountType: AdvertParams['amountType']) => {
+      onChange({ amount: value || undefined, amountType: value ? amountType : undefined });
+    },
+    INPUT_DEBOUNCE,
+  );
 
-  const handleChangeAmount = (d: string) => {
-    const nvalue = parseNumeric(d);
-    setAmount(nvalue);
-    changeAmountDebounced(nvalue);
-  };
+  const handleChangeAmount = useCallback(
+    (d: string) => {
+      const nvalue = parseNumeric(d);
+      setAmount(nvalue);
+      setAmountCrypto('');
+      changeAmountDebounced(nvalue, 'currency');
+    },
+    [setAmount, setAmountCrypto, changeAmountDebounced],
+  );
+
+  const handleChangeAmountCrypto = useCallback(
+    (d: string) => {
+      const nvalue = parseNumeric(d);
+      setAmountCrypto(nvalue);
+      setAmount('');
+      changeAmountDebounced(nvalue, 'cryptocurrency');
+    },
+    [setAmount, setAmountCrypto, changeAmountDebounced],
+  );
+
+  const renderCryptoCurrencyOption = useCallback((option: P2PCurrency) => {
+    const balance = '0,00107994';
+    const balanceUSD = '41,42 USD';
+
+    return (
+      <Box display="flex" alignItems="center" gap="4x">
+        <CryptoCurrencyIcon size="medium" currency={option.code} />
+        <Box display="flex" flexDirection="column" gap="1x" flexGrow={1}>
+          <Box display="flex" justifyContent="space-between">
+            <Text>{option.code}</Text>
+            <Text textAlign="right">{balance}</Text>
+          </Box>
+          <Box display="flex" justifyContent="space-between">
+            <Text color="textMuted" fontWeight="regular">
+              {option.name}
+            </Text>
+            <Text color="textMuted" fontWeight="regular" textAlign="right">
+              {balanceUSD}
+            </Text>
+          </Box>
+        </Box>
+      </Box>
+    );
+  }, []);
 
   return (
     <>
       <Box display="flex" flexDirection="column" gap="4x">
-        <SelectCurrency
-          options={cryptoCurrencies}
-          value={selectedCryptoCurrency}
-          onChange={(v) => onChange({ cryptocurrency: v!.code, paymethod: undefined })}
+        <InputAmountWithCurrency
+          label={t('Amount')}
+          amount={amountCrypto}
+          currencyList={cryptoCurrencies}
+          selectedCurrency={selectedCryptoCurrency}
+          renderOption={renderCryptoCurrencyOption}
+          onChangeAmount={handleChangeAmountCrypto}
+          onChangeCurrency={(v) => onChange({ cryptocurrency: v.code, paymethod: undefined })}
         />
         <InputAmountWithCurrency
+          label={t('Amount')}
           amount={amount}
           currencyList={fiats}
           selectedCurrency={selectedFiatCurrency}
