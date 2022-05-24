@@ -1098,7 +1098,7 @@ export const ru: LangType = {
   'resource.user.empty_new_password': 'Новый пароль отсутствует',
   'resource.user.missing_confirm_password': 'Подтверждение пароля отсутствует',
   'resource.user.empty_confirm_password': 'Подтверждение пароля отсутствует',
-  'resource.user.invalid_pin_code': 'Неверный пин-код',
+  'resource.user.invalid_pin_code': 'Неверный код подтверждения',
 
   'resource.profile.missing_first_name': 'Имя отсутствует',
   'resource.profile.missing_last_name': 'Фамилия отсутствует',
@@ -1592,4 +1592,14 @@ export const ru: LangType = {
   Login: 'Войти',
   'Nothing found': 'Ничего не найдено',
   Search: 'Поиск',
+
+  'Confirm your email': 'Подтвердите ваш email',
+  'verification.email.code':
+    'Введите код подтверждения, отправленный на {email}, или перейдите по ссылке, указанной в письме',
+  'Confirmation code': 'Код подтверждения',
+  'Invalid code': 'Неверный код подтверждения',
+  'verification.email.resend':
+    'Если вы не получили письмо, проверьте папку спам или запросите повторную отправку',
+  'Resend email': 'Отправить письмо повторно',
+  'The email has been sent': 'Письмо отправлено',
 };

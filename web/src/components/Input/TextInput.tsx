@@ -2,6 +2,7 @@ import { ReactNode, FC, ComponentPropsWithRef } from 'react';
 import cn from 'classnames';
 import { FormControl } from 'react-bootstrap';
 import { Box } from 'src/components/Box/Box';
+import { capitalize } from 'web/src/helpers/capitalize';
 import s from './TextInput.postcss';
 
 export interface TextInputProps
@@ -15,6 +16,7 @@ export interface TextInputProps
   autoFocus?: boolean | undefined;
   className?: string | undefined;
   noResize?: boolean;
+  color?: 'failed' | undefined;
 }
 
 export const TextInput: FC<TextInputProps> = ({
@@ -26,6 +28,7 @@ export const TextInput: FC<TextInputProps> = ({
   labelVisible,
   error,
   noResize,
+  color,
   ...rest
 }) => {
   return (
@@ -36,7 +39,7 @@ export const TextInput: FC<TextInputProps> = ({
       <FormControl
         type="text"
         {...rest}
-        className={inputClassName as string}
+        className={cn(color && s[`inputColor${capitalize(color)}`], inputClassName as string)}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder ?? (!labelVisible ? label?.toString() : undefined)}
       />
