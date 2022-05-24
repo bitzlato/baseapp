@@ -85,3 +85,4 @@ export const botticelli = 'rgb(211, 217, 231)';
 export const green = 'rgb(1, 191, 118)';
 export const milanoGreen = 'rgb(12, 178, 113)';
 export const carnation = 'rgb(248, 72, 95)';
+export const roman = 'rgb(219, 79, 79)';

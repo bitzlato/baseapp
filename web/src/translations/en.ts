@@ -1515,14 +1515,11 @@ export const en = {
   'deposit.erc20MDTWarning': 'Accepted only ERC-20 MonolithosDAO Tokens (MDT)',
   'deposit.contract': 'Accepting funds from contract addresses may take a long time',
 
-  'verification.pass': 'Pass verification',
-  'verification.oops': '😔 Oops!',
+  'Security verification': 'Security verification',
+  'verification.kyc': 'To perform this operation, you must complete KYC verification',
   'verification.info':
-    'Financial transactions on your account are temporarily unavailable.{br}' +
-    'If you are a new user, you need to pass verification.{br}' +
-    'If you have been registered for a long time, then your account may have been blocked for' +
-    'violating the terms of service.',
-  'verification.support': '🤖 Support:',
+    'Verification ensures the security of platform users and increases the safety of your assets',
+  'Go to verification': 'Go to verification',
 
   'rate.select':
     'Choose a rate source for the {pair}.{br}The rate source will be used in your adverts for P2P trading, with a dynamic rate.',

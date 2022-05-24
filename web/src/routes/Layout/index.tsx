@@ -67,7 +67,7 @@ import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSetti
 import { SignInAuth0 } from 'web/src/screens/SignInScreen/SignInAuth0';
 import { EmailVerificationModal } from 'web/src/screens/EmailVerification/EmailVerificationModal';
 import { getSearchParam, setLocation } from 'web/src/helpers/url';
-import { NeedVerificationModal } from 'web/src/containers/NeedVerificationModal/NeedVerificationModal';
+import { SecurityVerificationModal } from 'web/src/containers/SecurityVerificationModal/SecurityVerificationModal';
 import { SignInScreen } from 'web/src/screens/SignInScreen/SignInScreen';
 import { SignInMobileScreen } from 'web/src/mobile/screens/SignInScreen/SignInMobileScreen';
 import { SignUpScreen } from 'web/src/screens/SignUpScreen/SignUpScreen';
@@ -367,7 +367,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           />
         )}
         {this.props.verifyEmail && <EmailVerificationModal />}
-        {this.props.needVerification && <NeedVerificationModal />}
+        {this.props.needVerification && <SecurityVerificationModal />}
       </>
     );
 

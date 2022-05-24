@@ -6,7 +6,7 @@ import {
   PropsWithChildren,
   ReactElement,
 } from 'react';
-import { Box } from './Box';
+import { Box, BoxProps } from './Box';
 import { button, ButtonVariants } from './Button.css';
 
 type ButtonProps<C extends ElementType = 'button'> = NonNullable<ButtonVariants> & {
@@ -15,7 +15,8 @@ type ButtonProps<C extends ElementType = 'button'> = NonNullable<ButtonVariants>
 };
 
 type Props<C extends ElementType = 'button'> = ButtonProps<C> &
-  Omit<ComponentProps<C>, keyof ButtonProps>;
+  Omit<ComponentProps<C>, keyof ButtonProps> &
+  Omit<BoxProps<C>, keyof ButtonProps>;
 
 interface ButtonComponent {
   <C extends ElementType = 'button'>(props: PropsWithChildren<Props<C>>): ReactElement<
