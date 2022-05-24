@@ -18,10 +18,17 @@ interface Props<Option> {
   value?: Option | null;
   placeholder?: string;
   withSearch?: boolean;
-  searchFunction: (option: Option, searchText: string) => boolean;
+  searchFunction?: (searchText: string, optionValue: string, option: Option) => boolean;
   searchPlaceholder?: string;
   noOptionsMessage?: string;
   renderOption?: (option: Option) => ReactNode;
+  renderLabel?: (option: Option) => ReactNode;
+  renderCustomButton?: (props: {
+    selectedValue: Option | null;
+    placeholder?: string | undefined;
+    open: boolean;
+    onClick: () => void;
+  }) => ReactNode;
   getOptionLabel?: (option: Option) => string;
   getOptionValue?: (option: Option) => string;
   isOptionSelected?: (option: Option, selectValue: Option | null) => boolean;
@@ -36,15 +43,21 @@ function getOptionValueBuiltin<Option>(option: Option): string {
   return (option as { value?: unknown }).value as string;
 }
 
+function searchFunctionBuiltin(optionValue: string, searchText: string) {
+  return optionValue.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
+}
+
 export const SelectCustom = <Option,>({
   options,
   value = null,
-  noOptionsMessage,
-  renderOption,
   placeholder,
   withSearch = false,
-  searchFunction,
+  searchFunction = searchFunctionBuiltin,
   searchPlaceholder,
+  noOptionsMessage,
+  renderOption,
+  renderLabel,
+  renderCustomButton,
   getOptionValue = getOptionValueBuiltin,
   getOptionLabel = getOptionLabelBuiltin,
   isOptionSelected,
@@ -52,13 +65,6 @@ export const SelectCustom = <Option,>({
 }: Props<Option>) => {
   const [selectedValue, setSelectedValue] = useState(value);
   const [searchText, setSearchText] = useState('');
-  const filteredOptions = useMemo(() => {
-    if (!withSearch) {
-      return options;
-    }
-
-    return options.filter((option) => searchFunction(option, searchText));
-  }, [withSearch, searchFunction, options, searchText]);
 
   useEffect(() => {
     if (value) {
@@ -82,12 +88,26 @@ export const SelectCustom = <Option,>({
   );
 
   const formattedOptions: Options<CommonOption<Option>> = useMemo(() => {
-    return filteredOptions.map((option) => ({
+    const formatted = options.map((option) => ({
       data: option,
       value: getOptionValue(option),
       isSelected: isOptionSelectedInner(option, value),
     }));
-  }, [getOptionValue, isOptionSelectedInner, filteredOptions, value]);
+
+    if (!withSearch) {
+      return formatted;
+    }
+
+    return formatted.filter((option) => searchFunction(searchText, option.value, option.data));
+  }, [
+    value,
+    options,
+    getOptionValue,
+    isOptionSelectedInner,
+    withSearch,
+    searchFunction,
+    searchText,
+  ]);
 
   const renderOptionLabel = (option: Option) => {
     if (typeof renderOption === 'function') {
@@ -98,82 +118,91 @@ export const SelectCustom = <Option,>({
   };
 
   const renderSelectedOptionLabel = (option: Option) => {
+    if (typeof renderLabel === 'function') {
+      return renderLabel(option);
+    }
+
     return getOptionLabel(option);
   };
 
-  return (
-    <Dropdown
-      renderButton={({ open, onClick }) => (
-        <Box
-          as="button"
-          type="button"
-          position="relative"
-          display="flex"
-          alignItems="center"
-          height="11x"
-          width="full"
-          px="2x"
-          borderWidth="1x"
-          borderStyle="solid"
-          borderColor="selectInputBorder"
-          borderRadius="1.5x"
-          cursor="pointer"
-          textAlign="left"
-          onClick={onClick}
-        >
+  const renderButton = ({ open, onClick }: { open: boolean; onClick: () => void }) => {
+    if (renderCustomButton) {
+      return renderCustomButton({ selectedValue, placeholder, open, onClick });
+    }
+
+    return (
+      <Box
+        as="button"
+        type="button"
+        position="relative"
+        display="flex"
+        alignItems="center"
+        height="11x"
+        width="full"
+        px="2x"
+        borderWidth="1x"
+        borderStyle="solid"
+        borderColor="selectInputBorder"
+        borderRadius="1.5x"
+        cursor="pointer"
+        textAlign="left"
+        onClick={onClick}
+      >
+        {selectedValue ? (
+          <Box width="full" color="text">
+            {renderSelectedOptionLabel(selectedValue)}
+          </Box>
+        ) : (
           <Box width="full" color="selectInputPlaceholder">
-            {selectedValue ? renderSelectedOptionLabel(selectedValue) : placeholder}
+            {placeholder}
           </Box>
-          <Box color="selectButtonText">
-            <SelectCustomChevron open={open} />
-          </Box>
+        )}
+        <Box color="selectButtonText">
+          <SelectCustomChevron open={open} />
         </Box>
-      )}
-      renderContent={({ onClose }) => (
-        <>
-          {withSearch ? (
-            <Box
-              pb="2x"
-              borderBottomWidth="1x"
-              borderBottomStyle="solid"
-              borderColor="selectDropdownDelimeter"
+      </Box>
+    );
+  };
+
+  const renderMenu = ({ onClose }: { onClose: () => void }) => (
+    <>
+      {withSearch ? (
+        <Box
+          pb="2x"
+          borderBottomWidth="1x"
+          borderBottomStyle="solid"
+          borderColor="selectDropdownDelimeter"
+        >
+          <SearchInput
+            value={searchText}
+            placeholder={searchPlaceholder}
+            onChange={setSearchText}
+          />
+        </Box>
+      ) : null}
+      <Box flexGrow={1} overflowY="auto">
+        {formattedOptions.length > 0 ? (
+          formattedOptions.map((option) => (
+            <SelectCustomItem
+              key={option.value}
+              isSelected={option.isSelected}
+              onClick={() => {
+                setSelectedValue(option.data);
+                onChange?.(option.data);
+                onClose();
+              }}
             >
-              <SearchInput
-                value={searchText}
-                placeholder={searchPlaceholder}
-                onChange={setSearchText}
-              />
-            </Box>
-          ) : null}
-          <Box flexGrow={1} overflowY="auto">
-            {formattedOptions.length > 0 ? (
-              formattedOptions?.map((option) => (
-                <SelectCustomItem
-                  key={option.value}
-                  isSelected={option.isSelected}
-                  onClick={() => {
-                    setSelectedValue(option.data);
-                    onChange?.(option.data);
-                    onClose();
-                  }}
-                >
-                  {renderOptionLabel(option.data)}
-                </SelectCustomItem>
-              ))
-            ) : (
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                height="full"
-                color="text"
-              >
-                {noOptionsMessage}
-              </Box>
-            )}
+              {renderOptionLabel(option.data)}
+            </SelectCustomItem>
+          ))
+        ) : (
+          <Box display="flex" justifyContent="center" alignItems="center" color="text" px="10x">
+            {noOptionsMessage}
           </Box>
-        </>
-      )}
-    />
+        )}
+      </Box>
+    </>
   );
+
+  return <Dropdown renderButton={renderButton} renderContent={renderMenu} />;
 };
