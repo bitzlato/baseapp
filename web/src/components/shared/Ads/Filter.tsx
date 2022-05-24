@@ -11,11 +11,11 @@ import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { SwitchField } from 'web/src/components/profile/settings/SwitchField';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { InputAmountWithCurrency } from 'web/src/components/shared/Ads/InputAmountWithCurrency';
-import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
-import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
-import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import { SelectCurrency } from 'web/src/components/shared/Ads/SelectCurrency';
 import { SelectPaymentMethod } from 'web/src/components/shared/Ads/SelectPaymentMethod';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
+import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
+import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 
 const INPUT_DEBOUNCE = 500;
 const EMPTY_ARR: unknown[] = [];
@@ -112,7 +112,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
           value={selectedCryptoCurrency}
           onChange={(v) => onChange({ cryptocurrency: v!.code, paymethod: undefined })}
         />
-        {/*<InputAmountWithCurrency
+        <InputAmountWithCurrency
           amount={amount}
           currencyList={fiats}
           selectedCurrency={selectedFiatCurrency}
@@ -123,7 +123,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
           options={paymethods}
           value={selectedPaymethod}
           onChange={(v) => onChange({ paymethod: v!.id })}
-        />*/}
+        />
       </Box>
 
       <SwitchField
