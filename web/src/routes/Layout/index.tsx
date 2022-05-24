@@ -357,6 +357,20 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       </Route>,
     ];
 
+    const commonComponents = (
+      <>
+        {isLoggedIn && <WalletsFetch />}
+        {isShownExpSessionModal && (
+          <ExpiredSessionModal
+            onClose={this.handleChangeExpSessionModalState}
+            onSubmit={this.handleSubmitExpSessionModal}
+          />
+        )}
+        {this.props.verifyEmail && <EmailVerificationModal />}
+        {this.props.needVerification && <NeedVerificationModal />}
+      </>
+    );
+
     if (isMobileDevice) {
       return (
         <div className={mobileCls}>
@@ -460,15 +474,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             {showLanding() && <Route exact path="/" component={LandingScreenMobile as any} />}
             {commonRoutes}
           </Switch>
-          {isLoggedIn && <WalletsFetch />}
-          {isShownExpSessionModal && (
-            <ExpiredSessionModal
-              onClose={this.handleChangeExpSessionModalState}
-              onSubmit={this.handleSubmitExpSessionModal}
-            />
-          )}
-          {this.props.verifyEmail && <EmailVerificationModal />}
-          {this.props.needVerification && <NeedVerificationModal />}
+          {commonComponents}
         </div>
       );
     }
@@ -555,15 +561,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           />
           {commonRoutes}
         </Switch>
-        {isLoggedIn && <WalletsFetch />}
-        {isShownExpSessionModal && (
-          <ExpiredSessionModal
-            onClose={this.handleChangeExpSessionModalState}
-            onSubmit={this.handleSubmitExpSessionModal}
-          />
-        )}
-        {this.props.verifyEmail && <EmailVerificationModal />}
-        {this.props.needVerification && <NeedVerificationModal />}
+        {commonComponents}
       </div>
     );
   }

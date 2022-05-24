@@ -107,7 +107,7 @@ const interactiveProperties = defineProperties({
 const unresponsiveProperties = defineProperties({
   properties: {
     // flex
-    alignSelf: ['center'],
+    alignSelf: ['center', 'stretch'],
     flexWrap: ['wrap', 'nowrap'],
     flexShrink: [0, 1, 2],
 
