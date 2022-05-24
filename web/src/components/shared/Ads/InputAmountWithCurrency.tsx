@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
+import { useSharedT } from 'web/src/components/shared/Adapter';
 import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { MoneyCurrency } from 'web/src/types';
-import { useT } from 'web/src/hooks/useT';
 import { SearchInput } from 'web/src/components/shared/Ads/SearchInput';
 import { Dropdown, DropdownItem, DropdownChevron } from 'web/src/components/Dropdown';
 import * as s from './InputAmountWithCurrency.css';
@@ -23,7 +23,7 @@ export const InputAmountWithCurrency = ({
   onChangeAmount,
   onChangeCurrency,
 }: Props) => {
-  const t = useT();
+  const t = useSharedT();
   const [searchText, setSearchText] = useState('');
   const filteredCurrencies = useMemo(() => {
     return currencyList.filter(
@@ -70,29 +70,39 @@ export const InputAmountWithCurrency = ({
           </Box>
         </Box>
       )}
-      renderContent={() => (
+      renderContent={({ onClose }) => (
         <>
           <SearchInput value={searchText} placeholder={t('Search')} onChange={setSearchText} />
 
           <Box
+            flexGrow={1}
+            pt="2x"
+            overflowY="auto"
             borderTopWidth="1x"
             borderTopStyle="solid"
             borderColor="selectDropdownDelimeter"
-            pt="2x"
-            overflowY="auto"
           >
             {filteredCurrencies.length > 0 ? (
               filteredCurrencies?.map((currency) => (
                 <DropdownItem
                   key={currency.code}
                   isSelected={currency.code === selectedCurrency?.code}
-                  onClick={() => onChangeCurrency(currency)}
+                  onClick={() => {
+                    onChangeCurrency(currency);
+                    onClose();
+                  }}
                 >
                   {currency.code} ({currency.name})
                 </DropdownItem>
               ))
             ) : (
-              <Box py="20x" textAlign="center">
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                height="full"
+                color="text"
+              >
                 {t('Nothing found')}
               </Box>
             )}

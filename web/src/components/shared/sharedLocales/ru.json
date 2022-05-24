@@ -64,5 +64,9 @@
   "You receive": "Вы получите",
   "Start trade": "Начать торговлю",
   "Deal info": "Информация о сделке",
-  "Bitzlato fee": "Комиссия Bitzlato"
+  "Bitzlato fee": "Комиссия Bitzlato",
+
+  "Amount": "Сумма",
+  "Nothing found": "Ничего не найдено",
+  "Search": "Поиск"
 }

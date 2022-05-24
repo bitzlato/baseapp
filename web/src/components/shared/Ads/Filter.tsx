@@ -1,6 +1,5 @@
 import { useMemo, useState, FC } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { Select } from 'web/src/components/Select/Select';
 import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
@@ -8,16 +7,15 @@ import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/useFetchP2PWallets';
 import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
 import { AdvertParams, AdvertType, PaymethodInfo } from 'web/src/modules/p2p/types';
-import { P2PCurrency } from 'web/src/modules/p2p/wallet-types';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
-import { getCurrencyCodeSymbol } from 'web/src/helpers/getCurrencySymbol';
 import { SwitchField } from 'web/src/components/profile/settings/SwitchField';
-import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { InputAmountWithCurrency } from 'web/src/components/shared/Ads/InputAmountWithCurrency';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
+import { SelectCurrency } from 'web/src/components/shared/Ads/SelectCurrency';
+import { SelectPaymentMethod } from 'web/src/components/shared/Ads/SelectPaymentMethod';
 
 const INPUT_DEBOUNCE = 500;
 const EMPTY_ARR: unknown[] = [];
@@ -71,7 +69,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
   const [amount, setAmount] = useStateWithDeps(() => params.amount ?? '', [params.amount]);
 
   const { data: cryptoCurrencies = [] } = useFetchP2PCryptoCurrencies();
-  const cryptoCurrencyV = useMemo(() => {
+  const selectedCryptoCurrency = useMemo(() => {
     return cryptoCurrencies.find((d) => d.code === params.cryptocurrency) ?? null;
   }, [cryptoCurrencies, params.cryptocurrency]);
 
@@ -92,7 +90,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
   });
 
   const paymethods = paymethodsResp.data?.data ?? (EMPTY_ARR as PaymethodInfo[]);
-  const paymethodV = useMemo(() => {
+  const selectedPaymethod = useMemo(() => {
     return paymethods.find((d) => d.id === params.paymethod) ?? null;
   }, [paymethods, params.paymethod]);
 
@@ -106,26 +104,12 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     changeAmountDebounced(nvalue);
   };
 
-  const renderDropdownItem = (d: P2PCurrency) => {
-    return (
-      <Box display="flex" alignItems="center" gap="2x">
-        <CryptoCurrencyIcon size="small" currency={d.code} />
-        <span>{getCurrencyCodeSymbol(d.code)}</span>
-      </Box>
-    );
-  };
-
   return (
     <>
       <Box display="flex" flexDirection="column" gap="4x">
-        <Select<P2PCurrency>
-          isSearchable
+        <SelectCurrency
           options={cryptoCurrencies}
-          placeholder={t('Cryptocurrency')}
-          value={cryptoCurrencyV}
-          getOptionValue={(v) => v.code}
-          getOptionLabel={(v) => v.code}
-          formatOptionLabel={renderDropdownItem}
+          value={selectedCryptoCurrency}
           onChange={(v) => onChange({ cryptocurrency: v!.code, paymethod: undefined })}
         />
         <InputAmountWithCurrency
@@ -135,16 +119,14 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
           onChangeAmount={handleChangeAmount}
           onChangeCurrency={(v) => onChange({ currency: v.code, paymethod: undefined })}
         />
-        <Select<PaymethodInfo>
-          isSearchable
+
+        <SelectPaymentMethod
           options={paymethods}
-          placeholder={t('Payment method')}
-          value={paymethodV}
-          getOptionValue={(v) => v.id.toString()}
-          getOptionLabel={(v) => v.description}
+          value={selectedPaymethod}
           onChange={(v) => onChange({ paymethod: v!.id })}
         />
       </Box>
+
       <SwitchField
         id="filter.with_verified"
         label={t('Verified users')}
