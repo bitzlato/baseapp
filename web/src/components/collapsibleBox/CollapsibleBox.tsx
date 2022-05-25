@@ -8,14 +8,19 @@ import * as s from './CollapsibleBox.css';
 export interface CollapsibleBoxProps {
   visible: ReactNode;
   hidden?: ReactNode;
+  transparent?: boolean;
 }
 
-export const CollapsibleBox: FC<CollapsibleBoxProps> = ({ visible, hidden }) => {
+export const CollapsibleBox: FC<CollapsibleBoxProps> = ({
+  visible,
+  hidden,
+  transparent = false,
+}) => {
   const [expand, setExpand] = useState<boolean>();
   const t = useSharedT();
 
   return (
-    <Box w="full" borderRadius="2x" backgroundColor="block">
+    <Box w="full" borderRadius="2x" backgroundColor={transparent ? 'transparent' : 'dropdown'}>
       <Box w="full" px="4x" pt="2x">
         {visible}
         {hidden && (

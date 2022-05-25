@@ -18,6 +18,7 @@ export const headerFontSizes = createGlobalTheme(':root', {
 
 export const zIndexVars = createGlobalTheme(':root', {
   drawer: '10000',
+  chat: '10020',
   modal: '10001',
   modalInner: '10002',
   tooltip: '10010',
@@ -29,8 +30,10 @@ export const zIndexVars = createGlobalTheme(':root', {
 export const sizeVars = createGlobalTheme(':root', {
   auto: 'auto' as const,
   full: '100%' as const,
+  '70%': '70%' as const,
   '0': '0px' as const,
-  // '0.5x': '2px' as const,
+  '0.25x': '1px' as const,
+  '0.5x': '2px' as const,
   '1x': '4px' as const,
   '1.5x': '6px' as const,
   '2x': '8px' as const,
@@ -293,6 +296,65 @@ export const [themeLight, vars] = createTheme({
     calendarItemActiveBg: colors.indigo,
     calendarItemActiveText: colors.white,
     calendarItemHoverBg: colors.indigo20,
+    tradeMainComponent: colors.indigo,
+    tradeMainComponentTitle: colors.white,
+    tradeMainComponentCircleFilled: colors.white,
+    tradeMainComponentCircleEmpty: colors.white10,
+
+    tradeMainComponentTradeLabel: colors.white10,
+    tradeMainComponentTradeCounterDetails: colors.white10,
+
+    tradeMainComponentAdded10Minutes: colors.white,
+
+    tradeCurrenciesBackground: colors.white,
+    tradeCurrenciesTitleColor: colors.ebonyClay70,
+    tradeCurrenciesValueColor: colors.ebonyClay,
+    tradeCurrenciesCodeBackground: colors.whiteLilac,
+
+    tradePartnerTitleColor: colors.ebonyClay70,
+    tradePartnerColor: colors.ebonyClay,
+
+    tradeTermsBackground: colors.white,
+    tradeHistoryBackground: colors.white,
+    tradeHistoryItemFilled: colors.whiteLilac,
+    tradeHistoryItemUnFilled: colors.transparent,
+
+    tradeHistoryCircleFilled: colors.ebonyClay,
+    tradeHistoryCircleEmpty: colors.white10,
+    tradeHistoryCircleBorder: colors.ebonyClay,
+    tradeHistoryCircleContentColor: colors.white,
+    tradeHistoryCircleContentColorActive: colors.ebonyClay,
+
+    tradeInfoBackground: colors.white,
+    tradeInfoBox: colors.whiteLilac,
+    tradeInfoBoxTitle: colors.ebonyClay,
+    tradeInfoBoxKey: colors.ebonyClay70,
+    tradeInfoBoxValue: colors.ebonyClay,
+
+    tradeTipsModalTitle: colors.ebonyClay70,
+    tradeTipsModalDescription: colors.ebonyClay,
+    tradeTipsModalBalanceBorderColor: colors.whiteLilac,
+    tradeTipsModalBalanceBackground: colors.whiteLilac,
+
+    tradeInputDetailsBorder: colors.ebonyClay15,
+    tradeDetailsItemHover: colors.white,
+    tradeDetailsItem: colors.whiteLilac,
+
+    tradeDisputeDivider: colors.burntSienna,
+    tradeDisputeLabelBackground: colors.burntSienna,
+    tradeDisputeLabelColor: colors.white,
+
+    tradeMobileTradeId: colors.white50,
+    tradeMobileInfoBackgroundPrimary: colors.whiteLilac,
+    tradeMobilePartnerTitleColor: colors.ebonyClay,
+    tradeMobileInfoBoxKey: colors.ebonyClay,
+    tradeMobileInfoBoxValue: colors.ebonyClay,
+    tradeMobileHistoryItemFilled: colors.white70,
+    tradeMobileHistoryItemUnFilled: colors.transparent,
+    tradeMobileHistoryItemUnFilledBorder: colors.gray,
+    tradeMobileChatTitle: colors.ebonyClay,
+
+    divider: colors.ebonyClay15,
   },
 });
 
@@ -522,5 +584,64 @@ export const themeDark = createTheme(vars, {
     calendarItemActiveBg: colors.goldTips,
     calendarItemActiveText: colors.ebonyClay,
     calendarItemHoverBg: colors.goldTips20,
+    tradeMainComponent: colors.indigo,
+    tradeMainComponentTitle: colors.white,
+    tradeMainComponentCircleFilled: colors.white,
+    tradeMainComponentCircleEmpty: colors.white10,
+
+    tradeMainComponentTradeLabel: colors.white10,
+    tradeMainComponentTradeCounterDetails: colors.white10,
+
+    tradeMainComponentAdded10Minutes: colors.white,
+
+    tradeCurrenciesBackground: colors.ebonyClay,
+    tradeCurrenciesTitleColor: colors.white50,
+    tradeCurrenciesValueColor: colors.white,
+    tradeCurrenciesCodeBackground: colors.white10,
+
+    tradePartnerTitleColor: colors.white50,
+    tradePartnerColor: colors.white,
+
+    tradeTermsBackground: colors.ebonyClay,
+    tradeHistoryBackground: colors.ebonyClay,
+    tradeHistoryItemFilled: colors.white05,
+    tradeHistoryItemUnFilled: colors.transparent,
+
+    tradeHistoryCircleFilled: colors.white,
+    tradeHistoryCircleEmpty: colors.white10,
+    tradeHistoryCircleBorder: colors.white,
+    tradeHistoryCircleContentColor: colors.white,
+    tradeHistoryCircleContentColorActive: colors.white,
+
+    tradeInfoBackground: colors.ebonyClay,
+    tradeInfoBox: colors.white05,
+    tradeInfoBoxTitle: colors.white,
+    tradeInfoBoxKey: colors.white50,
+    tradeInfoBoxValue: colors.white,
+
+    tradeTipsModalTitle: colors.white50,
+    tradeTipsModalDescription: colors.white,
+    tradeTipsModalBalanceBorderColor: colors.indigo,
+    tradeTipsModalBalanceBackground: colors.white10,
+
+    tradeInputDetailsBorder: colors.white20,
+    tradeDetailsItemHover: colors.ebonyClay,
+    tradeDetailsItem: colors.milanoRed,
+
+    tradeDisputeDivider: colors.burntSienna,
+    tradeDisputeLabelBackground: colors.burntSienna,
+    tradeDisputeLabelColor: colors.white,
+
+    tradeMobileTradeId: colors.white50,
+    tradeMobileInfoBackgroundPrimary: colors.white05,
+    tradeMobilePartnerTitleColor: colors.white50,
+    tradeMobileInfoBoxKey: colors.white,
+    tradeMobileInfoBoxValue: colors.white,
+    tradeMobileHistoryItemFilled: colors.white05,
+    tradeMobileHistoryItemUnFilled: colors.transparent,
+    tradeMobileHistoryItemUnFilledBorder: colors.white70,
+    tradeMobileChatTitle: colors.white,
+
+    divider: colors.white10,
   },
 });

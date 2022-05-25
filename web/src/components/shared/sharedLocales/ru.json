@@ -105,8 +105,10 @@
   "Do you want to continue?": "Вы желаете продолжить?",
   "Cancel": "Отмена",
   "Confirm": "Подтвердить",
+
   "Filter": "Фильтр",
   "Apply": "Применить",
+
   "All payment methods": "Все способы оплаты",
   "User ads": "Объявления пользователя",
 
@@ -133,6 +135,8 @@
   "Amount to": "Сумма до",
   "Date from": "Дата от",
   "Date to": "Дата до",
+  "Chat": "Чат",
+  "Chat with": "Чат с {partner}",
 
   "trades.empty": "В настоящее время у вас нет сделок",
   "tradeStatus.cancel": "Отменена",
@@ -145,5 +149,106 @@
 
   "trader.chatUnavailable": "Вы не можете использовать чат. Либо у вас недостаточно рейтинга, либо у вас нет совместных сделок.",
 
-  "traderAds.empty": "У трейдера пока нет объявлений. Перейдите на маркет, чтобы найти множество объявлений от других трейдеров"
+  "traderAds.empty": "У трейдера пока нет объявлений. Перейдите на маркет, чтобы найти множество объявлений от других трейдеров",
+
+  "trade.state.button.confirm_trade": "Принять сделку",
+  "trade.state.button.cancel": "Отменить сделку",
+  "trade.state.button.payment": "Подтвердить перевод",
+  "trade.state.button.dispute": "Открыть спор",
+  "trade.state.button.tips": "Оставить чаевые",
+  "trade.state.button.confirm_payment": "Отпустить монеты",
+  "trade.state.button.addtime": "+10 минут",
+  "trade.state.waitingTimeIncreased": "10 минут добавлено",
+  "trade.state.type.purchase": "Покупаем",
+  "trade.state.purchase.cancel.title": "Сделка отменена",
+  "trade.state.purchase.cancel.subtitle": "",
+  "trade.state.purchase.trade_created.title": "Ждем продавца",
+  "trade.state.purchase.trade_created.subtitle": "Ожидаем {name}. Если он не появится в течение {minutes} минут, сделка будет автоматически отменена",
+  "trade.state.purchase.confirm_trade.title": "Переведите деньги",
+  "trade.state.purchase.confirm_trade.subtitle": "Переведите {amount} {code} по реквизитам продавца",
+  "trade.state.purchase.payment.title": "Ждем подтверждения от {name}",
+  "trade.state.purchase.payment.subtitle": "Ожидаем подтверждения получения средств от продавца",
+  "trade.state.purchase.confirm_payment.title": "Сделка завершена",
+  "trade.state.purchase.confirm_payment.subtitle": "{camount} {ccode} зачислены на Ваш баланс",
+  "trade.state.purchase.dispute.title": "Открыт спор",
+  "trade.state.purchase.dispute.subtitle": "Ожидаем рассмотрения спора агентом арбитража",
+  "trade.state.num": "Сделка №{id}",
+  "trade.state.details": "Указанные реквизиты {paymethod}",
+  "trade.state.for": "за",
+  "trade.state.atUser": "у пользователя {name}",
+  "trade.state.viaPaymethod": "через {paymethod}",
+  "trade.state.leave_feedback": "Оцените работу трейдера",
+
+  "trade.state.type.selling": "Продаем",
+  "trade.state.selling.cancel.title": "Сделка отменена",
+  "trade.state.selling.cancel.subtitle": "",
+  "trade.state.selling.trade_created.title": "Ждем покупателя",
+  "trade.state.selling.trade_created.subtitle": "Ожидаем {name}. Если он не появится в течение {minutes} минут, сделка будет автоматически отменена",
+  "trade.state.selling.confirm_trade.title": "Ожидаем платеж",
+  "trade.state.selling.confirm_trade.subtitle": "Ожидаем, когда {name} подтвердит перевод {amount} {code}",
+  "trade.state.selling.payment.title": "Получаем платеж от {name}",
+  "trade.state.selling.payment.subtitle": "Проверьте поступление {amount} {code} от {name}",
+  "trade.state.selling.confirm_payment.title": "Сделка завершена",
+  "trade.state.selling.confirm_payment.subtitle": "{camount} {ccode} отправлены {name}",
+  "trade.state.selling.dispute.title": "Открыт спор",
+  "trade.state.selling.dispute.subtitle": "Ожидаем рассмотрения спора агентом арбитража",
+
+  "trade.history.trade_created": "Создание сделки",
+  "trade.history.confirm_trade": "Продавец принял сделку",
+  "trade.history.cancel": "Сделка отменена",
+  "trade.history.payment": "Перевод денег",
+  "trade.history.dispute": "Открыт спор",
+  "trade.history.confirm_payment": "Сделка завершена",
+  "trade.history.inprogress": "В процессе",
+  "trade.history.title": "История сделки",
+
+  "trade.terms.history": "Условия торговли",
+  "trade.terms.history.empty": "не указано",
+
+  "trade.currencies.you_get": "Вы получите",
+  "trade.currencies.you_pay": "Вы платите",
+
+  "trade.info.trade.title": "Информация о сделке",
+  "trade.info.trader.title": "Информация о трейдере",
+  "trade.info.trader.rating": "Рейтинг",
+  "trade.info.trader.reputation": "Репутация",
+  "trade.info.trader.deals.successful": "Успешных сделок",
+  "trade.info.trader.deals.failed": "Отмененных сделок",
+  "trade.info.rate": "Курс",
+  "trade.info.fiat.amount": "Сумма сделки",
+  "trade.info.fee": "Комиссия Bitzlato",
+
+  "trade.tab.chat": "Чат",
+  "trade.tab.info": "Информация о сделке",
+
+  "trade.modal.cancel.button": "Отменить сделку",
+  "trade.modal.cancel.title": "Отмена сделки",
+  "trade.modal.cancel.action.1": "Вы уверены в том, что хотите",
+  "trade.modal.cancel.action.2": "отменить сделку",
+  "trade.modal.cancel.action.3": "{tradeId} на {amount} {code}? ({paymethod})",
+  "trade.modal.cancel.action_sure": "Пожалуйста, не отменяйте сделку, если {amount} {code} уже отправлены по реквизитам продавца. Получить {camount} {ccode} или вернуть отправленные средства после отмены невозможно!",
+
+  "trade.modal.receive_money.sure": "Вы уверены, что получили {amount} {code} от покупателя?",
+  "trade.modal.receive_money.no_refund": "Вернуть {cryptoamount} {ccode} после завершения сделки невозможно",
+
+  "trade.modal.tips.title": "Сделка успешно завершена!",
+  "trade.modal.tips.action": "Оставьте чаевые трейдеру",
+  "trade.modal.tips.description": "Вы можете поблагодарить его за успешную сделку, это будет приятным бонусом и позволит оставаться отличным торговцем для наших клиентов!",
+  "trade.modal.tips.percent": "Процент чаевых от суммы сделки",
+
+  "trade.modal.details.title": "Реквизиты для перевода",
+  "trade.modal.details.action": "Пожалуйста, введите ваши реквизиты для перевода",
+
+  "trade.chat.dispute.label": "Чат со службой поддержки",
+  "trade.chat.dispute.open": "Открыт спор",
+
+  "trade.mobile.tab.trader": "Трейдер",
+  "trade.mobile.tab.trade": "О сделке",
+
+  "Yes": "Да",
+  "No": "Нет",
+  "Available": "Доступно",
+  "Close": "Закрыть",
+  "Send": "Отправить",
+  "Details": "Реквизиты"
 }

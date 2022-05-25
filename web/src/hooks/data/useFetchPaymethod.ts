@@ -10,5 +10,9 @@ export const useFetchPaymethod = (id: string | number | undefined, lang: string)
       ? null
       : `${p2pUrl()}/public/refs/paymethods/${id}?${buildQueryString({ lang })}`,
     fetchWithCreds,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+    },
   );
 };

@@ -287,6 +287,7 @@ module.exports = {
         './Chat': './src/components/shared/Chat/Chat',
         './ChatMessage': './src/components/shared/Chat/ChatMessage',
         './Time': './src/components/shared/Time/Time',
+        './Trade': './src/components/shared/Trade/Trade',
       },
       shared: {
         react: { requiredVersion: deps.react, singleton: true },
