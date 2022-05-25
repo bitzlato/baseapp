@@ -47,6 +47,7 @@ import {
   selectVerifyEmailAuth0,
   selectVerifyEmail,
   selectUserNeedVerification,
+  selectUserFreezed,
 } from '../../modules';
 import {
   ConfirmScreen,
@@ -67,7 +68,7 @@ import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSetti
 import { SignInAuth0 } from 'web/src/screens/SignInScreen/SignInAuth0';
 import { EmailVerificationModal } from 'web/src/screens/EmailVerification/EmailVerificationModal';
 import { getSearchParam, setLocation } from 'web/src/helpers/url';
-import { NeedVerificationModal } from 'web/src/containers/NeedVerificationModal/NeedVerificationModal';
+import { FreezedModal } from 'web/src/containers/modals/FreezedModal';
 import { SignInScreen } from 'web/src/screens/SignInScreen/SignInScreen';
 import { SignInMobileScreen } from 'web/src/mobile/screens/SignInScreen/SignInMobileScreen';
 import { SignUpScreen } from 'web/src/screens/SignUpScreen/SignUpScreen';
@@ -99,6 +100,7 @@ interface ReduxProps {
   verifyEmailAuth0: boolean;
   verifyEmail: boolean;
   needVerification: boolean;
+  freezed: boolean;
 }
 
 interface DispatchProps {
@@ -365,7 +367,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
           />
         )}
         {this.props.verifyEmail && <EmailVerificationModal />}
-        {this.props.needVerification && <NeedVerificationModal />}
+        {this.props.freezed && <FreezedModal />}
       </>
     );
 
@@ -634,6 +636,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state): Red
   verifyEmailAuth0: selectVerifyEmailAuth0(state),
   verifyEmail: selectVerifyEmail(state),
   needVerification: selectUserNeedVerification(state),
+  freezed: selectUserFreezed(state),
 });
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch): DispatchProps => ({

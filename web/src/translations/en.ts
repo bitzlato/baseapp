@@ -1539,14 +1539,10 @@ export const en = {
   'deposit.aml-seizure': 'Hight risk',
   'deposit.aml-check': 'In process',
 
-  'verification.pass': 'Pass verification',
-  'verification.oops': '😔 Oops!',
-  'verification.info':
-    'Financial transactions on your account are temporarily unavailable.{br}' +
-    'If you are a new user, you need to pass verification.{br}' +
-    'If you have been registered for a long time, then your account may have been blocked for' +
-    'violating the terms of service.',
-  'verification.support': '🤖 Support:',
+  'Your account is restricted!': 'Your account is restricted!',
+  'freezed.info':
+    'Most likely you have violated some of the Trading Rules.{br}{br}To find out the reason and remove the restriction, contact our support team',
+  'Support team': 'Support team',
 
   'rate.select':
     'Choose a rate source for the {pair}.{br}The rate source will be used in your adverts for P2P trading, with a dynamic rate.',

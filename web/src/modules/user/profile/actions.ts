@@ -22,6 +22,7 @@ import {
   PROFILE_USER_FETCH,
   PROFILE_USER_REFETCH,
   PROFILE_TOGGLE_NEED_VERIFICATION,
+  PROFILE_TOGGLE_FREEZED,
 } from './constants';
 import { User } from './types';
 
@@ -146,6 +147,13 @@ export interface ToggleNeedVerification {
   };
 }
 
+export interface ToggleFreezed {
+  type: typeof PROFILE_TOGGLE_FREEZED;
+  payload: {
+    freezed: boolean;
+  };
+}
+
 export type ProfileAction =
   | ChangePasswordFetch
   | ChangePasswordData
@@ -167,7 +175,8 @@ export type ProfileAction =
   | ChangeUserDataFetch
   | ChangeUserData
   | ChangeUserDataError
-  | ToggleNeedVerification;
+  | ToggleNeedVerification
+  | ToggleFreezed;
 
 export const changePasswordFetch = (
   payload: ChangePasswordFetch['payload'],
@@ -273,5 +282,10 @@ export const toggleNeedVerification = (
   payload: ToggleNeedVerification['payload'],
 ): ToggleNeedVerification => ({
   type: PROFILE_TOGGLE_NEED_VERIFICATION,
+  payload,
+});
+
+export const toggleFreezed = (payload: ToggleFreezed['payload']): ToggleFreezed => ({
+  type: PROFILE_TOGGLE_FREEZED,
   payload,
 });
