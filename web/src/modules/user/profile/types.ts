@@ -47,7 +47,12 @@ export interface BitzlatoUser {
     currency: string;
     cryptocurrency: string;
     rating: string;
+    /**
+     * @deprecated
+     */
     verified: boolean;
+    verification_status: 'not_verified' | 'verified' | 'not_required';
+    verified_at: string | null;
     timezone?: string | null | undefined;
     safe_mode_enabled: boolean;
     self_frozen: boolean;

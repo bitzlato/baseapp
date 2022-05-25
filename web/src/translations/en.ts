@@ -1548,6 +1548,12 @@ export const en = {
     'Most likely you have violated some of the Trading Rules.{br}{br}To find out the reason and remove the restriction, contact our support team',
   'Support team': 'Support team',
 
+  'Security verification': 'Security verification',
+  'verification.kyc': 'To perform this operation, you must complete KYC verification',
+  'verification.info':
+    'Verification ensures the security of platform users and increases the safety of your assets',
+  'Go to verification': 'Go to verification',
+
   'rate.select':
     'Choose a rate source for the {pair}.{br}The rate source will be used in your adverts for P2P trading, with a dynamic rate.',
 

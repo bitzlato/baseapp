@@ -88,6 +88,7 @@ import { BoardScreen } from 'web/src/screens/p2p/BoardScreen';
 import { AdScreen } from 'web/src/screens/p2p/AdScreen';
 import { TraderScreen } from 'web/src/screens/p2p/TraderScreen';
 import { TradesScreen } from 'web/src/screens/p2p/TradesScreen';
+import { SecurityVerificationModal } from 'web/src/containers/modals/SecurityVerificationModal';
 
 interface ReduxProps {
   colorTheme: string;
@@ -376,6 +377,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         )}
         {this.props.verifyEmail && <EmailVerificationModal />}
         {this.props.freezed && <FreezedModal />}
+        {this.props.needVerification && <SecurityVerificationModal />}
       </>
     );
 
