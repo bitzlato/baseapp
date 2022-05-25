@@ -97,7 +97,7 @@ export const Board: FC = () => {
 
   if (isMobileDevice) {
     return (
-      <Box display="flex" flexDirection="column">
+      <Box display="flex" flexDirection="column" width="full">
         <Box m="5x" display="flex" flexDirection="column" gap="6x">
           {navs}
           <Box display="flex" flexDirection="column" gap="4x">
