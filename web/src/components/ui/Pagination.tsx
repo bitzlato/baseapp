@@ -1,4 +1,5 @@
 import { FC, memo } from 'react';
+import cn from 'classnames';
 import IconFirst from 'web/src/assets/svg/IconFirst.svg';
 import IconPrev from 'web/src/assets/svg/IconPrev.svg';
 import IconNext from 'web/src/assets/svg/IconNext.svg';
@@ -28,6 +29,9 @@ const PaginationItem: FC<PaginationItemProps> = ({
   disabled = false,
   onClick,
 }) => {
+  const { isMobileDevice } = useAppContext();
+  const sizeClassName = isMobileDevice ? s.itemSmall : s.itemMedium;
+
   if (onClick) {
     let className = s.item.button;
     if (active) {
@@ -37,14 +41,20 @@ const PaginationItem: FC<PaginationItemProps> = ({
     }
 
     return (
-      <Box as="button" type="button" className={className} title={title} onClick={onClick}>
+      <Box
+        as="button"
+        type="button"
+        className={cn(className, sizeClassName)}
+        title={title}
+        onClick={onClick}
+      >
         {children}
       </Box>
     );
   }
 
   return (
-    <Box className={s.item.base} title={title}>
+    <Box className={cn(s.item.base, sizeClassName)} title={title}>
       {children}
     </Box>
   );
@@ -71,7 +81,7 @@ export const Pagination: FC<Props> = memo(
     onChange,
     onChangePerPage,
   }) => {
-    const { lang } = useAppContext();
+    const { lang, isMobileDevice } = useAppContext();
     const t = createT(lang);
 
     const count = Math.ceil(total / perPage);
@@ -100,21 +110,29 @@ export const Pagination: FC<Props> = memo(
     const handleClickToLast = () => onChange(count);
 
     return (
-      <Box display="flex" alignItems="center" justifyContent="space-between">
-        <SelectString
-          value={perPage as any}
-          options={perPageOptions as any}
-          onChange={handleChangePerPage as any}
-          maxMenuHeight={200}
-        />
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent={isMobileDevice ? 'center' : 'space-between'}
+      >
+        {!isMobileDevice && (
+          <SelectString
+            value={perPage as any}
+            options={perPageOptions as any}
+            onChange={handleChangePerPage as any}
+            maxMenuHeight={200}
+          />
+        )}
         <Box display="flex" alignItems="center">
-          <PaginationItem
-            disabled={page === 1}
-            title={t('Go to first')}
-            onClick={handleClickToFirst}
-          >
-            <IconFirst />
-          </PaginationItem>
+          {!isMobileDevice && (
+            <PaginationItem
+              disabled={page === 1}
+              title={t('Go to first')}
+              onClick={handleClickToFirst}
+            >
+              <IconFirst />
+            </PaginationItem>
+          )}
           <PaginationItem
             title={t('Go to previous')}
             disabled={page === 1}
@@ -144,27 +162,31 @@ export const Pagination: FC<Props> = memo(
           >
             <IconNext />
           </PaginationItem>
-          <PaginationItem
-            title={t('Go to last')}
-            disabled={page === count}
-            onClick={handleClickToLast}
+          {!isMobileDevice && (
+            <PaginationItem
+              title={t('Go to last')}
+              disabled={page === count}
+              onClick={handleClickToLast}
+            >
+              <IconLast />
+            </PaginationItem>
+          )}
+        </Box>
+        {!isMobileDevice && (
+          <Box
+            minHeight="11x"
+            borderRadius="1.5x"
+            paddingLeft="4x"
+            paddingRight="4x"
+            display="inline-flex"
+            alignItems="center"
+            backgroundColor="reportBgHover"
           >
-            <IconLast />
-          </PaginationItem>
-        </Box>
-        <Box
-          minHeight="11x"
-          borderRadius="1.5x"
-          paddingLeft="4x"
-          paddingRight="4x"
-          display="inline-flex"
-          alignItems="center"
-          backgroundColor="reportBgHover"
-        >
-          <Text color="secondary">
-            <span>{page}</span> {t('of')} <span>{count}</span>
-          </Text>
-        </Box>
+            <Text color="secondary">
+              <span>{page}</span> {t('of')} <span>{count}</span>
+            </Text>
+          </Box>
+        )}
       </Box>
     );
   },
