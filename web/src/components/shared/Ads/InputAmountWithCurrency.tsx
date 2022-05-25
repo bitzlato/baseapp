@@ -1,10 +1,10 @@
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
-import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { SelectCustom, SelectCustomProps } from 'web/src/components/SelectCustom/SelectCustom';
 import { SelectCustomChevron } from 'web/src/components/SelectCustom/SelectCustomChevron';
 import * as s from './InputAmountWithCurrency.css';
+import { TextInput } from '../../TextInputCustom/TextInputCustom';
 
 interface CommonOption {
   code: string;
@@ -46,8 +46,8 @@ export const InputAmountWithCurrency = <Option extends CommonOption>({
     <Box position="relative">
       <Box
         flexGrow={1}
-        inputClassName={s.input}
-        as={NumberInput}
+        className={s.input}
+        as={TextInput}
         label={label}
         value={amount}
         onChange={onChangeAmount}
