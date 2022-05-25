@@ -19,6 +19,7 @@ export const URL_PARAMS: UrlParams<Omit<AdvertParams, 'lang'>> = {
   currency: { name: 'c', set: (v) => v, get: (v) => v },
   cryptocurrency: { name: 'cc', set: (v) => v, get: (v) => v },
   amount: { name: 'amount', set: (v) => v, get: (v) => v },
+  amountType: { name: 'amountType', set: (v) => v, get: (v) => v as AdvertParams['amountType'] },
   paymethod: { name: 'method', set: (v) => `${v}`, get: (v) => Number(v) },
   skip: { name: 'skip', set: (v) => `${v}`, get: (v) => Number(v) },
   limit: { name: 'limit', set: (v) => `${v}`, get: (v) => Number(v) },

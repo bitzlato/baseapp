@@ -1,4 +1,4 @@
-import { useMemo, useState, FC, useCallback } from 'react';
+import { useMemo, useState, FC } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
@@ -18,7 +18,6 @@ import { SelectPaymentMethod } from 'web/src/components/shared/Ads/SelectPayment
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
-import { TextInput } from '../../TextInputCustom/TextInputCustom';
 
 const INPUT_DEBOUNCE = 500;
 const EMPTY_ARR: unknown[] = [];
@@ -111,27 +110,21 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     INPUT_DEBOUNCE,
   );
 
-  const handleChangeAmount = useCallback(
-    (d: string) => {
-      const nvalue = parseNumeric(d);
-      setAmount(nvalue);
-      setAmountCrypto('');
-      changeAmountDebounced(nvalue, 'currency');
-    },
-    [setAmount, setAmountCrypto, changeAmountDebounced],
-  );
+  const handleChangeAmount = (d: string) => {
+    const nvalue = parseNumeric(d);
+    setAmount(nvalue);
+    setAmountCrypto('');
+    changeAmountDebounced(nvalue, 'currency');
+  };
 
-  const handleChangeAmountCrypto = useCallback(
-    (d: string) => {
-      const nvalue = parseNumeric(d);
-      setAmountCrypto(nvalue);
-      setAmount('');
-      changeAmountDebounced(nvalue, 'cryptocurrency');
-    },
-    [setAmount, setAmountCrypto, changeAmountDebounced],
-  );
+  const handleChangeAmountCrypto = (d: string) => {
+    const nvalue = parseNumeric(d);
+    setAmountCrypto(nvalue);
+    setAmount('');
+    changeAmountDebounced(nvalue, 'cryptocurrency');
+  };
 
-  const renderCryptoCurrencyOption = useCallback((option: P2PCurrency) => {
+  const renderCryptoCurrencyOption = (option: P2PCurrency) => {
     const balance = '0,00107994';
     const balanceUSD = '41,42 USD';
 
@@ -154,7 +147,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
         </Box>
       </Box>
     );
-  }, []);
+  };
 
   return (
     <>
@@ -181,8 +174,6 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
           value={selectedPaymethod}
           onChange={(v) => onChange({ paymethod: v!.id })}
         />
-
-        <TextInput label="Some label" />
       </Box>
 
       <SwitchField
