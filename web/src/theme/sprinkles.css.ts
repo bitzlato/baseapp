@@ -121,17 +121,19 @@ const unresponsiveProperties = defineProperties({
 
     // border
     border: ['none'],
-    borderStyle: ['solid'],
+    borderStyle: ['solid', 'dashed'],
     borderTopStyle: ['solid'],
     borderRightStyle: ['solid'],
     borderBottomStyle: ['solid'],
     borderLeftStyle: ['solid'],
     borderRadius: radiiVars,
+    borderBottomLeftRadius: radiiVars,
+    borderBottomRightRadius: radiiVars,
 
     // layout
     position: ['absolute', 'relative', 'fixed'],
-    top: [0],
-    right: [0],
+    top: [0, '25%', '50%'],
+    right: [0, '12px'],
     bottom: [0],
     left: [0],
     overflowY: ['auto'],
@@ -144,6 +146,9 @@ const unresponsiveProperties = defineProperties({
       dropdown: vars.boxShadows.dropdown,
       modal: vars.boxShadows.modal,
     },
+  },
+  shorthands: {
+    borderBottomRadius: ['borderBottomLeftRadius', 'borderBottomRightRadius'],
   },
 });
 

@@ -59,7 +59,7 @@ type NotificationVoucherCashed = NotificationBase & {
 
 type MessageType = 'in' | 'out';
 
-type NotificationNewMessage = NotificationBase & {
+export type NotificationNewMessage = NotificationBase & {
   to: string[];
   from: string;
   message: {
@@ -80,7 +80,7 @@ type NotificationNewAdminMessage = NotificationBase & {
 
 export type TradeStatus = 'trade_created' | 'cancel' | 'payment' | 'confirm-payment' | 'dispute';
 
-type NotificationTrade = NotificationBase & {
+export type NotificationTrade = NotificationBase & {
   tradeId: number;
   status: TradeStatus;
 };

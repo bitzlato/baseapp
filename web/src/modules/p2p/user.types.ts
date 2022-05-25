@@ -31,6 +31,7 @@ export interface UserInfo {
   trusted: boolean | null;
   trustsCount: number;
   verification: boolean;
+  verificationStatus: 'VERIFIED' | 'NOT_VERIFIED' | 'NOT_REQUIRED';
   verificationProvider: 'LEGACY';
 }
 

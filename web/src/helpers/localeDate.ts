@@ -7,6 +7,7 @@ const FORMATS = {
   fullDate: 'DD-MM-YYYY HH:mm:ss',
   shortDate: 'DD-MM-YYYY HH:mm',
   veryShortDate: 'D MMMM',
+  literalFullDate: 'D MMMM YYYY HH:mm',
   time: 'HH:mm:ss',
   date: 'DD-MM-YYYY',
   dateInput: 'YYYY-MM-DD',

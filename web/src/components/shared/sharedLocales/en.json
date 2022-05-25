@@ -16,6 +16,7 @@
   "ad.active.info": "Show ads of traders who are online only",
   "ad.rate_changed": "The exchange rate has changed:",
   "Missing.plural": "Missing",
+
   "To buy": "Buying",
   "To sell": "Selling",
 
@@ -30,5 +31,109 @@
 
   "trader.chatUnavailable": "You can't use chat. Either you don't have enough ratings or you don't have joint deals",
 
-  "traderAds.empty": "This trader has no ads yet. Go to the market to see many ads from other traders"
+  "traderAds.empty": "This trader has no ads yet. Go to the market to see many ads from other traders",
+  
+  "Chat": "Chat",
+  "Chat with": "Chat with {partner}",
+
+  "trade.state.button.confirm_trade": "Accept Trade",
+  "trade.state.button.cancel": "Cancel Trade",
+  "trade.state.button.payment": "Confirm Transfer",
+  "trade.state.button.dispute": "Open Dispute",
+  "trade.state.button.tips": "Leave a Tip",
+  "trade.state.button.confirm_payment": "Release coins",
+  "trade.state.button.addtime": "Add 10 minutes",
+  "trade.state.waitingTimeIncreased": "10 minutes added",
+  "trade.state.type.purchase": "Buy",
+  "trade.state.purchase.cancel.title": "Trade Canceled",
+  "trade.state.purchase.cancel.subtitle": "",
+  "trade.state.purchase.trade_created.title": "Waiting for a seller",
+  "trade.state.purchase.trade_created.subtitle": "Waiting for {name}. If it doesn't show up within {minutes} minutes, the trade will be automatically cancelled",
+  "trade.state.purchase.confirm_trade.title": "Transfer Money",
+  "trade.state.purchase.confirm_trade.subtitle": "Transfer {amount} {code} to seller details",
+  "trade.state.purchase.payment.title": "Awaiting confirmation from {name}",
+  "trade.state.purchase.payment.subtitle": "Awaiting confirmation of receipt of funds from the seller",
+  "trade.state.purchase.confirm_payment.title": "Trade Completed",
+  "trade.state.purchase.confirm_payment.subtitle": "{camount} {ccode} credited to your balance",
+  "trade.state.purchase.dispute.title": "Dispute Opened",
+  "trade.state.purchase.dispute.subtitle": "We are waiting for the dispute to be resolved by an arbitration agent",
+  "trade.state.num": "Trade #{id}",
+  "trade.state.details": "Specified details {paymethod}",
+  "trade.state.for": "at",
+  "trade.state.atUser": "user {name}",
+  "trade.state.viaPaymethod": "via {paymethod}",
+  "trade.state.leave_feedback": "Evaluate the work of a trader",
+
+  "trade.state.type.selling": "Selling",
+  "trade.state.selling.cancel.title": "Trade Canceled",
+  "trade.state.selling.cancel.subtitle": "",
+  "trade.state.selling.trade_created.title": "Waiting for a Buyer",
+  "trade.state.selling.trade_created.subtitle": "Waiting for {name}. If it doesn't show up within {minutes} minutes, the trade will be automatically cancelled",
+  "trade.state.selling.confirm_trade.title": "Awaiting Payment",
+  "trade.state.selling.confirm_trade.subtitle": "Waiting for {name} to confirm {amount} {code} transfer",
+  "trade.state.selling.payment.title": "Receive payment from {name}",
+  "trade.state.selling.payment.subtitle": "Check receipt of {amount} {code} from {name}",
+  "trade.state.selling.confirm_payment.title": "Trade Completed",
+  "trade.state.selling.confirm_payment.subtitle": "{camount} {ccode} sent to {name}",
+  "trade.state.selling.dispute.title": "Dispute Open",
+  "trade.state.selling.dispute.subtitle": "We are waiting for the arbitration agent to resolve the dispute",
+
+  "trade.history.trade_created": "Trade Creation",
+  "trade.history.confirm_trade": "Seller accepted the trade",
+  "trade.history.cancel": "Trade Canceled",
+  "trade.history.payment": "Money Transfer",
+  "trade.history.dispute": "Dispute Open",
+  "trade.history.confirm_payment": "Trade completed",
+  "trade.history.inprogress": "In progress",
+  "trade.history.title": "Trade History",
+
+  "trade.terms.history": "Terms of trade",
+  "trade.terms.history.empty": "not specified",
+
+  "trade.currencies.you_get": "You will get",
+  "trade.currencies.you_pay": "You Pay",
+
+  "trade.info.trade.title": "Trade",
+  "trade.info.trader.title": "Trader Information",
+  "trade.info.trader.rating": "Rating",
+  "trade.info.trader.reputation": "Reputation",
+  "trade.info.trader.deals.successful": "Successful Deals",
+  "trade.info.trader.deals.failed": "Canceled Deals",
+  "trade.info.rate": "Rate",
+  "trade.info.fiat.amount": "Trade Amount",
+  "trade.info.fee": "Bitzlato Fee",
+
+  "trade.tab.chat": "Chat",
+  "trade.tab.info": "Trade Information",
+
+  "trade.modal.cancel.button": "Cancel the deal",
+  "trade.modal.cancel.title": "Deal Cancellation",
+  "trade.modal.cancel.action.1": "Are you sure you want",
+  "trade.modal.cancel.action.2": "cancel the deal",
+  "trade.modal.cancel.action.3": "{tradeId} на {amount} {code}? ({paymethod})",
+  "trade.modal.cancel.action_sure": "Please don't cancel the deal if {amount} {code} already sent to the seller's details. It is not possible to receive {camount} {ccode} or return sent funds after cancellation!",
+
+  "trade.modal.receive_money.sure": "Are you sure you received {amount} {code} from the buyer?",
+  "trade.modal.receive_money.no_refund": "Return {cryptoamount} {ccode} after the transaction is not possible",
+
+  "trade.modal.tips.title": "Deal completed successfully!",
+  "trade.modal.tips.action": "Leave a tip for the trader",
+  "trade.modal.tips.description": "You can thank him for a successful transaction, this will be a nice bonus and will allow us to remain an excellent trader for our clients!",
+  "trade.modal.tips.percent": "Tip Percentage of Trade Amount",
+
+  "trade.modal.details.title": "Payment instructions",
+  "trade.modal.details.action": "Please, describe the details for the funds transfer",
+
+  "trade.chat.dispute.label": "Chat with support",
+  "trade.chat.dispute.open": "Dispute opened",
+
+  "trade.mobile.tab.trader": "Partner",
+  "trade.mobile.tab.trade": "Trade",
+
+  "Yes": "Yes",
+  "No": "No",
+  "Available": "Available",
+  "Close": "Close",
+  "Send": "Send",
+  "Details": "Details"
 }
