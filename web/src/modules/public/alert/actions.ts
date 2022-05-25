@@ -1,7 +1,4 @@
-import {
-  toggleNeedVerification,
-  ToggleNeedVerification,
-} from 'web/src/modules/user/profile/actions';
+import { ToggleFreezed, toggleFreezed } from 'web/src/modules/user/profile/actions';
 import { FetchError } from 'web/src/helpers/fetch';
 import { ALERT_DATA, ALERT_DELETE, ALERT_DELETE_BY_INDEX, ALERT_PUSH } from './constants';
 
@@ -52,14 +49,14 @@ export const alertDeleteByIndex = (index: number): AlertDeleteByIndex => ({
   index,
 });
 
-export const alertFetchError = (error: unknown): AlertPush | ToggleNeedVerification | undefined => {
+export const alertFetchError = (error: unknown): AlertPush | ToggleFreezed | undefined => {
   if (error instanceof FetchError) {
     if (
       (error.code === 403 && error.payload.code === 'OperationIsFrozen') ||
       (error.code === 403 && error.payload.message === 'Not allowed: all') ||
       (error.code === 500 && error.messages.includes('user can not make orders'))
     ) {
-      return toggleNeedVerification({ needVerification: true });
+      return toggleFreezed({ freezed: true });
     }
 
     return alertPush({
