@@ -141,12 +141,12 @@ export const SelectCustom = <Option,>({
         position="relative"
         display="flex"
         alignItems="center"
-        height="11x"
+        height="12x"
         width="full"
-        px="2x"
+        px="4x"
         borderWidth="1x"
         borderStyle="solid"
-        borderColor="selectInputBorder"
+        borderColor="inputBorder"
         borderRadius="1.5x"
         cursor="pointer"
         textAlign="left"
@@ -154,12 +154,12 @@ export const SelectCustom = <Option,>({
       >
         <Box display="flex" flexDirection="column" alignItems="center" width="full">
           {showPlaceholder ? (
-            <Box width="full" color="selectInputPlaceholder" fontSize="caption">
+            <Box width="full" color="inputPlaceholder" fontSize="medium">
               {placeholder}
             </Box>
           ) : null}
           {selectedValue ? (
-            <Box width="full" color="text" fontSize="caption">
+            <Box width="full" color="text" fontSize="medium">
               {renderSelectedOptionLabel(selectedValue)}
             </Box>
           ) : null}
@@ -175,12 +175,7 @@ export const SelectCustom = <Option,>({
   const renderMenu = ({ onClose }: { onClose: () => void }) => (
     <>
       {withSearch ? (
-        <Box
-          pb="2x"
-          borderBottomWidth="1x"
-          borderBottomStyle="solid"
-          borderColor="selectDropdownDelimeter"
-        >
+        <Box borderBottomWidth="1x" borderBottomStyle="solid" borderColor="selectDropdownDelimeter">
           <SearchInput
             value={searchText}
             placeholder={searchPlaceholder}
@@ -189,7 +184,7 @@ export const SelectCustom = <Option,>({
         </Box>
       ) : null}
 
-      <Box flexGrow={1} overflowY="auto">
+      <Box flexGrow={1} py="2x" overflowY="auto">
         {formattedOptions.length > 0 ? (
           formattedOptions.map((option) => (
             <SelectCustomItem

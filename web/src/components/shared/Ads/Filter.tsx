@@ -18,6 +18,7 @@ import { SelectPaymentMethod } from 'web/src/components/shared/Ads/SelectPayment
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
+import { TextInput } from '../../TextInputCustom/TextInputCustom';
 
 const INPUT_DEBOUNCE = 500;
 const EMPTY_ARR: unknown[] = [];
@@ -180,6 +181,8 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
           value={selectedPaymethod}
           onChange={(v) => onChange({ paymethod: v!.id })}
         />
+
+        <TextInput label="Some label" />
       </Box>
 
       <SwitchField
