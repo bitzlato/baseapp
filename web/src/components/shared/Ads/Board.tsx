@@ -74,13 +74,24 @@ export const Board: FC = () => {
   );
 
   const ads = (
-    <Ads
-      data={data?.data}
-      fiatSign={getFiatCurrency(filterParams.currency).sign}
-      cryptoSign={filterParams.cryptocurrency}
-      isLoading={isValidating}
-      onRefresh={handleRefresh}
-    />
+    <>
+      <Ads
+        data={data?.data}
+        fiatSign={getFiatCurrency(filterParams.currency).sign}
+        cryptoSign={filterParams.cryptocurrency}
+        isLoading={isValidating}
+        onRefresh={handleRefresh}
+      />
+      {data && !isValidating && (
+        <Pagination
+          page={filterParams.skip / filterParams.limit + 1}
+          total={data.total}
+          perPage={filterParams.limit}
+          onChange={handleChangePage}
+          onChangePerPage={handleChangePerPage}
+        />
+      )}
+    </>
   );
 
   if (isMobileDevice) {
@@ -92,7 +103,7 @@ export const Board: FC = () => {
             <FilterMobile params={filterParams} onChange={handleChangeFilter} />
           </Box>
         </Box>
-        <Box p="5x" backgroundColor="dropdown">
+        <Box px="5x" py="4x" backgroundColor="dropdown">
           {ads}
         </Box>
       </Box>
@@ -116,15 +127,6 @@ export const Board: FC = () => {
         </Box>
         <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
           {ads}
-          {data && !isValidating && (
-            <Pagination
-              page={filterParams.skip / filterParams.limit + 1}
-              total={data.total}
-              perPage={filterParams.limit}
-              onChange={handleChangePage}
-              onChangePerPage={handleChangePerPage}
-            />
-          )}
         </Box>
       </Box>
     </Container>

@@ -11,10 +11,8 @@ export const itemBase = sprinkles({
   fontWeight: 'strong',
   lineHeight: 'base',
   color: 'text',
-  height: '11x',
   borderRadius: '1.5x',
   px: '1x',
-  minWidth: '11x',
 });
 
 export const item = styleVariants({
@@ -32,4 +30,14 @@ export const item = styleVariants({
   ],
   active: [itemBase, { backgroundColor: vars.colors.paginationItemBgActive }],
   disabled: [itemBase, { color: vars.colors.paginationItemTextDisabled }],
+});
+
+export const itemSmall = sprinkles({
+  height: '9x',
+  minWidth: '9x',
+});
+
+export const itemMedium = sprinkles({
+  height: '11x',
+  minWidth: '11x',
 });
