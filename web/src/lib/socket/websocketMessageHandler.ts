@@ -1,12 +1,32 @@
 import { ScopedMutator } from 'swr/dist/types';
 import { p2pUrl } from 'web/src/api';
-import { Notification, IWebsocketMessage } from 'web/src/lib/socket/types';
+import { Notification, IWebsocketMessage, NotificationTrade } from 'web/src/lib/socket/types';
+
+const TradeEventList = [
+  'tradeStatusChanged',
+  'tradeExtendWaitingTime',
+  'disputeResolved',
+  'disputeAvailable',
+];
 
 export async function handleWebsocketMessage(
   mutate: ScopedMutator,
   eventMessage: IWebsocketMessage,
 ) {
   const { notificationId, name, ...data } = eventMessage;
+
+  const eventName = eventMessage.name;
+
+  if ((data as any).tradeId) {
+    const { tradeId } = data as NotificationTrade;
+    if (TradeEventList.includes(eventName)) {
+      mutate(`${p2pUrl()}/trade/${tradeId}`);
+    }
+
+    if (eventName === 'newChatMessage') {
+      mutate(`${p2pUrl()}/trade/${tradeId}/chat/`);
+    }
+  }
 
   const newNotification: Notification = {
     id: eventMessage.notificationId,

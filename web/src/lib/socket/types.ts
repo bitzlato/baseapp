@@ -80,7 +80,7 @@ type NotificationNewAdminMessage = NotificationBase & {
 
 export type TradeStatus = 'trade_created' | 'cancel' | 'payment' | 'confirm-payment' | 'dispute';
 
-type NotificationTrade = NotificationBase & {
+export type NotificationTrade = NotificationBase & {
   tradeId: number;
   status: TradeStatus;
 };

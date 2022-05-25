@@ -48,6 +48,24 @@ export const label = style([
   },
 ]);
 
+export const icon = style([
+  sprinkles({
+    position: 'absolute',
+    color: 'inputPlaceholder',
+    right: '12px',
+    top: 0,
+  }),
+  {
+    transition: 'all .2s ease',
+  },
+]);
+
+export const showIcon = style([
+  sprinkles({
+    pr: '16x',
+  }),
+]);
+
 globalStyle(`${input}:not(:focus):placeholder-shown + ${label}`, {
   paddingTop: 2,
   fontSize: '100%',

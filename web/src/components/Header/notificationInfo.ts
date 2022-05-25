@@ -17,25 +17,30 @@ export function notificationInfo(
   { translate, lang }: { translate: TranslateFn; lang: Language },
 ): NotificationModalNotification {
   const { createdAt } = item;
+
   const P2P_URL = `/${lang}/p2p`;
   const MERCH_URL = `/${lang}/merch`;
 
   const t = (key: string, args?: any) => translate(`notifications.${key}`, { ...args });
+  const tradeLink = `${P2P_URL}/trades/${item.data.tradeId}`;
 
   switch (item.name) {
     case 'tradeStatusChanged': {
-      const link = `${P2P_URL}/trades/${item.data.tradeId}`;
       switch (item.data.status) {
         case 'trade_created':
-          return { text: t('tradeStatusChangedCreated', item.data), link, createdAt };
+          return { text: t('tradeStatusChangedCreated', item.data), link: tradeLink, createdAt };
         case 'cancel':
-          return { text: t('tradeStatusChangedCancel', item.data), link, createdAt };
+          return { text: t('tradeStatusChangedCancel', item.data), link: tradeLink, createdAt };
         case 'payment':
-          return { text: t('tradeStatusChangedPayment', item.data), link, createdAt };
+          return { text: t('tradeStatusChangedPayment', item.data), link: tradeLink, createdAt };
         case 'confirm-payment':
-          return { text: t('tradeStatusChangedConfirmPayment', item.data), link, createdAt };
+          return {
+            text: t('tradeStatusChangedConfirmPayment', item.data),
+            link: tradeLink,
+            createdAt,
+          };
         default:
-          return { text: t('tradeStatusChanged', item.data), link, createdAt };
+          return { text: t('tradeStatusChanged', item.data), link: tradeLink, createdAt };
       }
     }
     case 'tradeExtendWaitingTime':
@@ -44,7 +49,7 @@ export function notificationInfo(
           tradeId: item.data.tradeId,
           time: item.data.time,
         }),
-        link: `/${P2P_URL}/trades/${item.data.tradeId}`,
+        link: tradeLink,
         createdAt,
       };
     case 'tradeWillExpire': {
@@ -52,13 +57,13 @@ export function notificationInfo(
       if (trade.time > Date.now()) {
         return {
           text: t('tradeWillExpire', item.data),
-          link: `${P2P_URL}/trades/${item.data.tradeId}`,
+          link: tradeLink,
           createdAt,
         };
       }
       return {
         text: t('tradeExpired', item.data),
-        link: `${P2P_URL}/trades/${item.data.tradeId}`,
+        link: tradeLink,
         createdAt,
       };
     }
@@ -69,7 +74,7 @@ export function notificationInfo(
           amount: item.data.cryptocurrency.amount,
           cryptocurrency: item.data.cryptocurrency.code,
         }),
-        link: `${P2P_URL}/trades/${item.data.tradeId}`,
+        link: tradeLink,
         createdAt,
       };
     case 'disputeAvailable': {
@@ -77,14 +82,14 @@ export function notificationInfo(
         item.data.type === 'selling' ? 'disputeAvailableSelling' : 'disputeAvailablePurchase';
       return {
         text: t(msg),
-        link: `${P2P_URL}/trades/${item.data.tradeId}`,
+        link: tradeLink,
         createdAt,
       };
     }
     case 'disputeAvailableTenMinutes': {
       return {
         text: t('disputeAvailableTenMinutes'),
-        link: `${P2P_URL}/trades/${item.data.tradeId}`,
+        link: tradeLink,
         createdAt,
       };
     }
@@ -94,7 +99,7 @@ export function notificationInfo(
           text: t('newTradeMessage', {
             tradeId: item.data.tradeId,
           }),
-          link: `${P2P_URL}/trades/${item.data.tradeId}`,
+          link: tradeLink,
           createdAt,
         };
       }
@@ -228,7 +233,7 @@ export function notificationInfo(
 
       return {
         text: t('tipsReceived', nData),
-        link: `${P2P_URL}/trades/${item.data.tradeId}`,
+        link: tradeLink,
         createdAt,
       };
     }

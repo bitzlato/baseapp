@@ -6,7 +6,7 @@ const rotate = keyframes({
   '100%': { transform: 'rotate(360deg)' },
 });
 
-export const loader = style({
+const baseLoader = style({
   borderRadius: '50%',
   fontSize: 10,
   position: 'relative',
@@ -18,3 +18,5 @@ export const loader = style({
   transform: 'translateZ(0)',
   animation: `${rotate} 1.1s infinite linear`,
 });
+
+export const loader = baseLoader;
