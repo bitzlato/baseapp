@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
@@ -9,15 +10,15 @@ import { Stack } from 'web/src/components/ui/Stack';
 import { UrlParams, getUrlSearchParams, setUrlSearchParams } from 'web/src/helpers/urlSearch';
 import { useAds } from 'web/src/hooks/data/useFetchAds';
 import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
+import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/useFetchP2PWallets';
 import { useT } from 'web/src/hooks/useT';
-import { AdvertParams } from 'web/src/modules/p2p/types';
+import { AdvertParams, AdvertType, SeoAdvertType } from 'web/src/modules/p2p/types';
 import { Ads } from './Ads';
 import { DEFAULT_FILTER, Filter, FilterMobile } from './Filter';
 
-export const URL_PARAMS: UrlParams<Omit<AdvertParams, 'lang'>> = {
-  type: { name: 'type', set: (v) => v, get: (v) => v },
-  currency: { name: 'c', set: (v) => v, get: (v) => v },
-  cryptocurrency: { name: 'cc', set: (v) => v, get: (v) => v },
+export const URL_PARAMS: UrlParams<
+  Omit<AdvertParams, 'lang' | 'type' | 'cryptocurrency' | 'currency'>
+> = {
   amount: { name: 'amount', set: (v) => v, get: (v) => v },
   amountType: { name: 'amountType', set: (v) => v, get: (v) => v as AdvertParams['amountType'] },
   paymethod: { name: 'method', set: (v) => `${v}`, get: (v) => Number(v) },
@@ -28,23 +29,96 @@ export const URL_PARAMS: UrlParams<Omit<AdvertParams, 'lang'>> = {
   isOwnerVerificated: { name: 'verif', set: (v) => `${v}`, get: (v) => Boolean(v) },
 };
 
+export const adTypeToSeo: Record<AdvertType, SeoAdvertType> = {
+  purchase: 'buy',
+  selling: 'sell',
+};
+
+export const seoTypeToAd: Record<SeoAdvertType, AdvertType> = {
+  buy: 'purchase',
+  sell: 'selling',
+};
+
+const isSeoType = (type: string | undefined): type is SeoAdvertType => {
+  return type === 'buy' || type === 'sell';
+};
+
+const getFilterPathParams = (
+  filter?: string,
+): Pick<AdvertParams, 'type' | 'cryptocurrency' | 'currency'> => {
+  const [seoType, cryptocurrency, currency] = filter?.split('-') ?? [];
+
+  return {
+    type: isSeoType(seoType) ? seoTypeToAd[seoType] : DEFAULT_FILTER.type,
+    cryptocurrency: cryptocurrency?.toUpperCase() ?? DEFAULT_FILTER.cryptocurrency,
+    currency: currency?.toUpperCase() ?? DEFAULT_FILTER.currency,
+  };
+};
+
+const generateFilterParamsUrl = (type: AdvertType, cryptocurrency: string, currency: string) => {
+  return (
+    `/board/${adTypeToSeo[type]}-${cryptocurrency}-${currency}`.toLowerCase() +
+    window.location.search
+  );
+};
+
 export const Board: FC = () => {
   const t = useT();
-  const { getFiatCurrency } = useFiatCurrencies();
+  const history = useHistory();
+  const { filter } = useParams<{ filter?: string }>();
+  const { getFiatCurrency, fiatCurrencies } = useFiatCurrencies();
+  const { data: cryptoCurrencies = [] } = useFetchP2PCryptoCurrencies();
   const { lang, isMobileDevice } = useAppContext();
-
   const [filterParams, setFilterParams] = useState<AdvertParams>(() => ({
     lang,
     ...DEFAULT_FILTER,
     ...getUrlSearchParams(URL_PARAMS),
+    ...getFilterPathParams(filter),
   }));
 
   const { data, error, isValidating, mutate } = useAds(filterParams);
 
-  const handleChangeFilter = (upd: Partial<AdvertParams>) => {
-    setFilterParams((prev) => ({ ...prev, ...upd }));
-    setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
-  };
+  useEffect(() => {
+    if (!filter) {
+      history.replace(
+        generateFilterParamsUrl(
+          DEFAULT_FILTER.type,
+          DEFAULT_FILTER.cryptocurrency,
+          DEFAULT_FILTER.currency,
+        ),
+      );
+    }
+  }, [filter, history]);
+
+  const handleChangeFilter = useCallback(
+    (upd: Partial<AdvertParams>) => {
+      setFilterParams((prev) => ({ ...prev, ...upd }));
+      setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
+
+      if (upd.type || upd.cryptocurrency || upd.currency) {
+        history.push(
+          generateFilterParamsUrl(
+            upd.type ?? filterParams.type,
+            upd.cryptocurrency ?? filterParams.cryptocurrency,
+            upd.currency ?? filterParams.currency,
+          ),
+        );
+      }
+    },
+    [filterParams, history],
+  );
+
+  useEffect(() => {
+    if (!cryptoCurrencies.some((currency) => currency.code === filterParams.cryptocurrency)) {
+      handleChangeFilter({ cryptocurrency: DEFAULT_FILTER.cryptocurrency, paymethod: undefined });
+    }
+  }, [handleChangeFilter, filterParams.cryptocurrency, cryptoCurrencies]);
+
+  useEffect(() => {
+    if (!Object.keys(fiatCurrencies).includes(filterParams.currency)) {
+      handleChangeFilter({ currency: DEFAULT_FILTER.currency, paymethod: undefined });
+    }
+  }, [handleChangeFilter, filterParams.currency, fiatCurrencies]);
 
   const handleChangePage = (value: number) => {
     handleChangeFilter({ skip: (value - 1) * filterParams.limit });

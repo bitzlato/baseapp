@@ -49,6 +49,7 @@ export interface P2PList<T> {
   total: number;
 }
 
+export type SeoAdvertType = 'buy' | 'sell';
 export type AdvertType = 'purchase' | 'selling';
 
 export interface AdvertParams {
