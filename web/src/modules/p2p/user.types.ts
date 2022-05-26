@@ -1,6 +1,6 @@
 export interface DealStat {
   canceledDeals: number;
-  cryptocurrency: string;
+  cryptocurrency: string | 'common';
   defeatInDisputes: number;
   successDeals: number;
   totalAmount: string;
@@ -9,13 +9,13 @@ export interface DealStat {
 
 export interface Feedback {
   count: number;
-  type: 'thumb_up' | 'hunkey';
+  type: 'thumb_up' | 'hankey';
 }
 
 export interface UserInfo {
-  blacklistedTimes: null;
-  blocked: null;
-  chatAvailable: null;
+  blacklistedTimes: number | null;
+  blocked: boolean | null;
+  chatAvailable: boolean | null;
   dealStats: DealStat[];
   deeplinkCode: string;
   feedbacks: Feedback[];
@@ -24,12 +24,16 @@ export interface UserInfo {
   lastActivity: number;
   name: string;
   rating: number;
-  regPeriod: null;
+  regPeriod: number | null;
   safetyIndex: number;
   startOfUseDate: number;
   suspicious: boolean;
-  trusted: null;
+  trusted: boolean | null;
   trustsCount: number;
   verification: boolean;
   verificationProvider: 'LEGACY';
+}
+
+export interface TrustParams {
+  trust: boolean;
 }

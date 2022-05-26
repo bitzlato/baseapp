@@ -8,8 +8,10 @@ import { useFetchAdvert } from 'web/src/hooks/data/useFetchAds';
 import { useFetchPaymethod } from 'web/src/hooks/data/useFetchPaymethod';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import ShieldIcon from 'web/src/assets/svg/ShieldIcon.svg';
-import TrustIcon from 'web/src/assets/svg/TrustIcon.svg';
-import { useFetchUser } from 'web/src/hooks/data/useFetchP2PUser';
+import LikeIcon from 'web/src/assets/svg/LikeIcon.svg';
+import UnLikeIcon from 'web/src/assets/svg/UnLikeIcon.svg';
+import VerifiedIcon from 'web/src/assets/svg/VerifiedIcon.svg';
+import { useChangeTrust, useFetchUser } from 'web/src/hooks/data/useFetchP2PUser';
 import { Tooltip } from 'web/src/components/ui/Tooltip';
 import { Button } from 'web/src/components/ui/Button';
 import { useLanguage } from 'web/src/components/app/AppContext';
@@ -20,6 +22,8 @@ import { useCryptoCurrencies } from 'web/src/hooks/useCryptoCurrencies';
 import { createMoney } from 'web/src/helpers/money';
 import { P2PMoneyFormat } from 'web/src/components/money/P2PFiatMoney';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
+import { DealStat } from 'web/src/modules/p2p/user.types';
+import { TrustedButton } from 'web/src/components/traderInfo/TrustedButton';
 import { OnlineStatusByLastActivity } from './OnlineStatus';
 
 interface UrlParams {
@@ -41,6 +45,7 @@ export const Ad: FC<Props> = () => {
   const { data: owner } = useFetchUser(advert?.owner);
   const { getFiatCurrency } = useFiatCurrencies();
   const { getCryptoCurrency } = useCryptoCurrencies();
+  const changeTrust = useChangeTrust();
 
   if (advert === undefined || paymethod === undefined || owner === undefined) {
     return (
@@ -66,6 +71,9 @@ export const Ad: FC<Props> = () => {
   const max = createMoney(advert.limitCurrency.max, fiatCcy);
   const fromCcy = isBuy ? fiatCcy : cryptoCcy;
   const toCcy = isBuy ? cryptoCcy : fiatCcy;
+  const deals =
+    owner.dealStats.find((v) => v.cryptocurrency === 'common') ??
+    ({ successDeals: 0, canceledDeals: 0 } as DealStat);
 
   const handleChangeFrom = (v: string) => {
     setFrom(parseNumeric(v));
@@ -73,6 +81,10 @@ export const Ad: FC<Props> = () => {
 
   const handleChangeTo = (v: string) => {
     setTo(parseNumeric(v));
+  };
+
+  const handleClickTrusted = () => {
+    changeTrust(owner.name, { trust: !owner.trusted });
   };
 
   return (
@@ -145,18 +157,72 @@ export const Ad: FC<Props> = () => {
           </Box>
         </Box>
         <Box p="6x" display="flex" flexDirection="column" gap="6x">
-          <Box p="6x" backgroundColor="adBg" borderRadius="1.5x">
-            <Box display="flex" mb="2x" alignItems="center" gap="2x">
-              <Box as="p" fontSize="lead24">
-                {advert.owner}
+          <Box p="6x" backgroundColor="adBg" borderRadius="1.5x" display="flex" gap="6x">
+            <Box flex={1} display="flex">
+              <Box display="flex" flexDirection="column" justifyContent="space-between">
+                <Box>
+                  <Box display="flex" mb="2x" alignItems="center" gap="2x">
+                    <Box as="p" fontSize="lead24">
+                      {advert.owner}
+                    </Box>
+                    {owner.verification && (
+                      <Tooltip label={t('Verified user')} placement="top">
+                        <div>
+                          <Box as={VerifiedIcon} display="block" />
+                        </div>
+                      </Tooltip>
+                    )}
+                  </Box>
+                  <OnlineStatusByLastActivity lastActivity={owner.lastActivity} />
+                </Box>
+                <TrustedButton onClick={handleClickTrusted} trusted={owner.trusted} />
               </Box>
-              <Tooltip label={t('Trusted user')} placement="top">
-                <div>
-                  <Box as={TrustIcon} display="block" />
-                </div>
-              </Tooltip>
             </Box>
-            <OnlineStatusByLastActivity lastActivity={owner.lastActivity} />
+            <Box flex={1} display="flex">
+              <Box
+                pl="6x"
+                fontSize="medium"
+                flexGrow={1}
+                display="flex"
+                flexDirection="column"
+                gap="4x"
+              >
+                <Box display="flex" justifyContent="space-between">
+                  <Text fontSize="medium" fontWeight="strong">
+                    {t('Rating')}
+                  </Text>
+                  <Box display="flex" alignItems="center" gap="5x">
+                    <Box display="flex" alignItems="center" gap="1x">
+                      <LikeIcon />
+                      <span>{owner.feedbacks.find((v) => v.type === 'thumb_up')?.count ?? 0}</span>
+                    </Box>
+                    <Box display="flex" alignItems="center" gap="1x">
+                      <UnLikeIcon />
+                      <span>{owner.feedbacks.find((v) => v.type === 'hankey')?.count ?? 0}</span>
+                    </Box>
+                    <span>{owner.rating}</span>
+                  </Box>
+                </Box>
+                <Box display="flex" justifyContent="space-between">
+                  <Text fontSize="medium" fontWeight="strong">
+                    {t('Reputation')}
+                  </Text>
+                  {owner.safetyIndex}
+                </Box>
+                <Box display="flex" justifyContent="space-between">
+                  <Text fontSize="medium" fontWeight="strong">
+                    {t('Successful deals')}
+                  </Text>
+                  {deals.successDeals}
+                </Box>
+                <Box display="flex" justifyContent="space-between">
+                  <Text fontSize="medium" fontWeight="strong">
+                    {t('Canceled deals')}
+                  </Text>
+                  {deals.canceledDeals}
+                </Box>
+              </Box>
+            </Box>
           </Box>
           <Box p="6x" backgroundColor="adBg" borderRadius="1.5x">
             <Text variant="title">{t('Trade terms')}</Text>
