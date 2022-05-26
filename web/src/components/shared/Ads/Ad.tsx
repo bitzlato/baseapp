@@ -13,12 +13,13 @@ import { useFetchUser } from 'web/src/hooks/data/useFetchP2PUser';
 import { Tooltip } from 'web/src/components/ui/Tooltip';
 import { Button } from 'web/src/components/ui/Button';
 import { useLanguage } from 'web/src/components/app/AppContext';
-import { MoneyInput } from 'web/src/components/Input/MoneyInput';
+import { MoneyInput } from 'web/src/components/TextInputCustom/MoneyInputCustom';
 import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
 import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useCryptoCurrencies } from 'web/src/hooks/useCryptoCurrencies';
 import { createMoney } from 'web/src/helpers/money';
 import { P2PMoneyFormat } from 'web/src/components/money/P2PFiatMoney';
+import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { OnlineStatusByLastActivity } from './OnlineStatus';
 
 interface UrlParams {
@@ -66,6 +67,14 @@ export const Ad: FC<Props> = () => {
   const fromCcy = isBuy ? fiatCcy : cryptoCcy;
   const toCcy = isBuy ? cryptoCcy : fiatCcy;
 
+  const handleChangeFrom = (v: string) => {
+    setFrom(parseNumeric(v));
+  };
+
+  const handleChangeTo = (v: string) => {
+    setTo(parseNumeric(v));
+  };
+
   return (
     <Container maxWidth="xl">
       <Box
@@ -87,13 +96,13 @@ export const Ad: FC<Props> = () => {
                 currency={fromCcy.code}
                 value={from}
                 label={t('You pay')}
-                onChange={setFrom}
+                onChange={handleChangeFrom}
               />
               <MoneyInput
                 currency={toCcy.code}
                 value={to}
                 label={t('You receive')}
-                onChange={setTo}
+                onChange={handleChangeTo}
               />
               <Button>{t('Start trade')}</Button>
             </Box>
