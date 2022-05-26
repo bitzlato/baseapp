@@ -12,7 +12,7 @@ type InputProps<C extends ElementType = 'input'> = {
   onChange?: ((value: string) => void) | undefined;
 };
 
-type Props<C extends ElementType = 'input'> = InputProps<C> &
+export type TextInputProps<C extends ElementType = 'input'> = InputProps<C> &
   Omit<ComponentProps<C>, keyof InputProps | SprinklesKeys>;
 
 export const TextInput = ({
@@ -22,7 +22,7 @@ export const TextInput = ({
   className,
   onChange,
   ...inputProps
-}: Props) => {
+}: TextInputProps) => {
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     onChange?.(event.target.value);
   };

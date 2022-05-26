@@ -14,6 +14,7 @@ const lineHeights = {
 const minWidth = {
   '9x': sizeVars['9x'],
   '11x': sizeVars['11x'],
+  '14x': sizeVars['14x'],
   '18x': sizeVars['18x'],
 };
 

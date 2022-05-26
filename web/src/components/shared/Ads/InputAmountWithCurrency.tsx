@@ -3,8 +3,8 @@ import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { SelectCustom, SelectCustomProps } from 'web/src/components/SelectCustom/SelectCustom';
 import { SelectCustomChevron } from 'web/src/components/SelectCustom/SelectCustomChevron';
-import * as s from './InputAmountWithCurrency.css';
-import { TextInput } from '../../TextInputCustom/TextInputCustom';
+import { TextInput } from 'web/src/components/TextInputCustom/TextInputCustom';
+import * as s from 'web/src/components/TextInputCustom/TextInputWithControl.css';
 
 interface CommonOption {
   code: string;
@@ -44,15 +44,7 @@ export const InputAmountWithCurrency = <Option extends CommonOption>({
 
   const renderCustomButton = ({ open, onClick }: { open: boolean; onClick: () => void }) => (
     <Box position="relative">
-      <Box
-        flexGrow={1}
-        className={s.input}
-        as={TextInput}
-        label={label}
-        value={amount}
-        onChange={onChangeAmount}
-      />
-
+      <TextInput className={s.input} label={label} value={amount} onChange={onChangeAmount} />
       <Box className={s.inputRightControls} display="flex" alignItems="center">
         <Box
           as="button"
