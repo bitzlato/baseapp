@@ -44,7 +44,7 @@ export function notificationInfo(
           tradeId: item.data.tradeId,
           time: item.data.time,
         }),
-        link: `/en/${P2P_URL}/trades/${item.data.tradeId}`,
+        link: `/${P2P_URL}/trades/${item.data.tradeId}`,
         createdAt,
       };
     case 'tradeWillExpire': {
