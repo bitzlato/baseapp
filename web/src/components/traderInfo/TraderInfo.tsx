@@ -9,10 +9,9 @@ import VerifiedIcon from 'web/src/assets/svg/VerifiedIcon.svg';
 import BlockedUserIcon from 'web/src/assets/svg/BlockedUserIcon.svg';
 import FavoriteIcon from 'web/src/assets/svg/FavoriteIcon.svg';
 import BlockedUserIconActive from 'web/src/assets/svg/BlockedUserIconActive.svg';
-import FavoriteIconActive from 'web/src/assets/svg/FavoriteIconActive.svg';
 import BlockedStatusIcon from 'web/src/assets/svg/BlockedStatusIcon.svg';
 import cn from 'classnames';
-import { useUserInfo } from 'web/src/hooks/useUserInfo';
+import { useFetchUser } from 'web/src/hooks/data/useFetchP2PUser';
 import { Notes } from './Notes';
 import { Chat } from './Chat';
 import { Deals } from './Deals';
@@ -20,6 +19,7 @@ import { Stat, StatLabel } from '../ui/Stat';
 import { VariantSwitcher } from '../ui/VariantSwitcher';
 import * as styles from './TraderInfo.css';
 import { IconButton } from '../IconButton/IconButton';
+import { TrustedButton } from './TrustedButton';
 
 interface TraderInfoProps {
   publicName: string;
@@ -31,11 +31,11 @@ export const TraderInfo: FC<TraderInfoProps> = ({ publicName }) => {
   const [blockedStatus, setBlockedStatus] = useState(false);
   const [value, setValue] = useState('info');
 
-  const { data } = useUserInfo(publicName);
+  const { data } = useFetchUser(publicName);
 
   useEffect(() => {
     if (data !== undefined) {
-      setBlockedStatus(data.blocked);
+      setBlockedStatus(Boolean(data.blocked));
     }
   }, [data]);
 
@@ -73,12 +73,10 @@ export const TraderInfo: FC<TraderInfoProps> = ({ publicName }) => {
             >
               {blockedStatus ? <BlockedUserIconActive /> : <BlockedUserIcon />}
             </IconButton>
-            <IconButton
+            <TrustedButton
               onClick={() => setFavoriteStatus(!favoriteStatus)}
-              className={cn(styles.iconButton, favoriteStatus && styles.favorited)}
-            >
-              {favoriteStatus ? <FavoriteIconActive /> : <FavoriteIcon />}
-            </IconButton>
+              trusted={favoriteStatus}
+            />
           </Box>
         </Box>
         <Box display="flex" alignItems="center" mb="5x">
