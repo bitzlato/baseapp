@@ -14,8 +14,5 @@
   "ad.trusted.info": "Show ads of traders you added to the list of trusted traders only",
   "ad.active.info": "Show ads of traders who are online only",
   "ad.rate_changed": "The exchange rate has changed:",
-
-  "Amount": "Amount",
-  "Nothing found": "Nothing found",
-  "Search": "Search"
+  "Missing.plural": "Missing"
 }
