@@ -62,7 +62,7 @@ export const ru = {
   'page.mobile.wallet.deposit.generating': 'Генерируется адресс...',
 
   'page.mobile.wallet.withdraw.modal.new.account': 'Подтвердить новый аккаунт',
-  'page.mobile.wallet.withdraw.modal.confirmation': 'Потвердить вывод',
+  'page.mobile.wallet.withdraw.modal.confirmation': 'Подтвердить вывод',
   'page.mobile.wallet.withdraw.modal.confirmation.warning':
     'Please check the target address carefully before confirming the withdrawal.',
   'page.mobile.wallet.withdraw.modal.confirmation.message1': "You've requested to withdraw",

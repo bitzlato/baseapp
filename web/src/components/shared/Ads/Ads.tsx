@@ -1,10 +1,11 @@
-import { FC } from 'react';
-import { Link } from 'react-router-dom';
-import { Advert } from 'web/src/modules/p2p/types';
+import { FC, useState } from 'react';
+import { Money } from '@bitzlato/money-js';
+import { useDispatch } from 'react-redux';
+import { Advert, AdvertSingleSource } from 'web/src/modules/p2p/types';
 import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
-import { useSharedT } from 'web/src/components/shared/Adapter';
+import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import TrustIcon from 'web/src/assets/svg/TrustIcon.svg';
 import RefreshIcon from 'web/src/assets/svg/RefreshIcon.svg';
 import { Tooltip } from 'web/src/components/ui/Tooltip';
@@ -20,8 +21,86 @@ import {
   AdsTableColumn,
   AdsTableHeaderColumn,
 } from 'web/src/components/shared/AdsTable/AdsTableColumn';
-import { useIsMobileDevice } from 'web/src/components/app/AppContext';
+import { useAppContext, useIsMobileDevice } from 'web/src/components/app/AppContext';
+import { p2pUrl } from 'web/src/api/config';
+import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
+import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { OnlineStatusByLastActivity } from './OnlineStatus';
+import { ConfirmRateChangeModal } from './ConfirmRateChangeModal';
+
+interface AdExchangeButtonProps {
+  ad: Advert;
+}
+
+interface AdExchangeConfirm {
+  prevRate: Money;
+  nextRate: Money;
+}
+
+const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
+  const { t, history } = useAdapterContext();
+  const { isMobileDevice, lang } = useAppContext();
+  const [active, setActive] = useState(false);
+  const [confirm, setConfirm] = useState<AdExchangeConfirm | undefined>(undefined);
+  const dispatch = useDispatch();
+
+  const isBuy = ad.type === 'selling';
+  const to =
+    process.env.NODE_ENV === 'development'
+      ? `/${isBuy ? 'buy' : 'sell'}/${ad.id}`
+      : `${lang}/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${ad.cryptoCurrency.code}-${
+          ad.currency.code
+        }-${ad.paymethod.name}`;
+
+  const handleClick = async () => {
+    setActive(true);
+
+    try {
+      const data: AdvertSingleSource = await fetchWithCreds(`${p2pUrl()}/exchange/dsa/${ad.id}`);
+      if (data) {
+        const nextRate = Money.fromDecimal(data.rate, ad.currency);
+
+        if (!ad.rate.eq(nextRate)) {
+          setConfirm({
+            prevRate: ad.rate,
+            nextRate,
+          });
+          setActive(false);
+          return;
+        }
+      }
+
+      history.push(to);
+    } catch (error: unknown) {
+      setActive(false);
+
+      if (error instanceof FetchError) {
+        alertFetchError(dispatch, error);
+        return;
+      }
+
+      throw error;
+    }
+  };
+  const handleClose = () => setConfirm(undefined);
+  const handleConfirm = () => history.push(to);
+
+  return (
+    <>
+      <Button fullWidth={isMobileDevice} disabled={active} onClick={handleClick}>
+        {isBuy ? t('Buy') : t('Sell')}
+      </Button>
+      <ConfirmRateChangeModal
+        prevRate={confirm?.prevRate}
+        nextRate={confirm?.nextRate}
+        cryptoCurrency={ad.cryptoCurrency}
+        isBuy={isBuy}
+        onConfirm={handleConfirm}
+        onClose={handleClose}
+      />
+    </>
+  );
+};
 
 interface Props {
   data?: Advert[] | undefined;
@@ -32,7 +111,7 @@ interface Props {
 }
 
 export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, onRefresh }) => {
-  const t = useSharedT();
+  const { t, Link } = useAdapterContext();
   const isMobileDevice = useIsMobileDevice();
 
   const buttonRefresh = (
@@ -64,7 +143,6 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
       {data && data.length > 0 && (
         <AdsTableBody>
           {data.map((ad) => {
-            const isBuy = ad.type === 'selling';
             const trader = (
               <>
                 <Box display="flex" mb="2x" alignItems="center">
@@ -99,18 +177,10 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
                 <P2PFiatFormat money={ad.limitCurrency.max} cryptoCurrency={ad.cryptoCurrency} />
               </>
             );
-            const buyButton = (
-              <Button
-                as={Link}
-                to={`/${isBuy ? 'buy' : 'sell'}/${ad.id}`}
-                fullWidth={isMobileDevice}
-              >
-                {isBuy ? t('Buy') : t('Sell')}
-              </Button>
-            );
+            const exchangeButton = <AdExchangeButton ad={ad} />;
 
             return isMobileDevice ? (
-              <Box p="4x" backgroundColor="adBg" borderRadius="1.5x">
+              <Box key={ad.id} p="4x" backgroundColor="adBg" borderRadius="1.5x">
                 <Stack direction="column" marginBottom="4x">
                   {trader}
                   <Box display="flex" justifyContent="space-between">
@@ -131,7 +201,7 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
                     </Text>
                     {limit}
                   </Box>
-                  {buyButton}
+                  {exchangeButton}
                 </Stack>
               </Box>
             ) : (
@@ -143,7 +213,7 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
                 <AdsTableColumn size="medium">{rate}</AdsTableColumn>
                 <AdsTableColumn size="small">{limit}</AdsTableColumn>
                 <AdsTableColumn size="large" display="flex" justifyContent="flex-end">
-                  <Box pr="4x">{buyButton}</Box>
+                  <Box pr="4x">{exchangeButton}</Box>
                 </AdsTableColumn>
               </AdsTableRow>
             );
