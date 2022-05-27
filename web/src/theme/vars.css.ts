@@ -224,8 +224,7 @@ export const [themeLight, vars] = createTheme({
     btnDrawer: colors.ebonyClay,
     btnDrawerHover: colors.ebonyClay15,
 
-    adHeaderText: colors.white,
-    adHeaderLabel: colors.white50,
+    adStatLabel: colors.ebonyClay,
 
     inputBorder: colors.ebonyClay15,
     inputPlaceholder: colors.ebonyClay70,
@@ -415,8 +414,7 @@ export const themeDark = createTheme(vars, {
     btnDrawer: colors.white,
     btnDrawerHover: colors.white50,
 
-    adHeaderText: colors.white,
-    adHeaderLabel: colors.white50,
+    adStatLabel: colors.white50,
 
     inputBorder: colors.white10,
     inputPlaceholder: colors.white50,
