@@ -5,19 +5,19 @@ import { Text } from 'web/src/components/ui/Text';
 import { Button } from 'web/src/components/ui/Button';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
-import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/useFetchP2PWallets';
 import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
 import { AdvertParams, AdvertType, PaymethodInfo } from 'web/src/modules/p2p/types';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { SwitchField } from 'web/src/components/profile/settings/SwitchField';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { InputAmountWithCurrency } from 'web/src/components/shared/Ads/InputAmountWithCurrency';
-import { P2PCurrency } from 'web/src/modules/p2p/wallet-types';
 import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
 import { SelectPaymentMethod } from 'web/src/components/shared/Ads/SelectPaymentMethod';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
+import { P2PWalletOption, useP2PWalletOptions } from 'web/src/hooks/useP2PWalletOptions';
+import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
 
 const INPUT_DEBOUNCE = 500;
 const EMPTY_ARR: unknown[] = [];
@@ -77,16 +77,16 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     [params.amount],
   );
 
-  const { data: cryptoCurrencies = [] } = useFetchP2PCryptoCurrencies();
-  const selectedCryptoCurrency = useMemo(() => {
-    return cryptoCurrencies.find((d) => d.code === params.cryptocurrency) ?? null;
-  }, [cryptoCurrencies, params.cryptocurrency]);
-
-  const { fiatCurrencies } = useFiatCurrencies();
+  const { fiatCurrencies, getFiatCurrency } = useFiatCurrencies();
   const fiats = useMemo(() => Object.values(fiatCurrencies), [fiatCurrencies]);
   const selectedFiatCurrency = useMemo(() => {
     return fiats.find((d) => d.code === params.currency) ?? null;
   }, [fiats, params.currency]);
+
+  const { selectedCryptoCurrency, cryptoCurrencies } = useP2PWalletOptions(
+    params.cryptocurrency,
+    getFiatCurrency,
+  );
 
   const paymethodsResp = useFetchPaymethods({
     lang: params.lang,
@@ -124,24 +124,23 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     changeAmountDebounced(nvalue, 'cryptocurrency');
   };
 
-  const renderCryptoCurrencyOption = (option: P2PCurrency) => {
-    const balance = '0,00107994';
-    const balanceUSD = '41,42 USD';
-
+  const renderCryptoCurrencyOption = (option: P2PWalletOption) => {
     return (
       <Box display="flex" alignItems="center" gap="4x">
         <CryptoCurrencyIcon size="medium" currency={option.code} />
         <Box display="flex" flexDirection="column" gap="1x" flexGrow={1}>
           <Box display="flex" justifyContent="space-between">
             <Text>{option.code}</Text>
-            <Text textAlign="right">{balance}</Text>
+            <Text>
+              <MoneyFormat money={option.balance} />
+            </Text>
           </Box>
           <Box display="flex" justifyContent="space-between">
             <Text color="textMuted" fontWeight="regular">
               {option.name}
             </Text>
-            <Text color="textMuted" fontWeight="regular" textAlign="right">
-              {balanceUSD}
+            <Text color="textMuted" fontWeight="regular">
+              <MoneyFormat money={option.worth} />
             </Text>
           </Box>
         </Box>
