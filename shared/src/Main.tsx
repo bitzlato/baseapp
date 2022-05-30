@@ -9,12 +9,13 @@ import {
   USER_STATUS_AUTHORIZED,
 } from 'shared/Header';
 import { Footer } from 'shared/Footer';
+import { MobileFooter } from 'shared/MobileFooter';
 import { Button } from 'shared/Button';
-import { Links, Notify, IconName } from 'shared/types';
+import { Links, Notify, BottomTabLink, UserLinks, UserLink } from 'shared/types';
 import { Language, Theme } from 'web/src/types';
 
-const MARKET_URL = 'https://market.bitzlato.com' as const;
-const P2P_URL = 'https://bitzlato.com/en/p2p' as const;
+const MARKET_URL = 'https://market.bitzlato.com';
+const P2Plinks = { en: 'https://bitzlato.com/en/p2p', ru: 'https://bitzlato.com/ru/p2p' };
 
 const languages = {
   en: 'English',
@@ -62,156 +63,6 @@ const Main: FC = () => {
     }, 1000);
   }, []);
 
-  let userProps;
-  if (status === USER_STATUS_AUTHORIZATION_REQUIRED) {
-    userProps = {
-      status: USER_STATUS_AUTHORIZATION_REQUIRED,
-      onSignInClick: handleSignInClick,
-      onSignUpClick: handleSignUpClick,
-    };
-  } else if (status === USER_STATUS_AUTHORIZED) {
-    userProps = {
-      status: USER_STATUS_AUTHORIZED,
-      onLogoutClick: handleLogoutClick,
-    };
-  } else {
-    userProps = { status: USER_STATUS_NOT_AUTHORIZED };
-  }
-
-  const navLinks = [
-    {
-      key: 'quick-exchange',
-      type: 'internal',
-      to: '/quick-exchange',
-      children: language === 'ru' ? 'Быстрый обмен' : 'Quick Exchange',
-    },
-    {
-      key: 'trading',
-      type: 'internal',
-      to: '/trading',
-      children: language === 'ru' ? 'Торговля' : 'Trade',
-    },
-    status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'wallets',
-          type: 'internal',
-          to: '/wallets',
-          children: language === 'ru' ? 'Кошельки' : 'Wallets',
-        }
-      : undefined,
-    status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'orders',
-          type: 'internal',
-          to: '/orders',
-          children: language === 'ru' ? 'Ордера' : 'Orders',
-        }
-      : undefined,
-    status === USER_STATUS_AUTHORIZED
-      ? {
-          key: '/trading',
-          type: 'internal',
-          to: '/history',
-          children: language === 'ru' ? 'История' : 'History',
-        }
-      : undefined,
-    {
-      key: P2P_URL,
-      type: 'external',
-      to: P2P_URL,
-      children: language === 'ru' ? 'P2P Торговля' : 'P2P Trading',
-    },
-  ].filter(Boolean) as Links;
-
-  const hamburgerLinks = [
-    status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'profile',
-          type: 'internal',
-          icon: 'profile' as IconName,
-          to: '/profile',
-          children: language === 'ru' ? 'Профиль' : 'Profile',
-        }
-      : undefined,
-    status === USER_STATUS_AUTHORIZATION_REQUIRED
-      ? {
-          key: 'signin',
-          icon: 'profile' as IconName,
-          children: language === 'ru' ? 'Войти' : 'Sign In',
-          onClick: handleSignInClick,
-        }
-      : undefined,
-    status === USER_STATUS_AUTHORIZATION_REQUIRED
-      ? {
-          key: 'signup',
-          icon: 'signup' as IconName,
-          children: language === 'ru' ? 'Регистрация' : 'Sign Up',
-          onClick: handleSignUpClick,
-        }
-      : undefined,
-    {
-      key: 'quickExchange',
-      type: 'internal',
-      icon: 'quickExchange' as IconName,
-      to: '/quick-exchange',
-      children: language === 'ru' ? 'Быстрый обмен' : 'Quick Exchange',
-    },
-    {
-      key: 'trading',
-      type: 'internal',
-      icon: 'trading' as IconName,
-      to: '/trading',
-      children: language === 'ru' ? 'Торговля' : 'Trade',
-    },
-    status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'wallets',
-          type: 'internal',
-          icon: 'wallets' as IconName,
-          to: '/wallets',
-          children: language === 'ru' ? 'Кошельки' : 'Wallets',
-        }
-      : undefined,
-    status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'orders',
-          type: 'internal',
-          icon: 'orders' as IconName,
-          to: '/orders',
-          children: language === 'ru' ? 'Ордера' : 'Orders',
-        }
-      : undefined,
-    status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'history',
-          type: 'internal',
-          icon: 'history' as IconName,
-          to: '/history',
-          children: language === 'ru' ? 'История' : 'History',
-        }
-      : undefined,
-    {
-      key: 'p2p',
-      type: 'external',
-      icon: 'p2p' as IconName,
-      to: P2P_URL,
-      children: language === 'ru' ? 'P2P Торговля' : 'P2P Trading',
-    },
-    {
-      key: 'docs',
-      type: 'internal',
-      icon: 'api' as IconName,
-      to: '/docs',
-      children: language === 'ru' ? 'API Документация' : 'API Documentation',
-    },
-    {
-      key: 'logout',
-      icon: 'logout' as IconName,
-      children: language === 'ru' ? 'Выйти' : 'Logout',
-      onClick: handleLogoutClick,
-    },
-  ].filter(Boolean) as Links;
-
   const t = (key: string) => {
     switch (key) {
       case 'signIn':
@@ -232,63 +83,192 @@ const Main: FC = () => {
       case 'notifications_empty':
         return language === 'ru' ? 'Нет уведомлений' : 'No notifications';
 
-      case 'all_read':
-        return language === 'ru' ? 'Пометить всё как прочитанное' : 'Mark everything as read';
+      case 'darkTheme':
+      case 'notificationsTitle':
+      case 'notificationRead':
+      case 'notificationUnread':
+        return key;
 
-      case 'adverts':
-        return 'My Adverts';
+      case 'p2p':
+      case 'AD Board':
+      case 'My adverts':
+      case 'My trades':
+      case 'Exchange':
+      case 'Trade':
+      case 'Orders':
+      case 'History':
+      case 'Quick exchange':
+        return key;
+
+      case 'bottomTabs.home':
+      case 'bottomTabs.exchange':
+      case 'bottomTabs.trading':
+      case 'bottomTabs.wallets':
+      case 'bottomTabs.p2p':
+        return key.split('.')[1] || key;
 
       default:
-        throw new Error(`t: Key '${key}' not found`);
+        throw new Error(`translate: Key '${key}' not found`);
     }
   };
 
-  const navLinks2: Links = [
+  let userProps;
+  if (status === USER_STATUS_AUTHORIZATION_REQUIRED) {
+    userProps = {
+      status: USER_STATUS_AUTHORIZATION_REQUIRED,
+      onSignInClick: handleSignInClick,
+      onSignUpClick: handleSignUpClick,
+    };
+  } else if (status === USER_STATUS_AUTHORIZED) {
+    const profileLink: UserLink = {
+      key: 'profile',
+      type: 'external',
+      to: '/profile',
+      icon: 'profile',
+      children: t('profile'),
+    };
+
+    const userLinks: UserLinks = [
+      {
+        key: 'telegram',
+        type: 'internal',
+        to: '/profile/telegram',
+        children: 'Telegram',
+      },
+    ];
+
+    userProps = {
+      profileLink,
+      userLinks,
+      status: USER_STATUS_AUTHORIZED,
+      onLogoutClick: handleLogoutClick,
+    };
+  } else {
+    userProps = { status: USER_STATUS_NOT_AUTHORIZED };
+  }
+
+  const p2pURL = P2Plinks[language] ?? P2Plinks.en;
+  const marketURL = MARKET_URL;
+
+  const navLinksMarket: Links = [
     {
-      key: 'main',
+      key: 'p2p',
+      type: 'tab',
+      children: t('p2p'),
+      tabs: [
+        {
+          key: 'Ad board',
+          type: 'external',
+          to: `/${p2pURL}/sell-btc-rub`,
+          children: t('AD Board'),
+        },
+        {
+          key: 'My adverts',
+          type: 'external',
+          to: `/${p2pURL}/adverts`,
+          children: t('My adverts'),
+        },
+        {
+          key: 'My trades',
+          type: 'external',
+          to: `/${p2pURL}/trades`,
+          children: t('My trades'),
+        },
+      ],
+    },
+    {
+      key: 'exchange',
+      type: 'tab',
+      children: t('Exchange'),
+      tabs: [
+        {
+          key: 'trading',
+          type: 'internal',
+          to: '/trading',
+          children: t('Trade'),
+        },
+        {
+          key: 'orders',
+          type: 'internal',
+          to: '/orders',
+          children: t('Orders'),
+        },
+        {
+          key: 'history',
+          type: 'internal',
+          to: '/history',
+          children: t('History'),
+        },
+      ],
+    },
+    {
+      key: 'quick-exchange',
       type: 'internal',
-      to: '/',
-      children: 'P2P',
-    },
-    {
-      key: 'market',
-      type: 'external',
-      to: MARKET_URL,
-      children: language === 'ru' ? 'Биржа' : 'Exchange',
-    },
-    {
-      key: 'knowledgebase',
-      type: 'external',
-      to: 'https://bitzlato.com/knowledgebase',
-      children: language === 'ru' ? 'Поддержка' : 'Support',
+      to: '/quick-exchange',
+      children: t('Quick exchange'),
     },
   ];
 
-  const hamburgerLinks2: Links = [
+  const navLinksP2P: Links = [
     {
-      key: 'main',
-      type: 'internal',
-      icon: 'p2p',
-      to: '/',
-      children: 'P2P',
+      key: 'p2p',
+      type: 'tab',
+      children: t('p2p'),
+      tabs: [
+        {
+          key: 'Ad board',
+          type: 'internal',
+          to: `/${p2pURL}/sell-btc-rub`,
+          children: t('AD Board'),
+        },
+        {
+          key: 'My adverts',
+          type: 'internal',
+          to: `/${p2pURL}/adverts`,
+          children: t('My adverts'),
+        },
+        {
+          key: 'My trades',
+          type: 'internal',
+          to: `/${p2pURL}/trades`,
+          children: t('My trades'),
+        },
+      ],
     },
     {
-      key: 'market',
-      type: 'external',
-      icon: 'trading',
-      to: MARKET_URL,
-      children: language === 'ru' ? 'Биржа' : 'Exchange',
+      key: 'exchange',
+      type: 'tab',
+      children: t('Exchange'),
+      tabs: [
+        {
+          key: 'trading',
+          type: 'external',
+          to: `${marketURL}/trading`,
+          children: t('Trade'),
+        },
+        {
+          key: 'orders',
+          type: 'external',
+          to: `${marketURL}/orders`,
+          children: t('Orders'),
+        },
+        {
+          key: 'history',
+          type: 'external',
+          to: `${marketURL}/history`,
+          children: t('History'),
+        },
+      ],
     },
     {
-      key: 'knowledgebase',
+      key: 'quick-exchange',
       type: 'external',
-      icon: 'question',
-      to: 'https://bitzlato.com/knowledgebase',
-      children: language === 'ru' ? 'Поддержка' : 'Support',
+      to: `${marketURL}/quick-exchange`,
+      children: t('Quick exchange'),
     },
   ];
 
-  const userLinks: Links = [
+  const userLinks: UserLinks = [
     {
       key: 'wallets',
       type: 'internal',
@@ -327,7 +307,42 @@ const Main: FC = () => {
     },
   ];
 
+  const BOTTOM_TABS: BottomTabLink[] = [
+    {
+      to: '/',
+      type: 'internal',
+      exact: true,
+      title: t('bottomTabs.home'),
+      icon: 'home',
+    },
+    {
+      to: '/quick-exchange',
+      type: 'internal',
+      icon: 'exchange',
+      title: t('bottomTabs.exchange'),
+    },
+    {
+      to: '/trading',
+      type: 'internal',
+      icon: 'trading',
+      title: t('bottomTabs.trading'),
+    },
+    {
+      to: '/wallets',
+      type: 'internal',
+      icon: 'wallets',
+      title: t('bottomTabs.wallets'),
+    },
+    {
+      to: p2pURL,
+      type: 'external',
+      icon: 'p2p',
+      title: t('bottomTabs.p2p'),
+    },
+  ];
+
   const handleNotifyClick = () => console.log('Notify clicked');
+
   const notifications: Notify[] = [
     {
       id: '1',
@@ -437,10 +452,19 @@ const Main: FC = () => {
       onClick: handleNotifyClick,
     },
   ];
+
   const handleAllRead = () => console.log('all read');
 
   let userProps2;
   if (status === USER_STATUS_AUTHORIZED) {
+    const profileLink: UserLink = {
+      key: 'profile',
+      type: 'external',
+      to: '/profile',
+      icon: 'profile',
+      children: t('page.header.navbar.profile'),
+    };
+
     userProps2 = {
       ...userProps,
       user: {
@@ -448,6 +472,7 @@ const Main: FC = () => {
         userpic:
           'https://www.gravatar.com/avatar/3dfe4fa2f9b94c93ad5af34cd33011bc?s=640&d=identicon',
       },
+      profileLink,
       userLinks,
       notifications,
       handleAllRead,
@@ -465,8 +490,7 @@ const Main: FC = () => {
         theme={theme}
         language={language}
         languages={languages}
-        navLinks={navLinks}
-        hamburgerLinks={hamburgerLinks}
+        navLinks={navLinksMarket}
         t={t}
         renderNavLinkComponent={({ key, className, to, children, onClick }) => {
           return (
@@ -492,12 +516,10 @@ const Main: FC = () => {
         logoLightURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--blue--nav.svg"
         logoDarkURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--white--nav.svg"
         toMainPage="/"
-        toAdvertsPage="/adverts"
         theme={theme}
         language={language}
         languages={languages2}
-        navLinks={navLinks2}
-        hamburgerLinks={hamburgerLinks2}
+        navLinks={navLinksP2P}
         t={t}
         renderNavLinkComponent={({ key, className, to, children, onClick }) => {
           return (
@@ -516,7 +538,6 @@ const Main: FC = () => {
         {...userProps2}
         beta={false}
         hamburgerShowOnlyTablet
-        enableMobileMenu
         onThemeChange={handleThemeChange}
         onLanguageChange={handleLanguageChange}
       />
@@ -528,6 +549,19 @@ const Main: FC = () => {
         renderMarketLink={({ key, className, to, children }) => {
           return (
             <a key={key} className={className} href={to}>
+              {children}
+            </a>
+          );
+        }}
+      />
+
+      <Heading level={1}>Mobile Footer:</Heading>
+      <MobileFooter
+        theme={theme}
+        tabLinks={BOTTOM_TABS}
+        renderNavLinkComponent={({ key, className, to, children, onClick }) => {
+          return (
+            <a key={key} className={className} href={to} onClick={onClick}>
               {children}
             </a>
           );

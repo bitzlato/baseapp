@@ -7,9 +7,7 @@ import { useSelector } from 'react-redux';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { Stack } from 'web/src/components/ui/Stack';
 import { useT } from 'web/src/hooks/useT';
-import { useHistory } from 'react-router';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
-import { Subheader } from 'web/src/mobile/components/Subheader';
 import { useUpdateProfile } from 'web/src/hooks/mutations/useUpdateProfile';
 import { useSaveSettings } from 'web/src/hooks/mutations/useSaveSettings';
 import { NotificationSettingStatus } from 'web/src/modules/user/profile/types';
@@ -31,7 +29,6 @@ const notificationsSettings = [
 export const ProfileSettings: FC = () => {
   const t = useT();
   const isMobileDevice = useSelector(selectMobileDeviceState);
-  const history = useHistory();
   const user = useSelector(selectUserInfo);
   const updateProfile = useUpdateProfile();
   const saveSettings = useSaveSettings();
@@ -180,14 +177,7 @@ export const ProfileSettings: FC = () => {
   );
 
   return isMobileDevice ? (
-    <Box my="1x">
-      <Subheader
-        title={t('Settings')}
-        backTitle={t('page.body.profile.header.account')}
-        onGoBack={() => history.push('/profile')}
-      />
-      {body}
-    </Box>
+    <Box my="1x">{body}</Box>
   ) : (
     <Container maxWidth="xl" my="4">
       {body}

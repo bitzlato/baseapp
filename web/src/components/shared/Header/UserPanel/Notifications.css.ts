@@ -1,21 +1,26 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from 'web/src/theme/vars.css';
+import { sprinkles } from 'web/src/theme/sprinkles.css';
 
-export const unread = style({
-  position: 'relative',
-  selectors: {
-    '&::after': {
-      content: '',
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      backgroundColor: vars.colors.alert,
-      width: 8,
-      height: 8,
-      borderRadius: '50%',
-    },
+export const unread = style([
+  sprinkles({
+    px: '2x',
+    py: '1x',
+    fontWeight: 'strong',
+    fontSize: 'small',
+    backgroundColor: 'danger',
+    color: 'tooltipText',
+  }),
+  {
+    position: 'absolute',
+    top: '-12px',
+    right: '24px',
+    height: '24px',
+    lineHeight: 1.2,
+    borderRadius: '22px',
+    transform: 'translateX(100%)',
+    zIndex: 10000,
   },
-});
+]);
 
 export const items = style({
   overflowY: 'auto',

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { CellData, Table } from 'src/components';
@@ -11,7 +10,6 @@ import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { Box } from 'src/components/Box';
 import { Card } from 'src/components/Card/Card';
 import { TradingFees } from 'src/containers/Fees/TradingFees';
-import { Subheader } from 'src/mobile/components/Subheader';
 import { TradingFee } from 'src/modules/public/tradingFees/types';
 import { setDocumentTitle } from '../../helpers';
 import s from './Fees.postcss';
@@ -27,7 +25,6 @@ export const FeesScreen: React.FC = () => {
   const isMobile = useSelector(selectMobileDeviceState);
 
   const isDesktop = !isMobile ? true : undefined;
-  const history = useHistory();
 
   useEffect(() => {
     setDocumentTitle(t('page.body.landing.footer.fees'));
@@ -85,11 +82,6 @@ export const FeesScreen: React.FC = () => {
   if (isMobile) {
     return (
       <Box col spacing="sm">
-        <Subheader
-          title={t('page.mobile.profileLinks.history.fees')}
-          backTitle={t('page.body.profile.header.account')}
-          onGoBack={() => history.push('/profile')}
-        />
         <Box bgColor="body" padding="2X3">
           <TradingFees tradingFees={data} />
         </Box>

@@ -1,7 +1,6 @@
 import { useHistory, useParams } from 'react-router';
 import { Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { Subheader } from 'src/mobile/components';
 import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
 import { useGeneralWallets } from 'src/hooks/useGeneralWallets';
@@ -53,11 +52,6 @@ export const WalletMobileScreen: React.FC = () => {
 
   return (
     <Box col spacing="sm">
-      <Subheader
-        title={t('page.body.wallets.balance')}
-        backTitle={t('page.mobile.wallets.title')}
-        onGoBack={() => history.push('/wallets')}
-      />
       <WalletMobileBalance wallet={general} />
       <Box bgColor="body" padding="2X3" col spacing="2">
         <Tabs value={tab} onSelectionChange={handleTabSelection as any}>

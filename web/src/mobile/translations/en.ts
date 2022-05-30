@@ -1,10 +1,10 @@
 export const en = {
   'page.mobile.header.signIn': 'Log In',
-  'page.mobile.footer.home': 'Home',
-  'page.mobile.footer.quick': 'Quick Exchange',
-  'page.mobile.footer.trading': 'Trade',
-  'page.mobile.footer.wallets': 'Wallets',
-  'page.mobile.footer.profile': 'Profile',
+  'bottomTabs.home': 'Home',
+  'bottomTabs.exchange': 'Exchange',
+  'bottomTabs.trading': 'Trade',
+  'bottomTabs.balances': 'Balances',
+  'bottomTabs.p2p': 'P2P',
 
   'page.mobile.tradingTabs.label.createOrder': 'Create Order',
   'page.mobile.tradingTabs.label.charts': 'Charts',

@@ -12,8 +12,8 @@ import TwitterIcon from 'web/src/assets/svg/TwitterIcon.svg';
 import YoutubeIcon from 'web/src/assets/svg/YoutubeIcon.svg';
 import { Language, Theme } from 'web/src/types';
 import { getBitzlatoLink } from 'web/src/helpers/links';
-import * as s from './Footer.css';
 import { FooterMenu } from './FooterMenu';
+import * as s from './Footer.css';
 
 type Product = 'p2p' | 'payment-gateway' | 'cryptoloan' | 'exchange';
 export const getProductLink = (locale: string, product: Product) => {
@@ -26,13 +26,13 @@ export const getProductLink = (locale: string, product: Product) => {
   }
 };
 
-interface Props {
+export interface SharedFooterProps {
   theme: Theme;
   language: Language;
   renderMarketLink: RenderLinkComponent;
 }
 
-export const Footer: FC<Props> = ({ theme, language, renderMarketLink }) => {
+export const Footer: FC<SharedFooterProps> = ({ theme, language, renderMarketLink }) => {
   const [active, setActive] = useState<string | undefined>();
   const themeClassName = theme === 'light' ? themeLight : themeDark;
   const t = createT(language);

@@ -5,7 +5,7 @@ export const breakpoints = {
   tablet: 768,
   desktop: 992,
   desktopXL: 1200,
-  // desktopXXL: 1400,
+  desktopXXL: 1400,
   desktopXXXL: 1600,
 };
 type Breakpoints = keyof typeof breakpoints;
@@ -24,7 +24,7 @@ interface ResponsiveStyle {
   tablet?: CSSProperties;
   desktop?: CSSProperties;
   desktopXL?: CSSProperties;
-  // desktopXXL?: CSSProperties;
+  desktopXXL?: CSSProperties;
   desktopXXXL?: CSSProperties;
 }
 

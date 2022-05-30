@@ -16,7 +16,7 @@ export const Logo: FC = () => {
   } = useContext(HeaderContext);
 
   return (
-    <Box position="relative" mr="3x">
+    <Box position="relative">
       <a href={toMainPage}>
         <img className={s.logo} alt="Logo" src={theme === 'dark' ? logoDarkURL : logoLightURL} />
         {beta && <Beta className={cn(s.beta, s.svg)} />}

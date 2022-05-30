@@ -29,11 +29,6 @@ if (gaKey) {
 
 const Header = lazyRetry(() => import('./components/Header/Header'));
 
-/* Mobile components */
-const MobileFooter = lazyRetry(() =>
-  import('./mobile/components/Footer').then(({ Footer }) => ({ default: Footer })),
-);
-
 /* Desktop components */
 const AlertsContainer = lazyRetry(() =>
   import('./containers/Alerts').then(({ Alerts }) => ({ default: Alerts })),
@@ -77,7 +72,7 @@ const RenderDeviceContainers = () => {
       <Header />
       <AlertsContainer />
       <LayoutContainer />
-      <MobileFooter />
+      <FooterContainer />
     </div>
   );
 };

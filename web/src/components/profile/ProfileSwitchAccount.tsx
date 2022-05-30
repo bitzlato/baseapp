@@ -78,9 +78,6 @@ export const ProfileSwitchAccount: FC<Props> = ({ authSubjects, currentSubject }
         flexDirection="column"
         bg="statBg"
         borderRadius="2x"
-        borderWidth="1x"
-        borderStyle="solid"
-        borderColor="dropdownBorder"
         fontSize="medium"
         boxShadow="dropdown"
       >

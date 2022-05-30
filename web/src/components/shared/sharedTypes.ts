@@ -5,18 +5,8 @@ import {
   USER_STATUS_NOT_AUTHORIZED,
 } from './sharedConstants';
 
-export type IconName =
-  | 'profile'
-  | 'signup'
-  | 'quickExchange'
-  | 'trading'
-  | 'wallets'
-  | 'orders'
-  | 'history'
-  | 'p2p'
-  | 'api'
-  | 'logout'
-  | 'question';
+export type IconName = 'profile' | 'logout' | 'telegram' | 'invoices';
+
 export type User = {
   userpic?: string | undefined;
   username?: string | undefined;
@@ -29,7 +19,7 @@ export type RenderLinkComponent = (props: {
   title?: string | undefined;
   children: ReactNode;
   onClick?: (() => void) | undefined;
-}) => ReactNode;
+}) => JSX.Element;
 
 export type RenderNavLinkComponent = (props: {
   key?: string | undefined;
@@ -37,22 +27,39 @@ export type RenderNavLinkComponent = (props: {
   activeClassName: string;
   to: string;
   children: ReactNode;
+  exact?: boolean;
   onClick?: (() => void) | undefined;
-}) => ReactNode;
+}) => JSX.Element;
 
 export type LinkType = 'internal' | 'external';
-export type Link = {
+export type CommonLink = {
   key: string;
-  icon?: IconName | undefined;
   children: string;
-} & (
-  | {
-      type: LinkType;
-      to: string;
-    }
-  | { onClick: () => void }
-);
+};
+export type LinkNav = CommonLink & {
+  type: LinkType;
+  to: string;
+};
+export type LinkTabs = CommonLink & {
+  type: 'tab';
+  tabs: LinkNav[];
+};
+export type Link = LinkNav | LinkTabs;
 export type Links = Link[];
+
+export type UserLink = LinkNav & {
+  icon?: IconName | undefined;
+};
+export type UserLinks = UserLink[];
+
+export type BottomTabIconName = 'home' | 'exchange' | 'trading' | 'wallets' | 'p2p';
+export type BottomTabLink = {
+  to: string;
+  type: 'internal' | 'external';
+  exact?: boolean;
+  title: string;
+  icon: BottomTabIconName;
+};
 
 export type TranslateFn = (key: string) => string;
 
@@ -77,7 +84,8 @@ export type UserContext =
   | {
       status: typeof USER_STATUS_AUTHORIZED;
       user?: User | undefined;
-      userLinks?: Links | undefined;
+      profileLink?: UserLink | undefined;
+      userLinks?: UserLinks | undefined;
       notifications?: Notify[] | undefined;
       onAllRead?: (() => void) | undefined;
       onLogoutClick: () => void;

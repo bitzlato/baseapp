@@ -14,8 +14,8 @@ export const item = style([
     display: 'flex',
     alignItems: 'center',
     h: '14x',
-    px: '5x',
-    borderBottomWidth: '2x',
+    px: '3x',
+    borderBottomWidth: '1x',
     borderBottomStyle: 'solid',
     borderBottomColor: 'dropdownItemBorderBottom',
     textDecoration: {
@@ -29,6 +29,8 @@ export const item = style([
     position: 'relative',
     width: 'full',
     flexShrink: 0,
+    fontSize: 'medium',
+    fontWeight: 'strong',
   }),
   {
     selectors: {
@@ -42,22 +44,8 @@ export const item = style([
 export const itemActive = style([
   resetStyles.base,
   sprinkles({
-    color: 'dropdownItemActiveText',
-    bg: 'dropdownItemHover',
+    color: { default: 'dropdownItemActiveText', hover: 'dropdownItemHoverText' },
   }),
-  {
-    selectors: {
-      '&::before': {
-        backgroundColor: vars.colors.dropdownItemActiveBefore,
-        content: '',
-        height: '100%',
-        left: 0,
-        position: 'absolute',
-        top: 0,
-        width: 3,
-      },
-    },
-  },
 ]);
 
 export const icon = style([

@@ -11,11 +11,18 @@ export const fontSizeVars = createGlobalTheme(':root', {
   lead30: '30px' as const,
 });
 
+export const headerFontSizes = createGlobalTheme(':root', {
+  tabTitle: '17px' as const,
+  tab: '16px' as const,
+});
+
 export const zIndexVars = createGlobalTheme(':root', {
   drawer: '10000',
   modal: '10001',
   modalInner: '10002',
   tooltip: '10010',
+  bottomTabs: '10000',
+  dropdown: '99990',
 });
 
 export const sizeVars = createGlobalTheme(':root', {
@@ -39,10 +46,10 @@ export const sizeVars = createGlobalTheme(':root', {
   '13x': '52px' as const,
   '14x': '56px' as const,
   '15x': '60px' as const,
-  // '16x': '64px' as const,
+  '16x': '64px' as const,
   // '17x': '68px' as const,
   '18x': '72px' as const,
-  // '19x': '76px' as const,
+  '19x': '76px' as const,
   '20x': '80px' as const,
   '25x': '100px' as const,
 });
@@ -89,16 +96,15 @@ export const [themeLight, vars] = createTheme({
     drawerItemDivider: colors.white,
 
     dropdown: colors.white,
-    dropdownBorder: colors.selago,
     dropdownItem: colors.transparent,
-    dropdownItemHover: colors.hawkesBlue,
-    dropdownItemBorderBottom: colors.whiteLilac,
+    dropdownItemHover: colors.whiteLilac,
+    dropdownItemBorderBottom: colors.ebonyClay15,
     dropdownItemActiveBefore: colors.cornflowerBlue,
-    dropdownItemText: colors.silverChalice,
+    dropdownItemText: colors.ebonyClay,
     dropdownItemHoverText: colors.black,
-    dropdownItemActiveText: colors.black,
-    dropdownItemIcon: colors.cornflowerBlue,
-    dropdownItemHoverIcon: colors.indigo,
+    dropdownItemActiveText: colors.indigo,
+    dropdownItemIcon: colors.ebonyClay,
+    dropdownItemHoverIcon: colors.ebonyClay,
     dropdownItemActiveIcon: colors.indigo,
 
     btnPrimaryBg: colors.goldTips,
@@ -246,6 +252,27 @@ export const [themeLight, vars] = createTheme({
     addressDropdownDelimeter: colors.ebonyClay15,
     addressHintIcon: colors.ebonyClay30,
     addressHintText: colors.whiteLilac,
+
+    headerBg: colors.whiteLilac,
+    headerBorderBottom: colors.black10,
+    headerIcon: colors.ebonyClay70,
+    headerIconHover: colors.ebonyClay,
+    headerLinkText: colors.ebonyClay70,
+    headerLinkTextHover: colors.ebonyClay,
+    headerLinkTextActive: colors.indigo,
+    headerSubmenuBg: colors.white,
+    headerSubmenuHoverText: colors.indigo,
+    headerSubmenuActiveBorder: colors.indigo,
+    headerLanguageSwitcherBorder: colors.ebonyClay15,
+    headerLanguageSwitcherHoverBorder: colors.ebonyClay30,
+    headerLanguageSwitcherHoverBg: colors.ebonyClay15,
+
+    bottomTabsBg: colors.white,
+    bottomTabsTopBorder: colors.black10,
+    bottomTabsIcon: colors.indigo,
+    bottomTabsIconActive: colors.goldTips,
+    bottomTabsText: colors.ebonyClay70,
+    bottomTabsTextActive: colors.goldTips,
   },
 });
 
@@ -278,16 +305,15 @@ export const themeDark = createTheme(vars, {
     drawerItemHover: colors.mako,
     drawerItemDivider: colors.white10,
 
-    dropdown: colors.ebonyClay,
-    dropdownBorder: colors.transparent,
+    dropdown: colors.milanoRed,
     dropdownItem: colors.transparent,
-    dropdownItemHover: colors.mako,
+    dropdownItemHover: colors.white10,
     dropdownItemBorderBottom: colors.bunker,
     dropdownItemActiveBefore: colors.indigo,
-    dropdownItemText: colors.silverChalice,
+    dropdownItemText: colors.white,
     dropdownItemHoverText: colors.white,
-    dropdownItemActiveText: colors.spindle,
-    dropdownItemIcon: colors.doveGray,
+    dropdownItemActiveText: colors.goldTips,
+    dropdownItemIcon: colors.white,
     dropdownItemHoverIcon: colors.white,
     dropdownItemActiveIcon: colors.spindle,
 
@@ -436,5 +462,26 @@ export const themeDark = createTheme(vars, {
     addressDropdownDelimeter: colors.white10,
     addressHintIcon: colors.white50,
     addressHintText: colors.whiteLilac,
+
+    headerBg: colors.bunker,
+    headerBorderBottom: colors.transparent,
+    headerIcon: colors.white50,
+    headerIconHover: colors.white,
+    headerLinkText: colors.white70,
+    headerLinkTextHover: colors.white,
+    headerLinkTextActive: colors.goldTips,
+    headerSubmenuBg: colors.ebonyClay,
+    headerSubmenuHoverText: colors.goldTips,
+    headerSubmenuActiveBorder: colors.goldTips,
+    headerLanguageSwitcherBorder: colors.white30,
+    headerLanguageSwitcherHoverBorder: colors.white60,
+    headerLanguageSwitcherHoverBg: colors.white30,
+
+    bottomTabsBg: colors.ebonyClay,
+    bottomTabsTopBorder: colors.ebonyClay,
+    bottomTabsIcon: colors.white50,
+    bottomTabsIconActive: colors.goldTips,
+    bottomTabsText: colors.white50,
+    bottomTabsTextActive: colors.goldTips,
   },
 });

@@ -1,30 +1,32 @@
 import { style } from '@vanilla-extract/css';
+import { sprinkles } from 'web/src/theme/sprinkles.css';
 
-export const language = style({
-  cursor: 'pointer',
-  fontWeight: '600',
-  textTransform: 'capitalize',
-  userSelect: 'none',
-
-  selectors: {
-    '&::after': {
-      borderBottom: '0',
-      borderLeft: '.3em solid transparent',
-      borderRight: '.3em solid transparent',
-      borderTop: '.3em solid',
-      content: '',
-      display: 'inline-block',
-      marginLeft: '.255em',
-      verticalAlign: '.255em',
-      transition: 'transform 0.3s ease',
+export const language = style([
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    w: '11x',
+    h: '6x',
+    borderWidth: '1x',
+    borderColor: {
+      default: 'headerLanguageSwitcherBorder',
+      hover: 'headerLanguageSwitcherHoverBorder',
     },
-  },
-});
-
-export const languageOpened = style({
-  selectors: {
-    '&::after': {
-      transform: 'rotate(-180deg)',
+    backgroundColor: {
+      default: 'transparent',
+      hover: 'headerLanguageSwitcherHoverBg',
     },
+    borderStyle: 'solid',
+    borderRadius: '1.5x',
+    fontSize: 'small',
+    fontWeight: 'strong',
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    cursor: 'pointer',
+    color: 'text',
+  }),
+  {
+    userSelect: 'none',
   },
-});
+]);

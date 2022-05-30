@@ -38,6 +38,7 @@ export const trackBase = style({
   transitionProperty: 'border-color',
   transitionDuration: transitionDurationVars.base,
   border: `1px solid ${vars.colors.switcherTrack}`,
+  boxSizing: 'border-box',
   selectors: {
     [`${input}:focus + &`]: {
       boxShadow: `0px 0px 0px 2px ${vars.colors.switcherTrackShadow}`,

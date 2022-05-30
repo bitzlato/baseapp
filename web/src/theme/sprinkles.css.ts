@@ -36,7 +36,7 @@ const responsiveProperties = defineProperties({
     tablet: { '@media': queries.tablet },
     desktop: { '@media': queries.desktop },
     desktopXL: { '@media': queries.desktopXL },
-    // desktopXXL: { '@media': queries.desktopXXL },
+    desktopXXL: { '@media': queries.desktopXXL },
     desktopXXXL: { '@media': queries.desktopXXXL },
   },
   defaultCondition: 'mobile',
@@ -64,6 +64,12 @@ const responsiveProperties = defineProperties({
     width: sizeVars,
     height: sizeVars,
     fontSize: fontSizeVars,
+
+    borderWidth: borderWidths,
+    borderTopWidth: borderWidths,
+    borderRightWidth: borderWidths,
+    borderBottomWidth: borderWidths,
+    borderLeftWidth: borderWidths,
   },
   shorthands: {
     p: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
@@ -119,20 +125,15 @@ const unresponsiveProperties = defineProperties({
 
     // border
     border: ['none'],
-    borderWidth: borderWidths,
     borderStyle: ['solid'],
-    borderTopWidth: borderWidths,
     borderTopStyle: ['solid'],
-    borderRightWidth: borderWidths,
     borderRightStyle: ['solid'],
-    borderBottomWidth: borderWidths,
     borderBottomStyle: ['solid'],
-    borderLeftWidth: borderWidths,
     borderLeftStyle: ['solid'],
     borderRadius: radiiVars,
 
     // layout
-    position: ['absolute', 'relative'],
+    position: ['absolute', 'relative', 'fixed'],
     top: [0],
     right: [0],
     bottom: [0],

@@ -7,15 +7,15 @@ export const en = {
   'page.header.navbar.signIn': 'Sign In',
   'page.header.navbar.quick-exchange': 'Quick Exchange',
   'page.header.navbar.trade': 'Trade',
-  'page.header.navbar.wallets': 'Wallets',
+  'page.header.navbar.balances': 'Balances',
   'page.header.navbar.openOrders': 'Orders',
   'page.header.navbar.history': 'History',
   'page.header.navbar.api': 'API Documentation',
   'page.header.navbar.internal.transfer': 'Internal transfer',
   'page.header.navbar.toP2P': 'P2P Trading',
 
-  'page.header.navbar.profile': 'Profile',
-  'page.header.navbar.logout': 'Logout',
+  'page.header.navbar.profile': 'My profile',
+  'page.header.navbar.logout': 'Logout of your account',
 
   'notifications.title': 'Notifications',
   'notifications.readall': 'Read all',
@@ -1393,7 +1393,7 @@ export const en = {
   Change: 'Change',
   Rename: 'Rename',
   Reports: 'Reports',
-  'AD Board': 'AD Board',
+  'AD Board': 'Market',
   'My adverts': 'My adverts',
   'My trades': 'My trades',
   'Active users': 'Active users',
@@ -1596,4 +1596,9 @@ export const en = {
     'If you did not receive the email, check your spam folder or request to resend email',
   'Resend email': 'Resend email',
   'The email has been sent': 'The email has been sent',
+
+  DarkTheme: 'Dark theme',
+  Back: 'Back',
+  Telegram: 'Telegram',
+  Invoices: 'Invoices',
 };
