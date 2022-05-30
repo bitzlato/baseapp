@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from 'web/src/theme/vars.css';
+import { vars, zIndexVars } from 'web/src/theme/vars.css';
 
 export const dataBlock = style({
   selectors: {
@@ -10,6 +10,7 @@ export const dataBlock = style({
       height: '200px',
       bottom: 0,
       backgroundImage: `linear-gradient(rgba(0,0,0,0), ${vars.colors.dropdown})`,
+      zIndex: zIndexVars.shadeRows,
     },
   },
 });

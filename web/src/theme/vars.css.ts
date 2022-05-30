@@ -23,6 +23,7 @@ export const zIndexVars = createGlobalTheme(':root', {
   tooltip: '10010',
   bottomTabs: '10000',
   dropdown: '99990',
+  shadeRows: '9990',
 });
 
 export const sizeVars = createGlobalTheme(':root', {
