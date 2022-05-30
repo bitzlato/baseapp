@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { fetchJson } from 'web/src/helpers/fetch';
 import { userRefetch } from 'web/src/modules/user/profile/actions';
 
@@ -28,12 +28,13 @@ const saveSettings = async (params: {
 
 export const useSaveSettings = () => {
   const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
   const [mutate] = useMutation(saveSettings, {
     onSuccess: () => {
       dispatch(userRefetch());
     },
     onFailure: ({ error }) => {
-      alertFetchError(dispatch, error);
+      handleFetchError(error);
     },
   });
 

@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 import { Money } from '@bitzlato/money-js';
-import { useDispatch } from 'react-redux';
 import { Advert, AdvertSingleSource } from 'web/src/modules/p2p/types';
 import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
@@ -24,7 +23,6 @@ import {
 import { useAppContext, useIsMobileDevice } from 'web/src/components/app/AppContext';
 import { p2pUrl } from 'web/src/api/config';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { OnlineStatusByLastActivity } from './OnlineStatus';
 import { ConfirmRateChangeModal } from './ConfirmRateChangeModal';
 
@@ -39,10 +37,9 @@ interface AdExchangeConfirm {
 
 const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
   const { t, history } = useAdapterContext();
-  const { isMobileDevice, lang } = useAppContext();
+  const { isMobileDevice, lang, handleFetchError } = useAppContext();
   const [active, setActive] = useState(false);
   const [confirm, setConfirm] = useState<AdExchangeConfirm | undefined>(undefined);
-  const dispatch = useDispatch();
 
   const isBuy = ad.type === 'selling';
   const to =
@@ -75,7 +72,7 @@ const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
       setActive(false);
 
       if (error instanceof FetchError) {
-        alertFetchError(dispatch, error);
+        handleFetchError(error);
         return;
       }
 

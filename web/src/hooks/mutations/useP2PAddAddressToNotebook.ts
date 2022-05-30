@@ -2,10 +2,10 @@ import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { alertPush } from 'web/src/modules/public/alert/actions';
 import { FetchError, fetchJson } from 'web/src/helpers/fetch';
 import { buildQueryString } from 'web/src/helpers';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 
 type Input = {
   cryptocurrency: string;
@@ -27,6 +27,7 @@ const P2PAddAddressToNotebook = async (params: Input) => {
 export const useP2PAddAddressToNotebook = ({ cryptocurrency }: { cryptocurrency: string }) => {
   const { mutate } = useSWRConfig();
   const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
 
   return useMutation(P2PAddAddressToNotebook, {
     onSuccess: () => {
@@ -35,7 +36,7 @@ export const useP2PAddAddressToNotebook = ({ cryptocurrency }: { cryptocurrency:
     },
     onFailure: ({ error }) => {
       if (error instanceof FetchError) {
-        alertFetchError(dispatch, error);
+        handleFetchError(error);
       }
     },
   });

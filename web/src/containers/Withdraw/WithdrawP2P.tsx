@@ -17,12 +17,12 @@ import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorM
 import { ProposalToEnableOTP } from 'web/src/components/profile/ProposalToEnableOTP';
 import { SafeModeWizardModal } from 'web/src/components/profile/settings/SafeModeWizardModal';
 import { alertPush } from 'web/src/modules';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { WithdrawP2PFormValues } from 'web/src/containers/Withdraw/types';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { useFetchP2PTransactions } from 'web/src/hooks/data/useFetchP2PTransactions';
 import { P2PTransaction } from 'web/src/modules/p2p/types';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 
 interface Props {
   currencyCode: string;
@@ -35,6 +35,7 @@ const defaultValue: WithdrawP2PFormValues = {
 };
 
 export const WithdrawP2P: FC<Props> = ({ currencyCode }) => {
+  const handleFetchError = useHandleFetchError();
   const t = useT();
   const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
@@ -104,7 +105,7 @@ export const WithdrawP2P: FC<Props> = ({ currencyCode }) => {
           setShow2fa(true);
 
           if (error.payload.message !== '2FA Token Required') {
-            alertFetchError(dispatch, error);
+            handleFetchError(error);
           }
         } else if (error.code === 471 && error.payload.code === 'SafetyWizardRequired') {
           setShowSafeModeWizard(true);
@@ -113,7 +114,7 @@ export const WithdrawP2P: FC<Props> = ({ currencyCode }) => {
         } else if (error.code === 403 && error.payload.code === 'Forbidden') {
           setShowWithdrawDisabled(true);
         } else {
-          alertFetchError(dispatch, error);
+          handleFetchError(error);
         }
       }
     }

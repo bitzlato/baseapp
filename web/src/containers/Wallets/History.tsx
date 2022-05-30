@@ -26,10 +26,9 @@ import { useFetchHistory } from 'web/src/hooks/data/useFetchHistory';
 import { Pagination } from 'web/src/components/Pagination/Pagination';
 import { TextInput } from 'web/src/components/Input/TextInput';
 import { P2PTransaction } from 'web/src/modules/p2p/types';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
 import { WalletType } from 'web/src/modules/account/types';
-
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import s from './TransferHistory.postcss';
 
 const LIMIT = 6;
@@ -83,6 +82,7 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
 };
 
 const P2PHistory: FC<Props> = ({ type, general }) => {
+  const handleFetchError = useHandleFetchError();
   const ccy = general.balanceTotal.currency;
 
   const [page, setPage] = useState(0);
@@ -121,7 +121,7 @@ const P2PHistory: FC<Props> = ({ type, general }) => {
         historyResp.mutate();
         dispatch(alertPush({ message: ['Successfully changed'], type: 'success' }));
       } catch (error) {
-        alertFetchError(dispatch, error);
+        handleFetchError(error);
       }
     }
     setTrx(null);

@@ -7,6 +7,7 @@ interface AppContextValue {
   lang: Language;
   user?: User;
   isMobileDevice: boolean;
+  handleFetchError: (error: unknown) => void;
 }
 
 export const AppContext = createContext(null as any as AppContextValue);
@@ -20,3 +21,5 @@ export const useLanguage = () => useAppContext().lang;
 export const useUser = () => useAppContext().user;
 
 export const useIsMobileDevice = () => useAppContext().isMobileDevice;
+
+export const useHandleFetchError = () => useAppContext().handleFetchError;

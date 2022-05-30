@@ -1,7 +1,6 @@
-import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import { p2pUrl } from 'web/src/api/config';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { CurrencyRate, RateSourcesParams } from 'web/src/modules/p2p/types';
@@ -32,7 +31,8 @@ export const useFetchRateSources = (cryptoCurrency: string, fiatCurrency: string
 
 export const useChangeRate = () => {
   const { mutate } = useSWRConfig();
-  const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
+
   return async (params: RateSourcesParams): Promise<void> => {
     try {
       await fetchWithCreds(`${p2pUrl()}/profile/rate-sources/`, {
@@ -46,7 +46,7 @@ export const useChangeRate = () => {
         })}`,
       );
     } catch (error) {
-      alertFetchError(dispatch, error);
+      handleFetchError(error);
     }
   };
 };

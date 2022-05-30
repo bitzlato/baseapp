@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useMutation, { Options } from 'use-mutation';
 import { p2pAuthUrl } from 'web/src/api/config';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { FetchError, fetchJson } from 'web/src/helpers/fetch';
 
 const P2PDeleteApiKey = async (kid: number) => {
@@ -19,7 +18,7 @@ const P2PDeleteApiKey = async (kid: number) => {
 
 export const useP2PDeleteApiKey = (options: Options<number, any, any> = {}) => {
   const { mutate } = useSWRConfig();
-  const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
 
   return useMutation(P2PDeleteApiKey, {
     ...options,
@@ -31,7 +30,7 @@ export const useP2PDeleteApiKey = (options: Options<number, any, any> = {}) => {
     onFailure: (params) => {
       const { error } = params;
       if (error instanceof FetchError) {
-        alertFetchError(dispatch, error);
+        handleFetchError(error);
       }
 
       options.onFailure?.(params);

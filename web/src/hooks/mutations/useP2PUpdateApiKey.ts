@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useMutation, { Options } from 'use-mutation';
 import { p2pAuthUrl } from 'web/src/api/config';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { FetchError, fetchJson } from 'web/src/helpers/fetch';
 import { P2PApiKey } from 'web/src/modules/user/apiKeys/types';
 
@@ -27,7 +26,7 @@ const P2PUpdateApiKey = async ({ params, twoFACode }: Input) => {
 
 export const useP2PUpdateApiKey = (options: Options<Input, any, any> = {}) => {
   const { mutate } = useSWRConfig();
-  const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
 
   return useMutation(P2PUpdateApiKey, {
     ...options,
@@ -39,7 +38,7 @@ export const useP2PUpdateApiKey = (options: Options<Input, any, any> = {}) => {
     onFailure: (params) => {
       const { error } = params;
       if (error instanceof FetchError) {
-        alertFetchError(dispatch, error);
+        handleFetchError(error);
       }
 
       options.onFailure?.(params);

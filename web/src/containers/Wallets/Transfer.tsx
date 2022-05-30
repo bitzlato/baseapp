@@ -23,7 +23,7 @@ import { TransferHistory } from './TransferHistory';
 import { getCurrencySymbol } from 'web/src/helpers/getCurrencySymbol';
 import { useSWRConfig } from 'swr';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 
 interface Props {
   currency: Currency;
@@ -32,6 +32,7 @@ interface Props {
 }
 
 export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P }) => {
+  const handleFetchError = useHandleFetchError();
   const [from, setFrom] = useState<WalletType | undefined>();
   const [to, setTo] = useState<WalletType | undefined>();
   const [amount, setAmount] = useState('');
@@ -96,7 +97,7 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
 
         dispatch(alertPush({ message: ['Transfer was successfully created'], type: 'success' }));
       } catch (e) {
-        alertFetchError(dispatch, e);
+        handleFetchError(e);
       }
     }
   };

@@ -1,7 +1,6 @@
-import { useDispatch } from 'react-redux';
 import useMutation from 'use-mutation';
 import { authUrl } from 'web/src/api/config';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { fetchJson } from 'web/src/helpers/fetch';
 
 const changeAuthSubject = async (authSubject: string) => {
@@ -18,13 +17,13 @@ const changeAuthSubject = async (authSubject: string) => {
 };
 
 export const useChangeAuthSubject = () => {
-  const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
   const [mutate] = useMutation(changeAuthSubject, {
     onSuccess: () => {
       window.location.reload();
     },
     onFailure: ({ error }) => {
-      alertFetchError(dispatch, error);
+      handleFetchError(error);
     },
   });
 
