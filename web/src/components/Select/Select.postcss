@@ -30,7 +30,12 @@
     border: 1px solid var(--dropdown-item-border-color);
     box-shadow: 3px 3px 10px 3px var(--shadow-color-level-1) !important;
     margin-top: 0 !important;
-    z-index: 10000 !important;
+    z-index: var(--z-index-dropdown) !important;
+  }
+
+  &__menu-portal {
+    /* should be greater or equivalent to zIndexVars.modal */
+    z-index: calc(var(--z-index-dropdown) + 1) !important;
   }
 
   &__option {
