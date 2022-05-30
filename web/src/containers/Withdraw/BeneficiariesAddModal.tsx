@@ -123,6 +123,7 @@ const BeneficiariesAddModalComponent: FC<Props> = ({
           placeholder={t('Network')}
           formatOptionLabel={renderSelectItem}
           getOptionValue={getOptionValue}
+          menuPortalTarget={document.body}
           autoFocus
         />
 
