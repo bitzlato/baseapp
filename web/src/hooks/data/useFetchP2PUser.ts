@@ -1,8 +1,6 @@
-import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import { p2pUrl } from 'web/src/api/config';
-import { useUser } from 'web/src/components/app/AppContext';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
+import { useHandleFetchError, useUser } from 'web/src/components/app/AppContext';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { TrustParams, UserInfo } from 'web/src/modules/p2p/user.types';
 import { useFetch } from './useFetch';
@@ -17,7 +15,8 @@ export const useFetchUser = (name: string | undefined) => {
 
 export const useChangeTrust = () => {
   const { mutate } = useSWRConfig();
-  const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
+
   return async (name: string, params: TrustParams): Promise<void> => {
     try {
       await fetchWithCreds(`${p2pUrl()}/userinfo/${name}/trust`, {
@@ -27,7 +26,7 @@ export const useChangeTrust = () => {
       });
       mutate(`${p2pUrl()}/userinfo/${name}`);
     } catch (error) {
-      alertFetchError(dispatch, error);
+      handleFetchError(error);
     }
   };
 };

@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
+  alertFetchError,
   selectCurrentColorTheme,
   selectCurrentLanguage,
   selectMobileDeviceState,
@@ -13,9 +14,16 @@ export const AppContextProvider: FC = ({ children }) => {
   const lang = useSelector(selectCurrentLanguage);
   const user = useSelector(selectUserInfo);
   const isMobileDevice = useSelector(selectMobileDeviceState);
+  const dispatch = useDispatch();
   const value = useMemo(
-    () => ({ theme, lang, user, isMobileDevice }),
-    [theme, lang, user, isMobileDevice],
+    () => ({
+      theme,
+      lang,
+      user,
+      isMobileDevice,
+      handleFetchError: (error: unknown) => dispatch(alertFetchError(error)),
+    }),
+    [theme, lang, user, isMobileDevice, dispatch],
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useMutation, { Options } from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { fetchJson, FetchError } from 'web/src/helpers/fetch';
 
 const markNotificationAsRead = async (notificationId: number) => {
@@ -18,7 +17,7 @@ const markNotificationAsRead = async (notificationId: number) => {
 };
 
 export const useMarkNotificationAsRead = (options: Options<number, any, any> = {}) => {
-  const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
   const { mutate } = useSWRConfig();
 
   return useMutation(markNotificationAsRead, {
@@ -29,7 +28,7 @@ export const useMarkNotificationAsRead = (options: Options<number, any, any> = {
     onFailure: (params) => {
       const { error } = params;
       if (error instanceof FetchError) {
-        alertFetchError(dispatch, error);
+        handleFetchError(error);
       }
 
       options.onFailure?.(params);

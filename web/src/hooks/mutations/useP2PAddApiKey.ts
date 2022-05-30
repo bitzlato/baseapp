@@ -1,7 +1,6 @@
-import { useDispatch } from 'react-redux';
 import useMutation from 'use-mutation';
 import { p2pAuthUrl } from 'web/src/api/config';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { FetchError, fetchJson } from 'web/src/helpers/fetch';
 
 export type ApiKeysParams = {
@@ -40,13 +39,13 @@ const P2PAddApiKey = async ({ params, twoFACode }: Input) => {
 };
 
 export const useP2PAddApiKey = () => {
-  const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
 
   return useMutation<Input, Data>(P2PAddApiKey, {
     throwOnFailure: true,
     onFailure: ({ error }) => {
       if (error instanceof FetchError) {
-        alertFetchError(dispatch, error);
+        handleFetchError(error);
       }
     },
   });

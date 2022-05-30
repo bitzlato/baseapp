@@ -32,7 +32,6 @@ import { alertPush } from 'web/src/modules/public/alert/actions';
 import { TextInput } from 'web/src/components/Input/TextInput';
 import { sliceString } from 'web/src/helpers/sliceString';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
@@ -42,6 +41,7 @@ import sq from 'src/containers/QuickExchange/QuickExchange.postcss';
 import { ProposalToEnableOTP } from 'web/src/components/profile/ProposalToEnableOTP';
 import { AMOUNT_PERCENTS, FIAT_PRECISION } from 'web/src/constants';
 import { None } from 'web/src/components/None';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import s from './Gift.postcss';
 
 interface Props {
@@ -50,6 +50,7 @@ interface Props {
 }
 
 export const Gift: FC<Props> = (props) => {
+  const handleFetchError = useHandleFetchError();
   const ccCode = getCurrencySymbol(props.currency);
 
   const [amount, setAmount] = useState('');
@@ -120,7 +121,7 @@ export const Gift: FC<Props> = (props) => {
       vouchersResponse.mutate();
       mutate(`${accountUrl()}/balances`);
     } catch (error) {
-      alertFetchError(dispatch, error);
+      handleFetchError(error);
     }
   };
 
@@ -163,7 +164,7 @@ export const Gift: FC<Props> = (props) => {
           } else if (error.code === 409 && error.payload.code === 'NoTwoFaUserApprove') {
             setShow2faProposal(true);
           } else {
-            alertFetchError(dispatch, error);
+            handleFetchError(error);
           }
         }
       }
@@ -196,7 +197,7 @@ export const Gift: FC<Props> = (props) => {
         vouchersResponse.mutate();
         dispatch(alertPush({ message: ['Successfully changed'], type: 'success' }));
       } catch (error) {
-        alertFetchError(dispatch, error);
+        handleFetchError(error);
       }
     }
     setGift(undefined);

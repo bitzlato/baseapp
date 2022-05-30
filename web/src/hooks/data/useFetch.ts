@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import useSWR, { BareFetcher, Key, SWRConfiguration } from 'swr';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { fetchJson } from 'web/src/helpers/fetch';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
 
 export type FetchResponse<Data, Error = unknown> =
   | {
@@ -23,12 +21,14 @@ export const useFetch = <Data = any, Error = any>(
   fetcher: BareFetcher<Data> | null = fetchJson,
   config?: SWRConfiguration<Data, Error, BareFetcher<Data>> | undefined,
 ) => {
-  const dispatch = useDispatch();
-  const swr = useSWR(key, fetcher, config);
+  const handleFetchError = useHandleFetchError();
 
-  useEffect(() => {
-    alertFetchError(dispatch, swr.error);
-  }, [dispatch, swr.error]);
+  return useSWR(key, fetcher, {
+    ...config,
+    onError: (...args) => {
+      config?.onError?.(...args);
 
-  return swr;
+      handleFetchError(args[0]);
+    },
+  });
 };

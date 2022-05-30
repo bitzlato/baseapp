@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import { p2pUrl } from 'web/src/api/config';
 import { buildQueryString } from 'web/src/helpers';
-import { alertFetchError } from 'web/src/helpers/alertFetchError';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import {
   P2PCurrency,
@@ -26,7 +25,8 @@ export function useFetchP2PCryptoCurrencies() {
 
 export const useGenerateP2PAddress = () => {
   const { mutate } = useSWRConfig();
-  const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
+
   return async (params: P2PGenerateParams): Promise<void> => {
     try {
       await fetchWithCreds(`${p2pUrl()}/wallets/generate-address`, {
@@ -40,7 +40,7 @@ export const useGenerateP2PAddress = () => {
       if (error instanceof FetchError && error.code === 500) {
         mutate(`${p2pUrl()}/wallets/${params.cryptocurrency}`);
       } else {
-        alertFetchError(dispatch, error);
+        handleFetchError(error);
       }
     }
   };
