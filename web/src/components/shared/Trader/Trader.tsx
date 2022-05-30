@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useParams } from 'react-router-dom';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
 import { Box } from 'web/src/components/ui/Box';
@@ -7,6 +6,7 @@ import { Pagination } from 'web/src/components/ui/Pagination';
 import { useUserAds } from 'web/src/hooks/data/useUserAds';
 import { TraderAds } from 'web/src/components/shared/TraderAds/TraderAds';
 import { TraderInfo } from 'web/src/components/traderInfo/TraderInfo';
+import { useAdapterContext } from 'web/src/components/shared/Adapter';
 
 interface UrlParams {
   name: string;
@@ -14,7 +14,7 @@ interface UrlParams {
 
 export const Trader: FC = () => {
   const { lang } = useAppContext();
-  const params = useParams<UrlParams>();
+  const { params } = useAdapterContext<UrlParams>();
   const { data = [], error, isValidating } = useUserAds({ publicName: params.name, lang });
 
   if (error) {

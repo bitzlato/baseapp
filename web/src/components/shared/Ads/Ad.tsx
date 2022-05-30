@@ -1,9 +1,8 @@
 import { FC, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { Container } from 'web/src/components/Container/Container';
-import { useSharedT } from 'web/src/components/shared/Adapter';
+import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { useFetchAdvert } from 'web/src/hooks/data/useFetchAds';
 import { useFetchPaymethod } from 'web/src/hooks/data/useFetchPaymethod';
 import { Spinner } from 'web/src/components/ui/Spinner';
@@ -40,8 +39,7 @@ export const Ad: FC = () => {
 
   const [show, setShow] = useState(false);
 
-  const t = useSharedT();
-  const params = useParams<UrlParams>();
+  const { t, params } = useAdapterContext<UrlParams>();
   const { lang, isMobileDevice } = useAppContext();
   const { data: advert } = useFetchAdvert(params.id);
   const { data: paymethod } = useFetchPaymethod(advert?.paymethod, lang);

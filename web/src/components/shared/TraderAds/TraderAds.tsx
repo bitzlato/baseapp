@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { TraderAdvert } from 'web/src/hooks/data/useUserAds';
 import {
   AdsTable,
@@ -11,7 +10,6 @@ import {
   AdsTableColumn,
   AdsTableHeaderColumn,
 } from 'web/src/components/shared/AdsTable/AdsTableColumn';
-import { useSharedT } from 'web/src/components/shared/Adapter';
 import { Box } from 'web/src/components/ui/Box';
 import { Stack } from 'web/src/components/ui/Stack';
 import { Button } from 'web/src/components/ui/Button';
@@ -19,6 +17,7 @@ import { Text } from 'web/src/components/ui/Text';
 import { HelpIcon } from 'web/src/components/ui/HelpIcon';
 import { Switch } from 'web/src/components/form/Switch';
 import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
+import { useAdapterContext } from 'web/src/components/shared/Adapter';
 
 interface Props {
   data: TraderAdvert[];
@@ -30,7 +29,7 @@ const FILTER_PURCHASE = 'purchase' as const;
 const FILTER_SALE = 'sale' as const;
 
 export const TraderAds: FC<Props> = ({ data, isLoading }) => {
-  const t = useSharedT();
+  const { t, Link } = useAdapterContext();
   const [filter, setFilter] = useState<
     typeof FILTER_ALL | typeof FILTER_PURCHASE | typeof FILTER_SALE
   >(FILTER_ALL);
