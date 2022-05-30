@@ -1,6 +1,6 @@
 import { Money } from '@bitzlato/money-js';
 import { Language } from 'web/src/types';
-import { Label } from '../kyc';
+import { Label } from 'web/src/modules/user/kyc/label/actions';
 
 export interface UserProfile {
   first_name: string;
