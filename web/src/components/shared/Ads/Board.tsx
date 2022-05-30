@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useAppContext } from 'web/src/components/app/AppContext';
@@ -90,35 +90,34 @@ export const Board: FC = () => {
     }
   }, [filter, history]);
 
-  const handleChangeFilter = useCallback(
-    (upd: Partial<AdvertParams>) => {
-      setFilterParams((prev) => ({ ...prev, ...upd }));
-      setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
+  const handleChangeFilter = (upd: Partial<AdvertParams>) => {
+    setFilterParams((prev) => ({ ...prev, ...upd }));
+    setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
 
-      if (upd.type || upd.cryptocurrency || upd.currency) {
-        history.push(
-          generateFilterParamsUrl(
-            upd.type ?? filterParams.type,
-            upd.cryptocurrency ?? filterParams.cryptocurrency,
-            upd.currency ?? filterParams.currency,
-          ),
-        );
-      }
-    },
-    [filterParams, history],
-  );
+    if (upd.type || upd.cryptocurrency || upd.currency) {
+      history.push(
+        generateFilterParamsUrl(
+          upd.type ?? filterParams.type,
+          upd.cryptocurrency ?? filterParams.cryptocurrency,
+          upd.currency ?? filterParams.currency,
+        ),
+      );
+    }
+  };
 
   useEffect(() => {
     if (!cryptoCurrencies.some((currency) => currency.code === filterParams.cryptocurrency)) {
       handleChangeFilter({ cryptocurrency: DEFAULT_FILTER.cryptocurrency, paymethod: undefined });
     }
-  }, [handleChangeFilter, filterParams.cryptocurrency, cryptoCurrencies]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterParams.cryptocurrency, cryptoCurrencies]);
 
   useEffect(() => {
     if (!Object.keys(fiatCurrencies).includes(filterParams.currency)) {
       handleChangeFilter({ currency: DEFAULT_FILTER.currency, paymethod: undefined });
     }
-  }, [handleChangeFilter, filterParams.currency, fiatCurrencies]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterParams.currency, fiatCurrencies]);
 
   const handleChangePage = (value: number) => {
     handleChangeFilter({ skip: (value - 1) * filterParams.limit });
