@@ -68,6 +68,7 @@ export interface BitzlatoUser {
     comission_return?: NotificationSettingStatus | null | undefined;
     dividends_received?: NotificationSettingStatus | null | undefined;
   } | null;
+  roles?: string[];
 }
 
 export interface AuthSubject {

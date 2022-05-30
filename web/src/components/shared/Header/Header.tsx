@@ -10,35 +10,58 @@ import {
 import { Logo } from './Logo';
 import { Navigation } from './Navigation';
 import { UserPanel } from './UserPanel/UserPanel';
-import * as s from './Header.css';
-import { HamburgerMenu } from './HamburgerMenu';
 import { HeaderContext, HeaderContextValue } from './HeaderContext';
+import * as s from './Header.css';
+import { MobileNavigation } from './MobileNavigation';
 
 type Props = HeaderContextValue;
 
 export const Header: FC<Props> = (props) => {
-  const { children, theme, navLinks, renderNavLinkComponent } = props;
+  const { children, backButton, theme, navLinks, pathname, renderNavLinkComponent } = props;
   const themeClassName = theme === 'light' ? themeLight : themeDark;
 
   return (
     <HeaderContext.Provider value={props}>
-      <Box
-        className={cn(s.header, themeClassName)}
-        bg="primary"
-        display="flex"
-        alignItems="center"
-        px={['2x', '2x', '4x', '8x']}
-        h={['14x', '18x']}
-      >
-        <HamburgerMenu />
-        <Logo />
+      <Box className={cn(s.header, themeClassName)} bg="headerBg" width="full">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          width="full"
+          borderBottomWidth={{ mobile: '0', tablet: '1x' }}
+          borderBottomStyle="solid"
+          borderBottomColor="headerBorderBottom"
+          px={{ mobile: '2x', tablet: '3x' }}
+          h={{ mobile: '14x', tablet: '16x' }}
+        >
+          <Box
+            display="flex"
+            alignItems="center"
+            ml={{ mobile: '0', desktop: '4x' }}
+            mr={{ mobile: '0', desktop: '3x' }}
+            flexShrink={0}
+          >
+            <Logo />
+            <Box display={{ mobile: 'none', desktopXL: 'block' }}>{backButton}</Box>
+          </Box>
 
-        {children || (
-          <Navigation navLinks={navLinks} renderNavLinkComponent={renderNavLinkComponent} />
-        )}
+          {children || (
+            <Navigation
+              navLinks={navLinks}
+              pathname={pathname}
+              renderNavLinkComponent={renderNavLinkComponent}
+            />
+          )}
 
-        <UserPanel
-          responsiveMode={children !== undefined && children !== null && children !== false}
+          <UserPanel
+            responsiveMode={children !== undefined && children !== null && children !== false}
+          />
+        </Box>
+
+        <MobileNavigation
+          navLinks={navLinks}
+          pathname={pathname}
+          renderNavLinkComponent={renderNavLinkComponent}
         />
       </Box>
     </HeaderContext.Provider>

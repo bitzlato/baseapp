@@ -17,13 +17,14 @@ const drawerBase = style({
 export const drawer = style([
   drawerBase,
   sprinkles({
+    mt: { mobile: '14x', tablet: '16x' },
     bg: 'drawer',
     height: 'full',
   }),
 ]);
 
 export const openDrawer = style({
-  transition: 'all .4s ease',
+  transition: 'transform .4s ease, margin-top .1s ease-in-out',
   transform: `translateX(-${drawerWidth})`,
 
   opacity: 1,

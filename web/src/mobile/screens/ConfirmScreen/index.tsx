@@ -6,7 +6,6 @@ import { getVerificationStep } from '../../../helpers';
 import { selectLabelData } from '../../../modules/user/kyc/label';
 import { ConfirmScreen } from '../../../screens/ConfirmScreen';
 import { MobileModal } from '../../components/Modal';
-import { Subheader } from '../../components/Subheader';
 
 const ConfirmMobileScreen: React.FC = () => {
   const intl = useIntl();
@@ -35,11 +34,6 @@ const ConfirmMobileScreen: React.FC = () => {
   return (
     <div className="cr-mobile-confirm">
       <div className="cr-mobile-confirm__identity">
-        <Subheader
-          title={intl.formatMessage({ id: `page.mobile.confirm.${step}` })}
-          backTitle={intl.formatMessage({ id: 'page.mobile.confirm.back' })}
-          onGoBack={() => history.goBack()}
-        />
         <ConfirmScreen />
       </div>
     </div>

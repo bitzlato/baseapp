@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { Pagination } from '../../../components';
 import { useApiKeysFetch } from '../../../hooks';
@@ -23,14 +22,13 @@ import {
   selectApiKeysNextPageExists,
 } from '../../../modules/user/apiKeys/selectors';
 import { AddIcon } from '../../assets/images/AddIcon';
-import { ApiKeysItem, Subheader } from '../../components';
+import { ApiKeysItem } from '../../components';
 import { ApiKeyModal } from 'web/src/containers/ProfileApiKeys/ApiKeyModal';
 
 const ProfileApiKeysMobileScreenComponent: React.FC = () => {
   const [currentPageIndex, setPageIndex] = React.useState(0);
   const dispatch = useDispatch();
   const intl = useIntl();
-  const history = useHistory();
   const apiKeys = useSelector(selectApiKeys);
   const apiKeysModal = useSelector(selectApiKeysModal);
   const user = useSelector(selectUserInfo);
@@ -89,11 +87,6 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
 
   return (
     <>
-      <Subheader
-        title={intl.formatMessage({ id: 'page.mobile.profile.apiKeys.title' })}
-        backTitle={intl.formatMessage({ id: 'page.body.profile.header.account' })}
-        onGoBack={() => history.push('/profile')}
-      />
       <div className="pg-mobile-profile-api-keys-screen">
         {user.otp ? (
           <div

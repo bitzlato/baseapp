@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import cn from 'classnames';
 import {
   IconName,
@@ -7,59 +7,56 @@ import {
   RenderNavLinkComponent,
 } from 'web/src/components/shared/sharedTypes';
 import { Box } from 'web/src/components/ui/Box';
-import ApiIcon from 'web/src/assets/svg/ApiIcon.svg';
-import HistoryIcon from 'web/src/assets/svg/HistoryIcon.svg';
 import LogoutIcon from 'web/src/assets/svg/LogoutIcon.svg';
-import OrdersIcon from 'web/src/assets/svg/OrdersIcon.svg';
-import P2PIcon from 'web/src/assets/svg/P2PIcon.svg';
-import ProfileIcon from 'web/src/assets/svg/ProfileIcon.svg';
-import QuickExchangeIcon from 'web/src/assets/svg/QuickExchangeIcon.svg';
-import SignupIcon from 'web/src/assets/svg/SignupIcon.svg';
-import TrandingIcon from 'web/src/assets/svg/TrandingIcon.svg';
-import WalletsIcon from 'web/src/assets/svg/WalletsIcon.svg';
-import QuestionIcon from 'web/src/assets/svg/QuestionIcon.svg';
+import SettingsIcon from 'web/src/assets/svg/SettingsIcon.svg';
+import TelegramPlainIcon from 'web/src/assets/svg/TelegramPlainIcon.svg';
+import ListIcon from 'web/src/assets/svg/ListIcon.svg';
 import * as s from './DropdownItem.css';
 
 const icons = {
-  profile: <ProfileIcon />,
-  signup: <SignupIcon />,
-  quickExchange: <QuickExchangeIcon />,
-  trading: <TrandingIcon />,
-  wallets: <WalletsIcon />,
-  orders: <OrdersIcon />,
-  history: <HistoryIcon />,
-  p2p: <P2PIcon />,
-  api: <ApiIcon />,
+  profile: <SettingsIcon />,
   logout: <LogoutIcon />,
-  question: <QuestionIcon />,
+  telegram: <TelegramPlainIcon />,
+  invoices: <ListIcon />,
 };
 
-type Props = {
-  icon?: IconName | undefined;
+type DropdownLinkType = {
+  type: LinkType;
+  to: string;
   children: string;
+};
+type DropdownLinkTypeWithRenderProps = DropdownLinkType &
+  (
+    | {
+        renderNavLinkComponent: RenderNavLinkComponent;
+      }
+    | {
+        renderLinkComponent: RenderLinkComponent;
+      }
+  );
+type DropdownButtonType = {
+  type: 'button';
+  isActive?: boolean | undefined;
+  children: ReactNode | string;
+  onClick: () => void;
+};
+type DropdownCustomType = { type: 'custom'; children: ReactNode };
+
+export type DropdownItemType = {
+  icon?: IconName | undefined;
+} & (DropdownLinkTypeWithRenderProps | DropdownButtonType | DropdownCustomType);
+
+type Props = {
   closeMenu: () => void;
-} & (
-  | ({
-      type: LinkType;
-      to: string;
-    } & (
-      | {
-          renderNavLinkComponent: RenderNavLinkComponent;
-        }
-      | {
-          renderLinkComponent: RenderLinkComponent;
-        }
-    ))
-  | { isActive?: boolean | undefined; onClick: () => void }
-);
+} & DropdownItemType;
 
 export const DropdownItem: FC<Props> = (props) => {
-  const { icon, children, closeMenu, ...rest } = props;
+  const { type, icon, children, closeMenu } = props;
 
   const handleClick = () => {
-    if ('onClick' in props) {
+    if (type === 'button') {
       const { onClick } = props;
-      onClick?.();
+      onClick();
     }
     closeMenu();
   };
@@ -75,11 +72,12 @@ export const DropdownItem: FC<Props> = (props) => {
     </>
   );
 
-  if ('onClick' in rest) {
+  if (type === 'button') {
+    const { isActive } = props;
     return (
       <Box
         as="button"
-        className={cn(s.item, rest.isActive && s.itemActive)}
+        className={cn(s.item, isActive && s.itemActive)}
         type="button"
         onClick={handleClick}
       >
@@ -88,10 +86,10 @@ export const DropdownItem: FC<Props> = (props) => {
     );
   }
 
-  if (rest.type === 'internal') {
-    const { to } = rest;
-    if ('renderNavLinkComponent' in rest) {
-      const { renderNavLinkComponent } = rest;
+  if (type === 'internal') {
+    const { to } = props;
+    if ('renderNavLinkComponent' in props) {
+      const { renderNavLinkComponent } = props;
 
       return (
         <>
@@ -106,21 +104,29 @@ export const DropdownItem: FC<Props> = (props) => {
       );
     }
 
-    const { renderLinkComponent } = rest;
-    return (
-      <>
-        {renderLinkComponent({
-          className: s.item,
-          to,
-          onClick: handleClick,
-          children: body,
-        })}
-      </>
-    );
+    if ('renderLinkComponent' in props) {
+      const { renderLinkComponent } = props;
+      return (
+        <>
+          {renderLinkComponent({
+            className: s.item,
+            to,
+            onClick: handleClick,
+            children: body,
+          })}
+        </>
+      );
+    }
   }
 
+  if (type === 'custom') {
+    return <Box className={s.item}>{children}</Box>;
+  }
+
+  const { to } = props;
+
   return (
-    <Box as="a" className={s.item} href={rest.to} onClick={handleClick}>
+    <Box as="a" className={s.item} href={to} onClick={handleClick}>
       {body}
     </Box>
   );

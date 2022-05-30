@@ -1,4 +1,4 @@
-import { useMemo, ComponentProps, FC, useCallback, useState } from 'react';
+import { ComponentProps, FC, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link, NavLink, useLocation } from 'react-router-dom';
@@ -18,23 +18,26 @@ import {
   changeLanguage,
   selectUserFetching,
   logoutFetch,
-  selectMobileDeviceState,
-} from 'src/modules';
-import { MarketSelector } from 'src/containers/MarketSelector/MarketSelector';
-import { HeaderToolbar } from 'src/containers/HeaderToolbar/HeaderToolbar';
-import { useT } from 'src/hooks/useT';
+} from 'web/src/modules';
+import { MarketSelector } from 'web/src/containers/MarketSelector/MarketSelector';
+import { HeaderToolbar } from 'web/src/containers/HeaderToolbar/HeaderToolbar';
+import { useT } from 'web/src/hooks/useT';
 import { getLinkToP2P } from 'web/src/components/Header/getLinkToP2P';
-import { Navigation } from 'web/src/components/shared/Header/Navigation';
-import { RenderLinkComponent, RenderNavLinkComponent } from 'web/src/components/shared/sharedTypes';
-import { Box } from 'web/src/components/ui/Box';
+import {
+  RenderLinkComponent,
+  RenderNavLinkComponent,
+  UserLink,
+  UserLinks,
+} from 'web/src/components/shared/sharedTypes';
 import { isToday, isYesterday, localeDate } from 'web/src/helpers';
 import { useMarkNotificationAsRead } from 'web/src/hooks/mutations/useMarkNotificationAsRead';
 import { Notification } from 'web/src/lib/socket/types';
 import { NotificationModalNotification } from 'web/src/containers/NotificationModal/types';
 import { useFetchP2PNotifications } from 'web/src/hooks/data/useFetchP2PNotifications';
 import { NotificationModal } from 'web/src/containers/NotificationModal/NotificationModal';
-import { Header as MobileHeader } from 'src/mobile/components/Header';
-import { notificationInfo } from './notificationInfo';
+import { Box } from 'web/src/components/ui/Box';
+import { notificationInfo } from 'web/src/components/Header/notificationInfo';
+import { BackButton } from 'web/src/components/shared/Header/BackButton';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
@@ -51,10 +54,9 @@ const Header: FC = () => {
   const [nofiticationModalProps, setNofiticationModalProps] = useState<
     NotificationModalNotification | undefined
   >();
-  const isMobileDevice = useSelector(selectMobileDeviceState);
   const t = useT();
   const dispatch = useDispatch();
-  const currentCode = useSelector(selectCurrentLanguage);
+  const language = useSelector(selectCurrentLanguage);
   const isLoggedIn = useSelector(selectUserLoggedIn);
   const user = useSelector(selectUserInfo);
   const colorTheme = useSelector(selectCurrentColorTheme);
@@ -62,6 +64,14 @@ const Header: FC = () => {
   const { pathname } = useLocation();
   const history = useHistory();
   const isTradingPage = pathname.includes('/trading');
+  const p2pURL = getLinkToP2P(language);
+  const merchantClient = (user.bitzlato_user?.roles ?? []).includes('merchantClient');
+
+  const handleBack = () => {
+    if (history.length) {
+      history.goBack();
+    }
+  };
 
   const translate = useCallback(
     (key: string) => {
@@ -75,32 +85,23 @@ const Header: FC = () => {
         case 'profile':
           return t('page.header.navbar.profile');
 
-        case 'all_read':
-          return t('notifications.readall');
+        case 'logout':
+          return t('page.header.navbar.logout');
 
         case 'notifications_empty':
           return t('notifications.empty');
 
-        case 'logout':
-          return t('page.body.profile.content.action.logout');
-
-        case 'theme':
-          return t('page.mobile.profileLinks.settings.theme');
-
         case 'notificationsTitle':
           return t('notifications.title');
-
-        case 'today':
-          return t('today');
-
-        case 'yesterday':
-          return t('yesterday');
 
         case 'notificationUnread':
           return t('notifications.unread');
 
         case 'notificationRead':
           return t('notifications.read');
+
+        case 'darkTheme':
+          return t('DarkTheme');
 
         default:
           throw new Error(`translate: Key '${key}' not found`);
@@ -160,13 +161,42 @@ const Header: FC = () => {
       onSignUpClick: () => history.push('/signup'),
     };
   } else {
+    const profileLink: UserLink = {
+      key: 'profile',
+      type: 'internal',
+      to: '/profile',
+      icon: 'profile',
+      children: t('page.header.navbar.profile'),
+    };
+
+    const userLinks = [
+      {
+        key: 'telegram',
+        type: 'external',
+        to: `${p2pURL}/profile/telegram`,
+        icon: 'telegram',
+        children: t('Telegram'),
+      },
+      merchantClient
+        ? {
+            key: 'merch',
+            type: 'external',
+            to: `${p2pURL}/merch`,
+            icon: 'invoices',
+            children: t('Invoices'),
+          }
+        : null,
+    ].filter(Boolean) as UserLinks;
+
     userProps = {
       status: USER_STATUS_AUTHORIZED,
+      profileLink,
+      userLinks,
       onLogoutClick: () => dispatch(logoutFetch()),
       notifications: notifications.map((notification) => {
         const notify: NotificationModalNotification = notificationInfo(notification, {
           translate: t,
-          lang: currentCode,
+          lang: language,
         }) as NotificationModalNotification;
         const handleNotifyClick = () => {
           handleMarkNotificationAsRead(notification.id);
@@ -186,14 +216,14 @@ const Header: FC = () => {
 
         const calculateDate = () => {
           if (isToday(notify.createdAt!)) {
-            return translate('today');
+            return t('today');
           }
 
           if (isYesterday(notify.createdAt!)) {
-            return translate('yesterday');
+            return t('yesterday');
           }
 
-          return localeDate(notify.createdAt, 'veryShortDate', currentCode);
+          return localeDate(notify.createdAt, 'veryShortDate', language);
         };
 
         return {
@@ -209,169 +239,76 @@ const Header: FC = () => {
     };
   }
 
-  const p2pURL = getLinkToP2P(currentCode);
-  const p2p: Links = useMemo(
-    () => [
-      {
-        key: 'p2p',
-        type: 'external',
-        to: p2pURL,
-        children: t('page.header.navbar.toP2P'),
-      },
-    ],
-    [p2pURL, t],
-  );
-  const navLinks = [
+  const navLinks: Links = [
+    {
+      key: 'p2p',
+      type: 'tab',
+      children: t('P2P'),
+      tabs: [
+        {
+          key: 'Ad board',
+          type: 'external',
+          to: `${p2pURL}/sell-btc-rub`,
+          children: t('AD Board'),
+        },
+        {
+          key: 'My adverts',
+          type: 'external',
+          to: `${p2pURL}/adverts`,
+          children: t('My adverts'),
+        },
+        {
+          key: 'My trades',
+          type: 'external',
+          to: `${p2pURL}/trades`,
+          children: t('My trades'),
+        },
+      ],
+    },
+    {
+      key: 'exchange',
+      type: 'tab',
+      children: t('Exchange'),
+      tabs: [
+        {
+          key: 'trading',
+          type: 'internal',
+          to: '/trading',
+          children: t('page.header.navbar.trade'),
+        },
+        {
+          key: 'orders',
+          type: 'internal',
+          to: '/orders',
+          children: t('page.header.navbar.openOrders'),
+        },
+        {
+          key: 'history',
+          type: 'internal',
+          to: '/history',
+          children: t('page.header.navbar.history'),
+        },
+      ],
+    },
     {
       key: 'quick-exchange',
       type: 'internal',
       to: '/quick-exchange',
       children: t('page.header.navbar.quick-exchange'),
     },
-    {
-      key: 'trading',
-      type: 'internal',
-      to: '/trading',
-      children: t('page.header.navbar.trade'),
-    },
-    userProps.status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'wallets',
-          type: 'internal',
-          to: '/wallets',
-          children: t('page.header.navbar.wallets'),
-        }
-      : undefined,
-    userProps.status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'orders',
-          type: 'internal',
-          to: '/orders',
-          children: t('page.header.navbar.openOrders'),
-        }
-      : undefined,
-    userProps.status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'history',
-          type: 'internal',
-          to: '/history',
-          children: t('page.header.navbar.history'),
-        }
-      : undefined,
-    ...p2p,
-  ].filter(Boolean) as Links;
+  ];
 
-  const hamburgerLinks = [
-    userProps.status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'profile',
-          type: 'internal',
-          icon: 'profile',
-          to: '/profile',
-          children: t('page.header.navbar.profile'),
-        }
-      : undefined,
-    userProps.status === USER_STATUS_AUTHORIZATION_REQUIRED
-      ? {
-          key: 'signin',
-          icon: 'profile',
-          children: t('page.header.navbar.signIn'),
-          onClick: userProps.onSignInClick,
-        }
-      : undefined,
-    userProps.status === USER_STATUS_AUTHORIZATION_REQUIRED
-      ? {
-          key: 'signup',
-          icon: 'signup',
-          children: t('page.header.signUp'),
-          onClick: userProps.onSignUpClick,
-        }
-      : undefined,
+  const rightNavLinks: Links = [
     {
-      key: 'quickExchange',
+      key: 'wallets',
       type: 'internal',
-      icon: 'quickExchange',
-      to: '/quick-exchange',
-      children: t('page.header.navbar.quick-exchange'),
+      to: '/wallets',
+      children: t('page.header.navbar.balances'),
     },
-    {
-      key: 'trading',
-      type: 'internal',
-      icon: 'trading',
-      to: '/trading',
-      children: t('page.header.navbar.trade'),
-    },
-    userProps.status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'wallets',
-          type: 'internal',
-          icon: 'wallets',
-          to: '/wallets',
-          children: t('page.header.navbar.wallets'),
-        }
-      : undefined,
-    userProps.status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'orders',
-          type: 'internal',
-          icon: 'orders',
-          to: '/orders',
-          children: t('page.header.navbar.openOrders'),
-        }
-      : undefined,
-    userProps.status === USER_STATUS_AUTHORIZED
-      ? {
-          key: 'history',
-          type: 'internal',
-          icon: 'history',
-          to: '/history',
-          children: t('page.header.navbar.history'),
-        }
-      : undefined,
-    {
-      key: 'p2p',
-      type: 'external',
-      icon: 'p2p',
-      to: p2pURL,
-      children: t('page.header.navbar.toP2P'),
-    },
-    {
-      key: 'docs',
-      type: 'internal',
-      icon: 'api',
-      to: '/docs',
-      children: t('page.header.navbar.api'),
-    },
-    {
-      key: 'logout',
-      icon: 'logout',
-      children: t('page.body.profile.content.action.logout'),
-      onClick: userProps.onLogoutClick,
-    },
-  ].filter(Boolean) as Links;
+  ];
 
   const renderLinkComponent: RenderLinkComponent = (props) => <Link {...props} />;
   const renderNavLinkComponent: RenderNavLinkComponent = (props) => <NavLink {...props} />;
-
-  const HeaderWrapper = useCallback(
-    ({ chilren, ...props }) =>
-      isMobileDevice ? (
-        <MobileHeader {...props} />
-      ) : (
-        <SharedHeader {...props}>
-          {isTradingPage && (
-            <>
-              <Box mr="6x">
-                <Navigation navLinks={p2p} renderNavLinkComponent={renderNavLinkComponent} />
-              </Box>
-              <MarketSelector />
-              <HeaderToolbar />
-            </>
-          )}
-        </SharedHeader>
-      ),
-    [isMobileDevice, isTradingPage, p2p],
-  );
 
   return (
     <>
@@ -381,15 +318,21 @@ const Header: FC = () => {
           handleClose={closeNotificationModal}
         />
       )}
-      <HeaderWrapper
+      <SharedHeader
+        backButton={
+          isTradingPage && history.length > 0 ? (
+            <BackButton title={t('Back')} onClick={handleBack} />
+          ) : undefined
+        }
         logoLightURL={window.env.logoUrl}
         logoDarkURL={window.env.logoDarkUrl}
         toMainPage={p2pURL}
         theme={colorTheme}
-        language={currentCode}
+        language={language}
         languages={languages}
         navLinks={navLinks}
-        hamburgerLinks={hamburgerLinks}
+        rightNavLinks={rightNavLinks}
+        pathname={pathname}
         t={translate}
         renderLinkComponent={renderLinkComponent}
         renderNavLinkComponent={renderNavLinkComponent}
@@ -398,15 +341,16 @@ const Header: FC = () => {
         onLanguageChange={handleLanguageChange}
       >
         {isTradingPage && (
-          <>
-            <Box mr="6x">
-              <Navigation navLinks={p2p} renderNavLinkComponent={renderNavLinkComponent} />
-            </Box>
+          <Box
+            display={{ mobile: 'none', tablet: 'flex' }}
+            alignItems="center"
+            justifyContent="space-between"
+          >
             <MarketSelector />
             <HeaderToolbar />
-          </>
+          </Box>
         )}
-      </HeaderWrapper>
+      </SharedHeader>
     </>
   );
 };

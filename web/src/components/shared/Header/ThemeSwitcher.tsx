@@ -1,10 +1,10 @@
-import { FC, useContext } from 'react';
-import Moon from 'web/src/assets/svg/Moon.svg';
-import Sun from 'web/src/assets/svg/Sun.svg';
+import { useContext } from 'react';
 import { Theme } from 'web/src/types';
 import { Box } from 'web/src/components/ui/Box';
+import { Switch } from 'web/src/components/form/Switch';
+import BedtimeIcon from 'web/src/assets/svg/BedtimeIcon.svg';
 
-import * as s from './ThemeSwitcher.css';
+import * as s from 'web/src/components/shared/Header/Dropdown/DropdownItem.css';
 import { HeaderContext } from './HeaderContext';
 
 export interface ThemeSwitcherContext {
@@ -12,56 +12,35 @@ export interface ThemeSwitcherContext {
   onThemeChange: (theme: Theme) => void;
 }
 
-interface Props {
-  itemInMenu?: boolean | undefined;
-}
+const SWITCH_ID = 'theme-switch';
 
-export const ThemeSwitcher: FC<Props> = ({ itemInMenu = false }) => {
+export const ThemeSwitcher = () => {
   const { t, theme, onThemeChange } = useContext(HeaderContext);
   const handleThemeChange = () => {
     onThemeChange(theme === 'light' ? 'dark' : 'light');
   };
 
-  const switcherProps = !itemInMenu
-    ? {
-        as: 'button' as const,
-        type: 'button',
-        onClick: handleThemeChange,
-      }
-    : { as: 'span' as const };
-  const switcher = (
+  return (
     <Box
-      {...switcherProps}
-      className={s.themeSwitcher}
-      bg="primary"
+      as="label"
       display="flex"
       alignItems="center"
-      borderWidth="1x"
-      borderStyle="solid"
-      borderColor={{ default: 'themeSwitcherBorder', hover: 'themeSwitcherBorderHover' }}
-      justifyContent="space-around"
-      borderRadius="1x"
-      w="20x"
-      h="9x"
-      alignSelf="center"
+      width="full"
+      height="full"
+      color={{
+        default: 'dropdownItemText',
+        hover: 'dropdownItemHoverText',
+      }}
+      htmlFor={SWITCH_ID}
+      cursor="pointer"
     >
-      <Box as="span" className={s.sun}>
-        <Sun />
+      <Box className={s.icon}>
+        <BedtimeIcon />
       </Box>
-      <Box as="span" className={s.moon}>
-        <Moon />
+      <Box display="flex" justifyContent="space-between" alignItems="center" width="full">
+        <span>{t('darkTheme')}</span>
+        <Switch id={SWITCH_ID} checked={theme === 'dark'} onChange={handleThemeChange} />
       </Box>
-    </Box>
-  );
-
-  if (!itemInMenu) {
-    return switcher;
-  }
-
-  return (
-    <Box as="button" className={s.item} type="button" onClick={handleThemeChange}>
-      <span>{t('theme')}:</span>
-      {switcher}
     </Box>
   );
 };

@@ -5,11 +5,10 @@ import { RenderLinkComponent, RenderNavLinkComponent } from 'web/src/components/
 import { Box } from 'web/src/components/ui/Box';
 import { Sprinkles } from 'web/src/theme/sprinkles.css';
 import { HeaderContext } from 'web/src/components/shared/Header/HeaderContext';
-import { Portal } from 'web/src/components/ui/Portal';
 import { OptionalWithUndefined } from 'web/src/types';
 import { DropdownMenu } from './DropdownMenu';
 
-export type RenderButtonFn = (props: { open: boolean }) => ReactNode;
+export type RenderButtonFn = (props: { open: boolean; onClick: () => void }) => ReactNode;
 
 export type RenderMenuFn = (props: {
   renderLinkComponent: RenderLinkComponent;
@@ -33,11 +32,7 @@ export const Dropdown: FC<Props> = ({
   renderMobileMenu,
   ...props
 }) => {
-  const {
-    enableMobileMenu = false,
-    renderLinkComponent,
-    renderNavLinkComponent,
-  } = useContext(HeaderContext);
+  const { renderLinkComponent, renderNavLinkComponent } = useContext(HeaderContext);
   const elementRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
@@ -65,38 +60,10 @@ export const Dropdown: FC<Props> = ({
     closeMenu,
   });
 
-  const mobileMenu = renderMobileMenu?.({
-    renderLinkComponent,
-    renderNavLinkComponent,
-    closeMenu,
-  });
-
   return (
     <Box ref={elementRef} {...props} position="relative">
-      <Box
-        as="button"
-        type="button"
-        display="flex"
-        height="full"
-        alignItems="center"
-        color={{ default: 'interactive', hover: 'interactiveHighlighted' }}
-        onClick={handleClick}
-      >
-        {renderButton({ open })}
-      </Box>
-      {enableMobileMenu && (
-        <Portal>
-          <DropdownMenu
-            ref={mobileMenuRef}
-            dropdownAlign={dropdownAlign}
-            dropdownSize={dropdownSize}
-            open={open}
-            mobile
-          >
-            {mobileMenu ?? items}
-          </DropdownMenu>
-        </Portal>
-      )}
+      {renderButton({ open, onClick: handleClick })}
+
       <DropdownMenu open={open} dropdownAlign={dropdownAlign} dropdownSize={dropdownSize}>
         {items}
       </DropdownMenu>

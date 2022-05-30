@@ -18,6 +18,7 @@
     "skipLibCheck": true,
     "paths": {
       "shared/Header": ["web/src/components/shared/Header/Header"],
+      "shared/MobileFooter": ["web/src/components/shared/MobileFooter/MobileFooter"],
       "shared/Footer": ["web/src/components/shared/Footer/Footer"],
       "shared/Box": ["web/src/components/ui/Box"],
       "shared/Button": ["web/src/components/ui/Button"],

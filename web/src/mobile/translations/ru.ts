@@ -1,10 +1,10 @@
 export const ru = {
   'page.mobile.header.signIn': 'Войти',
-  'page.mobile.footer.home': 'Главная',
-  'page.mobile.footer.quick': 'Быстрый обмен',
-  'page.mobile.footer.trading': 'Торговля',
-  'page.mobile.footer.wallets': 'Кошельки',
-  'page.mobile.footer.profile': 'Профиль',
+  'bottomTabs.home': 'Главная',
+  'bottomTabs.exchange': 'Обмен',
+  'bottomTabs.trading': 'Торговля',
+  'bottomTabs.balances': 'Балансы',
+  'bottomTabs.p2p': 'P2P',
 
   'page.mobile.tradingTabs.label.createOrder': 'Создание ордера',
   'page.mobile.tradingTabs.label.charts': 'График',

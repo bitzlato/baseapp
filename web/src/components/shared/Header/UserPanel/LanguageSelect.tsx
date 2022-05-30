@@ -1,5 +1,4 @@
 import { FC, useCallback, useContext } from 'react';
-import cn from 'classnames';
 import { Box } from 'web/src/components/ui/Box';
 import { Language } from 'web/src/types';
 import { HeaderContext } from 'web/src/components/shared/Header/HeaderContext';
@@ -9,6 +8,8 @@ import {
   RenderMenuFn,
 } from 'web/src/components/shared/Header/Dropdown/Dropdown';
 import { DropdownItem } from 'web/src/components/shared/Header/Dropdown/DropdownItem';
+import RuIcon from 'web/src/assets/svg/ru.svg';
+import EnIcon from 'web/src/assets/svg/en.svg';
 import * as s from './LanguageSelect.css';
 
 export interface LanguageSelectContext {
@@ -17,12 +18,27 @@ export interface LanguageSelectContext {
   onLanguageChange: (language: Language) => void;
 }
 
+const icons = {
+  ru: <RuIcon />,
+  en: <EnIcon />,
+};
+
 export const LanguageSelect: FC = () => {
   const { language, languages, onLanguageChange } = useContext(HeaderContext);
   const renderButton: RenderButtonFn = useCallback(
-    ({ open }) => (
-      <Box as="span" className={cn(s.language, open && s.languageOpened)}>
-        {language}
+    ({ onClick }) => (
+      <Box
+        as="button"
+        type="button"
+        display="flex"
+        height="full"
+        alignItems="center"
+        color={{ default: 'interactive', hover: 'interactiveHighlighted' }}
+        onClick={onClick}
+      >
+        <Box as="span" className={s.language}>
+          {language}
+        </Box>
       </Box>
     ),
     [language],
@@ -35,11 +51,15 @@ export const LanguageSelect: FC = () => {
 
         return (
           <DropdownItem
+            type="button"
             key={item}
             isActive={item === language}
             closeMenu={closeMenu}
             onClick={handleClick}
           >
+            <Box as="span" mr="4x">
+              {icons[item] ? icons[item] : null}
+            </Box>
             {languages[item] ?? ''}
           </DropdownItem>
         );

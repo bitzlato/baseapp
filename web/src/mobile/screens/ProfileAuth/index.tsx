@@ -1,11 +1,9 @@
 import { memo, useEffect, useState } from 'react';
-import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Box } from 'web/src/components/Box/Box';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuthScreen/ProfileTwoFactorAuthScreen';
-import { Subheader } from 'web/src/mobile/components/Subheader';
 import {
   selectTwoFactorAuthSuccess,
   selectUserInfo,
@@ -19,7 +17,6 @@ export const ProfileAuthMobileScreen: React.FC = memo(() => {
   const [showCode, setShowCode] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  const intl = useIntl();
   const user = useSelector(selectUserInfo);
   const success = useSelector(selectTwoFactorAuthSuccess);
 
@@ -49,11 +46,6 @@ export const ProfileAuthMobileScreen: React.FC = memo(() => {
 
   return (
     <Box col spacing="sm">
-      <Subheader
-        title={intl.formatMessage({ id: 'page.profile.kyc.title' })}
-        backTitle={intl.formatMessage({ id: 'page.body.profile.header.account' })}
-        onGoBack={() => history.push('/profile')}
-      />
       <div className="cr-mobile-profile-auth">
         <div className="cr-mobile-profile-auth__enable">
           <div className="cr-mobile-profile-auth__enable-label">

@@ -270,6 +270,7 @@ module.exports = {
       exposes: {
         './Header': './src/components/shared/Header/Header',
         './Footer': './src/components/shared/Footer/Footer',
+        './MobileFooter': './src/components/shared/MobileFooter/MobileFooter',
         './Box': './src/components/ui/Box',
         './Heading': './src/components/ui/Heading',
         './Stack': './src/components/ui/Stack',

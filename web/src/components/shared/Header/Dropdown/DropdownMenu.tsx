@@ -9,11 +9,10 @@ interface Props {
   dropdownAlign?: 'left' | 'right' | undefined;
   dropdownSize?: 'small' | 'medium' | undefined;
   open?: boolean | undefined;
-  mobile?: boolean | undefined;
 }
 
 export const DropdownMenu = forwardRef<HTMLDivElement, PropsWithChildren<Props>>(
-  ({ dropdownAlign, dropdownSize, open = false, mobile = false, children }, ref) => {
+  ({ dropdownAlign, dropdownSize, open = false, children }, ref) => {
     const context = useContext(HeaderContext);
     const themeClassName = getThemeClassName(context);
 
@@ -24,17 +23,13 @@ export const DropdownMenu = forwardRef<HTMLDivElement, PropsWithChildren<Props>>
           themeClassName,
           s.dropdown,
           open && s.dropdownOpened,
-          mobile && s.dropdownMobile,
           dropdownAlign === 'right' && s.dropdownRight,
           dropdownSize === 'small' && s.dropdownSmall,
         )}
-        display={!mobile ? ['none', 'flex'] : ['flex', 'none']}
+        display="flex"
         flexDirection="column"
         bg="dropdown"
-        borderRadius="2x"
-        borderWidth="1x"
-        borderStyle="solid"
-        borderColor="dropdownBorder"
+        borderRadius="1.5x"
         fontSize="medium"
         boxShadow="dropdown"
       >

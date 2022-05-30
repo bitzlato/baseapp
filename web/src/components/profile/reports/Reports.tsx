@@ -9,8 +9,6 @@ import { Spinner } from 'web/src/components/ui/Spinner';
 import { Text } from 'web/src/components/ui/Text';
 import { Container } from 'web/src/components/Container/Container';
 import DownloadIcon from 'web/src/assets/svg/DownloadIcon.svg';
-import { useHistory } from 'react-router-dom';
-import { Subheader } from 'web/src/mobile/components/Subheader';
 import LinkIcon from 'web/src/assets/svg/LinkIcon.svg';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import * as s from './Reports.css';
@@ -74,7 +72,6 @@ export const ReportLink: FC<ReportLinkProps> = ({
 
 export const Reports: FC = () => {
   const t = useT();
-  const history = useHistory();
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const user = useSelector(selectUserInfo);
   const { data: reports, error } = useFetchP2PReports();
@@ -109,14 +106,7 @@ export const Reports: FC = () => {
   );
 
   return isMobileDevice ? (
-    <Box my="1x">
-      <Subheader
-        title={t('Reports')}
-        backTitle={t('page.body.profile.header.account')}
-        onGoBack={() => history.push('/profile')}
-      />
-      {body}
-    </Box>
+    <Box my="1x">{body}</Box>
   ) : (
     <Container maxWidth="xl" my="4">
       {body}

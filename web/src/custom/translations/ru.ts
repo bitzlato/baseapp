@@ -7,15 +7,15 @@ export const ru: LangType = {
   'page.header.navbar.signIn': 'Войти',
   'page.header.navbar.quick-exchange': 'Быстрый обмен',
   'page.header.navbar.trade': 'Торговля',
-  'page.header.navbar.wallets': 'Кошельки',
+  'page.header.navbar.balances': 'Балансы',
   'page.header.navbar.openOrders': 'Ордера',
   'page.header.navbar.history': 'История',
   'page.header.navbar.api': 'API Документация',
   'page.header.navbar.internal.transfer': 'Internal transfer',
   'page.header.navbar.toP2P': 'Перейти в P2P',
 
-  'page.header.navbar.profile': 'Профиль',
-  'page.header.navbar.logout': 'Выйти',
+  'page.header.navbar.profile': 'Мой профиль',
+  'page.header.navbar.logout': 'Выйти из аккаунта',
 
   'notifications.title': 'Уведомления',
   'notifications.readall': 'Прочитать все',
@@ -1408,7 +1408,7 @@ export const ru: LangType = {
   Change: 'Изменить',
   Rename: 'Переименовать',
   Reports: 'Отчёты',
-  'AD Board': 'Доска объявлений',
+  'AD Board': 'Маркет',
   'My adverts': 'Мои Объявления',
   'My trades': 'Сделки',
   'Active users': 'Активные пользователи',
@@ -1613,4 +1613,9 @@ export const ru: LangType = {
     'Если вы не получили письмо, проверьте папку спам или запросите повторную отправку',
   'Resend email': 'Отправить письмо повторно',
   'The email has been sent': 'Письмо отправлено',
+  
+  DarkTheme: 'Темное оформление',
+  Back: 'Назад',
+  Telegram: 'Telegram',
+  Invoices: 'Счета',
 };

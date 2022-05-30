@@ -1,33 +1,37 @@
 import React, { FC, useCallback, useContext } from 'react';
+import { sprinkles } from 'web/src/theme/sprinkles.css';
 import { Notify } from 'web/src/components/shared/sharedTypes';
-import { Box } from 'web/src/components/ui/Box';
+import { Box, BoxProps } from 'web/src/components/ui/Box';
 import { HeaderContext } from 'web/src/components/shared/Header/HeaderContext';
 import { RenderMenuFn } from 'web/src/components/shared/Header/Dropdown/Dropdown';
+import { Drawer } from 'web/src/components/shared/Header/Drawer/Drawer';
 import NotificationsIcon from 'web/src/assets/svg/NotificationsIcon.svg';
 import ReadAllIcon from 'web/src/assets/svg/ReadAllIcon.svg';
 import OutlinedCrossIcon from 'web/src/assets/svg/OutlinedCrossIcon.svg';
-import { sprinkles } from 'web/src/theme/sprinkles.css';
 import * as s from './Notifications.css';
-import Drawer from '../Drawer/Drawer';
 
 interface Props {
+  px?: BoxProps['px'];
   notifications: Notify[];
   onAllRead?: (() => void) | undefined;
 }
 
-export const Notifications: FC<Props> = ({ notifications, onAllRead }) => {
+export const Notifications: FC<Props> = ({ px, notifications, onAllRead }) => {
   const { t } = useContext(HeaderContext);
+  const unreadNotifications = notifications.filter((notify) => !notify.read);
 
   const renderButton = useCallback(() => {
-    const hasUnreadNotify =
-      notifications.length > 0 && notifications.some((notify) => !notify.read);
-
     return (
-      <Box as="span" className={hasUnreadNotify ? s.unread : undefined}>
+      <Box as="span" position="relative" px={px}>
         <NotificationsIcon />
+        {unreadNotifications.length > 0 ? (
+          <Box as="span" className={s.unread}>
+            {unreadNotifications.length}
+          </Box>
+        ) : null}
       </Box>
     );
-  }, [notifications]);
+  }, [px, unreadNotifications.length]);
 
   const renderMenu: RenderMenuFn = useCallback(
     ({ closeMenu }) => (

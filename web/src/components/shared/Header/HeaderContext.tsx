@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, ReactNode } from 'react';
 import { themeDark, themeLight } from 'web/src/theme/vars.css';
 import {
   Links,
@@ -13,16 +13,16 @@ import type { ThemeSwitcherContext } from './ThemeSwitcher';
 export type HeaderContextValue = UserContext &
   LanguageSelectContext &
   ThemeSwitcherContext & {
+    backButton?: ReactNode;
     toMainPage?: string | undefined;
-    toAdvertsPage?: string | undefined;
     t: TranslateFn;
     hamburgerShowOnlyTablet?: boolean | undefined;
-    enableMobileMenu?: boolean | undefined;
     beta?: boolean | undefined;
     renderLinkComponent: RenderLinkComponent;
     renderNavLinkComponent: RenderNavLinkComponent;
-    hamburgerLinks: Links;
+    pathname?: string;
     navLinks: Links;
+    rightNavLinks?: Links;
     logoLightURL: string;
     logoDarkURL: string;
   };
@@ -44,6 +44,7 @@ export const getUserContext = (context: HeaderContextValue): UserContext => {
         status: context.status,
         user: context.user,
         userLinks: context.userLinks,
+        profileLink: context.profileLink,
         notifications: context.notifications,
         onAllRead: context.onAllRead,
         onLogoutClick: context.onLogoutClick,
