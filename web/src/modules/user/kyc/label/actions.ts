@@ -1,4 +1,4 @@
-import { CommonError } from '../../../types';
+import { CommonError } from 'web/src/modules/types';
 import { GET_LABEL_DATA, GET_LABEL_ERROR, GET_LABEL_FETCH } from './constants';
 
 export interface Label {

@@ -1,6 +1,7 @@
-import { MarketsState, TickerEvent } from './public/markets';
-import { OrderBookState } from './public/orderBook';
-import { OrdersState } from './user/orders';
+import { TickerEvent } from './public/markets/types';
+import { MarketsState } from './public/markets/reducer';
+import { OrderBookState } from './public/orderBook/types';
+import { OrdersState } from './user/orders/reducer';
 
 export interface CommonError {
   code: number;
@@ -88,10 +89,10 @@ export interface SessionsMe {
 }
 
 export interface DealStat {
-  cryptocurrency: string,
-  totalCount: number,
-  totalAmount: string,
-  successDeals: number,
-  canceledDeals: number,
-  defeatInDisputes: number,
+  cryptocurrency: string;
+  totalCount: number;
+  totalAmount: string;
+  successDeals: number;
+  canceledDeals: number;
+  defeatInDisputes: number;
 }

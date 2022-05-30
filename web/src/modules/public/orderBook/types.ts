@@ -1,5 +1,5 @@
-import { CommonState, OrderSide, OrderStatusType, OrderType } from '../../types';
-import { MarketId } from '../markets';
+import { CommonState, OrderSide, OrderStatusType, OrderType } from 'web/src/modules/types';
+import { MarketId } from 'web/src/modules/public/markets/types';
 
 export interface OrderBookOrder {
   id: number;
