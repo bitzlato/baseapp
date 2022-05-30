@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import { p2pUrl } from 'web/src/api/config';
+import { buildQueryString } from 'web/src/helpers';
 import { alertFetchError } from 'web/src/helpers/alertFetchError';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import {
@@ -44,3 +45,10 @@ export const useGenerateP2PAddress = () => {
     }
   };
 };
+
+export function useFetchP2PWalletsV2(currency: string | undefined) {
+  return useFetch<P2PWallet[]>(
+    currency ? `${p2pUrl()}/wallets/v2/?${buildQueryString({ currency })}` : null,
+    fetchWithCreds,
+  );
+}
