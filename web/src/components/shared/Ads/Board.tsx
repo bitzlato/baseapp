@@ -1,6 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
 import { Box } from 'web/src/components/ui/Box';
@@ -11,8 +9,8 @@ import { UrlParams, getUrlSearchParams, setUrlSearchParams } from 'web/src/helpe
 import { useAds } from 'web/src/hooks/data/useFetchAds';
 import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/useFetchP2PWallets';
-import { useT } from 'web/src/hooks/useT';
 import { AdvertParams, AdvertType, SeoAdvertType } from 'web/src/modules/p2p/types';
+import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { Ads } from './Ads';
 import { DEFAULT_FILTER, Filter, FilterMobile } from './Filter';
 
@@ -63,9 +61,12 @@ const generateFilterParamsUrl = (type: AdvertType, cryptocurrency: string, curre
 };
 
 export const Board: FC = () => {
-  const t = useT();
-  const history = useHistory();
-  const { filter } = useParams<{ filter?: string }>();
+  const {
+    t,
+    Link,
+    history,
+    params: { filter },
+  } = useAdapterContext<{ filter?: string }>();
   const { getFiatCurrency, fiatCurrencies } = useFiatCurrencies();
   const { data: cryptoCurrencies = [] } = useFetchP2PCryptoCurrencies();
   const { lang, isMobileDevice } = useAppContext();

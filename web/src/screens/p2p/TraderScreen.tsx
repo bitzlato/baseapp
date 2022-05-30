@@ -1,5 +1,5 @@
 import { FC, Suspense } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { Adapter } from 'web/src/components/shared/Adapter';
 import { lazyRetry } from 'web/src/helpers/lazyRetry';
 
@@ -9,10 +9,11 @@ const Trader = lazyRetry(() =>
 
 export const TraderScreen: FC = () => {
   const history = useHistory();
+  const params = useParams();
 
   return (
     <Suspense fallback>
-      <Adapter Link={Link} history={history}>
+      <Adapter Link={Link} history={history} params={params}>
         <Trader />
       </Adapter>
     </Suspense>
