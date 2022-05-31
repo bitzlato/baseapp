@@ -19,7 +19,10 @@ type Product = 'p2p' | 'payment-gateway' | 'cryptoloan' | 'exchange';
 export const getProductLink = (locale: string, product: Product) => {
   switch (product) {
     case 'exchange':
-      return 'https://market.bitzlato.com/';
+      return '/trading';
+
+    case 'p2p':
+      return `/${locale}/p2p`;
 
     default:
       return `https://bitzlato.com/${locale}/${product}`;
