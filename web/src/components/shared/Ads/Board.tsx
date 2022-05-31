@@ -107,7 +107,10 @@ export const Board: FC = () => {
   };
 
   useEffect(() => {
-    if (!cryptoCurrencies.some((currency) => currency.code === filterParams.cryptocurrency)) {
+    if (
+      cryptoCurrencies.length > 0 &&
+      !cryptoCurrencies.some((currency) => currency.code === filterParams.cryptocurrency)
+    ) {
       handleChangeFilter({ cryptocurrency: DEFAULT_FILTER.cryptocurrency, paymethod: undefined });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
