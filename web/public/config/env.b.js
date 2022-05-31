@@ -9,7 +9,11 @@ window.env = {
     finexUrl: 'https://b-www.lgk.one/api/v2/finex',
     applogicUrl: 'https://b-www.lgk.one/api/v2/applogic',
     rangerUrl: 'wss://b-www.lgk.one/api/v2/ranger',
-    accountUrl: 'https://account.b-www.lgk.one/api/private/v1',
+    accountUrl: 'https://b-www.lgk.one/api/whaler/private/v1',
+    accountPublicUrl: 'https://b-www.lgk.one/api/whaler/public/v1',
+    p2pUrl: 'https://b-www.lgk.one/api2/p2p',
+    p2pAuthUrl: 'https://b-www.lgk.one/api2/auth',
+    notificatorUrl: 'wss://b-www.lgk.one/wssb'
   },
   auth0: {
     domain: 'auth.lgk.one',
