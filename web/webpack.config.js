@@ -31,10 +31,11 @@ const extractSemver = (text) => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
-const ASSET_PATH = releaseStage === 'production' ? '/basestatic/' : '/';
+const ASSET_PATH =
+  process.env.ASSET_PATH ?? (process.env.NODE_ENV === 'production' ? '/basestatic/' : '/');
 const PRODUCTION_PUBLIC_PATH = `https://bitzlato.com${ASSET_PATH}`;
 
-let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : `${ASSET_PATH}/marketDocs`; // production or staging
+let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : `${ASSET_PATH}marketDocs`; // production or staging
 if (process.env.MARKET_DOCS_URL) {
   marketDocsUrl = process.env.MARKET_DOCS_URL; // e.g. http://localhost:3004
 } else if (process.env.PROXY_HOST) {
