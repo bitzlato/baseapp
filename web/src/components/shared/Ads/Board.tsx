@@ -2,9 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
 import { Box } from 'web/src/components/ui/Box';
-import { Button } from 'web/src/components/ui/Button';
 import { Pagination } from 'web/src/components/ui/Pagination';
-import { Stack } from 'web/src/components/ui/Stack';
 import { UrlParams, getUrlSearchParams, setUrlSearchParams } from 'web/src/helpers/urlSearch';
 import { useAds } from 'web/src/hooks/data/useFetchAds';
 import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
@@ -62,8 +60,6 @@ const generateFilterParamsUrl = (type: AdvertType, cryptocurrency: string, curre
 
 export const Board: FC = () => {
   const {
-    t,
-    Link,
     history,
     params: { filter },
   } = useAdapterContext<{ filter?: string }>();
@@ -137,20 +133,6 @@ export const Board: FC = () => {
     return null;
   }
 
-  const navs = (
-    <Stack marginRight="4x">
-      <Button as={Link} to="/" color="clarified" active>
-        {t('AD Board')}
-      </Button>
-      <Button as={Link} to="/" color="clarified">
-        {t('My adverts')}
-      </Button>
-      <Button as={Link} to="/" color="clarified">
-        {t('My trades')}
-      </Button>
-    </Stack>
-  );
-
   const ads = (
     <>
       <Ads
@@ -175,13 +157,17 @@ export const Board: FC = () => {
   if (isMobileDevice) {
     return (
       <Box display="flex" flexDirection="column" width="full">
-        <Box m="5x" display="flex" flexDirection="column" gap="6x">
-          {navs}
-          <Box display="flex" flexDirection="column" gap="4x">
-            <FilterMobile params={filterParams} onChange={handleChangeFilter} />
-          </Box>
+        <Box
+          backgroundColor="headerBg"
+          px="5x"
+          py="4x"
+          display="flex"
+          flexDirection="column"
+          gap="4x"
+        >
+          <FilterMobile params={filterParams} onChange={handleChangeFilter} />
         </Box>
-        <Box px="5x" py="4x" backgroundColor="dropdown">
+        <Box px="5x" py="4x" backgroundColor="block">
           {ads}
         </Box>
       </Box>
@@ -190,9 +176,6 @@ export const Board: FC = () => {
 
   return (
     <Container maxWidth="fullhd">
-      <Box display="flex" mt="8x" px="8x">
-        {navs}
-      </Box>
       <Box display="flex" p="8x">
         <Box
           backgroundColor="block"
