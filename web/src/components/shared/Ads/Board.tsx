@@ -195,7 +195,7 @@ export const Board: FC = () => {
       </Box>
       <Box display="flex" p="8x">
         <Box
-          backgroundColor="dropdown"
+          backgroundColor="block"
           p="6x"
           borderRadius="1.5x"
           marginRight="6x"
@@ -203,7 +203,7 @@ export const Board: FC = () => {
         >
           <Filter params={filterParams} onChange={handleChangeFilter} />
         </Box>
-        <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
+        <Box backgroundColor="block" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
           {ads}
         </Box>
       </Box>
