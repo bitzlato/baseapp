@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Market } from '../modules/public/markets';
 import { userOpenOrdersFetch } from '../modules/user/openOrders';
-import { selectUserLoggedIn } from '../modules/user/profile';
+import { selectUserLoggedIn, selectVerifyEmail } from '../modules/user/profile';
 
 export const userOpenOrdersFetchAction = (market: Market | undefined, hideOtherPairs: boolean) => {
   return userOpenOrdersFetch(
@@ -13,10 +13,11 @@ export const userOpenOrdersFetchAction = (market: Market | undefined, hideOtherP
 export const useOpenOrdersFetch = (market: Market | undefined, hideOtherPairs: boolean) => {
   const dispatch = useDispatch();
   const userLoggedIn = useSelector(selectUserLoggedIn);
+  const verifyEmail = useSelector(selectVerifyEmail);
 
   React.useEffect(() => {
-    if (userLoggedIn) {
+    if (userLoggedIn && !verifyEmail) {
       dispatch(userOpenOrdersFetchAction(market, hideOtherPairs));
     }
-  }, [userLoggedIn, market?.id, hideOtherPairs, dispatch]);
+  }, [userLoggedIn, verifyEmail, market?.id, hideOtherPairs, dispatch]);
 };
