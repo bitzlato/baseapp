@@ -4,7 +4,8 @@ import { Spinner } from 'web/src/components/ui/Spinner';
 import { Text } from 'web/src/components/ui/Text';
 import { Button } from 'web/src/components/ui/Button';
 import { Stack } from 'web/src/components/ui/Stack';
-import { useSharedLink, useSharedT } from 'web/src/components/shared/Adapter';
+import { useAdapterContext } from 'web/src/components/shared/Adapter';
+import { useAppContext } from 'web/src/components/app/AppContext';
 
 export const AdsTableHeader: FC = ({ children }) => (
   <Box display="flex" alignItems="center" pb="5x">
@@ -30,8 +31,8 @@ interface Props {
 }
 
 export const AdsTable: FC<Props> = ({ children, header, isLoading }) => {
-  const t = useSharedT();
-  const Link = useSharedLink();
+  const { lang, isMobileDevice } = useAppContext();
+  const { t, Link } = useAdapterContext();
 
   let body;
   if (isLoading) {
@@ -44,11 +45,11 @@ export const AdsTable: FC<Props> = ({ children, header, isLoading }) => {
     body = children;
   } else {
     body = (
-      <Box textAlign="center" py="20x">
+      <Box textAlign="center" py="20x" px="4x">
         <Box mb="6x">
-          <Text>{t('ad.empty')}</Text>
+          <Text variant={isMobileDevice ? 'title' : 'body'}>{t('ad.empty')}</Text>
         </Box>
-        <Button as={Link} to="/">
+        <Button as={Link} to={`/${lang}/p2p/adverts/create`}>
           {t('Create advert')}
         </Button>
       </Box>
