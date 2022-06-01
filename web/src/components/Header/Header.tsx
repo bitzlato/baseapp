@@ -173,7 +173,7 @@ const Header: FC = () => {
       {
         key: 'telegram',
         type: 'external',
-        to: `${p2pURL}/profile/telegram`,
+        to: `/${language}/profile/telegram`,
         icon: 'telegram',
         children: t('Telegram'),
       },
@@ -181,7 +181,7 @@ const Header: FC = () => {
         ? {
             key: 'merch',
             type: 'external',
-            to: `${p2pURL}/merch`,
+            to: `/${language}/merch`,
             icon: 'invoices',
             children: t('Invoices'),
           }

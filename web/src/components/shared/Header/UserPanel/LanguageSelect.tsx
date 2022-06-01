@@ -26,7 +26,7 @@ const icons = {
 export const LanguageSelect: FC = () => {
   const { language, languages, onLanguageChange } = useContext(HeaderContext);
   const renderButton: RenderButtonFn = useCallback(
-    ({ onClick }) => (
+    ({ open, onClick }) => (
       <Box
         as="button"
         type="button"
@@ -36,7 +36,26 @@ export const LanguageSelect: FC = () => {
         color={{ default: 'interactive', hover: 'interactiveHighlighted' }}
         onClick={onClick}
       >
-        <Box as="span" className={s.language}>
+        <Box
+          as="span"
+          className={s.language}
+          borderColor={
+            open
+              ? 'headerLanguageSwitcherHoverBorder'
+              : {
+                  default: 'headerLanguageSwitcherBorder',
+                  hover: 'headerLanguageSwitcherHoverBorder',
+                }
+          }
+          backgroundColor={
+            open
+              ? 'headerLanguageSwitcherHoverBg'
+              : {
+                  default: 'transparent',
+                  hover: 'headerLanguageSwitcherHoverBg',
+                }
+          }
+        >
           {language}
         </Box>
       </Box>

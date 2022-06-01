@@ -9,14 +9,6 @@ export const language = style([
     w: '11x',
     h: '6x',
     borderWidth: '1x',
-    borderColor: {
-      default: 'headerLanguageSwitcherBorder',
-      hover: 'headerLanguageSwitcherHoverBorder',
-    },
-    backgroundColor: {
-      default: 'transparent',
-      hover: 'headerLanguageSwitcherHoverBg',
-    },
     borderStyle: 'solid',
     borderRadius: '1.5x',
     fontSize: 'small',
