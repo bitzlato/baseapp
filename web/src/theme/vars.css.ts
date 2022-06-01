@@ -273,6 +273,8 @@ export const [themeLight, vars] = createTheme({
     bottomTabsIconActive: colors.goldTips,
     bottomTabsText: colors.ebonyClay70,
     bottomTabsTextActive: colors.goldTips,
+
+    layoutBg: colors.white,
   },
 });
 
@@ -483,5 +485,7 @@ export const themeDark = createTheme(vars, {
     bottomTabsIconActive: colors.goldTips,
     bottomTabsText: colors.white50,
     bottomTabsTextActive: colors.goldTips,
+
+    layoutBg: colors.ebonyClay,
   },
 });

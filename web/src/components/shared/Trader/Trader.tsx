@@ -26,14 +26,14 @@ export const Trader: FC = () => {
       <Box display="flex" p="8x" height="full">
         <Box
           display="flex"
-          backgroundColor="dropdown"
+          backgroundColor="layoutBg"
           borderRadius="1.5x"
           marginRight="6x"
           style={{ width: '20%', minWidth: '380px' }}
         >
           <TraderInfo publicName={params.name} />
         </Box>
-        <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
+        <Box backgroundColor="layoutBg" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
           <TraderAds data={data} isLoading={isValidating} />
           {data && !isValidating && (
             <Pagination

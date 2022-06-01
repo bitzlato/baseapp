@@ -181,7 +181,7 @@ export const Board: FC = () => {
             <FilterMobile params={filterParams} onChange={handleChangeFilter} />
           </Box>
         </Box>
-        <Box px="5x" py="4x" backgroundColor="dropdown">
+        <Box px="5x" py="4x" backgroundColor="layoutBg">
           {ads}
         </Box>
       </Box>
@@ -195,7 +195,7 @@ export const Board: FC = () => {
       </Box>
       <Box display="flex" p="8x">
         <Box
-          backgroundColor="dropdown"
+          backgroundColor="layoutBg"
           p="6x"
           borderRadius="1.5x"
           marginRight="6x"
@@ -203,7 +203,7 @@ export const Board: FC = () => {
         >
           <Filter params={filterParams} onChange={handleChangeFilter} />
         </Box>
-        <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
+        <Box backgroundColor="layoutBg" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
           {ads}
         </Box>
       </Box>

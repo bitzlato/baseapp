@@ -277,7 +277,7 @@ export const Ad: FC = () => {
       <Box
         display="flex"
         flexDirection="column"
-        backgroundColor="dropdown"
+        backgroundColor="layoutBg"
         m="8x"
         borderRadius="1.5x"
         overflow="hidden"

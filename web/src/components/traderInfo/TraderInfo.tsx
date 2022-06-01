@@ -48,7 +48,7 @@ export const TraderInfo: FC<TraderInfoProps> = ({ publicName }) => {
       p="3x"
       display="flex"
       flexDirection="column"
-      backgroundColor="dropdown"
+      backgroundColor="layoutBg"
       className={styles.sideBlock}
     >
       <Box mb="4x" pb="4x" borderBottomWidth="1x" borderColor="traderBorder" borderStyle="solid">
