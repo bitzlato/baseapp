@@ -4,6 +4,10 @@ import { P2PCurrencies, P2PCurrencyOption } from 'web/src/modules/public/currenc
 import { MoneyCurrency } from 'web/src/types';
 import { useFetch, FetchResponse } from './useFetch';
 
+export type FiatCurrencies = Record<string, MoneyCurrency>;
+
+const DEFAULT_FIAT_MINOR_UNIT = 2;
+
 export const useFetchP2PCurrencies = () => {
   return useFetch<P2PCurrencies>(`${p2pUrl()}/public/refs/currencies`);
 };
@@ -29,9 +33,10 @@ export const useP2PCurrencyOptions = (): FetchResponse<P2PCurrencyOption[]> => {
 
 export const useFiatCurrencies = (): {
   getFiatCurrency: (code: string) => MoneyCurrency;
-  fiatCurrencies: Record<string, MoneyCurrency>;
+  fiatCurrencies?: FiatCurrencies | undefined;
+  error: unknown;
 } => {
-  const { data } = useFetchP2PCurrencies();
+  const { data, error } = useFetchP2PCurrencies();
 
   const fiatCurrencies = useMemo(() => {
     if (data) {
@@ -40,30 +45,25 @@ export const useFiatCurrencies = (): {
           code: P2PCurrency.code,
           name: P2PCurrency.name,
           sign: P2PCurrency.sign,
-          minorUnit: 2,
+          minorUnit: DEFAULT_FIAT_MINOR_UNIT,
         };
 
         return acc;
       }, {});
     }
 
-    return {};
+    return undefined;
   }, [data]);
   const getFiatCurrency = useCallback(
-    (code: string): MoneyCurrency => {
-      const maybeMoneyCurrency = fiatCurrencies[code];
-
-      return (
-        maybeMoneyCurrency ?? {
-          code,
-          name: code,
-          sign: code,
-          minorUnit: 2,
-        }
-      );
-    },
+    (code: string): MoneyCurrency =>
+      fiatCurrencies?.[code] ?? {
+        code,
+        name: code,
+        sign: code,
+        minorUnit: DEFAULT_FIAT_MINOR_UNIT,
+      },
     [fiatCurrencies],
   );
 
-  return { getFiatCurrency, fiatCurrencies };
+  return { getFiatCurrency, fiatCurrencies, error };
 };
