@@ -1,7 +1,7 @@
 import { createContext, PropsWithChildren, ReactNode, useContext, useMemo } from 'react';
 import type { Link as LinkReactRouter } from 'react-router-dom';
 import type { History, LocationState } from 'history';
-import { useLanguage } from '../app/AppContext';
+import { useLanguage } from 'web/src/components/app/AppContext';
 import { createT, SharedTranslateFn } from './sharedI18n';
 
 interface AdapterCntextValue<TParams = {}> {

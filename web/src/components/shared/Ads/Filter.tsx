@@ -26,7 +26,6 @@ export const DEFAULT_FILTER: Omit<AdvertParams, 'lang'> = {
   limit: 15,
   skip: 0,
   type: 'purchase',
-  // TODO: get user default currency or from locale
   currency: 'RUB',
   cryptocurrency: 'BTC',
   isOwnerVerificated: false,
@@ -78,7 +77,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
   );
 
   const { fiatCurrencies, getFiatCurrency } = useFiatCurrencies();
-  const fiats = useMemo(() => Object.values(fiatCurrencies), [fiatCurrencies]);
+  const fiats = useMemo(() => Object.values(fiatCurrencies ?? {}), [fiatCurrencies]);
   const selectedFiatCurrency = useMemo(() => {
     return fiats.find((d) => d.code === params.currency) ?? null;
   }, [fiats, params.currency]);
@@ -152,7 +151,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     <>
       <Box display="flex" flexDirection="column" gap="4x">
         <InputAmountWithCurrency
-          label={t('Amount')}
+          label={t('AmountWithSymbol', { symbol: params.cryptocurrency })}
           amount={amountCrypto}
           currencyList={cryptoCurrencies}
           selectedCurrency={selectedCryptoCurrency}
@@ -161,7 +160,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
           onChangeCurrency={(v) => onChange({ cryptocurrency: v.code, paymethod: undefined })}
         />
         <InputAmountWithCurrency
-          label={t('Amount')}
+          label={t('AmountWithSymbol', { symbol: params.currency })}
           amount={amount}
           currencyList={fiats}
           selectedCurrency={selectedFiatCurrency}
