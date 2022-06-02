@@ -1,10 +1,9 @@
 import { useRef } from 'react';
-import cn from 'classnames';
 import { Box } from 'web/src/components/ui/Box';
 import { Link, RenderNavLinkComponent } from 'web/src/components/shared/sharedTypes';
 import { useFocusWithin } from 'web/src/hooks/useFocusWithin';
 import { NavigationTabs } from './NavigationTabs';
-import * as s from './NavigationItem.css';
+import { NavigationLink } from './NavigationLink';
 
 interface Props {
   item: Link;
@@ -53,41 +52,29 @@ export const NavigationItem = ({
     onBlurWithin: closeSubmenu,
   });
 
-  const className = cn(s.item, !open && active && s.itemActive, open && s.itemHover);
+  if (item.type !== 'tab') {
+    return (
+      <NavigationLink
+        active={active}
+        open={open}
+        link={item}
+        renderNavLinkComponent={renderNavLinkComponent}
+      />
+    );
+  }
 
   return (
-    <Box
-      height="full"
-      onMouseEnter={openSubmenu}
-      onMouseLeave={closeSubmenuDelayed}
-      {...focusWithinProps}
-    >
-      {item.type === 'internal' &&
-        renderNavLinkComponent({
-          key: item.key,
-          className,
-          activeClassName: s.itemActive,
-          to: item.to,
-          children: item.children,
-        })}
+    <Box onMouseEnter={openSubmenu} onMouseLeave={closeSubmenuDelayed} {...focusWithinProps}>
+      <NavigationLink
+        active={active}
+        open={open}
+        link={{ key: item.key, children: item.children, ...(item.link ?? {}) }}
+        renderNavLinkComponent={renderNavLinkComponent}
+      />
 
-      {item.type === 'external' && (
-        <Box as="a" className={className} href={item.to}>
-          {item.children}
-        </Box>
-      )}
-
-      {item.type === 'tab' && (
-        <>
-          <Box as="button" type="button" className={className}>
-            {item.children}
-          </Box>
-
-          {item.tabs && open ? (
-            <NavigationTabs tabs={item.tabs} renderNavLinkComponent={renderNavLinkComponent} />
-          ) : null}
-        </>
-      )}
+      {item.tabs && open ? (
+        <NavigationTabs tabs={item.tabs} renderNavLinkComponent={renderNavLinkComponent} />
+      ) : null}
     </Box>
   );
 };

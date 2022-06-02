@@ -37,7 +37,8 @@ import { useFetchP2PNotifications } from 'web/src/hooks/data/useFetchP2PNotifica
 import { NotificationModal } from 'web/src/containers/NotificationModal/NotificationModal';
 import { Box } from 'web/src/components/ui/Box';
 import { notificationInfo } from 'web/src/components/Header/notificationInfo';
-import { BackButton } from 'web/src/components/shared/Header/BackButton';
+import { NavigationLink } from 'web/src/components/shared/Header/NavigationLink';
+import ChevronLeftIcon from 'web/src/assets/svg/ChevronLeftIcon.svg';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
@@ -66,12 +67,6 @@ const Header: FC = () => {
   const isTradingPage = pathname.includes('/trading');
   const p2pURL = getLinkToP2P(language);
   const merchantClient = (user.bitzlato_user?.roles ?? []).includes('merchantClient');
-
-  const handleBack = () => {
-    if (history.length) {
-      history.goBack();
-    }
-  };
 
   const translate = useCallback(
     (key: string) => {
@@ -243,6 +238,10 @@ const Header: FC = () => {
     {
       key: 'p2p',
       type: 'tab',
+      link: {
+        type: 'external',
+        to: `${p2pURL}/sell-btc-rub`,
+      },
       children: t('P2P'),
       tabs: [
         {
@@ -268,6 +267,10 @@ const Header: FC = () => {
     {
       key: 'exchange',
       type: 'tab',
+      link: {
+        type: 'internal',
+        to: '/trading',
+      },
       children: t('Exchange'),
       tabs: [
         {
@@ -320,8 +323,24 @@ const Header: FC = () => {
       )}
       <SharedHeader
         backButton={
-          isTradingPage && history.length > 0 ? (
-            <BackButton title={t('Back')} onClick={handleBack} />
+          isTradingPage ? (
+            <NavigationLink
+              variant="withIcon"
+              link={{
+                key: 'wallets',
+                type: 'internal',
+                to: '/wallets',
+                children: (
+                  <>
+                    <ChevronLeftIcon />
+                    <Box as="span" fontWeight="strong">
+                      {t('Back')}
+                    </Box>
+                  </>
+                ),
+              }}
+              renderNavLinkComponent={renderNavLinkComponent}
+            />
           ) : undefined
         }
         logoLightURL={window.env.logoUrl}

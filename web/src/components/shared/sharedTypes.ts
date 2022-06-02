@@ -34,7 +34,7 @@ export type RenderNavLinkComponent = (props: {
 export type LinkType = 'internal' | 'external';
 export type CommonLink = {
   key: string;
-  children: string;
+  children: string | ReactNode;
 };
 export type LinkNav = CommonLink & {
   type: LinkType;
@@ -42,6 +42,10 @@ export type LinkNav = CommonLink & {
 };
 export type LinkTabs = CommonLink & {
   type: 'tab';
+  link?: {
+    type: LinkType;
+    to: string;
+  };
   tabs: LinkNav[];
 };
 export type Link = LinkNav | LinkTabs;
