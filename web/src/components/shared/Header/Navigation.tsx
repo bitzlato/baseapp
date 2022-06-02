@@ -23,33 +23,34 @@ export const findActiveTabByPathname = (navLinks: Links, pathname: string | unde
 };
 
 export const Navigation: FC<Props> = ({ navLinks, pathname, renderNavLinkComponent }) => {
-  const [openedTabKey, setOpenedTabKey] = useState<null | string>(null);
-  const [nextTabToOpen, setNextTabToOpen] = useState<null | string>(null);
+  const [tabOpened, setTabOpened] = useState<{ current: string | null; next: string | null }>({
+    current: null,
+    next: null,
+  });
   const activeTab = findActiveTabByPathname(navLinks, pathname);
 
   useEffect(() => {
-    if (openedTabKey === null && nextTabToOpen !== null) {
-      setOpenedTabKey(nextTabToOpen);
-      setNextTabToOpen(null);
+    if (tabOpened.current === null && tabOpened.next !== null) {
+      setTabOpened({ current: tabOpened.next, next: null });
     }
-  }, [openedTabKey, nextTabToOpen]);
+  }, [tabOpened]);
 
   const handleOpenTab = (key: string) => {
-    if (openedTabKey) {
-      setNextTabToOpen(key);
-    } else {
-      setOpenedTabKey(key);
-    }
+    setTabOpened((currentTabOpened) => {
+      return {
+        current: currentTabOpened.current ?? key,
+        next: currentTabOpened.current ? key : currentTabOpened.next,
+      };
+    });
   };
 
   const handleCloseTab = (key: string) => {
-    if (openedTabKey === key) {
-      setOpenedTabKey(null);
-    }
-
-    if (nextTabToOpen === key) {
-      setNextTabToOpen(null);
-    }
+    setTabOpened((currentTabOpened) => {
+      return {
+        current: currentTabOpened.current === key ? null : currentTabOpened.current,
+        next: currentTabOpened.next === key ? null : currentTabOpened.next,
+      };
+    });
   };
 
   return (
@@ -65,7 +66,7 @@ export const Navigation: FC<Props> = ({ navLinks, pathname, renderNavLinkCompone
             key={item.key}
             item={item}
             active={item.key === activeTab?.key}
-            open={item.key === openedTabKey}
+            open={item.key === tabOpened.current}
             renderNavLinkComponent={renderNavLinkComponent}
             onOpen={handleOpenTab}
             onClose={handleCloseTab}
