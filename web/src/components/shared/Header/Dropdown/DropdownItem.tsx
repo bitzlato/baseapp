@@ -23,7 +23,7 @@ const icons = {
 type DropdownLinkType = {
   type: LinkType;
   to: string;
-  children: string;
+  children: ReactNode | string;
 };
 type DropdownLinkTypeWithRenderProps = DropdownLinkType &
   (

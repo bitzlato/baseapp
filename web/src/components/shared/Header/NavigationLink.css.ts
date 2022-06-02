@@ -1,10 +1,10 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 import { sprinkles } from 'web/src/theme/sprinkles.css';
 import { responsiveStyle } from 'web/src/theme/themeUtils';
-import { headerFontSizes } from 'web/src/theme/vars.css';
+import { headerFontSizes, sizeVars } from 'web/src/theme/vars.css';
 import * as resetStyles from 'web/src/theme/reset.css';
 
-export const item = style([
+export const itemBase = style([
   resetStyles.base,
   sprinkles({
     color: {
@@ -26,20 +26,39 @@ export const item = style([
     py: '5x',
     fontWeight: 'strong',
   }),
-  responsiveStyle({
-    mobile: {
-      paddingLeft: '12px',
-      paddingRight: '12px',
-    },
-    desktop: {
-      paddingLeft: '24px',
-      paddingRight: '24px',
-    },
-  }),
   {
     fontSize: headerFontSizes.tabTitle,
   },
 ]);
+
+export const item = styleVariants({
+  default: [
+    itemBase,
+    responsiveStyle({
+      mobile: {
+        paddingLeft: sizeVars['3x'],
+        paddingRight: sizeVars['3x'],
+      },
+      desktop: {
+        paddingLeft: sizeVars['6x'],
+        paddingRight: sizeVars['6x'],
+      },
+    }),
+  ],
+  withIcon: [
+    itemBase,
+    responsiveStyle({
+      mobile: {
+        paddingLeft: sizeVars['2x'],
+        paddingRight: sizeVars['3x'],
+      },
+      desktop: {
+        paddingLeft: sizeVars['4x'],
+        paddingRight: sizeVars['6x'],
+      },
+    }),
+  ],
+});
 
 export const itemActive = sprinkles({
   color: { default: 'headerLinkTextActive', hover: 'headerLinkTextHover' },
