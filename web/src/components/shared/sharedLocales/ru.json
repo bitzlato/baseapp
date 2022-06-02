@@ -78,10 +78,13 @@
   "Bitzlato fee": "Комиссия Bitzlato",
 
   "Amount": "Сумма",
+  "AmountWithSymbol": "Сумма ({symbol})",
   "Nothing found": "Ничего не найдено",
   "Search": "Поиск",
   "Attention!": "Внимание!",
   "Do you want to continue?": "Вы желаете продолжить?",
   "Cancel": "Отмена",
-  "Confirm": "Подтвердить"
+  "Confirm": "Подтвердить",
+  "Filter": "Фильтр",
+  "Apply": "Применить"
 }
