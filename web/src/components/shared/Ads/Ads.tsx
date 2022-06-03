@@ -20,7 +20,7 @@ import {
   AdsTableColumn,
   AdsTableHeaderColumn,
 } from 'web/src/components/shared/AdsTable/AdsTableColumn';
-import { useAppContext, useIsMobileDevice } from 'web/src/components/app/AppContext';
+import { useAppContext } from 'web/src/components/app/AppContext';
 import { p2pUrl } from 'web/src/api/config';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { OnlineStatusByLastActivity } from './OnlineStatus';
@@ -109,7 +109,7 @@ interface Props {
 
 export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, onRefresh }) => {
   const { t, Link } = useAdapterContext();
-  const isMobileDevice = useIsMobileDevice();
+  const { isMobileDevice, user, lang } = useAppContext();
 
   const buttonRefresh = (
     <Button variant="text" color="clarified" size="small" onClick={onRefresh}>
@@ -174,7 +174,17 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
                 <P2PFiatFormat money={ad.limitCurrency.max} cryptoCurrency={ad.cryptoCurrency} />
               </>
             );
-            const exchangeButton = <AdExchangeButton ad={ad} />;
+            const publicName =
+              user?.bitzlato_user?.user_profile.public_name ??
+              user?.bitzlato_user?.user_profile.generated_name;
+            const actionButton =
+              ad.owner === publicName ? (
+                <Button as={Link} to={`/${lang}/p2p/adverts/${ad.id}`} fullWidth={isMobileDevice}>
+                  {t('Edit')}
+                </Button>
+              ) : (
+                <AdExchangeButton ad={ad} />
+              );
 
             return isMobileDevice ? (
               <Box key={ad.id} p="4x" backgroundColor="adBg" borderRadius="1.5x">
@@ -198,7 +208,7 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
                     </Text>
                     {limit}
                   </Box>
-                  {exchangeButton}
+                  {actionButton}
                 </Stack>
               </Box>
             ) : (
@@ -210,7 +220,7 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
                 <AdsTableColumn size="medium">{rate}</AdsTableColumn>
                 <AdsTableColumn size="small">{limit}</AdsTableColumn>
                 <AdsTableColumn size="large" display="flex" justifyContent="flex-end">
-                  <Box pr="4x">{exchangeButton}</Box>
+                  <Box pr="4x">{actionButton}</Box>
                 </AdsTableColumn>
               </AdsTableRow>
             );
