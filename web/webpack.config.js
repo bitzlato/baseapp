@@ -277,6 +277,10 @@ module.exports = {
         './Stack': './src/components/ui/Stack',
         './Text': './src/components/ui/Text',
         './getThemeClassName': './src/theme/getThemeClassName',
+        './AppContext': './src/components/app/AppContext',
+        './Adapter': './src/components/shared/Adapter',
+        './BoardScreen': './src/components/shared/Ads/Board',
+        './fetch': './src/helpers/fetch',
       },
       shared: {
         react: { requiredVersion: deps.react, singleton: true },
