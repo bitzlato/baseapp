@@ -1,7 +1,6 @@
 import { FC, ReactElement } from 'react';
 import { defaultFormatOptions, FormatOptions, Money } from '@bitzlato/money-js';
-import { useSelector } from 'react-redux';
-import { selectCurrentLanguage } from 'web/src/modules';
+import { useLanguage } from 'web/src/components/app/AppContext';
 import { getFormatOptionsByLanguage } from './getFormatOptionsByLanguage';
 import s from './AmountFormat.postcss';
 
@@ -13,7 +12,7 @@ export interface AmountFormatProps extends FormatOptions {
 }
 
 export const AmountFormat: FC<AmountFormatProps> = ({ money, children, ...options }) => {
-  const language = useSelector(selectCurrentLanguage);
+  const language = useLanguage();
   const formatOptions = {
     ...getFormatOptionsByLanguage(language),
     ...options,
