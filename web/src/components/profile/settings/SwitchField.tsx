@@ -4,6 +4,7 @@ import { Box } from 'web/src/components/ui/Box';
 import { Switch } from 'web/src/components/form/Switch';
 
 interface Props {
+  alignItems?: 'center' | 'flex-start' | undefined;
   defaultValue?: boolean | undefined;
   id: string;
   label: string;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const SwitchField: FC<Props> = ({
+  alignItems = 'center',
   defaultValue = false,
   id,
   label,
@@ -48,7 +50,7 @@ export const SwitchField: FC<Props> = ({
   }
 
   return (
-    <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Box display="flex" justifyContent="space-between" alignItems={alignItems}>
       <Box mr="4x">
         <Box as="label" htmlFor={id} display="block" mb="2x">
           <Text variant="label">{label}</Text>
