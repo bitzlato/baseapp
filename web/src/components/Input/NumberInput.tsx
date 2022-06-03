@@ -8,7 +8,7 @@ import s from './TextInput.postcss';
 export const NumberInput: FC<TextInputProps> = ({ className, ...rest }) => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
   if (isMobileDevice) {
-    rest.type = 'number';
+    rest.inputmode = 'decimal';
   }
   return <TextInput {...rest} className={cn(s.textInputNumber, className)} />;
 };
