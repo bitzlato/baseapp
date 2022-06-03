@@ -10,6 +10,7 @@ export interface TextInputProps
   label?: ReactNode;
   placeholder?: string | undefined;
   onChange: (value: string) => void;
+  onPressEnterKey?: () => void | undefined;
   inputClassName?: string;
   labelVisible?: boolean | undefined;
   error?: ReactNode;
@@ -23,6 +24,7 @@ export const TextInput: FC<TextInputProps> = ({
   label,
   placeholder,
   onChange,
+  onPressEnterKey,
   className,
   inputClassName,
   labelVisible,
@@ -31,6 +33,12 @@ export const TextInput: FC<TextInputProps> = ({
   color,
   ...rest
 }) => {
+  const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onPressEnterKey?.();
+    }
+  };
+
   return (
     <div className={cn(s.textInput, noResize && s.textInputNoResize, className)}>
       <Box ellipsis as="label">
@@ -41,6 +49,7 @@ export const TextInput: FC<TextInputProps> = ({
         {...rest}
         className={cn(color && s[`inputColor${capitalize(color)}`], inputClassName as string)}
         onChange={(e) => onChange(e.target.value)}
+        onKeyPress={onKeyPress}
         placeholder={placeholder ?? (!labelVisible ? label?.toString() : undefined)}
       />
       {error && <p className={s.textInputError}>{error}</p>}

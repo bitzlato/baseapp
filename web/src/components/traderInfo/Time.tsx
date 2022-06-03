@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Text } from 'web/src/components/ui/Text';
 import { localeDate } from 'web/src/helpers';
+import * as s from './Time.css';
 
 interface TimeProps {
   date: number;
@@ -13,5 +14,5 @@ export const Time: FC<TimeProps> = ({ date }) => {
   const dateFormated =
     (diff > 0 ? `${localeDate(date, 'veryShortDate')}, ` : '') + localeDate(date, 'time');
 
-  return <Text>{dateFormated}</Text>;
+  return <Text className={s.timeText}>{dateFormated}</Text>;
 };

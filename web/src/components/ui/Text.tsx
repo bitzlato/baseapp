@@ -20,6 +20,7 @@ interface Props
         | 'color'
         | 'lineHeight'
         | 'textOverflow'
+        | 'wordBreak'
       >
     > {
   as?: ElementType | undefined;

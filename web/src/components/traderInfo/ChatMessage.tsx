@@ -9,6 +9,7 @@ export const ChatMassege: FC<ChatMessageType> = ({ id, created, type, message })
   return (
     <Box
       display="flex"
+      mt="4x"
       mb="2x"
       flexDirection="column"
       alignItems={type === 'In' ? 'flex-end' : 'flex-start'}
@@ -16,13 +17,15 @@ export const ChatMassege: FC<ChatMessageType> = ({ id, created, type, message })
     >
       <Time date={created} />
       <Box
-        mt="2x"
+        mt="1x"
         px="6x"
         py="3x"
         backgroundColor={type === 'In' ? 'chatFromMsgBg' : 'chatToMsgBg'}
         className={type === 'In' ? styles.chatFromMsgBlock : styles.chatToMsgBlock}
       >
-        <Text color={type === 'In' ? 'chatFromMsgText' : 'chatToMsgText'}>{message}</Text>
+        <Text color={type === 'In' ? 'chatFromMsgText' : 'chatToMsgText'} wordBreak="break-word">
+          {message}
+        </Text>
       </Box>
     </Box>
   );
