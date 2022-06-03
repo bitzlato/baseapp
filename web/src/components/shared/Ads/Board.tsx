@@ -11,6 +11,7 @@ import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/useFetchP2PWalle
 import { AdvertParams, AdvertType, SeoAdvertType } from 'web/src/modules/p2p/types';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { P2PCurrency } from 'web/src/modules/p2p/wallet-types';
+import { Language } from 'web/src/types';
 import { Ads } from './Ads';
 import { DEFAULT_FILTER, Filter, FilterMobile } from './Filter';
 import * as s from './Board.css';
@@ -56,9 +57,14 @@ const getFilterPathParams = (
     : undefined;
 };
 
-const generateFilterParamsUrl = (type: AdvertType, cryptocurrency: string, currency: string) => {
+const generateFilterParamsUrl = (
+  lang: Language,
+  type: AdvertType,
+  cryptocurrency: string,
+  currency: string,
+) => {
   return (
-    `/board/${adTypeToSeo[type]}-${cryptocurrency}-${currency}`.toLowerCase() +
+    `/${lang}/p2p/${adTypeToSeo[type]}-${cryptocurrency}-${currency}`.toLowerCase() +
     window.location.search
   );
 };
@@ -88,13 +94,14 @@ const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies }: BoardBodyProps) =>
     if (!filter) {
       history.replace(
         generateFilterParamsUrl(
+          lang,
           DEFAULT_FILTER.type,
           DEFAULT_FILTER.cryptocurrency,
           user?.bitzlato_user?.user_profile.currency ?? DEFAULT_FILTER.currency,
         ),
       );
     }
-  }, [filter, history, user?.bitzlato_user?.user_profile.currency]);
+  }, [filter, history, lang, user?.bitzlato_user?.user_profile.currency]);
 
   const handleChangeFilter = (upd: Partial<AdvertParams>) => {
     setFilterParams((prev) => ({ ...prev, ...upd }));
@@ -102,6 +109,7 @@ const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies }: BoardBodyProps) =>
     if (upd.type || upd.cryptocurrency || upd.currency) {
       history.push(
         generateFilterParamsUrl(
+          lang,
           upd.type ?? filterParams.type,
           upd.cryptocurrency ?? filterParams.cryptocurrency,
           upd.currency ?? filterParams.currency,
@@ -182,7 +190,7 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
           {ads}
         </Box>
       </Box>
-      <Box className={s.layoutWithSidebar} p="8x">
+      <Box className={s.layoutWithSidebar} p="8x" width="full">
         <Box
           className={s.filter}
           backgroundColor="block"
@@ -213,7 +221,7 @@ export const Board: FC = () => {
     <Container maxWidth="fullhd">
       {fiatCurrenciesValue.fiatCurrencies === undefined ||
       cryptoCurrenciesValue.data === undefined ? (
-        <Box display="flex" justifyContent="center" py="20x">
+        <Box display="flex" justifyContent="center" py="20x" width="full">
           <Spinner />
         </Box>
       ) : (

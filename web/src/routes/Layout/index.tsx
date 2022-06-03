@@ -332,7 +332,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               key="BoardScreen"
               loading={userLoading}
               isLogged={isLoggedIn}
-              path="/board/:filter?"
+              path={['/p2p/:filter?', '/:lang/p2p/:filter?']}
               component={BoardScreen}
             />,
             <PrivateRoute
