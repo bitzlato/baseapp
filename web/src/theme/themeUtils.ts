@@ -33,6 +33,7 @@ export const responsiveStyle = ({
   tablet,
   desktop,
   desktopXL,
+  desktopXXL,
   desktopXXXL,
 }: ResponsiveStyle): StyleRule => {
   let styles: StyleRule = {};
@@ -53,6 +54,10 @@ export const responsiveStyle = ({
 
     if (desktopXL) {
       styles['@media'][queries.desktopXL] = desktopXL;
+    }
+
+    if (desktopXXL) {
+      styles['@media'][queries.desktopXXL] = desktopXXL;
     }
 
     if (desktopXXXL) {

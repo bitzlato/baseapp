@@ -16,7 +16,7 @@ const interpolate = (template: string, values: Record<string, string | number>) 
     const key = placeholder.slice(1, -1);
     const value = values[key];
 
-    return value ? value.toString() : placeholder;
+    return value !== undefined ? value.toString() : placeholder;
   });
 
 export const createT = (language: Language): SharedTranslateFn => {
