@@ -10,14 +10,17 @@ import {
 } from 'web/src/modules/p2p/types';
 import { useCryptoCurrencies } from 'web/src/hooks/useCryptoCurrencies';
 import { Money } from '@bitzlato/money-js';
+import { useUser } from 'web/src/components/app/AppContext';
 import { useFetch } from './useFetch';
 import { useFiatCurrencies } from './useFetchP2PCurrencies';
 
-export const useFetchAds = (params: AdvertParams) =>
-  useFetch<P2PList<AdvertSource>>(
-    `${p2pUrl()}/exchange/dsa/?${buildQueryString(params)}`,
+export const useFetchAds = (params: AdvertParams) => {
+  const user = useUser();
+  return useFetch<P2PList<AdvertSource>>(
+    `${p2pUrl()}${user === undefined ? '/public' : ''}/exchange/dsa/?${buildQueryString(params)}`,
     fetchWithCreds,
   );
+};
 
 export const useAds = (params: AdvertParams) => {
   const { getFiatCurrency } = useFiatCurrencies();

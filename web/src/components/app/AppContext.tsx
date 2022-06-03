@@ -5,7 +5,7 @@ import { Language, Theme } from 'web/src/types';
 interface AppContextValue {
   theme: Theme;
   lang: Language;
-  user?: User;
+  user?: User | undefined;
   isMobileDevice: boolean;
   handleFetchError: (error: unknown) => void;
 }

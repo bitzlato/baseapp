@@ -9,8 +9,8 @@ import { useCryptoCurrencies } from './useCryptoCurrencies';
 export interface P2PWalletOption {
   code: string;
   name: string;
-  balance: Money;
-  worth: Money;
+  balance?: Money | undefined;
+  worth?: Money | undefined;
 }
 
 export function useP2PWalletOptions(
@@ -22,25 +22,27 @@ export function useP2PWalletOptions(
 
   const userCurrency = user?.bitzlato_user?.user_profile.currency;
   const { data: wallets = [] } = useFetchP2PWalletsV2(userCurrency);
+  const { data: cryptoCurrencies = [] } = useFetchP2PCryptoCurrencies(); // TODO: merge with useCryptoCurrencies
 
-  const { data: cryptos = [] } = useFetchP2PCryptoCurrencies();
-
-  const cryptoCurrencies: P2PWalletOption[] = useMemo(() => {
-    return wallets.map((w) => {
-      const name = cryptos.find((c) => c.code === w.cryptocurrency)?.name ?? w.cryptocurrency;
+  const walletOptions: P2PWalletOption[] = useMemo(() => {
+    return cryptoCurrencies.map(({ code, name }) => {
+      const maybeWallet = wallets.find((wallet) => wallet.cryptocurrency === code);
       return {
-        code: w.cryptocurrency,
+        code,
         name,
-        balance: createMoney(w.balance, getCryptoCurrency(w.cryptocurrency)),
-        worth: createMoney(w.worth.value, getFiatCurrency(w.worth.currency)),
+        balance: maybeWallet
+          ? createMoney(maybeWallet.balance, getCryptoCurrency(maybeWallet.cryptocurrency))
+          : undefined,
+        worth: maybeWallet
+          ? createMoney(maybeWallet.worth.value, getFiatCurrency(maybeWallet.worth.currency))
+          : undefined,
       };
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wallets.length, cryptos.length]);
+  }, [cryptoCurrencies, wallets, getCryptoCurrency, getFiatCurrency]);
 
-  const selectedCryptoCurrency = useMemo(() => {
-    return cryptoCurrencies.find((d) => d.code === cryptocurrency) ?? null;
-  }, [cryptoCurrencies, cryptocurrency]);
+  const selectedWalletOption = useMemo(() => {
+    return walletOptions.find((option) => option.code === cryptocurrency) ?? null;
+  }, [cryptocurrency, walletOptions]);
 
-  return { selectedCryptoCurrency, cryptoCurrencies };
+  return { selectedWalletOption, walletOptions };
 }

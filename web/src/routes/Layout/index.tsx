@@ -328,10 +328,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
       ...(process.env.REACT_APP_RELEASE_STAGE === 'development'
         ? [
-            <PrivateRoute
+            <Route
               key="BoardScreen"
-              loading={userLoading}
-              isLogged={isLoggedIn}
               path={['/p2p/:filter?', '/:lang/p2p/:filter?']}
               component={BoardScreen}
             />,
