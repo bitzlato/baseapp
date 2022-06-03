@@ -184,6 +184,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
         label={t('Verified users')}
         helpText={t('ad.verified.info')}
         value={params.isOwnerVerificated}
+        alignItems="flex-start"
         onChange={(v) => onChange({ isOwnerVerificated: v })}
       />
       <SwitchField
@@ -191,6 +192,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
         label={t('Trusted users')}
         helpText={t('ad.trusted.info')}
         value={params.isOwnerTrusted}
+        alignItems="flex-start"
         onChange={(v) => onChange({ isOwnerTrusted: v })}
       />
       <SwitchField
@@ -198,6 +200,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
         label={t('Active users')}
         helpText={t('ad.active.info')}
         value={params.isOwnerActive}
+        alignItems="flex-start"
         onChange={(v) => onChange({ isOwnerActive: v })}
       />
     </>
