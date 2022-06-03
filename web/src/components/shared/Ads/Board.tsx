@@ -13,6 +13,7 @@ import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { P2PCurrency } from 'web/src/modules/p2p/wallet-types';
 import { Ads } from './Ads';
 import { DEFAULT_FILTER, Filter, FilterMobile } from './Filter';
+import * as s from './Board.css';
 
 export const URL_PARAMS: UrlParams<
   Omit<AdvertParams, 'lang' | 'type' | 'cryptocurrency' | 'currency'>
@@ -127,7 +128,6 @@ const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies }: BoardBodyProps) =>
 };
 
 export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies }) => {
-  const { isMobileDevice } = useAppContext();
   const { filterParams, handleChangeFilter } = useBoardFilter({ fiatCurrencies, cryptoCurrencies });
   const { data, error, isValidating, mutate } = useAds(filterParams);
 
@@ -165,9 +165,9 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
     </>
   );
 
-  if (isMobileDevice) {
-    return (
-      <Box display="flex" flexDirection="column" width="full">
+  return (
+    <>
+      <Box className={s.layoutWithoutSidebar} flexDirection="column" width="full">
         <Box
           backgroundColor="headerBg"
           px="5x"
@@ -182,24 +182,21 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
           {ads}
         </Box>
       </Box>
-    );
-  }
-
-  return (
-    <Box display="flex" p="8x">
-      <Box
-        backgroundColor="block"
-        p="6x"
-        borderRadius="1.5x"
-        marginRight="6x"
-        style={{ width: '20%', minWidth: '380px' }}
-      >
-        <Filter params={filterParams} onChange={handleChangeFilter} />
+      <Box className={s.layoutWithSidebar} p="8x">
+        <Box
+          className={s.filter}
+          backgroundColor="block"
+          p="6x"
+          borderRadius="1.5x"
+          marginRight="6x"
+        >
+          <Filter params={filterParams} onChange={handleChangeFilter} />
+        </Box>
+        <Box backgroundColor="block" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
+          {ads}
+        </Box>
       </Box>
-      <Box backgroundColor="block" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
-        {ads}
-      </Box>
-    </Box>
+    </>
   );
 };
 
