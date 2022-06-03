@@ -22,10 +22,9 @@ export const Chat: FC<ChatProps> = ({ messages, onSendMessage, onSendFile, isSen
   const [message, setMessage] = useState<string>('');
   const messageBoxRef = useRef<HTMLDivElement>(null);
 
-  const onSend = async () => {
+  const onSend = () => {
     if (message && message.length > 0) {
-      await onSendMessage?.(message);
-      setMessage('');
+      onSendMessage?.(message).then(() => setMessage(''));
     }
   };
 
@@ -119,7 +118,7 @@ export const Chat: FC<ChatProps> = ({ messages, onSendMessage, onSendFile, isSen
             value={message}
             inputClassName={styles.chatInputComponent}
             onChange={setMessage}
-            onPressEnter={onSend}
+            onPressEnterKey={onSend}
           />
         </Box>
         {isSending ? (
