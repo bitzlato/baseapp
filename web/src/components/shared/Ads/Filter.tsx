@@ -83,7 +83,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     return fiats.find((d) => d.code === params.currency) ?? null;
   }, [fiats, params.currency]);
 
-  const { selectedCryptoCurrency, cryptoCurrencies } = useP2PWalletOptions(
+  const { selectedWalletOption, walletOptions } = useP2PWalletOptions(
     params.cryptocurrency,
     getFiatCurrency,
   );
@@ -131,17 +131,21 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
         <Box display="flex" flexDirection="column" gap="1x" flexGrow={1}>
           <Box display="flex" justifyContent="space-between">
             <Text>{option.code}</Text>
-            <Text>
-              <MoneyFormat money={option.balance} />
-            </Text>
+            {option.balance && (
+              <Text>
+                <MoneyFormat money={option.balance} />
+              </Text>
+            )}
           </Box>
           <Box display="flex" justifyContent="space-between">
             <Text color="textMuted" fontWeight="regular">
               {option.name}
             </Text>
-            <Text color="textMuted" fontWeight="regular">
-              <MoneyFormat money={option.worth} />
-            </Text>
+            {option.worth && (
+              <Text color="textMuted" fontWeight="regular">
+                <MoneyFormat money={option.worth} />
+              </Text>
+            )}
           </Box>
         </Box>
       </Box>
@@ -154,8 +158,8 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
         <InputAmountWithCurrency
           label={t('AmountWithSymbol', { symbol: params.cryptocurrency })}
           amount={amountCrypto}
-          currencyList={cryptoCurrencies}
-          selectedCurrency={selectedCryptoCurrency}
+          currencyList={walletOptions}
+          selectedCurrency={selectedWalletOption}
           renderOption={renderCryptoCurrencyOption}
           onChangeAmount={handleChangeAmountCrypto}
           onChangeCurrency={(v) => onChange({ cryptocurrency: v.code, paymethod: undefined })}
