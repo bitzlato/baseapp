@@ -45,7 +45,7 @@ const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
   const to =
     process.env.NODE_ENV === 'development'
       ? `/${isBuy ? 'buy' : 'sell'}/${ad.id}`
-      : `${lang}/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${ad.cryptoCurrency.code}-${
+      : `/${lang}/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${ad.cryptoCurrency.code}-${
           ad.currency.code
         }-${ad.paymethod.name}`;
 
@@ -145,7 +145,7 @@ export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, 
                 <Box display="flex" mb="2x" alignItems="center">
                   <Box
                     as={Link}
-                    to={`/trader/${ad.owner}`}
+                    to={`/${lang}/p2p/users/${ad.owner}`}
                     color={{ default: 'adTrader', hover: 'adTrader' }}
                     display="block"
                     mr="2x"

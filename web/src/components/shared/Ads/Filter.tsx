@@ -33,6 +33,7 @@ export const DEFAULT_FILTER: Omit<AdvertParams, 'lang'> = {
   isOwnerActive: false,
   amount: undefined,
   paymethod: undefined,
+  amountType: undefined,
 };
 
 const { type, ...RESET_FILTER } = DEFAULT_FILTER;

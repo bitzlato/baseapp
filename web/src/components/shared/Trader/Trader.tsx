@@ -63,6 +63,7 @@ export const Trader: FC = () => {
       <Box display="flex" p="8x" height="full" flexDirection={{ desktop: 'row', mobile: 'column' }}>
         <Box
           display="flex"
+          backgroundColor="block"
           borderRadius="1.5x"
           marginRight={{ desktop: '6x' }}
           px={{ desktop: '6x' }}
@@ -71,7 +72,7 @@ export const Trader: FC = () => {
         >
           <TraderInfo publicName={params.name} onSingleMode={onSingleMode} />
         </Box>
-        <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x">
+        <Box backgroundColor="block" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
           <TraderStats publicName={params.name} desktopOnly />
           <TraderAds data={data} isLoading={isValidating} />
           {data && !isValidating && (
