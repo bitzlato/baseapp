@@ -137,10 +137,15 @@ const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies }: BoardBodyProps) =>
 
 export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies }) => {
   const { filterParams, handleChangeFilter } = useBoardFilter({ fiatCurrencies, cryptoCurrencies });
-  const { data, error, isValidating, mutate } = useAds(filterParams);
+  const { data, error, mutate } = useAds(filterParams);
 
   const handleChangePage = (value: number) => {
     handleChangeFilter({ skip: (value - 1) * filterParams.limit });
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
   const handleChangePerPage = (value: number) => {
     handleChangeFilter({ limit: value, skip: 0 });
@@ -158,10 +163,10 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
         data={data?.data}
         fiatSign={fiatCurrencies[filterParams.currency]?.sign ?? ''}
         cryptoSign={filterParams.cryptocurrency}
-        isLoading={isValidating}
+        isLoading={!data?.data}
         onRefresh={handleRefresh}
       />
-      {data && !isValidating && (
+      {data && (
         <Pagination
           page={filterParams.skip / filterParams.limit + 1}
           total={data.total}
