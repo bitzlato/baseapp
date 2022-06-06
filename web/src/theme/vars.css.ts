@@ -90,6 +90,7 @@ export const [themeLight, vars] = createTheme({
     interactive: colors.luckyPoint,
     interactiveHighlighted: colors.luckyPointLighter,
     alert: colors.flamingo,
+    mainBackground: colors.whiteLilac,
     block: colors.white,
 
     drawer: colors.white,
@@ -301,6 +302,7 @@ export const themeDark = createTheme(vars, {
     interactive: colors.silverChalice,
     interactiveHighlighted: colors.gray,
     alert: colors.flamingo,
+    mainBackground: colors.mirage,
     block: colors.ebonyClay,
 
     drawer: colors.ebonyClay,
