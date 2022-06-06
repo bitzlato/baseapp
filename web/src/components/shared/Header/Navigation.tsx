@@ -15,11 +15,16 @@ export const findActiveTabByPathname = (navLinks: Links, pathname: string | unde
     return undefined;
   }
 
-  return navLinks.find(
-    (item) =>
-      item.type === 'tab' &&
-      item.tabs.some((tab) => tab.to === pathname || pathname.startsWith(tab.to)),
-  ) as LinkTabs | undefined;
+  return navLinks.find((item) => {
+    if (item.type === 'tab') {
+      return (
+        item.tabs.some((tab) => tab.to === pathname) ||
+        item.tabs.some((tab) => pathname.startsWith(tab.to))
+      );
+    }
+
+    return false;
+  }) as LinkTabs | undefined;
 };
 
 export const Navigation: FC<Props> = ({ navLinks, pathname, renderNavLinkComponent }) => {

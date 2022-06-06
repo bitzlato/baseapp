@@ -240,14 +240,14 @@ const Header: FC = () => {
       type: 'tab',
       link: {
         type: 'external',
-        to: `${p2pURL}/sell-btc-rub`,
+        to: p2pURL,
       },
       children: t('P2P'),
       tabs: [
         {
           key: 'Ad board',
           type: 'external',
-          to: `${p2pURL}/sell-btc-rub`,
+          to: p2pURL,
           children: t('AD Board'),
         },
         {
