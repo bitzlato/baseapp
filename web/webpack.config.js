@@ -281,6 +281,7 @@ module.exports = {
         './Adapter': './src/components/shared/Adapter',
         './BoardScreen': './src/components/shared/Ads/Board',
         './fetch': './src/helpers/fetch',
+        './cssVars': './src/components/shared/sharedCssVars',
       },
       shared: {
         react: { requiredVersion: deps.react, singleton: true },
