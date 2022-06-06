@@ -37,7 +37,7 @@ interface AdExchangeConfirm {
 
 const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
   const { t, history } = useAdapterContext();
-  const { isMobileDevice, lang, handleFetchError } = useAppContext();
+  const { isMobileDevice, lang, handleFetchError, user } = useAppContext();
   const [active, setActive] = useState(false);
   const [confirm, setConfirm] = useState<AdExchangeConfirm | undefined>(undefined);
 
@@ -53,7 +53,9 @@ const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
     setActive(true);
 
     try {
-      const data: AdvertSingleSource = await fetchWithCreds(`${p2pUrl()}/exchange/dsa/${ad.id}`);
+      const data: AdvertSingleSource = await fetchWithCreds(
+        `${p2pUrl()}${user === undefined ? '/public' : ''}/exchange/dsa/${ad.id}`,
+      );
       if (data) {
         const nextRate = Money.fromDecimal(data.rate, ad.currency);
 
