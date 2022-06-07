@@ -195,7 +195,7 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
           {ads}
         </Box>
       </Box>
-      <Box className={s.layoutWithSidebar} p="8x" width="full">
+      <Box className={s.layoutWithSidebar} p="8x" width="full" alignItems="flex-start">
         <Box
           className={s.filter}
           backgroundColor="block"
