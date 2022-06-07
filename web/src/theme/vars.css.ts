@@ -219,9 +219,9 @@ export const [themeLight, vars] = createTheme({
     variantSwitcherItemBgActive: colors.goldTips,
     variantSwitcherItemTextActive: colors.ebonyClay,
 
-    paginationItemBgHover: colors.white05,
-    paginationItemBgActive: colors.white10,
-    paginationItemTextDisabled: colors.white30,
+    paginationItemBgHover: colors.whiteLilac50,
+    paginationItemBgActive: colors.whiteLilac,
+    paginationItemTextDisabled: colors.ebonyClay15,
 
     bids: colors.green,
     asks: colors.carnation,
