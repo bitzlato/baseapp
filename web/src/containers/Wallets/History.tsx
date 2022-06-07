@@ -10,11 +10,11 @@ import { tradeUrl } from 'web/src/api/config';
 import { DEFAULT_BLOCKCHAIN } from 'web/src/modules/public/blockchains/defaults';
 import { alertPush, Deposit, Withdraw } from 'web/src/modules';
 import { localeDate, sliceString, sortByDateDesc, truncateMiddle } from 'web/src/helpers';
-import { History } from 'web/src/components';
 import { useFetch } from 'web/src/hooks/data/useFetch';
 import { Box } from 'web/src/components/Box/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
+import { Text } from 'web/src/components/ui/Text';
 import {
   changeTransaction,
   useFetchP2PTransactions,
@@ -25,10 +25,11 @@ import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
 import { useFetchHistory } from 'web/src/hooks/data/useFetchHistory';
 import { Pagination } from 'web/src/components/Pagination/Pagination';
 import { TextInput } from 'web/src/components/Input/TextInput';
-import { P2PTransaction } from 'web/src/modules/p2p/types';
+import { P2PDepositTransaction, P2PTransaction } from 'web/src/modules/p2p/types';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
 import { WalletType } from 'web/src/modules/account/types';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
+import { Table } from 'web/src/components/Table';
 import s from './TransferHistory.postcss';
 
 const LIMIT = 6;
@@ -75,13 +76,28 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
 
   return (
     <>
-      <History headers={headers} data={tableData} tableClassName={s.transferHistory} />
+      <Table header={headers} data={tableData} tableClassName={s.transferHistory} />
       <Pagination limit={LIMIT} total={total} onChange={setPage} />
     </>
   );
 };
 
+function renderStatus(d: P2PDepositTransaction, t: (v: string) => string) {
+  switch (d.status) {
+    case 'success':
+      return <Text color="success">{t('deposit.success')}</Text>;
+    case 'aml-seizure':
+      return <Text color="danger">{t('deposit.aml-seizure')}</Text>;
+    case 'aml-check':
+      return <Text color="warning">{t('deposit.aml-check')}</Text>;
+    default:
+      return <None />;
+  }
+}
+
 const P2PHistory: FC<Props> = ({ type, general }) => {
+  const isDeposit = type === 'deposits';
+
   const handleFetchError = useHandleFetchError();
   const ccy = general.balanceTotal.currency;
 
@@ -98,7 +114,7 @@ const P2PHistory: FC<Props> = ({ type, general }) => {
     sortValue: 'desc',
     limit: LIMIT,
     skip: page * LIMIT,
-    type: type === 'deposits' ? 'load' : 'withdrawal',
+    type: isDeposit ? 'load' : 'withdrawal',
   });
 
   const data = historyResp.data?.data ?? [];
@@ -127,7 +143,17 @@ const P2PHistory: FC<Props> = ({ type, general }) => {
     setTrx(null);
   };
 
-  const headers = useMemo(() => ['', t('Date'), t('Address'), t('Amount'), t('Comment')], [t]);
+  const header = useMemo(
+    () => [
+      '',
+      t('Date'),
+      isDeposit ? t('Status') : undefined,
+      t('Address'),
+      t('Amount'),
+      t('Comment'),
+    ],
+    [t, isDeposit],
+  );
 
   const tableRows = data.map((d) => [
     <Button
@@ -140,6 +166,7 @@ const P2PHistory: FC<Props> = ({ type, general }) => {
       ...
     </Button>,
     <div title={`${d.id}`}>{localeDate(d.created, 'fullDate')}</div>,
+    isDeposit ? renderStatus(d as P2PDepositTransaction, t) : undefined,
     <ExternalLink href={d.viewUrl}>{truncateMiddle(d.address, 20)}</ExternalLink>,
     <MoneyFormat money={createMoney(d.cryptocurrency.amount, ccy)} />,
     d.comment ? sliceString(d.comment, 30) : <None />,
@@ -147,7 +174,7 @@ const P2PHistory: FC<Props> = ({ type, general }) => {
 
   return (
     <>
-      <History headers={headers} data={tableRows} tableClassName={s.p2PTransferHistory} />
+      <Table header={header} data={tableRows} tableClassName={s.p2PTransferHistory} />
       <Pagination limit={LIMIT} total={total} onChange={handleChangePage} />
       <Modal show={trx !== null} onClose={() => setTrx(null)}>
         <ModalHeader>{t('Edit comment')}</ModalHeader>

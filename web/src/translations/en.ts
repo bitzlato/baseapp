@@ -1535,6 +1535,9 @@ export const en = {
   'deposit.erc20warning': 'Funds are accepted only through the ERC-20 network',
   'deposit.erc20MDTWarning': 'Accepted only ERC-20 MonolithosDAO Tokens (MDT)',
   'deposit.contract': 'Accepting funds from contract addresses may take a long time',
+  'deposit.success': 'Low risk',
+  'deposit.aml-seizure': 'Hight risk',
+  'deposit.aml-check': 'In process',
 
   'verification.pass': 'Pass verification',
   'verification.oops': '😔 Oops!',
