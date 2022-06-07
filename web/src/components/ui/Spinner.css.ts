@@ -8,8 +8,6 @@ const rotate = keyframes({
 
 export const loader = style({
   borderRadius: '50%',
-  width: 32,
-  height: 32,
   fontSize: 10,
   position: 'relative',
   textIndent: '-9999em',
