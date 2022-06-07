@@ -23,6 +23,7 @@ import {
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { p2pUrl } from 'web/src/api/config';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
+import { Spinner } from 'web/src/components/ui/Spinner';
 import { OnlineStatusByLastActivity } from './OnlineStatus';
 import { ConfirmRateChangeModal } from './ConfirmRateChangeModal';
 
@@ -106,16 +107,26 @@ interface Props {
   fiatSign: string;
   cryptoSign: string;
   isLoading: boolean;
+  isRefreshing: boolean;
   onRefresh: () => void;
 }
 
-export const Ads: FC<Props> = ({ data, fiatSign, cryptoSign, isLoading = false, onRefresh }) => {
+export const Ads: FC<Props> = ({
+  data,
+  fiatSign,
+  cryptoSign,
+  isLoading = false,
+  isRefreshing = false,
+  onRefresh,
+}) => {
   const { t, Link } = useAdapterContext();
   const { isMobileDevice, user, lang } = useAppContext();
 
   const buttonRefresh = (
     <Button variant="text" color="clarified" size="small" onClick={onRefresh}>
-      <Box as={RefreshIcon} display="block" mr="2x" />
+      <Box as="span" mr="2x">
+        {isRefreshing ? <Spinner size="4x" /> : <Box as={RefreshIcon} display="block" />}
+      </Box>
       {t('Refresh')}
     </Button>
   );
