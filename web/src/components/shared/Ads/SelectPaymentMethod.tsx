@@ -8,6 +8,9 @@ interface Props {
   onChange: (value: PaymethodInfo) => void;
 }
 
+const searchFunction = (searchText: string, _optionValue: string, option: PaymethodInfo) =>
+  option.description.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
+
 const getOptionValue = (option: PaymethodInfo) => option.id.toString();
 const getOptionLabel = (option: PaymethodInfo) => option.description;
 
@@ -22,6 +25,8 @@ export const SelectPaymentMethod = ({ options, value, onChange }: Props) => {
       noOptionsMessage={t('Nothing found')}
       getOptionValue={getOptionValue}
       getOptionLabel={getOptionLabel}
+      searchFunction={searchFunction}
+      withSearch
       onChange={onChange}
     />
   );
