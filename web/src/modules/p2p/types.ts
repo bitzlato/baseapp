@@ -44,6 +44,11 @@ export interface P2PTransaction {
   viewUrl: string;
 }
 
+export interface P2PDepositTransaction extends P2PTransaction {
+  type: 'load';
+  status: 'success' | 'aml-seizure' | 'aml-check';
+}
+
 export interface P2PList<T> {
   data: T[];
   total: number;
