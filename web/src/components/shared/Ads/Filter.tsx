@@ -37,12 +37,12 @@ export const DEFAULT_FILTER: Omit<AdvertParams, 'lang'> = {
 
 const { type, ...RESET_FILTER } = DEFAULT_FILTER;
 
-interface Props {
+interface FilterBuySellProps {
   params: AdvertParams;
   onChange: (v: Partial<AdvertParams>) => void;
 }
 
-const FilterBuySell: FC<Props> = ({ params, onChange }) => {
+const FilterBuySell: FC<FilterBuySellProps> = ({ params, onChange }) => {
   const t = useSharedT();
 
   const variants = useMemo(
@@ -59,12 +59,18 @@ const FilterBuySell: FC<Props> = ({ params, onChange }) => {
       target="form"
       variants={variants}
       value={params.type}
-      onChange={(v) => onChange({ type: v as AdvertType, paymethod: undefined, skip: 0 })}
+      onChange={(v) => onChange({ type: v as AdvertType, paymethod: undefined })}
     />
   );
 };
 
-const FilterControls: FC<Props> = ({ params, onChange }) => {
+interface FilterControlsProps {
+  params: AdvertParams;
+  mobile?: boolean | undefined;
+  onChange: (v: Partial<AdvertParams>) => void;
+}
+
+const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onChange }) => {
   const t = useSharedT();
 
   const [amount, setAmount] = useStateWithDeps(
@@ -191,7 +197,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
       </Box>
 
       <SwitchField
-        id="filter.with_verified"
+        id={`filter.with_verified${mobile ? '_mobile' : ''}`}
         label={t('Verified users')}
         helpText={t('ad.verified.info')}
         value={params.isOwnerVerificated}
@@ -199,7 +205,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
         onChange={(v) => onChange({ isOwnerVerificated: v })}
       />
       <SwitchField
-        id="filter.with_trusted"
+        id={`filter.with_trusted${mobile ? '_mobile' : ''}`}
         label={t('Trusted users')}
         helpText={t('ad.trusted.info')}
         value={params.isOwnerTrusted}
@@ -207,7 +213,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
         onChange={(v) => onChange({ isOwnerTrusted: v })}
       />
       <SwitchField
-        id="filter.with_online"
+        id={`filter.with_online${mobile ? '_mobile' : ''}`}
         label={t('Active users')}
         helpText={t('ad.active.info')}
         value={params.isOwnerActive}
@@ -218,7 +224,12 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
   );
 };
 
-export const Filter: FC<Props> = ({ params, onChange }) => {
+interface FilterProps {
+  params: AdvertParams;
+  onChange: (v: Partial<AdvertParams>) => void;
+}
+
+export const Filter: FC<FilterProps> = ({ params, onChange }) => {
   const t = useSharedT();
 
   return (
@@ -234,7 +245,12 @@ export const Filter: FC<Props> = ({ params, onChange }) => {
   );
 };
 
-export const FilterMobile: FC<Props> = ({ params, onChange }) => {
+interface FilterMobileProps {
+  params: AdvertParams;
+  onChange: (v: Partial<AdvertParams>) => void;
+}
+
+export const FilterMobile: FC<FilterMobileProps> = ({ params, onChange }) => {
   const t = useSharedT();
 
   const [show, setShow] = useState(false);
@@ -274,7 +290,7 @@ export const FilterMobile: FC<Props> = ({ params, onChange }) => {
         <ModalHeader>{t('Filter')}</ModalHeader>
         <ModalBody>
           <Box display="flex" flexDirection="column" gap="6x">
-            <FilterControls params={localParams} onChange={updateParams} />
+            <FilterControls params={localParams} mobile onChange={updateParams} />
           </Box>
         </ModalBody>
         <ModalFooter>
