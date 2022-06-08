@@ -109,7 +109,7 @@ const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies }: BoardBodyProps) =>
 
   const handleChangeFilter = useCallback(
     (upd: Partial<AdvertParams>) => {
-      setFilterParams((prev) => ({ ...prev, ...upd }));
+      setFilterParams((prev) => ({ ...prev, ...upd, skip: 0 }));
       setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
       if (upd.type || upd.cryptocurrency || upd.currency || upd.paymethod) {
         history.push(
