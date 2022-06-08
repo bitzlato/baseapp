@@ -207,7 +207,9 @@ export const Ads: FC<Props> = ({
                     <Text variant="label" color="textMuted" fontWeight="strong">
                       {t('Payment method')}
                     </Text>
-                    {paymethodName}
+                    <Text textAlign="right" fontSize="medium">
+                      {paymethodName}
+                    </Text>
                   </Box>
                   <Box display="flex" justifyContent="space-between">
                     <Text variant="label" color="textMuted" fontWeight="strong">
