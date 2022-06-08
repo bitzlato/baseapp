@@ -20,7 +20,6 @@ import { P2PWalletOption, useP2PWalletOptions } from 'web/src/hooks/useP2PWallet
 import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
 
 const INPUT_DEBOUNCE = 500;
-const EMPTY_ARR: unknown[] = [];
 
 export const DEFAULT_FILTER: Omit<AdvertParams, 'lang'> = {
   limit: 15,
@@ -98,10 +97,22 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     isOwnerVerificated: params.isOwnerVerificated,
   });
 
-  const paymethods = paymethodsResp.data?.data ?? (EMPTY_ARR as PaymethodInfo[]);
-  const selectedPaymethod = useMemo(() => {
-    return paymethods.find((d) => d.id === params.paymethod) ?? null;
-  }, [paymethods, params.paymethod]);
+  const paymethods: [PaymethodInfo, ...PaymethodInfo[]] = useMemo(
+    () => [
+      {
+        id: -1,
+        count: 0,
+        description: t('All payment methods'),
+        rate: -1,
+      },
+      ...(paymethodsResp.data?.data ?? []),
+    ],
+    [paymethodsResp.data?.data, t],
+  );
+  const selectedPaymethod = useMemo(
+    () => paymethods.find((d) => d.id === params.paymethod) ?? paymethods[0],
+    [paymethods, params.paymethod],
+  );
 
   const changeAmountDebounced = useDebouncedCallback(
     (value: string, amountType: AdvertParams['amountType']) => {
@@ -175,7 +186,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
         <SelectPaymentMethod
           options={paymethods}
           value={selectedPaymethod}
-          onChange={(v) => onChange({ paymethod: v!.id })}
+          onChange={(v) => onChange({ paymethod: v.id > 0 ? v.id : undefined })}
         />
       </Box>
 
