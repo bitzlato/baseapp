@@ -29,7 +29,7 @@ const searchFunction = (searchText: string, _optionValue: string, option: Common
 };
 
 const getOptionValue = (option: CommonOption) => option.code;
-const getOptionLabel = (option: CommonOption) => `${option.code} (${option.name})`;
+const getOptionLabel = (option: CommonOption) => `${option.code} (${option.name.trim()})`;
 
 export const InputAmountWithCurrency = <Option extends CommonOption>({
   label,
@@ -44,7 +44,13 @@ export const InputAmountWithCurrency = <Option extends CommonOption>({
 
   const renderCustomButton = ({ open, onClick }: { open: boolean; onClick: () => void }) => (
     <Box position="relative">
-      <TextInput className={s.input} label={label} value={amount} onChange={onChangeAmount} />
+      <TextInput
+        className={s.input}
+        label={label}
+        inputMode="decimal"
+        value={amount}
+        onChange={onChangeAmount}
+      />
       <Box className={s.inputRightControls} display="flex" alignItems="center">
         <Box
           as="button"

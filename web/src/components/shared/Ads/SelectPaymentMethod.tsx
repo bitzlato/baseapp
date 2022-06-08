@@ -1,18 +1,18 @@
 import { useSharedT } from 'web/src/components/shared/Adapter';
-import { PaymethodInfo } from 'web/src/modules/p2p/types';
+import { PaymethodInfoSource } from 'web/src/modules/p2p/types';
 import { SelectCustom } from 'web/src/components/SelectCustom/SelectCustom';
 
 interface Props {
-  options: PaymethodInfo[];
-  value: PaymethodInfo | null;
-  onChange: (value: PaymethodInfo) => void;
+  options: PaymethodInfoSource[];
+  value: PaymethodInfoSource | null;
+  onChange: (value: PaymethodInfoSource) => void;
 }
 
-const searchFunction = (searchText: string, _optionValue: string, option: PaymethodInfo) =>
+const searchFunction = (searchText: string, _optionValue: string, option: PaymethodInfoSource) =>
   option.description.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
 
-const getOptionValue = (option: PaymethodInfo) => option.id.toString();
-const getOptionLabel = (option: PaymethodInfo) => option.description;
+const getOptionValue = (option: PaymethodInfoSource) => option.id.toString();
+const getOptionLabel = (option: PaymethodInfoSource) => option.description;
 
 export const SelectPaymentMethod = ({ options, value, onChange }: Props) => {
   const t = useSharedT();

@@ -83,10 +83,18 @@ export interface Paymethod {
   name: string;
 }
 
+export interface PaymethodInfoSource {
+  id: number;
+  count: number;
+  description: string;
+  rate: number;
+}
+
 export interface PaymethodInfo {
   id: number;
   count: number;
   description: string;
+  slug: string;
   rate: number;
 }
 
