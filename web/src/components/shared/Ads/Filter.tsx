@@ -6,7 +6,7 @@ import { Button } from 'web/src/components/ui/Button';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
-import { AdvertParams, AdvertType, PaymethodInfo } from 'web/src/modules/p2p/types';
+import { AdvertParams, AdvertType, PaymethodInfoSource } from 'web/src/modules/p2p/types';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { SwitchField } from 'web/src/components/profile/settings/SwitchField';
 import { useSharedT } from 'web/src/components/shared/Adapter';
@@ -97,7 +97,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     isOwnerVerificated: params.isOwnerVerificated,
   });
 
-  const paymethods: [PaymethodInfo, ...PaymethodInfo[]] = useMemo(
+  const paymethods: [PaymethodInfoSource, ...PaymethodInfoSource[]] = useMemo(
     () => [
       {
         id: -1,

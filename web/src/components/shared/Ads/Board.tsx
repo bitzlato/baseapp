@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
 import { Box } from 'web/src/components/ui/Box';
@@ -8,10 +8,11 @@ import { UrlParams, getUrlSearchParams, setUrlSearchParams } from 'web/src/helpe
 import { useAds } from 'web/src/hooks/data/useFetchAds';
 import { FiatCurrencies, useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/useFetchP2PWallets';
-import { AdvertParams, AdvertType, SeoAdvertType } from 'web/src/modules/p2p/types';
+import { AdvertParams, AdvertType, PaymethodInfo, SeoAdvertType } from 'web/src/modules/p2p/types';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { P2PCurrency } from 'web/src/modules/p2p/wallet-types';
 import { Language } from 'web/src/types';
+import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
 import { Ads } from './Ads';
 import { DEFAULT_FILTER, Filter, FilterMobile } from './Filter';
 import * as s from './Board.css';
@@ -21,7 +22,6 @@ export const URL_PARAMS: UrlParams<
 > = {
   amount: { name: 'amount', set: (v) => v, get: (v) => v },
   amountType: { name: 'amountType', set: (v) => v, get: (v) => v as AdvertParams['amountType'] },
-  paymethod: { name: 'method', set: (v) => `${v}`, get: (v) => Number(v) },
   skip: { name: 'skip', set: (v) => `${v}`, get: (v) => Number(v) },
   limit: { name: 'limit', set: (v) => `${v}`, get: (v) => Number(v) },
   isOwnerActive: { name: 'active', set: (v) => `${v}`, get: (v) => Boolean(v) },
@@ -62,9 +62,12 @@ const generateFilterParamsUrl = (
   type: AdvertType,
   cryptocurrency: string,
   currency: string,
+  paymethod?: PaymethodInfo | undefined,
 ) => {
+  const maybePaymethodSlug = paymethod ? `-${paymethod.slug}` : '';
+
   return (
-    `/${lang}/p2p/${adTypeToSeo[type]}-${cryptocurrency}-${currency}`.toLowerCase() +
+    `/${lang}/p2p/${adTypeToSeo[type]}-${cryptocurrency}-${currency}${maybePaymethodSlug}`.toLowerCase() +
     window.location.search
   );
 };
@@ -84,11 +87,12 @@ const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies }: BoardBodyProps) =>
     lang,
     ...DEFAULT_FILTER,
     ...(user?.bitzlato_user?.user_profile.currency
-      ? { currency: user.bitzlato_user?.user_profile.currency }
+      ? { currency: user.bitzlato_user.user_profile.currency }
       : undefined),
     ...getUrlSearchParams(URL_PARAMS),
     ...getFilterPathParams(filter),
   }));
+  const { data: { data: paymethods } = {} } = useFetchPaymethods(filterParams);
 
   useEffect(() => {
     if (!filter) {
@@ -103,34 +107,64 @@ const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies }: BoardBodyProps) =>
     }
   }, [filter, history, lang, user?.bitzlato_user?.user_profile.currency]);
 
-  const handleChangeFilter = (upd: Partial<AdvertParams>) => {
-    setFilterParams((prev) => ({ ...prev, ...upd }));
-    setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
-    if (upd.type || upd.cryptocurrency || upd.currency) {
-      history.push(
-        generateFilterParamsUrl(
-          lang,
-          upd.type ?? filterParams.type,
-          upd.cryptocurrency ?? filterParams.cryptocurrency,
-          upd.currency ?? filterParams.currency,
-        ),
-      );
+  const handleChangeFilter = useCallback(
+    (upd: Partial<AdvertParams>) => {
+      setFilterParams((prev) => ({ ...prev, ...upd }));
+      setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
+      if (upd.type || upd.cryptocurrency || upd.currency || upd.paymethod) {
+        history.push(
+          generateFilterParamsUrl(
+            lang,
+            upd.type ?? filterParams.type,
+            upd.cryptocurrency ?? filterParams.cryptocurrency,
+            upd.currency ?? filterParams.currency,
+            upd.paymethod
+              ? paymethods?.find((paymethod) => paymethod.id === upd.paymethod)
+              : undefined,
+          ),
+        );
+      }
+    },
+    [
+      filterParams.cryptocurrency,
+      filterParams.currency,
+      filterParams.type,
+      history,
+      lang,
+      paymethods,
+    ],
+  );
+
+  // Effect of handling slug paymethod changes from current location
+  useEffect(() => {
+    if (!filter || !paymethods) {
+      return;
     }
-  };
+
+    const [, , , paymethodSlug] = filter.split('-');
+    if (!paymethodSlug) {
+      return;
+    }
+
+    const patmethod = paymethods.find((item) => item.slug === paymethodSlug);
+    if (!patmethod) {
+      return;
+    }
+
+    handleChangeFilter({ paymethod: patmethod.id });
+  }, [filter, handleChangeFilter, paymethods]);
 
   useEffect(() => {
     if (!cryptoCurrencies?.some((currency) => currency.code === filterParams.cryptocurrency)) {
       handleChangeFilter({ cryptocurrency: DEFAULT_FILTER.cryptocurrency, paymethod: undefined });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterParams.cryptocurrency, cryptoCurrencies]);
+  }, [filterParams.cryptocurrency, cryptoCurrencies, handleChangeFilter]);
 
   useEffect(() => {
     if (!Object.keys(fiatCurrencies).includes(filterParams.currency)) {
       handleChangeFilter({ currency: DEFAULT_FILTER.currency, paymethod: undefined });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterParams.currency, fiatCurrencies]);
+  }, [filterParams.currency, fiatCurrencies, handleChangeFilter]);
 
   return { filterParams, handleChangeFilter };
 };
