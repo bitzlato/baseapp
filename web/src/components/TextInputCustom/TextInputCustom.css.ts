@@ -23,6 +23,7 @@ export const input = style([
     borderRadius: '1.5x',
     backgroundColor: 'transparent',
     color: 'text',
+    fontFamily: 'brand',
   }),
 ]);
 
