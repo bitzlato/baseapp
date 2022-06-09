@@ -163,6 +163,19 @@ export function notificationInfo(
         link: `${PROFILE_URL}/telegram`,
         createdAt,
       };
+
+    case 'blockChainMoneySeizure':
+      return {
+        text: t('blockChainMoneySeizure', item.data),
+        createdAt,
+      };
+
+    case 'blockChainMoneyHold':
+      return {
+        text: t('blockChainMoneyHold', item.data),
+        createdAt,
+      };
+
     case 'blockChainMoneyReceived':
       return item.data.isDust
         ? {

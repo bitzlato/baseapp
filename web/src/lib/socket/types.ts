@@ -78,7 +78,7 @@ type NotificationNewAdminMessage = NotificationBase & {
   message: string;
 };
 
-type TradeStatus = 'trade_created' | 'cancel' | 'payment' | 'confirm-payment' | 'dispute';
+export type TradeStatus = 'trade_created' | 'cancel' | 'payment' | 'confirm-payment' | 'dispute';
 
 type NotificationTrade = NotificationBase & {
   tradeId: number;
@@ -101,7 +101,7 @@ type NotificationDisputeResolved = NotificationBase & {
   };
 };
 
-type TradeType = 'selling' | 'purchase';
+export type TradeType = 'selling' | 'purchase';
 
 type NotificationDisputeAvailable = NotificationBase & {
   type: TradeType;
@@ -112,7 +112,10 @@ type NotificationDisputeAvailableTenMinutes = NotificationBase & {
   tradeId: number;
 };
 
-type NotificationTradeStatusChanged = NotificationBase & {};
+type NotificationTradeStatusChanged = NotificationBase & {
+  tradeId: number;
+};
+
 type NotificationAccountsMerged = NotificationBase & {};
 type NotificationInactivityRatingDecline = NotificationBase & {};
 type NotificationAdsPausedMessage = NotificationBase & {};
@@ -204,6 +207,13 @@ type NotificationBlockchainMoneyReceived = NotificationBase & {
   txid: number;
 };
 
+type NotificationBlockchainMoneySeizure = NotificationBase & {
+  cryptocurrency: string;
+  amount: string;
+};
+
+type NotificationBlockchainMoneyHold = NotificationBlockchainMoneySeizure;
+
 type NotificationBlockchainMoneySent = NotificationBase & {
   amount: string;
   cryptocurrency: string;
@@ -234,6 +244,8 @@ export type IWebsocketMessage =
   | NotificationNewReferral
   | NotificationDividendsReceived
   | NotificationAccountsMerged
+  | NotificationBlockchainMoneySeizure
+  | NotificationBlockchainMoneyHold
   | NotificationBlockchainMoneyReceived
   | NotificationBlockchainMoneySent
   | NotificationVerificationDecision
