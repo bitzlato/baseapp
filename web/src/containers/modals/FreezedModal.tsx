@@ -15,7 +15,6 @@ export const FreezedModal: FC = () => {
 
   const handleSupportToggle = () => {
     close();
-    // @ts-ignore
     global.toggleWidget();
   };
 

@@ -25,7 +25,6 @@ export const UserPanel: FC<Props> = ({ responsiveMode = false }) => {
   const { rightNavLinks, renderNavLinkComponent, t } = context;
 
   const handleSupportToggle = () => {
-    // @ts-ignore
     global.toggleWidget();
   };
 
