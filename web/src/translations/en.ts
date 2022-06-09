@@ -98,6 +98,10 @@ export const en = {
     '❌ Dear customer! Your verification is no longer valid. Please go through the verification procedure again',
   'notifications.verification-rejected': '❌ Your verification request has been rejected',
   'notifications.verification-rejected-ext': '❌ Your verification request has been rejected',
+  'notifications.blockChainMoneySeizure':
+    'Your transaction of {amount} {cryptocurrency} has been marked as high risk. Please contact our support',
+  'notifications.blockChainMoneyHold':
+    'Your transaction of {amount} {cryptocurrency} is in the process of AML checking. Soon you will receive a notification about the result of the check',
   'notifications.wallet-balance-loaded':
     '🔥 Your wallet deposited for {amount} {cryptocurrency}.\n\nTransaction: {txid}',
   'notifications.wallet-balance-loaded-dust':
