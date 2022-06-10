@@ -26,6 +26,7 @@ export const SelectPaymentMethod = ({ options, value, onChange }: Props) => {
       getOptionValue={getOptionValue}
       getOptionLabel={getOptionLabel}
       searchFunction={searchFunction}
+      searchPlaceholder={t('Search')}
       withSearch
       onChange={onChange}
     />
