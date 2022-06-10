@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import { useAppContext } from 'web/src/components/app/AppContext';
+import { useAppContext, useUser } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
 import { Box } from 'web/src/components/ui/Box';
 import { Pagination } from 'web/src/components/ui/Pagination';
@@ -13,6 +13,10 @@ import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { P2PCurrency } from 'web/src/modules/p2p/wallet-types';
 import { Language } from 'web/src/types';
 import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
+import { useFetchP2PLastFilter } from 'web/src/hooks/data/useFetchP2PLastFilter';
+import { useP2PSetLastFilter } from 'web/src/hooks/mutations/useP2PSetLastFilter';
+import { pick } from 'web/src/helpers/pick';
+import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { Ads } from './Ads';
 import { DEFAULT_FILTER, Filter, FilterMobile } from './Filter';
 import * as s from './Board.css';
@@ -39,22 +43,28 @@ export const seoTypeToAd: Record<SeoAdvertType, AdvertType> = {
   sell: 'selling',
 };
 
-const getFilterPathParams = (
-  filter?: string,
-): Pick<AdvertParams, 'type' | 'cryptocurrency' | 'currency'> | undefined => {
-  const [
-    seoType = 'buy',
-    cryptocurrency = DEFAULT_FILTER.cryptocurrency,
-    currency = DEFAULT_FILTER.currency,
-  ] = filter?.split('-') ?? [];
+type FilterPathParams = Partial<Pick<AdvertParams, 'type' | 'cryptocurrency' | 'currency'>>;
+const getFilterPathParams = (filter?: string): FilterPathParams | undefined => {
+  if (!filter) {
+    return undefined;
+  }
 
-  return filter
-    ? {
-        type: seoTypeToAd[seoType as SeoAdvertType] ?? DEFAULT_FILTER.type,
-        cryptocurrency: cryptocurrency.toUpperCase(),
-        currency: currency.toUpperCase(),
-      }
-    : undefined;
+  const [seoType = 'buy', cryptocurrency, currency] = filter?.split('-') ?? [];
+  const params: FilterPathParams = {};
+  const type = seoTypeToAd[seoType as SeoAdvertType];
+  if (type) {
+    params.type = type;
+  }
+
+  if (cryptocurrency) {
+    params.cryptocurrency = cryptocurrency.toUpperCase();
+  }
+
+  if (currency) {
+    params.currency = currency.toUpperCase();
+  }
+
+  return params;
 };
 
 const generateFilterParamsUrl = (
@@ -63,49 +73,92 @@ const generateFilterParamsUrl = (
   cryptocurrency: string,
   currency: string,
   paymethod?: PaymethodInfo | undefined,
+  query: string = window.location.search,
 ) => {
   const maybePaymethodSlug = paymethod ? `-${paymethod.slug}` : '';
 
   return (
     `/${lang}/p2p/${adTypeToSeo[type]}-${cryptocurrency}-${currency}${maybePaymethodSlug}`.toLowerCase() +
-    window.location.search
+    query
   );
+};
+
+const ADVERT_PARAMS_IN_QUERY = [
+  'amount',
+  'amountType',
+  'skip',
+  'limit',
+  'isOwnerActive',
+  'isOwnerTrusted',
+  'isOwnerVerificated',
+] as const;
+const ADVERT_PARAMS_IN_LAST_FILTER = [
+  'type',
+  'currency',
+  'cryptocurrency',
+  'isOwnerVerificated',
+  'isOwnerTrusted',
+  'isOwnerActive',
+  'paymethod',
+  'amount',
+  'amountType',
+] as const;
+const getFilterParamsFromLastFilter = (lastFilter: any): Partial<AdvertParams> | undefined => {
+  if (typeof lastFilter !== 'object' || lastFilter === null) {
+    return undefined;
+  }
+
+  return pick(lastFilter, ADVERT_PARAMS_IN_LAST_FILTER);
 };
 
 type BoardBodyProps = {
   fiatCurrencies: FiatCurrencies;
   cryptoCurrencies: P2PCurrency[];
+  lastFilter?: Partial<AdvertParams> | undefined;
 };
 
-const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies }: BoardBodyProps) => {
+const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies, lastFilter }: BoardBodyProps) => {
   const { lang, user } = useAppContext();
   const {
     history,
     params: { filter },
   } = useAdapterContext<{ filter?: string }>();
-  const [filterParams, setFilterParams] = useState<AdvertParams>(() => ({
-    lang,
-    ...DEFAULT_FILTER,
-    ...(user?.bitzlato_user?.user_profile.currency
-      ? { currency: user.bitzlato_user.user_profile.currency }
-      : undefined),
-    ...getUrlSearchParams(URL_PARAMS),
-    ...getFilterPathParams(filter),
-  }));
+  const [filterParams, setFilterParams] = useState<AdvertParams>(() => {
+    const byLocation = {
+      ...getUrlSearchParams(URL_PARAMS),
+      ...getFilterPathParams(filter),
+    };
+    const byLastFilter = getFilterParamsFromLastFilter(lastFilter);
+    const params = Object.keys(byLocation).length > 0 ? byLocation : byLastFilter;
+
+    return {
+      lang,
+      ...DEFAULT_FILTER,
+      ...(user?.bitzlato_user?.user_profile.currency
+        ? { currency: user.bitzlato_user.user_profile.currency }
+        : undefined),
+      ...params,
+    };
+  });
   const { data: { data: paymethods } = {} } = useFetchPaymethods(filterParams);
+  const [setLatsFilter] = useP2PSetLastFilter();
 
   useEffect(() => {
     if (!filter) {
       history.replace(
         generateFilterParamsUrl(
           lang,
-          DEFAULT_FILTER.type,
-          DEFAULT_FILTER.cryptocurrency,
-          user?.bitzlato_user?.user_profile.currency ?? DEFAULT_FILTER.currency,
+          filterParams.type,
+          filterParams.cryptocurrency,
+          filterParams.currency,
+          filterParams.paymethod
+            ? paymethods?.find((paymethod) => paymethod.id === filterParams.paymethod)
+            : undefined,
+          buildQueryString(pick(filterParams, ADVERT_PARAMS_IN_QUERY)),
         ),
       );
     }
-  }, [filter, history, lang, user?.bitzlato_user?.user_profile.currency]);
+  }, [filter, filterParams, history, lang, paymethods]);
 
   const handleChangeFilter = useCallback(
     (upd: Partial<AdvertParams>) => {
@@ -141,17 +194,17 @@ const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies }: BoardBodyProps) =>
       return;
     }
 
-    const [, , , paymethodSlug] = filter.split('-');
+    const paymethodSlug = filter.match(/[\w]+-[\w]+-[\w]+-(.*)/i)?.[1] ?? undefined;
     if (!paymethodSlug) {
       return;
     }
 
-    const patmethod = paymethods.find((item) => item.slug === paymethodSlug);
-    if (!patmethod) {
+    const paymethod = paymethods.find((item) => item.slug === paymethodSlug);
+    if (!paymethod) {
       return;
     }
 
-    handleChangeFilter({ paymethod: patmethod.id });
+    handleChangeFilter({ paymethod: paymethod.id });
   }, [filter, handleChangeFilter, paymethods]);
 
   useEffect(() => {
@@ -161,16 +214,27 @@ const useBoardFilter = ({ fiatCurrencies, cryptoCurrencies }: BoardBodyProps) =>
   }, [filterParams.cryptocurrency, cryptoCurrencies, handleChangeFilter]);
 
   useEffect(() => {
-    if (!Object.keys(fiatCurrencies).includes(filterParams.currency)) {
+    if (fiatCurrencies[filterParams.currency] === undefined) {
       handleChangeFilter({ currency: DEFAULT_FILTER.currency, paymethod: undefined });
     }
   }, [filterParams.currency, fiatCurrencies, handleChangeFilter]);
 
+  // Save filter params to backend
+  useEffect(() => {
+    if (user) {
+      setLatsFilter(pick(filterParams, ADVERT_PARAMS_IN_LAST_FILTER));
+    }
+  }, [filterParams, setLatsFilter, user]);
+
   return { filterParams, handleChangeFilter };
 };
 
-export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies }) => {
-  const { filterParams, handleChangeFilter } = useBoardFilter({ fiatCurrencies, cryptoCurrencies });
+export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies, lastFilter }) => {
+  const { filterParams, handleChangeFilter } = useBoardFilter({
+    fiatCurrencies,
+    cryptoCurrencies,
+    lastFilter,
+  });
   const { data, error, mutate, isValidating } = useAds(filterParams);
 
   const handleChangePage = (value: number) => {
@@ -249,9 +313,11 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
 };
 
 export const Board: FC = () => {
+  const user = useUser();
   const fiatCurrenciesValue = useFiatCurrencies();
   const cryptoCurrenciesValue = useFetchP2PCryptoCurrencies();
-  const error = fiatCurrenciesValue.error ?? cryptoCurrenciesValue.error;
+  const lastFilterValue = useFetchP2PLastFilter();
+  const error = fiatCurrenciesValue.error ?? cryptoCurrenciesValue.error ?? lastFilterValue.error;
 
   if (error) {
     return null;
@@ -260,7 +326,8 @@ export const Board: FC = () => {
   return (
     <Container maxWidth="fullhd">
       {fiatCurrenciesValue.fiatCurrencies === undefined ||
-      cryptoCurrenciesValue.data === undefined ? (
+      cryptoCurrenciesValue.data === undefined ||
+      (lastFilterValue.data === undefined && user) ? (
         <Box display="flex" justifyContent="center" py="20x" width="full">
           <Spinner />
         </Box>
@@ -268,6 +335,7 @@ export const Board: FC = () => {
         <BoardBody
           fiatCurrencies={fiatCurrenciesValue.fiatCurrencies}
           cryptoCurrencies={cryptoCurrenciesValue.data}
+          lastFilter={lastFilterValue.data}
         />
       )}
     </Container>
