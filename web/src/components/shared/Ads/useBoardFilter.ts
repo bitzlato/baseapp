@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAppContext } from 'web/src/components/app/AppContext';
-import { UrlParams, getUrlSearchParams, setUrlSearchParams } from 'web/src/helpers/urlSearch';
+import {
+  UrlParams,
+  getUrlSearchParams,
+  setUrlSearchParams,
+  buildUrlSearch,
+} from 'web/src/helpers/urlSearch';
 import { FiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { AdvertParams, AdvertType, PaymethodInfo, SeoAdvertType } from 'web/src/modules/p2p/types';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
@@ -9,7 +14,6 @@ import { Language } from 'web/src/types';
 import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
 import { useP2PSetLastFilter } from 'web/src/hooks/mutations/useP2PSetLastFilter';
 import { pick } from 'web/src/helpers/pick';
-import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { DEFAULT_FILTER } from './Filter';
 
 export const URL_PARAMS: UrlParams<
@@ -149,7 +153,7 @@ export const useBoardFilter = ({
           filterParams.paymethod
             ? paymethods?.find((paymethod) => paymethod.id === filterParams.paymethod)
             : undefined,
-          buildQueryString(pick(filterParams, ADVERT_PARAMS_IN_QUERY)),
+          buildUrlSearch(pick(filterParams, ADVERT_PARAMS_IN_QUERY), DEFAULT_FILTER, URL_PARAMS),
         ),
       );
     }

@@ -8,11 +8,11 @@ export type UrlParams<T> = {
   [P in keyof T]: UrlParam<T[P], T[P] extends string ? T[P] : string>;
 };
 
-export function setUrlSearchParams<T>(
+export function buildUrlSearch<T>(
   obj: Record<string, unknown>,
   def: Record<string, unknown>,
   tmpl: UrlParams<T>,
-): void {
+): string {
   const params = new URLSearchParams(window.location.search);
   Object.keys(obj).forEach((key) => {
     const ci = tmpl[key as keyof UrlParams<T>];
@@ -28,8 +28,18 @@ export function setUrlSearchParams<T>(
       params.delete(ci.name);
     }
   });
+
   const search = params.toString();
-  window.history.pushState(null, '', window.location.pathname + (search ? `?${search}` : ''));
+
+  return search ? `?${search}` : '';
+}
+
+export function setUrlSearchParams<T>(
+  obj: Record<string, unknown>,
+  def: Record<string, unknown>,
+  tmpl: UrlParams<T>,
+): void {
+  window.history.pushState(null, '', window.location.pathname + buildUrlSearch(obj, def, tmpl));
 }
 
 export function getUrlSearchParams<T>(tmpl: UrlParams<T>): Partial<T> {
