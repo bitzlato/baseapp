@@ -139,7 +139,15 @@ export const useBoardFilter = ({
       ...params,
     };
   });
-  const { data: { data: paymethods } = {} } = useFetchPaymethods(filterParams);
+  const { data: { data: paymethods } = {} } = useFetchPaymethods({
+    lang: filterParams.lang,
+    type: filterParams.type,
+    currency: filterParams.currency,
+    cryptocurrency: filterParams.cryptocurrency,
+    isOwnerActive: filterParams.isOwnerActive,
+    isOwnerTrusted: filterParams.isOwnerTrusted,
+    isOwnerVerificated: filterParams.isOwnerVerificated,
+  });
   const [setLatsFilter] = useP2PSetLastFilter();
 
   useEffect(() => {
