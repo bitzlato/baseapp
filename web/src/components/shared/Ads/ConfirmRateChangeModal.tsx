@@ -45,7 +45,7 @@ const DiffRate: FC<DiffRateProps> = ({ prevRate, nextRate, cryptoCurrency, isBuy
         </Text>
         <Box as="span" color={color} ml="5x" display="inline-flex" alignItems="center">
           {diff.isPositive() ? <LongUpArrowIcon /> : <LongDownArrowIcon />}
-          <Box as="span" ml="1x">
+          <Box as="span" ml="1x" fontFamily="brand">
             {plus}
             {procent}%
           </Box>
