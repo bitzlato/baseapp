@@ -170,3 +170,20 @@ export interface Advert
   currency: MoneyCurrency;
   cryptoCurrency: MoneyCurrency;
 }
+
+export interface TradeSource {
+  id: number;
+  currency: P2PCryptoCurrency;
+  cryptocurrency: P2PCryptoCurrency;
+  rate: string;
+  partner: string;
+  type: 'selling' | 'purchase';
+  paymethod: number;
+  status: 'cancel' | 'confirm_payment' | 'confirm_trade' | 'dispute' | 'payment' | 'trade_created';
+  date: number;
+}
+
+export interface Trade extends Omit<TradeSource, 'currency' | 'cryptocurrency'> {
+  currency: P2PCryptoCurrency & { moneyCurrency: MoneyCurrency };
+  cryptoCurrency: P2PCryptoCurrency & { moneyCurrency: MoneyCurrency };
+}

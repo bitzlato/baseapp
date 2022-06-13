@@ -79,10 +79,10 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
             active={filter === FILTER_PURCHASE}
             onClick={handleClickForPurchase}
           >
-            {t('Buying')}
+            {t('To buy')}
           </Button>
           <Button color="clarified" active={filter === FILTER_SALE} onClick={handleClickForSale}>
-            {t('Selling')}
+            {t('To sell')}
           </Button>
         </Stack>
 

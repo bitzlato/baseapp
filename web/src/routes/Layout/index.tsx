@@ -86,6 +86,7 @@ import { SignedOpConfirmScreen } from 'web/src/screens/SignedOpConfirmScreen/Sig
 import { BoardScreen } from 'web/src/screens/p2p/BoardScreen';
 import { AdScreen } from 'web/src/screens/p2p/AdScreen';
 import { TraderScreen } from 'web/src/screens/p2p/TraderScreen';
+import { TradesScreen } from 'web/src/screens/p2p/TradesScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -346,6 +347,13 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               isLogged={isLoggedIn}
               path="/trader/:name"
               component={TraderScreen}
+            />,
+            <PrivateRoute
+              key="TradesScreen"
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path="/trades/:filter?"
+              component={TradesScreen}
             />,
           ]
         : []),

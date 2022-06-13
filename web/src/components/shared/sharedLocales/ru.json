@@ -32,8 +32,8 @@
   "Go to next": "Перейти вперед",
   "Go to last": "Перейти в конец",
   "Only active": "Только активные",
-  "Buying": "На покупку",
-  "Selling": "На продажу",
+  "To buy": "На покупку",
+  "To sell": "На продажу",
   "All": "Все",
   "Edit": "Редактировать",
 
@@ -88,5 +88,17 @@
   "Confirm": "Подтвердить",
   "Filter": "Фильтр",
   "Apply": "Применить",
-  "All payment methods": "Все способы оплаты"
+  "All payment methods": "Все способы оплаты",
+
+  "Active": "Активные",
+  "Closed": "Завершенные",
+  "Purchase": "Покупка",
+  "Selling": "Продажа",
+
+  "tradeStatus.cancel": "Отменена",
+  "tradeStatus.confirm_payment": "Завершена",
+  "tradeStatus.confirm_trade": "Подтверждение сделки",
+  "tradeStatus.dispute": "Открыт диспут",
+  "tradeStatus.payment": "Платеж",
+  "tradeStatus.trade_created": "Новая"
 }

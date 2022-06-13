@@ -15,5 +15,14 @@
   "ad.trusted.info": "Show ads of traders you added to the list of trusted traders only",
   "ad.active.info": "Show ads of traders who are online only",
   "ad.rate_changed": "The exchange rate has changed:",
-  "Missing.plural": "Missing"
+  "Missing.plural": "Missing",
+  "To buy": "Buying",
+  "To sell": "Selling",
+
+  "tradeStatus.cancel": "Canceled",
+  "tradeStatus.confirm_payment": "Finished",
+  "tradeStatus.confirm_trade": "Confirm trade",
+  "tradeStatus.dispute": "Dispute",
+  "tradeStatus.payment": "Payment",
+  "tradeStatus.trade_created": "New"
 }
