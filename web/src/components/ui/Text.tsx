@@ -13,6 +13,7 @@ interface Props
         | 'fontFamily'
         | 'fontSize'
         | 'fontWeight'
+        | 'fontStyle'
         | 'fontSize'
         | 'textAlign'
         | 'textTransform'
