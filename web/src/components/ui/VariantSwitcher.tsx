@@ -1,38 +1,39 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import cn from 'classnames';
 import { Box } from 'web/src/components/ui/Box';
 import * as s from './VariantSwitcher.css';
 
-interface Variant {
+interface Variant<TValue> {
   label: string;
-  value: string;
+  value: TValue;
 }
 type Target = 'tabs' | 'form';
 
-interface VariantSwitcherItemProps {
+interface VariantSwitcherItemProps<TValue> {
   name?: string | undefined;
   target: Target;
-  variant: Variant;
+  variant: Variant<TValue>;
   active: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: TValue) => void;
 }
 
-export const VariantSwitcherItem: FC<VariantSwitcherItemProps> = ({
+export const VariantSwitcherItem = <TValue,>({
   name,
   target,
   variant,
   active = false,
   onChange,
-}) => {
+}: VariantSwitcherItemProps<TValue>) => {
   const [isFocused, setIsFocused] = useState(false);
   const handleChange = () => onChange(variant.value);
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
   const isTabs = target === 'tabs';
+  const stringifiedValue = `${variant.value}`;
 
   return (
     <Box
-      key={variant.value}
+      key={stringifiedValue}
       as={isTabs ? 'button' : 'label'}
       className={cn(s.control[active ? 'active' : 'base'], isFocused && s.controlFocused)}
       onClick={isTabs ? handleChange : undefined}
@@ -45,7 +46,7 @@ export const VariantSwitcherItem: FC<VariantSwitcherItemProps> = ({
             className={s.input}
             type="radio"
             name={name ?? 'variantSwitcher'}
-            value={variant.value}
+            value={stringifiedValue}
             checked={active}
             onChange={handleChange}
             onFocus={handleFocus}
@@ -58,15 +59,21 @@ export const VariantSwitcherItem: FC<VariantSwitcherItemProps> = ({
   );
 };
 
-interface Props {
+interface Props<TValue> {
   name?: string | undefined;
   target: Target;
-  variants: Variant[];
-  value: string;
-  onChange: (nextValue: string) => void;
+  variants: Variant<TValue>[];
+  value: TValue;
+  onChange: (nextValue: TValue) => void;
 }
 
-export const VariantSwitcher: FC<Props> = ({ name, target, variants, value, onChange }) => {
+export const VariantSwitcher = <TValue,>({
+  name,
+  target,
+  variants,
+  value,
+  onChange,
+}: Props<TValue>) => {
   return (
     <Box
       display="flex"
@@ -80,7 +87,7 @@ export const VariantSwitcher: FC<Props> = ({ name, target, variants, value, onCh
     >
       {variants.map((variant) => (
         <VariantSwitcherItem
-          key={variant.value}
+          key={`${variant.value}`}
           name={name}
           target={target}
           variant={variant}

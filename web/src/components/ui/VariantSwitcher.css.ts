@@ -18,7 +18,7 @@ const controlBase = style({
   alignItems: 'center',
   justifyContent: 'center',
   flexGrow: 1,
-  fontWeight: 'bold',
+  fontWeight: 600,
   fontSize: fontSizeVars.medium,
   paddingLeft: sizeVars['4x'],
   paddingRight: sizeVars['4x'],
