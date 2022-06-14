@@ -20,6 +20,7 @@ import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 import { Card } from 'web/src/components/Card/Card';
+import { TraderAdsEmpty } from './TraderAdsEmpty';
 
 interface Props {
   data: TraderAdvert[];
@@ -124,7 +125,7 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
   const body = (
     <>
       {controls}
-      <AdsTable header={header} isLoading={isLoading}>
+      <AdsTable header={header} emptyContent={<TraderAdsEmpty />} isLoading={isLoading}>
         {list && list.length > 0 && (
           <AdsTableBody>
             {list.map((ad) => {
