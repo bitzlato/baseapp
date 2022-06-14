@@ -108,6 +108,7 @@
   "Download invoice": "Скачать выписку",
   "Find an offer": "Найти предложение",
   "Go to": "Перейти",
+  "Show active ads only": "Показать только активные объявления",
 
   "trades.empty": "В настоящее время у вас нет сделок",
   "tradeStatus.cancel": "Отменена",
