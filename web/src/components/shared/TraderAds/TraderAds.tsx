@@ -80,7 +80,7 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
         <Box as="label" htmlFor="only_active" mr="2x">
           {t('Only active')}
         </Box>
-        <HelpIcon>{t('Only active')}</HelpIcon>
+        <HelpIcon>{t('Show active ads only')}</HelpIcon>
       </Text>
       <Switch id="only_active" checked={isOnlyActive} onChange={handleChangeIsOnlyActive} />
     </Box>
@@ -109,16 +109,16 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
   let list = data;
   if (tab !== TAB_ALL || isOnlyActive) {
     list = data.filter((item) => {
-      let result = false;
+      let passable = true;
       if (tab !== TAB_ALL) {
-        result = tab === TAB_PURCHASE ? item.type === 'selling' : item.type === 'purchase';
+        passable = tab === TAB_PURCHASE ? item.type === 'selling' : item.type === 'purchase';
       }
 
       if (isOnlyActive) {
-        result = result && item.available === true;
+        passable = passable && item.available === true;
       }
 
-      return result;
+      return passable;
     });
   }
 
@@ -137,10 +137,7 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
                   <P2PFiatFormat money={ad.limitCurrency.max} cryptoCurrency={ad.cryptoCurrency} />
                 </>
               );
-              const isBuy = ad.type === 'purchase';
-              const actionLabel = isBuy ? t('Buy') : t('Sell');
               let actionButton;
-
               if (ad.owner === publicName) {
                 actionButton = (
                   <Button as={Link} to={`/${lang}/p2p/adverts/${ad.id}`} fullWidth={isMobileDevice}>
@@ -148,6 +145,8 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
                   </Button>
                 );
               } else {
+                const isBuy = ad.type === 'purchase';
+                const actionLabel = isBuy ? t('Buy') : t('Sell');
                 actionButton = ad.available ? (
                   <Button
                     as={Link}
@@ -193,15 +192,15 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
                     <Box display="flex" justifyContent="space-between">
                       <Text variant="label" color="textMuted" fontWeight="strong">
                         {t('RateWithSymbol', {
-                          fiat: ad.cryptoCurrency.code,
-                          crypto: ad.currency.code,
+                          fiat: ad.currency.sign,
+                          crypto: ad.cryptoCurrency.sign,
                         })}
                       </Text>
                       {rate}
                     </Box>
                     <Box display="flex" justifyContent="space-between">
                       <Text variant="label" color="textMuted" fontWeight="strong">
-                        {t('LimitsWithSymbol', { fiat: ad.currency.code })}
+                        {t('LimitsWithSymbol', { fiat: ad.currency.sign })}
                       </Text>
                       {limit}
                     </Box>
@@ -210,6 +209,13 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
                 </Box>
               ) : (
                 <AdsTableRow key={ad.id}>
+                  <Box
+                    position="absolute"
+                    backgroundColor={ad.available ? 'success' : 'danger'}
+                    width="2x"
+                    height="full"
+                  />
+
                   <AdsTableColumn size="medium">
                     <Box pl="9x">{ad.cryptoCurrency.code}</Box>
                   </AdsTableColumn>
