@@ -19,10 +19,12 @@
   "To buy": "Buying",
   "To sell": "Selling",
 
+  "trades.empty": "You don't have any trades at the moment",
   "tradeStatus.cancel": "Canceled",
   "tradeStatus.confirm_payment": "Finished",
-  "tradeStatus.confirm_trade": "Confirm trade",
-  "tradeStatus.dispute": "Dispute",
+  "tradeStatus.active": "Active",
+  "tradeStatus.confirm_trade": "Confirmation of deal",
+  "tradeStatus.dispute": "Dispute opened",
   "tradeStatus.payment": "Payment",
-  "tradeStatus.trade_created": "New"
+  "tradeStatus.trade_created": "New deal"
 }

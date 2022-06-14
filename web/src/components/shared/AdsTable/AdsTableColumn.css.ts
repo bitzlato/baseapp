@@ -9,3 +9,5 @@ const columnSizes = {
 const columnBase = style({ flexShrink: 1, flexBasis: '0%' });
 
 export const columns = styleVariants(columnSizes, (size) => [columnBase, { flexGrow: size }]);
+
+export type ColumnsSizes = keyof typeof columns;

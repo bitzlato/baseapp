@@ -148,8 +148,19 @@ export const Ads: FC<Props> = ({
     </AdsTableHeader>
   );
 
+  const emptyContent = (
+    <Box textAlign="center" py="20x" px="4x">
+      <Box mb="6x">
+        <Text variant={isMobileDevice ? 'title' : 'body'}>{t('ad.empty')}</Text>
+      </Box>
+      <Button as={Link} to={`/${lang}/p2p/adverts/create`}>
+        {t('Create advert')}
+      </Button>
+    </Box>
+  );
+
   return (
-    <AdsTable header={header} isLoading={isLoading}>
+    <AdsTable header={header} emptyContent={emptyContent} isLoading={isLoading}>
       {data && data.length > 0 && (
         <AdsTableBody>
           {data.map((ad) => {

@@ -329,11 +329,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
       ...(process.env.REACT_APP_RELEASE_STAGE === 'development'
         ? [
-            <Route
-              key="BoardScreen"
-              path={['/p2p/:filter?', '/:lang/p2p/:filter?']}
-              component={BoardScreen}
-            />,
             <PrivateRoute
               key="AdScreen"
               loading={userLoading}
@@ -352,8 +347,13 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               key="TradesScreen"
               loading={userLoading}
               isLogged={isLoggedIn}
-              path="/trades/:filter?"
+              path={['/p2p/trades/:filter?', '/:lang/p2p/trades/:filter?']}
               component={TradesScreen}
+            />,
+            <Route
+              key="BoardScreen"
+              path={['/p2p/:filter?', '/:lang/p2p/:filter?']}
+              component={BoardScreen}
             />,
           ]
         : []),

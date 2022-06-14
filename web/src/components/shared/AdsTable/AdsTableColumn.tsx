@@ -4,9 +4,10 @@ import { Sprinkles } from 'web/src/theme/sprinkles.css';
 import { OptionalWithUndefined } from 'web/src/types';
 
 import * as s from './AdsTableColumn.css';
+import { ColumnsSizes } from './AdsTableColumn.css';
 
 interface Props extends Omit<OptionalWithUndefined<Sprinkles>, 'size'> {
-  size: 'small' | 'medium' | 'large';
+  size: ColumnsSizes;
 }
 
 export const AdsTableColumn: FC<Props> = ({ size, ...props }) => (

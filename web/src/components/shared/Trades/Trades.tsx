@@ -2,19 +2,18 @@ import { FC, useState } from 'react';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
 import { Box } from 'web/src/components/ui/Box';
+import { Text } from 'web/src/components/ui/Text';
 import { Button } from 'web/src/components/ui/Button';
 import { Stack } from 'web/src/components/ui/Stack';
 import { Pagination } from 'web/src/components/ui/Pagination';
 import { UrlParams, getUrlSearchParams, setUrlSearchParams } from 'web/src/helpers/urlSearch';
-import { TradesParams, useP2PTrades } from 'web/src/hooks/data/useFetchP2PTrades';
-import { useAdapterContext } from '../Adapter';
-import { TradesList } from './TradesList';
-
-export const DEFAULT_FILTER: TradesParams = {
-  onlyClosed: undefined,
-  limit: 15,
-  skip: 0,
-};
+import { TradesParams, useFetchP2PTrades } from 'web/src/hooks/data/useFetchP2PTrades';
+import { TradeType } from 'web/src/modules/p2p/trade.types';
+import { useAdapterContext } from 'web/src/components/shared/Adapter';
+import { TradesList } from 'web/src/components/shared/Trades/TradesList';
+import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
+import { TradesFilter, TradesFilterMobile, DEFAULT_FILTER } from './TradesFilter';
+import * as s from './Trades.css';
 
 export const URL_PARAMS: UrlParams<TradesParams> = {
   onlyClosed: {
@@ -22,33 +21,37 @@ export const URL_PARAMS: UrlParams<TradesParams> = {
     set: (v) => (v === undefined ? undefined : `${v}`),
     get: (v) => (v === undefined ? undefined : Boolean(v)),
   },
+  paymethod: { name: 'paymethod', set: (v) => `${v}`, get: (v) => v },
+  type: { name: 'type', set: (v) => `${v}`, get: (v) => v as TradeType },
+  partner: { name: 'partner', set: (v) => `${v}`, get: (v) => v },
+  tradeId: { name: 'tradeId', set: (v) => `${v}`, get: (v) => v },
   skip: { name: 'skip', set: (v) => `${v}`, get: (v) => Number(v) },
   limit: { name: 'limit', set: (v) => `${v}`, get: (v) => Number(v) },
 };
 
 export const Trades: FC = () => {
   const { t } = useAdapterContext();
-  const { isMobileDevice } = useAppContext();
+  const { lang, isMobileDevice } = useAppContext();
   const [filterParams, setFilterParams] = useState<TradesParams>(() => ({
     ...DEFAULT_FILTER,
     ...getUrlSearchParams(URL_PARAMS),
   }));
   const onlyClosedValues = [
+    // {
+    //   title: t('All'),
+    //   value: false,
+    // },
     {
-      title: t('All'),
-      value: false,
-    },
-    {
-      title: t('Active'),
+      label: t('Active'),
       value: undefined,
     },
     {
-      title: t('Closed'),
+      label: t('Closed'),
       value: true,
     },
   ];
 
-  const { data, error, isValidating, mutate } = useP2PTrades(filterParams);
+  const { data, error } = useFetchP2PTrades(filterParams, lang);
 
   const handleChangeFilter = (upd: Partial<TradesParams>) => {
     setFilterParams((prev) => ({ ...prev, ...upd }));
@@ -56,43 +59,53 @@ export const Trades: FC = () => {
   };
 
   const handleChangePage = (value: number) => {
-    handleChangeFilter({ skip: (value - 1) * filterParams.limit });
+    const nextSkip = (value - 1) * filterParams.limit;
+
+    if ((data?.total && nextSkip >= data.total) || nextSkip < 0) {
+      return;
+    }
+
+    handleChangeFilter({ skip: nextSkip });
   };
 
   const handleChangePerPage = (value: number) => {
     handleChangeFilter({ limit: value, skip: 0 });
   };
 
-  const handleRefresh = () => mutate();
-
-  console.log({ data });
-
   if (error) {
     return null;
   }
 
-  const stateFilters = (
+  const stateFilters = isMobileDevice ? (
+    <VariantSwitcher
+      name="tradeType"
+      target="form"
+      variants={onlyClosedValues}
+      value={filterParams.onlyClosed}
+      onChange={(value) => handleChangeFilter({ onlyClosed: value, skip: 0 })}
+    />
+  ) : (
     <Stack marginRight="4x">
-      {onlyClosedValues.map(({ title, value }) => {
+      {onlyClosedValues.map(({ label, value }) => {
         return (
           <Button
-            key={title}
+            key={label}
             color="clarified"
             active={filterParams.onlyClosed === value}
-            onClick={() => handleChangeFilter({ onlyClosed: value })}
+            onClick={() => handleChangeFilter({ onlyClosed: value, skip: 0 })}
           >
-            {title}
+            {label}
           </Button>
         );
       })}
     </Stack>
   );
 
-  const ads = (
+  const trades = (
     <>
-      <TradesList data={data?.data} isLoading={isValidating} />
+      <TradesList data={data?.data} isLoading={!data?.data} />
 
-      {data && !isValidating && (
+      {data && (
         <Pagination
           page={filterParams.skip / filterParams.limit + 1}
           total={data.total}
@@ -104,39 +117,53 @@ export const Trades: FC = () => {
     </>
   );
 
-  if (isMobileDevice) {
-    return (
-      <Box display="flex" flexDirection="column" width="full">
-        <Box m="5x" display="flex" flexDirection="column" gap="6x">
-          {stateFilters}
-          <Box display="flex" flexDirection="column" gap="4x">
-            FILTER HERE
-          </Box>
-        </Box>
-        <Box px="5x" py="4x" backgroundColor="dropdown">
-          {ads}
-        </Box>
-      </Box>
-    );
-  }
-
   return (
     <Container maxWidth="fullhd">
-      <Box display="flex" mt="8x" px="8x">
-        {stateFilters}
-      </Box>
-      <Box display="flex" p="8x">
+      <Box className={s.layoutWithoutSidebar} flexDirection="column" width="full">
         <Box
-          backgroundColor="dropdown"
-          p="6x"
-          borderRadius="1.5x"
-          marginRight="6x"
-          style={{ width: '20%', minWidth: '380px' }}
+          px="5x"
+          py="4x"
+          display="flex"
+          justifyContent="space-between"
+          gap="4x"
+          backgroundColor="headerBg"
         >
-          FILTER HERE
+          {stateFilters}
+          <TradesFilterMobile params={filterParams} onChange={handleChangeFilter} />
         </Box>
-        <Box backgroundColor="dropdown" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
-          {ads}
+        <Box px="5x" py="4x" backgroundColor="block">
+          {trades}
+        </Box>
+      </Box>
+
+      <Box className={s.layoutWithSidebar} p="8x" alignItems="flex-start">
+        <Box
+          className={s.filter}
+          flexShrink={0}
+          p="6x"
+          marginRight="6x"
+          borderRadius="1.5x"
+          backgroundColor="block"
+        >
+          <TradesFilter params={filterParams} onChange={handleChangeFilter} />
+        </Box>
+        <Box backgroundColor="block" pb="5x" borderRadius="1.5x" flexGrow={1}>
+          <Box
+            py="4x"
+            px="6x"
+            borderBottomStyle="solid"
+            borderBottomColor="modalHeaderBorderBottom"
+            borderBottomWidth="1x"
+          >
+            <Text variant="title">{t('My trades')}</Text>
+          </Box>
+
+          <Box px="6x">
+            <Box display="flex" my="6x">
+              {stateFilters}
+            </Box>
+            {trades}
+          </Box>
         </Box>
       </Box>
     </Container>

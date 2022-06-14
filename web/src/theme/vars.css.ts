@@ -212,6 +212,12 @@ export const [themeLight, vars] = createTheme({
     adTrader: colors.indigo,
     adTrade: colors.indigo,
 
+    tradeFinishedStatusLineBg: colors.ebonyClay05,
+    tradeLink: colors.ebonyClay30,
+    tradeLinkHover: colors.ebonyClay70,
+    tradeButtonLinkText: colors.indigo,
+    tradeButtonLinkTextHover: colors.indigoLight,
+
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,
 
@@ -423,6 +429,12 @@ export const themeDark = createTheme(vars, {
     adTableHeader: colors.white50,
     adTrader: colors.malibu,
     adTrade: colors.indigo,
+
+    tradeFinishedStatusLineBg: colors.white10,
+    tradeLink: colors.white30,
+    tradeLinkHover: colors.white70,
+    tradeButtonLinkText: colors.goldTips,
+    tradeButtonLinkTextHover: colors.lightningYellow,
 
     onlineStatusWaiting: colors.sweetCorn,
     onlineStatusInactive: colors.botticelli,

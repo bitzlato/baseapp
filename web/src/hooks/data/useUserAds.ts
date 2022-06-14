@@ -1,6 +1,7 @@
 import { Money } from '@bitzlato/money-js';
 import { p2pUrl } from 'web/src/api/config';
 import { fetchJson } from 'web/src/helpers/fetch';
+import { PaymethodSource } from 'web/src/modules/p2p/types';
 import { MoneyCurrency } from 'web/src/types';
 import { useCryptoCurrencies } from '../useCryptoCurrencies';
 import { useFetch } from './useFetch';
@@ -30,12 +31,6 @@ interface TraderAdvertSource {
   available: boolean;
   position: null;
   unactiveReason: string | null;
-}
-
-interface PaymethodSource {
-  id: number;
-  currency: string;
-  description: string;
 }
 
 export interface TraderAdvert

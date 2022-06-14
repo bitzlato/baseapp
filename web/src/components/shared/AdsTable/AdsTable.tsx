@@ -1,11 +1,7 @@
 import { FC, ReactNode } from 'react';
-import { Box } from 'web/src/components/ui/Box';
+import { Box, BoxProps } from 'web/src/components/ui/Box';
 import { Spinner } from 'web/src/components/ui/Spinner';
-import { Text } from 'web/src/components/ui/Text';
-import { Button } from 'web/src/components/ui/Button';
 import { Stack } from 'web/src/components/ui/Stack';
-import { useAdapterContext } from 'web/src/components/shared/Adapter';
-import { useAppContext } from 'web/src/components/app/AppContext';
 
 export const AdsTableHeader: FC = ({ children }) => (
   <Box display="flex" alignItems="center" pb="5x">
@@ -19,21 +15,31 @@ export const AdsTableBody: FC = ({ children }) => (
   </Stack>
 );
 
-export const AdsTableRow: FC = ({ children }) => (
-  <Box display="flex" alignItems="center" py="4x" backgroundColor="adBg" borderRadius="1.5x">
+interface AdsTableRowProps extends BoxProps<'div'> {}
+
+export const AdsTableRow: FC<AdsTableRowProps> = ({ children, onClick, ...restProps }) => (
+  <Box
+    display="flex"
+    alignItems="center"
+    py="4x"
+    backgroundColor="adBg"
+    borderRadius="1.5x"
+    position="relative"
+    overflow="hidden"
+    onClick={onClick}
+    {...restProps}
+  >
     {children}
   </Box>
 );
 
 interface Props {
   header: ReactNode;
+  emptyContent?: ReactNode | undefined;
   isLoading: boolean;
 }
 
-export const AdsTable: FC<Props> = ({ children, header, isLoading }) => {
-  const { lang, isMobileDevice } = useAppContext();
-  const { t, Link } = useAdapterContext();
-
+export const AdsTable: FC<Props> = ({ children, header, emptyContent, isLoading }) => {
   let body;
   if (isLoading) {
     body = (
@@ -44,16 +50,7 @@ export const AdsTable: FC<Props> = ({ children, header, isLoading }) => {
   } else if (children) {
     body = children;
   } else {
-    body = (
-      <Box textAlign="center" py="20x" px="4x">
-        <Box mb="6x">
-          <Text variant={isMobileDevice ? 'title' : 'body'}>{t('ad.empty')}</Text>
-        </Box>
-        <Button as={Link} to={`/${lang}/p2p/adverts/create`}>
-          {t('Create advert')}
-        </Button>
-      </Box>
-    );
+    body = emptyContent;
   }
 
   return (

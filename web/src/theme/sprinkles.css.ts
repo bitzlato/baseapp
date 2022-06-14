@@ -160,6 +160,7 @@ const typographyProperties = defineProperties({
       regular: 400,
       strong: 600,
     },
+    fontStyle: ['normal', 'italic'],
     lineHeight: lineHeights,
     minHeight: minHeights,
     minWidth,
