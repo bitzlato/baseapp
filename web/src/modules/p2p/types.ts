@@ -99,12 +99,12 @@ export interface PaymethodInfo {
 }
 
 export interface PaymethodsParams {
-  type: AdvertType;
-  currency: string;
-  cryptocurrency: string;
-  isOwnerVerificated: boolean;
-  isOwnerTrusted: boolean;
-  isOwnerActive: boolean;
+  type: AdvertType | undefined;
+  currency?: string;
+  cryptocurrency?: string;
+  isOwnerVerificated?: boolean;
+  isOwnerTrusted?: boolean;
+  isOwnerActive?: boolean;
   lang: string;
 }
 
@@ -145,12 +145,6 @@ export interface AdvertSingleSource {
   unactiveReason: 'not_enough_funds';
 }
 
-export interface PaymethodFull {
-  currency: string;
-  description: string;
-  id: number;
-}
-
 export interface Advert
   extends Omit<
     AdvertSource,
@@ -171,19 +165,8 @@ export interface Advert
   cryptoCurrency: MoneyCurrency;
 }
 
-export interface TradeSource {
+export interface PaymethodSource {
   id: number;
-  currency: P2PCryptoCurrency;
-  cryptocurrency: P2PCryptoCurrency;
-  rate: string;
-  partner: string;
-  type: 'selling' | 'purchase';
-  paymethod: number;
-  status: 'cancel' | 'confirm_payment' | 'confirm_trade' | 'dispute' | 'payment' | 'trade_created';
-  date: number;
-}
-
-export interface Trade extends Omit<TradeSource, 'currency' | 'cryptocurrency'> {
-  currency: P2PCryptoCurrency & { moneyCurrency: MoneyCurrency };
-  cryptoCurrency: P2PCryptoCurrency & { moneyCurrency: MoneyCurrency };
+  currency: string;
+  description: string;
 }

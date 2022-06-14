@@ -1,7 +1,8 @@
-import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useCallback, useMemo, useState } from 'react';
 import { Box } from 'web/src/components/ui/Box';
 import { Dropdown } from 'web/src/components/Dropdown/Dropdown';
 import { SearchInput } from 'web/src/components/SelectCustom/SearchInput';
+import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import { SelectCustomItem } from './SelectCustomItem';
 import { SelectCustomChevron } from './SelectCustomChevron';
 
@@ -65,14 +66,8 @@ export const SelectCustom = <Option,>({
   isOptionSelected,
   onChange,
 }: SelectCustomProps<Option>) => {
-  const [selectedValue, setSelectedValue] = useState(value);
+  const [selectedValue, setSelectedValue] = useStateWithDeps(() => value, [value]);
   const [searchText, setSearchText] = useState('');
-
-  useEffect(() => {
-    if (value) {
-      setSelectedValue(value);
-    }
-  }, [value]);
 
   const isOptionSelectedInner = useCallback(
     (option: Option, selectValue: Option | null): boolean => {
@@ -154,7 +149,11 @@ export const SelectCustom = <Option,>({
       >
         <Box display="flex" flexDirection="column" alignItems="center" width="full">
           {showPlaceholder ? (
-            <Box width="full" color="inputPlaceholder" fontSize="medium">
+            <Box
+              width="full"
+              color="inputPlaceholder"
+              fontSize={selectedValue ? 'caption' : 'medium'}
+            >
               {placeholder}
             </Box>
           ) : null}
