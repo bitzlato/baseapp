@@ -107,6 +107,7 @@
   "Trade status": "Статус сделки",
   "Download invoice": "Скачать выписку",
   "Find an offer": "Найти предложение",
+  "Go to": "Перейти",
 
   "trades.empty": "В настоящее время у вас нет сделок",
   "tradeStatus.cancel": "Отменена",
@@ -115,5 +116,7 @@
   "tradeStatus.confirm_trade": "Подтверждение сделки",
   "tradeStatus.dispute": "Открыт спор",
   "tradeStatus.payment": "Платеж",
-  "tradeStatus.trade_created": "Новая сделка"
+  "tradeStatus.trade_created": "Новая сделка",
+
+  "traderAds.empty": "У трейдера пока нет объявлений. Перейдите на маркет, чтобы найти множество объявлений от других трейдеров"
 }

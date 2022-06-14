@@ -26,5 +26,7 @@
   "tradeStatus.confirm_trade": "Confirmation of deal",
   "tradeStatus.dispute": "Dispute opened",
   "tradeStatus.payment": "Payment",
-  "tradeStatus.trade_created": "New deal"
+  "tradeStatus.trade_created": "New deal",
+
+  "traderAds.empty": "This trader has no ads yet. Go to the market to see many ads from other traders"
 }
