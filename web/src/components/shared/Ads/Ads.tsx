@@ -26,6 +26,7 @@ import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { OnlineStatusByLastActivity } from './OnlineStatus';
 import { ConfirmRateChangeModal } from './ConfirmRateChangeModal';
+import { getLinkToP2PUser } from './getLinkToP2PUser';
 
 interface AdExchangeButtonProps {
   ad: Advert;
@@ -169,7 +170,7 @@ export const Ads: FC<Props> = ({
                 <Box display="flex" mb="2x" alignItems="center">
                   <Box
                     as={Link}
-                    to={`/${lang}/p2p/users/${ad.owner}`}
+                    to={getLinkToP2PUser({ lang, userName: ad.owner })}
                     color={{ default: 'adTrader', hover: 'adTrader' }}
                     display="block"
                     mr="2x"
