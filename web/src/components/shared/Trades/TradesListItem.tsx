@@ -14,6 +14,7 @@ import { AdsTableRow } from 'web/src/components/shared/AdsTable/AdsTable';
 import { localeDate } from 'web/src/helpers';
 import ExternalLinkIcon from 'web/src/assets/svg/ExternalLinkIcon.svg';
 import { TradeStatusStepper } from './TradeStatusStepper';
+import { getLinkToP2PUser } from '../Ads/getLinkToP2PUser';
 
 const STATUS_STEP_INDEXES: Partial<Record<Trade['status'], number>> = {
   trade_created: 0,
@@ -118,7 +119,7 @@ export const TradesListItem = ({ trade }: Props) => {
       </Box>
       <Box
         as={Link}
-        to={`/trader/${trade.partner}`}
+        to={getLinkToP2PUser({ lang, userName: trade.partner })}
         display="flex"
         color={{ default: 'tradeLink', hover: 'tradeLinkHover' }}
         flexShrink={0}
