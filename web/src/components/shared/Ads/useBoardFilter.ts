@@ -128,7 +128,7 @@ export const useBoardFilter = ({
       ...getFilterPathParams(filter),
     };
     const byLastFilter = getFilterParamsFromLastFilter(lastFilter);
-    const params = Object.keys(byLocation).length > 0 ? byLocation : byLastFilter;
+    const params = byLastFilter && Object.keys(byLastFilter).length > 0 ? byLastFilter : byLocation;
 
     return {
       lang,
@@ -150,28 +150,11 @@ export const useBoardFilter = ({
   });
   const [setLatsFilter] = useP2PSetLastFilter();
 
-  useEffect(() => {
-    if (!filter) {
-      history.replace(
-        generateFilterParamsUrl(
-          lang,
-          filterParams.type,
-          filterParams.cryptocurrency,
-          filterParams.currency,
-          filterParams.paymethod
-            ? paymethods?.find((paymethod) => paymethod.id === filterParams.paymethod)
-            : undefined,
-          buildUrlSearch(pick(filterParams, ADVERT_PARAMS_IN_QUERY), DEFAULT_FILTER, URL_PARAMS),
-        ),
-      );
-    }
-  }, [filter, filterParams, history, lang, paymethods]);
-
   const handleChangeFilter = useCallback(
     (upd: Partial<AdvertParams>) => {
       setFilterParams((prev) => ({ ...prev, ...upd, skip: 0 }));
       setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
-      if (upd.type || upd.cryptocurrency || upd.currency || upd.paymethod) {
+      if (upd.type || upd.cryptocurrency || upd.currency || 'paymethod' in upd) {
         history.push(
           generateFilterParamsUrl(
             lang,
@@ -195,14 +178,53 @@ export const useBoardFilter = ({
     ],
   );
 
-  // Effect of handling slug paymethod changes from current location
+  // Set default filter or sync paymethod slug with location
   useEffect(() => {
-    if (!filter || !paymethods) {
+    if (!filter) {
+      history.replace(
+        generateFilterParamsUrl(
+          lang,
+          filterParams.type,
+          filterParams.cryptocurrency,
+          filterParams.currency,
+          filterParams.paymethod
+            ? paymethods?.find((paymethod) => paymethod.id === filterParams.paymethod)
+            : undefined,
+          buildUrlSearch(pick(filterParams, ADVERT_PARAMS_IN_QUERY), DEFAULT_FILTER, URL_PARAMS),
+        ),
+      );
+
+      return;
+    }
+
+    if (!paymethods) {
       return;
     }
 
     const paymethodSlug = filter.match(/[\w]+-[\w]+-[\w]+-(.*)/i)?.[1] ?? undefined;
     if (!paymethodSlug) {
+      if (filterParams.paymethod) {
+        const currentPatmethod = paymethods?.find(
+          (paymethod) => paymethod.id === filterParams.paymethod,
+        );
+        if (currentPatmethod) {
+          history.replace(
+            generateFilterParamsUrl(
+              lang,
+              filterParams.type,
+              filterParams.cryptocurrency,
+              filterParams.currency,
+              currentPatmethod,
+              buildUrlSearch(
+                pick(filterParams, ADVERT_PARAMS_IN_QUERY),
+                DEFAULT_FILTER,
+                URL_PARAMS,
+              ),
+            ),
+          );
+        }
+      }
+
       return;
     }
 
@@ -211,8 +233,12 @@ export const useBoardFilter = ({
       return;
     }
 
+    if (filterParams.paymethod === paymethod.id) {
+      return;
+    }
+
     handleChangeFilter({ paymethod: paymethod.id });
-  }, [filter, handleChangeFilter, paymethods]);
+  }, [filter, filterParams, handleChangeFilter, history, lang, paymethods]);
 
   useEffect(() => {
     if (!cryptoCurrencies?.some((currency) => currency.code === filterParams.cryptocurrency)) {
