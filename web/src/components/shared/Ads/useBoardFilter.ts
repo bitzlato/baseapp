@@ -128,7 +128,10 @@ export const useBoardFilter = ({
       ...getFilterPathParams(filter),
     };
     const byLastFilter = getFilterParamsFromLastFilter(lastFilter);
-    const params = byLastFilter && Object.keys(byLastFilter).length > 0 ? byLastFilter : byLocation;
+    const params = {
+      ...byLocation,
+      ...byLastFilter,
+    };
 
     return {
       lang,
@@ -151,8 +154,12 @@ export const useBoardFilter = ({
   const [setLatsFilter] = useP2PSetLastFilter();
 
   const handleChangeFilter = useCallback(
-    (upd: Partial<AdvertParams>) => {
-      setFilterParams((prev) => ({ ...prev, ...upd, skip: 0 }));
+    (next: Partial<AdvertParams>) => {
+      const upd = {
+        skip: 0,
+        ...next,
+      };
+      setFilterParams((prev) => ({ ...prev, ...upd }));
       setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
       if (upd.type || upd.cryptocurrency || upd.currency || 'paymethod' in upd) {
         history.push(
