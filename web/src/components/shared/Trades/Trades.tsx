@@ -15,6 +15,8 @@ import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { TradesFilter, TradesFilterMobile, DEFAULT_FILTER } from './TradesFilter';
 import * as s from './Trades.css';
 
+const REFETCH_INTERVAL = 10000;
+
 export const URL_PARAMS: UrlParams<TradesParams> = {
   onlyClosed: {
     name: 'onlyClosed',
@@ -51,7 +53,9 @@ export const Trades: FC = () => {
     },
   ];
 
-  const { data, error } = useFetchP2PTrades(filterParams, lang);
+  const { data, error } = useFetchP2PTrades(filterParams, lang, {
+    refreshInterval: REFETCH_INTERVAL,
+  });
 
   const handleChangeFilter = (upd: Partial<TradesParams>) => {
     setFilterParams((prev) => ({ ...prev, ...upd }));

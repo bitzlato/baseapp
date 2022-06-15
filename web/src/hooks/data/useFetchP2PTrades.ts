@@ -1,3 +1,4 @@
+import { BareFetcher, SWRConfiguration } from 'swr';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
@@ -18,7 +19,11 @@ export type TradesParams = {
   limit: number;
 };
 
-export const useFetchP2PTrades = (params: TradesParams, lang: string) => {
+export const useFetchP2PTrades = (
+  params: TradesParams,
+  lang: string,
+  options?: SWRConfiguration<P2PList<Trade>, Error, BareFetcher<P2PList<Trade>>> | undefined,
+) => {
   const { getFiatCurrency } = useFiatCurrencies();
   const { getCryptoCurrency } = useCryptoCurrencies();
 
@@ -53,9 +58,7 @@ export const useFetchP2PTrades = (params: TradesParams, lang: string) => {
         }),
       };
     },
-    {
-      revalidateOnFocus: false,
-    },
+    options,
   );
 };
 
