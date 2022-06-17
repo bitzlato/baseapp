@@ -101,7 +101,7 @@ export const en = {
   'notifications.blockChainMoneySeizure':
     'Your transaction of {amount} {cryptocurrency} has been marked as high risk. Please contact our support',
   'notifications.blockChainMoneyHold':
-    'Your transaction of {amount} {cryptocurrency} is in the process of AML checking. Soon you will receive a notification about the result of the check',
+    'Your transaction of {amount} {cryptocurrency} is in the process of checking. Soon you will receive a notification about the result of the check',
   'notifications.wallet-balance-loaded':
     '🔥 Your wallet deposited for {amount} {cryptocurrency}.\n\nTransaction: {txid}',
   'notifications.wallet-balance-loaded-dust':
