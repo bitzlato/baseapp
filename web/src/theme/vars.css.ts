@@ -162,6 +162,9 @@ export const [themeLight, vars] = createTheme({
     traderFavorited: colors.oceanGreen,
     traderBlockedBgHover: colors.mandy90,
     traderFavoritedBgHover: colors.oceanGreen90,
+    traderIconActive: colors.white,
+    traderCurrencyCode: colors.ebonyClay70,
+    traderStatRowMobileBorder: colors.whiteLilac,
 
     notesBg: colors.waikawaGray10,
     chatToMsgBg: colors.waikawaGray10,
@@ -180,7 +183,7 @@ export const [themeLight, vars] = createTheme({
 
     infoBg: colors.whiteLilac,
     statBg: colors.whiteLilac,
-    statIcon: colors.indigo30,
+    statIcon: colors.ebonyClay30,
 
     modal: colors.white,
     modalHeaderBorderBottom: colors.mako10,
@@ -203,7 +206,7 @@ export const [themeLight, vars] = createTheme({
     tooltip: colors.milanoRed,
     tooltipText: colors.white,
 
-    cardHeaderBorderBottom: colors.waikawaGray24,
+    cardHeaderBorderBottom: colors.ebonyClay15,
 
     reportBgHover: colors.whiteLilac,
 
@@ -282,6 +285,10 @@ export const [themeLight, vars] = createTheme({
     bottomTabsIconActive: colors.goldTips,
     bottomTabsText: colors.ebonyClay70,
     bottomTabsTextActive: colors.goldTips,
+
+    breadcrumbsColor: colors.ebonyClay70,
+
+    collapsibleBoxExpandControls: colors.indigo,
   },
 });
 
@@ -380,6 +387,9 @@ export const themeDark = createTheme(vars, {
     traderFavorited: colors.oceanGreen,
     traderBlockedBgHover: colors.mandy90,
     traderFavoritedBgHover: colors.oceanGreen90,
+    traderIconActive: colors.white,
+    traderCurrencyCode: colors.white50,
+    traderStatRowMobileBorder: colors.white10,
 
     notesBg: colors.white05,
     chatToMsgBg: colors.white05,
@@ -397,7 +407,7 @@ export const themeDark = createTheme(vars, {
     footerSocialIconHover: colors.silverChalice,
 
     infoBg: colors.mako,
-    statBg: colors.mako,
+    statBg: colors.white05,
     statIcon: colors.white30,
 
     modal: colors.charade,
@@ -421,7 +431,7 @@ export const themeDark = createTheme(vars, {
     tooltip: colors.milanoRed,
     tooltipText: colors.white,
 
-    cardHeaderBorderBottom: colors.white24,
+    cardHeaderBorderBottom: colors.white10,
 
     reportBgHover: colors.white10,
 
@@ -500,5 +510,9 @@ export const themeDark = createTheme(vars, {
     bottomTabsIconActive: colors.goldTips,
     bottomTabsText: colors.white50,
     bottomTabsTextActive: colors.goldTips,
+
+    breadcrumbsColor: colors.white50,
+
+    collapsibleBoxExpandControls: colors.goldTips,
   },
 });

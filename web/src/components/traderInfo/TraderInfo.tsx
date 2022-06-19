@@ -1,161 +1,247 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { Box } from 'web/src/components/ui/Box';
-import { useT } from 'web/src/hooks/useT';
-import { Stack } from 'web/src/components/ui/Stack';
 import { Text } from 'web/src/components/ui/Text';
-import VerifiedIcon from 'web/src/assets/svg/VerifiedIcon.svg';
-import BlockedUserIcon from 'web/src/assets/svg/BlockedUserIcon.svg';
-import FavoriteIcon from 'web/src/assets/svg/FavoriteIcon.svg';
-import FavoriteIconActive from 'web/src/assets/svg/FavoriteIconActive.svg';
-import BlockedUserIconActive from 'web/src/assets/svg/BlockedUserIconActive.svg';
-import BlockedStatusIcon from 'web/src/assets/svg/BlockedStatusIcon.svg';
-import { useUserInfo } from 'web/src/hooks/useUserInfo';
 import { Button } from 'web/src/components/ui/Button';
-import { useBlockUser } from 'web/src/hooks/mutations/useBlockUser';
-import { useTrustUser } from 'web/src/hooks/mutations/useTrustUser';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
-import { IconButton } from 'web/src/components/IconButton/IconButton';
-import { TraderStats } from 'web/src/components/traderStats/TraderStats';
+import { Stat, StatLabel } from 'web/src/components/ui/Stat';
+import ThumbUp from 'web/src/assets/svg/ThumbUp.svg';
+import ThumbDown from 'web/src/assets/svg/ThumbDown.svg';
+import { Card, CardHeader } from 'web/src/components/ui/Card';
+import { OnlineStatusByLastActivity } from 'web/src/components/ui/OnlineStatus';
+import { useSharedT } from 'web/src/components/shared/Adapter';
+import { ActionOnTraderButton } from 'web/src/components/p2p/ActionOnTraderButton';
+import { useIsMobileDevice, useUser } from 'web/src/components/app/AppContext';
+import { formatRating } from 'web/src/helpers/formatRating';
+import { CollapsibleBox } from 'web/src/components/collapsibleBox/CollapsibleBox';
+import { UserInfo } from 'web/src/modules/p2p/user.types';
+import { LoginRequired } from 'web/src/components/traderInfo/LoginRequired';
+import { TraderIcons } from 'web/src/components/traderInfo/TraderIcons';
 import { Notes } from './Notes';
 import { Deals } from './Deals';
-import * as styles from './TraderInfo.css';
 import { UserChat } from './UserChat';
+import * as s from './TraderInfo.css';
 
 interface TraderInfoProps {
-  publicName: string;
+  traderInfo: UserInfo;
   onSingleMode?: (name: string) => void;
+  onBlock: () => void;
+  onTrust: () => void;
 }
 
-export const TraderInfo: FC<TraderInfoProps> = ({ publicName, onSingleMode }) => {
-  const t = useT();
-  const [favoriteStatus, setFavoriteStatus] = useState(false);
-  const [blockedStatus, setBlockedStatus] = useState(false);
+export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBlock, onTrust }) => {
+  const isMobileDevice = useIsMobileDevice();
+  const user = useUser();
+  const t = useSharedT();
   const [value, setValue] = useState('info');
 
-  const { data } = useUserInfo(publicName);
+  const canActionOnTrader = user && user.bitzlato_user?.id !== traderInfo.id;
 
-  const userBlock = useBlockUser();
-  const userTrust = useTrustUser();
+  const [thumbUp, thumbDown] = (traderInfo.feedbacks ?? []).reduce<[number, number]>(
+    (acc, item) => {
+      if (item.type === 'thumb_up') {
+        acc[0] = item.count;
+      } else {
+        acc[1] = item.count;
+      }
 
-  useEffect(() => {
-    if (data !== undefined) {
-      setBlockedStatus(data.blocked);
-      setFavoriteStatus(data.trusted);
-    }
-  }, [data]);
+      return acc;
+    },
+    [0, 0],
+  );
 
-  const onClickBlock = () => {
-    userBlock({
-      publicName,
-      flag: !blockedStatus,
-    });
-
-    setBlockedStatus(!blockedStatus);
-  };
-
-  const onClickTrust = () => {
-    userTrust({
-      publicName,
-      flag: !favoriteStatus,
-    });
-
-    setFavoriteStatus(!favoriteStatus);
-  };
-
-  if (!data) return null;
-
-  const isOnline = Date.now() - data.lastActivity < 60000 * 5;
-
-  return (
-    <Box display="flex" mb="4x" flexDirection="column" className={styles.sideBlock}>
-      <Box mb="4x" pb="4x" borderBottomWidth="1x" borderColor="traderBorder" borderStyle="solid">
-        <Text variant="title" fontWeight="regular">
-          {t('trader.block.profileTrader')}
-        </Text>
-      </Box>
+  const traderStats = traderInfo.dealStats.find((item) => item.cryptocurrency === 'common');
+  const body = (
+    <Box display="flex" flex={1} flexDirection="column" py={{ mobile: '4x', tablet: '5x' }} px="5x">
       <Box mb="2x">
         <Box display="flex" justifyContent="space-between" mb="2x">
-          <Stack display="flex" marginRight="2x" alignItems="center">
-            <Text variant="h5" fontWeight="regular">
-              {data.name}
-            </Text>
-            {data && data.trusted && <VerifiedIcon />}
-            {favoriteStatus && <FavoriteIcon />}
-            {blockedStatus && <BlockedStatusIcon />}
-          </Stack>
-          <Box display="flex" alignItems="stretch" justifyContent="space-between">
-            <IconButton
-              onClick={onClickBlock}
-              className={styles.iconButton[blockedStatus ? 'blocked' : 'default']}
-            >
-              {blockedStatus ? <BlockedUserIconActive /> : <BlockedUserIcon />}
-            </IconButton>
-            <IconButton
-              onClick={onClickTrust}
-              className={styles.iconButton[favoriteStatus ? 'favorited' : 'default']}
-            >
-              {favoriteStatus ? <FavoriteIconActive /> : <FavoriteIcon />}
-            </IconButton>
+          <Box>
+            <Box display="flex" alignItems="center" gap="2x" mb="2x">
+              <Text variant="label" fontWeight={isMobileDevice ? 'regular' : 'strong'}>
+                {traderInfo.name}
+              </Text>
+
+              <TraderIcons traderInfo={traderInfo} />
+            </Box>
+            <OnlineStatusByLastActivity lastActivity={traderInfo.lastActivity} />
           </Box>
-        </Box>
-        <Box display="flex" alignItems="center" mb="5x">
-          {isOnline ? (
-            <Box width="2x" height="2x" borderRadius="circle" backgroundColor="success" mr="2x" />
-          ) : (
-            <Box width="2x" height="2x" borderRadius="circle" backgroundColor="warning" mr="2x" />
+          {canActionOnTrader && (
+            <Box display="flex" alignItems="stretch" justifyContent="space-between">
+              <ActionOnTraderButton
+                variant="block"
+                active={traderInfo.blocked ?? false}
+                title={t('Block')}
+                activeTitle={t('Unblock')}
+                onClick={onBlock}
+              />
+              <ActionOnTraderButton
+                variant="trust"
+                active={traderInfo.trusted ?? false}
+                title={t('Add to the list of trusted')}
+                activeTitle={t('Remove from the list of trusted')}
+                onClick={onTrust}
+              />
+            </Box>
           )}
-          <Text>{isOnline ? t('online') : t('offline')}</Text>
         </Box>
       </Box>
 
-      <Box display={{ mobile: 'none', desktop: 'flex' }}>
+      {isMobileDevice ? (
+        <Box display="flex" gap="3x">
+          <Box w="full">
+            <Button
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              onClick={() => onSingleMode?.('notes')}
+            >
+              {t('Notes')}
+            </Button>
+          </Box>
+          <Box w="full">
+            <Button color="secondary" fullWidth onClick={() => onSingleMode?.('chat')}>
+              {t('Сhat')}
+            </Button>
+          </Box>
+        </Box>
+      ) : (
         <VariantSwitcher
           target="tabs"
           variants={[
-            { label: t('info'), value: 'info' },
-            { label: t('chat'), value: 'chat' },
-            { label: t('notes'), value: 'notes' },
+            { label: t('Information'), value: 'info' },
+            { label: t('Chat'), value: 'chat' },
+            { label: t('Notes'), value: 'notes' },
           ]}
           value={value}
           onChange={setValue}
         />
-      </Box>
-
-      <Box display={{ mobile: 'flex', desktop: 'none' }}>
-        <Box mr="2x" w="full">
-          <Button
-            variant="outlined"
-            color="secondary"
-            fullWidth
-            onClick={() => onSingleMode?.('chat')}
-          >
-            {t('chat')}
-          </Button>
-        </Box>
-        <Box w="full">
-          <Button
-            variant="outlined"
-            color="secondary"
-            fullWidth
-            onClick={() => onSingleMode?.('notes')}
-          >
-            {t('notes')}
-          </Button>
-        </Box>
-      </Box>
+      )}
 
       <Box display="flex" position="relative" flexDirection="column" flexGrow={1}>
-        {data && value === 'info' && (
+        {value === 'info' && (
           <>
-            <Box mt="4x" mb="4x" display="flex">
-              <TraderStats publicName={publicName} showBasicOnly />
-            </Box>
-            <Deals data={data.dealStats} />
+            {isMobileDevice ? (
+              <Box my="4x">
+                <CollapsibleBox
+                  visible={
+                    <>
+                      <Box
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        py="2x"
+                      >
+                        <Text variant="label" fontWeight="strong">
+                          {t('Rating')}
+                        </Text>
+                        <Box display="flex" alignItems="center">
+                          <Box display="flex" alignItems="center" gap="2x" mr="6x">
+                            <Box as={ThumbUp} color="statIcon" />
+                            <Text fontSize="medium">{thumbUp}</Text>
+                            <Box as={ThumbDown} color="statIcon" />
+                            <Text fontSize="medium">{thumbDown}</Text>
+                          </Box>
+                          <Text fontSize="medium">{traderInfo.rating}</Text>
+                        </Box>
+                      </Box>
+                      <Box display="flex" w="full" justifyContent="space-between" py="2x">
+                        <Text variant="label" fontWeight="strong">
+                          {t('Successful deals')}
+                        </Text>
+                        <Text fontSize="medium">{traderStats?.successDeals}</Text>
+                      </Box>
+                      <Box display="flex" w="full" justifyContent="space-between" py="2x">
+                        <Text variant="label" fontWeight="strong">
+                          {t('Canceled deals')}
+                        </Text>
+                        <Text fontSize="medium">{traderStats?.canceledDeals}</Text>
+                      </Box>
+                    </>
+                  }
+                  hidden={
+                    <>
+                      <Box display="flex" w="full" justifyContent="space-between" py="2x">
+                        <Text variant="label" fontWeight="strong">
+                          {t('Defeat in dispute')}
+                        </Text>
+                        <Text fontSize="medium">{traderStats?.defeatInDisputes}</Text>
+                      </Box>
+                      <Box display="flex" w="full" justifyContent="space-between" py="2x">
+                        <Text variant="label" fontWeight="strong">
+                          {t('Trusted')}
+                        </Text>
+                        <Text fontSize="medium">{traderInfo.trustsCount}</Text>
+                      </Box>
+                      <Box display="flex" justifyContent="space-between" w="full" py="2x">
+                        <Text variant="label" fontWeight="strong">
+                          {t('Blacklisted')}
+                        </Text>
+                        <Text fontSize="medium">{traderInfo.blacklistedTimes ?? 0}</Text>
+                      </Box>
+                    </>
+                  }
+                />
+              </Box>
+            ) : (
+              <Box my="4x" display="flex" gap="4x">
+                <Box width="full">
+                  <Stat>
+                    <StatLabel>{t('Rating')}</StatLabel>
+                    <Text
+                      as="div"
+                      variant="title"
+                      textOverflow="ellipsis"
+                      textAlign="right"
+                      title={traderInfo.rating.toString()}
+                    >
+                      {formatRating(traderInfo.rating.toString())}
+                    </Text>
+                  </Stat>
+                </Box>
+                <Box width="full">
+                  <Stat>
+                    <StatLabel>{t('Comments')}</StatLabel>
+                    <Box display="flex" justifyContent="flex-end" gap="5x">
+                      <Box display="flex" alignItems="center">
+                        <Box color="statIcon" display="flex" alignItems="center" mr="2x">
+                          <ThumbUp />
+                        </Box>
+                        <Text variant="label">{thumbUp}</Text>
+                      </Box>
+
+                      <Box display="flex" alignItems="center">
+                        <Box color="statIcon" display="flex" alignItems="center" mr="2x">
+                          <ThumbDown />
+                        </Box>
+                        <Text variant="label">{thumbDown}</Text>
+                      </Box>
+                    </Box>
+                  </Stat>
+                </Box>
+              </Box>
+            )}
+            <Deals deals={traderInfo.dealStats} />
           </>
         )}
-        {value === 'chat' && <UserChat publicName={publicName} />}
-        {value === 'notes' && <Notes publicName={publicName} />}
+        {value === 'chat' &&
+          (user === undefined ? (
+            <LoginRequired>{t('Sign in to send messages')}</LoginRequired>
+          ) : (
+            <UserChat publicName={traderInfo.name} />
+          ))}
+        {value === 'notes' &&
+          (user === undefined ? (
+            <LoginRequired>{t('Sign in to save notes')}</LoginRequired>
+          ) : (
+            <Notes publicName={traderInfo.name} />
+          ))}
       </Box>
     </Box>
+  );
+
+  return (
+    <Card className={s.card} display="flex" flexDirection="column">
+      <CardHeader>{t('Trader profile')}</CardHeader>
+      {body}
+    </Card>
   );
 };

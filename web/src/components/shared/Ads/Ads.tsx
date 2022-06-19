@@ -24,7 +24,7 @@ import { useAppContext } from 'web/src/components/app/AppContext';
 import { p2pUrl } from 'web/src/api/config';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { Spinner } from 'web/src/components/ui/Spinner';
-import { OnlineStatusByLastActivity } from './OnlineStatus';
+import { OnlineStatusByLastActivity } from '../../ui/OnlineStatus';
 import { ConfirmRateChangeModal } from './ConfirmRateChangeModal';
 import { getLinkToP2PUser } from './getLinkToP2PUser';
 
@@ -182,7 +182,7 @@ export const Ads: FC<Props> = ({
                   {ad.ownerTrusted && (
                     <Tooltip label={t('Trusted user')} placement="top">
                       <div>
-                        <Box as={TrustIcon} display="block" />
+                        <Box as={TrustIcon} display="block" color="success" />
                       </div>
                     </Tooltip>
                   )}

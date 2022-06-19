@@ -14,7 +14,7 @@ import { useTradeStats } from 'web/src/hooks/data/useFetchTradeStatistics';
 import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
 import { useFetchSessionsMe } from 'web/src/hooks/data/useFetchSessionsMe';
-import { parseNumeric } from 'web/src/helpers/parseNumeric';
+import { formatRating } from 'web/src/helpers/formatRating';
 import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
@@ -26,12 +26,6 @@ import { ChangePassword } from './ChangePassword';
 import { ChangeUserAvatar } from './ChangeUserAvatar';
 import { UserAvatar } from './UserAvatar';
 import { UserSuspicious } from './UserSuspicious';
-
-const formatRating = (rating: string) =>
-  parseNumeric(rating, {
-    maxFractionDigits: 4,
-    allowNegativeNumeric: true,
-  });
 
 export const Profile: FC = () => {
   const t = useT();

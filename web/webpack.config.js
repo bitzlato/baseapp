@@ -280,6 +280,7 @@ module.exports = {
         './AppContext': './src/components/app/AppContext',
         './Adapter': './src/components/shared/Adapter',
         './BoardScreen': './src/components/shared/Ads/Board',
+        './TraderScreen': './src/components/shared/Trader/Trader',
         './TradesScreen': './src/components/shared/Trades/Trades',
         './fetch': './src/helpers/fetch',
         './cssVars': './src/components/shared/sharedCssVars',

@@ -1,9 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import { SWRResponse } from 'swr';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { fetchJson, FetchError } from 'web/src/helpers/fetch';
-import { alertPush } from 'web/src/modules/public/alert/actions';
-import { userRefetch } from 'web/src/modules/user/profile/actions';
+import { UserInfo } from 'web/src/modules/p2p/user.types';
 
 interface TrustUserInput {
   flag: boolean;
@@ -25,25 +26,31 @@ const trustUser = async (params: TrustUserInput) => {
   return response;
 };
 
-export const useTrustUser = () => {
-  const dispatch = useDispatch();
+export const useTrustUser = (swr?: SWRResponse<UserInfo, any> | undefined) => {
+  const handleFetchError = useHandleFetchError();
   const [mutate] = useMutation<TrustUserInput, any, unknown>(trustUser, {
-    onSuccess: () => {
-      dispatch(userRefetch());
-    },
+    throwOnFailure: true,
     onFailure: ({ error }) => {
       if (error instanceof FetchError) {
-        dispatch(
-          alertPush({
-            type: 'error',
-            code: error.code,
-            message: error.messages,
-            payload: error.payload,
-          }),
-        );
+        handleFetchError(error);
       }
     },
   });
 
-  return mutate;
+  return useCallback(
+    (input: TrustUserInput) => {
+      if (swr && swr.data) {
+        const optimisticData = { ...swr.data, trusted: input.flag };
+
+        return swr.mutate(mutate(input), {
+          optimisticData,
+          rollbackOnError: true,
+          populateCache: false,
+        });
+      }
+
+      return mutate(input);
+    },
+    [mutate, swr],
+  );
 };

@@ -7,10 +7,9 @@ import { useFetchAdvert } from 'web/src/hooks/data/useFetchAds';
 import { useFetchPaymethod } from 'web/src/hooks/data/useFetchPaymethod';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import ShieldIcon from 'web/src/assets/svg/ShieldIcon.svg';
-import LikeIcon from 'web/src/assets/svg/LikeIcon.svg';
-import UnLikeIcon from 'web/src/assets/svg/UnLikeIcon.svg';
+import LikeIcon from 'web/src/assets/svg/ThumbUp.svg';
+import UnLikeIcon from 'web/src/assets/svg/ThumbDown.svg';
 import VerifiedIcon from 'web/src/assets/svg/VerifiedIcon.svg';
-import { useChangeTrust, useFetchUser } from 'web/src/hooks/data/useFetchP2PUser';
 import { Tooltip } from 'web/src/components/ui/Tooltip';
 import { Button } from 'web/src/components/ui/Button';
 import { useAppContext } from 'web/src/components/app/AppContext';
@@ -22,10 +21,12 @@ import { createMoney } from 'web/src/helpers/money';
 import { P2PMoneyFormat } from 'web/src/components/money/P2PFiatMoney';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { DealStat } from 'web/src/modules/p2p/user.types';
-import { TrustedButton } from 'web/src/components/traderInfo/TrustedButton';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
+import { OnlineStatusByLastActivity } from 'web/src/components/ui/OnlineStatus';
+import { ActionOnTraderButton } from 'web/src/components/p2p/ActionOnTraderButton';
 import { themeDark } from 'web/src/theme/vars.css';
-import { OnlineStatusByLastActivity } from './OnlineStatus';
+import { useFetchTraderInfo } from 'web/src/hooks/data/useFetchTraderInfo';
+import { useTrustUser } from 'web/src/hooks/mutations/useTrustUser';
 import { AdStat } from './AdStat';
 
 interface UrlParams {
@@ -43,10 +44,11 @@ export const Ad: FC = () => {
   const { lang, isMobileDevice } = useAppContext();
   const { data: advert } = useFetchAdvert(params.id);
   const { data: paymethod } = useFetchPaymethod(advert?.paymethod, lang);
-  const { data: owner } = useFetchUser(advert?.owner);
+  const traderInfoSWR = useFetchTraderInfo(advert?.owner);
+  const { data: owner } = traderInfoSWR;
   const { getFiatCurrency } = useFiatCurrencies();
   const { getCryptoCurrency } = useCryptoCurrencies();
-  const changeTrust = useChangeTrust();
+  const changeTrust = useTrustUser(traderInfoSWR);
 
   if (advert === undefined || paymethod === undefined || owner === undefined) {
     return (
@@ -77,7 +79,7 @@ export const Ad: FC = () => {
   };
 
   const handleClickTrusted = () => {
-    changeTrust(owner.name, { trust: !owner.trusted });
+    changeTrust({ publicName: owner.name, flag: !owner.trusted });
   };
 
   const handleClickStart = () => {};
@@ -312,7 +314,13 @@ export const Ad: FC = () => {
             <Box flex={1} display="flex">
               <Box display="flex" flexDirection="column" justifyContent="space-between">
                 {traderEl}
-                <TrustedButton onClick={handleClickTrusted} trusted={owner.trusted} />
+                <ActionOnTraderButton
+                  variant="trust"
+                  active={owner.trusted ?? false}
+                  title={t('Add to trusted')}
+                  activeTitle={t('Remove from trusted')}
+                  onClick={handleClickTrusted}
+                />
               </Box>
             </Box>
             <Box flex={1} display="flex">
