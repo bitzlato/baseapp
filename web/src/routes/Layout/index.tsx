@@ -339,11 +339,9 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               path={['/buy/:id', '/sell/:id']}
               component={AdScreen}
             />,
-            <PrivateRoute
+            <Route
               key="TraderScreen"
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path="/trader/:name"
+              path={['/p2p/users/:name', '/:lang/p2p/users/:name']}
               component={TraderScreen}
             />,
             <PrivateRoute

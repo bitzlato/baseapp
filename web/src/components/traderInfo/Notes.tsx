@@ -31,25 +31,9 @@ export const Notes: FC<NotesProps> = ({ publicName }) => {
   }, [notesBoxRef, notes]);
 
   return (
-    <Box
-      mt="4x"
-      display="flex"
-      flexGrow={1}
-      height="full"
-      width="full"
-      borderWidth="1x"
-      borderColor="traderBorder"
-      borderStyle="solid"
-    >
+    <Box mt="4x" display="flex" flexGrow={1} height="full" width="full">
       {notes ? (
-        <Box
-          ref={notesBoxRef}
-          display="flex"
-          position="relative"
-          overflowY="auto"
-          flexGrow={1}
-          m="2x"
-        >
+        <Box ref={notesBoxRef} display="flex" position="relative" overflowY="auto" flexGrow={1}>
           <Box display="flex" flexDirection="column" position="absolute" width="full">
             {notes.map((note: Note) => (
               <Box display="flex" mb="2x" key={note.date}>

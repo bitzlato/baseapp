@@ -6,7 +6,7 @@ import SendIcon from 'web/src/assets/svg/SendIcon.svg';
 import AttachIcon from 'web/src/assets/svg/AttachIcon.svg';
 import { IconButton } from 'web/src/components/IconButton/IconButton';
 import { Spinner } from 'web/src/components/ui/Spinner';
-import { useT } from 'web/src/hooks/useT';
+import { useSharedT } from 'web/src/components/shared/Adapter';
 import * as styles from './Chat.css';
 
 export interface ChatProps {
@@ -18,7 +18,7 @@ export interface ChatProps {
 }
 
 export const Chat: FC<ChatProps> = ({ messages, onSendMessage, onSendFile, isSending }) => {
-  const t = useT();
+  const t = useSharedT();
   const [message, setMessage] = useState<string>('');
   const messageBoxRef = useRef<HTMLDivElement>(null);
 
@@ -53,6 +53,7 @@ export const Chat: FC<ChatProps> = ({ messages, onSendMessage, onSendFile, isSen
       borderColor="traderBorder"
       borderStyle="solid"
       flexDirection="column"
+      borderRadius="1.5x"
     >
       {messages && messages.length > 0 && (
         <Box
@@ -79,7 +80,7 @@ export const Chat: FC<ChatProps> = ({ messages, onSendMessage, onSendFile, isSen
           flexGrow={1}
           m="2x"
         >
-          <Text textAlign="center">{t('chat.nomessage')}</Text>
+          <Text textAlign="center">{t('Please Send message for start conversation')}</Text>
         </Box>
       )}
 
@@ -112,7 +113,7 @@ export const Chat: FC<ChatProps> = ({ messages, onSendMessage, onSendFile, isSen
         )}
         <Box flexGrow={1} display="flex">
           <TextInput
-            placeholder={t('chat.input.placeholder')}
+            placeholder={t('Write message')}
             disabled={isSending}
             className={styles.chatInput}
             value={message}

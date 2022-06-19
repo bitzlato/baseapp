@@ -2,16 +2,20 @@ import { FC, useState } from 'react';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/Container/Container';
 import { Box } from 'web/src/components/ui/Box';
-import { Pagination } from 'web/src/components/ui/Pagination';
 import { useUserAds } from 'web/src/hooks/data/useUserAds';
 import { TraderAds } from 'web/src/components/shared/TraderAds/TraderAds';
 import { TraderInfo } from 'web/src/components/traderInfo/TraderInfo';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { UserChat } from 'web/src/components/traderInfo/UserChat';
 import { Notes } from 'web/src/components/traderInfo/Notes';
-import { TraderStats } from 'web/src/components/traderStats/TraderStats';
-import { MobileTraderHeader } from 'web/src/components/traderInfo/MobileHeader';
-import { useT } from 'web/src/hooks/useT';
+import { TraderHeaderMobile } from 'web/src/components/traderInfo/TraderHeaderMobile';
+import { Breadcrumbs, BreadcrumbsItem } from 'web/src/components/ui/Breadcrumbs';
+import { useFetchTraderInfo } from 'web/src/hooks/data/useFetchTraderInfo';
+import { Text } from 'web/src/components/ui/Text';
+import { Spinner } from 'web/src/components/ui/Spinner';
+import { useBlockUser } from 'web/src/hooks/mutations/useBlockUser';
+import { useTrustUser } from 'web/src/hooks/mutations/useTrustUser';
+import { LoginRequired } from 'web/src/components/traderInfo/LoginRequired';
 import * as s from './Trader.css';
 
 interface UrlParams {
@@ -19,22 +23,47 @@ interface UrlParams {
 }
 
 export const Trader: FC = () => {
-  const t = useT();
-  const { lang } = useAppContext();
-  const { params } = useAdapterContext<UrlParams>();
-  const { data = [], error, isValidating } = useUserAds({ publicName: params.name, lang });
+  const { lang, isMobileDevice, user } = useAppContext();
+  const { params, t } = useAdapterContext<UrlParams>();
+  const { data = [], error } = useUserAds({ publicName: params.name, lang });
+  const traderInfoSWR = useFetchTraderInfo(params.name);
+  const traderInfo = traderInfoSWR.data;
   const [singleMode, setSingleMode] = useState('');
+  const userBlock = useBlockUser(traderInfoSWR);
+  const userTrust = useTrustUser(traderInfoSWR);
 
-  if (error) {
+  if (error || traderInfoSWR.error) {
     return null;
+  }
+
+  if (!traderInfo) {
+    return (
+      <Box display="flex" justifyContent="center" py="20x" width="full">
+        <Spinner />
+      </Box>
+    );
   }
 
   const onSingleMode = (name: string) => {
     setSingleMode(name);
   };
 
+  const handleBlock = () => {
+    userBlock({
+      publicName: traderInfo.name,
+      flag: !traderInfo.blocked,
+    });
+  };
+
+  const handleTrust = () => {
+    userTrust({
+      publicName: traderInfo.name,
+      flag: !traderInfo.trusted,
+    });
+  };
+
   if (singleMode === 'chat' || singleMode === 'notes') {
-    const title = `${singleMode === 'chat' ? t('chatwith') : t('noteswith')} ${params.name}`;
+    const title = `${singleMode === 'chat' ? t('Chat with') : t('Notes for')} ${params.name}`;
 
     return (
       <Box
@@ -47,43 +76,155 @@ export const Trader: FC = () => {
         pb="3x"
         className={s.singleContainer}
       >
-        <MobileTraderHeader
+        <TraderHeaderMobile
           title={title}
-          publicName={params.name}
+          traderInfo={traderInfo}
+          showOnlineStatus={singleMode === 'chat'}
           onGoBack={() => setSingleMode('')}
         />
-        {singleMode === 'chat' && <UserChat publicName={params.name} />}
-        {singleMode === 'notes' && <Notes publicName={params.name} />}
+        {singleMode === 'chat' &&
+          (user === undefined ? (
+            <LoginRequired>{t('Sign in to send messages')}</LoginRequired>
+          ) : (
+            <UserChat publicName={params.name} />
+          ))}
+        {singleMode === 'notes' &&
+          (user === undefined ? (
+            <LoginRequired>{t('Sign in to save notes')}</LoginRequired>
+          ) : (
+            <Notes publicName={params.name} />
+          ))}
       </Box>
+    );
+  }
+
+  const traderStats = traderInfo?.dealStats.find((item) => item.cryptocurrency === 'common');
+  const trader = (
+    <TraderInfo
+      traderInfo={traderInfo}
+      onSingleMode={onSingleMode}
+      onBlock={handleBlock}
+      onTrust={handleTrust}
+    />
+  );
+  const ads = <TraderAds data={data} isLoading={!data} />;
+
+  if (isMobileDevice) {
+    return (
+      <>
+        <Box bg="headerBg">{trader}</Box>
+        <Box bg="block">{ads}</Box>
+      </>
     );
   }
 
   return (
     <Container maxWidth="fullhd">
-      <Box display="flex" p="8x" height="full" flexDirection={{ desktop: 'row', mobile: 'column' }}>
-        <Box
-          display="flex"
-          backgroundColor="block"
-          borderRadius="1.5x"
-          marginRight={{ desktop: '6x' }}
-          px={{ desktop: '6x' }}
-          py={{ desktop: '5x' }}
-          className={s.leftBlock}
-        >
-          <TraderInfo publicName={params.name} onSingleMode={onSingleMode} />
-        </Box>
-        <Box backgroundColor="block" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
-          <TraderStats publicName={params.name} desktopOnly />
-          <TraderAds data={data} isLoading={isValidating} />
-          {data && !isValidating && (
-            <Pagination
-              page={1}
-              total={0}
-              perPage={15}
-              onChange={() => {}}
-              onChangePerPage={() => {}}
-            />
-          )}
+      <Box px="8x">
+        <Breadcrumbs>
+          <BreadcrumbsItem to={`/${lang}/p2p`}>{t('Market')}</BreadcrumbsItem>
+          <BreadcrumbsItem>
+            {t('Trader profile')} {params.name}
+          </BreadcrumbsItem>
+        </Breadcrumbs>
+      </Box>
+
+      <Box display="flex" px="8x" pb="8x" flexDirection={{ mobile: 'column', desktop: 'row' }}>
+        <Box className={s.leftBlock}>{trader}</Box>
+        <Box flexGrow={1}>
+          <Box className={s.stats}>
+            <Box className={s.stat}>
+              <Box
+                display="flex"
+                bg="block"
+                borderRadius="1x"
+                flexDirection="column"
+                justifyContent="space-between"
+                px="4x"
+                py="5x"
+                flexGrow={1}
+                height="full"
+              >
+                <Text variant="label">{t('Successful deals')}</Text>
+                <Text as="div" variant="h3">
+                  {traderStats?.successDeals}
+                </Text>
+              </Box>
+            </Box>
+            <Box className={s.stat}>
+              <Box
+                display="flex"
+                bg="block"
+                borderRadius="1x"
+                flexDirection="column"
+                justifyContent="space-between"
+                px="4x"
+                py="5x"
+                flexGrow={1}
+                height="full"
+              >
+                <Text variant="label">{t('Canceled deals')}</Text>
+                <Text as="div" variant="h3">
+                  {traderStats?.canceledDeals}
+                </Text>
+              </Box>
+            </Box>
+            <Box className={s.stat}>
+              <Box
+                display="flex"
+                bg="block"
+                borderRadius="1x"
+                flexDirection="column"
+                justifyContent="space-between"
+                px="4x"
+                py="5x"
+                flexGrow={1}
+                height="full"
+              >
+                <Text variant="label">{t('Defeat in dispute')}</Text>
+                <Text as="div" variant="h3">
+                  {traderStats?.defeatInDisputes}
+                </Text>
+              </Box>
+            </Box>
+            <Box className={s.stat}>
+              <Box
+                display="flex"
+                bg="block"
+                borderRadius="1x"
+                flexDirection="column"
+                justifyContent="space-between"
+                px="4x"
+                py="5x"
+                flexGrow={1}
+                height="full"
+              >
+                <Text variant="label">{t('Trusted')}</Text>
+                <Text as="div" variant="h3">
+                  {traderInfo?.trustsCount}
+                </Text>
+              </Box>
+            </Box>
+            <Box className={s.stat}>
+              <Box
+                display="flex"
+                bg="block"
+                borderRadius="1x"
+                flexDirection="column"
+                justifyContent="space-between"
+                px="4x"
+                py="5x"
+                flexGrow={1}
+                height="full"
+              >
+                <Text variant="label">{t('Blacklisted')}</Text>
+                <Text as="div" variant="h3">
+                  {traderInfo?.blacklistedTimes ?? 0}
+                </Text>
+              </Box>
+            </Box>
+          </Box>
+          {ads}
         </Box>
       </Box>
     </Container>

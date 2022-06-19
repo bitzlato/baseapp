@@ -19,7 +19,7 @@ import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
-import { Card } from 'web/src/components/Card/Card';
+import { Card, CardHeader } from 'web/src/components/ui/Card';
 import { TraderAdsEmpty } from './TraderAdsEmpty';
 
 interface Props {
@@ -62,15 +62,21 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
 
   const tabs = (
     <Box display="flex" gap="4x">
-      <Button color="clarified" active={tab === TAB_ALL} onClick={handleClickAll}>
-        {t('All')}
-      </Button>
-      <Button color="clarified" active={tab === TAB_PURCHASE} onClick={handleClickForPurchase}>
-        {t('To buy')}
-      </Button>
-      <Button color="clarified" active={tab === TAB_SALE} onClick={handleClickForSale}>
-        {t('To sell')}
-      </Button>
+      <Box flexShrink={0}>
+        <Button color="clarified" active={tab === TAB_ALL} onClick={handleClickAll}>
+          {t('All')}
+        </Button>
+      </Box>
+      <Box flexShrink={0}>
+        <Button color="clarified" active={tab === TAB_PURCHASE} onClick={handleClickForPurchase}>
+          {t('To buy')}
+        </Button>
+      </Box>
+      <Box flexShrink={0}>
+        <Button color="clarified" active={tab === TAB_SALE} onClick={handleClickForSale}>
+          {t('To sell')}
+        </Button>
+      </Box>
     </Box>
   );
 
@@ -95,9 +101,12 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
 
         {tabs}
       </Box>
-      <Box mx="5x" mb="5x">
-        {isShowFilterMobile && filter}
-      </Box>
+
+      {isShowFilterMobile && (
+        <Box mx="5x" mb="5x">
+          {filter}
+        </Box>
+      )}
     </Box>
   ) : (
     <Box display="flex" justifyContent="space-between" mb="6x">
@@ -123,126 +132,130 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
   }
 
   const body = (
-    <>
-      {controls}
-      <AdsTable header={header} emptyContent={<TraderAdsEmpty />} isLoading={isLoading}>
-        {list && list.length > 0 && (
-          <AdsTableBody>
-            {list.map((ad) => {
-              const rate = <P2PFiatFormat money={ad.rate} cryptoCurrency={ad.cryptoCurrency} />;
-              const limit = (
-                <>
-                  <P2PFiatFormat money={ad.limitCurrency.min} cryptoCurrency={ad.cryptoCurrency} />{' '}
-                  —{' '}
-                  <P2PFiatFormat money={ad.limitCurrency.max} cryptoCurrency={ad.cryptoCurrency} />
-                </>
+    <AdsTable header={header} emptyContent={<TraderAdsEmpty />} isLoading={isLoading}>
+      {list && list.length > 0 && (
+        <AdsTableBody>
+          {list.map((ad) => {
+            const rate = <P2PFiatFormat money={ad.rate} cryptoCurrency={ad.cryptoCurrency} />;
+            const limit = (
+              <>
+                <P2PFiatFormat money={ad.limitCurrency.min} cryptoCurrency={ad.cryptoCurrency} /> —{' '}
+                <P2PFiatFormat money={ad.limitCurrency.max} cryptoCurrency={ad.cryptoCurrency} />
+              </>
+            );
+            let actionButton;
+            if (ad.owner === publicName) {
+              actionButton = (
+                <Button as={Link} to={`/${lang}/p2p/adverts/${ad.id}`} fullWidth={isMobileDevice}>
+                  {t('Edit')}
+                </Button>
               );
-              let actionButton;
-              if (ad.owner === publicName) {
-                actionButton = (
-                  <Button as={Link} to={`/${lang}/p2p/adverts/${ad.id}`} fullWidth={isMobileDevice}>
-                    {t('Edit')}
-                  </Button>
-                );
-              } else {
-                const isBuy = ad.type === 'purchase';
-                const actionLabel = isBuy ? t('Buy') : t('Sell');
-                actionButton = ad.available ? (
-                  <Button
-                    as={Link}
-                    to={`/${lang}/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${
-                      ad.cryptoCurrency.code
-                    }-${ad.currency.code}-${ad.paymethod.description}`}
-                    fullWidth={isMobileDevice}
-                  >
-                    {actionLabel}
-                  </Button>
-                ) : (
-                  <Button disabled>{actionLabel}</Button>
-                );
-              }
-
-              return isMobileDevice ? (
-                <Box key={ad.id} p="4x" backgroundColor="adBg" borderRadius="1.5x">
-                  <Box display="flex" flexDirection="column" gap="4x">
-                    <Box display="flex" justifyContent="space-between">
-                      <Text variant="label" color="textMuted" fontWeight="strong">
-                        {t('Cryptocurrency')}
-                      </Text>
-                      <Text textAlign="right" fontSize="medium">
-                        {ad.cryptoCurrency.code}
-                      </Text>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between">
-                      <Text variant="label" color="textMuted" fontWeight="strong">
-                        {t('Сurrency')}
-                      </Text>
-                      <Text textAlign="right" fontSize="medium">
-                        {ad.currency.code}
-                      </Text>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between">
-                      <Text variant="label" color="textMuted" fontWeight="strong">
-                        {t('Payment method')}
-                      </Text>
-                      <Text textAlign="right" fontSize="medium">
-                        {ad.paymethod.description}
-                      </Text>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between">
-                      <Text variant="label" color="textMuted" fontWeight="strong">
-                        {t('RateWithSymbol', {
-                          fiat: ad.currency.sign,
-                          crypto: ad.cryptoCurrency.sign,
-                        })}
-                      </Text>
-                      {rate}
-                    </Box>
-                    <Box display="flex" justifyContent="space-between">
-                      <Text variant="label" color="textMuted" fontWeight="strong">
-                        {t('LimitsWithSymbol', { fiat: ad.currency.sign })}
-                      </Text>
-                      {limit}
-                    </Box>
-                    {actionButton}
-                  </Box>
-                </Box>
+            } else {
+              const isBuy = ad.type === 'purchase';
+              const actionLabel = isBuy ? t('Buy') : t('Sell');
+              actionButton = ad.available ? (
+                <Button
+                  as={Link}
+                  to={`/${lang}/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${
+                    ad.cryptoCurrency.code
+                  }-${ad.currency.code}-${ad.paymethod.description}`}
+                  fullWidth={isMobileDevice}
+                >
+                  {actionLabel}
+                </Button>
               ) : (
-                <AdsTableRow key={ad.id}>
-                  <Box
-                    position="absolute"
-                    backgroundColor={ad.available ? 'success' : 'danger'}
-                    width="2x"
-                    height="full"
-                  />
-
-                  <AdsTableColumn size="medium">
-                    <Box pl="9x">{ad.cryptoCurrency.code}</Box>
-                  </AdsTableColumn>
-                  <AdsTableColumn size="medium">{ad.currency.code}</AdsTableColumn>
-                  <AdsTableColumn size="medium">{ad.paymethod.description}</AdsTableColumn>
-                  <AdsTableColumn size="medium">{rate}</AdsTableColumn>
-                  <AdsTableColumn size="small">{limit}</AdsTableColumn>
-                  <AdsTableColumn size="small" display="flex" justifyContent="flex-end">
-                    <Box pr="4x">{actionButton}</Box>
-                  </AdsTableColumn>
-                </AdsTableRow>
+                <Button disabled>{actionLabel}</Button>
               );
-            })}
-          </AdsTableBody>
-        )}
-      </AdsTable>
-    </>
+            }
+
+            return isMobileDevice ? (
+              <Box key={ad.id} p="4x" backgroundColor="adBg" borderRadius="1.5x">
+                <Box display="flex" flexDirection="column" gap="4x">
+                  <Box display="flex" justifyContent="space-between">
+                    <Text variant="label" color="textMuted" fontWeight="strong">
+                      {t('Cryptocurrency')}
+                    </Text>
+                    <Text textAlign="right" fontSize="medium">
+                      {ad.cryptoCurrency.code}
+                    </Text>
+                  </Box>
+                  <Box display="flex" justifyContent="space-between">
+                    <Text variant="label" color="textMuted" fontWeight="strong">
+                      {t('Сurrency')}
+                    </Text>
+                    <Text textAlign="right" fontSize="medium">
+                      {ad.currency.code}
+                    </Text>
+                  </Box>
+                  <Box display="flex" justifyContent="space-between">
+                    <Text variant="label" color="textMuted" fontWeight="strong">
+                      {t('Payment method')}
+                    </Text>
+                    <Text textAlign="right" fontSize="medium">
+                      {ad.paymethod.description}
+                    </Text>
+                  </Box>
+                  <Box display="flex" justifyContent="space-between">
+                    <Text variant="label" color="textMuted" fontWeight="strong">
+                      {t('RateWithSymbol', {
+                        fiat: ad.currency.sign,
+                        crypto: ad.cryptoCurrency.sign,
+                      })}
+                    </Text>
+                    {rate}
+                  </Box>
+                  <Box display="flex" justifyContent="space-between">
+                    <Text variant="label" color="textMuted" fontWeight="strong">
+                      {t('LimitsWithSymbol', { fiat: ad.currency.sign })}
+                    </Text>
+                    {limit}
+                  </Box>
+                  {actionButton}
+                </Box>
+              </Box>
+            ) : (
+              <AdsTableRow key={ad.id}>
+                <Box
+                  position="absolute"
+                  backgroundColor={ad.available ? 'success' : 'danger'}
+                  width="2x"
+                  height="full"
+                />
+
+                <AdsTableColumn size="medium">
+                  <Box pl="9x">{ad.cryptoCurrency.code}</Box>
+                </AdsTableColumn>
+                <AdsTableColumn size="medium">{ad.currency.code}</AdsTableColumn>
+                <AdsTableColumn size="medium">{ad.paymethod.description}</AdsTableColumn>
+                <AdsTableColumn size="medium">{rate}</AdsTableColumn>
+                <AdsTableColumn size="small">{limit}</AdsTableColumn>
+                <AdsTableColumn size="small" display="flex" justifyContent="flex-end">
+                  <Box pr="4x">{actionButton}</Box>
+                </AdsTableColumn>
+              </AdsTableRow>
+            );
+          })}
+        </AdsTableBody>
+      )}
+    </AdsTable>
   );
 
-  return isMobileDevice ? (
-    <>
-      <Box mt="5x" mx="5x">
-        <Text fontWeight="strong">{t('User ads')}</Text>
-      </Box>
-      {body}
-    </>
-  ) : (
-    <Card header={<h4>{t('User ads')}</h4>}>{body}</Card>
+  return (
+    <Card>
+      <CardHeader>{t('User ads')}</CardHeader>
+      {isMobileDevice ? (
+        <>
+          {controls}
+          <Box px="5x" pb="5x">
+            {body}
+          </Box>
+        </>
+      ) : (
+        <Box p="6x">
+          {controls}
+          {body}
+        </Box>
+      )}
+    </Card>
   );
 };

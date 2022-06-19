@@ -11,6 +11,9 @@ interface Props {
   header?: React.ReactNode;
 }
 
+/**
+ * @depricated Use web/src/components/ui/Card
+ */
 export const Card: React.FC<Props> = ({ className, header, children }) => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
 

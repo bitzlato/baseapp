@@ -9,7 +9,7 @@ export const dataBlock = style({
       width: '100%',
       height: '200px',
       bottom: 0,
-      backgroundImage: `linear-gradient(rgba(0,0,0,0), ${vars.colors.dropdown})`,
+      backgroundImage: `linear-gradient(rgba(0,0,0,0), ${vars.colors.block})`,
       zIndex: zIndexVars.shadeRows,
     },
   },
