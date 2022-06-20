@@ -210,6 +210,7 @@ export const [themeLight, vars] = createTheme({
     adBg: colors.whiteLilac,
     adTableHeader: colors.ebonyClay50,
     adTrader: colors.indigo,
+    adRowLabelMobile: colors.ebonyClay70,
     adTrade: colors.indigo,
 
     tradeFinishedStatusLineBg: colors.ebonyClay05,
@@ -428,6 +429,7 @@ export const themeDark = createTheme(vars, {
     adBg: colors.white05,
     adTableHeader: colors.white50,
     adTrader: colors.malibu,
+    adRowLabelMobile: colors.white50,
     adTrade: colors.indigo,
 
     tradeFinishedStatusLineBg: colors.white10,
