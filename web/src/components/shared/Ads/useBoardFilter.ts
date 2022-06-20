@@ -16,16 +16,9 @@ import { useP2PSetLastFilter } from 'web/src/hooks/mutations/useP2PSetLastFilter
 import { pick } from 'web/src/helpers/pick';
 import { DEFAULT_FILTER } from './Filter';
 
-export const URL_PARAMS: UrlParams<
-  Omit<AdvertParams, 'lang' | 'type' | 'cryptocurrency' | 'currency'>
-> = {
-  amount: { name: 'amount', set: (v) => v, get: (v) => v },
-  amountType: { name: 'amountType', set: (v) => v, get: (v) => v as AdvertParams['amountType'] },
+export const URL_PARAMS: UrlParams<Pick<AdvertParams, 'skip' | 'limit'>> = {
   skip: { name: 'skip', set: (v) => `${v}`, get: (v) => Number(v) },
   limit: { name: 'limit', set: (v) => `${v}`, get: (v) => Number(v) },
-  isOwnerActive: { name: 'active', set: (v) => `${v}`, get: (v) => Boolean(v) },
-  isOwnerTrusted: { name: 'trusted', set: (v) => `${v}`, get: (v) => Boolean(v) },
-  isOwnerVerificated: { name: 'verif', set: (v) => `${v}`, get: (v) => Boolean(v) },
 };
 
 export const adTypeToSeo: Record<AdvertType, SeoAdvertType> = {
@@ -78,15 +71,7 @@ const generateFilterParamsUrl = (
   );
 };
 
-const ADVERT_PARAMS_IN_QUERY = [
-  'amount',
-  'amountType',
-  'skip',
-  'limit',
-  'isOwnerActive',
-  'isOwnerTrusted',
-  'isOwnerVerificated',
-] as const;
+const ADVERT_PARAMS_IN_QUERY = ['skip', 'limit'] as const;
 const ADVERT_PARAMS_IN_LAST_FILTER = [
   'type',
   'currency',

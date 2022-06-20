@@ -227,13 +227,17 @@ export const Ads: FC<Props> = ({
                     <Text variant="label" color="textMuted" fontWeight="strong">
                       {t('RateWithSymbol', { fiat: fiatSign, crypto: cryptoSign })}
                     </Text>
-                    {rate}
+                    <Text textAlign="right" fontSize="medium">
+                      {rate}
+                    </Text>
                   </Box>
                   <Box display="flex" justifyContent="space-between">
                     <Text variant="label" color="textMuted" fontWeight="strong">
                       {t('LimitsWithSymbol', { fiat: fiatSign })}
                     </Text>
-                    {limit}
+                    <Text textAlign="right" fontSize="medium">
+                      {limit}
+                    </Text>
                   </Box>
                   {actionButton}
                 </Stack>
