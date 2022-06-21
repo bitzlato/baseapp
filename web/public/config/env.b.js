@@ -13,15 +13,15 @@ window.env = {
     accountPublicUrl: 'https://b-www.lgk.one/api/whaler/public/v1',
     p2pUrl: 'https://b-www.lgk.one/api2/p2p',
     p2pAuthUrl: 'https://b-www.lgk.one/api2/auth',
-    notificatorUrl: 'wss://b-www.lgk.one/wssb'
+    notificatorUrl: 'wss://b-www.lgk.one/wssb',
   },
   auth0: {
     domain: 'auth.lgk.one',
     client_id: 'OL926gD0Zha6h80uJx4TVhJLMKrJemjb',
     redirect_uri: 'https://b-www.lgk.one/wallets',
   },
-  logoUrl: 'https://market.bitzlato.com/assets/bitzlato_logo--sm--blue--nav.svg',
-  logoDarkUrl: 'https://market.bitzlato.com/assets/bitzlato_logo--sm--white--nav.svg',
+  logoUrl: 'https://b-www.lgk.one/basestatic/bitzlato_logo--sm--blue--nav.svg',
+  logoDarkUrl: 'https://b-www.lgk.one/basestatic/bitzlato_logo--sm--white--nav.svg',
   minutesUntilAutoLogout: '120',
   withCredentials: false,
   finex: false,
