@@ -4249,6 +4249,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-calendar@npm:^3":
+  version: 3.5.1
+  resolution: "@types/react-calendar@npm:3.5.1"
+  dependencies:
+    "@types/react": "*"
+  checksum: b3e8b01c8233266ae7e82862c5de300aaf2564343b1075eb35aaca656d2b8e0007e6a19a02d323fc963dbb56f5e454434a888cc4ad675ccbb17164d3522d3fcb
+  languageName: node
+  linkType: hard
+
 "@types/react-color@npm:^3.0.6":
   version: 3.0.6
   resolution: "@types/react-color@npm:3.0.6"
@@ -4993,6 +5002,13 @@ __metadata:
     webpack-dev-server:
       optional: true
   checksum: 8b273f906aeffa60c7d5700ae25f98d4b66b7e922cad38acb9575d55ff83872cd20b9894aacfa81c4d54e5b51b16253ae0e70c5e9e0608dc8768276e15c74536
+  languageName: node
+  linkType: hard
+
+"@wojtekmaj/date-utils@npm:^1.0.2":
+  version: 1.0.3
+  resolution: "@wojtekmaj/date-utils@npm:1.0.3"
+  checksum: 70b7152160529295319ead97e070f85a50c0eab7973b5845e3a58eab9b0c999023975d2739b5e2a059d27b108ce7cdbf14da99737d6fa3e3822d4dafb76b06f0
   languageName: node
   linkType: hard
 
@@ -10240,6 +10256,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"get-user-locale@npm:^1.2.0":
+  version: 1.4.0
+  resolution: "get-user-locale@npm:1.4.0"
+  dependencies:
+    lodash.once: ^4.1.1
+  checksum: d27a6cf7b1aacdec1786c6877511efc956eb17810e10c55a408753af38f13b5d854f3a0033320f94a6046e95d3c0fc2248c950aeecfc181353599facd344b7e4
+  languageName: node
+  linkType: hard
+
 "get-value@npm:^2.0.3, get-value@npm:^2.0.6":
   version: 2.0.6
   resolution: "get-value@npm:2.0.6"
@@ -14079,6 +14104,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"merge-class-names@npm:^1.1.1":
+  version: 1.4.2
+  resolution: "merge-class-names@npm:1.4.2"
+  checksum: 569c333ab0d7fa1e06ae6e637d58e0d4623d7b165ea78d085c1bbd042568d8793bb7ce54ec55580679416046b11fc6eaf4956d68d19964cb320edc034e182c1d
+  languageName: node
+  linkType: hard
+
 "merge-descriptors@npm:1.0.1":
   version: 1.0.1
   resolution: "merge-descriptors@npm:1.0.1"
@@ -17110,6 +17142,21 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: 03c839079695af1c1fc7d9c2dcf78fc6ec07eb77a15dffef325e8caa99eedc83e55ce169d9ac207f0165dd349e1551fb62eec70b88e43ffb86e9ca357f77df62
+  languageName: node
+  linkType: hard
+
+"react-calendar@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "react-calendar@npm:3.7.0"
+  dependencies:
+    "@wojtekmaj/date-utils": ^1.0.2
+    get-user-locale: ^1.2.0
+    merge-class-names: ^1.1.1
+    prop-types: ^15.6.0
+  peerDependencies:
+    react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+  checksum: 368084515bdbc59dddf1a0e367c6bb49e9b9efdc1d01343afeeb412feb52d89b88ac6b09378433cdb3716557ff2cf56751f11183ecd99a5df2a5c48b1691e33d
   languageName: node
   linkType: hard
 
@@ -21220,6 +21267,7 @@ __metadata:
     "@types/node-jose": ^1.1.10
     "@types/qrcode.react": ^1.0.1
     "@types/react": ^17.0.39
+    "@types/react-calendar": ^3
     "@types/react-color": ^3.0.6
     "@types/react-dom": ^17.0.11
     "@types/react-google-recaptcha": ^2.1.5
@@ -21275,6 +21323,7 @@ __metadata:
     qrcode.react: 0.8.0
     react: ^17.0.2
     react-bootstrap: ^1.0.0-beta.16
+    react-calendar: ^3.7.0
     react-color: ^2.18.0
     react-dom: ^17.0.2
     react-fade-in: ^0.1.6
