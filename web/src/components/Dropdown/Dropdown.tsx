@@ -4,13 +4,15 @@ import { Box } from 'web/src/components/ui/Box';
 import { useOnClickOutside } from 'web/src/hooks/useOnClickOutside';
 import { useEscapeKeyDown } from 'web/src/hooks/useEscapeKeyDown';
 import * as s from './Dropdown.css';
+import { DropdownSizes } from './Dropdown.css';
 
 interface Props {
+  size?: DropdownSizes;
   renderButton: (props: { open: boolean; onClick: () => void }) => ReactNode;
   renderContent: (props: { onClose: () => void }) => ReactNode;
 }
 
-export const Dropdown = ({ renderButton, renderContent }: Props) => {
+export const Dropdown = ({ size = 'small', renderButton, renderContent }: Props) => {
   const elementRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -36,7 +38,7 @@ export const Dropdown = ({ renderButton, renderContent }: Props) => {
       {renderButton({ open, onClick: handleDropdownToggle })}
 
       <Box
-        className={cn(s.dropdown, open && s.dropdownOpened)}
+        className={cn(s.dropdown[size], open && s.dropdownOpened)}
         display="flex"
         flexDirection="column"
         backgroundColor="selectDropdownBg"

@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 
 export const chevron = style({
   transition: 'transform 0.3s ease',
@@ -8,7 +8,12 @@ export const chevronOpened = style({
   transform: 'rotate(-180deg)',
 });
 
-export const dropdown = style({
+const dropdownSizes = {
+  small: '284px',
+  medium: '300px',
+};
+
+const dropdownBase = style({
   fontFamily: "'Montserrat', helvetica, sans-serif",
   position: 'absolute',
   top: 'calc(100% + 4px)',
@@ -23,6 +28,10 @@ export const dropdown = style({
   maxHeight: '284px',
   zIndex: 10000,
 });
+
+export const dropdown = styleVariants(dropdownSizes, (size) => [dropdownBase, { maxHeight: size }]);
+
+export type DropdownSizes = keyof typeof dropdown;
 
 export const dropdownOpened = style({
   opacity: 1,
