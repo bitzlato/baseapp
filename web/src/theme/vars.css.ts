@@ -217,8 +217,7 @@ export const [themeLight, vars] = createTheme({
     adTrade: colors.indigo,
 
     tradeFinishedStatusLineBg: colors.ebonyClay05,
-    tradeLink: colors.ebonyClay30,
-    tradeLinkHover: colors.ebonyClay70,
+    tradeLinkHover: colors.ebonyClay40,
     tradeButtonLinkText: colors.indigo,
     tradeButtonLinkTextHover: colors.indigoLight,
 
@@ -290,6 +289,10 @@ export const [themeLight, vars] = createTheme({
     breadcrumbsColor: colors.ebonyClay70,
 
     collapsibleBoxExpandControls: colors.indigo,
+
+    calendarItemActiveBg: colors.indigo,
+    calendarItemActiveText: colors.white,
+    calendarItemHoverBg: colors.indigo20,
   },
 });
 
@@ -443,8 +446,7 @@ export const themeDark = createTheme(vars, {
     adTrade: colors.indigo,
 
     tradeFinishedStatusLineBg: colors.white10,
-    tradeLink: colors.white30,
-    tradeLinkHover: colors.white70,
+    tradeLinkHover: colors.white30,
     tradeButtonLinkText: colors.goldTips,
     tradeButtonLinkTextHover: colors.lightningYellow,
 
@@ -516,5 +518,9 @@ export const themeDark = createTheme(vars, {
     breadcrumbsColor: colors.white50,
 
     collapsibleBoxExpandControls: colors.goldTips,
+
+    calendarItemActiveBg: colors.goldTips,
+    calendarItemActiveText: colors.ebonyClay,
+    calendarItemHoverBg: colors.goldTips20,
   },
 });

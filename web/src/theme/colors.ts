@@ -23,6 +23,7 @@ export const ebonyClay05 = 'rgb(38, 45, 55, 0.05)';
 export const ebonyClay10 = 'rgb(38, 45, 55, 0.1)';
 export const ebonyClay15 = 'rgb(38, 45, 55, 0.15)';
 export const ebonyClay30 = 'rgb(38, 45, 55, 0.3)';
+export const ebonyClay40 = 'rgb(38, 45, 55, 0.4)';
 export const ebonyClay50 = 'rgb(38, 45, 55, 0.5)';
 export const ebonyClay70 = 'rgb(38, 45, 55, 0.7)';
 export const bunker = 'rgb(19, 23, 28)';
