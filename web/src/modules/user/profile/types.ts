@@ -51,7 +51,7 @@ export interface BitzlatoUser {
      * @deprecated
      */
     verified: boolean;
-    verification_status: 'not_verified' | 'verified' | 'not_required';
+    verification_status: 'NOT_VERIFIED' | 'VERIFIED' | 'NOT_REQUIRED';
     verified_at: string | null;
     timezone?: string | null | undefined;
     safe_mode_enabled: boolean;

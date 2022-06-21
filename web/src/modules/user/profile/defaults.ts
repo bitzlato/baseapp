@@ -15,7 +15,7 @@ export const DEFAULT_TEST_BITZLATO_USER: BitzlatoUser = {
     cryptocurrency: 'BTC',
     rating: '0.0',
     verified: false,
-    verification_status: 'not_verified',
+    verification_status: 'NOT_VERIFIED',
     verified_at: null,
     timezone: 'Europe/Kirov',
     safe_mode_enabled: true,
