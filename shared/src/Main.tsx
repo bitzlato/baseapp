@@ -485,8 +485,8 @@ const Main: FC = () => {
     <div className={getThemeClassName(theme)}>
       <Heading level={1}>MARKET:</Heading>
       <Header
-        logoLightURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--blue--nav.svg"
-        logoDarkURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--white--nav.svg"
+        logoLightURL="https://bitzlato.com/basestatic/bitzlato_logo--sm--blue--nav.svg"
+        logoDarkURL="https://bitzlato.com/basestatic/bitzlato_logo--sm--white--nav.svg"
         theme={theme}
         language={language}
         languages={languages}
@@ -513,8 +513,8 @@ const Main: FC = () => {
 
       <Heading level={1}>P2P:</Heading>
       <Header
-        logoLightURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--blue--nav.svg"
-        logoDarkURL="https://market.bitzlato.com/assets/bitzlato_logo--sm--white--nav.svg"
+        logoLightURL="https://bitzlato.com/basestatic/bitzlato_logo--sm--blue--nav.svg"
+        logoDarkURL="https://bitzlato.com/basestatic/bitzlato_logo--sm--white--nav.svg"
         toMainPage="/"
         theme={theme}
         language={language}

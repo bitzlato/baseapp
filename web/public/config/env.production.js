@@ -13,15 +13,15 @@ window.env = {
     accountPublicUrl: 'https://bitzlato.com/api/whaler/public/v1',
     p2pUrl: 'https://bitzlato.com/api2/p2p',
     p2pAuthUrl: 'https://bitzlato.com/api2/auth',
-    notificatorUrl: 'wss://bitzlato.com/wssb'
+    notificatorUrl: 'wss://bitzlato.com/wssb',
   },
   auth0: {
     domain: 'auth.bitzlato.bz',
     client_id: 'sW5Er9tgeD9T8XuklzCX_FcNX0ETttJK',
     redirect_uri: 'https://bitzlato.com/wallets',
   },
-  logoUrl: 'https://market.bitzlato.com/assets/bitzlato_logo--sm--blue--nav.svg',
-  logoDarkUrl: 'https://market.bitzlato.com/assets/bitzlato_logo--sm--white--nav.svg',
+  logoUrl: 'https://bitzlato.com/basestatic/bitzlato_logo--sm--blue--nav.svg',
+  logoDarkUrl: 'https://bitzlato.com/basestatic/bitzlato_logo--sm--white--nav.svg',
   minutesUntilAutoLogout: '120',
   withCredentials: false,
   finex: false,
