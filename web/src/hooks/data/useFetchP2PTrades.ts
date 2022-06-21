@@ -4,7 +4,7 @@ import { p2pUrl } from 'web/src/api/config';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { fetchJson } from 'web/src/helpers/fetch';
 import { useCryptoCurrencies } from 'web/src/hooks/useCryptoCurrencies';
-import { Trade, TradeSource } from 'web/src/modules/p2p/trade.types';
+import { Trade, TradeAmountType, TradeSource } from 'web/src/modules/p2p/trade.types';
 import { AdvertType, P2PList, PaymethodSource } from 'web/src/modules/p2p/types';
 import { useFetch } from './useFetch';
 import { useFiatCurrencies } from './useFetchP2PCurrencies';
@@ -15,8 +15,27 @@ export type TradesParams = {
   paymethod: string | undefined;
   partner: string | undefined;
   tradeId: string | undefined;
+  dateFrom: number | undefined;
+  dateTo: number | undefined;
+  amountType: TradeAmountType | undefined;
+  amountFrom: string | undefined;
+  amountTo: string | undefined;
   skip: number;
   limit: number;
+};
+
+const filterTradesParams = (params: TradesParams) => {
+  const resultParams = { ...params };
+
+  if (
+    resultParams.amountType &&
+    resultParams.amountTo === undefined &&
+    resultParams.amountFrom === undefined
+  ) {
+    resultParams.amountType = undefined;
+  }
+
+  return resultParams;
 };
 
 export const useFetchP2PTrades = (
@@ -26,9 +45,10 @@ export const useFetchP2PTrades = (
 ) => {
   const { getFiatCurrency } = useFiatCurrencies();
   const { getCryptoCurrency } = useCryptoCurrencies();
+  const filteredParams = filterTradesParams(params);
 
   return useFetch<P2PList<Trade>>(
-    `${p2pUrl()}/trade/?${buildQueryString(params)}`,
+    `${p2pUrl()}/trade/?${buildQueryString(filteredParams)}`,
     async (url: string) => {
       const trades = (await fetchJson(url)) as P2PList<TradeSource>;
       const paymethods = (await Promise.all(

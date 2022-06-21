@@ -8,16 +8,30 @@ import { Stack } from 'web/src/components/ui/Stack';
 import { Pagination } from 'web/src/components/ui/Pagination';
 import { UrlParams, getUrlSearchParams, setUrlSearchParams } from 'web/src/helpers/urlSearch';
 import { TradesParams, useFetchP2PTrades } from 'web/src/hooks/data/useFetchP2PTrades';
-import { TradeType } from 'web/src/modules/p2p/trade.types';
+import { TradeAmountType, TradeType } from 'web/src/modules/p2p/trade.types';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { TradesList } from 'web/src/components/shared/Trades/TradesList';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
+import { localeDate } from 'web/src/helpers';
 import { TradesFilter, TradesFilterMobile, DEFAULT_FILTER } from './TradesFilter';
 import * as s from './Trades.css';
 
 const REFETCH_INTERVAL = 10000;
 
 export const URL_PARAMS: UrlParams<TradesParams> = {
+  dateFrom: {
+    name: 'dateFrom',
+    set: (v) => localeDate(v, 'dateInput'),
+    get: (v) => new Date(v).getTime(),
+  },
+  dateTo: {
+    name: 'dateTo',
+    set: (v) => localeDate(v, 'dateInput'),
+    get: (v) => new Date(v).getTime(),
+  },
+  amountType: { name: 'amountType', set: (v) => `${v}`, get: (v) => v as TradeAmountType },
+  amountFrom: { name: 'amountFrom', set: (v) => `${v}`, get: (v) => v },
+  amountTo: { name: 'amountTo', set: (v) => `${v}`, get: (v) => v },
   onlyClosed: {
     name: 'onlyClosed',
     set: (v) => (v === undefined ? undefined : `${v}`),
@@ -39,10 +53,6 @@ export const Trades: FC = () => {
     ...getUrlSearchParams(URL_PARAMS),
   }));
   const onlyClosedValues = [
-    // {
-    //   title: t('All'),
-    //   value: false,
-    // },
     {
       label: t('Active'),
       value: undefined,

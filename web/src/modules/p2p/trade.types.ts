@@ -3,6 +3,8 @@ import { AdvertType, P2PCryptoCurrency, PaymethodSource } from './types';
 
 export type TradeType = AdvertType;
 
+export type TradeAmountType = 'fiat' | 'crypto';
+
 export type TradeStatus =
   | 'cancel'
   | 'confirm_payment'
