@@ -7,8 +7,8 @@ import {
   useSendMessage,
 } from 'web/src/hooks/data/useUserChat';
 
-import { ChatMassege } from './ChatMessage';
-import { Chat } from './Chat';
+import { ChatMessage } from 'web/src/components/shared/Chat/ChatMessage';
+import { Chat } from 'web/src/components/shared/Chat/Chat';
 
 interface UserChatProps {
   publicName: string;
@@ -35,7 +35,7 @@ export const UserChat: FC<UserChatProps> = ({ publicName }) => {
     }
   }, [markRead, unreadMessagesCount]);
 
-  const messages = data ? data.map((msg: ChatMessageType) => <ChatMassege {...msg} />) : null;
+  const messages = data ? data.map((msg: ChatMessageType) => <ChatMessage {...msg} />) : null;
 
   return <Chat messages={messages} onSendMessage={onSendMessage} />;
 };
