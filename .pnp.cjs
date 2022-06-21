@@ -7586,6 +7586,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@types/react-calendar", [
+        ["npm:3.5.1", {
+          "packageLocation": "./.yarn/cache/@types-react-calendar-npm-3.5.1-e267c7f722-b3e8b01c82.zip/node_modules/@types/react-calendar/",
+          "packageDependencies": [
+            ["@types/react-calendar", "npm:3.5.1"],
+            ["@types/react", "npm:17.0.39"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@types/react-color", [
         ["npm:3.0.6", {
           "packageLocation": "./.yarn/cache/@types-react-color-npm-3.0.6-d97738133b-8cd881d6eb.zip/node_modules/@types/react-color/",
@@ -8710,6 +8720,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/webpack-dev-server",
             "webpack-cli",
             "webpack-dev-server"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@wojtekmaj/date-utils", [
+        ["npm:1.0.3", {
+          "packageLocation": "./.yarn/cache/@wojtekmaj-date-utils-npm-1.0.3-66943d4ae0-70b7152160.zip/node_modules/@wojtekmaj/date-utils/",
+          "packageDependencies": [
+            ["@wojtekmaj/date-utils", "npm:1.0.3"]
           ],
           "linkType": "HARD",
         }]
@@ -15192,6 +15211,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["get-user-locale", [
+        ["npm:1.4.0", {
+          "packageLocation": "./.yarn/cache/get-user-locale-npm-1.4.0-5b0d4b8a21-d27a6cf7b1.zip/node_modules/get-user-locale/",
+          "packageDependencies": [
+            ["get-user-locale", "npm:1.4.0"],
+            ["lodash.once", "npm:4.1.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["get-value", [
         ["npm:2.0.6", {
           "packageLocation": "./.yarn/cache/get-value-npm-2.0.6-03cd422e0a-5c3b99cb53.zip/node_modules/get-value/",
@@ -19469,6 +19498,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["merge-class-names", [
+        ["npm:1.4.2", {
+          "packageLocation": "./.yarn/cache/merge-class-names-npm-1.4.2-aa575a4fce-569c333ab0.zip/node_modules/merge-class-names/",
+          "packageDependencies": [
+            ["merge-class-names", "npm:1.4.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["merge-descriptors", [
         ["npm:1.0.1", {
           "packageLocation": "./.yarn/cache/merge-descriptors-npm-1.0.1-615287aaa8-5abc259d2a.zip/node_modules/merge-descriptors/",
@@ -23266,6 +23304,36 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-transition-group", "virtual:ffb8672e3f17eef5595df44fc8a02752e4b19b3fdb56f0d3387244fecb2d3857d3a50771dd8ed7a554e90c5bf0525402e913fbda11a29da0ab1d6e6191325c72#npm:4.4.1"],
             ["uncontrollable", "virtual:ffb8672e3f17eef5595df44fc8a02752e4b19b3fdb56f0d3387244fecb2d3857d3a50771dd8ed7a554e90c5bf0525402e913fbda11a29da0ab1d6e6191325c72#npm:7.2.0"],
             ["warning", "npm:4.0.3"]
+          ],
+          "packagePeers": [
+            "@types/react-dom",
+            "@types/react",
+            "react-dom",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["react-calendar", [
+        ["npm:3.7.0", {
+          "packageLocation": "./.yarn/cache/react-calendar-npm-3.7.0-1b9ffc08c6-368084515b.zip/node_modules/react-calendar/",
+          "packageDependencies": [
+            ["react-calendar", "npm:3.7.0"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.7.0", {
+          "packageLocation": "./.yarn/__virtual__/react-calendar-virtual-f5ce4a8fc5/0/cache/react-calendar-npm-3.7.0-1b9ffc08c6-368084515b.zip/node_modules/react-calendar/",
+          "packageDependencies": [
+            ["react-calendar", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.7.0"],
+            ["@types/react", "npm:17.0.39"],
+            ["@types/react-dom", "npm:17.0.11"],
+            ["@wojtekmaj/date-utils", "npm:1.0.3"],
+            ["get-user-locale", "npm:1.4.0"],
+            ["merge-class-names", "npm:1.4.2"],
+            ["prop-types", "npm:15.7.2"],
+            ["react", "npm:17.0.2"],
+            ["react-dom", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:17.0.2"]
           ],
           "packagePeers": [
             "@types/react-dom",
@@ -28601,6 +28669,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node-jose", "npm:1.1.10"],
             ["@types/qrcode.react", "npm:1.0.1"],
             ["@types/react", "npm:17.0.39"],
+            ["@types/react-calendar", "npm:3.5.1"],
             ["@types/react-color", "npm:3.0.6"],
             ["@types/react-dom", "npm:17.0.11"],
             ["@types/react-google-recaptcha", "npm:2.1.5"],
@@ -28656,6 +28725,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["qrcode.react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.8.0"],
             ["react", "npm:17.0.2"],
             ["react-bootstrap", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.4.3"],
+            ["react-calendar", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.7.0"],
             ["react-color", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.19.3"],
             ["react-dom", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:17.0.2"],
             ["react-fade-in", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.1.8"],
