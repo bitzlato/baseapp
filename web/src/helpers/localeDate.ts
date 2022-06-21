@@ -9,6 +9,7 @@ const FORMATS = {
   veryShortDate: 'D MMMM',
   time: 'HH:mm:ss',
   date: 'DD-MM-YYYY',
+  dateInput: 'YYYY-MM-DD',
 };
 
 type FormatType = keyof typeof FORMATS;

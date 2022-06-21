@@ -25,15 +25,18 @@ export const input = style([
     color: 'text',
     fontFamily: 'brand',
   }),
+  {
+    selectors: {
+      '&[disabled]': {
+        cursor: 'not-allowed',
+      },
+    },
+  },
 ]);
 
 export const label = style([
   sprinkles({
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
     pt: '1x',
     px: '4x',
     fontSize: 'caption',

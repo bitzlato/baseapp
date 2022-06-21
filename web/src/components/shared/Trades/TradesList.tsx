@@ -25,10 +25,11 @@ export const TradesList: FC<Props> = ({ data, isLoading = false }) => {
   const header = isMobileDevice ? null : (
     <AdsTableHeader>
       <AdsTableHeaderColumn size="small">{t('Type')}</AdsTableHeaderColumn>
-      <AdsTableHeaderColumn size="small">{t('Partner')}</AdsTableHeaderColumn>
+      <AdsTableHeaderColumn size="small">{t('Date')}</AdsTableHeaderColumn>
+      <AdsTableHeaderColumn size="small">{t('Number')}</AdsTableHeaderColumn>
       <AdsTableHeaderColumn size="large">{t('Trade amount')}</AdsTableHeaderColumn>
       <AdsTableHeaderColumn size="small">{t('Payment method')}</AdsTableHeaderColumn>
-      <AdsTableHeaderColumn size="medium">{t('Date and number')}</AdsTableHeaderColumn>
+      <AdsTableHeaderColumn size="small">{t('Partner')}</AdsTableHeaderColumn>
       <AdsTableHeaderColumn size="medium">{t('Trade status')}</AdsTableHeaderColumn>
     </AdsTableHeader>
   );

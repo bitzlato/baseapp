@@ -8,7 +8,7 @@ type SprinklesKeys = keyof Sprinkles;
 
 type InputProps<C extends ElementType = 'input'> = {
   as?: C | undefined;
-  label?: string;
+  label?: string | undefined;
   inputMode?: JSX.IntrinsicElements['input']['inputMode'] | undefined;
   onChange?: ((value: string) => void) | undefined;
 };

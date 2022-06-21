@@ -301,9 +301,6 @@ export const FilterMobile: FC<FilterMobileProps> = ({ params, onChange }) => {
             <Button color="secondary" onClick={handleClickApply}>
               {t('Apply')}
             </Button>
-            <Button variant="outlined" color="secondary" onClick={handleClickCancel}>
-              {t('Cancel')}
-            </Button>
           </Box>
         </ModalFooter>
       </Modal>

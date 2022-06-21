@@ -12,9 +12,9 @@ import { useAppContext } from 'web/src/components/app/AppContext';
 import { AdsTableColumn } from 'web/src/components/shared/AdsTable/AdsTableColumn';
 import { AdsTableRow } from 'web/src/components/shared/AdsTable/AdsTable';
 import { localeDate } from 'web/src/helpers';
-import ExternalLinkIcon from 'web/src/assets/svg/ExternalLinkIcon.svg';
+import { getLinkToP2PUser } from 'web/src/components/shared/Ads/getLinkToP2PUser';
 import { TradeStatusStepper } from './TradeStatusStepper';
-import { getLinkToP2PUser } from '../Ads/getLinkToP2PUser';
+import * as s from './TradesListItem.css';
 
 const STATUS_STEP_INDEXES: Partial<Record<Trade['status'], number>> = {
   trade_created: 0,
@@ -113,20 +113,15 @@ export const TradesListItem = ({ trade }: Props) => {
   };
 
   const partner = (
-    <Box display="flex" alignItems="center">
-      <Box as="span" textOverflow="ellipsis" mr="2x">
-        {trade.partner}
-      </Box>
-      <Box
-        as={Link}
-        to={getLinkToP2PUser({ lang, userName: trade.partner })}
-        display="flex"
-        color={{ default: 'tradeLink', hover: 'tradeLinkHover' }}
-        flexShrink={0}
-        onClick={handleStopPropagation}
-      >
-        <ExternalLinkIcon />
-      </Box>
+    <Box
+      as={Link}
+      to={getLinkToP2PUser({ lang, userName: trade.partner })}
+      className={s.partner}
+      color={{ default: 'text', hover: 'tradeLinkHover' }}
+      textDecoration="underline"
+      onClick={handleStopPropagation}
+    >
+      {trade.partner}
     </Box>
   );
 
@@ -168,7 +163,7 @@ export const TradesListItem = ({ trade }: Props) => {
   const statusColumn = invoice || detailedStatus;
 
   const handleTradeClick = () => {
-    history.push(`/p2p/trades/${trade.id}`);
+    history.push(`/${lang}/p2p/trades/${trade.id}`);
   };
 
   return isMobileDevice ? (
@@ -193,9 +188,9 @@ export const TradesListItem = ({ trade }: Props) => {
         </Box>
         <Box display="flex" justifyContent="space-between" px="4x">
           <Text variant="label" color="textMuted" fontWeight="strong">
-            {t('Partner')}
+            {t('Date')}
           </Text>
-          {partner}
+          {date}
         </Box>
         <Box display="flex" justifyContent="space-between" px="4x">
           <Text variant="label" color="textMuted" fontWeight="strong">
@@ -205,15 +200,15 @@ export const TradesListItem = ({ trade }: Props) => {
         </Box>
         <Box display="flex" justifyContent="space-between" px="4x">
           <Text variant="label" color="textMuted" fontWeight="strong">
-            {t('Date')}
-          </Text>
-          {date}
-        </Box>
-        <Box display="flex" justifyContent="space-between" px="4x">
-          <Text variant="label" color="textMuted" fontWeight="strong">
             {t('Number')}
           </Text>
           {trade.id}
+        </Box>
+        <Box display="flex" justifyContent="space-between" px="4x">
+          <Text variant="label" color="textMuted" fontWeight="strong">
+            {t('Partner')}
+          </Text>
+          {partner}
         </Box>
         <Box pt="4x" px="4x" borderTopWidth="1x" borderTopStyle="solid" borderColor="inputBorder">
           <Text variant="label" color="textMuted" fontWeight="strong">
@@ -247,7 +242,10 @@ export const TradesListItem = ({ trade }: Props) => {
         </Box>
       </AdsTableColumn>
       <AdsTableColumn size="small">
-        <Box pr="4x">{partner}</Box>
+        <Box pr="4x">{date}</Box>
+      </AdsTableColumn>
+      <AdsTableColumn size="small">
+        <Box pr="4x">{trade.id}</Box>
       </AdsTableColumn>
       <AdsTableColumn size="large">
         <Box pr="4x">{amount}</Box>
@@ -257,9 +255,9 @@ export const TradesListItem = ({ trade }: Props) => {
           {trade.paymethod.description}
         </Box>
       </AdsTableColumn>
-      <AdsTableColumn size="medium">
-        <Box pr="4x">
-          {date} / {trade.id}
+      <AdsTableColumn size="small">
+        <Box pr="4x" textOverflow="ellipsis">
+          {partner}
         </Box>
       </AdsTableColumn>
       <AdsTableColumn size="medium">

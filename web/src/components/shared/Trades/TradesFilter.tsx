@@ -10,6 +10,9 @@ import { TradesParams } from 'web/src/hooks/data/useFetchP2PTrades';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import { TextInput } from 'web/src/components/TextInputCustom/TextInputCustom';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
+import { SelectCustom } from 'web/src/components/SelectCustom/SelectCustom';
+import { InputDate } from 'web/src/components/InputDate/InputDate';
+import { localeDate } from 'web/src/helpers';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 
 export const DEFAULT_FILTER: TradesParams = {
@@ -18,6 +21,11 @@ export const DEFAULT_FILTER: TradesParams = {
   type: undefined,
   partner: undefined,
   tradeId: undefined,
+  dateFrom: undefined,
+  dateTo: undefined,
+  amountType: undefined,
+  amountFrom: undefined,
+  amountTo: undefined,
   limit: 15,
   skip: 0,
 };
@@ -69,6 +77,42 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     () => params.tradeId ?? DEFAULT_FILTER.tradeId ?? '',
     [params.tradeId],
   );
+  const [amountFrom, setAmountFrom] = useStateWithDeps(
+    () => params.amountFrom ?? DEFAULT_FILTER.amountFrom ?? '',
+    [params.amountFrom],
+  );
+  const [amountTo, setAmountTo] = useStateWithDeps(
+    () => params.amountTo ?? DEFAULT_FILTER.amountTo ?? '',
+    [params.amountTo],
+  );
+  const [dateFrom, setDateFrom] = useStateWithDeps(() => {
+    if (params.dateFrom) {
+      return localeDate(params.dateFrom, 'dateInput');
+    }
+
+    if (DEFAULT_FILTER.dateFrom) {
+      return localeDate(DEFAULT_FILTER.dateFrom, 'dateInput');
+    }
+
+    return '';
+  }, [params.dateFrom]);
+  const [dateTo, setDateTo] = useStateWithDeps(() => {
+    if (params.dateTo) {
+      return localeDate(params.dateTo, 'dateInput');
+    }
+
+    if (DEFAULT_FILTER.dateTo) {
+      return localeDate(DEFAULT_FILTER.dateTo, 'dateInput');
+    }
+
+    return '';
+  }, [params.dateTo]);
+
+  const amountTypes: Array<{ label: string; value: TradesParams['amountType'] }> = [
+    { label: t('Currency'), value: 'fiat' },
+    { label: t('Cryptocurrency'), value: 'crypto' },
+  ];
+  const selectedAmountType = amountTypes.find((option) => option.value === params.amountType);
 
   const handleFieldChangeDebounced = useDebouncedCallback(
     (value: string | number, key: keyof TradesParams) => {
@@ -76,6 +120,42 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     },
     INPUT_DEBOUNCE,
   );
+
+  const handleAmountFromChange = (value: string) => {
+    const nvalue = parseNumeric(value);
+
+    setAmountFrom(nvalue);
+    handleFieldChangeDebounced(nvalue, 'amountFrom');
+  };
+
+  const handleAmountToChange = (value: string) => {
+    const nvalue = parseNumeric(value);
+
+    setAmountTo(nvalue);
+    handleFieldChangeDebounced(nvalue, 'amountTo');
+  };
+
+  const handleDateFromChange = (value: string) => {
+    setDateFrom(value);
+
+    const time = new Date(value).getTime();
+    if (!time || time < 0) {
+      return;
+    }
+
+    handleFieldChangeDebounced(time, 'dateFrom');
+  };
+
+  const handleDateToChange = (value: string) => {
+    setDateTo(value);
+
+    const time = new Date(value).getTime();
+    if (!time || time < 0) {
+      return;
+    }
+
+    handleFieldChangeDebounced(time, 'dateTo');
+  };
 
   const handlePartnerChange = (value: string) => {
     setPartner(value);
@@ -95,9 +175,21 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
 
   return (
     <Box display="flex" flexDirection="column" gap="4x">
-      <TextInput label={t('Partner')} value={partner} onChange={handlePartnerChange} />
+      <InputDate label={t('Date from')} value={dateFrom} onChange={handleDateFromChange} />
+      <InputDate label={t('Date to')} value={dateTo} onChange={handleDateToChange} />
+      <SelectCustom
+        options={amountTypes}
+        value={selectedAmountType}
+        placeholder={t('Choose currency')}
+        onChange={(v) => onChange({ amountType: v?.value })}
+      />
+      <Box display="flex" alignItems="center" gap="4x">
+        <TextInput label={t('Amount from')} value={amountFrom} onChange={handleAmountFromChange} />
+        <TextInput label={t('Amount to')} value={amountTo} onChange={handleAmountToChange} />
+      </Box>
       <TextInput label={t('Payment method')} value={paymethod} onChange={handlePaymethodChange} />
       <TextInput label={t('Trade number')} value={tradeId} onChange={handleTradeIdChange} />
+      <TextInput label={t('Partner')} value={partner} onChange={handlePartnerChange} />
     </Box>
   );
 };
@@ -168,9 +260,6 @@ export const TradesFilterMobile: FC<Props> = ({ params, onChange }) => {
             </Button>
             <Button color="secondary" onClick={handleClickApply}>
               {t('Apply')}
-            </Button>
-            <Button variant="outlined" color="secondary" onClick={handleClickCancel}>
-              {t('Cancel')}
             </Button>
           </Box>
         </ModalFooter>
