@@ -108,7 +108,7 @@ export const Profile: FC = () => {
         <div className={s.stat}>
           <Stat>
             <ProfileVerification
-              status={bitzlatoUser?.user_profile.verified === true}
+              status={bitzlatoUser?.user_profile.verification_status === 'verified'}
               url={user.kyc_verification_url}
             />
           </Stat>
