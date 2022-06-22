@@ -4,7 +4,7 @@ import { responsiveStyle } from 'web/src/theme/themeUtils';
 
 export const title = sprinkles({
   color: 'footerTitle',
-  fontSize: ['medium', 'small'],
+  fontSize: { mobile: 'medium', tablet: 'small' },
   fontWeight: 'strong',
   mb: '4x',
   textTransform: 'uppercase',

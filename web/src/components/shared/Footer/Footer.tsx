@@ -51,14 +51,14 @@ export const Footer: FC<SharedFooterProps> = ({ theme, language, renderMarketLin
         borderBottomWidth="2x"
         borderBottomColor="footerBorder"
         borderBottomStyle="solid"
-        py={['4x', '7x']}
-        px={['4x', '0']}
+        py={{ mobile: '4x', tablet: '7x' }}
+        px={{ mobile: '4x', tablet: '0' }}
       >
         <Stack
-          direction={['column', 'row']}
+          direction={{ mobile: 'column', tablet: 'row' }}
           justifyContent="center"
-          marginBottom={['0', '9x']}
-          marginRight={['0', '8x']}
+          marginBottom={{ mobile: '0', tablet: '9x' }}
+          marginRight={{ mobile: '0', tablet: '8x' }}
         >
           <FooterMenu
             section="products"
