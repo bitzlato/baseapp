@@ -348,7 +348,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               key="TradesScreen"
               loading={userLoading}
               isLogged={isLoggedIn}
-              path={['/p2p/trades/:filter?', '/:lang/p2p/trades/:filter?']}
+              path={['/p2p/trades/', '/:lang/p2p/trades/']}
               component={TradesScreen}
             />,
             <Route
