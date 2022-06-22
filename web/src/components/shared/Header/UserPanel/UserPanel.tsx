@@ -14,6 +14,7 @@ import { Notifications } from 'web/src/components/shared/Header/UserPanel/Notifi
 import { LanguageSelect } from 'web/src/components/shared/Header/UserPanel/LanguageSelect';
 import SupportIcon from 'web/src/assets/svg/SupportIcon.svg';
 import ProfileIcon from 'web/src/assets/svg/ProfileIcon.svg';
+import * as s from './UserPanel.css';
 
 export type Props = {
   responsiveMode?: boolean;
@@ -46,8 +47,8 @@ export const UserPanel: FC<Props> = ({ responsiveMode = false }) => {
     >
       {userContext.status === USER_STATUS_AUTHORIZED && rightNavLinks ? (
         <Box
+          className={s.navigation[responsiveMode ? 'responsiveMode' : 'base']}
           mr="4x"
-          display={{ tablet: responsiveMode ? 'none' : 'block', desktopXXL: 'block' }}
           flexShrink={0}
         >
           <Navigation navLinks={rightNavLinks} renderNavLinkComponent={renderNavLinkComponent} />
@@ -57,11 +58,7 @@ export const UserPanel: FC<Props> = ({ responsiveMode = false }) => {
       {userContext.status === USER_STATUS_AUTHORIZATION_REQUIRED && (
         <>
           <Box
-            display={{
-              mobile: 'none',
-              desktop: responsiveMode ? 'none' : 'block',
-              desktopXXL: 'block',
-            }}
+            className={s.signIn[responsiveMode ? 'responsiveMode' : 'base']}
             mr="3x"
             alignSelf="center"
           >
@@ -75,11 +72,7 @@ export const UserPanel: FC<Props> = ({ responsiveMode = false }) => {
             </Button>
           </Box>
           <Box
-            display={{
-              mobile: 'none',
-              desktop: responsiveMode ? 'none' : 'block',
-              desktopXXL: 'block',
-            }}
+            className={s.signIn[responsiveMode ? 'responsiveMode' : 'base']}
             mr={{ mobile: '3x', tablet: '9x' }}
             alignSelf="center"
           >
@@ -119,11 +112,7 @@ export const UserPanel: FC<Props> = ({ responsiveMode = false }) => {
         {userContext.status === USER_STATUS_AUTHORIZATION_REQUIRED ? (
           <Box
             as="button"
-            display={{
-              mobile: 'flex',
-              desktop: responsiveMode ? 'flex' : 'none',
-              desktopXXL: 'none',
-            }}
+            className={s.signInMobile[responsiveMode ? 'responsiveMode' : 'base']}
             alignItems="center"
             px="3x"
             color={{ default: 'headerIcon', hover: 'headerIconHover' }}

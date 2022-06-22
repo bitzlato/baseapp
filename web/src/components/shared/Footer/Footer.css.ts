@@ -9,7 +9,7 @@ export const link = sprinkles({
     default: 'footerLinkColor',
     hover: 'footerLinkColorHover',
   },
-  fontSize: ['medium', 'small'],
+  fontSize: { mobile: 'medium', tablet: 'small' },
   textDecoration: {
     default: 'none',
     hover: 'underline',

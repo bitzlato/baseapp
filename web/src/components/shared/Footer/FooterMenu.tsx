@@ -18,14 +18,14 @@ export const FooterMenu: FC<Props> = ({ children, section, title, active, onTitl
 
   return (
     <>
-      <Box className={s.title} display={['none', 'block']}>
+      <Box className={s.title} display={{ mobile: 'none', tablet: 'block' }}>
         {title}
       </Box>
       <Box
         as="button"
         className={cn(s.title, s.chevron, active && s.chevronOpened)}
         type="button"
-        display={['block', 'none']}
+        display={{ mobile: 'block', tablet: 'none' }}
         onClick={handleClick}
       >
         {title}

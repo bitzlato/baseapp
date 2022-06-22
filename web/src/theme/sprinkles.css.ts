@@ -35,12 +35,8 @@ const responsiveProperties = defineProperties({
     mobile: {},
     tablet: { '@media': queries.tablet },
     desktop: { '@media': queries.desktop },
-    desktopXL: { '@media': queries.desktopXL },
-    desktopXXL: { '@media': queries.desktopXXL },
-    desktopXXXL: { '@media': queries.desktopXXXL },
   },
   defaultCondition: 'mobile',
-  responsiveArray: ['mobile', 'tablet', 'desktop', 'desktopXL', /* 'desktopXXL', */ 'desktopXXXL'],
   properties: {
     display: ['none', 'flex', 'block', /* 'inline', */ 'inline-flex', 'inline-block'],
     flexDirection: ['row', 'column', 'row-reverse', 'column-reverse'],

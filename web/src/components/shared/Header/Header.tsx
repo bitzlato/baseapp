@@ -42,7 +42,7 @@ export const Header: FC<Props> = (props) => {
             flexShrink={0}
           >
             <Logo />
-            <Box display={{ mobile: 'none', desktopXL: 'block' }}>{backButton}</Box>
+            <Box className={s.backButton}>{backButton}</Box>
           </Box>
 
           {children || (
