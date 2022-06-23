@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Calendar from 'react-calendar';
 import { Box } from 'web/src/components/ui/Box';
 import { Dropdown } from 'web/src/components/Dropdown/Dropdown';
@@ -10,17 +11,29 @@ export interface InputDateProps extends TextInputProps {
   value: string;
 }
 
-export const InputDate = ({ value, label, onChange }: InputDateProps) => {
+export const InputDate = ({ value, placeholder, label, onChange }: InputDateProps) => {
+  const [focused, setFocused] = useState(false);
   const dateValue = value ? new Date(value) : null;
+
+  const handleFocus = () => {
+    setFocused(true);
+  };
+
+  const handleBlur = () => {
+    setFocused(false);
+  };
 
   const renderButton = ({ open, onClick }: { open: boolean; onClick: () => void }) => {
     return (
       <Box position="relative">
         <TextInput
           className={s.input}
-          type="date"
+          type={value || focused ? 'date' : 'text'}
+          placeholder={placeholder}
           label={label}
           value={value}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           onChange={onChange}
         />
 
