@@ -20,6 +20,7 @@ export const TextInput = ({
   as = 'input',
   type = 'text',
   label,
+  placeholder = ' ',
   className,
   onChange,
   ...inputProps
@@ -33,8 +34,8 @@ export const TextInput = ({
       <Box
         as={as}
         type={type}
+        placeholder={placeholder}
         {...inputProps}
-        placeholder=" "
         className={cn(s.input, className)}
         onChange={handleChange}
       />
