@@ -84,12 +84,17 @@ globalStyle(
 );
 
 globalStyle(
-  '.react-calendar__tile:hover abbr, .react-calendar__tile.react-calendar__decade-view__years__year:hover, .react-calendar__tile.react-calendar__century-view__decades__decade:hover',
+  '.react-calendar__tile:not([disabled]):hover abbr, .react-calendar__tile.react-calendar__decade-view__years__year:hover, .react-calendar__tile.react-calendar__century-view__decades__decade:hover',
   {
     backgroundColor: vars.colors.calendarItemHoverBg,
     color: vars.colors.text,
   },
 );
+
+globalStyle('.react-calendar__tile[disabled]', {
+  opacity: 0.2,
+  cursor: 'not-allowed',
+});
 
 globalStyle('.react-calendar__tile--active.react-calendar__month-view__days__day abbr', {
   padding: 0,

@@ -175,8 +175,18 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
 
   return (
     <Box display="flex" flexDirection="column" gap="4x">
-      <InputDate label={t('Date from')} value={dateFrom} onChange={handleDateFromChange} />
-      <InputDate label={t('Date to')} value={dateTo} onChange={handleDateToChange} />
+      <InputDate
+        label={t('Date from')}
+        calendarProps={{ maxDate: new Date() }}
+        value={dateFrom}
+        onChange={handleDateFromChange}
+      />
+      <InputDate
+        label={t('Date to')}
+        calendarProps={{ maxDate: new Date() }}
+        value={dateTo}
+        onChange={handleDateToChange}
+      />
       <SelectCustom
         options={amountTypes}
         value={selectedAmountType}

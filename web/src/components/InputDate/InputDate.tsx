@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Calendar from 'react-calendar';
+import Calendar, { CalendarProps } from 'react-calendar';
 import { Box } from 'web/src/components/ui/Box';
 import { Dropdown } from 'web/src/components/Dropdown/Dropdown';
 import { TextInput, TextInputProps } from 'web/src/components/TextInputCustom/TextInputCustom';
@@ -9,9 +9,16 @@ import * as s from './InputDate.css';
 
 export interface InputDateProps extends TextInputProps {
   value: string;
+  calendarProps?: CalendarProps;
 }
 
-export const InputDate = ({ value, placeholder, label, onChange }: InputDateProps) => {
+export const InputDate = ({
+  value,
+  placeholder,
+  label,
+  calendarProps,
+  onChange,
+}: InputDateProps) => {
   const [focused, setFocused] = useState(false);
   const dateValue = value ? new Date(value) : null;
 
@@ -59,6 +66,7 @@ export const InputDate = ({ value, placeholder, label, onChange }: InputDateProp
 
   const renderMenu = ({ onClose }: { onClose: () => void }) => (
     <Calendar
+      {...calendarProps}
       value={dateValue}
       onChange={(v: Date) => {
         onChange?.(localeDate(v, 'dateInput'));
