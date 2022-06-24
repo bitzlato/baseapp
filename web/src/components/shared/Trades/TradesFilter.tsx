@@ -15,6 +15,8 @@ import { InputDate } from 'web/src/components/InputDate/InputDate';
 import { localeDate } from 'web/src/helpers';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 
+const TODAY = new Date();
+
 export const DEFAULT_FILTER: TradesParams = {
   onlyClosed: undefined,
   paymethod: undefined,
@@ -177,13 +179,16 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     <Box display="flex" flexDirection="column" gap="4x">
       <InputDate
         label={t('Date from')}
-        calendarProps={{ maxDate: new Date() }}
+        calendarProps={{ maxDate: dateTo ? new Date(dateTo) : TODAY }}
         value={dateFrom}
         onChange={handleDateFromChange}
       />
       <InputDate
         label={t('Date to')}
-        calendarProps={{ maxDate: new Date() }}
+        calendarProps={{
+          maxDate: TODAY,
+          minDate: dateFrom ? new Date(dateFrom) : undefined,
+        }}
         value={dateTo}
         onChange={handleDateToChange}
       />
