@@ -1,4 +1,5 @@
-import { KeyedMutator } from 'swr';
+import { v4 } from 'uuid';
+import { KeyedMutator, useSWRConfig } from 'swr';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
@@ -8,6 +9,7 @@ import {
   TradeInfo,
 } from 'web/src/components/shared/Trade/types';
 import { fetchJson, FetchError } from 'web/src/helpers/fetch';
+import { ChatMessageList } from 'web/src/hooks/data/useUserChat';
 
 type UpdateTradeDetails = {
   tradeId: number;
@@ -207,12 +209,43 @@ export const useTradeTips = ({ reloadTrade, toggleTipsModal }: UpdateTradeTipsPo
 
 export const useTradeSendMessage = ({ reloadTradeChat }: { reloadTradeChat: () => void }) => {
   const handleFetchError = useHandleFetchError();
+  const { mutate, cache } = useSWRConfig();
 
   return useMutation(tradeSendMessage, {
+    onMutate({ input }) {
+      const tradeChatKey = `${p2pUrl()}/trade/${input.tradeId}/chat/`;
+      const oldData = cache.get(tradeChatKey);
+
+      mutate(
+        tradeChatKey,
+        (current: ChatMessageList) => {
+          return {
+            ...current,
+            data: [
+              ...current.data,
+              {
+                id: v4(),
+                created: new Date().getTime(),
+                file: null,
+                message: input.message,
+                type: 'Out',
+              },
+            ],
+          };
+        },
+        false,
+      );
+
+      return () => mutate(tradeChatKey, oldData, false);
+    },
     onSuccess: () => {
       reloadTradeChat();
     },
-    onFailure: ({ error }) => {
+    onFailure: ({ error, rollback }) => {
+      if (rollback) {
+        rollback();
+      }
+
       if (error instanceof FetchError) {
         handleFetchError(error);
       }
@@ -226,12 +259,43 @@ export const useTradeSendDisputeMessage = ({
   reloadTradeDisputeChat: () => void;
 }) => {
   const handleFetchError = useHandleFetchError();
+  const { mutate, cache } = useSWRConfig();
 
   return useMutation(tradeSendDisputeMessage, {
+    onMutate({ input }) {
+      const tradeChatKey = `${p2pUrl()}/trade/${input.tradeId}/dispute/admin-chat/`;
+      const oldData = cache.get(tradeChatKey);
+
+      mutate(
+        tradeChatKey,
+        (current: ChatMessageList) => {
+          return {
+            ...current,
+            data: [
+              ...current.data,
+              {
+                id: v4(),
+                created: new Date().getTime(),
+                file: null,
+                message: input.message,
+                type: 'Out',
+              },
+            ],
+          };
+        },
+        false,
+      );
+
+      return () => mutate(tradeChatKey, oldData, false);
+    },
     onSuccess: () => {
       reloadTradeDisputeChat();
     },
-    onFailure: ({ error }) => {
+    onFailure: ({ error, rollback }) => {
+      if (rollback) {
+        rollback();
+      }
+
       if (error instanceof FetchError) {
         handleFetchError(error);
       }
