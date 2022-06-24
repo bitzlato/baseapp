@@ -3,7 +3,9 @@ export const pick = <T, K extends keyof T>(obj: T, keys: readonly K[]): Pick<T, 
   const picked = {} as Pick<T, K>;
 
   for (const key of keys) {
-    picked[key] = obj[key];
+    if (key in obj) {
+      picked[key] = obj[key];
+    }
   }
 
   return picked;

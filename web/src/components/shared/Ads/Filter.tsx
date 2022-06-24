@@ -18,6 +18,7 @@ import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 import { P2PWalletOption, useP2PWalletOptions } from 'web/src/hooks/useP2PWalletOptions';
 import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
+import { useUser } from 'web/src/components/app/AppContext';
 
 const INPUT_DEBOUNCE = 500;
 
@@ -72,7 +73,7 @@ interface FilterControlsProps {
 
 const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onChange }) => {
   const t = useSharedT();
-
+  const user = useUser();
   const [amount, setAmount] = useStateWithDeps(
     () => (params.amountType === 'currency' ? params.amount ?? '' : ''),
     [params.amount],
@@ -204,14 +205,16 @@ const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onCha
         alignItems="flex-start"
         onChange={(v) => onChange({ isOwnerVerificated: v })}
       />
-      <SwitchField
-        id={`filter.with_trusted${mobile ? '_mobile' : ''}`}
-        label={t('Trusted users')}
-        helpText={t('ad.trusted.info')}
-        value={params.isOwnerTrusted}
-        alignItems="flex-start"
-        onChange={(v) => onChange({ isOwnerTrusted: v })}
-      />
+      {user && (
+        <SwitchField
+          id={`filter.with_trusted${mobile ? '_mobile' : ''}`}
+          label={t('Trusted users')}
+          helpText={t('ad.trusted.info')}
+          value={params.isOwnerTrusted}
+          alignItems="flex-start"
+          onChange={(v) => onChange({ isOwnerTrusted: v })}
+        />
+      )}
       <SwitchField
         id={`filter.with_online${mobile ? '_mobile' : ''}`}
         label={t('Active users')}

@@ -67,6 +67,7 @@ export interface AdvertParams {
   isOwnerTrusted: boolean;
   isOwnerActive: boolean;
   paymethod?: number | undefined;
+  paymethodSlug?: string | undefined; // Not changeable
   lang: string;
   amount?: string | undefined;
   amountType?: 'cryptocurrency' | 'currency' | undefined;
