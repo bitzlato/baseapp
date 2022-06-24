@@ -57,13 +57,11 @@ export const TradeChat: FC = () => {
 
   const handleSendMessage = async (message: string) => {
     if (isDispute) {
-      handleTradeSendDisputeMessage(message);
+      await handleTradeSendDisputeMessage(message);
     } else {
-      handleTradeSendMessage(message);
+      await handleTradeSendMessage(message);
     }
   };
 
-  const isSending = chat.isLoading || disputeChat.isLoading;
-
-  return <Chat messages={messages} isSending={isSending} onSendMessage={handleSendMessage} />;
+  return <Chat messages={messages} onSendMessage={handleSendMessage} />;
 };

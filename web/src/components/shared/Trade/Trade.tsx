@@ -191,7 +191,7 @@ export const SharedTrade: FC = () => {
   const handleTradeSendMessage = useCallback(
     async (message: string) => {
       if (trade.id) {
-        mutateTradeChat({ tradeId: trade.id, message });
+        await mutateTradeChat({ tradeId: trade.id, message });
       }
     },
     [trade.id, mutateTradeChat],
@@ -200,7 +200,7 @@ export const SharedTrade: FC = () => {
   const handleTradeSendDisputeMessage = useCallback(
     async (message: string) => {
       if (trade.id) {
-        mutateTradeDisputeChat({ tradeId: trade.id, message });
+        await mutateTradeDisputeChat({ tradeId: trade.id, message });
       }
     },
     [trade.id, mutateTradeDisputeChat],

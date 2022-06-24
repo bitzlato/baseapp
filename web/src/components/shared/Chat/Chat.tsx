@@ -14,17 +14,17 @@ export interface ChatProps {
   isCanSendFile?: boolean;
   onSendFile?: (file: File) => Promise<void>;
   onSendMessage?: (message: string) => Promise<void>;
-  isSending?: Boolean;
 }
 
-export const Chat: FC<ChatProps> = ({ messages, onSendMessage, onSendFile, isSending }) => {
+export const Chat: FC<ChatProps> = ({ messages, onSendMessage, onSendFile }) => {
   const t = useSharedT();
   const [message, setMessage] = useState<string>('');
   const messageBoxRef = useRef<HTMLDivElement>(null);
 
   const onSend = () => {
     if (message && message.length > 0) {
-      onSendMessage?.(message).then(() => setMessage(''));
+      onSendMessage?.(message);
+      setMessage('');
     }
   };
 
@@ -114,7 +114,6 @@ export const Chat: FC<ChatProps> = ({ messages, onSendMessage, onSendFile, isSen
         <Box flexGrow={1} display="flex">
           <TextInput
             placeholder={t('Write message')}
-            disabled={isSending}
             className={styles.chatInput}
             value={message}
             inputClassName={styles.chatInputComponent}
@@ -122,15 +121,9 @@ export const Chat: FC<ChatProps> = ({ messages, onSendMessage, onSendFile, isSen
             onPressEnterKey={onSend}
           />
         </Box>
-        {isSending ? (
-          <Box display="flex" alignItems="center" p="2x">
-            <Spinner />
-          </Box>
-        ) : (
-          <IconButton disabled={isSending} onClick={onSend}>
-            <SendIcon />
-          </IconButton>
-        )}
+        <IconButton onClick={onSend}>
+          <SendIcon />
+        </IconButton>
       </Box>
     </Box>
   );
