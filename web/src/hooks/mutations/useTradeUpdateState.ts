@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { KeyedMutator } from 'swr';
+import { v4 } from 'uuid';
+import { KeyedMutator, useSWRConfig } from 'swr';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
 import {
@@ -9,6 +10,7 @@ import {
 } from 'web/src/components/shared/Trade/types';
 import { fetchJson, FetchError } from 'web/src/helpers/fetch';
 import { alertPush } from 'web/src/modules/public/alert/actions';
+import { ChatMessageList } from 'web/src/hooks/data/useUserChat';
 
 type UpdateTradeDetails = {
   tradeId: number;
@@ -235,13 +237,44 @@ export const useTradeTips = ({ reloadTrade, toggleTipsModal }: UpdateTradeTipsPo
 };
 
 export const useTradeSendMessage = ({ reloadTradeChat }: { reloadTradeChat: () => void }) => {
+  const { mutate, cache } = useSWRConfig();
   const dispatch = useDispatch();
 
   return useMutation(tradeSendMessage, {
+    onMutate({ input }) {
+      const tradeChatKey = `${p2pUrl()}/trade/${input.tradeId}/chat/`;
+      const oldData = cache.get(tradeChatKey);
+
+      mutate(
+        tradeChatKey,
+        (current: ChatMessageList) => {
+          return {
+            ...current,
+            data: [
+              ...current.data,
+              {
+                id: v4(),
+                created: new Date().getTime(),
+                file: null,
+                message: input.message,
+                type: 'Out',
+              },
+            ],
+          };
+        },
+        false,
+      );
+
+      return () => mutate(tradeChatKey, oldData, false);
+    },
     onSuccess: () => {
       reloadTradeChat();
     },
-    onFailure: ({ error }) => {
+    onFailure: ({ error, rollback }) => {
+      if (rollback) {
+        rollback();
+      }
+
       if (error instanceof FetchError) {
         dispatch(
           alertPush({

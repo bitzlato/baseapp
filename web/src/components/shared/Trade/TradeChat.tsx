@@ -70,18 +70,13 @@ export const TradeChat: FC = () => {
   const handleSendMessage = useCallback(
     async (message: string) => {
       if (isDispute) {
-        handleTradeSendDisputeMessage(message);
+        await handleTradeSendDisputeMessage(message);
       } else {
-        handleTradeSendMessage(message);
+        await handleTradeSendMessage(message);
       }
     },
     [isDispute, handleTradeSendDisputeMessage, handleTradeSendMessage],
   );
 
-  const isSending = useMemo(
-    () => chat.isLoading || disputeChat.isLoading,
-    [chat.isLoading, disputeChat.isLoading],
-  );
-
-  return <Chat messages={messages} isSending={isSending} onSendMessage={handleSendMessage} />;
+  return <Chat messages={messages} onSendMessage={handleSendMessage} />;
 };

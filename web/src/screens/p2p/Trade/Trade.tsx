@@ -172,7 +172,7 @@ const TradeComponent: FC = () => {
   const handleTradeSendMessage = useCallback(
     async (message: string) => {
       if (trade.id) {
-        mutateTradeChat({ tradeId: trade.id, message });
+        await mutateTradeChat({ tradeId: trade.id, message });
       }
     },
     [mutateTradeChat, trade?.id],
