@@ -1,10 +1,115 @@
-import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSizeVars, sizeVars, vars } from 'web/src/theme/vars.css';
+import { globalStyle } from '@vanilla-extract/css';
+import { sprinkles } from 'web/src/theme/sprinkles.css';
+import { fontSizeVars, radiiVars, sizeVars, vars } from 'web/src/theme/vars.css';
 
-export const input = style({});
+export const input = sprinkles({
+  width: 'full',
+});
 
-globalStyle(`${input}::-webkit-calendar-picker-indicator`, {
-  display: 'none',
+globalStyle(`${input}.react-date-picker, ${input}.react-date-picker *`, {
+  boxSizing: 'border-box',
+});
+
+// input
+globalStyle(`${input} .react-date-picker__inputGroup`, {
+  display: 'flex',
+  alignItems: 'flex-end',
+  width: '100%',
+  height: 'auto',
+  minHeight: sizeVars['12x'],
+  paddingTop: sizeVars['4x'],
+  paddingLeft: sizeVars['4x'],
+  paddingRight: sizeVars['4x'],
+  paddingBottom: '2px',
+  borderStyle: 'solid',
+  borderColor: vars.colors.inputBorder,
+  borderWidth: 1,
+  borderRadius: sizeVars['1.5x'],
+  fontFamily: "'Montserrat', helvetica, sans-serif",
+  fontSize: fontSizeVars.medium,
+  color: vars.colors.text,
+  backgroundColor: 'transparent',
+});
+
+globalStyle(`${input} .react-date-picker__inputGroup__input`, {
+  minWidth: '0.6em',
+  position: 'relative',
+  padding: '2px',
+  lineHeight: '20px',
+  border: 'none',
+  borderWidth: 0,
+  fontFamily: "'Montserrat', helvetica, sans-serif",
+  fontSize: fontSizeVars.medium,
+  color: vars.colors.text,
+  background: 'transparent',
+  boxSizing: 'content-box',
+  MozAppearance: 'textfield',
+  // outline: 'none',
+});
+
+globalStyle(`${input} .react-date-picker__inputGroup__input--hasLeadingZero`, {
+  marginLeft: '-0.6em',
+  paddingLeft: 'calc(2px + 0.6em)',
+});
+
+globalStyle(`${input} .react-date-picker__inputGroup__leadingZero`, {
+  padding: '2px 0',
+  marginRight: '-2px',
+});
+
+globalStyle(`${input} .react-date-picker__inputGroup__divider`, {
+  padding: '2px 0',
+});
+
+globalStyle(
+  `${input} input::-webkit-outer-spin-button, ${input} input::-webkit-inner-spin-button`,
+  {
+    WebkitAppearance: 'none',
+    margin: 0,
+  },
+);
+
+globalStyle(`${input} .react-date-picker__calendar-button`, {
+  position: 'absolute',
+  right: 0,
+  top: '50%',
+  height: '100%',
+  paddingLeft: sizeVars['5x'],
+  paddingRight: sizeVars['5x'],
+  transform: 'translateY(-50%)',
+  border: 'none',
+  background: 'none',
+  color: vars.colors.calendarItemActiveBg,
+});
+
+globalStyle(`${input}.react-date-picker--closed .react-date-picker__calendar-button`, {
+  color: vars.colors.text,
+});
+
+// calendar
+globalStyle(`${input} .react-date-picker__calendar`, {
+  position: 'absolute',
+  top: 'calc(100% + 4px)',
+  left: 0,
+  overflowX: 'hidden',
+  overflowY: 'auto',
+  transition: 'transform 0.3s ease, opacity 0.3s ease',
+  width: '100%',
+  zIndex: 10000,
+
+  opacity: 1,
+  pointerEvents: 'initial',
+  transform: 'translateY(0)',
+
+  borderRadius: radiiVars['2x'],
+  backgroundColor: vars.colors.selectDropdownBg,
+  boxShadow: vars.boxShadows.dropdown,
+});
+
+globalStyle(`${input} .react-date-picker__calendar.react-date-picker__calendar--closed`, {
+  opacity: 0,
+  pointerEvents: 'none',
+  transform: 'translateY(-5%)',
 });
 
 globalStyle('.react-calendar', {
@@ -12,6 +117,7 @@ globalStyle('.react-calendar', {
   paddingBottom: sizeVars['5x'],
   paddingLeft: sizeVars['5x'],
   paddingRight: sizeVars['5x'],
+  fontFamily: "'Montserrat', helvetica, sans-serif",
 });
 
 globalStyle('.react-calendar__navigation', {

@@ -12,7 +12,6 @@ import { TextInput } from 'web/src/components/TextInputCustom/TextInputCustom';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { SelectCustom } from 'web/src/components/SelectCustom/SelectCustom';
 import { InputDate } from 'web/src/components/InputDate/InputDate';
-import { localeDate } from 'web/src/helpers';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 
 const TODAY = new Date();
@@ -89,25 +88,25 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
   );
   const [dateFrom, setDateFrom] = useStateWithDeps(() => {
     if (params.dateFrom) {
-      return localeDate(params.dateFrom, 'dateInput');
+      return new Date(params.dateFrom);
     }
 
     if (DEFAULT_FILTER.dateFrom) {
-      return localeDate(DEFAULT_FILTER.dateFrom, 'dateInput');
+      return new Date(DEFAULT_FILTER.dateFrom);
     }
 
-    return '';
+    return undefined;
   }, [params.dateFrom]);
   const [dateTo, setDateTo] = useStateWithDeps(() => {
     if (params.dateTo) {
-      return localeDate(params.dateTo, 'dateInput');
+      return new Date(params.dateTo);
     }
 
     if (DEFAULT_FILTER.dateTo) {
-      return localeDate(DEFAULT_FILTER.dateTo, 'dateInput');
+      return new Date(DEFAULT_FILTER.dateTo);
     }
 
-    return '';
+    return undefined;
   }, [params.dateTo]);
 
   const amountTypes: Array<{ label: string; value: TradesParams['amountType'] }> = [
@@ -137,10 +136,10 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     handleFieldChangeDebounced(nvalue, 'amountTo');
   };
 
-  const handleDateFromChange = (value: string) => {
+  const handleDateFromChange = (value: Date) => {
     setDateFrom(value);
 
-    const time = new Date(value).getTime();
+    const time = value.getTime();
     if (!time || time < 0) {
       return;
     }
@@ -148,10 +147,10 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     handleFieldChangeDebounced(time, 'dateFrom');
   };
 
-  const handleDateToChange = (value: string) => {
+  const handleDateToChange = (value: Date) => {
     setDateTo(value);
 
-    const time = new Date(value).getTime();
+    const time = value.getTime();
     if (!time || time < 0) {
       return;
     }
@@ -179,16 +178,14 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     <Box display="flex" flexDirection="column" gap="4x">
       <InputDate
         label={t('Date from')}
-        calendarProps={{ maxDate: dateTo ? new Date(dateTo) : TODAY }}
+        maxDate={dateTo ? new Date(dateTo) : TODAY}
         value={dateFrom}
         onChange={handleDateFromChange}
       />
       <InputDate
         label={t('Date to')}
-        calendarProps={{
-          maxDate: TODAY,
-          minDate: dateFrom ? new Date(dateFrom) : undefined,
-        }}
+        maxDate={TODAY}
+        minDate={dateFrom ? new Date(dateFrom) : undefined}
         value={dateTo}
         onChange={handleDateToChange}
       />
