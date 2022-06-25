@@ -1,79 +1,31 @@
-import { useState } from 'react';
-import Calendar, { CalendarProps } from 'react-calendar';
+import DatePicker, { DatePickerProps } from 'react-date-picker/dist/entry.nostyle';
 import { Box } from 'web/src/components/ui/Box';
-import { Dropdown } from 'web/src/components/Dropdown/Dropdown';
-import { TextInput, TextInputProps } from 'web/src/components/TextInputCustom/TextInputCustom';
-import { localeDate } from 'web/src/helpers';
+import { TextInputProps } from 'web/src/components/TextInputCustom/TextInputCustom';
 import CalendarIcon from 'web/src/assets/svg/CalendarIcon.svg';
+import * as inputS from 'web/src/components/TextInputCustom/TextInputCustom.css';
 import * as s from './InputDate.css';
 
-export interface InputDateProps extends TextInputProps {
-  value: string;
-  calendarProps?: CalendarProps;
-}
+export interface InputDateProps extends Pick<TextInputProps, 'label'>, DatePickerProps {}
 
-export const InputDate = ({
-  value,
-  placeholder,
-  label,
-  calendarProps,
-  onChange,
-}: InputDateProps) => {
-  const [focused, setFocused] = useState(false);
-  const dateValue = value ? new Date(value) : null;
-
-  const handleFocus = () => {
-    setFocused(true);
-  };
-
-  const handleBlur = () => {
-    setFocused(false);
-  };
-
-  const renderButton = ({ open, onClick }: { open: boolean; onClick: () => void }) => {
-    return (
-      <Box position="relative">
-        <TextInput
-          className={s.input}
-          type={value || focused ? 'date' : 'text'}
-          placeholder={placeholder}
-          label={label}
-          value={value}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onChange={onChange}
-        />
-
-        <Box
-          as="button"
-          type="button"
-          position="absolute"
-          right={0}
-          top={0}
-          bottom={0}
-          display="flex"
-          alignItems="center"
-          px="5x"
-          color={open ? 'calendarItemActiveBg' : 'text'}
-          cursor="pointer"
-          onClick={onClick}
-        >
-          <CalendarIcon />
-        </Box>
+export const InputDate = ({ label, value, minDate, maxDate, onChange }: InputDateProps) => {
+  return (
+    <Box as="label" className={inputS.inputContainer}>
+      <DatePicker
+        className={s.input}
+        value={value}
+        showLeadingZeros
+        format="dd.MM.y"
+        calendarIcon={<CalendarIcon />}
+        openCalendarOnFocus={false}
+        clearIcon={null}
+        minDate={minDate}
+        maxDate={maxDate}
+        isOpen={false}
+        onChange={onChange}
+      />
+      <Box as="span" className={inputS.label}>
+        {label}
       </Box>
-    );
-  };
-
-  const renderMenu = ({ onClose }: { onClose: () => void }) => (
-    <Calendar
-      {...calendarProps}
-      value={dateValue}
-      onChange={(v: Date) => {
-        onChange?.(localeDate(v, 'dateInput'));
-        onClose();
-      }}
-    />
+    </Box>
   );
-
-  return <Dropdown size="medium" renderButton={renderButton} renderContent={renderMenu} />;
 };
