@@ -279,6 +279,7 @@ module.exports = {
         './getThemeClassName': './src/theme/getThemeClassName',
         './AppContext': './src/components/app/AppContext',
         './Adapter': './src/components/shared/Adapter',
+        './AdScreen': './src/components/shared/Ads/Ad',
         './BoardScreen': './src/components/shared/Ads/Board',
         './TraderScreen': './src/components/shared/Trader/Trader',
         './TradesScreen': './src/components/shared/Trades/Trades',
