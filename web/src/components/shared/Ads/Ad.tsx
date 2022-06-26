@@ -101,7 +101,7 @@ export const Ad: FC = () => {
         {owner.verification && (
           <Tooltip label={t('Verified user')} placement="top">
             <div>
-              <Box as={VerifiedIcon} display="block" />
+              <VerifiedIcon width="22" height="22" />
             </div>
           </Tooltip>
         )}
@@ -116,11 +116,11 @@ export const Ad: FC = () => {
       <AdStat labelColor={labelColor} label={t('Rating')}>
         <Box display="flex" alignItems="center" gap="5x">
           <Box display="flex" alignItems="center" gap="1x">
-            <LikeIcon />
+            <Box as={LikeIcon} color="statIcon" />
             <span>{owner.feedbacks.find((v) => v.type === 'thumb_up')?.count ?? 0}</span>
           </Box>
           <Box display="flex" alignItems="center" gap="1x">
-            <UnLikeIcon />
+            <Box as={UnLikeIcon} color="statIcon" />
             <span>{owner.feedbacks.find((v) => v.type === 'hankey')?.count ?? 0}</span>
           </Box>
           <span>{owner.rating}</span>

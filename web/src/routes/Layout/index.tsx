@@ -336,7 +336,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               key="AdScreen"
               loading={userLoading}
               isLogged={isLoggedIn}
-              path={['/buy/:id', '/sell/:id']}
+              path={[
+                '/p2p/exchange/(buy|sell)/:id',
+                '/:lang/p2p/exchange/(buy|sell)/:id',
+                '/p2p/exchange/:id/*',
+                '/:lang/p2p/exchange/:id/*',
+              ]}
               component={AdScreen}
             />,
             <Route
