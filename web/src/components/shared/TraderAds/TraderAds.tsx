@@ -51,12 +51,12 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
 
   const header = !isMobileDevice && (
     <AdsTableHeader>
-      <AdsTableHeaderColumn size="medium">{t('Cryptocurrency')}</AdsTableHeaderColumn>
-      <AdsTableHeaderColumn size="medium">{t('Currency')}</AdsTableHeaderColumn>
+      <AdsTableHeaderColumn size="small">{t('Cryptocurrency')}</AdsTableHeaderColumn>
+      <AdsTableHeaderColumn size="small">{t('Currency')}</AdsTableHeaderColumn>
       <AdsTableHeaderColumn size="medium">{t('Payment method')}</AdsTableHeaderColumn>
       <AdsTableHeaderColumn size="medium">{t('Rate')}</AdsTableHeaderColumn>
-      <AdsTableHeaderColumn size="small">{t('Limits')}</AdsTableHeaderColumn>
-      <AdsTableHeaderColumn size="small" />
+      <AdsTableHeaderColumn size="medium">{t('Limits')}</AdsTableHeaderColumn>
+      <AdsTableHeaderColumn size="large" />
     </AdsTableHeader>
   );
 
@@ -222,14 +222,14 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
                   height="full"
                 />
 
-                <AdsTableColumn size="medium">
+                <AdsTableColumn size="small">
                   <Box pl="9x">{ad.cryptoCurrency.code}</Box>
                 </AdsTableColumn>
-                <AdsTableColumn size="medium">{ad.currency.code}</AdsTableColumn>
+                <AdsTableColumn size="small">{ad.currency.code}</AdsTableColumn>
                 <AdsTableColumn size="medium">{ad.paymethod.description}</AdsTableColumn>
                 <AdsTableColumn size="medium">{rate}</AdsTableColumn>
-                <AdsTableColumn size="small">{limit}</AdsTableColumn>
-                <AdsTableColumn size="small" display="flex" justifyContent="flex-end">
+                <AdsTableColumn size="medium">{limit}</AdsTableColumn>
+                <AdsTableColumn size="large" display="flex" justifyContent="flex-end">
                   <Box pr="4x">{actionButton}</Box>
                 </AdsTableColumn>
               </AdsTableRow>

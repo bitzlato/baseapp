@@ -15,7 +15,7 @@ import { Text } from 'web/src/components/ui/Text';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { useBlockUser } from 'web/src/hooks/mutations/useBlockUser';
 import { useTrustUser } from 'web/src/hooks/mutations/useTrustUser';
-import { LoginRequired } from 'web/src/components/traderInfo/LoginRequired';
+import { NotAvailable } from 'web/src/components/traderInfo/NotAvailable';
 import * as s from './Trader.css';
 
 interface UrlParams {
@@ -83,14 +83,18 @@ export const Trader: FC = () => {
           onGoBack={() => setSingleMode('')}
         />
         {singleMode === 'chat' &&
-          (user === undefined ? (
-            <LoginRequired>{t('Sign in to send messages')}</LoginRequired>
+          (user === undefined || !traderInfo.chatAvailable ? (
+            <NotAvailable signin={user === undefined}>
+              {!traderInfo.chatAvailable
+                ? t('trader.chatUnavailable')
+                : t('Sign in to send messages')}
+            </NotAvailable>
           ) : (
             <UserChat publicName={params.name} />
           ))}
         {singleMode === 'notes' &&
           (user === undefined ? (
-            <LoginRequired>{t('Sign in to save notes')}</LoginRequired>
+            <NotAvailable>{t('Sign in to save notes')}</NotAvailable>
           ) : (
             <Notes publicName={params.name} />
           ))}
@@ -111,10 +115,10 @@ export const Trader: FC = () => {
 
   if (isMobileDevice) {
     return (
-      <>
+      <Box display="flex" flexDirection="column">
         <Box bg="headerBg">{trader}</Box>
         <Box bg="block">{ads}</Box>
-      </>
+      </Box>
     );
   }
 

@@ -57,14 +57,12 @@ export const Deals: FC<DealsProps> = ({ deals }) => {
           position="relative"
           overflowY={showMore ? 'auto' : undefined}
           flexDirection="column"
-          flexGrow={1}
         >
           <Box
             className={!showMore && isLongList ? styles.dataBlock : ''}
             position="relative"
             display="flex"
             flexDirection="column"
-            flexGrow={1}
           >
             {(isLongList ? list.slice(0, !showMore ? 5 : undefined) : list).map((item) => (
               <Box
@@ -89,7 +87,7 @@ export const Deals: FC<DealsProps> = ({ deals }) => {
         {!showMore && isLongList && (
           <Box display="flex" justifyContent="center">
             <Button color="clarified" variant="text" onClick={() => setShowMore(true)}>
-              {t('show all')}
+              {t('Show all')}
             </Button>
           </Box>
         )}
