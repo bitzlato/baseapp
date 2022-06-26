@@ -16,7 +16,7 @@ export const Notes: FC<NotesProps> = ({ publicName }) => {
   const notes = useFetchNotes(publicName);
   const sendNote = useSendNote(publicName);
   const notesBoxRef = useRef<HTMLDivElement>(null);
-  const [text, setText] = useState<string>();
+  const [text, setText] = useState<string>('');
 
   const handleSendNote = () => {
     if (text !== undefined && text.length > 0) {

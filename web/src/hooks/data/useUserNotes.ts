@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import { p2pUrl } from 'web/src/api';
+import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
-import { alertPush } from 'web/src/modules/public/alert/actions';
 import { useFetch } from './useFetch';
 
 export interface NoteParams {
@@ -25,7 +24,8 @@ export const useFetchNotes = (publicName: string) => {
 
 export const useSendNote = (publicName: string) => {
   const { mutate } = useSWRConfig();
-  const dispatch = useDispatch();
+  const handleFetchError = useHandleFetchError();
+
   return async (params: NoteParams): Promise<void> => {
     try {
       await fetchWithCreds(`${p2pUrl()}/profile/${publicName}/notes`, {
@@ -36,14 +36,7 @@ export const useSendNote = (publicName: string) => {
       mutate(`${p2pUrl()}/profile/${publicName}/notes`);
     } catch (error) {
       if (error instanceof FetchError) {
-        dispatch(
-          alertPush({
-            type: 'error',
-            code: error.code,
-            message: error.messages,
-            payload: error.payload,
-          }),
-        );
+        handleFetchError(error);
       }
     }
   };
