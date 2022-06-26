@@ -53,6 +53,7 @@
   "Blacklisted": "Заблокировало пользователей",
   "Comments": "Отзывы",
   "Collapse": "Свернуть",
+  "Show all": "Показать все",
   "Show more": "Подробнее",
   "Chat with": "Чат с",
   "Notes for": "Заметки для",
@@ -75,7 +76,7 @@
   "Transaction volume": "Объём сделок",
   "Write message": "Напишите сообщение",
   "Please Send message for start conversation": "Напишите сообщение для начала общения",
-  "Verified user": "Проверенный пользователь",
+  "Verified user": "Верифицированный пользователь",
   "Verified users": "Проверенные пользователи",
   "Trusted user": "Доверенный пользователь",
   "Trusted users": "Доверенные пользователи",
@@ -141,6 +142,8 @@
   "tradeStatus.dispute": "Открыт спор",
   "tradeStatus.payment": "Платеж",
   "tradeStatus.trade_created": "Новая сделка",
+
+  "trader.chatUnavailable": "Вы не можете использовать чат. Либо у вас недостаточно рейтинга, либо у вас нет совместных сделок.",
 
   "traderAds.empty": "У трейдера пока нет объявлений. Перейдите на маркет, чтобы найти множество объявлений от других трейдеров"
 }

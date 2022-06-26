@@ -125,6 +125,7 @@ export const Tooltip: FC<Props> = ({ children, placement = 'bottom', label }) =>
                 transform: `translate(${position.x}px, ${position.y}px)`,
               }
             }
+            fontFamily="brand"
           >
             <Box
               className={s.tooltipArrow[placement]}

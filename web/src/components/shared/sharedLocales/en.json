@@ -28,5 +28,7 @@
   "tradeStatus.payment": "Payment",
   "tradeStatus.trade_created": "New deal",
 
+  "trader.chatUnavailable": "You can't use chat. Either you don't have enough ratings or you don't have joint deals",
+
   "traderAds.empty": "This trader has no ads yet. Go to the market to see many ads from other traders"
 }

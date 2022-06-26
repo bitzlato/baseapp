@@ -14,7 +14,7 @@ import { useIsMobileDevice, useUser } from 'web/src/components/app/AppContext';
 import { formatRating } from 'web/src/helpers/formatRating';
 import { CollapsibleBox } from 'web/src/components/collapsibleBox/CollapsibleBox';
 import { UserInfo } from 'web/src/modules/p2p/user.types';
-import { LoginRequired } from 'web/src/components/traderInfo/LoginRequired';
+import { NotAvailable } from 'web/src/components/traderInfo/NotAvailable';
 import { TraderIcons } from 'web/src/components/traderInfo/TraderIcons';
 import { Notes } from './Notes';
 import { Deals } from './Deals';
@@ -200,7 +200,7 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
                 <Box width="full">
                   <Stat>
                     <StatLabel>{t('Comments')}</StatLabel>
-                    <Box display="flex" justifyContent="flex-end" gap="5x">
+                    <Box display="flex" justifyContent="flex-end" flexWrap="wrap" gap="5x">
                       <Box display="flex" alignItems="center">
                         <Box color="statIcon" display="flex" alignItems="center" mr="2x">
                           <ThumbUp />
@@ -223,14 +223,18 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
           </>
         )}
         {value === 'chat' &&
-          (user === undefined ? (
-            <LoginRequired>{t('Sign in to send messages')}</LoginRequired>
+          (user === undefined || !traderInfo.chatAvailable ? (
+            <NotAvailable signin={user === undefined}>
+              {!traderInfo.chatAvailable
+                ? t('trader.chatUnavailable')
+                : t('Sign in to send messages')}
+            </NotAvailable>
           ) : (
             <UserChat publicName={traderInfo.name} />
           ))}
         {value === 'notes' &&
           (user === undefined ? (
-            <LoginRequired>{t('Sign in to save notes')}</LoginRequired>
+            <NotAvailable signin>{t('Sign in to save notes')}</NotAvailable>
           ) : (
             <Notes publicName={traderInfo.name} />
           ))}
