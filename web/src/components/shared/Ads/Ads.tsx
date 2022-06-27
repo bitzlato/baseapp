@@ -154,9 +154,15 @@ export const Ads: FC<Props> = ({
       <Box mb="6x">
         <Text variant={isMobileDevice ? 'title' : 'body'}>{t('ad.empty')}</Text>
       </Box>
-      <Button as={Link} to={`/${lang}/p2p/adverts/create`}>
-        {t('Create advert')}
-      </Button>
+      {user ? (
+        <Button as={Link} to={`/${lang}/p2p/adverts/create`}>
+          {t('Create advert')}
+        </Button>
+      ) : (
+        <Button as="a" href={`/signin?back=/${lang}/p2p/adverts/create`}>
+          {t('Create advert')}
+        </Button>
+      )}
     </Box>
   );
 
