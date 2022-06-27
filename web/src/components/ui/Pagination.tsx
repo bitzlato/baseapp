@@ -105,8 +105,8 @@ export const Pagination: FC<Props> = memo(
       }
     };
     const handleClickToFirst = () => onChange(1);
-    const handleClickToPrev = () => onChange(page - 1);
-    const handleClickToNext = () => onChange(page + 1);
+    const handleClickToPrev = () => onChange(Math.max(page - 1, 1));
+    const handleClickToNext = () => onChange(Math.min(page + 1, count));
     const handleClickToLast = () => onChange(count);
 
     return (
