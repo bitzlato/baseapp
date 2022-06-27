@@ -27,6 +27,8 @@ import { ActionOnTraderButton } from 'web/src/components/p2p/ActionOnTraderButto
 import { themeDark } from 'web/src/theme/vars.css';
 import { useFetchTraderInfo } from 'web/src/hooks/data/useFetchTraderInfo';
 import { useTrustUser } from 'web/src/hooks/mutations/useTrustUser';
+import { useTradeEstimate } from 'web/src/hooks/data/useTradeEstimate';
+import { useDebouncedCallback } from 'use-debounce';
 import { AdStat } from './AdStat';
 
 interface UrlParams {
@@ -50,6 +52,31 @@ export const Ad: FC = () => {
   const { getCryptoCurrency } = useCryptoCurrencies();
   const changeTrust = useTrustUser(traderInfoSWR);
 
+  const calculateAmount = useTradeEstimate();
+
+  const calculateDebounced = useDebouncedCallback(
+    async (amount: string, amountType: string, other: 'currency' | 'cryptocurrency') => {
+      if (advert && paymethod) {
+        const c = await calculateAmount({
+          advertId: advert.id,
+          amount,
+          amountType,
+          rate: advert.rate,
+        });
+
+        if (c) {
+          const calculated = c[other]?.amount;
+          if (other === 'cryptocurrency') {
+            setTo(calculated);
+          } else {
+            setFrom(calculated);
+          }
+        }
+      }
+    },
+    500,
+  );
+
   if (advert === undefined || paymethod === undefined || owner === undefined) {
     return (
       <Box display="flex" justifyContent="center" py="20x">
@@ -70,12 +97,19 @@ export const Ad: FC = () => {
     owner.dealStats.find((v) => v.cryptocurrency === 'common') ??
     ({ successDeals: 0, canceledDeals: 0 } as DealStat);
 
-  const handleChangeFrom = (v: string) => {
-    setFrom(parseNumeric(v));
-  };
+  const handleChange = async (field: 'currency' | 'cryptocurrency', value: string) => {
+    const amount = parseNumeric(value);
 
-  const handleChangeTo = (v: string) => {
-    setTo(parseNumeric(v));
+    if (field === 'currency') {
+      setFrom(amount);
+    } else {
+      setTo(amount);
+    }
+    if (amount) {
+      const amountType = field === 'currency' ? paymethod?.currency : advert.cryptocurrency;
+      const other = field === 'currency' ? 'cryptocurrency' : 'currency';
+      calculateDebounced(amount, amountType, other);
+    }
   };
 
   const handleClickTrusted = () => {
@@ -181,14 +215,14 @@ export const Ad: FC = () => {
         currency={fromCcy.code}
         value={from}
         label={t('You pay')}
-        onChange={handleChangeFrom}
+        onChange={(value: string) => handleChange(isBuy ? 'currency' : 'cryptocurrency', value)}
         autoFocus
       />
       <MoneyInput
         currency={toCcy.code}
         value={to}
         label={t('You receive')}
-        onChange={handleChangeTo}
+        onChange={(value: string) => handleChange(isBuy ? 'cryptocurrency' : 'currency', value)}
       />
     </>
   );
