@@ -56,7 +56,7 @@ export const alertDeleteByIndex = (index: number): AlertDeleteByIndex => ({
 
 export const alertFetchError = (
   error: unknown,
-): AlertPush | ToggleFreezed | ToggleNeedVerification | undefined => {
+): AlertPush | ToggleFreezed | ToggleNeedVerification | { type: '__skip' } => {
   if (error instanceof FetchError) {
     if (
       (error.code === 403 && error.payload.code === 'OperationIsFrozen') ||
@@ -78,5 +78,7 @@ export const alertFetchError = (
     });
   }
 
-  return undefined;
+  return {
+    type: '__skip',
+  };
 };

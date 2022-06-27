@@ -109,11 +109,6 @@ export const Board: FC = () => {
   const fiatCurrenciesValue = useFiatCurrencies();
   const cryptoCurrenciesValue = useFetchP2PCryptoCurrencies();
   const lastFilterValue = useFetchP2PLastFilter();
-  const error = fiatCurrenciesValue.error ?? cryptoCurrenciesValue.error ?? lastFilterValue.error;
-
-  if (error) {
-    return null;
-  }
 
   return (
     <Container maxWidth="fullhd">
