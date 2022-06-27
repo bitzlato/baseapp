@@ -27,7 +27,7 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
     cryptoCurrencies,
     lastFilter,
   });
-  const { data, error, mutate, isValidating } = useAds(filterParams);
+  const { data, mutate, isValidating } = useAds(filterParams);
 
   const handleChangePage = (value: number) => {
     handleChangeFilter({ skip: (value - 1) * filterParams.limit });
@@ -42,10 +42,6 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
   };
 
   const handleRefresh = () => mutate();
-
-  if (error) {
-    return null;
-  }
 
   const ads = (
     <>
