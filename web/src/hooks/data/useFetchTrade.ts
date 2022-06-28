@@ -32,9 +32,9 @@ export function useFetchTradeDisputeChat(tradeId: string | undefined) {
   );
 }
 
-export function useFetchLastRequisites(paymethodId: number) {
+export function useFetchLastRequisites(paymethodId?: number | undefined) {
   return useFetch<{ data: string[] }>(
-    `${p2pUrl()}/profile/last-trade-details/${paymethodId}`,
+    paymethodId ? `${p2pUrl()}/profile/last-trade-details/${paymethodId}` : null,
     fetchWithCreds,
     {
       revalidateIfStale: false,

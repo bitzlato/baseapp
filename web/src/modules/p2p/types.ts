@@ -143,7 +143,13 @@ export interface AdvertSingleSource {
   status: 'active';
   terms: string;
   type: AdvertType;
-  unactiveReason: 'not_enough_funds';
+  unactiveReason:
+    | 'not_enough_funds'
+    | 'blacklisted'
+    | 'partner_not_enough_funds'
+    | 'verified_only'
+    | 'trade_with_yourself'
+    | 'blacklisted_by_you';
 }
 
 export interface Advert

@@ -219,6 +219,8 @@ export const [themeLight, vars] = createTheme({
     adRowLabelMobile: colors.ebonyClay70,
     adTrade: colors.indigo,
 
+    adTradeMobileBackground: colors.white,
+
     tradeFinishedStatusLineBg: colors.ebonyClay05,
     tradeLinkHover: colors.ebonyClay40,
     tradeButtonLinkText: colors.indigo,
@@ -353,6 +355,7 @@ export const [themeLight, vars] = createTheme({
     tradeMobileHistoryItemUnFilled: colors.transparent,
     tradeMobileHistoryItemUnFilledBorder: colors.gray,
     tradeMobileChatTitle: colors.ebonyClay,
+    adExchangeViewError: colors.ebonyClay,
 
     divider: colors.ebonyClay15,
   },
@@ -507,6 +510,8 @@ export const themeDark = createTheme(vars, {
     adRowLabelMobile: colors.white50,
     adTrade: colors.indigo,
 
+    adTradeMobileBackground: colors.ebonyClay,
+
     tradeFinishedStatusLineBg: colors.white10,
     tradeLinkHover: colors.white30,
     tradeButtonLinkText: colors.goldTips,
@@ -641,6 +646,7 @@ export const themeDark = createTheme(vars, {
     tradeMobileHistoryItemUnFilled: colors.transparent,
     tradeMobileHistoryItemUnFilledBorder: colors.white70,
     tradeMobileChatTitle: colors.white,
+    adExchangeViewError: colors.ebonyClay,
 
     divider: colors.white10,
   },

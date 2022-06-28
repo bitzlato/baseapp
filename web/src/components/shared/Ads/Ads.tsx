@@ -44,12 +44,9 @@ const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
   const [confirm, setConfirm] = useState<AdExchangeConfirm | undefined>(undefined);
 
   const isBuy = ad.type === 'selling';
-  const to =
-    process.env.NODE_ENV === 'development'
-      ? `/${isBuy ? 'buy' : 'sell'}/${ad.id}`
-      : `/${lang}/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${ad.cryptoCurrency.code}-${
-          ad.currency.code
-        }-${ad.paymethod.name}`;
+  const to = `/${lang}/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${ad.cryptoCurrency.code}-${
+    ad.currency.code
+  }-${ad.paymethod.name}`;
 
   const handleClick = async () => {
     setActive(true);

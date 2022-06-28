@@ -1,6 +1,6 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { sprinkles } from 'web/src/theme/sprinkles.css';
-import { sizeVars } from 'web/src/theme/vars.css';
+import { sizeVars, vars } from 'web/src/theme/vars.css';
 
 export const inputContainer = sprinkles({
   position: 'relative',
@@ -65,6 +65,10 @@ export const showIcon = style([
     pr: '16x',
   }),
 ]);
+
+export const textAreaPlaceholder = style({
+  '::placeholder': { color: vars.colors.inputPlaceholder },
+});
 
 globalStyle(`${input}:not(:focus):placeholder-shown + ${label}`, {
   paddingTop: 2,

@@ -10,6 +10,7 @@ import {
 } from 'web/src/components/shared/Trade/types';
 import { fetchJson, FetchError } from 'web/src/helpers/fetch';
 import { ChatMessageList } from 'web/src/hooks/data/useUserChat';
+import { Trade } from 'web/src/modules/p2p/trade.types';
 
 type UpdateTradeDetails = {
   tradeId: number;
@@ -37,6 +38,16 @@ type Tips = {
   tradeId: number;
   amountPercent: number;
 };
+
+type TradeStart = {
+  advertId: number;
+  amount: string;
+  amountType: string;
+  rate: string;
+  details: string | null;
+};
+
+type TradeStartResp = Trade;
 
 const updateTradeDetails = async ({ tradeId, details }: UpdateTradeDetails) => {
   const response = await fetchJson(`${p2pUrl()}/trade/${tradeId}`, {
@@ -129,6 +140,25 @@ const tradeFeedback = async (params: { tradeId: number; code: TradeFeedback }) =
     method: 'PUT',
     body: JSON.stringify({
       rate: params.code,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+    credentials: 'include',
+  });
+
+  return response;
+};
+
+const tradeStart = async (params: TradeStart) => {
+  const response = await fetchJson(`${p2pUrl()}/trade/`, {
+    method: 'POST',
+    body: JSON.stringify({
+      advertId: params.advertId,
+      amount: params.amount,
+      amountType: params.amountType,
+      rate: params.rate,
+      counterDetails: params.details,
     }),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
@@ -315,4 +345,28 @@ export const useTradeFeedback = ({ onSuccess }: { onSuccess?: KeyedMutator<Trade
       }
     },
   });
+};
+
+export const useTradeStart = ({ onFailure }: { onFailure: (reason: string) => void }) => {
+  const handleFetchError = useHandleFetchError();
+  const [mutate] = useMutation<TradeStart, TradeStartResp, unknown>(tradeStart, {
+    onFailure: ({ error }) => {
+      if (error instanceof FetchError) {
+        if (
+          error.payload &&
+          (error.payload.code === 'AmountIsTooBig' ||
+            error.payload.code === 'AmountIsTooLow' ||
+            error.payload.code === 'ForbiddenTradeWithYourself' ||
+            error.payload.code === 'TradeRateWasChanged')
+        ) {
+          onFailure(error.payload.code);
+          return;
+        }
+
+        handleFetchError(error);
+      }
+    },
+  });
+
+  return mutate;
 };
