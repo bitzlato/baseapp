@@ -22,7 +22,7 @@ export const TradeState: FC = () => {
   const handleActionAddtime = () => handleTradeTimeout();
 
   const handleActionCancel = () => {
-    toggleModal('confirmPayment');
+    toggleModal('confirmCancel');
   };
 
   const handleActionTips = () => {

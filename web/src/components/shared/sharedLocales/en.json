@@ -135,5 +135,18 @@
   "Available": "Available",
   "Close": "Close",
   "Send": "Send",
-  "Details": "Details"
+  "Details": "Details",
+
+  "error.ForbiddenTradeWithYourself": "Forbidden to trade with yourself",
+  "error.TradeRateWasChanged": "The ad's owner has changed the rate",
+  "error.AmountIsTooBig": "The amount of the trade is too big",
+  "error.AmountIsTooLow": "The amount of the trade is too low",
+
+  "reasonBlacklisted": "Sorry, this user has blocked you!",
+  "reasonPartnerNotEnoughFunds": "The seller does not have enough funds!",
+  "reasonNotEnoughFunds": "This ad is not available because your balance is less than the minimum amount of the transaction",
+  "reasonVerifiedOnly": "This ad is available only for verified users",
+  "reasonTradeWithYourself": "It is forbidden to trade with yourself",
+  "reasonBlacklistedByYou": "You have blocked this user. You cannot make trades with him",
+  "notAvailable": "Unfortunately, this ad is not available at the moment!"
 }

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useTradeAction, useTradeContext } from 'web/src/components/shared/Trade/TradeContext';
-import { TradeDetailsModal } from 'web/src/components/shared/Modal/TradeDetailsModal';
+import { TradeDetailsModal } from 'web/src/components/shared/Trade/TradeModals/TradeDetailsModal';
 
 export const TradeInputDetails: FC = () => {
   const { toggleModal, modals, handleTradeDetails, trade } = useTradeContext();

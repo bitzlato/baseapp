@@ -69,7 +69,7 @@ export const TextAreaInput = ({
         as={as}
         rows={rows}
         placeholder=""
-        className={cn(s.input, className, icon && s.showIcon)}
+        className={cn(s.input, s.textAreaPlaceholder, className, icon && s.showIcon)}
         onChange={handleChange}
         {...restProps}
       />

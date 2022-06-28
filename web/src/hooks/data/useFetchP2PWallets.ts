@@ -15,8 +15,11 @@ export function useFetchP2PWalletStat() {
   return useFetch<P2PWalletStat[]>(`${p2pUrl()}/public/wallet/stat`, fetchWithCreds);
 }
 
-export function useFetchP2PWallet(cryptoCurrency: string) {
-  return useFetch<P2PWallet>(`${p2pUrl()}/wallets/${cryptoCurrency}`, fetchWithCreds);
+export function useFetchP2PWallet(cryptoCurrency?: string | undefined) {
+  return useFetch<P2PWallet>(
+    cryptoCurrency ? `${p2pUrl()}/wallets/${cryptoCurrency}` : null,
+    fetchWithCreds,
+  );
 }
 
 export function useFetchP2PCryptoCurrencies() {
