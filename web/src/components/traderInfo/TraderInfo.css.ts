@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
-export const card = style({
-  minHeight: '100%',
+export const tabBody = style({
+  height: 620,
+  display: 'flex',
+  flexDirection: 'column',
 });
