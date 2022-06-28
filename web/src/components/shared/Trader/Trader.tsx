@@ -63,7 +63,11 @@ export const Trader: FC = () => {
   };
 
   if (singleMode === 'chat' || singleMode === 'notes') {
-    const title = `${singleMode === 'chat' ? t('Chat with') : t('Notes for')} ${params.name}`;
+    const title = `${
+      singleMode === 'chat'
+        ? t('Chat with', { partner: params.name })
+        : t('Notes partner', { partner: params.name })
+    }`;
 
     return (
       <Box

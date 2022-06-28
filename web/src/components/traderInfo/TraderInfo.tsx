@@ -51,7 +51,7 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
 
   const traderStats = traderInfo.dealStats.find((item) => item.cryptocurrency === 'common');
   const body = (
-    <Box display="flex" flex={1} flexDirection="column" py={{ mobile: '4x', tablet: '5x' }} px="5x">
+    <Box display="flex" flexDirection="column" py={{ mobile: '4x', tablet: '5x' }} px="5x">
       <Box mb="2x">
         <Box display="flex" justifyContent="space-between" mb="2x">
           <Box>
@@ -99,7 +99,7 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
           </Box>
           <Box w="full">
             <Button color="secondary" fullWidth onClick={() => onSingleMode?.('chat')}>
-              {t('Сhat')}
+              {t('Chat')}
             </Button>
           </Box>
         </Box>
@@ -230,20 +230,24 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
                 : t('Sign in to send messages')}
             </NotAvailable>
           ) : (
-            <UserChat publicName={traderInfo.name} />
+            <div className={s.tabBody}>
+              <UserChat publicName={traderInfo.name} />
+            </div>
           ))}
         {value === 'notes' &&
           (user === undefined ? (
             <NotAvailable signin>{t('Sign in to save notes')}</NotAvailable>
           ) : (
-            <Notes publicName={traderInfo.name} />
+            <div className={s.tabBody}>
+              <Notes publicName={traderInfo.name} />
+            </div>
           ))}
       </Box>
     </Box>
   );
 
   return (
-    <Card className={s.card} display="flex" flexDirection="column">
+    <Card display="flex" flexDirection="column">
       <CardHeader>{t('Trader profile')}</CardHeader>
       {body}
     </Card>

@@ -6,7 +6,7 @@
   "LimitsWithSymbol": "Limits, {fiat}",
   "Limits": "Limits",
   "AmountWithSymbol": "Amount ({symbol})",
-
+  "Notes partner": "Notes {partner}",
   "ad.empty": "There are currently no ads for the parameters you specified. Be the first!",
   "ad.trade.info": "During the trade cryptocurrency will be held on the trader account. After the payment trader marks deal as finished and release the funds. This protects both the buyer and the seller.",
   "ad.buy": "Buy {cryptocurrency} for {currency} from user {username} via {paymethod}",
@@ -32,7 +32,7 @@
   "trader.chatUnavailable": "You can't use chat. Either you don't have enough ratings or you don't have joint deals",
 
   "traderAds.empty": "This trader has no ads yet. Go to the market to see many ads from other traders",
-  
+
   "Chat": "Chat",
   "Chat with": "Chat with {partner}",
 
