@@ -50,6 +50,36 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
   );
 
   const traderStats = traderInfo.dealStats.find((item) => item.cryptocurrency === 'common');
+  const tabs = isMobileDevice ? (
+    <Box display="flex" gap="3x">
+      <Box w="full">
+        <Button
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          onClick={() => onSingleMode?.('notes')}
+        >
+          {t('Notes')}
+        </Button>
+      </Box>
+      <Box w="full">
+        <Button color="secondary" fullWidth onClick={() => onSingleMode?.('chat')}>
+          {t('Chat')}
+        </Button>
+      </Box>
+    </Box>
+  ) : (
+    <VariantSwitcher
+      target="tabs"
+      variants={[
+        { label: t('Information'), value: 'info' },
+        { label: t('Chat'), value: 'chat' },
+        { label: t('Notes'), value: 'notes' },
+      ]}
+      value={value}
+      onChange={setValue}
+    />
+  );
   const body = (
     <Box display="flex" flexDirection="column" py={{ mobile: '4x', tablet: '5x' }} px="5x">
       <Box mb="2x">
@@ -85,36 +115,7 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
         </Box>
       </Box>
 
-      {isMobileDevice ? (
-        <Box display="flex" gap="3x">
-          <Box w="full">
-            <Button
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              onClick={() => onSingleMode?.('notes')}
-            >
-              {t('Notes')}
-            </Button>
-          </Box>
-          <Box w="full">
-            <Button color="secondary" fullWidth onClick={() => onSingleMode?.('chat')}>
-              {t('Chat')}
-            </Button>
-          </Box>
-        </Box>
-      ) : (
-        <VariantSwitcher
-          target="tabs"
-          variants={[
-            { label: t('Information'), value: 'info' },
-            { label: t('Chat'), value: 'chat' },
-            { label: t('Notes'), value: 'notes' },
-          ]}
-          value={value}
-          onChange={setValue}
-        />
-      )}
+      {canActionOnTrader && tabs}
 
       <Box display="flex" position="relative" flexDirection="column" flexGrow={1}>
         {value === 'info' && (
