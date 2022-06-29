@@ -119,7 +119,7 @@ export const Trader: FC = () => {
 
   if (isMobileDevice) {
     return (
-      <Box display="flex" flexDirection="column">
+      <Box display="flex" flexDirection="column" width="full">
         <Box bg="headerBg">{trader}</Box>
         <Box bg="block">{ads}</Box>
       </Box>

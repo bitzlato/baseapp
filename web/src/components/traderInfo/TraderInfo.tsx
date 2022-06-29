@@ -34,7 +34,8 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
   const t = useSharedT();
   const [value, setValue] = useState('info');
 
-  const canActionOnTrader = user && user.bitzlato_user?.id !== traderInfo.id;
+  const yourself = user && user.bitzlato_user?.id === traderInfo.id;
+  const canActionOnTrader = user && !yourself;
 
   const [thumbUp, thumbDown] = (traderInfo.feedbacks ?? []).reduce<[number, number]>(
     (acc, item) => {
@@ -115,7 +116,7 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
         </Box>
       </Box>
 
-      {canActionOnTrader && tabs}
+      {!yourself && tabs}
 
       <Box display="flex" position="relative" flexDirection="column" flexGrow={1}>
         {value === 'info' && (
