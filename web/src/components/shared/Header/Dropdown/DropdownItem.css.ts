@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { sprinkles } from 'web/src/theme/sprinkles.css';
 import { vars } from 'web/src/theme/vars.css';
 import * as resetStyles from 'web/src/theme/reset.css';
@@ -65,3 +65,7 @@ export const icon = style([
     },
   },
 ]);
+
+globalStyle(`${icon} svg`, {
+  fill: vars.colors.dropdown,
+});

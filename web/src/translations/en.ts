@@ -1599,4 +1599,5 @@ export const en = {
   Back: 'Back',
   Telegram: 'Telegram',
   Invoices: 'Invoices',
+  'Trader Workspace': 'Trader Workspace',
 };

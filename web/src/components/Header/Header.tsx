@@ -181,6 +181,13 @@ const Header: FC = () => {
             children: t('Invoices'),
           }
         : null,
+      {
+        key: 'trader-workspace',
+        type: 'external',
+        to: `/${language}/trader-workspace`,
+        icon: 'trader-workspace',
+        children: t('Trader Workspace'),
+      },
     ].filter(Boolean) as UserLinks;
 
     userProps = {
