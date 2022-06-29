@@ -1617,4 +1617,5 @@ export const ru: LangType = {
   Back: 'Назад',
   Telegram: 'Telegram',
   Invoices: 'Счета',
+  'Trader Workspace': 'Рабочее место трейдера',
 };

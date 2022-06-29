@@ -10,6 +10,7 @@ import { Box } from 'web/src/components/ui/Box';
 import LogoutIcon from 'web/src/assets/svg/LogoutIcon.svg';
 import SettingsIcon from 'web/src/assets/svg/SettingsIcon.svg';
 import TelegramPlainIcon from 'web/src/assets/svg/TelegramPlainIcon.svg';
+import TraderWorkspaceIcon from 'web/src/assets/svg/TraderWorkspaceIcon.svg';
 import ListIcon from 'web/src/assets/svg/ListIcon.svg';
 import * as s from './DropdownItem.css';
 
@@ -18,6 +19,7 @@ const icons = {
   logout: <LogoutIcon />,
   telegram: <TelegramPlainIcon />,
   invoices: <ListIcon />,
+  'trader-workspace': <TraderWorkspaceIcon />,
 };
 
 type DropdownLinkType = {
