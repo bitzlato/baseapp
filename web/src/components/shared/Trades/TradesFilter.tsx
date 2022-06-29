@@ -156,7 +156,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
     setDateTo(value);
 
     if (!value) {
-      handleFieldChangeDebounced(DEFAULT_FILTER.dateTo ?? '', 'dateFrom');
+      handleFieldChangeDebounced(DEFAULT_FILTER.dateTo ?? '', 'dateTo');
       return;
     }
 
