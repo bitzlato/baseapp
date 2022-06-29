@@ -139,6 +139,11 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
   const handleDateFromChange = (value: Date) => {
     setDateFrom(value);
 
+    if (!value) {
+      handleFieldChangeDebounced(DEFAULT_FILTER.dateFrom ?? '', 'dateFrom');
+      return;
+    }
+
     const time = value.getTime();
     if (!time || time < 0) {
       return;
@@ -149,6 +154,11 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
 
   const handleDateToChange = (value: Date) => {
     setDateTo(value);
+
+    if (!value) {
+      handleFieldChangeDebounced(DEFAULT_FILTER.dateTo ?? '', 'dateFrom');
+      return;
+    }
 
     const time = value.getTime();
     if (!time || time < 0) {
