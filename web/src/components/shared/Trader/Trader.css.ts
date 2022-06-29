@@ -18,7 +18,7 @@ export const leftBlock = style(
 );
 
 export const singleContainer = style({
-  minHeight: 'calc(100vh - 130px)',
+  minHeight: 'calc(100vh - 210px)',
 });
 
 export const stats = style({
