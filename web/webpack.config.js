@@ -31,9 +31,11 @@ const extractSemver = (text) => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
+const isProductionStage = releaseStage === 'production' || releaseStage === 'production_bz';
 const ASSET_PATH =
   process.env.ASSET_PATH ?? (process.env.NODE_ENV === 'production' ? '/basestatic/' : '/');
-const PRODUCTION_PUBLIC_PATH = `https://bitzlato.com${ASSET_PATH}`;
+const PRODUCTION_PUBLIC_PATH =
+  process.env.PUBLIC_URL && `https://${process.env.PUBLIC_URL}${ASSET_PATH}`;
 
 let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : `${ASSET_PATH}marketDocs`; // production or staging
 if (process.env.MARKET_DOCS_URL) {
@@ -193,7 +195,7 @@ module.exports = {
   },
 
   optimization: {
-    runtimeChunk: isDevelopment ? 'single' : undefined,
+    // runtimeChunk: isDevelopment ? 'single' : undefined,
     moduleIds: isDevelopment ? 'named' : 'deterministic',
     chunkIds: isDevelopment ? 'named' : 'deterministic',
     minimize: !isDevelopment,
@@ -222,7 +224,8 @@ module.exports = {
       }),
 
     process.env.REACT_APP_BUGSNAG_KEY &&
-      releaseStage === 'production' &&
+      isProductionStage &&
+      PRODUCTION_PUBLIC_PATH &&
       new BugsnagSourceMapUploaderPlugin({
         apiKey: process.env.REACT_APP_BUGSNAG_KEY,
         appVersion,
