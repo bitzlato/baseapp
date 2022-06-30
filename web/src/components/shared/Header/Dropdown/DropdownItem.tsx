@@ -19,7 +19,7 @@ const icons = {
   logout: <LogoutIcon />,
   telegram: <TelegramPlainIcon />,
   invoices: <ListIcon />,
-  'trader-workspace': <TraderWorkspaceIcon />,
+  'trader-workspace': <TraderWorkspaceIcon className={s.iconWithFill} />,
 };
 
 type DropdownLinkType = {
