@@ -13,6 +13,7 @@ import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { TradesList } from 'web/src/components/shared/Trades/TradesList';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { localeDate } from 'web/src/helpers';
+import { Breadcrumbs, BreadcrumbsItem } from 'web/src/components/ui/Breadcrumbs';
 import { TradesFilter, TradesFilterMobile, DEFAULT_FILTER } from './TradesFilter';
 import * as s from './Trades.css';
 
@@ -133,6 +134,15 @@ export const Trades: FC = () => {
 
   return (
     <Container maxWidth="fullhd">
+      {isMobileDevice ? null : (
+        <Box px="8x">
+          <Breadcrumbs>
+            <BreadcrumbsItem to={`/${lang}/p2p`}>{t('Market')}</BreadcrumbsItem>
+            <BreadcrumbsItem>{t('My trades')}</BreadcrumbsItem>
+          </Breadcrumbs>
+        </Box>
+      )}
+
       <Box className={s.layoutWithoutSidebar} flexDirection="column" width="full">
         <Box
           px="5x"
@@ -150,7 +160,7 @@ export const Trades: FC = () => {
         </Box>
       </Box>
 
-      <Box className={s.layoutWithSidebar} p="8x" alignItems="flex-start">
+      <Box className={s.layoutWithSidebar} px="8x" pb="8x" alignItems="flex-start">
         <Box
           className={s.filter}
           flexShrink={0}
