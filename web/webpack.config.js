@@ -195,7 +195,7 @@ module.exports = {
   },
 
   optimization: {
-    // runtimeChunk: isDevelopment ? 'single' : undefined,
+    runtimeChunk: isDevelopment ? 'single' : undefined,
     moduleIds: isDevelopment ? 'named' : 'deterministic',
     chunkIds: isDevelopment ? 'named' : 'deterministic',
     minimize: !isDevelopment,
