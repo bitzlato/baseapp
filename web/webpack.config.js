@@ -34,8 +34,7 @@ const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
 const isProductionStage = releaseStage === 'production' || releaseStage === 'production_bz';
 const ASSET_PATH =
   process.env.ASSET_PATH ?? (process.env.NODE_ENV === 'production' ? '/basestatic/' : '/');
-const PRODUCTION_PUBLIC_PATH =
-  process.env.PUBLIC_URL && `https://${process.env.PUBLIC_URL}${ASSET_PATH}`;
+const PRODUCTION_PUBLIC_PATH = process.env.PUBLIC_URL && `${process.env.PUBLIC_URL}${ASSET_PATH}`;
 
 let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : `${ASSET_PATH}marketDocs`; // production or staging
 if (process.env.MARKET_DOCS_URL) {
