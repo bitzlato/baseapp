@@ -99,14 +99,17 @@ const getFilterParamsFromLastFilter = (lastFilter: any): Partial<AdvertParams> |
     ...lastFilter,
   };
 
-  if (
-    'paymethod' in lastFilter &&
-    typeof lastFilter.paymethod === 'object' &&
-    'value' in lastFilter.paymethod &&
-    typeof lastFilter.paymethod.vakue === 'number'
-  ) {
-    // old format "paymethod":{"title":"Сбербанк","value":3547}
-    filterParams.paymethod = lastFilter.paymethod.value;
+  if ('paymethod' in lastFilter && typeof lastFilter.paymethod === 'object') {
+    if (
+      lastFilter.paymethod !== null &&
+      'value' in lastFilter.paymethod &&
+      typeof lastFilter.paymethod.value === 'number'
+    ) {
+      // old format "paymethod":{"title":"Сбербанк","value":3547}
+      filterParams.paymethod = lastFilter.paymethod.value;
+    } else {
+      filterParams.paymethod = undefined;
+    }
   }
 
   return pick(filterParams, ADVERT_PARAMS_IN_LAST_FILTER);
