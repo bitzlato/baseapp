@@ -7,7 +7,7 @@ export class FetchError extends Error {
   }
 }
 
-function createRequestWithCSRF(init?: RequestInit): RequestInit | undefined {
+const createRequestWithCSRF = (init?: RequestInit): RequestInit | undefined => {
   const csrfToken = getCsrfToken();
   if (csrfToken) {
     return {
@@ -20,7 +20,7 @@ function createRequestWithCSRF(init?: RequestInit): RequestInit | undefined {
   }
 
   return init;
-}
+};
 
 export const fetchJson = async (input: RequestInfo, init?: RequestInit) => {
   try {
