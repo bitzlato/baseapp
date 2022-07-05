@@ -35,6 +35,7 @@ import { PasswordInput } from 'web/src/components/Input/PasswordInput';
 import s from 'web/src/containers/SignIn/SignIn.postcss';
 import { PasswordWithMeter } from 'web/src/containers/PasswordWithMeter/PasswordWithMeter';
 import { ExternalLink } from 'web/src/components/History/ExternalLink';
+import { applyReferral } from 'web/src/containers/SignUp/P2PApplyReferral';
 
 export const SignUp: FC = () => {
   const dispatch = useDispatch();
@@ -85,7 +86,10 @@ export const SignUp: FC = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      setLocation(getSearchParam('back') ?? ' /wallets', history);
+      (async () => {
+        await applyReferral();
+        setLocation(getSearchParam('back') ?? ' /wallets', history);
+      })();
     }
   }, [isLoggedIn, history]);
 

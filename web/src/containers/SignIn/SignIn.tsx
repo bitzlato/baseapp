@@ -34,6 +34,7 @@ import {
 } from 'web/src/helpers';
 import { captchaType, captchaLogin } from 'web/src/api';
 import { PasswordInput } from 'web/src/components/Input/PasswordInput';
+import { applyReferral } from 'web/src/containers/SignUp/P2PApplyReferral';
 import s from './SignIn.postcss';
 
 export const SignIn: FC = () => {
@@ -75,7 +76,10 @@ export const SignIn: FC = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      setLocation(getSearchParam('back') ?? ' /wallets');
+      (async () => {
+        await applyReferral();
+        setLocation(getSearchParam('back') ?? ' /wallets');
+      })();
     }
   }, [isLoggedIn]);
 
