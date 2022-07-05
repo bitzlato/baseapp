@@ -25,7 +25,7 @@ import { p2pUrl } from 'web/src/api/config';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { OnlineStatusByLastActivity } from '../../ui/OnlineStatus';
-import { ConfirmRateChangeModal } from './ConfirmRateChangeModal';
+import { ConfirmRateChangeModal } from './RateDiffModal';
 import { getLinkToP2PUser } from './getLinkToP2PUser';
 
 interface AdExchangeButtonProps {
@@ -88,14 +88,16 @@ const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
       <Button fullWidth={isMobileDevice} disabled={active} onClick={handleClick}>
         {isBuy ? t('Buy') : t('Sell')}
       </Button>
-      <ConfirmRateChangeModal
-        prevRate={confirm?.prevRate}
-        nextRate={confirm?.nextRate}
-        cryptoCurrency={ad.cryptoCurrency}
-        isBuy={isBuy}
-        onConfirm={handleConfirm}
-        onClose={handleClose}
-      />
+      {confirm?.prevRate && confirm?.nextRate && (
+        <ConfirmRateChangeModal
+          prevRate={confirm.prevRate}
+          nextRate={confirm.nextRate}
+          cryptoCurrency={ad.cryptoCurrency}
+          isBuy={isBuy}
+          onConfirm={handleConfirm}
+          onClose={handleClose}
+        />
+      )}
     </>
   );
 };

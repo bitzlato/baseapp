@@ -6,9 +6,12 @@ import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { CurrencyRate, RateSourcesParams } from 'web/src/modules/p2p/types';
 import { useFetch } from './useFetch';
 
-export const useFetchRate = (cryptoCurrency: string, fiatCurrency: string | undefined) => {
+export const useFetchRate = (
+  cryptoCurrency?: string | undefined,
+  fiatCurrency?: string | undefined,
+) => {
   return useFetch<CurrencyRate>(
-    fiatCurrency
+    fiatCurrency && cryptoCurrency
       ? `${p2pUrl()}/profile/rate-sources/${cryptoCurrency}?${buildQueryString({
           currency: fiatCurrency,
         })}`

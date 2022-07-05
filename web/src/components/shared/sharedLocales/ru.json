@@ -242,6 +242,14 @@
   "trade.mobile.tab.trader": "Трейдер",
   "trade.mobile.tab.trade": "О сделке",
 
+  "trade.start.diff.exchage.header": "Разница курсов",
+  "trade.start.diff.exchage.sure": "Вы уверены в том, что хотите",
+  "trade.start.diff.exchage.buy": " купить {cryptocurrency} за {currency}",
+  "trade.start.diff.exchage.sell": " продать {cryptocurrency} за {currency}",
+  "trade.start.diff.exchage.rate": "Текущий рыночный курс",
+  "trade.start.diff.advert.rate": " по курсу ",
+  "trade.start.diff": "Внимание! Курс объявления отличается от биржевого более чем на 20%",
+
   "Yes": "Да",
   "No": "Нет",
   "Available": "Доступно",
