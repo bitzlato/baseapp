@@ -130,6 +130,14 @@
   "trade.mobile.tab.trader": "Partner",
   "trade.mobile.tab.trade": "Trade",
 
+  "trade.start.diff.exchage.header": "Rate difference",
+  "trade.start.diff.exchage.sure": "Are you sure you want to",
+  "trade.start.diff.exchage.buy": " buy {cryptocurrency} for {currency}",
+  "trade.start.diff.exchage.sell": " sell {cryptocurrency} for {currency}",
+  "trade.start.diff.exchage.rate": "Current exchange rate",
+  "trade.start.diff.advert.rate": " at the rate ",
+  "trade.start.diff": "Attention! The ad rate differs from the market rate by more than 20%",
+
   "Yes": "Yes",
   "No": "No",
   "Available": "Available",

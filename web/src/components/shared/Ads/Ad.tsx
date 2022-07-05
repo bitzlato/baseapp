@@ -37,7 +37,9 @@ import { AdvertType } from 'web/src/modules/p2p/types';
 import { WarningIcon } from 'web/src/mobile/assets/images/WarningIcon';
 import WarningTriangleIcon from 'web/src/assets/svg/WarningTriangleIcon.svg';
 import { DetailsInput } from 'web/src/components/TextInputCustom/DetailsInput';
+import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { AdStat } from './AdStat';
+import { ConfirmDangerRateModal } from './RateDiffModal';
 
 interface UrlParams {
   type: 'buy' | 'sell';
@@ -61,15 +63,24 @@ const WarningBlock: FC<{ unactiveReason: string }> = ({ unactiveReason }) => (
 );
 
 export const Ad: FC = () => {
+  const { lang, isMobileDevice } = useAppContext();
+
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [details, setDetails] = useState('');
   const [show, setShow] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [inputLast, setInputLast] = useState('');
+  const [rateDiffIsOk, setRateDiffIsOk] = useState(true);
+
+  const toggleRateDiffIsOk = () => setRateDiffIsOk((r) => !r);
+  const toggleRateDiffIsOkMobile = () => {
+    toggleRateDiffIsOk();
+    setShow(true);
+  };
 
   const { t, params, history } = useAdapterContext<UrlParams>();
-  const { lang, isMobileDevice } = useAppContext();
+
   const { data: advert, mutate: reloadAdvert } = useFetchAdvert(params.id);
   const { data: paymethod } = useFetchPaymethod(advert?.paymethod, lang);
   const lastRequisitesSWR = useFetchLastRequisites(paymethod?.id);
@@ -80,6 +91,9 @@ export const Ad: FC = () => {
   const changeTrust = useTrustUser(traderInfoSWR);
 
   const cryptocurrency = advert?.cryptocurrency;
+
+  const rateResponse = useFetchRate(cryptocurrency, paymethod?.currency);
+  const currentRate = rateResponse.data?.rate ?? 0;
 
   const { data: p2pWallet } = useFetchP2PWallet(cryptocurrency);
 
@@ -154,6 +168,7 @@ export const Ad: FC = () => {
   const fiatCcy = getFiatCurrency(paymethod.currency);
   const cryptoCcy = getCryptoCurrency(advert.cryptocurrency);
   const rate = createMoney(advert.rate, fiatCcy);
+  const nextRate = createMoney(currentRate, fiatCcy);
   const min = createMoney(advert.limitCurrency.min, fiatCcy);
   const max = createMoney(advert.limitCurrency.max, fiatCcy);
   const fromCcy = isBuy ? fiatCcy : cryptoCcy;
@@ -192,7 +207,11 @@ export const Ad: FC = () => {
     changeTrust({ publicName: owner.name, flag: !owner.trusted });
   };
 
-  const handleClickStart = async () => {
+  const handleStartTrade = async () => {
+    if (isMobileDevice) {
+      toggleRateDiffIsOkMobile();
+    }
+
     const amount = () => {
       if (advert.type === 'purchase') {
         if (inputLast === 'cryptocurrency') {
@@ -227,6 +246,21 @@ export const Ad: FC = () => {
         history.push(`/p2p/trades/${trade.id}`);
       }
     }
+  };
+
+  const handleClickStart = () => {
+    const rateDiff = rate.amount.div(nextRate.amount).times(100).sub(100).abs().toNumber();
+
+    if (rateDiff > 20) {
+      if (isMobileDevice) {
+        setShow(false);
+      }
+
+      toggleRateDiffIsOk();
+      return;
+    }
+
+    handleStartTrade();
   };
 
   const handleClickStartMobile = () => {
@@ -493,6 +527,16 @@ export const Ad: FC = () => {
             </Box>
           </ModalFooter>
         </Modal>
+        {!rateDiffIsOk && (
+          <ConfirmDangerRateModal
+            cryptoCurrency={cryptoCcy}
+            prevRate={rate}
+            nextRate={nextRate}
+            isBuy={isBuy}
+            onClose={toggleRateDiffIsOkMobile}
+            onConfirm={handleStartTrade}
+          />
+        )}
       </Box>
     );
   }
@@ -579,6 +623,16 @@ export const Ad: FC = () => {
           </Box>
         </Box>
       </Box>
+      {!rateDiffIsOk && (
+        <ConfirmDangerRateModal
+          cryptoCurrency={cryptoCcy}
+          prevRate={rate}
+          nextRate={nextRate}
+          isBuy={isBuy}
+          onClose={toggleRateDiffIsOk}
+          onConfirm={handleStartTrade}
+        />
+      )}
     </Container>
   );
 };
