@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useUser } from 'web/src/components/app/AppContext';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 import { Box } from 'web/src/components/ui/Box';
 import { Pagination } from 'web/src/components/ui/Pagination';
 import { Spinner } from 'web/src/components/ui/Spinner';

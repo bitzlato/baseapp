@@ -6,7 +6,7 @@ import { Card } from 'src/components/Card/Card';
 import { Box } from 'src/components/Box/Box';
 import { useT } from 'src/hooks/useT';
 import { loginAuth0 } from 'src/helpers/auth0';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 
 export const VerifyEmailModal: React.FC = () => {
   const t = useT();

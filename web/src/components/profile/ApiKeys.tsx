@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { Stack } from 'web/src/components/ui/Stack';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 import { Card } from 'web/src/components/Card/Card';
 import { Tab, TabList, Tabs } from 'web/src/components/Tabs';
 import { useT } from 'web/src/hooks/useT';

@@ -2,7 +2,7 @@ export * from './Blur';
 export * from './Captcha';
 export * from './Card/Card';
 export * from './CombinedOrderBook';
-export * from './Container/Container';
+export * from './ui/Container';
 export * from './CopyableTextField';
 export * from './CustomInput';
 export * from './DeepLinkInfo/DeepLinkInfo';

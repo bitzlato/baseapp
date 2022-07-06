@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Box } from 'web/src/components/Box/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { Card } from 'web/src/components/Card/Card';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 import { IconButton } from 'web/src/components/IconButton/IconButton';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { isValidCode, OTP_TIMEOUT } from 'web/src/helpers/codeValidation';

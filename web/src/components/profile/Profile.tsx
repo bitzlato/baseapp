@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 import { useT } from 'web/src/hooks/useT';
 import { Card } from 'web/src/components/Card/Card';
 import { Box } from 'web/src/components/ui/Box';

@@ -13,7 +13,7 @@ import { TradingFees } from 'src/containers/Fees/TradingFees';
 import { TradingFee } from 'src/modules/public/tradingFees/types';
 import { setDocumentTitle } from '../../helpers';
 import s from './Fees.postcss';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 import { Blockchain } from 'web/src/modules/public/blockchains/types';
 import { tradeUrl } from 'web/src/api/config';
 import { CurrencyTicker } from 'web/src/components/CurrencyTicker/CurrencyTicker';

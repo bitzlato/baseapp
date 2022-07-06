@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { CloseIcon } from 'web/src/assets/images/CloseIcon';
 import { Box } from 'web/src/components/Box/Box';
 import { Card } from 'web/src/components/Card/Card';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 import { IconButton } from 'web/src/components/IconButton/IconButton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
 import { MobileModal } from 'web/src/mobile/components/Modal';

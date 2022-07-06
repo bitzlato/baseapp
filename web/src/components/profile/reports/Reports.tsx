@@ -7,7 +7,7 @@ import { Card } from 'web/src/components/Card/Card';
 import { Box } from 'web/src/components/ui/Box';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { Text } from 'web/src/components/ui/Text';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 import DownloadIcon from 'web/src/assets/svg/DownloadIcon.svg';
 import LinkIcon from 'web/src/assets/svg/LinkIcon.svg';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';

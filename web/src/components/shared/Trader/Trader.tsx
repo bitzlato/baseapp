@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useAppContext } from 'web/src/components/app/AppContext';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 import { Box } from 'web/src/components/ui/Box';
 import { useUserAds } from 'web/src/hooks/data/useUserAds';
 import { TraderAds } from 'web/src/components/shared/TraderAds/TraderAds';
