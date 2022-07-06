@@ -20,7 +20,7 @@ import { InfoIcon } from 'src/assets/images/InfoIcon';
 import { DotsFlashing } from 'src/components/DotsFlashing/DotsFlashing';
 import { RefreshIcon } from 'src/assets/icons/RefreshIcon';
 import { DEFAULT_CCY_PRECISION } from 'src/constants';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 import { AmountDescription } from './AmountDescription';
 import { getWallet, getCurrencies, getCurrency } from './helpers';
 import { SwipeIcon } from '../../assets/images/swipe';

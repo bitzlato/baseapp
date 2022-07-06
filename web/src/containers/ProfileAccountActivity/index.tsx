@@ -19,7 +19,7 @@ import {
   selectUserActivityPageCount,
   UserActivityDataInterface,
 } from 'web/src/modules';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 
 interface ReduxProps {
   loading: boolean;

@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { DeepLinkInfo, deeplinkTitle } from 'web/src/components';
 import { Box } from 'web/src/components/ui/Box';
 import { Card } from 'web/src/components/Card/Card';
-import { Container } from 'web/src/components/Container/Container';
+import { Container } from 'web/src/components/ui/Container';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { Text } from 'web/src/components/ui/Text';
 import { useT } from 'web/src/hooks/useT';
