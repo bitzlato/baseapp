@@ -32,7 +32,7 @@ export const DeepLinkPreview: FC = () => {
   }
 
   return (
-    <Container maxWidth="sm" my="4">
+    <Container maxWidth="sm" my="6x">
       <Card
         header={
           <Text variant="title">{t(isLoading ? 'common.loading' : deeplinkTitle(deeplink))}</Text>

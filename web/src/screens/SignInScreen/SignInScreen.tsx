@@ -5,7 +5,7 @@ import { FC } from 'react';
 
 export const SignInScreen: FC = () => {
   return (
-    <Container maxWidth="sm" my="4">
+    <Container maxWidth="sm" my="6x">
       <Card>
         <SignIn />
       </Card>

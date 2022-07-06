@@ -14,7 +14,7 @@ export const VerifyEmailModal: React.FC = () => {
   const email = userError?.payload?.email ?? '';
 
   return (
-    <Container maxWidth="md" my="4">
+    <Container maxWidth="md" my="6x">
       <Card header={<h4>{t('verify.email.header')}</h4>}>
         <Box as="p" textSize="lg">
           {t('verify.email.content', { email })}

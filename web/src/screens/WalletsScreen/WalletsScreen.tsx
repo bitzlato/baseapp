@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 import { Card } from 'src/components/Card/Card';
@@ -32,7 +32,12 @@ interface Props {
   list: WalletItemData[];
 }
 
-const WalletsScreenContent: React.FC<Props> = ({ list }) => {
+interface UrlParams {
+  currency?: string;
+  tab?: string;
+}
+
+const WalletsScreenContent: FC<Props> = ({ list }) => {
   const params = useParams<UrlParams>();
   const history = useHistory();
   const wallets = useSelector(selectWallets);
@@ -86,7 +91,7 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
   };
 
   return (
-    <Container maxWidth="xl" my="4">
+    <Container maxWidth="xl" my="6x">
       <Box grow col spacing="4">
         <Estimated />
         <Card>
@@ -170,7 +175,7 @@ const WalletsScreenContent: React.FC<Props> = ({ list }) => {
   );
 };
 
-export const WalletsScreen: React.FC = () => {
+export const WalletsScreen: FC = () => {
   useDocumentTitle('Wallets');
   const list = useGeneralWallets();
 
@@ -182,8 +187,3 @@ export const WalletsScreen: React.FC = () => {
     <WalletsScreenContent list={list} />
   );
 };
-
-interface UrlParams {
-  currency?: string;
-  tab?: string;
-}

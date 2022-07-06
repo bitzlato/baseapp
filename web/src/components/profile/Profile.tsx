@@ -217,7 +217,7 @@ export const Profile: FC = () => {
       {body}
     </Box>
   ) : (
-    <Container maxWidth="xl" my="4">
+    <Container maxWidth="xl" my="6x">
       {body}
     </Container>
   );

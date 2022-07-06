@@ -1,13 +1,13 @@
 import cn from 'classnames';
-import { Box, Element } from 'web/src/components/Box/Box';
+import { FC } from 'react';
+import { Box, BoxProps } from 'web/src/components/ui/Box';
+import * as s from './Container.css';
 
-import s from './Container.postcss';
-
-type Props = {
+interface Props extends Omit<BoxProps, 'className' | 'maxWidth'> {
   className?: string | undefined;
-  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'fullhd' | undefined;
-};
+  maxWidth?: s.Sizes | undefined;
+}
 
-export const Container: Element<Props> = ({ className, maxWidth, ...props }) => {
-  return <Box {...props} className={cn(s.container, maxWidth && s[maxWidth], className)} />;
-};
+export const Container: FC<Props> = ({ className, maxWidth, ...rest }) => (
+  <Box className={cn(maxWidth && s.container[maxWidth], className)} {...rest} />
+);

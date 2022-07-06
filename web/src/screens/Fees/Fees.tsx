@@ -98,7 +98,7 @@ export const FeesScreen: React.FC = () => {
   }
 
   return (
-    <Container maxWidth="lg" my="4">
+    <Container maxWidth="lg" my="6x">
       <Card header={<h3>{t('page.body.landing.footer.fees')}</h3>}>
         <Box col spacing="4">
           <TradingFees tradingFees={data} />
