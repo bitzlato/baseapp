@@ -418,7 +418,7 @@ export const QuickExchangeContainer: React.FC = () => {
   return isMobileDevice ? (
     renderQuickExchangeBody()
   ) : (
-    <Container maxWidth="lg" my="2">
+    <Container maxWidth="lg" my="6x">
       {renderQuickExchangeBody()}
     </Container>
   );

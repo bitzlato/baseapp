@@ -165,7 +165,7 @@ export const ProfileTwoFactorAuthScreen: FC = () => {
   return isMobileDevice ? (
     content
   ) : (
-    <Container maxWidth="md" my="4">
+    <Container maxWidth="md" my="6x">
       <Card
         header={
           <Box row justify="between">

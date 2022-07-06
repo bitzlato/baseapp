@@ -108,7 +108,7 @@ export const Reports: FC = () => {
   return isMobileDevice ? (
     <Box my="1x">{body}</Box>
   ) : (
-    <Container maxWidth="xl" my="4">
+    <Container maxWidth="xl" my="6x">
       {body}
     </Container>
   );

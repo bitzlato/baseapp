@@ -5,7 +5,7 @@ import { ForgotPassword } from 'web/src/containers/ForgotPassword/ForgotPassword
 
 export const ForgotPasswordScreen: FC = () => {
   return (
-    <Container maxWidth="sm" my="4">
+    <Container maxWidth="sm" my="6x">
       <Card>
         <ForgotPassword />
       </Card>

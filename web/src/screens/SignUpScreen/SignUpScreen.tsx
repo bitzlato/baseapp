@@ -5,7 +5,7 @@ import { SignUp } from 'web/src/containers/SignUp/SignUp';
 
 export const SignUpScreen: FC = () => {
   return (
-    <Container maxWidth="sm" my="4">
+    <Container maxWidth="sm" my="6x">
       <Card>
         <SignUp />
       </Card>

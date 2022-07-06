@@ -15,7 +15,7 @@ export const ApiKeys: FC = () => {
   const [tab, setTab] = useState(API_KEYS_TAB_EXCHANGE);
 
   return (
-    <Container maxWidth="xl" my="4">
+    <Container maxWidth="xl" my="6x">
       <Card
         header={
           <Stack marginRight="4x" alignItems="center">

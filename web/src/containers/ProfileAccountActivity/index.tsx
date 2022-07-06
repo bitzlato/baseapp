@@ -55,7 +55,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
       </h4>
     );
     return (
-      <Container maxWidth="xl" my="4">
+      <Container maxWidth="xl" my="6x">
         <Card className="pg-profile-page__activity" header={cardHeader}>
           <div className={`pg-history-elem ${userActivity.length ? '' : 'pg-history-empty'}`}>
             {userActivity.length ? this.renderContent() : null}
