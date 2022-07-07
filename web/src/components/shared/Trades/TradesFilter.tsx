@@ -11,7 +11,7 @@ import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import { TextInput } from 'web/src/components/TextInputCustom/TextInputCustom';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { SelectCustom } from 'web/src/components/SelectCustom/SelectCustom';
-import { InputDate } from 'web/src/components/InputDate/InputDate';
+import { InputDate } from 'web/src/components/shared/InputDate/InputDate';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 
 const TODAY = new Date();
@@ -189,9 +189,6 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
       <InputDate
         label={t('Date from')}
         maxDate={dateTo ? new Date(dateTo) : TODAY}
-        dayPlaceholder={t('dd')}
-        monthPlaceholder={t('mm')}
-        yearPlaceholder={t('yyyy')}
         value={dateFrom}
         onChange={handleDateFromChange}
       />

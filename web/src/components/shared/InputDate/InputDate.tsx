@@ -1,6 +1,7 @@
 import DatePicker, { DatePickerProps } from 'react-date-picker/dist/entry.nostyle';
 import { Box } from 'web/src/components/ui/Box';
 import { TextInputProps } from 'web/src/components/TextInputCustom/TextInputCustom';
+import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import CalendarIcon from 'web/src/assets/svg/CalendarIcon.svg';
 import * as inputS from 'web/src/components/TextInputCustom/TextInputCustom.css';
 import * as s from './InputDate.css';
@@ -12,11 +13,13 @@ export const InputDate = ({
   value,
   minDate,
   maxDate,
-  dayPlaceholder = '--',
-  monthPlaceholder = '--',
-  yearPlaceholder = '--',
+  dayPlaceholder,
+  monthPlaceholder,
+  yearPlaceholder,
   onChange,
 }: InputDateProps) => {
+  const { t } = useAdapterContext();
+
   return (
     <Box as="label" className={inputS.inputContainer}>
       <DatePicker
@@ -24,9 +27,9 @@ export const InputDate = ({
         value={value}
         showLeadingZeros
         format="dd.MM.y"
-        dayPlaceholder={dayPlaceholder}
-        monthPlaceholder={monthPlaceholder}
-        yearPlaceholder={yearPlaceholder}
+        dayPlaceholder={dayPlaceholder ?? t('dd')}
+        monthPlaceholder={monthPlaceholder ?? t('mm')}
+        yearPlaceholder={yearPlaceholder ?? t('yyyy')}
         calendarIcon={<CalendarIcon />}
         openCalendarOnFocus={false}
         clearIcon={null}
