@@ -23,7 +23,7 @@ export const Skeleton: FC<Props> = ({
         <Box as="span" className={cn(s.skeleton, className)} borderRadius="1x" w="full" {...props}>
           &zwnj;
         </Box>
-        <br />
+        {i < count - 1 && <br />}
       </Fragment>
     );
 
