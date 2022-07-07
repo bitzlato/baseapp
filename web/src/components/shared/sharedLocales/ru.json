@@ -134,6 +134,9 @@
   "Date to": "Дата до",
   "Chat": "Чат",
   "Chat with": "Чат с {partner}",
+  "dd": "дд",
+  "mm": "мм",
+  "yyyy": "гггг",
 
   "trades.empty": "В настоящее время у вас нет сделок",
   "tradeStatus.cancel": "Отменена",

@@ -7,7 +7,16 @@ import * as s from './InputDate.css';
 
 export interface InputDateProps extends Pick<TextInputProps, 'label'>, DatePickerProps {}
 
-export const InputDate = ({ label, value, minDate, maxDate, onChange }: InputDateProps) => {
+export const InputDate = ({
+  label,
+  value,
+  minDate,
+  maxDate,
+  dayPlaceholder = '--',
+  monthPlaceholder = '--',
+  yearPlaceholder = '--',
+  onChange,
+}: InputDateProps) => {
   return (
     <Box as="label" className={inputS.inputContainer}>
       <DatePicker
@@ -15,6 +24,9 @@ export const InputDate = ({ label, value, minDate, maxDate, onChange }: InputDat
         value={value}
         showLeadingZeros
         format="dd.MM.y"
+        dayPlaceholder={dayPlaceholder}
+        monthPlaceholder={monthPlaceholder}
+        yearPlaceholder={yearPlaceholder}
         calendarIcon={<CalendarIcon />}
         openCalendarOnFocus={false}
         clearIcon={null}
