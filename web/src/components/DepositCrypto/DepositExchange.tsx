@@ -21,7 +21,7 @@ import {
   selectUserInfo,
   Wallet,
 } from '../../modules';
-import { CryptoCurrencyIcon } from '../CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { CryptoCurrencyIcon } from '../ui/CryptoCurrencyIcon';
 import { WalletAddress } from '../WalletAddress/WalletAddress';
 
 function isUSDXe(blockchainName: string, currency: string): boolean {
@@ -76,7 +76,7 @@ export const DepositExchange: FC<Props> = ({ wallet }) => {
   const renderSelectItem = (value: Blockchain) => {
     return (
       <Box row spacing>
-        <CryptoCurrencyIcon size="small" currency={getCurrencyCodeSymbol(value.key)} />
+        <CryptoCurrencyIcon size="6x" currency={getCurrencyCodeSymbol(value.key)} />
         <span>{value.name}</span>
         {isUSDXe(value.name, currency) ? <span> {`(${currency}.e)`}</span> : null}
       </Box>

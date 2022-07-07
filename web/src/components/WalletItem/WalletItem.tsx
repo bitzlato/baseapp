@@ -2,7 +2,7 @@ import { FC } from 'react';
 import cn from 'classnames';
 import { Money } from '@bitzlato/money-js';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
-import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { Box } from 'src/components/Box/Box';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
@@ -40,7 +40,7 @@ export const WalletItem: FC<Props> = ({ wallet, active, onClick, isMobileDevice 
       type="button"
       onClick={onClick}
     >
-      <CryptoCurrencyIcon size="medium" currency={wallet.currency} />
+      <CryptoCurrencyIcon size="9x" currency={wallet.currency} />
       <Box grow row align="start" justify="between">
         <Box col align="start" textAlign="start">
           <Box textColor={color} textSize="title">

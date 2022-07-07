@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Box } from 'web/src/components/ui/Box';
 import { useAppContext } from 'web/src/components/app/AppContext';
-import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { useTradeContext } from 'web/src/components/shared/Trade/TradeContext';
 
 const Currency: FC<{ title: string; value: number; code: string; icon?: JSX.Element }> = ({
@@ -91,7 +91,7 @@ export const TradeCurrencies: FC = () => {
         code={trade.cryptocurrency.code}
         icon={
           <Box>
-            <CryptoCurrencyIcon size="small" currency={trade.cryptocurrency.code} />
+            <CryptoCurrencyIcon size="6x" currency={trade.cryptocurrency.code} />
           </Box>
         }
       />

@@ -1,9 +1,6 @@
 /* eslint-disable global-require */
 import { FC } from 'react';
-import cn from 'classnames';
-import { capitalize } from 'src/helpers/capitalize';
-
-import s from './CryptoCurrencyIcon.postcss';
+import { sprinkles, Sprinkles } from 'web/src/theme/sprinkles.css';
 
 const ICONS: Record<string, string> = {
   // Currency icons
@@ -34,14 +31,19 @@ const ICONS: Record<string, string> = {
 };
 
 interface Props {
+  /**
+   * Cryptocurrency code in lowercase OR blockchain name in lowercase
+   */
   currency: string;
-  size?: 'small' | 'medium' | 'large' | undefined;
+  /**
+   * Size value from sprinkles (web/src/theme/sprinkles.css.ts)
+   */
+  size?: Sprinkles['size'] | undefined;
 }
 
 export const CryptoCurrencyIcon: FC<Props> = ({ currency, size }) => {
   const code = currency.split('-')[0]!;
-  const className = cn(size && s[`icon${capitalize(size)}`]);
   const src = ICONS[code.toLowerCase()] ?? require('cryptocurrency-icons/svg/color/generic.svg');
 
-  return <img className={className} src={src} alt={code.toUpperCase()} />;
+  return <img className={size && sprinkles({ size })} src={src} alt={code.toUpperCase()} />;
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { WalletItemData } from 'src/components/WalletItem/WalletItem';
 import { Box } from 'src/components/Box/Box';
-import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { useT } from 'src/hooks/useT';
@@ -20,7 +20,7 @@ export const WalletMobileBalance: React.FC<Props> = ({ wallet }) => {
     <Box bgColor="body" padding="2X3" col spacing="2">
       <Box row justify="between">
         <Box flex="1" col spacing align="center">
-          <CryptoCurrencyIcon size="medium" currency={wallet.currency} />
+          <CryptoCurrencyIcon size="9x" currency={wallet.currency} />
           <Box textAlign="center">
             <Box textColor="primary" bold>
               {cryptoCurrency}

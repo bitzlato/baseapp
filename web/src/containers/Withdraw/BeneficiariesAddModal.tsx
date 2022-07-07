@@ -10,7 +10,7 @@ import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { TextInput } from 'web/src/components/Input/TextInput';
 import { Select } from 'web/src/components/Select/Select';
-import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 
 interface Props {
   show: boolean;
@@ -84,7 +84,7 @@ const BeneficiariesAddModalComponent: FC<Props> = ({
   const renderSelectItem = (value: Blockchain) => {
     return (
       <Box display="flex" alignItems="center">
-        <CryptoCurrencyIcon size="small" currency={getCurrencyCodeSymbol(value.key)} />{' '}
+        <CryptoCurrencyIcon size="6x" currency={getCurrencyCodeSymbol(value.key)} />{' '}
         <Box as="p" ml="1.5x">
           {value.name}
         </Box>
