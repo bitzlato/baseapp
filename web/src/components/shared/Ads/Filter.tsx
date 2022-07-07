@@ -11,7 +11,7 @@ import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { SwitchField } from 'web/src/components/profile/settings/SwitchField';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { InputAmountWithCurrency } from 'web/src/components/shared/Ads/InputAmountWithCurrency';
-import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { SelectPaymentMethod } from 'web/src/components/shared/Ads/SelectPaymentMethod';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
@@ -145,7 +145,7 @@ const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onCha
   const renderCryptoCurrencyOption = (option: P2PWalletOption) => {
     return (
       <Box display="flex" alignItems="center" gap="4x">
-        <CryptoCurrencyIcon size="medium" currency={option.code} />
+        <CryptoCurrencyIcon size="9x" currency={option.code} />
         <Box display="flex" flexDirection="column" gap="1x" flexGrow={1}>
           <Box display="flex" justifyContent="space-between">
             <Text>{option.code}</Text>

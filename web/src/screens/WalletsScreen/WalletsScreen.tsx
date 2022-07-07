@@ -7,7 +7,7 @@ import { useT } from 'src/hooks/useT';
 import { useDocumentTitle } from 'src/hooks/useDocumentTitle';
 import { WalletList } from 'src/components/WalletList';
 import { selectWallets } from 'src/modules/user/wallets/selectors';
-import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { Tabs } from 'src/components/Tabs/Tabs';
 import { Tab, TabList, TabPanel } from 'src/components/Tabs';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
@@ -107,7 +107,7 @@ const WalletsScreenContent: FC<Props> = ({ list }) => {
                 <Box padding="5" col spacing="5" textColor="primary">
                   <Box row spacing="2" justify="between">
                     <Box row spacing="2">
-                      <CryptoCurrencyIcon size="large" currency={general.currency} />
+                      <CryptoCurrencyIcon size="16x" currency={general.currency} />
                       <Box col align="start" textAlign="start" spacing>
                         <Box as="span" textSize="title">
                           {cryptoCurrency}

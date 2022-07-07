@@ -10,7 +10,7 @@ import { parseNumeric } from 'src/helpers/parseNumeric';
 import { useT } from 'src/hooks/useT';
 import { Box } from 'web/src/components/Box/Box';
 import { SelectString } from 'web/src/components/Select/Select';
-import { CryptoCurrencyIcon } from 'web/src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { Button } from 'web/src/components/ui/Button';
 import { createCcy, createMoney } from 'web/src/helpers/money';
@@ -221,7 +221,7 @@ export const Gift: FC<Props> = (props) => {
   const renderItem = (d: string) => {
     return (
       <Box row spacing>
-        <CryptoCurrencyIcon size="small" currency={d} />
+        <CryptoCurrencyIcon size="6x" currency={d} />
         <Box textTr="uppercase" as="span">
           {d}
         </Box>

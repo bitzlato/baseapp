@@ -20,7 +20,7 @@ exports[`WalletList should render 1`] = `
   >
     <img
       alt="BTC"
-      class="iconMedium"
+      class="sprinkles_width_9x_mobile__w76aifku sprinkles_height_9x_mobile__w76aifn3"
       src="test-file-stub"
     />
     <div
@@ -90,7 +90,7 @@ exports[`WalletList should render 1`] = `
   >
     <img
       alt="ETH"
-      class="iconMedium"
+      class="sprinkles_width_9x_mobile__w76aifku sprinkles_height_9x_mobile__w76aifn3"
       src="test-file-stub"
     />
     <div

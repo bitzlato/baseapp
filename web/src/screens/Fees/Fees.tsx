@@ -5,7 +5,7 @@ import { CellData, Table } from 'src/components';
 import { currenciesFetch } from 'src/modules/public/currencies/actions';
 import { selectCurrencies } from 'src/modules/public/currencies/selectors';
 import { selectMobileDeviceState } from 'src/modules/public/globalSettings/selectors';
-import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { Box } from 'src/components/Box';
 import { Card } from 'src/components/Card/Card';
@@ -57,7 +57,7 @@ export const FeesScreen: React.FC = () => {
       tableData.push([
         isDesktop ? (
           <Box row spacing>
-            <CryptoCurrencyIcon currency={c.id} size="small" />
+            <CryptoCurrencyIcon currency={c.id} size="6x" />
             <span>{token}</span>
           </Box>
         ) : network ? (

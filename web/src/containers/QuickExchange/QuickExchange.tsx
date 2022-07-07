@@ -10,7 +10,7 @@ import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { createCcy, createMoney, ZERO_MONEY } from 'src/helpers/money';
 import { parseNumeric } from 'src/helpers/parseNumeric';
-import { CryptoCurrencyIcon } from 'src/components/CryptoCurrencyIcon/CryptoCurrencyIcon';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { Box } from 'src/components/Box/Box';
 import { MoneyFormat } from 'src/components/MoneyFormat/MoneyFormat';
 import { Button } from 'src/components/ui/Button';
@@ -214,7 +214,7 @@ export const QuickExchangeContainer: React.FC = () => {
   const renderDropdownItem = (d: string) => {
     return (
       <Box row spacing>
-        <CryptoCurrencyIcon size="small" currency={d} />
+        <CryptoCurrencyIcon size="6x" currency={d} />
         <Box textTr="uppercase" as="span">
           {d.split('-')[0]}
         </Box>
