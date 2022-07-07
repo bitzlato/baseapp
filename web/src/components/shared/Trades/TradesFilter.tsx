@@ -189,6 +189,9 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
       <InputDate
         label={t('Date from')}
         maxDate={dateTo ? new Date(dateTo) : TODAY}
+        dayPlaceholder={t('dd')}
+        monthPlaceholder={t('mm')}
+        yearPlaceholder={t('yyyy')}
         value={dateFrom}
         onChange={handleDateFromChange}
       />
