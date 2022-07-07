@@ -22,17 +22,17 @@ const createRequestWithCSRF = (init?: RequestInit): RequestInit | undefined => {
   return init;
 };
 
-export const fetchJson = async (input: RequestInfo, init?: RequestInit) => {
+export const fetchData = async (input: RequestInfo, init?: RequestInit) => {
   try {
     const options = init?.method ? createRequestWithCSRF(init) : init;
 
     const res = await fetch(input, options);
 
     const contentLength = res.headers.get('content-length');
-    const json = contentLength === '0' ? undefined : await res.json();
+    const text = contentLength === '0' ? undefined : await res.text();
 
     if (!res.ok) {
-      const { errors, error, ...rest } = json ?? {};
+      const { errors, error, ...rest } = (text ? JSON.parse(text) : {}) as any;
       if (Array.isArray(errors)) {
         const item = errors[0];
         if (typeof item === 'string') {
@@ -49,7 +49,7 @@ export const fetchJson = async (input: RequestInfo, init?: RequestInit) => {
       throw new FetchError([error ?? rest.message ?? 'Server error'], res.status, rest);
     }
 
-    return json;
+    return text;
   } catch (error) {
     if (error instanceof FetchError) {
       throw error;
@@ -61,6 +61,21 @@ export const fetchJson = async (input: RequestInfo, init?: RequestInit) => {
     }
 
     throw new FetchError([(error as Error).toString()], 500, {});
+  }
+};
+
+export const fetchJson = async (input: RequestInfo, init?: RequestInit) => {
+  const data = await fetchData(input, init);
+
+  try {
+    return data && JSON.parse(data);
+  } catch (error) {
+    // json parse syntax error
+    if (error instanceof SyntaxError) {
+      throw new FetchError(['Server error'], 500, {});
+    }
+
+    throw error;
   }
 };
 
