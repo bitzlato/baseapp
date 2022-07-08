@@ -1,4 +1,5 @@
 import { Currency, Money } from '@bitzlato/money-js';
+import Bugsnag from '@bugsnag/js';
 import { DEFAULT_CURRENCY } from 'src/modules/public/currencies/defaults';
 
 export function createCcy(code: string, minorUnit: number): Currency {
@@ -9,6 +10,11 @@ export function createMoney(amount: number | string, currency: Currency): Money 
   try {
     return Money.fromDecimal(amount, currency, Money.ROUND_DOWN);
   } catch (err) {
+    Bugsnag.notify(err as any, (event) => {
+      event.context = 'helpers/createMoney';
+      event.addMetadata('args', { amount, currency });
+    });
+
     return Money.fromDecimal(0, currency, Money.ROUND_DOWN);
   }
 }
