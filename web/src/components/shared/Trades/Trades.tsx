@@ -55,8 +55,12 @@ export const Trades: FC = () => {
   }));
   const onlyClosedValues = [
     {
-      label: t('Active'),
+      label: t('All'),
       value: undefined,
+    },
+    {
+      label: t('Active'),
+      value: false,
     },
     {
       label: t('Closed'),
