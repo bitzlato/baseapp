@@ -2,7 +2,10 @@ import { globalStyle } from '@vanilla-extract/css';
 import { sprinkles } from 'web/src/theme/sprinkles.css';
 import { fontSizeVars, radiiVars, sizeVars, vars } from 'web/src/theme/vars.css';
 
+export { inputContainer, label } from 'web/src/components/TextInputCustom/TextInputCustom.css';
+
 export const input = sprinkles({
+  position: 'relative',
   width: 'full',
 });
 
