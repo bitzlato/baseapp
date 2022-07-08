@@ -31,7 +31,7 @@ const extractSemver = (text) => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
-const isProductionStage = releaseStage === 'production' || releaseStage === 'production_bz';
+const isProductionStage = releaseStage === 'production' || releaseStage === 'bitzlato_bz';
 const ASSET_PATH =
   process.env.ASSET_PATH ?? (process.env.NODE_ENV === 'production' ? '/basestatic/' : '/');
 const PRODUCTION_PUBLIC_PATH =
