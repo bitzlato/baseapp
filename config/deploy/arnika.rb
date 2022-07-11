@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 set :stage, :production
-set :user, 'baseapp'
+set :user, 'app'
 set :public_url, 'https://arnika.lgk.one/'
 set :build_domain, 'arnika.lgk.one'
 set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}_shared" }
