@@ -14,6 +14,7 @@ window.env = {
     p2pUrl: '/api/p2p',
     p2pAuthUrl: '/api/auth',
     notificatorUrl: 'ws://localhost:8080/wss',
+    belomorUrl: 'http://localhost:8080/api/belomor',
   },
   auth0: {
     domain: window.AUTH0_DOMAIN ?? 'auth.lgk.one',

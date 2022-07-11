@@ -13,6 +13,7 @@ window.env = {
     accountPublicUrl: '/api/public/v1',
     p2pUrl: '/api/p2p',
     p2pAuthUrl: '/api/auth',
+    belomorUrl: '/api/belomor',
   },
   logoUrl: '',
   logoDarkUrl: '',

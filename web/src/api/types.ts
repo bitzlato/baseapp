@@ -17,6 +17,7 @@ declare global {
       p2pUrl: string;
       p2pAuthUrl: string;
       notificatorUrl: string;
+      belomorUrl: string;
     };
     auth0?: {
       domain: string;

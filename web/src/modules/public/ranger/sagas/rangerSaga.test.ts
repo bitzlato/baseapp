@@ -52,7 +52,8 @@ describe('Ranger module', () => {
         accountPublicUrl: '',
         p2pUrl: '',
         p2pAuthUrl: '',
-        notificatorUrl: ''
+        notificatorUrl: '',
+        belomorUrl: '',
       },
     };
   });

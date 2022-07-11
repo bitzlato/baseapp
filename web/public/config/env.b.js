@@ -14,6 +14,7 @@ window.env = {
     p2pUrl: 'https://b-www.lgk.one/api2/p2p',
     p2pAuthUrl: 'https://b-www.lgk.one/api2/auth',
     notificatorUrl: 'wss://b-www.lgk.one/wssb',
+    belomorUrl: 'https://b-www.lgk.one/api/belomor',
   },
   auth0: {
     domain: 'auth.lgk.one',

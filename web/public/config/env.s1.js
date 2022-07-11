@@ -13,6 +13,7 @@ window.env = {
     accountPublicUrl: 'https://account.s-www.lgk.one/api/public/v1',
     p2pUrl: 'https://s-www.lgk.one/api/p2p',
     p2pAuthUrl: 'https://s-www.lgk.one/api/auth',
+    belomorUrl: 'https://s1.s-www.lgk.one/api/belomor',
   },
   auth0: {
     domain: 'auth.lgk.one',
