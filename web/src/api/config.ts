@@ -24,6 +24,7 @@ export const defaultConfig: Config = {
     p2pUrl: '',
     p2pAuthUrl: '',
     notificatorUrl: '',
+    belomorUrl: '',
   },
   finex: false,
   withCredentials: false,
@@ -84,6 +85,7 @@ export const accountUrl = () => Cryptobase.config.api.accountUrl;
 export const p2pUrl = () => Cryptobase.config.api.p2pUrl;
 export const p2pAuthUrl = () => Cryptobase.config.api.p2pAuthUrl;
 export const accountPublicUrl = () => Cryptobase.config.api.accountPublicUrl;
+export const belomorUrl = () => Cryptobase.config.api.belomorUrl;
 export const withCredentials = () => convertToBoolean(Cryptobase.config.withCredentials);
 export const incrementalOrderBook = () => convertToBoolean(Cryptobase.config.incrementalOrderBook);
 export const isResizableGrid = () => convertToBoolean(Cryptobase.config.isResizable);

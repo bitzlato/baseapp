@@ -14,6 +14,7 @@ window.env = {
     p2pUrl: '/api2/p2p',
     p2pAuthUrl: '/api2/auth',
     notificatorUrl: 'ws://localhost:8080/wssb',
+    belomorUrl: '/api/belomor',
   },
   logoUrl: 'https://bitzlato.com/basestatic/bitzlato_logo--sm--blue--nav.svg',
   logoDarkUrl: 'https://bitzlato.com/basestatic/bitzlato_logo--sm--white--nav.svg',

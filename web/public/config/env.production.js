@@ -14,6 +14,7 @@ window.env = {
     p2pUrl: 'https://bitzlato.com/api2/p2p',
     p2pAuthUrl: 'https://bitzlato.com/api2/auth',
     notificatorUrl: 'wss://bitzlato.com/wssb',
+    belomorUrl: 'https://bitzlato.com/api/belomor',
   },
   auth0: {
     domain: 'auth.bitzlato.com',
