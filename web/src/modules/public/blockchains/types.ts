@@ -1,7 +1,7 @@
 export interface Blockchain {
-  explorer_address: string;
-  explorer_transaction: string;
-  height: number;
+  explorer_address?: string | null;
+  explorer_transaction?: string | null;
+  height?: number | null;
   id: number;
   is_transaction_price_too_high: boolean;
   key: string;

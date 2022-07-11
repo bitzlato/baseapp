@@ -8,8 +8,6 @@ import { NumberInput } from 'web/src/components/Input/NumberInput';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { defaultBeneficiary } from 'web/src/modules/user/beneficiaries/defaults';
 import { useT } from 'web/src/hooks/useT';
-import { Blockchain } from 'web/src/modules/public/blockchains/types';
-import { tradeUrl } from 'web/src/api/config';
 import { WithdrawSummary } from 'web/src/containers/Withdraw/WithdrawSummary';
 import {
   selectMemberLevels,
@@ -21,11 +19,11 @@ import { precisionRegExp } from 'web/src/helpers';
 import { Blur } from 'web/src/components';
 import { isValidCode } from 'web/src/helpers/codeValidation';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
-import { useFetch } from 'web/src/hooks/data/useFetch';
 import { WarningIcon } from 'web/src/mobile/assets/images/WarningIcon';
 import { useBeneficiariesFetch } from 'web/src/hooks';
 import { WithdrawMarketFormValues } from 'web/src/containers/Withdraw/types';
 import { AddressNotebookMarket } from 'web/src/containers/Withdraw/AddressNotebookMarket';
+import { useFetchBlockchains } from 'web/src/hooks/data/belomor/useFetchBlockchains';
 
 interface Props {
   wallet: Wallet;
@@ -50,7 +48,7 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
   const currencyCode = wallet.currency.code;
 
   useBeneficiariesFetch({ currency_id: currencyCode.toLowerCase() });
-  const { data: blockchains = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const { data: blockchains = [] } = useFetchBlockchains();
 
   const blockchain = blockchains.find((d) => d.id === beneficiary.blockchain_id);
   const isUSDXe =

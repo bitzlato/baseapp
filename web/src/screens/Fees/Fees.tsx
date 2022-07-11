@@ -14,10 +14,10 @@ import { TradingFee } from 'src/modules/public/tradingFees/types';
 import { setDocumentTitle } from '../../helpers';
 import s from './Fees.postcss';
 import { Container } from 'web/src/components/ui/Container';
-import { Blockchain } from 'web/src/modules/public/blockchains/types';
 import { tradeUrl } from 'web/src/api/config';
 import { CurrencyTicker } from 'web/src/components/CurrencyTicker/CurrencyTicker';
 import { useFetch } from 'web/src/hooks/data/useFetch';
+import { useFetchBlockchains } from 'web/src/hooks/data/belomor/useFetchBlockchains';
 
 export const FeesScreen: React.FC = () => {
   const t = useT();
@@ -35,7 +35,7 @@ export const FeesScreen: React.FC = () => {
 
   const { data = [] } = useFetch<TradingFee[]>(`${tradeUrl()}/public/trading_fees`);
 
-  const { data: blockchains = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const { data: blockchains = [] } = useFetchBlockchains();
 
   const header = [
     t('page.fees.table.coin'),

@@ -1,7 +1,5 @@
 import { FC, useMemo, useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFetch } from 'web/src/hooks/data/useFetch';
-import { tradeUrl } from 'src/api/config';
 import { defaultBeneficiary } from 'web/src/modules/user/beneficiaries/defaults';
 import {
   beneficiariesCreateData,
@@ -25,6 +23,7 @@ import { BeneficiariesAddModal } from 'web/src/containers/Withdraw/Beneficiaries
 import { BeneficiariesFailAddModal } from 'web/src/containers/Withdraw/BeneficiariesFailAddModal';
 import { Blockchain } from 'web/src/modules/public/blockchains/types';
 import { AddressNotebook } from 'web/src/containers/Withdraw/AddressNotebook';
+import { useFetchBlockchains } from 'web/src/hooks/data/belomor/useFetchBlockchains';
 
 interface Props {
   wallet: Wallet;
@@ -47,7 +46,7 @@ export const AddressNotebookMarket: FC<Props> = ({ wallet, onChangeValue }: Prop
   const [isOpenConfirmationModal, setConfirmationModalState] = useState(false);
   const [isOpenFailModal, setFailModalState] = useState(false);
 
-  const { data = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const { data = [] } = useFetchBlockchains();
   const currencyCode = wallet.currency.code;
   const blockchains = useMemo(
     () => data.filter((d) => wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id)),

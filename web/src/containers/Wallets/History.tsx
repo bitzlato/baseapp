@@ -5,12 +5,9 @@ import { WithdrawStatus } from 'web/src/components/History/WithdrawStatus';
 import { AmountFormat } from 'web/src/components/AmountFormat/AmountFormat';
 import { createMoney } from 'web/src/helpers/money';
 import { useT } from 'web/src/hooks/useT';
-import { Blockchain } from 'web/src/modules/public/blockchains/types';
-import { tradeUrl } from 'web/src/api/config';
 import { DEFAULT_BLOCKCHAIN } from 'web/src/modules/public/blockchains/defaults';
 import { alertPush, Deposit, Withdraw } from 'web/src/modules';
 import { localeDate, sliceString, sortByDateDesc, truncateMiddle } from 'web/src/helpers';
-import { useFetch } from 'web/src/hooks/data/useFetch';
 import { Box } from 'web/src/components/Box/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
@@ -30,6 +27,7 @@ import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
 import { WalletType } from 'web/src/modules/account/types';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { Table } from 'web/src/components/Table';
+import { useFetchBlockchains } from 'web/src/hooks/data/belomor/useFetchBlockchains';
 import s from './TransferHistory.postcss';
 
 const LIMIT = 6;
@@ -46,7 +44,7 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
 
   const t = useT();
 
-  const { data: blockchains = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const { data: blockchains = [] } = useFetchBlockchains();
 
   const resp = useFetchHistory(type, {
     currency: ccy.code.toLowerCase(),

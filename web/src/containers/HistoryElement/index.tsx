@@ -9,8 +9,6 @@ import { WithdrawStatus } from 'src/components/History/WithdrawStatus';
 import { AmountFormat } from 'src/components/AmountFormat/AmountFormat';
 import { createMoneyWithoutCcy } from 'src/helpers/money';
 import { useT } from 'src/hooks/useT';
-import { Blockchain } from 'src/modules/public/blockchains/types';
-import { tradeUrl } from 'src/api/config';
 import { DEFAULT_BLOCKCHAIN } from 'web/src/modules/public/blockchains/defaults';
 import { TransferHistory } from '../Wallets/TransferHistory';
 import {
@@ -34,7 +32,7 @@ import {
 } from '../../modules';
 import { localeDate, setTradesType, truncateMiddle } from '../../helpers';
 import { History, Pagination } from '../../components';
-import { useFetch } from 'web/src/hooks/data/useFetch';
+import { useFetchBlockchains } from 'web/src/hooks/data/belomor/useFetchBlockchains';
 
 interface Props {
   type: string;
@@ -54,7 +52,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
   const nextPageExists = useSelector(selectNextPageExists);
   const t = useT();
 
-  const { data: blockchains = [] } = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const { data: blockchains = [] } = useFetchBlockchains();
 
   useEffect(() => {
     dispatch(fetchHistory({ page: 0, type, limit: 25 }));
