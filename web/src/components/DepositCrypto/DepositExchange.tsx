@@ -13,6 +13,7 @@ import { Blockchain } from 'src/modules/public/blockchains/types';
 import { getCurrencyCodeSymbol } from 'src/helpers/getCurrencySymbol';
 import { useFetch } from 'web/src/hooks/data/useFetch';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
+import { useFetchBlockchains } from 'web/src/hooks/data/belomor/useFetchBlockchains';
 import { DepositSummary } from './DepositSummary';
 import {
   DepositAddress,
@@ -43,7 +44,7 @@ export const DepositExchange: FC<Props> = ({ wallet }) => {
 
   const [blockchain, setBlockchain] = useState<Blockchain | null>(null);
 
-  const blockchainsResponse = useFetch<Blockchain[]>(`${tradeUrl()}/public/blockchains`);
+  const blockchainsResponse = useFetchBlockchains();
 
   const blockchains = (blockchainsResponse.data ?? []).filter((d) =>
     wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id),
@@ -123,7 +124,7 @@ export const DepositExchange: FC<Props> = ({ wallet }) => {
                 })}
               </span>
               <Box row spacing="2">
-                {showMetamask ? (
+                {showMetamask && blockchain && typeof blockchain.explorer_address === 'string' ? (
                   <MetaMaskButton
                     depositAddress={depositAddress.address}
                     explorerAddress={blockchain.explorer_address}
