@@ -68,7 +68,7 @@ export const Trades: FC = () => {
     },
   ];
 
-  const { data, error } = useFetchP2PTrades(filterParams, lang, {
+  const { data } = useFetchP2PTrades(filterParams, lang, {
     refreshInterval: REFETCH_INTERVAL,
   });
 
@@ -90,10 +90,6 @@ export const Trades: FC = () => {
   const handleChangePerPage = (value: number) => {
     handleChangeFilter({ limit: value, skip: 0 });
   };
-
-  if (error) {
-    return null;
-  }
 
   const stateFilters = isMobileDevice ? (
     <VariantSwitcher
