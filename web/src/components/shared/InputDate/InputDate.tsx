@@ -20,7 +20,7 @@ export const InputDate = ({
   const { t } = useAdapterContext();
 
   return (
-    <Box as="label" className={s.inputContainer}>
+    <Box className={s.inputContainer}>
       <DatePicker
         className={s.input}
         value={value}

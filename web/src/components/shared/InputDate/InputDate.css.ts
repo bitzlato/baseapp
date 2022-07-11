@@ -34,6 +34,11 @@ globalStyle(`${input} .react-date-picker__inputGroup`, {
   backgroundColor: 'transparent',
 });
 
+globalStyle(`${input} input`, {
+  margin: 0,
+  fontVariantNumeric: 'normal',
+});
+
 globalStyle(`${input} .react-date-picker__inputGroup__input`, {
   minWidth: '0.6em',
   position: 'relative',
@@ -120,6 +125,10 @@ globalStyle('.react-calendar', {
   paddingBottom: sizeVars['5x'],
   paddingLeft: sizeVars['5x'],
   paddingRight: sizeVars['5x'],
+  fontFamily: "'Montserrat', helvetica, sans-serif",
+});
+
+globalStyle('.react-calendar input, .react-calendar button', {
   fontFamily: "'Montserrat', helvetica, sans-serif",
 });
 
