@@ -1,4 +1,4 @@
-import { MoneyCurrency } from 'web/src/types';
+import { BaseCurrency } from 'web/src/types/currencies.types';
 
 const MINOR_UNIT_MAP: Record<string, number> = {
   BTC: 8,
@@ -14,7 +14,7 @@ const MINOR_UNIT_MAP: Record<string, number> = {
   MDT: 8,
 };
 
-const cryptoCurrencies = Object.keys(MINOR_UNIT_MAP).reduce<Record<string, MoneyCurrency>>(
+const cryptoCurrencies = Object.keys(MINOR_UNIT_MAP).reduce<Record<string, BaseCurrency>>(
   (acc, code) => {
     acc[code] = { code, name: code, sign: code, minorUnit: MINOR_UNIT_MAP[code] ?? 8 };
     return acc;
@@ -22,7 +22,7 @@ const cryptoCurrencies = Object.keys(MINOR_UNIT_MAP).reduce<Record<string, Money
   {},
 );
 
-const getCryptoCurrency = (code: string): MoneyCurrency => {
+const getCryptoCurrency = (code: string): BaseCurrency => {
   const maybeMoneyCurrency = cryptoCurrencies[code];
 
   return (
@@ -31,6 +31,6 @@ const getCryptoCurrency = (code: string): MoneyCurrency => {
 };
 
 export const useCryptoCurrencies = (): {
-  getCryptoCurrency: (code: string) => MoneyCurrency;
-  cryptoCurrencies: Record<string, MoneyCurrency>;
+  getCryptoCurrency: (code: string) => BaseCurrency;
+  cryptoCurrencies: Record<string, BaseCurrency>;
 } => ({ getCryptoCurrency, cryptoCurrencies });

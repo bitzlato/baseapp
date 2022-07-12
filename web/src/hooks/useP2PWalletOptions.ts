@@ -1,8 +1,8 @@
 import { Money } from '@bitzlato/money-js';
 import { useMemo } from 'react';
-import { useUser } from '../components/app/AppContext';
-import { createMoney } from '../helpers/money';
-import { MoneyCurrency } from '../types';
+import { useUser } from 'web/src/components/app/AppContext';
+import { createMoney } from 'web/src/helpers/money';
+import { BaseCurrency } from 'web/src/types/currencies.types';
 import { useFetchP2PCryptoCurrencies, useFetchP2PWalletsV2 } from './data/useFetchP2PWallets';
 import { useCryptoCurrencies } from './useCryptoCurrencies';
 
@@ -15,7 +15,7 @@ export interface P2PWalletOption {
 
 export function useP2PWalletOptions(
   cryptocurrency: string,
-  getFiatCurrency: (code: string) => MoneyCurrency,
+  getFiatCurrency: (code: string) => BaseCurrency,
 ) {
   const user = useUser();
   const { getCryptoCurrency } = useCryptoCurrencies();

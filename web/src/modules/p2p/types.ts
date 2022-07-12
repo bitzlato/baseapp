@@ -1,5 +1,5 @@
 import { Money } from '@bitzlato/money-js';
-import { MoneyCurrency } from 'web/src/types';
+import { BaseCurrency } from 'web/src/types/currencies.types';
 
 export interface CurrencyRate {
   description: string;
@@ -168,8 +168,8 @@ export interface Advert
     max: Money;
     realMax?: Money | undefined;
   };
-  currency: MoneyCurrency;
-  cryptoCurrency: MoneyCurrency;
+  currency: BaseCurrency;
+  cryptoCurrency: BaseCurrency;
 }
 
 export interface PaymethodSource {
