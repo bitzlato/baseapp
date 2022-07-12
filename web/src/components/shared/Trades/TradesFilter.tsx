@@ -12,6 +12,7 @@ import { TextInput } from 'web/src/components/TextInputCustom/TextInputCustom';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { SelectCustom } from 'web/src/components/SelectCustom/SelectCustom';
 import { InputDate } from 'web/src/components/shared/InputDate/InputDate';
+import { getTimestampWithoutTimezone } from 'web/src/helpers/getTimestamp';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 
 const TODAY = new Date();
@@ -144,7 +145,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
       return;
     }
 
-    const time = value.getTime();
+    const time = getTimestampWithoutTimezone(value);
     if (!time || time < 0) {
       return;
     }
@@ -160,7 +161,7 @@ const FilterControls: FC<Props> = ({ params, onChange }) => {
       return;
     }
 
-    const time = value.getTime();
+    const time = getTimestampWithoutTimezone(value);
     if (!time || time < 0) {
       return;
     }
