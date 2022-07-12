@@ -1,4 +1,4 @@
-import { MoneyCurrency } from 'web/src/types';
+import { BaseCurrency } from 'web/src/types/currencies.types';
 import { AdvertType, P2PCryptoCurrency, PaymethodSource } from './types';
 
 export type TradeType = AdvertType;
@@ -27,6 +27,6 @@ export interface TradeSource {
 
 export interface Trade extends Omit<TradeSource, 'currency' | 'cryptocurrency' | 'paymethod'> {
   paymethod: PaymethodSource;
-  currency: P2PCryptoCurrency & { moneyCurrency: MoneyCurrency };
-  cryptoCurrency: P2PCryptoCurrency & { moneyCurrency: MoneyCurrency };
+  currency: P2PCryptoCurrency & { moneyCurrency: BaseCurrency };
+  cryptoCurrency: P2PCryptoCurrency & { moneyCurrency: BaseCurrency };
 }

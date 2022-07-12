@@ -2,7 +2,7 @@ import { Money } from '@bitzlato/money-js';
 import { p2pUrl } from 'web/src/api/config';
 import { fetchJson } from 'web/src/helpers/fetch';
 import { PaymethodSource } from 'web/src/modules/p2p/types';
-import { MoneyCurrency } from 'web/src/types';
+import { BaseCurrency } from 'web/src/types/currencies.types';
 import { useCryptoCurrencies } from '../useCryptoCurrencies';
 import { useFetch } from './useFetch';
 import { useFiatCurrencies } from './useFetchP2PCurrencies';
@@ -50,8 +50,8 @@ export interface TraderAdvert
     max: Money;
     realMax: Money | null;
   };
-  currency: MoneyCurrency;
-  cryptoCurrency: MoneyCurrency;
+  currency: BaseCurrency;
+  cryptoCurrency: BaseCurrency;
 }
 
 export const useUserAds = ({ publicName, lang }: { publicName: string; lang: string }) => {

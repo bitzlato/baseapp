@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from 'react';
 import { p2pUrl } from 'web/src/api/config';
 import { P2PCurrencies, P2PCurrencyOption } from 'web/src/modules/public/currencies/types';
-import { MoneyCurrency } from 'web/src/types';
+import { BaseCurrency } from 'web/src/types/currencies.types';
 import { useFetch, FetchResponse } from './useFetch';
 
-export type FiatCurrencies = Record<string, MoneyCurrency>;
+export type FiatCurrencies = Record<string, BaseCurrency>;
 
 const DEFAULT_FIAT_MINOR_UNIT = 2;
 
@@ -32,7 +32,7 @@ export const useP2PCurrencyOptions = (): FetchResponse<P2PCurrencyOption[]> => {
 };
 
 export const useFiatCurrencies = (): {
-  getFiatCurrency: (code: string) => MoneyCurrency;
+  getFiatCurrency: (code: string) => BaseCurrency;
   fiatCurrencies?: FiatCurrencies | undefined;
   error: unknown;
 } => {
@@ -40,7 +40,7 @@ export const useFiatCurrencies = (): {
 
   const fiatCurrencies = useMemo(() => {
     if (data) {
-      return data.reduce<Record<string, MoneyCurrency>>((acc, P2PCurrency) => {
+      return data.reduce<Record<string, BaseCurrency>>((acc, P2PCurrency) => {
         acc[P2PCurrency.code] = {
           code: P2PCurrency.code,
           name: P2PCurrency.name,
@@ -55,7 +55,7 @@ export const useFiatCurrencies = (): {
     return undefined;
   }, [data]);
   const getFiatCurrency = useCallback(
-    (code: string): MoneyCurrency =>
+    (code: string): BaseCurrency =>
       fiatCurrencies?.[code] ?? {
         code,
         name: code,
