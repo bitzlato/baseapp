@@ -35,9 +35,33 @@ export const URL_PARAMS: UrlParams<TradesParams> = {
   amountFrom: { name: 'amountFrom', set: (v) => `${v}`, get: (v) => v },
   amountTo: { name: 'amountTo', set: (v) => `${v}`, get: (v) => v },
   onlyClosed: {
-    name: 'onlyClosed',
-    set: (v) => (v === undefined ? undefined : `${v}`),
-    get: (v) => (v === undefined ? undefined : Boolean(v)),
+    name: 'status',
+    set: (v) => {
+      switch (v) {
+        case true:
+          return 'closed';
+
+        case undefined:
+          return 'all';
+
+        case false:
+        default:
+          return 'active';
+      }
+    },
+    get: (v) => {
+      switch (v) {
+        case 'closed':
+          return true;
+
+        case 'all':
+          return undefined;
+
+        case 'active':
+        default:
+          return false;
+      }
+    },
   },
   paymethod: { name: 'paymethod', set: (v) => `${v}`, get: (v) => v },
   type: { name: 'type', set: (v) => `${v}`, get: (v) => v as TradeType },
