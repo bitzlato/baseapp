@@ -14,6 +14,7 @@ import { TradesList } from 'web/src/components/shared/Trades/TradesList';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { localeDate } from 'web/src/helpers';
 import { Breadcrumbs, BreadcrumbsItem } from 'web/src/components/ui/Breadcrumbs';
+import { getTimestampWithoutTimezone } from 'web/src/helpers/getTimestamp';
 import { TradesFilter, TradesFilterMobile, DEFAULT_FILTER } from './TradesFilter';
 import * as s from './Trades.css';
 
@@ -23,12 +24,12 @@ export const URL_PARAMS: UrlParams<TradesParams> = {
   dateFrom: {
     name: 'dateFrom',
     set: (v) => localeDate(v, 'dateInput'),
-    get: (v) => new Date(v).getTime(),
+    get: (v) => getTimestampWithoutTimezone(new Date(v)),
   },
   dateTo: {
     name: 'dateTo',
     set: (v) => localeDate(v, 'dateInput'),
-    get: (v) => new Date(v).getTime(),
+    get: (v) => getTimestampWithoutTimezone(new Date(v)),
   },
   amountType: { name: 'amountType', set: (v) => `${v}`, get: (v) => v as TradeAmountType },
   amountFrom: { name: 'amountFrom', set: (v) => `${v}`, get: (v) => v },
