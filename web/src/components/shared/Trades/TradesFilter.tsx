@@ -18,7 +18,7 @@ import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 const TODAY = new Date();
 
 export const DEFAULT_FILTER: TradesParams = {
-  onlyClosed: undefined,
+  onlyClosed: false,
   paymethod: undefined,
   type: undefined,
   partner: undefined,
