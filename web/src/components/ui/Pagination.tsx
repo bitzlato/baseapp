@@ -9,6 +9,7 @@ import { Text } from 'web/src/components/ui/Text';
 import { SelectString } from 'web/src/components/Select/Select';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { createT } from 'web/src/components/shared/sharedI18n';
+import { range } from 'web/src/helpers/range';
 import * as s from './Pagination.css';
 
 export const PER_PAGE_DEFAULT = 15;
@@ -59,9 +60,6 @@ const PaginationItem: FC<PaginationItemProps> = ({
     </Box>
   );
 };
-
-const range = (start: number, end: number) =>
-  Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
 interface Props {
   page: number;
