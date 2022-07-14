@@ -60,7 +60,7 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
   const tableData = data
     .sort((a, b) => sortByDateDesc(a.created_at, b.created_at))
     .map((d) => {
-      const blockchain = blockchains.find((b) => b.id === d.blockchain_id) ?? DEFAULT_BLOCKCHAIN;
+      const blockchain = blockchains.find((b) => b.key === d.blockchain_key) ?? DEFAULT_BLOCKCHAIN;
       return [
         <div title={`${d.id} - ${d.state}`}>{localeDate(d.created_at, 'fullDate')}</div>,
         type === 'deposits' ? (

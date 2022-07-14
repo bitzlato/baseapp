@@ -17,6 +17,7 @@ const createWallet = (walletSource: WalletSource): Wallet => {
     min_withdraw_amount: createMoney(walletSource.min_withdraw_amount, currency),
     blockchain_currencies: walletSource.blockchain_currencies.map((d) => ({
       blockchain_id: d.blockchain_id,
+      blockchain_key: d.blockchain_key,
       withdraw_fee: createMoney(d.withdraw_fee, currency),
       min_deposit_amount: createMoney(d.min_deposit_amount, currency),
     })),

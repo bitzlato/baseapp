@@ -36,6 +36,7 @@ describe('Beneficiaries Create', () => {
       name: 'First company',
       data: '{"address": "0xa96bbd0de64ef10659ae49d5ca4bb8109169007eb90d53aa3f87b6dc65530d8a"}',
       blockchain_id: 0,
+      blockchain_key: '',
     };
 
     const fakeSuccessPayload: Beneficiary = {
@@ -47,6 +48,7 @@ describe('Beneficiaries Create', () => {
         address: '0xa96bbd0de64ef10659ae49d5ca4bb8109169007eb90d53aa3f87b6dc65530d8a',
       },
       blockchain_id: 0,
+      blockchain_key: '',
       sent_at: '',
       uid: '',
     };

@@ -68,7 +68,7 @@ const BeneficiariesAddModalComponent: FC<Props> = ({
 
   const handleSubmit = () => {
     const payload = {
-      blockchain_id: blockchain!.id,
+      blockchain_key: blockchain!.key,
       currency: currencyCode || '',
       name,
       data: JSON.stringify({

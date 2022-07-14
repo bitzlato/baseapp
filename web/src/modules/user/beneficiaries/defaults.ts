@@ -9,6 +9,7 @@ export const defaultBeneficiary: Beneficiary = {
     address: '',
   },
   blockchain_id: -1,
+  blockchain_key: '',
   uid: '',
   sent_at: '',
 };

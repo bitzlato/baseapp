@@ -2,12 +2,14 @@ import { Currency, Money } from '@bitzlato/money-js';
 
 interface BlockchainCurrency {
   blockchain_id: number;
+  blockchain_key: string;
   min_deposit_amount: string;
   withdraw_fee: string;
 }
 
 export interface BlockchainCurrencyMoney {
   blockchain_id: number;
+  blockchain_key: string;
   min_deposit_amount: Money;
   withdraw_fee: Money;
 }

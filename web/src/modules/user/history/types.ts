@@ -52,6 +52,7 @@ export type WithdrawState =
 export interface Withdraw {
   amount: string;
   blockchain_id: number;
+  blockchain_key: string;
   blockchain_txid: string;
   confirmations: number;
   created_at: string;
@@ -83,6 +84,7 @@ export type DepositState =
 export interface Deposit {
   amount: string;
   blockchain_id: number;
+  blockchain_key: string;
   completed_at: string;
   confirmations: number;
   created_at: string;

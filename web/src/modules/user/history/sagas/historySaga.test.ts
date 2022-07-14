@@ -34,6 +34,7 @@ describe('CurrencyHistory', () => {
       completed_at: '2018-12-03T17:14:56+01:00',
       state: 'accepted',
       blockchain_id: 0,
+      blockchain_key: '',
       transfer_type: '',
     },
     {
@@ -47,6 +48,7 @@ describe('CurrencyHistory', () => {
       completed_at: '2018-11-16T09:56:56+01:00',
       state: 'canceled',
       blockchain_id: 0,
+      blockchain_key: '',
       transfer_type: '',
     },
   ];
