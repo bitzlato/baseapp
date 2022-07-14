@@ -50,12 +50,12 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
   useBeneficiariesFetch({ currency_id: currencyCode.toLowerCase() });
   const { data: blockchains = [] } = useFetchBlockchains();
 
-  const blockchain = blockchains.find((d) => d.id === beneficiary.blockchain_id);
+  const blockchain = blockchains.find((d) => d.key === beneficiary.blockchain_key);
   const isUSDXe =
     blockchain?.name === 'Avalanche' && (currencyCode === 'USDT' || currencyCode === 'USDC');
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
-    (d) => d.blockchain_id === beneficiary.blockchain_id,
+    (d) => d.blockchain_key === beneficiary.blockchain_key,
   );
 
   const reset = () => {

@@ -113,11 +113,11 @@ export const HistoryElement: FC<Props> = ({ type }) => {
   const renderTableRow = (item: WalletHistoryElement) => {
     switch (type) {
       case 'deposits': {
-        const { amount, created_at, currency, txid, blockchain_id } = item as Deposit;
+        const { amount, created_at, currency, txid, blockchain_key } = item as Deposit;
         const wallet = wallets.find(
           (obj) => obj.currency.code.toLowerCase() === currency.toLowerCase(),
         );
-        const blockchain = blockchains.find((d) => d.id === blockchain_id) ?? DEFAULT_BLOCKCHAIN;
+        const blockchain = blockchains.find((d) => d.key === blockchain_key) ?? DEFAULT_BLOCKCHAIN;
         const blockchainLink = getBlockchainLink(blockchain, txid);
 
         return [
@@ -137,11 +137,11 @@ export const HistoryElement: FC<Props> = ({ type }) => {
         ];
       }
       case 'withdraws': {
-        const { created_at, currency, amount, fee, rid, blockchain_id } = item as Withdraw;
+        const { created_at, currency, amount, fee, rid, blockchain_key } = item as Withdraw;
         const wallet = wallets.find(
           (obj) => obj.currency.code.toLowerCase() === currency.toLowerCase(),
         );
-        const blockchain = blockchains.find((d) => d.id === blockchain_id) ?? DEFAULT_BLOCKCHAIN;
+        const blockchain = blockchains.find((d) => d.key === blockchain_key) ?? DEFAULT_BLOCKCHAIN;
         const blockchainLink = getBlockchainLink(blockchain, '', rid);
 
         return [

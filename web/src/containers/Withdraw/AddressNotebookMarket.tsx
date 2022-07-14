@@ -34,7 +34,7 @@ const convertBeneficiaryToAddress = (blockchains: Blockchain[]) => (beneficiary:
   ...beneficiary,
   address: beneficiary.data.address,
   isPending: beneficiary.state.toLowerCase() === 'pending',
-  blockchainName: blockchains.find((blockchain) => blockchain.id === beneficiary.blockchain_id)
+  blockchainName: blockchains.find((blockchain) => blockchain.key === beneficiary.blockchain_key)
     ?.name,
 });
 
@@ -49,7 +49,7 @@ export const AddressNotebookMarket: FC<Props> = ({ wallet, onChangeValue }: Prop
   const { data = [] } = useFetchBlockchains();
   const currencyCode = wallet.currency.code;
   const blockchains = useMemo(
-    () => data.filter((d) => wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id)),
+    () => data.filter((d) => wallet.blockchain_currencies.find((b) => b.blockchain_key === d.key)),
     [data, wallet.blockchain_currencies],
   );
 

@@ -53,7 +53,7 @@ export const FeesScreen: React.FC = () => {
     for (let bc of c.blockchain_currencies) {
       const ccy = c.id.toUpperCase();
       const [token, network] = ccy.split('-');
-      const blockchain = blockchains.find((d) => d.id === bc.blockchain_id);
+      const blockchain = blockchains.find((d) => d.key === bc.blockchain_key);
       tableData.push([
         isDesktop ? (
           <Box row spacing>

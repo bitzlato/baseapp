@@ -20,6 +20,7 @@ export interface BeneficiaryBank {
 
 export interface Beneficiary {
   blockchain_id: number;
+  blockchain_key: string;
   currency: string;
   data: BeneficiaryCrypto | BeneficiaryBank;
   description?: string;

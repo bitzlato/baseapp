@@ -19,6 +19,7 @@ export const selectCurrencies = (state: RootState): ApiCurrency[] => {
       min_withdraw_amount: createMoney(source.min_withdraw_amount, moneyCurrency),
       blockchain_currencies: source.blockchain_currencies.map((d) => ({
         blockchain_id: d.blockchain_id,
+        blockchain_key: d.blockchain_key,
         withdraw_fee: createMoney(d.withdraw_fee, moneyCurrency),
         min_deposit_amount: createMoney(d.min_deposit_amount, moneyCurrency),
       })),

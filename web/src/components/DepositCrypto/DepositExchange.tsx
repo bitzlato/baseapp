@@ -47,7 +47,7 @@ export const DepositExchange: FC<Props> = ({ wallet }) => {
   const blockchainsResponse = useFetchBlockchains();
 
   const blockchains = (blockchainsResponse.data ?? []).filter((d) =>
-    wallet.blockchain_currencies.find((b) => b.blockchain_id === d.id),
+    wallet.blockchain_currencies.find((b) => b.blockchain_key === d.key),
   );
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export const DepositExchange: FC<Props> = ({ wallet }) => {
   }, [blockchains.length, currency]);
 
   const depositResponse = useFetch<DepositAddress>(
-    blockchain?.id ? `${tradeUrl()}/account/deposit_address/${blockchain.id}` : null,
+    blockchain?.key ? `${tradeUrl()}/account/deposit_address/${blockchain.key}` : null,
     fetchWithCreds,
   );
 
@@ -71,7 +71,7 @@ export const DepositExchange: FC<Props> = ({ wallet }) => {
   }, [isNoAddress]);
 
   const blockchainCurrency = wallet.blockchain_currencies.find(
-    (d) => d.blockchain_id === blockchain?.id,
+    (d) => d.blockchain_key === blockchain?.key,
   );
 
   const renderSelectItem = (value: Blockchain) => {
