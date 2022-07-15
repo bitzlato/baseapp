@@ -3,11 +3,11 @@ import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { Button } from 'web/src/components/ui/Button';
 import { CollapsibleBox } from 'web/src/components/collapsibleBox/CollapsibleBox';
-import { useCryptoCurrencies } from 'web/src/hooks/useCryptoCurrencies';
 import { createMoney } from 'web/src/helpers/money';
 import { DealStat } from 'web/src/modules/p2p/user.types';
 import { AmountFormat } from 'web/src/components/AmountFormat/AmountFormat';
 import { useSharedT } from 'web/src/components/shared/Adapter';
+import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
 import * as styles from './Deals.css';
 
 interface DealsProps {
@@ -17,7 +17,7 @@ interface DealsProps {
 export const Deals: FC<DealsProps> = ({ deals }) => {
   const t = useSharedT();
   const [showMore, setShowMore] = useState(false);
-  const { getCryptoCurrency } = useCryptoCurrencies();
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
 
   const list = useMemo(
     () =>

@@ -4,7 +4,7 @@ import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { Button } from 'web/src/components/ui/Button';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
-import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
+import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
 import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
 import { AdvertParams, AdvertType, PaymethodInfoSource } from 'web/src/modules/p2p/types';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
@@ -83,7 +83,7 @@ const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onCha
     [params.amount],
   );
 
-  const { fiatCurrencies, getFiatCurrency } = useFiatCurrencies();
+  const { fiatCurrencies, getFiatCurrency } = useP2PFiatCurrencies();
   const fiats = useMemo(() => Object.values(fiatCurrencies ?? {}), [fiatCurrencies]);
   const selectedFiatCurrency = useMemo(() => {
     return fiats.find((d) => d.code === params.currency) ?? null;

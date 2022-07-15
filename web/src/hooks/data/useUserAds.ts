@@ -3,9 +3,9 @@ import { p2pUrl } from 'web/src/api/config';
 import { fetchJson } from 'web/src/helpers/fetch';
 import { PaymethodSource } from 'web/src/modules/p2p/types';
 import { BaseCurrency } from 'web/src/types/currencies.types';
-import { useCryptoCurrencies } from '../useCryptoCurrencies';
+import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
+import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
 import { useFetch } from './useFetch';
-import { useFiatCurrencies } from './useFetchP2PCurrencies';
 
 interface TraderAdvertSource {
   id: number;
@@ -55,8 +55,8 @@ export interface TraderAdvert
 }
 
 export const useUserAds = ({ publicName, lang }: { publicName: string; lang: string }) => {
-  const { getFiatCurrency } = useFiatCurrencies();
-  const { getCryptoCurrency } = useCryptoCurrencies();
+  const { getFiatCurrency } = useP2PFiatCurrencies();
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
 
   return useFetch(
     `${p2pUrl()}/public/exchange/dsa/all/${publicName}/`,

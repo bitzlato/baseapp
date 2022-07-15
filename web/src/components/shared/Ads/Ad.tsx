@@ -15,8 +15,7 @@ import { Button } from 'web/src/components/ui/Button';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { MoneyInput } from 'web/src/components/TextInputCustom/MoneyInputCustom';
 import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
-import { useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
-import { useCryptoCurrencies } from 'web/src/hooks/useCryptoCurrencies';
+import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
 import { createMoney } from 'web/src/helpers/money';
 import { P2PMoneyFormat } from 'web/src/components/money/P2PFiatMoney';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
@@ -38,6 +37,7 @@ import { WarningIcon } from 'web/src/mobile/assets/images/WarningIcon';
 import WarningTriangleIcon from 'web/src/assets/svg/WarningTriangleIcon.svg';
 import { DetailsInput } from 'web/src/components/TextInputCustom/DetailsInput';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
+import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
 import { AdStat } from './AdStat';
 import { ConfirmDangerRateModal } from './RateDiffModal';
 
@@ -86,8 +86,8 @@ export const Ad: FC = () => {
   const lastRequisitesSWR = useFetchLastRequisites(paymethod?.id);
   const traderInfoSWR = useFetchTraderInfo(advert?.owner);
   const { data: owner } = traderInfoSWR;
-  const { getFiatCurrency } = useFiatCurrencies();
-  const { getCryptoCurrency } = useCryptoCurrencies();
+  const { getFiatCurrency } = useP2PFiatCurrencies();
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
   const changeTrust = useTrustUser(traderInfoSWR);
 
   const cryptocurrency = advert?.cryptocurrency;

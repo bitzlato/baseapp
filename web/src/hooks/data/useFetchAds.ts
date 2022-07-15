@@ -8,11 +8,11 @@ import {
   AdvertSingleSource,
   P2PList,
 } from 'web/src/modules/p2p/types';
-import { useCryptoCurrencies } from 'web/src/hooks/useCryptoCurrencies';
 import { Money } from '@bitzlato/money-js';
 import { useUser } from 'web/src/components/app/AppContext';
+import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
 import { useFetch } from './useFetch';
-import { useFiatCurrencies } from './useFetchP2PCurrencies';
+import { useP2PFiatCurrencies } from '../useP2PFiatCurrencies';
 
 export const useFetchAds = (params: AdvertParams) => {
   const user = useUser();
@@ -23,8 +23,8 @@ export const useFetchAds = (params: AdvertParams) => {
 };
 
 export const useAds = (params: AdvertParams) => {
-  const { getFiatCurrency } = useFiatCurrencies();
-  const { getCryptoCurrency } = useCryptoCurrencies();
+  const { getFiatCurrency } = useP2PFiatCurrencies();
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
   const { data, ...swr } = useFetchAds(params);
 
   return {
