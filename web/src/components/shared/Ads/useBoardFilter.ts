@@ -6,14 +6,14 @@ import {
   setUrlSearchParams,
   buildUrlSearch,
 } from 'web/src/helpers/urlSearch';
-import { FiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { AdvertParams, AdvertType, SeoAdvertType } from 'web/src/modules/p2p/types';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
-import { P2PCurrency } from 'web/src/modules/p2p/wallet-types';
+import { P2PCryptoCurrencySource } from 'web/src/modules/p2p/wallet-types';
 import { Language } from 'web/src/types';
 import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
 import { useP2PSetLastFilter } from 'web/src/hooks/mutations/useP2PSetLastFilter';
 import { pick } from 'web/src/helpers/pick';
+import { P2PFiatCurrencies } from 'web/src/types/currencies.types';
 import { DEFAULT_FILTER } from './Filter';
 
 export const URL_PARAMS: UrlParams<Pick<AdvertParams, 'skip' | 'limit'>> = {
@@ -116,8 +116,8 @@ const getFilterParamsFromLastFilter = (lastFilter: any): Partial<AdvertParams> |
 };
 
 type UseBoardFilterArg = {
-  fiatCurrencies: FiatCurrencies;
-  cryptoCurrencies: P2PCurrency[];
+  fiatCurrencies: P2PFiatCurrencies;
+  cryptoCurrencies: P2PCryptoCurrencySource[];
   lastFilter?: Partial<AdvertParams> | undefined;
 };
 

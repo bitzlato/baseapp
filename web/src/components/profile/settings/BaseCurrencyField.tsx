@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
-import { useP2PCurrencyOptions } from 'web/src/hooks/data/useFetchP2PCurrencies';
 import { Select } from 'web/src/components/Select/Select';
 import { useT } from 'web/src/hooks/useT';
 import { P2PCurrencyOption } from 'web/src/modules/public/currencies/types';
+import { useP2PCurrencyOptions } from './useP2PCurrencyOptions';
 import * as s from './BaseCurrencyField.css';
 
 interface Props {

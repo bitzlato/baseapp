@@ -2,11 +2,7 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { Box } from 'src/components/Box';
-import {
-  useFetchP2PCryptoCurrencies,
-  useFetchP2PWallet,
-  useGenerateP2PAddress,
-} from 'web/src/hooks/data/useFetchP2PWallets';
+import { useFetchP2PWallet, useGenerateP2PAddress } from 'web/src/hooks/data/useFetchP2PWallets';
 import { createCcy, createMoney } from 'web/src/helpers/money';
 import { DEFAULT_CCY_PRECISION } from 'web/src/constants';
 import { WarningIcon } from 'web/src/mobile/assets/images/WarningIcon';
@@ -15,6 +11,7 @@ import { SummaryField } from 'web/src/components/SummaryField';
 import { AmountFormat } from 'web/src/components/AmountFormat/AmountFormat';
 import { WalletAddress } from 'web/src/components/WalletAddress/WalletAddress';
 import { alertPush } from 'web/src/modules/public/alert/actions';
+import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/p2p/useFetchP2PCryptoCurrencies';
 
 interface Props {
   currency: string;

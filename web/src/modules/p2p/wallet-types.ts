@@ -26,7 +26,7 @@ export interface P2PWallet {
   };
 }
 
-export interface P2PCurrency {
+export interface P2PCryptoCurrencySource {
   name: string;
   code: string;
   minWithdrawal: string;

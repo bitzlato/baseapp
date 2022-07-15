@@ -3,11 +3,11 @@ import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { fetchJson } from 'web/src/helpers/fetch';
-import { useCryptoCurrencies } from 'web/src/hooks/useCryptoCurrencies';
 import { Trade, TradeAmountType, TradeSource } from 'web/src/modules/p2p/trade.types';
 import { AdvertType, P2PList, PaymethodSource } from 'web/src/modules/p2p/types';
+import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
+import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
 import { useFetch } from './useFetch';
-import { useFiatCurrencies } from './useFetchP2PCurrencies';
 
 export type TradesParams = {
   onlyClosed: boolean | undefined;
@@ -43,8 +43,8 @@ export const useFetchP2PTrades = (
   lang: string,
   options?: SWRConfiguration<P2PList<Trade>, Error, BareFetcher<P2PList<Trade>>> | undefined,
 ) => {
-  const { getFiatCurrency } = useFiatCurrencies();
-  const { getCryptoCurrency } = useCryptoCurrencies();
+  const { getFiatCurrency } = useP2PFiatCurrencies();
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
   const filteredParams = filterTradesParams(params);
 
   return useFetch<P2PList<Trade>>(

@@ -5,19 +5,20 @@ import { Box } from 'web/src/components/ui/Box';
 import { Pagination } from 'web/src/components/ui/Pagination';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { useAds } from 'web/src/hooks/data/useFetchAds';
-import { FiatCurrencies, useFiatCurrencies } from 'web/src/hooks/data/useFetchP2PCurrencies';
-import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/useFetchP2PWallets';
+import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
 import { AdvertParams } from 'web/src/modules/p2p/types';
-import { P2PCurrency } from 'web/src/modules/p2p/wallet-types';
+import { P2PCryptoCurrencySource } from 'web/src/modules/p2p/wallet-types';
 import { useFetchP2PLastFilter } from 'web/src/hooks/data/useFetchP2PLastFilter';
+import { P2PFiatCurrencies } from 'web/src/types/currencies.types';
+import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/p2p/useFetchP2PCryptoCurrencies';
 import { Ads } from './Ads';
 import { Filter, FilterMobile } from './Filter';
 import { useBoardFilter } from './useBoardFilter';
 import * as s from './Board.css';
 
 type BoardBodyProps = {
-  fiatCurrencies: FiatCurrencies;
-  cryptoCurrencies: P2PCurrency[];
+  fiatCurrencies: P2PFiatCurrencies;
+  cryptoCurrencies: P2PCryptoCurrencySource[];
   lastFilter?: Partial<AdvertParams> | undefined;
 };
 
@@ -102,7 +103,7 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
 
 export const Board: FC = () => {
   const user = useUser();
-  const fiatCurrenciesValue = useFiatCurrencies();
+  const fiatCurrenciesValue = useP2PFiatCurrencies();
   const cryptoCurrenciesValue = useFetchP2PCryptoCurrencies();
   const lastFilterValue = useFetchP2PLastFilter();
 
