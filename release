@@ -7,3 +7,4 @@ git tag -a `semver` -m `semver` && \
 git push origin
 
 bundle exec cap production deploy
+bundle exec cap bitzlato_bz deploy
