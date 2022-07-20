@@ -92,6 +92,9 @@ import { SecurityVerificationModal } from 'web/src/containers/modals/SecurityVer
 import { TradeScreen } from 'web/src/screens/p2p/Trade/Trade';
 import { UserAdsScreen } from 'web/src/screens/p2p/UserAdsScreen';
 import { CreateAdScreen } from 'web/src/screens/p2p/CreateAdScreen';
+import { GiftsScreen } from 'web/src/screens/GiftsScreen/GiftsScreen';
+import { ActiveGiftsScreen } from 'web/src/screens/GiftsScreen/ActiveGiftsScreen';
+import { HistoryGiftsScreen } from 'web/src/screens/GiftsScreen/HistoryGiftsScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -331,6 +334,30 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         loading={userLoading}
         isLogged={isLoggedIn}
         component={DeepLinkPreview}
+      />,
+      <PrivateRoute
+        key="GiftsScreen"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        path="/gifts"
+        component={GiftsScreen}
+        exact
+      />,
+      <PrivateRoute
+        key="ActiveGiftsScreen"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        path="/gifts/active"
+        component={ActiveGiftsScreen}
+        exact
+      />,
+      <PrivateRoute
+        key="HistoryGiftsScreen"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        path="/gifts/history"
+        component={HistoryGiftsScreen}
+        exact
       />,
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
       ...(process.env.REACT_APP_RELEASE_STAGE === 'development'

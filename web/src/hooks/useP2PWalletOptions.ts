@@ -15,8 +15,8 @@ export interface P2PWalletOption {
 }
 
 export function useP2PWalletOptions(
-  cryptocurrency: string,
   getFiatCurrency: (code: string) => BaseCurrency,
+  cryptocurrency?: string | undefined,
 ) {
   const user = useUser();
   const { getCryptoCurrency } = useP2PCryptoCurrencies();

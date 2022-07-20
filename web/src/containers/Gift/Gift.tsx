@@ -17,8 +17,8 @@ import { createCcy, createMoney } from 'web/src/helpers/money';
 import { getCurrencySymbol } from 'web/src/helpers/getCurrencySymbol';
 import { accountUrl, p2pUrl } from 'web/src/api/config';
 import {
-  AccountVoucher,
   P2PConfirmation,
+  P2PVoucher,
   P2VoucherPostParams,
 } from 'web/src/modules/account/voucher-types';
 import { localeDate } from 'web/src/helpers/localeDate';
@@ -58,7 +58,7 @@ export const Gift: FC<Props> = (props) => {
   const [tab, setTab] = useState('Created');
   const [email, setEmail] = useState<string | undefined>();
   const [code2fa, setCode2fa] = useState<string | undefined>();
-  const [gift, setGift] = useState<AccountVoucher | undefined>();
+  const [gift, setGift] = useState<P2PVoucher | undefined>();
   const [comment, setComment] = useState('');
   const [show2fa, setShow2fa] = useState(false);
   const [showSafeModeWizard, setShowSafeModeWizard] = useState(false);
@@ -75,7 +75,7 @@ export const Gift: FC<Props> = (props) => {
   const vouchersResponse = useFetchVouchers(ccCode, cashed, 0, 10);
 
   const lastVoucherResponse = useFetchVouchers(ccCode, false, 0, 1);
-  const lastVoucher = lastVoucherResponse.data?.[0]?.deep_link_code;
+  const lastVoucher = lastVoucherResponse.data?.data[0]?.deepLinkCode;
   useEffect(() => {
     if (lastVoucher) {
       setEmail(undefined);
@@ -89,7 +89,7 @@ export const Gift: FC<Props> = (props) => {
     setGiftCurrency(ccCode);
   }, [ccCode]);
 
-  const data = vouchersResponse.data ?? [];
+  const data = vouchersResponse.data?.data ?? [];
   const userCurrency = user.bitzlato_user?.user_profile.currency ?? 'USD';
   const isFiat = giftCurrency === userCurrency;
   const fiatCcy = createCcy(userCurrency, FIAT_PRECISION);
@@ -113,9 +113,9 @@ export const Gift: FC<Props> = (props) => {
     }
   }
 
-  const handleDelete = async (value: AccountVoucher) => {
+  const handleDelete = async (value: P2PVoucher) => {
     try {
-      await fetchWithCreds(`${p2pUrl()}/vouchers/${value.deep_link_code}`, {
+      await fetchWithCreds(`${p2pUrl()}/vouchers/${value.deepLinkCode}`, {
         method: 'DELETE',
       });
       vouchersResponse.mutate();
@@ -181,7 +181,7 @@ export const Gift: FC<Props> = (props) => {
     return handleCreateGift(null);
   };
 
-  const handleClickOptions = (value: AccountVoucher) => {
+  const handleClickOptions = (value: P2PVoucher) => {
     setGift(value);
     setComment(value.comment ?? '');
   };
@@ -189,7 +189,7 @@ export const Gift: FC<Props> = (props) => {
   const handleClickApply = async () => {
     if (gift && comment !== gift.comment) {
       try {
-        await fetchWithCreds(`${p2pUrl()}/vouchers/${gift.deep_link_code}`, {
+        await fetchWithCreds(`${p2pUrl()}/vouchers/${gift.deepLinkCode}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ comment }),
@@ -255,18 +255,18 @@ export const Gift: FC<Props> = (props) => {
         ...
       </Button>,
       <Box textSize="sm" textColor="secondary">
-        {localeDate(d.created_at, 'fullDate')}
+        {localeDate(d.createdAt, 'fullDate')}
       </Box>,
       <Box col>
-        <MoneyFormat money={createMoney(d.amount, cryptoCcy)} />
+        <MoneyFormat money={createMoney(d.cryptocurrency.amount, cryptoCcy)} />
         <Box textSize="sm" textColor="secondary">
           ≈{' '}
           <MoneyFormat
-            money={createMoney(d.converted_amount, createCcy(d.currency, FIAT_PRECISION))}
+            money={createMoney(d.currency.amount, createCcy(d.currency.code, FIAT_PRECISION))}
           />
         </Box>
       </Box>,
-      cashed ? d.cashed_by?.profile_name ?? <None /> : undefined,
+      cashed ? (d.cashedBy && d.cashedBy[0]?.cashedBy) ?? <None /> : undefined,
       d.comment ? sliceString(d.comment, 30) : <None />,
       cashed ? undefined : (
         <IconButton title={t('Close')} onClick={() => handleDelete(d)}>
@@ -365,6 +365,7 @@ export const Gift: FC<Props> = (props) => {
           <Table tableClassName={s.giftHistory} header={header} data={tableData} />
         </Box>
       </Box>
+
       {show2fa ? (
         <TwoFactorModal
           onClose={() => setShow2fa(false)}
@@ -386,6 +387,7 @@ export const Gift: FC<Props> = (props) => {
           }
         />
       ) : null}
+
       {email ? (
         <Modal2 show header={t('Confirmation')} onClose={() => setEmail(undefined)}>
           <Box col spacing="3">
@@ -397,13 +399,14 @@ export const Gift: FC<Props> = (props) => {
           </Box>
         </Modal2>
       ) : null}
+
       {gift ? (
         <Modal2
           show
           header={
             <span>
               {t('Gift for', {
-                money: <MoneyFormat money={createMoney(gift.amount, cryptoCcy)} />,
+                money: <MoneyFormat money={createMoney(gift.cryptocurrency.amount, cryptoCcy)} />,
               })}
             </span>
           }
