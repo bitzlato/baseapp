@@ -359,6 +359,8 @@ export const [themeLight, vars] = createTheme({
     adExchangeViewError: colors.ebonyClay,
 
     divider: colors.ebonyClay15,
+
+    textInputControl: colors.whiteLilac,
   },
 });
 
@@ -651,5 +653,7 @@ export const themeDark = createTheme(vars, {
     adExchangeViewError: colors.ebonyClay,
 
     divider: colors.white10,
+
+    textInputControl: colors.outerSpace,
   },
 });
