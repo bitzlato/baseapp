@@ -36,6 +36,14 @@ export interface P2VoucherPostParams {
   cryptocurrency: string;
   currency: string;
   method: 'crypto' | 'fiat';
+  comment?: string;
+  cashTimes?: number;
+}
+
+export interface P2PVoucherCachedBy {
+  cashedAt: number;
+  cashedBy: string;
+  comment: string | null;
 }
 
 export interface P2PVoucher {
@@ -43,10 +51,15 @@ export interface P2PVoucher {
   currency: P2PCurrency;
   cryptocurrency: P2PCurrency;
   createdAt: number;
+  createdBy?: string | null;
   links: P2PVoucherLink[];
   status: 'active' | 'cashed';
-  cashedBy: string | null;
+  cashedBy: P2PVoucherCachedBy[] | null;
+  cashedTimes: number;
   comment: string | null;
+  holdAmount: P2PCurrency;
+  timesToWithdrawal: number;
+  validTill: null;
 }
 
 interface P2PCurrency {
@@ -54,7 +67,7 @@ interface P2PCurrency {
   amount: string;
 }
 
-interface P2PVoucherLink {
+export interface P2PVoucherLink {
   label: string;
   type: string;
   url: string;

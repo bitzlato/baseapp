@@ -119,7 +119,7 @@ export const SignedOpConfirmScreen: FC = () => {
       }
 
       if (command === ISignedOpCommand.VOUCHER_CREATE) {
-        redirectUrl = cryptocurrency ? `${WALLETS_URL}/${cryptocurrency}/gift` : PROFILE_URL;
+        redirectUrl = '/gifts/active';
       }
 
       memoized.actionBlock = (

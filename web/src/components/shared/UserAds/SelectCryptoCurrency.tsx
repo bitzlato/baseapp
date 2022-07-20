@@ -20,7 +20,7 @@ interface Props {
 export const SelectCryptoCurrency: FC<Props> = ({ value, onChange }) => {
   const t = useSharedT();
   const { getFiatCurrency } = useP2PFiatCurrencies();
-  const { selectedWalletOption, walletOptions } = useP2PWalletOptions(value, getFiatCurrency);
+  const { selectedWalletOption, walletOptions } = useP2PWalletOptions(getFiatCurrency, value);
 
   return (
     <>

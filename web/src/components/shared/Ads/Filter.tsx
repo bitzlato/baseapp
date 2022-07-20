@@ -88,8 +88,8 @@ const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onCha
   }, [fiats, params.currency]);
 
   const { selectedWalletOption, walletOptions } = useP2PWalletOptions(
-    params.cryptocurrency,
     getFiatCurrency,
+    params.cryptocurrency,
   );
 
   const paymethodsResp = useFetchPaymethods({
