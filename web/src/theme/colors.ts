@@ -96,3 +96,4 @@ export const mandy90 = 'rgba(232, 94, 89, 0.9)';
 export const shark = 'rgb(42, 47, 52)';
 export const mirage = 'rgb(22, 31, 39)';
 export const roman = 'rgb(219, 79, 79)';
+export const outerSpace = 'rgba(49, 56, 65, 1)';

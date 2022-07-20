@@ -17,3 +17,11 @@ export const inputRightControls = style({
   right: '1px',
   transform: 'translateY(-50%)',
 });
+
+export const inputRightControlsButton = style({
+  selectors: {
+    '&:hover': {
+      opacity: 0.75,
+    },
+  },
+});
