@@ -13,7 +13,8 @@
     <link rel="apple-touch-icon" href="<%= process.env.ASSET_PATH %>apple-touch-icon.png" />
     <link rel="manifest" href="<%= process.env.ASSET_PATH %>manifest.json" />
     <title>Bitzlato</title>
-    <% if (process.env.REACT_APP_RELEASE_STAGE === 'production') { %>
+    <% if (process.env.REACT_APP_RELEASE_STAGE === 'production' ||
+    process.env.REACT_APP_RELEASE_STAGE === 'bitzlato_bz') { %>
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -29,7 +30,8 @@
     <% } %>
   </head>
   <body>
-    <% if (process.env.REACT_APP_RELEASE_STAGE === 'production') { %>
+    <% if (process.env.REACT_APP_RELEASE_STAGE === 'production' ||
+    process.env.REACT_APP_RELEASE_STAGE === 'bitzlato_bz') { %>
     <noscript>
       <iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-56LJ9XZ"
@@ -48,7 +50,8 @@
       })();
     </script>
     <script src="<%= process.env.ASSET_PATH %>config/env.js?<%= process.env.HASH %>"></script>
-    <% } %> <% if (process.env.REACT_APP_RELEASE_STAGE === 'production') { %>
+    <% } %> <% if (process.env.REACT_APP_RELEASE_STAGE === 'production' ||
+    process.env.REACT_APP_RELEASE_STAGE === 'bitzlato_bz') { %>
     <style>
       iframe#launcher-frame {
         display: none;
