@@ -74,7 +74,7 @@
     "@capacitor/core": "^2.4.1",
     "@capacitor/ios": "2.4.1",
     "@ionic/cli": "^6.11.11",
-    "@pmmmwh/react-refresh-webpack-plugin": "git+https://github.com/rajzik/react-refresh-webpack-plugin.git#5ca99e83ec143116968bcccc71487c14593b20b7",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@statoscope/webpack-plugin": "^5.14.1",
     "@svgr/webpack": "^6.2.1",
     "@swc/core": "^1.2.140",

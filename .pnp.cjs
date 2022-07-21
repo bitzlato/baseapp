@@ -5943,13 +5943,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@pmmmwh/react-refresh-webpack-plugin", [
-        ["https://github.com/rajzik/react-refresh-webpack-plugin.git#commit=5ca99e83ec143116968bcccc71487c14593b20b7", {
-          "packageLocation": "./.yarn/cache/@pmmmwh-react-refresh-webpack-plugin-https-2c15647cd5-9dd0886835.zip/node_modules/@pmmmwh/react-refresh-webpack-plugin/",
-          "packageDependencies": [
-            ["@pmmmwh/react-refresh-webpack-plugin", "https://github.com/rajzik/react-refresh-webpack-plugin.git#commit=5ca99e83ec143116968bcccc71487c14593b20b7"]
-          ],
-          "linkType": "SOFT",
-        }],
         ["npm:0.5.4", {
           "packageLocation": "./.yarn/cache/@pmmmwh-react-refresh-webpack-plugin-npm-0.5.4-17669decc4-66deb75fe0.zip/node_modules/@pmmmwh/react-refresh-webpack-plugin/",
           "packageDependencies": [
@@ -5957,10 +5950,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#https://github.com/rajzik/react-refresh-webpack-plugin.git#commit=5ca99e83ec143116968bcccc71487c14593b20b7", {
-          "packageLocation": "./.yarn/__virtual__/@pmmmwh-react-refresh-webpack-plugin-virtual-0723c10058/0/cache/@pmmmwh-react-refresh-webpack-plugin-https-2c15647cd5-9dd0886835.zip/node_modules/@pmmmwh/react-refresh-webpack-plugin/",
+        ["npm:0.5.7", {
+          "packageLocation": "./.yarn/cache/@pmmmwh-react-refresh-webpack-plugin-npm-0.5.7-672cb2972a-3490649181.zip/node_modules/@pmmmwh/react-refresh-webpack-plugin/",
           "packageDependencies": [
-            ["@pmmmwh/react-refresh-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#https://github.com/rajzik/react-refresh-webpack-plugin.git#commit=5ca99e83ec143116968bcccc71487c14593b20b7"],
+            ["@pmmmwh/react-refresh-webpack-plugin", "npm:0.5.7"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.5.7", {
+          "packageLocation": "./.yarn/__virtual__/@pmmmwh-react-refresh-webpack-plugin-virtual-046fb100a2/0/cache/@pmmmwh-react-refresh-webpack-plugin-npm-0.5.7-672cb2972a-3490649181.zip/node_modules/@pmmmwh/react-refresh-webpack-plugin/",
+          "packageDependencies": [
+            ["@pmmmwh/react-refresh-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.5.7"],
             ["@types/react-refresh", null],
             ["@types/sockjs-client", null],
             ["@types/type-fest", null],
@@ -28754,7 +28754,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@formatjs/intl-relativetimeformat", "npm:7.3.6"],
             ["@ionic/cli", "npm:6.12.3"],
             ["@metamask/onboarding", "npm:1.0.1"],
-            ["@pmmmwh/react-refresh-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#https://github.com/rajzik/react-refresh-webpack-plugin.git#commit=5ca99e83ec143116968bcccc71487c14593b20b7"],
+            ["@pmmmwh/react-refresh-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.5.7"],
             ["@statoscope/webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.14.1"],
             ["@svgr/webpack", "npm:6.2.1"],
             ["@swc/core", "npm:1.2.140"],
