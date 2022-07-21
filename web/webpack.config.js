@@ -44,6 +44,10 @@ if (process.env.MARKET_DOCS_URL) {
   marketDocsUrl = `https://${process.env.PROXY_HOST}/marketDocs`; // for proxing
 }
 
+const features = {
+  vanillaExtractDebug: isDevelopment && (process.env.VANILLA_EXTRACT_DEBUG ?? false),
+};
+
 /** @type {webpack.WebpackOptionsNormalized} */
 module.exports = {
   mode: isDevelopment ? 'development' : 'production',
@@ -214,7 +218,9 @@ module.exports = {
         patterns: [{ from: 'public' }],
       }),
 
-    new VanillaExtractPlugin(),
+    new VanillaExtractPlugin({
+      identifiers: features.vanillaExtractDebug ? 'debug' : 'short',
+    }),
 
     !isDevelopment &&
       new MiniCssExtractPlugin({
