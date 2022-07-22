@@ -90,6 +90,7 @@ import { TraderScreen } from 'web/src/screens/p2p/TraderScreen';
 import { TradesScreen } from 'web/src/screens/p2p/TradesScreen';
 import { SecurityVerificationModal } from 'web/src/containers/modals/SecurityVerificationModal';
 import { TradeScreen } from 'web/src/screens/p2p/Trade/Trade';
+import { BalancesScreen } from 'web/src/screens/BalancesScreen/BalancesScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -330,6 +331,13 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         isLogged={isLoggedIn}
         component={DeepLinkPreview}
       />,
+      <PrivateRoute
+        key="balances"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        path={['/balances/:currency?/:section?', '/balances']}
+        component={BalancesScreen}
+      />,
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
       ...(process.env.REACT_APP_RELEASE_STAGE === 'development'
         ? [
@@ -354,7 +362,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               key="TradeScreen"
               loading={userLoading}
               isLogged={isLoggedIn}
-              path={["/p2p/trades/:tradeId", "/:lang/p2p/trades/:tradeId"]}
+              path={['/p2p/trades/:tradeId', '/:lang/p2p/trades/:tradeId']}
               component={TradeScreen}
             />,
             <PrivateRoute

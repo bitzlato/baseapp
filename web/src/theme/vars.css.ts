@@ -361,6 +361,29 @@ export const [themeLight, vars] = createTheme({
     divider: colors.ebonyClay15,
 
     textInputControl: colors.whiteLilac,
+
+    walletSidebarBorderRight: colors.white15,
+    walletItemColor: colors.white50,
+    walletItemBorderBottom: colors.white10,
+    walletItemBackgroundHover: colors.white05,
+    walletItemBackgroundActive: colors.white10,
+    walletItemColorActive: colors.white,
+    walletItemBorderLeftActive: colors.indigo,
+    walletRadioItemBackground: colors.outerSpace,
+    walletRadioItemBackgroundChecked: colors.goldTips,
+    walletRadioItemBackgroundDisabled: colors.whiteLilac,
+    walletRadioItemBackgroundHover: colors.white15,
+    walletRadioItemColor: colors.white,
+    walletRadioItemColorChecked: colors.ebonyClay,
+    walletRadioItemColorDisabled: colors.black50,
+    walletRadioControlBorderColor: colors.white10,
+    walletRadioControlBorderColorChecked: colors.white,
+    walletRadioShadow: colors.goldTips10,
+    walletRadioColorBackgroundChecked: colors.goldTips,
+    walletRadioShadowChecked: colors.white10,
+
+    currencyBadgeBackground: colors.outerSpace,
+    currencyBadgecolor: colors.white50,
   },
 });
 
@@ -655,5 +678,28 @@ export const themeDark = createTheme(vars, {
     divider: colors.white10,
 
     textInputControl: colors.outerSpace,
+
+    walletSidebarBorderRight: colors.white15,
+    walletItemColor: colors.white50,
+    walletItemBorderBottom: colors.white10,
+    walletItemBackgroundHover: colors.white05,
+    walletItemBackgroundActive: colors.white10,
+    walletItemColorActive: colors.white,
+    walletItemBorderLeftActive: colors.indigo,
+    walletRadioItemBackground: colors.outerSpace,
+    walletRadioItemBackgroundChecked: colors.goldTips,
+    walletRadioItemBackgroundDisabled: colors.outerSpace,
+    walletRadioItemBackgroundHover: colors.white15,
+    walletRadioItemColor: colors.white,
+    walletRadioItemColorChecked: colors.ebonyClay,
+    walletRadioItemColorDisabled: colors.white20,
+    walletRadioControlBorderColor: colors.white10,
+    walletRadioControlBorderColorChecked: colors.white,
+    walletRadioShadow: colors.goldTips10,
+    walletRadioColorBackgroundChecked: colors.goldTips,
+    walletRadioShadowChecked: colors.white10,
+
+    currencyBadgeBackground: colors.outerSpace,
+    currencyBadgecolor: colors.white50,
   },
 });

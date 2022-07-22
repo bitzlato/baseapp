@@ -1618,4 +1618,6 @@ export const ru: LangType = {
   Telegram: 'Telegram',
   Invoices: 'Счета',
   'Trader Workspace': 'Рабочее место трейдера',
+  'Select a balance': 'Выберите тип баланса',
+  'Enter the amount and withdrawal address': 'Введите сумму и адрес вывода',
 };

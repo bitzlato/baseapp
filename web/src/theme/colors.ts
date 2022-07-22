@@ -41,6 +41,7 @@ export const governorBay = 'rgb(49, 69, 176)';
 export const white = 'rgb(255, 255, 255)';
 export const white05 = 'rgba(255, 255, 255, 0.05)';
 export const white10 = 'rgba(255, 255, 255, 0.1)';
+export const white15 = 'rgba(255, 255, 255, 0.15)';
 export const white20 = 'rgba(255, 255, 255, 0.2)';
 export const white24 = 'rgba(255, 255, 255, 0.24)';
 export const white30 = 'rgba(255, 255, 255, 0.3)';

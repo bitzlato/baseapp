@@ -1600,4 +1600,6 @@ export const en = {
   Telegram: 'Telegram',
   Invoices: 'Invoices',
   'Trader Workspace': 'Trader Workspace',
+  'Select a balance': 'Select a balance',
+  'Enter the amount and withdrawal address': 'Enter the amount and withdrawal address',
 };
