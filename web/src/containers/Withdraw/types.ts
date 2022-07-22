@@ -11,4 +11,5 @@ export type WithdrawMarketFormValues = {
   beneficiary: Beneficiary;
   otpCode: string;
   total: string;
+  networkFee?: string | undefined;
 };

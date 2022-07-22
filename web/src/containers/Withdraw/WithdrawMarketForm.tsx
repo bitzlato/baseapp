@@ -2,6 +2,7 @@ import { FC, useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import { Button } from 'web/src/components/ui/Button';
+import { Text } from 'web/src/components/ui/Text';
 import { Box } from 'web/src/components/Box';
 import { createMoney } from 'web/src/helpers/money';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
@@ -24,6 +25,9 @@ import { useBeneficiariesFetch } from 'web/src/hooks';
 import { WithdrawMarketFormValues } from 'web/src/containers/Withdraw/types';
 import { AddressNotebookMarket } from 'web/src/containers/Withdraw/AddressNotebookMarket';
 import { useFetchBlockchains } from 'web/src/hooks/data/belomor/useFetchBlockchains';
+import { useBlockchainFees } from 'web/src/hooks/useBlockchainFees';
+import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
+import { BlockchainFeeType, WithdrawBlockchainFees } from './WithdrawBlockchainFees';
 
 interface Props {
   wallet: Wallet;
@@ -34,10 +38,12 @@ interface Props {
 
 export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone, onSubmit }) => {
   const t = useT();
+  const blockchainFeeFeatureEnabled = useFeatureEnabled('flexible_fee');
 
   const [amount, setAmount] = useState('');
   const [beneficiary, setBeneficiary] = useState(defaultBeneficiary);
   const [otpCode, setOtpCode] = useState('');
+  const [blockchainFee, setBlockchainFee] = useState<BlockchainFeeType>('market');
 
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const user = useSelector(selectUserInfo);
@@ -51,6 +57,7 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
   const { data: blockchains = [] } = useFetchBlockchains();
 
   const blockchain = blockchains.find((d) => d.key === beneficiary.blockchain_key);
+  const blockchainFeeEnabled = blockchainFeeFeatureEnabled && currencyCode === 'ETH';
   const isUSDXe =
     blockchain?.name === 'Avalanche' && (currencyCode === 'USDT' || currencyCode === 'USDC');
 
@@ -58,19 +65,25 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
     (d) => d.blockchain_key === beneficiary.blockchain_key,
   );
 
-  const reset = () => {
+  const blockchainFees = useBlockchainFees(
+    blockchainFeeEnabled && blockchain
+      ? {
+          blockchainKey: blockchain.key,
+          currencyCode,
+        }
+      : undefined,
+  );
+
+  useEffect(() => {
     setAmount('');
     setBeneficiary(defaultBeneficiary);
     setOtpCode('');
-  };
-
-  useEffect(() => {
-    reset();
   }, [currencyCode]);
 
   useEffect(() => {
     if (withdrawDone) {
-      reset();
+      setAmount('');
+      setOtpCode('');
     }
   }, [withdrawDone]);
 
@@ -78,12 +91,25 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
     if (blockchainCurrency) {
       const fee = blockchainCurrency?.withdraw_fee;
       const amountMoney = createMoney(amount, wallet.currency);
-      const totalMoney = amountMoney.subtract(fee);
+      let totalMoney = amountMoney.subtract(fee);
+      const networkFee = blockchainFeeEnabled ? blockchainFees?.fees[blockchainFee] : undefined;
+      if (networkFee) {
+        totalMoney = totalMoney.subtract(networkFee);
+      }
+
       return totalMoney.isNegative() ? (0).toFixed(wallet.precision) : totalMoney.toString();
     }
 
     return '';
-  }, [amount, blockchainCurrency, wallet]);
+  }, [
+    amount,
+    blockchainCurrency,
+    blockchainFee,
+    blockchainFeeEnabled,
+    blockchainFees?.fees,
+    wallet.currency,
+    wallet.precision,
+  ]);
 
   const isButtonDisabled = () => {
     const isPending = beneficiary.state && beneficiary.state.toLowerCase() === 'pending';
@@ -100,7 +126,13 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
   };
 
   const handleSubmit = () => {
-    onSubmit({ amount, total, beneficiary, otpCode });
+    onSubmit({
+      amount,
+      total,
+      beneficiary,
+      otpCode,
+      networkFee: blockchainFeeEnabled ? blockchainFees?.currency_fee[blockchainFee] : undefined,
+    });
     setOtpCode('');
   };
 
@@ -137,12 +169,19 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
   );
 
   const button = (
-    <Box flex="1" self="end" row justify="end">
-      <Button color="primary" onClick={handleSubmit} disabled={isButtonDisabled()}>
-        {countdown > 0
-          ? formatSeconds(countdown)
-          : t('page.body.wallets.tabs.withdraw.content.button')}
-      </Button>
+    <Box flex="1" self="end" col justify="end" gap="2">
+      {blockchainFeeEnabled && !isMobileDevice && (
+        <Text variant="caption" textAlign="right">
+          {t('withdrawalFee.help')}
+        </Text>
+      )}
+      <Box row justify="end">
+        <Button color="primary" onClick={handleSubmit} disabled={isButtonDisabled()}>
+          {countdown > 0
+            ? formatSeconds(countdown)
+            : t('page.body.wallets.tabs.withdraw.content.button')}
+        </Button>
+      </Box>
     </Box>
   );
 
@@ -180,6 +219,14 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
             />
           )}
         </Box>
+
+        {blockchainFeeEnabled && (
+          <WithdrawBlockchainFees
+            blockchainFees={blockchainFees}
+            value={blockchainFee}
+            onChange={setBlockchainFee}
+          />
+        )}
 
         {isMobileDevice ? (
           <Box col spacing="2">

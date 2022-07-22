@@ -361,6 +361,11 @@ export const [themeLight, vars] = createTheme({
     divider: colors.ebonyClay15,
 
     textInputControl: colors.whiteLilac,
+
+    withdrawBlockchainFeeBackground: colors.whiteLilac50,
+    withdrawBlockchainFeeBackgroundHover: colors.whiteLilac,
+    withdrawBlockchainFeeBackgroundActive: colors.whiteLilac,
+    withdrawBlockchainFeeFiatBackground: colors.ebonyClay15,
   },
 });
 
@@ -655,5 +660,10 @@ export const themeDark = createTheme(vars, {
     divider: colors.white10,
 
     textInputControl: colors.outerSpace,
+
+    withdrawBlockchainFeeBackground: colors.white05,
+    withdrawBlockchainFeeBackgroundHover: colors.white10,
+    withdrawBlockchainFeeBackgroundActive: colors.white20,
+    withdrawBlockchainFeeFiatBackground: colors.ebonyClay15,
   },
 });

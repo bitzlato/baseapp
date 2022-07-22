@@ -1618,4 +1618,14 @@ export const ru: LangType = {
   Telegram: 'Telegram',
   Invoices: 'Счета',
   'Trader Workspace': 'Рабочее место трейдера',
+
+  'Withdrawal method': 'Способ вывода',
+  'withdrawalFee.help':
+    'Обратите внимание, что скорость выводов может меняться из-за колебаний комиссии сети',
+  Slow: 'Медленный',
+  'up to 24 hours': 'до 24 часов',
+  Medium: 'Средний',
+  'up to 2 hours': 'до 2-х часов',
+  Fast: 'Быстрый',
+  'up to 30 minutes': 'до 30 минут',
 };

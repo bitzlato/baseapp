@@ -1601,4 +1601,13 @@ export const en = {
   Telegram: 'Telegram',
   Invoices: 'Invoices',
   'Trader Workspace': 'Trader Workspace',
+
+  'Withdrawal method': 'Withdrawal method',
+  'withdrawalFee.help': 'Note that the withdrawal rate may vary due to network fee fluctuations',
+  Slow: 'Slow',
+  'up to 24 hours': 'up to 24 hours',
+  Medium: 'Medium',
+  'up to 2 hours': 'up to 2 hours',
+  Fast: 'Fast',
+  'up to 30 minutes': 'up to 30 minutes',
 };

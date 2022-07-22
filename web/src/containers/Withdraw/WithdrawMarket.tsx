@@ -67,6 +67,7 @@ export const WithdrawMarket: FC<Props> = ({ wallet }) => {
       currency: wallet.currency.code.toLowerCase(),
       otp: withdrawData.otpCode,
       beneficiary_id: String(withdrawData.beneficiary.id),
+      network_fee: withdrawData.networkFee,
     };
 
     dispatch(walletsWithdrawCcyFetch(withdrawRequest));

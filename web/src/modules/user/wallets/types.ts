@@ -10,6 +10,7 @@ export interface WalletWithdrawCCY {
   currency: string;
   otp: string;
   beneficiary_id: string;
+  network_fee?: string | undefined;
 }
 
 export interface WalletWithdrawFiat {
