@@ -6,6 +6,7 @@ import { IntlProvider } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { Router } from 'react-router';
 import { getThemeClassName } from 'web/src/theme/getThemeClassName';
+import { useFetchPublicFeatures } from 'web/src/hooks/data/barong/useFetchPublicFeatures';
 import { gaTrackerKey } from './api';
 import { useSetMobileDevice } from './hooks';
 import * as mobileTranslations from './mobile/translations';
@@ -80,6 +81,7 @@ const RenderDeviceContainers = () => {
 export const App = () => {
   useSetMobileDevice();
   useNotificator();
+  useFetchPublicFeatures(); // load public features
 
   const lang = useSelector(selectCurrentLanguage);
   const isMobileDevice = useSelector(selectMobileDeviceState);
