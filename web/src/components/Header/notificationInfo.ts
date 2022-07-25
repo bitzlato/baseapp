@@ -242,19 +242,19 @@ export function notificationInfo(
         text: t('comissionReturn', item.data),
         createdAt,
       };
-    case 'freeze': {
-      const type = item.data.type
-        .split(',')
-        .map((i: string) => t(`freezeType${i}`))
-        .join(', ');
+    case 'tradeDispute': {
+      const tradeIds = item.data.tradeIds as string[];
+
+      const tradeList = tradeIds.map((id) => `№ ${id}`).join(', ');
 
       return {
-        text: t('freeze', { expire: new Date(item.data.expire) }),
-        alert: t('freezeReason', {
-          type,
-          reason: item.data.reason,
-          expire: new Date(item.data.expire),
-        }),
+        text: t('tradeDispute', { tradeList }),
+        createdAt,
+      };
+    }
+    case 'freeze': {
+      return {
+        text: t('freeze'),
         createdAt,
       };
     }
