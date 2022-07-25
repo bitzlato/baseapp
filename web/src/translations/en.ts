@@ -48,9 +48,10 @@ export const en = {
     '✌ You have win the dispute for trade #{tradeId} and received {amount} {cryptocurrency}.',
   'notifications.dividendsReceived':
     'You have received {cryptocurrencyamount} {cryptocurrencycode} referral fees 🤝',
-  'notifications.freeze': 'Your account if frozen till {expire, LL}',
-  'notifications.freezeReason':
-    'Freeze reason "{reason}". Operation types "{type}". Release date {expire, LL}',
+  'notifications.tradeDispute':
+    '⚠️ Your active trades automatically went into dispute, due to account restrictions of one of the parties.\nList of deals: {tradeList}',
+  'notifications.freeze':
+    'Your account is limited!\nTo remove the restriction, please contact the support',
   'notifications.freezeTypeall': 'all',
   'notifications.freezeTypeexchange_orders': 'exchange orders',
   'notifications.freezeTypetrades': 'p2p trade',

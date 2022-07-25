@@ -31,7 +31,8 @@ export type EventNameType =
   | 'user24hInactivityMessage'
   | 'walletAddressDropped'
   | 'withdrawCanceled'
-  | 'verificationReset';
+  | 'verificationReset'
+  | 'tradeDispute';
 
 type NotificationBase = {
   name: EventNameType;
