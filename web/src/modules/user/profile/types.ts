@@ -1,6 +1,7 @@
 import { Money } from '@bitzlato/money-js';
 import { Language } from 'web/src/types';
 import { Label } from 'web/src/modules/user/kyc/label/actions';
+import { FeatureMap } from 'web/src/types/featuresToggling.types';
 
 export interface UserProfile {
   first_name: string;
@@ -104,6 +105,7 @@ export interface User {
   kyc_verification_url: string;
   account_statements_url: string;
   email_verified: boolean;
+  features?: FeatureMap | undefined;
 }
 
 export interface TradeStatistics {
