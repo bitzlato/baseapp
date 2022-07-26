@@ -136,6 +136,14 @@ module.exports = {
               url: false,
             },
           },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [require.resolve('postcss-preset-env')],
+              },
+            },
+          },
         ],
       },
 
