@@ -34,6 +34,10 @@ export const input = style([
   },
 ]);
 
+export const inputError = style({
+  borderColor: vars.colors.danger,
+});
+
 export const label = style([
   sprinkles({
     position: 'absolute',

@@ -9,9 +9,10 @@ type SprinklesKeys = keyof Sprinkles;
 type InputProps<C extends ElementType = 'input'> = {
   as?: C | undefined;
   label?: string | undefined;
+  isError?: boolean | undefined;
+  icon?: ReactNode | undefined;
   inputMode?: JSX.IntrinsicElements['input']['inputMode'] | undefined;
   onChange?: ((value: string) => void) | undefined;
-  icon?: ReactNode;
 };
 
 export type TextInputProps<C extends ElementType = 'input'> = InputProps<C> &
@@ -23,6 +24,7 @@ export const TextInput = ({
   label,
   placeholder = ' ',
   className,
+  isError = false,
   onChange,
   ...inputProps
 }: TextInputProps) => {
@@ -37,7 +39,7 @@ export const TextInput = ({
         type={type}
         placeholder={placeholder}
         {...inputProps}
-        className={cn(s.input, className)}
+        className={cn(s.input, className, isError && s.inputError)}
         onChange={handleChange}
       />
       <Box as="span" className={s.label}>
@@ -54,9 +56,10 @@ export const TextAreaInput = ({
   as = 'textarea',
   rows = 3,
   label,
-  className,
-  onChange,
   icon,
+  className,
+  isError = false,
+  onChange,
   ...restProps
 }: TextAreaInputProps) => {
   const handleChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
@@ -69,7 +72,13 @@ export const TextAreaInput = ({
         as={as}
         rows={rows}
         placeholder=""
-        className={cn(s.input, s.textAreaPlaceholder, className, icon && s.showIcon)}
+        className={cn(
+          s.input,
+          s.textAreaPlaceholder,
+          className,
+          icon && s.showIcon,
+          isError && s.inputError,
+        )}
         onChange={handleChange}
         {...restProps}
       />
