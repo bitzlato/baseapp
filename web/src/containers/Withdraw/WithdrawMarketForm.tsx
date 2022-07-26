@@ -220,7 +220,7 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
           )}
         </Box>
 
-        {blockchainFeeEnabled && (
+        {blockchainFeeEnabled && beneficiary.id !== 0 && (
           <WithdrawBlockchainFees
             blockchainFees={blockchainFees}
             value={blockchainFee}
