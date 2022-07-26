@@ -21,9 +21,8 @@ interface Props {
 
 export const Deposit: FC<Props> = ({ general, wallet }) => {
   const cryptoCurrency = getCurrencyCodeSymbol(general.currency);
-  const isBtc = cryptoCurrency === 'BTC';
   const hasP2P = general.balanceP2P !== undefined;
-  const hasMarket = !isBtc && wallet !== undefined;
+  const hasMarket = wallet !== undefined;
 
   const options = useMemo(
     () => OPTIONS.filter((d) => (d === 'market' && hasMarket) || (d === 'p2p' && hasP2P)),
