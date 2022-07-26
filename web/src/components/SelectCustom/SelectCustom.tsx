@@ -34,6 +34,7 @@ export interface SelectCustomProps<Option> {
   getOptionLabel?: (option: Option) => string;
   getOptionValue?: (option: Option) => string;
   isOptionSelected?: (option: Option, selectValue: Option | null) => boolean;
+  isError?: boolean | undefined;
   onChange?: (option: Option) => void;
 }
 
@@ -64,6 +65,7 @@ export const SelectCustom = <Option,>({
   getOptionValue = getOptionValueBuiltin,
   getOptionLabel = getOptionLabelBuiltin,
   isOptionSelected,
+  isError = false,
   onChange,
 }: SelectCustomProps<Option>) => {
   const [selectedValue, setSelectedValue] = useStateWithDeps(() => value, [value]);
@@ -141,7 +143,7 @@ export const SelectCustom = <Option,>({
         px="4x"
         borderWidth="1x"
         borderStyle="solid"
-        borderColor="inputBorder"
+        borderColor={isError ? 'danger' : 'inputBorder'}
         borderRadius="1.5x"
         cursor="pointer"
         textAlign="left"
