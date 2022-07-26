@@ -1,12 +1,11 @@
-import { globalStyle } from '@vanilla-extract/css';
-import { sprinkles } from 'web/src/theme/sprinkles.css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { fontSizeVars, radiiVars, sizeVars, vars } from 'web/src/theme/vars.css';
 
 export { inputContainer, label } from 'web/src/components/TextInputCustom/TextInputCustom.css';
 
-export const input = sprinkles({
+export const input = style({
   position: 'relative',
-  width: 'full',
+  width: '100%',
 });
 
 globalStyle(`${input}.react-date-picker, ${input}.react-date-picker *`, {
