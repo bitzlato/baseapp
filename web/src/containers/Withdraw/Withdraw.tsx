@@ -22,9 +22,8 @@ export const Withdraw: FC<Props> = ({ general, wallet }) => {
   const t = useT();
 
   const currencyCode = getCurrencyCodeSymbol(general.currency);
-  const isBTC = currencyCode === 'BTC';
   const hasP2P = general.balanceP2P !== undefined;
-  const hasMarket = !isBTC && wallet !== undefined;
+  const hasMarket = wallet !== undefined;
 
   const availableWalletTypes = useMemo(() => {
     return WALLET_TYPES.filter((type) => {
