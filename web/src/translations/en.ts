@@ -333,13 +333,13 @@ export const en = {
   'page.body.wallets.table.invoiced': 'Invoiced',
 
   'page.body.wallets.tabs.withdraw': 'Withdraw',
-  'page.body.wallets.tabs.withdraw.content.amount': 'Withdrawal Amount',
+  'page.body.wallets.tabs.withdraw.content.amount': 'Withdrawal amount',
   'page.body.wallets.tabs.withdraw.content.code2fa': '2FA code',
-  'page.body.wallets.tabs.withdraw.content.fee': 'Withdrawal Fee',
-  'page.body.wallets.tabs.withdraw.content.total': 'Total Withdrawal Amount',
-  'page.body.wallets.tabs.withdraw.content.min': 'Min Withdrawal Amount',
-  'page.body.wallets.tabs.withdraw.content.limit24h': 'Withdrawal Limit 24h',
-  'page.body.wallets.tabs.withdraw.content.limit1month': 'Withdrawal Limit for 1 month',
+  'page.body.wallets.tabs.withdraw.content.fee': 'Withdrawal fee',
+  'page.body.wallets.tabs.withdraw.content.total': 'Withdrawal amount including fees',
+  'page.body.wallets.tabs.withdraw.content.min': 'Min withdrawal amount',
+  'page.body.wallets.tabs.withdraw.content.limit24h': 'Withdrawal limit 24h',
+  'page.body.wallets.tabs.withdraw.content.limit1month': 'Withdrawal limit for 1 month',
   'page.body.wallets.tabs.withdraw.content.unlimited': 'Unlimited',
   'page.body.wallets.tabs.withdraw.content.button': 'Withdraw',
 
@@ -369,6 +369,7 @@ export const en = {
   'page.body.wallets.tabs.withdraw.modal.confirmation': 'Confirmation',
   'page.body.wallets.tabs.withdraw.modal.message1': 'You will receive ',
   'page.body.wallets.tabs.withdraw.modal.message2': ' on address',
+  'page.body.wallets.tabs.withdraw.modal.message3': 'The balance is charged with a fee',
   'page.body.wallets.tabs.withdraw.modal.button.cancel': 'Cancel',
   'page.body.wallets.tabs.withdraw.modal.button.withdraw': 'Withdraw',
 

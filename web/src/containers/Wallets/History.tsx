@@ -55,7 +55,10 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
   const data = resp.data?.data ?? [];
   const total = resp.data?.total ?? 0;
 
-  const headers = useMemo(() => [t('Date'), t('Status'), t('Amount')], [t]);
+  const headers = useMemo(
+    () => [t('Date'), t('Status'), t('Amount'), t('page.body.history.withdraw.header.fee')],
+    [t],
+  );
 
   const tableData = data
     .sort((a, b) => sortByDateDesc(a.created_at, b.created_at))
@@ -69,6 +72,7 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
           <WithdrawStatus item={d as Withdraw} minConfirmations={blockchain.min_confirmations} />
         ),
         <AmountFormat key={d.id} money={createMoney(d.amount, ccy)} />,
+        <AmountFormat key={d.id} money={createMoney(d.fee, ccy)} />,
       ];
     });
 

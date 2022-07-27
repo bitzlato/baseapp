@@ -110,7 +110,8 @@ export const WithdrawMarket: FC<Props> = ({ wallet }) => {
       {showConfirmModal ? (
         <ModalWithdrawConfirmation
           show={showConfirmModal}
-          amount={withdrawData.total}
+          amount={withdrawData.amount}
+          total={withdrawData.total}
           currency={wallet.currency.code}
           precision={wallet.currency.minorUnit}
           rid={withdrawalAddress}
