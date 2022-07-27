@@ -338,7 +338,7 @@ export const ru: LangType = {
   'page.body.wallets.tabs.withdraw.content.amount': 'Сумма вывода',
   'page.body.wallets.tabs.withdraw.content.code2fa': '2FA код',
   'page.body.wallets.tabs.withdraw.content.fee': 'Комиссия',
-  'page.body.wallets.tabs.withdraw.content.total': 'Сумма вывода',
+  'page.body.wallets.tabs.withdraw.content.total': 'Сумма вывода с учётом комиссий',
   'page.body.wallets.tabs.withdraw.content.min': 'Минимальная сумма вывода',
   'page.body.wallets.tabs.withdraw.content.limit24h': 'Лимит на вывод за 24ч',
   'page.body.wallets.tabs.withdraw.content.limit1month': 'Лимит на вывод за 1 месяц',
@@ -371,6 +371,7 @@ export const ru: LangType = {
   'page.body.wallets.tabs.withdraw.modal.confirmation': 'Подтверждение',
   'page.body.wallets.tabs.withdraw.modal.message1': 'Вы получите ',
   'page.body.wallets.tabs.withdraw.modal.message2': ' на кошелек',
+  'page.body.wallets.tabs.withdraw.modal.message3': 'С учетом комиссии с баланса взимается',
   'page.body.wallets.tabs.withdraw.modal.button.cancel': 'Отменить',
   'page.body.wallets.tabs.withdraw.modal.button.withdraw': 'Вывести',
 

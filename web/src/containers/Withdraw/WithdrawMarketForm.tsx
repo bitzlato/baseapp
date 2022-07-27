@@ -91,10 +91,10 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
     if (blockchainCurrency) {
       const fee = blockchainCurrency?.withdraw_fee;
       const amountMoney = createMoney(amount, wallet.currency);
-      let totalMoney = amountMoney.subtract(fee);
+      let totalMoney = amountMoney.add(fee);
       const networkFee = blockchainFeeEnabled ? blockchainFees?.fees[blockchainFee] : undefined;
       if (networkFee) {
-        totalMoney = totalMoney.subtract(networkFee);
+        totalMoney = totalMoney.add(networkFee);
       }
 
       return totalMoney.isNegative() ? (0).toFixed(wallet.precision) : totalMoney.toString();
