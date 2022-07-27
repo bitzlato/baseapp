@@ -48,9 +48,10 @@ export const ru: LangType = {
     '✌ Вы победили в споре сделки {tradeId} и получили {amount} {cryptocurrency}.',
   'notifications.dividendsReceived':
     'Вы получили {cryptocurrencyamount} {cryptocurrencycode} вознаграждения от реферала 🤝',
-    'notifications.tradeDispute':
+  'notifications.tradeDispute':
     '⚠️ Ваши активные сделки автоматически перешли в спор, из-за ограничений аккаунта одной из сторон.\nСписок сделок: {tradeList}',
-  'notifications.freeze': 'Ваш аккаунт ограничен!\nЧтобы снять ограничение, пожалуйста, обратитесь в службу поддержки',
+  'notifications.freeze':
+    'Ваш аккаунт ограничен!\nЧтобы снять ограничение, пожалуйста, обратитесь в службу поддержки',
   'notifications.freezeTypeall': 'все',
   'notifications.freezeTypeexchange_orders': 'торги на бирже',
   'notifications.freezeTypetrades': 'p2p торги',
@@ -337,7 +338,7 @@ export const ru: LangType = {
   'page.body.wallets.tabs.withdraw.content.amount': 'Сумма вывода',
   'page.body.wallets.tabs.withdraw.content.code2fa': '2FA код',
   'page.body.wallets.tabs.withdraw.content.fee': 'Комиссия',
-  'page.body.wallets.tabs.withdraw.content.total': 'Сумма вывода',
+  'page.body.wallets.tabs.withdraw.content.total': 'Сумма вывода с учётом комиссий',
   'page.body.wallets.tabs.withdraw.content.min': 'Минимальная сумма вывода',
   'page.body.wallets.tabs.withdraw.content.limit24h': 'Лимит на вывод за 24ч',
   'page.body.wallets.tabs.withdraw.content.limit1month': 'Лимит на вывод за 1 месяц',
