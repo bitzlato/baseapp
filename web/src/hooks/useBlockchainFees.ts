@@ -16,18 +16,23 @@ export const useBlockchainFees = (
     }
 
     const currency = getMarketCurrency(data.currency_fee.currency_id.toUpperCase());
-    const low = createMoney(data.currency_fee.low, currency);
-    const lowInFiat = currency.apiCurrency
-      ? low.convert(currency.apiCurrency.price, USD_CCY)
+    const low = data.currency_fee.low ? createMoney(data.currency_fee.low, currency) : undefined;
+    const lowInFiat =
+      currency.apiCurrency && low ? low.convert(currency.apiCurrency.price, USD_CCY) : undefined;
+    const market = data.currency_fee.market
+      ? createMoney(data.currency_fee.market, currency)
       : undefined;
-    const market = createMoney(data.currency_fee.market, currency);
-    const marketInFiat = currency.apiCurrency
-      ? market.convert(currency.apiCurrency.price, USD_CCY)
+    const marketInFiat =
+      currency.apiCurrency && market
+        ? market.convert(currency.apiCurrency.price, USD_CCY)
+        : undefined;
+    const aggressive = data.currency_fee.aggressive
+      ? createMoney(data.currency_fee.aggressive, currency)
       : undefined;
-    const aggressive = createMoney(data.currency_fee.aggressive, currency);
-    const aggressiveInFiat = currency.apiCurrency
-      ? aggressive.convert(currency.apiCurrency.price, USD_CCY)
-      : undefined;
+    const aggressiveInFiat =
+      currency.apiCurrency && aggressive
+        ? aggressive.convert(currency.apiCurrency.price, USD_CCY)
+        : undefined;
 
     return {
       ...data,
