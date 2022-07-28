@@ -87,7 +87,9 @@ export const TradeHistory: FC = () => {
             borderStyle="solid"
           >
             <Box mb="3x">{timeBlock()}</Box>
-            <Text color="secondary">{t(`trade.history.${history.status}`)}</Text>
+            <Text color="tradeMobileHistoryContentColor">
+              {t(`trade.history.${history.status}`)}
+            </Text>
           </Box>
         ),
       };

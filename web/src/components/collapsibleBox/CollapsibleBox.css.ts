@@ -19,7 +19,7 @@ export const collapsible = style({
 });
 
 export const expand = style({
-  maxHeight: '25em',
+  maxHeight: '100%',
 });
 
 export const collapseContent = styleVariants({

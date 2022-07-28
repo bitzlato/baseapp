@@ -17,7 +17,9 @@ export const TradeTerms: FC = () => {
       </Box>
       <Divider />
       <Box py="5x" px="6x">
-        <Text fontSize="medium">{trade.terms || t('trade.terms.history.empty')}</Text>
+        <Text fontSize="medium" whiteSpace="pre-line">
+          {trade.terms || t('trade.terms.history.empty')}
+        </Text>
       </Box>
     </Box>
   );

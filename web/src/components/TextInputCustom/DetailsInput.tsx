@@ -36,7 +36,7 @@ export const DetailsInput: FC<Props> = ({ details, onChangeDetails, lastDetails,
   };
 
   return (
-    <>
+    <Box position="relative">
       <TextAreaInput
         rows={rows}
         onChange={onChangeDetails}
@@ -66,6 +66,6 @@ export const DetailsInput: FC<Props> = ({ details, onChangeDetails, lastDetails,
           ))}
         </Box>
       )}
-    </>
+    </Box>
   );
 };

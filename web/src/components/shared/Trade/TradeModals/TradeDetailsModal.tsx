@@ -46,7 +46,11 @@ export const TradeDetailsModal: FC<ITradeDetailsModal> = ({ confirm, onClose, pa
         </Box>
       </ModalBody>
       <ModalFooter>
-        <Box w={isMobileDevice ? 'full' : 'auto'} mx={isMobileDevice ? '0' : 'auto'}>
+        <Box
+          w={isMobileDevice ? 'full' : 'auto'}
+          mx={isMobileDevice ? '0' : 'auto'}
+          py={isMobileDevice ? '6x' : '4x'}
+        >
           <Button fullWidth onClick={handleConfirm} color="secondary" disabled={!details}>
             {t('Confirm')}
           </Button>

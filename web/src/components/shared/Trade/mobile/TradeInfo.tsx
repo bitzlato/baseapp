@@ -1,13 +1,18 @@
 import { FC, useState } from 'react';
 import { Box } from 'web/src/components/ui/Box';
-import ThumbUp from 'web/src/assets/svg/ThumbUp.svg';
-import ThumbDown from 'web/src/assets/svg/ThumbDown.svg';
+import ThumbUpIcon from 'web/src/assets/svg/ThumbUp.svg';
+import ThumbDownIcon from 'web/src/assets/svg/ThumbDown.svg';
 import { CollapsibleBox } from 'web/src/components/collapsibleBox/CollapsibleBox';
 import { useTradeContext } from 'web/src/components/shared/Trade/TradeContext';
 import { TradePartnerShort } from 'web/src/components/shared/Trade/TradePartnerShort';
 import { MobileTabs } from 'web/src/components/shared/Trade/types';
 import { MobileTradeTab } from 'web/src/components/shared/Trade/mobile/TradeTab';
 import { TradeHistory } from 'web/src/components/shared/Trade/TradeHistory';
+import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
+import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
+import { createMoney } from 'web/src/helpers/money';
+import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
+import { Text } from 'src/components/ui/Text';
 
 const MobileTradeInfoBoxCollapsible: FC<{
   elements: { key: string; value: JSX.Element | string | number }[];
@@ -99,6 +104,14 @@ export const MobileTradeInfo: FC = () => {
   };
   const { trade } = useTradeContext();
 
+  const { getFiatCurrency } = useP2PFiatCurrencies();
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
+
+  const ccurrency = getCryptoCurrency(trade.cryptocurrency.code);
+  const currency = getFiatCurrency(trade.currency.code);
+  const amountMoney = createMoney(trade.currency.amount, currency);
+  const rateMoney = createMoney(trade.rate, currency);
+
   const renderTab = (() => {
     if (tab === 'trader') {
       const dealStat = trade.partner.dealStats.find(
@@ -120,34 +133,25 @@ export const MobileTradeInfo: FC = () => {
             elements={[
               {
                 key: t('trade.info.trader.rating'),
-                value: (
-                  <Box display="flex" alignItems="center">
-                    <ThumbUp />
-                    <Box mx="2x">
-                      <Box as="span" fontSize="medium" color="tradeMobileInfoBoxValue">
-                        {thumbUp}
-                      </Box>
-                    </Box>
-
-                    <ThumbDown />
-
-                    <Box mx="2x">
-                      <Box as="span" fontSize="medium" color="tradeMobileInfoBoxValue">
-                        {thumbDown}
-                      </Box>
-                    </Box>
-
-                    <Box>
-                      <Box as="span" fontSize="medium" color="tradeMobileInfoBoxValue">
-                        {trade.partner.rating}
-                      </Box>
-                    </Box>
-                  </Box>
-                ),
+                value: trade.partner.rating,
               },
               {
-                key: t('trade.info.trader.reputation'),
-                value: trade.partner.safetyIndex,
+                key: t('Comments'),
+                value: (
+                  <Box display="flex" alignItems="center" gap="1x">
+                    <ThumbUpIcon />
+
+                    <Text as="span" fontSize="small" color="tradeInfoBoxValue">
+                      {thumbUp}
+                    </Text>
+
+                    <ThumbDownIcon />
+
+                    <Text as="span" fontSize="small" color="tradeInfoBoxValue">
+                      {thumbDown}
+                    </Text>
+                  </Box>
+                ),
               },
               {
                 key: t('trade.info.trader.deals.successful'),
@@ -176,8 +180,13 @@ export const MobileTradeInfo: FC = () => {
               }
               hidden={
                 <Box pb="4x">
-                  <Box as="span" fontSize="medium" color="tradeMobileInfoBoxValue">
-                    {trade.terms}
+                  <Box
+                    as="span"
+                    whiteSpace="pre-line"
+                    fontSize="medium"
+                    color="tradeMobileInfoBoxValue"
+                  >
+                    {trade.terms || t('trade.terms.history.empty')}
                   </Box>
                 </Box>
               }
@@ -207,11 +216,21 @@ export const MobileTradeInfo: FC = () => {
               elements={[
                 {
                   key: t('trade.info.rate'),
-                  value: `${trade.rate} ${trade.currency.code}`,
+                  value: (
+                    <Text>
+                      <P2PFiatFormat cryptoCurrency={ccurrency} money={rateMoney} />{' '}
+                      {trade.currency.code}
+                    </Text>
+                  ),
                 },
                 {
                   key: t('trade.info.fiat.amount'),
-                  value: `${trade.currency.amount} ${trade.currency.code}`,
+                  value: (
+                    <Text>
+                      <P2PFiatFormat cryptoCurrency={ccurrency} money={amountMoney} />{' '}
+                      {trade.currency.code}
+                    </Text>
+                  ),
                 },
                 {
                   key: t('trade.info.fee'),

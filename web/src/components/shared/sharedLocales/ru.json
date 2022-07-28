@@ -163,6 +163,8 @@
   "trade.state.type.purchase": "Покупаем",
   "trade.state.purchase.cancel.title": "Сделка отменена",
   "trade.state.purchase.cancel.subtitle": "",
+  "trade.state.purchase.trade_created.owner.title": "",
+  "trade.state.purchase.trade_created.owner.subtitle": "Пользователь ожидает подтверждения сделки от Вас, если вы не появитесь в течение {minutes} минут, то сделка будет отменена автоматически",
   "trade.state.purchase.trade_created.title": "Ждем продавца",
   "trade.state.purchase.trade_created.subtitle": "Ожидаем {name}. Если он не появится в течение {minutes} минут, сделка будет автоматически отменена",
   "trade.state.purchase.confirm_trade.title": "Переведите деньги",
@@ -177,6 +179,7 @@
   "trade.state.details": "Указанные реквизиты {paymethod}",
   "trade.state.for": "за",
   "trade.state.atUser": "у пользователя {name}",
+  "trade.state.toUser": "пользователю {name}",
   "trade.state.viaPaymethod": "через {paymethod}",
   "trade.state.leave_feedback": "Оцените работу трейдера",
 
@@ -207,7 +210,7 @@
   "trade.terms.history.empty": "не указано",
 
   "trade.currencies.you_get": "Вы получите",
-  "trade.currencies.you_pay": "Вы платите",
+  "trade.currencies.you_pay": "Вы отдаете",
 
   "trade.info.trade.title": "Информация о сделке",
   "trade.info.trader.title": "Информация о трейдере",
@@ -222,6 +225,9 @@
   "trade.tab.chat": "Чат",
   "trade.tab.info": "Информация о сделке",
 
+  "trade.modal.dispute.title": "Открытие спора",
+  "trade.modal.dispute.action": "Пожалуйста, опишите причину спора",
+  "trade.modal.dispute.button": "Открыть спор",
   "trade.modal.cancel.button": "Отменить сделку",
   "trade.modal.cancel.title": "Отмена сделки",
   "trade.modal.cancel.action.1": "Вы уверены в том, что хотите",

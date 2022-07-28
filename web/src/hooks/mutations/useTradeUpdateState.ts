@@ -8,7 +8,7 @@ import {
   TradeFeedback,
   TradeInfo,
 } from 'web/src/components/shared/Trade/types';
-import { fetchJson, FetchError } from 'web/src/helpers/fetch';
+import { fetchJson, FetchError, fetchData } from 'web/src/helpers/fetch';
 import { ChatMessageList } from 'web/src/hooks/data/useUserChat';
 import { Trade } from 'web/src/modules/p2p/trade.types';
 
@@ -21,6 +21,11 @@ type UpdateTradeState = {
   tradeId: number;
   action: TradeAvailableAction;
   twoFACode?: string | null | undefined;
+};
+
+type DescribeDispute = {
+  tradeId: number;
+  reason: string;
 };
 
 type UpdateTradeStatePostAction = {
@@ -50,7 +55,7 @@ type TradeStart = {
 type TradeStartResp = Trade;
 
 const updateTradeDetails = async ({ tradeId, details }: UpdateTradeDetails) => {
-  const response = await fetchJson(`${p2pUrl()}/trade/${tradeId}`, {
+  const response = await fetchData(`${p2pUrl()}/trade/${tradeId}`, {
     method: 'PUT',
     body: JSON.stringify({ details }),
     headers: {
@@ -70,6 +75,19 @@ const updateTradeState = async ({ tradeId, action, twoFACode }: UpdateTradeState
       'Content-type': 'application/json; charset=UTF-8',
       ...(twoFACode && { 'X-Code-2FA': twoFACode }),
       ...(twoFACode === null && { 'X-Code-NO2FA': 'true' }),
+    },
+    credentials: 'include',
+  });
+
+  return response;
+};
+
+const describeDispute = async ({ tradeId, reason }: DescribeDispute) => {
+  const response = await fetchJson(`${p2pUrl()}/trade/${tradeId}/dispute/description`, {
+    method: 'POST',
+    body: JSON.stringify({ description: reason }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
     },
     credentials: 'include',
   });
@@ -201,6 +219,18 @@ export const useTradeUpdateState = ({
         } else {
           handleFetchError(error);
         }
+      }
+    },
+  });
+};
+
+export const useDisputeDescribe = () => {
+  const handleFetchError = useHandleFetchError();
+
+  return useMutation<DescribeDispute, any, unknown>(describeDispute, {
+    onFailure: ({ error }) => {
+      if (error instanceof FetchError) {
+        handleFetchError(error);
       }
     },
   });

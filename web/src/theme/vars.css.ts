@@ -296,6 +296,7 @@ export const [themeLight, vars] = createTheme({
     breadcrumbsColor: colors.ebonyClay70,
 
     collapsibleBoxExpandControls: colors.indigo,
+    collapsibleTextExpandControls: colors.white,
 
     calendarItemActiveBg: colors.indigo,
     calendarItemActiveText: colors.white,
@@ -306,7 +307,8 @@ export const [themeLight, vars] = createTheme({
     tradeMainComponentCircleEmpty: colors.white10,
 
     tradeMainComponentTradeLabel: colors.white10,
-    tradeMainComponentTradeCounterDetails: colors.white10,
+    tradeMainComponentTradeCounterDetailsBackground: colors.white10,
+    tradeMainComponentTradeCounterDetailsColor: colors.white,
 
     tradeMainComponentAdded10Minutes: colors.white,
 
@@ -353,6 +355,7 @@ export const [themeLight, vars] = createTheme({
     tradeMobilePartnerTitleColor: colors.ebonyClay,
     tradeMobileInfoBoxKey: colors.ebonyClay,
     tradeMobileInfoBoxValue: colors.ebonyClay,
+    tradeMobileHistoryContentColor: colors.white,
     tradeMobileHistoryItemFilled: colors.white70,
     tradeMobileHistoryItemUnFilled: colors.transparent,
     tradeMobileHistoryItemUnFilledBorder: colors.gray,
@@ -619,6 +622,7 @@ export const themeDark = createTheme(vars, {
     breadcrumbsColor: colors.white50,
 
     collapsibleBoxExpandControls: colors.goldTips,
+    collapsibleTextExpandControls: colors.white,
 
     calendarItemActiveBg: colors.goldTips,
     calendarItemActiveText: colors.ebonyClay,
@@ -629,7 +633,8 @@ export const themeDark = createTheme(vars, {
     tradeMainComponentCircleEmpty: colors.white10,
 
     tradeMainComponentTradeLabel: colors.white10,
-    tradeMainComponentTradeCounterDetails: colors.white10,
+    tradeMainComponentTradeCounterDetailsBackground: colors.white10,
+    tradeMainComponentTradeCounterDetailsColor: colors.white,
 
     tradeMainComponentAdded10Minutes: colors.white,
 
@@ -650,7 +655,7 @@ export const themeDark = createTheme(vars, {
     tradeHistoryCircleEmpty: colors.white10,
     tradeHistoryCircleBorder: colors.white,
     tradeHistoryCircleContentColor: colors.white,
-    tradeHistoryCircleContentColorActive: colors.white,
+    tradeHistoryCircleContentColorActive: colors.ebonyClay,
 
     tradeInfoBackground: colors.ebonyClay,
     tradeInfoBox: colors.white05,
@@ -676,6 +681,7 @@ export const themeDark = createTheme(vars, {
     tradeMobilePartnerTitleColor: colors.white50,
     tradeMobileInfoBoxKey: colors.white,
     tradeMobileInfoBoxValue: colors.white,
+    tradeMobileHistoryContentColor: colors.white,
     tradeMobileHistoryItemFilled: colors.white05,
     tradeMobileHistoryItemUnFilled: colors.transparent,
     tradeMobileHistoryItemUnFilledBorder: colors.white70,
