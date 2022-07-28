@@ -18,6 +18,10 @@ export const TradeTimer: FC<{ targetTime: string }> = ({ targetTime }) => {
     };
   }, []);
 
+  if (duration.milliseconds() < 0) {
+    return <Box as="span">00:00:00</Box>;
+  }
+
   let hours: number | string = duration.hours();
   let minutes: number | string = duration.minutes();
   let seconds: number | string = duration.seconds();

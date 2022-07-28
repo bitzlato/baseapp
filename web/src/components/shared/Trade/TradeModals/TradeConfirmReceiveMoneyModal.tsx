@@ -6,7 +6,7 @@ import WarningTriangleIcon from 'web/src/assets/svg/WarningTriangleIcon.svg';
 import { useTradeAction, useTradeContext } from 'web/src/components/shared/Trade/TradeContext';
 
 export const TradeConfirmReceiveMoneyModal: FC = () => {
-  const { t } = useTradeContext();
+  const { t, formattedTradeValues } = useTradeContext();
   const { trade, toggleModal, modals } = useTradeContext();
   const tradeAction = useTradeAction();
   const { confirmPayment } = modals;
@@ -28,13 +28,13 @@ export const TradeConfirmReceiveMoneyModal: FC = () => {
           </Box>
           <Box as="span" textAlign="center" fontWeight="strong" fontSize="large">
             {t('trade.modal.receive_money.sure', {
-              amount: trade.currency.amount,
+              amount: formattedTradeValues.currency,
               code: trade.currency.code,
             })}
           </Box>
           <Box as="span" textAlign="center" fontSize="medium">
             {t('trade.modal.receive_money.no_refund', {
-              cryptoamount: trade.cryptocurrency.amount,
+              cryptoamount: formattedTradeValues.cryptocurrency,
               ccode: trade.cryptocurrency.code,
             })}
           </Box>

@@ -70,7 +70,7 @@ export enum TradeStatus {
 
 export type Tabs = 'tradeInfo' | 'chat';
 export type MobileTabs = 'trader' | 'trade';
-export type TradeModals = 'details' | 'confirmCancel' | 'confirmPayment' | 'tips';
+export type TradeModals = 'details' | 'confirmCancel' | 'confirmPayment' | 'tips' | 'disputeReason';
 export type TradeFeedback = 'thumb_up' | 'weary' | 'hankey';
 export interface TradeContextValue {
   trade: Trade;
@@ -80,6 +80,7 @@ export interface TradeContextValue {
   handleTradeTips: (tipsAmount: number) => void;
   handleTrustUser: (flag: boolean, publicName: string) => void;
   handleTradeFeedback: (code: TradeFeedback) => void;
+  handleOpenDispute: (reason: string | undefined) => void;
   modals: { [key in TradeModals]: boolean };
   toggleModal: (modal: TradeModals) => void;
   chat: {
@@ -94,5 +95,6 @@ export interface TradeContextValue {
   };
   t: SharedTranslateFn;
   theme: Theme;
+  formattedTradeValues: { currency: string; cryptocurrency: string };
 }
 export interface ISharedTrade extends TradeContextValue {}

@@ -1,16 +1,19 @@
 import { FC } from 'react';
 import { Box } from 'web/src/components/ui/Box';
-import VerifiedIcon from 'web/src/assets/svg/VerifiedIcon.svg';
 import { useTradeContext } from 'web/src/components/shared/Trade/TradeContext';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Text } from 'src/components/ui/Text';
 import { ActionOnTraderButton } from 'web/src/components/p2p/ActionOnTraderButton';
-import { OnlineStatusByLastActivity } from '../../ui/OnlineStatus';
+import { OnlineStatusByLastActivity } from 'web/src/components/ui/OnlineStatus';
+import { getLinkToP2PUser } from 'web/src/components/shared/Ads/getLinkToP2PUser';
+import { useAdapterContext } from 'web/src/components/shared/Adapter';
+import { TraderIcons } from 'web/src/components/traderInfo/TraderIcons';
 
 export const TradePartnerShort: FC = () => {
   const { trade, handleTrustUser } = useTradeContext();
   const { t } = useTradeContext();
-  const { isMobileDevice } = useAppContext();
+  const { isMobileDevice, lang } = useAppContext();
+  const { Link } = useAdapterContext();
 
   const trustUser = () => {
     handleTrustUser(!trade.partner.trusted, trade.partner.name);
@@ -26,11 +29,7 @@ export const TradePartnerShort: FC = () => {
     />
   );
 
-  const verifiedIcon = (
-    <Box w="5x" h="5x">
-      <VerifiedIcon />
-    </Box>
-  );
+  const verifiedIcon = <TraderIcons traderInfo={trade.partner} />;
 
   if (isMobileDevice) {
     return (
@@ -40,7 +39,15 @@ export const TradePartnerShort: FC = () => {
         </Box>
         <Box display="flex" justifyContent="space-between">
           <Box display="flex" alignItems="center" gap="2x">
-            <Box fontSize="lead" as="span" color="tradePartnerColor">
+            <Box
+              as={Link}
+              to={getLinkToP2PUser({ lang, userName: trade.partner.name })}
+              color={{ default: 'adTrader', hover: 'adTrader' }}
+              display="block"
+              textOverflow="ellipsis"
+              fontWeight="strong"
+              fontSize="lead"
+            >
               {trade.partner.name}
             </Box>
             {trade.partner.verificationStatus === 'VERIFIED' && verifiedIcon}
@@ -60,11 +67,20 @@ export const TradePartnerShort: FC = () => {
       <Text color="tradePartnerTitleColor" fontSize="medium">
         {t('Trader')}
       </Text>
+
       <Box display="flex" justifyContent="space-between">
         <Box display="flex" alignItems="center" gap="2x">
-          <Text fontSize="lead" color="tradePartnerColor">
+          <Box
+            as={Link}
+            to={getLinkToP2PUser({ lang, userName: trade.partner.name })}
+            color={{ default: 'adTrader', hover: 'adTrader' }}
+            display="block"
+            textOverflow="ellipsis"
+            fontWeight="strong"
+            fontSize="lead"
+          >
             {trade.partner.name}
-          </Text>
+          </Box>
           {trade.partner.verificationStatus === 'VERIFIED' && verifiedIcon}
         </Box>
 

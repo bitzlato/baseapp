@@ -19,6 +19,7 @@ import { useAppContext, useLanguage, useTheme } from 'src/components/app/AppCont
 import { MobileTrade } from 'web/src/components/shared/Trade/mobile/Trade';
 import { TradeCancelModal } from 'web/src/components/shared/Trade/TradeModals/TradeCancelModal';
 import { TradeInputDetails } from 'web/src/components/shared/Trade/TradeInputDetails';
+import { TradeDisputeReasonModal } from 'web/src/components/shared/Trade/TradeModals/TradeDisputeReasonModal';
 import { TradeConfirmReceiveMoneyModal } from 'web/src/components/shared/Trade/TradeModals/TradeConfirmReceiveMoneyModal';
 import { themeDark, themeLight } from 'web/src/theme/vars.css';
 import { useAdapterContext, useSharedT } from 'web/src/components/shared/Adapter';
@@ -32,6 +33,7 @@ import { useFetchPaymethod } from 'web/src/hooks/data/useFetchPaymethod';
 import { UserInfo } from 'web/src/modules/p2p/user.types';
 import { PaymethodSource } from 'web/src/modules/p2p/types';
 import {
+  useDisputeDescribe,
   useTradeFeedback,
   useTradeSendDisputeMessage,
   useTradeSendMessage,
@@ -41,12 +43,21 @@ import {
   useTradeUpdateState,
 } from 'web/src/hooks/mutations/useTradeUpdateState';
 import { useTrustUser } from 'web/src/hooks/mutations/useTrustUser';
-import { TradeDetails } from './TradeDetails';
+import { Breadcrumbs, BreadcrumbsItem } from 'web/src/components/ui/Breadcrumbs';
+import {
+  getFormatOptionsByLanguage,
+  getP2PFiatOptionsByCode,
+} from 'web/src/components/AmountFormat/getFormatOptionsByLanguage';
+import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
+import { createMoney } from 'web/src/helpers/money';
+import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
 
 export const SharedTrade: FC = () => {
   const t = useSharedT();
   const { isMobileDevice } = useAppContext();
   const { params } = useAdapterContext<{ tradeId: string | undefined }>();
+  const { getFiatCurrency } = useP2PFiatCurrencies();
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
 
   const { tradeId } = params;
 
@@ -55,6 +66,7 @@ export const SharedTrade: FC = () => {
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [confirmPayment, setConfirmPayment] = useState(false);
   const [tips, setTips] = useState(false);
+  const [askDisputeReason, setAskDisputeReason] = useState(false);
 
   const gap = '3x';
   const themeClassName = theme === 'light' ? themeLight : themeDark;
@@ -65,8 +77,9 @@ export const SharedTrade: FC = () => {
       confirmCancel,
       confirmPayment,
       tips,
+      disputeReason: askDisputeReason,
     }),
-    [askTradeDetails, confirmCancel, confirmPayment, tips],
+    [askTradeDetails, confirmCancel, confirmPayment, tips, askDisputeReason],
   );
 
   const toggleModal = useCallback((modal: TradeModals) => {
@@ -86,6 +99,10 @@ export const SharedTrade: FC = () => {
 
     if (modal === 'tips') {
       toggler = setTips;
+    }
+
+    if (modal === 'disputeReason') {
+      toggler = setAskDisputeReason;
     }
 
     if (toggler) {
@@ -129,6 +146,8 @@ export const SharedTrade: FC = () => {
     toggleDetailsModal: () => toggleModal('details'),
   });
 
+  const [mutateDescribeDispute] = useDisputeDescribe();
+
   const [mutateTradeTimeout] = useTradeTimeout({ reloadTrade });
 
   const [mutateTradeDetails] = useTradeUpdateDetails({
@@ -158,6 +177,23 @@ export const SharedTrade: FC = () => {
       }
     },
     [trade.id, mutateTradeState],
+  );
+
+  const handleOpenDispute = useCallback(
+    (reason: string | undefined) => {
+      if (trade.id) {
+        mutateTradeState({ tradeId: trade.id, action: 'dispute', twoFACode: null })
+          .then(() => {
+            if (reason) {
+              mutateDescribeDispute({ tradeId: trade.id, reason });
+            }
+          })
+          .then(() => {
+            toggleModal('disputeReason');
+          });
+      }
+    },
+    [trade.id, mutateTradeState, mutateDescribeDispute, toggleModal],
   );
 
   const handleTradeDetails = useCallback(
@@ -229,6 +265,26 @@ export const SharedTrade: FC = () => {
     [disputeChat?.data, tradeDisputeChatLoading, handleTradeSendDisputeMessage],
   );
 
+  const tradeValues = useMemo(() => {
+    if (trade.id) {
+      return {
+        currency: createMoney(trade.currency.amount, getFiatCurrency(trade.currency.code)).toFormat(
+          {
+            ...getFormatOptionsByLanguage(lang),
+            ...getP2PFiatOptionsByCode(trade.currency.code),
+          },
+        ),
+
+        cryptocurrency: createMoney(
+          trade.cryptocurrency.amount,
+          getCryptoCurrency(trade.cryptocurrency.code),
+        ).toFormat({ ...getFormatOptionsByLanguage(lang), maxFractionDigits: 8 }),
+      };
+    }
+
+    return { currency: '0', cryptocurrency: '0' };
+  }, [trade.id, trade.currency, trade.cryptocurrency, lang, getFiatCurrency, getCryptoCurrency]);
+
   const context = useMemo(
     () => ({
       trade,
@@ -238,12 +294,14 @@ export const SharedTrade: FC = () => {
       handleTradeTips,
       handleTrustUser,
       handleTradeFeedback,
+      handleOpenDispute,
       modals,
       toggleModal,
       chat: chatContext,
       disputeChat: disputeChatContext,
       t,
       theme,
+      formattedTradeValues: tradeValues,
     }),
     [
       trade,
@@ -253,12 +311,14 @@ export const SharedTrade: FC = () => {
       handleTradeTips,
       handleTrustUser,
       handleTradeFeedback,
+      handleOpenDispute,
       modals,
       toggleModal,
       chatContext,
       disputeChatContext,
       t,
       theme,
+      tradeValues,
     ],
   );
 
@@ -272,33 +332,42 @@ export const SharedTrade: FC = () => {
         {isMobileDevice ? (
           <MobileTrade />
         ) : (
-          <Box p="3x" display="flex" flexDirection="row" gap={gap}>
-            <Box w="70%" display="flex" flexDirection="column" gap={gap} flexShrink={0}>
-              <TradeState />
-              <TradeDetails />
-              <TradeCurrencies />
-              <TradeTerms />
-              <TradeHistory />
+          <>
+            <Box px="8x">
+              <Breadcrumbs>
+                <BreadcrumbsItem to={`/${lang}/p2p`}>{t('Market')}</BreadcrumbsItem>
+                <BreadcrumbsItem to={`/${lang}/p2p/trades`}>{t('My trades')}</BreadcrumbsItem>
+                <BreadcrumbsItem>{trade.id}</BreadcrumbsItem>
+              </Breadcrumbs>
             </Box>
-            <Box
-              flexGrow={1}
-              flexShrink={1}
-              backgroundColor="tradeInfoBackground"
-              p="5x"
-              borderRadius="1.5x"
-              display="flex"
-              flexDirection="column"
-              gap={gap}
-            >
-              <TradePartnerShort />
-              <TradeInfo />
+            <Box pt="0" p="3x" display="flex" flexDirection="row" gap={gap}>
+              <Box w="70%" display="flex" flexDirection="column" gap={gap} flexShrink={0}>
+                <TradeState />
+                <TradeCurrencies />
+                <TradeTerms />
+                <TradeHistory />
+              </Box>
+              <Box
+                flexGrow={1}
+                flexShrink={1}
+                backgroundColor="tradeInfoBackground"
+                p="5x"
+                borderRadius="1.5x"
+                display="flex"
+                flexDirection="column"
+                gap={gap}
+              >
+                <TradePartnerShort />
+                <TradeInfo />
+              </Box>
             </Box>
-          </Box>
+          </>
         )}
         <TradeTipsModal />
         <TradeCancelModal />
         <TradeInputDetails />
         <TradeConfirmReceiveMoneyModal />
+        <TradeDisputeReasonModal />
       </Box>
     </TradeContext.Provider>
   );

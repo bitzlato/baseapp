@@ -11,6 +11,8 @@ import {
 import { useTradeContext } from 'web/src/components/shared/Trade/TradeContext';
 import { Divider } from 'web/src/components/shared/Divider';
 import { MobileTradeChat } from 'web/src/components/shared/Trade/mobile/TradeChat/TradeChat';
+import { Text } from 'web/src/components/ui/Text';
+import { TradeFeedback as TradeFeedbackComponent } from 'web/src/components/shared/Trade/TradeFeedback';
 
 type Props = {
   handlers: {
@@ -34,6 +36,7 @@ type Props = {
   title: string;
   action: string;
   description: string;
+  details: JSX.Element;
 };
 
 export const MobileTradeState: FC<Props> = ({
@@ -42,10 +45,8 @@ export const MobileTradeState: FC<Props> = ({
     handleActionDispute,
     handleActionAddtime,
     handleActionCancel,
-    handleActionTips,
     handleActionPayment,
     handleActionConfirmPayment,
-    handleTradeFeedback,
   },
   availableActions,
   showDetails,
@@ -54,6 +55,7 @@ export const MobileTradeState: FC<Props> = ({
   title,
   action,
   description,
+  details,
 }) => {
   const { t } = useTradeContext();
   const { trade } = useTradeContext();
@@ -62,6 +64,10 @@ export const MobileTradeState: FC<Props> = ({
   const [openChat, setOpenChat] = useState(false);
 
   const toggleChat = () => setOpenChat((c) => !c);
+
+  const feedbackAndTips = (availableActions.tips || availableActions.feedback) && (
+    <TradeFeedbackComponent tipsAvailable={availableActions.tips} />
+  );
 
   return (
     <>
@@ -118,94 +124,63 @@ export const MobileTradeState: FC<Props> = ({
           <Stepper direction="horizontal" steps={tradeSteps} />
         </Box>
 
-        <Box px="5x" display="flex" flexDirection="row" gap="4x" alignItems="center">
-          <Box display="flex" flexDirection="column" gap="1x">
-            <Box as="span" color="tradeMainComponentTitle" fontSize="medium" fontWeight="strong">
-              {description}
-            </Box>
-            <Box as="span" fontSize="medium" color="tradeMainComponentTitle">
-              {action}
-            </Box>
+        <Box px="5x" py="3x" display="flex" flexDirection="column" gap="1x">
+          <Box as="span" color="tradeMainComponentTitle" fontSize="medium" fontWeight="strong">
+            {description}
           </Box>
+          <Box as="span" fontSize="medium" color="tradeMainComponentTitle">
+            {action}
+          </Box>
+        </Box>
 
-          <Box display="flex" justifyContent="flex-end" flex={1} gap="6x" alignItems="center">
-            {trade.status === TradeStatus.TRADE_CREATED && trade.waitingTimeIncreased && (
-              <Box w="18x" color="tradeMainComponentAdded10Minutes" textAlign="center">
+        <Box
+          px="5x"
+          display="flex"
+          flexDirection="row"
+          gap="6x"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          {trade.status === TradeStatus.TRADE_CREATED && trade.waitingTimeIncreased && (
+            <Box
+              borderColor="tradeMainComponentAdded10Minutes"
+              borderWidth="1x"
+              borderStyle="dashed"
+              borderRadius="1x"
+              py="1x"
+              px="6x"
+              textAlign="center"
+              h="12x"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Text as="span" variant="caption" color="tradeMainComponentAdded10Minutes">
                 {t('trade.state.waitingTimeIncreased')}
-              </Box>
-            )}
-            {availableActions.addtime && (
-              <Button onClick={handleActionAddtime} variant="outlined" color="secondary">
-                {t('trade.state.button.addtime')}
-              </Button>
-            )}
+              </Text>
+            </Box>
+          )}
+          {availableActions.addtime && (
+            <Button onClick={handleActionAddtime} variant="outlined" color="primary">
+              {t('trade.state.button.addtime')}
+            </Button>
+          )}
 
-            {availableActions['confirm-trade'] && (
-              <Button onClick={handleActionConfirmTrade}>
-                {t('trade.state.button.confirm_trade')}
-              </Button>
-            )}
-            {availableActions.dispute && (
-              <Button onClick={handleActionDispute}>{t('trade.state.button.dispute')}</Button>
-            )}
-            {availableActions.tips && (
-              <Button onClick={handleActionTips}>{t('trade.state.button.tips')}</Button>
-            )}
-            {availableActions.feedback && (
-              <Box>
-                <Box as="span" fontSize="lead" fontWeight="strong" color="tradeMainComponentTitle">
-                  {t('trade.state.leave_feedback')}
-                </Box>
-                <Box display="flex" gap="2x" mt="1x">
-                  <Button
-                    fullWidth
-                    color="primary"
-                    variant="outlined"
-                    onClick={() => handleTradeFeedback('thumb_up')}
-                  >
-                    🙂
-                  </Button>
-                  <Button
-                    fullWidth
-                    color="primary"
-                    variant="outlined"
-                    onClick={() => handleTradeFeedback('weary')}
-                  >
-                    😐
-                  </Button>
-                  <Button
-                    fullWidth
-                    color="primary"
-                    variant="outlined"
-                    onClick={() => handleTradeFeedback('hankey')}
-                  >
-                    😖
-                  </Button>
-                </Box>
-              </Box>
-            )}
-          </Box>
+          {availableActions['confirm-trade'] && (
+            <Button onClick={handleActionConfirmTrade}>
+              {t('trade.state.button.confirm_trade')}
+            </Button>
+          )}
+          {availableActions.dispute && (
+            <Button fullWidth onClick={handleActionDispute}>
+              {t('trade.state.button.dispute')}
+            </Button>
+          )}
+          {feedbackAndTips}
         </Box>
         {showDetails && (
           <Box px="5x" gap="2x" mt="6x" display="flex" flexDirection="column">
-            <Box
-              display="flex"
-              flexDirection="column"
-              gap="1x"
-              color="tradeMainComponentTitle"
-              backgroundColor="tradeMainComponentTradeCounterDetails"
-              py="3x"
-              px="6x"
-              flex={1}
-              borderRadius="1.5x"
-            >
-              <Box as="span" fontSize="caption">
-                {t('trade.state.details', { paymethod: trade.paymethod.description })}
-              </Box>
-              <Box as="span" fontSize="medium">
-                {trade.counterDetails}
-              </Box>
-            </Box>
+            {details}
 
             {availableActions.payment && (
               <Button fullWidth onClick={handleActionPayment}>

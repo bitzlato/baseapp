@@ -1,15 +1,18 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Box } from 'web/src/components/ui/Box';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { useTradeContext } from 'web/src/components/shared/Trade/TradeContext';
+import { Text } from 'web/src/components/ui/Text';
 
-const Currency: FC<{ title: string; value: number; code: string; icon?: JSX.Element }> = ({
-  title,
-  value,
-  code,
-  icon = null,
-}) => {
+interface CurrencyProps {
+  title: string;
+  amount: string;
+  code: string;
+  icon?: ReactNode;
+}
+
+const Currency: FC<CurrencyProps> = ({ title, amount, code, icon = null }) => {
   const { isMobileDevice } = useAppContext();
 
   if (isMobileDevice) {
@@ -27,15 +30,15 @@ const Currency: FC<{ title: string; value: number; code: string; icon?: JSX.Elem
           <Box as="span" fontSize="caption" color="tradeCurrenciesTitleColor">
             {title}
           </Box>
-          <Box as="span" fontSize="medium" color="tradeCurrenciesValueColor">
-            {value}
-          </Box>
+          <Text as="span" fontSize="medium" color="tradeCurrenciesValueColor">
+            {amount}
+          </Text>
         </Box>
         <Box display="flex" flex={1} justifyContent="flex-end">
           <Box backgroundColor="tradeCurrenciesBackground" p="2x" borderRadius="1x">
             <Box display="flex" alignItems="center" gap="1x">
               {icon}
-              <Box as="span">{code}</Box>
+              <Text as="span">{code}</Text>
             </Box>
           </Box>
         </Box>
@@ -58,7 +61,7 @@ const Currency: FC<{ title: string; value: number; code: string; icon?: JSX.Elem
           {title}
         </Box>
         <Box as="span" fontSize="lead" color="tradeCurrenciesValueColor">
-          {value}
+          {amount}
         </Box>
       </Box>
       <Box display="flex" flex={1} justifyContent="flex-end">
@@ -74,20 +77,22 @@ const Currency: FC<{ title: string; value: number; code: string; icon?: JSX.Elem
 };
 
 export const TradeCurrencies: FC = () => {
-  const { t } = useTradeContext();
+  const { t, formattedTradeValues } = useTradeContext();
   const { trade } = useTradeContext();
   const { isMobileDevice } = useAppContext();
+
+  const isSelling = trade.type === 'selling';
 
   return (
     <Box display="flex" flexDirection={isMobileDevice ? 'column' : 'row'} gap="3x">
       <Currency
-        title={t('trade.currencies.you_pay')}
-        value={trade.currency.amount}
+        title={isSelling ? t('trade.currencies.you_get') : t('trade.currencies.you_pay')}
+        amount={formattedTradeValues.currency}
         code={trade.currency.code}
       />
       <Currency
-        title={t('trade.currencies.you_get')}
-        value={trade.cryptocurrency.amount}
+        title={isSelling ? t('trade.currencies.you_pay') : t('trade.currencies.you_get')}
+        amount={formattedTradeValues.cryptocurrency}
         code={trade.cryptocurrency.code}
         icon={
           <Box>

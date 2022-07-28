@@ -6,7 +6,7 @@ import { Button } from 'web/src/components/ui/Button';
 import { useAppContext } from 'web/src/components/app/AppContext';
 
 export const TradeCancelModal: FC = () => {
-  const { t } = useTradeContext();
+  const { t, formattedTradeValues } = useTradeContext();
   const { isMobileDevice } = useAppContext();
   const { trade, toggleModal, modals } = useTradeContext();
   const { confirmCancel } = modals;
@@ -34,7 +34,7 @@ export const TradeCancelModal: FC = () => {
         {t('trade.modal.cancel.action.3', {
           tradeId: trade.id,
           code: trade.currency.code,
-          amount: trade.currency.amount,
+          amount: formattedTradeValues.currency,
           paymethod: trade.paymethod.description,
         })}
       </Box>
@@ -46,9 +46,9 @@ export const TradeCancelModal: FC = () => {
       <Box as="span" fontSize="medium">
         {t('trade.modal.cancel.action_sure', {
           ccode: trade.cryptocurrency.code,
-          camount: trade.cryptocurrency.amount,
+          camount: formattedTradeValues.cryptocurrency,
           code: trade.currency.code,
-          amount: trade.currency.amount,
+          amount: formattedTradeValues.currency,
         })}
       </Box>
     ) : null;

@@ -8,17 +8,33 @@ import { useAppContext } from 'web/src/components/app/AppContext';
 import { MobileTradeState } from 'web/src/components/shared/Trade/mobile/TradeState';
 import { Stepper } from 'web/src/components/Stepper/Stepper';
 import { Text } from 'web/src/components/ui/Text';
+import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
+import { createMoney } from 'web/src/helpers/money';
+import { IconButton } from 'web/src/components/IconButton/IconButton';
+import { CopyIcon } from 'src/assets/icons/CopyIcon';
+import { writeTextToClipboard } from 'web/src/helpers/writeTextToClipboard';
+import { CollapsibleText } from 'web/src/components/shared/CollapsibleText/CollapsibleText';
+import { TradeFeedback } from './TradeFeedback';
+
+const MINUTES_TO_ADD = 10;
+const MINUTES_TILL_TIMEOUT = 10;
 
 export const TradeState: FC = () => {
-  const { t } = useTradeContext();
+  const { t, formattedTradeValues } = useTradeContext();
   const { isMobileDevice } = useAppContext();
 
   const { trade, toggleModal, handleTradeTimeout, handleTradeFeedback } = useTradeContext();
   const tradeAction = useTradeAction();
   const { id, partner, type } = trade;
 
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
+
+  const cryptocurrency = getCryptoCurrency(trade.cryptocurrency.code);
+  const cryptoMoney = createMoney(trade.cryptocurrency.amount, cryptocurrency);
+
   const handleActionConfirmTrade = () => tradeAction('confirm-trade');
-  const handleActionDispute = () => tradeAction('dispute');
+  const handleActionDispute = () => toggleModal('disputeReason');
+
   const handleActionAddtime = () => handleTradeTimeout();
 
   const handleActionCancel = () => {
@@ -56,16 +72,26 @@ export const TradeState: FC = () => {
     return a;
   })();
 
+  const tradeDetails = trade.details || trade.counterDetails;
+
   const showDetails =
     [
       TradeStatus.CONFIRM_TRADE,
       TradeStatus.PAYMENT,
       TradeStatus.CONFIRM_PAYMENT,
       TradeStatus.DISPUTE,
-    ].includes(trade.status) && trade.details;
+    ].includes(trade.status) && tradeDetails;
 
   const tradeSteps = (() => {
-    const step1 = { key: '1', content: <Text as="span">1</Text>, isCompleted: true };
+    const step1 = {
+      key: '1',
+      content: (
+        <Text as="span" color="tradeHistoryCircleContentColorActive">
+          1
+        </Text>
+      ),
+      isCompleted: true,
+    };
 
     const isTradeActive = trade.status !== TradeStatus.TRADE_CREATED;
 
@@ -109,33 +135,89 @@ export const TradeState: FC = () => {
     return [step1, step2, step3];
   })();
 
-  const targetTime = trade.times.autocancel || trade.times.dispute; // || '2022-06-16T20:30:48.374Z';
+  const targetTime = trade.times.autocancel || trade.times.dispute; // '2022-07-05T20:30:48.374Z';
 
   const tradeType =
     type === AdsType.purchase ? t('trade.state.type.purchase') : t('trade.state.type.selling');
 
-  const currencies = `${trade.cryptocurrency.code} ${t('trade.state.for')} ${trade.currency.code}`;
+  const currencies = `${cryptoMoney.currency.code} ${t('trade.state.for')} ${trade.currency.code}`;
 
-  const atUser = t('trade.state.atUser', { name: partner.name });
+  const atUser =
+    type === AdsType.purchase
+      ? t('trade.state.atUser', { name: partner.name })
+      : t('trade.state.toUser', { name: partner.name });
   const viaPaymethod = t('trade.state.viaPaymethod', { paymethod: trade.paymethod.description });
 
   const title = [tradeType, currencies, atUser, viaPaymethod].join(' ');
 
-  const action = t(`trade.state.${type}.${trade.status}.subtitle`, {
-    name: partner.name,
-    code: trade.currency.code,
-    amount: trade.currency.amount,
-    camount: trade.cryptocurrency.amount,
-    ccode: trade.cryptocurrency.code,
-  });
+  const action = (() => {
+    if (trade.status === TradeStatus.TRADE_CREATED && trade.owner) {
+      if (trade.waitingTimeIncreased) {
+        return t('trade.state.purchase.trade_created.owner.subtitle', {
+          minutes: MINUTES_TILL_TIMEOUT + MINUTES_TO_ADD,
+        });
+      }
 
-  const description = t(`trade.state.${type}.${trade.status}.title`, {
-    name: partner.name,
-    code: trade.currency.code,
-    amount: trade.currency.amount,
-  });
+      return t('trade.state.purchase.trade_created.owner.subtitle', {
+        minutes: MINUTES_TILL_TIMEOUT,
+      });
+    }
+    return t(`trade.state.${type}.${trade.status}.subtitle`, {
+      name: partner.name,
+      code: trade.currency.code,
+      amount: formattedTradeValues.currency,
+      camount: formattedTradeValues.cryptocurrency,
+      ccode: trade.cryptocurrency.code,
+      minutes: trade.waitingTimeIncreased
+        ? MINUTES_TILL_TIMEOUT + MINUTES_TO_ADD
+        : MINUTES_TILL_TIMEOUT,
+    });
+  })();
 
-  const isSelling = trade.type === AdsType.selling;
+  const description = (() => {
+    if (trade.status === TradeStatus.TRADE_CREATED && trade.owner) {
+      return t('trade.state.purchase.trade_created.owner.title', {
+        minutes: MINUTES_TILL_TIMEOUT,
+      });
+    }
+
+    return t(`trade.state.${type}.${trade.status}.title`, {
+      name: partner.name,
+      code: trade.currency.code,
+      amount: formattedTradeValues.currency,
+      minutes: MINUTES_TILL_TIMEOUT,
+    });
+  })();
+
+  const details = (
+    <Box
+      display="flex"
+      flexDirection="column"
+      gap="1x"
+      color="tradeMainComponentTitle"
+      backgroundColor="tradeMainComponentTradeCounterDetailsBackground"
+      p="4x"
+      borderRadius="1.5x"
+      flexGrow={1}
+    >
+      <Box display="flex" flexDirection="row" justifyContent="space-between">
+        <Text
+          as="span"
+          fontWeight="strong"
+          fontSize="lead"
+          color="tradeMainComponentTradeCounterDetailsColor"
+        >
+          {t('trade.state.details', { paymethod: trade.paymethod?.description || '' })}
+        </Text>
+
+        <IconButton onClick={() => writeTextToClipboard(tradeDetails)} title="copy">
+          <CopyIcon />
+        </IconButton>
+      </Box>
+
+      <CollapsibleText text={tradeDetails} fontSize={isMobileDevice ? 'medium' : 'large'} />
+    </Box>
+  );
 
   if (isMobileDevice) {
     return (
@@ -157,20 +239,28 @@ export const TradeState: FC = () => {
         title={title}
         action={action}
         description={description}
+        details={details}
       />
     );
   }
 
+  const feedbackAndTips = (availableActions.tips || availableActions.feedback) && (
+    <TradeFeedback tipsAvailable={availableActions.tips} />
+  );
+
   return (
     <Box backgroundColor="tradeMainComponent" px="6x" py="8x" borderRadius="1.5x">
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Box display="flex" justifyContent="space-between" alignItems="center" gap="1x">
         <Text as="span" color="tradeMainComponentTitle" fontSize="lead30">
           {title}
         </Text>
+
         {availableActions.cancel && (
-          <Button color="danger" onClick={handleActionCancel}>
-            {t('trade.state.button.cancel')}
-          </Button>
+          <Box>
+            <Button fullWidth color="danger" onClick={handleActionCancel}>
+              {t('trade.state.button.cancel')}
+            </Button>
+          </Box>
         )}
       </Box>
       <Box display="flex" flexDirection="row" gap="1x" mb="8x" mt="6x">
@@ -198,7 +288,7 @@ export const TradeState: FC = () => {
           </Box>
         )}
 
-        <Box display="flex" flexDirection="column" gap="1x">
+        <Box display="flex" flexDirection="column" gap="1x" flex={1}>
           <Text as="span" color="tradeMainComponentTitle" fontSize="lead24" fontWeight="strong">
             {description}
           </Text>
@@ -214,7 +304,7 @@ export const TradeState: FC = () => {
             </Box>
           )}
           {availableActions.addtime && (
-            <Button onClick={handleActionAddtime} variant="outlined" color="secondary">
+            <Button onClick={handleActionAddtime} variant="outlined" color="primary">
               {t('trade.state.button.addtime')}
             </Button>
           )}
@@ -227,78 +317,22 @@ export const TradeState: FC = () => {
           {availableActions.dispute && (
             <Button onClick={handleActionDispute}>{t('trade.state.button.dispute')}</Button>
           )}
-          {availableActions.tips && (
-            <Button onClick={handleActionTips}>{t('trade.state.button.tips')}</Button>
-          )}
-          {availableActions.feedback && (
-            <Box>
-              <Text as="span" fontSize="lead" fontWeight="strong" color="tradeMainComponentTitle">
-                {t('trade.state.leave_feedback')}
-              </Text>
-              <Box display="flex" gap="2x" mt="1x">
-                <Button
-                  fullWidth
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => handleTradeFeedback('thumb_up')}
-                >
-                  🙂
-                </Button>
-                <Button
-                  fullWidth
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => handleTradeFeedback('weary')}
-                >
-                  😐
-                </Button>
-                <Button
-                  fullWidth
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => handleTradeFeedback('hankey')}
-                >
-                  😖
-                </Button>
-              </Box>
-            </Box>
-          )}
-          {availableActions['confirm-payment'] && (
-            <Box py="3x" px="6x">
-              <Button fullWidth onClick={handleActionConfirmPayment}>
-                {t('trade.state.button.confirm_payment')}
-              </Button>
-            </Box>
-          )}
+          {feedbackAndTips}
         </Box>
       </Box>
 
-      {showDetails && !isSelling && (
+      {showDetails && (
         <Box gap="2x" mt="6x" display="flex">
-          <Box
-            display="flex"
-            flexDirection="column"
-            gap="1x"
-            color="tradeMainComponentTitle"
-            backgroundColor="tradeMainComponentTradeCounterDetails"
-            py="3x"
-            px="6x"
-            flex={1}
-          >
-            <Text as="span" fontWeight="strong" fontSize="lead">
-              {t('trade.state.details', { paymethod: trade.paymethod?.description || '' })}
-            </Text>
-            <Text as="span" fontSize="lead">
-              {trade.counterDetails}
-            </Text>
-          </Box>
+          {details}
 
           {availableActions.payment && (
             <Box
+              flexShrink={0}
               py="3x"
-              px="6x"
-              backgroundColor="tradeMainComponentTradeCounterDetails"
-              flexGrow={0.5}
+              pl="6x"
+              display="flex"
+              justifyContent="center"
+              alignItems="flex-start"
             >
               <Button fullWidth onClick={handleActionPayment}>
                 {t('trade.state.button.payment')}
@@ -307,12 +341,7 @@ export const TradeState: FC = () => {
           )}
 
           {availableActions['confirm-payment'] && (
-            <Box
-              py="3x"
-              px="6x"
-              backgroundColor="tradeMainComponentTradeCounterDetails"
-              flexGrow={0.5}
-            >
+            <Box flexShrink={0} py="3x" px="6x">
               <Button fullWidth onClick={handleActionConfirmPayment}>
                 {t('trade.state.button.confirm_payment')}
               </Button>

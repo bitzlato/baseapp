@@ -8,11 +8,19 @@ import { TradeTab } from 'web/src/components/shared/Trade/TradeTab';
 import { Tabs } from 'web/src/components/shared/Trade/types';
 import { TradeChat } from 'web/src/components/shared/Trade/TradeChat';
 import { Text } from 'src/components/ui/Text';
+import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
+import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
+import { createMoney } from 'web/src/helpers/money';
+import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
 
-const TradeInfoBox: FC<{
+type TradeInfoElements = { key: string; value: JSX.Element | string | number };
+
+type TradeInfoBoxProps = {
   title: string;
-  elements: { key: string; value: JSX.Element | string | number }[];
-}> = ({ title, elements }) => {
+  elements: TradeInfoElements[];
+};
+
+const TradeInfoBox: FC<TradeInfoBoxProps> = ({ title, elements }) => {
   return (
     <Box
       backgroundColor="tradeInfoBox"
@@ -23,25 +31,27 @@ const TradeInfoBox: FC<{
       py="5x"
     >
       <Box>
-        <Box as="span" fontWeight="strong" fontSize="medium" color="tradeInfoBoxTitle">
+        <Text as="span" fontWeight="strong" fontSize="medium" color="tradeInfoBoxTitle">
           {title}
-        </Box>
+        </Text>
       </Box>
 
       {elements.map((element) => {
         const content =
           typeof element.value === 'string' || typeof element.value === 'number' ? (
-            <Box as="span" fontSize="small" color="tradeInfoBoxValue">
+            <Text as="span" fontSize="small" color="tradeInfoBoxValue">
               {element.value}
-            </Box>
+            </Text>
           ) : (
             element.value
           );
 
         return (
           <Box key={element.key} display="flex" justifyContent="space-between">
-            <Box as="span" fontWeight="strong" fontSize="small" color="tradeInfoBoxKey">
-              {element.key}
+            <Box display="flex" alignItems="center">
+              <Text as="span" fontWeight="strong" fontSize="small" color="tradeInfoBoxKey">
+                {element.key}
+              </Text>
             </Box>
             {content}
           </Box>
@@ -59,6 +69,16 @@ export const TradeInfo: FC = () => {
     setTab(nextTab as Tabs);
   };
   const { trade } = useTradeContext();
+
+  const { getFiatCurrency } = useP2PFiatCurrencies();
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
+
+  const ccurrency = getCryptoCurrency(trade.cryptocurrency.code);
+  const currency = getFiatCurrency(trade.currency.code);
+  const amountMoney = createMoney(trade.currency.amount, currency);
+  const rateMoney = createMoney(trade.rate, currency);
+
+  const isMaker = trade.owner;
 
   const renderTab = () => {
     if (tab === 'chat') {
@@ -78,6 +98,29 @@ export const TradeInfo: FC = () => {
       const thumbDown =
         trade.partner.feedbacks.find((feedback) => feedback.type === 'hankey')?.count || 0;
 
+      const tradeInfoElements = [
+        {
+          key: t('trade.info.rate'),
+          value: (
+            <Text>
+              <P2PFiatFormat cryptoCurrency={ccurrency} money={rateMoney} /> {trade.currency.code}
+            </Text>
+          ),
+        },
+        {
+          key: t('trade.info.fiat.amount'),
+          value: (
+            <Text>
+              <P2PFiatFormat cryptoCurrency={ccurrency} money={amountMoney} /> {trade.currency.code}
+            </Text>
+          ),
+        },
+        !isMaker && {
+          key: t('trade.info.fee'),
+          value: '0%',
+        },
+      ].filter(Boolean) as unknown as TradeInfoElements[];
+
       return (
         <>
           <TradeInfoBox
@@ -85,34 +128,25 @@ export const TradeInfo: FC = () => {
             elements={[
               {
                 key: t('trade.info.trader.rating'),
+                value: trade.partner.rating,
+              },
+              {
+                key: t('Comments'),
                 value: (
-                  <Box display="flex" alignItems="center">
+                  <Box display="flex" alignItems="center" gap="1x">
                     <ThumbUpIcon />
-                    <Box mx="1x">
-                      <Box as="span" fontSize="small" color="tradeInfoBoxValue">
-                        {thumbUp}
-                      </Box>
-                    </Box>
+
+                    <Text as="span" fontSize="small" color="tradeInfoBoxValue">
+                      {thumbUp}
+                    </Text>
 
                     <ThumbDownIcon />
 
-                    <Box mx="1x">
-                      <Box as="span" fontSize="small" color="tradeInfoBoxValue">
-                        {thumbDown}
-                      </Box>
-                    </Box>
-
-                    <Box>
-                      <Box as="span" fontSize="small" color="tradeInfoBoxValue">
-                        {trade.partner.rating}
-                      </Box>
-                    </Box>
+                    <Text as="span" fontSize="small" color="tradeInfoBoxValue">
+                      {thumbDown}
+                    </Text>
                   </Box>
                 ),
-              },
-              {
-                key: t('trade.info.trader.reputation'),
-                value: trade.partner.safetyIndex,
               },
               {
                 key: t('trade.info.trader.deals.successful'),
@@ -125,23 +159,7 @@ export const TradeInfo: FC = () => {
             ]}
           />
 
-          <TradeInfoBox
-            title={t('trade.info.trade.title')}
-            elements={[
-              {
-                key: t('trade.info.rate'),
-                value: trade.rate,
-              },
-              {
-                key: t('trade.info.fiat.amount'),
-                value: trade.currency.amount,
-              },
-              {
-                key: t('trade.info.fee'),
-                value: '0%',
-              },
-            ]}
-          />
+          <TradeInfoBox title={t('trade.info.trade.title')} elements={tradeInfoElements} />
 
           <Box display="flex" alignItems="center" gap="6x">
             <Box flexShrink={0}>
