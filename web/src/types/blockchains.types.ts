@@ -4,15 +4,15 @@ export interface BlockchainFeesSource {
   blockchain_key: string;
   native_fee: {
     currency_id: string;
-    low: string;
-    market: string;
-    aggressive: string;
+    low?: string | undefined;
+    market?: string | undefined;
+    aggressive?: string | undefined;
   };
   currency_fee: {
     currency_id: string;
-    low: string;
-    market: string;
-    aggressive: string;
+    low?: string | undefined;
+    market?: string | undefined;
+    aggressive?: string | undefined;
   };
   at: string;
 }
@@ -20,11 +20,11 @@ export interface BlockchainFeesSource {
 export interface BlockchainFees extends BlockchainFeesSource {
   fees: {
     currency_id: string;
-    low: Money;
+    low?: Money | undefined;
     lowInFiat?: Money | undefined;
-    market: Money;
+    market?: Money | undefined;
     marketInFiat?: Money | undefined;
-    aggressive: Money;
+    aggressive?: Money | undefined;
     aggressiveInFiat?: Money | undefined;
   };
 }

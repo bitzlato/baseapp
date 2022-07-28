@@ -101,30 +101,36 @@ export const WithdrawBlockchainFees: FC<Props> = ({ blockchainFees, value, onCha
       {title}
       <Box color="text" className={s.fees}>
         <RadioGroup value={value} onChange={handleChange}>
-          <WithdrawBlockchainFee
-            type="low"
-            title={t('Slow')}
-            description={t('up to 24 hours')}
-            fee={low}
-            feeInFiat={lowInFiat}
-            active={value === 'low'}
-          />
-          <WithdrawBlockchainFee
-            type="market"
-            title={t('Medium')}
-            description={t('up to 2 hours')}
-            fee={market}
-            feeInFiat={marketInFiat}
-            active={value === 'market'}
-          />
-          <WithdrawBlockchainFee
-            type="aggressive"
-            title={t('Fast')}
-            description={t('up to 30 minutes')}
-            fee={aggressive}
-            feeInFiat={aggressiveInFiat}
-            active={value === 'aggressive'}
-          />
+          {low && (
+            <WithdrawBlockchainFee
+              type="low"
+              title={t('Slow')}
+              description={t('up to 24 hours')}
+              fee={low}
+              feeInFiat={lowInFiat}
+              active={value === 'low'}
+            />
+          )}
+          {market && (
+            <WithdrawBlockchainFee
+              type="market"
+              title={t('Medium')}
+              description={t('up to 2 hours')}
+              fee={market}
+              feeInFiat={marketInFiat}
+              active={value === 'market'}
+            />
+          )}
+          {aggressive && (
+            <WithdrawBlockchainFee
+              type="aggressive"
+              title={t('Fast')}
+              description={t('up to 30 minutes')}
+              fee={aggressive}
+              feeInFiat={aggressiveInFiat}
+              active={value === 'aggressive'}
+            />
+          )}
         </RadioGroup>
       </Box>
     </>
