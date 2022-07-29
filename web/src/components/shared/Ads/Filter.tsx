@@ -257,10 +257,10 @@ export const FilterMobile: FC<FilterMobileProps> = ({ params, onChange }) => {
   const t = useSharedT();
 
   const [show, setShow] = useState(false);
-  const [localParams, setLocalParams] = useState<AdvertParams>(() => ({ ...params }));
+  const [localParams, setLocalParams] = useStateWithDeps<AdvertParams>(() => params, [params]);
 
   const updateParams = (v: Partial<AdvertParams>) => {
-    setLocalParams((prev) => ({ ...prev, ...v }));
+    setLocalParams({ ...localParams, ...v });
   };
 
   const toggleModal = () => setShow(!show);
