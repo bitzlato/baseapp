@@ -197,7 +197,11 @@ export const SignIn: FC = () => {
             maxLength="6"
           />
         ) : null}
-        <Button disabled={isLoading || !isValidForm() || isButtonDisabled()} onClick={handleClick}>
+        <Button
+          data-gtm-click="signin"
+          disabled={isLoading || !isValidForm() || isButtonDisabled()}
+          onClick={handleClick}
+        >
           {isLoading ? `${t('Loading')}...` : t('page.header.signIn')}
         </Button>
         <Box self="center" as={Link} to={{ pathname: '/forgot_password', state: { email } }}>
