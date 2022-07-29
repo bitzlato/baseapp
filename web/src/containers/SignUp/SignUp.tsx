@@ -240,7 +240,7 @@ export const SignUp: FC = () => {
           })}
         </Checkbox>
         {captchaLogin() && <Captcha error={signUpError || confirmationError || emailError} />}
-        <Button disabled={isButtonDisabled()} onClick={handleClick}>
+        <Button data-gtm-click="signup" disabled={isButtonDisabled()} onClick={handleClick}>
           {t('page.header.signUp')}
         </Button>
       </Box>

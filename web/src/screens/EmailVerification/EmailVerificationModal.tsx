@@ -119,7 +119,12 @@ export const EmailVerificationModal: FC = () => {
   );
 
   const confirmEl = (
-    <Button color="secondary" onClick={handleConfirm} disabled={disableConfirm}>
+    <Button
+      data-gtm-click="verify_email"
+      color="secondary"
+      onClick={handleConfirm}
+      disabled={disableConfirm}
+    >
       {t('Confirm')}
     </Button>
   );
