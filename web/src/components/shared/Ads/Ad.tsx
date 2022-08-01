@@ -38,6 +38,7 @@ import WarningTriangleIcon from 'web/src/assets/svg/WarningTriangleIcon.svg';
 import { DetailsInput } from 'web/src/components/TextInputCustom/DetailsInput';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
+import { getLinkToP2PUser } from 'web/src/components/shared/Ads/getLinkToP2PUser';
 import { AdStat } from './AdStat';
 import { ConfirmDangerRateModal } from './RateDiffModal';
 
@@ -79,7 +80,7 @@ export const Ad: FC = () => {
     setShow(true);
   };
 
-  const { t, params, history } = useAdapterContext<UrlParams>();
+  const { t, params, history, Link } = useAdapterContext<UrlParams>();
 
   const { data: advert, mutate: reloadAdvert } = useFetchAdvert(params.id);
   const { data: paymethod } = useFetchPaymethod(advert?.paymethod, lang);
@@ -274,7 +275,15 @@ export const Ad: FC = () => {
   const traderEl = (
     <Box>
       <Box display="flex" alignItems="center" gap="2x">
-        <Box as="p" fontSize="lead24">
+        <Box
+          as={Link}
+          to={getLinkToP2PUser({ lang, userName: advert.owner })}
+          color={{ default: 'adTrader', hover: 'adTrader' }}
+          display="block"
+          textOverflow="ellipsis"
+          fontWeight="strong"
+          fontSize="lead"
+        >
           {advert.owner}
         </Box>
         {owner.verification && (
