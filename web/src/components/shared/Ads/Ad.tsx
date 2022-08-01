@@ -42,6 +42,7 @@ import { getLinkToP2PUser } from 'web/src/components/shared/Ads/getLinkToP2PUser
 import { CollapsibleText } from 'web/src/components/shared/CollapsibleText/CollapsibleText';
 import { AdStat } from './AdStat';
 import { ConfirmDangerRateModal } from './RateDiffModal';
+import { CollapsibleBox } from '../../collapsibleBox/CollapsibleBox';
 
 interface UrlParams {
   type: 'buy' | 'sell';
@@ -345,7 +346,27 @@ export const Ad: FC = () => {
     </>
   );
 
-  const termsEl = (
+  const termsEl = isMobileDevice ? (
+    <Box pr="5x" pl="3x" backgroundColor="adBg" borderRadius="1.5x">
+      <CollapsibleBox
+        visible={
+          <Box py="2x">
+            <Box as="span" fontWeight="strong" fontSize="medium" color="tradeMobileInfoBoxKey">
+              {t('trade.terms.history')}
+            </Box>
+          </Box>
+        }
+        hidden={
+          <Box pb="4x">
+            <Box as="span" whiteSpace="pre-line" fontSize="medium" color="tradeMobileInfoBoxValue">
+              {advert.terms || t('trade.terms.history.empty')}
+            </Box>
+          </Box>
+        }
+        transparent
+      />
+    </Box>
+  ) : (
     <Box p="6x" backgroundColor="adBg" borderRadius="1.5x">
       <Text variant="title">{t('Trade terms')}</Text>
       <Box marginTop="6x" whiteSpace="pre-line">
