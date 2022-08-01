@@ -1,5 +1,6 @@
 import { Money } from '@bitzlato/money-js';
 import { BaseCurrency } from 'web/src/types/currencies.types';
+import { P2PVoucherLink } from 'web/src/modules/account/voucher-types';
 
 export interface CurrencyRate {
   description: string;
@@ -185,18 +186,18 @@ export interface PaymethodSource {
 }
 
 export interface UserAdvertSource {
-  balanceThreshold: null;
+  balanceThreshold: number | null;
   cryptocurrency: string;
   deepLinkCode: string;
   details: string | null;
-  disablePercent: null;
+  disablePercent: number | null;
   id: number;
-  links: null;
-  liquidityLimit: false;
+  links: P2PVoucherLink[];
+  liquidityLimit: boolean;
   maxAmount: string;
-  maxLimitForNewTrader: null;
+  maxLimitForNewTrader: string | null;
   minAmount: string;
-  minPartnerTradesAmount: null;
+  minPartnerTradesAmount: string | null;
   ownerLastActivity: number;
   paymethod: number;
   paymethod_currency: string;
@@ -218,6 +219,16 @@ export interface UserAdvert extends UserAdvertSource {
     min: Money;
     max: Money;
   };
+}
+
+export interface UserAdvertDetails extends Omit<UserAdvertSource, 'paymethod'> {
+  cryptoCurrency: BaseCurrency;
+  rate: Money;
+  limitCurrency: {
+    min: Money;
+    max: Money;
+  };
+  paymethod: PaymethodSource;
 }
 
 export type TradeStatusSource = Record<string, boolean>;

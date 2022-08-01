@@ -388,6 +388,7 @@ export const [themeLight, vars] = createTheme({
     advertsAlertWarningBg: colors.solitaire,
     advertsAlertInfoDot: colors.indigo,
     advertsAlertInfoBg: colors.whiteLilac,
+    advertsAlertErrorBg: colors.white,
     advertsAlertInfoLink: colors.indigo,
     advertsAlertInfoLinkHover: colors.indigoLight,
     advertsCryptoButtonBorder: colors.white10,
@@ -412,6 +413,16 @@ export const [themeLight, vars] = createTheme({
     giftsMultiTableBadgeBg: colors.white,
 
     badgeDangerColor: colors.white,
+
+    userAdButtonLinkBg: colors.whiteLilac,
+    userAdButtonLinkHoverBg: colors.indigo,
+    userAdButtonLinkHoverText: colors.white,
+    userAdButtonLinkBzLogoIcon: colors.luckyPoint,
+    userAdButtonLinkTelegramLogoIcon: colors.curiousBlue,
+    userAdButtonEdit: colors.manatee,
+    userAdButtonEditActive: colors.indigo,
+    userAdButtonEditActiveHover: colors.indigoLight,
+    userAdEditInputBg: colors.whiteLilac,
   },
 });
 
@@ -729,6 +740,7 @@ export const themeDark = createTheme(vars, {
     advertsAlertWarningBg: colors.outerSpace,
     advertsAlertInfoDot: colors.goldTips,
     advertsAlertInfoBg: colors.outerSpace,
+    advertsAlertErrorBg: colors.outerSpace,
     advertsAlertInfoLink: colors.goldTips,
     advertsAlertInfoLinkHover: colors.lightningYellow,
     advertsCryptoButtonBorder: colors.white10,
@@ -753,5 +765,15 @@ export const themeDark = createTheme(vars, {
     giftsMultiTableBadgeBg: colors.outerSpace,
 
     badgeDangerColor: colors.white,
+
+    userAdButtonLinkBg: colors.white05,
+    userAdButtonLinkHoverBg: colors.indigo,
+    userAdButtonLinkHoverText: colors.white,
+    userAdButtonLinkBzLogoIcon: colors.white,
+    userAdButtonLinkTelegramLogoIcon: colors.curiousBlue,
+    userAdButtonEdit: colors.manatee,
+    userAdButtonEditActive: colors.goldTips,
+    userAdButtonEditActiveHover: colors.lightningYellow,
+    userAdEditInputBg: colors.black30,
   },
 });

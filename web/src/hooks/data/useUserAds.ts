@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Money } from '@bitzlato/money-js';
 import { p2pUrl } from 'web/src/api/config';
 import { BaseCurrency } from 'web/src/types/currencies.types';
@@ -8,9 +9,11 @@ import {
   AdvertType,
   PaymethodSource,
   UserAdvert,
+  UserAdvertDetails,
   UserAdvertSource,
 } from 'web/src/modules/p2p/types';
 import { useFetch } from './useFetch';
+import { useFetchPaymethod } from './useFetchPaymethod';
 
 interface TraderAdvertSource {
   id: number;
@@ -135,4 +138,40 @@ export const useCurrenUserAds = (lang: string) => {
   });
 
   return { data: ads, ...other };
+};
+
+export const useCurrenUserAd = ({ advertId, lang }: { advertId: string; lang: string }) => {
+  const { getFiatCurrency } = useP2PFiatCurrencies();
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
+
+  const { data, ...other } = useFetch<UserAdvertSource>(
+    `${p2pUrl()}/dsa/${advertId}?lang=${lang}`,
+    fetchWithCreds,
+    {
+      revalidateIfStale: true,
+      revalidateOnFocus: true,
+    },
+  );
+  const { data: paymethod } = useFetchPaymethod(data?.paymethod, lang);
+  const ad: UserAdvertDetails | undefined = useMemo(() => {
+    if (!data || !paymethod) {
+      return undefined;
+    }
+
+    const currency = getFiatCurrency(data.paymethod_currency);
+    const cryptoCurrency = getCryptoCurrency(data.cryptocurrency);
+
+    return {
+      ...data,
+      rate: Money.fromDecimal(data.rateValue, currency),
+      limitCurrency: {
+        min: Money.fromDecimal(data.minAmount, currency),
+        max: Money.fromDecimal(data.maxAmount, currency),
+      },
+      cryptoCurrency,
+      paymethod,
+    };
+  }, [data, paymethod, getCryptoCurrency, getFiatCurrency]);
+
+  return { data: ad, ...other };
 };

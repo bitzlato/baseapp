@@ -55,7 +55,7 @@ export const UserAdsListItem: FC<Props> = ({ ad }) => {
     try {
       await updateUserAd({
         id: ad.id,
-        params: { status: ad.status !== 'active' ? 'active' : 'pause' },
+        values: { status: ad.status !== 'active' ? 'active' : 'pause' },
       });
     } catch (error) {
       if (

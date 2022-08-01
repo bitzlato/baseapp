@@ -95,6 +95,7 @@ import { CreateAdScreen } from 'web/src/screens/p2p/CreateAdScreen';
 import { GiftsScreen } from 'web/src/screens/GiftsScreen/GiftsScreen';
 import { ActiveGiftsScreen } from 'web/src/screens/GiftsScreen/ActiveGiftsScreen';
 import { HistoryGiftsScreen } from 'web/src/screens/GiftsScreen/HistoryGiftsScreen';
+import { UserAdScreen } from 'web/src/screens/p2p/UserAdScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -406,6 +407,14 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               isLogged={isLoggedIn}
               path={['/p2p/adverts/create', '/:lang/p2p/adverts/create']}
               component={CreateAdScreen}
+              exact
+            />,
+            <PrivateRoute
+              key="UserAdScreen"
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path={['/p2p/adverts/:advertId', '/:lang/p2p/adverts/:advertId']}
+              component={UserAdScreen}
               exact
             />,
             <Route

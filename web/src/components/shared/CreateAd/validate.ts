@@ -3,14 +3,14 @@ import { SharedTranslateFn } from 'web/src/components/shared/sharedI18n';
 import { CreateAdFormValues } from './CreateAdFormContext';
 import { MAX_AD_DETAILS_LENGTH, MAX_AD_TERMS_LENGTH } from './StepTerms';
 
-type TestFunc = (value: any, values: CreateAdFormValues) => true | string;
+type TestFunc = <T extends Partial<CreateAdFormValues>>(value: any, values: T) => true | string;
 
 const testRequired = (value: any) => {
   return value !== null && value !== '';
 };
 
-export const validateValues = (
-  formValues: CreateAdFormValues,
+export const validateValues = <T extends Partial<CreateAdFormValues>>(
+  formValues: T,
   keys: Array<keyof CreateAdFormValues>,
   { t }: { t: SharedTranslateFn },
 ) => {
@@ -68,7 +68,7 @@ export const validateValues = (
 
       return true;
     },
-    maxAmount: (value: CreateAdFormValues['maxAmount'], values: CreateAdFormValues) => {
+    maxAmount: (value: CreateAdFormValues['maxAmount'], values: Partial<CreateAdFormValues>) => {
       if (!testRequired(value)) {
         return t('createAd.errors.fill');
       }
@@ -87,10 +87,6 @@ export const validateValues = (
     liquidityLimit: () => true,
     individual: () => true,
     minPartnerTradesAmount: (value: CreateAdFormValues['minPartnerTradesAmount']) => {
-      if (!testRequired(value)) {
-        return true;
-      }
-
       if (value && Number(value) <= 0) {
         return t('createAd.errors.invalid');
       }
@@ -98,10 +94,6 @@ export const validateValues = (
       return true;
     },
     maxLimitForNewTrader: (value: CreateAdFormValues['maxLimitForNewTrader']) => {
-      if (!testRequired(value)) {
-        return true;
-      }
-
       if (value && Number(value) <= 0) {
         return t('createAd.errors.invalid');
       }

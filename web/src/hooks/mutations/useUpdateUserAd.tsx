@@ -2,24 +2,37 @@ import { useSWRConfig } from 'swr';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
-import { fetchJson, FetchError } from 'web/src/helpers/fetch';
+import { EditAdFormValues } from 'web/src/components/shared/UserAd/UserAdEditContext';
+import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { UserAdvert, UserAdvertSource } from 'web/src/modules/p2p/types';
 
 export interface UpdateUserAdInput {
   id: UserAdvert['id'];
-  params: {
-    status?: UserAdvert['status'];
-  };
+  values:
+    | EditAdFormValues
+    | {
+        status: UserAdvert['status'];
+      };
 }
 
-const updateUserAd = async ({ id, params }: UpdateUserAdInput): Promise<UserAdvertSource> => {
-  const response = await fetchJson(`${p2pUrl()}/dsa/${id}`, {
+const updateUserAd = async ({ id, values }: UpdateUserAdInput): Promise<UserAdvertSource> => {
+  let data: typeof values;
+  if ('status' in values) {
+    data = { status: values.status };
+  } else {
+    data = { ...values };
+
+    if (values.individual || values.details === null || values.details.length === 0) {
+      data.details = null;
+    }
+  }
+
+  const response = await fetchWithCreds(`${p2pUrl()}/dsa/${id}`, {
     method: 'PUT',
-    body: JSON.stringify(params),
+    body: JSON.stringify(data),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
-    credentials: 'include',
   });
 
   return response;
@@ -36,7 +49,18 @@ export const useUpdateUserAd = (lang: string) => {
     },
     onFailure: ({ error }) => {
       if (error instanceof FetchError) {
-        if (error.code === 477 && error.payload.code === 'AdvertIsDisabled') {
+        if (error.code === 481 && error.payload.code === 'AdsUpdatedToOften') {
+          return;
+        }
+
+        if (
+          [
+            'AdvertIsDisabled',
+            'TooHighAdvertRate',
+            'WrongMaxLimitForNewTrader',
+            'NotEnoughRatingForTermsWithDigits',
+          ].includes(error.payload.code)
+        ) {
           return;
         }
 
