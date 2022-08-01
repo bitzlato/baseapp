@@ -42,7 +42,7 @@ export const CollapsibleText: FC<Props> = ({
       >
         {title && (
           <Box pb="2x" pt="1x">
-            <Text as="span" color={titleColor} fontWeight="strong" fontSize="large">
+            <Text as="span" color={titleColor} fontWeight="strong" fontSize="medium">
               {title}
             </Text>
           </Box>

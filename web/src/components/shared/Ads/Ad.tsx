@@ -542,6 +542,7 @@ export const Ad: FC = () => {
           <Box p="6x" backgroundColor="adBg" borderRadius="1.5x">
             <CollapsibleText
               title={t('Garantee')}
+              titleColor="collapsibleTextTitleColor"
               text={t('ad.trade.info')}
               controlColor="collapsibleTextExpandControlsColorInverse"
             />
