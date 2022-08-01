@@ -1,7 +1,10 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { fontSizeVars, radiiVars, sizeVars, vars } from 'web/src/theme/vars.css';
+import { inputContainer } from 'web/src/components/TextInputCustom/TextInputCustom.css';
 
-export { inputContainer, label } from 'web/src/components/TextInputCustom/TextInputCustom.css';
+export { label } from 'web/src/components/TextInputCustom/TextInputCustom.css';
+
+export const container = inputContainer.medium;
 
 export const input = style({
   position: 'relative',
