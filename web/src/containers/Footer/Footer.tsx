@@ -32,6 +32,12 @@ export const Footer: FC = () => {
       icon: 'home',
     },
     {
+      to: '/gifts',
+      type: 'internal',
+      icon: 'gifts',
+      title: t('bottomTabs.gifts'),
+    },
+    {
       to: '/quick-exchange',
       type: 'internal',
       icon: 'exchange',

@@ -306,6 +306,38 @@ const Header: FC = () => {
       to: '/quick-exchange',
       children: t('page.header.navbar.quick-exchange'),
     },
+    {
+      key: 'gifts',
+      type: 'tab',
+      link: {
+        type: 'internal',
+        to: '/gifts',
+      },
+      children: t('Gifts'),
+      tabs: [
+        {
+          key: 'Create gift',
+          type: 'internal',
+          to: '/gifts',
+          children: t('gifts.createGift'),
+          exact: true,
+        },
+        {
+          key: 'Active gifts',
+          type: 'internal',
+          to: '/gifts/active',
+          children: t('gifts.activeGifts'),
+          exact: true,
+        },
+        {
+          key: 'Gifts history',
+          type: 'internal',
+          to: '/gifts/history',
+          children: t('gifts.giftsHistory'),
+          exact: true,
+        },
+      ],
+    },
   ];
 
   const rightNavLinks: Links = [

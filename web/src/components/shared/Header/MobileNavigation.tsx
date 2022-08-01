@@ -40,6 +40,7 @@ export const MobileNavigation: FC<Props> = ({ navLinks, pathname, renderNavLinkC
             activeClassName: s.tabActive,
             to: tab.to,
             children: tab.children,
+            exact: tab.exact ?? false,
           })
         ) : (
           <Box key={tab.key} as="a" className={s.tab} href={tab.to}>

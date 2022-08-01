@@ -1,6 +1,7 @@
 export const en = {
   'page.mobile.header.signIn': 'Log In',
   'bottomTabs.home': 'Home',
+  'bottomTabs.gifts': 'Gifts',
   'bottomTabs.exchange': 'Exchange',
   'bottomTabs.trading': 'Trade',
   'bottomTabs.balances': 'Balances',

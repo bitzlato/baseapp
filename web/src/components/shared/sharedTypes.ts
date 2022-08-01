@@ -39,6 +39,7 @@ export type CommonLink = {
 export type LinkNav = CommonLink & {
   type: LinkType;
   to: string;
+  exact?: boolean;
 };
 export type LinkTabs = CommonLink & {
   type: 'tab';
@@ -56,7 +57,7 @@ export type UserLink = LinkNav & {
 };
 export type UserLinks = UserLink[];
 
-export type BottomTabIconName = 'home' | 'exchange' | 'trading' | 'wallets' | 'p2p';
+export type BottomTabIconName = 'home' | 'exchange' | 'trading' | 'wallets' | 'p2p' | 'gifts';
 export type BottomTabLink = {
   to: string;
   type: 'internal' | 'external';

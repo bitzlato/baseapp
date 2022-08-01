@@ -1,6 +1,7 @@
 export const ru = {
   'page.mobile.header.signIn': 'Войти',
   'bottomTabs.home': 'Главная',
+  'bottomTabs.gifts': 'Чеки',
   'bottomTabs.exchange': 'Обмен',
   'bottomTabs.trading': 'Торговля',
   'bottomTabs.balances': 'Балансы',
