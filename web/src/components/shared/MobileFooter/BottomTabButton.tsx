@@ -5,6 +5,7 @@ import ExchangeIcon from 'web/src/assets/svg/bottom-tabs/Exchange.svg';
 import P2PIcon from 'web/src/assets/svg/bottom-tabs/P2P.svg';
 import TradingIcon from 'web/src/assets/svg/bottom-tabs/Trading.svg';
 import WalletsIcon from 'web/src/assets/svg/bottom-tabs/Wallets.svg';
+import GiftsIcon from 'web/src/assets/svg/bottom-tabs/Gifts.svg';
 import * as s from './BottomTabButton.css';
 
 const icons = {
@@ -13,6 +14,7 @@ const icons = {
   trading: <TradingIcon />,
   wallets: <WalletsIcon />,
   p2p: <P2PIcon />,
+  gifts: <GiftsIcon />,
 };
 
 export const BottomTabButton = ({

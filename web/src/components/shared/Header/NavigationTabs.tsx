@@ -31,6 +31,7 @@ export const NavigationTabs = ({ tabs, renderNavLinkComponent }: Props) => (
           activeClassName: s.tabActive,
           to: tab.to,
           children: tab.children,
+          exact: tab.exact ?? false,
         })
       ) : (
         <Box key={tab.key} as="a" className={s.tab} href={tab.to}>
