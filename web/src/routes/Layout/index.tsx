@@ -91,6 +91,7 @@ import { TradesScreen } from 'web/src/screens/p2p/TradesScreen';
 import { SecurityVerificationModal } from 'web/src/containers/modals/SecurityVerificationModal';
 import { TradeScreen } from 'web/src/screens/p2p/Trade/Trade';
 import { UserAdsScreen } from 'web/src/screens/p2p/UserAdsScreen';
+import { CreateAdScreen } from 'web/src/screens/p2p/CreateAdScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -372,6 +373,14 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
               isLogged={isLoggedIn}
               path={['/p2p/adverts/', '/:lang/p2p/adverts/']}
               component={UserAdsScreen}
+              exact
+            />,
+            <PrivateRoute
+              key="CreateAdScreen"
+              loading={userLoading}
+              isLogged={isLoggedIn}
+              path={['/p2p/adverts/create', '/:lang/p2p/adverts/create']}
+              component={CreateAdScreen}
               exact
             />,
             <Route

@@ -385,6 +385,11 @@ export const [themeLight, vars] = createTheme({
     advertsCryptoButtonBgHover: colors.indigoLight,
     advertsCryptoButtonActiveBg: colors.indigo,
     advertsCryptoButtonActiveBgHover: colors.indigoLight,
+
+    createAdLine: colors.ebonyClay30,
+    createAdInactiveText: colors.ebonyClay70,
+    createAdActiveValue: colors.indigo,
+    createAdStepActiveBg: colors.whiteLilac,
   },
 });
 
@@ -703,5 +708,10 @@ export const themeDark = createTheme(vars, {
     advertsCryptoButtonBgHover: colors.indigoLight,
     advertsCryptoButtonActiveBg: colors.indigo,
     advertsCryptoButtonActiveBgHover: colors.indigoLight,
+
+    createAdLine: colors.white30,
+    createAdInactiveText: colors.white50,
+    createAdActiveValue: colors.goldTips,
+    createAdStepActiveBg: colors.white05,
   },
 });

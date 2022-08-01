@@ -15,6 +15,7 @@ type InputProps<C extends ElementType = 'input'> = {
   inputMode?: JSX.IntrinsicElements['input']['inputMode'] | undefined;
   containerClassName?: string;
   size?: InputContainerSizes;
+  labelClassName?: string;
   onChange?: ((value: string) => void) | undefined;
 };
 
@@ -27,9 +28,10 @@ export const TextInput = ({
   label,
   placeholder = ' ',
   className,
-  isError = false,
   containerClassName,
+  labelClassName,
   size = 'medium',
+  isError = false,
   onChange,
   ...inputProps
 }: TextInputProps) => {
@@ -52,7 +54,7 @@ export const TextInput = ({
         )}
         onChange={handleChange}
       />
-      <Box as="span" className={s.label}>
+      <Box as="span" className={cn(s.label, labelClassName)}>
         {label}
       </Box>
     </Box>
@@ -60,7 +62,7 @@ export const TextInput = ({
 };
 
 type TextAreaInputProps<C extends ElementType = 'textarea'> = InputProps<C> &
-  Omit<ComponentProps<C>, keyof InputProps | SprinklesKeys>;
+  Omit<ComponentProps<C>, keyof InputProps | SprinklesKeys> & { resize?: 'none' | undefined };
 
 export const TextAreaInput = ({
   as = 'textarea',
@@ -68,9 +70,11 @@ export const TextAreaInput = ({
   label,
   icon,
   className,
-  isError = false,
+  labelClassName,
   placeholder = ' ',
   size = 'medium',
+  isError = false,
+  resize,
   onChange,
   ...restProps
 }: TextAreaInputProps) => {
@@ -86,6 +90,7 @@ export const TextAreaInput = ({
         placeholder={placeholder}
         className={cn(
           s.input[size],
+          resize === 'none' && s.inputTextareaNonResizable,
           placeholder && s.inputWithLabel[size],
           className,
           icon && s.showIcon,
@@ -94,7 +99,7 @@ export const TextAreaInput = ({
         onChange={handleChange}
         {...restProps}
       />
-      <Box as="span" className={s.label}>
+      <Box as="span" className={cn(s.label, labelClassName)}>
         {label}
       </Box>
       <Box className={s.icon}>{icon}</Box>

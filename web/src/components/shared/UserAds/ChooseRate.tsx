@@ -44,7 +44,9 @@ const ChooseRateVariant: FC<ChooseRateProps> = ({ children, value, title, isActi
 interface Props {
   type: RateType;
   fixed: string;
+  isFixedError?: boolean | undefined;
   percent: string;
+  isPercentError?: boolean | undefined;
   currency: string | undefined;
   cryptoCurrency: string;
   onChangeType: (value: RateType) => void;
@@ -55,7 +57,9 @@ interface Props {
 export const ChooseRate: FC<Props> = ({
   type,
   fixed,
+  isFixedError = false,
   percent,
+  isPercentError = false,
   currency,
   cryptoCurrency,
   onChangeType,
@@ -74,8 +78,8 @@ export const ChooseRate: FC<Props> = ({
         isActive={type === 'fixed'}
         onChange={onChangeType}
       >
-        <Box flexGrow={1}>
-          <TextInput size="small" value={fixed} onChange={onChangeFixed} />
+        <Box flexGrow={1} className={s.fixedInputContainer}>
+          <TextInput size="small" value={fixed} isError={isFixedError} onChange={onChangeFixed} />
         </Box>
         <Text>
           {t('trade.state.for')} <MoneyFormat money={createMoney(1, ccy)} />
@@ -92,6 +96,7 @@ export const ChooseRate: FC<Props> = ({
             className={s.floatingInput}
             size="small"
             value={percent}
+            isError={isPercentError}
             onChange={onChangePercent}
           />
 

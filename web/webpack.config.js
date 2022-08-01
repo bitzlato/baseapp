@@ -313,6 +313,7 @@ module.exports = {
         './TraderScreen': './src/components/shared/Trader/Trader',
         './TradesScreen': './src/components/shared/Trades/Trades',
         './UserAdsScreen': './src/components/shared/UserAds/UserAds',
+        './CreateAdScreen': './src/components/shared/CreateAd/CreateAd',
         './fetch': './src/helpers/fetch',
         './cssVars': './src/components/shared/sharedCssVars',
         './Chat': './src/components/shared/Chat/Chat',

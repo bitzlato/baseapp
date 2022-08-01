@@ -31,6 +31,11 @@ globalStyle(`${rowGap6x} > *:not(:first-child)`, {
   marginLeft: sizeVars['6x'],
 });
 
+export const rowGap7x = style({});
+globalStyle(`${rowGap7x} > *:not(:first-child)`, {
+  marginLeft: sizeVars['7x'],
+});
+
 export const rowGap8x = style({});
 globalStyle(`${rowGap8x} > *:not(:first-child)`, {
   marginLeft: sizeVars['8x'],
@@ -64,6 +69,11 @@ globalStyle(`${colGap5x} > *:not(:first-child)`, {
 export const colGap6x = style({});
 globalStyle(`${colGap6x} > *:not(:first-child)`, {
   marginTop: sizeVars['6x'],
+});
+
+export const colGap7x = style({});
+globalStyle(`${colGap7x} > *:not(:first-child)`, {
+  marginTop: sizeVars['7x'],
 });
 
 export const colGap8x = style({});

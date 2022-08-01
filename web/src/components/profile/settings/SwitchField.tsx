@@ -1,24 +1,34 @@
 import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { Text } from 'web/src/components/ui/Text';
-import { Box } from 'web/src/components/ui/Box';
+import { Box, BoxProps } from 'web/src/components/ui/Box';
 import { Switch } from 'web/src/components/form/Switch';
+import { Spinner } from 'web/src/components/ui/Spinner';
+import * as s from './SwitchField.css';
 
 interface Props {
-  alignItems?: 'center' | 'flex-start' | undefined;
-  defaultValue?: boolean | undefined;
-  id: string;
-  label: string;
+  id?: string;
+  label: ReactNode;
   helpText?: ReactNode | undefined;
+  isLoading?: boolean;
+  alignItems?: BoxProps['alignItems'];
+  justifyContent?: BoxProps['justifyContent'];
+  width?: BoxProps['width'];
+  defaultValue?: boolean | undefined;
+  labelPosition?: 'left' | 'right';
   value?: boolean;
   onChange: (nextValue: boolean) => void;
 }
 
 export const SwitchField: FC<Props> = ({
-  alignItems = 'center',
-  defaultValue = false,
   id,
   label,
   helpText,
+  isLoading = false,
+  alignItems = 'center',
+  justifyContent = 'space-between',
+  width = 'auto',
+  defaultValue = false,
+  labelPosition = 'left',
   value,
   onChange,
 }) => {
@@ -49,15 +59,34 @@ export const SwitchField: FC<Props> = ({
     );
   }
 
-  return (
-    <Box display="flex" justifyContent="space-between" alignItems={alignItems}>
-      <Box mr="4x">
-        <Box as="label" htmlFor={id} display="block" mb="2x">
-          <Text variant="label">{label}</Text>
-        </Box>
-        {help}
+  const labelContent = (
+    <>
+      <Box as="label" htmlFor={id} display="block" mb={help ? '2x' : '0'}>
+        {typeof label === 'string' ? <Text variant="label">{label}</Text> : label}
       </Box>
-      <Switch id={id} checked={isControlled ? value : on} onChange={handleChange} />
+      {help}
+    </>
+  );
+
+  return (
+    <Box display="flex" justifyContent={justifyContent} alignItems={alignItems} width={width}>
+      {labelPosition === 'left' ? <Box mr="4x">{labelContent}</Box> : null}
+      <Box position="relative">
+        {isLoading ? (
+          <Box className={s.spinnerContainer}>
+            <Spinner size="5x" />
+          </Box>
+        ) : null}
+        <Box className={isLoading ? s.switchLoading : undefined}>
+          <Switch
+            id={id}
+            checked={isControlled ? value : on}
+            disabled={isLoading}
+            onChange={handleChange}
+          />
+        </Box>
+      </Box>
+      {labelPosition === 'right' ? <Box ml="4x">{labelContent}</Box> : null}
     </Box>
   );
 };

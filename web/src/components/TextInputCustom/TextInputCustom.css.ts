@@ -119,3 +119,5 @@ globalStyle(`${input.medium}:not(:focus):placeholder-shown + ${label}`, {
   paddingTop: 2,
   lineHeight: sizeVars['11x'],
 });
+
+export const inputTextareaNonResizable = style({ resize: 'none' });
