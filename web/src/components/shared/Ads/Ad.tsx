@@ -39,6 +39,7 @@ import { DetailsInput } from 'web/src/components/TextInputCustom/DetailsInput';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
 import { getLinkToP2PUser } from 'web/src/components/shared/Ads/getLinkToP2PUser';
+import { CollapsibleText } from 'web/src/components/shared/CollapsibleText/CollapsibleText';
 import { AdStat } from './AdStat';
 import { ConfirmDangerRateModal } from './RateDiffModal';
 
@@ -523,8 +524,13 @@ export const Ad: FC = () => {
             {dealInfoEl}
           </Box>
           {termsEl}
+
           <Box p="6x" backgroundColor="adBg" borderRadius="1.5x">
-            <Text>{t('ad.trade.info')}</Text>
+            <CollapsibleText
+              title={t('Garantee')}
+              text={t('ad.trade.info')}
+              controlColor="collapsibleTextExpandControlsColorInverse"
+            />
           </Box>
         </Box>
         <Modal show={show} onClose={handleClickCancelMobile}>

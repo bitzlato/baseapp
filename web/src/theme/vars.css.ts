@@ -297,6 +297,7 @@ export const [themeLight, vars] = createTheme({
 
     collapsibleBoxExpandControls: colors.indigo,
     collapsibleTextExpandControls: colors.white,
+    collapsibleTextExpandControlsColorInverse: colors.black,
 
     calendarItemActiveBg: colors.indigo,
     calendarItemActiveText: colors.white,
@@ -623,6 +624,7 @@ export const themeDark = createTheme(vars, {
 
     collapsibleBoxExpandControls: colors.goldTips,
     collapsibleTextExpandControls: colors.white,
+    collapsibleTextExpandControlsColorInverse: colors.white,
 
     calendarItemActiveBg: colors.goldTips,
     calendarItemActiveText: colors.ebonyClay,
