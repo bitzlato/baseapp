@@ -1,7 +1,6 @@
 import { useMemo, useState, FC } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { Box } from 'web/src/components/ui/Box';
-import { Text } from 'web/src/components/ui/Text';
 import { Button } from 'web/src/components/ui/Button';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
@@ -11,14 +10,13 @@ import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { SwitchField } from 'web/src/components/profile/settings/SwitchField';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { InputAmountWithCurrency } from 'web/src/components/shared/Ads/InputAmountWithCurrency';
-import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { SelectPaymentMethod } from 'web/src/components/shared/Ads/SelectPaymentMethod';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
-import { P2PWalletOption, useP2PWalletOptions } from 'web/src/hooks/useP2PWalletOptions';
-import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
+import { useP2PWalletOptions } from 'web/src/hooks/useP2PWalletOptions';
 import { useUser } from 'web/src/components/app/AppContext';
+import { CryptoCurrencyOption } from 'web/src/components/shared/Ads/CryptoCurrencyOption';
 
 const INPUT_DEBOUNCE = 500;
 
@@ -142,34 +140,6 @@ const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onCha
     changeAmountDebounced(nvalue, 'cryptocurrency');
   };
 
-  const renderCryptoCurrencyOption = (option: P2PWalletOption) => {
-    return (
-      <Box display="flex" alignItems="center" gap="4x">
-        <CryptoCurrencyIcon size="9x" currency={option.code} />
-        <Box display="flex" flexDirection="column" gap="1x" flexGrow={1}>
-          <Box display="flex" justifyContent="space-between">
-            <Text>{option.code}</Text>
-            {option.balance && (
-              <Text>
-                <MoneyFormat money={option.balance} />
-              </Text>
-            )}
-          </Box>
-          <Box display="flex" justifyContent="space-between">
-            <Text color="textMuted" fontWeight="regular">
-              {option.name}
-            </Text>
-            {option.worth && (
-              <Text color="textMuted" fontWeight="regular">
-                <MoneyFormat money={option.worth} />
-              </Text>
-            )}
-          </Box>
-        </Box>
-      </Box>
-    );
-  };
-
   return (
     <>
       <Box display="flex" flexDirection="column" gap="4x">
@@ -178,7 +148,7 @@ const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onCha
           amount={amountCrypto}
           currencyList={walletOptions}
           selectedCurrency={selectedWalletOption}
-          renderOption={renderCryptoCurrencyOption}
+          renderOption={CryptoCurrencyOption}
           onChangeAmount={handleChangeAmountCrypto}
           onChangeCurrency={(v) => onChange({ cryptocurrency: v.code, paymethod: undefined })}
         />
