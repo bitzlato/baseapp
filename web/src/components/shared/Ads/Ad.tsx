@@ -190,15 +190,15 @@ export const Ad: FC = () => {
     setError(null);
     setInputLast(fieldType);
 
-    const amount = parseNumeric(value);
-
     if (field === 'to') {
-      setTo(amount);
+      setTo(value);
     } else {
-      setFrom(amount);
+      setFrom(value);
     }
 
-    if (amount) {
+    const moneyInput = createMoney(parseNumeric(value), fiatCcy);
+
+    if (moneyInput.isPositive() && !moneyInput.isZero()) {
       const amountType = code;
       const other = fieldType === 'cryptocurrency' ? 'currency' : 'cryptocurrency';
 
@@ -211,15 +211,18 @@ export const Ad: FC = () => {
 
       const coin = fieldType === 'cryptocurrency' ? advert.cryptocurrency : paymethod.currency;
 
-      if (Number(amount) > Number(cMax)) {
+      const moneyMax = createMoney(cMax, fieldType === 'cryptocurrency' ? cryptoCcy : fiatCcy);
+      const moneyMin = createMoney(cMin, fieldType === 'cryptocurrency' ? cryptoCcy : fiatCcy);
+
+      if (moneyInput.greaterThan(moneyMax)) {
         setError(t('error.limit.max', { max: cMax, coin }));
       }
 
-      if (Number(amount) < Number(cMin)) {
+      if (moneyInput.lessThan(moneyMin)) {
         setError(t('error.limit.min', { min: cMin, coin }));
       }
 
-      calculateDebounced(amount, amountType, other, advert.type);
+      calculateDebounced(moneyInput.amount.toString(), amountType, other, advert.type);
     }
   };
 
