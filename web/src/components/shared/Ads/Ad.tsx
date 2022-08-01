@@ -9,8 +9,6 @@ import { Spinner } from 'web/src/components/ui/Spinner';
 import ShieldIcon from 'web/src/assets/svg/ShieldIcon.svg';
 import LikeIcon from 'web/src/assets/svg/ThumbUp.svg';
 import UnLikeIcon from 'web/src/assets/svg/ThumbDown.svg';
-import VerifiedIcon from 'web/src/assets/svg/VerifiedIcon.svg';
-import { Tooltip } from 'web/src/components/ui/Tooltip';
 import { Button } from 'web/src/components/ui/Button';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { MoneyInput } from 'web/src/components/TextInputCustom/MoneyInputCustom';
@@ -43,6 +41,7 @@ import { CollapsibleText } from 'web/src/components/shared/CollapsibleText/Colla
 import { AdStat } from './AdStat';
 import { ConfirmDangerRateModal } from './RateDiffModal';
 import { CollapsibleBox } from '../../collapsibleBox/CollapsibleBox';
+import { TraderIcons } from '../../traderInfo/TraderIcons';
 
 interface UrlParams {
   type: 'buy' | 'sell';
@@ -306,13 +305,7 @@ export const Ad: FC = () => {
         >
           {advert.owner}
         </Box>
-        {owner.verification && (
-          <Tooltip label={t('Verified user')} placement="top">
-            <div>
-              <VerifiedIcon width="22" height="22" />
-            </div>
-          </Tooltip>
-        )}
+        <TraderIcons traderInfo={owner} />
       </Box>
       <OnlineStatusByLastActivity lastActivity={owner.lastActivity} />
     </Box>

@@ -17,7 +17,7 @@ export const TraderIcons: FC<Props> = ({ traderInfo }) => {
 
   return (
     <>
-      {traderInfo.verification && (
+      {traderInfo.verificationStatus === 'VERIFIED' && (
         <Tooltip label={t('Verified user')} placement="top">
           <div>
             <VerifiedIcon width="14" height="14" />
