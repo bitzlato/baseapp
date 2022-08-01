@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useRef } from 'react';
 import cn from 'classnames';
 import { Box } from 'web/src/components/ui/Box';
 import { TextInput, TextInputProps } from './TextInputCustom';
@@ -9,11 +9,24 @@ interface Props extends TextInputProps {
   onControlClick?: () => void;
 }
 
+const RIGHT_CONTROLS_PADDING = 12;
+
 export const TextInputWithControl: FC<Props> = ({ control, onControlClick, ...inputProps }) => {
+  const rightControlsRef = useRef<HTMLDivElement>(null);
+
   return (
     <Box width="full" position="relative">
-      <TextInput className={s.input} {...inputProps} />
+      <TextInput
+        className={s.input}
+        style={
+          rightControlsRef.current
+            ? { paddingRight: rightControlsRef.current.clientWidth + RIGHT_CONTROLS_PADDING }
+            : undefined
+        }
+        {...inputProps}
+      />
       <Box
+        ref={rightControlsRef}
         as={onControlClick ? 'button' : 'div'}
         className={cn(s.inputRightControls, { [s.inputRightControlsButton]: onControlClick })}
         display="flex"
