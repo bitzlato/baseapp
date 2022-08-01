@@ -229,7 +229,9 @@ export const Ad: FC = () => {
 
   const handleStartTrade = async () => {
     if (isMobileDevice) {
-      toggleRateDiffIsOkMobile();
+      if (!rateDiffIsOk) {
+        toggleRateDiffIsOkMobile();
+      }
     }
 
     const amount = () => {
