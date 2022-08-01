@@ -1,18 +1,20 @@
 import { useSharedT } from 'web/src/components/shared/Adapter';
-import { PaymethodInfoSource } from 'web/src/modules/p2p/types';
+import { PaymethodSource } from 'web/src/modules/p2p/types';
 import { SelectCustom } from 'web/src/components/SelectCustom/SelectCustom';
 
+interface PaymentOption extends Pick<PaymethodSource, 'id' | 'description'> {}
+
 interface Props {
-  options: PaymethodInfoSource[];
-  value: PaymethodInfoSource | null;
-  onChange: (value: PaymethodInfoSource) => void;
+  options: PaymentOption[];
+  value: PaymentOption | null;
+  onChange: (value: PaymentOption) => void;
 }
 
-const searchFunction = (searchText: string, _optionValue: string, option: PaymethodInfoSource) =>
+export const searchFunction = (searchText: string, _optionValue: string, option: PaymentOption) =>
   option.description.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
 
-const getOptionValue = (option: PaymethodInfoSource) => option.id.toString();
-const getOptionLabel = (option: PaymethodInfoSource) => option.description;
+export const getOptionValue = (option: PaymentOption) => option.id.toString();
+export const getOptionLabel = (option: PaymentOption) => option.description;
 
 export const SelectPaymentMethod = ({ options, value, onChange }: Props) => {
   const t = useSharedT();

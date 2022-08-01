@@ -11,7 +11,7 @@ interface Props extends TextInputProps {
 export const MoneyInput: FC<Props> = ({ currency, ...inputProps }) => {
   return (
     <Box position="relative">
-      <TextInput className={s.input} {...inputProps} />
+      <TextInput className={s.input} labelClassName={s.input} {...inputProps} />
       <Box
         className={s.inputRightControls}
         display="flex"

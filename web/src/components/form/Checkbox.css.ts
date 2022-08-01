@@ -1,11 +1,11 @@
 import { style, styleVariants } from '@vanilla-extract/css';
-import { radiiVars, sizeVars, transitionDurationVars, vars } from 'web/src/theme/vars.css';
+import { sizeVars, transitionDurationVars, vars } from 'web/src/theme/vars.css';
 
 export const checkbox = style({
   display: 'inline-flex',
   alignItems: 'center',
-  verticalAlign: 'top',
   cursor: 'pointer',
+  verticalAlign: 'top',
 });
 
 export const input = style({
@@ -33,6 +33,7 @@ export const controlBase = style({
   borderWidth: 2,
   borderColor: 'inherit',
   color: vars.colors.radio,
+  boxSizing: 'border-box',
   selectors: {
     [`${input}:focus + &`]: {
       boxShadow: `0px 0px 0px 4px ${vars.colors.radioShadow}`,
@@ -48,15 +49,6 @@ export const control = styleVariants({
       backgroundColor: vars.colors.radioChecked,
       borderColor: vars.colors.radioChecked,
       selectors: {
-        '&::before': {
-          content: '',
-          display: 'inline-block',
-          position: 'relative',
-          width: '50%',
-          height: '50%',
-          borderRadius: radiiVars.circle,
-          background: 'currentcolor',
-        },
         [`${input}:focus + &`]: {
           boxShadow: `0px 0px 0px 4px ${vars.colors.radioShadowChecked}`,
         },
