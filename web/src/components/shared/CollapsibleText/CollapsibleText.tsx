@@ -2,15 +2,26 @@ import { FC, useState } from 'react';
 import { Box } from 'web/src/components/ui/Box';
 import ChevronDownIcon from 'web/src/assets/svg/ChevronDownIcon.svg';
 import { Text } from 'web/src/components/ui/Text';
-import { fontSizeVars } from 'web/src/theme/vars.css';
+import { fontSizeVars, vars } from 'web/src/theme/vars.css';
 import * as s from './CollapsibleText.css';
 
 type Props = {
+  title?: string;
   text: string;
+  titleColor?: keyof typeof vars.colors;
+  textColor?: keyof typeof vars.colors;
+  controlColor?: keyof typeof vars.colors;
   fontSize?: keyof typeof fontSizeVars;
 };
 
-export const CollapsibleText: FC<Props> = ({ text, fontSize = 'medium' }) => {
+export const CollapsibleText: FC<Props> = ({
+  title,
+  text,
+  titleColor,
+  textColor,
+  controlColor,
+  fontSize = 'medium',
+}) => {
   const [collapse, setCollapse] = useState(true);
 
   return (
@@ -26,12 +37,21 @@ export const CollapsibleText: FC<Props> = ({ text, fontSize = 'medium' }) => {
         whiteSpace="nowrap"
         pr="4x"
         className={s.collapseTextContent[collapse ? 'collapse' : 'expand']}
+        display="flex"
+        flexDirection="column"
       >
+        {title && (
+          <Box pb="2x" pt="1x">
+            <Text as="span" color={titleColor} fontWeight="strong" fontSize="medium">
+              {title}
+            </Text>
+          </Box>
+        )}
         <Text
           as="span"
           whiteSpace={collapse ? 'nowrap' : 'pre-line'}
           fontSize={fontSize}
-          color="tradeMainComponentTradeCounterDetailsColor"
+          color={textColor}
         >
           {text}
         </Text>
@@ -47,7 +67,7 @@ export const CollapsibleText: FC<Props> = ({ text, fontSize = 'medium' }) => {
       >
         <Box
           cursor="pointer"
-          color="collapsibleTextExpandControls"
+          color={controlColor}
           className={s.chevrone[collapse ? 'down' : 'up']}
           onClick={() => setCollapse((c) => !c)}
         >

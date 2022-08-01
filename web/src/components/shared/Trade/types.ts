@@ -69,11 +69,17 @@ export enum TradeStatus {
 
 export type Tabs = 'tradeInfo' | 'chat';
 export type MobileTabs = 'trader' | 'trade';
-export type TradeModals = 'details' | 'confirmCancel' | 'confirmPayment' | 'tips' | 'disputeReason';
+export type TradeModals =
+  | 'details'
+  | 'confirmCancel'
+  | 'confirmPayment'
+  | 'tips'
+  | 'disputeReason'
+  | 'ask2fa';
 export type TradeFeedback = 'thumb_up' | 'weary' | 'hankey';
 export interface TradeContextValue {
   trade: Trade;
-  handleTradeAction: (action: TradeAvailableAction) => void;
+  handleTradeAction: (action: TradeAvailableAction, twoFACode?: string) => void;
   handleTradeTimeout: () => void;
   handleTradeDetails: (details: string, onSuccess?: () => void) => void;
   handleTradeTips: (tipsAmount: number) => void;

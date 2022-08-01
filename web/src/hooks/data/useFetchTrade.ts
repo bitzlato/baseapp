@@ -1,4 +1,5 @@
 import { p2pUrl } from 'web/src/api';
+import { useUser } from 'web/src/components/app/AppContext';
 import { TradeInfo } from 'web/src/components/shared/Trade/types';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { useFetch } from './useFetch';
@@ -10,8 +11,10 @@ export const useFetchTradeInfo = (tradeId: string | undefined) =>
   });
 
 export function useFetchLastRequisites(paymethodId?: number | undefined) {
+  const user = useUser();
+
   return useFetch<{ data: string[] }>(
-    paymethodId ? `${p2pUrl()}/profile/last-trade-details/${paymethodId}` : null,
+    user && paymethodId ? `${p2pUrl()}/profile/last-trade-details/${paymethodId}` : null,
     fetchWithCreds,
     {
       revalidateIfStale: false,

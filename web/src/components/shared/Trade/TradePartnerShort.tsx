@@ -29,7 +29,7 @@ export const TradePartnerShort: FC = () => {
     />
   );
 
-  const verifiedIcon = <TraderIcons traderInfo={trade.partner} />;
+  const traderIcons = <TraderIcons traderInfo={trade.partner} />;
 
   if (isMobileDevice) {
     return (
@@ -50,7 +50,7 @@ export const TradePartnerShort: FC = () => {
             >
               {trade.partner.name}
             </Box>
-            {trade.partner.verificationStatus === 'VERIFIED' && verifiedIcon}
+            {traderIcons}
           </Box>
 
           <Box>{trustButton}</Box>
@@ -81,7 +81,7 @@ export const TradePartnerShort: FC = () => {
           >
             {trade.partner.name}
           </Box>
-          {trade.partner.verificationStatus === 'VERIFIED' && verifiedIcon}
+          {traderIcons}
         </Box>
 
         <Box>{trustButton}</Box>
