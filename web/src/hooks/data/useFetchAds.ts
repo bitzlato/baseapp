@@ -63,5 +63,9 @@ export const useAds = (params: AdvertParams) => {
 };
 
 export const useFetchAdvert = (id: string) => {
-  return useFetch<AdvertSingleSource>(`${p2pUrl()}/exchange/dsa/${id}`, fetchWithCreds);
+  const user = useUser();
+  return useFetch<AdvertSingleSource>(
+    `${p2pUrl()}${user === undefined ? '/public' : ''}/exchange/dsa/${id}`,
+    fetchWithCreds,
+  );
 };

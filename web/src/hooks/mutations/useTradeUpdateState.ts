@@ -29,6 +29,7 @@ type DescribeDispute = {
 type UpdateTradeStatePostAction = {
   reloadTrade?: KeyedMutator<TradeInfo>;
   toggleDetailsModal: () => void;
+  toggle2faModal?: () => void;
 };
 
 type UpdateTradeTipsPostAction = {
@@ -171,6 +172,7 @@ export const useTradeUpdateDetails = ({ toggleDetailsModal }: UpdateTradeStatePo
 export const useTradeUpdateState = ({
   reloadTrade,
   toggleDetailsModal,
+  toggle2faModal,
 }: UpdateTradeStatePostAction) => {
   const handleFetchError = useHandleFetchError();
 
@@ -182,6 +184,8 @@ export const useTradeUpdateState = ({
       if (error instanceof FetchError) {
         if (error.payload && error.payload.code === 'TradeDetailsRequired') {
           toggleDetailsModal();
+        } else if (error.payload && error.payload.code === 'MfaRequired') {
+          toggle2faModal?.();
         } else {
           handleFetchError(error);
         }

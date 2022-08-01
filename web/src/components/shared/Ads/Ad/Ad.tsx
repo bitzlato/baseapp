@@ -7,25 +7,15 @@ import { useFetchAdvert } from 'web/src/hooks/data/useFetchAds';
 import { useFetchPaymethod } from 'web/src/hooks/data/useFetchPaymethod';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import ShieldIcon from 'web/src/assets/svg/ShieldIcon.svg';
-import LikeIcon from 'web/src/assets/svg/ThumbUp.svg';
-import UnLikeIcon from 'web/src/assets/svg/ThumbDown.svg';
-import VerifiedIcon from 'web/src/assets/svg/VerifiedIcon.svg';
-import { Tooltip } from 'web/src/components/ui/Tooltip';
 import { Button } from 'web/src/components/ui/Button';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { MoneyInput } from 'web/src/components/TextInputCustom/MoneyInputCustom';
-import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
 import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
 import { createMoney } from 'web/src/helpers/money';
-import { P2PMoneyFormat } from 'web/src/components/money/P2PFiatMoney';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
-import { DealStat } from 'web/src/modules/p2p/user.types';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
-import { OnlineStatusByLastActivity } from 'web/src/components/ui/OnlineStatus';
-import { ActionOnTraderButton } from 'web/src/components/p2p/ActionOnTraderButton';
 import { themeDark } from 'web/src/theme/vars.css';
 import { useFetchTraderInfo } from 'web/src/hooks/data/useFetchTraderInfo';
-import { useTrustUser } from 'web/src/hooks/mutations/useTrustUser';
 import { useTradeEstimate } from 'web/src/hooks/data/useTradeEstimate';
 import { useDebouncedCallback } from 'use-debounce';
 import { useFetchLastRequisites } from 'web/src/hooks/data/useFetchTrade';
@@ -33,13 +23,24 @@ import { useFetchP2PWallet } from 'web/src/hooks/data/useFetchP2PWallets';
 import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
 import { useTradeStart } from 'web/src/hooks/mutations/useTradeUpdateState';
 import { AdvertType } from 'web/src/modules/p2p/types';
-import { WarningIcon } from 'web/src/mobile/assets/images/WarningIcon';
-import WarningTriangleIcon from 'web/src/assets/svg/WarningTriangleIcon.svg';
 import { DetailsInput } from 'web/src/components/TextInputCustom/DetailsInput';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
-import { AdStat } from './AdStat';
+import { CollapsibleText } from 'web/src/components/shared/CollapsibleText/CollapsibleText';
+import {
+  getFormatOptionsByLanguage,
+  getP2PFiatOptionsByCode,
+} from 'web/src/components/AmountFormat/getFormatOptionsByLanguage';
+import { Money } from '@bitzlato/money-js';
+import { Breadcrumbs, BreadcrumbsItem } from 'web/src/components/ui/Breadcrumbs';
+import { AdsType } from 'web/src/components/shared/Trade/types';
 import { ConfirmDangerRateModal } from './RateDiffModal';
+import { ActionBlock } from './ActionBlock';
+import { AdTrader } from './AdTrader';
+import { AdTraderInfo } from './AdTraderInfo';
+import { AdTerms } from './AdTerms';
+import { AdInfo } from './AdInfo';
+import { AdError } from './AdError';
 
 interface UrlParams {
   type: 'buy' | 'sell';
@@ -48,22 +49,9 @@ interface UrlParams {
 
 const DEFERRED_INTERVAL = 300;
 
-const ErrorBlock: FC<{ text: string }> = ({ text }) => (
-  <Box display="flex" alignItems="center" mt="3x">
-    <WarningIcon />
-    <Text fontWeight="strong">{text}</Text>
-  </Box>
-);
-
-const WarningBlock: FC<{ unactiveReason: string }> = ({ unactiveReason }) => (
-  <Box display="flex" flexDirection="column" py="13x" justifyContent="center" alignItems="center">
-    <WarningTriangleIcon />
-    <Text>{unactiveReason}</Text>
-  </Box>
-);
-
 export const Ad: FC = () => {
-  const { lang, isMobileDevice } = useAppContext();
+  const { lang, isMobileDevice, user } = useAppContext();
+  const isLogged = user !== undefined;
 
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
@@ -88,7 +76,6 @@ export const Ad: FC = () => {
   const { data: owner } = traderInfoSWR;
   const { getFiatCurrency } = useP2PFiatCurrencies();
   const { getCryptoCurrency } = useP2PCryptoCurrencies();
-  const changeTrust = useTrustUser(traderInfoSWR);
 
   const cryptocurrency = advert?.cryptocurrency;
 
@@ -151,18 +138,18 @@ export const Ad: FC = () => {
     },
   });
 
-  if (
-    advert === undefined ||
-    paymethod === undefined ||
-    owner === undefined ||
-    p2pWallet === undefined
-  ) {
+  if (advert === undefined || paymethod === undefined || owner === undefined) {
     return (
       <Box display="flex" justifyContent="center" py="20x">
         <Spinner />
       </Box>
     );
   }
+
+  const handleChangeDetails = (d: string) => {
+    setError(null);
+    setDetails(d);
+  };
 
   const isBuy = advert.type === 'purchase';
   const fiatCcy = getFiatCurrency(paymethod.currency);
@@ -171,13 +158,15 @@ export const Ad: FC = () => {
   const nextRate = createMoney(currentRate, fiatCcy);
   const min = createMoney(advert.limitCurrency.min, fiatCcy);
   const max = createMoney(advert.limitCurrency.max, fiatCcy);
+  const cmin = createMoney(advert.limitCryptocurrency.min, cryptoCcy);
+  const cmax = createMoney(
+    advert.limitCryptocurrency.realMax || advert.limitCryptocurrency.max,
+    cryptoCcy,
+  );
   const fromCcy = isBuy ? fiatCcy : cryptoCcy;
   const toCcy = isBuy ? cryptoCcy : fiatCcy;
-  const deals =
-    owner.dealStats.find((v) => v.cryptocurrency === 'common') ??
-    ({ successDeals: 0, canceledDeals: 0 } as DealStat);
 
-  const balance = createMoney(p2pWallet.balance, cryptoCcy);
+  const balance = p2pWallet && createMoney(p2pWallet?.balance, cryptoCcy);
 
   const handleChange = async (
     field: 'from' | 'to',
@@ -185,31 +174,80 @@ export const Ad: FC = () => {
     value: string,
     code: string,
   ) => {
+    const isFieldTypeCryptocurrency = fieldType === 'cryptocurrency';
+
+    const numericValue = parseNumeric(value, {
+      maxFractionDigits: isFieldTypeCryptocurrency ? cryptoCcy.minorUnit : 0,
+    });
+
+    if (!numericValue) {
+      setTo('');
+      setFrom('');
+      return;
+    }
+
     setError(null);
     setInputLast(fieldType);
 
-    const amount = parseNumeric(value);
-
     if (field === 'to') {
-      setTo(amount);
+      setTo(numericValue);
     } else {
-      setFrom(amount);
+      setFrom(numericValue);
     }
 
-    if (amount) {
+    const moneyInput = createMoney(numericValue, isFieldTypeCryptocurrency ? cryptoCcy : fiatCcy);
+
+    if (moneyInput.isPositive() && !moneyInput.isZero()) {
       const amountType = code;
-      const other = fieldType === 'cryptocurrency' ? 'currency' : 'cryptocurrency';
-      calculateDebounced(amount, amountType, other, advert.type);
-    }
-  };
+      const other = isFieldTypeCryptocurrency ? 'currency' : 'cryptocurrency';
 
-  const handleClickTrusted = () => {
-    changeTrust({ publicName: owner.name, flag: !owner.trusted });
+      const limitType = isFieldTypeCryptocurrency ? 'limitCryptocurrency' : 'limitCurrency';
+
+      const advertMaxAmount = advert[limitType].realMax ?? advert[limitType].max;
+      const advertMinAmount = advert[limitType].min;
+
+      const coin = isFieldTypeCryptocurrency ? advert.cryptocurrency : paymethod.currency;
+
+      const moneyMax = createMoney(
+        advertMaxAmount,
+        isFieldTypeCryptocurrency ? cryptoCcy : fiatCcy,
+      );
+      const moneyMin = createMoney(
+        advertMinAmount,
+        isFieldTypeCryptocurrency ? cryptoCcy : fiatCcy,
+      );
+
+      const formatMinMax = (v: Money): string => {
+        if (isFieldTypeCryptocurrency) {
+          return v.toFormat({
+            ...getFormatOptionsByLanguage(lang),
+            maxFractionDigits: cryptoCcy.minorUnit,
+          });
+        }
+
+        return v.toFormat({
+          ...getFormatOptionsByLanguage(lang),
+          ...getP2PFiatOptionsByCode(coin),
+        });
+      };
+
+      if (moneyInput.greaterThan(moneyMax)) {
+        setError(t('error.limit.max', { max: formatMinMax(moneyMax), coin }));
+      }
+
+      if (moneyInput.lessThan(moneyMin)) {
+        setError(t('error.limit.min', { min: formatMinMax(moneyMin), coin }));
+      }
+
+      calculateDebounced(moneyInput.amount.toString(), amountType, other, advert.type);
+    }
   };
 
   const handleStartTrade = async () => {
     if (isMobileDevice) {
-      toggleRateDiffIsOkMobile();
+      if (!rateDiffIsOk) {
+        toggleRateDiffIsOkMobile();
+      }
     }
 
     const amount = () => {
@@ -271,72 +309,9 @@ export const Ad: FC = () => {
     setShow(false);
   };
 
-  const traderEl = (
-    <Box>
-      <Box display="flex" alignItems="center" gap="2x">
-        <Box as="p" fontSize="lead24">
-          {advert.owner}
-        </Box>
-        {owner.verification && (
-          <Tooltip label={t('Verified user')} placement="top">
-            <div>
-              <VerifiedIcon width="22" height="22" />
-            </div>
-          </Tooltip>
-        )}
-      </Box>
-      <OnlineStatusByLastActivity lastActivity={owner.lastActivity} />
-    </Box>
-  );
-
-  const labelColor = isMobileDevice ? 'text' : undefined;
-  const traderInfoEl = (
-    <>
-      <AdStat labelColor={labelColor} label={t('Rating')}>
-        <Box display="flex" alignItems="center" gap="5x">
-          <Box display="flex" alignItems="center" gap="1x">
-            <Box as={LikeIcon} color="statIcon" />
-            <span>{owner.feedbacks.find((v) => v.type === 'thumb_up')?.count ?? 0}</span>
-          </Box>
-          <Box display="flex" alignItems="center" gap="1x">
-            <Box as={UnLikeIcon} color="statIcon" />
-            <span>{owner.feedbacks.find((v) => v.type === 'hankey')?.count ?? 0}</span>
-          </Box>
-          <span>{owner.rating}</span>
-        </Box>
-      </AdStat>
-      <AdStat labelColor={labelColor} label={t('Reputation')}>
-        {owner.safetyIndex}
-      </AdStat>
-      <AdStat labelColor={labelColor} label={t('Successful deals')}>
-        {deals.successDeals}
-      </AdStat>
-      <AdStat labelColor={labelColor} label={t('Canceled deals')}>
-        {deals.canceledDeals}
-      </AdStat>
-    </>
-  );
-
-  const termsEl = (
-    <Box p="6x" backgroundColor="adBg" borderRadius="1.5x">
-      <Text variant="title">{t('Trade terms')}</Text>
-      <Box marginTop="6x" whiteSpace="pre-line">
-        {advert.terms ? (
-          <Text>{advert.terms}</Text>
-        ) : (
-          <Text
-            color="secondary"
-            textTransform="uppercase"
-            fontWeight="strong"
-            fontSize="medium"
-            textAlign="center"
-          >
-            {t('Missing.plural')}
-          </Text>
-        )}
-      </Box>
-    </Box>
-  );
+  const traderEl = <AdTrader trader={owner} />;
+  const traderInfoEl = <AdTraderInfo trader={owner} />;
+  const termsEl = <AdTerms terms={advert.terms} />;
 
   const yourBalance = !isBuy && balance && (
     <Box
@@ -358,23 +333,15 @@ export const Ad: FC = () => {
   );
 
   const dealInfoEl = (
-    <>
-      <Text variant="h6">{t('Deal info')}</Text>
-      <AdStat label={t('Rate')}>
-        <Text>
-          <P2PMoneyFormat money={rate} cryptoCurrency={cryptoCcy} />
-        </Text>
-      </AdStat>
-      <AdStat label={t('Limits')}>
-        <Text>
-          <P2PFiatFormat money={min} cryptoCurrency={cryptoCcy} /> —{' '}
-          <P2PMoneyFormat money={max} cryptoCurrency={cryptoCcy} />
-        </Text>
-      </AdStat>
-      <AdStat label={t('Bitzlato fee')}>
-        <Text>0%</Text>
-      </AdStat>
-    </>
+    <AdInfo
+      owner={owner}
+      rate={rate}
+      cryptocurrency={cryptoCcy}
+      currencyMin={min}
+      currencyMax={max}
+      cryptoCurrencyMax={cmax}
+      cryptoCurrencyMin={cmin}
+    />
   );
 
   const inputsEl = (
@@ -387,6 +354,7 @@ export const Ad: FC = () => {
           handleChange('from', isBuy ? 'currency' : 'cryptocurrency', value, fromCcy.code)
         }
         autoFocus
+        showIcon={!isBuy}
       />
       <MoneyInput
         currency={toCcy.code}
@@ -395,13 +363,14 @@ export const Ad: FC = () => {
         onChange={(value: string) =>
           handleChange('to', isBuy ? 'cryptocurrency' : 'currency', value, toCcy.code)
         }
+        showIcon={isBuy}
       />
 
       {!isBuy && (
         <DetailsInput
           rows={1}
           details={details}
-          onChangeDetails={setDetails}
+          onChangeDetails={handleChangeDetails}
           lastDetails={lastDetails}
         />
       )}
@@ -416,29 +385,17 @@ export const Ad: FC = () => {
   };
   const header = isBuy ? t('ad.buy', tValues) : t('ad.sell', tValues);
 
-  let reason = null;
-  switch (advert.unactiveReason) {
-    case 'blacklisted':
-      reason = t('reasonBlacklisted');
-      break;
-    case 'partner_not_enough_funds':
-      reason = t('reasonPartnerNotEnoughFunds');
-      break;
-    case 'not_enough_funds':
-      reason = t('reasonNotEnoughFunds');
-      break;
-    case 'verified_only':
-      reason = t('reasonVerifiedOnly');
-      break;
-    case 'trade_with_yourself':
-      reason = t('reasonTradeWithYourself');
-      break;
-    case 'blacklisted_by_you':
-      reason = t('reasonBlacklistedByYou');
-      break;
-    default:
-      reason = t('notAvailable');
-  }
+  const startTradeEnabled = from && to && !error;
+
+  const actionBlock = (
+    <ActionBlock
+      available={advert.available}
+      unactiveReason={advert.unactiveReason}
+      handleClickStart={handleClickStart}
+      startTradeEnabled={startTradeEnabled}
+      inputsEl={inputsEl}
+    />
+  );
 
   if (isMobileDevice) {
     return (
@@ -447,6 +404,9 @@ export const Ad: FC = () => {
           <Box as="h2" fontSize="lead" fontWeight="strong">
             {header}
           </Box>
+
+          {actionBlock}
+
           <Box mt="5x" bg="paginationItemBgHover" borderRadius="1.5x" px="5x" py="4x">
             <Box as="h6" fontSize="caption">
               {t('Trader')}
@@ -467,12 +427,10 @@ export const Ad: FC = () => {
             {traderInfoEl}
           </Box>
           <Box mt="5x">
-            {advert.available ? (
+            {advert.available && isLogged && (
               <Button fullWidth onClick={handleClickStartMobile}>
                 {t('Start trade')}
               </Button>
-            ) : (
-              <WarningBlock unactiveReason={reason} />
             )}
           </Box>
         </Box>
@@ -483,7 +441,6 @@ export const Ad: FC = () => {
           gap="4x"
           backgroundColor="adTradeMobileBackground"
         >
-          {termsEl}
           <Box
             p="6x"
             backgroundColor="adBg"
@@ -494,8 +451,15 @@ export const Ad: FC = () => {
           >
             {dealInfoEl}
           </Box>
+          {termsEl}
+
           <Box p="6x" backgroundColor="adBg" borderRadius="1.5x">
-            <Text>{t('ad.trade.info')}</Text>
+            <CollapsibleText
+              title={t('Garantee')}
+              titleColor="collapsibleTextTitleColor"
+              text={t('ad.trade.info')}
+              controlColor="collapsibleTextExpandControlsColorInverse"
+            />
           </Box>
         </Box>
         <Modal show={show} onClose={handleClickCancelMobile}>
@@ -514,11 +478,11 @@ export const Ad: FC = () => {
             >
               {inputsEl}
             </Box>
-            {error && <ErrorBlock text={error} />}
+            {error && <AdError>{error}</AdError>}
           </ModalBody>
           <ModalFooter>
             <Box flexGrow={1} display="flex" flexDirection="column" gap="4x">
-              <Button color="secondary" onClick={handleClickStart} disabled={!(from && to)}>
+              <Button color="secondary" onClick={handleClickStart} disabled={!startTradeEnabled}>
                 {t('Confirm')}
               </Button>
               <Button variant="outlined" color="secondary" onClick={handleClickCancelMobile}>
@@ -543,11 +507,18 @@ export const Ad: FC = () => {
 
   return (
     <Container maxWidth="xl">
+      <Breadcrumbs>
+        <BreadcrumbsItem to={`/${lang}/p2p`}>{t('Market')}</BreadcrumbsItem>
+        <BreadcrumbsItem>
+          {advert.type === AdsType.purchase ? t('Purchase') : t('Selling')}
+        </BreadcrumbsItem>
+      </Breadcrumbs>
+
       <Box
         display="flex"
         flexDirection="column"
         backgroundColor="dropdown"
-        m="8x"
+        mb="8x"
         borderRadius="1.5x"
         overflow="hidden"
         color="text"
@@ -556,19 +527,8 @@ export const Ad: FC = () => {
           <Box as="h2" fontSize="lead30">
             {header}
           </Box>
-          <Box mt="6x" display="flex" gap="6x">
-            <Box flex={1} display="flex" flexDirection="column" gap="4x" position="relative">
-              {advert.available ? (
-                <>
-                  {inputsEl}
-                  <Button onClick={handleClickStart} disabled={!(from && to)}>
-                    {t('Start trade')}
-                  </Button>
-                </>
-              ) : (
-                <WarningBlock unactiveReason={reason} />
-              )}
-            </Box>
+          <Box mt="6x" display="flex" gap="6x" flex={1}>
+            {actionBlock}
             <Box flex={1} display="flex" flexDirection="column" gap="2x">
               {yourBalance}
 
@@ -587,22 +547,11 @@ export const Ad: FC = () => {
               </Box>
             </Box>
           </Box>
-          {error && <ErrorBlock text={error} />}
+          {error && <AdError>{error}</AdError>}
         </Box>
         <Box p="6x" display="flex" flexDirection="column" gap="6x">
           <Box p="6x" backgroundColor="adBg" borderRadius="1.5x" display="flex" gap="6x">
-            <Box flex={1} display="flex">
-              <Box display="flex" flexDirection="column" justifyContent="space-between">
-                {traderEl}
-                <ActionOnTraderButton
-                  variant="trust"
-                  active={owner.trusted ?? false}
-                  title={t('Add to trusted')}
-                  activeTitle={t('Remove from trusted')}
-                  onClick={handleClickTrusted}
-                />
-              </Box>
-            </Box>
+            <Box flex={1}>{traderEl}</Box>
             <Box flex={1} display="flex">
               <Box
                 pl="6x"

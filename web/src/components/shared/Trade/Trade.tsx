@@ -55,6 +55,7 @@ import { getP2PTradeDisputeEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTr
 import { getP2PTradeDisputeUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeDisputeUnread';
 import { getP2PTradeChatEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeChat';
 import { getP2PTradeChatUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeChatUnread';
+import { TradeTwoFactorModal } from 'web/src/components/shared/Trade/TradeModals/TradeTwoFactorModal';
 
 const tradeEventList = [
   'tradeStatusChanged',
@@ -79,6 +80,7 @@ export const SharedTrade: FC = () => {
   const [confirmPayment, setConfirmPayment] = useState(false);
   const [tips, setTips] = useState(false);
   const [askDisputeReason, setAskDisputeReason] = useState(false);
+  const [ask2fa, setAsk2fa] = useState(false);
 
   const gap = '3x';
   const themeClassName = theme === 'light' ? themeLight : themeDark;
@@ -90,8 +92,9 @@ export const SharedTrade: FC = () => {
       confirmPayment,
       tips,
       disputeReason: askDisputeReason,
+      ask2fa,
     }),
-    [askTradeDetails, confirmCancel, confirmPayment, tips, askDisputeReason],
+    [askTradeDetails, confirmCancel, confirmPayment, tips, askDisputeReason, ask2fa],
   );
 
   const toggleModal = useCallback((modal: TradeModals) => {
@@ -115,6 +118,10 @@ export const SharedTrade: FC = () => {
 
     if (modal === 'disputeReason') {
       toggler = setAskDisputeReason;
+    }
+
+    if (modal === 'ask2fa') {
+      toggler = setAsk2fa;
     }
 
     if (toggler) {
@@ -142,6 +149,7 @@ export const SharedTrade: FC = () => {
   const [mutateTradeState] = useTradeUpdateState({
     reloadTrade,
     toggleDetailsModal: () => toggleModal('details'),
+    toggle2faModal: () => toggleModal('ask2fa'),
   });
 
   const [mutateDescribeDispute] = useDisputeDescribe();
@@ -167,9 +175,9 @@ export const SharedTrade: FC = () => {
   );
 
   const handleTradeAction = useCallback(
-    (action: TradeAvailableAction) => {
+    (action: TradeAvailableAction, twoFACode?: string) => {
       if (trade.id) {
-        mutateTradeState({ tradeId: trade.id, action, twoFACode: null });
+        mutateTradeState({ tradeId: trade.id, action, twoFACode: twoFACode ?? null });
       }
     },
     [trade.id, mutateTradeState],
@@ -353,6 +361,7 @@ export const SharedTrade: FC = () => {
         <TradeInputDetails />
         <TradeConfirmReceiveMoneyModal />
         <TradeDisputeReasonModal />
+        <TradeTwoFactorModal />
       </Box>
     </TradeContext.Provider>
   );

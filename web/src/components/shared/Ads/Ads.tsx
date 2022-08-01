@@ -25,7 +25,7 @@ import { p2pUrl } from 'web/src/api/config';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { OnlineStatusByLastActivity } from '../../ui/OnlineStatus';
-import { ConfirmRateChangeModal } from './RateDiffModal';
+import { ConfirmRateChangeModal } from './Ad/RateDiffModal';
 import { getLinkToP2PUser } from './getLinkToP2PUser';
 
 interface AdExchangeButtonProps {
