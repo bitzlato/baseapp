@@ -4,23 +4,6 @@ import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { P2PVoucher, P2PVouchers } from 'web/src/modules/account/voucher-types';
 import { useFetch } from './useFetch';
 
-export const useFetchVouchers = (
-  currency: string,
-  cashed: boolean,
-  page: number,
-  items: number,
-) => {
-  return useFetch<P2PVouchers>(
-    `${p2pUrl()}/vouchers/?${buildQueryString({
-      currency,
-      status: cashed ? 'cashed' : 'active',
-      offset: page * items,
-      limit: items,
-    })}`,
-    fetchWithCreds,
-  );
-};
-
 export const useFetchMyVouchers = ({
   cryptocurrency,
   skip = 0,
