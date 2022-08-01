@@ -392,6 +392,7 @@
   "minMaxDiscrepancy": "Минимальная сумма не может быть больше максимальной",
   "WrongMaxLimitForNewTrader": "Ограничения для нового трейдера не соответствует лимитам объявления (ниже минимального или выше максимального)",
   "NotEnoughRatingForTermsWithDigits": "Вводить цифры в описание объявления запрещено. Для ввода реквизитов используйте отдельное поле \"реквизиты\"",
+  "TooHighAdvertRate": "⚠️ Упс!\n\nСработала защита, вы меняете курс более чем на 10%!\n\nРекомендуем перепроверить курс, или менять курс в несколько шагов!",
 
   "Great!": "Отлично!",
   "Your ad has been successfully created": "Ваше объявление успешно создано",
@@ -425,5 +426,28 @@
   "gifts.createGift": "Создать чек",
   "gifts.activeGifts": "Активные чеки",
   "gifts.giftsHistory": "История",
-  "page.header.navbar.balances": "Балансы"
+  "page.header.navbar.balances": "Балансы",
+
+  "Delete": "Удалить",
+  "Advert": "Объявление",
+  "Status": "Статус",
+  "Additional": "Дополнительно",
+  "Requisites": "Реквизиты для перевода",
+  "Share": "Поделиться",
+  "Terms": "Условия торговли",
+  "Back": "Назад",
+  "Link copied": "Ссылка скопирована",
+  "Save": "Сохранить",
+  "userAd.title.buy": "Обменять {currency} за {cryptocurrency}",
+  "userAd.title.sell": "Обменять {cryptocurrency} за {currency}",
+  "userAd.deleteTitle": "Удалить объявление",
+  "userAd.deleteNotice": "Вы уверены в том, что хотите удалить объявление № {id}?",
+  "userAd.disabled.unactive_20_percent_diff": "Курс отличается от Bittrex на {percentDiff}%",
+  "userAd.disabled.unactive_not_enough_funds": "Недостаточно средств",
+  "userAd.disabled.unactive_not_enough_funds_for_purchase": "Чтобы активироавть объявлениие необходимо пополнить ваш баланс. Минимальная сумма баланса: {minBalance} {cryptocurrency}",
+  "userAd.empty.title": "Это объявление больше недоступно.",
+  "userAd.empty.marketLink": "Перейдите в маркет",
+  "userAd.empty.title2": "чтобы посмотреть другие объявления или создайте своё объявление",
+  "Num": "№",
+  "userAd.adsUpdatedToOften": "Вы редактируете объявление слишком часто. Повторите попытку через несколько секунд"
 }

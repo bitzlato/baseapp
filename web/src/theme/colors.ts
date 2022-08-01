@@ -103,3 +103,4 @@ export const mischka = 'rgba(225, 226, 230, 1)';
 export const outerSpace = 'rgba(49, 56, 65, 1)';
 export const solitaire = 'rgba(254, 247, 227, 1)';
 export const brightGray = 'rgb(58, 63, 70)';
+export const curiousBlue = 'rgba(41, 140, 232, 1)';

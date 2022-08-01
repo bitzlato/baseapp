@@ -280,5 +280,18 @@
   "gifts.createGift": "Create a check",
   "gifts.activeGifts": "Active checks",
   "gifts.giftsHistory": "History",
-  "page.header.navbar.balances": "Balances"
+  "page.header.navbar.balances": "Balances",
+
+  "userAd.title.buy": "Buy {cryptocurrency} for {currency}",
+  "userAd.title.sell": "Sell {cryptocurrency} for {currency}",
+  "userAd.deleteTitle": "Delete",
+  "userAd.deleteNotice": "Are you sure you want to delete the ad № {id}?",
+  "userAd.disabled.unactive_20_percent_diff": "The rate differs from Bittrex by {percentDiff}%",
+  "userAd.disabled.unactive_not_enough_funds": "Not enough funds",
+  "userAd.disabled.unactive_not_enough_funds_for_purchase": "To activate the ad you need to top up your balance. Minimal balance amount: {minBalance} {cryptocurrency}",
+  "userAd.empty.title": "This ad is no longer available",
+  "userAd.empty.marketLink": "Go to market",
+  "userAd.empty.title2": "to see other ads or create your own ad",
+  "Num": "#",
+  "userAd.adsUpdatedToOften": "You are editing ad too often. Try in a few seconds"
 }

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { AdvertType } from 'web/src/modules/p2p/types';
 import { useFetchP2PTradesAlerts } from 'web/src/hooks/data/useFetchP2PTradesAlerts';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
@@ -21,9 +21,15 @@ export const UserAdsAlerts: FC<Props> = ({ cryptocurrency, type }) => {
   return alertListFiltered && alertListFiltered.length > 0 ? (
     <Box mt="5x">
       {alertListFiltered.map((alert) => {
+        let body: ReactNode | null = (
+          <UserAdsAlert key={alert.code} theme="warning">
+            {t(`alerts.${alert.code}`)}
+          </UserAdsAlert>
+        );
+
         if (alert.code === 'not_verified') {
-          return (
-            <UserAdsAlert key={alert.code} theme="info">
+          body = (
+            <UserAdsAlert theme="info">
               {t('alerts.not_verified')} {t('alerts.not_verified.please')}{' '}
               <Box
                 as={Link}
@@ -38,8 +44,8 @@ export const UserAdsAlerts: FC<Props> = ({ cryptocurrency, type }) => {
         }
 
         if (alert.code === 'not_enough_funds' && alert.data && 'minBalance' in alert.data) {
-          return isPurchase ? (
-            <UserAdsAlert key={alert.code} theme="warning">
+          body = isPurchase ? (
+            <UserAdsAlert theme="warning">
               <Box
                 as="span"
                 display={{ mobile: 'block', tablet: 'inline-block' }}
@@ -57,11 +63,11 @@ export const UserAdsAlerts: FC<Props> = ({ cryptocurrency, type }) => {
           ) : null;
         }
 
-        return (
-          <UserAdsAlert key={alert.code} theme="warning">
-            {t(`alerts.${alert.code}`)}
-          </UserAdsAlert>
-        );
+        return body ? (
+          <Box key={alert.code} my="2x">
+            {body}
+          </Box>
+        ) : null;
       })}
     </Box>
   ) : null;
