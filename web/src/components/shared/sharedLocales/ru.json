@@ -272,5 +272,47 @@
   "reasonVerifiedOnly": "Данное объявление доступно только для верифицированных пользователей",
   "reasonTradeWithYourself": "Вы пытаетесь торговать с самим собой",
   "reasonBlacklistedByYou": "Вы заблокировали данного пользователя, в связи с этим вы не можете производить с ним сделки",
-  "notAvailable": "К сожалению, данное объявление недоступно на данный момент!"
+  "notAvailable": "К сожалению, данное объявление недоступно на данный момент!",
+
+  "My adverts": "Мои объявления",
+  "Enable": "Включить",
+  "Disable": "Выключить",
+  "Enable trading": "Включить торговлю",
+  "Trading enabled": "Торговля включена",
+  "Enable all": "Включить все",
+  "Disable all": "Выключить все",
+  "Choose rate": "Установить курс",
+  "Set": "Установить",
+  "Fixed rate": "Фиксированный курс",
+  "Floating rate": "Плавающий курс",
+  "from": "от",
+  "Error": "Ошибка",
+
+  "userAds.empty1": "Вы еще не создали ни одного объявления.",
+  "userAds.empty2": "Создайте его сейчас",
+  "userAds.onlyActive.info": "Показывать только активные объявления",
+  "userAds.enableTrading": "{on} торговлю по всем объявлнениям",
+  "userAds.enableTrading.on": "Включить",
+  "userAds.enableTrading.off": "Выключить",
+  "userAds.allAds.trading.enable": "{enable} все объявления на {type}",
+  "userAds.allAds.trading.enable.purchase": "покупку",
+  "userAds.allAds.trading.enable.selling": "продажу",
+  "userAds.setRate.title": "Установите курс",
+
+  "userAds.status.active": "Активно",
+  "userAds.status.inactive": "Неактивно",
+
+  "userAds.disabled.title": "Объявление не активно",
+  "userAds.disabled.notice": "Объявление не может быть активировано. Перейдите к объявлению, чтобы узнать подробности",
+
+  "alerts.error": "Ошибка",
+  "alerts.info": "Информация",
+  "alerts.warning": "Предупреждение",
+  "alerts.not_enough_funds": "Ваши объявления на покупку {currency} отключены, на вашем балансе недостаточно средств.",
+  "alerts.not_enough_funds.notice": "Минимальная сумма баланса должна быть: {amount} {currency}",
+  "alerts.not_verified": "Ваши заявки недоступны пользователям из безопасного режима.",
+  "alerts.not_verified.please": "Пожалуйста",
+  "alerts.not_verified.verification": "пройдите верификацию",
+
+  "AdsUpdatedToOften": "Вы пытаетесь изменить курс слишком часто. Попробуйте через несколько секунд"
 }

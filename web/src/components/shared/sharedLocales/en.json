@@ -19,6 +19,8 @@
 
   "To buy": "Buying",
   "To sell": "Selling",
+  "Purchase": "Buy",
+  "Selling": "Sell",
 
   "trades.empty": "You don't have any trades at the moment",
   "tradeStatus.cancel": "Canceled",
@@ -156,5 +158,33 @@
   "reasonVerifiedOnly": "This ad is available only for verified users",
   "reasonTradeWithYourself": "It is forbidden to trade with yourself",
   "reasonBlacklistedByYou": "You have blocked this user. You cannot make trades with him",
-  "notAvailable": "Unfortunately, this ad is not available at the moment!"
+  "notAvailable": "Unfortunately, this ad is not available at the moment!",
+
+  "userAds.empty1": "You haven't created any ads yet.",
+  "userAds.empty2": "Create your first one now",
+  "userAds.onlyActive.info": "Show active ads only",
+  "userAds.enableTrading": "Turn {on} trading on all ads",
+  "userAds.enableTrading.on": "on",
+  "userAds.enableTrading.off": "off",
+  "userAds.allAds.trading.enable": "{enable} trading on all {type} ads",
+  "userAds.allAds.trading.enable.purchase": "buy",
+  "userAds.allAds.trading.enable.selling": "sell",
+  "userAds.setRate.title": "Choose rate",
+
+  "userAds.status.active": "Active",
+  "userAds.status.inactive": "Inactive",
+
+  "userAds.disabled.title": "Ad is not active",
+  "userAds.disabled.notice": "The ad cannot be activated. Go to the ad for details",
+
+  "alerts.error": "Error",
+  "alerts.info": "Info",
+  "alerts.warning": "Warning",
+  "alerts.not_enough_funds": "Your ads to buy {currency} are disabled. There are not enough funds on your balance",
+  "alerts.not_enough_funds.notice": "The minimal amount of the balance should be: {amount} {currency}",
+  "alerts.not_verified": "Your offers are not available to users from safe mode",
+  "alerts.not_verified.please": "Please",
+  "alerts.not_verified.verification": "verify your account",
+
+  "AdsUpdatedToOften": "You are changing rate too often. Try in a few seconds"
 }

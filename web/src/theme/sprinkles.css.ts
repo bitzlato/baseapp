@@ -38,8 +38,8 @@ const responsiveProperties = defineProperties({
   },
   defaultCondition: 'mobile',
   properties: {
-    display: ['none', 'flex', 'block', /* 'inline', */ 'inline-flex', 'inline-block'],
-    flexDirection: ['row', 'column', 'row-reverse', 'column-reverse'],
+    display: ['none', 'flex', 'block', /* 'inline', */ 'inline-flex', 'inline-block'] as const,
+    flexDirection: ['row', 'column', 'row-reverse', 'column-reverse'] as const,
     justifyContent: [
       'stretch',
       'flex-start',
@@ -47,8 +47,8 @@ const responsiveProperties = defineProperties({
       'flex-end',
       'space-around',
       'space-between',
-    ],
-    alignItems: ['stretch', 'flex-start', 'center', 'flex-end'],
+    ] as const,
+    alignItems: ['stretch', 'flex-start', 'center', 'flex-end'] as const,
     paddingTop: sizeVars,
     paddingBottom: sizeVars,
     paddingLeft: sizeVars,
@@ -97,7 +97,7 @@ const interactiveProperties = defineProperties({
   properties: {
     color: vars.colors,
     backgroundColor: vars.colors,
-    textDecoration: ['none', 'underline'],
+    textDecoration: ['none', 'underline'] as const,
     borderColor: vars.colors,
     // borderTopColor: vars.colors,
     // borderRightColor: vars.colors,
@@ -112,36 +112,36 @@ const interactiveProperties = defineProperties({
 const unresponsiveProperties = defineProperties({
   properties: {
     // flex
-    alignSelf: ['center', 'stretch'],
-    flexWrap: ['wrap', 'nowrap'],
-    flexShrink: [0, 1, 2],
+    alignSelf: ['center', 'stretch'] as const,
+    flexWrap: ['wrap', 'nowrap'] as const,
+    flexShrink: [0, 1, 2] as const,
 
-    flexGrow: [0, 0.5, 1, 2],
-    flex: [0, 1, 1.618],
+    flexGrow: [0, 0.5, 1, 2] as const,
+    flex: [0, 1, 1.618] as const,
 
     // border
-    border: ['none'],
-    borderStyle: ['solid', 'dashed'],
-    borderTopStyle: ['solid'],
-    borderRightStyle: ['solid'],
-    borderBottomStyle: ['solid'],
-    borderLeftStyle: ['solid'],
+    border: ['none'] as const,
+    borderStyle: ['solid', 'dashed'] as const,
+    borderTopStyle: ['solid'] as const,
+    borderRightStyle: ['solid'] as const,
+    borderBottomStyle: ['solid'] as const,
+    borderLeftStyle: ['solid'] as const,
     borderRadius: radiiVars,
     borderBottomLeftRadius: radiiVars,
     borderBottomRightRadius: radiiVars,
 
     // layout
-    position: ['absolute', 'relative', 'fixed'],
-    top: [0, '25%', '50%'],
-    right: [0, '12px'],
-    bottom: [0],
-    left: [0],
-    overflowY: ['auto'],
-    overflow: ['hidden'],
+    position: ['absolute', 'relative', 'fixed'] as const,
+    top: [0, '25%', '50%'] as const,
+    right: [0, '12px'] as const,
+    bottom: [0] as const,
+    left: [0] as const,
+    overflowY: ['auto'] as const,
+    overflow: ['hidden'] as const,
     zIndex: zIndexVars,
 
     // other
-    cursor: ['default', 'pointer', 'not-allowed'],
+    cursor: ['default', 'pointer', 'not-allowed'] as const,
     boxShadow: {
       dropdown: vars.boxShadows.dropdown,
       modal: vars.boxShadows.modal,
@@ -159,16 +159,17 @@ const typographyProperties = defineProperties({
     },
     fontWeight: {
       regular: 400,
+      medium: 500,
       strong: 600,
     },
-    fontStyle: ['normal', 'italic'],
+    fontStyle: ['normal', 'italic'] as const,
     lineHeight: lineHeights,
     minHeight: minHeights,
     minWidth,
-    textAlign: ['left', 'center', 'right'],
-    textTransform: ['uppercase', 'capitalize'],
-    wordBreak: ['break-word'],
-    whiteSpace: ['nowrap', 'pre-line'],
+    textAlign: ['left', 'center', 'right'] as const,
+    textTransform: ['uppercase', 'capitalize'] as const,
+    wordBreak: ['break-word'] as const,
+    whiteSpace: ['nowrap', 'pre-line'] as const,
     textOverflow: {
       ellipsis: {
         textOverflow: 'ellipsis',
