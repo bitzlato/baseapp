@@ -16,7 +16,6 @@ import { useHistory, useParams } from 'react-router';
 import { Transfer } from 'src/containers/Wallets/Transfer';
 import { Estimated } from 'src/containers/Wallets/Estimated';
 import { Container } from 'web/src/components/ui/Container';
-import { Gift } from 'web/src/containers/Gift/Gift';
 import { useGeneralWallets } from 'web/src/hooks/useGeneralWallets';
 import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
@@ -147,14 +146,6 @@ const WalletsScreenContent: FC<Props> = ({ list }) => {
                         currency={general.balanceTotal.currency}
                         balanceMarket={general.balanceMarket?.toString() ?? '0'}
                         balanceP2P={general.balanceP2P?.toString() ?? '0'}
-                      />
-                    )}
-                  </TabPanel>
-                  <TabPanel value={TabId.gift}>
-                    {general.balanceP2P && (
-                      <Gift
-                        currency={general.balanceTotal.currency}
-                        balanceP2P={general.balanceP2P}
                       />
                     )}
                   </TabPanel>

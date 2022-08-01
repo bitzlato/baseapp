@@ -6,7 +6,6 @@ export const enum TabId {
   deposit = 'deposit',
   withdraw = 'withdraw',
   transfer = 'transfer',
-  gift = 'gift',
   rate = 'rate',
 }
 
@@ -16,7 +15,6 @@ const TABS: TabOption[] = [
   { value: TabId.deposit, label: 'Deposit.noun' },
   { value: TabId.withdraw, label: 'Withdraw.noun' },
   { value: TabId.transfer, label: 'Transfer.noun' },
-  { value: TabId.gift, label: 'Gifts' },
   { value: TabId.rate, label: 'Rate' },
 ];
 
@@ -38,9 +36,6 @@ export function useWalletTab(
         case TabId.transfer:
           return { ...tabItem, disabled: !general.hasTransfer };
 
-        case TabId.gift:
-          return { ...tabItem, disabled: !general.hasGift };
-
         case TabId.rate:
           return { ...tabItem, disabled: !hasRate };
 
@@ -48,7 +43,7 @@ export function useWalletTab(
           return { ...tabItem, disabled: false };
       }
     });
-  }, [general.hasTransfer, general.hasGift, hasRate]);
+  }, [general.hasTransfer, hasRate]);
 
   const setTab = (value: string | undefined): string | undefined => {
     const newValue = findTabByValue(tabs, value)?.value;

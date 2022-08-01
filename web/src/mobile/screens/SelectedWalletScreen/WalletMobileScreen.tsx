@@ -10,7 +10,6 @@ import { Transfer } from 'src/containers/Wallets/Transfer';
 import { selectWallet } from 'src/modules/user/wallets/selectors';
 import { WalletMobileBalance } from './WalletMobileBalance';
 import { TabId, useWalletTab } from 'web/src/screens/WalletsScreen/useWalletTab';
-import { Gift } from 'web/src/containers/Gift/Gift';
 import { DEFAULT_WALLET_ITEM } from 'web/src/components/WalletItem/defaults';
 import { Rate } from 'web/src/screens/WalletsScreen/Rate';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
@@ -80,11 +79,6 @@ export const WalletMobileScreen: React.FC = () => {
                 balanceMarket={general.balanceMarket?.toString() ?? '0'}
                 balanceP2P={general.balanceP2P?.toString() ?? '0'}
               />
-            )}
-          </TabPanel>
-          <TabPanel value={TabId.gift}>
-            {general.balanceP2P && (
-              <Gift currency={general.balanceTotal.currency} balanceP2P={general.balanceP2P} />
             )}
           </TabPanel>
           <TabPanel value={TabId.rate}>
