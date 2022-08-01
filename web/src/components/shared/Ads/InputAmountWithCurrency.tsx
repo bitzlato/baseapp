@@ -21,15 +21,15 @@ interface Props<Option extends CommonOption> {
   onChangeCurrency: (value: Option) => void;
 }
 
-const searchFunction = (searchText: string, _optionValue: string, option: CommonOption) => {
+export const searchFunction = (searchText: string, _optionValue: string, option: CommonOption) => {
   return (
     option.code.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
     option.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
   );
 };
 
-const getOptionValue = (option: CommonOption) => option.code;
-const getOptionLabel = (option: CommonOption) => `${option.code} (${option.name.trim()})`;
+export const getOptionValue = (option: CommonOption) => option.code;
+export const getOptionLabel = (option: CommonOption) => `${option.code} (${option.name.trim()})`;
 
 export const InputAmountWithCurrency = <Option extends CommonOption>({
   label,

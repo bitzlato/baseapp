@@ -1,15 +1,20 @@
 import { Money } from '@bitzlato/money-js';
 import { p2pUrl } from 'web/src/api/config';
-import { fetchJson } from 'web/src/helpers/fetch';
-import { PaymethodSource } from 'web/src/modules/p2p/types';
 import { BaseCurrency } from 'web/src/types/currencies.types';
 import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
 import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
+import { fetchJson, fetchWithCreds } from 'web/src/helpers/fetch';
+import {
+  AdvertType,
+  PaymethodSource,
+  UserAdvert,
+  UserAdvertSource,
+} from 'web/src/modules/p2p/types';
 import { useFetch } from './useFetch';
 
 interface TraderAdvertSource {
   id: number;
-  type: 'purchase' | 'selling';
+  type: AdvertType;
   cryptocurrency: string;
   paymethod: number;
   rate: string;
@@ -60,6 +65,7 @@ export const useUserAds = ({ publicName, lang }: { publicName: string; lang: str
 
   return useFetch(
     `${p2pUrl()}/public/exchange/dsa/all/${publicName}/`,
+
     async (url: string): Promise<TraderAdvert[]> => {
       const ads = (await fetchJson(url)) as TraderAdvertSource[];
       const paymethods = (await Promise.all(
@@ -102,4 +108,31 @@ export const useUserAds = ({ publicName, lang }: { publicName: string; lang: str
       });
     },
   );
+};
+
+export const useCurrenUserAds = (lang: string) => {
+  const { getFiatCurrency } = useP2PFiatCurrencies();
+  const { getCryptoCurrency } = useP2PCryptoCurrencies();
+
+  const { data, ...other } = useFetch<UserAdvertSource[]>(
+    `${p2pUrl()}/dsa/all?lang=${lang}`,
+    fetchWithCreds,
+  );
+
+  const ads = data?.map((ad): UserAdvert => {
+    const currency = getFiatCurrency(ad.paymethod_currency);
+    const cryptoCurrency = getCryptoCurrency(ad.cryptocurrency);
+
+    return {
+      ...ad,
+      rate: Money.fromDecimal(ad.rateValue, currency),
+      limitCurrency: {
+        min: Money.fromDecimal(ad.minAmount, currency),
+        max: Money.fromDecimal(ad.maxAmount, currency),
+      },
+      cryptoCurrency,
+    };
+  });
+
+  return { data: ads, ...other };
 };

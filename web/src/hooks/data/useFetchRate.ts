@@ -3,7 +3,7 @@ import { p2pUrl } from 'web/src/api/config';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
-import { CurrencyRate, RateSourcesParams } from 'web/src/modules/p2p/types';
+import { CurrencyRate, CurrencyRateByParams, RateSourcesParams } from 'web/src/modules/p2p/types';
 import { useFetch } from './useFetch';
 
 export const useFetchRate = (
@@ -17,6 +17,30 @@ export const useFetchRate = (
         })}`
       : null,
     fetchWithCreds,
+  );
+};
+
+interface CurrencyRateByParamsInput {
+  currency?: string | undefined;
+  percent?: string | number | undefined;
+  value?: string | number | undefined;
+}
+
+export const useFetchRateByParams = (
+  cryptoCurrency: string,
+  input: CurrencyRateByParamsInput = {},
+) => {
+  return useFetch<CurrencyRateByParams>(
+    input.currency && (input.value !== undefined || input.percent !== undefined)
+      ? [`${p2pUrl()}/profile/rate-sources/${cryptoCurrency}`, input]
+      : null,
+    async (url: string, args: CurrencyRateByParamsInput) => {
+      return fetchWithCreds(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(args),
+      });
+    },
   );
 };
 

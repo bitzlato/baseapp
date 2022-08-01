@@ -8,6 +8,12 @@ export interface CurrencyRate {
   rate: number;
 }
 
+export interface CurrencyRateByParams {
+  currency: string;
+  percent: string;
+  value: string;
+}
+
 export interface RateSourcesParams {
   cryptocurrency: string;
   currency: string;
@@ -177,3 +183,41 @@ export interface PaymethodSource {
   currency: string;
   description: string;
 }
+
+export interface UserAdvertSource {
+  balanceThreshold: null;
+  cryptocurrency: string;
+  deepLinkCode: string;
+  details: string | null;
+  disablePercent: null;
+  id: number;
+  links: null;
+  liquidityLimit: false;
+  maxAmount: string;
+  maxLimitForNewTrader: null;
+  minAmount: string;
+  minPartnerTradesAmount: null;
+  ownerLastActivity: number;
+  paymethod: number;
+  paymethod_currency: string;
+  paymethod_description: string;
+  position: null;
+  ratePercent: string;
+  rateValue: string;
+  status: 'active' | 'pause' | 'paused_automatically';
+  terms: string | null;
+  type: AdvertType;
+  unactiveReason: string | null;
+  verifiedOnly: boolean;
+}
+
+export interface UserAdvert extends UserAdvertSource {
+  cryptoCurrency: BaseCurrency;
+  rate: Money;
+  limitCurrency: {
+    min: Money;
+    max: Money;
+  };
+}
+
+export type TradeStatusSource = Record<string, boolean>;
