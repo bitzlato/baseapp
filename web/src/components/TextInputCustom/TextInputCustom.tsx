@@ -90,11 +90,12 @@ export const TextAreaInput = ({
         placeholder={placeholder}
         className={cn(
           s.input[size],
+          s.textAreaInput,
           resize === 'none' && s.inputTextareaNonResizable,
           placeholder && s.inputWithLabel[size],
-          className,
           icon && s.showIcon,
           isError && s.inputError,
+          className,
         )}
         onChange={handleChange}
         {...restProps}

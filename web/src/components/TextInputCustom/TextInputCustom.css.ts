@@ -75,6 +75,10 @@ export const inputWithLabel = styleVariants({
   },
 });
 
+export const textAreaInput = sprinkles({
+  pt: '3x',
+});
+
 export const label = style([
   sprinkles({
     position: 'absolute',
@@ -115,8 +119,8 @@ globalStyle(`${input.small}:not(:focus):placeholder-shown + ${label}`, {
 });
 
 globalStyle(`${input.medium}:not(:focus):placeholder-shown + ${label}`, {
-  fontSize: '100%',
   paddingTop: 2,
+  fontSize: '100%',
   lineHeight: sizeVars['11x'],
 });
 
