@@ -512,7 +512,6 @@ export const Ad: FC = () => {
           gap="4x"
           backgroundColor="adTradeMobileBackground"
         >
-          {termsEl}
           <Box
             p="6x"
             backgroundColor="adBg"
@@ -523,6 +522,7 @@ export const Ad: FC = () => {
           >
             {dealInfoEl}
           </Box>
+          {termsEl}
           <Box p="6x" backgroundColor="adBg" borderRadius="1.5x">
             <Text>{t('ad.trade.info')}</Text>
           </Box>
