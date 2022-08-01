@@ -271,6 +271,8 @@
   "error.TradeRateWasChanged": "Владельцем объявления был изменён курс",
   "error.AmountIsTooBig": "Сумма сделки слишком большая",
   "error.AmountIsTooLow": "Сумма сделки слишком маленькая",
+  "error.limit.max": "Максимальная сумма {max} {coin}",
+  "error.limit.min": "Минимальная сумма {min} {coin}",
 
   "reasonBlacklisted": "К сожалению, данный пользователь заблокировал вас!",
   "reasonPartnerNotEnoughFunds": "У продавца не достаточно средств",

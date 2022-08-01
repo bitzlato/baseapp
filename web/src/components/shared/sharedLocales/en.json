@@ -157,6 +157,8 @@
   "error.TradeRateWasChanged": "The ad's owner has changed the rate",
   "error.AmountIsTooBig": "The amount of the trade is too big",
   "error.AmountIsTooLow": "The amount of the trade is too low",
+  "error.limit.max": "Minimum amount {max} {coin}",
+  "error.limit.min": "Maximum amount {min} {coin}",
 
   "reasonBlacklisted": "Sorry, this user has blocked you!",
   "reasonPartnerNotEnoughFunds": "The seller does not have enough funds!",

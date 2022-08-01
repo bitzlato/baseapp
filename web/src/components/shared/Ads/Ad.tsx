@@ -200,6 +200,24 @@ export const Ad: FC = () => {
     if (amount) {
       const amountType = code;
       const other = fieldType === 'cryptocurrency' ? 'currency' : 'cryptocurrency';
+
+      const limitType = fieldType === 'cryptocurrency' ? 'limitCryptocurrency' : 'limitCurrency';
+
+      const { realMax } = advert[limitType];
+      const lcMax = advert[limitType].max;
+      const cMax = realMax ?? lcMax;
+      const cMin = advert[limitType].min;
+
+      const coin = fieldType === 'cryptocurrency' ? advert.cryptocurrency : paymethod.currency;
+
+      if (Number(amount) > Number(cMax)) {
+        setError(t('error.limit.max', { max: cMax, coin }));
+      }
+
+      if (Number(amount) < Number(cMin)) {
+        setError(t('error.limit.min', { min: cMin, coin }));
+      }
+
       calculateDebounced(amount, amountType, other, advert.type);
     }
   };
@@ -449,6 +467,8 @@ export const Ad: FC = () => {
       reason = t('notAvailable');
   }
 
+  const startTradeEnabled = from && to && !error;
+
   if (isMobileDevice) {
     return (
       <Box display="flex" flexDirection="column" width="full" color="btnPrimaryText">
@@ -527,7 +547,7 @@ export const Ad: FC = () => {
           </ModalBody>
           <ModalFooter>
             <Box flexGrow={1} display="flex" flexDirection="column" gap="4x">
-              <Button color="secondary" onClick={handleClickStart} disabled={!(from && to)}>
+              <Button color="secondary" onClick={handleClickStart} disabled={!startTradeEnabled}>
                 {t('Confirm')}
               </Button>
               <Button variant="outlined" color="secondary" onClick={handleClickCancelMobile}>
@@ -570,7 +590,7 @@ export const Ad: FC = () => {
               {advert.available ? (
                 <>
                   {inputsEl}
-                  <Button onClick={handleClickStart} disabled={!(from && to)}>
+                  <Button onClick={handleClickStart} disabled={!startTradeEnabled}>
                     {t('Start trade')}
                   </Button>
                 </>
