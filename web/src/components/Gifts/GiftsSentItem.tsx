@@ -51,7 +51,9 @@ export const GiftsSentItem: FC<Props> = ({ gift, onEdit }) => {
     gift.cryptocurrency.amount,
     getCryptoCurrency(gift.cryptocurrency.code),
   );
-  const amountFiatMoney = createMoney(gift.currency.amount, getFiatCurrency(gift.currency.code));
+  const amountFiatMoney = gift.currency
+    ? createMoney(gift.currency.amount, getFiatCurrency(gift.currency.code))
+    : null;
   const recipient = gift.cashedBy && gift.cashedBy[0]?.cashedBy;
   const recipientDate = localeDate(
     gift.cashedBy && gift.cashedBy[0]?.cashedAt,
@@ -159,10 +161,12 @@ export const GiftsSentItem: FC<Props> = ({ gift, onEdit }) => {
             <TableColumn size="medium">
               <Text variant="caption">
                 <MoneyFormat money={amountMoney} />
-                <Box as="span" display="block" color="textMuted">
-                  {'≈ '}
-                  <MoneyFormat money={amountFiatMoney} />
-                </Box>
+                {amountFiatMoney ? (
+                  <Box as="span" display="block" color="textMuted">
+                    {'≈ '}
+                    <MoneyFormat money={amountFiatMoney} />
+                  </Box>
+                ) : null}
               </Text>
             </TableColumn>
             <TableColumn size="medium">

@@ -48,7 +48,7 @@ export interface P2PVoucherCachedBy {
 
 export interface P2PVoucher {
   deepLinkCode: string;
-  currency: P2PCurrency;
+  currency: P2PCurrency | null;
   cryptocurrency: P2PCurrency;
   createdAt: number;
   createdBy?: string | null;
