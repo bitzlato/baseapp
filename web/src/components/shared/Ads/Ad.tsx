@@ -38,15 +38,15 @@ import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
 import { getLinkToP2PUser } from 'web/src/components/shared/Ads/getLinkToP2PUser';
 import { CollapsibleText } from 'web/src/components/shared/CollapsibleText/CollapsibleText';
-import { AdStat } from './AdStat';
-import { ConfirmDangerRateModal } from './RateDiffModal';
-import { CollapsibleBox } from '../../collapsibleBox/CollapsibleBox';
-import { TraderIcons } from '../../traderInfo/TraderIcons';
+import { CollapsibleBox } from 'web/src/components/collapsibleBox/CollapsibleBox';
+import { TraderIcons } from 'web/src/components/traderInfo/TraderIcons';
 import {
   getFormatOptionsByLanguage,
   getP2PFiatOptionsByCode,
-} from '../../AmountFormat/getFormatOptionsByLanguage';
+} from 'web/src/components/AmountFormat/getFormatOptionsByLanguage';
 import { Money } from '@bitzlato/money-js';
+import { AdStat } from './AdStat';
+import { ConfirmDangerRateModal } from './RateDiffModal';
 
 interface UrlParams {
   type: 'buy' | 'sell';
@@ -178,6 +178,11 @@ export const Ad: FC = () => {
   const nextRate = createMoney(currentRate, fiatCcy);
   const min = createMoney(advert.limitCurrency.min, fiatCcy);
   const max = createMoney(advert.limitCurrency.max, fiatCcy);
+  const cmin = createMoney(advert.limitCryptocurrency.min, cryptoCcy);
+  const cmax = createMoney(
+    advert.limitCryptocurrency.realMax || advert.limitCryptocurrency.max,
+    cryptoCcy,
+  );
   const fromCcy = isBuy ? fiatCcy : cryptoCcy;
   const toCcy = isBuy ? cryptoCcy : fiatCcy;
   const deals =
@@ -441,6 +446,11 @@ export const Ad: FC = () => {
         <Text>
           <P2PFiatFormat money={min} cryptoCurrency={cryptoCcy} /> —{' '}
           <P2PMoneyFormat money={max} cryptoCurrency={cryptoCcy} />
+        </Text>
+      </AdStat>
+      <AdStat label="">
+        <Text>
+          <MoneyFormat money={cmin} /> — <MoneyFormat money={cmax} />
         </Text>
       </AdStat>
       <AdStat label={t('Bitzlato fee')}>
