@@ -28,11 +28,9 @@ export const GiftsReceivedItem: FC<Props> = ({ gift }) => {
   const { getCryptoCurrency } = useP2PCryptoCurrencies();
   const { getFiatCurrency } = useP2PFiatCurrencies();
 
-  const userCashedBy = gift.cashedBy?.find(
-    (item) => item.cashedBy === user.bitzlato_user?.user_profile.public_name,
-  );
+  const userCashedDate = gift.cashedBy?.[0]?.cashedAt;
   const date = localeDate(
-    userCashedBy?.cashedAt,
+    userCashedDate,
     'date',
     lang,
     user?.bitzlato_user?.user_profile.timezone ?? undefined,
