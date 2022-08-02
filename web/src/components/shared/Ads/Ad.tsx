@@ -192,17 +192,23 @@ export const Ad: FC = () => {
     value: string,
     code: string,
   ) => {
+    const numericValue = parseNumeric(value);
+
+    if (!numericValue) {
+      return;
+    }
+
     setError(null);
     setInputLast(fieldType);
 
     if (field === 'to') {
-      setTo(value);
+      setTo(numericValue);
     } else {
-      setFrom(value);
+      setFrom(numericValue);
     }
 
     const moneyInput = createMoney(
-      parseNumeric(value),
+      numericValue,
       fieldType === 'cryptocurrency' ? cryptoCcy : fiatCcy,
     );
 
