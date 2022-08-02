@@ -42,6 +42,11 @@ import { AdStat } from './AdStat';
 import { ConfirmDangerRateModal } from './RateDiffModal';
 import { CollapsibleBox } from '../../collapsibleBox/CollapsibleBox';
 import { TraderIcons } from '../../traderInfo/TraderIcons';
+import {
+  getFormatOptionsByLanguage,
+  getP2PFiatOptionsByCode,
+} from '../../AmountFormat/getFormatOptionsByLanguage';
+import { Money } from '@bitzlato/money-js';
 
 interface UrlParams {
   type: 'buy' | 'sell';
@@ -217,12 +222,23 @@ export const Ad: FC = () => {
       const moneyMax = createMoney(cMax, fieldType === 'cryptocurrency' ? cryptoCcy : fiatCcy);
       const moneyMin = createMoney(cMin, fieldType === 'cryptocurrency' ? cryptoCcy : fiatCcy);
 
+      const formatMinMax = (v: Money): string => {
+        if (fieldType === 'cryptocurrency') {
+          return v.toFormat({ ...getFormatOptionsByLanguage(lang), maxFractionDigits: 8 });
+        }
+
+        return v.toFormat({
+          ...getFormatOptionsByLanguage(lang),
+          ...getP2PFiatOptionsByCode(coin),
+        });
+      };
+
       if (moneyInput.greaterThan(moneyMax)) {
-        setError(t('error.limit.max', { max: cMax, coin }));
+        setError(t('error.limit.max', { max: formatMinMax(moneyMax), coin }));
       }
 
       if (moneyInput.lessThan(moneyMin)) {
-        setError(t('error.limit.min', { min: cMin, coin }));
+        setError(t('error.limit.min', { min: formatMinMax(moneyMin), coin }));
       }
 
       calculateDebounced(moneyInput.amount.toString(), amountType, other, advert.type);
