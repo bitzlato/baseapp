@@ -92,7 +92,9 @@ export const GiftItem: FC<Props> = ({ gift, onEdit, onDelete }) => {
     gift.cryptocurrency.amount,
     getCryptoCurrency(gift.cryptocurrency.code),
   );
-  const amountFiatMoney = createMoney(gift.currency.amount, getFiatCurrency(gift.currency.code));
+  const amountFiatMoney = gift.currency
+    ? createMoney(gift.currency.amount, getFiatCurrency(gift.currency.code))
+    : null;
 
   const handleCopy = () => {
     setShowCopyLinks(true);
@@ -226,10 +228,12 @@ export const GiftItem: FC<Props> = ({ gift, onEdit, onDelete }) => {
             <TableColumn size="medium">
               <Text variant="caption">
                 <MoneyFormat money={amountMoney} />
-                <Box as="span" display="block" color="textMuted">
-                  {'≈ '}
-                  <MoneyFormat money={amountFiatMoney} />
-                </Box>
+                {amountFiatMoney ? (
+                  <Box as="span" display="block" color="textMuted">
+                    {'≈ '}
+                    <MoneyFormat money={amountFiatMoney} />
+                  </Box>
+                ) : null}
               </Text>
             </TableColumn>
             <TableColumn size="medium">
