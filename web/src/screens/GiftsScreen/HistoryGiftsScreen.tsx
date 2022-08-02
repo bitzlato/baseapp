@@ -17,7 +17,7 @@ import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import * as s from './HistoryGiftsScreen.css';
 
 export const HistoryGiftsScreen: FC = () => {
-  useDocumentTitle('Active Gifts');
+  useDocumentTitle('Gifts history');
   const t = useT();
   const history = useHistory();
   const isMobileDevice = useIsMobileDevice();
