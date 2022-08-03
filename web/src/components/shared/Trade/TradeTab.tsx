@@ -1,6 +1,8 @@
 import { FC } from 'react';
+import { Box } from 'web/src/components/ui/Box';
 import { VariantSwitcher } from 'web/src/components/ui/VariantSwitcher';
 import { Tabs } from 'web/src/components/shared/Trade/types';
+import { TradeUnreadChatMessages } from 'web/src/components/shared/Trade/TradeUnreadChatMessages';
 import { useTradeContext } from './TradeContext';
 
 interface ITradeTab {
@@ -13,7 +15,16 @@ export const TradeTab: FC<ITradeTab> = ({ tab, onChange }) => {
 
   const variants = [
     {
-      label: t('trade.tab.chat'),
+      label: (
+        <>
+          {t('trade.tab.chat')}
+          {tab !== 'chat' && (
+            <Box as="span" ml="2x">
+              <TradeUnreadChatMessages />
+            </Box>
+          )}
+        </>
+      ),
       value: 'chat',
     },
     {

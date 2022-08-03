@@ -13,7 +13,6 @@ import {
   TradeAvailableAction,
   TradeFeedback,
   TradeModals,
-  TradeStatus,
 } from 'web/src/components/shared/Trade/types';
 import { useAppContext, useLanguage, useTheme } from 'src/components/app/AppContext';
 import { MobileTrade } from 'web/src/components/shared/Trade/mobile/Trade';
@@ -23,11 +22,7 @@ import { TradeDisputeReasonModal } from 'web/src/components/shared/Trade/TradeMo
 import { TradeConfirmReceiveMoneyModal } from 'web/src/components/shared/Trade/TradeModals/TradeConfirmReceiveMoneyModal';
 import { themeDark, themeLight } from 'web/src/theme/vars.css';
 import { useAdapterContext, useSharedT } from 'web/src/components/shared/Adapter';
-import {
-  useFetchTradeChat,
-  useFetchTradeDisputeChat,
-  useFetchTradeInfo,
-} from 'web/src/hooks/data/useFetchTrade';
+import { useFetchTradeInfo } from 'web/src/hooks/data/useFetchTrade';
 import { useFetchTraderInfo } from 'web/src/hooks/data/useFetchTraderInfo';
 import { useFetchPaymethod } from 'web/src/hooks/data/useFetchPaymethod';
 import { UserInfo } from 'web/src/modules/p2p/user.types';
@@ -35,8 +30,6 @@ import { PaymethodSource } from 'web/src/modules/p2p/types';
 import {
   useDisputeDescribe,
   useTradeFeedback,
-  useTradeSendDisputeMessage,
-  useTradeSendMessage,
   useTradeTimeout,
   useTradeTips,
   useTradeUpdateDetails,
@@ -127,20 +120,6 @@ export const SharedTrade: FC = () => {
     [tradeInfo, partnerSWR.data, paymethod],
   );
 
-  const {
-    data: chat,
-    isValidating: tradeChatLoading,
-    mutate: reloadTradeChat,
-  } = useFetchTradeChat(tradeId);
-
-  const {
-    data: disputeChat,
-    isValidating: tradeDisputeChatLoading,
-    mutate: reloadTradeDisputeChat,
-  } = useFetchTradeDisputeChat(
-    trade && trade.id && trade.status === TradeStatus.DISPUTE ? tradeId : undefined,
-  );
-
   const [mutateTradeState] = useTradeUpdateState({
     reloadTrade,
     toggleDetailsModal: () => toggleModal('details'),
@@ -159,8 +138,6 @@ export const SharedTrade: FC = () => {
     toggleTipsModal: () => toggleModal('tips'),
   });
 
-  const [mutateTradeChat] = useTradeSendMessage({ reloadTradeChat });
-  const [mutateTradeDisputeChat] = useTradeSendDisputeMessage({ reloadTradeDisputeChat });
   const [mutateTradeFeedback] = useTradeFeedback({ onSuccess: reloadTrade });
 
   const trustUser = useTrustUser(partnerSWR);
@@ -224,45 +201,9 @@ export const SharedTrade: FC = () => {
     [trade.id, trade.cryptocurrency?.code, mutateTradeTips],
   );
 
-  const handleTradeSendMessage = useCallback(
-    async (message: string) => {
-      if (trade.id) {
-        await mutateTradeChat({ tradeId: trade.id, message });
-      }
-    },
-    [trade.id, mutateTradeChat],
-  );
-
-  const handleTradeSendDisputeMessage = useCallback(
-    async (message: string) => {
-      if (trade.id) {
-        await mutateTradeDisputeChat({ tradeId: trade.id, message });
-      }
-    },
-    [trade.id, mutateTradeDisputeChat],
-  );
-
   const handleTradeFeedback = useCallback(
     (code: TradeFeedback) => mutateTradeFeedback({ tradeId: trade.id, code }),
     [trade.id, mutateTradeFeedback],
-  );
-
-  const chatContext = useMemo(
-    () => ({
-      messages: chat?.data || [],
-      isLoading: tradeChatLoading,
-      handleTradeSendMessage,
-    }),
-    [chat?.data, tradeChatLoading, handleTradeSendMessage],
-  );
-
-  const disputeChatContext = useMemo(
-    () => ({
-      messages: disputeChat?.data || [],
-      isLoading: tradeDisputeChatLoading,
-      handleTradeSendDisputeMessage,
-    }),
-    [disputeChat?.data, tradeDisputeChatLoading, handleTradeSendDisputeMessage],
   );
 
   const tradeValues = useMemo(() => {
@@ -297,8 +238,6 @@ export const SharedTrade: FC = () => {
       handleOpenDispute,
       modals,
       toggleModal,
-      chat: chatContext,
-      disputeChat: disputeChatContext,
       t,
       theme,
       formattedTradeValues: tradeValues,
@@ -314,8 +253,6 @@ export const SharedTrade: FC = () => {
       handleOpenDispute,
       modals,
       toggleModal,
-      chatContext,
-      disputeChatContext,
       t,
       theme,
       tradeValues,
