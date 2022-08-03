@@ -1,67 +1,118 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Box } from 'web/src/components/ui/Box';
+import { useSharedT } from 'web/src/components/shared/Adapter';
 import { Chat } from 'web/src/components/shared/Chat/Chat';
-import { ChatMessage } from 'web/src/components/shared/Chat/ChatMessage';
 import { useTradeContext } from 'web/src/components/shared/Trade/TradeContext';
 import { TradeStatus } from 'web/src/components/shared/Trade/types';
+import { FetchError } from 'web/src/helpers/fetch';
+import { useFetchP2PTradeChat } from 'web/src/hooks/data/p2p/useFetchP2PTradeChat';
+import { useFetchP2PTradeChatUnread } from 'web/src/hooks/data/p2p/useFetchP2PTradeChatUnread';
+import { useFetchP2PTradeDispute } from 'web/src/hooks/data/p2p/useFetchP2PTradeDispute';
+import { useFetchP2PTradeDisputeUnread } from 'web/src/hooks/data/p2p/useFetchP2PTradeDisputeUnread';
+import { useP2PMarkReadTradeChat } from 'web/src/hooks/mutations/useP2PMarkReadTradeChat';
+import { useP2PMarkReadTradeDispute } from 'web/src/hooks/mutations/useP2PMarkReadTradeDispute';
+import { useP2PSendTradeChatFile } from 'web/src/hooks/mutations/useP2PSendTradeChatFile';
+import { useP2PSendTradeChatMessage } from 'web/src/hooks/mutations/useP2PSendTradeChatMessage';
+import { useP2PSendTradeDisputeFile } from 'web/src/hooks/mutations/useP2PSendTradeDisputeFile';
+import { useP2PSendTradeDisputeMessage } from 'web/src/hooks/mutations/useP2PSendTradeDisputeMessage';
+import * as s from './TradeChat.css';
 
-const RedLine = () => <Box backgroundColor="tradeDisputeDivider" w="full" h="0.5x" />;
-
-const DisputeDivider: FC<{ label: string }> = ({ label }) => (
-  <Box height="10x" display="flex" alignItems="center">
-    <Box w="full" display="flex" alignItems="center" justifyContent="center">
-      <RedLine />
-    </Box>
-    <Box w="full" display="flex" alignItems="center" justifyContent="center">
-      <Box as="span" fontSize="medium" color="tradeDisputeDivider">
-        {label}
-      </Box>
-    </Box>
-    <Box w="full" display="flex" alignItems="center" justifyContent="center">
-      <RedLine />
-    </Box>
-  </Box>
-);
-
-const DisputeLabel: FC<{ label: string }> = ({ label }) => (
-  <Box textAlign="center" py="4x" backgroundColor="tradeDisputeLabelBackground">
-    <Box as="span" color="tradeDisputeLabelColor" fontSize="medium" fontWeight="strong">
-      {label}
-    </Box>
-  </Box>
-);
+const CODE_ERRORS_TRANS = [
+  'ChatIsNotAvailable',
+  'NotEnoughRatingForChatMessageWithDigits',
+  'RequisitesNotAllowed',
+];
 
 export const TradeChat: FC = () => {
-  const { t } = useTradeContext();
-  const { chat, disputeChat, trade } = useTradeContext();
-
+  const t = useSharedT();
+  const { trade } = useTradeContext();
   const isDispute = trade.status === TradeStatus.DISPUTE;
+  const { data: { data: messages } = {} } = useFetchP2PTradeChat(trade.id);
+  const { data: unread } = useFetchP2PTradeChatUnread(trade.id);
+  const { data: { data: disputeMessages } = {} } = useFetchP2PTradeDispute(
+    isDispute ? trade.id : undefined,
+  );
+  const { data: disputeUnread } = useFetchP2PTradeDisputeUnread(isDispute ? trade.id : undefined);
+  const [sendTradeChatMessage, { error: errorSendMessage, reset: handleChatErrorClose }] =
+    useP2PSendTradeChatMessage();
+  const [
+    sendTradeDisputeMessage,
+    { error: errorSendDisputeMessage, reset: handleDisputeErrorClose },
+  ] = useP2PSendTradeDisputeMessage();
+  const [sendTradeChatFile, { error: errorSendFile, reset: handleChatFileErrorClose }] =
+    useP2PSendTradeChatFile();
+  const [
+    sendTradeDisputeFile,
+    { error: errorSendDisputeFile, reset: handleDisputeFileErrorClose },
+  ] = useP2PSendTradeDisputeFile();
+  const [markReadChat] = useP2PMarkReadTradeChat();
+  const [markReadDispute] = useP2PMarkReadTradeDispute();
 
-  const tradeMessages = chat.messages.map((message) => (
-    <ChatMessage key={message.id} {...message} file="null" />
-  ));
+  useEffect(() => {
+    if (unread && unread > 0) {
+      markReadChat(trade.id);
+    }
 
-  const disputeStartDivider = <DisputeDivider label={t('trade.chat.dispute.open')} />;
-  const disputeLabel = <DisputeLabel label={t('trade.chat.dispute.label')} />;
+    if (disputeUnread && disputeUnread > 0) {
+      markReadDispute(trade.id);
+    }
+  }, [disputeUnread, markReadChat, markReadDispute, trade.id, unread]);
 
-  const disputeMessages = disputeChat.messages.map((message) => (
-    <ChatMessage key={message.id} {...message} file="null" />
-  ));
+  const error = errorSendMessage ?? errorSendDisputeMessage;
+  let errorText;
+  if (error instanceof FetchError) {
+    errorText =
+      'code' in error.payload && CODE_ERRORS_TRANS.includes(error.payload.code)
+        ? t(`error.${error.payload.code}`)
+        : error.message;
+  }
 
-  const messages = isDispute
-    ? [disputeLabel, ...tradeMessages, disputeStartDivider, ...disputeMessages]
-    : tradeMessages;
-
-  const { handleTradeSendMessage } = chat;
-  const { handleTradeSendDisputeMessage } = disputeChat;
-
-  const handleSendMessage = async (message: string) => {
+  const handleSendMessage = (message: string) => {
     if (isDispute) {
-      await handleTradeSendDisputeMessage(message);
-    } else {
-      await handleTradeSendMessage(message);
+      return sendTradeDisputeMessage({ tradeId: trade.id, message });
+    }
+
+    return sendTradeChatMessage({ tradeId: trade.id, message });
+  };
+
+  const handleSendFile = (file: File) => {
+    if (isDispute) {
+      return sendTradeDisputeFile({ tradeId: trade.id, file });
+    }
+
+    return sendTradeChatFile({ tradeId: trade.id, file });
+  };
+
+  const handleErrorClose = () => {
+    if (errorSendMessage) {
+      handleChatErrorClose();
+    }
+    if (errorSendDisputeMessage) {
+      handleDisputeErrorClose();
+    }
+    if (errorSendFile) {
+      handleChatFileErrorClose();
+    }
+    if (errorSendDisputeFile) {
+      handleDisputeFileErrorClose();
     }
   };
 
-  return <Chat messages={messages} onSendMessage={handleSendMessage} />;
+  return (
+    <Box className={s.chat}>
+      <Chat
+        messages={messages}
+        disputeMessages={disputeMessages}
+        unread={disputeUnread ?? unread}
+        error={errorText}
+        readOnly={
+          trade.status === TradeStatus.CANCEL || trade.status === TradeStatus.CONFIRM_PAYMENT
+        }
+        canSendFiles
+        onTextSend={handleSendMessage}
+        onFileSend={handleSendFile}
+        onErrorClose={handleErrorClose}
+      />
+    </Box>
+  );
 };

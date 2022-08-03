@@ -1,4 +1,3 @@
-import { ChatMessageType } from 'web/src/hooks/data/useUserChat';
 import { PaymethodSource } from 'web/src/modules/p2p/types';
 import { UserInfo } from 'web/src/modules/p2p/user.types';
 import { Theme } from 'web/src/types';
@@ -83,16 +82,6 @@ export interface TradeContextValue {
   handleOpenDispute: (reason: string | undefined) => void;
   modals: { [key in TradeModals]: boolean };
   toggleModal: (modal: TradeModals) => void;
-  chat: {
-    isLoading: boolean;
-    messages: ChatMessageType[];
-    handleTradeSendMessage: (message: string) => Promise<void>;
-  };
-  disputeChat: {
-    isLoading: boolean;
-    messages: ChatMessageType[];
-    handleTradeSendDisputeMessage: (message: string) => Promise<void>;
-  };
   t: SharedTranslateFn;
   theme: Theme;
   formattedTradeValues: { currency: string; cryptocurrency: string };
