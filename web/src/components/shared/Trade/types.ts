@@ -83,11 +83,17 @@ export interface TradeContextValue {
   handleOpenDispute: (reason: string | undefined) => void;
   modals: { [key in TradeModals]: boolean };
   toggleModal: (modal: TradeModals) => void;
+  /**
+   * @deprecated
+   */
   chat: {
     isLoading: boolean;
     messages: ChatMessageType[];
     handleTradeSendMessage: (message: string) => Promise<void>;
   };
+  /**
+   * @deprecated
+   */
   disputeChat: {
     isLoading: boolean;
     messages: ChatMessageType[];

@@ -121,6 +121,9 @@ const tradeTips = async ({ cryptocurrency, tradeId, amountPercent }: Tips) => {
   return response;
 };
 
+/**
+ * @depricated
+ */
 const tradeSendMessage = async ({ tradeId, message }: { tradeId: number; message: string }) => {
   const response = await fetchJson(`${p2pUrl()}/trade/${tradeId}/chat/`, {
     method: 'POST',
@@ -267,6 +270,9 @@ export const useTradeTips = ({ reloadTrade, toggleTipsModal }: UpdateTradeTipsPo
   });
 };
 
+/**
+ * @deprecated
+ */
 export const useTradeSendMessage = ({ reloadTradeChat }: { reloadTradeChat: () => void }) => {
   const handleFetchError = useHandleFetchError();
   const { mutate, cache } = useSWRConfig();
@@ -313,6 +319,9 @@ export const useTradeSendMessage = ({ reloadTradeChat }: { reloadTradeChat: () =
   });
 };
 
+/**
+ * @deprecated
+ */
 export const useTradeSendDisputeMessage = ({
   reloadTradeDisputeChat,
 }: {

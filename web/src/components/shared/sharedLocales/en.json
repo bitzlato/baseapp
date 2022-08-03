@@ -157,6 +157,9 @@
   "error.TradeRateWasChanged": "The ad's owner has changed the rate",
   "error.AmountIsTooBig": "The amount of the trade is too big",
   "error.AmountIsTooLow": "The amount of the trade is too low",
+  "error.ChatIsNotAvailable": "Сhat with this user is not available",
+  "error.NotEnoughRatingForChatMessageWithDigits": "😞 Unfortunately, you cannot use digits in the chat due to the low level of trust in your account. To increase the level of trust you need to make more trades, but before this, use text without digits",
+  "error.RequisitesNotAllowed": "😢 Oops!\n\nAccording to the rules of the service, it is forbidden to send payment details (card number, banking account number or etc) in a message before starting the deal. Please start the deal first",
 
   "reasonBlacklisted": "Sorry, this user has blocked you!",
   "reasonPartnerNotEnoughFunds": "The seller does not have enough funds!",

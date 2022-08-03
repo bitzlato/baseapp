@@ -82,3 +82,7 @@ export const fetchJson = async (input: RequestInfo, init?: RequestInit) => {
 export const fetchWithCreds = (input: RequestInfo, init?: RequestInit) => {
   return fetchJson(input, { ...init, credentials: 'include' });
 };
+
+export const fetchDataWithCreds = (input: RequestInfo, init?: RequestInit) => {
+  return fetchJson(input, { ...init, credentials: 'include' });
+};

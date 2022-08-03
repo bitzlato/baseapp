@@ -10,6 +10,9 @@ export const useFetchTradeInfo = (tradeId: string | undefined) =>
     revalidateOnFocus: false,
   });
 
+/**
+ * @deprecated
+ */
 export function useFetchTradeChat(tradeId: string | undefined) {
   return useFetch<ChatMessageList>(
     tradeId ? `${p2pUrl()}/trade/${tradeId}/chat/` : null,
@@ -21,6 +24,9 @@ export function useFetchTradeChat(tradeId: string | undefined) {
   );
 }
 
+/**
+ * @deprecated
+ */
 export function useFetchTradeDisputeChat(tradeId: string | undefined) {
   return useFetch(
     tradeId ? `${p2pUrl()}/trade/${tradeId}/dispute/admin-chat/` : null,

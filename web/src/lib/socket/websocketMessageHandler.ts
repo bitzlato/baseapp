@@ -1,5 +1,7 @@
 import { ScopedMutator } from 'swr/dist/types';
 import { p2pUrl } from 'web/src/api';
+import { getP2PTradeChatEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeChat';
+import { getP2PTradeDisputeEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeDisputeChat';
 import {
   Notification,
   IWebsocketMessage,
@@ -31,9 +33,9 @@ export async function handleWebsocketMessage(
     if (eventName === 'newChatMessage') {
       const { isAdmin } = data as NotificationNewMessage;
       if (isAdmin) {
-        mutate(`${p2pUrl()}/trade/${tradeId}/dispute/admin-chat/`);
+        mutate(getP2PTradeDisputeEndpoint(tradeId));
       } else {
-        mutate(`${p2pUrl()}/trade/${tradeId}/chat/`);
+        mutate(getP2PTradeChatEndpoint(tradeId));
       }
     }
   }

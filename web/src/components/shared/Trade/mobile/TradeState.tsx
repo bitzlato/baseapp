@@ -13,6 +13,7 @@ import { Divider } from 'web/src/components/shared/Divider';
 import { MobileTradeChat } from 'web/src/components/shared/Trade/mobile/TradeChat/TradeChat';
 import { Text } from 'web/src/components/ui/Text';
 import { TradeFeedback as TradeFeedbackComponent } from 'web/src/components/shared/Trade/TradeFeedback';
+import { TradeUnreadChatMessages } from 'web/src/components/shared/Trade/TradeUnreadChatMessages';
 
 type Props = {
   handlers: {
@@ -99,7 +100,10 @@ export const MobileTradeState: FC<Props> = ({
 
           <Box flexGrow={1}>
             <Button fullWidth onClick={toggleChat}>
-              {t('Chat')}
+              {t('Chat')}{' '}
+              <Box as="span" ml="2x">
+                <TradeUnreadChatMessages />
+              </Box>
             </Button>
           </Box>
         </Box>

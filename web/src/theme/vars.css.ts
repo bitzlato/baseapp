@@ -175,6 +175,8 @@ export const [themeLight, vars] = createTheme({
     chatToMsgText: colors.mineShaft,
     chatFromMsgBg: colors.indigo,
     chatFromMsgText: colors.white,
+    chatErrorBackdrop: colors.black50,
+    chatErrorModal: colors.white,
 
     footerBg: colors.luckyPoint,
     footerTitle: colors.spindle,
@@ -402,6 +404,8 @@ export const [themeLight, vars] = createTheme({
     giftsQuestionActive: colors.goldTips,
     giftsSubtableBg: colors.whiteLilac,
     giftsMultiTableBadgeBg: colors.white,
+
+    badgeDangerColor: colors.white,
   },
 });
 
@@ -510,6 +514,8 @@ export const themeDark = createTheme(vars, {
     chatToMsgText: colors.white,
     chatFromMsgBg: colors.indigo,
     chatFromMsgText: colors.white,
+    chatErrorBackdrop: colors.black50,
+    chatErrorModal: colors.brightGray,
 
     footerBg: colors.ebonyClay,
     footerTitle: colors.silverChalice,
@@ -737,5 +743,7 @@ export const themeDark = createTheme(vars, {
     giftsQuestionActive: colors.goldTips,
     giftsSubtableBg: colors.mirage,
     giftsMultiTableBadgeBg: colors.outerSpace,
+
+    badgeDangerColor: colors.white,
   },
 });
