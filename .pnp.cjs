@@ -7692,6 +7692,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@types/react-textarea-autosize", [
+        ["npm:8.0.0", {
+          "packageLocation": "./.yarn/cache/@types-react-textarea-autosize-npm-8.0.0-3cad7ce0d1-35a06b6fe4.zip/node_modules/@types/react-textarea-autosize/",
+          "packageDependencies": [
+            ["@types/react-textarea-autosize", "npm:8.0.0"],
+            ["react-textarea-autosize", "virtual:3cad7ce0d12d0b2b2c024fa9d07139aa94410ebcce796d7ab1c2011cdf8e3cf3cd204d26ad271a30c88c24ec0e6365d1fb6027359d7f7db332fa5c2153ee029c#npm:8.3.4"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@types/react-transition-group", [
         ["npm:4.4.0", {
           "packageLocation": "./.yarn/cache/@types-react-transition-group-npm-4.4.0-dc81edfd45-ba44361d7b.zip/node_modules/@types/react-transition-group/",
@@ -24485,6 +24495,47 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["react-textarea-autosize", [
+        ["npm:8.3.4", {
+          "packageLocation": "./.yarn/cache/react-textarea-autosize-npm-8.3.4-828b129efc-87360d4392.zip/node_modules/react-textarea-autosize/",
+          "packageDependencies": [
+            ["react-textarea-autosize", "npm:8.3.4"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:3cad7ce0d12d0b2b2c024fa9d07139aa94410ebcce796d7ab1c2011cdf8e3cf3cd204d26ad271a30c88c24ec0e6365d1fb6027359d7f7db332fa5c2153ee029c#npm:8.3.4", {
+          "packageLocation": "./.yarn/__virtual__/react-textarea-autosize-virtual-55a49b489c/0/cache/react-textarea-autosize-npm-8.3.4-828b129efc-87360d4392.zip/node_modules/react-textarea-autosize/",
+          "packageDependencies": [
+            ["react-textarea-autosize", "virtual:3cad7ce0d12d0b2b2c024fa9d07139aa94410ebcce796d7ab1c2011cdf8e3cf3cd204d26ad271a30c88c24ec0e6365d1fb6027359d7f7db332fa5c2153ee029c#npm:8.3.4"],
+            ["@babel/runtime", "npm:7.16.7"],
+            ["@types/react", null],
+            ["react", null],
+            ["use-composed-ref", "virtual:55a49b489cc1b4d9b25931cef4498ca065efd3883c1005c4b46e65abcbd59f780c9253bdb53a11083451d0342c88318b97c969017342d07ecda0a6147d4389ce#npm:1.3.0"],
+            ["use-latest", "virtual:55a49b489cc1b4d9b25931cef4498ca065efd3883c1005c4b46e65abcbd59f780c9253bdb53a11083451d0342c88318b97c969017342d07ecda0a6147d4389ce#npm:1.2.1"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:8.3.4", {
+          "packageLocation": "./.yarn/__virtual__/react-textarea-autosize-virtual-a4a83c4a4f/0/cache/react-textarea-autosize-npm-8.3.4-828b129efc-87360d4392.zip/node_modules/react-textarea-autosize/",
+          "packageDependencies": [
+            ["react-textarea-autosize", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:8.3.4"],
+            ["@babel/runtime", "npm:7.16.7"],
+            ["@types/react", "npm:17.0.39"],
+            ["react", "npm:17.0.2"],
+            ["use-composed-ref", "virtual:a4a83c4a4f338e10c6291a6b86cbd1e9656c2577c4daed8045f37b0327cc2804e29adc67a58596cd1ebc60628786e67c088e63fcb1b49804fd6fd112acf963b6#npm:1.3.0"],
+            ["use-latest", "virtual:a4a83c4a4f338e10c6291a6b86cbd1e9656c2577c4daed8045f37b0327cc2804e29adc67a58596cd1ebc60628786e67c088e63fcb1b49804fd6fd112acf963b6#npm:1.2.1"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["react-transition-group", [
         ["npm:2.9.0", {
           "packageLocation": "./.yarn/cache/react-transition-group-npm-2.9.0-fe7767fa8d-d8c9e50aab.zip/node_modules/react-transition-group/",
@@ -28476,6 +28527,41 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["use-composed-ref", [
+        ["npm:1.3.0", {
+          "packageLocation": "./.yarn/cache/use-composed-ref-npm-1.3.0-20ed37af5c-f771cbadfd.zip/node_modules/use-composed-ref/",
+          "packageDependencies": [
+            ["use-composed-ref", "npm:1.3.0"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:55a49b489cc1b4d9b25931cef4498ca065efd3883c1005c4b46e65abcbd59f780c9253bdb53a11083451d0342c88318b97c969017342d07ecda0a6147d4389ce#npm:1.3.0", {
+          "packageLocation": "./.yarn/__virtual__/use-composed-ref-virtual-568b6c14ca/0/cache/use-composed-ref-npm-1.3.0-20ed37af5c-f771cbadfd.zip/node_modules/use-composed-ref/",
+          "packageDependencies": [
+            ["use-composed-ref", "virtual:55a49b489cc1b4d9b25931cef4498ca065efd3883c1005c4b46e65abcbd59f780c9253bdb53a11083451d0342c88318b97c969017342d07ecda0a6147d4389ce#npm:1.3.0"],
+            ["@types/react", null],
+            ["react", null]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:a4a83c4a4f338e10c6291a6b86cbd1e9656c2577c4daed8045f37b0327cc2804e29adc67a58596cd1ebc60628786e67c088e63fcb1b49804fd6fd112acf963b6#npm:1.3.0", {
+          "packageLocation": "./.yarn/__virtual__/use-composed-ref-virtual-7a2820f8f1/0/cache/use-composed-ref-npm-1.3.0-20ed37af5c-f771cbadfd.zip/node_modules/use-composed-ref/",
+          "packageDependencies": [
+            ["use-composed-ref", "virtual:a4a83c4a4f338e10c6291a6b86cbd1e9656c2577c4daed8045f37b0327cc2804e29adc67a58596cd1ebc60628786e67c088e63fcb1b49804fd6fd112acf963b6#npm:1.3.0"],
+            ["@types/react", "npm:17.0.39"],
+            ["react", "npm:17.0.2"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["use-debounce", [
         ["npm:7.0.1", {
           "packageLocation": "./.yarn/cache/use-debounce-npm-7.0.1-17cbf0764b-c5c1c34cce.zip/node_modules/use-debounce/",
@@ -28490,6 +28576,78 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["use-debounce", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.0.1"],
             ["@types/react", "npm:17.0.39"],
             ["react", "npm:17.0.2"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["use-isomorphic-layout-effect", [
+        ["npm:1.1.2", {
+          "packageLocation": "./.yarn/cache/use-isomorphic-layout-effect-npm-1.1.2-65facd0a4b-a6532f7fc9.zip/node_modules/use-isomorphic-layout-effect/",
+          "packageDependencies": [
+            ["use-isomorphic-layout-effect", "npm:1.1.2"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:6ecbe892b8aa3439e3e567fe1d5369701371c1365421c1c66cd7e7670259a1028c440afcdc633eab17f14177b0ab1b5f84336b84fea36e9ec5639999dd3985ac#npm:1.1.2", {
+          "packageLocation": "./.yarn/__virtual__/use-isomorphic-layout-effect-virtual-832c4136cb/0/cache/use-isomorphic-layout-effect-npm-1.1.2-65facd0a4b-a6532f7fc9.zip/node_modules/use-isomorphic-layout-effect/",
+          "packageDependencies": [
+            ["use-isomorphic-layout-effect", "virtual:6ecbe892b8aa3439e3e567fe1d5369701371c1365421c1c66cd7e7670259a1028c440afcdc633eab17f14177b0ab1b5f84336b84fea36e9ec5639999dd3985ac#npm:1.1.2"],
+            ["@types/react", null],
+            ["react", null]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:bf4cb92ec6f9569744add39291883e7d8c30d3e7ab53e4fb194a471fc41ddb9249dd951ee51dc874ceb3070d2f49ccea1c6ed265510cc8696a3dba12a9c3a2e9#npm:1.1.2", {
+          "packageLocation": "./.yarn/__virtual__/use-isomorphic-layout-effect-virtual-4630b8d529/0/cache/use-isomorphic-layout-effect-npm-1.1.2-65facd0a4b-a6532f7fc9.zip/node_modules/use-isomorphic-layout-effect/",
+          "packageDependencies": [
+            ["use-isomorphic-layout-effect", "virtual:bf4cb92ec6f9569744add39291883e7d8c30d3e7ab53e4fb194a471fc41ddb9249dd951ee51dc874ceb3070d2f49ccea1c6ed265510cc8696a3dba12a9c3a2e9#npm:1.1.2"],
+            ["@types/react", "npm:17.0.39"],
+            ["react", "npm:17.0.2"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["use-latest", [
+        ["npm:1.2.1", {
+          "packageLocation": "./.yarn/cache/use-latest-npm-1.2.1-a2c18ad4ba-ed3f2ddddf.zip/node_modules/use-latest/",
+          "packageDependencies": [
+            ["use-latest", "npm:1.2.1"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:55a49b489cc1b4d9b25931cef4498ca065efd3883c1005c4b46e65abcbd59f780c9253bdb53a11083451d0342c88318b97c969017342d07ecda0a6147d4389ce#npm:1.2.1", {
+          "packageLocation": "./.yarn/__virtual__/use-latest-virtual-6ecbe892b8/0/cache/use-latest-npm-1.2.1-a2c18ad4ba-ed3f2ddddf.zip/node_modules/use-latest/",
+          "packageDependencies": [
+            ["use-latest", "virtual:55a49b489cc1b4d9b25931cef4498ca065efd3883c1005c4b46e65abcbd59f780c9253bdb53a11083451d0342c88318b97c969017342d07ecda0a6147d4389ce#npm:1.2.1"],
+            ["@types/react", null],
+            ["react", null],
+            ["use-isomorphic-layout-effect", "virtual:6ecbe892b8aa3439e3e567fe1d5369701371c1365421c1c66cd7e7670259a1028c440afcdc633eab17f14177b0ab1b5f84336b84fea36e9ec5639999dd3985ac#npm:1.1.2"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:a4a83c4a4f338e10c6291a6b86cbd1e9656c2577c4daed8045f37b0327cc2804e29adc67a58596cd1ebc60628786e67c088e63fcb1b49804fd6fd112acf963b6#npm:1.2.1", {
+          "packageLocation": "./.yarn/__virtual__/use-latest-virtual-bf4cb92ec6/0/cache/use-latest-npm-1.2.1-a2c18ad4ba-ed3f2ddddf.zip/node_modules/use-latest/",
+          "packageDependencies": [
+            ["use-latest", "virtual:a4a83c4a4f338e10c6291a6b86cbd1e9656c2577c4daed8045f37b0327cc2804e29adc67a58596cd1ebc60628786e67c088e63fcb1b49804fd6fd112acf963b6#npm:1.2.1"],
+            ["@types/react", "npm:17.0.39"],
+            ["react", "npm:17.0.2"],
+            ["use-isomorphic-layout-effect", "virtual:bf4cb92ec6f9569744add39291883e7d8c30d3e7ab53e4fb194a471fc41ddb9249dd951ee51dc874ceb3070d2f49ccea1c6ed265510cc8696a3dba12a9c3a2e9#npm:1.1.2"]
           ],
           "packagePeers": [
             "@types/react",
@@ -28809,6 +28967,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-router", "npm:5.1.18"],
             ["@types/react-router-dom", "npm:5.3.3"],
             ["@types/react-scroll", "npm:1.8.3"],
+            ["@types/react-textarea-autosize", "npm:8.0.0"],
             ["@types/recharts", "npm:1.8.23"],
             ["@types/redux-mock-store", "npm:1.0.3"],
             ["@types/ua-parser-js", "npm:0.7.36"],
@@ -28873,6 +29032,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-router-dom", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.2.0"],
             ["react-scroll", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.8.1"],
             ["react-select", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.2.2"],
+            ["react-textarea-autosize", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:8.3.4"],
             ["recharts", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.8.5"],
             ["redux", "npm:4.0.5"],
             ["redux-mock-store", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.5.4"],
