@@ -218,6 +218,8 @@ export const Ad: FC = () => {
     const numericValue = parseNumeric(value);
 
     if (!numericValue) {
+      setTo('');
+      setFrom('');
       return;
     }
 
