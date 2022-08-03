@@ -81,6 +81,7 @@ const WarningBlock: FC<{ unactiveReason: string }> = ({ unactiveReason }) => (
   <Box
     display="flex"
     flexDirection="column"
+    flexWrap="wrap"
     px="5x"
     justifyContent="center"
     alignItems="center"
@@ -564,7 +565,11 @@ export const Ad: FC = () => {
     }
 
     if (!advert.available) {
-      return <WarningBlock unactiveReason={reason} />;
+      return (
+        <Box flex={1} m="auto">
+          <WarningBlock unactiveReason={reason} />
+        </Box>
+      );
     }
 
     if (!isLogged) {
