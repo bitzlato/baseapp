@@ -717,7 +717,7 @@ export const Ad: FC = () => {
           </Box>
           <Box mt="6x" display="flex" gap="6x" flex={1}>
             {actionBlock()}
-            <Box flexShrink={0} flexGrow={1} display="flex" flexDirection="column" gap="2x">
+            <Box flex={1} display="flex" flexDirection="column" gap="2x">
               {yourBalance}
 
               <Box
