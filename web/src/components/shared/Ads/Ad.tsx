@@ -62,15 +62,41 @@ const ErrorBlock: FC<{ text: string }> = ({ text }) => (
   </Box>
 );
 
+const WarningBlockMobile: FC<{ unactiveReason: string }> = ({ unactiveReason }) => (
+  <Box
+    bg="paginationItemBgHover"
+    display="flex"
+    flexDirection="column"
+    py="13x"
+    justifyContent="center"
+    alignItems="center"
+    textAlign="center"
+    borderRadius="1.5x"
+    mt="5x"
+  >
+    <WarningTriangleIcon />
+    <Text>{unactiveReason}</Text>
+  </Box>
+);
+
 const WarningBlock: FC<{ unactiveReason: string }> = ({ unactiveReason }) => (
-  <Box display="flex" flexDirection="column" py="13x" justifyContent="center" alignItems="center">
+  <Box
+    display="flex"
+    flexDirection="column"
+    px="5x"
+    justifyContent="center"
+    alignItems="center"
+    textAlign="center"
+    borderRadius="1.5x"
+  >
     <WarningTriangleIcon />
     <Text>{unactiveReason}</Text>
   </Box>
 );
 
 export const Ad: FC = () => {
-  const { lang, isMobileDevice } = useAppContext();
+  const { lang, isMobileDevice, user } = useAppContext();
+  const isLogged = !!user;
 
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
@@ -158,12 +184,7 @@ export const Ad: FC = () => {
     },
   });
 
-  if (
-    advert === undefined ||
-    paymethod === undefined ||
-    owner === undefined ||
-    p2pWallet === undefined
-  ) {
+  if (advert === undefined || paymethod === undefined || owner === undefined) {
     return (
       <Box display="flex" justifyContent="center" py="20x">
         <Spinner />
@@ -189,7 +210,7 @@ export const Ad: FC = () => {
     owner.dealStats.find((v) => v.cryptocurrency === 'common') ??
     ({ successDeals: 0, canceledDeals: 0 } as DealStat);
 
-  const balance = createMoney(p2pWallet.balance, cryptoCcy);
+  const balance = p2pWallet && createMoney(p2pWallet?.balance, cryptoCcy);
 
   const handleChange = async (
     field: 'from' | 'to',
@@ -498,7 +519,7 @@ export const Ad: FC = () => {
   };
   const header = isBuy ? t('ad.buy', tValues) : t('ad.sell', tValues);
 
-  let reason = null;
+  let reason: string;
   switch (advert.unactiveReason) {
     case 'blacklisted':
       reason = t('reasonBlacklisted');
@@ -524,6 +545,59 @@ export const Ad: FC = () => {
 
   const startTradeEnabled = from && to && !error;
 
+  const handleSignIn = () => history.push('/signin'.concat(`?back=${history.location.pathname}`));
+
+  const actionBlock = () => {
+    if (isMobileDevice) {
+      if (!advert.available) {
+        return <WarningBlockMobile unactiveReason={reason} />;
+      }
+
+      if (!isLogged) {
+        return (
+          <Box mt="5x" bg="paginationItemBgHover" display="flex" py="6x" borderRadius="1.5x">
+            <Box m="auto" textAlign="center" display="flex" flexDirection="column" gap="6x">
+              <Box px="15x">
+                <Text>{t('LoginToMakeTrade')}</Text>
+              </Box>
+              <Box>
+                <Button onClick={handleSignIn}>{t('Sign In')}</Button>
+              </Box>
+            </Box>
+          </Box>
+        );
+      }
+    }
+
+    if (!advert.available) {
+      return <WarningBlock unactiveReason={reason} />;
+    }
+
+    if (!isLogged) {
+      return (
+        <Box flex={1} display="flex">
+          <Box m="auto" textAlign="center" display="flex" flexDirection="column" gap="6x">
+            <Box px="25x">
+              <Text>{t('LoginToMakeTrade')}</Text>
+            </Box>
+            <Box>
+              <Button onClick={handleSignIn}>{t('Sign In')}</Button>
+            </Box>
+          </Box>
+        </Box>
+      );
+    }
+
+    return (
+      <Box flex={1} display="flex" flexDirection="column" gap="4x" position="relative">
+        {inputsEl}
+        <Button onClick={handleClickStart} disabled={!startTradeEnabled}>
+          {t('Start trade')}
+        </Button>
+      </Box>
+    );
+  };
+
   if (isMobileDevice) {
     return (
       <Box display="flex" flexDirection="column" width="full" color="btnPrimaryText">
@@ -531,6 +605,9 @@ export const Ad: FC = () => {
           <Box as="h2" fontSize="lead" fontWeight="strong">
             {header}
           </Box>
+
+          {actionBlock()}
+
           <Box mt="5x" bg="paginationItemBgHover" borderRadius="1.5x" px="5x" py="4x">
             <Box as="h6" fontSize="caption">
               {t('Trader')}
@@ -551,12 +628,10 @@ export const Ad: FC = () => {
             {traderInfoEl}
           </Box>
           <Box mt="5x">
-            {advert.available ? (
+            {advert.available && isLogged && (
               <Button fullWidth onClick={handleClickStartMobile}>
                 {t('Start trade')}
               </Button>
-            ) : (
-              <WarningBlock unactiveReason={reason} />
             )}
           </Box>
         </Box>
@@ -646,20 +721,9 @@ export const Ad: FC = () => {
           <Box as="h2" fontSize="lead30">
             {header}
           </Box>
-          <Box mt="6x" display="flex" gap="6x">
-            <Box flex={1} display="flex" flexDirection="column" gap="4x" position="relative">
-              {advert.available ? (
-                <>
-                  {inputsEl}
-                  <Button onClick={handleClickStart} disabled={!startTradeEnabled}>
-                    {t('Start trade')}
-                  </Button>
-                </>
-              ) : (
-                <WarningBlock unactiveReason={reason} />
-              )}
-            </Box>
-            <Box flex={1} display="flex" flexDirection="column" gap="2x">
+          <Box mt="6x" display="flex" gap="6x" flex={1}>
+            {actionBlock()}
+            <Box flexShrink={0} flexGrow={1} display="flex" flexDirection="column" gap="2x">
               {yourBalance}
 
               <Box

@@ -254,5 +254,6 @@
   "minMaxDiscrepancy": "The minimal amount cannot be greater than the maximal amount",
   "WrongMaxLimitForNewTrader": "Limits for new trader does not match the ads limits (below the min. or above the max.)",
   "NotEnoughRatingForTermsWithDigits": "It is forbidden to enter numbers in the ad description. To enter account details, use field \"account details\"",
-  "Garantee": "Security guarantee"
+  "Garantee": "Security guarantee",
+  "LoginToMakeTrade": "You need to be logged in to create a deal."
 }
