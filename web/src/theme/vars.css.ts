@@ -402,6 +402,8 @@ export const [themeLight, vars] = createTheme({
     giftsQuestionActive: colors.goldTips,
     giftsSubtableBg: colors.whiteLilac,
     giftsMultiTableBadgeBg: colors.white,
+
+    badgeDangerColor: colors.white,
   },
 });
 
@@ -737,5 +739,7 @@ export const themeDark = createTheme(vars, {
     giftsQuestionActive: colors.goldTips,
     giftsSubtableBg: colors.mirage,
     giftsMultiTableBadgeBg: colors.outerSpace,
+
+    badgeDangerColor: colors.white,
   },
 });
