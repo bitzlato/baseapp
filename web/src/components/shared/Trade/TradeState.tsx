@@ -215,7 +215,12 @@ export const TradeState: FC = () => {
         </IconButton>
       </Box>
 
-      <CollapsibleText text={tradeDetails} fontSize={isMobileDevice ? 'medium' : 'large'} />
+      <CollapsibleText
+        controlColor="collapsibleTextExpandControls"
+        text={tradeDetails}
+        textColor="tradeMainComponentTradeCounterDetailsColor"
+        fontSize={isMobileDevice ? 'medium' : 'large'}
+      />
     </Box>
   );
 

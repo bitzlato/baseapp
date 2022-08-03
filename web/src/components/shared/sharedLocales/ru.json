@@ -90,9 +90,9 @@
 
   "Reset": "Сбросить",
 
-  "You pay": "Вы платите",
+  "You pay": "Вы отдаете",
   "You receive": "Вы получите",
-  "Start trade": "Начать торговлю",
+  "Start trade": "Начать сделку",
   "Deal info": "Информация о сделке",
   "Bitzlato fee": "Комиссия Bitzlato",
 
@@ -271,6 +271,8 @@
   "error.TradeRateWasChanged": "Владельцем объявления был изменён курс",
   "error.AmountIsTooBig": "Сумма сделки слишком большая",
   "error.AmountIsTooLow": "Сумма сделки слишком маленькая",
+  "error.limit.max": "Максимальная сумма {max} {coin}",
+  "error.limit.min": "Минимальная сумма {min} {coin}",
 
   "reasonBlacklisted": "К сожалению, данный пользователь заблокировал вас!",
   "reasonPartnerNotEnoughFunds": "У продавца не достаточно средств",
@@ -390,5 +392,8 @@
   "Great!": "Отлично!",
   "Your ad has been successfully created": "Ваше объявление успешно создано",
   "View ad": "Посмотреть объявление",
-  "Create another ad": "Создать еще объявление"
+  "Create another ad": "Создать еще объявление",
+  "Garantee": "Гарантия безопасности",
+  "Balance": "Баланс",
+  "LoginToMakeTrade": "Для создания сделки вам необходимо войти в аккаунт"
 }
