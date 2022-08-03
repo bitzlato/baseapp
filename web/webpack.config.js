@@ -316,9 +316,6 @@ module.exports = {
         './CreateAdScreen': './src/components/shared/CreateAd/CreateAd',
         './fetch': './src/helpers/fetch',
         './cssVars': './src/components/shared/sharedCssVars',
-        './Chat': './src/components/shared/Chat/Chat',
-        './ChatMessage': './src/components/shared/Chat/ChatMessage',
-        './Time': './src/components/shared/Time/Time',
         './Trade': './src/components/shared/Trade/Trade',
       },
       shared: {

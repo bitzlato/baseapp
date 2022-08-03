@@ -1,5 +1,4 @@
-import { v4 } from 'uuid';
-import { KeyedMutator, useSWRConfig } from 'swr';
+import { KeyedMutator } from 'swr';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
@@ -9,7 +8,6 @@ import {
   TradeInfo,
 } from 'web/src/components/shared/Trade/types';
 import { fetchJson, FetchError, fetchData } from 'web/src/helpers/fetch';
-import { ChatMessageList } from 'web/src/hooks/data/useUserChat';
 import { Trade } from 'web/src/modules/p2p/trade.types';
 
 type UpdateTradeDetails = {
@@ -112,38 +110,6 @@ const tradeTips = async ({ cryptocurrency, tradeId, amountPercent }: Tips) => {
   const response = await fetchJson(`${p2pUrl()}/wallets/${cryptocurrency}/tips`, {
     method: 'POST',
     body: JSON.stringify({ tradeId, amountPercent }),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-    credentials: 'include',
-  });
-
-  return response;
-};
-
-const tradeSendMessage = async ({ tradeId, message }: { tradeId: number; message: string }) => {
-  const response = await fetchJson(`${p2pUrl()}/trade/${tradeId}/chat/`, {
-    method: 'POST',
-    body: JSON.stringify({ message }),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-    credentials: 'include',
-  });
-
-  return response;
-};
-
-const tradeSendDisputeMessage = async ({
-  tradeId,
-  message,
-}: {
-  tradeId: number;
-  message: string;
-}) => {
-  const response = await fetchJson(`${p2pUrl()}/trade/${tradeId}/dispute/admin-chat/`, {
-    method: 'POST',
-    body: JSON.stringify({ message }),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
@@ -260,102 +226,6 @@ export const useTradeTips = ({ reloadTrade, toggleTipsModal }: UpdateTradeTipsPo
       reloadTrade();
     },
     onFailure: ({ error }) => {
-      if (error instanceof FetchError) {
-        handleFetchError(error);
-      }
-    },
-  });
-};
-
-export const useTradeSendMessage = ({ reloadTradeChat }: { reloadTradeChat: () => void }) => {
-  const handleFetchError = useHandleFetchError();
-  const { mutate, cache } = useSWRConfig();
-
-  return useMutation(tradeSendMessage, {
-    onMutate({ input }) {
-      const tradeChatKey = `${p2pUrl()}/trade/${input.tradeId}/chat/`;
-      const oldData = cache.get(tradeChatKey);
-
-      mutate(
-        tradeChatKey,
-        (current: ChatMessageList) => {
-          return {
-            ...current,
-            data: [
-              ...current.data,
-              {
-                id: v4(),
-                created: new Date().getTime(),
-                file: null,
-                message: input.message,
-                type: 'Out',
-              },
-            ],
-          };
-        },
-        false,
-      );
-
-      return () => mutate(tradeChatKey, oldData, false);
-    },
-    onSuccess: () => {
-      reloadTradeChat();
-    },
-    onFailure: ({ error, rollback }) => {
-      if (rollback) {
-        rollback();
-      }
-
-      if (error instanceof FetchError) {
-        handleFetchError(error);
-      }
-    },
-  });
-};
-
-export const useTradeSendDisputeMessage = ({
-  reloadTradeDisputeChat,
-}: {
-  reloadTradeDisputeChat: () => void;
-}) => {
-  const handleFetchError = useHandleFetchError();
-  const { mutate, cache } = useSWRConfig();
-
-  return useMutation(tradeSendDisputeMessage, {
-    onMutate({ input }) {
-      const tradeChatKey = `${p2pUrl()}/trade/${input.tradeId}/dispute/admin-chat/`;
-      const oldData = cache.get(tradeChatKey);
-
-      mutate(
-        tradeChatKey,
-        (current: ChatMessageList) => {
-          return {
-            ...current,
-            data: [
-              ...current.data,
-              {
-                id: v4(),
-                created: new Date().getTime(),
-                file: null,
-                message: input.message,
-                type: 'Out',
-              },
-            ],
-          };
-        },
-        false,
-      );
-
-      return () => mutate(tradeChatKey, oldData, false);
-    },
-    onSuccess: () => {
-      reloadTradeDisputeChat();
-    },
-    onFailure: ({ error, rollback }) => {
-      if (rollback) {
-        rollback();
-      }
-
       if (error instanceof FetchError) {
         handleFetchError(error);
       }
