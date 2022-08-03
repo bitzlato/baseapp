@@ -1,6 +1,10 @@
 import { createGlobalTheme, createTheme } from '@vanilla-extract/css';
 import * as colors from './colors';
 
+export const fontFamilyVars = createGlobalTheme(':root', {
+  brand: "'Montserrat', helvetica, sans-serif" as const,
+});
+
 export const fontSizeVars = createGlobalTheme(':root', {
   caption: '12px' as const,
   small: '14px' as const,

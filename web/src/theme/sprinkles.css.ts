@@ -1,6 +1,6 @@
 import { defineProperties, createSprinkles } from '@vanilla-extract/sprinkles';
 import { queries } from 'web/src/theme/themeUtils';
-import { vars, sizeVars, radiiVars, zIndexVars, fontSizeVars } from './vars.css';
+import { vars, sizeVars, radiiVars, zIndexVars, fontSizeVars, fontFamilyVars } from './vars.css';
 
 const lineHeights = {
   // used in Button
@@ -154,9 +154,7 @@ const unresponsiveProperties = defineProperties({
 
 const typographyProperties = defineProperties({
   properties: {
-    fontFamily: {
-      brand: "'Montserrat', helvetica, sans-serif",
-    },
+    fontFamily: fontFamilyVars,
     fontWeight: {
       regular: 400,
       medium: 500,
