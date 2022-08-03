@@ -20,10 +20,8 @@ import { parseNumeric } from 'web/src/helpers/parseNumeric';
 import { DealStat } from 'web/src/modules/p2p/user.types';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { OnlineStatusByLastActivity } from 'web/src/components/ui/OnlineStatus';
-import { ActionOnTraderButton } from 'web/src/components/p2p/ActionOnTraderButton';
 import { themeDark } from 'web/src/theme/vars.css';
 import { useFetchTraderInfo } from 'web/src/hooks/data/useFetchTraderInfo';
-import { useTrustUser } from 'web/src/hooks/mutations/useTrustUser';
 import { useTradeEstimate } from 'web/src/hooks/data/useTradeEstimate';
 import { useDebouncedCallback } from 'use-debounce';
 import { useFetchLastRequisites } from 'web/src/hooks/data/useFetchTrade';
@@ -121,7 +119,6 @@ export const Ad: FC = () => {
   const { data: owner } = traderInfoSWR;
   const { getFiatCurrency } = useP2PFiatCurrencies();
   const { getCryptoCurrency } = useP2PCryptoCurrencies();
-  const changeTrust = useTrustUser(traderInfoSWR);
 
   const cryptocurrency = advert?.cryptocurrency;
 
@@ -275,10 +272,6 @@ export const Ad: FC = () => {
 
       calculateDebounced(moneyInput.amount.toString(), amountType, other, advert.type);
     }
-  };
-
-  const handleClickTrusted = () => {
-    changeTrust({ publicName: owner.name, flag: !owner.trusted });
   };
 
   const handleStartTrade = async () => {
@@ -745,18 +738,7 @@ export const Ad: FC = () => {
         </Box>
         <Box p="6x" display="flex" flexDirection="column" gap="6x">
           <Box p="6x" backgroundColor="adBg" borderRadius="1.5x" display="flex" gap="6x">
-            <Box flex={1} display="flex">
-              <Box display="flex" flexDirection="column" justifyContent="space-between">
-                {traderEl}
-                <ActionOnTraderButton
-                  variant="trust"
-                  active={owner.trusted ?? false}
-                  title={t('Add to trusted')}
-                  activeTitle={t('Remove from trusted')}
-                  onClick={handleClickTrusted}
-                />
-              </Box>
-            </Box>
+            <Box flex={1}>{traderEl}</Box>
             <Box flex={1} display="flex">
               <Box
                 pl="6x"
