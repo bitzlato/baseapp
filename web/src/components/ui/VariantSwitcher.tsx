@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import cn from 'classnames';
 import { Box } from 'web/src/components/ui/Box';
 import * as s from './VariantSwitcher.css';
 
 interface Variant<TValue> {
-  label: string;
+  label: ReactNode;
   value: TValue;
 }
 type Target = 'tabs' | 'form';
