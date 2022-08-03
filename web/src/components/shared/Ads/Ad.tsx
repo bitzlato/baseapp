@@ -364,6 +364,9 @@ export const Ad: FC = () => {
   const traderInfoEl = (
     <>
       <AdStat labelColor={labelColor} label={t('Rating')}>
+        <Text>{owner.rating}</Text>
+      </AdStat>
+      <AdStat labelColor={labelColor} label={t('Comments')}>
         <Box display="flex" alignItems="center" gap="5x">
           <Box display="flex" alignItems="center" gap="1x">
             <Box as={LikeIcon} color="statIcon" />
@@ -373,11 +376,7 @@ export const Ad: FC = () => {
             <Box as={UnLikeIcon} color="statIcon" />
             <span>{owner.feedbacks.find((v) => v.type === 'hankey')?.count ?? 0}</span>
           </Box>
-          <span>{owner.rating}</span>
         </Box>
-      </AdStat>
-      <AdStat labelColor={labelColor} label={t('Reputation')}>
-        {owner.safetyIndex}
       </AdStat>
       <AdStat labelColor={labelColor} label={t('Successful deals')}>
         {deals.successDeals}
