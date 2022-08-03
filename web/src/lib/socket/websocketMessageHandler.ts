@@ -1,5 +1,11 @@
 import { ScopedMutator } from 'swr/dist/types';
 import { p2pUrl } from 'web/src/api';
+import { getP2PTradeChatEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeChat';
+import { getP2PTradeChatUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeChatUnread';
+import { getP2PTradeDisputeEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeDispute';
+import { getP2PTradeDisputeUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeDisputeUnread';
+import { getP2PUserChatEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PUserChat';
+import { getP2PUserChatUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PUserChatUnread';
 import {
   Notification,
   IWebsocketMessage,
@@ -23,6 +29,7 @@ export async function handleWebsocketMessage(
   const eventName = eventMessage.name;
 
   if ((data as any).tradeId) {
+    // trade events
     const { tradeId } = data as NotificationTrade;
     if (TradeEventList.includes(eventName)) {
       mutate(`${p2pUrl()}/trade/${tradeId}`);
@@ -31,11 +38,19 @@ export async function handleWebsocketMessage(
     if (eventName === 'newChatMessage') {
       const { isAdmin } = data as NotificationNewMessage;
       if (isAdmin) {
-        mutate(`${p2pUrl()}/trade/${tradeId}/dispute/admin-chat/`);
+        mutate(getP2PTradeDisputeEndpoint(tradeId));
+        mutate(getP2PTradeDisputeUnreadEndpoint(tradeId));
       } else {
-        mutate(`${p2pUrl()}/trade/${tradeId}/chat/`);
+        mutate(getP2PTradeChatEndpoint(tradeId));
+        mutate(getP2PTradeChatUnreadEndpoint(tradeId));
       }
     }
+  } else if (eventName === 'newChatMessage') {
+    // user chat
+    const { from } = data as NotificationNewMessage;
+
+    mutate(getP2PUserChatEndpoint(from));
+    mutate(getP2PUserChatUnreadEndpoint(from));
   }
 
   const newNotification: Notification = {
