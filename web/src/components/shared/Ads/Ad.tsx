@@ -190,6 +190,8 @@ export const Ad: FC = () => {
     );
   }
 
+  const showBitzlatoFee = isLogged ? user?.username !== advert.owner : false;
+
   const isBuy = advert.type === 'purchase';
   const fiatCcy = getFiatCurrency(paymethod.currency);
   const cryptoCcy = getCryptoCurrency(advert.cryptocurrency);
@@ -469,9 +471,11 @@ export const Ad: FC = () => {
           <MoneyFormat money={cmin} /> — <MoneyFormat money={cmax} />
         </Text>
       </AdStat>
-      <AdStat label={t('Bitzlato fee')}>
-        <Text>0%</Text>
-      </AdStat>
+      {showBitzlatoFee && (
+        <AdStat label={t('Bitzlato fee')}>
+          <Text>0%</Text>
+        </AdStat>
+      )}
     </>
   );
 
