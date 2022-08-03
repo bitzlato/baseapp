@@ -218,7 +218,9 @@ export const Ad: FC = () => {
     value: string,
     code: string,
   ) => {
-    const numericValue = parseNumeric(value);
+    const numericValue = parseNumeric(value, {
+      maxFractionDigits: fieldType === 'cryptocurrency' ? 8 : 0,
+    });
 
     if (!numericValue) {
       setTo('');
