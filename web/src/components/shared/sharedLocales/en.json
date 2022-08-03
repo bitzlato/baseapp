@@ -31,7 +31,7 @@
   "tradeStatus.payment": "Payment",
   "tradeStatus.trade_created": "New deal",
 
-  "trader.chatUnavailable": "You can't use chat. Either you don't have enough ratings or you don't have joint deals",
+  "trader.chatUnavailable": "You cannot send messages to a trader before you start a trade. Please start a trade first",
 
   "traderAds.empty": "This trader has no ads yet. Go to the market to see many ads from other traders",
 
@@ -157,6 +157,10 @@
   "error.TradeRateWasChanged": "The ad's owner has changed the rate",
   "error.AmountIsTooBig": "The amount of the trade is too big",
   "error.AmountIsTooLow": "The amount of the trade is too low",
+  "error.ChatIsNotAvailable": "Сhat with this user is not available",
+  "error.NotEnoughRatingForChatMessageWithDigits": "😞 Unfortunately, you cannot use digits in the chat due to the low level of trust in your account. To increase the level of trust you need to make more trades, but before this, use text without digits",
+  "error.RequisitesNotAllowed": "Looks like you're trying to enter the payment details in the chat. Please start the deal first",
+  "error.BlackListed": "You can' t send a message because you are blocked or blacklisted by this user",
 
   "reasonBlacklisted": "Sorry, this user has blocked you!",
   "reasonPartnerNotEnoughFunds": "The seller does not have enough funds!",
