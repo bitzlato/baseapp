@@ -16,6 +16,7 @@ import { CollapsibleBox } from 'web/src/components/collapsibleBox/CollapsibleBox
 import { UserInfo } from 'web/src/modules/p2p/user.types';
 import { NotAvailable } from 'web/src/components/traderInfo/NotAvailable';
 import { TraderIcons } from 'web/src/components/traderInfo/TraderIcons';
+import { UserUnreadChatMessages } from 'web/src/components/traderInfo/UserUnreadChatMessages';
 import { Notes } from './Notes';
 import { Deals } from './Deals';
 import { UserChat } from './UserChat';
@@ -66,6 +67,10 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
       <Box w="full">
         <Button color="secondary" fullWidth onClick={() => onSingleMode?.('chat')}>
           {t('Chat')}
+
+          <Box as="span" ml="2x">
+            <UserUnreadChatMessages publicName={traderInfo.name} />
+          </Box>
         </Button>
       </Box>
     </Box>
@@ -74,7 +79,19 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
       target="tabs"
       variants={[
         { label: t('Information'), value: 'info' },
-        { label: t('Chat'), value: 'chat' },
+        {
+          label: (
+            <>
+              {t('Chat')}
+              {value !== 'chat' && (
+                <Box as="span" ml="2x">
+                  <UserUnreadChatMessages publicName={traderInfo.name} />
+                </Box>
+              )}
+            </>
+          ),
+          value: 'chat',
+        },
         { label: t('Notes'), value: 'notes' },
       ]}
       value={value}
@@ -225,16 +242,12 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
           </>
         )}
         {value === 'chat' &&
-          (user === undefined || !traderInfo.chatAvailable ? (
-            <NotAvailable signin={user === undefined}>
-              {!traderInfo.chatAvailable
-                ? t('trader.chatUnavailable')
-                : t('Sign in to send messages')}
-            </NotAvailable>
+          (user === undefined ? (
+            <NotAvailable signin>{t('Sign in to send messages')}</NotAvailable>
           ) : (
-            <div className={s.tabBody}>
-              <UserChat publicName={traderInfo.name} />
-            </div>
+            <Box className={s.tabBody} pt="4x">
+              <UserChat publicName={traderInfo.name} available={traderInfo.chatAvailable ?? true} />
+            </Box>
           ))}
         {value === 'notes' &&
           (user === undefined ? (
