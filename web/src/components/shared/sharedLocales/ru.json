@@ -390,5 +390,9 @@
   "Great!": "Отлично!",
   "Your ad has been successfully created": "Ваше объявление успешно создано",
   "View ad": "Посмотреть объявление",
-  "Create another ad": "Создать еще объявление"
+  "Create another ad": "Создать еще объявление",
+
+  "Enter 2FA code from the app": "Введите 2FA код из приложения",
+  "2FA Verification": "2FA верификация",
+  "2FA code": "Код 2FA"
 }

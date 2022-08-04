@@ -2,12 +2,12 @@ import { FC, useState, KeyboardEvent, ReactNode } from 'react';
 import { Box } from 'web/src/components/Box/Box';
 import { Button } from 'web/src/components/ui/Button';
 import { TextInput } from 'web/src/components/Input/TextInput';
-import { useT } from 'web/src/hooks/useT';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
 import { useCountdown } from 'web/src/hooks/useCountdown';
 import { isValidCode, OTP_TIMEOUT } from 'web/src/helpers/codeValidation';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { AutoFocusInside } from 'react-focus-on';
+import { useSharedT } from 'web/src/components/shared/Adapter';
 
 interface Props {
   buttonText?: string | undefined;
@@ -19,7 +19,7 @@ interface Props {
 
 export const TwoFactorModal: FC<Props> = ({ buttonText, text, show = true, onSend, onClose }) => {
   const [code, setCode] = useState('');
-  const t = useT();
+  const t = useSharedT();
   const { start, countdown } = useCountdown();
 
   const disabled = !isValidCode(code) || countdown > 0;
