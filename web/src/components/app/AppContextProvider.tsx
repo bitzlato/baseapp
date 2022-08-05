@@ -1,5 +1,6 @@
 import { FC, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNotificator } from 'web/src/components/app/useNotificator';
 import {
   alertFetchError,
   selectCurrentColorTheme,
@@ -11,6 +12,7 @@ import {
 import { AppContext } from './AppContext';
 
 export const AppContextProvider: FC = ({ children }) => {
+  const notificationSubscribe = useNotificator();
   const theme = useSelector(selectCurrentColorTheme);
   const lang = useSelector(selectCurrentLanguage);
   const user = useSelector(selectUserInfo);
@@ -23,9 +25,10 @@ export const AppContextProvider: FC = ({ children }) => {
       lang,
       user: userLoggedIn ? user : undefined,
       isMobileDevice,
+      notificationSubscribe,
       handleFetchError: (error: unknown) => dispatch(alertFetchError(error)),
     }),
-    [theme, lang, userLoggedIn, user, isMobileDevice, dispatch],
+    [theme, lang, userLoggedIn, user, isMobileDevice, notificationSubscribe, dispatch],
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

@@ -1,8 +1,6 @@
 import { notificatorUrl } from 'web/src/api';
-import { ScopedMutator } from 'swr/dist/types';
-import { handleWebsocketMessage } from './websocketMessageHandler';
 import { getStatusCodeDescription } from './specificStatusCodeMappings';
-import { IWebSocketTransport } from './types';
+import { IWebSocketTransport, NotificationSubscriber } from './types';
 
 const sleep = (ms: number) =>
   new Promise((resolve) => {
@@ -16,13 +14,27 @@ class WebSocketTransport implements IWebSocketTransport {
 
   private shouldReconnect: boolean = true;
 
-  private readonly mutate: ScopedMutator;
+  private subscribers: Array<NotificationSubscriber> = [];
 
-  constructor(mutate: ScopedMutator) {
-    this.mutate = mutate;
-
+  constructor() {
     this.connect = this.connect.bind(this);
     this.disconnect = this.disconnect.bind(this);
+  }
+
+  subscribe(subscriber: NotificationSubscriber): () => void {
+    this.subscribers.push(subscriber);
+
+    return () => {
+      this.subscribers = this.subscribers.filter((item) => item !== subscriber);
+    };
+  }
+
+  handleMessage(e: MessageEvent): void {
+    const message = JSON.parse(e.data);
+
+    this.subscribers.forEach((callback) => {
+      callback(message);
+    });
   }
 
   async connect(): Promise<void> {
@@ -32,10 +44,7 @@ class WebSocketTransport implements IWebSocketTransport {
       console.log('Connected');
     };
 
-    this.ws.onmessage = (e) => {
-      const message = JSON.parse(e.data);
-      handleWebsocketMessage(this.mutate, message);
-    };
+    this.ws.onmessage = (e) => this.handleMessage(e);
 
     this.ws.onclose = async (e) => {
       console.log(
@@ -72,6 +81,6 @@ class WebSocketTransport implements IWebSocketTransport {
   }
 }
 
-export function runNotificator(mutate: ScopedMutator): IWebSocketTransport {
-  return new WebSocketTransport(mutate);
+export function runNotificator(): IWebSocketTransport {
+  return new WebSocketTransport();
 }
