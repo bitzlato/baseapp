@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import { Router } from 'react-router';
 import { getThemeClassName } from 'web/src/theme/getThemeClassName';
 import { useFetchPublicFeatures } from 'web/src/hooks/data/barong/useFetchPublicFeatures';
+import { Adapter } from 'web/src/components/shared/Adapter';
+import { Link, useHistory } from 'react-router-dom';
 import { gaTrackerKey } from './api';
 import { useSetMobileDevice } from './hooks';
 import * as mobileTranslations from './mobile/translations';
@@ -57,9 +59,21 @@ const RenderDeviceContainers = () => {
   const theme = useSelector(selectCurrentColorTheme);
   const className = getThemeClassName(theme);
 
+  const history = useHistory();
+
+  let body;
   if (!isMobileDevice) {
-    return (
+    body = (
       <div className={className}>
+        <Header />
+        <AlertsContainer />
+        <LayoutContainer />
+        <FooterContainer />
+      </div>
+    );
+  } else {
+    body = (
+      <div className={cn('pg-mobile-app', className)}>
         <Header />
         <AlertsContainer />
         <LayoutContainer />
@@ -69,12 +83,9 @@ const RenderDeviceContainers = () => {
   }
 
   return (
-    <div className={cn('pg-mobile-app', className)}>
-      <Header />
-      <AlertsContainer />
-      <LayoutContainer />
-      <FooterContainer />
-    </div>
+    <Adapter Link={Link} history={history}>
+      {body}
+    </Adapter>
   );
 };
 
