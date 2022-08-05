@@ -1,4 +1,5 @@
 import { Dispatch, FC, SetStateAction, useCallback, useMemo, useState } from 'react';
+import { useSWRConfig } from 'swr';
 import { Box } from 'web/src/components/ui/Box';
 import { TradeContext } from 'web/src/components/shared/Trade/TradeContext';
 import { TradeCurrencies } from 'web/src/components/shared/Trade/TradeCurrencies';
@@ -14,7 +15,12 @@ import {
   TradeFeedback,
   TradeModals,
 } from 'web/src/components/shared/Trade/types';
-import { useAppContext, useLanguage, useTheme } from 'src/components/app/AppContext';
+import {
+  useAppContext,
+  useLanguage,
+  useNotificationSubscribe,
+  useTheme,
+} from 'src/components/app/AppContext';
 import { MobileTrade } from 'web/src/components/shared/Trade/mobile/Trade';
 import { TradeCancelModal } from 'web/src/components/shared/Trade/TradeModals/TradeCancelModal';
 import { TradeInputDetails } from 'web/src/components/shared/Trade/TradeInputDetails';
@@ -44,10 +50,23 @@ import {
 import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
 import { createMoney } from 'web/src/helpers/money';
 import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
+import { NotificationNewMessage } from 'web/src/lib/socket/types';
+import { getP2PTradeDisputeEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeDispute';
+import { getP2PTradeDisputeUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeDisputeUnread';
+import { getP2PTradeChatEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeChat';
+import { getP2PTradeChatUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PTradeChatUnread';
+
+const tradeEventList = [
+  'tradeStatusChanged',
+  'tradeExtendWaitingTime',
+  'disputeResolved',
+  'disputeAvailable',
+];
 
 export const SharedTrade: FC = () => {
   const t = useSharedT();
   const { isMobileDevice } = useAppContext();
+  const { mutate } = useSWRConfig();
   const { params } = useAdapterContext<{ tradeId: string | undefined }>();
   const { getFiatCurrency } = useP2PFiatCurrencies();
   const { getCryptoCurrency } = useP2PCryptoCurrencies();
@@ -257,6 +276,35 @@ export const SharedTrade: FC = () => {
       theme,
       tradeValues,
     ],
+  );
+
+  useNotificationSubscribe(
+    useCallback(
+      (notify) => {
+        if (tradeEventList.includes(notify.name)) {
+          reloadTrade();
+        }
+      },
+      [reloadTrade],
+    ),
+  );
+
+  useNotificationSubscribe(
+    useCallback(
+      (notify) => {
+        if (notify.name === 'newChatMessage' && 'tradeId' in notify && notify.tradeId && trade.id) {
+          const { isAdmin } = notify as NotificationNewMessage;
+          if (isAdmin) {
+            mutate(getP2PTradeDisputeEndpoint(trade.id));
+            mutate(getP2PTradeDisputeUnreadEndpoint(trade.id));
+          } else {
+            mutate(getP2PTradeChatEndpoint(trade.id));
+            mutate(getP2PTradeChatUnreadEndpoint(trade.id));
+          }
+        }
+      },
+      [mutate, trade.id],
+    ),
   );
 
   if (!trade.id || !trade.paymethod || !trade.partner.id) {
