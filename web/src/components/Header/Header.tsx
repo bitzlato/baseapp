@@ -31,7 +31,6 @@ import {
 } from 'web/src/components/shared/sharedTypes';
 import { isToday, isYesterday, localeDate } from 'web/src/helpers';
 import { useMarkNotificationAsRead } from 'web/src/hooks/mutations/useMarkNotificationAsRead';
-import { Notification } from 'web/src/lib/socket/types';
 import { NotificationModalNotification } from 'web/src/containers/NotificationModal/types';
 import { useFetchP2PNotifications } from 'web/src/hooks/data/useFetchP2PNotifications';
 import { NotificationModal } from 'web/src/containers/NotificationModal/NotificationModal';
@@ -39,6 +38,8 @@ import { Box } from 'web/src/components/ui/Box';
 import { notificationInfo } from 'web/src/components/Header/notificationInfo';
 import { NavigationLink } from 'web/src/components/shared/Header/NavigationLink';
 import ChevronLeftIcon from 'web/src/assets/svg/ChevronLeftIcon.svg';
+import { useNotificationSubscribe } from 'web/src/components/app/AppContext';
+import { Notification } from 'web/src/lib/socket/types';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
@@ -105,10 +106,25 @@ const Header: FC = () => {
     [t],
   );
 
-  const fetchNotificationRes = useFetchP2PNotifications();
-  const notifications: Notification[] = fetchNotificationRes.data || [];
+  const { data: notifications = [], mutate: notificationsMutate } = useFetchP2PNotifications();
 
   const [markNotificationAsReadP2P] = useMarkNotificationAsRead();
+
+  useNotificationSubscribe(
+    useCallback(
+      ({ notificationId: id, name, ...data }) => {
+        const newNotify: Notification = {
+          id,
+          name,
+          read: false,
+          data,
+        };
+
+        notificationsMutate((oldData) => (oldData ? [newNotify].concat(...oldData) : [newNotify]));
+      },
+      [notificationsMutate],
+    ),
+  );
 
   const handleMarkAllNotificationAsRead = () =>
     notifications.forEach((n) => {
