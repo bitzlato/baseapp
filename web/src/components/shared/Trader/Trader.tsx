@@ -1,5 +1,5 @@
-import { FC, useState } from 'react';
-import { useAppContext } from 'web/src/components/app/AppContext';
+import { FC, useCallback, useState } from 'react';
+import { useAppContext, useNotificationSubscribe } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/ui/Container';
 import { Box } from 'web/src/components/ui/Box';
 import { useUserAds } from 'web/src/hooks/data/useUserAds';
@@ -16,6 +16,10 @@ import { Spinner } from 'web/src/components/ui/Spinner';
 import { useBlockUser } from 'web/src/hooks/mutations/useBlockUser';
 import { useTrustUser } from 'web/src/hooks/mutations/useTrustUser';
 import { NotAvailable } from 'web/src/components/traderInfo/NotAvailable';
+import { NotificationNewMessage } from 'web/src/lib/socket/types';
+import { useSWRConfig } from 'swr';
+import { getP2PUserChatEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PUserChat';
+import { getP2PUserChatUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PUserChatUnread';
 import * as s from './Trader.css';
 
 interface UrlParams {
@@ -23,6 +27,7 @@ interface UrlParams {
 }
 
 export const Trader: FC = () => {
+  const { mutate } = useSWRConfig();
   const { lang, isMobileDevice, user } = useAppContext();
   const { params, t } = useAdapterContext<UrlParams>();
   const { data = [], error } = useUserAds({ publicName: params.name, lang });
@@ -31,6 +36,20 @@ export const Trader: FC = () => {
   const [singleMode, setSingleMode] = useState('');
   const userBlock = useBlockUser(traderInfoSWR);
   const userTrust = useTrustUser(traderInfoSWR);
+
+  useNotificationSubscribe(
+    useCallback(
+      (notify) => {
+        if (notify.name === 'newChatMessage' && 'tradeId' in notify && notify.tradeId === null) {
+          const { from } = notify as NotificationNewMessage;
+
+          mutate(getP2PUserChatEndpoint(from));
+          mutate(getP2PUserChatUnreadEndpoint(from));
+        }
+      },
+      [mutate],
+    ),
+  );
 
   if (error || traderInfoSWR.error) {
     return null;
