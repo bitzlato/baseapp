@@ -271,7 +271,11 @@ export type IWebsocketMessage =
   | NotificationVerificationReset
   | NotificationTradeStatusChanged;
 
+export type NotificationSubscriber = (message: IWebsocketMessage) => void;
+export type NotificationSubscribe = (subscriber: NotificationSubscriber) => () => void;
+
 export interface IWebSocketTransport {
+  subscribe: NotificationSubscribe;
   connect: () => void;
   disconnect: () => void;
 }

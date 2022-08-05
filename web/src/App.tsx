@@ -17,7 +17,6 @@ import { languageMap } from './translations';
 import { ErrorBoundary } from './containers/ErrorBoundary/ErrorBoundary';
 import { Language } from './types';
 import { lazyRetry } from './helpers/lazyRetry';
-import { useNotificator } from './hooks/useNotificator';
 
 const gaKey = gaTrackerKey();
 const browserHistory = createBrowserHistory();
@@ -91,7 +90,6 @@ const RenderDeviceContainers = () => {
 
 export const App = () => {
   useSetMobileDevice();
-  useNotificator();
   useFetchPublicFeatures(); // load public features
 
   const lang = useSelector(selectCurrentLanguage);

@@ -1,4 +1,5 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect } from 'react';
+import { NotificationSubscribe, NotificationSubscriber } from 'web/src/lib/socket/types';
 import { User } from 'web/src/modules/user/profile/types';
 import { Language, Theme } from 'web/src/types';
 
@@ -7,6 +8,7 @@ interface AppContextValue {
   lang: Language;
   user?: User | undefined;
   isMobileDevice: boolean;
+  notificationSubscribe: NotificationSubscribe;
   handleFetchError: (error: unknown) => void;
 }
 
@@ -23,3 +25,9 @@ export const useUser = () => useAppContext().user;
 export const useIsMobileDevice = () => useAppContext().isMobileDevice;
 
 export const useHandleFetchError = () => useAppContext().handleFetchError;
+
+export const useNotificationSubscribe = (subscriber: NotificationSubscriber) => {
+  const { notificationSubscribe } = useAppContext();
+
+  useEffect(() => notificationSubscribe(subscriber), [notificationSubscribe, subscriber]);
+};
