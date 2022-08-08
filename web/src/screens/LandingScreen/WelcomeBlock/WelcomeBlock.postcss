@@ -43,7 +43,7 @@
   width: 36%;
 
   @media (--breakpoint-down-xl) {
-    margin-bottom: 12px;
+    margin-bottom: 22px;
     text-align: center;
     width: 100%;
   }
@@ -97,7 +97,7 @@
     overflow: hidden;
     position: relative;
 
-    & > :global(.pg-charts) {
+    & > :global(.pg-trading-chart) {
       position: absolute;
     }
 
@@ -105,6 +105,24 @@
       box-shadow: 1px 1px 5px var(--shadow-color-level-2);
     }
   }
+}
+
+.tradingStatisticsHeaderP2P {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+
+  @media (--breakpoint-down-xl) {
+    justify-content: center;
+  }
+
+  & > *:not(:first-child) {
+    margin-left: 12px;
+  }
+}
+
+.tradingStatisticsSelectorP2P {
+  width: 200px;
 }
 
 .marketTable {

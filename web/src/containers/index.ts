@@ -17,7 +17,6 @@ export * from './ProfileApiKeys';
 export * from './ProfileTwoFactorAuth';
 export * from './RecentTrades';
 export * from './ToolBar';
-export * from './TradingChart';
 export * from './WalletsFetch';
 export * from './QuickExchange';
 export * from './CanCan';
