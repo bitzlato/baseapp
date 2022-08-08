@@ -162,7 +162,7 @@ export const UserAds: FC = () => {
             {isAdsEmpty ? (
               <Box />
             ) : (
-              <Button as={Link} to={`/${lang}/p2p/adverts/create`}>
+              <Button as={Link} to={`/${lang}/p2p/adverts/create`} data-gtm-click="create_advert">
                 {t('Create advert')}
               </Button>
             )}

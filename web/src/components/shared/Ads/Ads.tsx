@@ -85,7 +85,12 @@ const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
 
   return (
     <>
-      <Button fullWidth={isMobileDevice} disabled={active} onClick={handleClick}>
+      <Button
+        fullWidth={isMobileDevice}
+        disabled={active}
+        onClick={handleClick}
+        data-gtm-click={isBuy ? 'go_to_trade_buy' : 'go_to_trade_sell'}
+      >
         {isBuy ? t('Buy') : t('Sell')}
       </Button>
       {confirm?.prevRate && confirm?.nextRate && (
