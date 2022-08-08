@@ -1,13 +1,14 @@
-import { FC, ReactElement, useState } from 'react';
+import { FC, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { MarketName } from 'src/components/MarketName/MarketName';
 
 import { TabPanel } from '../../components/TabPanel';
 import { selectCurrentMarket } from '../../modules';
-import { MarketDepthsComponent, TradingChart } from '../index';
+import { MarketDepthsComponent } from '../index';
+import { TradingChart } from '../TradingChart/TradingChart';
 
-export const Charts: FC = (): ReactElement => {
+export const Charts: FC = () => {
   const intl = useIntl();
   const currentMarket = useSelector(selectCurrentMarket);
   const [currentTabIndex, setCurrentTabIndex] = useState(0);

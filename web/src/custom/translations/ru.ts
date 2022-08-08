@@ -1694,4 +1694,6 @@ export const ru: LangType = {
   'gifts.emptySentGifts': 'Здесь будут отображаться чеки, которые вы отправили',
   'gifts.allRecipients': 'Все получатели',
   Save: 'Сохранить',
+
+  'Start P2P Trading': 'Начать P2P торговлю',
 };

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
+import { TradingChart } from 'web/src/containers/TradingChart/TradingChart';
 import { OrderButtons } from '../..';
 import { TabPanel } from '../../../../components';
-import { OrderBook, RecentTrades, TradingChart } from '../../../../containers';
+import { OrderBook, RecentTrades } from '../../../../containers';
 
 interface Props {
   redirectToCreateOrder: (index: number) => void;

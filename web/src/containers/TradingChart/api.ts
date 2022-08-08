@@ -1,11 +1,18 @@
 import axios from 'axios';
-import { TradingChartComponent } from '.';
+import {
+  ChartingLibraryWidgetOptions,
+  DatafeedConfiguration,
+  IChartingLibraryWidget,
+} from 'web/src/charting_library/charting_library.min';
+import {
+  rangerSubscribeKlineMarket,
+  rangerUnsubscribeKlineMarket,
+} from 'web/src/modules/public/ranger/actions';
 import { finexUrl, isFinexEnabled, tradeUrl } from '../../api/config';
-import { LibrarySymbolInfo } from '../../charting_library/datafeed-api';
+import { LibrarySymbolInfo, SearchSymbolResultItem } from '../../charting_library/datafeed-api';
 import { buildQueryString, getTimestampPeriod } from '../../helpers';
 import {
   klineArrayToObject,
-  KlineEvent,
   KlineState,
   klineUpdatePeriod,
   klineUpdateTimeRange,
@@ -20,21 +27,24 @@ export interface CurrentKlineSubscription {
   periodString?: string;
 }
 
-const getHistoryApi = (): string => (isFinexEnabled() ? finexUrl() : tradeUrl());
+export type MarketKind = 'k-line' | 'p2p-k-line';
 
-const makeHistoryUrl = (market: string, resolution: number, from: number, to: number) => {
+export type TradingViewMarket = Pick<Market, 'id' | 'name' | 'quote_unit' | 'price_precision'>;
+
+const makeHistoryUrl = (
+  market: string,
+  resolution: number,
+  from: number,
+  to: number,
+  kind?: MarketKind,
+) => {
   const payload = {
     period: resolution,
     time_from: getTimestampPeriod(from, resolution),
     time_to: getTimestampPeriod(to, resolution),
   };
-  let endPoint = `/public/markets/${market}/k-line`;
-
-  if (payload) {
-    endPoint = `${endPoint}?${buildQueryString(payload)}`;
-  }
-
-  return `${getHistoryApi()}${endPoint}`;
+  const endPoint = `/public/markets/${market}/${kind ?? 'k-line'}?${buildQueryString(payload)}`;
+  return `${isFinexEnabled() ? finexUrl() : tradeUrl()}${endPoint}`;
 };
 
 const resolutionToSeconds = (r: string): number => {
@@ -51,40 +61,35 @@ const resolutionToSeconds = (r: string): number => {
   return 1;
 };
 
-const config = {
+const config: DatafeedConfiguration = {
   supports_timescale_marks: true,
   supports_time: false,
   supported_resolutions: ['1', '5', '15', '30', '60', '120', '240', '360', '720', 'd', '3d'],
 };
 
-export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Market[]) => {
-  const dataFeed = {
-    onReady: (
-      cb: (arg0: {
-        supports_timescale_marks: boolean;
-        supports_time: boolean;
-        supported_resolutions: string[];
-      }) => void,
-    ) => {
+interface Props {
+  markets: TradingViewMarket[];
+  tvWidget: () => IChartingLibraryWidget | null;
+  subscribeKline: typeof rangerSubscribeKlineMarket;
+  unSubscribeKline: typeof rangerUnsubscribeKlineMarket;
+  marketKind?: MarketKind | undefined;
+}
+
+export type DatafeedExt = ChartingLibraryWidgetOptions['datafeed'] & {
+  currentKlineSubscription: CurrentKlineSubscription;
+  onRealtimeCallback: (_kline: KlineState) => void;
+};
+
+export const dataFeedObject = (props: Props) => {
+  const dataFeed: DatafeedExt = {
+    currentKlineSubscription: {},
+
+    onReady: (cb) => {
       setTimeout(() => cb(config), 0);
     },
-    searchSymbols: (
-      _userInput: any,
-      _exchange: any,
-      _symbolType: any,
-      onResultReadyCallback: (
-        arg0: {
-          symbol: string;
-          full_name: string;
-          description: string;
-          exchange: string;
-          ticker: string;
-          type: string;
-          currency_code: string;
-        }[],
-      ) => void,
-    ) => {
-      const symbols = markets.map((m) => ({
+
+    searchSymbols: (_userInput, _exchange, _symbolType, onResultReadyCallback) => {
+      const symbols = props.markets.map<SearchSymbolResultItem>((m) => ({
         symbol: m.id,
         full_name: m.name,
         description: m.name,
@@ -95,56 +100,56 @@ export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Mar
       }));
       setTimeout(() => onResultReadyCallback(symbols), 0);
     },
-    resolveSymbol: (
-      symbolName: string,
-      onSymbolResolvedCallback: (arg0: any) => void,
-      onResolveErrorCallback: (arg0: string) => void,
-    ) => {
-      const symbol = markets.find((m) => m.id === symbolName || m.name === symbolName);
 
-      if (!symbol) {
+    resolveSymbol: (symbolName, onSymbolResolvedCallback, onResolveErrorCallback) => {
+      const market = props.markets.find((m) => m.id === symbolName || m.name === symbolName);
+
+      if (!market) {
         return setTimeout(() => onResolveErrorCallback('Symbol not found'), 0);
       }
 
-      const symbolStub = {
-        name: symbol.name,
-        currency_code: symbol.quote_unit.toUpperCase(),
+      const symbolStub: LibrarySymbolInfo = {
+        name: market.name,
+        currency_code: market.quote_unit.toUpperCase(),
         description: '',
         type: 'bitcoin',
         session: '24x7',
         timezone: 'Etc/UTC',
-        ticker: symbol.id,
+        ticker: market.id,
         minmov: 1,
-        pricescale: 10 ** symbol.price_precision,
+        pricescale: 10 ** market.price_precision,
         has_intraday: true,
         intraday_multipliers: ['1', '5', '15', '30', '60', '120', '240', '360', '720', 'd', '3d'],
         supported_resolutions: ['1', '5', '15', '30', '60', '120', '240', '360', '720', 'd', '3d'],
         volume_precision: 8,
         data_status: 'streaming',
+        full_name: '',
+        exchange: '',
+        listed_exchange: '',
+        format: 'price',
       };
 
       return setTimeout(() => onSymbolResolvedCallback(symbolStub), 0);
     },
+
     getTimescaleMarks: async () => {
-      const range = tradingChart.tvWidget!.activeChart().getVisibleRange();
-      const period = tradingChart.tvWidget!.activeChart().resolution();
-      store.dispatch(klineUpdateTimeRange(range));
-      store.dispatch(klineUpdatePeriod(period));
+      const w = props.tvWidget();
+      if (w) {
+        const range = w.activeChart().getVisibleRange();
+        const period = w.activeChart().resolution();
+        store.dispatch(klineUpdateTimeRange(range));
+        store.dispatch(klineUpdatePeriod(period));
+      }
     },
-    getBars: async (
-      symbolInfo: LibrarySymbolInfo,
-      resolution: string,
-      from: number,
-      to: number,
-      onHistoryCallback: (arg0: never[], arg1: { noData: boolean }) => any,
-    ) => {
+
+    getBars: async (symbolInfo, resolution, from, to, onHistoryCallback) => {
       const url = makeHistoryUrl(
         symbolInfo.ticker || symbolInfo.name.toLowerCase(),
         resolutionToSeconds(resolution),
         from,
         to,
+        props.marketKind,
       );
-
       return axios
         .get(url)
         .then(({ data }) => {
@@ -152,43 +157,41 @@ export const dataFeedObject = (tradingChart: TradingChartComponent, markets: Mar
             return onHistoryCallback([], { noData: true });
           }
           const bars = data.map(klineArrayToObject);
-
           return onHistoryCallback(bars, { noData: false });
         })
         .catch(() => {
           return onHistoryCallback([], { noData: true });
         });
     },
-    subscribeBars: (
-      symbolInfo: LibrarySymbolInfo,
-      resolution: string,
-      onRealtimeCallback: (arg0: KlineEvent) => void,
-    ) => {
-      dataFeed.onRealtimeCallback = ((kline: KlineState) => {
+
+    subscribeBars: (symbolInfo, resolution, onRealtimeCallback) => {
+      dataFeed.onRealtimeCallback = (kline: KlineState) => {
         if (
           kline.last &&
-          kline.marketId === tradingChart.currentKlineSubscription.marketId &&
-          kline.period === tradingChart.currentKlineSubscription.periodString
+          kline.marketId === dataFeed.currentKlineSubscription.marketId &&
+          kline.period === dataFeed.currentKlineSubscription.periodString
         ) {
           onRealtimeCallback(kline.last);
         }
-      }) as any;
+      };
       const marketId: string = symbolInfo.ticker!;
       const periodString = periodMinutesToString(resolutionToSeconds(resolution));
 
-      tradingChart.props.subscribeKline(marketId, periodString);
-      tradingChart.currentKlineSubscription = {
+      props.subscribeKline(marketId, periodString);
+      dataFeed.currentKlineSubscription = {
         marketId,
         periodString,
       };
     },
+
     unsubscribeBars: () => {
-      const { marketId, periodString } = tradingChart.currentKlineSubscription;
+      const { marketId, periodString } = dataFeed.currentKlineSubscription;
       if (marketId && periodString) {
-        tradingChart.props.unSubscribeKline(marketId, periodString);
+        props.unSubscribeKline(marketId, periodString);
       }
-      tradingChart.currentKlineSubscription = {};
+      dataFeed.currentKlineSubscription = {};
     },
+
     onRealtimeCallback: (_kline: KlineState) => {
       // window.console.log(`default onRealtimeCallback called with ${JSON.stringify(bar)}`);
     },

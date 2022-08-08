@@ -3,8 +3,6 @@ import { ThemeName } from '../charting_library/charting_library.min';
 import { colors } from '../constants';
 import { convertRgbToHex, getStylesValueByKey } from '../helpers';
 
-export const customWidgetParams = {};
-
 export const customWidgetOptions = (colorTheme?: string) => {
   if (colorTheme === 'light') {
     return {

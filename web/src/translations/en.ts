@@ -1675,4 +1675,6 @@ export const en = {
   'gifts.emptySentGifts': 'Checks that you have sent will be displayed here',
   'gifts.allRecipients': 'All recipients',
   Save: 'Save',
+
+  'Start P2P Trading': 'Start P2P Trading',
 };
