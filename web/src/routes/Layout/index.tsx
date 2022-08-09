@@ -96,6 +96,7 @@ import { GiftsScreen } from 'web/src/screens/GiftsScreen/GiftsScreen';
 import { ActiveGiftsScreen } from 'web/src/screens/GiftsScreen/ActiveGiftsScreen';
 import { HistoryGiftsScreen } from 'web/src/screens/GiftsScreen/HistoryGiftsScreen';
 import { UserAdScreen } from 'web/src/screens/p2p/UserAdScreen';
+import { WalletsStatScreen } from 'web/src/screens/WalletsStat/WalletsStat';
 
 interface ReduxProps {
   colorTheme: string;
@@ -328,6 +329,11 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     const commonRoutes = [
       <Route key="exchange" path="/quick-exchange" component={QuickExchange as any} />,
       <Route key="fees" path="/fees" component={FeesScreen as any} />,
+      <Route
+        key="wallets-stat"
+        path={['/wallets_stat', '/:lang/wallets_stat']}
+        component={WalletsStatScreen}
+      />,
       <PrivateRoute
         key="deeplink"
         exact
