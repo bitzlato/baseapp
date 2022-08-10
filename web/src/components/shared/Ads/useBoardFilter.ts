@@ -169,19 +169,18 @@ export const useBoardFilter = ({
         ..._upd,
       };
 
+      const next = {
+        ...filterParams,
+        ...upd,
+      };
+
       let paymethod;
       if ('paymethod' in upd) {
         paymethod = upd.paymethod
           ? paymethods?.find((item) => item.id === upd.paymethod)
           : undefined;
-      }
 
-      const next = {
-        ...filterParams,
-        ...upd,
-      };
-      if (paymethod) {
-        next.paymethodSlug = paymethod.slug;
+        next.paymethodSlug = paymethod?.slug ?? undefined;
       }
 
       setFilterParams(next);
@@ -227,6 +226,20 @@ export const useBoardFilter = ({
       ),
     );
   }, [filter, filterParams, handleChangeFilter, history, lang, paymethods]);
+
+  useEffect(() => {
+    if (
+      paymethods &&
+      paymethods.length > 0 &&
+      !filterParams.paymethod &&
+      filterParams.paymethodSlug
+    ) {
+      handleChangeFilter({
+        paymethod: paymethods?.find((paymethod) => paymethod.slug === filterParams.paymethodSlug)
+          ?.id,
+      });
+    }
+  }, [filterParams, paymethods, handleChangeFilter]);
 
   useEffect(() => {
     if (!cryptoCurrencies?.some((currency) => currency.code === filterParams.cryptocurrency)) {
