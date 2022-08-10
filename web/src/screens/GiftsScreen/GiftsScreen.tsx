@@ -164,54 +164,58 @@ export const GiftsScreen: FC = () => {
 
   return (
     <Adapter Link={Link} history={history}>
-      <Box px="8x">
-        <Breadcrumbs>
-          <BreadcrumbsItem>{t('Gifts')}</BreadcrumbsItem>
-          <BreadcrumbsItem>{t('gifts.createGift')}</BreadcrumbsItem>
-        </Breadcrumbs>
-      </Box>
-
       <Container maxWidth="xl" my="6x">
-        <Card display="flex" flexDirection="column" pb="9x" px={{ tablet: '6x', desktop: '15x' }}>
-          {header}
+        {isMobileDevice ? null : (
+          <Box px="4x">
+            <Breadcrumbs>
+              <BreadcrumbsItem>{t('Gifts')}</BreadcrumbsItem>
+              <BreadcrumbsItem>{t('gifts.createGift')}</BreadcrumbsItem>
+            </Breadcrumbs>
+          </Box>
+        )}
 
-          <Box display="flex" pt={{ mobile: '6x', tablet: '5x' }} pb="7x">
-            <Box width="full">
-              {isMobileDevice ? null : (
-                <>
-                  <Box as={Text} variant="title" fontWeight="strong">
-                    {t('gifts.createGift')}
-                  </Box>
-                  <Box
-                    className={s.createNotice}
-                    as={Text}
-                    variant="caption"
-                    color="textMuted"
-                    mt="2x"
-                  >
-                    {t('gifts.createNotice', { br: ' ' })}
-                  </Box>
-                </>
-              )}
+        <Box px={{ mobile: '0', tablet: '4x' }}>
+          <Card display="flex" flexDirection="column" pb="9x" px={{ tablet: '6x', desktop: '15x' }}>
+            {header}
 
-              <Box
-                className={s.form}
-                flexGrow={1}
-                mt={{ mobile: '0', tablet: '8x' }}
-                mr={{ mobile: '0', desktop: '15x' }}
-                px={{ mobile: '5x', tablet: '0' }}
-                pt={{ mobile: '4x', tablet: '0' }}
-                pb={{ mobile: '10x', tablet: '0' }}
-              >
-                <CreateGiftForm user={user} onSubmit={handleSubmit} />
+            <Box display="flex" pt={{ mobile: '6x', tablet: '5x' }} pb="7x">
+              <Box width="full">
+                {isMobileDevice ? null : (
+                  <>
+                    <Box as={Text} variant="title" fontWeight="strong">
+                      {t('gifts.createGift')}
+                    </Box>
+                    <Box
+                      className={s.createNotice}
+                      as={Text}
+                      variant="caption"
+                      color="textMuted"
+                      mt="2x"
+                    >
+                      {t('gifts.createNotice', { br: ' ' })}
+                    </Box>
+                  </>
+                )}
+
+                <Box
+                  className={s.form}
+                  flexGrow={1}
+                  mt={{ mobile: '0', tablet: '8x' }}
+                  mr={{ mobile: '0', desktop: '15x' }}
+                  px={{ mobile: '5x', tablet: '0' }}
+                  pt={{ mobile: '4x', tablet: '0' }}
+                  pb={{ mobile: '10x', tablet: '0' }}
+                >
+                  <CreateGiftForm user={user} onSubmit={handleSubmit} />
+                </Box>
+              </Box>
+
+              <Box mt="3x" display={{ mobile: 'none', desktop: 'block' }} flexShrink={0}>
+                <GiftsInstructions />
               </Box>
             </Box>
-
-            <Box mt="3x" display={{ mobile: 'none', desktop: 'block' }} flexShrink={0}>
-              <GiftsInstructions />
-            </Box>
-          </Box>
-        </Card>
+          </Card>
+        </Box>
       </Container>
 
       <TwoFactorModal

@@ -114,76 +114,81 @@ export const ActiveGiftsScreen: FC = () => {
 
   return (
     <Adapter Link={Link} history={history}>
-      <Box px="8x">
-        <Breadcrumbs>
-          <BreadcrumbsItem>{t('Gifts')}</BreadcrumbsItem>
-          <BreadcrumbsItem>{t('gifts.activeGifts')}</BreadcrumbsItem>
-        </Breadcrumbs>
-      </Box>
       <Container maxWidth="xl" my="6x">
-        <Card
-          display="flex"
-          flexDirection="column"
-          pt="6x"
-          pb="9x"
-          px={{ tablet: '6x', desktop: '15x' }}
-        >
-          <Box
+        {isMobileDevice ? null : (
+          <Box px="4x">
+            <Breadcrumbs>
+              <BreadcrumbsItem>{t('Gifts')}</BreadcrumbsItem>
+              <BreadcrumbsItem>{t('gifts.activeGifts')}</BreadcrumbsItem>
+            </Breadcrumbs>
+          </Box>
+        )}
+
+        <Box px={{ mobile: '0', tablet: '4x' }}>
+          <Card
             display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            px={{ mobile: '5x', tablet: '0' }}
+            flexDirection="column"
+            pt="6x"
+            pb="9x"
+            px={{ tablet: '6x', desktop: '15x' }}
           >
-            <Text variant="h4">{t('gifts.activeGifts')}</Text>
-            <Box display={{ mobile: 'none', tablet: 'block' }}>
-              <GiftsNavigation />
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              px={{ mobile: '5x', tablet: '0' }}
+            >
+              <Text variant="h4">{t('gifts.activeGifts')}</Text>
+              <Box display={{ mobile: 'none', tablet: 'block' }}>
+                <GiftsNavigation />
+              </Box>
             </Box>
-          </Box>
 
-          <Box
-            className={s.notice}
-            as={Text}
-            variant="body"
-            color="textMuted"
-            mt={{ mobile: '3x', tablet: '2x', desktop: '1x' }}
-            px={{ mobile: '5x', tablet: '0' }}
-          >
-            {t('gifts.activeGifts.notice')}
-          </Box>
+            <Box
+              className={s.notice}
+              as={Text}
+              variant="body"
+              color="textMuted"
+              mt={{ mobile: '3x', tablet: '2x', desktop: '1x' }}
+              px={{ mobile: '5x', tablet: '0' }}
+            >
+              {t('gifts.activeGifts.notice')}
+            </Box>
 
-          <Box
-            pt={{ mobile: '5x', tablet: '15x', desktop: '25x' }}
-            pb="7x"
-            px={{ mobile: '4x', tablet: '0' }}
-          >
-            <Table header={header} isLoading={!data?.data} emptyContent={emptyContent}>
-              {data && data.data.length > 0 && (
-                <TableBody>
-                  {data.data.map((gift) => {
-                    return (
-                      <GiftItem
-                        key={gift.deepLinkCode}
-                        gift={gift}
-                        onDelete={handleDeleteGift}
-                        onEdit={handleEditGift}
-                      />
-                    );
-                  })}
-                </TableBody>
+            <Box
+              pt={{ mobile: '5x', tablet: '15x', desktop: '25x' }}
+              pb="7x"
+              px={{ mobile: '4x', tablet: '0' }}
+            >
+              <Table header={header} isLoading={!data?.data} emptyContent={emptyContent}>
+                {data && data.data.length > 0 && (
+                  <TableBody>
+                    {data.data.map((gift) => {
+                      return (
+                        <GiftItem
+                          key={gift.deepLinkCode}
+                          gift={gift}
+                          onDelete={handleDeleteGift}
+                          onEdit={handleEditGift}
+                        />
+                      );
+                    })}
+                  </TableBody>
+                )}
+              </Table>
+
+              {data && (
+                <Pagination
+                  page={params.skip / params.limit + 1}
+                  total={data.total}
+                  perPage={params.limit}
+                  onChange={handleChangePage}
+                  onChangePerPage={handleChangePerPage}
+                />
               )}
-            </Table>
-
-            {data && (
-              <Pagination
-                page={params.skip / params.limit + 1}
-                total={data.total}
-                perPage={params.limit}
-                onChange={handleChangePage}
-                onChangePerPage={handleChangePerPage}
-              />
-            )}
-          </Box>
-        </Card>
+            </Box>
+          </Card>
+        </Box>
       </Container>
 
       {deletedGift ? (
