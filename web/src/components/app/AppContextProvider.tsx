@@ -12,13 +12,13 @@ import {
 import { AppContext } from './AppContext';
 
 export const AppContextProvider: FC = ({ children }) => {
-  const notificationSubscribe = useNotificator();
   const theme = useSelector(selectCurrentColorTheme);
   const lang = useSelector(selectCurrentLanguage);
   const user = useSelector(selectUserInfo);
   const userLoggedIn = useSelector(selectUserLoggedIn);
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const dispatch = useDispatch();
+  const notificationSubscribe = useNotificator(userLoggedIn);
   const value = useMemo(
     () => ({
       theme,

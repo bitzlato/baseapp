@@ -81,6 +81,4 @@ class WebSocketTransport implements IWebSocketTransport {
   }
 }
 
-export function runNotificator(): IWebSocketTransport {
-  return new WebSocketTransport();
-}
+export const notificator = new WebSocketTransport();
