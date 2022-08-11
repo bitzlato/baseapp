@@ -298,6 +298,7 @@ module.exports = {
         marketDocs: `marketDocs@${marketDocsUrl}/marketDocs.js`,
       },
       exposes: {
+        './standaloneComponents': './src/components/standalone/standaloneComponents',
         './Header': './src/components/shared/Header/Header',
         './Footer': './src/components/shared/Footer/Footer',
         './MobileFooter': './src/components/shared/MobileFooter/MobileFooter',

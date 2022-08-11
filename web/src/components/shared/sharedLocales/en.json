@@ -259,5 +259,26 @@
   "WrongMaxLimitForNewTrader": "Limits for new trader does not match the ads limits (below the min. or above the max.)",
   "NotEnoughRatingForTermsWithDigits": "It is forbidden to enter numbers in the ad description. To enter account details, use field \"account details\"",
   "Garantee": "Security guarantee",
-  "LoginToMakeTrade": "You need to be logged in to create a deal."
+  "LoginToMakeTrade": "You need to be logged in to create a deal.",
+
+  "page.header.navbar.signIn": "Sign In",
+  "page.header.signUp": "Sign Up",
+  "page.header.navbar.profile": "My profile",
+  "page.header.navbar.logout": "Logout of your account",
+  "notifications.empty": "No notifications",
+  "notifications.title": "Notifications",
+  "notifications.unread": "Unread",
+  "notifications.read": "Read",
+  "DarkTheme": "Dark theme",
+  "P2P": "P2P Trading",
+  "AD Board": "Market",
+  "page.header.navbar.trade": "Trade",
+  "page.header.navbar.openOrders": "Orders",
+  "page.header.navbar.history": "History",
+  "page.header.navbar.quick-exchange": "Quick Exchange",
+  "Gifts": "Gifts",
+  "gifts.createGift": "Create a check",
+  "gifts.activeGifts": "Active checks",
+  "gifts.giftsHistory": "History",
+  "page.header.navbar.balances": "Balances"
 }

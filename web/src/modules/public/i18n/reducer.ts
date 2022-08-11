@@ -11,7 +11,9 @@ const defaultLanguage = {
   code: languages[0]!,
 };
 
-const detectLanguage = (): Language => {
+export const setLanguage = (lang: Language) => localStorage.setItem('lang_code', lang);
+
+export const detectLanguage = (): Language => {
   const fromLocalStorage = localStorage.getItem('lang_code');
   if (fromLocalStorage) {
     return fromLocalStorage as Language;
@@ -37,7 +39,7 @@ export const changeLanguageReducer = (
 ) => {
   switch (action.type) {
     case CHANGE_LANGUAGE:
-      localStorage.setItem('lang_code', action.payload);
+      setLanguage(action.payload as Language);
 
       return {
         lang: action.payload,
