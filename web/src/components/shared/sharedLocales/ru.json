@@ -404,5 +404,26 @@
   "Garantee": "Гарантия безопасности",
   "Balance": "Баланс",
   "LoginToMakeTrade": "Для создания сделки вам необходимо войти в аккаунт",
-  "Enter 2FA code from the app for": "Введите 2FA код из приложения для"
+  "Enter 2FA code from the app for": "Введите 2FA код из приложения для",
+
+  "page.header.navbar.signIn": "Войти",
+  "page.header.signUp": "Регистрация",
+  "page.header.navbar.profile": "Мой профиль",
+  "page.header.navbar.logout": "Выйти из аккаунта",
+  "notifications.empty": "Уведомлений нет",
+  "notifications.title": "Уведомления",
+  "notifications.unread": "Непрочитанное",
+  "notifications.read": "Прочтено",
+  "DarkTheme": "Темное оформление",
+  "P2P": "P2P",
+  "AD Board": "Маркет",
+  "page.header.navbar.trade": "Торговля",
+  "page.header.navbar.openOrders": "Ордера",
+  "page.header.navbar.history": "История",
+  "page.header.navbar.quick-exchange": "Быстрый обмен",
+  "Gifts": "Чеки",
+  "gifts.createGift": "Создать чек",
+  "gifts.activeGifts": "Активные чеки",
+  "gifts.giftsHistory": "История",
+  "page.header.navbar.balances": "Балансы"
 }
