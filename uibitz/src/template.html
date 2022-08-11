@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>UIBitz Components</title>
+    <script src="http://localhost:8080/config/env.js"></script>
+  </head>
+  <body>
+    <div id="header"></div>
+    <div>body</div>
+    <div id="footer"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        window.uibitzReady(() => {
+          console.log(`UIBitz version: ${window.uibitz.VERSION}`);
+
+          window.uibitz.renderComponent('header', document.getElementById('header'));
+          window.uibitz.renderComponent('footer', document.getElementById('footer'));
+        });
+      });
+    </script>
+  </body>
+</html>

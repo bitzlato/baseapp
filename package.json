@@ -4,7 +4,8 @@
   "workspaces": [
     "market-docs",
     "shared",
-    "web"
+    "web",
+    "uibitz"
   ],
   "engines": {
     "node": ">=16.13.1 <17"

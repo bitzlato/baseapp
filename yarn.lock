@@ -9512,6 +9512,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"external-remotes-plugin@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "external-remotes-plugin@npm:1.0.0"
+  dependencies:
+    webpack-sources: ^2.2.0
+  peerDependencies:
+    webpack: ^5
+  checksum: ac2bc6ad190ef973b4942a50deae2cbc292985e4870e51d18f0c085042d5e6025f812fe2872fcb1de4dc4a1182e9258d7c366fbaa4bbd441189a30bd5832ef72
+  languageName: node
+  linkType: hard
+
 "extglob@npm:^2.0.4":
   version: 2.0.4
   resolution: "extglob@npm:2.0.4"
@@ -19241,6 +19252,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"source-list-map@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "source-list-map@npm:2.0.1"
+  checksum: 806efc6f75e7cd31e4815e7a3aaf75a45c704871ea4075cb2eb49882c6fca28998f44fc5ac91adb6de03b2882ee6fb02f951fdc85e6a22b338c32bfe19557938
+  languageName: node
+  linkType: hard
+
 "source-map-js@npm:^0.6.2":
   version: 0.6.2
   resolution: "source-map-js@npm:0.6.2"
@@ -20914,6 +20932,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uibitz@workspace:uibitz":
+  version: 0.0.0-use.local
+  resolution: "uibitz@workspace:uibitz"
+  dependencies:
+    "@pmmmwh/react-refresh-webpack-plugin": ^0.5.4
+    "@swc/core": ^1.2.140
+    "@types/react": ^17.0.39
+    "@types/react-dom": ^17.0.11
+    core-js: ^3.21.0
+    external-remotes-plugin: ^1.0.0
+    html-webpack-plugin: ^5.5.0
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    react-refresh: ^0.11.0
+    swc-loader: ^0.1.15
+    webpack: ^5.69.0
+    webpack-cli: ^4.9.2
+    webpack-dev-server: ^4.7.4
+  languageName: unknown
+  linkType: soft
+
 "unbox-primitive@npm:^1.0.1":
   version: 1.0.1
   resolution: "unbox-primitive@npm:1.0.1"
@@ -21653,6 +21692,16 @@ __metadata:
     clone-deep: ^4.0.1
     wildcard: ^2.0.0
   checksum: 88786ab91013f1bd2a683834ff381be81c245a4b0f63304a5103e90f6653f44dab496a0768287f8531761f8ad957d1f9f3ccb2cb55df0de1bd9ee343e079da26
+  languageName: node
+  linkType: hard
+
+"webpack-sources@npm:^2.2.0":
+  version: 2.3.1
+  resolution: "webpack-sources@npm:2.3.1"
+  dependencies:
+    source-list-map: ^2.0.1
+    source-map: ^0.6.1
+  checksum: 6fd67f2274a84c5f51ad89767112ec8b47727134bf0f2ba0cff458c970f18966939a24128bdbddba621cd66eeb2bef0552642a9333cd8e54514f7b2a71776346
   languageName: node
   linkType: hard
 
