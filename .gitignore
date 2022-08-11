@@ -15,6 +15,7 @@ log/
 
 market-docs/build
 shared/build
+uibitz/build
 web/public/config/env.js
 web/build
 web/**/*.postcss.d.ts

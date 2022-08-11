@@ -17,6 +17,7 @@
     "noEmit": true,
     "skipLibCheck": true,
     "paths": {
+      "shared/standaloneComponents": ["web/src/components/standalone/standaloneComponents"],
       "shared/Header": ["web/src/components/shared/Header/Header"],
       "shared/MobileFooter": ["web/src/components/shared/MobileFooter/MobileFooter"],
       "shared/Footer": ["web/src/components/shared/Footer/Footer"],
