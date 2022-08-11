@@ -100,6 +100,7 @@ import { WalletsStatScreen } from 'web/src/screens/WalletsStat/WalletsStat';
 import { ProfileTelegramMobileScreen } from 'web/src/mobile/screens/ProfileTelegramMobileScreen';
 import { ComponentsScreen } from 'web/src/screens/docs/ComponentsScreen';
 import { TradingViewScreen } from 'web/src/screens/TradingViewScreen/TradingViewScreen';
+import { DeeplinkScreen } from 'web/src/screens/DeepLinkScreen/DeepLinkScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -330,6 +331,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     }
 
     const commonRoutes = [
+      <Route key="deeplink" exact path={['/p2p/', '/p2p']} component={DeeplinkScreen} />,
       <Route key="exchange" path="/quick-exchange" component={QuickExchange as any} />,
       <Route key="fees" path="/fees" component={FeesScreen as any} />,
       <Route
