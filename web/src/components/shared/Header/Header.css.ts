@@ -11,6 +11,7 @@ export const backButton = style(
 
 export const header = sprinkles({
   fontFamily: 'brand',
+  lineHeight: 'base',
 });
 
 globalStyle(`${header} svg`, {
