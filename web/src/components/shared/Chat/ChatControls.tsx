@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC, FormEventHandler, useState } from 'react';
+import { ChangeEventHandler, FC, FormEventHandler, KeyboardEventHandler, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { Box } from 'web/src/components/ui/Box';
@@ -23,8 +23,23 @@ export const ChatControls: FC<Props> = ({
 
   const [text, setText] = useState<string>('');
 
+  const submit = () => {
+    if (text.length > 0) {
+      onTextSend?.(text);
+      setText('');
+    }
+  };
+
   const handleTextChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     setText(event.target.value);
+  };
+
+  const handleTextKeyPress: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey && !event.ctrlKey) {
+      event.preventDefault();
+
+      submit();
+    }
   };
 
   const handleFileChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
@@ -37,10 +52,7 @@ export const ChatControls: FC<Props> = ({
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    if (text.length > 0) {
-      onTextSend?.(text);
-      setText('');
-    }
+    submit();
   };
 
   return (
@@ -64,6 +76,7 @@ export const ChatControls: FC<Props> = ({
           value={text}
           disabled={disabled}
           onChange={handleTextChange}
+          onKeyPress={handleTextKeyPress}
         />
       </Box>
 
