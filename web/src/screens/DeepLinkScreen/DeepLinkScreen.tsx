@@ -22,10 +22,10 @@ export default function generateAdvertLink({
   advert: AdvertSingleSource;
   paymethod: PaymethodSource;
 }) {
-  const chpu = `${advert.type === 'selling' ? 'buy' : 'sell'}-${advert.cryptocurrency}-${
+  const seoUrl = `${advert.type === 'selling' ? 'buy' : 'sell'}-${advert.cryptocurrency}-${
     paymethod.currency
   }-${paymethod.description}`;
-  return `p2p/exchange/${advert.id}/${chpu}`;
+  return `p2p/exchange/${advert.id}/${seoUrl}`;
 }
 
 export const DeeplinkScreen: FC = () => {
@@ -42,19 +42,13 @@ export const DeeplinkScreen: FC = () => {
     [dispatch],
   );
 
-  const redirect = useCallback((url: string) => history.push(url), [history]);
-
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const deeplinkCode = urlParams.get('start');
 
-    async function handleDeeplink() {
-      console.log('HERE', { deeplinkCode });
+    (async () => {
       if (deeplinkCode) {
-        // document.cookie = cookie.serialize('referer_id', deeplinkCode);
-
         const deeplinkResult = await activateDeeplink({ code: deeplinkCode });
-        console.log({ deeplinkResult });
 
         if (!deeplinkResult) {
           return;
@@ -69,54 +63,63 @@ export const DeeplinkScreen: FC = () => {
         }
 
         if ('action' in deeplinkResult && !deeplinkResult.action && !deeplinkResult.code) {
-          redirect(`/${lang}/p2p/`);
+          history.push(`/${lang}/p2p/`);
         }
 
-        const type = deeplinkResult.action;
+        const { action } = deeplinkResult;
         const params = deeplinkResult.params || ({} as DeeplinkResultParams);
 
-        if (params.message === 'login_for_pay_bill') {
-          redirect(`/${lang}/merch/public/invoices/${params.invoiceId}`);
-        }
+        switch (action) {
+          case DeeplinkType.ALERT: {
+            if (params.message === 'login_for_pay_bill') {
+              history.push(`/${lang}/merch/public/invoices/${params.invoiceId}`);
+            } else {
+              showAlert(params);
+            }
 
-        if (type === DeeplinkType.ALERT && params.message !== 'login_for_pay_bill') {
-          showAlert(params);
-        }
+            break;
+          }
 
-        if (type === DeeplinkType.SHOW_WITHDRAW_VOUCHER) {
-          showAlert({ message: 'showWithdrawVoucher' });
-        }
+          case DeeplinkType.SHOW_WITHDRAW_VOUCHER: {
+            showAlert({ message: 'showWithdrawVoucher' });
 
-        if (type === DeeplinkType.SHOW_ADVERT) {
-          const advert: AdvertSingleSource = await fetchWithCreds(
-            `${p2pUrl()}${user === undefined ? '/public' : ''}/exchange/dsa/${params.advertId}`,
-          );
-          const paymethod: PaymethodSource = await fetchWithCreds(
-            `${p2pUrl()}/public/refs/paymethods/${advert.paymethod}?lang=${lang}`,
-          );
-          const advertUrl = generateAdvertLink({ advert, paymethod });
-          redirect(`/${lang}/${advertUrl}`);
-        }
+            break;
+          }
 
-        if (type === DeeplinkType.SHOW_TRADE) {
-          redirect(`/${lang}/p2p/trades/${params.tradeId}`);
-        }
+          case DeeplinkType.SHOW_ADVERT: {
+            const advert: AdvertSingleSource = await fetchWithCreds(
+              `${p2pUrl()}${user === undefined ? '/public' : ''}/exchange/dsa/${params.advertId}`,
+            );
+            const paymethod: PaymethodSource = await fetchWithCreds(
+              `${p2pUrl()}/public/refs/paymethods/${advert.paymethod}?lang=${lang}`,
+            );
+            const advertUrl = generateAdvertLink({ advert, paymethod });
 
-        if (type === DeeplinkType.SHOW_BILL) {
-          redirect(`/${lang}/merch/bills/${params.billId}`);
+            history.push(`/${lang}/${advertUrl}`);
+
+            break;
+          }
+
+          case DeeplinkType.SHOW_TRADE: {
+            history.push(`/${lang}/p2p/trades/${params.tradeId}`);
+
+            break;
+          }
+
+          case DeeplinkType.SHOW_BILL: {
+            history.push(`/${lang}/merch/bills/${params.billId}`);
+
+            break;
+          }
+
+          default:
+            break;
         }
       } else {
-        console.log('deeplink not provided');
-        redirect(`/${lang}/p2p/`);
+        history.push(`/${lang}/p2p/`);
       }
-    }
-
-    handleDeeplink();
-
-    return () => {
-      console.log('unmount deeplink component');
-    };
-  }, [user, activateDeeplink, lang, showAlert, redirect, location.search]);
+    })();
+  }, [user, activateDeeplink, lang, showAlert, history, location.search]);
 
   return (
     <Container maxWidth="fullhd">
