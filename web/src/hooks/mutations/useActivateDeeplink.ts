@@ -22,8 +22,7 @@ export enum DeeplinkType {
 export type DeeplinkResult = {
   action: DeeplinkType;
   params?: DeeplinkResultParams | undefined;
-  code?: string;
-  statusCode: number;
+  code?: string | undefined;
 } & (
   | {}
   | {
