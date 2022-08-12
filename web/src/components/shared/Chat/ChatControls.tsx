@@ -35,10 +35,17 @@ export const ChatControls: FC<Props> = ({
   };
 
   const handleTextKeyPress: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
-    if (event.key === 'Enter' && !event.shiftKey && !event.ctrlKey) {
-      event.preventDefault();
+    if (event.key === 'Enter') {
+      if (!event.shiftKey && !event.ctrlKey) {
+        event.preventDefault();
 
-      submit();
+        submit();
+        return;
+      }
+
+      if (event.ctrlKey) {
+        setText(`${text}\n`);
+      }
     }
   };
 
