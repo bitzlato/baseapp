@@ -9,13 +9,22 @@ import { TextAreaInput } from './TextInputCustom';
 import * as s from './DetailsInput.css';
 
 type Props = {
-  details: string;
-  onChangeDetails: (details: string) => void;
+  inputClassName?: string | undefined;
   lastDetails: string[];
   rows?: number;
+  isError?: boolean | undefined;
+  details: string;
+  onChangeDetails: (details: string) => void;
 };
 
-export const DetailsInput: FC<Props> = ({ details, onChangeDetails, lastDetails, rows = 4 }) => {
+export const DetailsInput: FC<Props> = ({
+  inputClassName,
+  rows = 4,
+  lastDetails,
+  isError = false,
+  details,
+  onChangeDetails,
+}) => {
   const elementRef = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
   const t = useSharedT();
@@ -38,8 +47,8 @@ export const DetailsInput: FC<Props> = ({ details, onChangeDetails, lastDetails,
   return (
     <Box position="relative">
       <TextAreaInput
+        className={inputClassName}
         rows={rows}
-        onChange={onChangeDetails}
         spellCheck={false}
         maxLength={400}
         icon={
@@ -50,7 +59,9 @@ export const DetailsInput: FC<Props> = ({ details, onChangeDetails, lastDetails,
           )
         }
         placeholder={t('Details')}
+        isError={isError}
         value={details}
+        onChange={onChangeDetails}
       />
       {show && lastDetails.length > 0 && (
         <Box className={s.detailsBox} ref={elementRef} position="absolute" w="full">
