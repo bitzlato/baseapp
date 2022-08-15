@@ -316,6 +316,7 @@ module.exports = {
         './UserAdsScreen': './src/components/shared/UserAds/UserAds',
         './CreateAdScreen': './src/components/shared/CreateAd/CreateAd',
         './UserAdScreen': './src/components/shared/UserAd/UserAd',
+        './WalletsStatScreen': './src/components/shared/WalletsStat/WalletsStat',
         './fetch': './src/helpers/fetch',
         './cssVars': './src/components/shared/sharedCssVars',
         './Trade': './src/components/shared/Trade/Trade',

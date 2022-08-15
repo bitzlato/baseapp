@@ -293,5 +293,25 @@
   "userAd.empty.marketLink": "Go to market",
   "userAd.empty.title2": "to see other ads or create your own ad",
   "Num": "#",
-  "userAd.adsUpdatedToOften": "You are editing ad too often. Try in a few seconds"
+  "userAd.adsUpdatedToOften": "You are editing ad too often. Try in a few seconds",
+
+  "walletsStat.title": "Bitzlato wallets statistics",
+  "walletsStat.titleShort": "Wallets statistics",
+  "walletsStat.code": "Code",
+  "walletsStat.withdrawalFee": "Withdrawal fee",
+  "walletsStat.minDeposit": "Min deposit",
+  "walletsStat.minWithdrawal": "Min withdrawal",
+  "walletsStat.withdrawEnabled": "Withdraw enabled",
+  "walletsStat.depositEnabled": "Deposit enabled",
+  "walletsStat.withdrawalQueue": "Withdrawal queue",
+  "walletsStat.withdrawalErrors": "Withdrawal errors",
+  "Table headers": "Table headers",
+  "walletsStat.notice.code": "Cryptocurrency code",
+  "walletsStat.notice.withdrawalFee": "Withdrawal fee",
+  "walletsStat.notice.minDeposit": "Minimum deposit amount",
+  "walletsStat.notice.minWithdrawal": "Min withdraw amount",
+  "walletsStat.notice.withdrawEnabled": "Withdraw enabled",
+  "walletsStat.notice.depositEnabled": "Deposit enabled",
+  "walletsStat.notice.withdrawalQueue": "Withdrawal queue",
+  "walletsStat.notice.withdrawalErrors": "Withdrawal errors for 24 hours"
 }
