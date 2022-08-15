@@ -49,9 +49,10 @@ export const CollapsibleText: FC<Props> = ({
         )}
         <Text
           as="span"
-          whiteSpace={collapse ? 'nowrap' : 'pre-line'}
           fontSize={fontSize}
           color={textColor}
+          whiteSpace={collapse ? 'nowrap' : 'pre-line'}
+          textOverflow={collapse ? 'ellipsis' : undefined}
         >
           {text}
         </Text>
