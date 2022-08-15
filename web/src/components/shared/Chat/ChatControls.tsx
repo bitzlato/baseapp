@@ -44,7 +44,11 @@ export const ChatControls: FC<Props> = ({
       }
 
       if (event.ctrlKey) {
-        setText(`${text}\n`);
+        setText(
+          `${text.slice(0, event.currentTarget.selectionStart)}\n${text.slice(
+            event.currentTarget.selectionEnd,
+          )}`,
+        );
       }
     }
   };
