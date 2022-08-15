@@ -281,7 +281,7 @@ export const Ad: FC = () => {
       });
 
       if (trade && trade.id) {
-        history.push(`/p2p/trades/${trade.id}`);
+        history.push(`/${lang}/p2p/trades/${trade.id}`);
       }
     }
   };
