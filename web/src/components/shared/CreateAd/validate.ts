@@ -43,14 +43,25 @@ export const validateValues = <T extends Partial<CreateAdFormValues>>(
 
       return true;
     },
-    ratePercent: (value: CreateAdFormValues['ratePercent']) => {
+    ratePercent: (
+      value: CreateAdFormValues['ratePercent'],
+      values: Partial<CreateAdFormValues>,
+    ) => {
+      if (values.rateValue) {
+        return true;
+      }
+
       if (!testRequired(value)) {
         return t('createAd.errors.fill');
       }
 
       return true;
     },
-    rateValue: (value: CreateAdFormValues['rateValue']) => {
+    rateValue: (value: CreateAdFormValues['rateValue'], values: Partial<CreateAdFormValues>) => {
+      if (values.ratePercent) {
+        return true;
+      }
+
       if (!testRequired(value)) {
         return t('createAd.errors.fill');
       }

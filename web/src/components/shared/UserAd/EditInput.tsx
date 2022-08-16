@@ -12,10 +12,14 @@ import { Box } from 'web/src/components/ui/Box';
 import { Sprinkles } from 'web/src/theme/sprinkles.css';
 import * as s from './EditInput.css';
 
+const MIN_PX = 8;
+
 type SprinklesKeys = keyof Sprinkles;
 
 type InputProps = {
+  className?: string | undefined;
   prefix?: string | undefined;
+  suffix?: string | undefined;
   isError?: boolean | undefined;
   value: string;
   onChange?: ((value: string) => void) | undefined;
@@ -25,18 +29,28 @@ type Props<C extends ElementType = 'input'> = InputProps &
   Omit<ComponentProps<C>, keyof InputProps>;
 
 export const EditInput: FC<Props> = ({
+  className,
   prefix,
+  suffix,
   isError = false,
   value,
   onChange,
   ...inputProps
 }) => {
   const prefixRef = useRef<HTMLDivElement>(null);
-  const [prefixPadding, setPrefixPadding] = useState(0);
+  const suffixRef = useRef<HTMLDivElement>(null);
+  const [prefixPadding, setPrefixPadding] = useState(MIN_PX);
+  const [suffixPadding, setSuffixPadding] = useState(MIN_PX);
 
   useEffect(() => {
     if (prefixRef.current) {
       setPrefixPadding(prefixRef.current.clientWidth);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (suffixRef.current) {
+      setSuffixPadding(suffixRef.current.clientWidth);
     }
   }, []);
 
@@ -45,26 +59,42 @@ export const EditInput: FC<Props> = ({
   };
 
   return (
-    <Box className={s.container}>
-      <Box
-        ref={prefixRef}
-        className={s.prefix}
-        as="span"
-        px="1.5x"
-        fontSize="caption"
-        fontWeight="regular"
-        color="textMuted"
-      >
-        {prefix}
-      </Box>
+    <Box className={cn(s.container, className, isError ? s.inputErrorContainer : null)}>
+      {prefix ? (
+        <Box
+          ref={prefixRef}
+          className={s.prefix}
+          as="span"
+          px="1.5x"
+          fontSize="caption"
+          fontWeight="regular"
+          color="textMuted"
+        >
+          {prefix}
+        </Box>
+      ) : null}
 
       <input
-        className={cn(s.input, isError ? s.inputError : null)}
-        style={{ paddingLeft: prefixPadding }}
+        className={cn(s.input, isError ? s.inputError : null, prefix ? s.inputWithPrefix : null)}
+        style={{ paddingLeft: prefixPadding, paddingRight: suffixPadding }}
         {...inputProps}
         value={value}
         onChange={handleChange}
       />
+
+      {suffix ? (
+        <Box
+          ref={suffixRef}
+          className={s.suffix}
+          as="span"
+          px="1.5x"
+          fontSize="caption"
+          fontWeight="regular"
+          color="textMuted"
+        >
+          {suffix}
+        </Box>
+      ) : null}
     </Box>
   );
 };

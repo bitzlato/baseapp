@@ -1,8 +1,9 @@
 import { useSWRConfig } from 'swr';
+import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
-import { fetchWithCreds } from 'web/src/helpers/fetch';
+import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { CurrencyRate, CurrencyRateByParams, RateSourcesParams } from 'web/src/modules/p2p/types';
 import { useFetch } from './useFetch';
 
@@ -40,6 +41,34 @@ export const useFetchRateByParams = (
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(args),
       });
+    },
+  );
+};
+
+interface ControlledCurrencyRateByParamsInput {
+  cryptoCurrency: string | undefined;
+  currency: string | undefined;
+  percent?: string | number | undefined;
+  value?: string | number | undefined;
+}
+
+export const useControlledFetchRateByParams = () => {
+  const handleFetchError = useHandleFetchError();
+
+  return useMutation<ControlledCurrencyRateByParamsInput, CurrencyRateByParams, unknown>(
+    async ({ cryptoCurrency, ...input }) => {
+      return fetchWithCreds(`${p2pUrl()}/profile/rate-sources/${cryptoCurrency}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(input),
+      });
+    },
+    {
+      onFailure: ({ error }) => {
+        if (error instanceof FetchError) {
+          handleFetchError(error);
+        }
+      },
     },
   );
 };

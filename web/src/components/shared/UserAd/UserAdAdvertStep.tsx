@@ -4,11 +4,16 @@ import { createMoney } from 'web/src/helpers/money';
 import { UserAdvertDetails } from 'web/src/modules/p2p/types';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { Box } from 'web/src/components/ui/Box';
+import { Text } from 'web/src/components/ui/Text';
 import { parseNumeric } from 'web/src/helpers/parseNumeric';
+import { useControlledFetchRateByParams } from 'web/src/hooks/data/useFetchRate';
+import { useDebouncedCallback } from 'use-debounce';
 import { UserAdField } from './UserAdField';
 import { UserAdBlock } from './UserAdBlock';
 import { EditButton } from './EditButton';
 import { useUserAdEditContext } from './UserAdEditContext';
+import { EditInput } from './EditInput';
+import * as s from './UserAdAdvertStep.css';
 
 const STEP_KEY = 'advert';
 
@@ -29,14 +34,42 @@ export const UserAdAdvertStep: FC<Props> = ({ ad }) => {
     formErrors,
   } = useUserAdEditContext();
   const isEdit = isStepInEdit(STEP_KEY);
+  const [fetchRateByParams] = useControlledFetchRateByParams();
 
   const handleToggleEdit = () => {
     if (isEdit) {
-      resetFormValues(['rateValue', 'minAmount', 'maxAmount']);
+      resetFormValues(['rateValue', 'ratePercent', 'minAmount', 'maxAmount']);
       removeStepInEdit(STEP_KEY);
     } else {
       setStepInEdit(STEP_KEY);
     }
+  };
+
+  const debouncedCalcRatePercent = useDebouncedCallback(async (value: string) => {
+    const res = await fetchRateByParams({
+      cryptoCurrency: ad.cryptoCurrency.code,
+      currency: ad.paymethod.currency,
+      percent: value,
+    });
+
+    if (res) {
+      updateFormValues({ rateValue: res.value, ratePercent: res.percent });
+    }
+  }, 1000);
+
+  const handleRatePercentChange = async (value: string) => {
+    const nvalue = parseNumeric(value);
+    updateFormValues({ rateType: 'floating', ratePercent: nvalue });
+
+    if (nvalue && nvalue.length > 0) {
+      debouncedCalcRatePercent(nvalue);
+    } else {
+      updateFormValues({ ratePercent: null, rateValue: null });
+    }
+  };
+
+  const handleRateValueChange = async (value: string) => {
+    updateFormValues({ rateType: 'fixed', rateValue: parseNumeric(value), ratePercent: null });
   };
 
   return (
@@ -48,15 +81,37 @@ export const UserAdAdvertStep: FC<Props> = ({ ad }) => {
       <Box pt="3x">
         <UserAdField variant="text" label={t('Currency')} readOnlyValue={ad.paymethod.currency} />
         <UserAdField
-          variant="input"
+          variant="custom"
           isEdit={isEdit}
           error={formErrors?.rateValue}
           label={t('Rate')}
-          value={formValues.rateValue ?? ''}
-          readOnlyValue={
-            <AmountFormat money={createMoney(ad.rate.toString(), ad.cryptoCurrency)} />
+          value={
+            <Box display="flex" alignItems="center" justifyContent="flex-end" gap="1x">
+              <EditInput
+                className={s.percentInput}
+                suffix="%"
+                isError={Boolean(formErrors?.ratePercent)}
+                value={formValues.ratePercent ?? ''}
+                onChange={handleRatePercentChange}
+              />
+              <Box as="span" flexShrink={0} display={{ mobile: 'none', tablet: 'inline-block' }}>
+                {t('or')}
+              </Box>
+              <EditInput
+                className={s.valueInput}
+                suffix={ad.paymethod.currency}
+                isError={Boolean(formErrors?.rateValue)}
+                value={formValues.rateValue ?? ''}
+                onChange={handleRateValueChange}
+              />
+            </Box>
           }
-          onChange={(value) => updateFormValues({ rateValue: parseNumeric(value) })}
+          readOnlyValue={
+            <Text>
+              <AmountFormat money={createMoney(ad.rate.toString(), ad.cryptoCurrency)} />
+              {ad.ratePercent ? ` (${ad.ratePercent}%)` : ''}
+            </Text>
+          }
         />
         <UserAdField
           variant="rangeInput"
