@@ -1,12 +1,9 @@
 import { FC, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useT } from 'src/hooks/useT';
 import { ControlledTradingChart } from 'web/src/containers/TradingChart/ControlledTradingChart';
 import { TradingViewMarket } from 'web/src/containers/TradingChart/api';
 import { Button } from 'web/src/components/ui/Button';
 import { MarketSelectorP2P } from 'web/src/containers/MarketSelector/MarketSelectorP2P';
-import { getLinkToP2P } from 'web/src/components/Header/getLinkToP2P';
-import { selectCurrentLanguage } from 'web/src/modules/public/i18n/selectors';
 
 import s from './WelcomeBlock.postcss';
 
@@ -33,15 +30,14 @@ const MARKETS: TradingViewMarket[] = [
 
 export const TradingStatisticsP2P: FC = () => {
   const t = useT();
-  const language = useSelector(selectCurrentLanguage);
 
   const [currentMarket, setCurrentMarket] = useState(MARKETS[0]!);
 
   const p2pMarketLink = useMemo(() => {
     const [crypto, paymethod] = currentMarket.id.toLowerCase().split('_');
     const fiat = currentMarket.quote_unit.toLowerCase();
-    return `${getLinkToP2P(language)}/buy-${crypto}-${fiat}-${paymethod}`;
-  }, [currentMarket, language]);
+    return `/p2p/buy-${crypto}-${fiat}-${paymethod}`;
+  }, [currentMarket]);
 
   return (
     <div className={s.tradingStatistics}>
