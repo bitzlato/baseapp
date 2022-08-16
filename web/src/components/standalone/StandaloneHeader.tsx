@@ -6,7 +6,6 @@ import {
   USER_STATUS_AUTHORIZATION_REQUIRED,
   USER_STATUS_AUTHORIZED,
 } from 'web/src/components/shared/Header/Header';
-import { getLinkToP2P } from 'web/src/components/Header/getLinkToP2P';
 import { useFetchResourceUsersMe } from 'web/src/hooks/data/barong/useFetchResourceUsersMe';
 import { RenderLinkComponent, UserLink, UserLinks } from 'web/src/components/shared/sharedTypes';
 import { useDeleteIdentitySessions } from 'web/src/hooks/mutations/useDeleteIdentitySessions';
@@ -108,7 +107,7 @@ export const StandaloneHeader: FC<Props> = ({
     [t],
   );
 
-  const p2pURL = getLinkToP2P(language);
+  const p2pURL = '/p2p';
   const navLinks: Links = [
     {
       key: 'p2p',
@@ -239,7 +238,7 @@ export const StandaloneHeader: FC<Props> = ({
       {
         key: 'telegram',
         type: 'external',
-        to: `/${language}/profile/telegram`,
+        to: '/profile/telegram',
         icon: 'telegram',
         children: t('Telegram'),
       },

@@ -21,7 +21,6 @@ import {
 import { MarketSelector } from 'web/src/containers/MarketSelector/MarketSelector';
 import { HeaderToolbar } from 'web/src/containers/HeaderToolbar/HeaderToolbar';
 import { useT } from 'web/src/hooks/useT';
-import { getLinkToP2P } from 'web/src/components/Header/getLinkToP2P';
 import {
   RenderLinkComponent,
   RenderNavLinkComponent,
@@ -68,7 +67,7 @@ const Header: FC = () => {
   const { pathname } = useLocation();
   const history = useHistory();
   const isTradingPage = pathname.endsWith('/trading') || pathname.includes('/trading/');
-  const p2pURL = getLinkToP2P(language);
+  const p2pURL = '/p2p';
   const merchantClient = (user.bitzlato_user?.roles ?? []).includes('merchantClient');
 
   const translate = useCallback(
@@ -186,7 +185,7 @@ const Header: FC = () => {
     const userLinks = [
       {
         key: 'telegram',
-        type: 'external',
+        type: 'internal',
         to: '/profile/telegram',
         icon: 'telegram',
         children: t('Telegram'),
@@ -265,26 +264,26 @@ const Header: FC = () => {
       key: 'p2p',
       type: 'tab',
       link: {
-        type: 'external',
+        type: 'internal',
         to: p2pURL,
       },
       children: t('P2P'),
       tabs: [
         {
           key: 'Ad board',
-          type: 'external',
+          type: 'internal',
           to: p2pURL,
           children: t('AD Board'),
         },
         {
           key: 'My adverts',
-          type: 'external',
+          type: 'internal',
           to: `${p2pURL}/adverts`,
           children: t('My adverts'),
         },
         {
           key: 'My trades',
-          type: 'external',
+          type: 'internal',
           to: `${p2pURL}/trades`,
           children: t('My trades'),
         },
