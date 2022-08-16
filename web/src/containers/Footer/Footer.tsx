@@ -8,7 +8,6 @@ import {
 } from 'web/src/modules';
 import { Footer as SharedFooter } from 'web/src/components/shared/Footer/Footer';
 import { MobileFooter as SharedMobileFooter } from 'web/src/components/shared/MobileFooter/MobileFooter';
-import { getLinkToP2P } from 'web/src/components/Header/getLinkToP2P';
 import {
   BottomTabLink,
   RenderLinkComponent,
@@ -21,7 +20,6 @@ export const Footer: FC = () => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const language = useSelector(selectCurrentLanguage);
   const theme = useSelector(selectCurrentColorTheme);
-  const p2pURL = getLinkToP2P(language);
 
   const BOTTOM_TABS: BottomTabLink[] = [
     {
@@ -56,8 +54,8 @@ export const Footer: FC = () => {
       title: t('bottomTabs.balances'),
     },
     {
-      to: p2pURL,
-      type: 'external',
+      to: '/p2p',
+      type: 'internal',
       icon: 'p2p',
       title: t('bottomTabs.p2p'),
     },
