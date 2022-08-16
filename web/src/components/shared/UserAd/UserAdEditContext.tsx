@@ -12,11 +12,14 @@ import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import { UserAdvertDetails } from 'web/src/modules/p2p/types';
 import { validateValues } from 'web/src/components/shared/CreateAd/validate';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
+import { RateType } from 'web/src/components/shared/UserAds/ChooseRate';
 
 export type EditableSteps = 'advert' | 'additional' | 'requisites' | 'terms';
 
 export type EditAdFormValues = {
+  rateType?: RateType | null | undefined;
   rateValue: string | null;
+  ratePercent: string | null;
   maxLimitForNewTrader: string | null;
   minAmount: string | null;
   maxAmount: string | null;
@@ -60,7 +63,9 @@ export const UserAdEditContextProvider: FC<Props> = ({ ad, children }) => {
   const { t } = useAdapterContext();
   const initialValues: EditAdFormValues = useMemo(
     () => ({
+      rateType: ad.ratePercent ? 'floating' : 'fixed',
       rateValue: ad.rateValue,
+      ratePercent: ad.ratePercent,
       minAmount: ad.minAmount,
       maxAmount: ad.maxAmount,
       verifiedOnly: !!ad.verifiedOnly,
@@ -73,7 +78,9 @@ export const UserAdEditContextProvider: FC<Props> = ({ ad, children }) => {
     }),
     [ad],
   );
-  const formKeys = Object.keys(initialValues) as Array<keyof EditAdFormValues>;
+  const formKeys = Object.keys(initialValues).filter((key) => key !== 'rateType') as Array<
+    keyof Omit<EditAdFormValues, 'rateType'>
+  >;
   const [formValues, setFormValues] = useStateWithDeps<EditAdFormValues>(
     () => initialValues,
     [initialValues],

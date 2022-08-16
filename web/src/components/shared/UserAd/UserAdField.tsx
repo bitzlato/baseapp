@@ -133,6 +133,7 @@ export const UserAdField: FC<Props> = ({
   return (
     <Box className={s.container} mb={{ mobile: '2x', tablet: '0' }}>
       <Box
+        className={s.label}
         as={Text}
         flexShrink={1}
         my={{ mobile: '1x', tablet: '1.5x' }}

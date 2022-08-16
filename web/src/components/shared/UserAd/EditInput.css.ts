@@ -1,11 +1,27 @@
 import { style } from '@vanilla-extract/css';
 import { sprinkles } from 'web/src/theme/sprinkles.css';
-import { vars } from 'web/src/theme/vars.css';
+import { responsiveStyle } from 'web/src/theme/themeUtils';
+import { radiiVars, vars } from 'web/src/theme/vars.css';
 
-export const container = style({
-  position: 'relative',
-  width: 90,
-});
+export const container = style([
+  {
+    position: 'relative',
+    borderRadius: radiiVars['1x'],
+    backgroundColor: vars.colors.userAdEditInputBg,
+  },
+  responsiveStyle({
+    mobile: {
+      width: '100%',
+      flexGrow: 1,
+      maxWidth: '50%',
+    },
+    tablet: {
+      width: 110,
+      flexGrow: 0,
+      maxWidth: '100%',
+    },
+  }),
+]);
 
 export const input = style([
   sprinkles({
@@ -17,13 +33,14 @@ export const input = style([
     borderBottomWidth: '1x',
     borderBottomStyle: 'solid',
     borderBottomColor: 'transparent',
-    borderRadius: '1x',
     fontSize: 'small',
+    fontFamily: 'brand',
     color: 'text',
-    backgroundColor: 'userAdEditInputBg',
-    textAlign: 'right',
+    backgroundColor: 'transparent',
   }),
   {
+    position: 'relative',
+    zIndex: 2,
     width: '100%',
     height: 22,
     outlineOffset: '-1px',
@@ -37,6 +54,15 @@ export const input = style([
   },
 ]);
 
+export const inputWithPrefix = sprinkles({
+  textAlign: 'right',
+});
+
+export const inputErrorContainer = style({
+  borderBottomLeftRadius: 0,
+  borderBottomRightRadius: 0,
+});
+
 export const inputError = style({
   borderBottomLeftRadius: 0,
   borderBottomRightRadius: 0,
@@ -47,7 +73,8 @@ export const textarea = style([
   {
     width: '100%',
     height: 'auto',
-    textAlign: 'left',
+    borderRadius: radiiVars['1x'],
+    backgroundColor: vars.colors.userAdEditInputBg,
   },
   sprinkles({
     py: '2x',
@@ -59,4 +86,13 @@ export const prefix = style({
   top: '50%',
   left: '1px',
   transform: 'translateY(-50%)',
+  zIndex: 1,
+});
+
+export const suffix = style({
+  position: 'absolute',
+  top: '50%',
+  right: '1px',
+  transform: 'translateY(-50%)',
+  zIndex: 1,
 });

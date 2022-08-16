@@ -22,7 +22,19 @@ const updateUserAd = async ({ id, values }: UpdateUserAdInput): Promise<UserAdve
   } else {
     data = { ...values };
 
-    if (values.individual || values.details === null || values.details.length === 0) {
+    if (data.rateType) {
+      if (data.rateType === 'fixed') {
+        data.ratePercent = null;
+      }
+
+      if (data.rateType === 'floating') {
+        data.rateValue = null;
+      }
+
+      delete data.rateType;
+    }
+
+    if (data.individual || data.details === null || data.details.length === 0) {
       data.details = null;
     }
   }

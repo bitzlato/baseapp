@@ -16,6 +16,17 @@ export const container = style(
   }),
 );
 
+export const label = style(
+  responsiveStyle({
+    mobile: {
+      maxWidth: '70%',
+    },
+    tablet: {
+      maxWidth: '100%',
+    },
+  }),
+);
+
 export const value = style([
   {
     maxWidth: '100%',
