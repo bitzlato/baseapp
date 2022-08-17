@@ -12,7 +12,7 @@ import { TraderIcons } from 'web/src/components/traderInfo/TraderIcons';
 export const TradePartnerShort: FC = () => {
   const { trade, handleTrustUser } = useTradeContext();
   const { t } = useTradeContext();
-  const { isMobileDevice, lang } = useAppContext();
+  const { isMobileDevice } = useAppContext();
   const { Link } = useAdapterContext();
 
   const trustUser = () => {
@@ -41,7 +41,7 @@ export const TradePartnerShort: FC = () => {
           <Box display="flex" alignItems="center" gap="2x">
             <Box
               as={Link}
-              to={getLinkToP2PUser({ lang, userName: trade.partner.name })}
+              to={getLinkToP2PUser({ userName: trade.partner.name })}
               color={{ default: 'adTrader', hover: 'adTrader' }}
               display="block"
               textOverflow="ellipsis"
@@ -72,7 +72,7 @@ export const TradePartnerShort: FC = () => {
         <Box display="flex" alignItems="center" gap="2x">
           <Box
             as={Link}
-            to={getLinkToP2PUser({ lang, userName: trade.partner.name })}
+            to={getLinkToP2PUser({ userName: trade.partner.name })}
             color={{ default: 'adTrader', hover: 'adTrader' }}
             display="block"
             textOverflow="ellipsis"

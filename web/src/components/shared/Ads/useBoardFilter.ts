@@ -9,7 +9,6 @@ import {
 import { AdvertParams, AdvertType, SeoAdvertType } from 'web/src/modules/p2p/types';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { P2PCryptoCurrencySource } from 'web/src/modules/p2p/wallet-types';
-import { Language } from 'web/src/types';
 import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
 import { useP2PSetLastFilter } from 'web/src/hooks/mutations/useP2PSetLastFilter';
 import { pick } from 'web/src/helpers/pick';
@@ -62,7 +61,6 @@ const getFilterPathParams = (filter?: string): FilterPathParams | undefined => {
 };
 
 const generateFilterParamsUrl = (
-  lang: Language,
   type: AdvertType,
   cryptocurrency: string,
   currency: string,
@@ -72,7 +70,7 @@ const generateFilterParamsUrl = (
   const maybePaymethodSlug = paymethodSlug ? `-${paymethodSlug}` : '';
 
   return (
-    `/${lang}/p2p/${adTypeToSeo[type]}-${cryptocurrency}-${currency}${maybePaymethodSlug}`.toLowerCase() +
+    `/p2p/${adTypeToSeo[type]}-${cryptocurrency}-${currency}${maybePaymethodSlug}`.toLowerCase() +
     query
   );
 };
@@ -194,7 +192,6 @@ export const useBoardFilter = ({
       if (upd.type || upd.cryptocurrency || upd.currency || paymethod) {
         history.push(
           generateFilterParamsUrl(
-            lang,
             upd.type ?? filterParams.type,
             upd.cryptocurrency ?? filterParams.cryptocurrency,
             upd.currency ?? filterParams.currency,
@@ -203,7 +200,7 @@ export const useBoardFilter = ({
         );
       }
     },
-    [filterParams, history, lang, paymethods, setLatsFilter, user],
+    [filterParams, history, paymethods, setLatsFilter, user],
   );
 
   // Set default filter or sync paymethod slug with location
@@ -217,7 +214,6 @@ export const useBoardFilter = ({
 
     history.replace(
       generateFilterParamsUrl(
-        lang,
         filterParams.type,
         filterParams.cryptocurrency,
         filterParams.currency,

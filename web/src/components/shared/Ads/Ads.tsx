@@ -39,12 +39,12 @@ interface AdExchangeConfirm {
 
 const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
   const { t, history } = useAdapterContext();
-  const { isMobileDevice, lang, handleFetchError, user } = useAppContext();
+  const { isMobileDevice, handleFetchError, user } = useAppContext();
   const [active, setActive] = useState(false);
   const [confirm, setConfirm] = useState<AdExchangeConfirm | undefined>(undefined);
 
   const isBuy = ad.type === 'selling';
-  const to = `/${lang}/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${ad.cryptoCurrency.code}-${
+  const to = `/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${ad.cryptoCurrency.code}-${
     ad.currency.code
   }-${ad.paymethod.name}`;
 
@@ -125,7 +125,7 @@ export const Ads: FC<Props> = ({
   onRefresh,
 }) => {
   const { t, Link } = useAdapterContext();
-  const { isMobileDevice, user, lang } = useAppContext();
+  const { isMobileDevice, user } = useAppContext();
 
   const buttonRefresh = (
     <Button variant="text" color="clarified" size="small" onClick={onRefresh}>
@@ -159,11 +159,11 @@ export const Ads: FC<Props> = ({
         <Text variant={isMobileDevice ? 'title' : 'body'}>{t('ad.empty')}</Text>
       </Box>
       {user ? (
-        <Button as={Link} to={`/${lang}/p2p/adverts/create`}>
+        <Button as={Link} to="/p2p/adverts/create">
           {t('Create advert')}
         </Button>
       ) : (
-        <Button as="a" href={`/signin?back=/${lang}/p2p/adverts/create`}>
+        <Button as="a" href="/signin?back=/p2p/adverts/create">
           {t('Create advert')}
         </Button>
       )}
@@ -180,7 +180,7 @@ export const Ads: FC<Props> = ({
                 <Box display="flex" mb="2x" alignItems="center">
                   <Box
                     as={Link}
-                    to={getLinkToP2PUser({ lang, userName: ad.owner })}
+                    to={getLinkToP2PUser({ userName: ad.owner })}
                     color={{ default: 'adTrader', hover: 'adTrader' }}
                     display="block"
                     mr="2x"
@@ -214,7 +214,7 @@ export const Ads: FC<Props> = ({
               user?.bitzlato_user?.user_profile.generated_name;
             const actionButton =
               ad.owner === publicName ? (
-                <Button as={Link} to={`/${lang}/p2p/adverts/${ad.id}`} fullWidth={isMobileDevice}>
+                <Button as={Link} to={`/p2p/adverts/${ad.id}`} fullWidth={isMobileDevice}>
                   {t('Edit')}
                 </Button>
               ) : (
