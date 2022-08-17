@@ -376,69 +376,65 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         path="/trading-view/:symbol?"
         component={TradingViewScreen}
       />,
-      ...(process.env.REACT_APP_RELEASE_STAGE === 'development'
-        ? [
-            <Route
-              key="AdScreen"
-              path={[
-                '/p2p/exchange/(buy|sell)/:id',
-                '/:lang/p2p/exchange/(buy|sell)/:id',
-                '/p2p/exchange/:id/*',
-                '/:lang/p2p/exchange/:id/*',
-              ]}
-              component={AdScreen}
-            />,
-            <Route
-              key="TraderScreen"
-              path={['/p2p/users/:name', '/:lang/p2p/users/:name']}
-              component={TraderScreen}
-            />,
-            <PrivateRoute
-              key="TradeScreen"
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path={['/p2p/trades/:tradeId', '/:lang/p2p/trades/:tradeId']}
-              component={TradeScreen}
-            />,
-            <PrivateRoute
-              key="TradesScreen"
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path={['/p2p/trades/', '/:lang/p2p/trades/']}
-              component={TradesScreen}
-              exact
-            />,
-            <PrivateRoute
-              key="UserAdsScreen"
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path={['/p2p/adverts/', '/:lang/p2p/adverts/']}
-              component={UserAdsScreen}
-              exact
-            />,
-            <PrivateRoute
-              key="CreateAdScreen"
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path={['/p2p/adverts/create', '/:lang/p2p/adverts/create']}
-              component={CreateAdScreen}
-              exact
-            />,
-            <PrivateRoute
-              key="UserAdScreen"
-              loading={userLoading}
-              isLogged={isLoggedIn}
-              path={['/p2p/adverts/:advertId', '/:lang/p2p/adverts/:advertId']}
-              component={UserAdScreen}
-              exact
-            />,
-            <Route
-              key="BoardScreen"
-              path={['/p2p/:filter?', '/:lang/p2p/:filter?']}
-              component={BoardScreen}
-            />,
-          ]
-        : []),
+      <Route
+        key="AdScreen"
+        path={[
+          '/p2p/exchange/(buy|sell)/:id',
+          '/:lang/p2p/exchange/(buy|sell)/:id',
+          '/p2p/exchange/:id/*',
+          '/:lang/p2p/exchange/:id/*',
+        ]}
+        component={AdScreen}
+      />,
+      <Route
+        key="TraderScreen"
+        path={['/p2p/users/:name', '/:lang/p2p/users/:name']}
+        component={TraderScreen}
+      />,
+      <PrivateRoute
+        key="TradeScreen"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        path={['/p2p/trades/:tradeId', '/:lang/p2p/trades/:tradeId']}
+        component={TradeScreen}
+      />,
+      <PrivateRoute
+        key="TradesScreen"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        path={['/p2p/trades/', '/:lang/p2p/trades/']}
+        component={TradesScreen}
+        exact
+      />,
+      <PrivateRoute
+        key="UserAdsScreen"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        path={['/p2p/adverts/', '/:lang/p2p/adverts/']}
+        component={UserAdsScreen}
+        exact
+      />,
+      <PrivateRoute
+        key="CreateAdScreen"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        path={['/p2p/adverts/create', '/:lang/p2p/adverts/create']}
+        component={CreateAdScreen}
+        exact
+      />,
+      <PrivateRoute
+        key="UserAdScreen"
+        loading={userLoading}
+        isLogged={isLoggedIn}
+        path={['/p2p/adverts/:advertId', '/:lang/p2p/adverts/:advertId']}
+        component={UserAdScreen}
+        exact
+      />,
+      <Route
+        key="BoardScreen"
+        path={['/p2p/:filter?', '/:lang/p2p/:filter?']}
+        component={BoardScreen}
+      />,
       // and default fallback
       <Route key="catchall" path="**">
         <Redirect to="/trading/" />
