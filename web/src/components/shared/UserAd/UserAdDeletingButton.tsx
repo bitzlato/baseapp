@@ -26,7 +26,7 @@ export const UserAdDeletingButton: FC<Props> = ({ adId }) => {
 
   const handleDeleteSubmit = async () => {
     await deleteUserAd({ id: adId });
-    history.push(`/${lang}/p2p/adverts/`);
+    history.push('/p2p/adverts/');
   };
 
   return (

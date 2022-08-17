@@ -32,7 +32,7 @@ export const UserAdsList: FC<Props> = ({
   isRefreshing = false,
   onRefresh,
 }) => {
-  const { isMobileDevice, lang } = useAppContext();
+  const { isMobileDevice } = useAppContext();
   const { t, Link } = useAdapterContext();
 
   const isEmpty = !data || data.length === 0;
@@ -85,7 +85,7 @@ export const UserAdsList: FC<Props> = ({
           <span>{t('userAds.empty2')}</span>
         </Box>
       </Box>
-      <Button as={Link} to={`/${lang}/p2p/adverts/create`}>
+      <Button as={Link} to="/p2p/adverts/create">
         {t('Create advert')}
       </Button>
     </Box>

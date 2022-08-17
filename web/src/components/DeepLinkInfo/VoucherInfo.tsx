@@ -8,13 +8,7 @@ import { Spinner } from 'web/src/components/ui/Spinner';
 import { p2pUrl } from 'web/src/api';
 import { FetchError, fetchJson } from 'web/src/helpers/fetch';
 import { useT } from 'web/src/hooks/useT';
-import {
-  RootState,
-  selectCurrentLanguage,
-  selectUserFetching,
-  selectUserInfo,
-  selectUserLoggedIn,
-} from 'web/src/modules';
+import { RootState, selectUserFetching, selectUserInfo, selectUserLoggedIn } from 'web/src/modules';
 import { DeepLinkInfoType, DeeplinkPayloadVoucher } from './types';
 
 interface Props {
@@ -62,14 +56,11 @@ const InfoBubble = ({ children }: { children: ReactNode }) => {
 
 export const VoucherInfo: FC<Props> = ({ deeplink }) => {
   const t = useT();
-  const { currentLanguageCode, isAuthorized, isCheckingAuth, user } = useSelector(
-    (state: RootState) => ({
-      currentLanguageCode: selectCurrentLanguage(state),
-      isCheckingAuth: selectUserFetching(state),
-      isAuthorized: selectUserLoggedIn(state),
-      user: selectUserInfo(state),
-    }),
-  );
+  const { isAuthorized, isCheckingAuth, user } = useSelector((state: RootState) => ({
+    isCheckingAuth: selectUserFetching(state),
+    isAuthorized: selectUserLoggedIn(state),
+    user: selectUserInfo(state),
+  }));
   const history = useHistory();
   const payload = deeplink.payload as DeeplinkPayloadVoucher;
 
@@ -80,11 +71,7 @@ export const VoucherInfo: FC<Props> = ({ deeplink }) => {
       <strong>{`(${payload.converted_amount} ${payload.currency})`}</strong>
     ),
     user: (
-      <a
-        href={`/${currentLanguageCode}/p2p/users/${payload.user.profile_name}`}
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a href={`/p2p/users/${payload.user.profile_name}`} target="_blank" rel="noreferrer">
         {payload.user.profile_name}
       </a>
     ),

@@ -1,7 +1,6 @@
 import { Box } from 'web/src/components/ui/Box';
 import { Container } from 'web/src/components/ui/Container';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
-import { useAppContext } from 'web/src/components/app/AppContext';
 import { Breadcrumbs, BreadcrumbsItem } from 'web/src/components/ui/Breadcrumbs';
 import { Card, CardHeader } from 'web/src/components/ui/Card';
 import { CreateAdForm } from './CreateAdForm';
@@ -12,13 +11,12 @@ import * as s from './CreateAd.css';
 
 export const CreateAd = () => {
   const { t } = useAdapterContext();
-  const { lang } = useAppContext();
 
   return (
     <Container maxWidth="fullhd">
       <Box display={{ mobile: 'none', tablet: 'block' }} px="8x">
         <Breadcrumbs>
-          <BreadcrumbsItem to={`/${lang}/p2p/adverts`}>{t('My adverts')}</BreadcrumbsItem>
+          <BreadcrumbsItem to="/p2p/adverts">{t('My adverts')}</BreadcrumbsItem>
           <BreadcrumbsItem>{t('Create advert')}</BreadcrumbsItem>
         </Breadcrumbs>
       </Box>

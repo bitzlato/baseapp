@@ -33,7 +33,7 @@ const TAB_SALE = 'sale' as const;
 type Tab = typeof TAB_ALL | typeof TAB_PURCHASE | typeof TAB_SALE;
 
 export const TraderAds: FC<Props> = ({ data, isLoading }) => {
-  const { isMobileDevice, user, lang } = useAppContext();
+  const { isMobileDevice, user } = useAppContext();
   const { t, Link } = useAdapterContext();
   const [tab, setTab] = useState<Tab>(TAB_ALL);
   const [isOnlyActive, setIsOnlyActive] = useState(false);
@@ -146,7 +146,7 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
             let actionButton;
             if (ad.owner === publicName) {
               actionButton = (
-                <Button as={Link} to={`/${lang}/p2p/adverts/${ad.id}`} fullWidth={isMobileDevice}>
+                <Button as={Link} to={`/p2p/adverts/${ad.id}`} fullWidth={isMobileDevice}>
                   {t('Edit')}
                 </Button>
               );
@@ -156,9 +156,9 @@ export const TraderAds: FC<Props> = ({ data, isLoading }) => {
               actionButton = ad.available ? (
                 <Button
                   as={Link}
-                  to={`/${lang}/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${
-                    ad.cryptoCurrency.code
-                  }-${ad.currency.code}-${ad.paymethod.description}`}
+                  to={`/p2p/exchange/${ad.id}/${isBuy ? 'buy' : 'sell'}-${ad.cryptoCurrency.code}-${
+                    ad.currency.code
+                  }-${ad.paymethod.description}`}
                   fullWidth={isMobileDevice}
                 >
                   {actionLabel}
