@@ -149,7 +149,7 @@ export const Trader: FC = () => {
     <Container maxWidth="fullhd">
       <Box px="8x">
         <Breadcrumbs>
-          <BreadcrumbsItem to={`/${lang}/p2p`}>{t('Market')}</BreadcrumbsItem>
+          <BreadcrumbsItem to="/p2p">{t('Market')}</BreadcrumbsItem>
           <BreadcrumbsItem>
             {t('Trader profile')} {params.name}
           </BreadcrumbsItem>

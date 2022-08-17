@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useAppContext } from 'web/src/components/app/AppContext';
 import { TraderIcons } from 'web/src/components/traderInfo/TraderIcons';
 import { Box } from 'web/src/components/ui/Box';
 import { OnlineStatusByLastActivity } from 'web/src/components/ui/OnlineStatus';
@@ -13,14 +12,13 @@ type Props = {
 
 export const AdTrader: FC<Props> = ({ trader }) => {
   const { Link } = useAdapterContext();
-  const { lang } = useAppContext();
 
   return (
     <Box>
       <Box display="flex" alignItems="center" gap="2x">
         <Box
           as={Link}
-          to={getLinkToP2PUser({ lang, userName: trader.name })}
+          to={getLinkToP2PUser({ userName: trader.name })}
           color={{ default: 'adTrader', hover: 'adTrader' }}
           display="block"
           textOverflow="ellipsis"

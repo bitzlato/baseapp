@@ -98,13 +98,13 @@ export const UserAds: FC = () => {
     handleCloseCreatedAdModal();
 
     if (adId) {
-      history.push(`/${lang}/p2p/adverts/${adId}`);
+      history.push(`/p2p/adverts/${adId}`);
     }
   };
 
   const handleGoToCreateAnotherAd = () => {
     handleCloseCreatedAdModal();
-    history.push(`/${lang}/p2p/adverts/create`);
+    history.push('/p2p/adverts/create');
   };
 
   const ads = (
@@ -129,7 +129,7 @@ export const UserAds: FC = () => {
         {isMobileDevice ? null : (
           <Box px="8x">
             <Breadcrumbs>
-              <BreadcrumbsItem to={`/${lang}/p2p`}>{t('Market')}</BreadcrumbsItem>
+              <BreadcrumbsItem to="/p2p">{t('Market')}</BreadcrumbsItem>
               <BreadcrumbsItem>{t('My adverts')}</BreadcrumbsItem>
             </Breadcrumbs>
           </Box>
@@ -162,7 +162,7 @@ export const UserAds: FC = () => {
             {isAdsEmpty ? (
               <Box />
             ) : (
-              <Button as={Link} to={`/${lang}/p2p/adverts/create`} data-gtm-click="create_advert">
+              <Button as={Link} to="/p2p/adverts/create" data-gtm-click="create_advert">
                 {t('Create advert')}
               </Button>
             )}
@@ -250,7 +250,7 @@ export const UserAds: FC = () => {
                     cryptoCurrency={filterParams.cryptocurrency}
                     currencyList={currencyList}
                   />
-                  <Button as={Link} to={`/${lang}/p2p/adverts/create`}>
+                  <Button as={Link} to="/p2p/adverts/create">
                     {t('Create advert')}
                   </Button>
                 </Box>

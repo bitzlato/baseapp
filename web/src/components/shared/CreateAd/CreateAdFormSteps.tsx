@@ -59,7 +59,7 @@ export const CreateAdFormSteps = () => {
       };
 
       const ad = await createAd(filteredFormValues);
-      history.push(`/${lang}/p2p/adverts/`, { createdAdId: ad?.id });
+      history.push('/p2p/adverts/', { createdAdId: ad?.id });
     } catch (error) {
       if (error instanceof FetchError) {
         switch (error.payload.code) {

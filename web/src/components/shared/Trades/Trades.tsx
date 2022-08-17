@@ -162,7 +162,7 @@ export const Trades: FC = () => {
       {isMobileDevice ? null : (
         <Box px="8x">
           <Breadcrumbs>
-            <BreadcrumbsItem to={`/${lang}/p2p`}>{t('Market')}</BreadcrumbsItem>
+            <BreadcrumbsItem to="/p2p">{t('Market')}</BreadcrumbsItem>
             <BreadcrumbsItem>{t('My trades')}</BreadcrumbsItem>
           </Breadcrumbs>
         </Box>
