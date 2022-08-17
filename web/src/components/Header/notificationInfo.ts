@@ -18,7 +18,7 @@ export function notificationInfo(
 ): NotificationModalNotification {
   const { createdAt } = item;
 
-  const P2P_URL = `/${lang}/p2p`;
+  const P2P_URL = `/p2p`;
   const MERCH_URL = `/${lang}/merch`;
 
   const t = (key: string, args?: any) => translate(`notifications.${key}`, { ...args });

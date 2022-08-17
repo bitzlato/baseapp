@@ -48,7 +48,7 @@ export const UserAdsListItem: FC<Props> = ({ ad }) => {
   };
 
   const handleAdClick = () => {
-    history.push(`/${lang}/p2p/adverts/${ad.id}`);
+    history.push(`/p2p/adverts/${ad.id}`);
   };
 
   const handleUpdateStatus = async () => {
