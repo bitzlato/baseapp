@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { IconButton } from 'web/src/components/IconButton/IconButton';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { useOnClickOutside } from 'web/src/hooks/useOnClickOutside';
+import { MAX_AD_DETAILS_LENGTH } from 'web/src/components/shared/CreateAd/StepTerms';
 import { TextAreaInput } from './TextInputCustom';
 import * as s from './DetailsInput.css';
 
@@ -50,7 +51,7 @@ export const DetailsInput: FC<Props> = ({
         className={inputClassName}
         rows={rows}
         spellCheck={false}
-        maxLength={400}
+        maxLength={MAX_AD_DETAILS_LENGTH}
         icon={
           lastDetails.length > 0 && (
             <IconButton onClick={toggleOptions}>

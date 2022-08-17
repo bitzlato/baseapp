@@ -12,7 +12,7 @@ import { StepSubmitRow } from './StepSubmitRow';
 type FieldKeys = 'terms' | 'details';
 
 export const MAX_AD_TERMS_LENGTH = 3000;
-export const MAX_AD_DETAILS_LENGTH = 700;
+export const MAX_AD_DETAILS_LENGTH = 50;
 const DEFAULT_ROWS = 6;
 
 interface Props {

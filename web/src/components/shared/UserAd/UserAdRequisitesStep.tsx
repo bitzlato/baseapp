@@ -5,7 +5,6 @@ import { UserAdvertDetails } from 'web/src/modules/p2p/types';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { useFetchLastRequisites } from 'web/src/hooks/data/useFetchTrade';
 import { DetailsInput } from 'web/src/components/TextInputCustom/DetailsInput';
-import { CollapsibleText } from 'web/src/components/shared/CollapsibleText/CollapsibleText';
 import { UserAdBlock } from './UserAdBlock';
 import { UserAdField } from './UserAdField';
 import { EditCheckbox } from './EditCheckbox';
@@ -57,6 +56,7 @@ export const UserAdRequisitesStep: FC<Props> = ({ ad }) => {
               error={formErrors?.details}
               value={
                 <DetailsInput
+                  rows={2}
                   inputClassName={s.textareaInput}
                   lastDetails={lastDetails}
                   isError={Boolean(formErrors?.details)}
@@ -65,7 +65,9 @@ export const UserAdRequisitesStep: FC<Props> = ({ ad }) => {
                 />
               }
               readOnlyValue={
-                <CollapsibleText text={ad.details ?? ''} textColor="textMuted" fontSize="small" />
+                <Text variant="body" color="textMuted">
+                  {ad.details ?? ''}
+                </Text>
               }
             />
           </Box>
