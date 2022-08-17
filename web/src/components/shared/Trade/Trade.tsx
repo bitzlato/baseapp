@@ -328,8 +328,8 @@ export const SharedTrade: FC = () => {
           <>
             <Box px="8x">
               <Breadcrumbs>
-                <BreadcrumbsItem to={`/${lang}/p2p`}>{t('Market')}</BreadcrumbsItem>
-                <BreadcrumbsItem to={`/${lang}/p2p/trades`}>{t('My trades')}</BreadcrumbsItem>
+                <BreadcrumbsItem to="/p2p">{t('Market')}</BreadcrumbsItem>
+                <BreadcrumbsItem to="/p2p/trades">{t('My trades')}</BreadcrumbsItem>
                 <BreadcrumbsItem>{trade.id}</BreadcrumbsItem>
               </Breadcrumbs>
             </Box>

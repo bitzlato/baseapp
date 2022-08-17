@@ -115,7 +115,7 @@ export const TradesListItem = ({ trade }: Props) => {
   const partner = (
     <Box
       as={Link}
-      to={getLinkToP2PUser({ lang, userName: trade.partner })}
+      to={getLinkToP2PUser({ userName: trade.partner })}
       className={s.partner}
       color={{ default: 'text', hover: 'tradeLinkHover' }}
       textDecoration="underline"
@@ -163,7 +163,7 @@ export const TradesListItem = ({ trade }: Props) => {
   const statusColumn = invoice || detailedStatus;
 
   const handleTradeClick = () => {
-    history.push(`/${lang}/p2p/trades/${trade.id}`);
+    history.push(`/p2p/trades/${trade.id}`);
   };
 
   return isMobileDevice ? (

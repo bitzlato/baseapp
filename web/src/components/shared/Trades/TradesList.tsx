@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const TradesList: FC<Props> = ({ data, isLoading = false }) => {
-  const { isMobileDevice, lang } = useAppContext();
+  const { isMobileDevice } = useAppContext();
   const { t, Link } = useAdapterContext();
 
   const header = isMobileDevice ? null : (
@@ -39,7 +39,7 @@ export const TradesList: FC<Props> = ({ data, isLoading = false }) => {
       <Box mb="6x">
         <Text variant={isMobileDevice ? 'title' : 'body'}>{t('trades.empty')}</Text>
       </Box>
-      <Button as={Link} to={`/${lang}/p2p/`}>
+      <Button as={Link} to="/p2p">
         {t('Find an offer')}
       </Button>
     </Box>
