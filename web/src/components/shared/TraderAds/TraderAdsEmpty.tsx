@@ -7,14 +7,14 @@ import { useAdapterContext } from 'web/src/components/shared/Adapter';
 
 export const TraderAdsEmpty: FC = () => {
   const { t, Link } = useAdapterContext();
-  const { isMobileDevice, lang } = useAppContext();
+  const { isMobileDevice } = useAppContext();
 
   return (
     <Box textAlign="center" py="20x" px="4x">
       <Box mb="6x">
         <Text variant={isMobileDevice ? 'title' : 'body'}>{t('traderAds.empty')}</Text>
       </Box>
-      <Button as={Link} to={`/${lang}/p2p/`}>
+      <Button as={Link} to="/p2p">
         {t('Go to')}
       </Button>
     </Box>

@@ -27,8 +27,8 @@ export const UserAd: FC = () => {
   const breadcrumbs = isMobileDevice ? null : (
     <Box px="2x">
       <Breadcrumbs>
-        <BreadcrumbsItem to={`/${lang}/p2p`}>{t('Market')}</BreadcrumbsItem>
-        <BreadcrumbsItem to={`/${lang}/p2p/adverts`}>{t('My adverts')}</BreadcrumbsItem>
+        <BreadcrumbsItem to="/p2p">{t('Market')}</BreadcrumbsItem>
+        <BreadcrumbsItem to="/p2p/adverts">{t('My adverts')}</BreadcrumbsItem>
         <BreadcrumbsItem>
           {t('Num')} {advertId}
         </BreadcrumbsItem>
@@ -97,14 +97,14 @@ export const UserAd: FC = () => {
             <Box className={s.emptyContainer} textAlign="center">
               <Text>{t('userAd.empty.title')}</Text>
               <Text>
-                <Link className={s.emptyLink} to={`/${lang}/p2p`}>
+                <Link className={s.emptyLink} to="/p2p">
                   {t('userAd.empty.marketLink')}
                 </Link>{' '}
                 {t('userAd.empty.title2')}
               </Text>
 
               <Box mt="6x">
-                <Button as={Link} to={`/${lang}/p2p/adverts/create`}>
+                <Button as={Link} to="/p2p/adverts/create">
                   {t('Create advert')}
                 </Button>
               </Box>

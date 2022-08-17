@@ -13,12 +13,12 @@ import { AppContextProvider } from 'web/src/components/app/AppContextProvider';
 const browserHistory = createBrowserHistory();
 const store = createStore(rootReducer);
 
-const locale = 'en';
+const lang = 'en';
 
 export const TestComponentWrapper: React.FC = ({ children }) => {
   return (
     <Router history={browserHistory}>
-      <IntlProvider {...{ locale }} defaultLocale={locale} messages={languageMap[locale]}>
+      <IntlProvider {...{ locale: lang }} defaultLocale={lang} messages={languageMap[lang]}>
         <Provider store={store}>
           <AppContextProvider>{children}</AppContextProvider>
         </Provider>

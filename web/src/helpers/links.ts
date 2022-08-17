@@ -1,14 +1,14 @@
 type Product = 'p2p' | 'payment-gateway' | 'cryptoloan' | 'exchange';
-export const getProductLink = (locale: string, product: Product) => {
+export const getProductLink = (lang: string, product: Product) => {
   switch (product) {
     case 'exchange':
       return '/trading';
 
     case 'p2p':
-      return `/${locale}/p2p`;
+      return `/p2p`;
 
     default:
-      return `https://bitzlato.com/${locale}/${product}`; // external
+      return `https://bitzlato.com/${lang}/${product}`; // external
   }
 };
 
@@ -17,15 +17,15 @@ const faqLinks: Record<string, string> = {
   ru: 'https://bitzlato.com/ru/faq_category/exchange-en-2/',
 };
 
-export const getBitzlatoLink = (locale: string, section: string) => {
+export const getBitzlatoLink = (lang: string, section: string) => {
   switch (section) {
     case 'wallets_stat/':
-      return `/${locale}/${section}`;
+      return `/${section}`;
 
     case 'faq':
-      return faqLinks[locale] ?? faqLinks.en; // external
+      return faqLinks[lang] ?? faqLinks.en; // external
 
     default:
-      return `https://bitzlato.com/${locale === 'en' ? '' : `${locale}/`}${section}`; // external
+      return `https://bitzlato.com/${lang === 'en' ? '' : `${lang}/`}${section}`; // external
   }
 };

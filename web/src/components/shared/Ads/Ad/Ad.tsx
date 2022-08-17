@@ -281,7 +281,7 @@ export const Ad: FC = () => {
       });
 
       if (trade && trade.id) {
-        history.push(`/${lang}/p2p/trades/${trade.id}`);
+        history.push(`/p2p/trades/${trade.id}`);
       }
     }
   };
@@ -509,7 +509,7 @@ export const Ad: FC = () => {
   return (
     <Container maxWidth="xl">
       <Breadcrumbs>
-        <BreadcrumbsItem to={`/${lang}/p2p`}>{t('Market')}</BreadcrumbsItem>
+        <BreadcrumbsItem to="/p2p">{t('Market')}</BreadcrumbsItem>
         <BreadcrumbsItem>
           {advert.type === AdsType.purchase ? t('Purchase') : t('Selling')}
         </BreadcrumbsItem>
