@@ -73,6 +73,11 @@ export const Footer: FC = () => {
       renderNavLinkComponent={renderNavLinkComponent}
     />
   ) : (
-    <SharedFooter theme={theme} language={language} renderMarketLink={renderLinkComponent} />
+    <SharedFooter
+      logoURL={window.env.logoDarkUrl}
+      theme={theme}
+      language={language}
+      renderMarketLink={renderLinkComponent}
+    />
   );
 };

@@ -12,6 +12,7 @@ const sizes = {
   md: 550,
   lg: 960,
   xl: 1160,
+  xxl: 1440,
   fullhd: 1920,
 } as const;
 export type Sizes = keyof typeof sizes;

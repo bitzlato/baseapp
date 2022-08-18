@@ -544,6 +544,7 @@ const Main: FC = () => {
 
       <Heading level={1}>Footer:</Heading>
       <Footer
+        logoURL={window.env.logoDarkUrl}
         theme={theme}
         language={language}
         renderMarketLink={({ key, className, to, children }) => {
