@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { useT, strong } from 'web/src/hooks/useT';
 import { Box } from 'web/src/components/ui/Box';
-import { getBitzlatoLink } from 'web/src/helpers/links';
 import { selectCurrentLanguage } from 'web/src/modules';
 import { useSelector } from 'react-redux';
 import { Spinner } from 'web/src/components/ui/Spinner';
@@ -15,7 +14,9 @@ interface Props {
 export const FreezeAccountContent: FC<Props> = ({ status }) => {
   const t = useT();
   const currentLanguage = useSelector(selectCurrentLanguage);
-  const supportLink = getBitzlatoLink(currentLanguage, 'knowledgebase/');
+  const supportLink = `https://bitzlato.com${
+    currentLanguage === 'ru' ? '/ru/knowledgebase/' : '/knowledgebase/'
+  }`;
 
   if (status === 'running') {
     return (
