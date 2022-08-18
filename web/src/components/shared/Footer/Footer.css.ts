@@ -1,8 +1,44 @@
+import { style } from '@vanilla-extract/css';
 import { sprinkles } from 'web/src/theme/sprinkles.css';
+import { responsiveStyle } from 'web/src/theme/themeUtils';
+import { sizeVars } from 'web/src/theme/vars.css';
 
 export const footer = sprinkles({
   fontFamily: 'brand',
+  bg: 'footerBg',
 });
+
+export const leftColumn = style(
+  responsiveStyle({
+    tablet: {
+      width: 'auto',
+      marginRight: sizeVars['4x'],
+      marginLeft: sizeVars['2x'],
+    },
+    desktop: {
+      width: 242,
+      marginRight: 0,
+      marginLeft: 0,
+    },
+  }),
+);
+
+export const rightColumn = style(
+  responsiveStyle({
+    mobile: {
+      marginLeft: '0',
+    },
+    tablet: {
+      width: 'auto',
+      marginRight: sizeVars['2x'],
+      marginLeft: 'auto',
+    },
+    desktop: {
+      width: 226,
+      marginRight: 0,
+    },
+  }),
+);
 
 export const link = sprinkles({
   color: {
@@ -24,3 +60,39 @@ export const socialNetwork = sprinkles({
   },
   size: '7x',
 });
+
+export const copyright = style(
+  responsiveStyle({
+    mobile: {
+      order: 3,
+    },
+    tablet: {
+      order: 1,
+    },
+  }),
+);
+export const socialNetworks = style(
+  responsiveStyle({
+    mobile: {
+      order: 1,
+      padding: `${sizeVars['4x']} 0 ${sizeVars['8x']}`,
+    },
+    tablet: {
+      order: 2,
+      padding: 0,
+    },
+  }),
+);
+
+export const apps = style(
+  responsiveStyle({
+    mobile: {
+      order: 2,
+      paddingBottom: sizeVars['6x'],
+    },
+    tablet: {
+      order: 3,
+      paddingBottom: 0,
+    },
+  }),
+);

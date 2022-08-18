@@ -9,5 +9,10 @@ interface Props extends StandaloneComponentProps {}
 const renderLink: RenderLinkComponent = ({ to, ...props }) => <a href={to} {...props} />;
 
 export const StandaloneFooter: FC<Props> = ({ theme, language }) => (
-  <Footer theme={theme} language={language} renderMarketLink={renderLink} />
+  <Footer
+    logoURL={window.env.logoDarkUrl}
+    theme={theme}
+    language={language}
+    renderMarketLink={renderLink}
+  />
 );
