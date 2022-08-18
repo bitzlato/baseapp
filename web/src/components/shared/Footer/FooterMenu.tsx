@@ -26,7 +26,7 @@ export const FooterMenu: FC<Props> = ({ t, language, renderMarketLink }) => {
         active={active === FooterMenuSections.TRADING}
         onTitleClick={handleClick}
       >
-        <FooterMenuLink to={`/${language}/p2p/`}>{t('P2P Trading')}</FooterMenuLink>
+        <FooterMenuLink to="/p2p">{t('P2P Trading')}</FooterMenuLink>
         <FooterMenuLink to="/trading" renderMarketLink={renderMarketLink}>
           {t('Exchange')}
         </FooterMenuLink>
@@ -34,7 +34,7 @@ export const FooterMenu: FC<Props> = ({ t, language, renderMarketLink }) => {
           {t('Quick Exchange')}
         </FooterMenuLink>
         <FooterMenuLink to={`/${language}/price`}>{t('Fees')}</FooterMenuLink>
-        <FooterMenuLink to={`/${language}/wallets_stat/`}>{t('Wallets Statistics')}</FooterMenuLink>
+        <FooterMenuLink to="/wallets_stat">{t('Wallets Statistics')}</FooterMenuLink>
       </FooterMenuSection>
 
       <FooterMenuSection
