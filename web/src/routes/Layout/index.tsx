@@ -98,6 +98,7 @@ import { HistoryGiftsScreen } from 'web/src/screens/GiftsScreen/HistoryGiftsScre
 import { UserAdScreen } from 'web/src/screens/p2p/UserAdScreen';
 import { WalletsStatScreen } from 'web/src/screens/WalletsStat/WalletsStat';
 import { ProfileTelegramMobileScreen } from 'web/src/mobile/screens/ProfileTelegramMobileScreen';
+import { ComponentsScreen } from 'web/src/screens/docs/ComponentsScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -593,6 +594,10 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/accounts/password_reset"
             component={ResetPasswordScreen}
           />
+          {process.env.REACT_APP_RELEASE_STAGE === 'b' ||
+            (process.env.REACT_APP_RELEASE_STAGE === 'development' && (
+              <Route path="/docs/components" component={ComponentsScreen} />
+            ))}
           <Route path="/docs" component={DocumentationScreen as any} />
           <Route path="/restriction" component={RestrictedScreen as any} />
           <Route path="/maintenance" component={MaintenanceScreen as any} />
