@@ -1,10 +1,10 @@
+import { Component, ComponentType, FC, useEffect } from 'react';
 import classnames from 'classnames';
-import * as React from 'react';
 import { Spinner } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
-import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
-import { Route, RouteComponentProps, RouterProps, Switch } from 'react-router';
-import { Redirect, useLocation, withRouter } from 'react-router-dom';
+import { connect, MapDispatchToProps, MapStateToProps, useDispatch } from 'react-redux';
+import { Route, RouteComponentProps, RouteProps, RouterProps, Switch } from 'react-router';
+import { Redirect, useLocation, useParams, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { FeesScreen } from 'src/screens/Fees/Fees';
 import type { IntlProps } from 'src/types';
@@ -13,9 +13,9 @@ import { VerifyEmailModal } from 'src/screens/VerifyEmail/VerifyEmail';
 import { WalletMobileScreen } from 'src/mobile/screens/SelectedWalletScreen/WalletMobileScreen';
 import { WalletsMobileScreen } from 'src/mobile/screens/WalletsScreen/WalletsMobileScreen';
 import { ProfileScreen } from 'web/src/screens/ProfileScreen/ProfileScreen';
-import { minutesUntilAutoLogout, sessionCheckInterval, showLanding, wizardStep } from '../../api';
-import { WalletsFetch } from '../../containers';
-import { toggleColorTheme } from '../../helpers';
+import { minutesUntilAutoLogout, sessionCheckInterval, showLanding, wizardStep } from 'web/src/api';
+import { WalletsFetch } from 'web/src/containers';
+import { toggleColorTheme } from 'web/src/helpers';
 import {
   ConfirmMobileScreen,
   LandingScreenMobile,
@@ -27,7 +27,7 @@ import {
   ProfileMobileScreen,
   ProfileThemeMobileScreen,
   TradingScreenMobile,
-} from '../../mobile/screens';
+} from 'web/src/mobile/screens';
 import {
   logoutFetch,
   Market,
@@ -48,7 +48,8 @@ import {
   selectVerifyEmail,
   selectUserNeedVerification,
   selectUserFreezed,
-} from '../../modules';
+  changeLanguage,
+} from 'web/src/modules';
 import {
   ConfirmScreen,
   DeepLinkPreview,
@@ -62,7 +63,7 @@ import {
   TradingScreen,
   QuickExchange,
   LandingScreen,
-} from '../../screens';
+} from 'web/src/screens';
 import { ProfileTwoFactorAuthScreen } from 'web/src/screens/ProfileTwoFactorAuthScreen/ProfileTwoFactorAuthScreen';
 import { ProfileSettingsMobileScreen } from 'web/src/mobile/screens/ProfileSettingsMobileScreen/ProfileSettingsMobileScreen';
 import { SignInAuth0 } from 'web/src/screens/SignInScreen/SignInAuth0';
@@ -141,11 +142,17 @@ const renderLoader = () => (
 
 const STORE_KEY = 'lastAction';
 
-// tslint:disable-next-line no-any
-const PrivateRoute: React.FunctionComponent<any> = ({
+interface CustomRouteProps extends Omit<RouteProps, 'component'> {
+  component?: ComponentType<RouteComponentProps<any>> | ComponentType<any> | undefined;
+  loading?: boolean | undefined;
+  isLogged?: boolean | undefined;
+}
+
+const PrivateRoute: FC<CustomRouteProps> = ({
   component: CustomComponent,
   loading,
   isLogged,
+  render,
   ...rest
 }) => {
   const { pathname } = useLocation();
@@ -153,10 +160,12 @@ const PrivateRoute: React.FunctionComponent<any> = ({
   if (loading) {
     return renderLoader();
   }
-  const renderCustomerComponent = (props: RouteComponentProps) => <CustomComponent {...props} />;
+
+  const renderCustomerComponent = (props: RouteComponentProps) =>
+    CustomComponent ? <CustomComponent {...props} /> : null;
 
   if (isLogged) {
-    return <Route {...rest} render={renderCustomerComponent} />;
+    return <Route {...rest} render={render || renderCustomerComponent} />;
   }
 
   return (
@@ -166,11 +175,11 @@ const PrivateRoute: React.FunctionComponent<any> = ({
   );
 };
 
-// tslint:disable-next-line no-any
-const PublicRoute: React.FunctionComponent<any> = ({
+const PublicRoute: FC<CustomRouteProps> = ({
   component: CustomComponent,
   loading,
   isLogged,
+  render,
   ...rest
 }) => {
   if (loading) {
@@ -185,12 +194,36 @@ const PublicRoute: React.FunctionComponent<any> = ({
     );
   }
 
-  const renderCustomerComponent = (props: RouteComponentProps) => <CustomComponent {...props} />;
+  const renderCustomerComponent = (props: RouteComponentProps) =>
+    CustomComponent ? <CustomComponent {...props} /> : null;
 
-  return <Route {...rest} render={renderCustomerComponent} />;
+  return <Route {...rest} render={render || renderCustomerComponent} />;
 };
 
-class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
+const LangHandler: FC = ({ children }) => {
+  const dispatch = useDispatch();
+  const { lang } = useParams<{ lang?: string }>();
+
+  useEffect(() => {
+    if (lang) {
+      dispatch(changeLanguage(lang));
+    }
+  }, []);
+
+  return <>{children}</>;
+};
+
+const RouteWithLang: FC<
+  CustomRouteProps & { RouteComponent?: typeof Route | FC<CustomRouteProps> | undefined }
+> = ({ component: CustomComponent, RouteComponent = Route, ...rest }) => {
+  const renderCustomerComponent = (props: RouteComponentProps) => (
+    <LangHandler>{CustomComponent ? <CustomComponent {...props} /> : null}</LangHandler>
+  );
+
+  return <RouteComponent {...rest} render={renderCustomerComponent} />;
+};
+
+class LayoutComponent extends Component<LayoutProps, LayoutState> {
   public static eventsListen = [
     'click',
     'keydown',
@@ -331,11 +364,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     const commonRoutes = [
       <Route key="exchange" path="/quick-exchange" component={QuickExchange as any} />,
       <Route key="fees" path="/fees" component={FeesScreen as any} />,
-      <Route
-        key="wallets-stat"
-        path={['/wallets_stat', '/:lang/wallets_stat']}
-        component={WalletsStatScreen}
-      />,
       <PrivateRoute
         key="deeplink"
         exact
@@ -370,7 +398,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
       />,
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
 
-      <Route
+      <RouteWithLang
+        key="wallets-stat"
+        path={['/wallets_stat', '/:lang/wallets_stat']}
+        component={WalletsStatScreen}
+      />,
+      <RouteWithLang
         key="AdScreen"
         path={[
           '/p2p/exchange/(buy|sell)/:id',
@@ -380,51 +413,56 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         ]}
         component={AdScreen}
       />,
-      <Route
+      <RouteWithLang
         key="TraderScreen"
         path={['/p2p/users/:name', '/:lang/p2p/users/:name']}
         component={TraderScreen}
       />,
-      <PrivateRoute
+      <RouteWithLang
         key="TradeScreen"
+        RouteComponent={PrivateRoute}
         loading={userLoading}
         isLogged={isLoggedIn}
         path={['/p2p/trades/:tradeId', '/:lang/p2p/trades/:tradeId']}
         component={TradeScreen}
       />,
-      <PrivateRoute
+      <RouteWithLang
         key="TradesScreen"
+        RouteComponent={PrivateRoute}
         loading={userLoading}
         isLogged={isLoggedIn}
         path={['/p2p/trades/', '/:lang/p2p/trades/']}
         component={TradesScreen}
         exact
       />,
-      <PrivateRoute
+      <RouteWithLang
         key="UserAdsScreen"
+        RouteComponent={PrivateRoute}
         loading={userLoading}
         isLogged={isLoggedIn}
         path={['/p2p/adverts/', '/:lang/p2p/adverts/']}
         component={UserAdsScreen}
         exact
       />,
-      <PrivateRoute
+      <RouteWithLang
         key="CreateAdScreen"
+        RouteComponent={PrivateRoute}
         loading={userLoading}
         isLogged={isLoggedIn}
         path={['/p2p/adverts/create', '/:lang/p2p/adverts/create']}
         component={CreateAdScreen}
         exact
       />,
-      <PrivateRoute
+      <RouteWithLang
         key="UserAdScreen"
+        RouteComponent={PrivateRoute}
         loading={userLoading}
         isLogged={isLoggedIn}
         path={['/p2p/adverts/:advertId', '/:lang/p2p/adverts/:advertId']}
         component={UserAdScreen}
         exact
       />,
-      <Route
+      <RouteWithLang
         key="BoardScreen"
         path={['/p2p/:filter?', '/:lang/p2p/:filter?']}
         component={BoardScreen}
