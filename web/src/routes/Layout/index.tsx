@@ -594,10 +594,10 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
             path="/accounts/password_reset"
             component={ResetPasswordScreen}
           />
-          {process.env.REACT_APP_RELEASE_STAGE === 'b' ||
-            (process.env.REACT_APP_RELEASE_STAGE === 'development' && (
-              <Route path="/docs/components" component={ComponentsScreen} />
-            ))}
+          {(process.env.REACT_APP_RELEASE_STAGE === 's5' ||
+            process.env.REACT_APP_RELEASE_STAGE === 'development') && (
+            <Route path="/docs/components" component={ComponentsScreen} />
+          )}
           <Route path="/docs" component={DocumentationScreen as any} />
           <Route path="/restriction" component={RestrictedScreen as any} />
           <Route path="/maintenance" component={MaintenanceScreen as any} />

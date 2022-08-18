@@ -27,7 +27,6 @@ const extractSemver = (text) => {
 
   return `v${version}`;
 };
-
 const isDevelopment = process.env.NODE_ENV === 'development';
 const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
 const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
