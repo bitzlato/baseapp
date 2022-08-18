@@ -11,6 +11,7 @@ import { P2PCryptoCurrencySource } from 'web/src/modules/p2p/wallet-types';
 import { useFetchP2PLastFilter } from 'web/src/hooks/data/useFetchP2PLastFilter';
 import { P2PFiatCurrencies } from 'web/src/types/currencies.types';
 import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/p2p/useFetchP2PCryptoCurrencies';
+import { useHandleDeeplink } from 'web/src/hooks/useHandleDeeplink';
 import { Ads } from './Ads';
 import { Filter, FilterMobile } from './Filter';
 import { useBoardFilter } from './useBoardFilter';
@@ -106,12 +107,14 @@ export const Board: FC = () => {
   const fiatCurrenciesValue = useP2PFiatCurrencies();
   const cryptoCurrenciesValue = useFetchP2PCryptoCurrencies();
   const lastFilterValue = useFetchP2PLastFilter();
+  const deeplinkLoading = useHandleDeeplink();
 
   return (
     <Container maxWidth="fullhd">
-      {fiatCurrenciesValue.fiatCurrencies === undefined ||
+      {deeplinkLoading ||
+      fiatCurrenciesValue.fiatCurrencies === undefined ||
       cryptoCurrenciesValue.data === undefined ||
-      (lastFilterValue.data === undefined && user) ? (
+      (lastFilterValue.data === undefined && user !== undefined) ? (
         <Box display="flex" justifyContent="center" py="20x" width="full">
           <Spinner />
         </Box>
