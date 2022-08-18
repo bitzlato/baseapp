@@ -22,7 +22,7 @@ export default function generateAdvertLink({
   const seoUrl = `${advert.type === 'selling' ? 'buy' : 'sell'}-${advert.cryptocurrency}-${
     paymethod.currency
   }-${paymethod.description}`;
-  return `p2p/exchange/${advert.id}/${seoUrl}`;
+  return `/p2p/exchange/${advert.id}/${seoUrl}`;
 }
 
 export const useHandleDeeplink = () => {
@@ -61,7 +61,7 @@ export const useHandleDeeplink = () => {
         }
 
         if ('action' in deeplinkResult && !deeplinkResult.action && !deeplinkResult.code) {
-          history.push(`/${lang}/p2p/`);
+          history.push('/p2p');
         }
 
         const { action } = deeplinkResult;
@@ -91,15 +91,14 @@ export const useHandleDeeplink = () => {
             const paymethod: PaymethodSource = await fetchWithCreds(
               `${p2pUrl()}/public/refs/paymethods/${advert.paymethod}?lang=${lang}`,
             );
-            const advertUrl = generateAdvertLink({ advert, paymethod });
 
-            history.push(`/${lang}/${advertUrl}`);
+            history.push(generateAdvertLink({ advert, paymethod }));
 
             break;
           }
 
           case DeeplinkType.SHOW_TRADE: {
-            history.push(`/${lang}/p2p/trades/${params.tradeId}`);
+            history.push(`/p2p/trades/${params.tradeId}`);
 
             break;
           }
