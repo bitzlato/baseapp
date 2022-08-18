@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { alertPush, selectCurrentLanguage } from 'web/src/modules';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,9 +11,6 @@ import {
 import { AdvertSingleSource, PaymethodSource } from 'web/src/modules/p2p/types';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { useUser } from 'web/src/components/app/AppContext';
-import { Spinner } from 'web/src/components/ui/Spinner';
-import { Container } from 'web/src/components/ui/Container';
-import { Box } from 'web/src/components/ui/Box';
 
 export default function generateAdvertLink({
   advert,
@@ -28,13 +25,14 @@ export default function generateAdvertLink({
   return `p2p/exchange/${advert.id}/${seoUrl}`;
 }
 
-export const DeeplinkScreen: FC = () => {
+export const useHandleDeeplink = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
   const user = useUser();
   const lang = useSelector(selectCurrentLanguage);
   const [activateDeeplink] = useActivateDeeplink();
+  const [loading, setLoading] = useState(true);
 
   const showAlert = useCallback(
     (params: { message: string }) =>
@@ -115,17 +113,11 @@ export const DeeplinkScreen: FC = () => {
           default:
             break;
         }
-      } else {
-        history.push(`/${lang}/p2p/`);
       }
+
+      setLoading(false);
     })();
   }, [user, activateDeeplink, lang, showAlert, history, location.search]);
 
-  return (
-    <Container maxWidth="fullhd">
-      <Box display="flex" alignItems="center" justifyContent="center" my="15x" py="15x">
-        <Spinner />
-      </Box>
-    </Container>
-  );
+  return loading;
 };
