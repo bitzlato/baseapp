@@ -368,7 +368,25 @@ const Header: FC = () => {
   ];
 
   const renderLinkComponent: RenderLinkComponent = (props) => <Link {...props} />;
-  const renderNavLinkComponent: RenderNavLinkComponent = (props) => <NavLink {...props} />;
+  const renderNavLinkComponent: RenderNavLinkComponent = (props) => (
+    <NavLink
+      isActive={(match, location) => {
+        if (!match) {
+          return false;
+        }
+
+        const partsOfLocation = location.pathname.split('/');
+
+        if (match.url === p2pURL && partsOfLocation.includes('p2p')) {
+          const [seoType] = location.pathname.split('-') ?? [];
+          return Boolean(seoType?.endsWith('buy') || seoType?.endsWith('purchase'));
+        }
+
+        return match.isExact;
+      }}
+      {...props}
+    />
+  );
 
   return (
     <>
