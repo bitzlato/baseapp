@@ -58,7 +58,7 @@ export const UserAdAdvertStep: FC<Props> = ({ ad }) => {
   }, 1000);
 
   const handleRatePercentChange = async (value: string) => {
-    const nvalue = parseNumeric(value);
+    const nvalue = parseNumeric(value, { allowNegativeNumeric: true });
     updateFormValues({ rateType: 'floating', ratePercent: nvalue });
 
     if (nvalue && nvalue.length > 0) {
