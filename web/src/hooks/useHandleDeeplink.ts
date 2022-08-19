@@ -35,8 +35,13 @@ export const useHandleDeeplink = () => {
   const [loading, setLoading] = useState(true);
 
   const showAlert = useCallback(
-    (params: { message: string }) =>
-      dispatch(alertPush({ type: 'info', message: [params.message] })),
+    (params: { message: string }) => {
+      if (!params.message) {
+        return;
+      }
+
+      dispatch(alertPush({ type: 'info', message: [params.message] }));
+    },
     [dispatch],
   );
 
@@ -72,7 +77,7 @@ export const useHandleDeeplink = () => {
             if (params.message === 'login_for_pay_bill') {
               history.push(`/${lang}/merch/public/invoices/${params.invoiceId}`);
             } else {
-              showAlert(params);
+              showAlert({ message: params.message });
             }
 
             break;
