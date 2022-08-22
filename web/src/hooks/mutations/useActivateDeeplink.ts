@@ -1,7 +1,7 @@
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
-import { useHandleFetchError, useUser } from 'web/src/components/app/AppContext';
-import { fetchJson, FetchError } from 'web/src/helpers/fetch';
+import { useUser } from 'web/src/components/app/AppContext';
+import { fetchJson } from 'web/src/helpers/fetch';
 
 export type DeeplinkResultParams = {
   message: string;
@@ -49,14 +49,8 @@ const activateDeeplink =
 
 export const useActivateDeeplink = () => {
   const user = useUser();
-  const handleFetchError = useHandleFetchError();
 
   return useMutation<Input, DeeplinkResult>(activateDeeplink(user !== undefined), {
-    throwOnFailure: false,
-    onFailure: ({ error }) => {
-      if (error instanceof FetchError) {
-        handleFetchError(error);
-      }
-    },
+    throwOnFailure: true,
   });
 };
