@@ -1,12 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import {
-  alertPush,
-  selectCurrentLanguage,
-  selectUserFetching,
-  selectUserInfo,
-} from 'web/src/modules';
-import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentLanguage, selectUserFetching, selectUserInfo } from 'web/src/modules';
+import { useSelector } from 'react-redux';
 import { p2pUrl } from 'web/src/api';
 import {
   DeeplinkResultParams,
@@ -14,7 +9,8 @@ import {
   useActivateDeeplink,
 } from 'web/src/hooks/mutations/useActivateDeeplink';
 import { AdvertSingleSource, PaymethodSource } from 'web/src/modules/p2p/types';
-import { fetchWithCreds } from 'web/src/helpers/fetch';
+import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
+import { useDeeplinkAlertContext } from 'web/src/containers/DeeplinkAlert/DeeplinkAlertContext';
 
 export default function generateAdvertLink({
   advert,
@@ -30,25 +26,25 @@ export default function generateAdvertLink({
 }
 
 export const useHandleDeeplink = () => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
   const user = useSelector(selectUserInfo);
   const userFetching = useSelector(selectUserFetching);
   const lang = useSelector(selectCurrentLanguage);
+  const { setAlert } = useDeeplinkAlertContext();
   const [activateDeeplink] = useActivateDeeplink();
   const [loading, setLoading] = useState(true);
 
   const showAlert = useCallback(
-    (params: { message: string }) => {
-      if (!params.message) {
-        return;
-      }
-
-      dispatch(alertPush({ type: 'info', message: [params.message] }));
+    (message: string | null | undefined) => {
+      setAlert(message ?? null);
     },
-    [dispatch],
+    [setAlert],
   );
+
+  const redirectExternal = (to: string) => {
+    window.location.replace(to);
+  };
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -60,7 +56,14 @@ export const useHandleDeeplink = () => {
           return;
         }
 
-        const deeplinkResult = await activateDeeplink({ code: deeplinkCode });
+        let deeplinkResult;
+        try {
+          deeplinkResult = await activateDeeplink({ code: deeplinkCode });
+        } catch (error) {
+          if (error instanceof FetchError) {
+            deeplinkResult = error;
+          }
+        }
 
         if (!deeplinkResult) {
           history.push('/p2p');
@@ -69,14 +72,18 @@ export const useHandleDeeplink = () => {
 
         if (deeplinkResult.code) {
           if ('message' in deeplinkResult) {
-            showAlert({ message: deeplinkResult.message });
+            showAlert(deeplinkResult.message);
           } else {
-            showAlert({ message: deeplinkResult.code });
+            showAlert(deeplinkResult.code);
           }
         }
 
-        if ('action' in deeplinkResult && !deeplinkResult.action && !deeplinkResult.code) {
+        if (
+          deeplinkResult instanceof FetchError ||
+          ('action' in deeplinkResult && !deeplinkResult.action && !deeplinkResult.code)
+        ) {
           history.push('/p2p');
+          return;
         }
 
         const { action } = deeplinkResult;
@@ -85,33 +92,41 @@ export const useHandleDeeplink = () => {
         switch (action) {
           case DeeplinkType.ALERT: {
             if (params.message === 'login_for_pay_bill') {
-              history.push(`/${lang}/merch/public/invoices/${params.invoiceId}`);
+              redirectExternal(`/${lang}/merch/public/invoices/${params.invoiceId}`);
             } else {
-              showAlert({ message: params.message });
+              showAlert(params.message);
             }
 
             break;
           }
 
           case DeeplinkType.SHOW_WITHDRAW_VOUCHER: {
-            showAlert({ message: 'showWithdrawVoucher' });
+            showAlert('showWithdrawVoucher');
 
             break;
           }
 
           case DeeplinkType.SHOW_ADVERT: {
-            const advert: AdvertSingleSource = await fetchWithCreds(
-              `${p2pUrl()}${user === undefined ? '/public' : ''}/exchange/dsa/${params.advertId}`,
-            );
-            const paymethod: PaymethodSource = await fetchWithCreds(
-              `${p2pUrl()}/public/refs/paymethods/${advert.paymethod}?lang=${lang}`,
-            );
+            try {
+              const advert: AdvertSingleSource = await fetchWithCreds(
+                `${p2pUrl()}${user === undefined ? '/public' : ''}/exchange/dsa/${params.advertId}`,
+              );
+              const paymethod: PaymethodSource = await fetchWithCreds(
+                `${p2pUrl()}/public/refs/paymethods/${advert.paymethod}?lang=${lang}`,
+              );
 
-            history.push(generateAdvertLink({ advert, paymethod }));
+              history.push(generateAdvertLink({ advert, paymethod }));
+            } catch (error) {
+              if (error instanceof FetchError) {
+                showAlert(error.message);
+                history.push('/p2p');
+              }
+            }
 
             break;
           }
 
+          // May be unused
           case DeeplinkType.SHOW_TRADE: {
             history.push(`/p2p/trades/${params.tradeId}`);
 
@@ -119,16 +134,15 @@ export const useHandleDeeplink = () => {
           }
 
           case DeeplinkType.SHOW_BILL: {
-            history.push(`/${lang}/merch/bills/${params.billId}`);
+            redirectExternal(`/${lang}/merch/bills/${params.billId}`);
 
             break;
           }
 
           default:
+            history.push('/p2p');
             break;
         }
-
-        history.push('/p2p');
       }
 
       setLoading(false);
