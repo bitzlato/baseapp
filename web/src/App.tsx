@@ -15,6 +15,8 @@ import { selectCurrentColorTheme, selectCurrentLanguage, selectMobileDeviceState
 import { languageMap } from './translations';
 import { ErrorBoundary } from './containers/ErrorBoundary/ErrorBoundary';
 import { lazyRetry } from './helpers/lazyRetry';
+import { DeeplinkAlertProvider } from './containers/DeeplinkAlert/DeeplinkAlertContext';
+import { DeeplinkAlertModal } from './containers/DeeplinkAlert/DeeplinkAlertModal';
 
 const gaKey = gaTrackerKey();
 const browserHistory = createBrowserHistory();
@@ -52,6 +54,7 @@ const RenderDeviceContainers = () => {
     body = (
       <div className={className}>
         <Header />
+        <DeeplinkAlertModal />
         <AlertsContainer />
         <LayoutContainer />
         <FooterContainer />
@@ -61,6 +64,7 @@ const RenderDeviceContainers = () => {
     body = (
       <div className={cn('pg-mobile-app', className)}>
         <Header />
+        <DeeplinkAlertModal />
         <AlertsContainer />
         <LayoutContainer />
         <FooterContainer />
@@ -69,9 +73,11 @@ const RenderDeviceContainers = () => {
   }
 
   return (
-    <Adapter Link={Link} history={history}>
-      {body}
-    </Adapter>
+    <DeeplinkAlertProvider>
+      <Adapter Link={Link} history={history}>
+        {body}
+      </Adapter>
+    </DeeplinkAlertProvider>
   );
 };
 
