@@ -1711,6 +1711,16 @@ export const en = {
 
   'Start P2P Trading': 'Start P2P Trading',
 
+  // Deeplinks alerts
+  'Attention!': 'Alert',
+  login_for_get_check: 'You clicked on a gift-link! To receive the funds you need to login!',
   showWithdrawVoucher:
     'You have received voucher for free withdrawal!\nUse it when withdrawing your coins from the service!',
+  WithdrawVoucherNotFound: '😔 Oops!\n\nThis free withdrawal voucher has already been cashed!',
+  'Already cashed by the user':
+    'You have already cashed this check.\n\nYou can only use this check once.',
+  'Already cashed':
+    'This check has already been cashed. You can get all the details from the creator of the check.',
+  'Not found': 'Nothing found',
+  'Invoice is expired': 'Unfortunately, this ad is unavailable right now',
 };
