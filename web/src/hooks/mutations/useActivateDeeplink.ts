@@ -52,6 +52,7 @@ export const useActivateDeeplink = () => {
   const handleFetchError = useHandleFetchError();
 
   return useMutation<Input, DeeplinkResult>(activateDeeplink(user !== undefined), {
+    throwOnFailure: false,
     onFailure: ({ error }) => {
       if (error instanceof FetchError) {
         handleFetchError(error);
