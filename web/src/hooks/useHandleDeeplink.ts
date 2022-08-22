@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { alertPush, selectCurrentLanguage } from 'web/src/modules';
+import {
+  alertPush,
+  selectCurrentLanguage,
+  selectUserFetching,
+  selectUserInfo,
+} from 'web/src/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { p2pUrl } from 'web/src/api';
 import {
@@ -10,7 +15,6 @@ import {
 } from 'web/src/hooks/mutations/useActivateDeeplink';
 import { AdvertSingleSource, PaymethodSource } from 'web/src/modules/p2p/types';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
-import { useUser } from 'web/src/components/app/AppContext';
 
 export default function generateAdvertLink({
   advert,
@@ -29,7 +33,8 @@ export const useHandleDeeplink = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
-  const user = useUser();
+  const user = useSelector(selectUserInfo);
+  const userFetching = useSelector(selectUserFetching);
   const lang = useSelector(selectCurrentLanguage);
   const [activateDeeplink] = useActivateDeeplink();
   const [loading, setLoading] = useState(true);
@@ -51,9 +56,14 @@ export const useHandleDeeplink = () => {
 
     (async () => {
       if (deeplinkCode) {
+        if (userFetching) {
+          return;
+        }
+
         const deeplinkResult = await activateDeeplink({ code: deeplinkCode });
 
         if (!deeplinkResult) {
+          history.push('/p2p');
           return;
         }
 
@@ -117,11 +127,13 @@ export const useHandleDeeplink = () => {
           default:
             break;
         }
+
+        history.push('/p2p');
       }
 
       setLoading(false);
     })();
-  }, [user, activateDeeplink, lang, showAlert, history, location.search]);
+  }, [user, userFetching, activateDeeplink, lang, showAlert, history, location.search]);
 
   return loading;
 };
