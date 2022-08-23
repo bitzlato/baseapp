@@ -106,8 +106,10 @@ const Header: FC = () => {
     [t],
   );
 
-  const { data: notifications = [], mutate: notificationsMutate } =
-    useFetchP2PNotifications(isLoggedIn);
+  const { data: notifications = [], mutate: notificationsMutate } = useFetchP2PNotifications(
+    isLoggedIn,
+    language,
+  );
 
   const [markNotificationAsReadP2P] = useMarkNotificationAsRead();
 
