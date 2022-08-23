@@ -4,7 +4,7 @@ import { Notification } from 'web/src/lib/socket/types';
 import { useFetch } from './useFetch';
 
 export const useFetchP2PNotifications = (isLoggedIn: boolean) => {
-  return useFetch<Array<Notification>>(
+  return useFetch<Notification[]>(
     isLoggedIn ? `${p2pUrl()}/notifications/` : null,
     fetchWithCreds,
     {
