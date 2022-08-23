@@ -17,6 +17,7 @@ import { UserInfo } from 'web/src/modules/p2p/user.types';
 import { NotAvailable } from 'web/src/components/traderInfo/NotAvailable';
 import { TraderIcons } from 'web/src/components/traderInfo/TraderIcons';
 import { UserUnreadChatMessages } from 'web/src/components/traderInfo/UserUnreadChatMessages';
+import { getDiffByDays } from 'web/src/helpers/dateDiff';
 import { Notes } from './Notes';
 import { Deals } from './Deals';
 import { UserChat } from './UserChat';
@@ -189,6 +190,14 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
                           {t('Trusted')}
                         </Text>
                         <Text fontSize="medium">{traderInfo.trustsCount}</Text>
+                      </Box>
+                      <Box display="flex" justifyContent="space-between" w="full" py="2x">
+                        <Text variant="label" fontWeight="strong">
+                          {t('Account created (days ago)')}
+                        </Text>
+                        <Text fontSize="medium">
+                          {getDiffByDays(new Date(traderInfo.startOfUseDate), new Date())}
+                        </Text>
                       </Box>
                       <Box display="flex" justifyContent="space-between" w="full" py="2x">
                         <Text variant="label" fontWeight="strong">
