@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import { FC } from 'react';
 import { Button } from 'web/src/components/ui/Button';
 import { Table, TableHeader, TableBody, TableRow } from 'web/src/components/Gifts/Table';
@@ -6,6 +7,11 @@ import { Box } from 'web/src/components/ui/Box';
 import { Card, CardBody, CardHeader } from 'web/src/components/ui/Card';
 import { Container } from 'web/src/components/ui/Container';
 import { Text } from 'web/src/components/ui/Text';
+import { SelectCustom } from 'web/src/components/SelectCustom/SelectCustom';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
+import { CryptoCurrencyOption } from 'web/src/components/shared/Ads/CryptoCurrencyOption';
+import { TextAreaInput, TextInput } from 'web/src/components/TextInputCustom/TextInputCustom';
+import { TextInputWithControl } from 'web/src/components/TextInputCustom/TextInputWithControl';
 
 export const ComponentsScreen: FC = () => {
   const headerButton = (
@@ -72,6 +78,23 @@ export const ComponentsScreen: FC = () => {
         </Text>
         <Text as="span" variant="caption" fontWeight="strong">
           true
+        </Text>
+      </TableHeaderColumn>
+    </TableHeader>
+  );
+
+  const headerSelect = (
+    <TableHeader>
+      <TableHeaderColumn size="medium">
+        <Box pl="6x">
+          <Text variant="caption" fontWeight="strong">
+            Props
+          </Text>
+        </Box>
+      </TableHeaderColumn>
+      <TableHeaderColumn size="medium">
+        <Text as="span" variant="caption" fontWeight="strong">
+          View
         </Text>
       </TableHeaderColumn>
     </TableHeader>
@@ -864,6 +887,256 @@ export const ComponentsScreen: FC = () => {
             </TableBody>
           </Table>
         </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader>{'<SelectCustom />'}</CardHeader>
+
+        <Table header={headerSelect} isLoading={false}>
+          <TableBody>
+            <TableRow overflow="visible">
+              <TableColumn size="medium">
+                <pre>
+                  {`
+      <SelectCustom
+        options={[
+          { label: 'Label', value: 'Value' },
+          { label: 'Label1', value: 'Value1' },
+          { label: 'Label2', value: 'Value2' },
+          { label: 'Label3', value: 'Value3' },
+        ]}
+        value={null}
+        placeholder="Choose option"
+      />
+                `}
+                </pre>
+              </TableColumn>
+              <TableColumn size="medium">
+                <Box pr="6x">
+                  <SelectCustom
+                    options={[
+                      { label: 'Label', value: 'Value' },
+                      { label: 'Label1', value: 'Value1' },
+                      { label: 'Label2', value: 'Value2' },
+                      { label: 'Label3', value: 'Value3' },
+                    ]}
+                    value={null}
+                    placeholder="Choose option"
+                  />
+                </Box>
+              </TableColumn>
+            </TableRow>
+            <TableRow overflow="visible">
+              <TableColumn size="medium">
+                <pre>
+                  {`
+      <SelectCustom
+        options={[
+          { label: 'Label', value: 'Value' },
+          { label: 'Label1', value: 'Value1' },
+          { label: 'Label2', value: 'Value2' },
+          { label: 'Label3', value: 'Value3' },
+        ]}
+        isError
+        placeholder="Choose option"
+        value={null}
+      />
+                `}
+                </pre>
+              </TableColumn>
+              <TableColumn size="medium">
+                <Box pr="6x">
+                  <SelectCustom
+                    options={[
+                      { label: 'Label', value: 'Value' },
+                      { label: 'Label1', value: 'Value1' },
+                      { label: 'Label2', value: 'Value2' },
+                      { label: 'Label3', value: 'Value3' },
+                    ]}
+                    isError
+                    placeholder="Choose option"
+                    value={null}
+                  />
+                </Box>
+              </TableColumn>
+            </TableRow>
+            <TableRow overflow="visible">
+              <TableColumn size="medium">
+                <pre>
+                  {`
+    <SelectCustom
+      placeholder="Select cryptocurrency"
+      options={[
+        {
+          code: 'BTC',
+          name: 'Bitcoin',
+        },
+        {
+          code: 'ETH',
+          name: 'Ethereum',
+        },
+        {
+          code: 'DOGE',
+          name: 'Dogecoin',
+        },
+      ]}
+      withSearch
+      searchFunction={(searchText, _optionValue, option) => {
+        return (
+          option.code.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
+          option.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+        );
+      }}
+      searchPlaceholder="Search"
+      noOptionsMessage="Nothing found"
+      getOptionValue={(option) => option.code}
+      getOptionLabel={(option) => ${'`${option.code} (${option.name.trim()})`'}}
+      renderLabel={(option) => {
+        return (
+          <Box display="flex" alignItems="center" gap="3x">
+            <CryptoCurrencyIcon size="6x" currency={option.code} />
+            <Text variant="label">{option.code}</Text>
+          </Box>
+        );
+      }}
+      renderOption={CryptoCurrencyOption}
+      value={null}
+      isError={false}
+      onChange={() => {}}
+    />
+                `}
+                </pre>
+              </TableColumn>
+              <TableColumn size="medium">
+                <Box pr="6x">
+                  <SelectCustom
+                    placeholder="Select cryptocurrency"
+                    options={[
+                      {
+                        code: 'BTC',
+                        name: 'Bitcoin',
+                      },
+                      {
+                        code: 'ETH',
+                        name: 'Ethereum',
+                      },
+                      {
+                        code: 'DOGE',
+                        name: 'Dogecoin',
+                      },
+                    ]}
+                    withSearch
+                    searchFunction={(searchText, _optionValue, option) => {
+                      return (
+                        option.code.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
+                        option.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+                      );
+                    }}
+                    searchPlaceholder="Search"
+                    noOptionsMessage="Nothing found"
+                    getOptionValue={(option) => option.code}
+                    getOptionLabel={(option) => `${option.code} (${option.name.trim()})`}
+                    renderLabel={(option) => {
+                      return (
+                        <Box display="flex" alignItems="center" gap="3x">
+                          <CryptoCurrencyIcon size="6x" currency={option.code} />
+                          <Text variant="label">{option.code}</Text>
+                        </Box>
+                      );
+                    }}
+                    renderOption={CryptoCurrencyOption}
+                    value={null}
+                    isError={false}
+                    onChange={() => {}}
+                  />
+                </Box>
+              </TableColumn>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Card>
+
+      <Card>
+        <CardHeader>{'<TextInputCustom />'}</CardHeader>
+
+        <Table header={headerSelect} isLoading={false}>
+          <TableBody>
+            <TableRow overflow="visible">
+              <TableColumn size="medium">
+                <pre>
+                  {`
+    <TextInput
+      placeholder="Placeholder"
+      onChange={() => {}}
+    />
+                  `}
+                </pre>
+              </TableColumn>
+              <TableColumn size="medium">
+                <Box pr="6x">
+                  <TextInput placeholder="Placeholder" onChange={() => {}} />
+                </Box>
+              </TableColumn>
+            </TableRow>
+            <TableRow overflow="visible">
+              <TableColumn size="medium">
+                <pre>
+                  {`
+    <TextInput
+      isError
+      placeholder="Placeholder"
+      onChange={() => {}}
+    />
+                  `}
+                </pre>
+              </TableColumn>
+              <TableColumn size="medium">
+                <Box pr="6x">
+                  <TextInput isError placeholder="Placeholder" onChange={() => {}} />
+                </Box>
+              </TableColumn>
+            </TableRow>
+            <TableRow overflow="visible">
+              <TableColumn size="medium">
+                <pre>
+                  {`
+    <TextInputWithControl
+      placeholder="Placeholder"
+      control="USD"
+      onChange={() => {}}
+    />
+                  `}
+                </pre>
+              </TableColumn>
+              <TableColumn size="medium">
+                <Box pr="6x">
+                  <TextInputWithControl
+                    placeholder="Placeholder"
+                    control="USD"
+                    onChange={() => {}}
+                  />
+                </Box>
+              </TableColumn>
+            </TableRow>
+            <TableRow overflow="visible">
+              <TableColumn size="medium">
+                <pre>
+                  {`
+    <TextAreaInput
+      placeholder="Placeholder"
+      onChange={() => {}}
+    />
+                  `}
+                </pre>
+              </TableColumn>
+              <TableColumn size="medium">
+                <Box pr="6x">
+                  <TextAreaInput placeholder="Placeholder" onChange={() => {}} />
+                </Box>
+              </TableColumn>
+            </TableRow>
+          </TableBody>
+        </Table>
       </Card>
     </Container>
   );

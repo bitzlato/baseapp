@@ -25,15 +25,22 @@ export const TableHeader: FC<TableHeaderProps> = ({ size = 'medium', children })
 
 export const TableBody: FC = ({ children }) => <Box>{children}</Box>;
 
-interface TableRowProps extends BoxProps<'div'> {}
+interface TableRowProps extends Omit<BoxProps<'div'>, 'overflow'> {
+  overflow?: 'visible' | 'hidden' | undefined;
+}
 
-export const TableRow: FC<TableRowProps> = ({ children, onClick, ...restProps }) => (
+export const TableRow: FC<TableRowProps> = ({
+  children,
+  overflow = 'hidden',
+  onClick,
+  ...restProps
+}) => (
   <Box
     display="flex"
     alignItems="center"
     py="3x"
     position="relative"
-    overflow="hidden"
+    overflow={overflow === 'visible' ? undefined : overflow}
     borderBottomStyle="solid"
     borderBottomWidth="1x"
     borderBottomColor="giftsTableRowBorder"
