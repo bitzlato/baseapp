@@ -21,28 +21,27 @@ export const singleContainer = style({
   minHeight: 'calc(100vh - 210px)',
 });
 
-export const stats = style({
-  margin: '0 -8px',
-  display: 'flex',
-  flexWrap: 'wrap',
-});
-
-export const stat = style([
+export const stats = style([
   {
-    padding: '0 8px',
-    marginBottom: 16,
-    flex: '0 0 auto',
-    height: '128px',
+    display: 'grid',
+    gridGap: sizeVars['4x'],
+    marginBottom: sizeVars['4x'],
   },
   responsiveStyle({
     tablet: {
-      width: '50%',
+      gridTemplateColumns: 'repeat(3, 1fr)',
     },
     desktop: {
-      width: '33%',
+      gridTemplateColumns: 'repeat(3, 1fr)',
     },
-    desktopXL: {
-      width: '20%',
+    desktopXXL: {
+      gridTemplateColumns: 'repeat(6, 1fr)',
     },
   }),
+]);
+
+export const stat = style([
+  {
+    height: 128,
+  },
 ]);
