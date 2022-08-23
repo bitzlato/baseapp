@@ -29,10 +29,51 @@ export function notificationInfo(
       switch (item.data.status) {
         case 'trade_created':
           return { text: t('tradeStatusChangedCreated', item.data), link: tradeLink, createdAt };
+        case 'confirm_trade':
+          switch (item.data.type) {
+            case 'selling':
+              return {
+                text: t('tradeStatusChangedConfirmTradeSelling', item.data),
+                link: tradeLink,
+                createdAt,
+              };
+
+            case 'purchase':
+              return {
+                text: t('tradeStatusChangedConfirmTradePurchase', item.data),
+                link: tradeLink,
+                createdAt,
+              };
+
+            default:
+              return { text: t('tradeStatusChanged', item.data), link: tradeLink, createdAt };
+          }
         case 'cancel':
           return { text: t('tradeStatusChangedCancel', item.data), link: tradeLink, createdAt };
         case 'payment':
-          return { text: t('tradeStatusChangedPayment', item.data), link: tradeLink, createdAt };
+          switch (item.data.type) {
+            case 'purchase':
+              return {
+                text: t('tradeStatusChangedPaymentPurchase', item.data),
+                link: tradeLink,
+                createdAt,
+              };
+
+            case 'selling':
+              return {
+                text: t('tradeStatusChangedPaymentSelling', item.data),
+                link: tradeLink,
+                createdAt,
+              };
+
+            default:
+              return {
+                text: t('tradeStatusChangedPayment', item.data),
+                link: tradeLink,
+                createdAt,
+              };
+          }
+
         case 'confirm-payment':
           return {
             text: t('tradeStatusChangedConfirmPayment', item.data),
@@ -41,6 +82,59 @@ export function notificationInfo(
           };
         default:
           return { text: t('tradeStatusChanged', item.data), link: tradeLink, createdAt };
+      }
+    }
+    case 'userTradeStatusReminder': {
+      switch (item.data.tradeState) {
+        case 'confirm_trade':
+          switch (item.data.type) {
+            case 'seller':
+              return {
+                text: t('tradeStatusReminderConfirmTradeSeller', item.data),
+                link: tradeLink,
+                createdAt,
+              };
+
+            case 'buyer':
+              return {
+                text: t('tradeStatusReminderConfirmTradeBuyer', item.data),
+                link: tradeLink,
+                createdAt,
+              };
+
+            default:
+              return {
+                text: t('item.name'),
+                createdAt,
+              };
+          }
+        case 'payment':
+          switch (item.data.type) {
+            case 'seller':
+              return {
+                text: t('tradeStatusReminderPaymentSeller', item.data),
+                link: tradeLink,
+                createdAt,
+              };
+
+            case 'buyer':
+              return {
+                text: t('tradeStatusReminderPaymentBuyer', item.data),
+                link: tradeLink,
+                createdAt,
+              };
+
+            default:
+              return {
+                text: t('item.name'),
+                createdAt,
+              };
+          }
+        default:
+          return {
+            text: t('item.name'),
+            createdAt,
+          };
       }
     }
     case 'tradeExtendWaitingTime':
