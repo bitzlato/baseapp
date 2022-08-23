@@ -219,6 +219,7 @@ const Header: FC = () => {
           translate: t,
           lang: language,
         }) as NotificationModalNotification;
+
         const handleNotifyClick = () => {
           handleMarkNotificationAsRead(notification.id);
 
