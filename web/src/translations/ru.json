@@ -65,6 +65,8 @@
   "notifications.tradeWillExpire": "Сделка #{tradeId} будет автоматически отменена {time, fromNow}",
   "notifications.unFreeze": "Ваш аккаунт разморожен",
   "notifications.unFreezeReason": "Причина разморозки \"{reason}\". Типы операций \"{type}\".",
+  "notifications.unfreeze": "Финансовые операции вновь доступны на вашем аккаунте, ограничения были сняты!",
+  "notifications.unmute": "Время ограничения истекло, ваши объявления вновь активны!",
   "notifications.verification-confirmed": "✅ Ваша заявку на верификацию подтверждена",
   "notifications.verificationReset": "❌ Уважаемый клиент! Ваша верификация больше недействительна. Пожалуйста, пройдите заново процедуру верификации",
   "notifications.verification-rejected": "❌ Ваша заявка на верификацию отклонена",
