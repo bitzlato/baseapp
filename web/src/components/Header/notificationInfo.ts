@@ -270,6 +270,18 @@ export function notificationInfo(
         createdAt,
       };
     }
+    case 'unfreeze': {
+      return {
+        text: t('unfreeze'),
+        createdAt,
+      };
+    }
+    case 'unmute': {
+      return {
+        text: t('unmute'),
+        createdAt,
+      };
+    }
     case 'newAdminMessage':
       return {
         text: t('newAdminMessage'),
