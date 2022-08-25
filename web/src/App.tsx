@@ -11,11 +11,9 @@ import { Adapter } from 'web/src/components/shared/Adapter';
 import { Link, useHistory } from 'react-router-dom';
 import { gaTrackerKey } from './api';
 import { useSetMobileDevice } from './hooks';
-import * as mobileTranslations from './mobile/translations';
 import { selectCurrentColorTheme, selectCurrentLanguage, selectMobileDeviceState } from './modules';
 import { languageMap } from './translations';
 import { ErrorBoundary } from './containers/ErrorBoundary/ErrorBoundary';
-import { Language } from './types';
 import { lazyRetry } from './helpers/lazyRetry';
 
 const gaKey = gaTrackerKey();
@@ -41,17 +39,6 @@ const LayoutContainer = lazyRetry(() =>
 const FooterContainer = lazyRetry(() =>
   import('./containers/Footer/Footer').then(({ Footer }) => ({ default: Footer })),
 );
-
-const getTranslations = (lang: Language, isMobileDevice: boolean) => {
-  if (isMobileDevice) {
-    return {
-      ...languageMap[lang],
-      ...mobileTranslations[lang],
-    };
-  }
-
-  return languageMap[lang];
-};
 
 const RenderDeviceContainers = () => {
   const isMobileDevice = useSelector(selectMobileDeviceState);
@@ -93,10 +80,9 @@ export const App = () => {
   useFetchPublicFeatures(); // load public features
 
   const lang = useSelector(selectCurrentLanguage);
-  const isMobileDevice = useSelector(selectMobileDeviceState);
 
   return (
-    <IntlProvider locale={lang} messages={getTranslations(lang, isMobileDevice)} key={lang}>
+    <IntlProvider locale={lang} messages={languageMap[lang]} key={lang}>
       <Router history={browserHistory}>
         <ErrorBoundary>
           <React.Suspense fallback={null}>
