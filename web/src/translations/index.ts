@@ -1,11 +1,8 @@
-import { customLanguageMap } from '../custom/translations';
-import { en as enCustom } from '../custom/translations/en';
-import { en } from './en';
-
-export type LangType = typeof en;
+import en from './en.json';
+import ru from './ru.json';
 
 export const languageMap = {
   default: en,
-  en: { ...en, ...enCustom },
-  ...customLanguageMap,
+  en,
+  ru,
 };
