@@ -20,6 +20,7 @@ import { NotificationNewMessage } from 'web/src/lib/socket/types';
 import { useSWRConfig } from 'swr';
 import { getP2PUserChatEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PUserChat';
 import { getP2PUserChatUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PUserChatUnread';
+import { getDiffByDays } from 'web/src/helpers/dateDiff';
 import * as s from './Trader.css';
 
 interface UrlParams {
@@ -232,6 +233,26 @@ export const Trader: FC = () => {
                 </Text>
               </Box>
             </Box>
+            {traderInfo.startOfUseDate ? (
+              <Box className={s.stat}>
+                <Box
+                  display="flex"
+                  bg="block"
+                  borderRadius="1x"
+                  flexDirection="column"
+                  justifyContent="space-between"
+                  px="4x"
+                  py="5x"
+                  flexGrow={1}
+                  height="full"
+                >
+                  <Text variant="label">{t('Account created (days ago)')}</Text>
+                  <Text as="div" variant="h3">
+                    {getDiffByDays(new Date(traderInfo.startOfUseDate), new Date())}
+                  </Text>
+                </Box>
+              </Box>
+            ) : null}
             <Box className={s.stat}>
               <Box
                 display="flex"
