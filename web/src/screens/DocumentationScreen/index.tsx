@@ -57,7 +57,7 @@ export const DocumentationScreen: FC = () => (
         </TabPanel>
         <TabPanel value="3">
           <Suspense fallback>
-            <Swagger url="v2/api-docs?group=all" />
+            <Swagger url="v2/api-docs?group=default" />
           </Suspense>
         </TabPanel>
       </Tabs>
