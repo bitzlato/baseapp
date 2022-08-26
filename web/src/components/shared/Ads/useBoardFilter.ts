@@ -10,7 +10,6 @@ import { AdvertParams, AdvertType, SeoAdvertType } from 'web/src/modules/p2p/typ
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { P2PCryptoCurrencySource } from 'web/src/modules/p2p/wallet-types';
 import { Language } from 'web/src/types';
-import { useFetchPaymethods } from 'web/src/hooks/data/useFetchPaymethods';
 import { useP2PSetLastFilter } from 'web/src/hooks/mutations/useP2PSetLastFilter';
 import { pick } from 'web/src/helpers/pick';
 import { P2PFiatCurrencies } from 'web/src/types/currencies.types';
@@ -69,11 +68,10 @@ const generateFilterParamsUrl = (
   paymethodSlug?: string | undefined,
   query: string = window.location.search,
 ) => {
-  const maybePaymethodSlug = paymethodSlug ? `-${paymethodSlug}` : '';
+  const maybePaymethodSlug = paymethodSlug ? `-${paymethodSlug}` : `-${currency}`;
 
   return (
-    `/${lang}/p2p/${adTypeToSeo[type]}-${cryptocurrency}-${currency}${maybePaymethodSlug}`.toLowerCase() +
-    query
+    `/${lang}/p2p/${adTypeToSeo[type]}-${cryptocurrency}${maybePaymethodSlug}`.toLowerCase() + query
   );
 };
 
@@ -85,7 +83,6 @@ const ADVERT_PARAMS_IN_LAST_FILTER = [
   'isOwnerVerificated',
   'isOwnerTrusted',
   'isOwnerActive',
-  'paymethod',
   'paymethodSlug',
   'amount',
   'amountType',
@@ -98,19 +95,6 @@ const getFilterParamsFromLastFilter = (lastFilter: any): Partial<AdvertParams> |
   const filterParams = {
     ...lastFilter,
   };
-
-  if ('paymethod' in lastFilter && typeof lastFilter.paymethod === 'object') {
-    if (
-      lastFilter.paymethod !== null &&
-      'value' in lastFilter.paymethod &&
-      typeof lastFilter.paymethod.value === 'number'
-    ) {
-      // old format "paymethod":{"title":"Сбербанк","value":3547}
-      filterParams.paymethod = lastFilter.paymethod.value;
-    } else {
-      filterParams.paymethod = undefined;
-    }
-  }
 
   if ('amount' in filterParams && !filterParams.amount && 'amountType' in filterParams) {
     filterParams.amount = undefined;
@@ -156,15 +140,6 @@ export const useBoardFilter = ({
       ...params,
     };
   });
-  const { data: { data: paymethods } = {} } = useFetchPaymethods({
-    lang: filterParams.lang,
-    type: filterParams.type,
-    currency: filterParams.currency,
-    cryptocurrency: filterParams.cryptocurrency,
-    isOwnerActive: filterParams.isOwnerActive,
-    isOwnerTrusted: filterParams.isOwnerTrusted,
-    isOwnerVerificated: filterParams.isOwnerVerificated,
-  });
   const [setLatsFilter] = useP2PSetLastFilter();
 
   const handleChangeFilter = useCallback(
@@ -179,15 +154,6 @@ export const useBoardFilter = ({
         ...upd,
       };
 
-      let paymethod;
-      if ('paymethod' in upd) {
-        paymethod = upd.paymethod
-          ? paymethods?.find((item) => item.id === upd.paymethod)
-          : undefined;
-
-        next.paymethodSlug = paymethod?.slug ?? undefined;
-      }
-
       setFilterParams(next);
 
       // Save filter params to backend
@@ -196,65 +162,51 @@ export const useBoardFilter = ({
       }
 
       setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
-      if (upd.type || upd.cryptocurrency || upd.currency || paymethod) {
+
+      if ('type' in upd || 'cryptocurrency' in upd || 'currency' in upd || 'paymethodSlug' in upd) {
         history.push(
           generateFilterParamsUrl(
             lang,
             upd.type ?? filterParams.type,
             upd.cryptocurrency ?? filterParams.cryptocurrency,
             upd.currency ?? filterParams.currency,
-            paymethod?.slug,
+            next.paymethodSlug,
           ),
         );
       }
     },
-    [filterParams, history, lang, paymethods, setLatsFilter, user],
+    [filterParams, history, lang, setLatsFilter, user],
   );
 
-  // Set default filter or sync paymethod slug with location
+  // Sync filterParams with location
   useEffect(() => {
-    let { paymethodSlug } = filterParams;
-    if (!paymethodSlug && filterParams.paymethod) {
-      paymethodSlug = paymethods?.find(
-        (paymethod) => paymethod.id === filterParams.paymethod,
-      )?.slug;
-    }
-
-    history.replace(
-      generateFilterParamsUrl(
-        lang,
-        filterParams.type,
-        filterParams.cryptocurrency,
-        filterParams.currency,
-        paymethodSlug,
-        buildUrlSearch(pick(filterParams, ADVERT_PARAMS_IN_QUERY), DEFAULT_FILTER, URL_PARAMS),
-      ),
+    const currentFilterParamsUrl = history.location.pathname;
+    const actualFilterParamsUrl = generateFilterParamsUrl(
+      lang,
+      filterParams.type,
+      filterParams.cryptocurrency,
+      filterParams.currency,
+      filterParams.paymethodSlug,
+      buildUrlSearch(pick(filterParams, ADVERT_PARAMS_IN_QUERY), DEFAULT_FILTER, URL_PARAMS),
     );
-  }, [filter, filterParams, handleChangeFilter, history, lang, paymethods]);
 
-  useEffect(() => {
-    if (
-      paymethods &&
-      paymethods.length > 0 &&
-      !filterParams.paymethod &&
-      filterParams.paymethodSlug
-    ) {
-      handleChangeFilter({
-        paymethod: paymethods?.find((paymethod) => paymethod.slug === filterParams.paymethodSlug)
-          ?.id,
-      });
+    if (currentFilterParamsUrl !== actualFilterParamsUrl) {
+      history.replace(actualFilterParamsUrl);
     }
-  }, [filterParams, paymethods, handleChangeFilter]);
+  }, [lang, history, filterParams]);
 
   useEffect(() => {
     if (!cryptoCurrencies?.some((currency) => currency.code === filterParams.cryptocurrency)) {
-      handleChangeFilter({ cryptocurrency: DEFAULT_FILTER.cryptocurrency, paymethod: undefined });
+      handleChangeFilter({
+        cryptocurrency: DEFAULT_FILTER.cryptocurrency,
+        paymethodSlug: undefined,
+      });
     }
   }, [filterParams.cryptocurrency, cryptoCurrencies, handleChangeFilter]);
 
   useEffect(() => {
     if (fiatCurrencies[filterParams.currency] === undefined) {
-      handleChangeFilter({ currency: DEFAULT_FILTER.currency, paymethod: undefined });
+      handleChangeFilter({ currency: DEFAULT_FILTER.currency, paymethodSlug: undefined });
     }
   }, [filterParams.currency, fiatCurrencies, handleChangeFilter]);
 

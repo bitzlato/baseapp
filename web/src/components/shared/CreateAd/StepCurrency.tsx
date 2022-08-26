@@ -7,19 +7,24 @@ import {
   getOptionLabel,
   searchFunction,
 } from 'web/src/components/shared/Ads/InputAmountWithCurrency';
-import {
-  getOptionValue as getPaymethodOptionValue,
-  getOptionLabel as getPaymethodOptionLabel,
-  searchFunction as searchPaymethodFunction,
-} from 'web/src/components/shared/Ads/SelectPaymentMethod';
 import { SelectCustom } from 'web/src/components/SelectCustom/SelectCustom';
 import { CryptoCurrencyOption } from 'web/src/components/shared/Ads/CryptoCurrencyOption';
 import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 import { omit } from 'web/src/helpers/omit';
+import { PaymethodSource } from 'web/src/modules/p2p/types';
 import { StepSubmitRow } from './StepSubmitRow';
 import { CreateAdFormValues, useCreateAdFormContext } from './CreateAdFormContext';
 import { StepInputRow } from './StepInputRow';
 import { validateValues } from './validate';
+
+export const searchPaymethodFunction = (
+  searchText: string,
+  _optionValue: string,
+  option: PaymethodSource,
+) => option.description.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
+
+export const getPaymethodOptionValue = (option: PaymethodSource) => option.id.toString();
+export const getPaymethodOptionLabel = (option: PaymethodSource) => option.description;
 
 type FieldKeys = 'cryptocurrency' | 'currency' | 'paymethod';
 
