@@ -30,7 +30,7 @@ export const DEFAULT_FILTER: Omit<AdvertParams, 'lang'> = {
   isOwnerTrusted: false,
   isOwnerActive: false,
   amount: undefined,
-  paymethod: undefined,
+  paymethodSlug: undefined,
   amountType: undefined,
 };
 
@@ -58,7 +58,7 @@ const FilterBuySell: FC<FilterBuySellProps> = ({ params, onChange }) => {
       target="form"
       variants={variants}
       value={params.type}
-      onChange={(v) => onChange({ type: v as AdvertType, paymethod: undefined })}
+      onChange={(v) => onChange({ type: v as AdvertType, paymethodSlug: undefined })}
     />
   );
 };
@@ -109,14 +109,15 @@ const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onCha
         count: 0,
         description: t('All payment methods'),
         rate: -1,
+        slug: undefined,
       },
       ...(paymethodsResp.data?.data ?? []),
     ],
     [paymethodsResp.data?.data, t],
   );
   const selectedPaymethod = useMemo(
-    () => paymethods.find((d) => d.id === params.paymethod) ?? paymethods[0],
-    [paymethods, params.paymethod],
+    () => paymethods.find((d) => d.slug === params.paymethodSlug) ?? paymethods[0],
+    [paymethods, params.paymethodSlug],
   );
 
   const changeAmountDebounced = useDebouncedCallback(
@@ -150,7 +151,7 @@ const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onCha
           selectedCurrency={selectedWalletOption}
           renderOption={CryptoCurrencyOption}
           onChangeAmount={handleChangeAmountCrypto}
-          onChangeCurrency={(v) => onChange({ cryptocurrency: v.code, paymethod: undefined })}
+          onChangeCurrency={(v) => onChange({ cryptocurrency: v.code, paymethodSlug: undefined })}
         />
         <InputAmountWithCurrency
           label={t('AmountWithSymbol', { symbol: params.currency })}
@@ -158,12 +159,12 @@ const FilterControls: FC<FilterControlsProps> = ({ params, mobile = false, onCha
           currencyList={fiats}
           selectedCurrency={selectedFiatCurrency}
           onChangeAmount={handleChangeAmount}
-          onChangeCurrency={(v) => onChange({ currency: v.code, paymethod: undefined })}
+          onChangeCurrency={(v) => onChange({ currency: v.code, paymethodSlug: undefined })}
         />
         <SelectPaymentMethod
           options={paymethods}
           value={selectedPaymethod}
-          onChange={(v) => onChange({ paymethod: v.id > 0 ? v.id : undefined })}
+          onChange={(v) => onChange({ paymethodSlug: v.slug })}
         />
       </Box>
 

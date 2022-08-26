@@ -38,6 +38,7 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
       behavior: 'smooth',
     });
   };
+
   const handleChangePerPage = (value: number) => {
     handleChangeFilter({ limit: value, skip: 0 });
   };
