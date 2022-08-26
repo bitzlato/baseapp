@@ -10,7 +10,7 @@
   "engines": {
     "node": ">=16.13.1 <17"
   },
-  "packageManager": "yarn@3.1.1",
+  "packageManager": "yarn@3.2.3",
   "scripts": {
     "start": "yarn workspace web start",
     "start:all": "MARKET_DOCS_URL=http://localhost:3004 yarn workspaces foreach -pvi --from '{market-docs,web}' run start",
