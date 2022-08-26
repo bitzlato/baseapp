@@ -30,13 +30,13 @@ if (gaKey) {
 const Header = lazyRetry(() => import('./components/Header/Header'));
 
 /* Desktop components */
-const AlertsContainer = lazyRetry(() =>
+const AlertsContainer = lazyRetry<{}>(() =>
   import('./containers/Alerts').then(({ Alerts }) => ({ default: Alerts })),
 );
-const LayoutContainer = lazyRetry(() =>
+const LayoutContainer = lazyRetry<{}>(() =>
   import('./routes').then(({ Layout }) => ({ default: Layout })),
 );
-const FooterContainer = lazyRetry(() =>
+const FooterContainer = lazyRetry<{}>(() =>
   import('./containers/Footer/Footer').then(({ Footer }) => ({ default: Footer })),
 );
 

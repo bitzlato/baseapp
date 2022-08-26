@@ -3,7 +3,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { Adapter } from 'web/src/components/shared/Adapter';
 import { lazyRetry } from 'web/src/helpers/lazyRetry';
 
-const Trader = lazyRetry(() =>
+const Trader = lazyRetry<{}>(() =>
   import('web/src/components/shared/Trader/Trader').then((m) => ({ default: m.Trader })),
 );
 
