@@ -73,6 +73,8 @@
   "notifications.tradeWillExpire": "Trade #{tradeId} will be automatically cancelled {time, fromNow}",
   "notifications.unFreeze": "Your account has been unfrozen",
   "notifications.unFreezeReason": "Reason \"{reason}\". Operations \"{type}\".",
+  "notifications.unfreeze": "Financial transactions are once again available on your account, restrictions have been removed!",
+  "notifications.unmute": "The time restriction has expired, your ads are active again!",
   "notifications.verification-confirmed": "✅ Your verification request has been confirmed",
   "notifications.verificationReset": "❌ Dear customer! Your verification is no longer valid. Please go through the verification procedure again",
   "notifications.verification-rejected": "❌ Your verification request has been rejected",
