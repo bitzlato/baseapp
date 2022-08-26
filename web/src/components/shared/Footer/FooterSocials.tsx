@@ -74,7 +74,7 @@ export const FooterSocials: FC<Props> = ({ t, language }) => (
       href={
         language === 'ru'
           ? 'https://www.youtube.com/c/BZRussia'
-          : '"https://www.youtube.com/channel/UCz11WIy4qSWRrRVpEl0Txqg"'
+          : 'https://www.youtube.com/channel/UCz11WIy4qSWRrRVpEl0Txqg'
       }
       target="_blank"
       rel="noopener noreferrer"
