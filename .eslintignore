@@ -531,7 +531,6 @@ web/src/modules/user/withdrawLimit/sagas/withdrawLimitSaga.ts
 web/src/modules/user/withdrawLimit/selectors.ts
 web/src/routes/Layout/index.tsx
 web/src/screens/ConfirmScreen/index.tsx
-web/src/screens/DocumentationScreen/index.tsx
 web/src/screens/EmailVerification/index.tsx
 web/src/screens/Fees/Fees.tsx
 web/src/screens/ForgotPassword/index.tsx

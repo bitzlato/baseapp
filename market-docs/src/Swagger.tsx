@@ -2,8 +2,12 @@ import { FC } from 'react';
 import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
 
-const Swagger: FC = () => {
-  return <SwaggerUI url="api/v2/peatio/swagger" />;
+interface Props {
+  url: string;
+}
+
+const Swagger: FC<Props> = ({ url }) => {
+  return <SwaggerUI url={url} />;
 };
 
 export default Swagger;
