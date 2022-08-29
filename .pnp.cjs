@@ -7496,10 +7496,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/node", [\
-        ["npm:10.17.51", {\
-          "packageLocation": "./.yarn/cache/@types-node-npm-10.17.51-59d566e9b9-28dc090b43.zip/node_modules/@types/node/",\
+        ["npm:10.17.60", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-10.17.60-63ac1f669f-2cdb3a77d0.zip/node_modules/@types/node/",\
           "packageDependencies": [\
-            ["@types/node", "npm:10.17.51"]\
+            ["@types/node", "npm:10.17.60"]\
           ],\
           "linkType": "HARD"\
         }],\
@@ -28319,7 +28319,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/history", "npm:4.7.8"],\
             ["@types/jest", "npm:26.0.20"],\
             ["@types/multicoin-address-validator", "npm:0.5.0"],\
-            ["@types/node", "npm:10.17.51"],\
+            ["@types/node", "npm:10.17.60"],\
             ["@types/node-jose", "npm:1.1.10"],\
             ["@types/qrcode.react", "npm:1.0.1"],\
             ["@types/react", "npm:17.0.39"],\
