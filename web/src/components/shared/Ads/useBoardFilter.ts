@@ -90,7 +90,7 @@ const ADVERT_PARAMS_IN_LAST_FILTER = [
   'amount',
   'amountType',
 ] as const;
-const getFilterParamsFromLastFilter = (lastFilter: any): Partial<AdvertParams> | undefined => {
+const getFilterParamsFromLastFilter = (): Partial<AdvertParams> | undefined => {
   if (typeof lastFilter !== 'object' || lastFilter === null) {
     return undefined;
   }
@@ -112,8 +112,9 @@ const getFilterParamsFromLastFilter = (lastFilter: any): Partial<AdvertParams> |
     }
   }
 
-  if ('amount' in filterParams && filterParams.amount === null) {
+  if ('amount' in filterParams && !filterParams.amount && 'amountType' in filterParams) {
     filterParams.amount = undefined;
+    filterParams.amountType = undefined;
   }
 
   return pick(filterParams, ADVERT_PARAMS_IN_LAST_FILTER);
