@@ -1,12 +1,12 @@
 import { ComponentType, lazy } from 'react';
 
-type Factory<P = {}> = () => Promise<{ default: ComponentType<P> }>;
+type Factory<T extends ComponentType<any>> = () => Promise<{ default: T }>;
 
-function retry<P = {}>(
-  factory: Factory<P>,
+function retry<T extends ComponentType<any>>(
+  factory: Factory<T>,
   retries: number,
   interval: number,
-): ReturnType<Factory<P>> {
+): ReturnType<Factory<T>> {
   return new Promise((resolve, reject) => {
     factory()
       .then(resolve)
@@ -22,10 +22,10 @@ function retry<P = {}>(
   });
 }
 
-export function lazyRetry<P = {}>(
-  factory: Factory<P>,
+export function lazyRetry<T extends ComponentType<any>>(
+  factory: Factory<T>,
   retries = 5,
   interval = 1000,
-): React.LazyExoticComponent<React.ComponentType<P>> {
+): React.LazyExoticComponent<T> {
   return lazy(() => retry(factory, retries, interval));
 }
