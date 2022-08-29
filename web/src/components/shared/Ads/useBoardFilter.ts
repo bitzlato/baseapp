@@ -112,6 +112,10 @@ const getFilterParamsFromLastFilter = (lastFilter: any): Partial<AdvertParams> |
     }
   }
 
+  if ('amount' in filterParams && filterParams.amount === null) {
+    filterParams.amount = undefined;
+  }
+
   return pick(filterParams, ADVERT_PARAMS_IN_LAST_FILTER);
 };
 
