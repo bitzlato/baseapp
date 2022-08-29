@@ -7611,10 +7611,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/uuid", [\
-        ["npm:8.3.1", {\
-          "packageLocation": "./.yarn/cache/@types-uuid-npm-8.3.1-4239b14bac-b41bdc5e86.zip/node_modules/@types/uuid/",\
+        ["npm:8.3.4", {\
+          "packageLocation": "./.yarn/cache/@types-uuid-npm-8.3.4-7547f4402c-6f11f3ff70.zip/node_modules/@types/uuid/",\
           "packageDependencies": [\
-            ["@types/uuid", "npm:8.3.1"]\
+            ["@types/uuid", "npm:8.3.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -27146,7 +27146,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/recharts", "npm:1.8.23"],\
             ["@types/redux-mock-store", "npm:1.0.3"],\
             ["@types/ua-parser-js", "npm:0.7.36"],\
-            ["@types/uuid", "npm:8.3.1"],\
+            ["@types/uuid", "npm:8.3.4"],\
             ["@types/ws", "npm:6.0.4"],\
             ["@vanilla-extract/css", "npm:1.7.2"],\
             ["@vanilla-extract/recipes", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.2.5"],\
