@@ -28316,7 +28316,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/axios", "npm:0.14.0"],\
             ["@types/classnames", "npm:2.2.11"],\
             ["@types/enzyme", "npm:3.10.11"],\
-            ["@types/history", "npm:4.7.8"],\
+            ["@types/history", "npm:4.7.11"],\
             ["@types/jest", "npm:26.0.20"],\
             ["@types/multicoin-address-validator", "npm:0.5.0"],\
             ["@types/node", "npm:10.17.51"],\
