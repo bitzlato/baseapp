@@ -70,11 +70,6 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@capacitor/android": "2.4.1",
-    "@capacitor/cli": "^2.4.2",
-    "@capacitor/core": "^2.4.1",
-    "@capacitor/ios": "2.4.1",
-    "@ionic/cli": "^6.11.11",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@statoscope/webpack-plugin": "^5.14.1",
     "@svgr/webpack": "^6.2.1",

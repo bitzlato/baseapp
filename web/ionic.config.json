@@ -1,7 +1,0 @@
-{
-  "name": "Baseapp",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react"
-}
