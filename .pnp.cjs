@@ -8103,17 +8103,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@vanilla-extract/webpack-plugin", [\
-        ["npm:2.1.11", {\
-          "packageLocation": "./.yarn/cache/@vanilla-extract-webpack-plugin-npm-2.1.11-9e0152fd4b-7104ef7a88.zip/node_modules/@vanilla-extract/webpack-plugin/",\
+        ["npm:2.1.12", {\
+          "packageLocation": "./.yarn/cache/@vanilla-extract-webpack-plugin-npm-2.1.12-48f59ae56c-1c948e82e3.zip/node_modules/@vanilla-extract/webpack-plugin/",\
           "packageDependencies": [\
-            ["@vanilla-extract/webpack-plugin", "npm:2.1.11"]\
+            ["@vanilla-extract/webpack-plugin", "npm:2.1.12"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.1.11", {\
-          "packageLocation": "./.yarn/__virtual__/@vanilla-extract-webpack-plugin-virtual-f05ab77374/0/cache/@vanilla-extract-webpack-plugin-npm-2.1.11-9e0152fd4b-7104ef7a88.zip/node_modules/@vanilla-extract/webpack-plugin/",\
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.1.12", {\
+          "packageLocation": "./.yarn/__virtual__/@vanilla-extract-webpack-plugin-virtual-e42727188f/0/cache/@vanilla-extract-webpack-plugin-npm-2.1.12-48f59ae56c-1c948e82e3.zip/node_modules/@vanilla-extract/webpack-plugin/",\
           "packageDependencies": [\
-            ["@vanilla-extract/webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.1.11"],\
+            ["@vanilla-extract/webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.1.12"],\
             ["@types/webpack", null],\
             ["@vanilla-extract/integration", "npm:5.0.0"],\
             ["chalk", "npm:4.1.2"],\
@@ -27151,7 +27151,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vanilla-extract/css", "npm:1.7.2"],\
             ["@vanilla-extract/recipes", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.2.5"],\
             ["@vanilla-extract/sprinkles", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.4.1"],\
-            ["@vanilla-extract/webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.1.11"],\
+            ["@vanilla-extract/webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.1.12"],\
             ["axios", "npm:0.21.1"],\
             ["axios-mock-adapter", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.19.0"],\
             ["bignumber.js", "npm:9.0.1"],\
