@@ -1,4 +1,0 @@
-HTTP/2 200 
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Methods: GET, POST, DELETE, PUT, PATCH, OPTIONS, HEAD
-Access-Control-Allow-Headers: *
