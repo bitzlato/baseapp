@@ -3769,14 +3769,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/history@npm:*, @types/history@npm:^4.7.0":
+"@types/history@npm:*":
   version: 4.7.8
   resolution: "@types/history@npm:4.7.8"
   checksum: 9c867532afd80f72a7101a5bb3c10c1ad7cc8c2c14e92fdbc54d5fed0ef8cdb6060c0f261a39884e243424636c6ff85d8aaffb984e2edaac348d2f216f9eedeb
   languageName: node
   linkType: hard
 
-"@types/history@npm:^4.7.11":
+"@types/history@npm:4.7.11, @types/history@npm:^4.7.11":
   version: 4.7.11
   resolution: "@types/history@npm:4.7.11"
   checksum: c92e2ba407dcab0581a9afdf98f533aa41b61a71133420a6d92b1ca9839f741ab1f9395b17454ba5b88cb86020b70b22d74a1950ccfbdfd9beeaa5459fdc3464
@@ -19531,7 +19531,7 @@ __metadata:
     "@types/axios": ^0.14.0
     "@types/classnames": ^2.2.6
     "@types/enzyme": ^3.10.11
-    "@types/history": ^4.7.0
+    "@types/history": 4.7.11
     "@types/jest": ^26.0.10
     "@types/multicoin-address-validator": ^0.5.0
     "@types/node": ^10.9.4
