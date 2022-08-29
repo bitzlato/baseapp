@@ -12493,17 +12493,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["dts-css-modules-loader", [\
-        ["npm:1.2.4", {\
-          "packageLocation": "./.yarn/cache/dts-css-modules-loader-npm-1.2.4-460e329a85-434ca4d054.zip/node_modules/dts-css-modules-loader/",\
+        ["npm:1.2.5", {\
+          "packageLocation": "./.yarn/cache/dts-css-modules-loader-npm-1.2.5-db92b9ff93-1b08135bc9.zip/node_modules/dts-css-modules-loader/",\
           "packageDependencies": [\
-            ["dts-css-modules-loader", "npm:1.2.4"]\
+            ["dts-css-modules-loader", "npm:1.2.5"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.2.4", {\
-          "packageLocation": "./.yarn/__virtual__/dts-css-modules-loader-virtual-9888ea822f/0/cache/dts-css-modules-loader-npm-1.2.4-460e329a85-434ca4d054.zip/node_modules/dts-css-modules-loader/",\
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.2.5", {\
+          "packageLocation": "./.yarn/__virtual__/dts-css-modules-loader-virtual-c88f6d175f/0/cache/dts-css-modules-loader-npm-1.2.5-db92b9ff93-1b08135bc9.zip/node_modules/dts-css-modules-loader/",\
           "packageDependencies": [\
-            ["dts-css-modules-loader", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.2.4"],\
+            ["dts-css-modules-loader", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.2.5"],\
             ["@types/css-loader", null],\
             ["css-loader", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:6.6.0"],\
             ["loader-utils", "npm:2.0.0"]\
@@ -27164,7 +27164,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cryptocurrency-icons", "https://github.com/bitzlato/cryptocurrency-icons.git#commit=1c1db76ce934c5a81fa67d1ebad689c7e0a85504"],\
             ["css-loader", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:6.6.0"],\
             ["css-minimizer-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.4.1"],\
-            ["dts-css-modules-loader", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.2.4"],\
+            ["dts-css-modules-loader", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.2.5"],\
             ["enzyme", "npm:3.11.0"],\
             ["events", "npm:3.3.0"],\
             ["header-case-normalizer", "npm:1.0.3"],\
