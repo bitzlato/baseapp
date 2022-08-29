@@ -194,7 +194,7 @@ const Header: FC = () => {
         ? {
             key: 'merch',
             type: 'external',
-            to: `/${language}/merch`,
+            to: '/merch',
             icon: 'invoices',
             children: t('Invoices'),
           }
@@ -202,7 +202,7 @@ const Header: FC = () => {
       {
         key: 'trader-workspace',
         type: 'external',
-        to: `/${language}/trader-workspace`,
+        to: '/trader-workspace',
         icon: 'trader-workspace',
         children: t('Trader Workspace'),
       },
