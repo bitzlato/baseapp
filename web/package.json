@@ -80,7 +80,7 @@
     "@svgr/webpack": "^6.2.1",
     "@swc/core": "^1.2.140",
     "@swc/jest": "^0.2.5",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/react": "12.1.5",
     "@types/axios": "^0.14.0",
     "@types/classnames": "^2.2.6",
     "@types/enzyme": "^3.10.11",
