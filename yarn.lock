@@ -3977,12 +3977,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qrcode.react@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@types/qrcode.react@npm:1.0.1"
+"@types/qrcode.react@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@types/qrcode.react@npm:1.0.2"
   dependencies:
     "@types/react": "*"
-  checksum: 44da4a9cd0dce0c6e4d1e5bad57bbdb1a18b7fce852894badc804459673a00c8218baeca59630162dc6cf6229069fbb27939bed9c7e530a43f739d583e349392
+  checksum: be256f0192366b4c0822da43c732bf3e29beb954c89d739aa770f09e5160842a3ca4d6814cb57bbcbbf8997cf7af0b998de318dab957f0820f267bb746c9a329
   languageName: node
   linkType: hard
 
@@ -19536,7 +19536,7 @@ __metadata:
     "@types/multicoin-address-validator": ^0.5.0
     "@types/node": ^10.9.4
     "@types/node-jose": ^1.1.10
-    "@types/qrcode.react": ^1.0.1
+    "@types/qrcode.react": 1.0.2
     "@types/react": ^17.0.39
     "@types/react-color": ^3.0.6
     "@types/react-dom": ^17.0.11
