@@ -92,7 +92,7 @@ export const useHandleDeeplink = () => {
         switch (action) {
           case DeeplinkType.ALERT: {
             if (params.message === 'login_for_pay_bill') {
-              redirectExternal(`/${lang}/merch/public/invoices/${params.invoiceId}`);
+              redirectExternal(`/merch/public/invoices/${params.invoiceId}`);
             } else {
               showAlert(params.message);
             }
@@ -134,7 +134,7 @@ export const useHandleDeeplink = () => {
           }
 
           case DeeplinkType.SHOW_BILL: {
-            redirectExternal(`/${lang}/merch/bills/${params.billId}`);
+            redirectExternal(`/merch/bills/${params.billId}`);
 
             break;
           }
