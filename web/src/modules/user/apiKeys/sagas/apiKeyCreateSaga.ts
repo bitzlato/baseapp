@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import {
   apiKeyCreate,
   ApiKeyCreateFetch,
@@ -20,7 +20,7 @@ const createOptions = (csrfToken?: string): RequestOptions => {
 export function* apiKeyCreateSaga(action: ApiKeyCreateFetch) {
   try {
     const apiKey: ApiKeyDataInterface = yield call(
-      API.post(createOptions(getCsrfToken())),
+      API.post(createOptions(getCSRFToken())),
       '/resource/api_keys',
       action.payload,
     );

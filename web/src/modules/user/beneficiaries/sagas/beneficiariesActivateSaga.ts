@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, Beneficiary, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import {
   BeneficiariesActivate,
   beneficiariesActivateData,
@@ -20,7 +20,7 @@ export function* beneficiariesActivateSaga(action: BeneficiariesActivate) {
   try {
     const { id } = action.payload;
     const payload: Beneficiary = yield call(
-      API.patch(config(getCsrfToken())),
+      API.patch(config(getCSRFToken())),
       `/account/beneficiaries/${id}/activate`,
       action.payload,
     );

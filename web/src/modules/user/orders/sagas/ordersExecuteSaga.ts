@@ -3,7 +3,7 @@ import { RANGER_DIRECT_WRITE } from 'src/modules/public/ranger/constants';
 import { OrderCommon } from 'web/src/modules/types';
 import { alertPush, sendError } from '../../..';
 import { API, isFinexEnabled, isWsApiEnabled, RequestOptions } from '../../../../api';
-import { getCsrfToken, getOrderAPI } from '../../../../helpers';
+import { getCSRFToken, getOrderAPI } from '../../../../helpers';
 import { userOpenOrdersAppend } from '../../openOrders';
 import { orderExecuteData, orderExecuteError, OrderExecuteFetch } from '../actions';
 
@@ -32,7 +32,7 @@ export function* ordersExecuteSaga(action: OrderExecuteFetch) {
           }
         : action.payload;
       const order: OrderCommon = yield call(
-        API.post(executeOptions(getCsrfToken())),
+        API.post(executeOptions(getCSRFToken())),
         '/market/orders',
         params,
       );

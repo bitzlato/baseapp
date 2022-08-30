@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../..';
 import { API, isFinexEnabled, RequestOptions } from '../../../../api';
-import { getCsrfToken, getOrderAPI } from '../../../../helpers';
+import { getCSRFToken, getOrderAPI } from '../../../../helpers';
 import { openOrdersCancelError, OpenOrdersCancelFetch } from '../actions';
 
 const ordersCancelOptions = (csrfToken?: string): RequestOptions => {
@@ -19,20 +19,20 @@ export function* openOrdersCancelSaga(action: OpenOrdersCancelFetch) {
 
     if (isFinexEnabled()) {
       if (uuid) {
-        yield call(API.post(ordersCancelOptions(getCsrfToken())), `/market/orders/cancel/${uuid}`, {
+        yield call(API.post(ordersCancelOptions(getCSRFToken())), `/market/orders/cancel/${uuid}`, {
           uuid,
         });
       } else {
-        yield call(API.post(ordersCancelOptions(getCsrfToken())), `/market/orders/cancel/${id}`, {
+        yield call(API.post(ordersCancelOptions(getCSRFToken())), `/market/orders/cancel/${id}`, {
           id,
         });
       }
     } else if (uuid) {
-      yield call(API.post(ordersCancelOptions(getCsrfToken())), `/market/orders/${uuid}/cancel`, {
+      yield call(API.post(ordersCancelOptions(getCSRFToken())), `/market/orders/${uuid}/cancel`, {
         uuid,
       });
     } else {
-      yield call(API.post(ordersCancelOptions(getCsrfToken())), `/market/orders/${id}/cancel`, {
+      yield call(API.post(ordersCancelOptions(getCSRFToken())), `/market/orders/${id}/cancel`, {
         id,
       });
     }

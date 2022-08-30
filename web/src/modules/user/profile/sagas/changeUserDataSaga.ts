@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { sendError, User } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import { changeUserData, changeUserDataError, ChangeUserDataFetch } from '../actions';
 
 const changeUserDataOptions = (csrfToken?: string): RequestOptions => {
@@ -14,7 +14,7 @@ const changeUserDataOptions = (csrfToken?: string): RequestOptions => {
 export function* changeUserDataSaga(action: ChangeUserDataFetch) {
   try {
     const user: User = yield call(
-      API.put(changeUserDataOptions(getCsrfToken())),
+      API.put(changeUserDataOptions(getCSRFToken())),
       '/resource/users/me',
       action.payload.user,
     );

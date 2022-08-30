@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import { BeneficiariesDelete, beneficiariesDeleteData, beneficiariesDeleteError } from '../actions';
 
 const config = (csrfToken?: string): RequestOptions => {
@@ -13,7 +13,7 @@ const config = (csrfToken?: string): RequestOptions => {
 
 export function* beneficiariesDeleteSaga(action: BeneficiariesDelete) {
   try {
-    yield call(API.delete(config(getCsrfToken())), `/account/beneficiaries/${action.payload.id}`);
+    yield call(API.delete(config(getCSRFToken())), `/account/beneficiaries/${action.payload.id}`);
     yield put(beneficiariesDeleteData({ id: action.payload.id }));
     yield put(alertPush({ message: ['success.beneficiaries.deleted'], type: 'success' }));
   } catch (error) {

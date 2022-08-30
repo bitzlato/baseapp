@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import { apiKeyDelete, ApiKeyDeleteFetch, apiKeys2FAModal, apiKeysError } from '../actions';
 
 const deleteOptions = (csrfToken?: string): RequestOptions => {
@@ -15,7 +15,7 @@ export function* apiKeyDeleteSaga(action: ApiKeyDeleteFetch) {
   try {
     const { kid, totp_code } = action.payload;
     yield call(
-      API.delete(deleteOptions(getCsrfToken())),
+      API.delete(deleteOptions(getCSRFToken())),
       `/resource/api_keys/${kid}?totp_code=${totp_code}`,
     );
     yield put(apiKeyDelete({ kid }));

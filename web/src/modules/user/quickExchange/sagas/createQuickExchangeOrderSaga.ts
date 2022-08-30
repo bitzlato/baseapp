@@ -1,7 +1,7 @@
 import { call, delay, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import {
   createQuickExchangeData,
   createQuickExchangeError,
@@ -19,7 +19,7 @@ const config = (csrfToken?: string): RequestOptions => {
 export function* createQuickExchangeOrderSaga(action: CreateQuickExchangeFetch) {
   try {
     const data: QuickExchangeCreate = yield call(
-      API.post(config(getCsrfToken())),
+      API.post(config(getCSRFToken())),
       '/market/swap_orders',
       action.payload,
     );

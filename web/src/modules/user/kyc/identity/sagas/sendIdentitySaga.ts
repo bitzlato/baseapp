@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../../..';
 import { API, RequestOptions } from '../../../../../api';
-import { getCsrfToken } from '../../../../../helpers';
+import { getCSRFToken } from '../../../../../helpers';
 import { sendIdentityData, sendIdentityError, SendIdentityFetch } from '../actions';
 
 const sessionsConfig = (csrfToken?: string): RequestOptions => {
@@ -14,7 +14,7 @@ const sessionsConfig = (csrfToken?: string): RequestOptions => {
 export function* sendIdentitySaga(action: SendIdentityFetch) {
   try {
     const response: { message?: string } = yield call(
-      API.post(sessionsConfig(getCsrfToken())),
+      API.post(sessionsConfig(getCSRFToken())),
       '/resource/profiles',
       action.payload,
     );

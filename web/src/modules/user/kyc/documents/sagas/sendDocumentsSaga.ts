@@ -1,7 +1,7 @@
 import { all, call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../../..';
 import { API, RequestOptions } from '../../../../../api';
-import { getCsrfToken } from '../../../../../helpers';
+import { getCSRFToken } from '../../../../../helpers';
 import { sendDocumentsData, sendDocumentsError, SendDocumentsFetch } from '../actions';
 
 const sessionsConfig = (csrfToken?: string): RequestOptions => {
@@ -35,6 +35,6 @@ export function* sendDocumentsSaga(action: SendDocumentsFetch) {
 }
 
 export function* sendDocumentItem(payload: FormData) {
-  yield call(API.post(sessionsConfig(getCsrfToken())), '/resource/documents', payload);
+  yield call(API.post(sessionsConfig(getCSRFToken())), '/resource/documents', payload);
   yield put(alertPush({ message: ['success.documents.accepted'], type: 'success' }));
 }

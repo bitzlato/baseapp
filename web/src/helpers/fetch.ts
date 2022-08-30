@@ -1,4 +1,4 @@
-import { getCsrfToken } from 'web/src/helpers/getCsrfToken';
+import { getCSRFToken } from 'web/src/helpers/CSRFToken';
 
 export class FetchError extends Error {
   constructor(public messages: string[], public code: number, public payload: Record<string, any>) {
@@ -8,7 +8,7 @@ export class FetchError extends Error {
 }
 
 const createRequestWithCSRF = (init?: RequestInit): RequestInit | undefined => {
-  const csrfToken = getCsrfToken();
+  const csrfToken = getCSRFToken();
   if (csrfToken) {
     return {
       ...init,

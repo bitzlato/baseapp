@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { StorageKeys } from 'web/src/helpers/storageKeys';
+import { setCSRFToken } from 'web/src/helpers/CSRFToken';
 import { alertPush, sendError, User, userData } from '../../..';
 import { API, RequestOptions } from '../../../../api';
 import { signUpError, VerificationFetch } from '../actions';
@@ -18,7 +18,7 @@ export function* verificationSaga(action: VerificationFetch) {
 
     yield put(userData({ user }));
     if (user.csrf_token) {
-      localStorage.setItem(StorageKeys.csrfToken, user.csrf_token);
+      setCSRFToken(user.csrf_token);
     }
 
     yield put(alertPush({ message: ['success.email.confirmed'], type: 'success' }));
