@@ -1,5 +1,5 @@
 import { call, delay, put, select } from 'redux-saga/effects';
-import { StorageKeys } from 'web/src/helpers/storageKeys';
+import { removeCSRFToken } from 'web/src/helpers';
 import {
   resetHistory,
   setBlocklistStatus,
@@ -32,7 +32,7 @@ export function* handleAlertSaga(action: AlertPush) {
           action.payload.message.indexOf('authz.csrf_token_mismatch') > -1
         ) {
           yield put(userReset());
-          localStorage.removeItem(StorageKeys.csrfToken);
+          removeCSRFToken();
           yield put(userOpenOrdersReset());
           yield put(signInRequire2FA({ require2fa: false }));
           yield put(resetHistory());

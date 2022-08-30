@@ -6,7 +6,7 @@ import { resetHistory } from '../../history';
 import { userOpenOrdersReset } from '../../openOrders';
 import { userReset } from '../../profile';
 import { logoutError } from '../actions';
-import { StorageKeys } from 'web/src/helpers/storageKeys';
+import { removeCSRFToken } from 'web/src/helpers/CSRFToken';
 
 const requestOptions: RequestOptions = {
   apiVersion: 'barong',
@@ -16,7 +16,7 @@ export function* logoutSaga() {
   try {
     yield call(API.delete(requestOptions), '/identity/sessions');
     yield put(userReset());
-    localStorage.removeItem(StorageKeys.csrfToken);
+    removeCSRFToken();
     yield put(userOpenOrdersReset());
     yield put(signInRequire2FA({ require2fa: false }));
     yield put(resetHistory());

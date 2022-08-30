@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import {
   createInternalTransfersData,
   createInternalTransfersError,
@@ -17,7 +17,7 @@ const config = (csrfToken?: string): RequestOptions => {
 
 export function* createInternalTransfersSaga(action: CreateInternalTransfersFetch) {
   try {
-    yield call(API.post(config(getCsrfToken())), '/account/internal_transfers', action.payload);
+    yield call(API.post(config(getCSRFToken())), '/account/internal_transfers', action.payload);
     yield put(createInternalTransfersData());
     yield put(alertPush({ message: ['success.internal.transfer.created'], type: 'success' }));
   } catch (error) {

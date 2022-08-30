@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../../..';
 import { API, RequestOptions } from '../../../../../api';
-import { getCsrfToken } from '../../../../../helpers';
+import { getCSRFToken } from '../../../../../helpers';
 import { resendCodeData, resendCodeError, ResendCodeFetch } from '../actions';
 
 const sessionsConfig = (csrfToken?: string): RequestOptions => {
@@ -14,7 +14,7 @@ const sessionsConfig = (csrfToken?: string): RequestOptions => {
 export function* resendCodeSaga(action: ResendCodeFetch) {
   try {
     yield call(
-      API.post(sessionsConfig(getCsrfToken())),
+      API.post(sessionsConfig(getCSRFToken())),
       '/resource/phones/send_code',
       action.payload,
     );

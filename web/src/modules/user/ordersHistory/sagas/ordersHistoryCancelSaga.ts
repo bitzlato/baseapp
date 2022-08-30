@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../..';
 import { API, isFinexEnabled, RequestOptions } from '../../../../api';
-import { getCsrfToken, getOrderAPI } from '../../../../helpers';
+import { getCSRFToken, getOrderAPI } from '../../../../helpers';
 import { ordersHistoryCancelError, OrdersHistoryCancelFetch } from '../actions';
 
 const ordersCancelOptions = (csrfToken?: string): RequestOptions => {
@@ -16,11 +16,11 @@ export function* ordersHistoryCancelSaga(action: OrdersHistoryCancelFetch) {
     const { id } = action.payload;
 
     if (isFinexEnabled()) {
-      yield call(API.post(ordersCancelOptions(getCsrfToken())), `/market/orders/cancel/${id}`, {
+      yield call(API.post(ordersCancelOptions(getCSRFToken())), `/market/orders/cancel/${id}`, {
         id,
       });
     } else {
-      yield call(API.post(ordersCancelOptions(getCsrfToken())), `/market/orders/${id}/cancel`, {
+      yield call(API.post(ordersCancelOptions(getCSRFToken())), `/market/orders/${id}/cancel`, {
         id,
       });
     }

@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import {
   BeneficiariesResendPin,
   beneficiariesResendPinData,
@@ -19,7 +19,7 @@ export function* beneficiariesResendPinSaga(action: BeneficiariesResendPin) {
   try {
     const { id } = action.payload;
     yield call(
-      API.patch(config(getCsrfToken())),
+      API.patch(config(getCSRFToken())),
       `/account/beneficiaries/${id}/resend_pin`,
       action.payload,
     );

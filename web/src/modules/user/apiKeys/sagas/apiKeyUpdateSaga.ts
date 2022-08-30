@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import {
   ApiKeyDataInterface,
   apiKeys2FAModal,
@@ -22,7 +22,7 @@ export function* apiKeyUpdateSaga(action: ApiKeyUpdateFetch) {
     const { totp_code } = action.payload;
     const { kid, state } = action.payload.apiKey;
     const updatedApiKey: ApiKeyDataInterface = yield call(
-      API.patch(updateOptions(getCsrfToken())),
+      API.patch(updateOptions(getCSRFToken())),
       `/resource/api_keys/${kid}`,
       { totp_code, state },
     );

@@ -9,7 +9,7 @@ export * from './copy';
 export * from './emailValidation';
 export * from './filterData';
 export * from './formatDate';
-export * from './getCsrfToken';
+export * from './CSRFToken';
 export * from './getHistorySagaParam';
 export * from './getLanguageByCode';
 export * from './getOrderAPI';

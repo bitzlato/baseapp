@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { Deposit, fetchHistory, alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import { DepositsCreate, depositsCreateData, depositsCreateError } from '../actions';
 
 const config = (csrfToken?: string): RequestOptions => {
@@ -16,7 +16,7 @@ const DEFAULT_LIMIT = 10;
 export function* depositsCreateSaga(action: DepositsCreate) {
   try {
     const payload: Deposit = yield call(
-      API.post(config(getCsrfToken())),
+      API.post(config(getCSRFToken())),
       '/account/deposits/intention',
       action.payload,
     );

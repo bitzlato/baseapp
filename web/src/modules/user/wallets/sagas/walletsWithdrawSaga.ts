@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { alertPush, sendError } from '../../..';
 import { API, RequestOptions } from '../../../../api';
-import { getCsrfToken } from '../../../../helpers';
+import { getCSRFToken } from '../../../../helpers';
 import {
   walletsWithdrawCcyData,
   walletsWithdrawCcyError,
@@ -18,7 +18,7 @@ const walletsWithdrawCcyOptions = (csrfToken?: string): RequestOptions => {
 export function* walletsWithdrawCcySaga(action: WalletsWithdrawCcyFetch) {
   try {
     yield call(
-      API.post(walletsWithdrawCcyOptions(getCsrfToken())),
+      API.post(walletsWithdrawCcyOptions(getCSRFToken())),
       '/account/withdraws',
       action.payload,
     );
