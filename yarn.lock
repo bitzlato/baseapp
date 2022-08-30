@@ -15031,9 +15031,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-preset-env@npm:^6.7.0":
-  version: 6.7.0
-  resolution: "postcss-preset-env@npm:6.7.0"
+"postcss-preset-env@npm:6.7.1":
+  version: 6.7.1
+  resolution: "postcss-preset-env@npm:6.7.1"
   dependencies:
     autoprefixer: ^9.6.1
     browserslist: ^4.6.4
@@ -15072,7 +15072,7 @@ __metadata:
     postcss-replace-overflow-wrap: ^3.0.0
     postcss-selector-matches: ^4.0.0
     postcss-selector-not: ^4.0.0
-  checksum: 209cbb63443a1631aa97ccfc3b95b1ff519ddaeb672f84d6af501bd9e9ad6727680b5b1bffb8209322e47d93029a69df6064f75cd0b7633b6df943cbef33f22e
+  checksum: 8021910aae20f78b3d940b92fafe7e001a6ea57cc2fa9fdd9b0d32a2d43c7dac12b529abc26fe40047e507de5e914af302ebf652d94037207aafd60e78063114
   languageName: node
   linkType: hard
 
@@ -19595,7 +19595,7 @@ __metadata:
     postcss: ^8.3.6
     postcss-loader: 6.2.1
     postcss-nested: ^5.0.6
-    postcss-preset-env: ^6.7.0
+    postcss-preset-env: 6.7.1
     prettier: ^2.4.1
     qrcode.react: 0.8.0
     react: ^17.0.2
