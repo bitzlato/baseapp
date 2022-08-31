@@ -4,7 +4,7 @@ import { Spinner } from 'react-bootstrap';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps, MapStateToProps, useDispatch } from 'react-redux';
 import { Route, RouteComponentProps, RouteProps, RouterProps, Switch } from 'react-router';
-import { Redirect, useLocation, useParams, withRouter } from 'react-router-dom';
+import { Redirect, useHistory, useLocation, useParams, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { FeesScreen } from 'src/screens/Fees/Fees';
 import type { IntlProps } from 'src/types';
@@ -204,10 +204,12 @@ const PublicRoute: FC<CustomRouteProps> = ({
 const LangHandler: FC = ({ children }) => {
   const dispatch = useDispatch();
   const { lang } = useParams<{ lang?: string }>();
+  const history = useHistory<{ lang?: string }>();
 
   useEffect(() => {
     if (lang) {
       dispatch(changeLanguage(lang));
+      history.replace(history.location.pathname.slice(`/${lang}`.length));
     }
   }, []);
 
