@@ -2778,46 +2778,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pmmmwh/react-refresh-webpack-plugin@npm:^0.5.4":
-  version: 0.5.4
-  resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.5.4"
-  dependencies:
-    ansi-html-community: ^0.0.8
-    common-path-prefix: ^3.0.0
-    core-js-pure: ^3.8.1
-    error-stack-parser: ^2.0.6
-    find-up: ^5.0.0
-    html-entities: ^2.1.0
-    loader-utils: ^2.0.0
-    schema-utils: ^3.0.0
-    source-map: ^0.7.3
-  peerDependencies:
-    "@types/webpack": 4.x || 5.x
-    react-refresh: ">=0.10.0 <1.0.0"
-    sockjs-client: ^1.4.0
-    type-fest: ">=0.17.0 <3.0.0"
-    webpack: ">=4.43.0 <6.0.0"
-    webpack-dev-server: 3.x || 4.x
-    webpack-hot-middleware: 2.x
-    webpack-plugin-serve: 0.x || 1.x
-  peerDependenciesMeta:
-    "@types/webpack":
-      optional: true
-    sockjs-client:
-      optional: true
-    type-fest:
-      optional: true
-    webpack-dev-server:
-      optional: true
-    webpack-hot-middleware:
-      optional: true
-    webpack-plugin-serve:
-      optional: true
-  checksum: 66deb75fe06c0d93f9f6f87c57349013cdc82d4cc536b3aff919fd417df1c6603d14a96448d4088f1a680ec22a75f994b30c374a0042c524dfecd96a942ff674
-  languageName: node
-  linkType: hard
-
-"@pmmmwh/react-refresh-webpack-plugin@npm:^0.5.7":
+"@pmmmwh/react-refresh-webpack-plugin@npm:0.5.7, @pmmmwh/react-refresh-webpack-plugin@npm:^0.5.7":
   version: 0.5.7
   resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.5.7"
   dependencies:
@@ -12844,7 +12805,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "market-docs@workspace:market-docs"
   dependencies:
-    "@pmmmwh/react-refresh-webpack-plugin": ^0.5.4
+    "@pmmmwh/react-refresh-webpack-plugin": 0.5.7
     "@swc/core": 1.2.246
     "@types/react": 17.0.49
     "@types/react-dom": 17.0.17
@@ -17418,7 +17379,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "shared@workspace:shared"
   dependencies:
-    "@pmmmwh/react-refresh-webpack-plugin": ^0.5.4
+    "@pmmmwh/react-refresh-webpack-plugin": 0.5.7
     "@swc/core": 1.2.246
     "@types/react": 17.0.49
     "@types/react-dom": 17.0.17
@@ -19076,7 +19037,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "uibitz@workspace:uibitz"
   dependencies:
-    "@pmmmwh/react-refresh-webpack-plugin": ^0.5.4
+    "@pmmmwh/react-refresh-webpack-plugin": 0.5.7
     "@swc/core": 1.2.246
     "@types/react": 17.0.49
     "@types/react-dom": 17.0.17
