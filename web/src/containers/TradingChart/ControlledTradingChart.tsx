@@ -106,7 +106,7 @@ export const ControlledTradingChart: FC<Props> = ({ marketKind, markets, current
   const updateChart = () => {
     if (ref.current.widget && currentMarket) {
       ref.current.widget.onChartReady(() => {
-        ref.current.widget!.activeChart().setSymbol(currentMarket, () => {
+        ref.current.widget?.activeChart().setSymbol(currentMarket, () => {
           print('Symbol set', currentMarket);
         });
       });
@@ -120,7 +120,7 @@ export const ControlledTradingChart: FC<Props> = ({ marketKind, markets, current
       setChart();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [colorTheme]);
+  }, [colorTheme, markets]);
 
   useEffect(() => {
     if (ref.current.widget) {
