@@ -74,7 +74,7 @@
     "@statoscope/webpack-plugin": "^5.14.1",
     "@svgr/webpack": "^6.2.1",
     "@swc/core": "1.2.246",
-    "@swc/jest": "^0.2.5",
+    "@swc/jest": "0.2.22",
     "@testing-library/react": "12.1.5",
     "@types/axios": "^0.14.0",
     "@types/classnames": "^2.2.6",

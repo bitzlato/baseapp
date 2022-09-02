@@ -1773,7 +1773,7 @@ __metadata:
     "@babel/preset-env": ^7.16.11
     "@babel/preset-typescript": ^7.16.7
     "@swc/core": 1.2.246
-    "@swc/jest": ^0.2.17
+    "@swc/jest": 0.2.22
     "@testing-library/jest-dom": ^5.16.1
     "@types/enzyme": ^3.10.11
     "@types/eslint": ^8
@@ -3443,23 +3443,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/jest@npm:^0.2.17":
-  version: 0.2.17
-  resolution: "@swc/jest@npm:0.2.17"
+"@swc/jest@npm:0.2.22":
+  version: 0.2.22
+  resolution: "@swc/jest@npm:0.2.22"
   dependencies:
     "@jest/create-cache-key-function": ^27.4.2
   peerDependencies:
     "@swc/core": "*"
-  checksum: 33e08c71adaa3d46f47b888b954c8f61513804a1b3ee24fdc13ccbbb89ca6c96b474eef4002b96edcd6090a308a1aafd313073ae4bcd6339fcc3a22e2f29f1b7
-  languageName: node
-  linkType: hard
-
-"@swc/jest@npm:^0.2.5":
-  version: 0.2.5
-  resolution: "@swc/jest@npm:0.2.5"
-  peerDependencies:
-    "@swc/core": "*"
-  checksum: 3a1b2717623a1419f0f3fc04bc7e2cd112a084e1763a33d9df06bda9431b6dd67bff8dba358162b23f1911f9a0e67422f09afd0983c77b4dc6f9fbde7a712bd8
+  checksum: c624cfcc9325a719fc7d811536011c4bde0c63c808827b47d7bbcc57621323146cb3891d8702fd01c1bebfc54a9148692f772af4db8e839eb2c6ccd7850fa5f5
   languageName: node
   linkType: hard
 
@@ -19561,7 +19552,7 @@ __metadata:
     "@statoscope/webpack-plugin": ^5.14.1
     "@svgr/webpack": ^6.2.1
     "@swc/core": 1.2.246
-    "@swc/jest": ^0.2.5
+    "@swc/jest": 0.2.22
     "@testing-library/react": 12.1.5
     "@types/axios": ^0.14.0
     "@types/classnames": ^2.2.6

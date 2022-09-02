@@ -57,7 +57,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-env", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:7.16.11"],\
             ["@babel/preset-typescript", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:7.16.7"],\
             ["@swc/core", "npm:1.2.246"],\
-            ["@swc/jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.17"],\
+            ["@swc/jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.22"],\
             ["@testing-library/jest-dom", "npm:5.16.1"],\
             ["@types/enzyme", "npm:3.10.11"],\
             ["@types/eslint", "npm:8.4.1"],\
@@ -4536,7 +4536,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-env", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:7.16.11"],\
             ["@babel/preset-typescript", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:7.16.7"],\
             ["@swc/core", "npm:1.2.246"],\
-            ["@swc/jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.17"],\
+            ["@swc/jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.22"],\
             ["@testing-library/jest-dom", "npm:5.16.1"],\
             ["@types/enzyme", "npm:3.10.11"],\
             ["@types/eslint", "npm:8.4.1"],\
@@ -6663,37 +6663,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@swc/jest", [\
-        ["npm:0.2.17", {\
-          "packageLocation": "./.yarn/cache/@swc-jest-npm-0.2.17-eac7a37005-33e08c71ad.zip/node_modules/@swc/jest/",\
+        ["npm:0.2.22", {\
+          "packageLocation": "./.yarn/cache/@swc-jest-npm-0.2.22-4a6b0339d9-c624cfcc93.zip/node_modules/@swc/jest/",\
           "packageDependencies": [\
-            ["@swc/jest", "npm:0.2.17"]\
+            ["@swc/jest", "npm:0.2.22"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["npm:0.2.5", {\
-          "packageLocation": "./.yarn/cache/@swc-jest-npm-0.2.5-2355da0fa9-3a1b271762.zip/node_modules/@swc/jest/",\
+        ["virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.22", {\
+          "packageLocation": "./.yarn/__virtual__/@swc-jest-virtual-f64e85b0ae/0/cache/@swc-jest-npm-0.2.22-4a6b0339d9-c624cfcc93.zip/node_modules/@swc/jest/",\
           "packageDependencies": [\
-            ["@swc/jest", "npm:0.2.5"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.2.5", {\
-          "packageLocation": "./.yarn/__virtual__/@swc-jest-virtual-f6677d01e6/0/cache/@swc-jest-npm-0.2.5-2355da0fa9-3a1b271762.zip/node_modules/@swc/jest/",\
-          "packageDependencies": [\
-            ["@swc/jest", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.2.5"],\
-            ["@swc/core", "npm:1.2.246"],\
-            ["@types/swc__core", null]\
-          ],\
-          "packagePeers": [\
-            "@swc/core",\
-            "@types/swc__core"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.17", {\
-          "packageLocation": "./.yarn/__virtual__/@swc-jest-virtual-c5e201e804/0/cache/@swc-jest-npm-0.2.17-eac7a37005-33e08c71ad.zip/node_modules/@swc/jest/",\
-          "packageDependencies": [\
-            ["@swc/jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.17"],\
+            ["@swc/jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.22"],\
             ["@jest/create-cache-key-function", "npm:27.4.2"],\
             ["@swc/core", "npm:1.2.246"],\
             ["@types/swc__core", null]\
@@ -27152,7 +27132,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@statoscope/webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.14.1"],\
             ["@svgr/webpack", "npm:6.2.1"],\
             ["@swc/core", "npm:1.2.246"],\
-            ["@swc/jest", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.2.5"],\
+            ["@swc/jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.22"],\
             ["@testing-library/react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:12.1.5"],\
             ["@types/axios", "npm:0.14.0"],\
             ["@types/classnames", "npm:2.2.11"],\
