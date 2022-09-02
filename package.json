@@ -27,7 +27,7 @@
     "@babel/preset-typescript": "^7.16.7",
     "@swc/core": "1.2.246",
     "@swc/jest": "^0.2.17",
-    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/jest-dom": "5.16.5",
     "@types/enzyme": "^3.10.11",
     "@types/eslint": "^8",
     "@types/jest": "^27.4.0",
