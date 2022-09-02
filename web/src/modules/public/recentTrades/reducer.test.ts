@@ -15,6 +15,7 @@ import { PublicTradeEvent } from './types';
 describe('recentTrade reducer', () => {
   const market: Market = {
     id: 'ethbtc',
+    symbol: 'ethbtc',
     name: 'ETH/BTC',
     base_unit: 'eth',
     quote_unit: 'btc',

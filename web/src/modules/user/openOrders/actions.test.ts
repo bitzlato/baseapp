@@ -22,6 +22,7 @@ describe('Open Orders actions', () => {
     const payload = {
       market: {
         id: 'ethusd',
+        symbol: 'ethusd',
         name: 'ETH/USD',
         base_unit: 'eth',
         quote_unit: 'usd',

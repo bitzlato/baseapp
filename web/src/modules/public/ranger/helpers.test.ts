@@ -107,6 +107,7 @@ describe('ranger helpers', () => {
   describe('streamsBuilder', () => {
     const marketExample: Market = {
       id: 'abcdefg',
+      symbol: 'abcdefg',
       name: 'ABCD/EFG',
       base_unit: 'abcd',
       quote_unit: 'efg',

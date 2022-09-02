@@ -24,6 +24,7 @@ describe('Open Orders Fetch', () => {
 
   const fakeMarket: Market = {
     id: 'ethusd',
+    symbol: 'ethusd',
     name: 'ETH/USD',
     base_unit: 'eth',
     quote_unit: 'usd',

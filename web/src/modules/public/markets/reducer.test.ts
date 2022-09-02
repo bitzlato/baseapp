@@ -7,6 +7,7 @@ describe('Markets reducer', () => {
   const fakeMarkets: Market[] = [
     {
       id: 'usdbtc',
+      symbol: 'usdbtc',
       name: 'USD/BTC',
       base_unit: 'usd',
       quote_unit: 'btc',
@@ -18,6 +19,7 @@ describe('Markets reducer', () => {
     },
     {
       id: 'btceth',
+      symbol: 'btceth',
       name: 'BTC/ETH',
       base_unit: 'btc',
       quote_unit: 'eth',

@@ -34,6 +34,7 @@ describe('Markets & Tickers sagas', () => {
   const fakeMarkets: Market[] = [
     {
       id: 'usdbtc',
+      symbol: 'usdbtc',
       name: 'USD/BTC',
       base_unit: 'usd',
       quote_unit: 'btc',
@@ -45,6 +46,7 @@ describe('Markets & Tickers sagas', () => {
     },
     {
       id: 'btceth',
+      symbol: 'btceth',
       name: 'BTC/ETH',
       base_unit: 'btc',
       quote_unit: 'eth',
