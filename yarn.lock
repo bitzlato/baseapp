@@ -1783,7 +1783,7 @@ __metadata:
     "@types/testing-library__jest-dom": 5.14.5
     "@typescript-eslint/eslint-plugin": ^5.35.1
     "@typescript-eslint/parser": ^5.35.1
-    "@vanilla-extract/babel-plugin": ^1.1.4
+    "@vanilla-extract/babel-plugin": 1.1.7
     "@vanilla-extract/css": ^1.7.2
     "@wojtekmaj/enzyme-adapter-react-17": ^0.6.6
     babel-jest: ^27.5.1
@@ -4498,32 +4498,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vanilla-extract/babel-plugin@npm:^1.1.4":
-  version: 1.1.4
-  resolution: "@vanilla-extract/babel-plugin@npm:1.1.4"
+"@vanilla-extract/babel-plugin@npm:1.1.7":
+  version: 1.1.7
+  resolution: "@vanilla-extract/babel-plugin@npm:1.1.7"
   dependencies:
     "@babel/core": ^7.13.10
     "@babel/template": ^7.12.13
-    "@vanilla-extract/integration": ^2.0.1
-  checksum: ef439d07150197853c18b08f00f910299bddfe36cfc473aa212c9f460d4236b972bfce16868c3bb79417dbb24cf341f3007e30424dcb1cca5ae2b1cc541e8022
-  languageName: node
-  linkType: hard
-
-"@vanilla-extract/css@npm:^1.6.8":
-  version: 1.6.8
-  resolution: "@vanilla-extract/css@npm:1.6.8"
-  dependencies:
-    "@emotion/hash": ^0.8.0
-    "@vanilla-extract/private": ^1.0.3
-    chalk: ^4.1.1
-    css-what: ^5.0.1
-    cssesc: ^3.0.0
-    csstype: ^3.0.7
-    deep-object-diff: ^1.1.0
-    deepmerge: ^4.2.2
-    escape-string-regexp: ^4.0.0
-    outdent: ^0.8.0
-  checksum: 1bee577c83ef11e3bdba1cb1b29fee2c07774eed3b304c4f6d674ad5ebcebe755278db5de00de0ed98463484c74982318e777acba9aed4770833e1c9383d45f3
+    "@vanilla-extract/integration": ^5.0.0
+  checksum: 0fd00a1190c9413320d82ef797ef3149ba89e64eaa18d0d09d0235c025d6ab41b453718654e390c84aca322b883d663e3300d672bae9d74157838f73244ba94b
   languageName: node
   linkType: hard
 
@@ -4543,22 +4525,6 @@ __metadata:
     media-query-parser: ^2.0.2
     outdent: ^0.8.0
   checksum: 7e0f4b77532ae6c42de14237eea0f3a0269648f1515c7bf52bcbc45205179060b18530d44452fcf4031e990d60c450c6673b27fadf1d16fe8c202503e809fffd
-  languageName: node
-  linkType: hard
-
-"@vanilla-extract/integration@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@vanilla-extract/integration@npm:2.0.1"
-  dependencies:
-    "@vanilla-extract/css": ^1.6.8
-    chalk: ^4.1.1
-    esbuild: ^0.11.16
-    eval: ^0.1.6
-    find-up: ^5.0.0
-    javascript-stringify: ^2.0.1
-    lodash: ^4.17.21
-    outdent: ^0.8.0
-  checksum: f7b49435716083a1fb0b2b6ecb0316c989dbe5292f61c381f81dbcb3cf388fb1475501e53f0f4e352b18ae296a2d2f7541776bdf586c9c34844b714ad2dd56c8
   languageName: node
   linkType: hard
 
@@ -8664,7 +8630,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eval@npm:0.1.6, eval@npm:^0.1.6":
+"eval@npm:0.1.6":
   version: 0.1.6
   resolution: "eval@npm:0.1.6"
   dependencies:

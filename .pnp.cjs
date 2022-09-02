@@ -67,7 +67,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/testing-library__jest-dom", "npm:5.14.5"],\
             ["@typescript-eslint/eslint-plugin", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:5.35.1"],\
             ["@typescript-eslint/parser", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:5.35.1"],\
-            ["@vanilla-extract/babel-plugin", "npm:1.1.4"],\
+            ["@vanilla-extract/babel-plugin", "npm:1.1.7"],\
             ["@vanilla-extract/css", "npm:1.7.2"],\
             ["@wojtekmaj/enzyme-adapter-react-17", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.6.6"],\
             ["babel-jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:27.5.1"],\
@@ -4546,7 +4546,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/testing-library__jest-dom", "npm:5.14.5"],\
             ["@typescript-eslint/eslint-plugin", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:5.35.1"],\
             ["@typescript-eslint/parser", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:5.35.1"],\
-            ["@vanilla-extract/babel-plugin", "npm:1.1.4"],\
+            ["@vanilla-extract/babel-plugin", "npm:1.1.7"],\
             ["@vanilla-extract/css", "npm:1.7.2"],\
             ["@wojtekmaj/enzyme-adapter-react-17", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.6.6"],\
             ["babel-jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:27.5.1"],\
@@ -7978,35 +7978,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@vanilla-extract/babel-plugin", [\
-        ["npm:1.1.4", {\
-          "packageLocation": "./.yarn/cache/@vanilla-extract-babel-plugin-npm-1.1.4-f9034d2a2d-ef439d0715.zip/node_modules/@vanilla-extract/babel-plugin/",\
+        ["npm:1.1.7", {\
+          "packageLocation": "./.yarn/cache/@vanilla-extract-babel-plugin-npm-1.1.7-3feca6fadc-0fd00a1190.zip/node_modules/@vanilla-extract/babel-plugin/",\
           "packageDependencies": [\
-            ["@vanilla-extract/babel-plugin", "npm:1.1.4"],\
+            ["@vanilla-extract/babel-plugin", "npm:1.1.7"],\
             ["@babel/core", "npm:7.17.5"],\
             ["@babel/template", "npm:7.16.7"],\
-            ["@vanilla-extract/integration", "npm:2.0.1"]\
+            ["@vanilla-extract/integration", "npm:5.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@vanilla-extract/css", [\
-        ["npm:1.6.8", {\
-          "packageLocation": "./.yarn/cache/@vanilla-extract-css-npm-1.6.8-2b0da5ed75-1bee577c83.zip/node_modules/@vanilla-extract/css/",\
-          "packageDependencies": [\
-            ["@vanilla-extract/css", "npm:1.6.8"],\
-            ["@emotion/hash", "npm:0.8.0"],\
-            ["@vanilla-extract/private", "npm:1.0.3"],\
-            ["chalk", "npm:4.1.2"],\
-            ["css-what", "npm:5.1.0"],\
-            ["cssesc", "npm:3.0.0"],\
-            ["csstype", "npm:3.0.10"],\
-            ["deep-object-diff", "npm:1.1.7"],\
-            ["deepmerge", "npm:4.2.2"],\
-            ["escape-string-regexp", "npm:4.0.0"],\
-            ["outdent", "npm:0.8.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:1.7.2", {\
           "packageLocation": "./.yarn/cache/@vanilla-extract-css-npm-1.7.2-42abda58de-7e0f4b7753.zip/node_modules/@vanilla-extract/css/",\
           "packageDependencies": [\
@@ -8027,21 +8010,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@vanilla-extract/integration", [\
-        ["npm:2.0.1", {\
-          "packageLocation": "./.yarn/cache/@vanilla-extract-integration-npm-2.0.1-f597976318-f7b4943571.zip/node_modules/@vanilla-extract/integration/",\
-          "packageDependencies": [\
-            ["@vanilla-extract/integration", "npm:2.0.1"],\
-            ["@vanilla-extract/css", "npm:1.6.8"],\
-            ["chalk", "npm:4.1.2"],\
-            ["esbuild", "npm:0.11.23"],\
-            ["eval", "npm:0.1.6"],\
-            ["find-up", "npm:5.0.0"],\
-            ["javascript-stringify", "npm:2.1.0"],\
-            ["lodash", "npm:4.17.21"],\
-            ["outdent", "npm:0.8.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:5.0.0", {\
           "packageLocation": "./.yarn/cache/@vanilla-extract-integration-npm-5.0.0-dfa0fe4268-fc8d6ea3a3.zip/node_modules/@vanilla-extract/integration/",\
           "packageDependencies": [\
