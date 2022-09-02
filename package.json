@@ -37,7 +37,7 @@
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
     "@vanilla-extract/babel-plugin": "^1.1.4",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
+    "@wojtekmaj/enzyme-adapter-react-17": "0.6.7",
     "babel-jest": "^27.5.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "enzyme": "^3.11.0",
