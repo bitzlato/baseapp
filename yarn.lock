@@ -1775,7 +1775,7 @@ __metadata:
     "@swc/core": 1.2.246
     "@swc/jest": ^0.2.17
     "@testing-library/jest-dom": ^5.16.1
-    "@types/enzyme": ^3.10.11
+    "@types/enzyme": 3.10.12
     "@types/eslint": ^8
     "@types/jest": ^27.4.0
     "@types/react": 17.0.49
@@ -3692,13 +3692,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/enzyme@npm:^3.10.11":
-  version: 3.10.11
-  resolution: "@types/enzyme@npm:3.10.11"
+"@types/enzyme@npm:3.10.12":
+  version: 3.10.12
+  resolution: "@types/enzyme@npm:3.10.12"
   dependencies:
     "@types/cheerio": "*"
     "@types/react": "*"
-  checksum: 4085899b16e691e715f374345fae2963dc89a002c55a249381e37f94d93c8d016ad7208a8d11cc0f2d8c7cdfa6fa9f5590f0bfae984e51571f5d1e9c2d6ee782
+  checksum: 356e9142566b68c9b324ae71a7b93f03512a1c009a1d337a25ce4f495590f3e79de08aa4a0016d6224cb228c27832d92b6d7d3276ba5962302c41d0577e8a912
   languageName: node
   linkType: hard
 
@@ -19565,7 +19565,7 @@ __metadata:
     "@testing-library/react": 12.1.5
     "@types/axios": ^0.14.0
     "@types/classnames": ^2.2.6
-    "@types/enzyme": ^3.10.11
+    "@types/enzyme": 3.10.12
     "@types/history": 4.7.11
     "@types/jest": ^26.0.10
     "@types/multicoin-address-validator": ^0.5.0

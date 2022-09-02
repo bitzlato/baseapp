@@ -59,7 +59,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@swc/core", "npm:1.2.246"],\
             ["@swc/jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.17"],\
             ["@testing-library/jest-dom", "npm:5.16.1"],\
-            ["@types/enzyme", "npm:3.10.11"],\
+            ["@types/enzyme", "npm:3.10.12"],\
             ["@types/eslint", "npm:8.4.1"],\
             ["@types/jest", "npm:27.4.0"],\
             ["@types/react", "npm:17.0.49"],\
@@ -4538,7 +4538,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@swc/core", "npm:1.2.246"],\
             ["@swc/jest", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.2.17"],\
             ["@testing-library/jest-dom", "npm:5.16.1"],\
-            ["@types/enzyme", "npm:3.10.11"],\
+            ["@types/enzyme", "npm:3.10.12"],\
             ["@types/eslint", "npm:8.4.1"],\
             ["@types/jest", "npm:27.4.0"],\
             ["@types/react", "npm:17.0.49"],\
@@ -6977,10 +6977,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/enzyme", [\
-        ["npm:3.10.11", {\
-          "packageLocation": "./.yarn/cache/@types-enzyme-npm-3.10.11-b2cc4cff6b-4085899b16.zip/node_modules/@types/enzyme/",\
+        ["npm:3.10.12", {\
+          "packageLocation": "./.yarn/cache/@types-enzyme-npm-3.10.12-eae4c96ec1-356e914256.zip/node_modules/@types/enzyme/",\
           "packageDependencies": [\
-            ["@types/enzyme", "npm:3.10.11"],\
+            ["@types/enzyme", "npm:3.10.12"],\
             ["@types/cheerio", "npm:0.22.30"],\
             ["@types/react", "npm:17.0.49"]\
           ],\
@@ -8617,7 +8617,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/@wojtekmaj-enzyme-adapter-react-17-virtual-f2ce4b699f/0/cache/@wojtekmaj-enzyme-adapter-react-17-npm-0.6.6-ce9d110efc-bf6dad4131.zip/node_modules/@wojtekmaj/enzyme-adapter-react-17/",\
           "packageDependencies": [\
             ["@wojtekmaj/enzyme-adapter-react-17", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:0.6.6"],\
-            ["@types/enzyme", "npm:3.10.11"],\
+            ["@types/enzyme", "npm:3.10.12"],\
             ["@types/react", "npm:17.0.49"],\
             ["@types/react-dom", "npm:17.0.17"],\
             ["@wojtekmaj/enzyme-adapter-utils", "virtual:f2ce4b699f39a17fd03d3d133152c39bad7658912b2a47b9725b3c987b7199e2fa4cde3fd653a51b61f634f2a63bf688d6bf7e12dec84c448cef667cb0205cee#npm:0.1.2"],\
@@ -12799,7 +12799,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["enzyme-to-json", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:3.6.2"],\
             ["@types/cheerio", "npm:0.22.30"],\
-            ["@types/enzyme", "npm:3.10.11"],\
+            ["@types/enzyme", "npm:3.10.12"],\
             ["enzyme", "npm:3.11.0"],\
             ["lodash", "npm:4.17.21"],\
             ["react-is", "npm:16.13.1"]\
@@ -27156,7 +27156,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:12.1.5"],\
             ["@types/axios", "npm:0.14.0"],\
             ["@types/classnames", "npm:2.2.11"],\
-            ["@types/enzyme", "npm:3.10.11"],\
+            ["@types/enzyme", "npm:3.10.12"],\
             ["@types/history", "npm:4.7.11"],\
             ["@types/jest", "npm:26.0.20"],\
             ["@types/multicoin-address-validator", "npm:0.5.0"],\
