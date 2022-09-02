@@ -21,6 +21,7 @@ export type MarketFilter = MarketFilterSignificantDigit | MarketFilterCustomStep
 
 export interface Market {
   id: MarketId;
+  symbol: string;
   name: string;
   base_unit: string;
   quote_unit: string;

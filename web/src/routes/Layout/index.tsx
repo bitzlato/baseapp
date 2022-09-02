@@ -99,6 +99,7 @@ import { UserAdScreen } from 'web/src/screens/p2p/UserAdScreen';
 import { WalletsStatScreen } from 'web/src/screens/WalletsStat/WalletsStat';
 import { ProfileTelegramMobileScreen } from 'web/src/mobile/screens/ProfileTelegramMobileScreen';
 import { ComponentsScreen } from 'web/src/screens/docs/ComponentsScreen';
+import { TradingViewScreen } from 'web/src/screens/TradingViewScreen/TradingViewScreen';
 
 interface ReduxProps {
   colorTheme: string;
@@ -369,6 +370,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         exact
       />,
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
+      <Route key="trading-view" exact path="/trading-view" component={TradingViewScreen} />,
       ...(process.env.REACT_APP_RELEASE_STAGE === 'development'
         ? [
             <Route
