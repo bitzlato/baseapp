@@ -25,6 +25,7 @@ describe('Saga: depth', () => {
 
   const fakeMarket: Market = {
     id: 'btczar',
+    symbol: 'btczar',
     name: 'BTC/ZAR',
     base_unit: 'btc',
     quote_unit: 'zar',

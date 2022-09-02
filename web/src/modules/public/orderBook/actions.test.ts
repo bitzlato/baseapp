@@ -17,6 +17,7 @@ import { OrderBookState } from './types';
 describe('Orderbook/MarketDepth actions', () => {
   const fakeMarket: Market = {
     id: 'btczar',
+    symbol: 'btczar',
     name: 'BTC/ZAR',
     base_unit: 'btc',
     quote_unit: 'zar',

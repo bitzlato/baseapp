@@ -67,6 +67,7 @@ describe('Recent Trades module', () => {
   const currentMarket: Market = {
     name: 'XRP/BTC',
     id: 'xrpbtc',
+    symbol: 'xrpbtc',
     base_unit: 'xrp',
     quote_unit: 'btc',
     min_price: '0.0',

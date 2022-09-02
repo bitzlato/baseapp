@@ -14,6 +14,7 @@ describe('Open Orders reducer', () => {
     const payload: actions.UserOpenOrdersFetch['payload'] = {
       market: {
         id: 'ethusd',
+        symbol: 'ethusd',
         name: 'ETH/USD',
         base_unit: 'eth',
         quote_unit: 'usd',
