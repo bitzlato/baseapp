@@ -3,7 +3,7 @@
   "dependencies": {
     "promise-polyfill": "6.0.2",
     "tslib": "1.7.1",
-    "whatwg-fetch": "2.0.3"
+    "whatwg-fetch": "2.0.4"
   },
   "devDependencies": {
     "rollup": "0.49.2",
