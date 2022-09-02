@@ -17421,10 +17421,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["js-combinatorics", [\
-        ["npm:0.5.0", {\
-          "packageLocation": "./.yarn/cache/js-combinatorics-npm-0.5.0-b13084e7e4-b72e84c19d.zip/node_modules/js-combinatorics/",\
+        ["npm:0.6.1", {\
+          "packageLocation": "./.yarn/cache/js-combinatorics-npm-0.6.1-cae5ed3b83-35974272c5.zip/node_modules/js-combinatorics/",\
           "packageDependencies": [\
-            ["js-combinatorics", "npm:0.5.0"]\
+            ["js-combinatorics", "npm:0.6.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -27202,7 +27202,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["html-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.5.0"],\
             ["i18n-iso-countries", "npm:3.7.8"],\
             ["jest", "npm:26.6.3"],\
-            ["js-combinatorics", "npm:0.5.0"],\
+            ["js-combinatorics", "npm:0.6.1"],\
             ["lodash-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.11.6"],\
             ["mini-css-extract-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.6.1"],\
             ["moment", "npm:2.29.1"],\

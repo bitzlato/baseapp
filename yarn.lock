@@ -12134,10 +12134,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-combinatorics@npm:0.5.0":
-  version: 0.5.0
-  resolution: "js-combinatorics@npm:0.5.0"
-  checksum: b72e84c19de738f164a845c8207ed45b115e685144a1369266f264a7b10e0527cecd0055b96aaa2e28a974a1123290043d67ebd519c4eae6725ba5918c7fe2b8
+"js-combinatorics@npm:0.6.1":
+  version: 0.6.1
+  resolution: "js-combinatorics@npm:0.6.1"
+  checksum: 35974272c5488fb12f564f37e9b277887c0fd139198d958415f95e79cfcfc00cfd4b70edc923895a597d0ba414d45a4d4c9c11bb78dca89526a120ab128c6a5d
   languageName: node
   linkType: hard
 
@@ -19611,7 +19611,7 @@ __metadata:
     html-webpack-plugin: ^5.5.0
     i18n-iso-countries: ^3.7.8
     jest: ^26.4.1
-    js-combinatorics: 0.5.0
+    js-combinatorics: 0.6.1
     lodash-webpack-plugin: ^0.11.6
     mini-css-extract-plugin: ^2.6.1
     moment: ^2.23.0
