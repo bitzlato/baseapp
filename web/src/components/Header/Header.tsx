@@ -65,7 +65,7 @@ const Header: FC = () => {
   const isUserFetching = useSelector(selectUserFetching);
   const { pathname } = useLocation();
   const history = useHistory();
-  const isTradingPage = pathname.includes('/trading');
+  const isTradingPage = pathname.endsWith('/trading') || pathname.includes('/trading/');
   const p2pURL = getLinkToP2P(language);
   const merchantClient = (user.bitzlato_user?.roles ?? []).includes('merchantClient');
 
