@@ -74,7 +74,9 @@ export const TradingStatistics: FC = () => {
                       href={
                         market.isExchange
                           ? `/trading/${market.symbol}`
-                          : `/p2p/buy-${market.symbol.replace('_', '-')}`
+                          : `/p2p/buy-${market.currencyCode.toLowerCase()}-${market.symbol
+                              .split('_')[1]
+                              ?.toLowerCase()}` // : `/p2p/buy-${market.symbol.replace('_', '-')}`
                       }
                     >
                       {market.isExchange

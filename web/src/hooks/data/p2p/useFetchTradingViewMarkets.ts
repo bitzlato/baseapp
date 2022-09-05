@@ -4,19 +4,19 @@
 
 const MARKETS = [
   {
-    symbol: 'btc_rub-sberbank',
+    symbol: 'BTC_Sberbank',
     ccCode: 'BTC',
     currency: 'RUB',
     description: 'Sberbank',
   },
   {
-    symbol: 'btc_rub-qiwi',
+    symbol: 'BTC_QIWI',
     ccCode: 'BTC',
     currency: 'RUB',
     description: 'QIWI',
   },
   {
-    symbol: 'btc_rub-tinkoff',
+    symbol: 'BTC_Tinkoff',
     ccCode: 'BTC',
     currency: 'RUB',
     description: 'Tinkoff',
