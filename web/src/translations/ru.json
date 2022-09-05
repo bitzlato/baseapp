@@ -70,7 +70,7 @@
   "notifications.tradeStatusReminderConfirmTradeBuyer": "Отправьте {fiatAmount} {fiatCurrency} ({paymethodName}) пользователю {counterUsername} в рамках сделки #{tradeId}. ⚠️ Если Вы не отправите средства, сделка будет отменена через 15 минут.",
   "notifications.tradeStatusReminderPaymentSeller": "Пользователь {counterUsername} подтвердил оплату в размере {fiatAmount} {fiatCurrency} ({paymethodName}) по сделке #{tradeId}, проверьте поступление средств и отпустите монеты. ⚠️ Не отправляйте монеты до поступления средств.",
   "notifications.tradeStatusReminderPaymentBuyer": "Пользователь {counterUsername} не подтвердил оплату в размере {fiatAmount} {fiatCurrency} ({paymethodName}) по сделке #{tradeId}, вы можете открыть спор.",
-  "notifications.tradeWillExpire": "Сделка #{tradeId} будет автоматически отменена {time, fromNow}",
+  "notifications.tradeWillExpire": "Сделка #{tradeId} будет автоматически отменена",
   "notifications.unFreeze": "Ваш аккаунт разморожен",
   "notifications.unFreezeReason": "Причина разморозки \"{reason}\". Типы операций \"{type}\".",
   "notifications.unfreeze": "Финансовые операции вновь доступны на вашем аккаунте, ограничения были сняты!",
