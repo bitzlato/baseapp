@@ -1810,7 +1810,7 @@ __metadata:
     stylelint: ^14.3.0
     stylelint-config-standard: ^24.0.0
     stylelint-order: ^5.0.0
-    swc-loader: ^0.1.15
+    swc-loader: ^0.2.0
     typescript: ^4.8.2
     webpack: ^5.69.0
     webpack-cli: ^4.9.2
@@ -12863,7 +12863,7 @@ __metadata:
     stream-browserify: ^3.0.0
     style-loader: ^3.3.1
     swagger-ui-react: ^4.5.0
-    swc-loader: ^0.1.15
+    swc-loader: ^0.2.0
     url: ^0.11.0
     webpack: ^5.69.0
     webpack-cli: ^4.9.2
@@ -17427,7 +17427,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-refresh: ^0.11.0
-    swc-loader: ^0.1.15
+    swc-loader: ^0.2.0
     webpack: ^5.69.0
     webpack-cli: ^4.9.2
     webpack-dev-server: ^4.7.4
@@ -18418,15 +18418,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swc-loader@npm:^0.1.15":
-  version: 0.1.15
-  resolution: "swc-loader@npm:0.1.15"
-  dependencies:
-    loader-utils: ^2.0.0
+"swc-loader@npm:^0.2.0":
+  version: 0.2.3
+  resolution: "swc-loader@npm:0.2.3"
   peerDependencies:
-    "@swc/core": ^1.2.52
+    "@swc/core": ^1.2.147
     webpack: ">=2"
-  checksum: dd3b5893cc04abba85f7f3abbd97f4e810da5df24fe87123d4c0b4ac8559df37b59b3b044e88661e9ae52cbb111e0eb6eff02c96e243f984f26cba651eb90f15
+  checksum: 010d84d399525c0185d36d62c86c55ae017e7a90046bc8a39be4b7e07526924037868049f6037bc966da98151cb2600934b96a66279b742d3c413a718b427251
   languageName: node
   linkType: hard
 
@@ -19086,7 +19084,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-refresh: ^0.11.0
-    swc-loader: ^0.1.15
+    swc-loader: ^0.2.0
     webpack: ^5.69.0
     webpack-cli: ^4.9.2
     webpack-dev-server: ^4.7.4
@@ -19655,7 +19653,7 @@ __metadata:
     sass-loader: ^12.2.0
     src: "link:./src"
     style-loader: 3.3.1
-    swc-loader: ^0.1.15
+    swc-loader: ^0.2.0
     swr: ^1.2.2
     timezones.json: ^1.6.1
     transition-hook: ^1.5.1
