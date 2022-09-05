@@ -120,7 +120,7 @@ export const ControlledTradingChart: FC<Props> = ({ marketKind, markets, current
       setChart();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [colorTheme, markets]);
+  }, [colorTheme, markets, marketKind]);
 
   useEffect(() => {
     if (ref.current.widget) {
