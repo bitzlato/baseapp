@@ -18,7 +18,7 @@ import * as s from './TradingStatistics.css';
 
 export const TradingStatistics: FC = () => {
   const t = useT();
-  const cryptoCurrencies = useCryptoCurrencies();
+  const cryptoCurrencies = useCryptoCurrencies()?.filter((c) => c.code === 'BTC');
   useMarketsFetch();
 
   const [selectedCryptoCurrency, setSelectedCryptoCurrency] = useState<BaseCurrency>();
