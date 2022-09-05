@@ -4,5 +4,5 @@
     "config:base",
     ":preserveSemverRanges"
   ],
-  "ignorePaths": ["/web/public/**", "/web/src/**"]
+  "ignorePaths": ["web/public/**"]
 }
