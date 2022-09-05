@@ -176,7 +176,12 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
         </Text>
       )}
       <Box row justify="end">
-        <Button color="primary" onClick={handleSubmit} disabled={isButtonDisabled()}>
+        <Button
+          data-gtm-click="create_withdraw"
+          color="primary"
+          disabled={isButtonDisabled()}
+          onClick={handleSubmit}
+        >
           {countdown > 0
             ? formatSeconds(countdown)
             : t('page.body.wallets.tabs.withdraw.content.button')}

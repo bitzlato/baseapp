@@ -458,13 +458,14 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       <div className="cr-order-item">
         <Box
           as={Button}
-          block
-          disabled={checkButtonIsDisabled()}
-          onClick={handleSubmit}
+          data-gtm-click={type === 'buy' ? 'create_order_buy' : 'create_order_sell'}
           size="lg"
           variant={type === 'buy' ? 'success' : 'danger'}
           row
           spacing
+          block
+          disabled={checkButtonIsDisabled()}
+          onClick={handleSubmit}
         >
           <span>{t(`page.body.openOrders.header.side.${type}`)}</span>
           <CurrencyTicker symbol={to} />

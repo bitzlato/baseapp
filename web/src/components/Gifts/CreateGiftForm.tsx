@@ -378,7 +378,7 @@ export const CreateGiftForm: FC<Props> = ({ user, onSubmit }) => {
       </Stack>
 
       <Box mt="6x" className={s.buttonSubmitContainer}>
-        <Button fullWidth onClick={handleSubmit}>
+        <Button data-gtm-click="create_gift" fullWidth onClick={handleSubmit}>
           {t('gifts.createGift')}
         </Button>
       </Box>

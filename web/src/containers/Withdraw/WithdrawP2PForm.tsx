@@ -179,7 +179,12 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
           <WithdrawVoucher count={voucherCount} value={voucher} onChange={setVoucher} />
         )}
         <Box flex="1" self="end" row justify="end">
-          <Button color="primary" onClick={handleSubmit} disabled={isButtonDisabled()}>
+          <Button
+            data-gtm-click="create_withdraw"
+            color="primary"
+            disabled={isButtonDisabled()}
+            onClick={handleSubmit}
+          >
             {countdown > 0
               ? formatSeconds(countdown)
               : t('page.body.wallets.tabs.withdraw.content.button')}

@@ -183,7 +183,12 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
             <span>{t('Free')}</span>
           </SummaryField>
           <Box flex="1" self="end" row justify="end">
-            <Button variant="primary" onClick={handleTransfer} disabled={disableTransfer}>
+            <Button
+              data-gtm-click="create_transfer"
+              variant="primary"
+              disabled={disableTransfer}
+              onClick={handleTransfer}
+            >
               {t('Transfer.verb')}
             </Button>
           </Box>
