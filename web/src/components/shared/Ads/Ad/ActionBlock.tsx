@@ -44,6 +44,7 @@ type Props = {
   unactiveReason: string;
   inputsEl: ReactNode;
   startTradeEnabled: boolean | '';
+  isBuy: boolean;
   handleClickStart: () => void;
 };
 
@@ -52,6 +53,7 @@ export const ActionBlock: FC<Props> = ({
   unactiveReason,
   inputsEl,
   startTradeEnabled,
+  isBuy,
   handleClickStart,
 }) => {
   const { isMobileDevice, user } = useAppContext();
@@ -134,7 +136,11 @@ export const ActionBlock: FC<Props> = ({
   return (
     <Box flex={1} display="flex" flexDirection="column" gap="4x" position="relative">
       {inputsEl}
-      <Button onClick={handleClickStart} disabled={!startTradeEnabled}>
+      <Button
+        data-gtm-click={isBuy ? 'start_deal_buy' : 'start_deal_sell'}
+        disabled={!startTradeEnabled}
+        onClick={handleClickStart}
+      >
         {t('Start trade')}
       </Button>
     </Box>

@@ -384,11 +384,12 @@ export const QuickExchangeContainer: React.FC = () => {
             </Box>
           </Box>
           <Box
+            as={Button}
+            data-gtm-click="create_quick_exchange"
             row
             spacing="2"
-            as={Button}
-            onClick={handleExchange}
             disabled={noAmount || rateOutOfDate || exchangeFetching}
+            onClick={handleExchange}
           >
             <span>
               {noMarket

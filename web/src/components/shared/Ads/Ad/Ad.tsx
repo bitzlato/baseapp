@@ -394,6 +394,7 @@ export const Ad: FC = () => {
       handleClickStart={handleClickStart}
       startTradeEnabled={startTradeEnabled}
       inputsEl={inputsEl}
+      isBuy={isBuy}
     />
   );
 

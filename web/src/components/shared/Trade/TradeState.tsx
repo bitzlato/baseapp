@@ -137,15 +137,14 @@ export const TradeState: FC = () => {
 
   const targetTime = trade.times.autocancel || trade.times.dispute; // '2022-07-05T20:30:48.374Z';
 
-  const tradeType =
-    type === AdsType.purchase ? t('trade.state.type.purchase') : t('trade.state.type.selling');
+  const isBuy = type === AdsType.purchase;
+  const tradeType = isBuy ? t('trade.state.type.purchase') : t('trade.state.type.selling');
 
   const currencies = `${cryptoMoney.currency.code} ${t('trade.state.for')} ${trade.currency.code}`;
 
-  const atUser =
-    type === AdsType.purchase
-      ? t('trade.state.atUser', { name: partner.name })
-      : t('trade.state.toUser', { name: partner.name });
+  const atUser = isBuy
+    ? t('trade.state.atUser', { name: partner.name })
+    : t('trade.state.toUser', { name: partner.name });
   const viaPaymethod = t('trade.state.viaPaymethod', { paymethod: trade.paymethod.description });
 
   const title = [tradeType, currencies, atUser, viaPaymethod].join(' ');
@@ -315,7 +314,10 @@ export const TradeState: FC = () => {
           )}
 
           {availableActions['confirm-trade'] && (
-            <Button onClick={handleActionConfirmTrade}>
+            <Button
+              data-gtm-click={isBuy ? 'finish_deal_buy' : 'finish_deal_sell'}
+              onClick={handleActionConfirmTrade}
+            >
               {t('trade.state.button.confirm_trade')}
             </Button>
           )}

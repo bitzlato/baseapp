@@ -36,6 +36,7 @@ export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, url 
         <Box
           as="a"
           id="verificationLink"
+          data-gtm-click="get_verified"
           href={url}
           color={{ default: 'textHighlighted', hover: 'textHighlighted' }}
           fontWeight="strong"
