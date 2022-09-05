@@ -14,7 +14,8 @@ import { ALERT_PUSH } from '../constants';
 
 export function* handleAlertSaga(action: AlertPush) {
   if (action.payload.type === 'error') {
-    switch (action.payload.code) {
+    const { code } = action.payload;
+    switch (code) {
       case 401:
         if (action.payload.message.indexOf('identity.session.auth0.email_not_verified') > -1) {
           return;
