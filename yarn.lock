@@ -15558,15 +15558,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qrcode.react@npm:0.8.0":
-  version: 0.8.0
-  resolution: "qrcode.react@npm:0.8.0"
+"qrcode.react@npm:0.9.3":
+  version: 0.9.3
+  resolution: "qrcode.react@npm:0.9.3"
   dependencies:
     prop-types: ^15.6.0
     qr.js: 0.0.0
   peerDependencies:
     react: ^15.5.3 || ^16.0.0
-  checksum: 9fcaef850276a4b64be317e6d404816bf8aabc18438064996c38e6c5bd61c329343cae1eb1291f006571b5ead58660b53f2e64b5dffc3545e14ab4b498f136a1
+  checksum: 174710c8dcd247071099eda2ea32b5f22a0f907744568bae3fd3cdb4f01e2e55f0f7dbe7e7b6cb80309bf5e069e9af076a98c55e4e4b8f75eb87cfbe1205be81
   languageName: node
   linkType: hard
 
@@ -19625,7 +19625,7 @@ __metadata:
     postcss-nested: ^5.0.6
     postcss-preset-env: 6.7.1
     prettier: ^2.4.1
-    qrcode.react: 0.8.0
+    qrcode.react: 0.9.3
     react: ^17.0.2
     react-bootstrap: ^1.0.0-beta.16
     react-color: ^2.18.0
