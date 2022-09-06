@@ -2,10 +2,10 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Language } from 'src/types';
+import { useChangeLang } from 'web/src/hooks/useChangeLang';
 import { languages } from '../../../api/config';
 import { getLanguageName } from '../../../helpers';
 import {
-  changeLanguage,
   changeUserDataFetch,
   selectCurrentLanguage,
   selectUserInfo,
@@ -14,12 +14,13 @@ import {
 import { CheckIcon } from '../../assets/images/CheckIcon';
 
 const ProfileLanguageMobileScreenComponent: React.FC = () => {
+  const changeLanguage = useChangeLang();
   const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
   const isLoggedIn = useSelector(selectUserLoggedIn);
   const currentLanguage = useSelector(selectCurrentLanguage);
 
-  const handleChangeLanguage = (language: string) => {
+  const handleChangeLanguage = (language: Language) => {
     if (isLoggedIn) {
       const data = user.data && JSON.parse(user.data);
 
@@ -36,7 +37,7 @@ const ProfileLanguageMobileScreenComponent: React.FC = () => {
       }
     }
 
-    dispatch(changeLanguage(language));
+    changeLanguage(language);
   };
 
   const renderLanguageListItem = (language: Language, index: number) => {

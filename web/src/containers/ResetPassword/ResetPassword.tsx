@@ -10,15 +10,17 @@ import { IconButton } from 'web/src/components/IconButton/IconButton';
 import { ERROR_PASSWORD_CONFIRMATION, PASSWORD_REGEX } from 'web/src/helpers/emailValidation';
 import { changeForgotPasswordFetch } from 'web/src/modules/user/password/actions';
 import { getSearchParam } from 'web/src/helpers/url';
-import { changeLanguage } from 'web/src/modules/public/i18n/actions';
 import { selectChangeForgotPasswordSuccess } from 'web/src/modules/user/password/selectors';
 import { PasswordInput } from 'web/src/components/Input/PasswordInput';
+import { useChangeLang } from 'web/src/hooks/useChangeLang';
+import { Language } from 'web/src/types';
 import { PasswordWithMeter } from '../PasswordWithMeter/PasswordWithMeter';
 
 export const ResetPassword: FC = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const changeLanguage = useChangeLang();
   const dispatch = useDispatch();
   const history = useHistory();
   const t = useT();
@@ -33,11 +35,11 @@ export const ResetPassword: FC = () => {
   const isValidForm = isNewPasswordValid && isConfirmPasswordValid;
 
   useEffect(() => {
-    const lang = getSearchParam('lang');
+    const lang = getSearchParam('lang')?.toLowerCase() as Language | null;
     if (lang) {
-      dispatch(changeLanguage(lang.toLowerCase()));
+      changeLanguage(lang);
     }
-  }, [dispatch]);
+  }, [changeLanguage]);
 
   useEffect(() => {
     if (changeForgotPassword) {

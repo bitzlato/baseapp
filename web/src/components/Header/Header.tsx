@@ -15,7 +15,6 @@ import {
   selectUserInfo,
   selectUserLoggedIn,
   changeUserDataFetch,
-  changeLanguage,
   selectUserFetching,
   logoutFetch,
 } from 'web/src/modules';
@@ -40,6 +39,8 @@ import { NavigationLink } from 'web/src/components/shared/Header/NavigationLink'
 import ChevronLeftIcon from 'web/src/assets/svg/ChevronLeftIcon.svg';
 import { useNotificationSubscribe } from 'web/src/components/app/AppContext';
 import { Notification } from 'web/src/lib/socket/types';
+import { useChangeLang } from 'web/src/hooks/useChangeLang';
+import { Language } from 'web/src/types';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
@@ -57,6 +58,7 @@ const Header: FC = () => {
     NotificationModalNotification | undefined
   >();
   const t = useT();
+  const changeLanguage = useChangeLang();
   const dispatch = useDispatch();
   const language = useSelector(selectCurrentLanguage);
   const isLoggedIn = useSelector(selectUserLoggedIn);
@@ -137,7 +139,7 @@ const Header: FC = () => {
   const handleMarkNotificationAsRead = (notificationId: number) =>
     markNotificationAsReadP2P(notificationId);
 
-  const handleLanguageChange = (code: string) => {
+  const handleLanguageChange = (code: Language) => {
     if (isLoggedIn) {
       const data = user.data && JSON.parse(user.data);
 
@@ -156,7 +158,7 @@ const Header: FC = () => {
       }
     }
 
-    dispatch(changeLanguage(code));
+    changeLanguage(code);
   };
   const handleThemeChange = () =>
     dispatch(changeColorTheme(colorTheme === 'light' ? 'dark' : 'light'));
