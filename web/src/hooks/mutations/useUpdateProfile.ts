@@ -4,8 +4,10 @@ import { p2pUrl } from 'web/src/api/config';
 import { fetchJson, FetchError } from 'web/src/helpers/fetch';
 import { alertPush } from 'web/src/modules/public/alert/actions';
 import { userRefetch } from 'web/src/modules/user/profile/actions';
+import { Language } from 'web/src/types';
 
 interface UpdateProfileInput {
+  lang?: Language;
   currency?: string;
   timezone?: string;
   safeModeEnabled?: boolean;
