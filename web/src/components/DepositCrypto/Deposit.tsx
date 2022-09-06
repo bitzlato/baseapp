@@ -7,6 +7,7 @@ import { WalletType } from 'web/src/modules/account/types';
 import { useT } from 'web/src/hooks/useT';
 import { SelectString } from 'web/src/components/Select/Select';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
+import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
 import { DepositExchange } from './DepositExchange';
 import { DepositP2P } from './DepositP2P';
 import { WalletItemData } from '../WalletItem/WalletItem';
@@ -20,10 +21,12 @@ interface Props {
 }
 
 export const Deposit: FC<Props> = ({ general, wallet }) => {
+  const isBTCPeatioDepositEnabled = useFeatureEnabled('btc_peatio_deposit');
   const cryptoCurrency = getCurrencyCodeSymbol(general.currency);
-  const isBtc = cryptoCurrency === 'BTC';
+  const isBTC = cryptoCurrency === 'BTC';
+  const isBTCPeatioEnabled = isBTC && isBTCPeatioDepositEnabled;
   const hasP2P = general.balanceP2P !== undefined;
-  const hasMarket = !isBtc && wallet !== undefined;
+  const hasMarket = (isBTCPeatioEnabled || !isBTC) && wallet !== undefined;
 
   const options = useMemo(
     () => OPTIONS.filter((d) => (d === 'market' && hasMarket) || (d === 'p2p' && hasP2P)),

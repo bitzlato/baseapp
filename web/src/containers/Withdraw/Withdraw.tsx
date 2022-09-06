@@ -10,6 +10,7 @@ import { WalletItemData } from 'web/src/components/WalletItem/WalletItem';
 import { WalletType } from 'web/src/modules/account/types';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import { getCurrencyCodeSymbol } from 'web/src/helpers/getCurrencySymbol';
+import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
 
 const WALLET_TYPES: WalletType[] = ['p2p', 'market'];
 
@@ -19,12 +20,14 @@ interface Props {
 }
 
 export const Withdraw: FC<Props> = ({ general, wallet }) => {
+  const isBTCPeatioWithdrawEnabled = useFeatureEnabled('btc_peatio_withdraw');
   const t = useT();
 
   const currencyCode = getCurrencyCodeSymbol(general.currency);
   const isBTC = currencyCode === 'BTC';
+  const isBTCPeatioEnabled = isBTC && isBTCPeatioWithdrawEnabled;
   const hasP2P = general.balanceP2P !== undefined;
-  const hasMarket = !isBTC && wallet !== undefined;
+  const hasMarket = (isBTCPeatioEnabled || !isBTC) && wallet !== undefined;
 
   const availableWalletTypes = useMemo(() => {
     return WALLET_TYPES.filter((type) => {
