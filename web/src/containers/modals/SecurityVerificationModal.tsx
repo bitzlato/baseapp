@@ -28,13 +28,14 @@ export const SecurityVerificationModal: FC = () => {
 
   const gotoVerification = (
     <Button
-      color="secondary"
-      fullWidth
-      onClick={close}
       as="a"
+      data-gtm-click="get_verified"
       target="_blank"
       rel="noopener noreferrer"
       href={user.kyc_verification_url}
+      color="secondary"
+      fullWidth
+      onClick={close}
     >
       <Text whiteSpace="nowrap">{t('Go to verification')}</Text>
     </Button>
