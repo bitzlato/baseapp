@@ -12134,13 +12134,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-combinatorics@npm:0.5.0":
-  version: 0.5.0
-  resolution: "js-combinatorics@npm:0.5.0"
-  checksum: b72e84c19de738f164a845c8207ed45b115e685144a1369266f264a7b10e0527cecd0055b96aaa2e28a974a1123290043d67ebd519c4eae6725ba5918c7fe2b8
-  languageName: node
-  linkType: hard
-
 "js-file-download@npm:^0.4.12":
   version: 0.4.12
   resolution: "js-file-download@npm:0.4.12"
@@ -19609,7 +19602,6 @@ __metadata:
     html-webpack-plugin: ^5.5.0
     i18n-iso-countries: ^3.7.8
     jest: ^26.4.1
-    js-combinatorics: 0.5.0
     lodash-webpack-plugin: ^0.11.6
     mini-css-extract-plugin: ^2.6.1
     moment: ^2.23.0
