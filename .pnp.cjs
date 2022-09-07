@@ -23840,14 +23840,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["rimraf", [\
-        ["npm:2.7.1", {\
-          "packageLocation": "./.yarn/cache/rimraf-npm-2.7.1-9a71f3cc37-cdc7f6eacb.zip/node_modules/rimraf/",\
-          "packageDependencies": [\
-            ["rimraf", "npm:2.7.1"],\
-            ["glob", "npm:7.1.6"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:3.0.2", {\
           "packageLocation": "./.yarn/cache/rimraf-npm-3.0.2-2cb7dac69a-87f4164e39.zip/node_modules/rimraf/",\
           "packageDependencies": [\
@@ -27224,7 +27216,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["redux-mock-store", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.5.4"],\
             ["redux-saga", "npm:1.1.3"],\
             ["regenerator-runtime", "npm:0.13.9"],\
-            ["rimraf", "npm:2.7.1"],\
+            ["rimraf", "npm:3.0.2"],\
             ["sass-loader", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:12.2.0"],\
             ["src", "link:./src::locator=web%40workspace%3Aweb"],\
             ["style-loader", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.3.1"],\
