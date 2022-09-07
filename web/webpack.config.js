@@ -191,6 +191,8 @@ module.exports = {
               transform: {
                 react: {
                   runtime: 'automatic',
+                  development: isDevelopment,
+                  refresh: isDevelopment,
                 },
               },
             },
