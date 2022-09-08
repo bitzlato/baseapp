@@ -4900,6 +4900,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@formatjs/ecma402-abstract", [\
+        ["npm:1.12.0", {\
+          "packageLocation": "./.yarn/cache/@formatjs-ecma402-abstract-npm-1.12.0-1123b3bcda-29dc157d66.zip/node_modules/@formatjs/ecma402-abstract/",\
+          "packageDependencies": [\
+            ["@formatjs/ecma402-abstract", "npm:1.12.0"],\
+            ["@formatjs/intl-localematcher", "npm:0.2.31"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:1.4.0", {\
           "packageLocation": "./.yarn/cache/@formatjs-ecma402-abstract-npm-1.4.0-81aec400f3-b5fad8934c.zip/node_modules/@formatjs/ecma402-abstract/",\
           "packageDependencies": [\
@@ -5014,15 +5023,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tslib", "npm:2.3.1"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.2.31", {\
+          "packageLocation": "./.yarn/cache/@formatjs-intl-localematcher-npm-0.2.31-c6d664a86c-c05bf5854f.zip/node_modules/@formatjs/intl-localematcher/",\
+          "packageDependencies": [\
+            ["@formatjs/intl-localematcher", "npm:0.2.31"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@formatjs/intl-pluralrules", [\
-        ["npm:3.5.6", {\
-          "packageLocation": "./.yarn/cache/@formatjs-intl-pluralrules-npm-3.5.6-e7e11a04e3-473ff2a679.zip/node_modules/@formatjs/intl-pluralrules/",\
+        ["npm:5.1.3", {\
+          "packageLocation": "./.yarn/cache/@formatjs-intl-pluralrules-npm-5.1.3-05ba0e95e8-da83f58c50.zip/node_modules/@formatjs/intl-pluralrules/",\
           "packageDependencies": [\
-            ["@formatjs/intl-pluralrules", "npm:3.5.6"],\
-            ["@formatjs/ecma402-abstract", "npm:1.4.0"],\
-            ["tslib", "npm:2.1.0"]\
+            ["@formatjs/intl-pluralrules", "npm:5.1.3"],\
+            ["@formatjs/ecma402-abstract", "npm:1.12.0"],\
+            ["@formatjs/intl-localematcher", "npm:0.2.31"],\
+            ["tslib", "npm:2.4.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -26198,6 +26216,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tslib", "npm:2.3.1"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:2.4.0", {\
+          "packageLocation": "./.yarn/cache/tslib-npm-2.4.0-9cb6dc5030-8c4aa6a3c5.zip/node_modules/tslib/",\
+          "packageDependencies": [\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["tsutils", [\
@@ -27101,7 +27126,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bitzlato/money-js", "npm:0.0.4"],\
             ["@bugsnag/js", "npm:7.16.1"],\
             ["@bugsnag/plugin-react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.16.1"],\
-            ["@formatjs/intl-pluralrules", "npm:3.5.6"],\
+            ["@formatjs/intl-pluralrules", "npm:5.1.3"],\
             ["@formatjs/intl-relativetimeformat", "npm:7.3.6"],\
             ["@metamask/onboarding", "npm:1.0.1"],\
             ["@pmmmwh/react-refresh-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.5.7"],\
