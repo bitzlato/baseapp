@@ -370,7 +370,12 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         exact
       />,
       <Route key="report" exact path="/reports/:code" component={ReportDownloadScreen} />,
-      <Route key="trading-view" exact path="/trading-view" component={TradingViewScreen} />,
+      <Route
+        key="trading-view"
+        exact
+        path="/trading-view/:symbol?"
+        component={TradingViewScreen}
+      />,
       ...(process.env.REACT_APP_RELEASE_STAGE === 'development'
         ? [
             <Route

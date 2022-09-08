@@ -47,13 +47,11 @@ export const TradingStatisticsMarketSelect: FC<Props> = ({ options, value, onCha
               </Text>
             )}
           </Text>
-          {isExchange && (
-            <Box ml="auto">
-              <Text variant="caption" color="textMuted">
-                {t('Exchange')}
-              </Text>
-            </Box>
-          )}
+          <Box ml="auto">
+            <Text variant="caption" color="textMuted">
+              {isExchange ? t('Exchange') : t('P2P')}
+            </Text>
+          </Box>
         </Box>
       )}
       value={value ?? null}
