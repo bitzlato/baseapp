@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { Button } from 'web/src/components/ui/Button';
@@ -13,10 +13,16 @@ import { useTradingViewMarkets } from 'web/src/hooks/useTradingViewMarkets';
 import { TradingViewMarketOption } from 'web/src/types/tradingView.types';
 import { ControlledTradingChart } from 'web/src/containers/TradingChart/ControlledTradingChart';
 import { Spinner } from 'web/src/components/ui/Spinner';
+import { useHistory } from 'react-router-dom';
 import { TradingStatisticsMarketSelect } from './TradingStatisticsMarketSelect';
 import * as s from './TradingStatistics.css';
 
-export const TradingStatistics: FC = () => {
+interface Props {
+  initialMarketSymbol?: string | undefined;
+}
+
+export const TradingStatistics: FC<Props> = ({ initialMarketSymbol }) => {
+  const history = useHistory();
   const t = useT();
   const cryptoCurrencies = useCryptoCurrencies()?.filter((c) => c.code === 'BTC');
   useMarketsFetch();
@@ -30,11 +36,21 @@ export const TradingStatistics: FC = () => {
   };
   const handleMarketChange = (value: TradingViewMarketOption) => {
     setSelectedMarket(value);
+    history.replace(`/trading-view/${value.symbol}`);
   };
 
   const cryptoCurrency = selectedCryptoCurrency ?? cryptoCurrencies?.[0];
   const markets = useTradingViewMarkets(cryptoCurrency?.code);
-  const market = selectedMarket ?? markets?.[0];
+  const initialMarket = initialMarketSymbol
+    ? markets?.find(({ symbol }) => symbol === initialMarketSymbol)
+    : undefined;
+  const market = selectedMarket ?? initialMarket ?? markets?.[0];
+
+  useEffect(() => {
+    if (!initialMarketSymbol && market) {
+      history.replace(`/trading-view/${market.symbol}`);
+    }
+  }, [history, initialMarketSymbol, market]);
 
   return (
     <Container maxWidth="xl" p="8x">
