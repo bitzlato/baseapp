@@ -475,7 +475,6 @@ class LayoutComponent extends Component<LayoutProps, LayoutState> {
         path={['/p2p/:filter?', '/:lang/p2p/:filter?']}
         component={BoardScreen}
       />,
->>>>>>> 7f1c48c82 (fix: Add p2p shared screen routes to production)
       // and default fallback
       <Route key="catchall" path="**">
         <Redirect to="/trading/" />
