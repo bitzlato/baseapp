@@ -53,7 +53,7 @@ const getFilterPathParams = (filter?: string): FilterPathParams | undefined => {
   }
 
   if (paymethodSlug) {
-    params.paymethodSlug = paymethodSlug;
+    params.paymethodSlug = `${currency}-${paymethodSlug}`;
   }
 
   return params;
