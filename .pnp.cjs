@@ -4392,6 +4392,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["regenerator-runtime", "npm:0.13.7"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:7.19.0", {\
+          "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.19.0-86b37fbb72-fa69c351bb.zip/node_modules/@babel/runtime/",\
+          "packageDependencies": [\
+            ["@babel/runtime", "npm:7.19.0"],\
+            ["regenerator-runtime", "npm:0.13.7"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@babel/runtime-corejs3", [\
@@ -14969,6 +14977,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tiny-invariant", "npm:1.1.0"],\
             ["tiny-warning", "npm:1.0.3"],\
             ["value-equal", "npm:1.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:5.3.0", {\
+          "packageLocation": "./.yarn/cache/history-npm-5.3.0-00136b6a63-d73c35df49.zip/node_modules/history/",\
+          "packageDependencies": [\
+            ["history", "npm:5.3.0"],\
+            ["@babel/runtime", "npm:7.19.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -27154,7 +27170,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["enzyme", "npm:3.11.0"],\
             ["events", "npm:3.3.0"],\
             ["header-case-normalizer", "npm:1.0.3"],\
-            ["history", "npm:4.10.1"],\
+            ["history", "npm:5.3.0"],\
             ["html-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.5.0"],\
             ["i18n-iso-countries", "npm:3.7.8"],\
             ["jest", "npm:26.6.3"],\
