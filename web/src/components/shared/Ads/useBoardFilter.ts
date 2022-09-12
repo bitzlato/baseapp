@@ -30,14 +30,14 @@ export const seoTypeToAd: Record<SeoAdvertType, AdvertType> = {
 };
 
 type FilterPathParams = Partial<
-  Pick<AdvertParams, 'type' | 'cryptocurrency' | 'currency' | 'paymethodSlug'>
+  Pick<AdvertParams, 'type' | 'cryptocurrency' | 'currency' | 'slug'>
 >;
 const getFilterPathParams = (filter?: string): FilterPathParams | undefined => {
   if (!filter) {
     return undefined;
   }
 
-  const [seoType = 'buy', cryptocurrency, currency, paymethodSlug] = filter?.split('-') ?? [];
+  const [seoType = 'buy', cryptocurrency, currency, slug] = filter?.split('-') ?? [];
   const params: FilterPathParams = {};
   const type = seoTypeToAd[seoType as SeoAdvertType];
   if (type) {
@@ -52,8 +52,8 @@ const getFilterPathParams = (filter?: string): FilterPathParams | undefined => {
     params.currency = currency.toUpperCase();
   }
 
-  if (paymethodSlug) {
-    params.paymethodSlug = `${currency}-${paymethodSlug}`;
+  if (slug) {
+    params.slug = `${currency}-${slug}`;
   }
 
   return params;
@@ -63,10 +63,10 @@ const generateFilterParamsUrl = (
   type: AdvertType,
   cryptocurrency: string,
   currency: string,
-  paymethodSlug?: string | undefined,
+  slug?: string | undefined,
   query: string = window.location.search,
 ) => {
-  const maybePaymethodSlug = paymethodSlug ? `-${paymethodSlug}` : `-${currency}`;
+  const maybePaymethodSlug = slug ? `-${slug}` : `-${currency}`;
 
   return `/p2p/${adTypeToSeo[type]}-${cryptocurrency}${maybePaymethodSlug}`.toLowerCase() + query;
 };
@@ -79,7 +79,7 @@ const ADVERT_PARAMS_IN_LAST_FILTER = [
   'isOwnerVerificated',
   'isOwnerTrusted',
   'isOwnerActive',
-  'paymethodSlug',
+  'slug',
   'amount',
   'amountType',
 ] as const;
@@ -159,13 +159,13 @@ export const useBoardFilter = ({
 
       setUrlSearchParams(upd, DEFAULT_FILTER, URL_PARAMS);
 
-      if ('type' in upd || 'cryptocurrency' in upd || 'currency' in upd || 'paymethodSlug' in upd) {
+      if ('type' in upd || 'cryptocurrency' in upd || 'currency' in upd || 'slug' in upd) {
         history.push(
           generateFilterParamsUrl(
             upd.type ?? filterParams.type,
             upd.cryptocurrency ?? filterParams.cryptocurrency,
             upd.currency ?? filterParams.currency,
-            next.paymethodSlug,
+            next.slug,
           ),
         );
       }
@@ -180,7 +180,7 @@ export const useBoardFilter = ({
       filterParams.type,
       filterParams.cryptocurrency,
       filterParams.currency,
-      filterParams.paymethodSlug,
+      filterParams.slug,
       buildUrlSearch(pick(filterParams, ADVERT_PARAMS_IN_QUERY), DEFAULT_FILTER, URL_PARAMS),
     );
 
@@ -193,14 +193,14 @@ export const useBoardFilter = ({
     if (!cryptoCurrencies?.some((currency) => currency.code === filterParams.cryptocurrency)) {
       handleChangeFilter({
         cryptocurrency: DEFAULT_FILTER.cryptocurrency,
-        paymethodSlug: undefined,
+        slug: undefined,
       });
     }
   }, [filterParams.cryptocurrency, cryptoCurrencies, handleChangeFilter]);
 
   useEffect(() => {
     if (fiatCurrencies[filterParams.currency] === undefined) {
-      handleChangeFilter({ currency: DEFAULT_FILTER.currency, paymethodSlug: undefined });
+      handleChangeFilter({ currency: DEFAULT_FILTER.currency, slug: undefined });
     }
   }, [filterParams.currency, fiatCurrencies, handleChangeFilter]);
 
