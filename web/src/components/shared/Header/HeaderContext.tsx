@@ -43,6 +43,7 @@ export const getUserContext = (context: HeaderContextValue): UserContext => {
       return {
         status: context.status,
         user: context.user,
+        userBarong: context.userBarong,
         userLinks: context.userLinks,
         profileLink: context.profileLink,
         notifications: context.notifications,

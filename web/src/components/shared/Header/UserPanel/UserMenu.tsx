@@ -14,6 +14,7 @@ import {
 import { ThemeSwitcher } from 'web/src/components/shared/Header/ThemeSwitcher';
 import { UserLink } from 'web/src/components/shared/sharedTypes';
 import ProfileIcon from 'web/src/assets/svg/ProfileIcon.svg';
+import { UserMenuMobile } from 'web/src/components/shared/Header/UserPanel/UserMenuMobile';
 
 type DropdownItemWithKey = { key: string } & DropdownItemType;
 
@@ -42,7 +43,8 @@ export const UserMenu = ({ px }: Props) => {
       {
         key: 'theme-switcher',
         type: 'custom',
-        children: <ThemeSwitcher />,
+        icon: 'theme',
+        component: ThemeSwitcher,
       },
     ];
 
@@ -95,11 +97,20 @@ export const UserMenu = ({ px }: Props) => {
   );
 
   return (
-    <Dropdown
-      dropdownAlign="right"
-      renderButton={renderButton}
-      renderMenu={renderMenu}
-      height="full"
-    />
+    <>
+      <Dropdown
+        display={{ mobile: 'none', tablet: 'block' }}
+        dropdownAlign="right"
+        renderButton={renderButton}
+        renderMenu={renderMenu}
+        height="full"
+      />
+
+      <UserMenuMobile
+        links={links}
+        user={userContext.status === USER_STATUS_AUTHORIZED ? userContext.userBarong : undefined}
+        renderButton={renderButton}
+      />
+    </>
   );
 };

@@ -21,14 +21,14 @@ export const headerFontSizes = createGlobalTheme(':root', {
 });
 
 export const zIndexVars = createGlobalTheme(':root', {
+  shadeRows: '9990',
   drawer: '10000',
   chat: '10020',
+  bottomTabs: '10000',
   modal: '10001',
   modalInner: '10002',
   tooltip: '10010',
-  bottomTabs: '10000',
   dropdown: '99990',
-  shadeRows: '9990',
 });
 
 export const sizeVars = createGlobalTheme(':root', {
@@ -70,8 +70,12 @@ export const radiiVars = createGlobalTheme(':root', {
   circle: '9999px' as const,
 });
 
+export enum TransitionDurations {
+  base = 300,
+}
+
 export const transitionDurationVars = createGlobalTheme(':root', {
-  base: '0.3s',
+  base: `${TransitionDurations.base}ms`,
 });
 
 export const [themeLight, vars] = createTheme({
@@ -113,7 +117,13 @@ export const [themeLight, vars] = createTheme({
     dropdownItemText: colors.ebonyClay,
     dropdownItemHoverText: colors.black,
     dropdownItemActiveText: colors.indigo,
+    /**
+     * @deprecated
+     */
     dropdownItemIcon: colors.ebonyClay,
+    /**
+     * @deprecated
+     */
     dropdownItemHoverIcon: colors.ebonyClay,
     dropdownItemActiveIcon: colors.indigo,
 
@@ -284,9 +294,10 @@ export const [themeLight, vars] = createTheme({
     addressHintText: colors.whiteLilac,
 
     headerBg: colors.whiteLilac,
+    headerMobileBg: colors.white,
     headerBorderBottom: colors.black10,
-    headerIcon: colors.ebonyClay70,
-    headerIconHover: colors.ebonyClay,
+    headerIcon: colors.mako,
+    headerIconHover: colors.mako,
     headerLinkText: colors.ebonyClay70,
     headerLinkTextHover: colors.ebonyClay,
     headerLinkTextActive: colors.indigo,
@@ -296,6 +307,11 @@ export const [themeLight, vars] = createTheme({
     headerLanguageSwitcherBorder: colors.ebonyClay15,
     headerLanguageSwitcherHoverBorder: colors.ebonyClay30,
     headerLanguageSwitcherHoverBg: colors.ebonyClay15,
+    menuMobileHeaderBorder: colors.ebonyClay15,
+    menuMobileItemText: colors.brightGray,
+    menuMobileItemIcon: colors.ebonyClay70,
+    menuMobileItemIconActive: colors.indigo,
+    menuMobileItemBorder: colors.ebonyClay15,
 
     bottomTabsBg: colors.white,
     bottomTabsTopBorder: colors.black10,
@@ -641,6 +657,7 @@ export const themeDark = createTheme(vars, {
     addressHintText: colors.whiteLilac,
 
     headerBg: colors.bunker,
+    headerMobileBg: colors.bunker,
     headerBorderBottom: colors.transparent,
     headerIcon: colors.white50,
     headerIconHover: colors.white,
@@ -653,6 +670,11 @@ export const themeDark = createTheme(vars, {
     headerLanguageSwitcherBorder: colors.white30,
     headerLanguageSwitcherHoverBorder: colors.white60,
     headerLanguageSwitcherHoverBg: colors.white30,
+    menuMobileHeaderBorder: colors.white10,
+    menuMobileItemText: colors.white,
+    menuMobileItemIcon: colors.white,
+    menuMobileItemIconActive: colors.goldTips,
+    menuMobileItemBorder: colors.white10,
 
     bottomTabsBg: colors.ebonyClay,
     bottomTabsTopBorder: colors.ebonyClay,

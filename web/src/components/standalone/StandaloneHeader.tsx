@@ -315,6 +315,7 @@ export const StandaloneHeader: FC<Props> = ({
         };
       }),
       onAllRead: handleMarkAllNotificationAsRead,
+      userBarong: user,
     };
   }
 
