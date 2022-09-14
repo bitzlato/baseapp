@@ -16,7 +16,7 @@ export const language = style([
     textTransform: 'uppercase',
     textAlign: 'center',
     cursor: 'pointer',
-    color: 'text',
+    color: 'headerIcon',
   }),
   {
     userSelect: 'none',

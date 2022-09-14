@@ -22,7 +22,7 @@ export const Header: FC<Props> = (props) => {
 
   return (
     <HeaderContext.Provider value={props}>
-      <Box className={cn(s.header, themeClassName)} bg="headerBg" width="full">
+      <Box className={cn(s.header, themeClassName)}>
         <Box
           display="flex"
           alignItems="center"
@@ -32,7 +32,7 @@ export const Header: FC<Props> = (props) => {
           borderBottomStyle="solid"
           borderBottomColor="headerBorderBottom"
           px={{ mobile: '2x', tablet: '3x' }}
-          h={{ mobile: '14x', tablet: '16x' }}
+          h={{ mobile: '12x', tablet: '16x' }}
         >
           <Box
             display="flex"

@@ -12,14 +12,17 @@ import SettingsIcon from 'web/src/assets/svg/SettingsIcon.svg';
 import TelegramPlainIcon from 'web/src/assets/svg/TelegramPlainIcon.svg';
 import TraderWorkspaceIcon from 'web/src/assets/svg/TraderWorkspaceIcon.svg';
 import ListIcon from 'web/src/assets/svg/ListIcon.svg';
+import BedtimeIcon from 'web/src/assets/svg/BedtimeIcon.svg';
 import * as s from './DropdownItem.css';
 
-const icons = {
+// TODO: move to UserMenu.tsx
+export const icons = {
   profile: <SettingsIcon />,
   logout: <LogoutIcon />,
   telegram: <TelegramPlainIcon />,
   invoices: <ListIcon />,
   'trader-workspace': <TraderWorkspaceIcon className={s.iconWithFill} />,
+  theme: <BedtimeIcon />,
 };
 
 type DropdownLinkType = {
@@ -42,7 +45,7 @@ type DropdownButtonType = {
   children: ReactNode | string;
   onClick: () => void;
 };
-type DropdownCustomType = { type: 'custom'; children: ReactNode };
+type DropdownCustomType = { type: 'custom'; component: FC<{ icon: ReactNode }> };
 
 export type DropdownItemType = {
   icon?: IconName | undefined;
@@ -63,13 +66,14 @@ export const DropdownItem: FC<Props> = (props) => {
     closeMenu();
   };
 
+  const iconBox = icon && (
+    <Box as="span" className={s.icon}>
+      {icons[icon]}
+    </Box>
+  );
   const body = (
     <>
-      {icon && (
-        <Box as="span" className={s.icon}>
-          {icons[icon]}
-        </Box>
-      )}
+      {iconBox}
       {children}
     </>
   );
@@ -122,7 +126,12 @@ export const DropdownItem: FC<Props> = (props) => {
   }
 
   if (type === 'custom') {
-    return <Box className={s.item}>{children}</Box>;
+    const { component: Component } = props;
+    return (
+      <Box className={s.item}>
+        <Component icon={iconBox} />
+      </Box>
+    );
   }
 
   const { to } = props;

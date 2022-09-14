@@ -256,6 +256,7 @@ const Header: FC = () => {
         };
       }),
       onAllRead: handleMarkAllNotificationAsRead,
+      userBarong: user,
     };
   }
 

@@ -1,13 +1,17 @@
 import { ReactNode } from 'react';
+import { User } from 'web/src/modules/user/profile/types';
 import {
   USER_STATUS_AUTHORIZATION_REQUIRED,
   USER_STATUS_AUTHORIZED,
   USER_STATUS_NOT_AUTHORIZED,
 } from './sharedConstants';
 
-export type IconName = 'profile' | 'logout' | 'telegram' | 'invoices';
+export type IconName = 'profile' | 'logout' | 'telegram' | 'invoices' | 'theme';
 
-export type User = {
+/**
+ * @deprecated
+ */
+type UserDeprecated = {
   userpic?: string | undefined;
   username?: string | undefined;
 };
@@ -88,7 +92,11 @@ export type UserContext =
     }
   | {
       status: typeof USER_STATUS_AUTHORIZED;
-      user?: User | undefined;
+      /**
+       * @deprecated
+       */
+      user?: UserDeprecated | undefined;
+      userBarong?: User | undefined;
       profileLink?: UserLink | undefined;
       userLinks?: UserLinks | undefined;
       notifications?: Notify[] | undefined;
