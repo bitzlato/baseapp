@@ -13,6 +13,11 @@ import TelegramPlainIcon from 'web/src/assets/svg/TelegramPlainIcon.svg';
 import TraderWorkspaceIcon from 'web/src/assets/svg/TraderWorkspaceIcon.svg';
 import ListIcon from 'web/src/assets/svg/ListIcon.svg';
 import BedtimeIcon from 'web/src/assets/svg/BedtimeIcon.svg';
+import ExchangeMenuIcon from 'web/src/assets/svg/ExchangeMenuIcon.svg';
+import GiftsMenuIcon from 'web/src/assets/svg/GiftsMenuIcon.svg';
+import WalletsMenuIcon from 'web/src/assets/svg/WalletsMenuIcon.svg';
+import QuickExchangeMenuIcon from 'web/src/assets/svg/QuickExchangeMenuIcon.svg';
+import P2PMenuIcon from 'web/src/assets/svg/P2PMenuIcon.svg';
 import * as s from './DropdownItem.css';
 
 // TODO: move to UserMenu.tsx
@@ -23,6 +28,11 @@ export const icons = {
   invoices: <ListIcon />,
   'trader-workspace': <TraderWorkspaceIcon className={s.iconWithFill} />,
   theme: <BedtimeIcon />,
+  wallets: <WalletsMenuIcon width="24" height="24" />,
+  gifts: <GiftsMenuIcon width="20" height="20" />,
+  'quick-exchange': <QuickExchangeMenuIcon width="18" height="19" />,
+  exchange: <ExchangeMenuIcon width="17" height="16" />,
+  p2p: <P2PMenuIcon width="24" height="24" />,
 };
 
 type DropdownLinkType = {
