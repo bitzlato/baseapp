@@ -269,6 +269,7 @@ const Header: FC = () => {
         to: p2pURL,
       },
       children: t('P2P'),
+      icon: 'p2p',
       tabs: [
         {
           key: 'Ad board',
@@ -297,6 +298,7 @@ const Header: FC = () => {
         type: 'internal',
         to: '/trading',
       },
+      icon: 'exchange',
       children: t('Exchange'),
       tabs: [
         {
@@ -324,6 +326,7 @@ const Header: FC = () => {
       type: 'internal',
       to: '/quick-exchange',
       children: t('page.header.navbar.quick-exchange'),
+      icon: 'quick-exchange',
     },
     {
       key: 'gifts',
@@ -333,6 +336,7 @@ const Header: FC = () => {
         to: '/gifts',
       },
       children: t('Gifts'),
+      icon: 'gifts',
       tabs: [
         {
           key: 'Create gift',
@@ -365,6 +369,7 @@ const Header: FC = () => {
       type: 'internal',
       to: '/wallets',
       children: t('page.header.navbar.balances'),
+      icon: 'wallets',
     },
   ];
 

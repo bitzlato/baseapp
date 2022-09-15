@@ -14,6 +14,7 @@ import { Notifications } from 'web/src/components/shared/Header/UserPanel/Notifi
 import { LanguageSelect } from 'web/src/components/shared/Header/UserPanel/LanguageSelect';
 import SupportIcon from 'web/src/assets/svg/SupportIcon.svg';
 import ProfileIcon from 'web/src/assets/svg/ProfileIcon.svg';
+import { HamburgerMenu } from 'web/src/components/shared/Header/UserPanel/HamburgerMenu';
 import * as s from './UserPanel.css';
 
 export type Props = {
@@ -122,6 +123,8 @@ export const UserPanel: FC<Props> = ({ responsiveMode = false }) => {
             <ProfileIcon />
           </Box>
         ) : null}
+
+        <HamburgerMenu />
       </Box>
     </Box>
   );

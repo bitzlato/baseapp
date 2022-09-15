@@ -6,7 +6,17 @@ import {
   USER_STATUS_NOT_AUTHORIZED,
 } from './sharedConstants';
 
-export type IconName = 'profile' | 'logout' | 'telegram' | 'invoices' | 'theme';
+export type IconName =
+  | 'profile'
+  | 'logout'
+  | 'telegram'
+  | 'invoices'
+  | 'theme'
+  | 'wallets'
+  | 'gifts'
+  | 'quick-exchange'
+  | 'exchange'
+  | 'p2p';
 
 /**
  * @deprecated
@@ -39,6 +49,8 @@ export type LinkType = 'internal' | 'external';
 export type CommonLink = {
   key: string;
   children: string | ReactNode;
+  icon?: IconName;
+  isActive?: boolean | undefined;
 };
 export type LinkNav = CommonLink & {
   type: LinkType;
