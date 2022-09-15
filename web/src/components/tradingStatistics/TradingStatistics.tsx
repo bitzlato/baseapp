@@ -24,7 +24,7 @@ interface Props {
 export const TradingStatistics: FC<Props> = ({ initialMarketSymbol }) => {
   const history = useHistory();
   const t = useT();
-  const cryptoCurrencies = useCryptoCurrencies()?.filter((c) => c.code === 'BTC');
+  const cryptoCurrencies = useCryptoCurrencies();
   useMarketsFetch();
 
   const [selectedCryptoCurrency, setSelectedCryptoCurrency] = useState<BaseCurrency>();
