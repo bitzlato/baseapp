@@ -677,7 +677,7 @@ export const themeDark = createTheme(vars, {
     menuMobileItemIcon: colors.white,
     menuMobileItemIconActive: colors.goldTips,
     menuMobileItemBorder: colors.white10,
-    menuMobileSubItem: colors.white05,
+    menuMobileSubItem: colors.white50,
     menuMobileSubItemActive: colors.goldTips,
 
     bottomTabsBg: colors.ebonyClay,
