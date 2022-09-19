@@ -9,6 +9,7 @@ import { getThemeClassName } from 'web/src/theme/getThemeClassName';
 import { useFetchPublicFeatures } from 'web/src/hooks/data/barong/useFetchPublicFeatures';
 import { Adapter } from 'web/src/components/shared/Adapter';
 import { Link, useHistory } from 'react-router-dom';
+import { useNewTradeNotifyWithSound } from 'web/src/hooks/useNewTradeNotifySound';
 import { gaTrackerKey } from './api';
 import { useSetMobileDevice } from './hooks';
 import { selectCurrentColorTheme, selectCurrentLanguage, selectMobileDeviceState } from './modules';
@@ -84,6 +85,7 @@ const RenderDeviceContainers = () => {
 export const App = () => {
   useSetMobileDevice();
   useFetchPublicFeatures(); // load public features
+  useNewTradeNotifyWithSound(); // add sound notify on new trade
 
   const lang = useSelector(selectCurrentLanguage);
 
