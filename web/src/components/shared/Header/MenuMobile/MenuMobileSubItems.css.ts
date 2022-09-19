@@ -30,6 +30,11 @@ const itemBase = style({
   fontSize: fontSizeVars.small,
   fontWeight: 600,
   color: vars.colors.menuMobileSubItem,
+  selectors: {
+    '&:hover': {
+      color: vars.colors.menuMobileSubItemActive,
+    },
+  },
 });
 
 export const item = styleVariants({
