@@ -16291,6 +16291,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-teleporter@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "react-teleporter@npm:3.0.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: bb14849f4d31646d8c34d85b180ac9f6c3e261de48e58add2c7f82529e217d11d9cf8635f2b985b3281a442fb446caa719f15588223281a340a4ec1f97f62004
+  languageName: node
+  linkType: hard
+
 "react-test-renderer@npm:^17.0.0":
   version: 17.0.2
   resolution: "react-test-renderer@npm:17.0.2"
@@ -19609,6 +19619,7 @@ __metadata:
     react-router-dom: ^5.1.2
     react-scroll: ^1.8.1
     react-select: ^5.2.2
+    react-teleporter: ^3.0.2
     react-textarea-autosize: ^8.3.4
     recharts: ^1.8.5
     redux: ^4.0.5
