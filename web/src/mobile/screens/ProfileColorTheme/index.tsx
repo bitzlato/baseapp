@@ -1,14 +1,15 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { BackButtonMobile } from 'web/src/components/shared/Header/BackButtonMobile';
+import { useT } from 'web/src/hooks/useT';
 import { changeColorTheme, selectCurrentColorTheme, Theme } from '../../../modules';
 import { CheckIcon } from '../../assets/images/CheckIcon';
 
 const COLOR_THEMES: Theme[] = ['dark', 'light'];
 
 const ProfileThemeMobileScreenComponent: React.FC = () => {
-  const intl = useIntl();
+  const t = useT();
   const dispatch = useDispatch();
   const currentColorTheme = useSelector(selectCurrentColorTheme);
 
@@ -29,20 +30,21 @@ const ProfileThemeMobileScreenComponent: React.FC = () => {
         className={listItemClassName}
         onClick={() => handleChangeColorTheme(colorTheme)}
       >
-        <span>
-          {intl.formatMessage({ id: `page.mobile.profileColorTheme.theme.${colorTheme}` })}
-        </span>
+        <span>{t(`page.mobile.profileColorTheme.theme.${colorTheme}`)}</span>
         <CheckIcon />
       </div>
     );
   };
 
   return (
-    <div className="pg-mobile-profile-theme-screen">
-      <div className="pg-mobile-profile-theme-screen__list">
-        {COLOR_THEMES.map(renderThemeListItem)}
+    <>
+      <BackButtonMobile to="/profile">{t('page.body.profile.header.account')}</BackButtonMobile>
+      <div className="pg-mobile-profile-theme-screen">
+        <div className="pg-mobile-profile-theme-screen__list">
+          {COLOR_THEMES.map(renderThemeListItem)}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

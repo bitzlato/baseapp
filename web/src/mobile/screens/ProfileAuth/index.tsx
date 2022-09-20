@@ -12,6 +12,7 @@ import {
 } from 'web/src/modules/user/profile';
 import { ProfileTwoFactorAuth } from 'web/src/containers/ProfileTwoFactorAuth';
 import { useT } from 'web/src/hooks/useT';
+import { BackButtonMobile } from 'web/src/components/shared/Header/BackButtonMobile';
 
 export const ProfileAuthMobileScreen: React.FC = memo(() => {
   const [showCode, setShowCode] = useState(false);
@@ -46,6 +47,7 @@ export const ProfileAuthMobileScreen: React.FC = memo(() => {
 
   return (
     <Box col spacing="sm">
+      <BackButtonMobile to="/profile">{t('page.body.profile.header.account')}</BackButtonMobile>
       <div className="cr-mobile-profile-auth">
         <div className="cr-mobile-profile-auth__enable">
           <div className="cr-mobile-profile-auth__enable-label">
