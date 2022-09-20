@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { TwoFactorModal } from 'web/src/containers/ProfileAuthDetails/TwoFactorModal';
 import { Pagination } from '../../../components';
@@ -24,11 +23,13 @@ import {
 import { AddIcon } from '../../assets/images/AddIcon';
 import { ApiKeysItem } from '../../components';
 import { ApiKeyModal } from 'web/src/containers/ProfileApiKeys/ApiKeyModal';
+import { BackButtonMobile } from 'web/src/components/shared/Header/BackButtonMobile';
+import { useT } from 'web/src/hooks/useT';
 
 const ProfileApiKeysMobileScreenComponent: React.FC = () => {
   const [currentPageIndex, setPageIndex] = React.useState(0);
   const dispatch = useDispatch();
-  const intl = useIntl();
+  const t = useT();
   const apiKeys = useSelector(selectApiKeys);
   const apiKeysModal = useSelector(selectApiKeysModal);
   const user = useSelector(selectUserInfo);
@@ -87,6 +88,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
 
   return (
     <>
+      <BackButtonMobile to="/profile">{t('page.body.profile.header.account')}</BackButtonMobile>
       <div className="pg-mobile-profile-api-keys-screen">
         {user.otp ? (
           <div
@@ -118,7 +120,7 @@ const ProfileApiKeysMobileScreenComponent: React.FC = () => {
               />
             </>
           ) : (
-            <span className="no-data">{intl.formatMessage({ id: 'page.noDataToShow' })}</span>
+            <span className="no-data">{t('page.noDataToShow')}</span>
           )}
         </div>
         {apiKeysModal.action === 'createSuccess' ? (

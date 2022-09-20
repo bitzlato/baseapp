@@ -7,6 +7,7 @@ import {
   USER_STATUS_AUTHORIZED,
   USER_STATUS_NOT_AUTHORIZED,
 } from 'web/src/components/shared/sharedConstants';
+import { HeaderBackButtonMobile } from 'web/src/components/shared/Header/HeaderBackButtonMobile';
 import { Logo } from './Logo';
 import { Navigation } from './Navigation';
 import { UserPanel } from './UserPanel/UserPanel';
@@ -35,7 +36,7 @@ export const Header: FC<Props> = (props) => {
           h={{ mobile: '12x', tablet: '16x' }}
         >
           <Box
-            display="flex"
+            display={{ mobile: 'none', tablet: 'flex' }}
             alignItems="center"
             ml={{ mobile: '0', desktop: '4x' }}
             mr={{ mobile: '0', desktop: '3x' }}
@@ -43,6 +44,9 @@ export const Header: FC<Props> = (props) => {
           >
             <Logo />
             <Box className={s.backButton}>{backButton}</Box>
+          </Box>
+          <Box display={{ mobile: 'block', tablet: 'none' }}>
+            <HeaderBackButtonMobile />
           </Box>
 
           {children || (

@@ -15,6 +15,7 @@ import { Rate } from 'web/src/screens/WalletsScreen/Rate';
 import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { useFetchRate } from 'web/src/hooks/data/useFetchRate';
 import { Deposit } from 'web/src/components/DepositCrypto/Deposit';
+import { BackButtonMobile } from 'web/src/components/shared/Header/BackButtonMobile';
 
 export const WalletMobileScreen: React.FC = () => {
   const params = useParams<UrlParams>();
@@ -51,6 +52,7 @@ export const WalletMobileScreen: React.FC = () => {
 
   return (
     <Box col spacing="sm">
+      <BackButtonMobile to="/wallets">{t('page.body.wallets.balance')}</BackButtonMobile>
       <WalletMobileBalance wallet={general} />
       <Box bgColor="body" padding="2X3" col spacing="2">
         <Tabs value={tab} onSelectionChange={handleTabSelection as any}>

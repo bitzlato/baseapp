@@ -2,7 +2,9 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Language } from 'src/types';
+import { BackButtonMobile } from 'web/src/components/shared/Header/BackButtonMobile';
 import { useChangeLang } from 'web/src/hooks/useChangeLang';
+import { useT } from 'web/src/hooks/useT';
 import { languages } from '../../../api/config';
 import { getLanguageName } from '../../../helpers';
 import {
@@ -14,6 +16,7 @@ import {
 import { CheckIcon } from '../../assets/images/CheckIcon';
 
 const ProfileLanguageMobileScreenComponent: React.FC = () => {
+  const t = useT();
   const changeLanguage = useChangeLang();
   const dispatch = useDispatch();
   const user = useSelector(selectUserInfo);
@@ -54,11 +57,14 @@ const ProfileLanguageMobileScreenComponent: React.FC = () => {
   };
 
   return (
-    <div className="pg-mobile-profile-language-screen">
-      <div className="pg-mobile-profile-language-screen__list">
-        {languages.map(renderLanguageListItem)}
+    <>
+      <BackButtonMobile to="/profile">{t('page.body.profile.header.account')}</BackButtonMobile>
+      <div className="pg-mobile-profile-language-screen">
+        <div className="pg-mobile-profile-language-screen__list">
+          {languages.map(renderLanguageListItem)}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
