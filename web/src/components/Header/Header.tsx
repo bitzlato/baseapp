@@ -27,7 +27,7 @@ import {
   UserLink,
   UserLinks,
 } from 'web/src/components/shared/sharedTypes';
-import { isToday, isYesterday, localeDate } from 'web/src/helpers';
+import { getLanguageName, isToday, isYesterday, localeDate } from 'web/src/helpers';
 import { useMarkNotificationAsRead } from 'web/src/hooks/mutations/useMarkNotificationAsRead';
 import { NotificationModalNotification } from 'web/src/containers/NotificationModal/types';
 import { useFetchP2PNotifications } from 'web/src/hooks/data/useFetchP2PNotifications';
@@ -44,8 +44,9 @@ import { Language } from 'web/src/types';
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
 const languages = {
-  en: 'English',
-  ru: 'Русский',
+  en: getLanguageName('en'),
+  ru: getLanguageName('ru'),
+  uk: getLanguageName('uk'),
 };
 
 const strIncludesStrings = (str: string, substr: string[]): boolean => {

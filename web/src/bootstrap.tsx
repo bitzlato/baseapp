@@ -16,6 +16,7 @@ if (!Intl?.PluralRules) {
   require('@formatjs/intl-pluralrules/polyfill');
   require('@formatjs/intl-pluralrules/locale-data/en');
   require('@formatjs/intl-pluralrules/locale-data/ru');
+  require('@formatjs/intl-pluralrules/locale-data/uk');
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -24,6 +25,7 @@ if (!Intl?.RelativeTimeFormat) {
   require('@formatjs/intl-relativetimeformat/polyfill');
   require('@formatjs/intl-relativetimeformat/locale-data/en');
   require('@formatjs/intl-relativetimeformat/locale-data/ru');
+  require('@formatjs/intl-relativetimeformat/locale-data/uk');
 }
 
 sagaMiddleware.run(rootSaga);

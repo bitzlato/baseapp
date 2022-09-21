@@ -8,8 +8,9 @@ import {
   RenderMenuFn,
 } from 'web/src/components/shared/Header/Dropdown/Dropdown';
 import { DropdownItem } from 'web/src/components/shared/Header/Dropdown/DropdownItem';
-import RuIcon from 'web/src/assets/svg/ru.svg';
 import EnIcon from 'web/src/assets/svg/en.svg';
+import RuIcon from 'web/src/assets/svg/ru.svg';
+import UkIcon from 'web/src/assets/svg/uk.svg';
 import * as s from './LanguageSelect.css';
 
 export interface LanguageSelectContext {
@@ -19,8 +20,9 @@ export interface LanguageSelectContext {
 }
 
 const icons = {
-  ru: <RuIcon />,
   en: <EnIcon />,
+  ru: <RuIcon />,
+  uk: <UkIcon />,
 };
 
 export const LanguageSelect: FC = () => {

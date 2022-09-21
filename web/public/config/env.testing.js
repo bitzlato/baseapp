@@ -27,7 +27,7 @@ window.env = {
   isDraggable: false,
   showLanding: true,
   msPricesUpdates: '1000',
-  languages: ['en', 'ru'],
+  languages: ['en', 'ru', 'uk'],
   sessionCheckInterval: '15000',
   balancesFetchInterval: '3000',
   passwordEntropyStep: 14,

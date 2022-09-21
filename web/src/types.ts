@@ -2,7 +2,7 @@ import { WrappedComponentProps } from 'react-intl';
 
 export type IntlProps = WrappedComponentProps;
 
-export type Language = 'ru' | 'en';
+export type Language = 'en' | 'ru' | 'uk';
 export type Theme = 'light' | 'dark';
 
 export type OptionalWithUndefined<T> = {

@@ -1,5 +1,6 @@
 import moment from 'moment-timezone';
 import 'moment/locale/ru';
+import 'moment/locale/uk';
 import { Language } from '../types';
 import { getTimezone } from './timezone';
 

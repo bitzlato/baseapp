@@ -1,3 +1,4 @@
+import { LanguageCode } from 'web/src/charting_library/charting_library.min';
 import { DEFAULT_TRADING_VIEW_INTERVAL } from '../../constants';
 import { customWidgetOptions } from '../../custom/tradingChartConfig';
 
@@ -35,7 +36,7 @@ export const widgetOptions = (colorTheme?: string) => {
   };
 };
 
-export const isLangIncluded = (value: string) =>
+export const isLangIncluded = (value: string): value is LanguageCode =>
   [
     'ar',
     'zh',
