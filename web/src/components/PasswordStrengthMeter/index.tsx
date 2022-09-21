@@ -70,7 +70,7 @@ const PasswordStrengthMeterComponent: React.FC<PasswordStrengthMeterProps> = (pr
 
   const passwordComplete =
     passwordErrorSecondSolved && passwordErrorFirstSolved && passwordErrorThirdSolved;
-  const AVG_PASSWORD_ENTROPY = minPasswordEntropy + passwordEntropyStep();
+  const AVG_PASSWORD_ENTROPY = minPasswordEntropy + passwordEntropyStep() * 1.3;
   const STRONG_PASSWORD_ENTROPY = minPasswordEntropy + passwordEntropyStep() * 2;
 
   let passwordStrengthMeterLength = -1;
@@ -88,7 +88,7 @@ const PasswordStrengthMeterComponent: React.FC<PasswordStrengthMeterProps> = (pr
 
   if (passwordComplete) {
     if (
-      currentPasswordEntropy >= minPasswordEntropy &&
+      currentPasswordEntropy >= passwordEntropyStep() &&
       currentPasswordEntropy < AVG_PASSWORD_ENTROPY
     ) {
       passwordStrengthMeterLength = 2;
