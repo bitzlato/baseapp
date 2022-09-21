@@ -11,6 +11,7 @@ type Input = {
   cryptocurrency: string;
   address: string;
   description: string;
+  blockchainId: number | undefined;
 };
 
 const P2PAddAddressToNotebook = async (params: Input) => {
@@ -24,7 +25,13 @@ const P2PAddAddressToNotebook = async (params: Input) => {
   });
 };
 
-export const useP2PAddAddressToNotebook = ({ cryptocurrency }: { cryptocurrency: string }) => {
+export const useP2PAddAddressToNotebook = ({
+  cryptocurrency,
+  blockchainId,
+}: {
+  cryptocurrency: string;
+  blockchainId?: number | undefined;
+}) => {
   const { mutate } = useSWRConfig();
   const dispatch = useDispatch();
   const handleFetchError = useHandleFetchError();
@@ -32,7 +39,9 @@ export const useP2PAddAddressToNotebook = ({ cryptocurrency }: { cryptocurrency:
   return useMutation(P2PAddAddressToNotebook, {
     onSuccess: () => {
       dispatch(alertPush({ message: ['address.added'], type: 'success' }));
-      mutate(`${p2pUrl()}/profile/addresses/?${buildQueryString({ cryptocurrency })}`);
+      mutate(
+        `${p2pUrl()}/profile/addresses/?${buildQueryString({ cryptocurrency, blockchainId })}`,
+      );
     },
     onFailure: ({ error }) => {
       if (error instanceof FetchError) {

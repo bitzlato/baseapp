@@ -9,11 +9,14 @@ import { isValidAddress } from 'web/src/helpers/validateBeneficiaryAddress';
 export type AddNotebookAddressValues = {
   name: string;
   address: string;
+  blockchainId?: number | undefined;
 };
 
 interface Props {
   show: boolean;
   currencyCode: string;
+  blockchainId?: number | undefined;
+  validatorKey?: string | undefined;
   onClose: () => void;
   onSubmit: (values: AddNotebookAddressValues) => void;
 }
@@ -21,6 +24,8 @@ interface Props {
 export const AddressNotebookAddModal: React.FC<Props> = ({
   show,
   currencyCode,
+  blockchainId,
+  validatorKey,
   onClose,
   onSubmit,
 }) => {
@@ -37,8 +42,8 @@ export const AddressNotebookAddModal: React.FC<Props> = ({
       return;
     }
 
-    const valid = isValidAddress(value, currencyCode);
-    const validTestnet = isValidAddress(value, currencyCode, 'testnet');
+    const valid = isValidAddress(value, validatorKey ?? currencyCode);
+    const validTestnet = isValidAddress(value, validatorKey ?? currencyCode, 'testnet');
     setAddressError(valid || validTestnet ? null : t('address.invalid'));
   };
 
@@ -56,7 +61,7 @@ export const AddressNotebookAddModal: React.FC<Props> = ({
   };
 
   const handleSubmit = () => {
-    onSubmit({ address, name });
+    onSubmit({ address, name, blockchainId });
     setName('');
     setAddress('');
     setAddressError(null);
@@ -66,7 +71,6 @@ export const AddressNotebookAddModal: React.FC<Props> = ({
     <Modal size="lg" show={show} onClose={onClose}>
       <ModalHeader>{t('page.body.wallets.beneficiaries.addAddressModal.header')}</ModalHeader>
       <Box
-        fontSize="medium"
         mx="6x"
         py="4x"
         borderTopWidth="1x"

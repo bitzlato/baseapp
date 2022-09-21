@@ -3,6 +3,7 @@ import { Currency } from '@bitzlato/money-js';
 import { useDebounce } from 'use-debounce';
 import { Button } from 'web/src/components/ui/Button';
 import { Box } from 'web/src/components/Box';
+import { Box as UIBox } from 'web/src/components/ui/Box';
 import { Blur } from 'web/src/components';
 import { createMoney } from 'web/src/helpers/money';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
@@ -21,6 +22,9 @@ import { isValidAddress } from 'web/src/helpers/validateBeneficiaryAddress';
 import { useFetchP2PWalletStat } from 'web/src/hooks/data/useFetchP2PWallets';
 import { WithdrawP2PFormValues } from 'web/src/containers/Withdraw/types';
 import { AddressNotebookP2P } from 'web/src/containers/Withdraw/AddressNotebookP2P';
+import { Select } from 'web/src/components/Select/Select';
+import { P2PBlockchain } from 'web/src/modules/public/blockchains/types';
+import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
 
 interface Props {
   currency: Currency;
@@ -28,6 +32,8 @@ interface Props {
   withdrawDone: boolean;
   onSubmit: (params: WithdrawP2PFormValues) => void;
 }
+
+const getOptionValue = (option: P2PBlockchain) => option.key;
 
 export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, onSubmit }) => {
   const t = useT();
@@ -38,17 +44,27 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
   const [amountError, setAmountError] = useState<null | string>(null);
   const [addressError, setAddressError] = useState<null | string>(null);
   const [defferedAmount] = useDebounce(amount, 1000);
+  const [blockchain, setBlockchain] = useState<P2PBlockchain | null>(null);
 
   const { data: p2pWalletsStat } = useFetchP2PWalletStat();
   const walletStat = p2pWalletsStat?.find((wallet) => wallet.code === currency.code);
+  const blockchains = walletStat?.blockchains;
+  const hasBlockchains = blockchains && blockchains.length > 0;
   const { data: vouchersData } = useFetchP2PWithdrawVouchers();
   const { data: withdrawalInfo } = useFetchP2PWithdrawalInfo({
     amount: defferedAmount,
     cryptocurrency: currency.code,
     voucher,
+    blockchainId: blockchain?.id,
   });
 
+  useEffect(() => {
+    setBlockchain(blockchains?.length === 1 ? blockchains[0]! : null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blockchains?.length, currency.code]);
+
   const voucherCount = vouchersData?.count ?? 0;
+  const validatorKey = blockchain?.key.replace('p2p-', '');
 
   const reset = () => {
     setAmount('');
@@ -74,8 +90,8 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
       return;
     }
 
-    const valid = isValidAddress(value, currency.code);
-    const validTestnet = isValidAddress(value, currency.code, 'testnet');
+    const valid = isValidAddress(value, validatorKey ?? currency.code);
+    const validTestnet = isValidAddress(value, validatorKey ?? currency.code, 'testnet');
     setAddressError(valid || validTestnet ? null : t('address.invalid'));
   };
 
@@ -130,6 +146,11 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
     setAddress(value);
   };
 
+  const handleBlockchainChange = (value: P2PBlockchain | null) => {
+    setBlockchain(value);
+    setAddress('');
+  };
+
   const handleChangeInputAmount = (value: string) => {
     const amountValue = parseNumeric(value);
     if (amountValue.match(precisionRegExp(currency.minorUnit))) {
@@ -138,59 +159,93 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
   };
 
   const handleSubmit = () => {
-    onSubmit({ amount, address, voucher });
+    onSubmit({ amount, address, voucher, blockchainId: blockchain?.id });
   };
 
   const renderBlur = () => {
-    if (walletStat === undefined) {
-      return null;
+    let withdrawEnabled = true;
+    if (hasBlockchains) {
+      if (blockchain) {
+        withdrawEnabled = blockchain.withdrawEnabled;
+      }
+    } else if (walletStat) {
+      withdrawEnabled = walletStat.withdrawEnabled;
     }
 
-    if (walletStat.withdrawEnabled === false) {
-      return <Blur text={t('page.body.wallets.tabs.withdraw.disabled.message')} />;
-    }
+    return !withdrawEnabled ? (
+      <Blur text={t('page.body.wallets.tabs.withdraw.disabled.message')} />
+    ) : null;
+  };
 
-    return null;
+  const renderSelectItem = (value: P2PBlockchain) => {
+    return (
+      <UIBox display="flex" alignItems="center">
+        <CryptoCurrencyIcon size="6x" currency={value.key.replace('p2p-', '').split('-')[0]!} />{' '}
+        <UIBox as="p" ml="1.5x">
+          {value.name}
+        </UIBox>
+      </UIBox>
+    );
   };
 
   return (
-    <Box col spacing="3">
+    <Box col spacing="3" position="relative">
       {renderBlur()}
-      <AddressNotebookP2P
-        currencyCode={currency.code}
-        inputAddress={address}
-        error={addressError}
-        onChange={handleAddressChange}
-      />
-      <Box grow row spacing="2" align="start">
-        <Box
-          flex="1"
-          as={NumberInput}
-          value={amount}
-          onChange={handleChangeInputAmount}
-          label={t('page.body.wallets.tabs.withdraw.content.amount')}
-          error={amountError}
-        />
-      </Box>
 
-      <Box col spacing="2">
-        <WithdrawP2PSummary amount={amount} currency={currency} info={withdrawalInfo} />
-        {voucherCount > 0 && (
-          <WithdrawVoucher count={voucherCount} value={voucher} onChange={setVoucher} />
-        )}
-        <Box flex="1" self="end" row justify="end">
-          <Button
-            data-gtm-click="create_withdraw"
-            color="primary"
-            disabled={isButtonDisabled()}
-            onClick={handleSubmit}
-          >
-            {countdown > 0
-              ? formatSeconds(countdown)
-              : t('page.body.wallets.tabs.withdraw.content.button')}
-          </Button>
-        </Box>
-      </Box>
+      {hasBlockchains && (
+        <Select
+          options={blockchains}
+          value={blockchain}
+          onChange={handleBlockchainChange}
+          placeholder={t('Network')}
+          formatOptionLabel={renderSelectItem}
+          getOptionValue={getOptionValue}
+          menuPortalTarget={document.body}
+          autoFocus
+        />
+      )}
+
+      {(!blockchains || blockchains.length === 0 || blockchain) && (
+        <>
+          <AddressNotebookP2P
+            blockchainId={blockchain?.id}
+            validatorKey={validatorKey}
+            currencyCode={currency.code}
+            inputAddress={address}
+            error={addressError}
+            onChange={handleAddressChange}
+          />
+          <Box grow row spacing="2" align="start">
+            <Box
+              flex="1"
+              as={NumberInput}
+              value={amount}
+              onChange={handleChangeInputAmount}
+              label={t('page.body.wallets.tabs.withdraw.content.amount')}
+              error={amountError}
+            />
+          </Box>
+
+          <Box col spacing="2">
+            <WithdrawP2PSummary amount={amount} currency={currency} info={withdrawalInfo} />
+            {voucherCount > 0 && (
+              <WithdrawVoucher count={voucherCount} value={voucher} onChange={setVoucher} />
+            )}
+            <Box flex="1" self="end" row justify="end">
+              <Button
+                data-gtm-click="create_withdraw"
+                color="primary"
+                disabled={isButtonDisabled()}
+                onClick={handleSubmit}
+              >
+                {countdown > 0
+                  ? formatSeconds(countdown)
+                  : t('page.body.wallets.tabs.withdraw.content.button')}
+              </Button>
+            </Box>
+          </Box>
+        </>
+      )}
     </Box>
   );
 };

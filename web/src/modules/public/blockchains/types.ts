@@ -9,3 +9,15 @@ export interface Blockchain {
   name: string;
   status: 'disabled' | 'active';
 }
+
+export interface P2PBlockchain {
+  id: number;
+  name: string;
+  code?: string | null | undefined;
+  key: string;
+  minWithdrawal: string;
+  minAcceptableDeposit: string;
+  minFee: number;
+  fee: number;
+  withdrawEnabled: boolean;
+}

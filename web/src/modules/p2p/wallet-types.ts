@@ -1,3 +1,5 @@
+import { P2PBlockchain } from 'web/src/modules/public/blockchains/types';
+
 export interface P2PWalletStat {
   code: string;
   depositEnabled: boolean;
@@ -11,6 +13,7 @@ export interface P2PWalletStat {
   paymentsQueue: number;
   unconfirmed: number;
   withdrawEnabled: boolean;
+  blockchains?: Array<P2PBlockchain> | undefined;
 }
 
 export interface P2PWallet {
@@ -36,4 +39,5 @@ export interface P2PCryptoCurrencySource {
 
 export interface P2PGenerateParams {
   cryptocurrency: string;
+  blockchainId?: number | undefined;
 }
