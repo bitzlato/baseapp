@@ -108,6 +108,21 @@ yarn lint
 
 > cap production maintenance:disable
 
+## Переводы
+
+Доступна команда для импорта json-файлов из Tolgee. Необходимо предворительно настроить переменные окружения `TOLGEE_URL`, `TOLGEE_MAIN_API_KEY` и `TOLGEE_SHARED_API_KEY`
+
+```env
+# .envrc
+export TOLGEE_URL=<URL_TO_TOLGEE>
+export TOLGEE_MAIN_API_KEY=<YOUR_PROJECT_API_KEY>
+export TOLGEE_SHARED_API_KEY=<YOUR_PROJECT_API_KEY>
+```
+
+```sh
+yarn workspace web run tolgee:import
+```
+
 ## Contributing
 
 - Соблюдайте соглашения сообщения коммитов [www.conventionalcommits.org](https://www.conventionalcommits.org). И прочтите наш путиводитель [github.com/bitzlato/guides](https://github.com/bitzlato/guides#%D0%BA%D0%B0%D0%BA-%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE-%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C-commit-%D1%8B)

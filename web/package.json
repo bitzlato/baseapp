@@ -3,14 +3,11 @@
   "version": "3.0.0",
   "private": true,
   "scripts": {
-    "mockAPI": "node mocks/mockAPI.js",
-    "mockWS": "node mocks/mockWS.js",
     "start": "cross-env NODE_ENV=development REACT_APP_GIT_SHA=$(git rev-parse HEAD) webpack serve",
-    "start-mock": "cross-env MOCK=1 npm-run-all -p start mockAPI mockWS",
     "build": "cross-env NODE_ENV=production webpack",
     "analyze": "cross-env NODE_ENV=production ANALYZE=enable webpack",
-    "spec:integration": "cypress open",
-    "clean": "rimraf build src/**/*.postcss.d.ts"
+    "clean": "rimraf build src/**/*.postcss.d.ts",
+    "tolgee:import": "node scripts/tolgeeImport.js"
   },
   "dependencies": {
     "@bitzlato/ethereum-provider": "^0.1.1",
