@@ -18,4 +18,5 @@ export type P2PWithdrawalParams = {
   amount: string;
   standart?: boolean;
   voucher?: boolean;
+  blockchainId?: number | undefined;
 };

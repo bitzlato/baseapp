@@ -4,6 +4,7 @@ export type WithdrawP2PFormValues = {
   amount: string;
   address: string;
   voucher: boolean;
+  blockchainId?: number | undefined;
 };
 
 export type WithdrawMarketFormValues = {

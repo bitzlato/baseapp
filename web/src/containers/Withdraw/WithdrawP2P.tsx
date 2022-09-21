@@ -119,8 +119,8 @@ export const WithdrawP2P: FC<Props> = ({ currencyCode }) => {
   };
 
   const handleWithdraw = async (code: string | null | undefined) => {
-    const { address, amount, voucher } = withdrawData;
-    const params: P2PWithdrawalParams = { address, amount };
+    const { address, amount, voucher, blockchainId } = withdrawData;
+    const params: P2PWithdrawalParams = { address, amount, blockchainId };
 
     if (voucher) {
       params.voucher = true;

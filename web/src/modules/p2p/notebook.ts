@@ -3,4 +3,5 @@ export type NotebookAddress = {
   address: string;
   cryptocurrency: string;
   description: string;
+  blockchainId: number;
 };

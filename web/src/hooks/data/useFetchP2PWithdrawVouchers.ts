@@ -8,13 +8,19 @@ export const useFetchP2PWithdrawalInfo = ({
   cryptocurrency,
   amount,
   voucher,
+  blockchainId,
 }: {
   cryptocurrency: string;
   amount: string;
   voucher: boolean;
+  blockchainId?: number | undefined;
 }) =>
   useFetch<P2PWithdrawInfo>(
-    `${p2pUrl()}/wallets/${cryptocurrency}/withdrawal?${buildQueryString({ amount, voucher })}`,
+    `${p2pUrl()}/wallets/${cryptocurrency}/withdrawal?${buildQueryString({
+      amount,
+      voucher,
+      blockchainId,
+    })}`,
     fetchWithCreds,
   );
 

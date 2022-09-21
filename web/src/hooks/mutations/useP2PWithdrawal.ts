@@ -8,6 +8,7 @@ type Input = {
   params: P2PWithdrawalParams;
   cryptocurrency: string;
   twoFACode: string | null | undefined;
+  blockchainId?: number | undefined;
 };
 
 const P2PWithdrawal = async ({ cryptocurrency, params, twoFACode }: Input) => {
