@@ -58,6 +58,7 @@ const fetchProject = (project) => {
           console.log(`${project}.${lang}: 2/2 Saving...`);
 
           let rawData = '';
+          res.setEncoding('utf8');
           res.on('data', (chunk) => {
             rawData += chunk;
           });
@@ -67,7 +68,7 @@ const fetchProject = (project) => {
                 const parsedData = JSON.parse(rawData);
                 fs.writeFile(
                   path.resolve(targetFolder, `${lang}.json`),
-                  JSON.stringify(flattenObject(parsedData), null, 2),
+                  JSON.stringify(flattenObject(parsedData), null, 2) + '\n',
                   (err) => {
                     if (err) {
                       return console.error(`${project}.${lang}: File write error: ${err}`);

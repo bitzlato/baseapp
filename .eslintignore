@@ -145,8 +145,6 @@ web/src/containers/Wallets/Transfer.tsx
 web/src/containers/Wallets/TransferHistory.tsx
 web/src/containers/WalletsFetch/index.tsx
 web/src/containers/index.ts
-web/src/custom/translations/index.ts
-web/src/custom/translations/ru.ts
 web/src/helpers/auth0.ts
 web/src/helpers/cleanPositiveFloatInput.ts
 web/src/helpers/customizationSettings.ts

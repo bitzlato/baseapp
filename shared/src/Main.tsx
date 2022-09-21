@@ -15,7 +15,11 @@ import { Links, Notify, BottomTabLink, UserLinks, UserLink } from 'shared/types'
 import { Language, Theme } from 'web/src/types';
 
 const MARKET_URL = 'https://market.bitzlato.com';
-const P2Plinks = { en: 'https://bitzlato.com/en/p2p', ru: 'https://bitzlato.com/ru/p2p' };
+const P2Plinks = {
+  en: 'https://bitzlato.com/en/p2p',
+  ru: 'https://bitzlato.com/ru/p2p',
+  uk: 'https://bitzlato.com/ru/p2p',
+};
 
 const languages = {
   en: 'English',

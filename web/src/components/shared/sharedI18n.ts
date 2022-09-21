@@ -1,6 +1,7 @@
 import { Language } from 'web/src/types';
 import en from './sharedLocales/en.json';
 import ru from './sharedLocales/ru.json';
+import uk from './sharedLocales/uk.json';
 
 type Dictionary = Record<string, string>;
 export type SharedTranslateFn = (key: string, values?: Record<string, string | number>) => string;
@@ -9,6 +10,7 @@ const defaultDictionary: Dictionary = en;
 const dictionaries: Record<string, Dictionary> = {
   en,
   ru,
+  uk,
 };
 
 const interpolate = (template: string, values: Record<string, string | number>) =>
