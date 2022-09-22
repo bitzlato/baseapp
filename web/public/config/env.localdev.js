@@ -1,30 +1,27 @@
+const wsHostURL = `${window.location.protocol === 'http:' ? 'ws://' : 'wss://'}${
+  window.location.hostname
+}`;
+
 window.env = {
   routes: {
     profile: '/profile',
     wallets: '/wallets',
   },
   api: {
-    authUrl: 'http://localhost:8080/api/v2/barong',
-    tradeUrl: 'http://localhost:8080/api/v2/peatio',
-    finexUrl: 'http://localhost:8080/api/v2/finex',
-    applogicUrl: 'http://localhost:8080/api/v2/applogic',
-    rangerUrl: 'ws://localhost:8080/api/v2/ranger',
-    accountUrl: '/api/private/v1',
-    accountPublicUrl: '/api/public/v1',
-    p2pUrl: '/api/p2p',
-    p2pAuthUrl: '/api/auth',
-    notificatorUrl: 'ws://localhost:8080/wss',
-    belomorUrl: 'http://localhost:8080/api/belomor',
+    authUrl: '/api/v2/barong',
+    tradeUrl: '/api/v2/peatio',
+    finexUrl: '/api/v2/finex',
+    applogicUrl: '/api/v2/applogic',
+    rangerUrl: `${wsHostURL}/api/v2/ranger`,
+    accountUrl: '/api/whaler/private/v1',
+    accountPublicUrl: '/api/whaler/public/v1',
+    p2pUrl: '/api2/p2p',
+    p2pAuthUrl: '/api2/auth',
+    notificatorUrl: `${wsHostURL}/wssb`,
+    belomorUrl: '/api/belomor',
   },
-  auth0: {
-    domain: window.AUTH0_DOMAIN ?? 'auth.lgk.one',
-    client_id: window.AUTH0_CLIENT_ID ?? 'OL926gD0Zha6h80uJx4TVhJLMKrJemjb',
-    // domain: 'auth.bitzlato.bz',
-    // client_id: 'sW5Er9tgeD9T8XuklzCX_FcNX0ETttJK',
-    redirect_uri: 'http://localhost:8080/wallets',
-  },
-  logoUrl: 'https://bitzlato.com/basestatic/bitzlato_logo--sm--blue--nav.svg',
-  logoDarkUrl: 'https://bitzlato.com/basestatic/bitzlato_logo--sm--white--nav.svg',
+  logoUrl: '/bitzlato_logo--sm--blue--nav.svg',
+  logoDarkUrl: '/bitzlato_logo--sm--white--nav.svg',
   minutesUntilAutoLogout: '120',
   withCredentials: false,
   finex: false,

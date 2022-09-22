@@ -1,28 +1,27 @@
+const wsHostURL = `${window.location.protocol === 'http:' ? 'ws://' : 'wss://'}${
+  window.location.hostname
+}`;
+
 window.env = {
   routes: {
     profile: '/profile',
     wallets: '/wallets',
   },
   api: {
-    authUrl: 'https://bitzlato.com/api/v2/barong',
-    tradeUrl: 'https://bitzlato.com/api/v2/peatio',
-    finexUrl: 'https://bitzlato.com/api/v2/finex',
-    applogicUrl: 'https://bitzlato.com/api/v2/applogic',
-    rangerUrl: 'wss://bitzlato.com/api/v2/ranger',
-    accountUrl: 'https://bitzlato.com/api/whaler/private/v1',
-    accountPublicUrl: 'https://bitzlato.com/api/whaler/public/v1',
-    p2pUrl: 'https://bitzlato.com/api2/p2p',
-    p2pAuthUrl: 'https://bitzlato.com/api2/auth',
-    notificatorUrl: 'wss://bitzlato.com/wssb',
-    belomorUrl: 'https://bitzlato.com/api/belomor',
+    authUrl: '/api/v2/barong',
+    tradeUrl: '/api/v2/peatio',
+    finexUrl: '/api/v2/finex',
+    applogicUrl: '/api/v2/applogic',
+    rangerUrl: `${wsHostURL}/api/v2/ranger`,
+    accountUrl: '/api/whaler/private/v1',
+    accountPublicUrl: '/api/whaler/public/v1',
+    p2pUrl: '/api2/p2p',
+    p2pAuthUrl: '/api2/auth',
+    notificatorUrl: `${wsHostURL}/wssb`,
+    belomorUrl: '/api/belomor',
   },
-  auth0: {
-    domain: 'auth.bitzlato.com',
-    client_id: 'sW5Er9tgeD9T8XuklzCX_FcNX0ETttJK',
-    redirect_uri: 'https://bitzlato.com/wallets',
-  },
-  logoUrl: 'https://bitzlato.com/basestatic/bitzlato_logo--sm--blue--nav.svg',
-  logoDarkUrl: 'https://bitzlato.com/basestatic/bitzlato_logo--sm--white--nav.svg',
+  logoUrl: '/basestatic/bitzlato_logo--sm--blue--nav.svg',
+  logoDarkUrl: '/basestatic/bitzlato_logo--sm--white--nav.svg',
   minutesUntilAutoLogout: '120',
   withCredentials: false,
   finex: false,

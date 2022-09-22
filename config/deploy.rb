@@ -67,9 +67,7 @@ task :yarn_build do
   on roles('app') do
     within release_path do
       execute :yarn, :rebuild
-      with PUBLIC_URL: fetch(:public_url) do
-        execute :yarn, :build
-      end
+      execute :yarn, :build
       execute :ln, "-sr web/build/ web/build/shared"
       execute :ln, "-sr web/build/ web/build/basestatic"
       execute :cp, "-R market-docs/build web/build/marketDocs"
