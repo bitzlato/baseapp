@@ -233,7 +233,7 @@ export const SignUp: FC = () => {
         <Checkbox name="terms" checked={hasConfirmed} onChange={handleChangeCheckbox}>
           {t('page.header.signUp.agree', {
             terms: (
-              <ExternalLink href="https://bitzlato.com/terms-of-service-bitzlato/">
+              <ExternalLink href="/terms-of-service-bitzlato/">
                 {t('page.header.signUp.terms')}
               </ExternalLink>
             ),

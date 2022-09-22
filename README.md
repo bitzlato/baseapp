@@ -24,14 +24,9 @@ _(опционально)_ **Для развёртывания** потребу�
 nvm use
 corepack enable
 yarn rebuild
-# для проксирования на s
 cp .envrc.development .envrc
 direnv allow
 ln -s env.localdev.js web/public/config/env.js
-# ИЛИ для проксирования на b
-cp .envrc.development-b .envrc
-direnv allow
-ln -s env.localdev-b.js web/public/config/env.js
 ```
 
 Теперь у вас всё готово для работы!

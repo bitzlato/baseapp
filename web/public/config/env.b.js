@@ -1,28 +1,27 @@
+const wsHostURL = `${window.location.protocol === 'http:' ? 'ws://' : 'wss://'}${
+  window.location.hostname
+}`;
+
 window.env = {
   routes: {
     profile: '/profile',
     wallets: '/wallets',
   },
   api: {
-    authUrl: 'https://b-www.lgk.one/api/v2/barong',
-    tradeUrl: 'https://b-www.lgk.one/api/v2/peatio',
-    finexUrl: 'https://b-www.lgk.one/api/v2/finex',
-    applogicUrl: 'https://b-www.lgk.one/api/v2/applogic',
-    rangerUrl: 'wss://b-www.lgk.one/api/v2/ranger',
-    accountUrl: 'https://b-www.lgk.one/api/whaler/private/v1',
-    accountPublicUrl: 'https://b-www.lgk.one/api/whaler/public/v1',
-    p2pUrl: 'https://b-www.lgk.one/api2/p2p',
-    p2pAuthUrl: 'https://b-www.lgk.one/api2/auth',
-    notificatorUrl: 'wss://b-www.lgk.one/wssb',
-    belomorUrl: 'https://b-www.lgk.one/api/belomor',
+    authUrl: '/api/v2/barong',
+    tradeUrl: '/api/v2/peatio',
+    finexUrl: '/api/v2/finex',
+    applogicUrl: '/api/v2/applogic',
+    rangerUrl: `${wsHostURL}/api/v2/ranger`,
+    accountUrl: '/api/whaler/private/v1',
+    accountPublicUrl: '/api/whaler/public/v1',
+    p2pUrl: '/api2/p2p',
+    p2pAuthUrl: '/api2/auth',
+    notificatorUrl: `${wsHostURL}/wssb`,
+    belomorUrl: '/api/belomor',
   },
-  auth0: {
-    domain: 'auth.lgk.one',
-    client_id: 'OL926gD0Zha6h80uJx4TVhJLMKrJemjb',
-    redirect_uri: 'https://b-www.lgk.one/wallets',
-  },
-  logoUrl: 'https://b-www.lgk.one/basestatic/bitzlato_logo--sm--blue--nav.svg',
-  logoDarkUrl: 'https://b-www.lgk.one/basestatic/bitzlato_logo--sm--white--nav.svg',
+  logoUrl: '/basestatic/bitzlato_logo--sm--blue--nav.svg',
+  logoDarkUrl: '/basestatic/bitzlato_logo--sm--white--nav.svg',
   minutesUntilAutoLogout: '120',
   withCredentials: false,
   finex: false,

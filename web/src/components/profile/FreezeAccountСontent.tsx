@@ -14,9 +14,7 @@ interface Props {
 export const FreezeAccountContent: FC<Props> = ({ status }) => {
   const t = useT();
   const currentLanguage = useSelector(selectCurrentLanguage);
-  const supportLink = `https://bitzlato.com${
-    currentLanguage === 'ru' ? '/ru/knowledgebase/' : '/knowledgebase/'
-  }`;
+  const supportLink = currentLanguage === 'ru' ? '/ru/knowledgebase/' : '/knowledgebase/';
 
   if (status === 'running') {
     return (
