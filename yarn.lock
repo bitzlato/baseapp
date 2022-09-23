@@ -3956,17 +3956,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^10.9.4":
-  version: 10.17.51
-  resolution: "@types/node@npm:10.17.51"
-  checksum: 28dc090b43512274401ab103232346012cae038b136e6b371cb812c53d8ea605b7a3f2e4faf17f8c789e8128a6a8d3be63165f5447fd004f9068936814823ffd
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:^12.20.15":
   version: 12.20.33
   resolution: "@types/node@npm:12.20.33"
   checksum: 2b7a6ce348760003d0564bda87a8360e534c7099da12513d17c06f82a336cd39be0b485cc1a6f0ddce9661135affe8dc3d2673d4f219d988c6f065aebfb30970
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^16.0.0":
+  version: 16.11.59
+  resolution: "@types/node@npm:16.11.59"
+  checksum: b3a2986ef8f8216bb7fd1187dcf2e69aca3e6b6b5fdfd6abf4cf11c44e3cdd587fae875a28dc4ef257e2b369e2c5290642aff6a0a9d702f3385a78f561293259
   languageName: node
   linkType: hard
 
@@ -19544,7 +19544,7 @@ __metadata:
     "@types/history": 4.7.11
     "@types/jest": ^26.0.10
     "@types/multicoin-address-validator": ^0.5.0
-    "@types/node": ^10.9.4
+    "@types/node": ^16.0.0
     "@types/node-jose": ^1.1.10
     "@types/qrcode.react": 1.0.2
     "@types/react": 17.0.49
