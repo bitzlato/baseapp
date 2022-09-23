@@ -8,10 +8,11 @@ import * as s from './StepSubmitRow.css';
 interface Props {
   title?: string | undefined;
   errors?: Record<string, string | null> | null | undefined;
+  createAdvert?: boolean | undefined;
   onSubmit: () => void;
 }
 
-export const StepSubmitRow: FC<Props> = ({ title, errors, onSubmit }) => {
+export const StepSubmitRow: FC<Props> = ({ title, errors, createAdvert = false, onSubmit }) => {
   const { t } = useAdapterContext();
 
   return (
@@ -19,7 +20,11 @@ export const StepSubmitRow: FC<Props> = ({ title, errors, onSubmit }) => {
       {errors ? <StepErrors errors={errors} /> : null}
 
       <Box className={s.submitContainer}>
-        <Button fullWidth onClick={onSubmit}>
+        <Button
+          fullWidth
+          onClick={onSubmit}
+          data-gtm-click={createAdvert ? 'create_advert' : undefined}
+        >
           {title || t('Continue')}
         </Button>
       </Box>

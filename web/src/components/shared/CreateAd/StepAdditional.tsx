@@ -160,7 +160,12 @@ export const StepAdditional = ({ onSubmit }: Props) => {
           )}
         </Box>
 
-        <StepSubmitRow title={t('Create advert')} errors={errors} onSubmit={handleSubmit} />
+        <StepSubmitRow
+          title={t('Create advert')}
+          errors={errors}
+          createAdvert
+          onSubmit={handleSubmit}
+        />
       </Box>
 
       <Modal show={showLiquidityHintModal} onClose={() => setShowLiquidityHintModal(false)}>
