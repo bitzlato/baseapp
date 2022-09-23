@@ -62,7 +62,10 @@ export const DepositStatus: FC<Props> = ({ item, minConfirmations }) => {
 
     case 'accepted':
       return (
-        <ConfirmingStatus confirmations={item.confirmations} minConfirmations={minConfirmations} />
+        <ConfirmingStatus
+          confirmations={item.confirmations ?? 0}
+          minConfirmations={minConfirmations}
+        />
       );
 
     case 'refunding':

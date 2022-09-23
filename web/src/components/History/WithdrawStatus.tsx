@@ -23,7 +23,10 @@ export const WithdrawStatus: FC<Props> = ({ item, minConfirmations }) => {
 
     case 'confirming':
       return (
-        <ConfirmingStatus confirmations={item.confirmations} minConfirmations={minConfirmations} />
+        <ConfirmingStatus
+          confirmations={item.confirmations ?? 0}
+          minConfirmations={minConfirmations}
+        />
       );
 
     case 'succeed':
