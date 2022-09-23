@@ -28,6 +28,7 @@ import { WalletType } from 'web/src/modules/account/types';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { Table } from 'web/src/components/Table';
 import { useFetchBlockchains } from 'web/src/hooks/data/belomor/useFetchBlockchains';
+import { getBlockchainLink } from 'web/src/helpers/getBlockchainLink';
 import s from './TransferHistory.postcss';
 
 const LIMIT = 6;
@@ -38,14 +39,12 @@ interface Props {
 }
 
 export const ExchangeHistory: FC<Props> = ({ type, general }) => {
-  const ccy = general.balanceTotal.currency;
+  const t = useT();
+  const { data: blockchains = [] } = useFetchBlockchains();
 
   const [page, setPage] = useState(0);
 
-  const t = useT();
-
-  const { data: blockchains = [] } = useFetchBlockchains();
-
+  const ccy = general.balanceTotal.currency;
   const resp = useFetchHistory(type, {
     currency: ccy.code.toLowerCase(),
     limit: LIMIT,
@@ -54,19 +53,34 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
 
   const data = resp.data?.data ?? [];
   const total = resp.data?.total ?? 0;
+  const isDeposit = type === 'deposits';
 
   const headers = useMemo(
-    () => [t('Date'), t('Status'), t('Amount'), t('page.body.history.withdraw.header.fee')],
-    [t],
+    () => [
+      isDeposit
+        ? t('page.body.history.deposit.header.txid')
+        : t('page.body.history.withdraw.header.address'),
+      t('Date'),
+      t('Status'),
+      t('Amount'),
+      t('page.body.history.withdraw.header.fee'),
+    ],
+    [t, isDeposit],
   );
 
   const tableData = data
     .sort((a, b) => sortByDateDesc(a.created_at, b.created_at))
     .map((d) => {
       const blockchain = blockchains.find((b) => b.key === d.blockchain_key) ?? DEFAULT_BLOCKCHAIN;
+      const blockchainLink = isDeposit
+        ? getBlockchainLink(blockchain, (d as Deposit).txid)
+        : getBlockchainLink(blockchain, '', (d as Withdraw).rid);
       return [
+        <a href={blockchainLink} target="_blank" rel="noopener noreferrer">
+          {truncateMiddle(isDeposit ? (d as Deposit).txid : (d as Withdraw).rid, 30)}
+        </a>,
         <div title={`${d.id} - ${d.state}`}>{localeDate(d.created_at, 'fullDate')}</div>,
-        type === 'deposits' ? (
+        isDeposit ? (
           <DepositStatus item={d as Deposit} minConfirmations={blockchain.min_confirmations} />
         ) : (
           <WithdrawStatus item={d as Withdraw} minConfirmations={blockchain.min_confirmations} />
