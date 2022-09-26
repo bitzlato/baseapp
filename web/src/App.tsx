@@ -1,6 +1,5 @@
 import { createBrowserHistory } from 'history';
 import * as React from 'react';
-import * as ReactGA from 'react-ga';
 import cn from 'classnames';
 import { IntlProvider } from 'react-intl';
 import { useSelector } from 'react-redux';
@@ -10,7 +9,6 @@ import { useFetchPublicFeatures } from 'web/src/hooks/data/barong/useFetchPublic
 import { Adapter } from 'web/src/components/shared/Adapter';
 import { Link, useHistory } from 'react-router-dom';
 import { useNewTradeNotifyWithSound } from 'web/src/hooks/useNewTradeNotifySound';
-import { gaTrackerKey } from './api';
 import { useSetMobileDevice } from './hooks';
 import { selectCurrentColorTheme, selectCurrentLanguage, selectMobileDeviceState } from './modules';
 import { languageMap } from './translations';
@@ -19,16 +17,7 @@ import { lazyRetry } from './helpers/lazyRetry';
 import { DeeplinkAlertProvider } from './containers/DeeplinkAlert/DeeplinkAlertContext';
 import { DeeplinkAlertModal } from './containers/DeeplinkAlert/DeeplinkAlertModal';
 
-const gaKey = gaTrackerKey();
 const browserHistory = createBrowserHistory();
-
-if (gaKey) {
-  ReactGA.initialize(gaKey);
-  browserHistory.listen((location) => {
-    ReactGA.set({ page: location.pathname });
-    ReactGA.pageview(location.pathname);
-  });
-}
 
 const Header = lazyRetry(() => import('./components/Header/Header'));
 

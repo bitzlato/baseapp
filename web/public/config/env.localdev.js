@@ -25,7 +25,6 @@ window.env = {
   minutesUntilAutoLogout: '120',
   withCredentials: false,
   finex: false,
-  gaTrackerKey: '',
   rangerReconnectPeriod: '1',
   msAlertDisplayTime: '10000',
   incrementalOrderBook: true,

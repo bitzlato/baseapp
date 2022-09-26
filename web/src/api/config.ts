@@ -34,7 +34,6 @@ export const defaultConfig: Config = {
   showLanding: true,
   captchaLogin: false,
   usernameEnabled: false,
-  gaTrackerKey: '',
   minutesUntilAutoLogout: '5',
   msAlertDisplayTime: '5000',
   msPricesUpdates: '5000',
@@ -96,7 +95,6 @@ export const captchaLogin = () => convertToBoolean(Cryptobase.config.captchaLogi
 export const minutesUntilAutoLogout = () => Cryptobase.config.minutesUntilAutoLogout;
 export const sessionCheckInterval = () => Cryptobase.config.sessionCheckInterval;
 export const balancesFetchInterval = () => Cryptobase.config.balancesFetchInterval;
-export const gaTrackerKey = () => Cryptobase.config.gaTrackerKey;
 export const msAlertDisplayTime = () => Cryptobase.config.msAlertDisplayTime;
 export const msPricesUpdates = () => Cryptobase.config.msPricesUpdates;
 export const defaultStorageLimit = () => Number(Cryptobase.config.storage.defaultStorageLimit);

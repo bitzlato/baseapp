@@ -15887,16 +15887,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-ga@npm:^2.6.0":
-  version: 2.7.0
-  resolution: "react-ga@npm:2.7.0"
-  peerDependencies:
-    prop-types: ^15.6.0
-    react: ^15.6.2 || ^16.0
-  checksum: 15d8571c156edfaa204ff0041db7a901b0eeca3e3b21774e918269b0fe48204bb5b6a3df882caea5e0077aa3a32be39a48e7082e556563338f2a78b402a59463
-  languageName: node
-  linkType: hard
-
 "react-google-recaptcha@npm:^2.1.0":
   version: 2.1.0
   resolution: "react-google-recaptcha@npm:2.1.0"
@@ -19596,7 +19586,6 @@ __metadata:
     react-dom: ^17.0.2
     react-fade-in: ^0.1.6
     react-focus-on: ^3.5.4
-    react-ga: ^2.6.0
     react-google-recaptcha: ^2.1.0
     react-grid-layout: ^1.3.3
     react-intl: ^5.20.9

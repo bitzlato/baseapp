@@ -32,7 +32,6 @@ declare global {
     showLanding: string | boolean;
     captchaLogin: string | boolean;
     usernameEnabled: string | boolean;
-    gaTrackerKey: string;
     minutesUntilAutoLogout: string;
     msAlertDisplayTime: string;
     msPricesUpdates: string;
