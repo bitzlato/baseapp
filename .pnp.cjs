@@ -12300,6 +12300,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["diacritics", [\
+        ["npm:1.3.0", {\
+          "packageLocation": "./.yarn/cache/diacritics-npm-1.3.0-c93caecb7f-ef7552c36e.zip/node_modules/diacritics/",\
+          "packageDependencies": [\
+            ["diacritics", "npm:1.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["diff-sequences", [\
         ["npm:26.6.2", {\
           "packageLocation": "./.yarn/cache/diff-sequences-npm-26.6.2-fbf1967570-79af871776.zip/node_modules/diff-sequences/",\
@@ -15337,10 +15346,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["i18n-iso-countries", [\
-        ["npm:3.7.8", {\
-          "packageLocation": "./.yarn/cache/i18n-iso-countries-npm-3.7.8-445de2927e-20327f3945.zip/node_modules/i18n-iso-countries/",\
+        ["npm:7.5.0", {\
+          "packageLocation": "./.yarn/cache/i18n-iso-countries-npm-7.5.0-092ba3cf33-bec3260ea2.zip/node_modules/i18n-iso-countries/",\
           "packageDependencies": [\
-            ["i18n-iso-countries", "npm:3.7.8"]\
+            ["i18n-iso-countries", "npm:7.5.0"],\
+            ["diacritics", "npm:1.3.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -27174,7 +27184,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["header-case-normalizer", "npm:1.0.3"],\
             ["history", "npm:4.10.1"],\
             ["html-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.5.0"],\
-            ["i18n-iso-countries", "npm:3.7.8"],\
+            ["i18n-iso-countries", "npm:7.5.0"],\
             ["jest", "npm:26.6.3"],\
             ["lodash-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.11.6"],\
             ["mini-css-extract-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.6.1"],\

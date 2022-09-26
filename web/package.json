@@ -31,7 +31,7 @@
     "cryptocurrency-icons": "git+https://github.com/bitzlato/cryptocurrency-icons.git#1c1db76ce934c5a81fa67d1ebad689c7e0a85504",
     "events": "^3.3.0",
     "history": "^4.7.2",
-    "i18n-iso-countries": "^3.7.8",
+    "i18n-iso-countries": "^7.0.0",
     "moment": "^2.23.0",
     "moment-timezone": "^0.5.23",
     "multicoin-address-validator": "^0.5.2",
