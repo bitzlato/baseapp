@@ -22240,17 +22240,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["react-ga", [\
-        ["npm:2.7.0", {\
-          "packageLocation": "./.yarn/cache/react-ga-npm-2.7.0-87bdce9bdf-15d8571c15.zip/node_modules/react-ga/",\
+        ["npm:3.3.1", {\
+          "packageLocation": "./.yarn/cache/react-ga-npm-3.3.1-de5c01fc6e-3026976d02.zip/node_modules/react-ga/",\
           "packageDependencies": [\
-            ["react-ga", "npm:2.7.0"]\
+            ["react-ga", "npm:3.3.1"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.7.0", {\
-          "packageLocation": "./.yarn/__virtual__/react-ga-virtual-b1adc48de7/0/cache/react-ga-npm-2.7.0-87bdce9bdf-15d8571c15.zip/node_modules/react-ga/",\
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.3.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-ga-virtual-d153403b20/0/cache/react-ga-npm-3.3.1-de5c01fc6e-3026976d02.zip/node_modules/react-ga/",\
           "packageDependencies": [\
-            ["react-ga", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.7.0"],\
+            ["react-ga", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.3.1"],\
             ["@types/prop-types", null],\
             ["@types/react", "npm:17.0.50"],\
             ["prop-types", "npm:15.7.2"],\
@@ -27197,7 +27197,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:17.0.2"],\
             ["react-fade-in", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.1.8"],\
             ["react-focus-on", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.5.4"],\
-            ["react-ga", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.7.0"],\
+            ["react-ga", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.3.1"],\
             ["react-google-recaptcha", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.1.0"],\
             ["react-grid-layout", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.3.3"],\
             ["react-intl", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.20.9"],\
