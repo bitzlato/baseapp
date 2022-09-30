@@ -221,20 +221,6 @@ export const GiftsScreen: FC = () => {
       <TwoFactorModal
         show={show2fa}
         buttonText={t('Create gift')}
-        text={
-          <span>
-            {user.bitzlato_user
-              ? t('Enter 2FA code from the app for', {
-                  name: (
-                    <strong>{`${
-                      user.bitzlato_user.user_profile.public_name ??
-                      user.bitzlato_user.user_profile.generated_name
-                    }@Bitzlato.com`}</strong>
-                  ),
-                })
-              : undefined}
-          </span>
-        }
         onClose={() => setShow2fa(false)}
         onSend={handleSend2fa}
       />
