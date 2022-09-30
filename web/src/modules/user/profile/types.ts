@@ -97,6 +97,7 @@ export interface User {
   csrf_token?: string;
   data?: string | undefined;
   referal_uid: string | null;
+  totp_label: string;
   labels: Label[];
   phone: Phone[];
   created_at: string;

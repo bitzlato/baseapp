@@ -49,7 +49,7 @@ export const TwoFactorModal: FC<Props> = ({ buttonText, text, show = true, onSen
           {text}
           {user && (
             <span>
-              {t('Enter 2FA code from the app for')} <strong>{`bitzlato (${user.uid})`}</strong>
+              {t('Enter 2FA code from the app for')} <strong>{user.totp_label}</strong>
             </span>
           )}
           <AutoFocusInside>

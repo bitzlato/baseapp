@@ -58,6 +58,7 @@ export const defaultUser: User = {
   uid: '',
   profiles: [],
   referal_uid: '',
+  totp_label: '',
   labels: [],
   phone: [],
   created_at: '',

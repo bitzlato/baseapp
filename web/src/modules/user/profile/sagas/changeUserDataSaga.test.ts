@@ -39,6 +39,7 @@ describe('Module: Change user info', () => {
     profiles: [],
     data: '',
     referal_uid: '',
+    totp_label: '',
     labels: [],
     phone: [],
     created_at: '',

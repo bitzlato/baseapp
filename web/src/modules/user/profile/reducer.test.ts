@@ -34,6 +34,7 @@ describe('Profile reducer', () => {
       profiles: fakeProfiles,
       data: '{"language":"en"}',
       referal_uid: '',
+      totp_label: '',
       labels: [],
       phone: [],
       created_at: '',

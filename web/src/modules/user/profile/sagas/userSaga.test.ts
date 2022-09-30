@@ -38,6 +38,7 @@ describe('Module: User', () => {
     state: 'active',
     profiles: [],
     referal_uid: '',
+    totp_label: '',
     labels: [],
     phone: [],
     created_at: '',

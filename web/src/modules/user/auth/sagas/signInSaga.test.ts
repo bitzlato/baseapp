@@ -38,6 +38,7 @@ describe('SignIn saga', () => {
     profiles: [],
     data: '{"language":"en"}',
     referal_uid: '',
+    totp_label: '',
     labels: [],
     phone: [],
     created_at: '',
