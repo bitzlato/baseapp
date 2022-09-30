@@ -1,5 +1,5 @@
 import { FC, useState, useMemo, useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useCountdown } from 'web/src/hooks/useCountdown';
 import { useT } from 'web/src/hooks/useT';
 import { Button } from 'web/src/components/ui/Button';
@@ -19,7 +19,6 @@ import { SafeModeWizardModal } from 'web/src/components/profile/settings/SafeMod
 import { alertPush } from 'web/src/modules';
 import { WithdrawP2PFormValues } from 'web/src/containers/Withdraw/types';
 import { formatSeconds } from 'web/src/helpers/formatSeconds';
-import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import { useFetchP2PTransactions } from 'web/src/hooks/data/useFetchP2PTransactions';
 import { P2PTransaction } from 'web/src/modules/p2p/types';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
@@ -38,7 +37,6 @@ export const WithdrawP2P: FC<Props> = ({ currencyCode }) => {
   const handleFetchError = useHandleFetchError();
   const t = useT();
   const dispatch = useDispatch();
-  const user = useSelector(selectUserInfo);
   const ccy = useMemo(() => createCcy(currencyCode, DEFAULT_CCY_PRECISION), [currencyCode]);
   const { countdown, start } = useCountdown();
 
@@ -189,20 +187,6 @@ export const WithdrawP2P: FC<Props> = ({ currencyCode }) => {
           onClose={() => setShow2fa(false)}
           onSend={handleSend2fa}
           buttonText={t('withdraw.confirm')}
-          text={
-            <span>
-              {user.bitzlato_user
-                ? t('Enter 2FA code from the app for', {
-                    name: (
-                      <strong>{`${
-                        user.bitzlato_user.user_profile.public_name ??
-                        user.bitzlato_user.user_profile.generated_name
-                      }@Bitzlato.com`}</strong>
-                    ),
-                  })
-                : undefined}
-            </span>
-          }
         />
       ) : null}
 

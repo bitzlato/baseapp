@@ -8,6 +8,7 @@ import { isValidCode, OTP_TIMEOUT } from 'web/src/helpers/codeValidation';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { AutoFocusInside } from 'react-focus-on';
 import { useSharedT } from 'web/src/components/shared/Adapter';
+import { useUser } from 'web/src/components/app/AppContext';
 
 interface Props {
   buttonText?: string | undefined;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 export const TwoFactorModal: FC<Props> = ({ buttonText, text, show = true, onSend, onClose }) => {
+  const user = useUser();
   const [code, setCode] = useState('');
   const t = useSharedT();
   const { start, countdown } = useCountdown();
@@ -45,10 +47,15 @@ export const TwoFactorModal: FC<Props> = ({ buttonText, text, show = true, onSen
       <ModalBody>
         <Box col spacing="3">
           {text}
+          {user && (
+            <span>
+              {t('Enter 2FA code from the app for')} <strong>{`bitzlato (${user.uid})`}</strong>
+            </span>
+          )}
           <AutoFocusInside>
             <TextInput
               label={t('2FA code')}
-              placeholder={!text ? t('Enter 2FA code from the app') : undefined}
+              placeholder={t('2FA code')}
               value={code}
               onChange={setCode}
               onKeyPress={handleKeyPress}
