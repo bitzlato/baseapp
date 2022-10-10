@@ -4,12 +4,13 @@ FROM node:16.17.1 AS builder
 WORKDIR /app
 
 COPY . .
-
 COPY web/public/config/env.production.js web/public/config/env.js
+
 RUN yarn rebuild
 RUN yarn build
-COPY uibitz/build web/build/uibitz
-COPY market-docs/build web/build/marketDocs
+
+RUN cp -R uibitz/build web/build/uibitz
+RUN cp -R market-docs/build web/build/marketDocs
 
 # serve
 FROM nginx:alpine
