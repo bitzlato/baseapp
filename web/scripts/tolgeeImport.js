@@ -74,7 +74,7 @@ const fetchProject = (project) => {
                       return console.error(`${project}.${lang}: File write error: ${err}`);
                     }
 
-                    console.log(`${project}.${lang}: Import comleted!`);
+                    console.log(`${project}.${lang}: Import completed!`);
                   },
                 );
               } catch (e) {
