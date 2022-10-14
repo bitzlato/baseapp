@@ -1,5 +1,5 @@
 VERSION=latest
-REPO=barong
+REPO=baseapp
 REGISTRY=nexus.lgk.one:5000
 IMAGE_NAME=${REGISTRY}/${REPO}:${VERSION}
 
