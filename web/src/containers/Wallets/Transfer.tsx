@@ -113,7 +113,7 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
       ? createMoney(balanceP2P, currency)
       : createMoney(0, currency);
 
-  const m = createMoney(amount, currency);
+  const m = createMoney(amount || 0, currency);
   const disablePercents = !from || !to || available.isZero();
   const disableTransfer = disablePercents || m.isZero() || m.greaterThan(available);
 

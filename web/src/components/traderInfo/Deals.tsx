@@ -27,7 +27,7 @@ export const Deals: FC<DealsProps> = ({ deals }) => {
 
           return {
             ...item,
-            totalAmount: createMoney(item.totalAmount, currency),
+            totalAmount: createMoney(item.totalAmount || 0, currency),
           };
         })
         .filter((item) => item.cryptocurrency !== 'common' && !item.totalAmount.isZero())

@@ -33,7 +33,7 @@ export const WithdrawP2PSummary: FC<Props> = ({ currency, amount, info }) => {
     return {
       available: createMoney(info.available, currency),
       minValue: createMoney(info.min, currency),
-      amount: createMoney(amount, currency),
+      amount: createMoney(amount || 0, currency),
     };
   }, [currency, info, amount]);
 

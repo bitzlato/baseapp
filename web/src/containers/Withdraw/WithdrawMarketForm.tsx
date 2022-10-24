@@ -88,7 +88,7 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
   }, [withdrawDone]);
 
   const total = useMemo(() => {
-    if (blockchainCurrency) {
+    if (blockchainCurrency && amount) {
       const fee = blockchainCurrency?.withdraw_fee;
       const amountMoney = createMoney(amount, wallet.currency);
       let totalMoney = amountMoney.add(fee);

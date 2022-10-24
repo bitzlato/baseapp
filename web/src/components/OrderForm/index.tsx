@@ -140,14 +140,14 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   const isMobileDevice = useSelector(selectMobileDeviceState);
 
   React.useEffect(() => {
-    const nextPriceLimitTruncated = createMoney(priceLimit!, bidCcy).toFormat();
+    const nextPriceLimitTruncated = createMoney(priceLimit ?? 0, bidCcy).toFormat();
     if (isLimit(orderType) && priceLimit && nextPriceLimitTruncated !== price) {
       handlePriceChange(nextPriceLimitTruncated);
     }
   }, [priceLimit]);
 
   React.useEffect(() => {
-    const nextTriggerTruncated = createMoney(obTrigger!, bidCcy).toFormat();
+    const nextTriggerTruncated = createMoney(obTrigger ?? 0, bidCcy).toFormat();
     if (isTriggerByPrice(orderType) && obTrigger && nextTriggerTruncated !== trigger) {
       handleTriggerChange(nextTriggerTruncated);
     }
