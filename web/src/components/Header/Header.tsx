@@ -293,6 +293,12 @@ const Header: FC = () => {
       ],
     },
     {
+      key: 'dp2p',
+      type: 'external',
+      to: 'https://dp2p.bitzlato.bz/',
+      children: 'DP2P',
+    },
+    {
       key: 'exchange',
       type: 'tab',
       link: {
