@@ -20,3 +20,16 @@ A kit of components for some projects
 <div>body</body>
 <div id="footer"></div>
 ```
+
+# Config
+
+```js
+window.uibitz.setConfig({
+  mainUrl: '/',
+  languages: ['en', 'ru', 'uk'],
+  getTheme: () => window.localStorage.getItem('theme'),
+  getLanguage: () => window.localStorage.getItem('lang'),
+  onThemeChange: (theme) => window.localStorage.setItem('theme', theme),
+  onLanguageChange: (lang) => window.localStorage.setItem('lang', lang),
+});
+```

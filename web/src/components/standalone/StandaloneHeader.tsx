@@ -19,15 +19,17 @@ import { NotificationModal } from 'web/src/containers/NotificationModal/Notifica
 import { useNotificator } from 'web/src/components/app/useNotificator';
 import { Notification } from 'web/src/lib/socket/types';
 import { createT } from 'web/src/components/shared/sharedI18n';
+import { getLanguageName } from 'web/src/helpers/getLanguageByCode';
 import { StandaloneComponentProps } from './types';
 
 type Links = ComponentProps<typeof Header>['navLinks'];
 
 interface Props extends StandaloneComponentProps {}
 
-const languages = {
-  en: 'English',
-  ru: 'Русский',
+const availableLanguages = {
+  en: getLanguageName('en'),
+  ru: getLanguageName('ru'),
+  uk: getLanguageName('uk'),
 };
 
 // eslint-disable-next-line jsx-a11y/anchor-has-content
@@ -36,6 +38,7 @@ const renderLink: RenderLinkComponent = ({ to, ...props }) => <a href={to} {...p
 export const StandaloneHeader: FC<Props> = ({
   theme,
   language,
+  languages = ['en', 'ru'],
   onThemeChange,
   onLanguageChange,
 }) => {
@@ -336,7 +339,13 @@ export const StandaloneHeader: FC<Props> = ({
         toMainPage="/"
         theme={theme}
         language={language}
-        languages={languages}
+        languages={languages.reduce<Partial<Record<Language, string>>>((acc, lang) => {
+          if (lang in availableLanguages) {
+            acc[lang] = availableLanguages[lang];
+          }
+
+          return acc;
+        }, {})}
         navLinks={navLinks}
         rightNavLinks={rightNavLinks}
         t={translate}
