@@ -6,6 +6,7 @@ export interface UIBitzComponent {
 
 export interface UIBitzConfig {
   mainUrl: string;
+  languages?: Language[] | undefined;
   getTheme: () => Theme;
   getLanguage: () => Language;
   onThemeChange: (theme: Theme) => void;
