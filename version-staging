@@ -1,0 +1,6 @@
+# Create version tag for STAGING
+LATEST_STAGING_VERSION=$(git describe --abbrev=0 --match "*staging.*" --tags $(git rev-list --tags --max-count=1))
+STAGING_VERSION="v0.0.0-staging.$((${LATEST_STAGING_VERSION##*.}+1))"
+git tag -a $STAGING_VERSION -m "Staging version $STAGING_VERSION" && \
+git push origin && \
+git push origin --tags

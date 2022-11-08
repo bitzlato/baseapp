@@ -1,5 +1,4 @@
 const path = require('path');
-const fs = require('fs');
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,24 +10,15 @@ const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
 const { BugsnagSourceMapUploaderPlugin } = require('webpack-bugsnag-plugins');
 const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-
-const deps = require('./package.json').dependencies;
+const { dependencies: deps, version } = require('./package.json');
 
 const BUILD_DIR = path.resolve(__dirname, './build');
 const SVGR_DIR = path.resolve(__dirname, './src/assets/svg');
 const HASH = Math.round(Date.now() / 1000).toString();
 
-const extractSemver = (text) => {
-  const version = [
-    text.match(/:major:\s*(\d+)/)[1],
-    text.match(/:minor:\s*(\d+)/)[1],
-    text.match(/:patch:\s*(\d+)/)[1],
-  ].join('.');
-
-  return `v${version}`;
-};
 const isDevelopment = process.env.NODE_ENV === 'development';
-const appVersion = extractSemver(fs.readFileSync('../.semver').toString());
+const appVersion = `v${version}`;
+
 const releaseStage = process.env.REACT_APP_RELEASE_STAGE ?? 'development';
 const isProductionStage = releaseStage === 'production';
 const ASSET_PATH =
