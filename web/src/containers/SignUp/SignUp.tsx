@@ -42,7 +42,7 @@ export const SignUp: FC = () => {
   const history = useHistory();
   const t = useT();
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(() => getSearchParam('email') ?? '');
   const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
