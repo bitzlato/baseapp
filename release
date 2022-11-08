@@ -1,9 +1,11 @@
-SECTION=${1:-patch}
-echo "Increment $SECTION semver section. You can use also 'minor' and 'major'"
-semver inc patch && \
-git add .semver && \
-git commit -m `semver` && \
-git tag -a `semver` -m `semver` && \
-git push origin
+# Create version tag for PRODUCTION
+STRATEGY=${1:-patch}
 
-bundle exec cap production deploy
+echo "You can use \"patch\", \"minor\", or \"major\"."
+yarn version $STRATEGY
+APP_VERSION=$(node -p '`v${require("./package.json").version}`')
+git add package.json && \
+git commit -m $APP_VERSION && \
+git tag -a $APP_VERSION -m "Production version $APP_VERSION" && \
+git push origin && \
+git push origin --tags
