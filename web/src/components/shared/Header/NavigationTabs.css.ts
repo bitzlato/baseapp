@@ -43,6 +43,10 @@ export const tabActive = style([
   }),
   {
     selectors: {
+      '&:hover': {
+        position: 'relative',
+        zIndex: 20, // for landing
+      },
       '&::after': {
         content: '',
         display: 'block',
