@@ -602,7 +602,9 @@ class LayoutComponent extends Component<LayoutProps, LayoutState> {
               component={ReportsMobileScreen}
             />
             <Route exact path="/trading/:market?" component={TradingScreenMobile as any} />
-            {showLanding() && <Route exact path="/" component={LandingScreenMobile as any} />}
+            {showLanding() && (
+              <Route exact path={['/', '/main']} component={LandingScreenMobile as any} />
+            )}
             {commonRoutes}
           </Switch>
           {commonComponents}
