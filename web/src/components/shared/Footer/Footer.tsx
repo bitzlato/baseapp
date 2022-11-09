@@ -5,7 +5,6 @@ import { FC } from 'react';
 import { RenderLinkComponent } from 'web/src/components/shared/sharedTypes';
 import { themeDark, themeLight } from 'web/src/theme/vars.css';
 import { Language, Theme } from 'web/src/types';
-import { Container } from 'web/src/components/ui/Container';
 import { FooterMenu } from './FooterMenu';
 import { FooterLogo } from './FooterLogo';
 import { FooterEmails } from './FooterEmails';
@@ -26,7 +25,7 @@ export const Footer: FC<SharedFooterProps> = ({ theme, language, renderMarketLin
 
   return (
     <Box className={cn(themeClassName, s.footer)}>
-      <Container maxWidth="xxl">
+      <Box className={s.footerContainer}>
         <Box
           display="flex"
           flexDirection={{ mobile: 'column', tablet: 'row' }}
@@ -61,7 +60,7 @@ export const Footer: FC<SharedFooterProps> = ({ theme, language, renderMarketLin
             <FooterApps language={language} />
           </Box>
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 };

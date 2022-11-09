@@ -8,6 +8,31 @@ export const footer = sprinkles({
   bg: 'footerBg',
 });
 
+export const footerContainer = style([
+  {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '100%',
+  },
+  responsiveStyle({
+    tablet: {
+      width: 720,
+    },
+    desktop: {
+      width: 960,
+    },
+    desktopXL: {
+      width: 1140,
+    },
+    desktopXXL: {
+      width: 1320,
+    },
+    desktopXXXL: {
+      width: 1560,
+    },
+  }),
+]);
+
 export const leftColumn = style(
   responsiveStyle({
     tablet: {
@@ -19,6 +44,7 @@ export const leftColumn = style(
       width: 242,
       marginRight: 0,
       marginLeft: 0,
+      paddingLeft: sizeVars['4x'],
     },
   }),
 );
