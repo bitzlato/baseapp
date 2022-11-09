@@ -602,9 +602,7 @@ class LayoutComponent extends Component<LayoutProps, LayoutState> {
               component={ReportsMobileScreen}
             />
             <Route exact path="/trading/:market?" component={TradingScreenMobile as any} />
-            {showLanding() && (
-              <Route exact path={['/', '/main']} component={LandingScreenMobile as any} />
-            )}
+            {showLanding() && <Route exact path="/" component={LandingScreenMobile as any} />}
             {commonRoutes}
           </Switch>
           {commonComponents}
@@ -647,7 +645,7 @@ class LayoutComponent extends Component<LayoutProps, LayoutState> {
           <Route path="/restriction" component={RestrictedScreen as any} />
           <Route path="/maintenance" component={MaintenanceScreen as any} />
           <Route exact path="/trading/:market?" component={TradingScreen as any} />
-          {showLanding() && <Route exact path="/" component={LandingScreen as any} />}
+          {showLanding() && <Route exact path={['/', '/main']} component={LandingScreen as any} />}
           <PrivateRoute
             loading={userLoading}
             isLogged={isLoggedIn}
