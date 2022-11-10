@@ -19,8 +19,6 @@ import {
   signInError,
   signUpRequireVerification,
   selectSignInError,
-  selectRecaptchaSuccess,
-  selectGeetestCaptchaSuccess,
   selectCaptchaResponse,
   resetCaptchaState,
   selectSignInLoading,
@@ -53,8 +51,6 @@ export const SignIn: FC = () => {
   const require2FA = useSelector(selectSignInRequire2FA);
   const requireEmailVerification = useSelector(selectVerifyEmail);
   const errorSignIn = useShallowSelector(selectSignInError);
-  const reCaptchaSuccess = useSelector(selectRecaptchaSuccess);
-  const geetestCaptchaSuccess = useSelector(selectGeetestCaptchaSuccess);
   const captchaResponse = useShallowSelector(selectCaptchaResponse);
   const signInLoading = useSelector(selectSignInLoading);
 
@@ -125,9 +121,6 @@ export const SignIn: FC = () => {
     return email && isEmailValid && password && (!require2FA || isValidCode(code));
   };
 
-  const isButtonDisabled = () =>
-    !!(captchaLogin() && captchaType() !== 'none' && !(reCaptchaSuccess || geetestCaptchaSuccess));
-
   const handleSubmitForm = () => {
     refreshError();
     handleSignIn();
@@ -197,11 +190,7 @@ export const SignIn: FC = () => {
             maxLength="6"
           />
         ) : null}
-        <Button
-          data-gtm-click="signin"
-          disabled={isLoading || !isValidForm() || isButtonDisabled()}
-          onClick={handleClick}
-        >
+        <Button data-gtm-click="signin" disabled={isLoading} onClick={handleClick}>
           {isLoading ? `${t('Loading')}...` : t('page.header.signIn')}
         </Button>
         <Box self="center" as={Link} to={{ pathname: '/forgot_password', state: { email } }}>
