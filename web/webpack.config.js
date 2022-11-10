@@ -24,12 +24,13 @@ const isProductionStage = releaseStage === 'production';
 const ASSET_PATH =
   process.env.ASSET_PATH ?? (process.env.NODE_ENV === 'production' ? '/basestatic/' : '/');
 const BUGSNAG_PUBLIC_PATH = `https://bitzlato.*${ASSET_PATH}`;
+const PROXY_PROTOCOL = process.env.PROXY_PROTOCOL ?? 'https';
 
 let marketDocsUrl = isDevelopment ? 'http://localhost:3004' : `${ASSET_PATH}marketDocs`; // production or staging
 if (process.env.MARKET_DOCS_URL) {
   marketDocsUrl = process.env.MARKET_DOCS_URL; // e.g. http://localhost:3004
 } else if (process.env.PROXY_HOST) {
-  marketDocsUrl = `https://${process.env.PROXY_HOST}/marketDocs`; // for proxing
+  marketDocsUrl = `${PROXY_PROTOCOL}://${process.env.PROXY_HOST}/basestatic/marketDocs`; // for proxing
 }
 
 const features = {
@@ -356,31 +357,31 @@ module.exports = {
                 },
               },
               '/api/private/v1/': {
-                target: `https://${process.env.ACCOUNT_HOST}`,
+                target: `${PROXY_PROTOCOL}://${process.env.ACCOUNT_HOST}`,
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
               },
               '/api/public/v1/': {
-                target: `https://${process.env.ACCOUNT_HOST}`,
+                target: `${PROXY_PROTOCOL}://${process.env.ACCOUNT_HOST}`,
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
               },
               '/api/p2p': process.env.P2P_HOST
                 ? {
-                    target: `https://${process.env.P2P_HOST}`,
+                    target: `${PROXY_PROTOCOL}://${process.env.P2P_HOST}`,
                     changeOrigin: true,
                     cookieDomainRewrite: 'localhost',
                   }
                 : undefined,
               '/api/auth': process.env.P2P_HOST
                 ? {
-                    target: `https://${process.env.P2P_HOST}`,
+                    target: `${PROXY_PROTOCOL}://${process.env.P2P_HOST}`,
                     changeOrigin: true,
                     cookieDomainRewrite: 'localhost',
                   }
                 : undefined,
               '/api': {
-                target: `https://${process.env.PROXY_HOST}`,
+                target: `${PROXY_PROTOCOL}://${process.env.PROXY_HOST}`,
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
               },
