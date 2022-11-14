@@ -19,4 +19,11 @@ export const badge = styleVariants({
       color: 'badgeDangerColor',
     }),
   ],
+  clarified: [
+    badgeBase,
+    sprinkles({
+      bg: 'badgeClarifiedBg',
+      color: 'badgeClarifiedColor',
+    }),
+  ],
 });

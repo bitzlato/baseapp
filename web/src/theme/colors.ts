@@ -107,3 +107,4 @@ export const solitaire = 'rgba(254, 247, 227, 1)';
 export const brightGray = 'rgb(58, 63, 70)';
 export const curiousBlue = 'rgba(41, 140, 232, 1)';
 export const nevada = 'rgb(103, 109, 114)';
+export const silverTree = 'rgb(84, 180, 137)';

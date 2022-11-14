@@ -12,9 +12,11 @@ import { useFetchP2PLastFilter } from 'web/src/hooks/data/useFetchP2PLastFilter'
 import { P2PFiatCurrencies } from 'web/src/types/currencies.types';
 import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/p2p/useFetchP2PCryptoCurrencies';
 import { useHandleDeeplink } from 'web/src/hooks/useHandleDeeplink';
+import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
 import { Ads } from './Ads';
 import { Filter, FilterMobile } from './Filter';
 import { useBoardFilter } from './useBoardFilter';
+import { BoardChart } from './BoardChart';
 import * as s from './Board.css';
 
 type BoardBodyProps = {
@@ -24,6 +26,7 @@ type BoardBodyProps = {
 };
 
 export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies, lastFilter }) => {
+  const isChartEnabled = useFeatureEnabled('p2p_board_chart');
   const { filterParams, handleChangeFilter } = useBoardFilter({
     fiatCurrencies,
     cryptoCurrencies,
@@ -68,6 +71,8 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
     </>
   );
 
+  const chart = isChartEnabled && filterParams.slug && <BoardChart filterParams={filterParams} />;
+
   return (
     <>
       <Box className={s.layoutWithoutSidebar} flexDirection="column" width="full">
@@ -95,8 +100,11 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
         >
           <Filter params={filterParams} onChange={handleChangeFilter} />
         </Box>
-        <Box backgroundColor="block" py="5x" px="6x" borderRadius="1.5x" flexGrow={1}>
-          {ads}
+        <Box flexGrow={1}>
+          {chart}
+          <Box backgroundColor="block" py="5x" px="6x" borderRadius="1.5x">
+            {ads}
+          </Box>
         </Box>
       </Box>
     </>
