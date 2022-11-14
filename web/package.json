@@ -29,6 +29,7 @@
     "events": "^3.3.0",
     "history": "^4.7.2",
     "i18n-iso-countries": "^3.7.8",
+    "lightweight-charts": "^3.8.0",
     "moment": "^2.23.0",
     "moment-timezone": "^0.5.23",
     "multicoin-address-validator": "^0.5.2",

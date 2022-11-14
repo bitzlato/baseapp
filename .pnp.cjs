@@ -13852,6 +13852,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["fancy-canvas", [\
+        ["npm:0.2.2", {\
+          "packageLocation": "./.yarn/cache/fancy-canvas-npm-0.2.2-6fad573a67-965446383e.zip/node_modules/fancy-canvas/",\
+          "packageDependencies": [\
+            ["fancy-canvas", "npm:0.2.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["fast-deep-equal", [\
         ["npm:3.1.3", {\
           "packageLocation": "./.yarn/cache/fast-deep-equal-npm-3.1.3-790edcfcf5-e21a9d8d84.zip/node_modules/fast-deep-equal/",\
@@ -17815,6 +17824,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["levn", "npm:0.4.1"],\
             ["prelude-ls", "npm:1.2.1"],\
             ["type-check", "npm:0.4.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lightweight-charts", [\
+        ["npm:3.8.0", {\
+          "packageLocation": "./.yarn/cache/lightweight-charts-npm-3.8.0-e9c5bf7123-606c4b01a1.zip/node_modules/lightweight-charts/",\
+          "packageDependencies": [\
+            ["lightweight-charts", "npm:3.8.0"],\
+            ["fancy-canvas", "npm:0.2.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -27151,6 +27170,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["html-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.5.0"],\
             ["i18n-iso-countries", "npm:3.7.8"],\
             ["jest", "npm:26.6.3"],\
+            ["lightweight-charts", "npm:3.8.0"],\
             ["lodash-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.11.6"],\
             ["mini-css-extract-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.6.1"],\
             ["moment", "npm:2.29.1"],\

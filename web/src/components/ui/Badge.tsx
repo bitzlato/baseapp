@@ -4,7 +4,7 @@ import { Box } from 'web/src/components/ui/Box';
 import * as s from './Badge.css';
 
 interface Props {
-  variant: 'danger';
+  variant: 'danger' | 'clarified';
 }
 
 export const Badge: FC<Props> = ({ children, variant }) => (

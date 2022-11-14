@@ -436,6 +436,8 @@ export const [themeLight, vars] = createTheme({
     giftsMultiTableBadgeBg: colors.white,
 
     badgeDangerColor: colors.white,
+    badgeClarifiedBg: colors.hawkesBlue,
+    badgeClarifiedColor: colors.indigo,
 
     userAdButtonLinkBg: colors.whiteLilac,
     userAdButtonLinkHoverBg: colors.indigo,
@@ -801,6 +803,8 @@ export const themeDark = createTheme(vars, {
     giftsMultiTableBadgeBg: colors.outerSpace,
 
     badgeDangerColor: colors.white,
+    badgeClarifiedBg: colors.white10,
+    badgeClarifiedColor: colors.white,
 
     userAdButtonLinkBg: colors.white05,
     userAdButtonLinkHoverBg: colors.indigo,
