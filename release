@@ -1,5 +1,5 @@
 # Create version tag for PRODUCTION
-STRATEGY=${1:-patch}
+STRATEGY=${1:-minor}
 
 echo "You can use \"patch\", \"minor\", or \"major\"."
 yarn version $STRATEGY
