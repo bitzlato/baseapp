@@ -11,7 +11,7 @@ interface Props {
 
 export const P2PMiniChart: FC<Props> = ({ cryptocurrency, paymethod }) => {
   const theme = useTheme();
-  const kLine = useP2PKLine(`${cryptocurrency}_${paymethod}`);
+  const kLine = useP2PKLine(`${cryptocurrency.toLowerCase()}_${paymethod}`);
   const chartElementRef = useRef<HTMLDivElement>(null);
   const candleSeriesRef = useRef<ISeriesApi<'Candlestick'>>();
   const areaSeriesRef = useRef<ISeriesApi<'Area'>>();
