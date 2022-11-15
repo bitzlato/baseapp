@@ -356,6 +356,7 @@
   "trade.state.purchase.payment.subtitle": "Ожидаем подтверждения получения средств от продавца",
   "trade.state.purchase.payment.title": "Ждем подтверждения от {name}",
   "trade.state.purchase.trade_created.owner.subtitle": "Пользователь ожидает подтверждения сделки от Вас, если вы не появитесь в течение {minutes} минут, то сделка будет отменена автоматически",
+  "trade.state.purchase.trade_created.owner.title": "Ждём Вас",
   "trade.state.purchase.trade_created.subtitle": "Ожидаем {name}. Если он не появится в течение {minutes} минут, сделка будет автоматически отменена",
   "trade.state.purchase.trade_created.title": "Ждем продавца",
   "trade.state.selling.cancel.subtitle": " ",

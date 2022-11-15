@@ -357,6 +357,7 @@
   "trade.state.purchase.payment.subtitle": "Awaiting confirmation of receipt of funds from the seller",
   "trade.state.purchase.payment.title": "Awaiting confirmation from {name}",
   "trade.state.purchase.trade_created.owner.subtitle": "The user expects confirmation of the deal from you, if you do not confirm it within {minutes} minutes, the deal will be canceled automatically",
+  "trade.state.purchase.trade_created.owner.title": "Waiting for you",
   "trade.state.purchase.trade_created.subtitle": "Waiting for {name}. If it doesn't show up within {minutes} minutes, the trade will be automatically cancelled",
   "trade.state.purchase.trade_created.title": "Waiting for a seller",
   "trade.state.selling.cancel.subtitle": " ",
