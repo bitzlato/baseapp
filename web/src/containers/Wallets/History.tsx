@@ -80,11 +80,7 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
           {truncateMiddle(isDeposit ? (d as Deposit).txid : (d as Withdraw).rid, 30)}
         </a>,
         <div title={`${d.id} - ${d.state}`}>{localeDate(d.created_at, 'fullDate')}</div>,
-        isDeposit ? (
-          <DepositStatus item={d as Deposit} minConfirmations={blockchain.min_confirmations} />
-        ) : (
-          <WithdrawStatus item={d as Withdraw} minConfirmations={blockchain.min_confirmations} />
-        ),
+        isDeposit ? <DepositStatus item={d as Deposit} /> : <WithdrawStatus item={d as Withdraw} />,
         <AmountFormat key={d.id} money={createMoney(d.amount, ccy)} />,
         <AmountFormat key={d.id} money={createMoney(d.fee, ccy)} />,
       ];

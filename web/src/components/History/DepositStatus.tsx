@@ -8,10 +8,9 @@ import { ConfirmingStatus } from './ConfirmingStatus';
 
 interface Props {
   item: Deposit;
-  minConfirmations: number;
 }
 
-export const DepositStatus: FC<Props> = ({ item, minConfirmations }) => {
+export const DepositStatus: FC<Props> = ({ item }) => {
   const t = useT();
 
   switch (item.state) {
@@ -61,12 +60,7 @@ export const DepositStatus: FC<Props> = ({ item, minConfirmations }) => {
       );
 
     case 'accepted':
-      return (
-        <ConfirmingStatus
-          confirmations={item.confirmations ?? 0}
-          minConfirmations={minConfirmations}
-        />
-      );
+      return <ConfirmingStatus />;
 
     case 'refunding':
       return <Text color="warning">{t('page.body.history.deposit.content.status.refunding')}</Text>;
