@@ -133,7 +133,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
           localeDate(created_at, 'fullDate'),
           <CurrencyTicker symbol={currency} />,
           wallet && createMoneyWithoutCcy(amount, wallet.precision).toFormat(),
-          <DepositStatus item={item as Deposit} minConfirmations={blockchain.min_confirmations} />,
+          <DepositStatus item={item as Deposit} />,
         ];
       }
       case 'withdraws': {
@@ -154,11 +154,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
           <CurrencyTicker symbol={currency} />,
           wallet && createMoneyWithoutCcy(amount, wallet.precision).toFormat(),
           wallet && createMoneyWithoutCcy(fee, wallet.precision).toFormat(),
-          <WithdrawStatus
-            key="status"
-            item={item as Withdraw}
-            minConfirmations={blockchain.min_confirmations}
-          />,
+          <WithdrawStatus key="status" item={item as Withdraw} />,
         ];
       }
       case 'trades': {

@@ -6,10 +6,9 @@ import { ConfirmingStatus } from './ConfirmingStatus';
 
 interface Props {
   item: Withdraw;
-  minConfirmations: number;
 }
 
-export const WithdrawStatus: FC<Props> = ({ item, minConfirmations }) => {
+export const WithdrawStatus: FC<Props> = ({ item }) => {
   const t = useT();
 
   switch (item.state) {
@@ -22,12 +21,7 @@ export const WithdrawStatus: FC<Props> = ({ item, minConfirmations }) => {
       );
 
     case 'confirming':
-      return (
-        <ConfirmingStatus
-          confirmations={item.confirmations ?? 0}
-          minConfirmations={minConfirmations}
-        />
-      );
+      return <ConfirmingStatus />;
 
     case 'succeed':
       return <Text color="success">{t('page.body.history.withdraw.content.status.succeed')}</Text>;
