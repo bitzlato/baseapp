@@ -60,7 +60,7 @@ export const Transfer: React.FC<Props> = ({ currency, balanceMarket, balanceP2P 
   };
 
   const handleChangeAmount = (value: string) => {
-    setAmount(parseNumeric(value));
+    setAmount(parseNumeric(value, { maxFractionDigits: currency.minorUnit }));
   };
 
   const handlerRearrange = () => {
