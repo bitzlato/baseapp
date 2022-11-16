@@ -23,7 +23,7 @@ export const P2PMiniChart: FC<Props> = ({ cryptocurrency, paymethod }) => {
 
     const chart = createChart(chartElementRef.current, {
       width: chartElementRef.current.offsetWidth,
-      height: 222,
+      height: 288,
       timeScale: {
         timeVisible: true,
         fixLeftEdge: true,
