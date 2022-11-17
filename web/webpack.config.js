@@ -332,6 +332,7 @@ module.exports = {
                 target: `wss://${process.env.PROXY_WSS_HOST}`,
                 changeOrigin: true,
                 ws: true,
+                secure: false,
                 onProxyReqWs: (proxyReq, _, socket) => {
                   proxyReq.removeHeader('origin');
                   proxyReq.setHeader('origin', `https://${process.env.PROXY_WSS_HOST}`);
@@ -346,6 +347,7 @@ module.exports = {
                 target: `wss://${process.env.PROXY_HOST}`,
                 changeOrigin: true,
                 ws: true,
+                secure: false,
                 headers: { Connection: 'keep-alive' },
                 onProxyReqWs: (proxyReq, _, socket) => {
                   proxyReq.removeHeader('origin');
@@ -360,17 +362,20 @@ module.exports = {
                 target: `${PROXY_PROTOCOL}://${process.env.ACCOUNT_HOST}`,
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
+                secure: false,
               },
               '/api/public/v1/': {
                 target: `${PROXY_PROTOCOL}://${process.env.ACCOUNT_HOST}`,
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
+                secure: false,
               },
               '/api/p2p': process.env.P2P_HOST
                 ? {
                     target: `${PROXY_PROTOCOL}://${process.env.P2P_HOST}`,
                     changeOrigin: true,
                     cookieDomainRewrite: 'localhost',
+                    secure: false,
                   }
                 : undefined,
               '/api/auth': process.env.P2P_HOST
@@ -378,12 +383,14 @@ module.exports = {
                     target: `${PROXY_PROTOCOL}://${process.env.P2P_HOST}`,
                     changeOrigin: true,
                     cookieDomainRewrite: 'localhost',
+                    secure: false,
                   }
                 : undefined,
               '/api': {
                 target: `${PROXY_PROTOCOL}://${process.env.PROXY_HOST}`,
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
+                secure: false,
               },
             }
           : undefined,

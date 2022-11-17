@@ -1,6 +1,6 @@
 const wsHostURL = `${window.location.protocol === 'http:' ? 'ws://' : 'wss://'}${
   window.location.hostname
-}`;
+}${window.location.port ? `:${window.location.port}` : ''}`;
 
 window.env = {
   routes: {
