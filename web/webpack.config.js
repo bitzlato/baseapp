@@ -329,13 +329,13 @@ module.exports = {
         proxy: process.env.PROXY_HOST
           ? {
               '/wss': {
-                target: `wss://${process.env.PROXY_WSS_HOST}`,
+                target: `wss://${process.env.PROXY_HOST}`,
                 changeOrigin: true,
                 ws: true,
                 secure: false,
                 onProxyReqWs: (proxyReq, _, socket) => {
                   proxyReq.removeHeader('origin');
-                  proxyReq.setHeader('origin', `https://${process.env.PROXY_WSS_HOST}`);
+                  proxyReq.setHeader('origin', `https://${process.env.PROXY_HOST}`);
 
                   socket.on('error', (error) => {
                     // eslint-disable-next-line no-console
@@ -359,28 +359,28 @@ module.exports = {
                 },
               },
               '/api/private/v1/': {
-                target: `${PROXY_PROTOCOL}://${process.env.ACCOUNT_HOST}`,
+                target: `${PROXY_PROTOCOL}://${process.env.PROXY_HOST}`,
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
                 secure: false,
               },
               '/api/public/v1/': {
-                target: `${PROXY_PROTOCOL}://${process.env.ACCOUNT_HOST}`,
+                target: `${PROXY_PROTOCOL}://${process.env.PROXY_HOST}`,
                 changeOrigin: true,
                 cookieDomainRewrite: 'localhost',
                 secure: false,
               },
-              '/api/p2p': process.env.P2P_HOST
+              '/api/p2p': process.env.PROXY_HOST
                 ? {
-                    target: `${PROXY_PROTOCOL}://${process.env.P2P_HOST}`,
+                    target: `${PROXY_PROTOCOL}://${process.env.PROXY_HOST}`,
                     changeOrigin: true,
                     cookieDomainRewrite: 'localhost',
                     secure: false,
                   }
                 : undefined,
-              '/api/auth': process.env.P2P_HOST
+              '/api/auth': process.env.PROXY_HOST
                 ? {
-                    target: `${PROXY_PROTOCOL}://${process.env.P2P_HOST}`,
+                    target: `${PROXY_PROTOCOL}://${process.env.PROXY_HOST}`,
                     changeOrigin: true,
                     cookieDomainRewrite: 'localhost',
                     secure: false,
