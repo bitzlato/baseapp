@@ -82,3 +82,14 @@ export const fetchJson = async (input: RequestInfo, init?: RequestInit) => {
 export const fetchWithCreds = (input: RequestInfo, init?: RequestInit) => {
   return fetchJson(input, { ...init, credentials: 'include' });
 };
+
+export const fetchMutation = (input: RequestInfo, init?: RequestInit) =>
+  fetchJson(input, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+    credentials: 'include',
+    ...init,
+    body: init?.body ? JSON.stringify(init?.body) : null,
+  });

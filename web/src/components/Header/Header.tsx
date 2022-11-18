@@ -30,7 +30,10 @@ import {
 import { getLanguageName, isToday, isYesterday, localeDate } from 'web/src/helpers';
 import { useMarkNotificationAsRead } from 'web/src/hooks/mutations/useMarkNotificationAsRead';
 import { NotificationModalNotification } from 'web/src/containers/NotificationModal/types';
-import { useFetchP2PNotifications } from 'web/src/hooks/data/useFetchP2PNotifications';
+import {
+  getNotificationsEndpoint,
+  useFetchP2PNotifications,
+} from 'web/src/hooks/data/useFetchP2PNotifications';
 import { NotificationModal } from 'web/src/containers/NotificationModal/NotificationModal';
 import { Box } from 'web/src/components/ui/Box';
 import { notificationInfo } from 'web/src/components/Header/notificationInfo';
@@ -40,6 +43,7 @@ import { useNotificationSubscribe } from 'web/src/components/app/AppContext';
 import { Notification } from 'web/src/lib/socket/types';
 import { useChangeLang } from 'web/src/hooks/useChangeLang';
 import { Language } from 'web/src/types';
+import { useMarkAllNotificationsAsRead } from 'web/src/hooks/mutations/p2p/useMarkAllNotificationsAsRead';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
@@ -112,6 +116,7 @@ const Header: FC = () => {
     useFetchP2PNotifications(isLoggedIn);
 
   const [markNotificationAsReadP2P] = useMarkNotificationAsRead();
+  const [markAsRead] = useMarkAllNotificationsAsRead();
 
   useNotificationSubscribe(
     useCallback(
@@ -130,10 +135,9 @@ const Header: FC = () => {
   );
 
   const handleMarkAllNotificationAsRead = () =>
-    notifications.forEach((n) => {
-      if (!n.read) {
-        markNotificationAsReadP2P(n.id);
-      }
+    markAsRead(undefined, undefined, {
+      swrKey: getNotificationsEndpoint(),
+      optimisticData: notifications.map((notify) => ({ ...notify, read: true })),
     });
 
   const handleMarkNotificationAsRead = (notificationId: number) =>
