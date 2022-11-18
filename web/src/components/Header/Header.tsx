@@ -20,7 +20,6 @@ import {
 } from 'web/src/modules';
 import { MarketSelector } from 'web/src/containers/MarketSelector/MarketSelector';
 import { HeaderToolbar } from 'web/src/containers/HeaderToolbar/HeaderToolbar';
-import { useT } from 'web/src/hooks/useT';
 import {
   RenderLinkComponent,
   RenderNavLinkComponent,
@@ -44,6 +43,7 @@ import { Notification } from 'web/src/lib/socket/types';
 import { useChangeLang } from 'web/src/hooks/useChangeLang';
 import { Language } from 'web/src/types';
 import { useMarkAllNotificationsAsRead } from 'web/src/hooks/mutations/p2p/useMarkAllNotificationsAsRead';
+import { createT } from 'web/src/components/shared/sharedI18n';
 
 type Links = ComponentProps<typeof SharedHeader>['navLinks'];
 
@@ -61,7 +61,6 @@ const Header: FC = () => {
   const [nofiticationModalProps, setNofiticationModalProps] = useState<
     NotificationModalNotification | undefined
   >();
-  const t = useT();
   const changeLanguage = useChangeLang();
   const dispatch = useDispatch();
   const language = useSelector(selectCurrentLanguage);
@@ -71,6 +70,7 @@ const Header: FC = () => {
   const isUserFetching = useSelector(selectUserFetching);
   const { pathname } = useLocation();
   const history = useHistory();
+  const t = createT(language);
   const isTradingPage = pathname.endsWith('/trading') || pathname.includes('/trading/');
   const p2pURL = '/p2p';
   const merchantClient = (user.bitzlato_user?.roles ?? []).includes('merchantClient');
