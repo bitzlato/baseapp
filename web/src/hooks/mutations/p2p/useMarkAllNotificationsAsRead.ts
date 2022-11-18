@@ -9,4 +9,4 @@ const fetcher: FetcherMutationFn = (url, config) =>
   });
 
 export const useMarkAllNotificationsAsRead = () =>
-  useFetchMutation<undefined>(`${p2pUrl()}/api/p2p/notifications/all`, fetcher);
+  useFetchMutation<undefined>(`${p2pUrl()}/notifications/all`, fetcher);
