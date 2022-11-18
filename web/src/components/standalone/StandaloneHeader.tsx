@@ -272,6 +272,7 @@ export const StandaloneHeader: FC<Props> = ({
       markAsRead(undefined, undefined, {
         swrKey: getNotificationsEndpoint(),
         optimisticData: notifications.map((notify) => ({ ...notify, read: true })),
+        populateCache: false,
       });
 
     const handleMarkNotificationAsRead = (notificationId: number) =>
