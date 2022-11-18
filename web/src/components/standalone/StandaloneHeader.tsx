@@ -10,7 +10,10 @@ import { useFetchResourceUsersMe } from 'web/src/hooks/data/barong/useFetchResou
 import { RenderLinkComponent, UserLink, UserLinks } from 'web/src/components/shared/sharedTypes';
 import { useDeleteIdentitySessions } from 'web/src/hooks/mutations/useDeleteIdentitySessions';
 import { NotificationModalNotification } from 'web/src/containers/NotificationModal/types';
-import { useFetchP2PNotifications } from 'web/src/hooks/data/useFetchP2PNotifications';
+import {
+  getNotificationsEndpoint,
+  useFetchP2PNotifications,
+} from 'web/src/hooks/data/useFetchP2PNotifications';
 import { useMarkNotificationAsRead } from 'web/src/hooks/mutations/useMarkNotificationAsRead';
 import { notificationInfo } from 'web/src/components/Header/notificationInfo';
 import { isToday, isYesterday } from 'web/src/helpers/checkDate';
@@ -20,6 +23,7 @@ import { useNotificator } from 'web/src/components/app/useNotificator';
 import { Notification } from 'web/src/lib/socket/types';
 import { createT } from 'web/src/components/shared/sharedI18n';
 import { getLanguageName } from 'web/src/helpers/getLanguageByCode';
+import { useMarkAllNotificationsAsRead } from 'web/src/hooks/mutations/p2p/useMarkAllNotificationsAsRead';
 import { StandaloneComponentProps } from './types';
 
 type Links = ComponentProps<typeof Header>['navLinks'];
@@ -50,6 +54,7 @@ export const StandaloneHeader: FC<Props> = ({
   const { data: notifications = [], mutate: notificationsMutate } =
     useFetchP2PNotifications(isLoggedIn);
   const [markNotificationAsReadP2P] = useMarkNotificationAsRead();
+  const [markAsRead] = useMarkAllNotificationsAsRead();
   const useNotificationSubscribe = useNotificator(isLoggedIn);
   const [nofiticationModalProps, setNofiticationModalProps] = useState<
     NotificationModalNotification | undefined
@@ -264,10 +269,9 @@ export const StandaloneHeader: FC<Props> = ({
     ].filter(Boolean) as UserLinks;
 
     const handleMarkAllNotificationAsRead = () =>
-      notifications.forEach((n) => {
-        if (!n.read) {
-          markNotificationAsReadP2P(n.id);
-        }
+      markAsRead(undefined, undefined, {
+        swrKey: getNotificationsEndpoint(),
+        optimisticData: notifications.map((notify) => ({ ...notify, read: true })),
       });
 
     const handleMarkNotificationAsRead = (notificationId: number) =>
