@@ -30,6 +30,10 @@ export function notificationInfo(
         case 'trade_created':
           return { text: t('tradeStatusChangedCreated', item.data), link: tradeLink, createdAt };
         case 'confirm_trade':
+          if (!('username' in item.data) || item.data.username === null) {
+            return { text: t('tradeStatusChanged', item.data), link: tradeLink, createdAt };
+          }
+
           switch (item.data.type) {
             case 'selling':
               return {
@@ -51,6 +55,10 @@ export function notificationInfo(
         case 'cancel':
           return { text: t('tradeStatusChangedCancel', item.data), link: tradeLink, createdAt };
         case 'payment':
+          if (!('username' in item.data) || item.data.username === null) {
+            return { text: t('tradeStatusChangedPayment', item.data), link: tradeLink, createdAt };
+          }
+
           switch (item.data.type) {
             case 'purchase':
               return {

@@ -4,7 +4,10 @@ import ru from './sharedLocales/ru.json';
 import uk from './sharedLocales/uk.json';
 
 type Dictionary = Record<string, string>;
-export type SharedTranslateFn = (key: string, values?: Record<string, string | number>) => string;
+export type SharedTranslateFn = (
+  key: string,
+  values?: Record<string, string | number | undefined | null>,
+) => string;
 
 const defaultDictionary: Dictionary = en;
 const dictionaries: Record<string, Dictionary> = {
@@ -13,12 +16,15 @@ const dictionaries: Record<string, Dictionary> = {
   uk,
 };
 
-const interpolate = (template: string, values: Record<string, string | number>) =>
+const interpolate = (
+  template: string,
+  values: Record<string, string | number | undefined | null>,
+): string =>
   template.replace(/{([^{}]+)}/g, (placeholder) => {
     const key = placeholder.slice(1, -1);
     const value = values[key];
 
-    return value !== undefined ? value.toString() : placeholder;
+    return value !== undefined && value !== null ? value.toString() : placeholder;
   });
 
 export const createT = (language: Language): SharedTranslateFn => {
