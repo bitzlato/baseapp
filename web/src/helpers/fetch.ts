@@ -1,5 +1,17 @@
 import { getCSRFToken } from 'web/src/helpers/CSRFToken';
 
+const parseJSON = (str: string | undefined, emptyResult = {}): any => {
+  if (!str) {
+    return emptyResult;
+  }
+
+  try {
+    return JSON.parse(str);
+  } catch (error) {
+    return emptyResult;
+  }
+};
+
 export class FetchError extends Error {
   constructor(public messages: string[], public code: number, public payload: Record<string, any>) {
     super(messages[0]);
@@ -32,7 +44,7 @@ export const fetchData = async (input: RequestInfo, init?: RequestInit) => {
     const text = contentLength === '0' ? undefined : await res.text();
 
     if (!res.ok) {
-      const { errors, error, ...rest } = (text ? JSON.parse(text) : {}) as any;
+      const { errors, error, ...rest } = parseJSON(text);
       if (Array.isArray(errors)) {
         const item = errors[0];
         if (typeof item === 'string') {
