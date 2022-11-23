@@ -1,5 +1,6 @@
 import { FC, useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { mutate } from 'swr';
 import { Button } from 'web/src/components/ui/Button';
 import { Box } from 'web/src/components/Box';
 import { defaultBeneficiary } from 'web/src/modules/user/beneficiaries/defaults';
@@ -16,6 +17,8 @@ import { ModalWithdrawConfirmation } from 'web/src/containers/Withdraw/ModalWith
 import { useCountdown } from 'web/src/hooks/useCountdown';
 import { WithdrawMarketFormValues } from 'web/src/containers/Withdraw/types';
 import { WithdrawMarketForm } from 'web/src/containers/Withdraw/WithdrawMarketForm';
+import { LIMIT } from 'web/src/containers/Wallets/History';
+import { getHistoryEndpoint } from 'web/src/hooks/data/useFetchHistory';
 
 interface Props {
   wallet: Wallet;
@@ -59,6 +62,17 @@ export const WithdrawMarket: FC<Props> = ({ wallet }) => {
 
   const handleCloseWithdrawSubmitModal = () => {
     setWithdrawSubmitModal(false);
+
+    mutate(
+      getHistoryEndpoint({
+        type: 'withdraws',
+        params: {
+          currency: wallet.currency.code.toLowerCase(),
+          limit: LIMIT,
+          page: 0,
+        },
+      }),
+    );
   };
 
   const handleWithdraw = async () => {

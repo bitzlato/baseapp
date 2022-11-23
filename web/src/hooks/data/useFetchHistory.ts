@@ -5,18 +5,25 @@ import { P2PList } from 'web/src/modules/p2p/types';
 import { Deposit, Withdraw } from 'web/src/modules/user/history/types';
 import { useFetch } from './useFetch';
 
+type HistoryTypes = 'withdraws' | 'deposits';
+
 export interface HistoryParams {
   currency: string;
   page: number;
   limit: number;
 }
 
-export function useFetchHistory<T extends 'deposits' | 'withdraws'>(
-  type: T,
-  params: HistoryParams,
-) {
+export const getHistoryEndpoint = ({
+  type,
+  params,
+}: {
+  type: HistoryTypes;
+  params: HistoryParams;
+}) => `${tradeUrl()}/account/${type}_t?${buildQueryString(params)}`;
+
+export function useFetchHistory<T extends HistoryTypes>(type: T, params: HistoryParams) {
   return useFetch<P2PList<T extends 'deposits' ? Deposit : Withdraw>>(
-    `${tradeUrl()}/account/${type}_t?${buildQueryString(params)}`,
+    getHistoryEndpoint({ type, params }),
     fetchWithCreds,
   );
 }

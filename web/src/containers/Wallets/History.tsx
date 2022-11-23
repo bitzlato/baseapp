@@ -31,7 +31,7 @@ import { useFetchBlockchains } from 'web/src/hooks/data/belomor/useFetchBlockcha
 import { getBlockchainLink } from 'web/src/helpers/getBlockchainLink';
 import s from './TransferHistory.postcss';
 
-const LIMIT = 6;
+export const LIMIT = 6;
 
 interface Props {
   type: 'deposits' | 'withdraws';
