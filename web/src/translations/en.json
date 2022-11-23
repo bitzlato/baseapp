@@ -1419,5 +1419,6 @@
   "withdrawalFee.help": "Note that the withdrawal rate may vary due to network fee fluctuations",
   "wrongMergeCode": "Incorrect code",
   "yesterday": "Yesterday",
-  "your_address": "Your address"
+  "your_address": "Your address",
+  "maxFileSizeError": "The size of the selected file is too big. Maximum file size is {value}MB"
 }

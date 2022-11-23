@@ -1,17 +1,24 @@
 import { FC, useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button } from 'web/src/components/ui/Button';
 import { Modal, ModalHeader } from 'web/src/components/ui/Modal';
 import { Box } from 'web/src/components/ui/Box';
 import { useSaveAvatar } from 'web/src/hooks/mutations/useSaveAvatar';
 import { useT } from 'web/src/hooks/useT';
+import { FetchError } from 'web/src/helpers/fetch';
+import { alertPush } from 'web/src/modules';
 import { UserAvatar } from './UserAvatar';
 import * as s from './ChangeUserAvatar.css';
+
+const MAX_FILE_SIZE_MB = 1;
 
 interface ChangeUserAvatarProps {
   image?: string;
 }
+
 export const ChangeUserAvatar: FC<ChangeUserAvatarProps> = ({ image }) => {
   const t = useT();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   const [imageFile, setImageFile] = useState<File>();
@@ -25,7 +32,7 @@ export const ChangeUserAvatar: FC<ChangeUserAvatarProps> = ({ image }) => {
     if (target && target.files && target.files[0]) {
       const fileName = target.files[0].name;
       const idxDot = fileName.lastIndexOf('.') + 1;
-      const extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+      const extFile = fileName.slice(idxDot).toLowerCase();
       const acceptableExtensions = ['jpg', 'jpeg', 'png'];
 
       if (acceptableExtensions.includes(extFile)) {
@@ -37,10 +44,23 @@ export const ChangeUserAvatar: FC<ChangeUserAvatarProps> = ({ image }) => {
     }
   };
 
-  const handleClickSetAvatar = () => {
-    if (imageFile) {
-      mutate(imageFile);
-      setOpen(false);
+  const handleClickSetAvatar = async () => {
+    try {
+      if (imageFile) {
+        await mutate(imageFile);
+        setOpen(false);
+      }
+    } catch (error) {
+      if (error instanceof FetchError) {
+        if (error.code === 413) {
+          dispatch(
+            alertPush({
+              type: 'error',
+              message: [t('maxFileSizeError', { value: MAX_FILE_SIZE_MB })],
+            }),
+          );
+        }
+      }
     }
   };
 
