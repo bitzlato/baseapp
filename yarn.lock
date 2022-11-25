@@ -15843,12 +15843,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-fade-in@npm:^0.1.6":
-  version: 0.1.8
-  resolution: "react-fade-in@npm:0.1.8"
+"react-fade-in@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "react-fade-in@npm:2.0.1"
   peerDependencies:
-    react: 15 || 16
-  checksum: 40fbb4d3e3a9edab9b23d595271a4eca90c36059f2788062516f01efa646dd976d545b3758993c8c88948924fae05354ca55c35d0913f35a418d7ba6a1667826
+    react: ^16.8 || 17
+  checksum: 34e6ddf1641417e170a268b07b514d3207603b14a56bc9836372828b72782df16e51d3bd066a271e6f6c7e2bf2916b100b72b06dd20a5447d965b16f78160cd5
   languageName: node
   linkType: hard
 
@@ -19601,7 +19601,7 @@ __metadata:
     react-color: ^2.18.0
     react-date-picker: ^8.4.0
     react-dom: ^17.0.2
-    react-fade-in: ^0.1.6
+    react-fade-in: ^2.0.0
     react-focus-on: ^3.5.4
     react-google-recaptcha: ^2.1.0
     react-grid-layout: ^1.3.3
