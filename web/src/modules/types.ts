@@ -30,21 +30,21 @@ export interface OrderCommon {
   state: OrderStatusType;
   remaining_volume: string;
   origin_volume: string;
-  executed_volume?: string;
+  executed_volume?: string | undefined;
   side: OrderSide;
   market: string;
   ord_type?: OrderType | undefined;
   avg_price?: string;
   volume?: number;
-  trigger_price?: string;
-  created_at?: string;
-  updated_at?: string;
-  triggered_at?: string;
-  confirmed?: boolean;
-  uuid?: string;
-  id?: number;
-  kind?: OrderKind;
-  trades_count?: number;
+  trigger_price?: string | undefined;
+  created_at?: string | number | undefined;
+  updated_at?: string | number | undefined;
+  triggered_at?: string | undefined;
+  confirmed?: boolean | undefined;
+  uuid?: string | undefined;
+  id?: number | undefined;
+  kind?: OrderKind | undefined;
+  trades_count?: number | undefined;
 }
 
 export interface OrderEvent extends OrderCommon {

@@ -6,6 +6,8 @@ export const convertOrderEvent = (orderEvent: OrderEvent): OrderCommon => {
   return {
     ...order,
     ord_type: order.order_type || order.ord_type,
+    created_at: typeof order.created_at === 'number' ? order.created_at * 1000 : order.created_at,
+    updated_at: typeof order.updated_at === 'number' ? order.updated_at * 1000 : order.updated_at,
   };
 };
 
