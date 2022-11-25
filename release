@@ -2,6 +2,7 @@
 STRATEGY=${1:-minor}
 
 echo "You can use \"patch\", \"minor\", or \"major\"."
+git pull --rebase
 yarn version $STRATEGY
 APP_VERSION=$(node -p '`v${require("./package.json").version}`')
 git add package.json && \
