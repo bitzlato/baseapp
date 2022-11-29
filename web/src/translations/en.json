@@ -384,6 +384,7 @@
   "market.order.non_integer_limit": "Limit value you send could not be parsed into Integer type",
   "market.order.non_positive_price": "Volume value must be positive",
   "market.order.non_positive_volume": "Volume value must be positive",
+  "market.order.open_orders_limit": "You have reached the limit. Maximum of open orders: {open_orders_limit}",
   "market.swap_order.invalid_currency": "Invalid currency",
   "market.swap_order.invalid_market": "Invalid market",
   "market.swap_order.invalid_market_volume": "Invalid amount",
