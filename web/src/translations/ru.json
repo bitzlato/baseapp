@@ -381,6 +381,7 @@
   "market.order.non_integer_limit": "Не удается проанализировать отправляемое вами предельное значение в тип Integer",
   "market.order.non_positive_price": "Значение объема должно быть положительным",
   "market.order.non_positive_volume": "Значение объема должно быть положительным",
+  "market.order.open_orders_limit": "Вы достигли лимита. Максимум активных ордеров: {open_orders_limit}",
   "market.swap_order.invalid_currency": "Неверная валюта",
   "market.swap_order.invalid_market": "Неверный рынок",
   "market.swap_order.invalid_market_volume": "Неверная сумма обмена",

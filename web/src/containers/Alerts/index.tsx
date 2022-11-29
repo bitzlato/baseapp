@@ -17,7 +17,7 @@ export const Alerts: React.FC = () => {
           <FadeIn key={i}>
             <div onClick={() => dispatch(alertDeleteByIndex(i))}>
               <Alert variant={w.type === 'error' ? 'danger' : w.type}>
-                {t(msg)}
+                {t(msg, w.payload)}
                 {w.code && ` ${w.code.toString(10)}`}
               </Alert>
             </div>
