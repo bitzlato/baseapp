@@ -401,7 +401,7 @@
   "market.trade.not_permitted": "Please, pass the corresponding verification steps to enable trading",
   "merge.answer_question": "Answer the question",
   "merge.enter_token": "To merge accounts, enter the code received in the telegram bot:",
-  "merge.merged": "You have already attached your profile to telegram-account (@{username}). Now you can trade both on web bitzlato.com and in telegram-bot!",
+  "merge.merged": "You have already attached your profile to telegram-account {username}. Now you can trade both on web bitzlato.com and in telegram-bot!",
   "merge.telegram_security_question": "⚠️ Any support agent, security service agent will not give you a code. Any third party who asks you to enter the code received from him is a scammer. By entering the code for merging accounts that you received from someone or took anywhere except bitzlato.com/p2p in the section \"My Account\" - \"Telegram\" you will lose your money.{br}{br}❓Do you agree that you can’t get the verification code from anyone, even from real support agents, but only personally in your bitzlato.com/p2p account in the \"My Account\" - \"Telegram\" section?",
   "merge.telegram_start_text": "Enter a special code taken in bot in the section \"Merge WEB account\"> \"Get the code\", after you answer the security question",
   "merge.telegram_test_failed": "Wrong! No one should receive this code, even the support service and anyone who asks you.\n\nRemember this rule and try again.",

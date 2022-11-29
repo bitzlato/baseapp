@@ -16,10 +16,25 @@ export const MergeWithTelegram: FC = () => {
 
   let body;
   if (user.bitzlato_user?.user_profile.merged && user.bitzlato_user?.user_profile.telegram) {
-    const { username } = JSON.parse(user.bitzlato_user.user_profile.telegram);
+    const {
+      username,
+      first_name: firstName,
+      last_name: lastName,
+    } = JSON.parse(user.bitzlato_user.user_profile.telegram) as {
+      id: string;
+      username?: string | undefined;
+      first_name?: string | undefined;
+      last_name?: string | undefined;
+    };
+    let name;
+    if (username) {
+      name = `(@${username})`;
+    } else if (firstName || lastName) {
+      name = `(${firstName ? `${firstName} ` : ''}${lastName})`;
+    }
     body = (
       <Box color="text" py="7x" fontSize="medium" textAlign="center">
-        {t('merge.merged', { username })}
+        {t('merge.merged', { username: name })}
       </Box>
     );
   } else {
