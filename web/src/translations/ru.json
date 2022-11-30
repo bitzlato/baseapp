@@ -235,11 +235,14 @@
   "common.loading": "Загрузка сведений",
   "country.blank": "Страна отсутствует",
   "country.must have alpha2 or alpha3 format": "Страна должна быть в буквенном формате",
+  "deeplink.ad.title": "Sell offer",
   "deeplink.cant_load.text": "Ссылка недействительна или срок объявления истек.",
   "deeplink.cant_load.title": "Не удалось считать информацию",
   "deeplink.not_supported": "Неподдерживаемая ссылка",
   "deeplink.profile.current_account_label": "Авторизация аккаунта",
   "deeplink.profile.need_auth": "Войдите в свою учетную запись для погашения.",
+  "deeplink.server.InsufficientFunds": "У владелца ваучера сейчас недостаточно средств.",
+  "deeplink.server.OutdatedVoucher": "Ваучер устарел.",
   "deeplink.voucher.cash_failed": "Не удалось погасить ваучер.",
   "deeplink.voucher.cashed": "Ваучер погашен в {cashed_at}.",
   "deeplink.voucher.comment_label": "Комментарий",
@@ -396,6 +399,7 @@
   "market.trade.non_integer_limit": "Не удается проанализировать отправляемое вами предельное значение в тип Integer",
   "market.trade.non_integer_timestamp": "Отправленное вами время не может быть проанализировано в типе Integer",
   "market.trade.not_permitted": "Пожалуйста, пройдите соответствующие шаги проверки, чтобы включить торговлю",
+  "maxFileSizeError": "Размер выбранного файла слишком велик. Максимальный размер {value}MB",
   "merge.answer_question": "Ответить на вопрос",
   "merge.enter_token": "Чтобы объединить аккаунты, введите код, полученный в телеграм боте:",
   "merge.merged": "Вы уже привязали вашу учетную запись к telegram-аккаунту {username}. Теперь вы можете совершать сделки, как в веб-версии на bitzlato.com, так и в боте!",
@@ -1417,6 +1421,5 @@
   "withdrawalFee.help": "Обратите внимание, что скорость выводов может меняться из-за колебаний комиссии сети",
   "wrongMergeCode": "Неверный код",
   "yesterday": "Вчера",
-  "your_address": "Ваш адрес",
-  "maxFileSizeError": "Размер выбранного файла слишком велик. Максимальный размер {value}MB"
+  "your_address": "Ваш адрес"
 }

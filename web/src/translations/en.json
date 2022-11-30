@@ -399,6 +399,7 @@
   "market.trade.non_integer_limit": "Limit value you send could not be parsed into Integer type",
   "market.trade.non_integer_timestamp": "Timestamp value you send could not be parsed into Integer type",
   "market.trade.not_permitted": "Please, pass the corresponding verification steps to enable trading",
+  "maxFileSizeError": "The size of the selected file is too big. Maximum file size is {value}MB",
   "merge.answer_question": "Answer the question",
   "merge.enter_token": "To merge accounts, enter the code received in the telegram bot:",
   "merge.merged": "You have already attached your profile to telegram-account {username}. Now you can trade both on web bitzlato.com and in telegram-bot!",
@@ -1420,6 +1421,5 @@
   "withdrawalFee.help": "Note that the withdrawal rate may vary due to network fee fluctuations",
   "wrongMergeCode": "Incorrect code",
   "yesterday": "Yesterday",
-  "your_address": "Your address",
-  "maxFileSizeError": "The size of the selected file is too big. Maximum file size is {value}MB"
+  "your_address": "Your address"
 }
