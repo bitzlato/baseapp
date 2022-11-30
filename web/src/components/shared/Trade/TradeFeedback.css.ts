@@ -10,7 +10,7 @@ export const feedbackBlock = style([
   responsiveStyle({
     desktopXL: {
       flexDirection: 'row',
-      gap: '3.5rem',
+      gap: '28px',
     },
     mobile: {
       flexDirection: 'column',

@@ -3,6 +3,9 @@ import { Button } from 'web/src/components/ui/Button';
 import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { useAppContext } from 'web/src/components/app/AppContext';
+import SmileFace from 'web/src/assets/svg/SmileFace.svg';
+import NeutralFace from 'web/src/assets/svg/NeutralFace.svg';
+import SadFace from 'web/src/assets/svg/SadFace.svg';
 import { useTradeContext } from './TradeContext';
 import * as s from './TradeFeedback.css';
 
@@ -29,27 +32,30 @@ export const TradeFeedback: FC<Props> = ({ tipsAvailable }) => {
         <Box display="flex" gap="2x" w="full">
           <Button
             fullWidth
-            color="primary"
-            variant="outlined"
+            color="clarified"
+            variant="contained"
+            title={t('Good')}
             onClick={() => handleTradeFeedback('thumb_up')}
           >
-            🙂
+            <SmileFace />
           </Button>
           <Button
             fullWidth
-            color="primary"
-            variant="outlined"
+            color="clarified"
+            variant="contained"
+            title={t('Passable')}
             onClick={() => handleTradeFeedback('weary')}
           >
-            😐
+            <NeutralFace />
           </Button>
           <Button
             fullWidth
-            color="primary"
-            variant="outlined"
+            color="clarified"
+            variant="contained"
+            title={t('Bad')}
             onClick={() => handleTradeFeedback('hankey')}
           >
-            😖
+            <SadFace />
           </Button>
         </Box>
 
