@@ -37,8 +37,6 @@ interface Props<T extends CommonAddressNotebook> {
   onInputChange?: (value: string) => void;
 }
 
-const noop = () => {};
-
 export const AddressNotebook = <T extends CommonAddressNotebook>({
   inputReadonly = false,
   inputAddress,
@@ -50,7 +48,7 @@ export const AddressNotebook = <T extends CommonAddressNotebook>({
   onAddClick,
   onDeleteClick,
   onSelect,
-  onInputChange = noop,
+  onInputChange,
 }: Props<T>) => {
   const t = useT();
   const elementRef = useRef<HTMLDivElement>(null);
@@ -94,6 +92,11 @@ export const AddressNotebook = <T extends CommonAddressNotebook>({
     setOpen(false);
   };
 
+  const handleInputChange = (value: string) => {
+    onInputChange?.(value);
+    setOpen(value === '');
+  };
+
   return (
     <Box ref={elementRef} position="relative">
       <TextInput
@@ -102,8 +105,8 @@ export const AddressNotebook = <T extends CommonAddressNotebook>({
         label={t('page.body.wallets.beneficiaries.title')}
         value={inputAddress}
         error={error}
-        onChange={onInputChange}
-        onClick={inputReadonly ? handleDropdownToggle : undefined}
+        onChange={handleInputChange}
+        onClick={handleDropdownToggle}
       />
 
       <Box className={s.inputRightControls} display="flex" alignItems="center">
