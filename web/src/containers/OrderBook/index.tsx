@@ -21,7 +21,6 @@ import {
   selectDepthAsks,
   selectDepthBids,
   selectDepthLoading,
-  selectLastRecentTrade,
   selectMarketTickers,
   selectMobileDeviceState,
   selectOpenOrdersList,
@@ -29,6 +28,8 @@ import {
   depthIncrementSubscribeResetLoading,
   Ticker,
   Theme,
+  selectLastPrice,
+  LastPrice,
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
 
@@ -42,6 +43,7 @@ interface ReduxProps {
   openOrdersList: OrderCommon[];
   orderBookLoading: boolean;
   isMobileDevice: boolean;
+  lastPrice?: LastPrice | undefined;
 }
 
 interface DispatchProps {
@@ -194,50 +196,27 @@ class OrderBookContainer extends React.Component<Props, State> {
   };
 
   public lastPrice() {
-    const { currentMarket, lastRecentTrade, marketTickers } = this.props;
+    const { lastPrice } = this.props;
 
-    if (currentMarket) {
-      let lastPrice = '';
-      let priceChangeSign: '' | 'positive' | 'negative' = '';
-
-      if (lastRecentTrade?.market === currentMarket.id) {
-        lastPrice = lastRecentTrade.price;
-
-        if (Number(lastRecentTrade.price_change) >= 0) {
-          priceChangeSign = 'positive';
-        } else if (Number(lastRecentTrade.price_change) < 0) {
-          priceChangeSign = 'negative';
-        }
-      } else {
-        const currentTicker = currentMarket && this.getTickerValue(currentMarket, marketTickers);
-        lastPrice = currentTicker.last;
-
-        if (currentTicker.price_change_percent.includes('+')) {
-          priceChangeSign = 'positive';
-        } else if (currentTicker.price_change_percent.includes('-')) {
-          priceChangeSign = 'negative';
-        }
-      }
-
-      const cn = classNames('', {
-        'cr-combined-order-book__market-negative': priceChangeSign === 'negative',
-        'cr-combined-order-book__market-positive': priceChangeSign === 'positive',
-      });
-
+    if (!lastPrice) {
       return (
         <>
-          <span className={cn}>
-            {createMoneyWithoutCcy(lastPrice, currentMarket.price_precision).toFormat()}
-          </span>
+          <span className="cr-combined-order-book__market-negative">0.00</span>
           <span>
             {this.props.intl.formatMessage({ id: 'page.body.trade.orderbook.lastMarket' })}
           </span>
         </>
       );
     }
+
+    const cn = classNames('', {
+      'cr-combined-order-book__market-negative': lastPrice.changeSign === 'negative',
+      'cr-combined-order-book__market-positive': lastPrice.changeSign === 'positive',
+    });
+
     return (
       <>
-        <span className="cr-combined-order-book__market-negative">0</span>
+        <span className={cn}>{lastPrice.price.toFormat()}</span>
         <span>{this.props.intl.formatMessage({ id: 'page.body.trade.orderbook.lastMarket' })}</span>
       </>
     );
@@ -487,20 +466,6 @@ class OrderBookContainer extends React.Component<Props, State> {
     }
   };
 
-  private getTickerValue = (currentMarket: Market, tickers: { [key: string]: Ticker }) => {
-    const defaultTicker = {
-      amount: '0',
-      low: '0',
-      last: '0',
-      high: '0',
-      volume: '0',
-      open: '0',
-      price_change_percent: '+0.00%',
-    };
-
-    return tickers[currentMarket.id] || defaultTicker;
-  };
-
   private handleResize = () => {
     if (this.orderRef.current && this.state.width !== this.orderRef.current.clientWidth) {
       this.setState({
@@ -517,10 +482,10 @@ const mapStateToProps = (state: RootState) => ({
   orderBookLoading: selectDepthLoading(state),
   currentMarket: selectCurrentMarket(state),
   currentPrice: selectCurrentPrice(state),
-  lastRecentTrade: selectLastRecentTrade(state),
   marketTickers: selectMarketTickers(state),
   openOrdersList: selectOpenOrdersList(state),
   isMobileDevice: selectMobileDeviceState(state),
+  lastPrice: selectLastPrice(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = (dispatch) => ({

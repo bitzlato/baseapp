@@ -8,7 +8,13 @@ import { CloseIcon } from '../../../assets/images/CloseIcon';
 import { FilterInput } from '../../../components';
 import { DEFAULT_CCY_PRECISION } from '../../../constants';
 import { MarketsTable } from '../../../containers';
-import { Market, selectCurrentMarket, selectMarkets, selectMarketTickers } from '../../../modules';
+import {
+  Market,
+  selectCurrentMarket,
+  selectLastPrice,
+  selectMarkets,
+  selectMarketTickers,
+} from '../../../modules';
 import { ChevronIcon } from '../../assets/images/ChevronIcon';
 import { MobileModal } from '..';
 
@@ -27,6 +33,7 @@ const CurrentMarketInfoComponent: React.FC = () => {
   const currentMarket = useSelector(selectCurrentMarket);
   const markets = useSelector(selectMarkets);
   const tickers = useSelector(selectMarketTickers);
+  const lastPrice = useSelector(selectLastPrice);
   const [isOpenMarketSelector, setOpenMarketSelector] = React.useState(false);
   const [filteredMarkets, setFilteredMarkets] = React.useState(markets);
   const [marketsSearchKey, setMarketsSearchKey] = React.useState('');
@@ -98,12 +105,7 @@ const CurrentMarketInfoComponent: React.FC = () => {
           </div>
         </div>
         <div className="pg-mobile-current-market-info__left__price-change">
-          <span className={currentMarketChangeClass}>
-            {createMoneyWithoutCcy(
-              currentMarketTicker.last,
-              currentMarketPricePrecision,
-            ).toFormat()}
-          </span>
+          <span className={currentMarketChangeClass}>{lastPrice?.price.toFormat() ?? '0.00'}</span>
           <span className={currentMarketChangeClass}>
             {currentMarketTicker.price_change_percent}
           </span>
