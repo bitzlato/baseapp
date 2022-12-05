@@ -4,7 +4,7 @@ import useMutation, { Options, Reset, Status } from 'use-mutation';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
 import { FetchError, fetchMutation } from 'web/src/helpers/fetch';
 
-export type FetcherMutationFn = (url: string, config?: RequestInit) => Promise<any>;
+export type FetcherMutationFn = typeof fetchMutation;
 
 export type MutateFn<Input = unknown, Data = unknown, Error = unknown> = (
   input: Input,
@@ -25,7 +25,7 @@ export type TriggerFn<Input = unknown, Data = unknown, Error = unknown> = Input 
 
 export const useFetchMutation = <Input = unknown, Data = unknown, Error = unknown>(
   url: string,
-  fetcherMutation: FetcherMutationFn = fetchMutation,
+  fetcherMutation: FetcherMutationFn,
   options?: Options<Input, Data, Error> | undefined,
 ): [
   TriggerFn<Input, Data, Error>,
@@ -39,10 +39,7 @@ export const useFetchMutation = <Input = unknown, Data = unknown, Error = unknow
   const { mutate: swrMutate } = useSWRConfig();
   const handleFetchError = useHandleFetchError();
   const mutationFn = useCallback(
-    (input: Input): Promise<Data> =>
-      fetcherMutation(url, {
-        body: input as any,
-      }),
+    (input: Input): Promise<Data> => fetcherMutation(url, { body: input }),
     [fetcherMutation, url],
   );
 

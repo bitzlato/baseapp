@@ -95,7 +95,11 @@ export const fetchWithCreds = (input: RequestInfo, init?: RequestInit) => {
   return fetchJson(input, { ...init, credentials: 'include' });
 };
 
-export const fetchMutation = (input: RequestInfo, init?: RequestInit) =>
+interface MutationInit extends Omit<RequestInit, 'body'> {
+  body?: unknown;
+}
+
+export const fetchMutation = (input: RequestInfo, init?: MutationInit) =>
   fetchJson(input, {
     method: 'POST',
     headers: {
