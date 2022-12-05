@@ -5,7 +5,7 @@ import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { SelectCustom } from 'web/src/components/SelectCustom/SelectCustom';
-import { useSetUserAdRate } from 'web/src/hooks/mutations/useSetUserAdRate';
+import { SetUserAdRateData, useSetUserAdRate } from 'web/src/hooks/mutations/useSetUserAdRate';
 import { AdvertType } from 'web/src/modules/p2p/types';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
@@ -18,11 +18,12 @@ interface Props {
   type: AdvertType;
   cryptoCurrency: string;
   currencyList: string[];
+  onChanged?: ((data: SetUserAdRateData) => void) | undefined;
 }
 
 const getOptionValue = (option: string | undefined) => option || '';
 
-export const SetRate: FC<Props> = ({ type, cryptoCurrency, currencyList }) => {
+export const SetRate: FC<Props> = ({ type, cryptoCurrency, currencyList, onChanged }) => {
   const { t } = useAdapterContext();
   const { lang } = useAppContext();
   const [setUserAdRate, { status }] = useSetUserAdRate(lang);
@@ -67,7 +68,7 @@ export const SetRate: FC<Props> = ({ type, cryptoCurrency, currencyList }) => {
         return;
       }
 
-      await setUserAdRate({
+      const data = await setUserAdRate({
         type,
         cryptocurrency: cryptoCurrency,
         currency: selectedCurrency,
@@ -80,6 +81,10 @@ export const SetRate: FC<Props> = ({ type, cryptoCurrency, currencyList }) => {
       setFixedValue('');
 
       handleClose();
+
+      if (data && onChanged) {
+        onChanged(data);
+      }
     } catch (error) {
       if (error instanceof FetchError) {
         if (error.code === 481 && error.payload.code === 'AdsUpdatedToOften') {

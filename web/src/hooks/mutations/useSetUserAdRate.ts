@@ -2,7 +2,7 @@ import { useSWRConfig } from 'swr';
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
-import { fetchJson, FetchError } from 'web/src/helpers/fetch';
+import { FetchError, fetchMutation } from 'web/src/helpers/fetch';
 import { Language } from 'web/src/types';
 
 interface SetUserAdRateInput {
@@ -13,24 +13,22 @@ interface SetUserAdRateInput {
   ratePercent: string | null | undefined;
 }
 
-const setUserAdRate = async (input: SetUserAdRateInput): Promise<void> => {
-  const response = await fetchJson(`${p2pUrl()}/dsa/changerates`, {
-    method: 'PUT',
-    body: JSON.stringify(input),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-    credentials: 'include',
-  });
+export interface SetUserAdRateData {
+  updatedAds: ReadonlyArray<number>;
+  notUpdatedAds: ReadonlyArray<number>;
+}
 
-  return response;
-};
+const setUserAdRate = async (input: SetUserAdRateInput): Promise<SetUserAdRateData> =>
+  fetchMutation(`${p2pUrl()}/dsa/changerates`, {
+    method: 'PUT',
+    body: input,
+  });
 
 export const useSetUserAdRate = (lang: Language) => {
   const { mutate } = useSWRConfig();
   const handleFetchError = useHandleFetchError();
 
-  return useMutation<SetUserAdRateInput>(setUserAdRate, {
+  return useMutation<SetUserAdRateInput, SetUserAdRateData>(setUserAdRate, {
     throwOnFailure: true,
     onSuccess: () => {
       mutate(`${p2pUrl()}/dsa/all?lang=${lang}`);

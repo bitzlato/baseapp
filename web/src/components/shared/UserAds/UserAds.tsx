@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/ui/Container';
 import { Box } from 'web/src/components/ui/Box';
@@ -13,6 +13,8 @@ import { Breadcrumbs, BreadcrumbsItem } from 'web/src/components/ui/Breadcrumbs'
 import { Modal, ModalBody, ModalHeader } from 'web/src/components/ui/Modal';
 import { UserAdvertSource } from 'web/src/modules/p2p/types';
 import { StorageKeys } from 'web/src/helpers/storageKeys';
+import { SetUserAdRateData } from 'web/src/hooks/mutations/useSetUserAdRate';
+import { useDebouncedCallback } from 'use-debounce';
 import { UserAdsList } from './UserAdsList';
 import {
   UserAdsFilter,
@@ -26,6 +28,9 @@ import { UserAdsEnableTradingSwitch } from './UserAdsEnableTradingSwitch';
 import { SelectCryptoCurrency } from './SelectCryptoCurrency';
 import { UserAdsAlerts } from './UserAdsAlerts';
 import * as s from './UserAds.css';
+
+const CLEAR_SUCCESSFUL_RATE_CHANGES_WAIT = 30 * 1000; // 30 seconds
+const CLEAR_FAILURE_RATE_CHANGES_WAIT = 60 * 1000; // 60 seconds
 
 export const UserAds: FC = () => {
   const { t, Link, history } = useAdapterContext<
@@ -43,6 +48,7 @@ export const UserAds: FC = () => {
       ...lastFilter,
     };
   });
+  const [rateChanged, setRateChanged] = useState<SetUserAdRateData>();
   const [showCreatedAdModal, setShowCreatedAdModal] = useState(
     history.location.state?.createdAdId !== undefined,
   );
@@ -72,6 +78,19 @@ export const UserAds: FC = () => {
   const currencyList = useMemo(
     () => [...new Set(filteredAds?.map((ad) => ad.paymethod_currency))],
     [filteredAds],
+  );
+
+  const clearSuccessfulRateChanges = useDebouncedCallback(
+    useCallback(() => {
+      setRateChanged((prev) => ({ updatedAds: [], notUpdatedAds: prev?.notUpdatedAds ?? [] }));
+    }, []),
+    CLEAR_SUCCESSFUL_RATE_CHANGES_WAIT,
+  );
+  const clearRateChanges = useDebouncedCallback(
+    useCallback(() => {
+      setRateChanged(undefined);
+    }, []),
+    CLEAR_FAILURE_RATE_CHANGES_WAIT,
   );
 
   const handleEnableTradeToggle = () => {
@@ -106,11 +125,21 @@ export const UserAds: FC = () => {
     history.push('/p2p/adverts/create');
   };
 
+  const handleRateChanged = (result: SetUserAdRateData) => {
+    clearSuccessfulRateChanges.cancel();
+    clearRateChanges.cancel();
+    setRateChanged(result);
+
+    clearSuccessfulRateChanges();
+    clearRateChanges();
+  };
+
   const ads = (
     <Box mt={{ mobile: '4x', tablet: isAdsEmpty ? '6x' : '10x' }}>
       <UserAdsList
         data={filteredAds}
         params={filterParams}
+        rateChanged={rateChanged}
         isLoading={!filteredAds}
         isRefreshing={isValidating}
         onRefresh={handleRefresh}
@@ -188,6 +217,7 @@ export const UserAds: FC = () => {
                       type={filterParams.type}
                       cryptoCurrency={filterParams.cryptocurrency}
                       currencyList={currencyList}
+                      onChanged={handleRateChanged}
                     />
                   </Box>
 
@@ -248,6 +278,7 @@ export const UserAds: FC = () => {
                     type={filterParams.type}
                     cryptoCurrency={filterParams.cryptocurrency}
                     currencyList={currencyList}
+                    onChanged={handleRateChanged}
                   />
                   <Button as={Link} to="/p2p/adverts/create">
                     {t('Create advert')}

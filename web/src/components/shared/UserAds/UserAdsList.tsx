@@ -14,20 +14,38 @@ import { UserAdvert } from 'web/src/modules/p2p/types';
 import { UserAdsListItem } from 'web/src/components/shared/UserAds/UserAdsListItem';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import RefreshIcon from 'web/src/assets/svg/RefreshIcon.svg';
+import { SetUserAdRateData } from 'web/src/hooks/mutations/useSetUserAdRate';
 import { UserAdsFilterParams } from './UserAdsFilter';
 import { UserAdsTradingStatusSwitch } from './UserAdsTradingStatusSwitch';
 
 interface Props {
   data?: UserAdvert[] | undefined;
   params: UserAdsFilterParams;
+  rateChanged?: SetUserAdRateData | undefined;
   isLoading?: boolean;
   isRefreshing?: boolean;
   onRefresh?: () => void;
 }
 
+const getRateChangedStatus = (
+  { updatedAds, notUpdatedAds }: SetUserAdRateData,
+  id: number,
+): 'success' | 'failure' | undefined => {
+  if (updatedAds.includes(id)) {
+    return 'success';
+  }
+
+  if (notUpdatedAds.includes(id)) {
+    return 'failure';
+  }
+
+  return undefined;
+};
+
 export const UserAdsList: FC<Props> = ({
   data,
   params,
+  rateChanged,
   isLoading = false,
   isRefreshing = false,
   onRefresh,
@@ -96,7 +114,11 @@ export const UserAdsList: FC<Props> = ({
       {data && data.length > 0 && (
         <AdsTableBody>
           {data.map((ad) => (
-            <UserAdsListItem key={ad.id} ad={ad} />
+            <UserAdsListItem
+              key={ad.id}
+              ad={ad}
+              rateChangedStatus={rateChanged ? getRateChangedStatus(rateChanged, ad.id) : undefined}
+            />
           ))}
         </AdsTableBody>
       )}

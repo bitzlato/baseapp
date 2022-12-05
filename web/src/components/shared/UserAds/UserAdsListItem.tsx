@@ -17,9 +17,10 @@ import * as s from './UserAdsListItem.css';
 
 interface Props {
   ad: UserAdvert;
+  rateChangedStatus?: 'success' | 'failure' | undefined;
 }
 
-export const UserAdsListItem: FC<Props> = ({ ad }) => {
+export const UserAdsListItem: FC<Props> = ({ ad, rateChangedStatus }) => {
   const { lang, isMobileDevice } = useAppContext();
   const { t, history } = useAdapterContext();
   const [updateUserAd, { status: updateUserAdState }] = useUpdateUserAd(lang);
@@ -67,6 +68,21 @@ export const UserAdsListItem: FC<Props> = ({ ad }) => {
       }
     }
   };
+
+  let rateChanged;
+  if (rateChangedStatus === 'success') {
+    rateChanged = (
+      <Text variant="caption" color="success" fontWeight="strong">
+        {t('Change accepted')}
+      </Text>
+    );
+  } else if (rateChangedStatus === 'failure') {
+    rateChanged = (
+      <Text variant="caption" color="danger" fontWeight="strong">
+        {t('Change rejected')}
+      </Text>
+    );
+  }
 
   const controls = (
     <Box className={s.statusSwitch}>
@@ -134,6 +150,7 @@ export const UserAdsListItem: FC<Props> = ({ ad }) => {
               </Text>
               <Text variant="label" textAlign="right">
                 <P2PFiatFormat money={ad.rate} cryptoCurrency={ad.cryptoCurrency} />
+                {rateChanged}
               </Text>
             </Box>
             <Box display="flex" justifyContent="space-between" px="4x">
@@ -174,6 +191,7 @@ export const UserAdsListItem: FC<Props> = ({ ad }) => {
             <Box pr="4x" textOverflow="ellipsis">
               <P2PFiatFormat money={ad.rate} cryptoCurrency={ad.cryptoCurrency} />
               {ad.ratePercent ? ` (${ad.ratePercent}%)` : null}
+              {rateChanged}
             </Box>
           </AdsTableColumn>
           <AdsTableColumn size="small">
