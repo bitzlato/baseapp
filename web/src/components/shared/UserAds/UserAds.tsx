@@ -12,6 +12,7 @@ import { useUpdateTradeStatus } from 'web/src/hooks/mutations/useUpdateTradeStat
 import { Breadcrumbs, BreadcrumbsItem } from 'web/src/components/ui/Breadcrumbs';
 import { Modal, ModalBody, ModalHeader } from 'web/src/components/ui/Modal';
 import { UserAdvertSource } from 'web/src/modules/p2p/types';
+import { StorageKeys } from 'web/src/helpers/storageKeys';
 import { UserAdsList } from './UserAdsList';
 import {
   UserAdsFilter,
@@ -26,8 +27,6 @@ import { SelectCryptoCurrency } from './SelectCryptoCurrency';
 import { UserAdsAlerts } from './UserAdsAlerts';
 import * as s from './UserAds.css';
 
-const USER_ADS_FILTER_KEY = 'userAdsFilterCryptocurrency';
-
 export const UserAds: FC = () => {
   const { t, Link, history } = useAdapterContext<
     {},
@@ -37,7 +36,7 @@ export const UserAds: FC = () => {
   const { data: tradeStatuses } = useTradeStatus();
   const [updateTradeStatus] = useUpdateTradeStatus();
   const [filterParams, setFilterParams] = useState<UserAdsFilterParams>(() => {
-    const lastFilter = JSON.parse(localStorage.getItem(USER_ADS_FILTER_KEY) || '{}') ?? {};
+    const lastFilter = JSON.parse(localStorage.getItem(StorageKeys.userAdsFilter) || '{}') ?? {};
 
     return {
       ...DEFAULT_FILTER,
@@ -83,7 +82,7 @@ export const UserAds: FC = () => {
     const next = { ...filterParams, ...upd };
 
     setFilterParams(next);
-    localStorage.setItem(USER_ADS_FILTER_KEY, JSON.stringify(next));
+    localStorage.setItem(StorageKeys.userAdsFilter, JSON.stringify(next));
   };
 
   const handleRefresh = () => mutate();
