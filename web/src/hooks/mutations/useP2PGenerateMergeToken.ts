@@ -1,9 +1,8 @@
 import useMutation, { Options } from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
+import { StorageKeys } from 'web/src/helpers/storageKeys';
 import { GenerateMergeTokenResponse } from 'web/src/modules/user/profile/types';
-
-const LAST_MERGE_TOKEN_STORAGE_KEY = 'lastMergeToken';
 
 const passMergeWizard = () =>
   fetchWithCreds(`${p2pUrl()}/profile/merge/pass_wizard`, {
@@ -41,7 +40,7 @@ const generateMergeToken = async ({ otp }: Input) => {
       error.code === 497 &&
       error.payload.code === 'WaitForNewMergeToken'
     ) {
-      const lastToken = window.sessionStorage.getItem(LAST_MERGE_TOKEN_STORAGE_KEY);
+      const lastToken = window.sessionStorage.getItem(StorageKeys.lastMergeToken);
       if (lastToken) {
         return {
           token: lastToken,
