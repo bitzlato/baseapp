@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { TraderAdvert } from 'web/src/hooks/data/useUserAds';
+import { TraderAdvert } from 'web/src/hooks/data/useTraderAds';
 import {
   AdsTable,
   AdsTableBody,

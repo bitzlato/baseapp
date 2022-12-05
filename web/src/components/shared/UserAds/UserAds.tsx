@@ -5,7 +5,7 @@ import { Box } from 'web/src/components/ui/Box';
 import { Stack } from 'web/src/components/ui/Stack';
 import { Text } from 'web/src/components/ui/Text';
 import { Button } from 'web/src/components/ui/Button';
-import { useCurrenUserAds } from 'web/src/hooks/data/useUserAds';
+import { useUserAds } from 'web/src/hooks/data/useUserAds';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { useTradeStatus } from 'web/src/hooks/data/useTradeStatus';
 import { useUpdateTradeStatus } from 'web/src/hooks/mutations/useUpdateTradeStatus';
@@ -48,7 +48,7 @@ export const UserAds: FC = () => {
   );
   const isTradeEnabled = tradeStatuses?.[filterParams.cryptocurrency] ?? false;
 
-  const { data, isValidating, mutate } = useCurrenUserAds(lang);
+  const { data, isValidating, mutate } = useUserAds(lang);
   const filteredAds = useMemo(() => {
     let filtered = data;
 

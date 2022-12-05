@@ -7,7 +7,7 @@ import { Text } from 'web/src/components/ui/Text';
 import { Breadcrumbs, BreadcrumbsItem } from 'web/src/components/ui/Breadcrumbs';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { useAppContext } from 'web/src/components/app/AppContext';
-import { useCurrenUserAd } from 'web/src/hooks/data/useUserAds';
+import { useUserAd } from 'web/src/hooks/data/useUserAds';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { UserAdEditContextProvider } from './UserAdEditContext';
 import { UserAdEditForm } from './UserAdEditForm';
@@ -22,7 +22,7 @@ export const UserAd: FC = () => {
     params: { advertId },
   } = useAdapterContext<{ advertId: string }>();
   const { lang, isMobileDevice } = useAppContext();
-  const { data: ad, error, mutate: mutateAd } = useCurrenUserAd({ advertId, lang });
+  const { data: ad, error, mutate: mutateAd } = useUserAd({ advertId, lang });
 
   const breadcrumbs = isMobileDevice ? null : (
     <Box px="2x">
