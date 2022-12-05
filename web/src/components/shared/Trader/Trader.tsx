@@ -2,7 +2,7 @@ import { FC, useCallback, useState } from 'react';
 import { useAppContext, useNotificationSubscribe } from 'web/src/components/app/AppContext';
 import { Container } from 'web/src/components/ui/Container';
 import { Box } from 'web/src/components/ui/Box';
-import { useUserAds } from 'web/src/hooks/data/useUserAds';
+import { useTraderAds } from 'web/src/hooks/data/useTraderAds';
 import { TraderAds } from 'web/src/components/shared/TraderAds/TraderAds';
 import { TraderInfo } from 'web/src/components/traderInfo/TraderInfo';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
@@ -31,7 +31,7 @@ export const Trader: FC = () => {
   const { mutate } = useSWRConfig();
   const { lang, isMobileDevice, user } = useAppContext();
   const { params, t } = useAdapterContext<UrlParams>();
-  const { data = [], error } = useUserAds({ publicName: params.name, lang });
+  const { data = [], error } = useTraderAds({ publicName: params.name, lang });
   const traderInfoSWR = useFetchTraderInfo(params.name);
   const traderInfo = traderInfoSWR.data;
   const [singleMode, setSingleMode] = useState('');
