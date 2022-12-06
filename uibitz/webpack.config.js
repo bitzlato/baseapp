@@ -5,7 +5,8 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExternalTemplateRemotesPlugin = require('external-remotes-plugin');
 
-const { dependencies: deps, version } = require('./package.json');
+const { version } = require('../package.json');
+const { dependencies: deps } = require('./package.json');
 
 const BUILD_DIR = path.resolve(__dirname, './build');
 

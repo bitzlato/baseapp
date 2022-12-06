@@ -10,7 +10,8 @@ const StatoscopeWebpackPlugin = require('@statoscope/webpack-plugin').default;
 const { BugsnagSourceMapUploaderPlugin } = require('webpack-bugsnag-plugins');
 const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const { dependencies: deps, version } = require('./package.json');
+const { version } = require('../package.json');
+const { dependencies: deps } = require('./package.json');
 
 const BUILD_DIR = path.resolve(__dirname, './build');
 const SVGR_DIR = path.resolve(__dirname, './src/assets/svg');
