@@ -7,7 +7,7 @@ module.exports = {
       '@semantic-release/release-notes-generator',
       {
         preset: 'conventionalcommits',
-        writeOpts: {
+        presetConfig: {
           issueUrlFormat: 'https://www.pivotaltracker.com/story/show/{{id}}',
         },
       },
