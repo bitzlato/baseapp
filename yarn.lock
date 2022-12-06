@@ -8694,14 +8694,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dts-css-modules-loader@npm:1.2.5":
-  version: 1.2.5
-  resolution: "dts-css-modules-loader@npm:1.2.5"
-  dependencies:
-    loader-utils: ^2.0.0
+"dts-css-modules-loader@npm:2.0.1":
+  version: 2.0.1
+  resolution: "dts-css-modules-loader@npm:2.0.1"
   peerDependencies:
     css-loader: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
-  checksum: 1b08135bc9e14afa58c51f850215aa366374157ee69ae8f6cb1b8f0e59e199e546e15ebf70b5ec0eb685f64c9afe6e0bc3ebb2cb686e8ac40f62537d3c3cd3d1
+  checksum: 50047341948c48a613065571d707bf28c5e8670f20062d1592915bccb554038a4d56b3fc5de8b8de2c2fff137675d79d05d64993ec0a125a216c0133e000c68a
   languageName: node
   linkType: hard
 
@@ -21884,7 +21882,7 @@ __metadata:
     cryptocurrency-icons: "git+https://github.com/bitzlato/cryptocurrency-icons.git#1c1db76ce934c5a81fa67d1ebad689c7e0a85504"
     css-loader: ^6.6.0
     css-minimizer-webpack-plugin: ^4.0.0
-    dts-css-modules-loader: 1.2.5
+    dts-css-modules-loader: 2.0.1
     enzyme: ^3.11.0
     events: ^3.3.0
     header-case-normalizer: 1.0.3
