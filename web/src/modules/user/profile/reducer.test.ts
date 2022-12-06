@@ -8,9 +8,16 @@ describe('Profile reducer', () => {
   const fakeProfiles: UserProfile[] = [
     {
       first_name: '',
+      middle_name: '',
       last_name: '',
       dob: '',
       address: '',
+      passport_division_code: '',
+      passport_issue_by: '',
+      passport_issue_date: '',
+      passport_number: '',
+      passport_serial: '',
+      phone_number: '',
       metadata: '',
       postcode: '',
       city: '',
