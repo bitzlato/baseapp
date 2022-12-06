@@ -1,6 +1,6 @@
 import { BareFetcher, SWRConfiguration } from 'swr';
 import useMutation from 'use-mutation';
-import { p2pUrl } from 'web/src/api/config';
+import { accountUrl, p2pUrl } from 'web/src/api/config';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { fetchJson } from 'web/src/helpers/fetch';
 import { Trade, TradeAmountType, TradeSource } from 'web/src/modules/p2p/trade.types';
@@ -85,6 +85,17 @@ export const useFetchP2PTrades = (
 export const useFetchP2PTradeInvoice = () => {
   return useMutation(async (tradeId: TradeSource['id']) => {
     const response = await fetch(`${p2pUrl()}/trade/${tradeId}/invoice?responseType=arraybuffer`, {
+      credentials: 'include',
+    });
+    const data = await response.arrayBuffer();
+
+    return Buffer.from(data).toString('base64');
+  });
+};
+
+export const useFetchP2PCashContract = () => {
+  return useMutation(async (tradeId: TradeSource['id']) => {
+    const response = await fetch(`${accountUrl()}/trades/${tradeId}/cash_contract`, {
       credentials: 'include',
     });
     const data = await response.arrayBuffer();
