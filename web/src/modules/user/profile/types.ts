@@ -4,13 +4,20 @@ import { Label } from 'web/src/modules/user/kyc/label/actions';
 import { FeatureMap } from 'web/src/types/featuresToggling.types';
 
 export interface UserProfile {
-  first_name: string;
-  last_name: string;
-  dob: string;
-  address: string;
-  postcode: string;
-  city: string;
-  country: string;
+  first_name: string | null;
+  last_name: string | null;
+  middle_name: string | null;
+  passport_division_code: string | null;
+  passport_issue_by: string | null;
+  passport_issue_date: string | null;
+  passport_number: string | null;
+  passport_serial: string | null;
+  phone_number: string | null;
+  dob: string | null;
+  address: string | null;
+  postcode: string | null;
+  city: string | null;
+  country: string | null;
   state: string;
   created_at: string;
   updated_at: string;

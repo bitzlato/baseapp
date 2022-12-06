@@ -18,6 +18,7 @@ import { SwitchField } from './SwitchField';
 import { TwoFactorAuthSwitcher } from './TwoFactorAuthSwitcher';
 import { SafeModeSwitcher } from './SafeModeSwitcher';
 import { NotificationSettingField } from './NotificationSettingField';
+import { CashContractForm } from './CashContractForm';
 
 const notificationsSettings = [
   'newReferral',
@@ -170,6 +171,26 @@ export const ProfileSettings: FC = () => {
               defaultValue={user.bitzlato_user.user_setting?.user_message}
               onChange={changeNotificationSettingHandles.userMessage}
             />
+          </Stack>
+        </div>
+      </Box>
+
+      <Box
+        className={s.block}
+        display="flex"
+        justifyContent="space-between"
+        py="8x"
+        px="5x"
+        borderBottomColor="modalHeaderBorderBottom"
+      >
+        <Box className={s.label} mb="6x">
+          <Text as="p" variant="label" fontWeight="strong">
+            {t('cashContractProfile')}
+          </Text>
+        </Box>
+        <div className={s.controls}>
+          <Stack direction="column" marginBottom="8x">
+            <CashContractForm profiles={user.profiles} />
           </Stack>
         </div>
       </Box>
