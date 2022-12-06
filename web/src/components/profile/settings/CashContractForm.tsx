@@ -97,21 +97,19 @@ export const CashContractForm = ({ profiles }: Props) => {
         value={values.address ?? ''}
         onChange={(value) => setValues((current) => ({ ...current, address: value }))}
       />
-      {false && (
-        <TextInput
-          type="tel"
-          name="phone"
-          autoComplete="tel"
-          label={t('cashContract.phoneNumber')}
-          value={values.phone_number ?? ''}
-          onChange={(value) =>
-            setValues((current) => ({
-              ...current,
-              phone_number: isPhoneNumber(value) ? value : current.phone_number ?? '',
-            }))
-          }
-        />
-      )}
+      <TextInput
+        type="tel"
+        name="phone"
+        autoComplete="tel"
+        label={t('cashContract.phoneNumber')}
+        value={values.phone_number ?? ''}
+        onChange={(value) =>
+          setValues((current) => ({
+            ...current,
+            phone_number: isPhoneNumber(value) ? value : current.phone_number ?? '',
+          }))
+        }
+      />
       <TextInput
         label={t('cashContract.passportSerial')}
         value={values.passport_serial ?? ''}
