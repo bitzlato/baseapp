@@ -23773,15 +23773,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["qr.js", [\
-        ["npm:0.0.0", {\
-          "packageLocation": "./.yarn/cache/qr.js-npm-0.0.0-eea89f459b-5ac6c39396.zip/node_modules/qr.js/",\
-          "packageDependencies": [\
-            ["qr.js", "npm:0.0.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["qrcode-terminal", [\
         ["npm:0.12.0", {\
           "packageLocation": "./.yarn/cache/qrcode-terminal-npm-0.12.0-f81f8a6a67-51638d11d0.zip/node_modules/qrcode-terminal/",\
@@ -23792,20 +23783,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["qrcode.react", [\
-        ["npm:0.9.3", {\
-          "packageLocation": "./.yarn/cache/qrcode.react-npm-0.9.3-e9b5f9efa5-174710c8dc.zip/node_modules/qrcode.react/",\
+        ["npm:3.1.0", {\
+          "packageLocation": "./.yarn/cache/qrcode.react-npm-3.1.0-068f53fc24-94a2942ecf.zip/node_modules/qrcode.react/",\
           "packageDependencies": [\
-            ["qrcode.react", "npm:0.9.3"]\
+            ["qrcode.react", "npm:3.1.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.9.3", {\
-          "packageLocation": "./.yarn/__virtual__/qrcode.react-virtual-40c1ad6fb1/0/cache/qrcode.react-npm-0.9.3-e9b5f9efa5-174710c8dc.zip/node_modules/qrcode.react/",\
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/qrcode.react-virtual-781a339d20/0/cache/qrcode.react-npm-3.1.0-068f53fc24-94a2942ecf.zip/node_modules/qrcode.react/",\
           "packageDependencies": [\
-            ["qrcode.react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.9.3"],\
+            ["qrcode.react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.1.0"],\
             ["@types/react", "npm:17.0.52"],\
-            ["prop-types", "npm:15.7.2"],\
-            ["qr.js", "npm:0.0.0"],\
             ["react", "npm:17.0.2"]\
           ],\
           "packagePeers": [\
@@ -29739,7 +29728,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss-nested", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.0.6"],\
             ["postcss-preset-env", "npm:6.7.0"],\
             ["prettier", "npm:2.4.1"],\
-            ["qrcode.react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.9.3"],\
+            ["qrcode.react", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.1.0"],\
             ["react", "npm:17.0.2"],\
             ["react-bootstrap", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.4.3"],\
             ["react-color", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.19.3"],\
