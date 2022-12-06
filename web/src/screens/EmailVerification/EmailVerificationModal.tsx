@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
+import Bugsnag from '@bugsnag/js';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from 'web/src/components/ui/Box';
 import { Button } from 'web/src/components/ui/Button';
@@ -41,23 +42,35 @@ export const EmailVerificationModal: FC = () => {
   const user = useSelector(selectUserInfo);
   const isMobileDevice = useSelector(selectMobileDeviceState);
 
+  const isCaptchaEnabled = captchaType() === 'recaptcha' || captchaType() === 'geetest';
+
   const confirmCode = useConfirmCode();
+  const generateCode = useCallback(() => {
+    if (!user?.email) {
+      Bugsnag.notify('Email empty in EmailVerificationModal', (event) => {
+        // eslint-disable-next-line no-param-reassign
+        event.context = 'screens/EmailVerificationModal';
+        event.addMetadata('args', { user, email: user?.email });
+      });
+    }
+
+    setStep('sent');
+    dispatch(
+      emailVerificationFetch({
+        email: user.email,
+        ...(isCaptchaEnabled && {
+          captcha_response: captchaResponse,
+        }),
+      }),
+    );
+    dispatch(resetCaptchaState());
+  }, [captchaResponse, dispatch, isCaptchaEnabled, user]);
 
   useEffect(() => {
     if (reCaptchaSuccess) {
-      setStep('sent');
-      dispatch(
-        emailVerificationFetch({
-          email: user.email,
-          ...((captchaType() === 'recaptcha' || captchaType() === 'geetest') && {
-            captcha_response: captchaResponse,
-          }),
-        }),
-      );
-      dispatch(resetCaptchaState());
+      generateCode();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reCaptchaSuccess]);
+  }, [generateCode, reCaptchaSuccess]);
 
   useEffect(() => {
     if (resendSuccess) {
@@ -72,7 +85,11 @@ export const EmailVerificationModal: FC = () => {
   }
 
   const handleResend = () => {
-    setStep('captcha');
+    if (isCaptchaEnabled) {
+      setStep('captcha');
+    } else {
+      generateCode();
+    }
   };
 
   const handleConfirm = async () => {
@@ -171,7 +188,7 @@ export const EmailVerificationModal: FC = () => {
           <Box mt="5x">{confirmEl}</Box>
           <Box mt="8x" display="flex" flexDirection="column" gap="4x">
             <Text textAlign="center">
-              {t('verification.email.resend', { email: <b>{user.email}</b> })}
+              {t('verification.email.resend', { email: <strong>{user.email}</strong> })}
             </Text>
             {resendEl}
             {captchaEl}
