@@ -518,5 +518,7 @@
   "walletsStat.withdrawalFee": "Комиссия",
   "walletsStat.withdrawalQueue": "Очередь выводов",
   "yesterday": "Вчера",
-  "yyyy": "гггг"
+  "yyyy": "гггг",
+  "cashContractFill": "Чтобы создать договор купли-продажи, пожалуйста, заполните данные",
+  "cashContractFillProfile": "в профиле"
 }

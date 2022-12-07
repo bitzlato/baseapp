@@ -6,10 +6,7 @@ import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
 import { Box } from 'web/src/components/ui/Box';
 import { Stack } from 'web/src/components/ui/Stack';
 import { Text } from 'web/src/components/ui/Text';
-import {
-  useFetchP2PCashContract,
-  useFetchP2PTradeInvoice,
-} from 'web/src/hooks/data/useFetchP2PTrades';
+import { useFetchP2PTradeInvoice } from 'web/src/hooks/data/useFetchP2PTrades';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import { AdsTableColumn } from 'web/src/components/shared/AdsTable/AdsTableColumn';
@@ -17,6 +14,8 @@ import { AdsTableRow } from 'web/src/components/shared/AdsTable/AdsTable';
 import { localeDate } from 'web/src/helpers';
 import { getLinkToP2PUser } from 'web/src/components/shared/Ads/getLinkToP2PUser';
 import { RUB_CASH_AD_PAYMETHOD_ID } from 'web/src/constants';
+import { useCashContractDownload } from 'web/src/components/shared/Trade/useCashContractDownload';
+import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
 import { TradeStatusStepper } from './TradeStatusStepper';
 import * as s from './TradesListItem.css';
 
@@ -46,8 +45,9 @@ export const TradesListItem = ({ trade }: Props) => {
   const { user, lang, isMobileDevice } = useAppContext();
   const { t, history, Link } = useAdapterContext();
   const [fetchInvoice] = useFetchP2PTradeInvoice();
-  const [fetchCashContract] = useFetchP2PCashContract();
   const isPurchase = trade.type === 'purchase';
+  const isCashContractsEnabled = useFeatureEnabled('cash_contracts');
+  const cashContractDownload = useCashContractDownload({ trade });
   const date = localeDate(
     trade.date,
     'date',
@@ -150,17 +150,8 @@ export const TradesListItem = ({ trade }: Props) => {
   };
 
   const handleCashContractDownload: MouseEventHandler<HTMLElement> = async (event) => {
-    if (trade.paymethod.id !== RUB_CASH_AD_PAYMETHOD_ID) {
-      return;
-    }
-
     event.stopPropagation();
-
-    const b64Data = await fetchCashContract(trade.id);
-
-    if (b64Data) {
-      downloadFile(b64Data, `Bitzlato trade ${trade.id} cash contract.doc`, 'Download PDF file');
-    }
+    cashContractDownload();
   };
 
   const invoice = trade.status === 'confirm_payment' && (
@@ -179,7 +170,7 @@ export const TradesListItem = ({ trade }: Props) => {
       >
         {t('Download invoice')}
       </Box>
-      {trade.paymethod.id === RUB_CASH_AD_PAYMETHOD_ID && (
+      {isCashContractsEnabled && trade.paymethod.id === RUB_CASH_AD_PAYMETHOD_ID && (
         <Box
           as="button"
           type="button"
