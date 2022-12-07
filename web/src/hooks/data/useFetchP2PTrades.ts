@@ -7,6 +7,7 @@ import { Trade, TradeAmountType, TradeSource } from 'web/src/modules/p2p/trade.t
 import { AdvertType, P2PList, PaymethodSource } from 'web/src/modules/p2p/types';
 import { useP2PFiatCurrencies } from 'web/src/hooks/useP2PFiatCurrencies';
 import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
+import { getFilenameFromContentDisposition } from 'web/src/helpers/getFilenameFromContentDisposition';
 import { useFetch } from './useFetch';
 
 export type TradesParams = {
@@ -99,7 +100,8 @@ export const useFetchP2PCashContract = () => {
       credentials: 'include',
     });
     const data = await response.arrayBuffer();
+    const filename = getFilenameFromContentDisposition(response.headers.get('Content-Disposition'));
 
-    return Buffer.from(data).toString('base64');
+    return { data: Buffer.from(data).toString('base64'), filename };
   });
 };

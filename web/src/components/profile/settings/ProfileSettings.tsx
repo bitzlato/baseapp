@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import { Container } from 'web/src/components/ui/Container';
 import { Card } from 'web/src/components/Card/Card';
 import { Box } from 'web/src/components/ui/Box';
@@ -11,6 +11,7 @@ import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/s
 import { useUpdateProfile } from 'web/src/hooks/mutations/useUpdateProfile';
 import { useSaveSettings } from 'web/src/hooks/mutations/useSaveSettings';
 import { NotificationSettingStatus } from 'web/src/modules/user/profile/types';
+import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
 import * as s from './ProfileSettings.css';
 import { BaseCurrencyField } from './BaseCurrencyField';
 import { TimezoneField } from './TimezoneField';
@@ -30,9 +31,16 @@ const notificationsSettings = [
 export const ProfileSettings: FC = () => {
   const t = useT();
   const isMobileDevice = useSelector(selectMobileDeviceState);
+  const isCashContractsEnabled = useFeatureEnabled('cash_contracts');
   const user = useSelector(selectUserInfo);
   const updateProfile = useUpdateProfile();
   const saveSettings = useSaveSettings();
+
+  useEffect(() => {
+    if (user.bitzlato_user !== null && window.location.hash.length > 0) {
+      window.location.href = window.location.hash;
+    }
+  }, [user.bitzlato_user]);
 
   const handleChangeBaseCurrency = (currency: string) => {
     updateProfile({ currency });
@@ -175,25 +183,28 @@ export const ProfileSettings: FC = () => {
         </div>
       </Box>
 
-      <Box
-        className={s.block}
-        display="flex"
-        justifyContent="space-between"
-        py="8x"
-        px="5x"
-        borderBottomColor="modalHeaderBorderBottom"
-      >
-        <Box className={s.label} mb="6x">
-          <Text as="p" variant="label" fontWeight="strong">
-            {t('cashContractProfile')}
-          </Text>
+      {isCashContractsEnabled && (
+        <Box
+          id="cash-contract"
+          className={s.block}
+          display="flex"
+          justifyContent="space-between"
+          py="8x"
+          px="5x"
+          borderBottomColor="modalHeaderBorderBottom"
+        >
+          <Box className={s.label} mb="6x">
+            <Text as="p" variant="label" fontWeight="strong">
+              {t('cashContractProfile')}
+            </Text>
+          </Box>
+          <div className={s.controls}>
+            <Stack direction="column" marginBottom="8x">
+              <CashContractForm profiles={user.profiles} />
+            </Stack>
+          </div>
         </Box>
-        <div className={s.controls}>
-          <Stack direction="column" marginBottom="8x">
-            <CashContractForm profiles={user.profiles} />
-          </Stack>
-        </div>
-      </Box>
+      )}
     </Card>
   );
 
