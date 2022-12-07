@@ -38,6 +38,7 @@ type Props = {
   action: string;
   description: string;
   details: JSX.Element;
+  cashContract: JSX.Element | null;
 };
 
 export const MobileTradeState: FC<Props> = ({
@@ -57,6 +58,7 @@ export const MobileTradeState: FC<Props> = ({
   action,
   description,
   details,
+  cashContract,
 }) => {
   const { t } = useTradeContext();
   const { trade } = useTradeContext();
@@ -200,6 +202,12 @@ export const MobileTradeState: FC<Props> = ({
           </Box>
         )}
       </Box>
+
+      {cashContract ? (
+        <Box px="5x" pb="6x">
+          {cashContract}
+        </Box>
+      ) : null}
     </>
   );
 };

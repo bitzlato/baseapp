@@ -65,22 +65,22 @@ export const CashContractForm = ({ profiles }: Props) => {
   return (
     <Box display="flex" flexDirection="column" gap="4x">
       <TextInput
-        label={t('cashContract.lastName')}
+        label={t('Last name')}
         value={values.last_name ?? ''}
         onChange={(value) => setValues((current) => ({ ...current, last_name: value }))}
       />
       <TextInput
-        label={t('cashContract.firstName')}
+        label={t('First name')}
         value={values.first_name ?? ''}
         onChange={(value) => setValues((current) => ({ ...current, first_name: value }))}
       />
       <TextInput
-        label={t('cashContract.middleName')}
+        label={t('Middle name')}
         value={values.middle_name ?? ''}
         onChange={(value) => setValues((current) => ({ ...current, middle_name: value }))}
       />
       <InputDate
-        label={t('cashContract.dob')}
+        label={t('Date of birth')}
         maxDate={TODAY}
         value={values.dob ? new Date(values.dob) : null}
         onChange={(value: Date) => {
@@ -88,12 +88,12 @@ export const CashContractForm = ({ profiles }: Props) => {
         }}
       />
       <TextInput
-        label={t('cashContract.city')}
+        label={t('City')}
         value={values.city ?? ''}
         onChange={(value) => setValues((current) => ({ ...current, city: value }))}
       />
       <TextInput
-        label={t('cashContract.address')}
+        label={t('Address')}
         value={values.address ?? ''}
         onChange={(value) => setValues((current) => ({ ...current, address: value }))}
       />
@@ -101,7 +101,7 @@ export const CashContractForm = ({ profiles }: Props) => {
         type="tel"
         name="phone"
         autoComplete="tel"
-        label={t('cashContract.phoneNumber')}
+        label={t('Phone number')}
         value={values.phone_number ?? ''}
         onChange={(value) =>
           setValues((current) => ({
@@ -111,22 +111,22 @@ export const CashContractForm = ({ profiles }: Props) => {
         }
       />
       <TextInput
-        label={t('cashContract.passportSerial')}
+        label={t('Passport (serial number)')}
         value={values.passport_serial ?? ''}
         onChange={(value) => setValues((current) => ({ ...current, passport_serial: value }))}
       />
       <TextInput
-        label={t('cashContract.passportNumber')}
+        label={t('Passport (number)')}
         value={values.passport_number ?? ''}
         onChange={(value) => setValues((current) => ({ ...current, passport_number: value }))}
       />
       <TextInput
-        label={t('cashContract.passportIssueBy')}
+        label={t('Passport (issue by)')}
         value={values.passport_issue_by ?? ''}
         onChange={(value) => setValues((current) => ({ ...current, passport_issue_by: value }))}
       />
       <InputDate
-        label={t('cashContract.passportIssueDate')}
+        label={t('Passport (issue date)')}
         maxDate={TODAY}
         value={values.passport_issue_date ? new Date(values.passport_issue_date) : null}
         onChange={(value: Date) => {
@@ -137,7 +137,7 @@ export const CashContractForm = ({ profiles }: Props) => {
         }}
       />
       <TextInput
-        label={t('cashContract.passportDivisionCode')}
+        label={t('Passport (division code)')}
         value={values.passport_division_code ?? ''}
         onChange={(value) =>
           setValues((current) => ({ ...current, passport_division_code: value }))
