@@ -1,5 +1,5 @@
 import { p2pUrl } from 'web/src/api';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { TradeInfo } from 'web/src/components/shared/Trade/types';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { useFetch } from './useFetch';

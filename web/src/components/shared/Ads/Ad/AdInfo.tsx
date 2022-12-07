@@ -6,8 +6,8 @@ import { P2PFiatFormat } from 'web/src/components/money/P2PFiatFormat';
 import { MoneyFormat } from 'web/src/components/MoneyFormat/MoneyFormat';
 import { Money } from '@bitzlato/money-js';
 import { P2PCryptoCurrency } from 'web/src/types/currencies.types';
-import { useAppContext } from 'web/src/components/app/AppContext';
 import { UserInfo } from 'web/src/modules/p2p/user.types';
+import { useUser } from 'web/src/components/app/UserContext';
 import { AdStat } from './AdStat';
 
 type Props = {
@@ -30,7 +30,7 @@ export const AdInfo: FC<Props> = ({
   owner,
 }) => {
   const { t } = useAdapterContext();
-  const { user } = useAppContext();
+  const user = useUser();
 
   const isLogged = user !== undefined;
   const showBitzlatoFee = isLogged ? user?.username !== owner.name : false;

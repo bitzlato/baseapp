@@ -1,5 +1,5 @@
 import { p2pUrl } from 'web/src/api/config';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { AdvertParams } from 'web/src/modules/p2p/types';
 import { useFetch } from './useFetch';

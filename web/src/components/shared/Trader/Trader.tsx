@@ -21,6 +21,7 @@ import { useSWRConfig } from 'swr';
 import { getP2PUserChatEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PUserChat';
 import { getP2PUserChatUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PUserChatUnread';
 import { getDiffByDays } from 'web/src/helpers/dateDiff';
+import { useUser } from 'web/src/components/app/UserContext';
 import * as s from './Trader.css';
 
 interface UrlParams {
@@ -29,7 +30,8 @@ interface UrlParams {
 
 export const Trader: FC = () => {
   const { mutate } = useSWRConfig();
-  const { lang, isMobileDevice, user } = useAppContext();
+  const user = useUser();
+  const { lang, isMobileDevice } = useAppContext();
   const { params, t } = useAdapterContext<UrlParams>();
   const { data = [], error } = useTraderAds({ publicName: params.name, lang });
   const traderInfoSWR = useFetchTraderInfo(params.name);

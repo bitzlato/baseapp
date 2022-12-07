@@ -15,7 +15,7 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/u
 import { useStateWithDeps } from 'web/src/hooks/useStateWithDeps';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 import { useP2PWalletOptions } from 'web/src/hooks/useP2PWalletOptions';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { CryptoCurrencyOption } from 'web/src/components/shared/Ads/CryptoCurrencyOption';
 
 const INPUT_DEBOUNCE = 500;

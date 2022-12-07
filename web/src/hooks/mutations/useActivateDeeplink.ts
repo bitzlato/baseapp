@@ -1,6 +1,6 @@
 import useMutation from 'use-mutation';
 import { p2pUrl } from 'web/src/api/config';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { fetchJson } from 'web/src/helpers/fetch';
 
 export type DeeplinkResultParams = {

@@ -9,7 +9,7 @@ import {
   P2PList,
 } from 'web/src/modules/p2p/types';
 import { Money } from '@bitzlato/money-js';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { useP2PCryptoCurrencies } from 'web/src/hooks/useP2PCryptoCurrencies';
 import { useFetch } from './useFetch';
 import { useP2PFiatCurrencies } from '../useP2PFiatCurrencies';

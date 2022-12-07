@@ -1,6 +1,6 @@
 import { p2pUrl } from 'web/src/api/config';
 import { fetchJson, fetchWithCreds } from 'web/src/helpers/fetch';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { UserInfo } from 'web/src/modules/p2p/user.types';
 import { useFetch } from './useFetch';
 

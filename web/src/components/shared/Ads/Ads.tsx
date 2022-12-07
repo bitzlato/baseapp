@@ -24,6 +24,7 @@ import { useAppContext } from 'web/src/components/app/AppContext';
 import { p2pUrl } from 'web/src/api/config';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { Spinner } from 'web/src/components/ui/Spinner';
+import { useUser } from 'web/src/components/app/UserContext';
 import { OnlineStatusByLastActivity } from '../../ui/OnlineStatus';
 import { ConfirmRateChangeModal } from './Ad/RateDiffModal';
 import { getLinkToP2PUser } from './getLinkToP2PUser';
@@ -39,7 +40,8 @@ interface AdExchangeConfirm {
 
 const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
   const { t, history } = useAdapterContext();
-  const { isMobileDevice, handleFetchError, user } = useAppContext();
+  const user = useUser();
+  const { isMobileDevice, handleFetchError } = useAppContext();
   const [active, setActive] = useState(false);
   const [confirm, setConfirm] = useState<AdExchangeConfirm | undefined>(undefined);
 
@@ -125,7 +127,8 @@ export const Ads: FC<Props> = ({
   onRefresh,
 }) => {
   const { t, Link } = useAdapterContext();
-  const { isMobileDevice, user } = useAppContext();
+  const user = useUser();
+  const { isMobileDevice } = useAppContext();
 
   const buttonRefresh = (
     <Button variant="text" color="clarified" size="small" onClick={onRefresh}>

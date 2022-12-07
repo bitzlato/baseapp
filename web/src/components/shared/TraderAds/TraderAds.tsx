@@ -20,6 +20,7 @@ import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { useAppContext } from 'web/src/components/app/AppContext';
 import FilterIcon from 'web/src/assets/svg/FilterIcon.svg';
 import { Card, CardHeader } from 'web/src/components/ui/Card';
+import { useUser } from 'web/src/components/app/UserContext';
 import { TraderAdsEmpty } from './TraderAdsEmpty';
 
 interface Props {
@@ -33,7 +34,8 @@ const TAB_SALE = 'sale' as const;
 type Tab = typeof TAB_ALL | typeof TAB_PURCHASE | typeof TAB_SALE;
 
 export const TraderAds: FC<Props> = ({ data, isLoading }) => {
-  const { isMobileDevice, user } = useAppContext();
+  const user = useUser();
+  const { isMobileDevice } = useAppContext();
   const { t, Link } = useAdapterContext();
   const [tab, setTab] = useState<Tab>(TAB_ALL);
   const [isOnlyActive, setIsOnlyActive] = useState(false);

@@ -8,7 +8,7 @@ import { isValidCode, OTP_TIMEOUT } from 'web/src/helpers/codeValidation';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'web/src/components/ui/Modal';
 import { AutoFocusInside } from 'react-focus-on';
 import { useSharedT } from 'web/src/components/shared/Adapter';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 
 interface Props {
   buttonText?: string | undefined;

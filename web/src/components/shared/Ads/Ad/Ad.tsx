@@ -34,6 +34,7 @@ import {
 import { Money } from '@bitzlato/money-js';
 import { Breadcrumbs, BreadcrumbsItem } from 'web/src/components/ui/Breadcrumbs';
 import { AdsType } from 'web/src/components/shared/Trade/types';
+import { useUser } from 'web/src/components/app/UserContext';
 import { ConfirmDangerRateModal } from './RateDiffModal';
 import { ActionBlock } from './ActionBlock';
 import { AdTrader } from './AdTrader';
@@ -50,7 +51,8 @@ interface UrlParams {
 const DEFERRED_INTERVAL = 300;
 
 export const Ad: FC = () => {
-  const { lang, isMobileDevice, user } = useAppContext();
+  const user = useUser();
+  const { lang, isMobileDevice } = useAppContext();
   const isLogged = user !== undefined;
 
   const [from, setFrom] = useState('');

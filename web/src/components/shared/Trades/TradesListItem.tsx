@@ -16,6 +16,7 @@ import { getLinkToP2PUser } from 'web/src/components/shared/Ads/getLinkToP2PUser
 import { RUB_CASH_AD_PAYMETHOD_ID } from 'web/src/constants';
 import { useCashContractDownload } from 'web/src/components/shared/Trade/useCashContractDownload';
 import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
+import { useUser } from 'web/src/components/app/UserContext';
 import { TradeStatusStepper } from './TradeStatusStepper';
 import * as s from './TradesListItem.css';
 
@@ -42,7 +43,8 @@ interface Props {
 }
 
 export const TradesListItem = ({ trade }: Props) => {
-  const { user, lang, isMobileDevice } = useAppContext();
+  const user = useUser();
+  const { lang, isMobileDevice } = useAppContext();
   const { t, history, Link } = useAdapterContext();
   const [fetchInvoice] = useFetchP2PTradeInvoice();
   const isPurchase = trade.type === 'purchase';
