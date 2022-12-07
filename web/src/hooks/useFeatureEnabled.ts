@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { useFetchPublicFeatures } from 'web/src/hooks/data/barong/useFetchPublicFeatures';
 import { FeatureMap } from 'web/src/types/featuresToggling.types';
 

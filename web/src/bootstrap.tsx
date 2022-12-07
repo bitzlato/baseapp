@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as ReactDOM from 'react-dom';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { Provider } from 'react-redux';
+import { UserContextProvider } from 'web/src/components/app/UserContextProvider';
 
 import { App } from './App';
 import { AppContextProvider } from './components/app/AppContextProvider';
@@ -33,9 +34,11 @@ rangerMiddleware.run(rangerSagas);
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppContextProvider>
-      <App />
-    </AppContextProvider>
+    <UserContextProvider>
+      <AppContextProvider>
+        <App />
+      </AppContextProvider>
+    </UserContextProvider>
   </Provider>,
   document.getElementById('root') as HTMLElement,
 );

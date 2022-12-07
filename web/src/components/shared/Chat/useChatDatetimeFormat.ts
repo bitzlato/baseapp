@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useAppContext } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { localeDate } from 'web/src/helpers/localeDate';
 import { formatDistanceToNow } from 'web/src/helpers/relativeTime';
 
 const SHOW_RELATIVE_TIME_INTERVAL = 60 * 60 * 24 * 1000; // 24 hours
 
 export const useChatDatetimeFormat = (time: number) => {
-  const { user, lang: locale } = useAppContext();
+  const user = useUser();
+  const { lang: locale } = useAppContext();
   const [, forceRerender] = useState({});
 
   const timezone = user?.bitzlato_user?.user_profile.timezone ?? undefined;

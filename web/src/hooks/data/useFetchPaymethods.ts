@@ -1,5 +1,5 @@
 import { p2pUrl } from 'web/src/api/config';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { P2PList, PaymethodInfo, PaymethodsParams } from 'web/src/modules/p2p/types';

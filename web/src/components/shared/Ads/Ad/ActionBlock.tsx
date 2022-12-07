@@ -5,6 +5,7 @@ import { Text } from 'web/src/components/ui/Text';
 import WarningTriangleIcon from 'web/src/assets/svg/WarningTriangleIcon.svg';
 import { Button } from 'web/src/components/ui/Button';
 import { useAdapterContext } from 'web/src/components/shared/Adapter';
+import { useUser } from 'web/src/components/app/UserContext';
 
 const WarningBlockMobile: FC = ({ children }) => (
   <Box
@@ -56,7 +57,8 @@ export const ActionBlock: FC<Props> = ({
   isBuy,
   handleClickStart,
 }) => {
-  const { isMobileDevice, user } = useAppContext();
+  const user = useUser();
+  const { isMobileDevice } = useAppContext();
   const { t, history } = useAdapterContext();
 
   const handleSignIn = () => history.push('/signin'.concat(`?back=${history.location.pathname}`));

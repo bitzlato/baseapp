@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { Container } from 'web/src/components/ui/Container';
 import { Box } from 'web/src/components/ui/Box';
 import { Pagination } from 'web/src/components/ui/Pagination';

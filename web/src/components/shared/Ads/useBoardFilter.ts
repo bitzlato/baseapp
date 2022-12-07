@@ -12,6 +12,7 @@ import { P2PCryptoCurrencySource } from 'web/src/modules/p2p/wallet-types';
 import { useP2PSetLastFilter } from 'web/src/hooks/mutations/useP2PSetLastFilter';
 import { pick } from 'web/src/helpers/pick';
 import { P2PFiatCurrencies } from 'web/src/types/currencies.types';
+import { useUser } from 'web/src/components/app/UserContext';
 import { DEFAULT_FILTER } from './Filter';
 
 export const URL_PARAMS: UrlParams<Pick<AdvertParams, 'skip' | 'limit'>> = {
@@ -111,7 +112,8 @@ export const useBoardFilter = ({
   cryptoCurrencies,
   lastFilter,
 }: UseBoardFilterArg) => {
-  const { lang, user } = useAppContext();
+  const user = useUser();
+  const { lang } = useAppContext();
   const {
     history,
     params: { filter },

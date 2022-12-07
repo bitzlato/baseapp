@@ -6,7 +6,6 @@ import {
   selectCurrentColorTheme,
   selectCurrentLanguage,
   selectMobileDeviceState,
-  selectUserInfo,
   selectUserLoggedIn,
 } from 'web/src/modules';
 import { AppContext } from './AppContext';
@@ -14,7 +13,6 @@ import { AppContext } from './AppContext';
 export const AppContextProvider: FC = ({ children }) => {
   const theme = useSelector(selectCurrentColorTheme);
   const lang = useSelector(selectCurrentLanguage);
-  const user = useSelector(selectUserInfo);
   const userLoggedIn = useSelector(selectUserLoggedIn);
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const dispatch = useDispatch();
@@ -23,12 +21,11 @@ export const AppContextProvider: FC = ({ children }) => {
     () => ({
       theme,
       lang,
-      user: userLoggedIn ? user : undefined,
       isMobileDevice,
       notificationSubscribe,
       handleFetchError: (error: unknown) => dispatch(alertFetchError(error)),
     }),
-    [theme, lang, userLoggedIn, user, isMobileDevice, notificationSubscribe, dispatch],
+    [theme, lang, isMobileDevice, notificationSubscribe, dispatch],
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

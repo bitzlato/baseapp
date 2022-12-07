@@ -5,7 +5,8 @@ import { Spinner } from 'web/src/components/ui/Spinner';
 import { TradeStatus } from 'web/src/components/shared/Trade/types';
 import { Divider } from 'web/src/components/shared/Divider';
 import { useTradeContext } from 'web/src/components/shared/Trade/TradeContext';
-import { useAppContext, useLanguage, useUser } from 'web/src/components/app/AppContext';
+import { useAppContext, useLanguage } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { Stepper } from 'web/src/components/Stepper/Stepper';
 import { Text } from 'src/components/ui/Text';
 

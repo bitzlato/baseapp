@@ -17,6 +17,7 @@ import { writeTextToClipboard } from 'web/src/helpers/writeTextToClipboard';
 import { CollapsibleText } from 'web/src/components/shared/CollapsibleText/CollapsibleText';
 import { RUB_CASH_AD_PAYMETHOD_ID } from 'web/src/constants';
 import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
+import { useUser } from 'web/src/components/app/UserContext';
 import { TradeFeedback } from './TradeFeedback';
 import { useCashContractDownload } from './useCashContractDownload';
 
@@ -25,7 +26,8 @@ const MINUTES_TILL_TIMEOUT = 10;
 
 export const TradeState: FC = () => {
   const { t, formattedTradeValues } = useTradeContext();
-  const { isMobileDevice, user } = useAppContext();
+  const { isMobileDevice } = useAppContext();
+  const user = useUser();
 
   const { trade, toggleModal, handleTradeTimeout, handleTradeFeedback } = useTradeContext();
   const tradeAction = useTradeAction();

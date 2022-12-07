@@ -4,11 +4,13 @@ import { useT } from 'web/src/hooks/useT';
 import { Container } from 'web/src/components/ui/Container';
 import { Card } from 'web/src/components/Card/Card';
 import { useAppContext } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { MergeWithTelegramControls } from './MergeWithTelegramControls';
 
 export const MergeWithTelegram: FC = () => {
   const t = useT();
-  const { user, isMobileDevice } = useAppContext();
+  const user = useUser();
+  const { isMobileDevice } = useAppContext();
 
   if (!user) {
     return null;

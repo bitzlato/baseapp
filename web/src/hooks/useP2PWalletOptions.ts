@@ -1,6 +1,6 @@
 import { Money } from '@bitzlato/money-js';
 import { useMemo } from 'react';
-import { useUser } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { createMoney } from 'web/src/helpers/money';
 import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/p2p/useFetchP2PCryptoCurrencies';
 import { useFetchP2PWalletsV2 } from 'web/src/hooks/data/p2p/useFetchP2PWalletsV2';
