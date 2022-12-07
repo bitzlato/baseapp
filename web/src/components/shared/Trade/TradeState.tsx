@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from 'web/src/components/ui/Button';
 import { Box } from 'web/src/components/ui/Box';
 import { AdsType, TradeStatus } from 'web/src/components/shared/Trade/types';
@@ -14,20 +15,26 @@ import { IconButton } from 'web/src/components/IconButton/IconButton';
 import { CopyIcon } from 'src/assets/icons/CopyIcon';
 import { writeTextToClipboard } from 'web/src/helpers/writeTextToClipboard';
 import { CollapsibleText } from 'web/src/components/shared/CollapsibleText/CollapsibleText';
+import { RUB_CASH_AD_PAYMETHOD_ID } from 'web/src/constants';
+import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
 import { TradeFeedback } from './TradeFeedback';
+import { useCashContractDownload } from './useCashContractDownload';
 
 const MINUTES_TO_ADD = 10;
 const MINUTES_TILL_TIMEOUT = 10;
 
 export const TradeState: FC = () => {
   const { t, formattedTradeValues } = useTradeContext();
-  const { isMobileDevice } = useAppContext();
+  const { isMobileDevice, user } = useAppContext();
 
   const { trade, toggleModal, handleTradeTimeout, handleTradeFeedback } = useTradeContext();
   const tradeAction = useTradeAction();
   const { id, partner, type } = trade;
 
   const { getCryptoCurrency } = useP2PCryptoCurrencies();
+  const handleCashContractDownload = useCashContractDownload({ trade });
+  const isCashContractsEnabled = useFeatureEnabled('cash_contracts');
+  const isCanDownloadCashContract = Boolean(user?.profiles && user.profiles.length > 0);
 
   const cryptocurrency = getCryptoCurrency(trade.cryptocurrency.code);
   const cryptoMoney = createMoney(trade.cryptocurrency.amount, cryptocurrency);
@@ -188,6 +195,37 @@ export const TradeState: FC = () => {
     });
   })();
 
+  const cashContract =
+    isCashContractsEnabled &&
+    ['confirm_trade', 'payment', 'confirm_payment', 'dispute'].includes(trade.status) &&
+    trade.paymethod.id === RUB_CASH_AD_PAYMETHOD_ID ? (
+      <Box mt="6x">
+        <Button
+          size="small"
+          disabled={!isCanDownloadCashContract}
+          onClick={handleCashContractDownload}
+        >
+          {t('Download cash contract')}
+        </Button>
+        {!isCanDownloadCashContract && (
+          <Box mt="2x">
+            <Text as="span" color="tradeMainComponentTitle" fontSize="caption">
+              {t('cashContractFill')}{' '}
+              <Box
+                as={Link}
+                to="/profile#cash-contract"
+                textDecoration="underline"
+                whiteSpace="nowrap"
+                color={{ default: 'tradeMainComponentTitle', hover: 'textHighlighted' }}
+              >
+                {t('cashContractFillProfile')}
+              </Box>
+            </Text>
+          </Box>
+        )}
+      </Box>
+    ) : null;
+
   const details = (
     <Box
       display="flex"
@@ -244,6 +282,7 @@ export const TradeState: FC = () => {
         action={action}
         description={description}
         details={details}
+        cashContract={cashContract}
       />
     );
   }
@@ -356,6 +395,8 @@ export const TradeState: FC = () => {
           )}
         </Box>
       )}
+
+      {cashContract}
     </Box>
   );
 };

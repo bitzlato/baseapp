@@ -86,4 +86,4 @@ export const colors = {
 
 export const FIXED_VOL_PRECISION = 2;
 
-export const RUB_CASH_AD_PAYMETHOD_ID = 158;
+export const RUB_CASH_AD_PAYMETHOD_ID = 159; // 158;

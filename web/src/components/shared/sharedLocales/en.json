@@ -521,5 +521,7 @@
   "walletsStat.withdrawalFee": "Withdrawal fee",
   "walletsStat.withdrawalQueue": "Withdrawal queue",
   "yesterday": "Yesterday",
-  "yyyy": "yyyy"
+  "yyyy": "yyyy",
+  "cashContractFill": "To create a cash contract, please fill out the data",
+  "cashContractFillProfile": "in profile"
 }
