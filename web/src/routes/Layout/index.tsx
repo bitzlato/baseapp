@@ -475,6 +475,7 @@ class LayoutComponent extends Component<LayoutProps, LayoutState> {
         path={['/p2p/:filter?', '/:lang/p2p/:filter?']}
         component={BoardScreen}
       />,
+      <Route path="/docs" component={DocumentationScreen as any} />,
       // and default fallback
       <Route key="catchall" path="**">
         <Redirect to="/trading/" />
@@ -641,7 +642,6 @@ class LayoutComponent extends Component<LayoutProps, LayoutState> {
             process.env.REACT_APP_RELEASE_STAGE === 'development') && (
             <Route path="/docs/components" component={ComponentsScreen} />
           )}
-          <Route path="/docs" component={DocumentationScreen as any} />
           <Route path="/restriction" component={RestrictedScreen as any} />
           <Route path="/maintenance" component={MaintenanceScreen as any} />
           <Route exact path="/trading/:market?" component={TradingScreen as any} />
