@@ -59,8 +59,8 @@
   "Disable all": "Disable all",
   "Do you want to continue?": "Do you want to continue?",
   "Documentation": "Documentation",
-  "Download invoice": "Download invoice",
   "Download cash contract": "Download cash contract",
+  "Download invoice": "Download invoice",
   "Edit": "Edit",
   "Enable": "Enable",
   "Enable all": "Enable all",
@@ -204,6 +204,8 @@
   "alerts.not_verified.please": "Please",
   "alerts.not_verified.verification": "verify your account",
   "alerts.warning": "Warning",
+  "cashContractFill": "To create a cash contract, please fill out the data",
+  "cashContractFillProfile": "in profile",
   "copyright": "Bitzlato © All rights reserved.",
   "createAd.chooseCryptocurrency": "Select cryptocurrency",
   "createAd.chooseCryptocurrency.label.purchase": "Select the cryptocurrency you want to buy",
@@ -521,7 +523,5 @@
   "walletsStat.withdrawalFee": "Withdrawal fee",
   "walletsStat.withdrawalQueue": "Withdrawal queue",
   "yesterday": "Yesterday",
-  "yyyy": "yyyy",
-  "cashContractFill": "To create a cash contract, please fill out the data",
-  "cashContractFillProfile": "in profile"
+  "yyyy": "yyyy"
 }
