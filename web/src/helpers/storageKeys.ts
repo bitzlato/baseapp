@@ -5,7 +5,7 @@ export const enum StorageKeys {
   oldTheme = 'colorTheme',
   lang = 'lang_code',
   referral = 'referral_code',
-  lastAction = 'lastAction',
+  lastActionAt = 'lastAction',
   orderType = 'orderType',
   lastMergeToken = 'lastMergeToken',
   userAdsFilter = 'userAdsFilterCryptocurrency',
