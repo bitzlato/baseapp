@@ -9,6 +9,15 @@ import { useFetchPublicFeatures } from 'web/src/hooks/data/barong/useFetchPublic
 import { Adapter } from 'web/src/components/shared/Adapter';
 import { Link, useHistory } from 'react-router-dom';
 import { useNewTradeNotifyWithSound } from 'web/src/hooks/useNewTradeNotifySound';
+import { useEffect } from 'react';
+import { toggleColorTheme } from 'web/src/helpers/toggleColorTheme';
+import { WalletsFetching } from 'web/src/components/app/WalletsFetching';
+import { EmailVerification } from 'web/src/components/app/EmailVerification';
+import { Freezed } from 'web/src/components/app/Freezed';
+import { SecurityVerification } from 'web/src/components/app/SecurityVerification';
+import { useFetchUser } from 'web/src/hooks/useFetchUser';
+import { ExpiredSession } from 'web/src/components/app/ExpiredSession';
+import { ListensForLogin } from 'web/src/components/app/ListenLogout';
 import { useSetMobileDevice } from './hooks';
 import { selectCurrentColorTheme, selectCurrentLanguage, selectMobileDeviceState } from './modules';
 import { languageMap } from './translations';
@@ -16,56 +25,48 @@ import { ErrorBoundary } from './containers/ErrorBoundary/ErrorBoundary';
 import { lazyRetry } from './helpers/lazyRetry';
 import { DeeplinkAlertProvider } from './containers/DeeplinkAlert/DeeplinkAlertContext';
 import { DeeplinkAlertModal } from './containers/DeeplinkAlert/DeeplinkAlertModal';
+import './global.css';
 
 const browserHistory = createBrowserHistory();
 
+const Routes = lazyRetry(() =>
+  import('./components/app/routes/SwitchRoutes').then(({ SwitchRoutes }) => ({
+    default: SwitchRoutes,
+  })),
+);
 const Header = lazyRetry(() => import('./components/Header/Header'));
-
-/* Desktop components */
 const AlertsContainer = lazyRetry(() =>
   import('./containers/Alerts').then(({ Alerts }) => ({ default: Alerts })),
-);
-const LayoutContainer = lazyRetry(() =>
-  import('./routes').then(({ Layout }) => ({ default: Layout })),
 );
 const FooterContainer = lazyRetry(() =>
   import('./containers/Footer/Footer').then(({ Footer }) => ({ default: Footer })),
 );
 
-const RenderDeviceContainers = () => {
+const Body = () => {
+  const history = useHistory();
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const theme = useSelector(selectCurrentColorTheme);
-  const className = getThemeClassName(theme);
 
-  const history = useHistory();
-
-  let body;
-  if (!isMobileDevice) {
-    body = (
-      <div className={className}>
-        <Header />
-        <DeeplinkAlertModal />
-        <AlertsContainer />
-        <LayoutContainer />
-        <FooterContainer />
-      </div>
-    );
-  } else {
-    body = (
-      <div className={cn('pg-mobile-app', className)}>
-        <Header />
-        <DeeplinkAlertModal />
-        <AlertsContainer />
-        <LayoutContainer />
-        <FooterContainer />
-      </div>
-    );
-  }
+  useEffect(() => {
+    toggleColorTheme(theme);
+  }, [theme]);
 
   return (
     <DeeplinkAlertProvider>
       <Adapter Link={Link} history={history}>
-        {body}
+        <div className={cn(isMobileDevice && 'pg-mobile-app', getThemeClassName(theme))}>
+          <Header />
+          <DeeplinkAlertModal />
+          <AlertsContainer />
+          <Routes />
+          <FooterContainer />
+          <WalletsFetching />
+          <EmailVerification />
+          <Freezed />
+          <SecurityVerification />
+          <ExpiredSession />
+          <ListensForLogin />
+        </div>
       </Adapter>
     </DeeplinkAlertProvider>
   );
@@ -73,6 +74,7 @@ const RenderDeviceContainers = () => {
 
 export const App = () => {
   useSetMobileDevice();
+  useFetchUser(); // load user
   useFetchPublicFeatures(); // load public features
   useNewTradeNotifyWithSound(); // add sound notify on new trade
 
@@ -83,7 +85,7 @@ export const App = () => {
       <Router history={browserHistory}>
         <ErrorBoundary>
           <React.Suspense fallback={null}>
-            <RenderDeviceContainers />
+            <Body />
           </React.Suspense>
         </ErrorBoundary>
       </Router>
