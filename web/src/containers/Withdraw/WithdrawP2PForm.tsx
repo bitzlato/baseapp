@@ -25,6 +25,7 @@ import { AddressNotebookP2P } from 'web/src/containers/Withdraw/AddressNotebookP
 import { Select } from 'web/src/components/Select/Select';
 import { P2PBlockchain } from 'web/src/modules/public/blockchains/types';
 import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
+import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
 
 interface Props {
   currency: Currency;
@@ -36,6 +37,7 @@ interface Props {
 const getOptionValue = (option: P2PBlockchain) => option.key;
 
 export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, onSubmit }) => {
+  const blockchainsChoiceEnabled = useFeatureEnabled('p2p_blockchains_choice');
   const t = useT();
 
   const [amount, setAmount] = useState('');
@@ -50,6 +52,7 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
   const walletStat = p2pWalletsStat?.find((wallet) => wallet.code === currency.code);
   const blockchains = walletStat?.blockchains;
   const hasBlockchains = blockchains && blockchains.length > 0;
+  const blockchainsEnabled = hasBlockchains && blockchainsChoiceEnabled;
   const { data: vouchersData } = useFetchP2PWithdrawVouchers();
   const { data: withdrawalInfo } = useFetchP2PWithdrawalInfo({
     amount: defferedAmount,
@@ -59,9 +62,11 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
   });
 
   useEffect(() => {
-    setBlockchain(blockchains?.length === 1 ? blockchains[0]! : null);
+    if (blockchainsEnabled) {
+      setBlockchain(blockchains?.length === 1 ? blockchains[0]! : null);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [blockchains?.length, currency.code]);
+  }, [blockchainsEnabled, blockchains?.length, currency.code]);
 
   const voucherCount = vouchersData?.count ?? 0;
   const validatorKey = blockchain?.key.replace('p2p-', '');
@@ -164,7 +169,7 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
 
   const renderBlur = () => {
     let withdrawEnabled = true;
-    if (hasBlockchains) {
+    if (blockchainsEnabled) {
       if (blockchain) {
         withdrawEnabled = blockchain.withdrawEnabled;
       }
@@ -192,7 +197,7 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
     <Box col spacing="3" position="relative">
       {renderBlur()}
 
-      {hasBlockchains && (
+      {blockchainsEnabled && (
         <Select
           options={blockchains}
           value={blockchain}

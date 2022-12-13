@@ -20,6 +20,7 @@ import { P2PBlockchain } from 'web/src/modules/public/blockchains/types';
 import { Select } from 'src/components/Select/Select';
 import { Spinner } from 'web/src/components/ui/Spinner';
 import { CryptoCurrencyIcon } from 'web/src/components/ui/CryptoCurrencyIcon';
+import { useFeatureEnabled } from 'web/src/hooks/useFeatureEnabled';
 
 interface Props {
   currency: string;
@@ -28,6 +29,7 @@ interface Props {
 const getOptionValue = <T extends P2PBlockchain>(option: T) => option.id.toString();
 
 export const DepositP2P: FC<Props> = ({ currency }) => {
+  const blockchainsChoiceEnabled = useFeatureEnabled('p2p_blockchains_choice');
   const t = useT();
   const dispatch = useDispatch();
 
@@ -45,15 +47,18 @@ export const DepositP2P: FC<Props> = ({ currency }) => {
   const minDepositAmount = createMoney(currencyData?.minAcceptableDeposit ?? 0, ccy);
   const depositAddress = walletResp.data?.address ?? '';
   const blockchains = walletStat?.blockchains;
-  const hasBlockchains = blockchains !== undefined && blockchains?.length !== 0;
+  const hasBlockchains = blockchains && blockchains?.length > 0;
+  const blockchainsEnabled = hasBlockchains && blockchainsChoiceEnabled;
   const isNoAddress = walletResp.data?.address === null || !walletResp.data;
   const isERC20Crypto = currency === 'ETH' || currency === 'USDT' || currency === 'MDT';
   const isMDT = currency === 'MDT';
 
   useEffect(() => {
-    setBlockchain(walletStat?.blockchains?.length === 1 ? walletStat.blockchains[0]! : null);
+    if (blockchainsEnabled) {
+      setBlockchain(walletStat?.blockchains?.length === 1 ? walletStat.blockchains[0]! : null);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [walletStat?.blockchains?.length, currency]);
+  }, [blockchainsEnabled, blockchains?.length, currency]);
 
   const handleClickGenerate = () => {
     generateAddress({
@@ -84,7 +89,7 @@ export const DepositP2P: FC<Props> = ({ currency }) => {
   }
 
   let body;
-  if (hasBlockchains && !blockchain) {
+  if (blockchainsEnabled && !blockchain) {
     body = null;
   } else if (isNoAddress) {
     body = (
@@ -134,7 +139,7 @@ export const DepositP2P: FC<Props> = ({ currency }) => {
 
   return (
     <Box col spacing="2">
-      {hasBlockchains && (
+      {blockchainsEnabled && (
         <Select
           options={blockchains}
           value={blockchain}
