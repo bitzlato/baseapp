@@ -1,5 +1,5 @@
 # Create version tag for STAGING
-LATEST_STAGING_VERSION=$(curl -H "Accept: application/vnd.github+json" -s https://api.github.com/repos/bitzlato/baseapp/git/matching-refs/tags | grep -Eo "v0.0.0-staging.[0-9]+" | sort -r | head -n1)
+LATEST_STAGING_VERSION=$(curl -H "Accept: application/vnd.github+json" -s https://api.github.com/repos/bitzlato/baseapp/git/matching-refs/tags | grep -Eo "v0.0.0-staging.[0-9]+" | sort -r -n --field-separator='.' --key=4 | head -n1)
 STAGING_VERSION="v0.0.0-staging.$((${LATEST_STAGING_VERSION##*.}+1))"
 git tag -a $STAGING_VERSION -m "Staging version $STAGING_VERSION" && \
 git push origin && \
