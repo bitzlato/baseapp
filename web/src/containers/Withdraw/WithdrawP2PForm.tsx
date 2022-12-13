@@ -210,7 +210,7 @@ export const WithdrawP2PForm: FC<Props> = ({ currency, countdown, withdrawDone, 
         />
       )}
 
-      {(!blockchains || blockchains.length === 0 || blockchain) && (
+      {(!blockchainsEnabled || (blockchainsEnabled && blockchain)) && (
         <>
           <AddressNotebookP2P
             blockchainId={blockchain?.id}
