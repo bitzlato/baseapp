@@ -74,7 +74,7 @@ export const SignIn: FC = () => {
     if (isLoggedIn) {
       (async () => {
         await applyReferral();
-        setLocation(getSearchParam('back') ?? ' /wallets');
+        setLocation(getSearchParam('back') ?? '/wallets');
       })();
     }
   }, [isLoggedIn]);

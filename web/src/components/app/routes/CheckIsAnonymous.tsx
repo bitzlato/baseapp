@@ -1,15 +1,17 @@
-import { FC, PropsWithChildren, ReactElement } from 'react';
+import { FC, PropsWithChildren, ReactElement, useRef } from 'react';
 import { Redirect } from 'react-router-dom';
 import { ROUTES } from 'web/src/app/routes';
 import { useUserContext } from 'web/src/components/app/UserContext';
-import { Loading } from './Loading';
 
 export const CheckIsAnonymous: FC<PropsWithChildren<{}>> = ({ children }) => {
-  const { isUserLoggedIn, isUserFetching } = useUserContext();
+  // Check only the first rendering
+  const { isUserLoggedIn } = useUserContext();
+  const ref = useRef(isUserLoggedIn);
 
-  if (isUserFetching) {
-    return <Loading />;
-  }
+  // TODO: add spinner
+  // if (isUserFetching) {
+  //   return <Loading />;
+  // }
 
-  return isUserLoggedIn ? <Redirect to={ROUTES.wallets} /> : (children as ReactElement);
+  return ref.current ? <Redirect to={ROUTES.wallets} /> : (children as ReactElement);
 };
