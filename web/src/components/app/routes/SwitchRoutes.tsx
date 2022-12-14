@@ -189,9 +189,8 @@ export const SwitchRoutes: FC = () => {
           exact
         />
 
-        <Route path={ROUTES.advert} component={AdScreen} />
-        <Route path={ROUTES.trader} component={TraderScreen} />
-        <Route path={ROUTES.board} component={BoardScreen} />
+        <Route path={ROUTES.advert} component={AdScreen} exact />
+        <Route path={ROUTES.trader} component={TraderScreen} exact />
 
         <Route type="protected" path={ROUTES.deal} component={TradeScreen} exact />
         <Route type="protected" path={ROUTES.deals} component={TradesScreen} exact />
@@ -200,13 +199,15 @@ export const SwitchRoutes: FC = () => {
         <Route type="protected" path={ROUTES.createAdvert} component={CreateAdScreen} exact />
         <Route type="protected" path={ROUTES.myAdvert} component={UserAdScreen} exact />
 
+        <Route path={ROUTES.board} component={BoardScreen} exact />
+
         <Route path={ROUTES.withLang} component={RemoveLangParam} exact />
 
         {showLanding() && (
           <Route
-            exact
             path={ROUTES.main}
             component={isMobileDevice ? LandingScreenMobile : LandingScreen}
+            exact
           />
         )}
 
