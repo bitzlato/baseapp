@@ -1,3 +1,4 @@
+import Bugsnag from '@bugsnag/js';
 import { getCSRFToken } from 'web/src/helpers/CSRFToken';
 
 const parseJSON = (str: string | undefined, emptyResult = {}): any => {
@@ -44,21 +45,61 @@ export const fetchData = async (input: RequestInfo, init?: RequestInit) => {
     const text = contentLength === '0' ? undefined : await res.text();
 
     if (!res.ok) {
-      const { errors, error, ...rest } = parseJSON(text);
-      if (Array.isArray(errors)) {
-        const item = errors[0];
-        if (typeof item === 'string') {
-          throw new FetchError(errors, res.status, rest);
-        } else if (typeof item?.detail === 'string') {
-          throw new FetchError(
-            errors.map((d) => d.detail),
-            res.status,
-            rest,
-          );
+      try {
+        const { errors, error, ...rest } = parseJSON(text);
+
+        if (res.status >= 500) {
+          Bugsnag.notify(res.statusText, (event) => {
+            // eslint-disable-next-line no-param-reassign
+            event.context = 'fetchData:error5xx';
+            event.addMetadata('extra', {
+              url: res.url,
+              method: options?.method ?? 'GET',
+              response: text,
+              traceid: res.headers.get('x-b3-traceid'),
+            });
+          });
+        }
+
+        if (Array.isArray(errors)) {
+          const item = errors[0];
+          if (typeof item === 'string') {
+            throw new FetchError(errors, res.status, rest);
+          } else if (typeof item?.detail === 'string') {
+            throw new FetchError(
+              errors.map((d) => d.detail),
+              res.status,
+              rest,
+            );
+          }
+        }
+
+        throw new FetchError([error ?? rest.message ?? res.statusText], res.status, rest);
+      } catch (error) {
+        if (error instanceof FetchError) {
+          throw error;
+        }
+
+        // json parse syntax error
+        if (error instanceof SyntaxError) {
+          const { message } = error;
+          const notifyMessage = 'Failure to parse rejection response';
+
+          Bugsnag.notify(notifyMessage, (event) => {
+            // eslint-disable-next-line no-param-reassign
+            event.context = 'fetchData:rejection_response_parsing';
+            event.addMetadata('extra', {
+              url: res.url,
+              method: options?.method ?? 'GET',
+              response: text,
+              error: message,
+              traceid: res.headers.get('x-b3-traceid'),
+            });
+          });
+
+          throw new FetchError([notifyMessage], 500, {});
         }
       }
-
-      throw new FetchError([error ?? rest.message ?? 'Server error'], res.status, rest);
     }
 
     return text;
@@ -67,12 +108,18 @@ export const fetchData = async (input: RequestInfo, init?: RequestInit) => {
       throw error;
     }
 
-    // json parse syntax error
-    if (error instanceof SyntaxError) {
-      throw new FetchError(['Server error'], 500, {});
-    }
+    const message = (error as Error).toString();
 
-    throw new FetchError([(error as Error).toString()], 500, {});
+    Bugsnag.notify(message, (event) => {
+      // eslint-disable-next-line no-param-reassign
+      event.context = 'fetchData:unknow_error';
+      event.addMetadata('extra', {
+        url: input,
+        method: init?.method ?? 'GET',
+      });
+    });
+
+    throw new FetchError([message], 500, {});
   }
 };
 
@@ -84,7 +131,21 @@ export const fetchJson = async (input: RequestInfo, init?: RequestInit) => {
   } catch (error) {
     // json parse syntax error
     if (error instanceof SyntaxError) {
-      throw new FetchError(['Server error'], 500, {});
+      const { message } = error;
+      const notifyMessage = 'Failure to parse response';
+
+      Bugsnag.notify(notifyMessage, (event) => {
+        // eslint-disable-next-line no-param-reassign
+        event.context = 'fetchData:response_parsing';
+        event.addMetadata('extra', {
+          url: input,
+          method: init?.method ?? 'GET',
+          response: data,
+          error: message,
+        });
+      });
+
+      throw new FetchError([notifyMessage], 500, {});
     }
 
     throw error;
