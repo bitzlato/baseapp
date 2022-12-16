@@ -269,7 +269,7 @@
   "deposit.aml-seizure": "Високий ризик",
   "deposit.contract": "Прийом коштів з контрактних адрес може зайняти тривалий час",
   "deposit.erc20MDTWarning": "Активи приймаються лише у вигляді ERC-20 токенів MonolithosDAO Token (MDT)",
-  "deposit.erc20warning": "Активи приймаються лише через мережу ERC-20",
+  "deposit.erc20warning": "Активи приймаються лише через мережу {blockchainCode}",
   "deposit.success": "Низький ризик",
   "deposit.usdx.e": "Приймаються лише депозити токенів {currency}, будьте уважні при надсиланні коштів!",
   "dob.blank": "Дата народження відсутня",
