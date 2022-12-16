@@ -14,6 +14,7 @@ import {
   selectCurrentPrice,
   selectMobileDeviceState,
   selectUserLoggedIn,
+  selectUserState,
   setCurrentPrice,
 } from '../../modules';
 import {
@@ -28,6 +29,7 @@ interface ReduxProps {
   currentMarket: Market | undefined;
   currentPrice: number | undefined;
   userLoggedIn: boolean;
+  userActivated: boolean;
   isMobileDevice: boolean;
 }
 
@@ -88,7 +90,7 @@ class RecentTradesComponent extends React.Component<RecentTradesProps, State> {
   private renderContent = () => {
     const { isMobileDevice, recentTrades } = this.props;
 
-    return this.props.userLoggedIn ? (
+    return this.props.userActivated ? (
       <TabPanel
         panels={this.renderTabs()}
         onTabChange={this.handleMakeRequest}
@@ -144,6 +146,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
   currentMarket: selectCurrentMarket(state),
   currentPrice: selectCurrentPrice(state),
   userLoggedIn: selectUserLoggedIn(state),
+  userActivated: selectUserState(state) === 'active',
   isMobileDevice: selectMobileDeviceState(state),
 });
 
