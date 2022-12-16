@@ -1,6 +1,7 @@
 import { useSWRConfig } from 'swr';
 import { p2pUrl } from 'web/src/api/config';
 import { useHandleFetchError } from 'web/src/components/app/AppContext';
+import { useIsUserActivated } from 'web/src/components/app/UserContext';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { P2PGenerateParams, P2PWallet, P2PWalletStat } from 'web/src/modules/p2p/wallet-types';
 import { P2PBlockchain } from 'web/src/modules/public/blockchains/types';
@@ -14,8 +15,10 @@ export function useFetchP2PWallet(
   cryptoCurrency?: string | undefined,
   blockchain?: P2PBlockchain | undefined,
 ) {
+  const isUserActivated = useIsUserActivated();
+
   return useFetch<P2PWallet>(
-    cryptoCurrency
+    cryptoCurrency && isUserActivated
       ? `${p2pUrl()}/wallets/${cryptoCurrency}${blockchain ? `?blockchainId=${blockchain.id}` : ''}`
       : null,
     fetchWithCreds,

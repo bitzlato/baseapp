@@ -1,5 +1,5 @@
 import { p2pUrl } from 'web/src/api/config';
-import { useUser } from 'web/src/components/app/UserContext';
+import { useIsUserActivated } from 'web/src/components/app/UserContext';
 import { buildQueryString } from 'web/src/helpers/buildQueryString';
 import { fetchWithCreds } from 'web/src/helpers/fetch';
 import { P2PList, PaymethodInfo, PaymethodsParams } from 'web/src/modules/p2p/types';
@@ -13,8 +13,8 @@ const fetchPaymethods = async (
 };
 
 export const useFetchPaymethods = (params: PaymethodsParams) => {
-  const user = useUser();
-  const endpoint = `${p2pUrl()}${user === undefined ? '/public' : ''}/exchange/paymethods/`;
+  const isUserActivated = useIsUserActivated();
+  const endpoint = `${p2pUrl()}${!isUserActivated ? '/public' : ''}/exchange/paymethods/`;
 
   return useFetch<P2PList<PaymethodInfo>>([endpoint, params], fetchPaymethods);
 };
