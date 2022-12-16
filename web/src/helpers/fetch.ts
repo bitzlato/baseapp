@@ -57,6 +57,8 @@ export const fetchData = async (input: RequestInfo, init?: RequestInit) => {
               method: options?.method ?? 'GET',
               response: text,
               traceid: res.headers.get('x-b3-traceid'),
+              statusText: res.statusText,
+              status: res.status,
             });
           });
         }
@@ -108,18 +110,7 @@ export const fetchData = async (input: RequestInfo, init?: RequestInit) => {
       throw error;
     }
 
-    const message = (error as Error).toString();
-
-    Bugsnag.notify(message, (event) => {
-      // eslint-disable-next-line no-param-reassign
-      event.context = 'fetchData:unknow_error';
-      event.addMetadata('extra', {
-        url: input,
-        method: init?.method ?? 'GET',
-      });
-    });
-
-    throw new FetchError([message], 500, {});
+    throw new FetchError([(error as Error).toString()], 500, {});
   }
 };
 
