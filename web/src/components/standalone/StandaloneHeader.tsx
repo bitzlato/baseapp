@@ -51,8 +51,9 @@ export const StandaloneHeader: FC<Props> = ({
   const isUserFetching = user === undefined && error === undefined && isValidating;
   const isLoggedIn = user !== undefined;
   const [logout] = useDeleteIdentitySessions();
-  const { data: notifications = [], mutate: notificationsMutate } =
-    useFetchP2PNotifications(isLoggedIn);
+  const { data: notifications = [], mutate: notificationsMutate } = useFetchP2PNotifications(
+    user?.state === 'active',
+  );
   const [markNotificationAsReadP2P] = useMarkNotificationAsRead();
   const [markAsRead] = useMarkAllNotificationsAsRead();
   const useNotificationSubscribe = useNotificator(isLoggedIn);
