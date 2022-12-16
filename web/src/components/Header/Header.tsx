@@ -17,6 +17,7 @@ import {
   changeUserDataFetch,
   selectUserFetching,
   logoutFetch,
+  selectUserState,
 } from 'web/src/modules';
 import { MarketSelector } from 'web/src/containers/MarketSelector/MarketSelector';
 import { HeaderToolbar } from 'web/src/containers/HeaderToolbar/HeaderToolbar';
@@ -65,6 +66,7 @@ const Header: FC = () => {
   const dispatch = useDispatch();
   const language = useSelector(selectCurrentLanguage);
   const isLoggedIn = useSelector(selectUserLoggedIn);
+  const isUserActivated = useSelector(selectUserState) === 'active';
   const user = useSelector(selectUserInfo);
   const colorTheme = useSelector(selectCurrentColorTheme);
   const isUserFetching = useSelector(selectUserFetching);
@@ -113,7 +115,7 @@ const Header: FC = () => {
   );
 
   const { data: notifications = [], mutate: notificationsMutate } =
-    useFetchP2PNotifications(isLoggedIn);
+    useFetchP2PNotifications(isUserActivated);
 
   const [markNotificationAsReadP2P] = useMarkNotificationAsRead();
   const [markAsRead] = useMarkAllNotificationsAsRead();
