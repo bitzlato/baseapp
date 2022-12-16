@@ -32,7 +32,7 @@ window.env = {
   isDraggable: false,
   languages: ['en', 'ru', 'uk'],
   sessionCheckInterval: '15000',
-  balancesFetchInterval: '3000',
+  balancesFetchInterval: '6000',
   passwordEntropyStep: 14,
   kycSteps: [
     'email',
