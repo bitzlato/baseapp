@@ -325,7 +325,7 @@
   "notifications.tradePause": "Упс! Здається, Вас зараз немає на місці і Ви пропускаєте обміни. Ми призупинили показ ваших оголошень доти, доки Ви не повернетеся.",
   "notifications.tradeStatusChanged": "Змінився статус обміну #{tradeId}",
   "notifications.tradeStatusChangedCancel": "Обмін #{tradeId} скасовано",
-  "notifications.tradeStatusChangedConfirmPayment": "Ви отримали TICKER AMOUNT. Обмін #{tradeId}",
+  "notifications.tradeStatusChangedConfirmPayment": "Ви отримали {cryptocurrency}. Обмін #{tradeId}",
   "notifications.tradeStatusChangedConfirmTradePurchase": "{username} приняв Ваш обмін #{tradeId}. Чекайте на надходження платежу {amount} {currency} ({paymethodName}). Якщо Вам не надішлють кошти, обмін буде скасований через 30 хвилин.",
   "notifications.tradeStatusChangedConfirmTradeSelling": "Надішліть {amount} {currency} ({paymethodName}) користувачеві {username} у рамках обміну #{tradeId}. ⚠️ Якщо Ви не відправите кошти, обмін буде скасований через 30 хвилин.",
   "notifications.tradeStatusChangedCreated": "Нова пропозиція! Обмін #{tradeId}",

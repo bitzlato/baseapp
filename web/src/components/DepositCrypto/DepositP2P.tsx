@@ -129,7 +129,11 @@ export const DepositP2P: FC<Props> = ({ currency }) => {
           <Box row spacing>
             <WarningIcon />
             <Box textColor="warning" textSize="lg">
-              {isMDT ? t('deposit.erc20MDTWarning') : t('deposit.erc20warning')}
+              {isMDT
+                ? t('deposit.erc20MDTWarning')
+                : t('deposit.erc20warning', {
+                    blockchainCode: blockchainsEnabled && blockchain ? blockchain.code : 'ERC-20',
+                  })}
             </Box>
           </Box>
         )}
