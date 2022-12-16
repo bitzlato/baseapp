@@ -21,7 +21,7 @@ import { useSWRConfig } from 'swr';
 import { getP2PUserChatEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PUserChat';
 import { getP2PUserChatUnreadEndpoint } from 'web/src/hooks/data/p2p/useFetchP2PUserChatUnread';
 import { getDiffByDays } from 'web/src/helpers/dateDiff';
-import { useUser } from 'web/src/components/app/UserContext';
+import { useUserContext } from 'web/src/components/app/UserContext';
 import * as s from './Trader.css';
 
 interface UrlParams {
@@ -30,7 +30,7 @@ interface UrlParams {
 
 export const Trader: FC = () => {
   const { mutate } = useSWRConfig();
-  const user = useUser();
+  const { user, isUserActivated } = useUserContext();
   const { lang, isMobileDevice } = useAppContext();
   const { params, t } = useAdapterContext<UrlParams>();
   const { data = [], error } = useTraderAds({ publicName: params.name, lang });
@@ -109,9 +109,9 @@ export const Trader: FC = () => {
           onGoBack={() => setSingleMode('')}
         />
         {singleMode === 'chat' &&
-          (user === undefined || !traderInfo.chatAvailable ? (
+          (user === undefined || !traderInfo.chatAvailable || !isUserActivated ? (
             <NotAvailable signin={user === undefined}>
-              {!traderInfo.chatAvailable
+              {!traderInfo.chatAvailable || !isUserActivated
                 ? t('trader.chatUnavailable')
                 : t('Sign in to send messages')}
             </NotAvailable>

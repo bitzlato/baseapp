@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useUser } from 'web/src/components/app/UserContext';
+import { useIsUserActivated } from 'web/src/components/app/UserContext';
 import { Container } from 'web/src/components/ui/Container';
 import { Box } from 'web/src/components/ui/Box';
 import { Pagination } from 'web/src/components/ui/Pagination';
@@ -112,7 +112,7 @@ export const BoardBody: FC<BoardBodyProps> = ({ fiatCurrencies, cryptoCurrencies
 };
 
 export const Board: FC = () => {
-  const user = useUser();
+  const isUserActivated = useIsUserActivated();
   const fiatCurrenciesValue = useP2PFiatCurrencies();
   const cryptoCurrenciesValue = useFetchP2PCryptoCurrencies();
   const lastFilterValue = useFetchP2PLastFilter();
@@ -123,7 +123,7 @@ export const Board: FC = () => {
       {deeplinkLoading ||
       fiatCurrenciesValue.fiatCurrencies === undefined ||
       cryptoCurrenciesValue.data === undefined ||
-      (lastFilterValue.data === undefined && user !== undefined) ? (
+      (lastFilterValue.data === undefined && isUserActivated) ? (
         <Box display="flex" justifyContent="center" py="20x" width="full">
           <Spinner />
         </Box>

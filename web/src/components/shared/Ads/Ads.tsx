@@ -24,7 +24,7 @@ import { useAppContext } from 'web/src/components/app/AppContext';
 import { p2pUrl } from 'web/src/api/config';
 import { FetchError, fetchWithCreds } from 'web/src/helpers/fetch';
 import { Spinner } from 'web/src/components/ui/Spinner';
-import { useUser } from 'web/src/components/app/UserContext';
+import { useIsUserActivated, useUser } from 'web/src/components/app/UserContext';
 import { OnlineStatusByLastActivity } from '../../ui/OnlineStatus';
 import { ConfirmRateChangeModal } from './Ad/RateDiffModal';
 import { getLinkToP2PUser } from './getLinkToP2PUser';
@@ -40,7 +40,7 @@ interface AdExchangeConfirm {
 
 const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
   const { t, history } = useAdapterContext();
-  const user = useUser();
+  const isUserActivated = useIsUserActivated();
   const { isMobileDevice, handleFetchError } = useAppContext();
   const [active, setActive] = useState(false);
   const [confirm, setConfirm] = useState<AdExchangeConfirm | undefined>(undefined);
@@ -55,7 +55,7 @@ const AdExchangeButton: FC<AdExchangeButtonProps> = ({ ad }) => {
 
     try {
       const data: AdvertSingleSource = await fetchWithCreds(
-        `${p2pUrl()}${user === undefined ? '/public' : ''}/exchange/dsa/${ad.id}`,
+        `${p2pUrl()}${!isUserActivated ? '/public' : ''}/exchange/dsa/${ad.id}`,
       );
       if (data) {
         const nextRate = Money.fromDecimal(data.rate, ad.currency);

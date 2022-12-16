@@ -11,7 +11,7 @@ import { OnlineStatusByLastActivity } from 'web/src/components/ui/OnlineStatus';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { ActionOnTraderButton } from 'web/src/components/p2p/ActionOnTraderButton';
 import { useIsMobileDevice } from 'web/src/components/app/AppContext';
-import { useUser } from 'web/src/components/app/UserContext';
+import { useUserContext } from 'web/src/components/app/UserContext';
 import { formatRating } from 'web/src/helpers/formatRating';
 import { CollapsibleBox } from 'web/src/components/collapsibleBox/CollapsibleBox';
 import { UserInfo } from 'web/src/modules/p2p/user.types';
@@ -33,7 +33,7 @@ interface TraderInfoProps {
 
 export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBlock, onTrust }) => {
   const isMobileDevice = useIsMobileDevice();
-  const user = useUser();
+  const { user, isUserActivated } = useUserContext();
   const t = useSharedT();
   const [value, setValue] = useState('info');
 
@@ -252,8 +252,10 @@ export const TraderInfo: FC<TraderInfoProps> = ({ traderInfo, onSingleMode, onBl
           </>
         )}
         {value === 'chat' &&
-          (user === undefined ? (
-            <NotAvailable signin>{t('Sign in to send messages')}</NotAvailable>
+          (user === undefined || !isUserActivated ? (
+            <NotAvailable signin={user === undefined}>
+              {!isUserActivated ? t('trader.chatUnavailable') : t('Sign in to send messages')}
+            </NotAvailable>
           ) : (
             <Box className={s.tabBody} pt="4x">
               <UserChat publicName={traderInfo.name} available={traderInfo.chatAvailable ?? true} />
