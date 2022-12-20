@@ -57,15 +57,13 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
 
   const headers = useMemo(
     () => [
-      isDeposit
-        ? t('page.body.history.deposit.header.txid')
-        : t('page.body.history.withdraw.header.address'),
+      t('page.body.history.deposit.header.txid'),
       t('Date'),
       t('Status'),
       t('Amount'),
       t('page.body.history.withdraw.header.fee'),
     ],
-    [t, isDeposit],
+    [t],
   );
 
   const tableData = data
@@ -74,10 +72,10 @@ export const ExchangeHistory: FC<Props> = ({ type, general }) => {
       const blockchain = blockchains.find((b) => b.key === d.blockchain_key) ?? DEFAULT_BLOCKCHAIN;
       const blockchainLink = isDeposit
         ? getBlockchainLink(blockchain, (d as Deposit).txid)
-        : getBlockchainLink(blockchain, '', (d as Withdraw).rid);
+        : getBlockchainLink(blockchain, (d as Withdraw).blockchain_txid);
       return [
         <a href={blockchainLink} target="_blank" rel="noopener noreferrer">
-          {truncateMiddle(isDeposit ? (d as Deposit).txid : (d as Withdraw).rid, 30)}
+          {truncateMiddle(isDeposit ? (d as Deposit).txid : (d as Withdraw).blockchain_txid, 30)}
         </a>,
         <div title={`${d.id} - ${d.state}`}>{localeDate(d.created_at, 'fullDate')}</div>,
         isDeposit ? <DepositStatus item={d as Deposit} /> : <WithdrawStatus item={d as Withdraw} />,

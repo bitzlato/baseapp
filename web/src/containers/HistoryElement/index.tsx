@@ -89,7 +89,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
         ];
       case 'withdraws':
         return [
-          t('page.body.history.withdraw.header.address'),
+          t('page.body.history.withdraw.header.txid'),
           t('page.body.history.withdraw.header.date'),
           t('page.body.history.withdraw.header.currency'),
           t('page.body.history.withdraw.header.amount'),
@@ -137,17 +137,18 @@ export const HistoryElement: FC<Props> = ({ type }) => {
         ];
       }
       case 'withdraws': {
-        const { created_at, currency, amount, fee, rid, blockchain_key } = item as Withdraw;
+        const { created_at, currency, amount, fee, blockchain_txid, blockchain_key } =
+          item as Withdraw;
         const wallet = wallets.find(
           (obj) => obj.currency.code.toLowerCase() === currency.toLowerCase(),
         );
         const blockchain = blockchains.find((d) => d.key === blockchain_key) ?? DEFAULT_BLOCKCHAIN;
-        const blockchainLink = getBlockchainLink(blockchain, '', rid);
+        const blockchainLink = getBlockchainLink(blockchain, blockchain_txid);
 
         return [
-          <div className="pg-history-elem__hide" key={rid}>
+          <div className="pg-history-elem__hide" key={blockchain_txid}>
             <a href={blockchainLink} target="_blank" rel="noopener noreferrer">
-              {truncateMiddle(rid, 30)}
+              {truncateMiddle(blockchain_txid, 30)}
             </a>
           </div>,
           localeDate(created_at, 'fullDate'),
