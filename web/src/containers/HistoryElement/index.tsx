@@ -89,7 +89,7 @@ export const HistoryElement: FC<Props> = ({ type }) => {
         ];
       case 'withdraws':
         return [
-          t('page.body.history.withdraw.header.txid'),
+          t('page.body.history.deposit.header.txid'),
           t('page.body.history.withdraw.header.date'),
           t('page.body.history.withdraw.header.currency'),
           t('page.body.history.withdraw.header.amount'),
