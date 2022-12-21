@@ -4741,12 +4741,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ws@npm:^6.0.4":
-  version: 6.0.4
-  resolution: "@types/ws@npm:6.0.4"
+"@types/ws@npm:^8.0.0":
+  version: 8.5.3
+  resolution: "@types/ws@npm:8.5.3"
   dependencies:
     "@types/node": "*"
-  checksum: b2656a76bfad0c17bb1e3fc237ba7122431c1373669977ed8edef45934c82f71c75d8c71f0a576dc6d98b0954fd94cae0166c6b4ccb40f7e0ee29cc92673519c
+  checksum: 0ce46f850d41383fcdc2149bcacc86d7232fa7a233f903d2246dff86e31701a02f8566f40af5f8b56d1834779255c04ec6ec78660fe0f9b2a69cf3d71937e4ae
   languageName: node
   linkType: hard
 
@@ -21879,7 +21879,7 @@ __metadata:
     "@types/redux-mock-store": ^1.0.3
     "@types/ua-parser-js": ^0.7.36
     "@types/uuid": 8.3.4
-    "@types/ws": ^6.0.4
+    "@types/ws": ^8.0.0
     "@vanilla-extract/css": ^1.7.2
     "@vanilla-extract/recipes": ^0.2.5
     "@vanilla-extract/sprinkles": ^1.4.1
@@ -21960,7 +21960,7 @@ __metadata:
     webpack-bugsnag-plugins: ^1.8.0
     webpack-cli: ^4.9.2
     webpack-dev-server: ^4.7.4
-    ws: ^7.2.0
+    ws: ^8.0.0
   languageName: unknown
   linkType: soft
 
@@ -22447,7 +22447,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^7.2.0, ws@npm:^7.2.3":
+"ws@npm:^7.2.3":
   version: 7.4.2
   resolution: "ws@npm:7.4.2"
   peerDependencies:
@@ -22474,6 +22474,21 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 0c2ffc9a539dd61dd2b00ff6cc5c98a3371e2521011fe23da4b3578bb7ac26cbdf7ca8a68e8e08023c122ae247013216dde2a20c908de415a6bcc87bdef68c87
+  languageName: node
+  linkType: hard
+
+"ws@npm:^8.0.0":
+  version: 8.11.0
+  resolution: "ws@npm:8.11.0"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ^5.0.2
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 316b33aba32f317cd217df66dbfc5b281a2f09ff36815de222bc859e3424d83766d9eb2bd4d667de658b6ab7be151f258318fb1da812416b30be13103e5b5c67
   languageName: node
   linkType: hard
 
