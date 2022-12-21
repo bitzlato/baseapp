@@ -158,7 +158,7 @@ const P2PHistory: FC<Props> = ({ type, general }) => {
       '',
       t('Date'),
       isDeposit ? t('Status') : undefined,
-      t('Address'),
+      t('page.body.history.deposit.header.txid'),
       t('Amount'),
       t('Comment'),
     ],
