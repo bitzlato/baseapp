@@ -11432,10 +11432,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"input-core@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "input-core@npm:1.0.0"
-  checksum: cfa24bcce6ab3d76723e69799a85a0670fcc853d487504766718f12318cba6b1696c2adc704856268b07dad5cddcb09f0801a4138822a071cb0be298352ba528
+"input-core@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "input-core@npm:2.1.0"
+  checksum: 6cdda98a09031940742c23c1dc0a4479dc6ff96d3f042160c799d37289e88b01183c81aaf36940c047de7721da6f66fbef6a82d60108c347d06b592f7ea24bc9
   languageName: node
   linkType: hard
 
@@ -17940,15 +17940,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-maskinput@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "react-maskinput@npm:1.0.1"
+"react-maskinput@npm:^3.0.0":
+  version: 3.2.0
+  resolution: "react-maskinput@npm:3.2.0"
   dependencies:
-    input-core: ^1.0.0
+    input-core: ^2.1.0
   peerDependencies:
-    react: ">15.4.1"
-    react-dom: ">15.4.1"
-  checksum: 2e1dc72a9ad9ebb6222683d101dfeb53c37d8de7c7498475a5ae70806a459fc0b4cc5531acc4cc70ea72f2ee4f0fb7e5d5bf868a1ab960d45b7efe4f637d21fa
+    react: ">=16.8.0"
+  checksum: 67bf2b9de757798df7055d2e552f0fffb5dc8a1a9c5f7ac9bd69b18f89aea5751522631c7e17bfeaed81767c183f47a7f71efc362d2f27cf5eb6afb79493f08a
   languageName: node
   linkType: hard
 
@@ -21919,7 +21918,7 @@ __metadata:
     react-google-recaptcha: ^2.1.0
     react-grid-layout: ^1.3.3
     react-intl: ^5.20.9
-    react-maskinput: ^1.0.1
+    react-maskinput: ^3.0.0
     react-perfect-scrollbar: ^1.5.8
     react-redux: ^7.2.1
     react-refresh: ^0.14.0
