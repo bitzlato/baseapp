@@ -39,6 +39,7 @@ interface Props {
 export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone, onSubmit }) => {
   const t = useT();
   const blockchainFeeFeatureEnabled = useFeatureEnabled('flexible_fee');
+  const blockchainFeeUSDTFeatureEnabled = useFeatureEnabled('flexible_fee_usdt');
 
   const [amount, setAmount] = useState('');
   const [beneficiary, setBeneficiary] = useState(defaultBeneficiary);
@@ -57,7 +58,9 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
   const { data: blockchains = [] } = useFetchBlockchains();
 
   const blockchain = blockchains.find((d) => d.key === beneficiary.blockchain_key);
-  const blockchainFeeEnabled = blockchainFeeFeatureEnabled && currencyCode === 'ETH';
+  const blockchainFeeEnabled =
+    (blockchainFeeFeatureEnabled && currencyCode === 'ETH') ||
+    (blockchainFeeUSDTFeatureEnabled && currencyCode === 'USDT');
   const isUSDXe =
     blockchain?.name === 'Avalanche' && (currencyCode === 'USDT' || currencyCode === 'USDC');
 
