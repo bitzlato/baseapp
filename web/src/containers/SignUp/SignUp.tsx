@@ -133,7 +133,7 @@ export const SignUp: FC = () => {
       return true;
     }
 
-    const captchaTypeValue = captchaType();
+    const captchaTypeValue = captchaLogin() ? captchaType() : 'none';
 
     if (captchaTypeValue === 'recaptcha' && !reCaptchaSuccess) {
       return true;
