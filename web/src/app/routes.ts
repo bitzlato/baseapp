@@ -53,11 +53,9 @@ export const ROUTES = {
   createAdvert: '/p2p/adverts/create',
   myAdverts: '/p2p/adverts/',
   myAdvert: '/p2p/adverts/:advertId',
-
-  withLang: [] as Array<string>,
 };
 
-ROUTES.withLang = [
+export const ROUTES_WITH_LANG = [
   ROUTES.walletsStat,
   ROUTES.board,
   ...ROUTES.advert,

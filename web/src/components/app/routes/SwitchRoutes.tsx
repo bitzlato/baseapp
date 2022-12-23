@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import cn from 'classnames';
 import { Switch, useLocation } from 'react-router-dom';
-import { ROUTES } from 'web/src/app/routes';
+import { ROUTES, ROUTES_WITH_LANG } from 'web/src/app/routes';
 import { DeepLinkPreview } from 'web/src/screens/DeepLinkPreview/DeepLinkPreview';
 import { FeesScreen } from 'web/src/screens/Fees/Fees';
 import { ActiveGiftsScreen } from 'web/src/screens/GiftsScreen/ActiveGiftsScreen';
@@ -201,7 +201,7 @@ export const SwitchRoutes: FC = () => {
 
         <Route path={ROUTES.board} component={BoardScreen} exact />
 
-        <Route path={ROUTES.withLang} component={RemoveLangParam} exact />
+        <Route path={ROUTES_WITH_LANG} component={RemoveLangParam} exact />
 
         {showLanding() && (
           <Route
