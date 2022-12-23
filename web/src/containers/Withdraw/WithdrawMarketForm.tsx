@@ -77,6 +77,7 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
           currencyCode,
         }
       : undefined,
+    { isConvertToFiat: currencyCode !== 'USDT' },
   );
 
   useEffect(() => {

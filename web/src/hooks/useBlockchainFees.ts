@@ -6,6 +6,7 @@ import { BlockchainFees } from 'web/src/types/blockchains.types';
 
 export const useBlockchainFees = (
   params: { blockchainKey: string; currencyCode: string } | undefined,
+  { isConvertToFiat = true }: { isConvertToFiat?: boolean | undefined } = {},
 ): BlockchainFees | undefined => {
   const { data } = useFetchBlockchainFees(params);
   const { getMarketCurrency } = useMarketCurrencies();
@@ -18,19 +19,21 @@ export const useBlockchainFees = (
     const currency = getMarketCurrency(data.currency_fee.currency_id.toUpperCase());
     const low = data.currency_fee.low ? createMoney(data.currency_fee.low, currency) : undefined;
     const lowInFiat =
-      currency.apiCurrency && low ? low.convert(currency.apiCurrency.price, USD_CCY) : undefined;
+      currency.apiCurrency && low && isConvertToFiat
+        ? low.convert(currency.apiCurrency.price, USD_CCY)
+        : undefined;
     const market = data.currency_fee.market
       ? createMoney(data.currency_fee.market, currency)
       : undefined;
     const marketInFiat =
-      currency.apiCurrency && market
+      currency.apiCurrency && market && isConvertToFiat
         ? market.convert(currency.apiCurrency.price, USD_CCY)
         : undefined;
     const aggressive = data.currency_fee.aggressive
       ? createMoney(data.currency_fee.aggressive, currency)
       : undefined;
     const aggressiveInFiat =
-      currency.apiCurrency && aggressive
+      currency.apiCurrency && aggressive && isConvertToFiat
         ? aggressive.convert(currency.apiCurrency.price, USD_CCY)
         : undefined;
 
@@ -49,5 +52,5 @@ export const useBlockchainFees = (
         aggressiveInFiat,
       },
     };
-  }, [data, getMarketCurrency]);
+  }, [data, getMarketCurrency, isConvertToFiat]);
 };
