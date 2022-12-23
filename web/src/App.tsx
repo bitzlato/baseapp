@@ -58,10 +58,10 @@ const Body = () => {
           <Header />
           <DeeplinkAlertModal />
           <AlertsContainer />
+          <EmailVerification />
           <Routes />
           <FooterContainer />
           <WalletsFetching />
-          <EmailVerification />
           <Freezed />
           <SecurityVerification />
           <ExpiredSession />

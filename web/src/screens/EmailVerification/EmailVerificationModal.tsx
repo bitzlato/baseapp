@@ -22,6 +22,7 @@ import {
   selectSendEmailVerificationSuccess,
   selectUserInfo,
 } from 'web/src/modules';
+import { UserAdsAlert } from 'web/src/components/shared/UserAds/UserAdsAlert';
 
 const EMAIL_SENT_TIMEOUT = 10000;
 
@@ -81,7 +82,27 @@ export const EmailVerificationModal: FC = () => {
   }, [resendSuccess]);
 
   if (!show) {
-    return null;
+    const handleClick = () => {
+      setShow(true);
+    };
+
+    return (
+      <Box px="5x" py="1x">
+        <UserAdsAlert theme="warning">
+          {t('Confirm your email')}!{' '}
+          <Box
+            as="button"
+            type="button"
+            fontWeight="strong"
+            color={{ default: 'advertsAlertInfoLink', hover: 'advertsAlertInfoLinkHover' }}
+            textDecoration="underline"
+            onClick={handleClick}
+          >
+            {t('Confirm')}
+          </Box>
+        </UserAdsAlert>
+      </Box>
+    );
   }
 
   const handleResend = () => {
