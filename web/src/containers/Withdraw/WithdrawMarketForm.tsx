@@ -60,7 +60,9 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
   const blockchain = blockchains.find((d) => d.key === beneficiary.blockchain_key);
   const blockchainFeeEnabled =
     (blockchainFeeFeatureEnabled && currencyCode === 'ETH') ||
-    (blockchainFeeUSDTFeatureEnabled && currencyCode === 'USDT');
+    (blockchainFeeUSDTFeatureEnabled &&
+      currencyCode === 'USDT' &&
+      blockchain?.key === 'eth-mainnet');
   const isUSDXe =
     blockchain?.name === 'Avalanche' && (currencyCode === 'USDT' || currencyCode === 'USDC');
 
