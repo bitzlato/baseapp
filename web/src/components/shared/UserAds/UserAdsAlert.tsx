@@ -17,6 +17,7 @@ interface Props {
   theme?: Theme | undefined;
 }
 
+// TODO: move to ui/Alert
 export const UserAdsAlert: FC<Props> = ({ children, theme = 'warning' }) => {
   const { isMobileDevice } = useAppContext();
 
