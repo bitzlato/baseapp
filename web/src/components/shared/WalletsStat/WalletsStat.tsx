@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Box } from 'web/src/components/ui/Box';
 import { Text } from 'web/src/components/ui/Text';
 import { Card, CardHeader } from 'web/src/components/ui/Card';
@@ -124,6 +124,22 @@ export const WalletsStat: FC = () => {
     </TableHeader>
   );
 
+  const items = useMemo(
+    () =>
+      data && data.length > 0
+        ? data.flatMap((item) =>
+            item.blockchains && item.blockchains.length > 0
+              ? item.blockchains.map((blockchain) => ({
+                  ...item,
+                  ...blockchain,
+                  code: `${item.code} (${blockchain.code})`,
+                }))
+              : item,
+          )
+        : undefined,
+    [data],
+  );
+
   return (
     <Container maxWidth="xl" my="6x">
       <Card>
@@ -131,13 +147,13 @@ export const WalletsStat: FC = () => {
 
         <Box py={{ mobile: '2x', tablet: '6x' }} px={{ mobile: '4x', tablet: '6x' }}>
           <Table header={header} isLoading={!data}>
-            {data && data.length > 0 ? (
+            {items && (
               <TableBody>
-                {data.map((item) => (
+                {items.map((item) => (
                   <WalletsStatItem key={item.code} item={item} />
                 ))}
               </TableBody>
-            ) : null}
+            )}
           </Table>
 
           <Box py="4x" px={{ mobile: '0', tablet: '6x' }}>
@@ -159,3 +175,4 @@ export const WalletsStat: FC = () => {
     </Container>
   );
 };
+// [{"code":"BTC","paymentsHour":68,"minWithdrawal":"0.00000546","withdrawEnabled":true,"depositEnabled":true,"minFee":0.00006,"fee":0.00028,"paymentsQueue":8,"paymentsError":0,"inputHour":36,"unconfirmed":1430,"minAcceptableDeposit":"0.00005","blockchains":[]},{"code":"USDT","paymentsHour":9,"minWithdrawal":"0.01","withdrawEnabled":true,"depositEnabled":true,"minFee":15,"fee":15,"paymentsQueue":0,"paymentsError":0,"inputHour":2,"unconfirmed":0,"minAcceptableDeposit":"45","blockchains":[{"id":1,"name":"Ethereum","code":"ERC-20","key":"p2p-eth-mainnet","minWithdrawal":"0.01","minAcceptableDeposit":"45","minFee":15,"fee":15,"withdrawEnabled":true},{"id":2,"name":"Tron","code":"TRC-20","key":"p2p-tron-mainnet","minWithdrawal":"10","minAcceptableDeposit":"2","minFee":1,"fee":1,"withdrawEnabled":true}]},{"code":"LTC","paymentsHour":8,"minWithdrawal":"0.00000546","withdrawEnabled":true,"depositEnabled":true,"minFee":0.002,"fee":0.002,"paymentsQueue":1,"paymentsError":0,"inputHour":161,"unconfirmed":0,"minAcceptableDeposit":"0.00000001","blockchains":[]},{"code":"ETH","paymentsHour":0,"minWithdrawal":"0.02","withdrawEnabled":true,"depositEnabled":true,"minFee":0.002,"fee":0.002,"paymentsQueue":0,"paymentsError":0,"inputHour":3,"unconfirmed":0,"minAcceptableDeposit":"0.01","blockchains":[]},{"code":"BCH","paymentsHour":0,"minWithdrawal":"0.00000546","withdrawEnabled":true,"depositEnabled":true,"minFee":0.001,"fee":0.001,"paymentsQueue":0,"paymentsError":0,"inputHour":0,"unconfirmed":0,"minAcceptableDeposit":"0.00000001","blockchains":[]},{"code":"DASH","paymentsHour":0,"minWithdrawal":"0.00000546","withdrawEnabled":true,"depositEnabled":true,"minFee":0.001,"fee":0.001,"paymentsQueue":0,"paymentsError":0,"inputHour":1,"unconfirmed":0,"minAcceptableDeposit":"0.00000001","blockchains":[]},{"code":"DOGE","paymentsHour":0,"minWithdrawal":"1","withdrawEnabled":true,"depositEnabled":true,"minFee":10,"fee":10,"paymentsQueue":0,"paymentsError":0,"inputHour":164,"unconfirmed":0,"minAcceptableDeposit":"0.00000001","blockchains":[]},{"code":"USDC","paymentsHour":0,"minWithdrawal":"0","withdrawEnabled":true,"depositEnabled":true,"minFee":15,"fee":15,"paymentsQueue":0,"paymentsError":0,"inputHour":0,"unconfirmed":0,"minAcceptableDeposit":"45","blockchains":[]},{"code":"DAI","paymentsHour":0,"minWithdrawal":"0.01","withdrawEnabled":true,"depositEnabled":true,"minFee":15,"fee":15,"paymentsQueue":0,"paymentsError":0,"inputHour":0,"unconfirmed":0,"minAcceptableDeposit":"45","blockchains":[]},{"code":"MCR","paymentsHour":0,"minWithdrawal":"1000","withdrawEnabled":true,"depositEnabled":true,"minFee":50,"fee":50,"paymentsQueue":0,"paymentsError":0,"inputHour":0,"unconfirmed":0,"minAcceptableDeposit":"3000","blockchains":[]},{"code":"MDT","paymentsHour":0,"minWithdrawal":"25","withdrawEnabled":true,"depositEnabled":true,"minFee":3,"fee":3,"paymentsQueue":0,"paymentsError":0,"inputHour":0,"unconfirmed":0,"minAcceptableDeposit":"100","blockchains":[]}]
