@@ -15,6 +15,7 @@ import { useAdapterContext } from 'web/src/components/shared/Adapter';
 import { useFetchP2PCryptoCurrencies } from 'web/src/hooks/data/p2p/useFetchP2PCryptoCurrencies';
 import { BaseCurrency } from 'web/src/types/currencies.types';
 import { P2PCryptoCurrencySource } from 'web/src/modules/p2p/wallet-types';
+import { useLanguage } from 'web/src/components/app/AppContext';
 
 export type CreateAdFormValues = {
   type: AdvertType | null;
@@ -75,6 +76,7 @@ const DEFAULT_FORM_VALUES: CreateAdFormValues = {
 };
 
 export const CreateAdFormProvider: FC<{}> = ({ children }) => {
+  const lang = useLanguage();
   const [formValues, setFormValues] = useState<CreateAdFormValues>(DEFAULT_FORM_VALUES);
   const [creationError, setCreationError] = useState<null | CreateError>(null);
   const { t } = useAdapterContext();
@@ -85,6 +87,7 @@ export const CreateAdFormProvider: FC<{}> = ({ children }) => {
     type: formValues.type ?? undefined,
     currency: formValues.currency ?? undefined,
     cryptocurrency: formValues.cryptocurrency ?? undefined,
+    lang,
   });
 
   const selectedFiatCurrency = useMemo(() => {
