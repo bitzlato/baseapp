@@ -55,7 +55,7 @@ export const ROUTES = {
   myAdvert: '/p2p/adverts/:advertId',
 };
 
-export const ROUTES_WITH_LANG = [
+export const ROUTES_WITH_LANG: Array<string> = [
   ROUTES.walletsStat,
   ROUTES.board,
   ...ROUTES.advert,
@@ -67,3 +67,28 @@ export const ROUTES_WITH_LANG = [
   ROUTES.myAdvert,
   ROUTES.profileTelegram,
 ].map((item) => `/:lang${item}`);
+
+export const ROUTES_NEED_USER_ACTIVATED: Array<string> = [
+  ROUTES.deeplink,
+  ROUTES.gifts,
+  ROUTES.giftsActive,
+  ROUTES.giftsHistory,
+  ROUTES.report,
+  ...ROUTES.wallet,
+  ROUTES.wallets,
+  ROUTES.orders,
+  ROUTES.profileSettings,
+  ROUTES.profileActivity,
+  ROUTES.profileApiKeys,
+  ROUTES.profileLanguage,
+  ROUTES.profile2FA,
+  ROUTES.profileTheme,
+  ROUTES.profileTelegram,
+  ROUTES.profileReports,
+  // ROUTES.profile, // don't blocked, see minimal user informations
+  ROUTES.deal,
+  ROUTES.deals,
+  ROUTES.myAdverts,
+  ROUTES.createAdvert,
+  ROUTES.myAdvert,
+];

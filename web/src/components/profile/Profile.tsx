@@ -7,7 +7,6 @@ import { Text } from 'web/src/components/ui/Text';
 import { Stack } from 'web/src/components/ui/Stack';
 import { Stat, StatLabel, StatValue } from 'web/src/components/ui/Stat';
 import { useSelector } from 'react-redux';
-import { selectUserInfo } from 'web/src/modules/user/profile/selectors';
 import ThumbUp from 'web/src/assets/svg/ThumbUp.svg';
 import ThumbDown from 'web/src/assets/svg/ThumbDown.svg';
 import { useTradeStats } from 'web/src/hooks/data/useFetchTradeStatistics';
@@ -15,6 +14,7 @@ import { Skeleton } from 'web/src/components/ui/Skeleton';
 import { selectMobileDeviceState } from 'web/src/modules/public/globalSettings/selectors';
 import { useFetchSessionsMe } from 'web/src/hooks/data/useFetchSessionsMe';
 import { formatRating } from 'web/src/helpers/formatRating';
+import { useUserContext } from 'web/src/components/app/UserContext';
 import { ProfileDealsStats } from './ProfileDealsStats';
 import * as s from './Profile.css';
 import { ProfileVerification } from './ProfileVerification';
@@ -30,12 +30,12 @@ import { UserSuspicious } from './UserSuspicious';
 export const Profile: FC = () => {
   const t = useT();
   const title = t('page.body.profile.header.account');
-  const user = useSelector(selectUserInfo);
+  const { user, isUserActivated } = useUserContext();
   const isMobileDevice = useSelector(selectMobileDeviceState);
   const swr = useTradeStats();
   const { data: sessionsMe } = useFetchSessionsMe();
 
-  if (swr.error) {
+  if (swr.error || !user) {
     return null; // TODO: Add throw and error boundary screen
   }
 
@@ -60,7 +60,9 @@ export const Profile: FC = () => {
                 {bitzlatoUser.user_profile.public_name ?? bitzlatoUser.user_profile.generated_name}
               </Text>
 
-              {bitzlatoUser?.user_profile.public_name === null && <ChangePublicName />}
+              {bitzlatoUser?.user_profile.public_name === null && isUserActivated && (
+                <ChangePublicName />
+              )}
 
               {bitzlatoUser?.user_profile.suspicious && <UserSuspicious />}
             </Box>
@@ -75,35 +77,38 @@ export const Profile: FC = () => {
           </Text>
         </Box>
       </Box>
-      <Box mb="7x">
-        <Stack
-          direction={{ mobile: 'column', tablet: 'row' }}
-          marginBottom={{ mobile: '3x', tablet: '0' }}
-          marginRight={{ mobile: '0', tablet: '3x' }}
-        >
-          {user.available_auth_subjects.length >= 2 && (
-            <ProfileSwitchAccount
-              authSubjects={user.available_auth_subjects}
-              currentSubject={sessionsMe?.auth_sub}
-            />
-          )}
+      {isUserActivated && (
+        <Box mb="7x">
+          <Stack
+            direction={{ mobile: 'column', tablet: 'row' }}
+            marginBottom={{ mobile: '3x', tablet: '0' }}
+            marginRight={{ mobile: '0', tablet: '3x' }}
+          >
+            {user.available_auth_subjects.length >= 2 && (
+              <ProfileSwitchAccount
+                authSubjects={user.available_auth_subjects}
+                currentSubject={sessionsMe?.auth_sub}
+              />
+            )}
 
-          <ProfileReferalLinks />
-          <ChangePassword />
-          {user.bitzlato_user && (
-            <FreezeAccount isSelfFrozen={user.bitzlato_user.user_profile.self_frozen} />
-          )}
-          {user.bitzlato_user && (
-            <ChangeUserAvatar image={bitzlatoUser?.user_profile.avatar.original || ''} />
-          )}
-        </Stack>
-      </Box>
+            <ProfileReferalLinks />
+            <ChangePassword />
+            {user.bitzlato_user && (
+              <FreezeAccount isSelfFrozen={user.bitzlato_user.user_profile.self_frozen} />
+            )}
+            {user.bitzlato_user && (
+              <ChangeUserAvatar image={bitzlatoUser?.user_profile.avatar.original || ''} />
+            )}
+          </Stack>
+        </Box>
+      )}
       <Box className={s.stats} mb={isMobileDevice ? '8x' : undefined}>
         <div className={s.stat}>
           <Stat>
             <ProfileVerification
               status={bitzlatoUser?.user_profile.verification_status === 'VERIFIED'}
               url={user.kyc_verification_url}
+              disabled={!isUserActivated}
             />
           </Stat>
         </div>

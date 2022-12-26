@@ -12,7 +12,7 @@ import { useNewTradeNotifyWithSound } from 'web/src/hooks/useNewTradeNotifySound
 import { useEffect } from 'react';
 import { toggleColorTheme } from 'web/src/helpers/toggleColorTheme';
 import { WalletsFetching } from 'web/src/components/app/WalletsFetching';
-import { EmailVerification } from 'web/src/components/app/EmailVerification';
+import { EmailVerification } from 'web/src/components/user/EmailVerification';
 import { Freezed } from 'web/src/components/app/Freezed';
 import { SecurityVerification } from 'web/src/components/app/SecurityVerification';
 import { useFetchUser } from 'web/src/hooks/useFetchUser';

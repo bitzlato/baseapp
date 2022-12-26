@@ -8,9 +8,11 @@ import { ProfileSettings } from 'web/src/components/profile/settings/ProfileSett
 import { ApiKeys } from 'web/src/components/profile/ApiKeys';
 import { Reports } from 'web/src/components/profile/reports/Reports';
 import { MergeWithTelegram } from 'web/src/components/profile/mergeWithTelegram/MergeWithTelegram';
+import { useIsUserActivated } from 'web/src/components/app/UserContext';
 
 export const ProfileScreen: FC = () => {
   const t = useT();
+  const isUserActivated = useIsUserActivated();
   const title = t('page.body.profile.header.account');
 
   useDocumentTitle(title);
@@ -18,11 +20,15 @@ export const ProfileScreen: FC = () => {
   return (
     <Box my="7">
       <Profile />
-      <MergeWithTelegram />
-      <ProfileSettings />
-      <Reports />
-      <ApiKeys />
-      <ProfileAccountActivity />
+      {isUserActivated && (
+        <>
+          <MergeWithTelegram />
+          <ProfileSettings />
+          <Reports />
+          <ApiKeys />
+          <ProfileAccountActivity />
+        </>
+      )}
     </Box>
   );
 };
