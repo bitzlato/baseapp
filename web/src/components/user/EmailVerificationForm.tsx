@@ -1,52 +1,59 @@
-import { FC, useCallback, useEffect, useState } from 'react';
 import Bugsnag from '@bugsnag/js';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box } from 'web/src/components/ui/Box';
+import { captchaType } from 'web/src/api/config';
+import { useIsMobileDevice } from 'web/src/components/app/AppContext';
+import { useUser } from 'web/src/components/app/UserContext';
 import { Button } from 'web/src/components/ui/Button';
-import { Text } from 'web/src/components/ui/Text';
-import { useT } from 'web/src/hooks/useT';
-import { Modal, ModalHeader } from 'web/src/components/ui/Modal';
 import { NumberInput } from 'web/src/components/Input/NumberInput';
+import { Box } from 'web/src/components/ui/Box';
+import { Text } from 'web/src/components/ui/Text';
 import { CODE_LENGTH, isValidCode } from 'web/src/helpers/codeValidation';
 import { useConfirmCode } from 'web/src/hooks/data/useFetchUsers';
-import { captchaType } from 'web/src/api/config';
-import { Captcha } from 'web/src/components';
+import { useT } from 'web/src/hooks/useT';
+import { resetCaptchaState } from 'web/src/modules/user/captcha/actions';
 import {
-  emailVerificationFetch,
-  resetCaptchaState,
   selectCaptchaResponse,
-  selectMobileDeviceState,
   selectRecaptchaSuccess,
+} from 'web/src/modules/user/captcha/selectors';
+import { emailVerificationFetch } from 'web/src/modules/user/emailVerification/actions';
+import {
   selectSendEmailVerificationError,
   selectSendEmailVerificationLoading,
   selectSendEmailVerificationSuccess,
-  selectUserInfo,
-} from 'web/src/modules';
-import { UserAdsAlert } from 'web/src/components/shared/UserAds/UserAdsAlert';
+} from 'web/src/modules/user/emailVerification/selectors';
+import { Captcha } from 'web/src/components/Captcha';
+
+interface Props {
+  onConfirm?: (() => void) | undefined;
+}
 
 const EMAIL_SENT_TIMEOUT = 10000;
 
-export const EmailVerificationModal: FC = () => {
-  const [show, setShow] = useState(true);
+export const EmailVerificationForm: FC<Props> = ({ onConfirm }) => {
+  const t = useT();
+  const dispatch = useDispatch();
+  const isMobileDevice = useIsMobileDevice();
+  const user = useUser();
+
   const [invalidCode, setInvalidCode] = useState(false);
   const [code, setCode] = useState('');
   const [step, setStep] = useState<'resend' | 'captcha' | 'sent'>('resend');
-
-  const t = useT();
-  const dispatch = useDispatch();
 
   const resendInProgress = useSelector(selectSendEmailVerificationLoading);
   const resendError = useSelector(selectSendEmailVerificationError);
   const resendSuccess = useSelector(selectSendEmailVerificationSuccess);
   const captchaResponse = useSelector(selectCaptchaResponse);
   const reCaptchaSuccess = useSelector(selectRecaptchaSuccess);
-  const user = useSelector(selectUserInfo);
-  const isMobileDevice = useSelector(selectMobileDeviceState);
 
   const isCaptchaEnabled = captchaType() === 'recaptcha' || captchaType() === 'geetest';
 
   const confirmCode = useConfirmCode();
   const generateCode = useCallback(() => {
+    if (!user) {
+      return;
+    }
+
     if (!user?.email) {
       Bugsnag.notify('Email empty in EmailVerificationModal', (event) => {
         // eslint-disable-next-line no-param-reassign
@@ -81,30 +88,6 @@ export const EmailVerificationModal: FC = () => {
     return undefined;
   }, [resendSuccess]);
 
-  if (!show) {
-    const handleClick = () => {
-      setShow(true);
-    };
-
-    return (
-      <Box px="5x" py="1x">
-        <UserAdsAlert theme="warning">
-          {t('Confirm your email')}!{' '}
-          <Box
-            as="button"
-            type="button"
-            fontWeight="strong"
-            color={{ default: 'advertsAlertInfoLink', hover: 'advertsAlertInfoLinkHover' }}
-            textDecoration="underline"
-            onClick={handleClick}
-          >
-            {t('Confirm')}
-          </Box>
-        </UserAdsAlert>
-      </Box>
-    );
-  }
-
   const handleResend = () => {
     if (isCaptchaEnabled) {
       setStep('captcha');
@@ -116,7 +99,7 @@ export const EmailVerificationModal: FC = () => {
   const handleConfirm = async () => {
     const isValid = await confirmCode({ pin_code: code });
     if (isValid) {
-      setShow(false);
+      onConfirm?.();
     } else {
       setInvalidCode(true);
     }
@@ -136,6 +119,10 @@ export const EmailVerificationModal: FC = () => {
 
   const disableConfirm = !isValidCode(code);
   const disableResend = resendInProgress;
+
+  if (!user) {
+    return null;
+  }
 
   const infoEl = t('verification.email.code', { email: <b>{user.email}</b> });
 
@@ -187,35 +174,30 @@ export const EmailVerificationModal: FC = () => {
 
   const captchaEl = step === 'captcha' && <Captcha error={resendError} success={resendSuccess} />;
 
-  return (
-    <Modal show size="lg" onClose={() => setShow(false)}>
-      <ModalHeader center={!isMobileDevice}>{t('Confirm your email')}</ModalHeader>
-      {isMobileDevice ? (
-        <Box px="7x" pt="2x" pb="7x" display="flex" flexDirection="column" gap="4x">
-          <Box>
-            <Text>{infoEl}</Text>
-            <Box mt="8x">{codeEl}</Box>
-          </Box>
-          {confirmEl}
-          {resendEl}
-          {captchaEl}
-        </Box>
-      ) : (
-        <Box display="flex" flexDirection="column" alignItems="center" px="8x" pb="6x">
-          <Text textAlign="center">{infoEl}</Text>
-          <Box mt="4x" alignSelf="stretch">
-            {codeEl}
-          </Box>
-          <Box mt="5x">{confirmEl}</Box>
-          <Box mt="8x" display="flex" flexDirection="column" gap="4x">
-            <Text textAlign="center">
-              {t('verification.email.resend', { email: <strong>{user.email}</strong> })}
-            </Text>
-            {resendEl}
-            {captchaEl}
-          </Box>
-        </Box>
-      )}
-    </Modal>
+  return isMobileDevice ? (
+    <Box px="7x" pt="2x" pb="7x" display="flex" flexDirection="column" gap="4x">
+      <Box>
+        <Text>{infoEl}</Text>
+        <Box mt="8x">{codeEl}</Box>
+      </Box>
+      {confirmEl}
+      {resendEl}
+      {captchaEl}
+    </Box>
+  ) : (
+    <Box display="flex" flexDirection="column" alignItems="center" px="8x" pb="6x">
+      <Text textAlign="center">{infoEl}</Text>
+      <Box mt="4x" alignSelf="stretch">
+        {codeEl}
+      </Box>
+      <Box mt="5x">{confirmEl}</Box>
+      <Box mt="8x" display="flex" flexDirection="column" gap="4x">
+        <Text textAlign="center">
+          {t('verification.email.resend', { email: <strong>{user.email}</strong> })}
+        </Text>
+        {resendEl}
+        {captchaEl}
+      </Box>
+    </Box>
   );
 };

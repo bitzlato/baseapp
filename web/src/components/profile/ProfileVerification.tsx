@@ -8,9 +8,14 @@ import { useT } from 'web/src/hooks/useT';
 interface ProfileVerificationProps {
   status: boolean;
   url: string;
+  disabled?: boolean;
 }
 
-export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, url }) => {
+export const ProfileVerification: FC<ProfileVerificationProps> = ({
+  status,
+  url,
+  disabled = false,
+}) => {
   const t = useT();
   const [busy, setBusy] = useState(false);
 
@@ -56,9 +61,11 @@ export const ProfileVerification: FC<ProfileVerificationProps> = ({ status, url 
       <Text variant="label" color="danger" textAlign="center" fontWeight="strong">
         {t('profile.verification_no')}
       </Text>
-      <Button data-gtm-click="get_verified" color="primary" fullWidth onClick={handleClick}>
-        {t('profile.verification_goto')}
-      </Button>
+      {!disabled && (
+        <Button data-gtm-click="get_verified" color="primary" fullWidth onClick={handleClick}>
+          {t('profile.verification_goto')}
+        </Button>
+      )}
     </>
   ) : (
     <>
