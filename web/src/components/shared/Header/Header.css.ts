@@ -26,6 +26,33 @@ export const header = style([
   }),
 ]);
 
+export const snowfall = style([
+  {
+    selectors: {
+      '&::after': {
+        content: '',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        display: 'block',
+        boxShadow: `inset -10px -3px 20px 4px ${vars.colors.headerBg}`,
+      },
+    },
+  },
+  responsiveStyle({
+    mobile: {
+      width: '100px',
+      height: '47px',
+    },
+    tablet: {
+      width: '130px',
+      height: '63px',
+    },
+  }),
+]);
+
 globalStyle(`${header} svg`, {
   verticalAlign: 'middle',
 });

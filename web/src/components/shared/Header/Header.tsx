@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import cn from 'classnames';
+import Snowfall from 'react-snowfall';
 import { Box } from 'web/src/components/ui/Box';
 import { themeDark, themeLight } from 'web/src/theme/vars.css';
 import {
@@ -23,7 +24,17 @@ export const Header: FC<Props> = (props) => {
 
   return (
     <HeaderContext.Provider value={props}>
-      <Box className={cn(s.header, themeClassName)}>
+      <Box className={cn(s.header, themeClassName)} position="relative">
+        <Box position="absolute" left={0} top={0} className={s.snowfall}>
+          <Snowfall
+            snowflakeCount={50}
+            changeFrequency={300}
+            color={theme === 'light' ? '#B8DBED' : '#ffffff'}
+            speed={[0.01, 0.1]}
+            wind={[0, 0.05]}
+            radius={[0.2, 1.4]}
+          />
+        </Box>
         <Box
           display="flex"
           alignItems="center"

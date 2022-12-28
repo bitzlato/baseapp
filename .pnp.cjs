@@ -24349,6 +24349,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["react-fast-compare", [\
+        ["npm:3.2.0", {\
+          "packageLocation": "./.yarn/cache/react-fast-compare-npm-3.2.0-fbfa6627d9-8ef272c825.zip/node_modules/react-fast-compare/",\
+          "packageDependencies": [\
+            ["react-fast-compare", "npm:3.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["react-fit", [\
         ["npm:1.4.0", {\
           "packageLocation": "./.yarn/cache/react-fit-npm-1.4.0-3361b86bb4-c645e6b6a0.zip/node_modules/react-fit/",\
@@ -25072,6 +25081,33 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:17.0.2"],\
             ["react-transition-group", "virtual:04926f8baa01c1a982c18da9f1930e22800064341c6461da02e3119ef7c3bc2481221d1ec7eb17a52dd8e267e93f788b43caae97690ecd2bb82cb7c7b6c38363#npm:2.9.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-snowfall", [\
+        ["npm:1.2.1", {\
+          "packageLocation": "./.yarn/cache/react-snowfall-npm-1.2.1-ffb69bac7b-297ca98466.zip/node_modules/react-snowfall/",\
+          "packageDependencies": [\
+            ["react-snowfall", "npm:1.2.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.2.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-snowfall-virtual-196e060ab1/0/cache/react-snowfall-npm-1.2.1-ffb69bac7b-297ca98466.zip/node_modules/react-snowfall/",\
+          "packageDependencies": [\
+            ["react-snowfall", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.2.1"],\
+            ["@types/react", "npm:17.0.52"],\
+            ["@types/react-dom", "npm:17.0.18"],\
+            ["react", "npm:17.0.2"],\
+            ["react-dom", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:17.0.2"],\
+            ["react-fast-compare", "npm:3.2.0"]\
           ],\
           "packagePeers": [\
             "@types/react-dom",\
@@ -29804,6 +29840,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-router-dom", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.2.0"],\
             ["react-scroll", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.8.1"],\
             ["react-select", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:5.2.2"],\
+            ["react-snowfall", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.2.1"],\
             ["react-teleporter", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:3.0.2"],\
             ["react-textarea-autosize", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:8.3.4"],\
             ["recharts", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.8.5"],\
