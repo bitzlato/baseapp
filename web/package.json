@@ -52,6 +52,7 @@
     "react-router-dom": "^5.1.2",
     "react-scroll": "^1.8.1",
     "react-select": "^5.2.2",
+    "react-snowfall": "^1.2.1",
     "react-teleporter": "^3.0.2",
     "react-textarea-autosize": "^8.3.4",
     "recharts": "^1.8.5",
