@@ -13,7 +13,7 @@ export const UserContextProvider: FC = ({ children }) => {
         ? {
             user,
             isUserLoggedIn,
-            isUserActivated: user.state === 'active' || !user.email_verified,
+            isUserActivated: user.state === 'active' && user.email_verified,
             isUserFetching: false,
           }
         : {
