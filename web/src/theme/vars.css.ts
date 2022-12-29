@@ -273,6 +273,7 @@ export const [themeLight, vars] = createTheme({
     adStatLabel: colors.ebonyClay,
 
     inputBorder: colors.ebonyClay15,
+    inputBorderFocus: colors.goldTips,
     inputPlaceholder: colors.ebonyClay70,
 
     selectButtonBg: colors.ebonyClay10,
@@ -640,6 +641,7 @@ export const themeDark = createTheme(vars, {
     adStatLabel: colors.white50,
 
     inputBorder: colors.white10,
+    inputBorderFocus: colors.goldTips,
     inputPlaceholder: colors.white50,
 
     selectButtonBg: colors.white10,

@@ -24,6 +24,7 @@ import { Notification } from 'web/src/lib/socket/types';
 import { createT } from 'web/src/components/shared/sharedI18n';
 import { getLanguageName } from 'web/src/helpers/getLanguageByCode';
 import { useMarkAllNotificationsAsRead } from 'web/src/hooks/mutations/p2p/useMarkAllNotificationsAsRead';
+import { SignInFormModal } from 'web/src/components/signin/SignInFormModal';
 import { StandaloneComponentProps } from './types';
 
 type Links = ComponentProps<typeof Header>['navLinks'];
@@ -45,6 +46,7 @@ export const StandaloneHeader: FC<Props> = ({
   languages = ['en', 'ru'],
   onThemeChange,
   onLanguageChange,
+  onLoggedIn,
 }) => {
   const t = createT(language);
   const { data: user, error, isValidating } = useFetchResourceUsersMe();
@@ -60,6 +62,7 @@ export const StandaloneHeader: FC<Props> = ({
   const [nofiticationModalProps, setNofiticationModalProps] = useState<
     NotificationModalNotification | undefined
   >();
+  const [isSignInShow, setIsSignInShow] = useState(false);
 
   const merchantClient = (user?.bitzlato_user?.roles ?? []).includes('merchantClient');
 
@@ -231,7 +234,7 @@ export const StandaloneHeader: FC<Props> = ({
   } else if (!isLoggedIn) {
     userProps = {
       status: USER_STATUS_AUTHORIZATION_REQUIRED,
-      onSignInClick: () => window.location.assign('/signin'),
+      onSignInClick: () => setIsSignInShow(true),
       onSignUpClick: () => window.location.assign('/signup'),
     };
   } else {
@@ -330,6 +333,7 @@ export const StandaloneHeader: FC<Props> = ({
   const handleThemeChange = (nextTheme: Theme) => onThemeChange?.(nextTheme);
   const handleLanguageChange = (nextLanguage: Language) => onLanguageChange?.(nextLanguage);
   const closeNotificationModal = () => setNofiticationModalProps(undefined);
+  const handleSignInClose = () => setIsSignInShow(false);
 
   return (
     <>
@@ -361,6 +365,14 @@ export const StandaloneHeader: FC<Props> = ({
         onThemeChange={handleThemeChange}
         onLanguageChange={handleLanguageChange}
       />
+      {!isLoggedIn && (
+        <SignInFormModal
+          t={t}
+          show={isSignInShow}
+          onClose={handleSignInClose}
+          onLoggedIn={onLoggedIn}
+        />
+      )}
     </>
   );
 };
