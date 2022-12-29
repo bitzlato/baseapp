@@ -64,7 +64,7 @@ const Body = () => {
           <WalletsFetching />
           <Freezed />
           <SecurityVerification />
-          <ExpiredSession />
+          {/* <ExpiredSession /> */}
           <ListensForLogin />
         </div>
       </Adapter>

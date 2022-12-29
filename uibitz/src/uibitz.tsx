@@ -44,6 +44,7 @@ global.uibitz = ((defaultConfig: UIBitzConfig) => {
           languages={config.languages}
           onThemeChange={handleThemeChange}
           onLanguageChange={handleLanguageChange}
+          onLoggedIn={config.onLoggedIn}
         />,
         element,
       );
