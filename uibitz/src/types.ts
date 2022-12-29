@@ -1,4 +1,5 @@
 import { Theme, Language } from 'web/src/types';
+import { User } from 'web/src/modules/user/profile/types';
 
 export interface UIBitzComponent {
   destroy: () => void;
@@ -11,6 +12,7 @@ export interface UIBitzConfig {
   getLanguage: () => Language;
   onThemeChange: (theme: Theme) => void;
   onLanguageChange: (language: Language) => void;
+  onLoggedIn?: ((user: User | undefined) => void) | undefined;
 }
 
 export type RenderComponentFn = (
