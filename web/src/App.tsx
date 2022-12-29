@@ -16,7 +16,7 @@ import { EmailVerification } from 'web/src/components/user/EmailVerification';
 import { Freezed } from 'web/src/components/app/Freezed';
 import { SecurityVerification } from 'web/src/components/app/SecurityVerification';
 import { useFetchUser } from 'web/src/hooks/useFetchUser';
-import { ExpiredSession } from 'web/src/components/app/ExpiredSession';
+// import { ExpiredSession } from 'web/src/components/app/ExpiredSession';
 import { ListensForLogin } from 'web/src/components/app/ListenLogout';
 import { useSetMobileDevice } from './hooks';
 import { selectCurrentColorTheme, selectCurrentLanguage, selectMobileDeviceState } from './modules';
@@ -64,7 +64,7 @@ const Body = () => {
           <WalletsFetching />
           <Freezed />
           <SecurityVerification />
-          <ExpiredSession />
+          {/* <ExpiredSession /> */}
           <ListensForLogin />
         </div>
       </Adapter>
