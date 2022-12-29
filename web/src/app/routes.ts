@@ -81,7 +81,7 @@ export const ROUTES_NEED_USER_ACTIVATED: Array<string> = [
   ROUTES.profileActivity,
   ROUTES.profileApiKeys,
   ROUTES.profileLanguage,
-  ROUTES.profile2FA,
+  // ROUTES.profile2FA,
   ROUTES.profileTheme,
   ROUTES.profileTelegram,
   ROUTES.profileReports,
