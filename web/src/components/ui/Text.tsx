@@ -1,11 +1,11 @@
-import { ElementType, FC } from 'react';
+import { ComponentProps, ElementType, FC, PropsWithChildren } from 'react';
 import cn from 'classnames';
 import { Sprinkles } from 'web/src/theme/sprinkles.css';
 import { Box } from 'web/src/components/ui/Box';
 import { OptionalWithUndefined } from 'web/src/types';
 import { text, TextVariants } from './Text.css';
 
-interface Props
+interface Props<C extends ElementType = 'p'>
   extends NonNullable<TextVariants>,
     OptionalWithUndefined<
       Pick<
@@ -24,12 +24,19 @@ interface Props
         | 'wordBreak'
       >
     > {
-  as?: ElementType | undefined;
+  as?: C | undefined;
   className?: string | undefined;
   title?: string | undefined;
 }
 
-const variantMapping: Record<NonNullable<Props['variant']>, keyof JSX.IntrinsicElements> = {
+export type TextProps<C extends ElementType = 'p'> = Props<C> &
+  Omit<ComponentProps<C>, keyof Props>;
+
+type TextComponent = <C extends ElementType = 'p'>(
+  props: PropsWithChildren<TextProps<C>>,
+) => ReturnType<FC<TextProps<C>>>;
+
+const variantMapping = {
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',
@@ -41,9 +48,9 @@ const variantMapping: Record<NonNullable<Props['variant']>, keyof JSX.IntrinsicE
   label: 'span',
   body: 'p',
   caption: 'p',
-};
+} as const;
 
-export const Text: FC<Props> = ({
+export const Text: TextComponent = ({
   as,
   className,
   children,
@@ -54,7 +61,7 @@ export const Text: FC<Props> = ({
 }) => {
   return (
     <Box
-      as={as ?? variantMapping[variant]}
+      as={(as ?? variantMapping[variant]) as any} // FIXME: remove any
       className={cn(text({ variant, gutterBottom }), className)}
       color={color}
       {...props}
