@@ -20,9 +20,9 @@ export const ProfileScreen: FC = () => {
   return (
     <Box my="7">
       <Profile />
+      <MergeWithTelegram />
       {isUserActivated && (
         <>
-          <MergeWithTelegram />
           <ProfileSettings />
           <Reports />
           <ApiKeys />
