@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Box } from 'web/src/components/ui/Box';
 import { useSharedT } from 'web/src/components/shared/Adapter';
 import { Chat } from 'web/src/components/shared/Chat/Chat';
@@ -47,6 +47,12 @@ export const TradeChat: FC = () => {
   ] = useP2PSendTradeDisputeFile();
   const [markReadChat] = useP2PMarkReadTradeChat();
   const [markReadDispute] = useP2PMarkReadTradeDispute();
+
+  const disputeMessagesSorted = useMemo(
+    () =>
+      disputeMessages ? [...disputeMessages].sort((a, b) => a.created - b.created) : undefined,
+    [disputeMessages],
+  );
 
   useEffect(() => {
     if (unread && unread > 0) {
@@ -102,7 +108,7 @@ export const TradeChat: FC = () => {
     <Box className={s.chat}>
       <Chat
         messages={messages}
-        disputeMessages={disputeMessages}
+        disputeMessages={disputeMessagesSorted}
         unread={disputeUnread ?? unread}
         error={errorText}
         readOnly={
