@@ -26,7 +26,11 @@ export const PasswordInput: FC<TextInputProps> = ({ className, type, ...rest }) 
         aria-label="toggle password visibility"
         noFill
       >
-        {isPassword ? <EyeIcon /> : <EyeOffIcon />}
+        {isPassword ? (
+          <Box as={EyeIcon} display="block" />
+        ) : (
+          <Box as={EyeOffIcon} display="block" />
+        )}
       </IconButton>
     </Box>
   );
