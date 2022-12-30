@@ -6,8 +6,6 @@ This is a react application of the trading platform
 
 ## Подготовка окружения
 
-Обязательно ознакомтесь с путеводителем нашей команды: [github.com/bitzlato/guides](https://github.com/bitzlato/guides)
-
 **Для разработки** необходимы:
 
 1. **nvm** [github.com/nvm-sh/nvm](https://github.com/nvm-sh/nvm)
@@ -68,6 +66,21 @@ VANILLA_EXTRACT_DEBUG=1 yarn start
 
 1. Обновления чатов и статусов сделок
 1. Получение уведомлений
+
+## Деплой на прод
+
+```sh
+sh ./release
+bundle exec cap production deploy
+```
+
+## Создать версию для стейджа
+
+```sh
+sh ./version-staging
+```
+
+В github actions запустится задача на сборку и пуш контейнера
 
 ## Сборка проекта
 
