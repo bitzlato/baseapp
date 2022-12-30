@@ -23,7 +23,11 @@ export const InputPassword: FC<Props> = memo(
         onClick={handleClick}
         aria-label="toggle password visibility"
       >
-        {isShowPassword ? <EyeOffIcon /> : <EyeIcon />}
+        {isShowPassword ? (
+          <Box as={EyeOffIcon} display="block" />
+        ) : (
+          <Box as={EyeIcon} display="block" />
+        )}
       </Box>
     );
 
