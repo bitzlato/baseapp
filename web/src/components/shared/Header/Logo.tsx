@@ -11,7 +11,7 @@ export const Logo: FC = () => {
   const {
     toMainPage = '/',
     theme,
-    beta = true,
+    beta = false,
     logoDarkURL,
     logoLightURL,
   } = useContext(HeaderContext);
