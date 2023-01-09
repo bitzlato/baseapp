@@ -138,7 +138,7 @@ export const WithdrawMarketForm: FC<Props> = ({ wallet, countdown, withdrawDone,
       beneficiary,
       otpCode,
       networkFee: blockchainFeeEnabled
-        ? blockchainFees?.fees[blockchainFee]?.toString()
+        ? blockchainFees?.fees.native[blockchainFee]?.toString()
         : undefined,
     });
     setOtpCode('');

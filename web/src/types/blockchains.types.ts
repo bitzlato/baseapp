@@ -26,5 +26,10 @@ export interface BlockchainFees extends BlockchainFeesSource {
     marketInFiat?: Money | undefined;
     aggressive?: Money | undefined;
     aggressiveInFiat?: Money | undefined;
+    native: {
+      low?: Money | undefined;
+      aggressive?: Money | undefined;
+      market?: Money | undefined;
+    };
   };
 }

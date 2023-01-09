@@ -18,6 +18,7 @@ export const useBlockchainFees = (
 
     const currency = getMarketCurrency(data.currency_fee.currency_id.toUpperCase());
     const low = data.currency_fee.low ? createMoney(data.currency_fee.low, currency) : undefined;
+    const lowNative = data.native_fee.low ? createMoney(data.native_fee.low, currency) : undefined;
     const lowInFiat =
       currency.apiCurrency && low && isConvertToFiat
         ? low.convert(currency.apiCurrency.price, USD_CCY)
@@ -25,12 +26,18 @@ export const useBlockchainFees = (
     const market = data.currency_fee.market
       ? createMoney(data.currency_fee.market, currency)
       : undefined;
+    const marketNative = data.native_fee.market
+      ? createMoney(data.native_fee.market, currency)
+      : undefined;
     const marketInFiat =
       currency.apiCurrency && market && isConvertToFiat
         ? market.convert(currency.apiCurrency.price, USD_CCY)
         : undefined;
     const aggressive = data.currency_fee.aggressive
       ? createMoney(data.currency_fee.aggressive, currency)
+      : undefined;
+    const aggressiveNative = data.native_fee.aggressive
+      ? createMoney(data.native_fee.aggressive, currency)
       : undefined;
     const aggressiveInFiat =
       currency.apiCurrency && aggressive && isConvertToFiat
@@ -50,6 +57,11 @@ export const useBlockchainFees = (
         aggressiveOriginal: data.currency_fee.aggressive,
         aggressive,
         aggressiveInFiat,
+        native: {
+          low: lowNative,
+          market: marketNative,
+          aggressive: aggressiveNative,
+        },
       },
     };
   }, [data, getMarketCurrency, isConvertToFiat]);
