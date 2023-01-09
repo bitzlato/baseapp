@@ -6,7 +6,6 @@ describe('HISTORY_UPDATE', () => {
   const newDeposit: Deposit = {
     amount: '0.02',
     completed_at: '2021-11-11T12:59:44+03:00',
-    confirmations: 0,
     created_at: '2021-11-11T12:59:44+03:00',
     currency: 'eth',
     fee: '0.0',
@@ -22,7 +21,6 @@ describe('HISTORY_UPDATE', () => {
   const updatedDeposit: Deposit = {
     amount: '0.02',
     completed_at: '2021-11-11T12:59:44+03:00',
-    confirmations: 4,
     created_at: '2021-11-11T12:59:44+03:00',
     currency: 'eth',
     fee: '0.0',

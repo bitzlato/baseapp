@@ -54,7 +54,6 @@ export interface Withdraw {
   blockchain_id: number;
   blockchain_key: string;
   blockchain_txid: string;
-  confirmations: number | null;
   created_at: string;
   currency: string;
   done_at: string;
@@ -86,7 +85,6 @@ export interface Deposit {
   blockchain_id: number;
   blockchain_key: string;
   completed_at: string;
-  confirmations: number | null;
   created_at: string;
   currency: string;
   fee: string;
