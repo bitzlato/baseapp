@@ -77,7 +77,7 @@ export const CreateGiftForm: FC<Props> = ({ user, onSubmit }) => {
   const rate = rateResponse.data?.rate ?? 0;
   const fiatCcy = getFiatCurrency(userCurrency);
   const ccy = cryptoCurrency ? getCryptoCurrency(cryptoCurrency) : null;
-  const amountCryptoMoney = ccy ? createMoney(amountCrypto, ccy) : null;
+  const amountCryptoMoney = ccy && amountCrypto ? createMoney(amountCrypto, ccy) : null;
   const willBlockedCrypto = amountCryptoMoney ? amountCryptoMoney.multiply(count).toString() : null;
   const available = selectedWalletOption?.balance;
   const maxCount =
