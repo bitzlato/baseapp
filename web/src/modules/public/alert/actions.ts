@@ -54,6 +54,18 @@ export const alertDeleteByIndex = (index: number): AlertDeleteByIndex => ({
   index,
 });
 
+const safeErrorMessages = (messages: Array<string>) => {
+  if (Array.isArray(messages)) {
+    return messages.map((msg) => msg || 'Unknown Error');
+  }
+
+  if (typeof messages === 'string') {
+    return [messages || 'Unknown Error'];
+  }
+
+  return messages;
+};
+
 export const alertFetchError = (
   error: unknown,
 ): AlertPush | ToggleFreezed | ToggleNeedVerification | { type: '__skip' } => {
@@ -73,7 +85,7 @@ export const alertFetchError = (
     return alertPush({
       type: 'error',
       code: error.code,
-      message: error.messages,
+      message: safeErrorMessages(error.messages),
       payload: error.payload,
     });
   }
