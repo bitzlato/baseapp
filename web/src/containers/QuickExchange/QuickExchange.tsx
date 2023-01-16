@@ -407,7 +407,7 @@ export const QuickExchangeContainer: React.FC = () => {
     );
   };
 
-  const noAmount = createMoney(requestVolume, DEFAULT_CURRENCY).isZero();
+  const noAmount = requestVolume ? createMoney(requestVolume, DEFAULT_CURRENCY).isZero() : true;
   const noMarket = !market && !!fromCurrency && !!toCurrency;
   const disablePercents = noMarket || !!fromWallet?.balance.isZero();
 
