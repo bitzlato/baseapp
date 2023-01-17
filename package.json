@@ -1,6 +1,6 @@
 {
   "name": "@bitzlato/baseapp",
-  "version": "10.22.5",
+  "version": "10.22.6",
   "private": true,
   "workspaces": [
     "market-docs",
