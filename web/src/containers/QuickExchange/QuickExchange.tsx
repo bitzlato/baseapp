@@ -183,16 +183,20 @@ export const QuickExchangeContainer: React.FC = () => {
   };
 
   const handleRefresh = () => {
-    if (!createMoney(requestVolume, DEFAULT_CURRENCY).isZero()) {
-      dispatch(
-        marketPriceFetch({
-          from_currency: fromCurrency,
-          to_currency: toCurrency,
-          request_volume: parseNumeric(requestVolume, { trimRightDot: true }),
-          request_currency: requestCurrency,
-        }),
-      );
+    const noAmount = requestVolume ? createMoney(requestVolume, DEFAULT_CURRENCY).isZero() : true;
+
+    if (noAmount) {
+      return;
     }
+
+    dispatch(
+      marketPriceFetch({
+        from_currency: fromCurrency,
+        to_currency: toCurrency,
+        request_volume: parseNumeric(requestVolume, { trimRightDot: true }),
+        request_currency: requestCurrency,
+      }),
+    );
   };
 
   const handleExchange = () => {
