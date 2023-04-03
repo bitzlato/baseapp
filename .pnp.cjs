@@ -20873,10 +20873,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["node-jose", [\
-        ["npm:2.1.0", {\
-          "packageLocation": "./.yarn/cache/node-jose-npm-2.1.0-248b74cc87-3dcc79f692.zip/node_modules/node-jose/",\
+        ["npm:2.2.0", {\
+          "packageLocation": "./.yarn/cache/node-jose-npm-2.2.0-0a517520c7-ec021aaf12.zip/node_modules/node-jose/",\
           "packageDependencies": [\
-            ["node-jose", "npm:2.1.0"],\
+            ["node-jose", "npm:2.2.0"],\
             ["base64url", "npm:3.0.1"],\
             ["buffer", "npm:6.0.3"],\
             ["es6-promise", "npm:4.2.8"],\
@@ -20885,7 +20885,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["node-forge", "npm:1.3.0"],\
             ["pako", "npm:2.0.4"],\
             ["process", "npm:0.11.10"],\
-            ["uuid", "npm:8.3.2"]\
+            ["uuid", "npm:9.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -29583,6 +29583,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["uuid", "npm:8.3.2"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:9.0.0", {\
+          "packageLocation": "./.yarn/cache/uuid-npm-9.0.0-46c41e3e43-8dd2c83c43.zip/node_modules/uuid/",\
+          "packageDependencies": [\
+            ["uuid", "npm:9.0.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["v8-compile-cache", [\
@@ -29835,7 +29842,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["moment", "npm:2.29.1"],\
             ["moment-timezone", "npm:0.5.32"],\
             ["multicoin-address-validator", "npm:0.5.2"],\
-            ["node-jose", "npm:2.1.0"],\
+            ["node-jose", "npm:2.2.0"],\
             ["node-sass", "npm:7.0.1"],\
             ["npm-run-all", "npm:4.1.5"],\
             ["postcss", "npm:8.3.6"],\
