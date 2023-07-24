@@ -5048,12 +5048,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vanilla-extract/recipes@npm:^0.2.5":
-  version: 0.2.5
-  resolution: "@vanilla-extract/recipes@npm:0.2.5"
+"@vanilla-extract/recipes@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@vanilla-extract/recipes@npm:0.5.0"
   peerDependencies:
     "@vanilla-extract/css": ^1.0.0
-  checksum: 474ab445f4166bded294d5f77e02ba9b10ec6effe08364c03396e2802848d904a2a1dd9b20466405ebda93449c5a634c2fe99cd1d12888b0f84accf4d2d72666
+  checksum: a05c5be63bfa15289e274027836943cec4b94110becb4b8bc8d56e3113d08352151fbe5abd7c00c147e38922a32d8672dc55c60177a99f94255ce7ecceffc829
   languageName: node
   linkType: hard
 
@@ -21899,7 +21899,7 @@ __metadata:
     "@types/uuid": 8.3.4
     "@types/ws": ^6.0.4
     "@vanilla-extract/css": ^1.7.2
-    "@vanilla-extract/recipes": ^0.2.5
+    "@vanilla-extract/recipes": ^0.5.0
     "@vanilla-extract/sprinkles": ^1.4.1
     "@vanilla-extract/webpack-plugin": ^2.1.11
     axios: ^0.21.1
