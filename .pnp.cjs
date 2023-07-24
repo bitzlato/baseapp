@@ -8655,17 +8655,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@vanilla-extract/recipes", [\
-        ["npm:0.2.5", {\
-          "packageLocation": "./.yarn/cache/@vanilla-extract-recipes-npm-0.2.5-708276a047-474ab445f4.zip/node_modules/@vanilla-extract/recipes/",\
+        ["npm:0.5.0", {\
+          "packageLocation": "./.yarn/cache/@vanilla-extract-recipes-npm-0.5.0-b90613e411-a05c5be63b.zip/node_modules/@vanilla-extract/recipes/",\
           "packageDependencies": [\
-            ["@vanilla-extract/recipes", "npm:0.2.5"]\
+            ["@vanilla-extract/recipes", "npm:0.5.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.2.5", {\
-          "packageLocation": "./.yarn/__virtual__/@vanilla-extract-recipes-virtual-3f3a5b7241/0/cache/@vanilla-extract-recipes-npm-0.2.5-708276a047-474ab445f4.zip/node_modules/@vanilla-extract/recipes/",\
+        ["virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.5.0", {\
+          "packageLocation": "./.yarn/__virtual__/@vanilla-extract-recipes-virtual-fc4ba8bc9f/0/cache/@vanilla-extract-recipes-npm-0.5.0-b90613e411-a05c5be63b.zip/node_modules/@vanilla-extract/recipes/",\
           "packageDependencies": [\
-            ["@vanilla-extract/recipes", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.2.5"],\
+            ["@vanilla-extract/recipes", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.5.0"],\
             ["@types/vanilla-extract__css", null],\
             ["@vanilla-extract/css", "npm:1.7.2"]\
           ],\
@@ -29806,7 +29806,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/uuid", "npm:8.3.4"],\
             ["@types/ws", "npm:6.0.4"],\
             ["@vanilla-extract/css", "npm:1.7.2"],\
-            ["@vanilla-extract/recipes", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.2.5"],\
+            ["@vanilla-extract/recipes", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.5.0"],\
             ["@vanilla-extract/sprinkles", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.4.1"],\
             ["@vanilla-extract/webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.1.11"],\
             ["axios", "npm:0.21.1"],\
