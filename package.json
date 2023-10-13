@@ -9,7 +9,7 @@
     "uibitz"
   ],
   "engines": {
-    "node": ">=16.13.1 <17"
+    "node": "<19"
   },
   "packageManager": "yarn@3.3.1",
   "scripts": {
