@@ -29001,10 +29001,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["ua-parser-js", [\
-        ["npm:0.7.23", {\
-          "packageLocation": "./.yarn/cache/ua-parser-js-npm-0.7.23-b65ab49624-ccf0d98c1e.zip/node_modules/ua-parser-js/",\
+        ["npm:0.7.37", {\
+          "packageLocation": "./.yarn/cache/ua-parser-js-npm-0.7.37-caddca0606-9e91a66171.zip/node_modules/ua-parser-js/",\
           "packageDependencies": [\
-            ["ua-parser-js", "npm:0.7.23"]\
+            ["ua-parser-js", "npm:0.7.37"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -29879,7 +29879,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["swr", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.2.2"],\
             ["timezones.json", "npm:1.6.1"],\
             ["transition-hook", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:1.5.1"],\
-            ["ua-parser-js", "npm:0.7.23"],\
+            ["ua-parser-js", "npm:0.7.37"],\
             ["use-debounce", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:7.0.1"],\
             ["use-mutation", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.2.1"],\
             ["uuid", "npm:8.3.2"],\
