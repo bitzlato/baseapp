@@ -20533,14 +20533,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["moment", "npm:2.29.1"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:2.30.1", {\
+          "packageLocation": "./.yarn/cache/moment-npm-2.30.1-1c51a5c631-859236bab1.zip/node_modules/moment/",\
+          "packageDependencies": [\
+            ["moment", "npm:2.30.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["moment-timezone", [\
-        ["npm:0.5.32", {\
-          "packageLocation": "./.yarn/cache/moment-timezone-npm-0.5.32-13fb2dd384-d19da6e426.zip/node_modules/moment-timezone/",\
+        ["npm:0.5.45", {\
+          "packageLocation": "./.yarn/cache/moment-timezone-npm-0.5.45-2df3ad72a4-a22e9f983f.zip/node_modules/moment-timezone/",\
           "packageDependencies": [\
-            ["moment-timezone", "npm:0.5.32"],\
-            ["moment", "npm:2.29.1"]\
+            ["moment-timezone", "npm:0.5.45"],\
+            ["moment", "npm:2.30.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -29833,7 +29840,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash-webpack-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:0.11.6"],\
             ["mini-css-extract-plugin", "virtual:42b1ed7d3a3ef35c42ac579b760bc4a57b4d9efe82aa857be421d347a9d5eb77b93f1eefdf7c38f1138ec18d742a002770af95542f0d242dcc89856cb39b7f23#npm:2.6.1"],\
             ["moment", "npm:2.29.1"],\
-            ["moment-timezone", "npm:0.5.32"],\
+            ["moment-timezone", "npm:0.5.45"],\
             ["multicoin-address-validator", "npm:0.5.2"],\
             ["node-jose", "npm:2.1.0"],\
             ["node-sass", "npm:7.0.1"],\
