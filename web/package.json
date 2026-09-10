@@ -67,7 +67,7 @@
     "ua-parser-js": "^0.7.19",
     "use-debounce": "^7.0.1",
     "use-mutation": "^2.2.1",
-    "uuid": "^8.3.2"
+    "uuid": "^11.0.0"
   },
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
