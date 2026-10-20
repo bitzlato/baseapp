@@ -19809,17 +19809,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["markdown-to-jsx", [\
-        ["npm:7.1.6", {\
-          "packageLocation": "./.yarn/cache/markdown-to-jsx-npm-7.1.6-a62e327d09-f7d8375f98.zip/node_modules/markdown-to-jsx/",\
+        ["npm:7.7.17", {\
+          "packageLocation": "./.yarn/cache/markdown-to-jsx-npm-7.7.17-39c500dcce-fd0c50f7ed.zip/node_modules/markdown-to-jsx/",\
           "packageDependencies": [\
-            ["markdown-to-jsx", "npm:7.1.6"]\
+            ["markdown-to-jsx", "npm:7.7.17"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:bb9feb007e7dc759af8bf3b21c4c63d3e6797d26659e6d2ad094b3476963865ea8e0eff469d46793840aacd6c4a1230a64d4731f7cd36aecf6612bb8df3e04ea#npm:7.1.6", {\
-          "packageLocation": "./.yarn/__virtual__/markdown-to-jsx-virtual-06050f2d46/0/cache/markdown-to-jsx-npm-7.1.6-a62e327d09-f7d8375f98.zip/node_modules/markdown-to-jsx/",\
+        ["virtual:bb9feb007e7dc759af8bf3b21c4c63d3e6797d26659e6d2ad094b3476963865ea8e0eff469d46793840aacd6c4a1230a64d4731f7cd36aecf6612bb8df3e04ea#npm:7.7.17", {\
+          "packageLocation": "./.yarn/__virtual__/markdown-to-jsx-virtual-9cc045531b/0/cache/markdown-to-jsx-npm-7.7.17-39c500dcce-fd0c50f7ed.zip/node_modules/markdown-to-jsx/",\
           "packageDependencies": [\
-            ["markdown-to-jsx", "virtual:bb9feb007e7dc759af8bf3b21c4c63d3e6797d26659e6d2ad094b3476963865ea8e0eff469d46793840aacd6c4a1230a64d4731f7cd36aecf6612bb8df3e04ea#npm:7.1.6"],\
+            ["markdown-to-jsx", "virtual:bb9feb007e7dc759af8bf3b21c4c63d3e6797d26659e6d2ad094b3476963865ea8e0eff469d46793840aacd6c4a1230a64d4731f7cd36aecf6612bb8df3e04ea#npm:7.7.17"],\
             ["@types/react", "npm:17.0.52"],\
             ["react", "npm:17.0.2"]\
           ],\
@@ -19882,7 +19882,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["css-loader", "virtual:bb9feb007e7dc759af8bf3b21c4c63d3e6797d26659e6d2ad094b3476963865ea8e0eff469d46793840aacd6c4a1230a64d4731f7cd36aecf6612bb8df3e04ea#npm:6.6.0"],\
             ["css-minimizer-webpack-plugin", "virtual:bb9feb007e7dc759af8bf3b21c4c63d3e6797d26659e6d2ad094b3476963865ea8e0eff469d46793840aacd6c4a1230a64d4731f7cd36aecf6612bb8df3e04ea#npm:4.0.0"],\
             ["events", "npm:3.3.0"],\
-            ["markdown-to-jsx", "virtual:bb9feb007e7dc759af8bf3b21c4c63d3e6797d26659e6d2ad094b3476963865ea8e0eff469d46793840aacd6c4a1230a64d4731f7cd36aecf6612bb8df3e04ea#npm:7.1.6"],\
+            ["markdown-to-jsx", "virtual:bb9feb007e7dc759af8bf3b21c4c63d3e6797d26659e6d2ad094b3476963865ea8e0eff469d46793840aacd6c4a1230a64d4731f7cd36aecf6612bb8df3e04ea#npm:7.7.17"],\
             ["mini-css-extract-plugin", "virtual:bb9feb007e7dc759af8bf3b21c4c63d3e6797d26659e6d2ad094b3476963865ea8e0eff469d46793840aacd6c4a1230a64d4731f7cd36aecf6612bb8df3e04ea#npm:2.6.1"],\
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:7e9907d94a707924ee1e822065ab49d1eef02025bf2d91f22940ae0e73d79f8e801d03bb3433c7c529961e2a2eac7e6a068a8e98dba4e2a974829f9b719e502b#npm:17.0.2"],\
