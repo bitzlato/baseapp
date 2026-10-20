@@ -21980,7 +21980,7 @@ __metadata:
     webpack-bugsnag-plugins: ^1.8.0
     webpack-cli: ^5.0.0
     webpack-dev-server: ^4.7.4
-    ws: ^7.2.0
+    ws: ^8.0.0
   languageName: unknown
   linkType: soft
 
@@ -22466,7 +22466,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^7.2.0, ws@npm:^7.2.3":
+"ws@npm:^7.2.3":
   version: 7.4.2
   resolution: "ws@npm:7.4.2"
   peerDependencies:
@@ -22493,6 +22493,21 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 0c2ffc9a539dd61dd2b00ff6cc5c98a3371e2521011fe23da4b3578bb7ac26cbdf7ca8a68e8e08023c122ae247013216dde2a20c908de415a6bcc87bdef68c87
+  languageName: node
+  linkType: hard
+
+"ws@npm:^8.0.0":
+  version: 8.22.0
+  resolution: "ws@npm:8.22.0"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: ba8819b01815b2f76e4d54024010e661e38174c2e4a5b196c39d1c1b745046d23c6b4d84470a46cc1921079e397abd61b18a4b934ba3c3f4f77659b0c7ca22d2
   languageName: node
   linkType: hard
 
