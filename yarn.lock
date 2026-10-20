@@ -20288,7 +20288,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-loader@npm:3.3.1, style-loader@npm:^3.3.1":
+"style-loader@npm:3.3.4":
+  version: 3.3.4
+  resolution: "style-loader@npm:3.3.4"
+  peerDependencies:
+    webpack: ^5.0.0
+  checksum: caac3f2fe2c3c89e49b7a2a9329e1cfa515ecf5f36b9c4885f9b218019fda207a9029939b2c35821dec177a264a007e7c391ccdd3ff7401881ce6287b9c8f38b
+  languageName: node
+  linkType: hard
+
+"style-loader@npm:^3.3.1":
   version: 3.3.1
   resolution: "style-loader@npm:3.3.1"
   peerDependencies:
@@ -21967,7 +21976,7 @@ __metadata:
     rimraf: ^3.0.0
     sass-loader: ^13.0.0
     src: "link:./src"
-    style-loader: 3.3.1
+    style-loader: 3.3.4
     swc-loader: ^0.2.0
     swr: ^1.2.2
     timezones.json: ^1.6.1
