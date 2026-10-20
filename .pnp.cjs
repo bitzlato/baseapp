@@ -7890,10 +7890,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/qrcode.react", [\
-        ["npm:1.0.2", {\
-          "packageLocation": "./.yarn/cache/@types-qrcode.react-npm-1.0.2-f8cabf6225-be256f0192.zip/node_modules/@types/qrcode.react/",\
+        ["npm:1.0.5", {\
+          "packageLocation": "./.yarn/cache/@types-qrcode.react-npm-1.0.5-66ce988cd7-eea7526180.zip/node_modules/@types/qrcode.react/",\
           "packageDependencies": [\
-            ["@types/qrcode.react", "npm:1.0.2"],\
+            ["@types/qrcode.react", "npm:1.0.5"],\
             ["@types/react", "npm:17.0.52"]\
           ],\
           "linkType": "HARD"\
@@ -29789,7 +29789,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/multicoin-address-validator", "npm:0.5.0"],\
             ["@types/node", "npm:16.11.59"],\
             ["@types/node-jose", "npm:1.1.10"],\
-            ["@types/qrcode.react", "npm:1.0.2"],\
+            ["@types/qrcode.react", "npm:1.0.5"],\
             ["@types/react", "npm:17.0.52"],\
             ["@types/react-color", "npm:3.0.6"],\
             ["@types/react-dom", "npm:17.0.18"],\
